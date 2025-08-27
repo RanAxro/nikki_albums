@@ -1,0 +1,41 @@
+//windows通过注册表信息定位无限暖暖的游戏目录
+const INRegistryPaths = [
+  //(keyPath, valueName, addition) 从注册表 HKEY_LOCAL_MACHINE\keyPath 拿到valueName的合法值, 加上addition就是游戏根目录
+  (r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikki Launcher", "DisplayIcon", r""),
+  // 官网版本 值为?\InfinityNikki Launcher\launcher.exe, X6Game在?\InfinityNikki Launcher\InfinityNikki\X6Game
+  (r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikki Launcher", "UninstallString", r""),
+  // 官网版本 值为?\InfinityNikki Launcher\uninst.exe, X6Game在?\InfinityNikki Launcher\InfinityNikki\X6Game
+  (r"SOFTWARE\TapTap\Games\247283", "InstallPath", r"\InfinityNikki Launcher"),
+  // TapTap版本 值为?\TapTap\PC Games\InfinityNikki, X6Game在?TapTap\PC Games\InfinityNikki\InfinityNikki Launcher\InfinityNikki\X6Game
+
+  // 哔哩哔哩版本去 %LOCALAPPDATA%\bilibiliGameCenter\config\setting.ini 拿到游戏安装目录 [download] path=
+  (r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 3164330", "InstallLocation", r"")
+  // steam版本 值为?\steam\steamapps\common\Infinity Nikki, X6Game在?\steam\steamapps\common\Infinity Nikki\InfinityNikki\X6Game
+];
+//Android通过包名定位游戏
+const INAndroidPackage = "com.papegames.infinitynikki";
+
+//各文件夹所在的位置
+const Map<String, Map<String, String>> INFolderPaths = {
+  "Windows": {
+    "ScreenShot": r"$root$\InfinityNikki\X6Game\ScreenShot",  //
+    "CustomAvatar": r"$root$\InfinityNikki\X6Game\Saved\CustomAvatar\$uid$",
+    "CustomCard": r"$root$\InfinityNikki\X6Game\Saved\CustomCard\$uid$",
+    "ClockInPhoto": r"$root$\InfinityNikki\X6Game\Saved\\GamePlayPhotos\$uid$\ClockInPhoto",
+    "CloudPhotos": r"$root$\InfinityNikki\X6Game\Saved\\GamePlayPhotos\$uid$\CloudPhotos",
+    "CloudPhotos_LowQuality": r"$root$\InfinityNikki\X6Game\Saved\\GamePlayPhotos\$uid$\CloudPhotos_LowQuality",
+    "NikkiPhotos_HighQuality": r"$root$\InfinityNikki\X6Game\Saved\\GamePlayPhotos\$uid$\NikkiPhotos_HighQuality",
+    "NikkiPhotos_LowQuality": r"$root$\InfinityNikki\X6Game\Saved\\GamePlayPhotos\$uid$\NikkiPhotos_LowQuality"
+  },
+  "Android": {
+    //Android的ScreenShot保存在截图文件夹, 文件名格式为 Screenshot_yyyy-MM-dd-HH-mm-ss-fff_com_papegames.infinitynikki.jpg
+    "ScreenShot": r"storage/emulated/0/DCIM/Screenshots",
+    "CustomAvatar": r"$root$/files/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$",
+    "CustomCard": r"$root$/files/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$",
+    "ClockInPhoto": r"$root$/files/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$/ClockInPhoto",
+    "CloudPhotos": r"$root$/files/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$/CloudPhotos",
+    "CloudPhotos_LowQuality": r"f$root$/iles/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$/CloudPhotos_LowQuality",
+    "NikkiPhotos_HighQuality": r"$root$/files/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$/NikkiPhotos_HighQuality",
+    "NikkiPhotos_LowQuality": r"$root$/files/UnrealGame/X6Game/X6Game/Saved/GamePlayPhotos/$uid$/NikkiPhotos_LowQuality"
+  }
+};
