@@ -1,11 +1,8 @@
 <div align="center">
   <img src="src/0.1/Windows/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
-  # 暖暖相册(Nikki Albums)
+  <h1>暖暖相册(Nikki Albums)</h1>h1
 </div>
-
-
-# 暖暖相册(Nikki Albums)
  
 一款主要用于管理你的游戏相册的软件.  
 A tool mainly used for managing game albums.
