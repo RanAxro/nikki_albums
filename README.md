@@ -4,8 +4,6 @@
   暖暖相册(Nikki Albums)
 </div>
 
-
-# 暖暖相册(Nikki Albums)
  
 一款主要用于管理你的游戏相册的软件.  
 A tool mainly used for managing game albums.
