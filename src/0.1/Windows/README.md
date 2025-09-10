@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="src/0.1/Windows/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
+  <img src="assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
   暖暖相册(Nikki Albums)
 </div>
@@ -68,6 +68,7 @@
   本工具的开发目的是为了提供一个方便的游戏相册管理功能，帮助用户更好地组织和展示游戏中的图片和截图。我们不鼓励、不支持任何形式的游戏作弊或违规行为。使用本工具时，用户应遵守游戏的官方规则和使用条款。
 * ## 免责声明
   本工具及其开发者不对用户因使用本工具而可能产生的任何直接或间接损失承担责任。用户使用本工具即表示同意并接受上述声明和免责声明。本工具并非无限暖暖官方或叠纸、bilibili、steam、taptap 等平台的官方产品。
+
 
 
 
