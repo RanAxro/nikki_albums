@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="src/0.1/Windows/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
+  <img src="src/0.1/nikki_albums/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
   暖暖相册(Nikki Albums)
 </div>
