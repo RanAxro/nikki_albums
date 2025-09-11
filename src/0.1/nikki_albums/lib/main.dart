@@ -57,6 +57,13 @@ void main() async{
 
   try{
     final apiMap = await api.getWebApi(apiUrl, source: "github");
+    final bool  isWarning = apiMap["isWarning"];
+    final String warningTitle = apiMap["warningTitle"];
+    final String warningMessage = apiMap["warningMessage"];
+    if(isWarning){
+      await tip.show(title: warningTitle, message: warningMessage, isForce: true, isWarning: true);
+    }
+
     final String? version0 = apiMap["version0"];
     final String? version1 = apiMap["version1"];
     final String qq = apiMap["qq"];
