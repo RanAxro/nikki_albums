@@ -175,7 +175,10 @@ const apiUrl = r"https://api.github.com/repos/ranaxro/nikki_albums/contents/api.
 const api = {
   "version0": "0.1",
   "version1": null,
-  "qq": "",
+  "isWarning": false,
+  "warningTitle": "",
+  "warningMessage": "",
+  "qq": "1062670402",
   "url": "",
   "camera": "https://github.com/ChanIok/SpinningMomo",
   "paper_tool": "https://myl.nuanpaper.com/home",
