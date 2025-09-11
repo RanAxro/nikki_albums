@@ -441,6 +441,7 @@ abstract class tip{
     String trueText = "知道了",
     String falseText = "拒绝",
     bool isForce = false,
+    bool isWarning = false,
   }){
     if(overlay != null){
       overlay?.remove();
@@ -490,7 +491,7 @@ abstract class tip{
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
-                        Text(title, style: TextStyle(color: Color(defaultAntiColor), fontSize: 32, decoration: TextDecoration.none)),
+                        Text(title, style: TextStyle(color: Color(isWarning ? defaultWarningColor : defaultAntiColor), fontSize: 32, decoration: TextDecoration.none)),
                         block10H,
                         Text(message, style: TextStyle(color: Color(defaultAntiColor), fontSize: 16, decoration: TextDecoration.none)),
                         block10H,
@@ -555,163 +556,4 @@ abstract class tip{
 
     return completer.future;
   }
-
-
 }
-
-
-
-// abstract class webview{
-//   static OverlayEntry? overlay;
-//   static const defaultUrl = "https://myl.nuanpaper.com/home";
-//
-//   static ValueNotifier<String> currentTab = ValueNotifier<String>("default");
-//   static Map<String, GlobalKey> webviewKeyList = {};
-//   static Map<String, InAppWebView> webviewList = {};
-//   static Map<String, InAppWebViewController> webviewControllerList = {};
-//
-//   //跳转至表情页面, 若不存在则创建
-//   static void tab(String tabName, {String? url}){
-//     if(webviewKeyList.keys.contains(tabName)){
-//       webviewControllerList[tabName];
-//     }else{
-//       final key = GlobalKey();
-//       final widget = InAppWebView(
-//         key: key,
-//         initialUrlRequest: URLRequest(url: WebUri(url ?? defaultUrl)),
-//         onWebViewCreated: (controller){
-//           webviewControllerList[tabName] = controller;
-//         },
-//       );
-//       webviewKeyList[tabName] = key;
-//       webviewList[tabName] = widget;
-//     }
-//     currentTab.value = tabName;
-//     show();
-//   }
-//
-//   static void forward({String? tabName}){
-//     webviewControllerList[tabName ?? currentTab.value]?.goForward();
-//   }
-//
-//   static void back({String? tabName}){
-//     webviewControllerList[tabName ?? currentTab.value]?.goBack();
-//   }
-//
-//   static void refresh({String? tabName}){
-//     webviewControllerList[tabName ?? currentTab.value]?.reload();
-//   }
-//
-//   //关闭标签页
-//   static void close(String tabName){
-//
-//   }
-//
-//   //显示webview
-//   static void show(){
-//     print("1");
-//
-//
-//     if(overlay != null){
-//       hide();
-//     }
-//
-//     isWebview.value = true;
-//
-//     overlay = OverlayEntry(
-//       builder: (context){
-//         return Stack(
-//           children: [
-//             //导航栏
-//             Positioned(
-//               left: sideBarWidth,
-//               top: 0,
-//               height: topBarHeight,
-//               child: Container(
-//                 // color: Color(defaultWarningColor),
-//                 child: Row(
-//                   children: [
-//
-//                     //关闭按钮
-//                     IconButton(
-//                       icon: Image.asset("assets/icon/close.webp", height: 20),
-//                       onPressed: (){hide();},
-//                       style: buttonStyle(borderRadius: 8),
-//                     ),
-//
-//                     //后退按钮
-//                     IconButton(
-//                       icon: Image.asset("assets/icon/back.webp", height: 20),
-//                       onPressed: (){back();},
-//                       style: buttonStyle(borderRadius: 8),
-//                     ),
-//
-//                     //前进按钮
-//                     IconButton(
-//                       icon: Image.asset("assets/icon/forward.webp", height: 20),
-//                       onPressed: (){forward();},
-//                       style: buttonStyle(borderRadius: 8),
-//                     ),
-//
-//                     //刷新按钮
-//                     IconButton(
-//                       icon: Image.asset("assets/icon/refresh.webp", height: 20),
-//                       onPressed: (){refresh();},
-//                       style: buttonStyle(borderRadius: 8),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//
-//             //隐藏区
-//             Positioned(
-//               left: 0,
-//               top: topBarHeight + 2,
-//               bottom: 0,
-//               width: sideBarWidth,
-//               child: GestureDetector(
-//                 onTap: (){hide();},
-//               ),
-//             ),
-//
-//             //网页区
-//             Positioned(
-//               left: sideBarWidth,
-//               top: topBarHeight + 2,
-//               right: 0,
-//               bottom: 0,
-//               child: ValueListenableBuilder(
-//                 valueListenable: currentTab,
-//                 builder: (context, value, tab){
-//                   return Container(
-//                     child: webviewList[value],
-//                   );
-//                 },
-//               ),
-//             ),
-//           ],
-//         );
-//       }
-//     );
-//
-//     Overlay.of(ancestor.currentContext!).insert(overlay!);
-//
-//   }
-//
-//   //隐藏webview
-//   static void hide(){
-//
-//     isWebview.value = false;
-//
-//     if(overlay != null){
-//       overlay?.remove();
-//       overlay = null;
-//     }
-//   }
-//
-//
-//
-//
-//
-// }
