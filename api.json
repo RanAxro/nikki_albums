@@ -1,6 +1,9 @@
 {
   "version0": "0.1",
   "version1": null,
+  "isWarning": false,
+  "warningTitle": "",
+  "warningMessage": "",
   "qq": "1062670402",
   "url": "",
   "camera": "https://github.com/ChanIok/SpinningMomo",
