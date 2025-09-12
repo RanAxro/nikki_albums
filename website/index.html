@@ -1,1 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暖暖相册</title>
+<meta name="description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
+<meta name="keywords" content="无限暖暖, 暖暖, 暖暖相册, nikki_albums, 暖暖5, infinitynikki, InfinityNikki, infinity-nikki">
+<meta name="author" content="RanAxro">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta property="og:title" content="暖暖相册">
+<meta property="og:description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
+<meta property="og:image" content="favicon.ico">
+<meta property="og:url" content="页面链接">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="暖暖相册">
+<meta name="twitter:description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
+<meta name="twitter:image" content="图片链接">
+<style type="text/css">
+*{
+	padding: 0;
+	margin: 0;
+	border: none;
+	/* overflow: hidden; */
+	touch-action: none;
+	user-select: none;
+}
+:root{
+	--text-border: 
+    2px 0 0 #333, /* 右侧阴影 */
+    -2px 0 0 #333, /* 左侧阴影 */
+    0 2px 0 #333, /* 下侧阴影 */
+    0 -2px 0 #333, /* 上侧阴影 */
+    1.414px 1.414px 0 #333, /* 右下角阴影 */
+    -1.414px -1.414px 0 #333, /* 左上角阴影 */
+    1.414px -1.414px 0 #333, /* 右上角阴影 */
+    -1.414px 1.414px 0 #333; /* 左下角阴影 */
+	background-color: #222;
+}
 
+html{
+	margin: 0 auto;
+	width: min(100%, 500px);
+	height: 100%;
+}
+body{
+	margin: 0;
+	width: 100%;
+	min-height: 100%;
+	/* height: 100%; */
+	background-color: #333;
+  display: inline-block;
+}
+
+#img_box{
+	padding: 25px;
+	margin: 20px auto;
+	width: 150px;
+	height: 150px;
+}
+#img_box img{
+	border-radius: 50px;
+	transition: .3s all;
+}
+#img_box img:hover{
+	border-radius: 0px;
+}
+
+#title_box{
+	margin: 20px auto;
+	text-align: center;
+	font-size: 48px;
+	font-weight: bold;
+	background: linear-gradient(270deg, #ffd7e9, #ffffff, #e6daff, #ffffe0);
+	-webkit-background-clip: text;
+	color: transparent;
+	background-size: 600% 600%;
+	animation: gradient 4s ease infinite;
+}
+
+@keyframes gradient{
+	0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	}
+}
+
+#description_box{
+	margin: 20px auto;
+	width: min(90%, 400px);
+	text-align: center;
+	font-size: 16px;
+	color: #EEE;
+}
+
+#btn_box{
+	margin-top: 30px;
+}
+
+
+#btn_tip{
+	margin: 0 auto 10px;
+	width: min(70%, 300px);
+	line-height: 12px;
+	text-align: center;
+	font-size: 10px;
+	color: #EEE;
+	user-select: text;
+}
+#btn_download{
+	border-radius: 10px;
+	margin: 0 auto 10px;
+	width: min(70%, 300px);
+	line-height: 50px;
+	background: linear-gradient(270deg, #ffd7e9, #ffffff, #e6daff, #ffffe0);
+	background-size: 200% 200%;
+	background-position: 0% 0%;
+	font-size: 24px;
+	font-weight: bold;
+	color: #EEE;
+  text-shadow: var(--text-border);
+	text-align: center;
+	cursor: pointer;
+	transition: .3s all;
+}
+#btn_download:hover{
+	/* background-position: 100% 100%; */
+	animation: gradient 2s ease infinite;
+}
+#btn_src{
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 2px #EEE;
+	margin: 0 auto 10px;
+	width: min(70%, 300px);
+	line-height: 50px;
+	background: #333;
+	font-size: 24px;
+	font-weight: bold;
+	color: #EEE;
+  text-shadow: var(--text-border);
+	text-align: center;
+	cursor: pointer;
+	transition: .3s all;
+}
+#btn_src:hover{
+	box-shadow: inset 0 0 0 3px #e6daff;
+	color: #e6daff;
+}
+#btn_qq{
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 2px #EEE;
+	margin: 0 auto 10px;
+	width: min(70%, 300px);
+	line-height: 50px;
+	background: #333;
+	font-size: 24px;
+	font-weight: bold;
+	color: #EEE;
+  text-shadow: var(--text-border);
+	text-align: center;
+	cursor: pointer;
+	transition: .3s all;
+}
+#btn_qq:hover{
+	box-shadow: inset 0 0 0 3px #e0f7fa;
+	color: #e0f7fa;
+}
+
+#btn_readme{
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 2px #EEE;
+	margin: 0 auto 10px;
+	width: min(70%, 300px);
+	line-height: 50px;
+	background: #333;
+	font-size: 24px;
+	font-weight: bold;
+	color: #EEE;
+  text-shadow: var(--text-border);
+	text-align: center;
+	cursor: pointer;
+	transition: .3s all;
+}
+#btn_readme:hover{
+	box-shadow: inset 0 0 0 3px #ffffe0;
+	color: #ffffe0;
+}
+		
+</style>
+</head>
+<body>
+	<div id="img_box">
+		<img src="favicon.ico" alt="Nikki Albums" width="150px" height="150px" />
+	</div>
+	
+	<div id="title_box">暖暖相册</div>
+	
+	<div id="description_box">一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧</div>
+	
+	<div id="btn_box">
+		<div id="btn_download">下  载</div>
+		<div id="btn_tip">密码: nnxc</div>
+		<div id="btn_src">github</div>
+		<div id="btn_qq">交流群</div>
+		<div id="btn_tip">密码: RanAxro</div>
+		<div id="btn_readme">软件介绍</div>
+	</div>
+	
+	
+	<!-- README -->
+	
+	
+	
+<script>
+	
+const downloadLink = "https://ranaxro.lanzouu.com/iQ2IT35xhqid";
+const githubLink = "https://github.com/RanAxro/nikki_albums";
+const qLink = "https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy";
+const readmeLink = "https://github.com/RanAxro/nikki_albums/blob/main/README.md";
+
+document.getElementById("btn_download").addEventListener("click", function(){
+	window.open(downloadLink, "_blank");
+});
+
+document.getElementById("btn_src").addEventListener("click", function(){
+	window.open(githubLink, "_blank");
+});
+
+document.getElementById("btn_qq").addEventListener("click", function(){
+	window.open(qLink, "_blank");
+});
+
+document.getElementById("btn_readme").addEventListener("click", function(){
+	window.open(readmeLink, "_blank");
+});
+	
+</script>
+	
+</body>
+</html>
