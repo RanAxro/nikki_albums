@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <url>
+    <loc>https://nikki.ranaxro.com/</loc>
+    <lastmod>2025-09-29T11:02:35+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
 
-<url>
-  <loc>https://nikki.ranaxro.com/</loc>
-  <lastmod>2025-09-29T11:02:35+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-cn" href="https://nikki.ranaxro.com/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://nikki.ranaxro.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nikki.ranaxro.com/"/>
 
-  <xhtml:link rel="alternate" hreflang="zh-cn" href="https://nikki.ranaxro.com"/>
-  <xhtml:link rel="alternate" hreflang="zh" href="https://nikki.ranaxro.com"/>
-  <xhtml:link rel="alternate" hreflang="en" href="https://nikki.ranaxro.com"/>
-  
-  <image:image>
-    <image:loc>src/nikki_albums/windows/runner/resources/app_icon.ico</image:loc>
-    <image:title>Nikki Albums</image:title>
-  </image:image>
-</url>
-
+    <image:image>
+      <image:loc>https://nikki.ranaxro.com/src/nikki_albums/windows/runner/resources/app_icon.ico</image:loc>
+      <image:title>Nikki Albums</image:title>
+    </image:image>
+  </url>
 
 </urlset>
