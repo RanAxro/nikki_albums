@@ -4,9 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>暖暖相册</title>
-<meta name="msvalidate.01" content="E0E16D90B3238CE90B38D9525A8FEB51" />
-<meta name="baidu-site-verification" content="codeva-1EpMqtvGgU" />
-<meta name="360-site-verification" content="31312a583fabfd77f5a3c66007bbe59b" />
 <meta name="description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
 <meta name="keywords" content="无限暖暖, 暖暖, 暖暖相册, nikki_albums, 暖暖5, infinitynikki, InfinityNikki, infinity-nikki">
 <meta name="author" content="RanAxro">
@@ -137,6 +134,25 @@ body{
 	/* background-position: 100% 100%; */
 	animation: gradient 2s ease infinite;
 }
+#btn_download_release{
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 2px #EEE;
+	margin: 0 auto 10px;
+	width: min(70%, 300px);
+	line-height: 50px;
+	background: #333;
+	font-size: 24px;
+	font-weight: bold;
+	color: #EEE;
+  text-shadow: var(--text-border);
+	text-align: center;
+	cursor: pointer;
+	transition: .3s all;
+}
+#btn_download_release:hover{
+	box-shadow: inset 0 0 0 3px #e6daff;
+	color: #e6daff;
+}
 #btn_src{
 	border-radius: 10px;
 	box-shadow: inset 0 0 0 2px #EEE;
@@ -210,9 +226,10 @@ body{
 	<div id="btn_box">
 		<div id="btn_download">下  载</div>
 		<div id="btn_tip">密码: nnxc</div>
+		<div id="btn_download_release">下载release版本</div>
+		<div id="btn_tip">密码: nnxc</div>
 		<div id="btn_src">github</div>
 		<div id="btn_qq">交流群</div>
-		<div id="btn_tip">密码: RanAxro</div>
 		<div id="btn_readme">软件介绍</div>
 	</div>
 	
@@ -223,13 +240,18 @@ body{
 	
 <script>
 	
-const downloadLink = "https://ranaxro.lanzouu.com/ikWhJ373l7jg";
+const downloadLink = "https://ranaxro.lanzouu.com/iBArJ3cyauej";
+const downloadReleaseLink = "https://ranaxro.lanzouu.com/iVp3E3cyaymb";
 const githubLink = "https://github.com/RanAxro/nikki_albums";
 const qLink = "https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy";
 const readmeLink = "https://github.com/RanAxro/nikki_albums/blob/main/README.md";
 
 document.getElementById("btn_download").addEventListener("click", function(){
 	window.open(downloadLink, "_blank");
+});
+
+document.getElementById("btn_download_release").addEventListener("click", function(){
+	window.open(downloadReleaseLink, "_blank");
 });
 
 document.getElementById("btn_src").addEventListener("click", function(){
@@ -248,4 +270,3 @@ document.getElementById("btn_readme").addEventListener("click", function(){
 	
 </body>
 </html>
-

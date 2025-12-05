@@ -1,161 +1,134 @@
-import "package:nikki_albums/main.dart";
-import "package:nikki_albums/ui/desktop_frame.dart";
-import "package:nikki_albums/pages/album.dart";
+import "dart:convert";
+import "dart:io";
 
-import "package:nikki_albums/api/api.dart" as api;
+import "package:nikkialbums/api/system/system.dart";
+import "package:nikkialbums/api/path.dart";
+import "package:nikkialbums/ui/frame.dart";
+import "package:nikkialbums/game/game.dart";
+import "package:nikkialbums/pages/album/album.dart" as albumPage;
+import "package:nikkialbums/pages/start/start.dart" as startPage;
+import "package:nikkialbums/pages/resource/resource.dart" as resourcePage;
 
 import "package:flutter/material.dart";
 
-// ------ global ------
-
-//根 WindowBorder
 final GlobalKey ancestor = GlobalKey();
 
-//窗口是否置顶
-final ValueNotifier<bool> isTopWindow = ValueNotifier<bool>(false);
-//是否正在选择游戏账号
-final ValueNotifier<bool> isSelectAccount = ValueNotifier<bool>(false);
-//目前所选择的游戏账号
-final ValueNotifier<String?> currentAccount = ValueNotifier<String?>(null);
-//content页面
-final ValueNotifier<int> contentPage = ValueNotifier<int>(1);
-//content页面PageView Controller
-PageController contentController = PageController(initialPage: 1);
+final ContentController pages = ContentController();
 
-//当前是否在webview
-final ValueNotifier<bool> isWebview = ValueNotifier<bool>(false);
+abstract class AppState{
+  static final ValueNotifier<int> version = _create<int>(3);  // current Nikki Albums version (x)
+  static final ValueNotifier<bool> isAgreeAgreement =  _create<bool>(false);  // 用户是否同意软件使用协议
+  static final ValueNotifier<String> lang =  _create<String>("zh-CN");
+  static final ValueNotifier<int> theme =  _create<int>(0xFFEEEEEE);  // theme 0xFFEEEEEE
+  static final ValueNotifier<int> animationDuration =  _create<int>(100);
+  static final ValueNotifier<Game?> currentGame = _create<Game?>(null);
+  static final ValueNotifier<List<Game>> customGame = _create<List<Game>>([]);
+  static final ValueNotifier<int> albumColumn = _create<int>(4);
 
-// ------ album ------
+  static ValueNotifier<T> _create<T>(T initValue){
+    final ValueNotifier<T> vn = ValueNotifier<T>(initValue);
+    vn.addListener((){
+      save();
+    });
+    return vn;
+  }
 
-// final GlobalKey gameImageZone = GlobalKey();
-// final GlobalKey backupImageZone = GlobalKey();
-//刷新相册
-final ValueNotifier<int> refreshAlbum = ValueNotifier<int>(0);
-//当前游戏区照片显示列数
-final ValueNotifier<int> gameImageColumns = ValueNotifier<int>(2);
-//当前备份区照片显示列数
-final ValueNotifier<int> backupImageColumns = ValueNotifier<int>(2);
-//是否正在选择相册类型
-final ValueNotifier<bool> isSelectAlbum = ValueNotifier<bool>(false);
-//当前相册类型
-final ValueNotifier<String?> currentAlbum = ValueNotifier<String?>(null);
-//更新currentAlbum
-void updateCurrentAlbum(){
-  currentAlbum.value = currentAccount.value == null ?
-  null : currentAccount.value!.split(" > ")[1] == "" ?
-  "ScreenShot" : "NikkiPhotos";
+  static Future<void> read() async{
+    final Path config = (await getAppDateDirectoryPath()) + "config3.json";
+    late final Map jsonMap;
+
+    try{
+      if(!await config.file.exists()){
+        save();
+        return;
+      }
+
+      jsonMap = jsonDecode(await config.file.readAsString());
+    }catch(e){
+      writeError("AppState.read", e.toString());
+      return;
+    }
+
+    /// 辅助函数
+    assign<T>(String key, Function(T value) callback){
+      if(jsonMap.containsKey(key) && jsonMap[key] is T) callback(jsonMap[key]);
+    }
+
+    assign<int>("version", (int value) => version.value = value);
+    assign<bool>("isAgreeAgreement", (bool value) => isAgreeAgreement.value = value);
+    assign<String>("lang", (String value) => lang.value = value);
+    assign<int>("theme", (int value) => theme.value = value);
+    assign<int>("animationDuration", (int value) => animationDuration.value = value);
+    assign<Map>("currentGame", (Map value) => currentGame.value = Game.fromMap(value));
+    assign<List>("customGame", (List value){
+      final List<Game> res = <Game>[];
+      for(dynamic gameMap in value){
+        final Game? game = Game.fromMap(gameMap);
+        if(game != null) res.add(game);
+      }
+      customGame.value = res;
+      // customGame.value = value.map((gameMap) => Game.fromMap(gameMap)).where((Game? game) => game != null).toList() as List<Game>
+    });
+    assign<int>("albumColumn", (int value) => albumColumn.value = value);
+  }
+
+  static Future<void> save() async{
+    final Path config = (await getAppDateDirectoryPath()) + "config3.json";
+    if(!await config.file.exists()){
+      config.file.create(recursive: true);
+    }
+
+    final Map jsonMap = {
+      "version": version.value,
+      "isAgreeAgreement": isAgreeAgreement.value,
+      "lang": lang.value,
+      "theme": theme.value,
+      "animationDuration": animationDuration.value,
+      "currentGame": Game.toMap(currentGame.value),
+      "customGame": customGame.value.map((Game game) => Game.toMap(game)).toList(),
+      "albumColumn": albumColumn.value,
+    };
+
+    try{
+      // 编码并写入配置
+      final String json = jsonEncode(jsonMap);
+      await config.file.writeAsString(json);
+    }catch(e){
+      writeError("AppState.save", e.toString());
+    }
+  }
+
+  static Future<void> writeError(String form, String error) async{
+    try{
+      final Path log = (await getAppDateDirectoryPath()) + "log.txt";
+      if(!await log.file.exists()){
+        log.file.create(recursive: true);
+      }
+      log.file.writeAsString("\n$form : $error", mode: FileMode.append, flush: true);
+    }on FileSystemException catch(e){
+      final errno = e.osError?.errorCode;
+      switch(errno){
+        case 13:
+          print("权限被拒（Android 6+ 没动态申请存储权限，或 iOS 沙盒外路径）");
+          break;
+        case 28:
+          print("磁盘已满");
+          break;
+        case 16 || 32:
+          print("进程被占用");
+          break;
+      }
+    }catch(e){
+      print("写入失败: $e");
+    }
+  }
 }
-//游戏区照片排序方式, 默认为时间排序倒序
-final ValueNotifier<bool> isGamePartForward = ValueNotifier<bool>(false);
-//备份区照片排序方式, 默认为时间排序倒序
-final ValueNotifier<bool> isBackupPartForward = ValueNotifier<bool>(false);
-//备份目录路径
-final ValueNotifier<String?> backupFolderPath = ValueNotifier<String?>(null);
-//是否显示group列表
-final ValueNotifier<bool> isShowGroupList = ValueNotifier<bool>(true);
-//当前备份相册的group
-final ValueNotifier<String?> currentBackupGroup = ValueNotifier<String?>(null);
-//是否正在浏览已位于中转站的图片
-final ValueNotifier<bool> isViewSmallImage = ValueNotifier<bool>(false);
-//游戏区图片中转站
-final ValueNotifier<Map<String, bool>> gameStationImage = ValueNotifier<Map<String, bool>>({});
-//备份区图片中转站
-final ValueNotifier<Map<String, bool>> backupStationImage = ValueNotifier<Map<String, bool>>({});
 
 
+Future<void> initState() async{
+  AppState.read();
 
-void initState(){
-
-  imageCache.maximumSize = 0;
-  imageCache.maximumSizeBytes = 0;
-
-// ------ global ------
-
-  //监听窗口是否置顶
-  isTopWindow.addListener((){
-    api.doTopWindow(isTopWindow.value);
-  });
-
-  //监听content页码变换并跳转
-  contentPage.addListener((){
-    contentController.animateToPage(contentPage.value, duration: Duration(milliseconds: 300), curve: Curves.ease);
-  });
-
-  //获取最后一次选择的account
-  currentAccount.value = config["selectedAccount"];
-  currentAccount.addListener((){
-    //保存最后一次选择的account
-    save((){config["selectedAccount"] = currentAccount.value;});
-    //更新album
-    updateCurrentAlbum();
-  });
-
-  isSelectAccount.addListener(() async{
-    if(isSelectAccount.value){
-      accountSelector.build();
-    }else{
-      accountSelector.close();
-    }
-  });
-
-
-// ------ album ------
-
-  //初始化currentAlbum
-  updateCurrentAlbum();
-
-  //是否正在选择相册
-  isSelectAlbum.addListener((){
-    if(isSelectAlbum.value){
-      albumSelector.build();
-    }else{
-      albumSelector.close();
-    }
-  });
-
-  //当其游戏相册被选中时, 关闭中转站
-  currentAlbum.addListener((){
-    gameStationImage.value = {};
-    backupStationImage.value = {};
-  });
-
-
-  //获取备份文件夹路径
-  backupFolderPath.value = config["backupFolderPath"];
-  backupFolderPath.addListener((){
-    //更新备份文件夹
-    save((){config["backupFolderPath"] = backupFolderPath.value;});
-  });
-
-  //监听到有图片放入游戏区中转站时打开中转站, 否者关闭
-  gameStationImage.addListener((){
-    if(gameStationImage.value.isEmpty){
-      gameStation.close();
-    }else{
-      //若备份区中转站未关闭, 则手动关闭
-      if(backupStationImage.value.isNotEmpty){
-        backupStationImage.value = {};
-      }
-      //当中转站首次打开时才创建
-      if(gameStation.selector == null){
-        gameStation.build();
-      }
-    }
-  });
-  //监听到有图片放入备份区中转站时打开中转站, 否者关闭
-  backupStationImage.addListener((){
-    if(backupStationImage.value.isEmpty){
-      backupStation.close();
-    }else{
-      //若备份区中转站未关闭, 则手动关闭
-      if(gameStationImage.value.isNotEmpty){
-        gameStationImage.value = {};
-      }
-      //当中转站首次打开时才创建
-      if(backupStation.selector == null){
-        backupStation.build();
-      }
-    }
-  });
-
+  albumPage.init();
+  startPage.init();
+  resourcePage.init();
 }

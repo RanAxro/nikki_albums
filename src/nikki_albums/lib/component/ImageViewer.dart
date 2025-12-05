@@ -133,8 +133,6 @@ class _ImageViewerState extends State<ImageViewer>{
   /// Switch to the previous page
   _toPreviousImage(){
     if(_pageController.page != null && _pageController.page! > 0){
-      // Pause the animation
-      _pageController.jumpToPage(_pageController.page!.round());
       _pageController.previousPage(
         duration: Duration(milliseconds: _ImageToggleDuration),
         curve: Curves.easeInOut,
@@ -144,8 +142,6 @@ class _ImageViewerState extends State<ImageViewer>{
   /// Switch to the next page
   _toNextImage(){
     if(_pageController.page != null && _pageController.page! < widget._imageCount - 1){
-      // Pause the animation
-      _pageController.jumpTo(_pageController.offset);
       _pageController.nextPage(
         duration: Duration(milliseconds: _ImageToggleDuration),
         curve: Curves.easeInOut,
@@ -185,7 +181,7 @@ class _ImageViewerState extends State<ImageViewer>{
         allowImplicitScrolling: true,
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: widget._imageCount,
         itemBuilder: (context, index){
           return InteractiveViewer(
