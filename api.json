@@ -1,7 +1,7 @@
 {
-  "version": "2",
-  "version0": "0.2",
-  "version1": "0.2",
+  "version": "3",
+  "version0": "3",
+  "version1": "0",
   "isWarning": false,
   "warningTitle": "",
   "warningMessage": "",
@@ -14,4 +14,5 @@
   "wikiList": [{"source": "biligame wiki", "url": "https://wiki.biligame.com/wxnn/%E9%A6%96%E9%A1%B5"}, {"source": "gamekee wiki", "url": "https://www.gamekee.com/infinitynikki/"}, {"source": "fandom wiki", "url": "https://infinity-nikki.fandom.com/zh/wiki/%E6%97%A0%E9%99%90%E6%9A%96%E6%9A%96Wiki"}, {"source": "暖暖照相馆", "url": "https://nikkigallery.vip/"}, {"source": "Infinity Nikki Assistant", "url": "https://nuan5.pro"}, {"source": "暖暖共鸣录", "url": "https://gongeo.us/zh"}]
 
 }
+
 
