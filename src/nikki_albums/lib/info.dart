@@ -161,7 +161,9 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     description: "NikkiPhotos_HighQualityDescription",
     isRequireUid: true,
     locateInGame: r"\X6Game\Saved\GamePlayPhotos\$uid$\NikkiPhotos_HighQuality",
-    locateInBackup: r"\NikkiAlbumsBackupImage\$uid$\NikkiPhotos",
+    locateInBackup: r"\X6Game\Saved\GamePlayPhotos\$uid$\NikkiAlbums_NikkiPhotos",
+    // locateInBackup: r"\X6Game\Saved\GamePlayPhotos\$uid$\NikkiPhotos_HighQuality\NikkiAlbumsBackupImages",
+    // locateInBackup: r"\NikkiAlbumsBackupImage\$uid$\NikkiPhotos",
     chainDeletion: {AlbumType.NikkiPhotos_LowQuality: true, AlbumType.ScreenShot: true, AlbumType.ClockInPhoto: false},
   ),
   // 大喵相册缩略图 无云端 删除后只要NikkiPhotos_HighQuality存在 就会重新生成 每次进入相册会把HighQuality没有的缩略图的自动生成
