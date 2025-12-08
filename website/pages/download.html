@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暖暖相册 - 下载</title>
+<meta name="description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
+<meta name="keywords" content="无限暖暖, 暖暖, 暖暖相册, nikki_albums, 暖暖5, infinitynikki, InfinityNikki, infinity-nikki">
+<meta name="author" content="RanAxro">
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta property="og:title" content="暖暖相册">
+<meta property="og:description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
+<meta property="og:image" content="../images/favicon.ico">
+<meta property="og:url" content="https://ranaxro.github.io/nikki_albums/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="暖暖相册">
+<meta name="twitter:description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
+<meta name="twitter:image" content="src/nikki_albums/windows/runner/resources/app_icon.ico">
+<style type="text/css">
+*{
+	padding: 0;
+	margin: 0;
+	border: none;
+	/* overflow: hidden; */
+	touch-action: none;
+	user-select: none;
+}
+:root{
+	background: var(--bg-color);
+
+	--text-border: 
+    2px 0 0 #333, /* 右侧阴影 */
+    -2px 0 0 #333, /* 左侧阴影 */
+    0 2px 0 #333, /* 下侧阴影 */
+    0 -2px 0 #333, /* 上侧阴影 */
+    1.414px 1.414px 0 #333, /* 右下角阴影 */
+    -1.414px -1.414px 0 #333, /* 左上角阴影 */
+    1.414px -1.414px 0 #333, /* 右上角阴影 */
+    -1.414px 1.414px 0 #333; /* 左下角阴影 */
+	--bg-color: #222;
+	--onbg-color: #333;
+	--ct-color: #EEE;
+	--onct-color: #CCC;
+}
+header, section, footer, aside, nav, article, figure{
+	display: block;
+}
+
+html{
+	margin: 0 auto;
+	width: min(100%, 1400px);
+	height: 100%;
+}
+body{
+	margin: 0;
+	padding: 5px 20px;
+	width: calc(100% - 40px);
+	min-height: calc(100% - 10px);
+	height: 100%;
+	background-color: var(--bg-color);
+}
+
+header{
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+}
+
+#web_logo{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	align-items: center;
+  text-decoration: none;
+}
+#web_logo img{
+	margin: 5px;
+	width: 30px;
+	height: 30px;
+}
+#web_logo h1{
+	margin: 5px;
+	font-size: 20px;
+	font-weight: lighter;
+	color: var(--ct-color);
+}
+
+header nav{
+	margin-left: auto;
+}
+
+.web_header_nav_list{
+  margin: 0;
+  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+  list-style:none;
+  display: flex;
+  gap: 20px;
+}
+.web_header_nav_list a{
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--ct-color);
+  gap: 6px;
+	transition: .2s all;
+}
+.web_header_nav_list a:hover{
+	color: var(--onct-color);
+}
+.web_header_nav_list img{
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+.web_header_nav_list p{
+  width: 35px;
+  height: 20px;
+}
+
+#web_more{
+	visibility: hidden;
+	display: none;
+}
+@media(max-width: 500px){
+	.web_header_nav_list li{
+		visibility: hidden;
+		display: none;
+	}
+	#web_more{
+		visibility: visible;
+		display: block;
+	}
+}
+
+
+/* info */
+
+#info{
+	display: flex;          /* 弹性容器 */
+	flex-wrap: wrap;        /* 关键：空间不足就换行 */
+	gap: 50px;              /* 两栏间距 */
+	align-items: center;     /* 关键：纵轴居中 */
+	justify-content: center; /* 可选：整个区域再水平居中 */
+}
+
+#info_logo{
+	min-width: 100px;
+	max-width: 160px;
+	flex: 1 1 100px;
+}
+#info_logo img{
+	width: 100%;
+}
+#info_text{
+	flex: 1 1 300px;
+	color: var(--ct-color);
+}
+
+#info_text_title{
+	width: auto;
+	text-align: center;
+	font-size: 48px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	background: linear-gradient(90deg, #CCE7F6 0%, #B3DDF9 25%, #E6F4FD 50%, #B3DDF9 75%, #CCE7F6 100%);
+	background-size: 200% 100%;
+
+	-webkit-background-clip: text;
+					background-clip: text;
+	-webkit-text-fill-color: transparent;
+					text-fill-color: transparent;
+
+	animation: flow 3s linear infinite;
+}
+
+@keyframes flow{
+	0%{
+		background-position: 0% 0;
+	}
+	100%{
+		background-position: -200% 0;
+	}
+}
+
+#info_text_description{
+	color: var(--onct-color);
+	display: block;
+	text-align: center;
+}
+
+
+
+/* layout */
+
+
+#layout{
+  display: flex;
+  gap: 24px;          /* 两栏间距 */
+  align-items: flex-start;   /* 顶部对齐 */
+	overflow: hidden;
+  height: 100%;
+}
+
+/* 侧边栏固定宽度 */
+#layout aside{
+  flex: 0 0 200px;    /* 不放大、不缩小、固定 200px */
+}
+
+/* 主内容区占剩余空间 */
+#layout main{
+  flex: 1 1 0;        /* 放大、缩小、基础宽度 0 → 占满剩余 */
+  min-width: 0;       /* 防止 table 撑爆 */
+}
+
+
+
+
+
+/* aside */
+
+/* ========= 侧边导航整体 ========= */
+aside{
+	margin-top: 50px;
+	padding-top: 100px;
+  width: 200px;
+  background: var(--bg-color);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  font-family: system-ui, sans-serif;
+}
+
+/* 标题条 */
+aside h2{
+  margin: 0;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  background: var(--onbg-color);
+  color: var(--ct-color);
+  letter-spacing: .5px;
+}
+
+/* 导航列表 */
+aside ul{
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+aside li{
+  border-bottom: 1px solid #f2f2f2;
+}
+aside li:last-child{
+  border-bottom: none;
+}
+
+/* 链接 */
+aside a{
+  display: block;
+  padding: 12px 20px;
+  color: var(--ct-color);
+  text-decoration: none;
+  font-size: 15px;
+  position: relative;
+  transition: .2s, color .2s;
+}
+aside a:hover{
+  background: var(--onbg-color);
+  color: var(--onct-color);
+}
+
+
+
+
+
+main{
+	padding-top: 100px;
+	margin: 0 auto;
+	width: calc(100% - 100px);
+	max-width: 800px;
+	height: calc(100vh - 50px);
+  overflow-y: auto;
+}
+
+/* table */
+
+section{
+	margin-bottom: 200px;
+}
+
+/* ========== 表格整体 ========== */
+table{
+  /* 居中 & 宽度 */
+  margin: 0 auto;
+  width: 96%;
+  max-width: 960px;
+
+  /* 圆角卡片 */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ct-color);
+  border-collapse: collapse;
+}
+
+/* ========== 标题 ========== */
+table caption{
+  caption-side: top;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--ct-color);
+}
+
+/* ========== 表头 ========== */
+table thead{
+  background: var(--onbg-color);
+  color: var(--ct-color);
+}
+table th{
+  padding: 14px 16px;
+  font-weight: 500;
+  letter-spacing: .5px;
+}
+
+/* ========== 单元格 ========== */
+table td{
+  padding: 12px 16px;
+  border-bottom: 1px solid #eaeaea;
+	text-align: center;
+}
+table tbody tr:last-child td{
+  border-bottom: none;
+}
+
+
+table tbody tr:hover{
+  background: var(--onbg-color);
+}
+
+/* ========== 下载按钮 ========== */
+table a{
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 4px;
+  background: var(--bg-color);
+  color: var(--ct-color);
+  text-decoration: none;
+  font-size: 12px;
+  transition: .2s;
+}
+table a:hover{
+  background: var(--ct-color);
+	color: var(--bg-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+/* ========== 响应式：小屏滚动 ========== */
+@media(max-width: 600px){
+  table{
+		font-size: 12px;
+	}
+  table th, table td{
+		padding: 10px 12px;
+	}
+  /* 横向滚动容器 */
+  section{
+		overflow-x: auto;
+	}
+}
+		
+</style>
+</head>
+<body>
+	<header>
+		<a id="web_logo" href="../../index.html">
+			<img src="../images/favicon.ico" alt="暖暖相册">
+			<h1>暖暖相册</h1>
+		</a>
+		<nav>
+			<ul class="web_header_nav_list">
+				<li>
+					<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer" style="margin-right: 20px;">
+						<img src="../images/github.svg" alt="github">
+						<p>github</p>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.bilibili.com/video/BV1QcmFBBEr2/?share_source=copy_web&vd_source=8ed638af14381b52e402e47079c8e0d4" target="_blank" rel="noopener noreferrer">
+						<img src="../images/tutorial.svg" alt="github">
+						<p>教程</p>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+
+	<div id="layout">
+
+		<!-- aside -->
+		<aside>
+			<h2>版本(密码均为 nnxc)</h2>
+			<nav>
+				<ul>
+					<li><a href="#section_3_0">v3.0</a></li>
+					<li><a href="#section_2_0">v2.0</a></li>
+					<li><a href="#section_1_0">v1.0</a></li>
+				</ul>
+			</nav>
+		</aside>
+		<main>
+			<!-- v3.0 -->
+			<section id="section_3_0">
+				<table>
+					<caption>v3.0</caption>
+						<thead>
+							<tr>
+								<th scope="col">运行系统</th>
+								<th scope="col">版本</th>
+								<th scope="col">直链下载</th>
+								<th scope="col">123网盘</th>
+								<th scope="col">蓝奏云网盘</th>
+								<th scope="col">百度网盘</th>
+							</tr>
+						</thead>
+					<tbody>
+						<tr>
+							<td>Windows</td>
+							<td>单文件绿色版</td>
+							<td><a href="https://1846454622.v.123pan.cn/1846454622/Nikki%20Albums/v3.0/%E6%9A%96%E6%9A%96%E7%9B%B8%E5%86%8C-v3.0-Windows-x64.zip" target="_blank" rel="noopener noreferrer">下载</a></td>
+							<td><a href="https://www.123865.com/s/kmWyTd-NqMWA?pwd=nnxc#" target="_blank" rel="noopener noreferrer">下载</a></td>
+							<td><a href="https://ranaxro.lanzouu.com/i3DxT3d06xvc"  target="_blank" rel="noopener noreferrer">下载</a></td>
+							<td><a href="">不下载</a></td>
+						</tr>
+						<tr>
+							<td>Windows</td>
+							<td>release绿色版</td>
+							<td><a href="https://1846454622.v.123pan.cn/1846454622/Nikki%20Albums/v3.0/%E6%9A%96%E6%9A%96%E7%9B%B8%E5%86%8C-v3.0-Windows-x64-release.zip" target="_blank" rel="noopener noreferrer">下载</a></td>
+							<td><a href="https://www.123865.com/s/kmWyTd-OqMWA?pwd=nnxc#" target="_blank" rel="noopener noreferrer">下载</a></td>
+							<td><a href="https://ranaxro.lanzouu.com/iNixL3d06zqj" target="_blank" rel="noopener noreferrer">下载</a></td>
+							<td><a href="">不下载</a></td>
+						</tr>
+						<tr>
+							<td>Windows</td>
+							<td>msix安装包</td>
+							<td><a href="">不下载</a></td>
+							<td><a href="">不下载</a></td>
+							<td><a href="">不下载</a></td>
+							<td><a href="">不下载</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+
+			<!-- v2.0 -->
+			<section id="section_2_0">
+				<table>
+					<caption>v2.0</caption>
+						<thead>
+							<tr>
+								<th scope="col">运行系统</th>
+								<th scope="col">版本</th>
+								<th scope="col">123网盘</th>
+							</tr>
+						</thead>
+					<tbody>
+						<tr>
+							<td>Windows</td>
+							<td>单文件绿色版</td>
+							<td><a href="https://www.123865.com/s/kmWyTd-RqMWA?pwd=nnxc#" target="_blank" rel="noopener noreferrer">下载</a></td>
+						</tr>
+						<tr>
+							<td>Windows</td>
+							<td>release绿色版</td>
+							<td><a href="">不下载</a></td>
+						</tr>
+						<tr>
+							<td>Windows</td>
+							<td>msix安装包</td>
+							<td><a href="">不下载</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			
+			
+			<!-- v1.0 -->
+			<section id="section_1_0">
+				<table>
+					<caption>v1.0</caption>
+						<thead>
+							<tr>
+								<th scope="col">运行系统</th>
+								<th scope="col">版本</th>
+								<th scope="col">123网盘</th>
+							</tr>
+						</thead>
+					<tbody>
+						<tr>
+							<td>Windows</td>
+							<td>单文件绿色版</td>
+							<td><a href="">不下载</a></td>
+						</tr>
+						<tr>
+							<td>Windows</td>
+							<td>release绿色版</td>
+							<td><a href="">不下载</a></td>
+						</tr>
+						<tr>
+							<td>Windows</td>
+							<td>msix安装包</td>
+							<td><a href="">不下载</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</div>
+<script>
+	
+	
+</script>
+</body>
+</html>

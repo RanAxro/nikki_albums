@@ -7,17 +7,81 @@
 <meta name="description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
 <meta name="keywords" content="无限暖暖, 暖暖, 暖暖相册, nikki_albums, 暖暖5, infinitynikki, InfinityNikki, infinity-nikki">
 <meta name="author" content="RanAxro">
-<link rel="icon" href="src/nikki_albums/windows/runner/resources/app_icon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="website/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="website/images/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="暖暖相册">
 <meta property="og:description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
-<meta property="og:image" content="favicon.ico">
+<meta property="og:image" content="website/images/favicon.ico">
 <meta property="og:url" content="https://ranaxro.github.io/nikki_albums/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="暖暖相册">
 <meta name="twitter:description" content="一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
 <meta name="twitter:image" content="src/nikki_albums/windows/runner/resources/app_icon.ico">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "暖暖相册官网",
+  "alternateName": "Nikki Albums Official",
+  "url": "https://nikki.ranaxro.com",
+  "description": "一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://ranaxro.com",
+    "name": "RanAxro",
+    "url": "https://ranaxro.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nikki.ranaxro.com/src/nikki_albums/windows/runner/resources/app_icon.ico"
+    },
+    "sameAs": [
+      "https://github.com/RanAxro"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "url": "https://github.com/RanAxro/nikki_albums/discussion",
+      "availableLanguage": ["zh","en"]
+    }
+  },
+  "mainEntity": {
+    "@type": "SoftwareApplication",
+    "@id": "https://nikki.ranaxro.com",
+    "name": "暖暖相册 Nikki Albums",
+    "alternateName": "Nikki Albums",
+    "description": "一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。",
+    "url": "https://nikki.ranaxro.com",
+    "downloadUrl": "https://nikki.ranaxro.com/website/pages/download",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": ["Windows","Android"],
+    "releaseNotes": "https://github.com/RanAxro/nikki_albums/releases",
+    "softwareVersion": "v3.0",
+    "datePublished": "2025-12-07",
+    "license": "https://github.com/RanAxro/nikki_albums/blob/main/LICENSE",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY",
+      "availability": "https://schema.org/InStock",
+      "category": "free"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "RanAxro",
+      "url": "https://ranaxro.com",
+      "sameAs": "https://github.com/RanAxro"
+    },
+    "sameAs": [
+      "https://github.com/RanAxro/nikki_albums",
+      "https://github.com/RanAxro/nikki_albums/docs",
+      "https://github.com/RanAxro/nikki_albums/discussion"
+    ],
+    "keywords": ["无限暖暖","相册管理","相册工具"],
+    "image": "https://nikki.ranaxro.com/src/nikki_albums/windows/runner/resources/app_icon.ico"
+  }
+}
+</script>
 <style type="text/css">
 *{
 	padding: 0;
@@ -28,6 +92,8 @@
 	user-select: none;
 }
 :root{
+	background: var(--bg-color);
+
 	--text-border: 
     2px 0 0 #333, /* 右侧阴影 */
     -2px 0 0 #333, /* 左侧阴影 */
@@ -37,236 +103,345 @@
     -1.414px -1.414px 0 #333, /* 左上角阴影 */
     1.414px -1.414px 0 #333, /* 右上角阴影 */
     -1.414px 1.414px 0 #333; /* 左下角阴影 */
-	background-color: #222;
+	--bg-color: #222;
+	--onbg-color: #333;
+	--ct-color: #EEE;
+	--onct-color: #CCC;
+}
+header, section, footer, aside, nav, article, figure{
+	display: block;
 }
 
 html{
 	margin: 0 auto;
-	width: min(100%, 500px);
+	width: min(100%, 1400px);
 	height: 100%;
 }
 body{
 	margin: 0;
-	width: 100%;
-	min-height: 100%;
+	padding: 5px 20px;
+	width: calc(100% - 40px);
+	min-height: calc(100% - 10px);
 	/* height: 100%; */
-	background-color: #333;
-  display: inline-block;
+	background-color: var(--bg-color);
+  /* display: inline-block; */
 }
 
-#img_box{
-	padding: 25px;
-	margin: 20px auto;
-	width: 150px;
-	height: 150px;
-}
-#img_box img{
-	border-radius: 50px;
-	transition: .3s all;
-}
-#img_box img:hover{
-	border-radius: 0px;
+header{
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
 }
 
-#title_box{
-	margin: 20px auto;
+#web_logo{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+#web_logo img{
+	margin: 5px;
+	width: 30px;
+	height: 30px;
+}
+#web_logo h1{
+	margin: 5px;
+	font-size: 20px;
+	font-weight: lighter;
+	color: var(--ct-color);
+}
+
+header nav{
+	margin-left: auto;
+}
+
+.web_header_nav_list{
+  margin: 0;
+  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+  list-style:none;
+  display: flex;
+  gap: 20px;
+}
+.web_header_nav_list a{
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--ct-color);
+  gap: 6px;
+	transition: .2s all;
+}
+.web_header_nav_list a:hover{
+	color: var(--onct-color);
+}
+.web_header_nav_list img{
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+.web_header_nav_list p{
+  width: 35px;
+  height: 20px;
+}
+
+#web_more{
+	visibility: hidden;
+	display: none;
+}
+@media(max-width: 500px){
+	.web_header_nav_list li{
+		visibility: hidden;
+		display: none;
+	}
+	#web_more{
+		visibility: visible;
+		display: block;
+	}
+}
+
+
+
+
+
+
+main{
+	/* padding: 50px 100px; */
+	padding-top: 100px;
+	margin: 0 auto;
+	/* width: min(60%, 1000px); */
+	width: calc(100% - 100px);
+	max-width: 800px;
+}
+
+
+/* info */
+
+#info{
+	display: flex;          /* 弹性容器 */
+	flex-wrap: wrap;        /* 关键：空间不足就换行 */
+	gap: 50px;              /* 两栏间距 */
+	align-items: center;     /* 关键：纵轴居中 */
+	justify-content: center; /* 可选：整个区域再水平居中 */
+}
+
+#info_logo{
+	min-width: 100px;
+	max-width: 160px;
+	flex: 1 1 100px;
+}
+#info_logo img{
+	width: 100%;
+}
+#info_text{
+	flex: 1 1 300px;
+	color: var(--ct-color);
+}
+
+#info_text_title{
+	width: auto;
 	text-align: center;
 	font-size: 48px;
 	font-weight: bold;
-	background: linear-gradient(270deg, #ffd7e9, #ffffff, #e6daff, #ffffe0);
+	letter-spacing: 2px;
+	background: linear-gradient(90deg, #CCE7F6 0%, #B3DDF9 25%, #E6F4FD 50%, #B3DDF9 75%, #CCE7F6 100%);
+	background-size: 200% 100%;
+
 	-webkit-background-clip: text;
-	color: transparent;
-	background-size: 600% 600%;
-	animation: gradient 4s ease infinite;
+					background-clip: text;
+	-webkit-text-fill-color: transparent;
+					text-fill-color: transparent;
+
+	animation: flow 3s linear infinite;
 }
 
-@keyframes gradient{
+@keyframes flow{
 	0%{
-		background-position: 0% 50%;
-	}
-	50%{
-		background-position: 100% 50%;
+		background-position: 0% 0;
 	}
 	100%{
-		background-position: 0% 50%;
+		background-position: -200% 0;
 	}
 }
 
-#description_box{
-	margin: 20px auto;
-	width: min(90%, 400px);
+#info_text_description{
+	color: var(--onct-color);
+	display: block;
 	text-align: center;
-	font-size: 16px;
-	color: #EEE;
-}
-
-#btn_box{
-	margin-top: 30px;
 }
 
 
-#btn_tip{
-	margin: 0 auto 10px;
-	width: min(70%, 300px);
-	line-height: 12px;
-	text-align: center;
-	font-size: 10px;
-	color: #EEE;
-	user-select: text;
-}
-#btn_download{
-	border-radius: 10px;
-	margin: 0 auto 10px;
-	width: min(70%, 300px);
-	line-height: 50px;
-	background: linear-gradient(270deg, #ffd7e9, #ffffff, #e6daff, #ffffe0);
-	background-size: 200% 200%;
-	background-position: 0% 0%;
-	font-size: 24px;
-	font-weight: bold;
-	color: #EEE;
-  text-shadow: var(--text-border);
-	text-align: center;
-	cursor: pointer;
-	transition: .3s all;
-}
-#btn_download:hover{
-	/* background-position: 100% 100%; */
-	animation: gradient 2s ease infinite;
-}
-#btn_download_release{
-	border-radius: 10px;
-	box-shadow: inset 0 0 0 2px #EEE;
-	margin: 0 auto 10px;
-	width: min(70%, 300px);
-	line-height: 50px;
-	background: #333;
-	font-size: 24px;
-	font-weight: bold;
-	color: #EEE;
-  text-shadow: var(--text-border);
-	text-align: center;
-	cursor: pointer;
-	transition: .3s all;
-}
-#btn_download_release:hover{
-	box-shadow: inset 0 0 0 3px #e6daff;
-	color: #e6daff;
-}
-#btn_src{
-	border-radius: 10px;
-	box-shadow: inset 0 0 0 2px #EEE;
-	margin: 0 auto 10px;
-	width: min(70%, 300px);
-	line-height: 50px;
-	background: #333;
-	font-size: 24px;
-	font-weight: bold;
-	color: #EEE;
-  text-shadow: var(--text-border);
-	text-align: center;
-	cursor: pointer;
-	transition: .3s all;
-}
-#btn_src:hover{
-	box-shadow: inset 0 0 0 3px #e6daff;
-	color: #e6daff;
-}
-#btn_qq{
-	border-radius: 10px;
-	box-shadow: inset 0 0 0 2px #EEE;
-	margin: 0 auto 10px;
-	width: min(70%, 300px);
-	line-height: 50px;
-	background: #333;
-	font-size: 24px;
-	font-weight: bold;
-	color: #EEE;
-  text-shadow: var(--text-border);
-	text-align: center;
-	cursor: pointer;
-	transition: .3s all;
-}
-#btn_qq:hover{
-	box-shadow: inset 0 0 0 3px #e0f7fa;
-	color: #e0f7fa;
+/* fast_vist */
+
+#fast_vist{
+	margin-top: 100px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 50px;
+	align-items: center;
+	justify-content: center;
 }
 
-#btn_readme{
-	border-radius: 10px;
-	box-shadow: inset 0 0 0 2px #EEE;
-	margin: 0 auto 10px;
-	width: min(70%, 300px);
-	line-height: 50px;
-	background: #333;
-	font-size: 24px;
-	font-weight: bold;
-	color: #EEE;
-  text-shadow: var(--text-border);
-	text-align: center;
+.fast_vist_item_box{
+  text-decoration: none;
+	padding: 10px;
+	border-radius: 12px;
+	height: 50px;
+	flex: 1 1 200px;
+	display: flex;
+	align-items: center;
 	cursor: pointer;
-	transition: .3s all;
+	transition: .2s all;
 }
-#btn_readme:hover{
-	box-shadow: inset 0 0 0 3px #ffffe0;
-	color: #ffffe0;
+.fast_vist_item_box img{
+	height: 50px;
 }
+.fast_vist_item_box p{
+	position: relative;
+	left: -10px;
+	width: 100%;
+	text-align: center;
+	color: var(--ct-color);
+	font-size: 28px;
+}
+
+#download_windows_box{
+	background-color: #0078D4;
+}
+#download_windows_box:hover{
+	background-color: #0068C0;
+}
+#go_to_github_box{
+	outline: solid 3px;
+	outline-color: var(--ct-color);
+	outline-offset: -3px;
+}
+#go_to_github_box:hover{
+	outline: solid 3px;
+	outline-color: var(--onct-color);
+	outline-offset: -3px;
+}
+
+
+
+/* card */
+#card_box{
+  margin-left: auto;
+  margin-right: auto;
+	padding-top: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+#card_box article{
+	padding: 20px;
+	border-radius: 24px;
+  flex: 1 0 150px;
+  max-width: 220px;
+  height: 130px;
+  background: var(--onbg-color);
+	opacity: 0.7;
+	color: var(--ct-color);
+	transition: .2s all;
+}
+#card_box article:hover{
+	opacity: 1;
+}
+
+#card_box img{
+	width: 32px;
+	opacity: .7;
+	transform-origin: 0 0;
+}
+#card_box span{
+	color: var(--onct-color);
+}
+
 		
 </style>
 </head>
 <body>
-	<div id="img_box">
-		<img src="src/nikki_albums/windows/runner/resources/app_icon.ico" alt="Nikki Albums" width="150px" height="150px" />
-	</div>
-	
-	<div id="title_box">暖暖相册</div>
-	
-	<div id="description_box">一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧</div>
-	
-	<div id="btn_box">
-		<div id="btn_download">下  载</div>
-		<div id="btn_tip">密码: nnxc</div>
-		<div id="btn_download_release">下载release版本</div>
-		<div id="btn_tip">密码: nnxc</div>
-		<div id="btn_src">github</div>
-		<div id="btn_qq">交流群</div>
-		<div id="btn_readme">软件介绍</div>
-	</div>
-	
-	
-	<!-- README -->
-	
-	
-	
-<script>
-	
-const downloadLink = "https://ranaxro.lanzouu.com/i3DxT3d06xvc";
-const downloadReleaseLink = "https://ranaxro.lanzouu.com/iNixL3d06zqj";
-const githubLink = "https://github.com/RanAxro/nikki_albums";
-const qLink = "https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy";
-const readmeLink = "https://github.com/RanAxro/nikki_albums/blob/main/README.md";
+	<header>
+		<div id="web_logo">
+			<img src="website/images/favicon.ico" alt="暖暖相册">
+			<h1>暖暖相册</h1>
+		</div>
+		<nav>
+			<ul class="web_header_nav_list">
+				<li>
+					<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer" style="margin-right: 20px;">
+						<img src="website/images/github.svg" alt="github">
+						<p>github</p>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.bilibili.com/video/BV1QcmFBBEr2/?share_source=copy_web&vd_source=8ed638af14381b52e402e47079c8e0d4" target="_blank" rel="noopener noreferrer">
+						<img src="website/images/tutorial.svg" alt="github">
+						<p>教程</p>
+					</a>
+				</li>
+				<li>
+					<a href="website/pages/download.html">
+						<img src="website/images/download.svg" alt="github">
+						<p>下载</p>
+					</a>
+				</li>
+				<li id="web_more">
+					<a href="" onclick="alert('喵喵喵')">
+						<img src="website/images/more.svg" alt="github" style="margin-top: 10px;">
+						<!-- <p>更多</p> -->
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<!-- info -->
+		<section id="info">
+			<div id="info_logo">
+				<img src="website/images/favicon.ico" alt="暖暖相册">
+			</div>
+			<div id="info_text">
+				<h2 id="info_text_title">暖暖相册</h2>
+				<span id="info_text_description">
+					一款用于管理你的无限暖暖相册的工具
+				</span>
+			</div>
+		</section>
 
-document.getElementById("btn_download").addEventListener("click", function(){
-	window.open(downloadLink, "_blank");
-});
+		<!-- fast visit -->
+		<section id="fast_vist">
+			<a id="download_windows_box" class="fast_vist_item_box" href="https://1846454622.v.123pan.cn/1846454622/Nikki%20Albums/v3.0/%E6%9A%96%E6%9A%96%E7%9B%B8%E5%86%8C-v3.0-Windows-x64.zip" target="_blank">
+			<!-- <a id="download_windows_box" class="fast_vist_item_box" target="_blank" onclick="console.log('pr')"> -->
+				<img src="website/images/windows.svg" alt="下载Windows版本">
+				<p>下载</p>
+			</a>
+			<a id="go_to_github_box" class="fast_vist_item_box" href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
+				<img src="website/images/github.svg" alt="前往github">
+				<p>github</p>
+			</a>
+		</section>
 
-document.getElementById("btn_download_release").addEventListener("click", function(){
-	window.open(downloadReleaseLink, "_blank");
-});
-
-document.getElementById("btn_src").addEventListener("click", function(){
-	window.open(githubLink, "_blank");
-});
-
-document.getElementById("btn_qq").addEventListener("click", function(){
-	window.open(qLink, "_blank");
-});
-
-document.getElementById("btn_readme").addEventListener("click", function(){
-	window.open(readmeLink, "_blank");
-});
-	
-</script>
-	
+		<!-- card -->
+		<section id="card_box">
+			<article>
+				<img src="website/images/album.svg" alt="多种相册">
+				<h2>多种相册</h2>
+				<span>支持查看12类相册+3类游戏资源</span>
+			</article>
+			<article>
+				<img src="website/images/batch.svg" alt="批量操作" style="transform: scale(0.9);">
+				<h2>批量操作</h2>
+				<span>支持批量导出、删除、移动</span>
+			</article>
+			<article>
+				<img src="website/images/box.svg" alt="多种导出方式">
+				<h2>多种导出方式</h2>
+				<span>支持批量复制到剪贴板与发送到网络设备</span>
+			</article>
+		</section>
+	</main>
 </body>
 </html>
