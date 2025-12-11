@@ -1,10 +1,6 @@
 {
-  "version": "3",
-  "version0": "3",
-  "version1": "0",
-  "isWarning": false,
-  "warningTitle": "",
-  "warningMessage": "",
-  "qq": "1062670402",
-  "url": "https://www.bilibili.com/video/BV1QcmFBBEr2/?share_source=copy_web&vd_source=8ed638af14381b52e402e47079c8e0d4",
+  "version": 4,
+  "versionString": "3.01",
+  "downloadLink": "https://nikki.ranaxro.com",
+  "updatedContent": "更新\n新内容"
 }
