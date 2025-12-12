@@ -17,8 +17,13 @@
   "forward": "",
   "previous": "",
   "next": "",
+  "sort_reverse": "",
+  "sort_forward": "",
   "filter": "",
   "play": "",
+  "enable": "",
+  "disable": "",
+  "download": "",
 
 
   "----------setting----------": "----------setting----------",
@@ -26,10 +31,27 @@
   "lang": "",
   "language": "",
 
+  "personalization": "",
+  "accountManagement": "",
+  "versionInformation": "",
+
+  "maximizeOrRestoreButton": "",
+
+  "checkForUpdates": "",
+  "checkFailed": "",
+  "alreadyTheLatestVersion": "",
+  "findNewVersion": "",
+  "updateMessage": "",
+  "downloadFailed": "",
+  "toOfficialWebsite": "",
 
 
 
+  "----------frame----------": "----------frame----------",
+
+  "account": "",
   "selectAccountButton": "",
+  "deleteAccount": "",
   "addCustomAccountButton": "",
   "locateGame": "",
   "locateInfinityNikki": "",
@@ -87,6 +109,7 @@
   "out-of-game": "",
   "layout_minus": "",
   "layout_plus": "",
+  "select": "",
   "deselect": "",
   "selectAll": "",
   "invertSelect": "",

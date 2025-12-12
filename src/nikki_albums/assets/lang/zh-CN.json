@@ -1,6 +1,6 @@
 {
   "nikkialbums": "暖暖相册",
-  "info": "该软件还在测试阶段, 不代表最终品质\n 当前版本没有联网功能, 若要获取最新版本, 请加入QQ群: 1062670402\n 软件官网: nikki.ranaxro.com \n github: github.com/RanAxro/nikki_albums",
+  "info": "该软件还在测试阶段, 不代表最终品质\n 软件官网: nikki.ranaxro.com \n github: github.com/RanAxro/nikki_albums \n QQ交流群: 1062670402",
 
   "version": "版本",
   "setting": "设置",
@@ -17,8 +17,13 @@
   "forward": "前进",
   "previous": "下一个",
   "next": "上一个",
+  "sort_reverse": "倒序",
+  "sort_forward": "正序",
   "filter": "筛选",
   "play": "启动",
+  "enable": "启用",
+  "disable": "禁用",
+  "download": "下载",
 
 
   "----------setting----------": "----------setting----------",
@@ -26,11 +31,28 @@
   "lang": "简体中文",
   "language": "语言",
 
+  "personalization": "个性化",
+  "accountManagement": "账号管理",
+  "versionInformation": "版本信息",
+
+  "maximizeOrRestoreButton": "最大化按钮",
+
+  "checkForUpdates": "检测更新",
+  "checkFailed": "检测失败",
+  "alreadyTheLatestVersion": "已是最新版本",
+  "findNewVersion": "发现新版本",
+  "updateMessage": "更新内容",
+  "downloadFailed": "下载失败",
+  "toOfficialWebsite": "前往官网",
 
 
 
+  "----------frame----------": "----------frame----------",
 
+
+  "account": "账号",
   "selectAccountButton": "选择账号",
+  "deleteAccount": "你确定要删除该账号吗",
   "addCustomAccountButton": "添加",
   "locateGame": "定位游戏",
   "locateInfinityNikki": "请选择\"无限暖暖\"、\"launcher\"或者\"xstarter\"",
@@ -89,6 +111,7 @@
   "out-of-game": "游戏外",
   "layout_minus": "减少列数",
   "layout_plus": "增加列数",
+  "select": "选择",
   "deselect": "取消选择",
   "selectAll": "全选",
   "invertSelect": "反选",

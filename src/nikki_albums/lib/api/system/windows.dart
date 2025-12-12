@@ -15,25 +15,17 @@ import "package:win32/win32.dart";
 import "package:bitsdojo_window/bitsdojo_window.dart";
 
 /// 获取屏幕大小
-Size getScreenSize(){
+(int, int) getWindowsScreenSize(){
+
   if(Platform.isWindows){
     try{
-      final lib = DynamicLibrary.open("user32.dll");
-      final metrics = lib.lookupFunction<Int32 Function(Int32 nIndex), int Function(int nIndex)>("GetSystemMetrics");
-      return Size(metrics(0).toDouble(), metrics(1).toDouble());
+      return (GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
     }catch(e){
       AppState.writeError("api.system.getScreenSize", e.toString());
-      return Size(1920, 1080);
-    }
-  }else if(Platform.isAndroid){
-    final view = ui.PlatformDispatcher.instance.views.firstOrNull ?? ui.PlatformDispatcher.instance.implicitView;
-    if(view != null){
-      return view.physicalSize;
-    }else{
-      return Size(1080, 2400);
+      return (1920, 1080);
     }
   }
-  return Size(0, 0);
+  return (0, 0);
 }
 
 /// 是否置顶window窗口
@@ -59,17 +51,12 @@ void doTopWindow(bool isTop, {int? hwnd}){
 }
 
 
-/// 运行bin
-abstract class Bin{
-  static Path? _path;
-  static Path get path{
-    _path ??= Path(Platform.resolvedExecutable).cut(1) + "/data/flutter_assets/bin";
-    return _path!;
+Path? getWindowsDesktopPath(){
+  final userProfile = Platform.environment["USERPROFILE"];
+  if(userProfile == null){
+    return null;
   }
-
-  static Path get jhead{
-    return path + "/jhead.exe";
-  }
+  return Path(userProfile) + "Desktop";
 }
 
 
@@ -157,6 +144,14 @@ Future<int> compressInWindows(List<Path> files, Path to, [void Function(double)?
   });
 
   return await process.exitCode;
+}
+
+Future<int> decompressInWindows(Path file, Path to) async{
+  final Path bin7z = getBin() + "7za.exe";
+
+  final ProcessResult process = await Process.run(bin7z.path, ["x", file.path, "-o${to.path}", "-y"]);
+
+  return process.exitCode;
 }
 
 

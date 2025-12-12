@@ -17,8 +17,13 @@
   "forward": "Forward",
   "previous": "Previous",
   "next": "Next",
+  "sort_reverse": "Reverse order",
+  "sort_forward": "Forward order",
   "filter": "Filter",
   "play": "Play",
+  "enable": "Enable",
+  "disable": "Disable",
+  "download": "Download",
 
 
   "----------setting----------": "----------setting----------",
@@ -26,11 +31,27 @@
   "lang": "English",
   "language": "Language",
 
+  "personalization": "Personalization",
+  "accountManagement": "Account Management",
+  "versionInformation": "Version Information",
+
+  "maximizeOrRestoreButton": "Maximize Button",
+
+  "checkForUpdates": "Check for Updates",
+  "checkFailed": "Check Failed",
+  "alreadyTheLatestVersion": "You are up to date",
+  "findNewVersion": "New Version Found",
+  "updateMessage": "Release Notes",
+  "downloadFailed": "Download failed",
+  "toOfficialWebsite": "Visit the official website",
 
 
 
+  "----------frame----------": "----------frame----------",
 
+  "account": "Account",
   "selectAccountButton": "Select account",
+  "deleteAccount": "Are you sure you want to delete this account",
   "addCustomAccountButton": "Add",
   "locateGame": "Locate the game",
   "locateInfinityNikki": "Find \"InfinityNikki\",\"launcher\"or\"xstarter\"",
@@ -90,6 +111,7 @@
   "out-of-game": "out-of-game images",
   "layout_minus": "Fewer columns",
   "layout_plus": "More columns",
+  "select": "Select",
   "deselect": "Deselect",
   "selectAll": "Select all",
   "invertSelect": "Invert Selection",

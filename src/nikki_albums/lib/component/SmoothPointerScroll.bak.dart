@@ -1,0 +1,243 @@
+// import "IndependentScrollbar.bak.dart";
+// import "appRawScrollbar.dart" as app;
+//
+// import "package:flutter/gestures.dart";
+// import "package:flutter/material.dart";
+//
+// /// 平滑滚动
+// class SmoothPointerScroll extends StatefulWidget{
+//   final ScrollController _scrollController;  // ScrollView 的 ScrollController
+//   final double _initialScrollOffset;
+//   final bool _isInternalController;  // 外部是否传入了ScrollController
+//   final Duration _duration;  // 平滑过渡动画时长
+//   final Curve _curve;  // 平滑过渡动画曲线
+//   final Widget Function(BuildContext, ScrollController, ScrollPhysics, IndependentScrollbar) builder;  // builder 返回 ScrollController 传入到需要的 ScrollView 上
+//
+//   SmoothPointerScroll({
+//     super.key,
+//     ScrollController? scrollController,
+//     double initialScrollOffset = 0,
+//     Duration duration = const Duration(milliseconds: 150),
+//     Curve curve = Curves.easeOut,
+//     required this.builder,
+//   }) :
+//     _scrollController = scrollController ?? ScrollController(),
+//     _initialScrollOffset = initialScrollOffset,
+//     _isInternalController = scrollController == null,
+//     _duration = duration,
+//     _curve = curve
+//   ;
+//
+//   @override
+//   State<SmoothPointerScroll> createState() => _SmoothPointerScroll();
+// }
+//
+// class _SmoothPointerScroll extends State<SmoothPointerScroll>{
+//   late double _offset;  // ScrollView 当前位置, 不听从 ScrollController
+//   bool isMouse = false;  // 当前是否使用鼠标
+//   late final IndependentScrollController scrollbarController;  // 滚动条 Controller
+//   late final IndependentScrollbar scrollbar;
+//
+//   double get offset => _offset;
+//   set offset(double target){
+//     if(!widget._scrollController.hasClients) return;
+//     // 更新 offset
+//     _offset = target.clamp(widget._scrollController.position.minScrollExtent, widget._scrollController.position.maxScrollExtent);
+//     animateTo();
+//   }
+//   set forceOffset(double target){
+//     if(!widget._scrollController.hasClients) return;
+//     _offset = target.clamp(widget._scrollController.position.minScrollExtent, widget._scrollController.position.maxScrollExtent);
+//     jumpTo();
+//   }
+//
+//   // 页面滚动动画
+//   void animateTo(){
+//     if(widget._duration == Duration.zero){
+//       jumpTo();
+//     }else{
+//       widget._scrollController.animateTo(
+//         offset,
+//         duration: widget._duration,
+//         curve: widget._curve,
+//       );
+//     }
+//   }
+//   void jumpTo(){
+//     widget._scrollController.jumpTo(offset);
+//   }
+//
+//   @override
+//   void initState(){
+//     super.initState();
+//
+//     _offset = widget._initialScrollOffset;
+//
+//     scrollbarController = IndependentScrollController();
+//     scrollbarController.addListener((){
+//       if(scrollbarController.isDrag){
+//         forceOffset = widget._scrollController.position.maxScrollExtent * scrollbarController.progress;
+//         // 当前用户正在拖拽滚动条, 更新 ScrollView 的位置
+//         // offset = widget._scrollController.position.maxScrollExtent * scrollbarController.progress;
+//       }
+//     });
+//     widget._scrollController.addListener((){
+//       if(scrollbarController.isDrag == false){
+//         // ScrollView 的位置发生变化, 更新滚动条progress
+//         scrollbarController.progress = widget._scrollController.offset / widget._scrollController.position.maxScrollExtent;
+//       }
+//     });
+//
+//     // 监听帧绘制完成
+//     WidgetsBinding.instance.addPostFrameCallback((_){
+//       if(widget._scrollController.hasClients){
+//         widget._scrollController.jumpTo(_offset);
+//
+//         // 将 ScrollView 的长度传给滚动条
+//         final maxExtent = widget._scrollController.position.maxScrollExtent;
+//         scrollbarController.length = maxExtent;
+//       }
+//     });
+//
+//     scrollbar = IndependentScrollbar(
+//       controller: scrollbarController,
+//       thickness: 8,
+//       radius: const Radius.circular(4),
+//       color: Colors.blue,
+//       trackColor: Colors.grey[300],
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context){
+//     return Listener(
+//       behavior: HitTestBehavior.opaque,
+//       onPointerDown: (details){
+//         if(details.kind == PointerDeviceKind.mouse){
+//           isMouse = true;
+//         }
+//       },
+//       onPointerUp: (details){
+//         if(details.kind == PointerDeviceKind.mouse){
+//           isMouse = false;
+//         }
+//       },
+//       onPointerSignal: (event){
+//         if(event is PointerScrollEvent) offset += event.scrollDelta.dy;
+//       },
+//       child: GestureDetector(
+//         onVerticalDragUpdate: (event){
+//           // 仅在触摸屏上才可拖拽
+//           if(isMouse) return;
+//
+//           if(event.primaryDelta != null) offset -= event.primaryDelta!;
+//         },
+//         child: LayoutBuilder(
+//           builder: (BuildContext context, BoxConstraints constraints){
+//             Offset downOffset = Offset(0, 0);
+//
+//             double _maxScroll = 1000;
+//             final double _barHeight = 80; // 滑块高度
+//             double _top = 0; // 滑块距顶部距离
+//
+//
+//             return Listener(
+//               behavior: HitTestBehavior.translucent,
+//               // onPointerDown: (PointerDownEvent event){
+//               //   downOffset = event.localPosition;
+//               //   print(downOffset.dy);
+//               // },
+//               // onPointerMove: (PointerMoveEvent event){
+//               //   print(event.localPosition.dy);
+//               //   forceOffset = widget._scrollController.position.maxScrollExtent * (event.localPosition.dy - downOffset.dy) / constraints.maxHeight;
+//               //   // forceOffset = offset + widget._scrollController.position.maxScrollExtent * event.delta.dy / constraints.maxHeight;
+//               // },
+//               child: ScrollConfiguration(
+//                 behavior: ScrollConfiguration.of(context).copyWith(
+//                   scrollbars: false,
+//                 ),
+//                 child: Stack(
+//                   children: [
+//                     widget.builder(context, widget._scrollController, const NeverScrollableScrollPhysics(), scrollbar),
+//                     IndependentScrollbar(controller: widget._scrollbarController),
+//                   ],
+//                 ),
+//               ),
+//               // child: RawScrollbar(
+//               //   controller: widget._scrollController,
+//               //   thumbVisibility: true,
+//               //   thickness: 8,
+//               //   radius: const Radius.circular(4),
+//               //   interactive: true, // ✅ 允许拖动滚动条
+//               //   child: widget.builder(context, widget._scrollController, const NeverScrollableScrollPhysics(), scrollbar),
+//               // ),
+//             );
+//           },
+//         ),
+//       )
+//     );
+//   }
+//
+//   @override
+//   void dispose(){
+//     super.dispose();
+//     if(widget._isInternalController) widget._scrollController.dispose();
+//     scrollbarController.dispose();
+//   }
+// }
+//
+//
+// class _Scrollbar extends StatefulWidget{
+//   final ScrollController controller;
+//   const _Scrollbar({
+//     super.key,
+//     required this.controller,
+//   });
+//
+//   @override
+//   State<_Scrollbar> createState() => _ScrollbarState();
+// }
+// class _ScrollbarState extends State<_Scrollbar>{
+//   late final double _maxScroll;
+//   final double _barHeight = 80; // 滑块高度
+//   double _top = 0; // 滑块距顶部距离
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _maxScroll = widget.controller.position.maxScrollExtent;
+//   }
+//
+//   @override
+//   Widget build(BuildContext context){
+//     return LayoutBuilder(
+//       builder: (BuildContext context, BoxConstraints constraints){
+//         return Stack(
+//           children: [
+//             Positioned(
+//               right: 4,
+//               top: _top,
+//               child: GestureDetector(
+//                 onVerticalDragUpdate: (DragUpdateDetails d) {
+//                   final newTop = (_top + d.delta.dy)
+//                       .clamp(0.0, MediaQuery.sizeOf(context).height - _barHeight);
+//                   setState(() => _top = newTop);
+//                   final ratio = newTop / (MediaQuery.sizeOf(context).height - _barHeight);
+//                   widget.controller.jumpTo(ratio * _maxScroll);
+//                 },
+//                 child: Container(
+//                   width: 8,
+//                   height: _barHeight,
+//                   decoration: BoxDecoration(
+//                     color: Colors.blueAccent,
+//                     borderRadius: BorderRadius.circular(4),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+// }

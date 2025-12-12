@@ -23,7 +23,7 @@ class AlbumPreviewer extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return SmoothPointerScroll(
-      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
+      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
         return GridView.builder(
           padding: const EdgeInsets.all(1),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

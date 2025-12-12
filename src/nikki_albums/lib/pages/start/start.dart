@@ -304,8 +304,8 @@ class MoveFolderDialog extends StatelessWidget{
       /// storage space
       MultiValueListenableBuilder(
         listenables: [destination, directorySize],
-        builder: (BuildContext context, List<Object?> values){
-          if(values[0] == null || values[1] == null){
+        builder: (BuildContext context, Widget? child){
+          if(destination.value == null || directorySize.value == null){
             return Row(
               children: [
                 Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.error.pressedColor),
@@ -314,8 +314,8 @@ class MoveFolderDialog extends StatelessWidget{
             );
           }
 
-          final String to =  values[0] as String;
-          final int need = values[1] as int;
+          final String to =  destination.value!;
+          final int need = directorySize.value!;
 
           final (available, total, free) = getDiskFreeSpaceEx(to);
 
@@ -391,7 +391,7 @@ class MoveFolderDialog extends StatelessWidget{
       /// buttons
       MultiValueListenableBuilder(
         listenables: [directorySize, freeSize, destination, permission],
-        builder: (BuildContext context, List<Object?> values){
+        builder: (BuildContext context, Widget? child){
           final Widget cancelButton = SmallButton(
             width: null,
             onClick: (){
@@ -400,13 +400,13 @@ class MoveFolderDialog extends StatelessWidget{
             child: Text(context.tr("cancel")),
           );
 
-          bool isReady = values[0] != null && values[1] != null && values[2] != null && values[3] != null;
+          bool isReady = directorySize.value != null && freeSize.value != null && destination.value != null;
 
           if(!isReady) return cancelButton;
 
-          final int need = values[0] as int;
-          final int free = values[1] as int;
-          final bool linkPermission = values[3] as bool;
+          final int need = directorySize.value!;
+          final int free = freeSize.value!;
+          final bool linkPermission = permission.value;
           isReady = isReady && (free > need + extraSpace) && linkPermission;
 
           if(!isReady) return cancelButton;

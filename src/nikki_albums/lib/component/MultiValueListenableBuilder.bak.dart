@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 class MultiValueListenableBuilder extends StatelessWidget{
   final List<ValueNotifier<dynamic>> listenables; // 明确限制为 ValueNotifier
 
-  final Widget Function(BuildContext context, Widget? child) builder;
+  final Widget Function(BuildContext context, List<Object?> values) builder;
 
   final Widget? child;
 
@@ -19,8 +19,8 @@ class MultiValueListenableBuilder extends StatelessWidget{
   Widget build(BuildContext context){
     return ValueListenableBuilder<List<Object?>>(
       valueListenable: _CombinedValueListenable(listenables), // 使用改进后的内部类
-      builder: (context, values, c) {
-        return builder(context, child);
+      builder: (context, values, c) { // c 接收 ValueListenableBuilder 的 child
+        return builder(context, values);
       },
       child: child, // 将外部传入的 child 传递给内部的 ValueListenableBuilder
     );

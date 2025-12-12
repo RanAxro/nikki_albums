@@ -1,3 +1,7 @@
+import "personalization.dart";
+import "editCustomGame.dart";
+import "versionInformation.dart";
+
 import "package:nikkialbums/info.dart";
 import "package:nikkialbums/state.dart";
 import "package:nikkialbums/ui/rui.dart";
@@ -7,29 +11,73 @@ import "package:nikkialbums/component/component.dart";
 import "package:flutter/material.dart";
 
 import "package:easy_localization/easy_localization.dart";
+import "package:http/http.dart" as http;
+
+
 
 
 class SettingDialog extends StatelessWidget{
-  const SettingDialog({super.key});
+  final PageController controller = PageController(initialPage: 0);
+
+  SettingDialog({super.key});
 
   @override
   Widget build(BuildContext context){
 
-    List<Widget> buttons = [
-      Text("${context.tr("version")}: $version", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+    final Widget content = Row(
+      spacing: listSpacing,
+      children: [
+        SizedBox(
+          width: sideBarExpandWidth,
+          child: SmoothPointerScroll(
+            builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+              return ListView(
+                controller: scrollController,
+                physics: physics,
+                children: [
+                  SmallButton(
+                    onClick: (){
+                      controller.jumpToPage(0);
+                    },
+                    child: Text(context.tr("personalization"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                  ),
+                  block5H,
+                  SmallButton(
+                    onClick: (){
+                      controller.jumpToPage(1);
+                    },
+                    child: Text(context.tr("accountManagement"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                  ),
+                  block5H,
+                  SmallButton(
+                    onClick: (){
+                      controller.jumpToPage(2);
+                    },
+                    child: Text(context.tr("versionInformation"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
 
-      SmallDivider(color: AppTheme.of(context)!.colorScheme.background.onColor),
+        SmallVerticalDivider(
+          color: AppTheme.of(context)!.colorScheme.background.hoveredColor,
+        ),
 
-      const ChangeTheme(),
-
-      SmallDivider(color: AppTheme.of(context)!.colorScheme.background.onColor),
-
-      const ChangeLanguage(),
-
-      SmallDivider(color: AppTheme.of(context)!.colorScheme.background.onColor),
-
-      SelectableText(context.tr("info"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-    ];
+        Expanded(
+          child: PageView(
+            controller: controller,
+            scrollDirection: Axis.vertical,
+            children: [
+              Personalization(),
+              EditCustomGame(),
+              VersionInformation(),
+            ],
+          ),
+        ),
+      ],
+    );
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -38,36 +86,36 @@ class SettingDialog extends StatelessWidget{
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
       child: Container(
         padding: const EdgeInsets.all(smallPadding),
-        constraints: const BoxConstraints(maxWidth: smallDialogMaxWidth),
-        child: SmoothPointerScroll(
-          builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
-            return SingleChildScrollView(
-              controller: controller,
-              physics: physics,
-              scrollDirection: Axis.vertical,
-              child: Column(
-                spacing: listSpacing,
+        child: Column(
+          spacing: bigListSpacing,
+          children: [
+            SizedBox(
+              height: topBarHeight,
+              child: Row(
+                spacing: bigListSpacing,
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(context.tr("setting"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-                      ),
-                      SmallButton(
-                        onClick: (){
-                          Navigator.of(context).pop();
-                        },
-                        child: Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-                      )
-                    ],
+                  block10W,
+                  Expanded(
+                    child: Text(context.tr("setting"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
                   ),
-                  ...buttons,
+
+                  const ChangeLanguage(),
+
+                  SmallButton(
+                    onClick: (){
+                      Navigator.of(context).pop();
+                    },
+                    child: Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+                  )
                 ],
               ),
-            );
-          },
+            ),
+            Expanded(
+              child: content,
+            ),
+          ],
         ),
-      ),
+      )
     );
   }
 }
@@ -124,39 +172,41 @@ class ChangeLanguage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Row(
-      spacing: bigListSpacing,
-      children: [
-        Text(context.tr("language"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-        MenuAnchor(
-          style: MenuStyle(
-            backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
-          ),
-          menuChildren: [
-            MenuItemButton(
-              onPressed: (){
-                AppState.lang.value = "zh-CN";
-              },
-              child: Text("简体中文", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-            ),
-            MenuItemButton(
-              onPressed: (){
-                AppState.lang.value = "en-US";
-              },
-              child: Text("English", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-            )
-          ],
-          builder: (BuildContext context, MenuController controller, Widget? child){
-            return SmallButton(
-              width: null,
-              onClick: (){
-                controller.isOpen ? controller.close() : controller.open();
-              },
-              child: Text(context.tr("lang"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-            );
+    return MenuAnchor(
+      style: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
+      ),
+      menuChildren: [
+        MenuItemButton(
+          onPressed: (){
+            AppState.lang.value = "zh-CN";
           },
+          child: Text("简体中文", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
         ),
+        MenuItemButton(
+          onPressed: (){
+            AppState.lang.value = "en-US";
+          },
+          child: Text("English", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+        )
       ],
+      builder: (BuildContext context, MenuController controller, Widget? child){
+        return SmallButton(
+          padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+          width: null,
+          onClick: (){
+            controller.isOpen ? controller.close() : controller.open();
+          },
+          child: Row(
+            spacing: listSpacing,
+            children: [
+              Image.asset("assets/icon/language.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onColor),
+              Text(context.tr("language"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+              Text(context.tr("lang"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor))
+            ],
+          ),
+        );
+      },
     );
   }
 }

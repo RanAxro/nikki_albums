@@ -1,7 +1,9 @@
 import "package:nikkialbums/state.dart";
 import "package:nikkialbums/ui/frame.dart";
+import "package:nikkialbums/api/system/system.dart";
 
 import "package:flutter/material.dart";
+import "dart:ui";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:bitsdojo_window/bitsdojo_window.dart";
@@ -15,10 +17,11 @@ void main() async{
 
   doWhenWindowReady(() async{
     final win = appWindow;
-    // final Size screenSize = getScreenSize();
-    // win.size = Size(0.5 * screenSize.width / dpr, 0.5 * screenSize.height / dpr);
-    // win.minSize = Size(0.3 * screenSize.width / dpr, 0.3 * screenSize.height / dpr);
-    win.size = Size(700, 500);
+
+    final dpr = PlatformDispatcher.instance.views.first.devicePixelRatio;
+    final (int screenX, int screenY) = getWindowsScreenSize();
+    win.size = Size(0.7 * screenX / dpr, 0.7 * screenY / dpr);
+
     win.minSize = Size(0, 0);
     win.alignment = Alignment.center;
     win.title = "Nikki Albums";

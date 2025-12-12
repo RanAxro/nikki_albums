@@ -38,9 +38,11 @@ class ImageViewerController extends ChangeNotifier{
     _state = state;
   }
 
-  int get page{
-    return _state._pageController.page?.round() ?? 0;
-  }
+  // int get page{
+  //   return _state._pageController.page?.round() ?? 0;
+  // }
+
+  int get index => _state.index;
 
   void toPreviousImage(){
     _state._toPreviousImage();
@@ -108,11 +110,13 @@ class ImageViewer extends StatefulWidget{
 class _ImageViewerState extends State<ImageViewer>{
   List<ValueNotifier<Matrix4>> _imageMatrix = [];
   late final PageController _pageController;
+  late int index;
 
   @override
   void initState(){
     super.initState();
     _pageController = PageController(initialPage: widget._initIndex);
+    index = widget._initIndex;
     widget._controller?._attach(this);
     _imageMatrix = List.generate(
       widget._imageCount,
@@ -132,21 +136,30 @@ class _ImageViewerState extends State<ImageViewer>{
 
   /// Switch to the previous page
   _toPreviousImage(){
-    if(_pageController.page != null && _pageController.page! > 0){
-      _pageController.previousPage(
-        duration: Duration(milliseconds: _ImageToggleDuration),
-        curve: Curves.easeInOut,
-      );
+    if(index > 0){
+      index--;
+      _pageController.animateToPage(index, duration: Duration(milliseconds: _ImageToggleDuration), curve: Curves.easeInOut);
     }
+    // if(_pageController.page != null && _pageController.page! > 0){
+    //   _pageController.previousPage(
+    //     duration: Duration(milliseconds: _ImageToggleDuration),
+    //     curve: Curves.easeInOut,
+    //   );
+    // }
   }
   /// Switch to the next page
   _toNextImage(){
-    if(_pageController.page != null && _pageController.page! < widget._imageCount - 1){
-      _pageController.nextPage(
-        duration: Duration(milliseconds: _ImageToggleDuration),
-        curve: Curves.easeInOut,
-      );
+    if(index < widget._imageCount - 1){
+      index++;
+      _pageController.animateToPage(index, duration: Duration(milliseconds: _ImageToggleDuration), curve: Curves.easeInOut);
     }
+    // if(_pageController.page != null && _pageController.page! < widget._imageCount - 1){
+    //   index++;
+    //   _pageController.nextPage(
+    //     duration: Duration(milliseconds: _ImageToggleDuration),
+    //     curve: Curves.easeInOut,
+    //   );
+    // }
   }
   /// horizontal flip
   _horizontalFlip(){

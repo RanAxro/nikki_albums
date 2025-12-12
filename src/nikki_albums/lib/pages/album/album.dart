@@ -1,3 +1,5 @@
+import "package:flutter/services.dart";
+
 import "albumView.dart";
 import "albumPreviewer.dart";
 import "sendFile.dart";
@@ -36,9 +38,11 @@ void init(){
 
 class AlbumValuePool extends InheritedWidget{
   final ValueNotifier<bool> isPrimaryMouseDown = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> isDragScrollbar = ValueNotifier<bool>(false);
   final ValueNotifier<bool> isShowTimeHeader = ValueNotifier<bool>(true);
   final ValueNotifier<bool> isViewGameAlbum = ValueNotifier<bool>(true);
   final ValueNotifier<bool> isViewBackupAlbum = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> isReverse = ValueNotifier<bool>(true);
 
   AlbumValuePool({super.key, required super.child});
 
@@ -241,6 +245,29 @@ class _ToolBarState extends State<ToolBar>{
             /// 筛选
             const FiltrationButton(),
 
+            ValueListenableBuilder(
+              valueListenable: AlbumValuePool.of(context)!.isReverse,
+              builder: (BuildContext context, bool isReverse, Widget? child){
+                final String text = isReverse ? context.tr("sort_forward") : context.tr("sort_reverse");
+                final String icon = isReverse ? "assets/icon/sort_reverse.webp" : "assets/icon/sort_forward.webp";
+
+                return Tooltip(
+                  message: text,
+                  child: SmallButton(
+                    colorRole: ColorRoles.secondary,
+                    onClick: (){
+                      if(isReverse){
+                        AlbumValuePool.of(context)!.isReverse.value = false;
+                      }else{
+                        AlbumValuePool.of(context)!.isReverse.value = true;
+                      }
+                    },
+                    child: Image.asset(icon, height: 20, color: AppTheme.of(context)!.colorScheme.secondary.onEnabledColor),
+                  ),
+                );
+              },
+            ),
+
             SmallVerticalDivider(color: AppTheme.of(context)!.colorScheme.secondary.pressedColor),
 
             /// 减少列数
@@ -412,7 +439,7 @@ class _ToolBarState extends State<ToolBar>{
           child: Align(
             alignment: Alignment.centerRight,
             child: SmoothPointerScroll(
-              builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
+              builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
                 return SingleChildScrollView(
                   controller: controller,
                   physics: physics,
@@ -546,32 +573,65 @@ class _AlbumExhibitionState extends State<AlbumExhibition>{
 
   Widget generateViewWithHeader(Game game, AlbumVarType album, int column){
     return SmoothPointerScroll(
-      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
-        return Container(
+      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+
+        scrollbarController.addListener((){
+          AlbumValuePool.of(context)!.isDragScrollbar.value = scrollbarController.isDrag;
+        });
+
+        return Padding(
           padding: EdgeInsets.only(top: topBarHeight),
-          color: AppTheme.of(context)!.colorScheme.background.color,
-          child: AlbumView(
-            data: album,
-            controller: controller,
-            physics: physics,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: column,
-              mainAxisSpacing: 1,
-              crossAxisSpacing: 1,
-            ),
-            headerHeight: topBarHeight,
-            headerBuilder: (BuildContext context, String title){
-              return Container(
-                alignment: Alignment.centerLeft,
+          child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: scrollbarThickness + 2 * safeMargin),
                 color: AppTheme.of(context)!.colorScheme.background.color,
-                padding: const EdgeInsets.only(left: listSpacing),
-                height: topBarHeight,
-                child: Text(title, style: TextStyle(fontSize: 16, color: AppTheme.of(context)!.colorScheme.background.onColor)),
-              );
-            },
-            itemBuilder: (BuildContext context, ImageItem item){
-              return Exhibit(game, item);
-            },
+                child: ValueListenableBuilder(
+                  valueListenable: AlbumValuePool.of(context)!.isReverse,
+                  builder: (BuildContext context, bool isReverse, Widget? child){
+                    return AlbumView(
+                      album: album,
+                      controller: controller,
+                      physics: physics,
+                      isReverse: isReverse,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: column,
+                        mainAxisSpacing: 1,
+                        crossAxisSpacing: 1,
+                      ),
+                      headerHeight: topBarHeight,
+                      headerBuilder: (BuildContext context, String title){
+                        return Container(
+                          alignment: Alignment.centerLeft,
+                          color: AppTheme.of(context)!.colorScheme.background.color,
+                          padding: const EdgeInsets.only(left: listSpacing),
+                          height: topBarHeight,
+                          child: Text(title, style: TextStyle(fontSize: 16, color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                        );
+                      },
+                      itemBuilder: (BuildContext context, ImageItem item){
+                        return Exhibit(game, item);
+                      },
+                    );
+                  },
+                ),
+              ),
+              /// scrollbar
+              Positioned(
+                top: 0,
+                right: safeMargin,
+                bottom: 0,
+                width: 10,
+                child: IndependentScrollbar(
+                  controller: scrollbarController,
+                  thickness: scrollbarThickness,
+                  thumbRadius: Radius.circular(5),
+                  color: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(100),
+                  hoveredColor: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(125),
+                  pressedColor: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(150),
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -593,9 +653,9 @@ class _AlbumExhibitionState extends State<AlbumExhibition>{
               builder: (BuildContext context, AlbumVarType originAlbum){
                 return MultiValueListenableBuilder(
                   listenables: [AlbumValuePool.of(context)!.isViewGameAlbum, AlbumValuePool.of(context)!.isViewBackupAlbum],
-                  builder: (BuildContext context, List<Object?> values){
-                    final bool isViewGameAlbum = values[0] as bool;
-                    final bool isViewBackupAlbum = values[1] as bool;
+                  builder: (BuildContext context, Widget? child){
+                    final bool isViewGameAlbum = AlbumValuePool.of(context)!.isViewGameAlbum.value;
+                    final bool isViewBackupAlbum = AlbumValuePool.of(context)!.isViewBackupAlbum.value;
                     final AlbumVarType album = Game.filterAlbum(originAlbum, (ImageItem item) =>
                       (isViewGameAlbum && item.source == ImageSource.game) ||
                       (isViewBackupAlbum && item.source == ImageSource.backup)
@@ -615,9 +675,9 @@ class _AlbumExhibitionState extends State<AlbumExhibition>{
                       },
                       child: MultiValueListenableBuilder(
                         listenables: [AlbumValuePool.of(context)!.isShowTimeHeader, AppState.albumColumn],
-                        builder: (BuildContext context, List<Object?> values){
-                          final bool isShowTimeHeader = values[0] as bool;
-                          final int column = values[1] as int;
+                        builder: (BuildContext context, Widget? child){
+                          final bool isShowTimeHeader = AlbumValuePool.of(context)!.isShowTimeHeader.value;
+                          final int column = AppState.albumColumn.value;
 
                           if(isShowTimeHeader){
                             return generateViewWithHeader(game, album, column);
@@ -655,7 +715,7 @@ class GridAlbum extends StatelessWidget{
       valueListenable: AppState.albumColumn,
       builder: (BuildContext context, int column, Widget? child){
         return SmoothPointerScroll(
-          builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
+          builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
             return Row(
               children: [
                 Expanded(
@@ -677,11 +737,11 @@ class GridAlbum extends StatelessWidget{
                     },
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: topBarHeight),
-                  width: 10,
-                  child: scrollbar,
-                )
+                // Container(
+                //   margin: EdgeInsets.only(top: topBarHeight),
+                //   width: 10,
+                //   child: scrollbar,
+                // )
               ],
             );
           },
@@ -746,13 +806,16 @@ class _ExhibitState extends State<Exhibit>{
           },
         );
 
-        return ValueListenableBuilder(
-          valueListenable: AlbumValuePool.of(context)!.isPrimaryMouseDown,
-          builder: (BuildContext context, bool isPrimaryMouseDown, Widget? child){
+        return MultiValueListenableBuilder(
+          listenables: [AlbumValuePool.of(context)!.isPrimaryMouseDown, AlbumValuePool.of(context)!.isDragScrollbar],
+          builder: (BuildContext context, Widget? child){
+            final bool isPrimaryMouseDown = AlbumValuePool.of(context)!.isPrimaryMouseDown.value;
+            final bool isDragScrollbar = AlbumValuePool.of(context)!.isDragScrollbar.value;
+
             return MouseRegion(
               onEnter: (_){
                 // 长按多选
-                if(isPrimaryMouseDown) widget.game.invertImage(widget.imageItem);
+                if(isPrimaryMouseDown && !isDragScrollbar) widget.game.invertImage(widget.imageItem);
               },
               child: Listener(
                 onPointerDown: (e){
@@ -767,7 +830,7 @@ class _ExhibitState extends State<Exhibit>{
                           future: widget.game.album,
                           builder: (BuildContext context, AlbumVarType album){
                             final List<ImageItem> images = Game.flattenAlbum(album).toList();
-                            return ImageViewerDialog(images: images, initImage: widget.imageItem);
+                            return ImageViewerDialog(game: widget.game, images: images, initImage: widget.imageItem);
                           },
                         );
                       }
@@ -784,6 +847,188 @@ class _ExhibitState extends State<Exhibit>{
   }
 }
 
+
+
+class ImageViewerDialog extends StatelessWidget{
+  final Game? game;
+  final List<ImageItem> images;
+  final ImageItem initImage;
+  final ImageViewerController controller = ImageViewerController();
+
+  ImageViewerDialog({
+    super.key,
+    this.game,
+    required this.images,
+    required this.initImage,
+  });
+
+  void _invertImage(){
+    if(game != null) game!.invertImage(images[controller.index]);
+  }
+
+  @override
+  Widget build(BuildContext context){
+
+    final Widget toolButtons = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Tooltip(
+          message: context.tr("close"),
+          child: SmallButton(
+            onClick: (){
+              Navigator.of(context).pop();
+            },
+            child: Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+
+        Tooltip(
+          message: context.tr("reset"),
+          child: SmallButton(
+            onClick: (){
+              controller.reset();
+            },
+            child: Image.asset("assets/icon/refresh.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+
+        Tooltip(
+          message: context.tr("horizontalFlip"),
+          child: SmallButton(
+            onClick: (){
+              controller.horizontalFlip();
+            },
+            child: Image.asset("assets/icon/horizontalFlip.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+        Tooltip(
+          message: context.tr("verticalFlip"),
+          child: SmallButton(
+            onClick: (){
+              controller.verticalFlip();
+            },
+            child: Image.asset("assets/icon/verticalFlip.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+
+        Tooltip(
+          message: context.tr("rotateLeft90"),
+          child: SmallButton(
+            onClick: (){
+              controller.rotateLeft90();
+            },
+            child: Image.asset("assets/icon/rotateLeft90.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+        Tooltip(
+          message: context.tr("rotateRight90"),
+          child: SmallButton(
+            onClick: (){
+              controller.rotateRight90();
+            },
+            child: Image.asset("assets/icon/rotateRight90.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+
+        Tooltip(
+          message: context.tr("toPreviousImage"),
+          child: SmallButton(
+            onClick: (){
+              controller.toPreviousImage();
+            },
+            child: Image.asset("assets/icon/back.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+        Tooltip(
+          message: context.tr("toNextImage"),
+          child: SmallButton(
+            onClick: (){
+              controller.toNextImage();
+            },
+            child: Image.asset("assets/icon/forward.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+          ),
+        ),
+
+
+        if(game != null)
+          ListenableBuilder(
+            listenable: controller,
+            builder: (BuildContext context, Widget? child){
+              return NotifierBuilder(
+                listenable: game!.whenSelectedImagesChange,
+                builder: (BuildContext context, Widget? child){
+                  final ImageItem item = images[controller.index];
+                  final bool isSelected = game!.selectedImages.contains(item);
+                  final String text = isSelected ? context.tr("deselect") : context.tr("select");
+                  final String icon = isSelected ? "assets/icon/selectAll.webp" : "assets/icon/notSelect.webp";
+                  return Tooltip(
+                    message: text,
+                    child: SmallButton(
+                      onClick: _invertImage,
+                      child: Image.asset(icon, height: 22, color: AppTheme.of(context)!.colorScheme.background.onColor),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+      ],
+    );
+
+    return Focus(
+      autofocus: true,
+      onKeyEvent: (FocusNode node, KeyEvent event){
+        if(event is KeyDownEvent && (event.logicalKey == LogicalKeyboardKey.arrowLeft || event.logicalKey == LogicalKeyboardKey.keyA)){
+          controller.toPreviousImage();
+          return KeyEventResult.handled;
+        }
+        if(event is KeyDownEvent && (event.logicalKey == LogicalKeyboardKey.arrowRight ||  event.logicalKey == LogicalKeyboardKey.keyD)){
+          controller.toNextImage();
+          return KeyEventResult.handled;
+        }
+        if(event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.space){
+          _invertImage();
+          return KeyEventResult.handled;
+        }
+        return KeyEventResult.ignored;
+      },
+      child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(smallBorderRadius),
+        ),
+        backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+        child: Column(
+          children: [
+            Expanded(
+              child: Listener(
+                onPointerDown: (e){
+                  if(e.kind == PointerDeviceKind.mouse && e.buttons == kPrimaryMouseButton){
+                    _invertImage();
+                  }
+                  if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: ImageViewer(
+                  controller: controller,
+                  imageCount: images.length,
+                  initIndex: images.indexOf(initImage),
+                  imageBuilder: (BuildContext context, int index){
+                    return Image.file(images[index].path.file, fit: BoxFit.contain);
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: topBarHeight,
+              child: toolButtons,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 
 
@@ -1455,138 +1700,6 @@ class ImportImagesDialog extends StatelessWidget{
             ),
             Expanded(
               child: processor,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-
-class ImageViewerDialog extends StatelessWidget{
-  final List<ImageItem> images;
-  final ImageItem initImage;
-  final ImageViewerController controller = ImageViewerController();
-
-  ImageViewerDialog({
-    super.key,
-    required this.images,
-    required this.initImage,
-  });
-
-  @override
-  Widget build(BuildContext context){
-
-    final Widget toolButtons = Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Tooltip(
-          message: context.tr("close"),
-          child: SmallButton(
-            onClick: (){
-              Navigator.of(context).pop();
-            },
-            child: Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-
-        Tooltip(
-          message: context.tr("reset"),
-          child: SmallButton(
-            onClick: (){
-              controller.reset();
-            },
-            child: Image.asset("assets/icon/refresh.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-
-        Tooltip(
-          message: context.tr("horizontalFlip"),
-          child: SmallButton(
-            onClick: (){
-              controller.horizontalFlip();
-            },
-            child: Image.asset("assets/icon/horizontalFlip.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-        Tooltip(
-          message: context.tr("verticalFlip"),
-          child: SmallButton(
-            onClick: (){
-              controller.verticalFlip();
-            },
-            child: Image.asset("assets/icon/verticalFlip.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-
-        Tooltip(
-          message: context.tr("rotateLeft90"),
-          child: SmallButton(
-            onClick: (){
-              controller.rotateLeft90();
-            },
-            child: Image.asset("assets/icon/rotateLeft90.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-        Tooltip(
-          message: context.tr("rotateRight90"),
-          child: SmallButton(
-            onClick: (){
-              controller.rotateRight90();
-            },
-            child: Image.asset("assets/icon/rotateRight90.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-
-        Tooltip(
-          message: context.tr("toPreviousImage"),
-          child: SmallButton(
-            onClick: (){
-              controller.toPreviousImage();
-            },
-            child: Image.asset("assets/icon/back.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-        Tooltip(
-          message: context.tr("toNextImage"),
-          child: SmallButton(
-            onClick: (){
-              controller.toNextImage();
-            },
-            child: Image.asset("assets/icon/forward.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
-          ),
-        ),
-      ],
-    );
-
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(smallBorderRadius),
-      ),
-      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-      child: Listener(
-        onPointerDown: (e){
-          if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
-            Navigator.of(context).pop();
-          }
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: ImageViewer(
-                controller: controller,
-                imageCount: images.length,
-                initIndex: images.indexOf(initImage),
-                imageBuilder: (BuildContext context, int index){
-                  return Image.file(images[index].path.file, fit: BoxFit.contain);
-                },
-              ),
-            ),
-            SizedBox(
-              height: topBarHeight,
-              child: toolButtons,
             ),
           ],
         ),

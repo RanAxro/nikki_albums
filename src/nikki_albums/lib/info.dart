@@ -1,6 +1,12 @@
 import "package:win32_registry/win32_registry.dart";
 
-const String version = "3.0";
+const int version = 4;
+const String versionString = "3.1";
+
+const String officialWebsite = r"nikki.ranaxro.com";
+const String githubWebsite = r"github.com/RanAxro/nikki_albums";
+const String qqGroup = r"1062670402";
+
 
 enum LauncherChannel{
   unknown,

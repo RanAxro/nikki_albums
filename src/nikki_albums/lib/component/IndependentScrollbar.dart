@@ -1,40 +1,28 @@
+import "dart:math";
+
+import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 
 /// 独立滚动条, 不依赖于 ScrollView
 
 /* =========================  Controller ========================= */
 
-class IndependentScrollController extends ChangeNotifier{
+class IndependentScrollbarController extends ChangeNotifier{
+  bool _isDrag = false;
   double _progress;
-  double _length;
-  double _viewportExtent = 0;
+  double? _virtualScrollViewExtent;
 
-  IndependentScrollController({
+  IndependentScrollbarController({
     double initialProgress = 0.0,
-    double initialLength = 1000,
+    double? initialVirtualScrollViewExtent,
   }) :
     _progress = initialProgress.clamp(0.0, 1.0),
-    _length = initialLength
+    _virtualScrollViewExtent = initialVirtualScrollViewExtent
   ;
 
-  double get progress => _progress;
   bool get isDrag => _isDrag;
-  double get length => _length;
-
-  set length(double value){
-    if(value <= 0) value = 1;
-    if(_length == value) return;
-    _length = value;
-    notifyListeners();
-  }
-
-  void _updateViewport(double vp){
-    if(_viewportExtent == vp) return;
-    _viewportExtent = vp;
-    notifyListeners();
-  }
-
-  bool _isDrag = false;
+  double get progress => _progress;
+  double? get virtualScrollViewExtent => _virtualScrollViewExtent;
 
   set progress(double value){
     value = value.clamp(0.0, 1.0);
@@ -42,11 +30,9 @@ class IndependentScrollController extends ChangeNotifier{
     _progress = value;
     notifyListeners();
   }
-
-  void _updateProgressFromDrag(double value){
-    value = value.clamp(0.0, 1.0);
-    if(_progress == value && _isDrag) return;
-    _progress = value;
+  set virtualScrollViewExtent(double? value){
+    if(_virtualScrollViewExtent == value) return;
+    _virtualScrollViewExtent = value;
     notifyListeners();
   }
 
@@ -71,154 +57,120 @@ class IndependentScrollController extends ChangeNotifier{
 /* =====================  IndependentScrollbar =================== */
 
 class IndependentScrollbar extends StatelessWidget{
-  final IndependentScrollController controller;
+  final IndependentScrollbarController controller;
+  final Axis direction;
   final double thickness;
-  final Radius radius;
-  final Color? color;
+  final Radius trackRadius;
   final Color? trackColor;
+
+  final double thumbLength;
+  final Radius thumbRadius;
+  final Color color;
+  final Color? hoveredColor;
+  final Color? pressedColor;
 
   const IndependentScrollbar({
     super.key,
     required this.controller,
+
+    this.direction = Axis.vertical,
     this.thickness = 10,
-    this.radius = Radius.zero,
-    this.color,
+    this.trackRadius = Radius.zero,
     this.trackColor,
-  });
+
+    this.thumbLength = 50,
+    this.thumbRadius = Radius.zero,
+    this.color = Colors.grey,
+    Color? hoveredColor,
+    Color? pressedColor,
+  }) :
+    hoveredColor = hoveredColor ?? color,
+    pressedColor = pressedColor ?? color
+  ;
 
   @override
   Widget build(BuildContext context){
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (_, __){
-        return _ScrollbarRender(
-          controller: controller,
-          thickness: thickness,
-          radius: radius,
-          color: color ?? Theme.of(context).highlightColor,
-          trackColor: trackColor ?? Colors.grey[200],
-        );
-      },
-    );
-  }
-}
+    bool isHover = false;
 
-/* ========================  Render + Painter ==================== */
+    return SizedBox(
+      width: direction == Axis.vertical ? thickness : null,
+      height: direction == Axis.horizontal ? thickness : null,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints){
+          final viewport = constraints.maxHeight;
 
-class _ScrollbarRender extends StatefulWidget{
-  final IndependentScrollController controller;
-  final double thickness;
-  final Radius radius;
-  final Color color;
-  final Color? trackColor;
+          return ListenableBuilder(
+            listenable: controller,
+            builder: (BuildContext context, Widget? child){
+              double length = controller._virtualScrollViewExtent == null ?
+              min(thumbLength, 0.9 * viewport) :
+              (0.8 * viewport * viewport / controller._virtualScrollViewExtent!).clamp(thumbLength, viewport);
 
-  const _ScrollbarRender({
-    required this.controller,
-    required this.thickness,
-    required this.radius,
-    required this.color,
-    required this.trackColor,
-  });
-
-  @override
-  State<_ScrollbarRender> createState() => _ScrollbarRenderState();
-}
-
-class _ScrollbarRenderState extends State<_ScrollbarRender>{
-  bool _hovering = false;
-
-  double _thumbHeight(double vp){
-    final ratio = vp / widget.controller.length;
-    return (vp * ratio).clamp(20.0, vp);
-  }
-
-  double _offsetToProgress(Offset local, double vp){
-    final th = _thumbHeight(vp);
-    final half = th / 2;
-    final valid = vp - half * 2;
-    return ((local.dy - half) / valid).clamp(0.0, 1.0);
-  }
-
-  @override
-  Widget build(BuildContext context){
-    return LayoutBuilder(
-      builder: (_, constraints){
-        final viewport = constraints.maxHeight;
-        WidgetsBinding.instance.addPostFrameCallback((_){
-          widget.controller._updateViewport(viewport);
-        });
-
-        return MouseRegion(
-          onEnter: (_) => setState(() => _hovering = true),
-          onExit: (_) => setState(() => _hovering = false),
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            // 不再用 onVerticalDragDown 更新进度
-            onVerticalDragUpdate: (d){
-              widget.controller._startDrag();
-              widget.controller._updateProgressFromDrag(
-                  _offsetToProgress(d.localPosition, viewport));
+              return Stack(
+                children: [
+                  child!,
+                  Positioned(
+                    left: 0,
+                    top: controller.progress * (viewport - length),
+                    right: 0,
+                    height: length,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onVerticalDragDown: (DragDownDetails details){
+                        controller._startDrag();
+                      },
+                      onVerticalDragEnd: (DragEndDetails details){
+                        controller._endDrag();
+                      },
+                      onVerticalDragCancel: (){
+                        controller._endDrag();
+                      },
+                      onVerticalDragUpdate: (DragUpdateDetails details){
+                        switch(direction){
+                          case Axis.horizontal:
+                            controller.progress += details.delta.dx / (viewport - length);
+                            break;
+                          case Axis.vertical:
+                            controller.progress += details.delta.dy / (viewport - length);
+                            break;
+                        }
+                      },
+                      child: StatefulBuilder(
+                        builder: (BuildContext context, void Function(void Function()) setThumbState){
+                          return MouseRegion(
+                            onEnter: (PointerEnterEvent event){
+                              isHover = true;
+                              setThumbState((){});
+                            },
+                            onExit: (PointerExitEvent event){
+                              isHover = false;
+                              setThumbState((){});
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadiusDirectional.all(thumbRadius),
+                                color: controller.isDrag ? pressedColor : isHover ? hoveredColor : color,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              );
             },
-            onVerticalDragEnd: (_) => widget.controller._endDrag(),
-            child: CustomPaint(
-              size: Size(widget.thickness, double.infinity),
-              painter: _ScrollbarPainter(
-                progress: widget.controller.progress,
-                thickness: widget.thickness,
-                radius: widget.radius,
-                color: widget.color.withValues(alpha: _hovering ? 1.0 : 0.5),
-                trackColor: widget.trackColor,
-                viewportExtent: viewport,
-                contentLength: widget.controller.length,
+            child: Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadiusDirectional.all(trackRadius),
+                  color: trackColor,
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
-}
-
-class _ScrollbarPainter extends CustomPainter{
-  final double progress, thickness;
-  final Radius radius;
-  final Color color, trackColor;
-  final double viewportExtent;
-  final double contentLength;
-
-  _ScrollbarPainter({
-    required this.progress,
-    required this.thickness,
-    required this.radius,
-    required this.color,
-    required Color? trackColor,
-    required this.viewportExtent,
-    required this.contentLength,
-  }) : trackColor = trackColor ?? Colors.grey[200]!;
-
-  double _thumbHeight(){
-    if(contentLength <= viewportExtent) return viewportExtent;
-    final ratio = viewportExtent / contentLength;
-    return (viewportExtent * ratio).clamp(40.0, viewportExtent);
-  }
-
-  @override
-  void paint(Canvas canvas, Size size){
-    final track = Rect.fromLTWH(0, 0, thickness, size.height);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(track, radius),
-      Paint()..color = trackColor,
-    );
-
-    final th = _thumbHeight();
-    final top = (size.height - th) * progress;
-    final thumb = Rect.fromLTWH(0, top, thickness, th);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(thumb, radius),
-      Paint()..color = color,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant _ScrollbarPainter old) => old.progress != progress || old.viewportExtent != viewportExtent || old.contentLength != contentLength || old.color != color;
 }

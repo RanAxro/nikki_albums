@@ -229,7 +229,7 @@ class GridViewer extends StatelessWidget{
       valueListenable: AppState.albumColumn,
       builder: (BuildContext context, int column, Widget? child){
         return SmoothPointerScroll(
-          builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
+          builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: column,
@@ -266,7 +266,7 @@ class ListViewer extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return SmoothPointerScroll(
-      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbar scrollbar){
+      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
         return ListView.builder(
           itemCount: movies.length,
           controller: controller,

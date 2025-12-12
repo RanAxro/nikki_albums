@@ -1,10 +1,10 @@
 import "package:nikkialbums/game/game.dart";
 
 import "package:flutter/material.dart";
-
+import "dart:collection";
 
 class AlbumView extends StatelessWidget{
-  final AlbumVarType data;
+  final AlbumVarType album;
   final SliverGridDelegate? gridDelegate;
   final EdgeInsetsGeometry? padding;
   final double headerHeight;
@@ -12,10 +12,11 @@ class AlbumView extends StatelessWidget{
   final Widget Function(BuildContext context, ImageItem item) itemBuilder;
   final ScrollController? controller;
   final ScrollPhysics? physics;
+  final bool isReverse;
 
   const AlbumView({
     super.key,
-    required this.data,
+    required this.album,
     this.gridDelegate,
     this.padding,
     this.headerHeight = 40,
@@ -23,10 +24,20 @@ class AlbumView extends StatelessWidget{
     required this.itemBuilder,
     this.controller,
     this.physics,
+    this.isReverse = true,
   });
 
   @override
   Widget build(BuildContext context){
+    final data = isReverse ? album : Map.fromEntries(
+      album.entries.toList().reversed.map((e) {
+        // SplayTreeSet 也支持逆序迭代器
+        final reversedSet = LinkedHashSet<ImageItem>.of(e.value.toList().reversed);
+        return MapEntry(e.key, reversedSet as Set<ImageItem>);
+      }),
+    );
+
+
     // 把 SplayTreeMap 拍平成两个 List，方便后面用 SliverList 懒加载
     final sections = <_Section>[];
     data.forEach((date, set){
