@@ -1,8 +1,6 @@
 {
-  "version": 4,
+  "version": 5,
   "versionString": "3.01",
-  "downloadLink": "https://nikki.ranaxro.com",
+  "downloadLink": "https://1846454622.v.123pan.cn/1846454622/Nikki%20Albums/v3.01/Nikki%20Albums-v3.01-Windows-x64.zip",
   "updatedContent": "1.增加了滚动条\n2.支持正序与倒序查看相册\n3.查看大图时可通过快捷键切换上一张或下一张\n4.查看大图时可通过点击图片以切换图片的选中状态\n5.增加了切换窗口最大化的按钮\n6.增加了删除自定义账号功能\n7.增加了检测更新功能"
-
 }
-
