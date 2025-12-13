@@ -1,7 +1,22 @@
 <div align="center">
   <img src="src/nikki_albums/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
-  Nikki Albums
+  <h1>Nikki Albums</h1>
+  <p>
+    <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" />
+    
+    <a href="https://github.com/RanAxro/nikki_albums/releases/latest">
+      <img alt="Release" src="https://img.shields.io/github/v/release/RanAxro/nikki_albums?style=flat-square&color=brightgreen" />
+    </a>
+
+    <a href="https://nikki.ranaxro.com">
+      <img alt="website" src="https://img.shields.io/badge/website-visit-yellow?style=flat-square&logo=home-automation&logoColor=white" />
+    </a>
+
+    <a href="https://github.com/ChanIok/SpinningMomo/blob/main/LICENSE">
+      <img alt="License" src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" />
+    </a>
+  </p>
 </div>
 
 <h2>🌟 A capable assistant for game album management</h2>

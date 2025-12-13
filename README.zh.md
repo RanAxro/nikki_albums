@@ -1,8 +1,28 @@
+<a href="README.en.md">Read the English</a>
+
 <div align="center">
   <img src="src/nikki_albums/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
-  暖暖相册(Nikki Albums)
+  <h1>暖暖相册</h1>
+  <p>
+    <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" />
+    
+    <a href="https://github.com/RanAxro/nikki_albums/releases/latest">
+      <img alt="Release" src="https://img.shields.io/github/v/release/RanAxro/nikki_albums?style=flat-square&color=brightgreen" />
+    </a>
+
+    <a href="https://nikki.ranaxro.com">
+      <img alt="website" src="https://img.shields.io/badge/website-visit-yellow?style=flat-square&logo=home-automation&logoColor=white" />
+    </a>
+
+    <a href="https://github.com/ChanIok/SpinningMomo/blob/main/LICENSE">
+      <img alt="License" src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" />
+    </a>
+  </p>
 </div>
+
+
+
 
 <h2>🌟 游戏相册管理的得力助手</h2>
 
