@@ -1,3 +1,5 @@
+<a href="README.en.md">Read the English</a>
+
 <div align="center">
   <img src="src/nikki_albums/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
