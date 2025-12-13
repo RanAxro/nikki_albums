@@ -6,6 +6,23 @@
   暖暖相册(Nikki Albums)
 </div>
 
+
+<p>
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" />
+  
+  <a href="https://github.com/RanAxro/nikki_albums/releases/latest">
+    <img alt="Release" src="https://img.shields.io/github/v/release/RanAxro/nikki_albums?style=flat-square&color=brightgreen" />
+  </a>
+
+  <a href="https://nikki.ranaxro.com">
+    <img alt="website" src="https://img.shields.io/badge/website-home-green?style=flat-square&logo=home-automation&logoColor=white" />
+  </a>
+
+  <a href="https://github.com/ChanIok/SpinningMomo/blob/main/LICENSE">
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" />
+  </a>
+</p>
+
 <h2>🌟 游戏相册管理的得力助手</h2>
 
 暖暖相册（Nikki Albums）是一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。
