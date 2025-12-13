@@ -15,7 +15,7 @@
   </a>
 
   <a href="https://nikki.ranaxro.com">
-    <img alt="website" src="https://img.shields.io/badge/website-home-green?style=flat-square&logo=home-automation&logoColor=white" />
+    <img alt="website" src="https://img.shields.io/badge/website-visit-yellow?style=flat-square&logo=home-automation&logoColor=white" />
   </a>
 
   <a href="https://github.com/ChanIok/SpinningMomo/blob/main/LICENSE">
