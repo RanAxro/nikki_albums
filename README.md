@@ -22,6 +22,11 @@
   </a>
 </p>
 
+<p>
+  <img src="website/images/p1.zh.png" />
+  <img src="website/images/p2.png" />
+</p>
+
 
 
 <h2>🌟 游戏相册管理的得力助手</h2>

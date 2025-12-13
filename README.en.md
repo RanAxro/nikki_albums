@@ -19,6 +19,11 @@
   </a>
 </p>
 
+<p>
+  <img src="website/images/p1.en.png" />
+  <img src="website/images/p2.png" />
+</p>
+
 <h2>🌟 A capable assistant for game album management</h2>
 
 Nikki Albums is an album management software specially designed for Infinity Nikki players, dedicated to helping you manage game albums easily and efficiently, making the gaming experience more smooth and worry-free
