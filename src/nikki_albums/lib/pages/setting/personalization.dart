@@ -39,8 +39,8 @@ class MaximizeOrRestoreButtonSwitch extends StatelessWidget{
           alignment: Alignment.centerLeft,
           child: SmallButton(
             padding: const EdgeInsets.all(smallPadding),
-            colorRole: ColorRoles.secondary,
-            transparent: true,
+            colorRole: ColorRoles.background,
+            transparent: false,
             width: smallDialogMaxWidth,
             height: mediumButtonSize,
             onClick: (){
@@ -52,7 +52,7 @@ class MaximizeOrRestoreButtonSwitch extends StatelessWidget{
             },
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text("${context.tr("maximizeOrRestoreButton")}: ${isUseMaximizeOrRestoreButton ? context.tr("enable") : context.tr("disable")}"),
+              child: Text("${context.tr("maximizeOrRestoreButton")}: ${isUseMaximizeOrRestoreButton ? context.tr("enable") : context.tr("disable")}", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
             ),
           ),
         );

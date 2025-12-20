@@ -1,7 +1,10 @@
-import "package:easy_localization/easy_localization.dart";
+import "package:nikkialbums/ui/theme.dart";
+
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
-import "package:nikkialbums/ui/theme.dart";
+import "dart:io";
+
+import "package:easy_localization/easy_localization.dart";
 
 
 const double smallButtonSize = 36;
@@ -12,7 +15,6 @@ const double bigButtonSize = 80;
 const double bigButtonContentSize = 62;
 
 const double windowTitleBarHeight = smallButtonSize + 10;
-
 const double topBarHeight = smallButtonSize + 8;
 const double sideBarWidth = mediumButtonSize + 10;
 const double sideBarExpandWidth = 200;
@@ -21,6 +23,9 @@ const double smallDialogMaxWidth = 400;
 const double smallCardMaxWidth = 400;
 const double smallCardMaxHeight = 100;
 
+const double iconWeakeningRate = 0.5;
+const double smallBorder = 2;
+const double scrollbarThickness = 12;
 const double smallBorderRadius = 8;
 const double smallPadding = 8;
 const double bigPadding = 20;
@@ -32,7 +37,14 @@ const block5W = SizedBox(width: 5);
 const block10W = SizedBox(width: 10);
 const block5H = SizedBox(height: 5);
 const block10H = SizedBox(height: 10);
+const block20H = SizedBox(height: 20);
 
+double get safeMargin{
+  if(Platform.isWindows){
+    return 5;
+  }
+  return 0;
+}
 
 class SmallDivider extends StatelessWidget{
   final Color color;
@@ -91,7 +103,17 @@ class RFutureBuilder<T> extends StatelessWidget{
       future: future,
       builder: (BuildContext context, AsyncSnapshot<T> snapshot){
         if(snapshot.connectionState == ConnectionState.waiting){
-          final CircularProgressIndicator indicator = CircularProgressIndicator();
+          final Widget indicator = Padding(
+            padding: const EdgeInsets.all(smallPadding),
+            child: CircularProgressIndicator(
+              backgroundColor: AppTheme.of(context)!.colorScheme.primary.color,
+              color: AppTheme.of(context)!.colorScheme.primary.onColor,
+              constraints: const BoxConstraints(
+                maxWidth: 50,
+                maxHeight: 50,
+              ),
+            ),
+          );
           if(waitingBuilder != null) return waitingBuilder!(context, indicator);
           return indicator;
         }
@@ -118,7 +140,7 @@ Future<T?> showProgressBar<T>({
     barrierDismissible: barrierDismissible,
     builder: (BuildContext context){
 
-      final Widget? child = builder?.call(context);
+      final Widget? buildChild = builder?.call(context);
 
       return Dialog(
         shape: RoundedRectangleBorder(
@@ -148,14 +170,14 @@ Future<T?> showProgressBar<T>({
                 spacing: bigListSpacing,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(text),
+                  Text(text, style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
                   LinearProgressIndicator(
                     value: progress,
                     backgroundColor: AppTheme.of(context)!.colorScheme.primary.color,
                     valueColor: AlwaysStoppedAnimation<Color>(AppTheme.of(context)!.colorScheme.primary.onColor),
                     minHeight: 4,
                   ),
-                  ?child,
+                  ?buildChild,
                   if(progress != null && progress >= 1) ?completedBuilder?.call(context, () => Navigator.of(context).pop()),
                 ],
               );
@@ -362,6 +384,7 @@ class SmallButton extends StatelessWidget{
   final void Function()? onClick;
   final Widget? child;
   final Widget? Function(BuildContext context, Widget? child, bool isInside, bool isPressed)? builder;
+  final Widget? Function(BuildContext context, Color onButtonColor, Widget? child)? colorBuilder;
 
   const SmallButton({
     super.key,
@@ -375,12 +398,14 @@ class SmallButton extends StatelessWidget{
     this.margin,
     this.borderRadius = smallBorderRadius,
     this.colorRole = ColorRoles.primary,
-    bool? transparent,
+    this.transparent = true,
     this.usable = true,
     this.onClick,
     this.child,
     this.builder,
-  }) : transparent = transparent ?? colorRole == ColorRoles.background ? false : true;
+    this.colorBuilder
+  }) :
+    assert(builder == null || colorBuilder == null, "colorBuilder不能同时拥有builder与colorBuilder");
 
   @override
   Widget build(BuildContext context){
@@ -422,7 +447,14 @@ class SmallButton extends StatelessWidget{
           ),
         ),
         usable: usable,
-        builder: builder,
+        builder: builder ?? (colorBuilder == null ? null : (BuildContext context, Widget? child, bool isInside, bool isPressed) => colorBuilder!.call(
+          context,
+          !usable ? AppTheme.of(context)!.colorScheme.byRole(colorRole).onDisabledColor :
+            isPressed ? AppTheme.of(context)!.colorScheme.byRole(colorRole).onPressedColor :
+            isInside ? AppTheme.of(context)!.colorScheme.byRole(colorRole).onHoveredColor :
+            AppTheme.of(context)!.colorScheme.byRole(colorRole).onEnabledColor,
+          child,
+        )),
         child: child,
       ),
     );
@@ -629,18 +661,21 @@ class RTextFiled extends StatelessWidget{
   final TextEditingController? controller;
   final String? labelText;
   final ColorRoles colorRole;
+  final void Function(String)? onChanged;
 
   const RTextFiled({
     super.key,
     this.controller,
     this.labelText,
     this.colorRole = ColorRoles.primary,
+    this.onChanged
   });
 
   @override
   Widget build(BuildContext context){
     return TextField(
       controller: controller,
+      onChanged: onChanged,
       cursorColor: AppTheme.of(context)!.colorScheme.byRole(colorRole).onColor,
       decoration: InputDecoration(
         labelText: labelText,

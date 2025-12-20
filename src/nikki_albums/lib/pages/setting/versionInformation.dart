@@ -1,3 +1,4 @@
+import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:nikkialbums/state.dart";
 import "package:nikkialbums/info.dart";
 import "package:nikkialbums/ui/rui.dart";
@@ -37,6 +38,8 @@ class VersionInformation extends StatelessWidget{
 
               SmallButton(
                 width: null,
+                colorRole: ColorRoles.background,
+                transparent: false,
                 onClick: (){
                   launchOfficialWebsite(context);
                 },
@@ -65,8 +68,8 @@ class _CheckUpdatesButtonState extends State<CheckUpdatesButton>{
   Widget build(BuildContext context){
     return SmallButton(
       padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-      colorRole: ColorRoles.secondary,
-      transparent: true,
+      colorRole: ColorRoles.background,
+      transparent: false,
       width: null,
       onClick: (){
         setState((){
@@ -225,6 +228,10 @@ class UpdateDialog extends StatelessWidget{
         }else{
           savePath.open(FileSystemEntityType.directory);
           downloadProgress.value = 1;
+
+          /// TODO 窗口提示重启
+          await closeState();
+          appWindow.close();
         }
 
         WidgetsBinding.instance.addPostFrameCallback((_){

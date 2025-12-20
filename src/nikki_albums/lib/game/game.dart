@@ -1,64 +1,113 @@
-import "dart:convert";
+export "image.dart";
 
-import "package:nikkialbums/component/component.dart";
+import "uid.dart";
+import "album_manager.dart";
+import "image.dart";
+import "tag.dart";
 import "package:nikkialbums/pages/album/album.dart";
 import "package:nikkialbums/state.dart";
 import "package:nikkialbums/info.dart";
 import "package:nikkialbums/api/path.dart";
 import "package:nikkialbums/api/ini.dart";
-import "package:nikkialbums/api/Image.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
-import "dart:collection";
 import "dart:async";
+import "dart:convert";
 
 import "package:win32_registry/win32_registry.dart";
-import "package:watcher/watcher.dart";
 
 
-typedef AlbumVarType = SplayTreeMap<DateTime, SplayTreeSet<ImageItem>>;
+class GameShortcut{
+  static Map<String, dynamic>? toJsonMap(GameShortcut? shortcut){
+    if(shortcut == null) return null;
 
-enum ImageSource{
-  game,
-  backup,
-  other,
-}
-class ImageItem implements Comparable<ImageItem>{
-  final int id;
-  final ImageSource source;
-  final Path path;
-  final DateTime time;
-
-  ImageItem({
-    required this.source,
-    required this.path,
-    DateTime? time,
-  }) :
-    id = path.hashCode,
-    time =  time ?? path.stat.modified;
-
-  String get name => path.name;
-
-  @override
-  int compareTo(ImageItem other){
-    int cmp = other.time.compareTo(time);
-    if(cmp == 0){
-      return other.id.compareTo(id);
-    }
-    return cmp;
+    return {
+      "launcherChannel": shortcut.launcherChannel.name,
+      "launcherPath": shortcut.launcherPath.path,
+      "launcherName": shortcut.launcherName,
+      "installPath": shortcut.installPath.path,
+      "uid": Uid.toJsonMap(shortcut.selectedUid),
+    };
   }
+
+  static GameShortcut? from(dynamic map){
+    if(map is String) map = jsonDecode(map);
+    if(map is! Map) return null;
+
+    final LauncherChannel launcherChannel = LauncherChannel.from(map["launcherChannel"]);
+    final Path? launcherPath = Path.from(map["launcherPath"]);
+    final dynamic launcherName = map["launcherName"];
+    final Path? installPath = Path.from(map["installPath"]);
+    final Uid? uid = Uid.from(map["uid"]);
+
+    if(launcherPath == null || installPath == null || uid == null) return null;
+
+    return GameShortcut(
+      launcherChannel: launcherChannel,
+      launcherPath: launcherPath,
+      launcherName: launcherName is String ? launcherName : null,
+      installPath: installPath,
+      selectedUid: uid,
+    );
+  }
+
+  final LauncherChannel launcherChannel;
+  final Path launcherPath;
+  final String? launcherName;
+  final Path installPath;
+  final Uid selectedUid;
+
+  const GameShortcut({
+    required this.launcherChannel,
+    required this.launcherPath,
+    this.launcherName,
+    required this.installPath,
+    required this.selectedUid
+  });
+
+  Game get game => Game(
+    launcherChannel: launcherChannel,
+    launcherPath: launcherPath,
+    launcherName: launcherName,
+    installPath: installPath,
+    uid: selectedUid,
+  );
+
+  bool isFrom(Game game){
+    return launcherChannel == game.launcherChannel &&
+      launcherPath == game.launcherPath &&
+      launcherName == game.launcherName &&
+      installPath == game.installPath;
+  }
+
+  bool get isNailed => AppState.gameShortcuts.value.contains(this);
+
+  void add(){
+    AppState.gameShortcuts.value = {...AppState.gameShortcuts.value..add(this)};
+  }
+  void remove(){
+    AppState.gameShortcuts.value = {...AppState.gameShortcuts.value..remove(this)};
+  }
+
+
+  /// ---------- class ---------- ///
 
   @override
   bool operator ==(Object other) =>
-    identical(this, other) ||
-    other is ImageItem && runtimeType == other.runtimeType && path == other.path;
+    identical(this, other) || other is GameShortcut && runtimeType == other.runtimeType &&
+    launcherChannel == other.launcherChannel && launcherPath == other.launcherPath && launcherName == other.launcherName && installPath == other.installPath && selectedUid == other.selectedUid;
 
   @override
-  int get hashCode => path.hashCode;
+  int get hashCode => Object.hash(launcherChannel, launcherPath, launcherName, installPath, selectedUid);
+
+  @override
+  String toString() => "GameShortcut $launcherName $selectedUid";
 }
 
-class Game extends ChangeNotifier{
+
+
+class Game extends ChangeNotifier with AlbumPath{
   static List<Game>? cacheGameList;
   static Future<List<Game>> find() async{
     final List<Game> gameList = <Game>[];
@@ -149,91 +198,77 @@ class Game extends ChangeNotifier{
     return gameList;
   }
 
-  static Map<String, String?>? toMap(Game? game){
+  static Map<String, dynamic>? toJsonMap(Game? game){
     if(game == null) return null;
 
     return {
       "launcherChannel": game.launcherChannel.name,
-      "launcherPath": game.launcherPath?.path,
+      "launcherPath": game.launcherPath.path,
       "launcherName": game.launcherName,
-      "installPath": game.installPath?.path,
-      "uid": game._selectedUid,
+      "installPath": game.installPath.path,
+      "uid": Uid.toJsonMap(game.selectedUid),
     };
   }
 
-  static Game? fromMap(dynamic map){
+  static Game? from(dynamic map){
     if(map is String) map = jsonDecode(map);
     if(map is! Map) return null;
 
-    final Game res = Game(
-      launcherChannel: map.containsKey("launcherChannel") && map["launcherChannel"] is String ? LauncherChannel.fromName(map["launcherChannel"]!) : LauncherChannel.unknown,
-      launcherPath: map.containsKey("launcherPath") && map["launcherPath"] is String? ? Path(map["launcherPath"]!) : null,
-      launcherName: map["launcherName"] is String? ? map["launcherName"] : null,
-      installPath: map.containsKey("installPath") && map["installPath"] is String ? Path(map["installPath"]!) : null,
+    final LauncherChannel launcherChannel = LauncherChannel.from(map["launcherChannel"]);
+    final Path? launcherPath = Path.from(map["launcherPath"]);
+    final dynamic launcherName = map["launcherName"];
+    final Path? installPath = Path.from(map["installPath"]);
+    final Uid? uid = Uid.from(map["uid"]);
+
+    if(launcherPath == null || installPath == null) return null;
+
+    return Game(
+      launcherChannel: launcherChannel,
+      launcherPath: launcherPath,
+      launcherName: launcherName is String ? launcherName : null,
+      installPath: installPath,
+      uid: uid,
     );
-    if(map.containsKey("uid")) res.selectedUid = map["uid"] is String? ? map["uid"] : null;
-    return res;
   }
 
-  static int _albumMapSort(DateTime a, DateTime b) => b.compareTo(a);
-
-  Future moveAndLinkGameInstallTo(Path toDirectory) async{
-
-  }
-  Future moveAndLinkGameAlbumTo(Path toDirectory) async{
-
-  }
+  // Future moveAndLinkGameInstallTo(Path toDirectory) async{
+  //
+  // }
+  // Future moveAndLinkGameAlbumTo(Path toDirectory) async{
+  //
+  // }
 
   final LauncherChannel launcherChannel;
-  Path? launcherPath;
+  Path _launcherPath;
   String? launcherName;
-  Path? _installPath;
-
-  String? _selectedUid;
-  Future<Path?> _avatar = Future<Path?>.value(null);
-  Future<FileImage?> _avatarImage = Future<FileImage?>.value(null);
-
-  AlbumType? _selectedAlbum;
-  Future<AlbumVarType> album = Future<AlbumVarType>.value(SplayTreeMap(_albumMapSort));
-  Set<ImageItem> _selectedImages = SplayTreeSet<ImageItem>();
-  Notifier whenSelectedImagesChange = Notifier();
-
-  final Set<String> _albumWatcherNotificationBlacklist = {};
-  DirectoryWatcher? _gameAlbumWatcher;
-  StreamSubscription<WatchEvent>? _gameAlbumWatcherStream;
-  DirectoryWatcher? _backupAlbumWatcher;
-  StreamSubscription<WatchEvent>? _backupAlbumWatcherStream;
+  Path _installPath;
   
   Game({
     this.launcherChannel = LauncherChannel.unknown,
-    this.launcherPath,
+    required Path launcherPath,
     this.launcherName,
-    Path? installPath,
+    required Path installPath,
+    Uid? uid,
   }) :
-    _installPath = installPath;
-
-
-  void reset(){
-    _selectedUid = null;
-    _avatar = Future<Path?>.value(null);
-    _avatarImage = Future<FileImage?>.value(null);
-    _selectedAlbum = null;
-    album = Future<AlbumVarType>.value(SplayTreeMap(_albumMapSort));
+    _launcherPath = launcherPath,
+    _installPath = installPath,
+    _album = AlbumManager(type: defaultAlbumTypeWithoutUid, installPath: installPath),
+    tag = Tag(installPath)
+  {
+    selectedUid = uid;
   }
 
-  Path? get installPath => _installPath;
+  Path get launcherPath => _launcherPath;
+  Path get installPath => _installPath;
 
-  set installPath(Path? newPath){
+  set installPath(Path newPath){
     _installPath = newPath;
-    reset();
+    selectedUid = null;
+
+    notifyListeners();
   }
 
-  Path? get gamePlayPhotosPath{
-    if(installPath == null) return null;
-    return installPath! + locateToGamePlayPhotos;
-  }
-
-  bool get _isProhibitSet => _installPath == null;
+  Path get gamePlayPhotosPath => installPath + locateToGamePlayPhotos;
 
   String get logoAssetName => "assets/logo/${launcherChannel.name}.png";
 
@@ -246,21 +281,32 @@ class Game extends ChangeNotifier{
     return launcherChannel.name;
   }
 
-  /// ////////////////
-  /// uid
+  GameShortcut? get shortcut => selectedUid == null ? null : GameShortcut(
+    launcherChannel: launcherChannel,
+    launcherPath: launcherPath,
+    launcherName: launcherName,
+    installPath: installPath,
+    selectedUid: selectedUid!,
+  );
 
-  // List<String> uidList = <String>[];
+
+  /// ---------- tag ---------- ///
+
+  final Tag tag;
+
+
+  /// ---------- uid ---------- ///
+
+  Uid? _selectedUid;
 
   /// TODO redo use new function [getAlbumPath]
-  Future<List<String>> findUid() async{
-    if(installPath == null) return [];
-
-    final Set<String> uidList = {};
+  Future<List<Uid>> findUid() async{
+    final Set<Uid> uidList = {};
 
     for(AlbumsInfoItem info in albumsInfoMap.values){
       if(!info.isRequireUid) continue;
 
-      final Path root = installPath! + info.locateInGame.split(r"$uid$").first;
+      final Path root = installPath + info.locateInGame.split(r"$uid$").first;
       try{
         // 判断文件夹合法性
         if(root.type != FileSystemEntityType.directory) continue;
@@ -268,9 +314,9 @@ class Game extends ChangeNotifier{
         final List<FileSystemEntity> entities = await root.directory.list(recursive: false).toList();
 
         for(FileSystemEntity entity in entities){
-          String uid = entity.path.split(Path.symbol).last;
+          String uidValue = entity.path.split(Path.symbol).last;
           // 去重并且判断是否为6-12位数字格式
-          if(RegExp(r"^\d{6,12}$").hasMatch(uid)) uidList.add(uid);
+          if(RegExp(r"^\d{6,12}$").hasMatch(uidValue)) uidList.add(Uid(value: uidValue, installPath: _installPath));
         }
       }catch(e){
 /// @ 1
@@ -278,124 +324,47 @@ class Game extends ChangeNotifier{
         continue;
       }
     }
-    // this.uidList = uidList.toList(growable: false);
     return uidList.toList(growable: false);
   }
 
-  String? get selectedUid => _selectedUid;
+  Uid? get selectedUid => _selectedUid;
 
-  /// [_selectUid] depends on [_installPath]
-  /// if [_installPath] is null, [_selectUid] can not be set
-  set selectedUid(String? newUid){
-    if(_isProhibitSet) return;
-
+  set selectedUid(Uid? newUid){
     if(newUid == _selectedUid) return;
+
     _selectedUid = newUid;
-    updateAvatar();
-    selectedAlbum = defaultAlbum;
+    selectedAlbum = defaultAlbumType;
+
+    /// 不需要 notifyListeners, 当 set selectedAlbum 时, 他会通知
+    // notifyListeners();
+  }
+
+
+  /// ---------- album ---------- ///
+
+  AlbumManager _album;
+
+  AlbumType get defaultAlbumType => _selectedUid == null ? defaultAlbumTypeWithoutUid : defaultAlbumTypeWithUid;
+
+  AlbumManager get album => _album;
+
+  AlbumType get selectedAlbum => _album.type;
+
+  set selectedAlbum(AlbumType newType){
+    if(selectedAlbum == newType) return;
+
+    _album.dispose();
+    _album = AlbumManager(
+      type: newType,
+      installPath: _installPath,
+      uid: _selectedUid,
+    );
 
     notifyListeners();
   }
 
-  // Future<void> setUidThenWaitAvatarUpdated(String? newUid) async{
-  //   if(_isProhibitSet) return;
-  //
-  //   if(newUid == _selectUid) return;
-  //   _selectUid = newUid;
-  //   _avatar = null;
-  //   _selectAlbum = defaultAlbum;
-  //
-  //   notifyListeners();
-  //   await updateAvatar();
-  // }
-
-  /// ////////////////
-  /// avatar
-
-  /// 从"CustomAvatar"找最新的头像图像
-  ///
-  /// find the latest player avatar from game album "CustomAvatar"
-  Future<Path?> findAvatarByUid(String uid) async{
-    if(installPath == null) return null;
-
-    final Directory avatarDir = (installPath! + albumsInfoMap[AlbumType.CustomAvatar]!.locateInGame.replaceAll(r"$uid$", uid)).directory;
-
-    if(!(await avatarDir.exists())) return null;
-
-    final List<FileSystemEntity> entities = await avatarDir
-      .list(recursive: false)
-      .where((entity) => entity is File && isImageExtension(Path(entity.path)))
-      .toList();
-
-    if(entities.isEmpty) return null;
-
-    final List<Path> avatarList = entities.map((entity) => Path(entity.path)).toList();
-
-    for(Path item in avatarList){
-      await item.statAsync;
-    }
-
-    avatarList.sort((a, b) => b.cacheStat.modified.compareTo(a.cacheStat.modified));
-
-    return avatarList.first;
-  }
-
-  void updateAvatar(){
-    if(_selectedUid == null){
-      _avatar = Future<Path?>.value(null);
-      _avatarImage = Future<FileImage?>.value(null);
-    }else{
-      _avatar = findAvatarByUid(_selectedUid!);
-      _avatarImage = Future(() async{
-        final Path avatarPath = await _avatar as Path;
-        return FileImage(avatarPath.file);
-      });
-    }
-  }
-
-  Future<Path?> get avatar => _avatar;
-
-  Future<FileImage?> get avatarImage => _avatarImage;
-
-  /// ////////////////
-  ///
-  /// album
-
-  static AlbumVarType filterAlbum(AlbumVarType album, bool Function(ImageItem currentItem) isRetain){
-    final AlbumVarType res = SplayTreeMap(_albumMapSort);
-
-    for(MapEntry<DateTime, SplayTreeSet<ImageItem>> it in album.entries){
-      final SplayTreeSet<ImageItem> images = SplayTreeSet();
-
-      for(ImageItem item in it.value){
-        if(isRetain(item)) images.add(item);
-      }
-
-      if(images.isNotEmpty) res[it.key] = images;
-    }
-
-    return res;
-  }
-
-  AlbumType get defaultAlbum => _selectedUid == null ? AlbumType.ScreenShot : AlbumType.NikkiPhotos_HighQuality;
-
-  AlbumType? get selectedAlbum => _selectedAlbum;
-
-  set selectedAlbum(AlbumType? newType){
-    if(_isProhibitSet) return;
-
-    if(_selectedAlbum == newType) return;
-
-    _selectedAlbum = newType;
-    updateAlbum();
-
-    notifyListeners();
-  }
-
-  List<AlbumType> get accessibleAlbum{
+  List<AlbumType> get accessibleAlbumType{
     final List<AlbumType> res = <AlbumType>[];
-
-    if(installPath == null) return res;
 
     for(MapEntry<AlbumType, AlbumsInfoItem> item in albumsInfoMap.entries){
       if(item.value.isRequireUid && _selectedUid == null) continue;
@@ -405,231 +374,29 @@ class Game extends ChangeNotifier{
     return res;
   }
 
-  bool isAllowBackup(AlbumType type) => albumsInfoMap[type]!.locateInBackup != null;
+  void refresh() async{
+    _album.refresh();
 
-  Path? getAlbumPath(AlbumType type, {String? uid, ImageSource source = ImageSource.game}){
-    if(installPath == null) return null;
-
-    if(source == ImageSource.backup && !isAllowBackup(type)) return null;
-
-    final AlbumsInfoItem info = albumsInfoMap[type]!;
-
-    final String locate = source == ImageSource.game ? info.locateInGame : info.locateInBackup!;
-
-    if(info.isRequireUid){
-      if(uid == null) return null;
-
-      return installPath! + locate.replaceAll(r"$uid$", uid);
-    }
-
-    return installPath! + locate;
-  }
-
-  Path? get gameAlbumPath => _selectedAlbum == null ? null : getAlbumPath(_selectedAlbum!, uid: _selectedUid, source: ImageSource.game);
-
-  Path? get backupAlbumPath => _selectedAlbum == null ? null : getAlbumPath(_selectedAlbum!, uid: _selectedUid, source: ImageSource.backup);
-
-  /// Traverse all the image files in the directory
-  /// [albumPath] album directory path
-  /// [depth] The depth of the folder to be traversed. If this is a negative number, this will be traversed to the end
-  ///
-  /// 遍历目录下的所有图像文件
-  /// [albumPath] 需要遍历的目录
-  /// [depth] 遍历的文件夹深度. 如果这是负数, 将遍历完所有的子目录
-  Future<List<ImageItem>> traverseAlbum(ImageSource source, Path albumPath, {int depth = 1}) async{
-    final List<ImageItem> res = <ImageItem>[];
-
-    if(depth == 0) return res;
-
-    if(await albumPath.typeAsync != FileSystemEntityType.directory) return res;
-
-    final List<FileSystemEntity> entities = await albumPath.directory.list(recursive: false).toList();
-
-    for(FileSystemEntity entity in entities){
-      final Path entityPath = Path(entity.path);
-
-      if(entity is Directory){
-        res.addAll(await traverseAlbum(source, entityPath, depth: depth - 1));
-      }else if(entity is File){
-        if(!isImageExtension(entityPath)) continue;
-
-        final DateTime time = (await entityPath.cacheStatAsync).modified;
-
-        res.add(ImageItem(source: source, path: entityPath, time: time));
-      }
-    }
-
-    return res;
-  }
-
-  Future<AlbumVarType> initAlbum() async{
-    final AlbumVarType res = SplayTreeMap(_albumMapSort);
-
-    final Path? path = gameAlbumPath;
-    final Path? backupPath = backupAlbumPath;
-
-    final List<ImageItem> imageList = <ImageItem>[];
-
-    if(path != null){
-      imageList.addAll(await traverseAlbum(ImageSource.game, path, depth: 10));
-    }
-    if(backupPath != null){
-      imageList.addAll(await traverseAlbum(ImageSource.backup, backupPath, depth: 10));
-    }
-
-    for(final image in imageList){
-      final day = DateTime(image.time.year, image.time.month, image.time.day);
-      (res[day] ??= SplayTreeSet<ImageItem>()).add(image);
-    }
-
-    return res;
-  }
-
-  Future<void> _insertItemToAlbum(Path itemPath, ImageSource source) async{
-    final DateTime time = (await itemPath.cacheStatAsync).modified;
-    final ImageItem item = ImageItem(source: source, path: itemPath, time: time);
-
-    final AlbumVarType album = await this.album;
-    final day = DateTime(item.time.year, item.time.month, item.time.day);
-    (album[day] ??= SplayTreeSet<ImageItem>()).add(item);
-  }
-
-  Future<void> _removeItemFromAlbum(Path itemPath, ImageSource source) async{
-    final AlbumVarType album = await this.album;
-    album.forEach((_, list){
-      list.removeWhere((ImageItem item){
-        if(item.path == itemPath && item.source == source) return true;
-        return false;
-        /// 大喵这么写一定有他的道理  -- 暖暖
-        momoCry(555);
-      });
-    });
-  }
-
-  Future<(DirectoryWatcher?, StreamSubscription<WatchEvent>?)> _generateWatcher(Path? albumPath, ImageSource source) async{
-    if(albumPath == null) return (null, null);
-
-    if(!await albumPath.directory.exists()){
-      await albumPath.directory.create(recursive: true);
-    }
-
-    final DirectoryWatcher albumWatcher = DirectoryWatcher(albumPath.path);
-    final StreamSubscription<WatchEvent> albumWatcherStream = albumWatcher.events.listen((event){
-      final Path path = Path(event.path);
-      if(event.type == ChangeType.ADD){
-        _insertItemToAlbum(path, source);
-      }else if(event.type == ChangeType.REMOVE){
-        _removeItemFromAlbum(path, source);
-      }
-
-      if(!_albumWatcherNotificationBlacklist.contains(path.name)) notifyListeners();
-    });
-
-    return (albumWatcher, albumWatcherStream);
-  }
-
-  Future<void> updateAlbum() async{
-    album = initAlbum();
-    _selectedImages.clear();
-
-    final Path? gameAlbum = gameAlbumPath;
-    _gameAlbumWatcherStream?.cancel();
-    final (DirectoryWatcher? gameWatcher, StreamSubscription<WatchEvent>? gameStream) = await _generateWatcher(gameAlbum, ImageSource.game);
-    _gameAlbumWatcher = gameWatcher;
-    _gameAlbumWatcherStream = gameStream;
-
-    final Path? backupAlbum = backupAlbumPath;
-    _backupAlbumWatcherStream?.cancel();
-    final (DirectoryWatcher? backupWatcher, StreamSubscription<WatchEvent>? backupStream) = await _generateWatcher(backupAlbum, ImageSource.backup);
-    _gameAlbumWatcher = backupWatcher;
-    _gameAlbumWatcherStream = backupStream;
-  }
-
-  /// ////////////////
-  ///
-  /// image
-
-  static SplayTreeSet<ImageItem> flattenAlbum(AlbumVarType targetAlbum){
-    final SplayTreeSet<ImageItem> flat = SplayTreeSet<ImageItem>();
-
-    for(SplayTreeSet<ImageItem> set in targetAlbum.values){
-      flat.addAll(set);
-    }
-    return flat;
-  }
-
-  Set<ImageItem> get selectedImages => _selectedImages;
-
-  void refresh(){
-    updateAlbum();
+    /// 确保拿到值后再通知, 减少ui等待时间
+    await _album.images;
     notifyListeners();
   }
 
-  void selectImage(ImageItem item){
-    if(_selectedImages.contains(item)) return;
-
-    _selectedImages.add(item);
-    whenSelectedImagesChange.notify();
-  }
-
-  Future<void> selectAllImage() async{
-    _selectedImages = flattenAlbum(await album);
-
-    whenSelectedImagesChange.notify();
-  }
-
-  void deselectImage(ImageItem item){
-    if(!_selectedImages.contains(item)) return;
-
-    _selectedImages.remove(item);
-    whenSelectedImagesChange.notify();
-  }
-
-  void deselectAllImage(){
-    if(_selectedImages.isEmpty) return;
-
-    _selectedImages.clear();
-    whenSelectedImagesChange.notify();
-  }
-
-  void invertImage(ImageItem item){
-    if(_selectedImages.contains(item)){
-      deselectImage(item);
-    }else{
-      selectImage(item);
-    }
-  }
-
-  Future<void> invertAllImage() async{
-    final SplayTreeSet<ImageItem> allImage = flattenAlbum(await album);
-
-    for(ImageItem item in allImage){
-      if(_selectedImages.contains(item)){
-        _selectedImages.remove(item);
-      }else{
-        _selectedImages.add(item);
-      }
-    }
-
-    whenSelectedImagesChange.notify();
-  }
-
   Future<void> backupSelectedImages({void Function(double progress)? onProgress, void Function(Set<ImageItem> errorImages)? onError}) async{
-    if(_selectedImages.isEmpty) return onProgress?.call(1);
+    if(_album.selectedImages.isEmpty) return onProgress?.call(1);
 
-    final Path? backupPath = backupAlbumPath;
+    final Path? backupPath = _album.backupAlbumPath;
     if(backupPath == null) return;
 
     int currentProgress = 0;
-    final int all = _selectedImages.length;
+    final int all = _album.selectedImages.length;
 
     final Set<ImageItem> toRemove = {};
     final Set<ImageItem> errorImages = {};
 
-    for(ImageItem item in _selectedImages){
+    for(ImageItem item in _album.selectedImages){
       try{
         if(item.source == ImageSource.game){
-          _albumWatcherNotificationBlacklist.add(item.name);
           await item.path.file.rename((backupPath + item.name).path);
           toRemove.add(item);
         }
@@ -640,29 +407,25 @@ class Game extends ChangeNotifier{
       }
     }
 
-    _selectedImages.removeAll(toRemove);
-    _albumWatcherNotificationBlacklist.clear();
+    _album.selectedImages.removeAll(toRemove);
     onError?.call(errorImages);
-    /// 延迟通知, 也许能解决通知时UI拿到的是旧的Album (100ms是进度条对话框关闭的动画时间) --大喵
-    await Future.delayed(const Duration(milliseconds: 100), notifyListeners);
   }
 
   Future<void> restoreSelectedImages({void Function(double progress)? onProgress, void Function(Set<ImageItem> errorImages)? onError}) async{
-    if(_selectedImages.isEmpty) return onProgress?.call(1);
+    if(_album.selectedImages.isEmpty) return onProgress?.call(1);
 
-    final Path? gamePath = gameAlbumPath;
+    final Path? gamePath = _album.gameAlbumPath;
     if(gamePath == null) return;
 
     int currentProgress = 0;
-    final int all = _selectedImages.length;
+    final int all = _album.selectedImages.length;
 
     final Set<ImageItem> toRemove = {};
     final Set<ImageItem> errorImages = {};
 
-    for(ImageItem item in _selectedImages){
+    for(ImageItem item in _album.selectedImages){
       try{
         if(item.source == ImageSource.backup){
-          _albumWatcherNotificationBlacklist.add(item.name);
           await item.path.file.rename((gamePath + item.name).path);
           toRemove.add(item);
         }
@@ -673,36 +436,33 @@ class Game extends ChangeNotifier{
       }
     }
 
-    _selectedImages.removeAll(toRemove);
-    _albumWatcherNotificationBlacklist.clear();
+    _album.selectedImages.removeAll(toRemove);
     onError?.call(errorImages);
-    await Future.delayed(const Duration(milliseconds: 100), notifyListeners);
   }
 
   Future<void> deleteSelectedImages(Map<AlbumType, bool> chainDeletion, {void Function(double progress)? onProgress, void Function(Set<ImageItem> errorImages)? onError}) async{
-    if(_selectedImages.isEmpty) return onProgress?.call(1);
+    if(_album.selectedImages.isEmpty) return onProgress?.call(1);
 
     final Set<ImageItem> toRemove = {};
     final Set<ImageItem> errorImages = {};
 
     int currentProgress = 0;
-    final int all = _selectedImages.length;
+    final int all = _album.selectedImages.length;
 
-    for(ImageItem item in _selectedImages){
+    for(ImageItem item in _album.selectedImages){
       try{
-        _albumWatcherNotificationBlacklist.add(item.name);
         await item.path.file.delete();
         toRemove.add(item);
 
         for(final chain in chainDeletion.entries){
           if(!chain.value) continue;
 
-          final Path? gameAlbumPath = getAlbumPath(chain.key, uid: _selectedUid, source: ImageSource.game);
+          final Path? gameAlbumPath = getAlbumPath(installPath, chain.key, uid: _selectedUid, source: ImageSource.game);
           if(gameAlbumPath != null){
             final File imageFile = (gameAlbumPath + item.name).file;
             if(await imageFile.exists()) await imageFile.delete();
           }
-          final Path? backupAlbumPath = getAlbumPath(chain.key, uid: _selectedUid, source: ImageSource.backup);
+          final Path? backupAlbumPath = getAlbumPath(installPath, chain.key, uid: _selectedUid, source: ImageSource.backup);
           if(backupAlbumPath != null){
             final File imageFile = (backupAlbumPath + item.name).file;
             if(await imageFile.exists()) await imageFile.delete();
@@ -715,16 +475,14 @@ class Game extends ChangeNotifier{
       }
     }
 
-    _selectedImages.removeAll(toRemove);
-    _albumWatcherNotificationBlacklist.clear();
+    _album.selectedImages.removeAll(toRemove);
     onError?.call(errorImages);
-    await Future.delayed(const Duration(milliseconds: 100), notifyListeners);
   }
 
   Future<void> importImages(List<ImageItem> images, {void Function(double progress)? onProgress, void Function(Set<ImageItem> errorImages)? onError}) async{
-    if(images.isEmpty) return onProgress?.call(1);
+    if(_album.selectedImages.isEmpty) return onProgress?.call(1);
 
-    final Path? gamePath = gameAlbumPath;
+    final Path? gamePath = _album.gameAlbumPath;
     if(gamePath == null) return;
 
     int currentProgress = 0;
@@ -736,7 +494,6 @@ class Game extends ChangeNotifier{
     for(ImageItem item in images){
       try{
         if(item.source == ImageSource.other){
-          _albumWatcherNotificationBlacklist.add(item.name);
           await item.path.file.copy((gamePath + item.name).path);
           toRemove.add(item);
         }
@@ -747,10 +504,23 @@ class Game extends ChangeNotifier{
       }
     }
 
-    _albumWatcherNotificationBlacklist.clear();
     onError?.call(errorImages);
-    await Future.delayed(const Duration(milliseconds: 100), notifyListeners);
   }
+
+
+
+  /// ---------- class ---------- ///
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is Game && runtimeType == other.runtimeType &&
+    launcherChannel == other.launcherChannel && launcherPath == other.launcherPath && launcherName == other.launcherName && installPath == other.installPath;
+
+  @override
+  int get hashCode => Object.hash(launcherChannel, launcherPath, launcherName, installPath);
+
+  @override
+  String toString() => "Game $launcherName";
 }
 
 

@@ -1,8 +1,10 @@
 import "package:flutter/services.dart";
+import "package:nikkialbums/game/album_manager.dart";
+import "package:nikkialbums/ui/keyboard_characters.dart";
 
-import "albumView.dart";
-import "albumPreviewer.dart";
-import "sendFile.dart";
+import "album_view.dart";
+import "album_previewer.dart";
+import "send_file.dart";
 import "package:nikkialbums/info.dart";
 import "package:nikkialbums/game/game.dart";
 import "package:nikkialbums/state.dart";
@@ -40,9 +42,7 @@ class AlbumValuePool extends InheritedWidget{
   final ValueNotifier<bool> isPrimaryMouseDown = ValueNotifier<bool>(false);
   final ValueNotifier<bool> isDragScrollbar = ValueNotifier<bool>(false);
   final ValueNotifier<bool> isShowTimeHeader = ValueNotifier<bool>(true);
-  final ValueNotifier<bool> isViewGameAlbum = ValueNotifier<bool>(true);
-  final ValueNotifier<bool> isViewBackupAlbum = ValueNotifier<bool>(true);
-  final ValueNotifier<bool> isReverse = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> isPressTag = ValueNotifier<bool>(false);
 
   AlbumValuePool({super.key, required super.child});
 
@@ -71,6 +71,9 @@ class Album extends StatelessWidget{
   }
 }
 
+
+/// ---------- top bar ---------- ///
+
 class ToolBar extends StatefulWidget{
   const ToolBar({super.key});
 
@@ -87,15 +90,15 @@ class ToolBar extends StatefulWidget{
   }
 
   void _deselect(Game game){
-    game.deselectAllImage();
+    game.album.deselectAllImage();
   }
 
   void _selectAll(Game game){
-    game.selectAllImage();
+    game.album.selectAllImage();
   }
 
   void _invertSelect(Game game){
-    game.invertAllImage();
+    game.album.invertAllImage();
   }
 
   void _viewSelect(BuildContext context, Game game){
@@ -206,14 +209,19 @@ class _ToolBarState extends State<ToolBar>{
     return ListenableBuilder(
       listenable: game,
       builder: (BuildContext context, Widget? child){
-        final bool isAllowBackup = game.selectedAlbum != null && game.isAllowBackup(game.selectedAlbum!);
+        final bool isAllowBackup = game.isAllowBackup(game.selectedAlbum);
 
-        return NotifierBuilder(
-          listenable: game.whenSelectedImagesChange,
+        return ListenableBuilder(
+          listenable: game.album,
           builder: (BuildContext context, Widget? child){
-            final bool isExistSelectedImage = game.selectedImages.isNotEmpty;
+            return NotifierBuilder(
+              listenable: game.album.whenSelectedImagesChange,
+              builder: (BuildContext context, Widget? child){
+                final bool isExistSelectedImage = game.album.selectedImages.isNotEmpty;
 
-            return builder(isExistSelectedImage, isAllowBackup);
+                return builder(isExistSelectedImage, isAllowBackup);
+              },
+            );
           },
         );
       },
@@ -243,27 +251,33 @@ class _ToolBarState extends State<ToolBar>{
             ),
 
             /// 筛选
-            const FiltrationButton(),
+            FiltrationButton(game: game),
 
-            ValueListenableBuilder(
-              valueListenable: AlbumValuePool.of(context)!.isReverse,
-              builder: (BuildContext context, bool isReverse, Widget? child){
-                final String text = isReverse ? context.tr("sort_forward") : context.tr("sort_reverse");
-                final String icon = isReverse ? "assets/icon/sort_reverse.webp" : "assets/icon/sort_forward.webp";
+            /// 排序
+            ListenableBuilder(
+              listenable: game,
+              builder: (BuildContext context, Widget? child){
+                return ListenableBuilder(
+                  listenable: game.album,
+                  builder: (BuildContext context, Widget? child){
+                    final String text = context.tr((game.album.sortOrder == SortOrder.ascending ? SortOrder.descending : SortOrder.ascending).name);
+                    final String icon = "assets/icon/${game.album.sortOrder.name}.webp";
 
-                return Tooltip(
-                  message: text,
-                  child: SmallButton(
-                    colorRole: ColorRoles.secondary,
-                    onClick: (){
-                      if(isReverse){
-                        AlbumValuePool.of(context)!.isReverse.value = false;
-                      }else{
-                        AlbumValuePool.of(context)!.isReverse.value = true;
-                      }
-                    },
-                    child: Image.asset(icon, height: 20, color: AppTheme.of(context)!.colorScheme.secondary.onEnabledColor),
-                  ),
+                    return Tooltip(
+                      message: text,
+                      child: SmallButton(
+                        colorRole: ColorRoles.secondary,
+                        onClick: (){
+                          if(game.album.sortOrder == SortOrder.descending){
+                            game.album.sortOrder = SortOrder.ascending;
+                          }else{
+                            game.album.sortOrder = SortOrder.descending;
+                          }
+                        },
+                        child: Image.asset(icon, height: 20, color: AppTheme.of(context)!.colorScheme.secondary.onEnabledColor),
+                      ),
+                    );
+                  },
                 );
               },
             ),
@@ -272,7 +286,7 @@ class _ToolBarState extends State<ToolBar>{
 
             /// 减少列数
             Tooltip(
-              message: context.tr("layout_minus"),
+              message: context.tr("layout_minus") + getKeyboardCharacter([LogicalKeyboardKey.add]),
               child: SmallButton(
                 colorRole: ColorRoles.secondary,
                 onClick: widget._layoutMinus,
@@ -352,6 +366,7 @@ class _ToolBarState extends State<ToolBar>{
               return Tooltip(
                 message: usable ? context.tr("remove") : "",
                 child: SmallButton(
+                  width: isAllowBackup ? smallButtonSize : 0,
                   colorRole: ColorRoles.secondary,
                   onClick: (){
                     widget._remove(context, game);
@@ -369,6 +384,7 @@ class _ToolBarState extends State<ToolBar>{
               return Tooltip(
                 message: usable ? context.tr("insert") : "",
                 child: SmallButton(
+                  width: isAllowBackup ? smallButtonSize : 0,
                   colorRole: ColorRoles.secondary,
                   onClick: (){
                     widget._insert(context, game);
@@ -400,7 +416,7 @@ class _ToolBarState extends State<ToolBar>{
 
             /// 导出
             _gameListener(game, (bool isExistSelectedImage, bool isAllowBackup){
-              return ExportImagesButton(usable: isExistSelectedImage, images: game.selectedImages.toList(growable: false));
+              return ExportImagesButton(usable: isExistSelectedImage, images: game.album.selectedImages.toList(growable: false));
             }),
 
             /// 导入
@@ -430,10 +446,31 @@ class _ToolBarState extends State<ToolBar>{
       },
     );
 
+    /// TODO 多tab
     final Widget toolBox = Row(
       spacing: listSpacing,
       children: [
         AlbumButton(),
+
+        /// tag button
+        ValueListenableBuilder(
+          valueListenable: AppState.currentGame,
+          builder: (BuildContext context, Game? game, Widget? child){
+            if(game == null) return block0;
+
+            return SmallButton(
+              onClick: (){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return TagListDialog(game);
+                  }
+                );
+              },
+              child: Image.asset("assets/icon/tag.webp", height: 16, color: AppTheme.of(context)!.colorScheme.secondary.onEnabledColor.withValues(alpha: iconWeakeningRate)),
+            );
+          },
+        ),
 
         Expanded(
           child: Align(
@@ -489,29 +526,35 @@ class AlbumButton extends StatelessWidget{
   const AlbumButton({super.key});
 
   void _openAlbumFolder(){
-    AppState.currentGame.value?.gameAlbumPath?.open();
+    AppState.currentGame.value?.album.gameAlbumPath?.open();
   }
 
   @override
   Widget build(BuildContext context){
-    Widget menu = ValueListenableBuilder<Game?>(
+    return ValueListenableBuilder<Game?>(
       valueListenable: AppState.currentGame,
       builder: (BuildContext context, Game? game, Widget? child){
+        if(game == null) return block0;
+
         final List<Widget> menuChildren = <Widget>[];
 
-        if(game != null){
-          final List<AlbumType> gameAlbum = game.accessibleAlbum;
-
-          for(AlbumType type in gameAlbum){
-            final AlbumsInfoItem info = albumsInfoMap[type]!;
-            if(info.visible){
-              menuChildren.add(MenuItemButton(
+        for(AlbumType type in game.accessibleAlbumType){
+          final AlbumsInfoItem info = albumsInfoMap[type]!;
+          if(info.visible){
+            menuChildren.add(
+              MenuItemButton(
                 onPressed: (){
                   game.selectedAlbum = type;
                 },
-                child: Text(context.tr(info.name), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
-              ));
-            }
+                child: Row(
+                  spacing: bigPadding,
+                  children: [
+                    Image.asset("assets/icon/album/${info.type}.webp", height: 18, color: AppTheme.of(context)!.colorScheme.secondary.onColor.withValues(alpha: iconWeakeningRate)),
+                    Text(context.tr(info.name), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
+                  ],
+                ),
+              ),
+            );
           }
         }
 
@@ -520,22 +563,18 @@ class AlbumButton extends StatelessWidget{
             backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
           ),
           builder: (BuildContext context, MenuController controller, Widget? child){
-            late final Widget text;
-
-            if(game == null){
-              text = Text(context.tr("currentGameIsNull"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor));
-            }else{
-              if(game.selectedAlbum == null){
-                text = Text(context.tr("selectedAlbumIsNull"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor));
-              }else{
-                text = ListenableBuilder(
-                  listenable: game,
-                  builder: (BuildContext context, Widget? child){
-                    return Text(context.tr(albumsInfoMap[game.selectedAlbum!]!.name), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor));
-                  },
+            late final Widget buttonContent = ListenableBuilder(
+              listenable: game,
+              builder: (BuildContext context, Widget? child){
+                return Row(
+                  spacing: listSpacing,
+                  children: [
+                    Image.asset("assets/icon/album/${game.selectedAlbum.name}.webp", height: 18, color: AppTheme.of(context)!.colorScheme.secondary.onColor),
+                    Text(context.tr(albumsInfoMap[game.selectedAlbum]!.name), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
+                  ],
                 );
-              }
-            }
+              },
+            );
 
             return GestureDetector(
               onSecondaryTap: (){
@@ -544,12 +583,12 @@ class AlbumButton extends StatelessWidget{
               child: SmallButton(
                 padding: const EdgeInsets.all(6),
                 width: null,
+                constraints: const BoxConstraints(minWidth: bigButtonSize),
                 colorRole: ColorRoles.secondary,
                 onClick: (){
                   controller.isOpen ? controller.close() : controller.open();
                 },
-                usable: game != null,
-                child: text,
+                child: buttonContent,
               ),
             );
           },
@@ -557,109 +596,36 @@ class AlbumButton extends StatelessWidget{
         );
       },
     );
-
-    return menu;
   }
 }
 
 
-class AlbumExhibition extends StatefulWidget{
+
+/// ---------- exhibition ---------- ///
+
+class AlbumExhibition extends StatelessWidget{
   const AlbumExhibition({super.key});
-
-  @override
-  State<AlbumExhibition> createState() => _AlbumExhibitionState();
-}
-class _AlbumExhibitionState extends State<AlbumExhibition>{
-
-  Widget generateViewWithHeader(Game game, AlbumVarType album, int column){
-    return SmoothPointerScroll(
-      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-
-        scrollbarController.addListener((){
-          AlbumValuePool.of(context)!.isDragScrollbar.value = scrollbarController.isDrag;
-        });
-
-        return Padding(
-          padding: EdgeInsets.only(top: topBarHeight),
-          child: Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(right: scrollbarThickness + 2 * safeMargin),
-                color: AppTheme.of(context)!.colorScheme.background.color,
-                child: ValueListenableBuilder(
-                  valueListenable: AlbumValuePool.of(context)!.isReverse,
-                  builder: (BuildContext context, bool isReverse, Widget? child){
-                    return AlbumView(
-                      album: album,
-                      controller: controller,
-                      physics: physics,
-                      isReverse: isReverse,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: column,
-                        mainAxisSpacing: 1,
-                        crossAxisSpacing: 1,
-                      ),
-                      headerHeight: topBarHeight,
-                      headerBuilder: (BuildContext context, String title){
-                        return Container(
-                          alignment: Alignment.centerLeft,
-                          color: AppTheme.of(context)!.colorScheme.background.color,
-                          padding: const EdgeInsets.only(left: listSpacing),
-                          height: topBarHeight,
-                          child: Text(title, style: TextStyle(fontSize: 16, color: AppTheme.of(context)!.colorScheme.background.onColor)),
-                        );
-                      },
-                      itemBuilder: (BuildContext context, ImageItem item){
-                        return Exhibit(game, item);
-                      },
-                    );
-                  },
-                ),
-              ),
-              /// scrollbar
-              Positioned(
-                top: 0,
-                right: safeMargin,
-                bottom: 0,
-                width: 10,
-                child: IndependentScrollbar(
-                  controller: scrollbarController,
-                  thickness: scrollbarThickness,
-                  thumbRadius: Radius.circular(5),
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(100),
-                  hoveredColor: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(125),
-                  pressedColor: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(150),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context){
     return ValueListenableBuilder(
       valueListenable: AppState.currentGame,
       builder: (BuildContext context, Game? game, Widget? child){
-        if(game == null) return block0;
+        if(game == null){
+          return Center(
+            child: Text(context.tr("currentGameIsNull"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+          );
+        }
 
         return ListenableBuilder(
           listenable: game,
           builder: (BuildContext context, Widget? child){
-            return RFutureBuilder(
-              future: game.album,
-              builder: (BuildContext context, AlbumVarType originAlbum){
-                return MultiValueListenableBuilder(
-                  listenables: [AlbumValuePool.of(context)!.isViewGameAlbum, AlbumValuePool.of(context)!.isViewBackupAlbum],
-                  builder: (BuildContext context, Widget? child){
-                    final bool isViewGameAlbum = AlbumValuePool.of(context)!.isViewGameAlbum.value;
-                    final bool isViewBackupAlbum = AlbumValuePool.of(context)!.isViewBackupAlbum.value;
-                    final AlbumVarType album = Game.filterAlbum(originAlbum, (ImageItem item) =>
-                      (isViewGameAlbum && item.source == ImageSource.game) ||
-                      (isViewBackupAlbum && item.source == ImageSource.backup)
-                    );
+            return ListenableBuilder(
+              listenable: game.album,
+              builder: (BuildContext context, Widget? child){
+                return RFutureBuilder(
+                  future: game.album.process(),
+                  builder: (BuildContext context, ProcessedAlbumType album){
                     return Listener(
                       // 鼠标键按下
                       onPointerDown: (e){
@@ -680,9 +646,10 @@ class _AlbumExhibitionState extends State<AlbumExhibition>{
                           final int column = AppState.albumColumn.value;
 
                           if(isShowTimeHeader){
-                            return generateViewWithHeader(game, album, column);
+                            return AlbumExhibitionWithHeader(game: game, album: album, column: column);
                           }
-                          return GridAlbum(game: game, images: Game.flattenAlbum(album).toList(), aspectRatio: 1 / 1);
+                          return GridAlbum(game: game, images: [], aspectRatio: 1 / 1);
+                          // return GridAlbum(game: game, images: Game.flattenAlbum(album).toList(), aspectRatio: 1 / 1);
                         },
                       ),
                     );
@@ -697,6 +664,98 @@ class _AlbumExhibitionState extends State<AlbumExhibition>{
   }
 }
 
+class AlbumExhibitionWithHeader extends StatefulWidget{
+  final Game game;
+  final ProcessedAlbumType album;
+  final int column;
+
+  const AlbumExhibitionWithHeader({
+    super.key,
+    required this.game,
+    required this.album,
+    required this.column,
+  });
+
+  @override
+  State<AlbumExhibitionWithHeader> createState() => _AlbumExhibitionWithHeaderState();
+}
+class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader>{
+  final IndependentScrollbarController scrollbarController = IndependentScrollbarController();
+
+  void onDrag(){
+    AlbumValuePool.of(context)!.isDragScrollbar.value = scrollbarController.isDrag;
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    scrollbarController.addListener(onDrag);
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return SmoothPointerScroll(
+      scrollbarController: scrollbarController,
+      builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+        return Padding(
+          padding: EdgeInsets.only(top: topBarHeight),
+          child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: scrollbarThickness + 2 * safeMargin),
+                color: AppTheme.of(context)!.colorScheme.background.color,
+                child: AlbumView(
+                  album: widget.album,
+                  controller: controller,
+                  physics: physics,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: widget.column,
+                    mainAxisSpacing: 1,
+                    crossAxisSpacing: 1,
+                  ),
+                  headerHeight: topBarHeight,
+                  headerBuilder: (BuildContext context, String title){
+                    return Container(
+                      alignment: Alignment.centerLeft,
+                      color: AppTheme.of(context)!.colorScheme.background.color,
+                      padding: const EdgeInsets.only(left: listSpacing),
+                      height: topBarHeight,
+                      child: Text(title, style: TextStyle(fontSize: 16, color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                    );
+                  },
+                  itemBuilder: (BuildContext context, ImageItem item){
+                    return Exhibit(widget.game, item);
+                  },
+                ),
+              ),
+              /// scrollbar
+              Positioned(
+                top: 0,
+                right: safeMargin,
+                bottom: 0,
+                width: scrollbarThickness,
+                child: IndependentScrollbar(
+                  controller: scrollbarController,
+                  thickness: scrollbarThickness,
+                  thumbRadius: Radius.circular(5),
+                  color: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(100),
+                  hoveredColor: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(125),
+                  pressedColor: AppTheme.of(context)!.colorScheme.secondary.onColor.withAlpha(150),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose(){
+    scrollbarController.removeListener(onDrag);
+    super.dispose();
+  }
+}
 
 class GridAlbum extends StatelessWidget{
   final Game game;
@@ -766,15 +825,56 @@ class Exhibit extends StatefulWidget{
   State<Exhibit> createState() => _ExhibitState();
 }
 class _ExhibitState extends State<Exhibit>{
+
+  Widget _generateTagButton(BuildContext context, bool isHover){
+    return Positioned(
+      top: smallPadding,
+      right: smallPadding,
+      width: smallButtonContentSize + 2 * smallBorder,
+      height: smallButtonContentSize + 2 * smallBorder,
+      child: TagMenu(
+        game: widget.game,
+        value: widget.imageItem.name,
+        builder: (BuildContext context, Color? color, Widget? child, void Function() trigger){
+
+          if(!isHover && color == null) return block0;
+
+          String icon = color == null ? "assets/icon/tag.webp" : "assets/icon/tag_fill.webp";
+
+          return MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: Listener(
+              onPointerDown: (_){
+                AlbumValuePool.of(context)!.isPressTag.value = true;
+
+                trigger();
+              },
+              onPointerUp: (_){
+                AlbumValuePool.of(context)!.isPressTag.value = false;
+              },
+              onPointerCancel: (_){
+                AlbumValuePool.of(context)!.isPressTag.value = false;
+              },
+              child: Image.asset(icon, color: color),
+            ),
+          );
+        }
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context){
     return RFutureBuilder(
       future: ImageThumbnail.fromCache(id: widget.imageItem.name, imagePath: widget.imageItem.path, targetWidth: 720),
       builder: (context, image){
+
         final Widget exhibit = NotifierBuilder(
-          listenable: widget.game.whenSelectedImagesChange,
+          listenable: widget.game.album.whenSelectedImagesChange,
           builder: (BuildContext context, Widget? child){
-            final bool isSelected = widget.game.selectedImages.contains(widget.imageItem);
+
+            final bool isSelected = widget.game.album.selectedImages.contains(widget.imageItem);
+
             return Stack(
               children: [
                 Positioned.fill(
@@ -787,18 +887,23 @@ class _ExhibitState extends State<Exhibit>{
                   Positioned.fill(
                     child: ColoredBox(color: Color(0x66000000)),
                   ),
+
                 if(isSelected)
                   Positioned(
                     left: smallPadding,
                     top: smallPadding,
-                    width: smallButtonContentSize,
-                    height: smallButtonContentSize,
-                    child: ClipRRect(
-                      borderRadius: BorderRadiusGeometry.all(Radius.circular(0.5 * smallButtonContentSize)),
-                      child: Container(
+                    width: smallButtonContentSize + 2 * smallBorder,
+                    height: smallButtonContentSize + 2 * smallBorder,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+                          width: smallBorder,
+                        ),
                         color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                        child: Image.asset("assets/icon/tick.webp", color: AppTheme.of(context)!.colorScheme.secondary.color),
                       ),
+                      child: Image.asset("assets/icon/tick.webp", color: AppTheme.of(context)!.colorScheme.secondary.color),
                     ),
                   ),
               ],
@@ -806,38 +911,60 @@ class _ExhibitState extends State<Exhibit>{
           },
         );
 
-        return MultiValueListenableBuilder(
-          listenables: [AlbumValuePool.of(context)!.isPrimaryMouseDown, AlbumValuePool.of(context)!.isDragScrollbar],
-          builder: (BuildContext context, Widget? child){
-            final bool isPrimaryMouseDown = AlbumValuePool.of(context)!.isPrimaryMouseDown.value;
-            final bool isDragScrollbar = AlbumValuePool.of(context)!.isDragScrollbar.value;
-
-            return MouseRegion(
-              onEnter: (_){
-                // 长按多选
-                if(isPrimaryMouseDown && !isDragScrollbar) widget.game.invertImage(widget.imageItem);
-              },
-              child: Listener(
-                onPointerDown: (e){
-                  if(e.kind == PointerDeviceKind.mouse && e.buttons == kPrimaryMouseButton){
-                    widget.game.invertImage(widget.imageItem);
-                  }
-                  if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return RFutureBuilder(
-                          future: widget.game.album,
-                          builder: (BuildContext context, AlbumVarType album){
-                            final List<ImageItem> images = Game.flattenAlbum(album).toList();
-                            return ImageViewerDialog(game: widget.game, images: images, initImage: widget.imageItem);
-                          },
-                        );
-                      }
+        final Widget groundLayout = Listener(
+          onPointerDown: (e){
+            if(e.kind == PointerDeviceKind.mouse && e.buttons == kPrimaryMouseButton){
+              widget.game.album.invertImage(widget.imageItem);
+            }
+            if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return RFutureBuilder(
+                      future: widget.game.album.images,
+                      builder: (BuildContext context, Set<ImageItem> images){
+                        return ImageViewerDialog(game: widget.game, images: widget.game.album.sortImages(images).toList(growable: false), initImage: widget.imageItem);
+                      },
                     );
                   }
-                },
-                child: exhibit,
+              );
+            }
+          },
+          child: exhibit,
+        );
+
+        bool isHover = false;
+
+        return StatefulBuilder(
+          builder: (BuildContext context, void Function(void Function()) setButtonState){
+            return MouseRegion(
+              onEnter: (_){
+                final bool isPrimaryMouseDown = AlbumValuePool.of(context)!.isPrimaryMouseDown.value;
+                final bool isDragScrollbar = AlbumValuePool.of(context)!.isDragScrollbar.value;
+                final bool isPressTag = AlbumValuePool.of(context)!.isPressTag.value;
+                // 长按多选
+                if(isPrimaryMouseDown && !isDragScrollbar && !isPressTag) widget.game.album.invertImage(widget.imageItem);
+
+                setButtonState((){
+                  isHover = true;
+                });
+              },
+              onHover: (_){
+                setButtonState((){
+                  isHover = true;
+                });
+              },
+              onExit: (_){
+                setButtonState((){
+                  isHover = false;
+                });
+              },
+              child: Stack(
+                children: [
+                  groundLayout,
+
+                  _generateTagButton(context, isHover),
+                ],
               ),
             );
           },
@@ -848,6 +975,517 @@ class _ExhibitState extends State<Exhibit>{
 }
 
 
+/// ---------- tag ---------- ///
+
+class TagMenu extends StatelessWidget{
+  final Game game;
+  final String value;
+  final Widget Function(BuildContext context, Color? tagColor, Widget? child, void Function() trigger) builder;
+
+  const TagMenu({
+    required this.game,
+    required this.value,
+    required this.builder,
+    super.key
+  });
+
+  @override
+  Widget build(BuildContext context){
+    return ListenableBuilder(
+      listenable: game.tag,
+      builder: (BuildContext context, Widget? child){
+        return MenuAnchor(
+          style: MenuStyle(
+            backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
+          ),
+          builder: (BuildContext context, MenuController controller, Widget? child){
+            return builder(context, game.tag.findTagColorBy(value), child, (){
+              if(controller.isOpen){
+                game.tag.remove([value]);
+                controller.close();
+              }else{
+                if(game.tag.findTagBy(value) != false){
+                  game.tag.remove([value]);
+                }else{
+                  game.tag.add(null, [value]);
+                  controller.open();
+                }
+              }
+            });
+          },
+          menuChildren: game.tag.tagList.map((String? tag){
+            return MenuItemButton(
+              onPressed: (){
+                game.tag.add(tag, [value]);
+              },
+              child: Row(
+                spacing: smallPadding,
+                children: [
+                  Image.asset("assets/icon/tag_fill.webp", height: smallButtonContentSize, color: game.tag.getColor(tag)),
+                  Text(tag ?? context.tr("defaultTag"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                ],
+              ),
+            );
+          })
+          .toList()
+          ..add(
+            MenuItemButton(
+              onPressed: () async{
+                final (String tag, Color color)? res = await showDialog<(String tag, Color color)>(
+                  context: context,
+                  builder: (BuildContext context){
+                    return EditTagDialog(tagList: game.tag.tagList);
+                  }
+                );
+
+                if(res != null){
+                  game.tag.add(res.$1, [value]);
+                  game.tag.setColor(res.$1, res.$2);
+                }
+              },
+              child: Text(context.tr("addCustomTag"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            )
+          ),
+        );
+      },
+    );
+  }
+}
+
+class EditTagDialog extends StatelessWidget{
+  static const List<Color> _swatches = [
+    Colors.red, Colors.pink, Colors.purple, Colors.deepPurple,
+    Colors.indigo, Colors.blue, Colors.lightBlue, Colors.cyan,
+    Colors.teal, Colors.green, Colors.lightGreen, Colors.lime,
+    Colors.yellow, Colors.amber, Colors.orange, Colors.deepOrange,
+    Colors.brown, Colors.grey, Colors.blueGrey,
+  ];
+
+  final bool check;
+  final Set<String?> tagList;
+  late final ValueNotifier<String> tag;
+  late final ValueNotifier<Color> color;
+
+  EditTagDialog({
+    super.key,
+    this.check = true,
+    required this.tagList,
+    (String tag, Color color)? initValue,
+  }){
+    tag = ValueNotifier<String>(initValue?.$1 ?? "");
+    color = ValueNotifier<Color>(initValue?.$2 ?? Colors.orange);
+  }
+
+
+  final ValueNotifier<String?> errorInfo = ValueNotifier<String?>(null);
+
+  void verify(){
+    if(!check) return;
+
+    if(tagList.contains(tag.value)){
+      errorInfo.value = "tagAlreadyExists";
+    }else{
+      errorInfo.value = null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(smallBorderRadius),
+      ),
+      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+      child: Container(
+        padding: const EdgeInsets.all(smallPadding),
+        constraints: const BoxConstraints(maxWidth: smallDialogMaxWidth),
+        child: Column(
+          spacing: smallPadding,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            ///
+            Row(
+              spacing: smallPadding,
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: color,
+                  builder: (BuildContext context, Color selectedColor, Widget? child){
+                    return Image.asset("assets/icon/tag_fill.webp", height: 30, color: selectedColor);
+                  },
+                ),
+                Expanded(
+                  child: RTextFiled(
+                    controller: TextEditingController()..text = tag.value,
+                    labelText: context.tr("tagName"),
+                    colorRole: ColorRoles.background,
+                    onChanged: (String input){
+                      tag.value = input;
+                      verify();
+                    },
+                  ),
+                ),
+              ],
+            ),
+
+            ValueListenableBuilder(
+              valueListenable: errorInfo,
+              builder: (BuildContext context, String? info, Widget? child){
+                return info == null ? block0 : Text(context.tr(info), style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor));
+              },
+            ),
+
+            block20H,
+
+            /// color selector
+            Container(
+              constraints: const BoxConstraints(maxHeight: smallCardMaxHeight),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: smallButtonContentSize,
+                  mainAxisSpacing: listSpacing,
+                  crossAxisSpacing: listSpacing,
+                  childAspectRatio: 1 / 1,
+                ),
+                itemCount: _swatches.length,
+                itemBuilder: (BuildContext context, int index){
+                  return GestureDetector(
+                    onTap: (){
+                      color.value = _swatches[index];
+                    },
+                    child: ClipOval(
+                      child: Container(
+                        color: _swatches[index],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            /// cancel
+            SmallButton(
+              width: null,
+              height: mediumButtonSize,
+              colorRole: ColorRoles.background,
+              transparent: false,
+              onClick: (){
+                Navigator.of(context).pop();
+              },
+              child: Text(context.tr("cancel"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ),
+
+            /// save
+            SmallButton(
+              width: null,
+              height: mediumButtonSize,
+              colorRole: ColorRoles.background,
+              transparent: false,
+              onClick: (){
+                verify();
+
+                if(errorInfo.value == null){
+                  Navigator.of(context).pop((tag.value, color.value));
+                }
+              },
+              child: Text(context.tr("save"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// TODO 拖动排序
+class TagListDialog extends StatelessWidget{
+  final Game game;
+
+  const TagListDialog(this.game, {super.key});
+
+  Future<void> _editTag(BuildContext context, String tag) async{
+    if(game.tag.getColor(tag) == null) return;
+
+    final (String tag, Color color)? res = await showDialog<(String tag, Color color)>(
+      context: context,
+      builder: (BuildContext context){
+        return EditTagDialog(tagList: game.tag.tagList, initValue: (tag, game.tag.getColor(tag)!));
+      }
+    );
+
+    if(res != null){
+      game.tag.rename(tag, res.$1);
+      game.tag.setColor(res.$1, res.$2);
+    }
+  }
+
+  Future<void> _deleteTag(BuildContext context, String tag) async{
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(smallBorderRadius),
+          ),
+          backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+          child: Container(
+            padding: const EdgeInsets.all(smallPadding),
+            constraints: const BoxConstraints(maxWidth: smallDialogMaxWidth),
+            child: Column(
+              spacing: smallPadding,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(context.tr("deleteXTag", args: [tag]), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+
+                /// cancel
+                SmallButton(
+                  padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                  width: null,
+                  height: mediumButtonSize,
+                  colorRole: ColorRoles.background,
+                  transparent: false,
+                  onClick: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(context.tr("cancel"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                ),
+
+                /// delete
+                SmallButton(
+                  padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                  width: null,
+                  height: mediumButtonSize,
+                  colorRole: ColorRoles.background,
+                  transparent: false,
+                  onClick: (){
+                    game.tag.delete(tag);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(context.tr("delete"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    );
+  }
+
+  Future<void> _addTag(BuildContext context) async{
+    final (String tag, Color color)? res = await showDialog<(String tag, Color color)>(
+      context: context,
+      builder: (BuildContext context){
+        return EditTagDialog(tagList: game.tag.tagList);
+      }
+    );
+
+    if(res != null){
+      game.tag.add(res.$1, []);
+      game.tag.setColor(res.$1, res.$2);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context){
+
+    final Widget tagButtons = ListenableBuilder(
+      listenable: game.tag,
+      builder: (BuildContext context, Widget? child){
+        return Column(
+          spacing: smallPadding,
+          mainAxisSize: MainAxisSize.min,
+          children: game.tag.tagList.map((String? tag){
+            return SmallButton(
+              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+              width: null,
+              height: mediumButtonSize,
+              colorRole: ColorRoles.background,
+              onClick: (){
+                final List<String>? values = game.tag.getValues(tag);
+
+                if(values == null) return;
+
+                Navigator.of(context).pop();
+
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(smallBorderRadius),
+                      ),
+                      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+                      child: Padding(
+                        padding: const EdgeInsets.all(smallPadding),
+                        child: Column(
+                          spacing: listSpacing,
+                          children: [
+                            Row(
+                              children: [
+                                block10W,
+
+                                Text(tag ?? context.tr("defaultTag"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+
+                                Expanded(
+                                  child: block0,
+                                ),
+
+                                SmallButton(
+                                  onClick: (){
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+                                ),
+                              ],
+                            ),
+
+                            Expanded(
+                              child: RFutureBuilder(
+                                future: game.album.images,
+                                builder: (BuildContext context, Set<ImageItem> images){
+                                  final List<ImageItem> processImages = images.toList()..removeWhere((ImageItem item) => !values.contains(item.name));
+
+                                  return AlbumPreviewer(
+                                    images: processImages,
+                                    onDelete: (ImageItem item){
+                                      game.tag.remove([item.name]);
+                                    },
+                                    builder: (BuildContext context, ImageItem item) {
+                                      return RFutureBuilder(
+                                        future: ImageThumbnail.fromCache(id: item.name, imagePath: item.path, targetWidth: 720),
+                                        builder: (context, image){
+                                          return Listener(
+                                            onPointerDown: (e){
+                                              if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (BuildContext context){
+                                                    return ImageViewerDialog(images: processImages, initImage: item);
+                                                  }
+                                                );
+                                              }
+                                            },
+                                            child: KeepAliveWrapper(
+                                              child: RawImage(
+                                                image: image,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                );
+
+              },
+              child: Row(
+                children: [
+                  /// color
+                  Image.asset("assets/icon/tag_fill.webp", height: 20, color: game.tag.getColor(tag)),
+
+                  block5W,
+
+                  /// tag name
+                  Expanded(
+                    child: Text(tag ?? context.tr("defaultTag"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                  ),
+                  /// edit tag
+                  if(tag != null)
+                    Tooltip(
+                      message: context.tr("edit"),
+                      child: SmallButton(
+                        colorRole: ColorRoles.primary,
+                        onClick: (){
+                          _editTag(context, tag);
+                        },
+                        child: Image.asset("assets/icon/edit.webp", height: 20, color: AppTheme.of(context)!.colorScheme.primary.onColor),
+                      ),
+                    ),
+                  /// delete tag
+                  if(tag != null)
+                    Tooltip(
+                      message: context.tr("delete"),
+                      child: SmallButton(
+                        colorRole: ColorRoles.primary,
+                        onClick: (){
+                          _deleteTag(context, tag);
+                        },
+                        child: Image.asset("assets/icon/delete.webp", height: 20, color: AppTheme.of(context)!.colorScheme.primary.onColor),
+                      ),
+                    )
+                ],
+              ),
+            );
+          }).toList(growable: false),
+        );
+      },
+    );
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(smallBorderRadius),
+      ),
+      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+      child: Container(
+        padding: const EdgeInsets.all(smallPadding),
+        constraints: const BoxConstraints(maxWidth: smallDialogMaxWidth),
+        child: Column(
+          spacing: smallPadding,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            /// top bar
+            Row(
+              spacing: bigListSpacing,
+              children: [
+                block5W,
+
+                Expanded(
+                  child: Text(context.tr("manageTags"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                ),
+
+                SmallButton(
+                  colorRole: ColorRoles.background,
+                  onClick: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Image.asset("assets/icon/cross.webp", height: 20, color: AppTheme.of(context)!.colorScheme.background.onColor),
+                )
+              ],
+            ),
+
+            tagButtons,
+
+            /// add tag
+            SmallButton(
+              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+              width: null,
+              height: mediumButtonSize,
+              colorRole: ColorRoles.background,
+              transparent: false,
+              onClick: (){
+                _addTag(context);
+              },
+              child: Text(context.tr("addCustomTag"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+/// ---------- image viewer ---------- ///
 
 class ImageViewerDialog extends StatelessWidget{
   final Game? game;
@@ -863,7 +1501,7 @@ class ImageViewerDialog extends StatelessWidget{
   });
 
   void _invertImage(){
-    if(game != null) game!.invertImage(images[controller.index]);
+    game?.album.invertImage(images[controller.index]);
   }
 
   @override
@@ -873,7 +1511,7 @@ class ImageViewerDialog extends StatelessWidget{
       mainAxisSize: MainAxisSize.min,
       children: [
         Tooltip(
-          message: context.tr("close"),
+          message: context.tr("close") + getKeyboardCharacter([LogicalKeyboardKey.escape]),
           child: SmallButton(
             onClick: (){
               Navigator.of(context).pop();
@@ -931,7 +1569,7 @@ class ImageViewerDialog extends StatelessWidget{
         ),
 
         Tooltip(
-          message: context.tr("toPreviousImage"),
+          message: context.tr("toPreviousImage") + getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
           child: SmallButton(
             onClick: (){
               controller.toPreviousImage();
@@ -940,7 +1578,7 @@ class ImageViewerDialog extends StatelessWidget{
           ),
         ),
         Tooltip(
-          message: context.tr("toNextImage"),
+          message: context.tr("toNextImage") + getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
           child: SmallButton(
             onClick: (){
               controller.toNextImage();
@@ -949,26 +1587,44 @@ class ImageViewerDialog extends StatelessWidget{
           ),
         ),
 
-
         if(game != null)
           ListenableBuilder(
             listenable: controller,
             builder: (BuildContext context, Widget? child){
               return NotifierBuilder(
-                listenable: game!.whenSelectedImagesChange,
+                listenable: game!.album.whenSelectedImagesChange,
                 builder: (BuildContext context, Widget? child){
                   final ImageItem item = images[controller.index];
-                  final bool isSelected = game!.selectedImages.contains(item);
+                  final bool isSelected = game!.album.selectedImages.contains(item);
                   final String text = isSelected ? context.tr("deselect") : context.tr("select");
                   final String icon = isSelected ? "assets/icon/selectAll.webp" : "assets/icon/notSelect.webp";
                   return Tooltip(
-                    message: text,
+                    message: text + getKeyboardCharacter([LogicalKeyboardKey.space]),
                     child: SmallButton(
                       onClick: _invertImage,
                       child: Image.asset(icon, height: 22, color: AppTheme.of(context)!.colorScheme.background.onColor),
                     ),
                   );
                 },
+              );
+            },
+          ),
+
+        if(game != null)
+          ListenableBuilder(
+            listenable: controller,
+            builder: (BuildContext context, Widget? child){
+              return TagMenu(
+                game: game!,
+                value: images[controller.index].name,
+                builder: (BuildContext context, Color? color, Widget? child, void Function() trigger){
+                  final String icon = color == null ? "assets/icon/tag.webp" : "assets/icon/tag_fill.webp";
+
+                  return SmallButton(
+                    onClick: trigger,
+                    child: Image.asset(icon, height: 18, color: color ?? AppTheme.of(context)!.colorScheme.background.onColor),
+                  );
+                }
               );
             },
           ),
@@ -1032,33 +1688,73 @@ class ImageViewerDialog extends StatelessWidget{
 
 
 
+/// ---------- tool bar button ---------- ///
 
 class FiltrationButton extends StatelessWidget{
+  final Game game;
+
   const FiltrationButton({
     super.key,
+    required this.game,
   });
 
-  Widget _buttonBuilder(valueListenable, String text){
-    return ValueListenableBuilder<bool>(
-      valueListenable: valueListenable,
-      builder: (BuildContext context, bool value, Widget? child){
-        final Color color = value ? AppTheme.of(context)!.colorScheme.background.onColor : AppTheme.of(context)!.colorScheme.background.onColor.withAlpha(0);
+  Widget _buttonBuilder(Filtration filtration){
+    return ListenableBuilder(
+      listenable: game,
+      builder: (BuildContext context, Widget? child){
+        return ListenableBuilder(
+          listenable: game.album,
+          builder: (BuildContext context, Widget? child){
+            final bool isFilter = game.album.isFilter(filtration);
 
-        return MenuItemButton(
-          onPressed: () async{
-            valueListenable.value = !valueListenable.value;
+            final Color color = AppTheme.of(context)!.colorScheme.background.onColor.withAlpha(isFilter ? 255 : 0);
+
+            return SmallButton(
+              borderRadius: 0,
+              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+              width: null,
+              height: mediumButtonSize,
+              onClick: () async{
+                if(isFilter){
+                  game.album.unfilter(filtration);
+                }else{
+                  game.album.filter(filtration);
+                }
+              },
+              child: Row(
+                spacing: listSpacing,
+                children: [
+                  Image.asset("assets/icon/tick.webp", height: 16, color: color),
+                  Text(context.tr(filtration.name), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
+                ],
+              ),
+            );
           },
-          child: Row(
-            spacing: listSpacing,
-            children: [
-              Image.asset("assets/icon/tick.webp", height: 16, color: color),
-              Text(text, style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
-            ],
-          ),
         );
       },
     );
   }
+  // Widget _buttonBuilder(valueListenable, String text){
+  //   return ValueListenableBuilder<bool>(
+  //     valueListenable: valueListenable,
+  //     builder: (BuildContext context, bool value, Widget? child){
+  //       final Color color = value ? AppTheme.of(context)!.colorScheme.background.onColor : AppTheme.of(context)!.colorScheme.background.onColor.withAlpha(0);
+  //
+  //       return MenuItemButton(
+  //         onPressed: () async{
+  //           valueListenable.value = !valueListenable.value;
+  //         },
+  //         child: Row(
+  //           spacing: listSpacing,
+  //           children: [
+  //             Image.asset("assets/icon/tick.webp", height: 16, color: color),
+  //             Text(text, style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context){
@@ -1078,10 +1774,11 @@ class FiltrationButton extends StatelessWidget{
           ),
         );
       },
-      menuChildren: [
-        _buttonBuilder(AlbumValuePool.of(context)!.isViewGameAlbum, context.tr("in-game")),
-        _buttonBuilder(AlbumValuePool.of(context)!.isViewBackupAlbum, context.tr("out-of-game")),
-      ],
+      menuChildren: Filtration.values.map((Filtration filtration) => _buttonBuilder(filtration)).toList(growable: false),
+      // menuChildren: [
+      //   _buttonBuilder(AlbumValuePool.of(context)!.isViewGameAlbum, context.tr("in-game")),
+      //   _buttonBuilder(AlbumValuePool.of(context)!.isViewBackupAlbum, context.tr("out-of-game")),
+      // ],
     );
   }
 }
@@ -1098,7 +1795,7 @@ class SelectionViewerDialog extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final List<ImageItem> images = game.selectedImages.toList(growable: false);
+    final List<ImageItem> images = game.album.selectedImages.toList(growable: false);
 
     final Widget topBar = Container(
       margin: const EdgeInsets.symmetric(horizontal: smallPadding),
@@ -1107,9 +1804,9 @@ class SelectionViewerDialog extends StatelessWidget{
         children: [
           Expanded(
             child: NotifierBuilder(
-              listenable: game.whenSelectedImagesChange,
+              listenable: game.album.whenSelectedImagesChange,
               builder: (BuildContext context, Widget? child){
-                return Text(context.plural("xImageSelected", game.selectedImages.length), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor));
+                return Text(context.plural("xImageSelected", game.album.selectedImages.length), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor));
               },
             ),
           ),
@@ -1126,8 +1823,8 @@ class SelectionViewerDialog extends StatelessWidget{
     final Widget viewer = AlbumPreviewer(
       images: images,
       onDelete: (ImageItem item){
-        game.deselectImage(item);
-        if(game.selectedImages.isEmpty) Navigator.of(context).pop();
+        game.album.deselectImage(item);
+        if(game.album.selectedImages.isEmpty) Navigator.of(context).pop();
       },
       builder: (BuildContext context, ImageItem item){
         return RFutureBuilder(
@@ -1271,6 +1968,7 @@ class DeleteImagesDialog extends StatelessWidget{
               padding: const EdgeInsets.symmetric(horizontal: smallPadding),
               width: null,
               height: mediumButtonSize,
+              colorRole: ColorRoles.background,
               onClick: (){
                 chain[type] = !chain[type]!;
                 chainDeletion.notify();
@@ -1286,7 +1984,7 @@ class DeleteImagesDialog extends StatelessWidget{
                       child: tickBox,
                     ),
                   ),
-                  Text("${context.tr(albumsInfoMap[type]!.name)} ( ${albumsInfoMap[type]!.type} )"),
+                  Text("${context.tr(albumsInfoMap[type]!.name)} ( ${albumsInfoMap[type]!.type} )", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
                 ],
               ),
             );
@@ -1306,8 +2004,9 @@ class DeleteImagesDialog extends StatelessWidget{
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(context.plural("deleteXImage", game.selectedImages.length), style: TextStyle(fontSize: 20, color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
-            Container(
+            Text(context.plural("deleteXImage", game.album.selectedImages.length), style: TextStyle(fontSize: 20, color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
+
+            options.isEmpty ? block20H : Container(
               padding: const EdgeInsets.all(smallPadding),
               alignment: Alignment.centerLeft,
               child: Text(context.tr("deleteSameImage"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
@@ -1331,6 +2030,7 @@ class DeleteImagesDialog extends StatelessWidget{
                   child: SmallButton(
                     width: null,
                     colorRole: ColorRoles.background,
+                    transparent: false,
                     onClick: (){
                       _cancel(context);
                     },
@@ -1511,6 +2211,7 @@ class ImportImagesDialog extends StatelessWidget{
             const FailToCopyFileSystemEntry(),
             SmallButton(
               width: null,
+              colorRole: ColorRoles.background,
               onClick: close,
               child: Text(context.tr("ok")),
             )
@@ -1690,6 +2391,7 @@ class ImportImagesDialog extends StatelessWidget{
                     child: Text("${context.tr("importImageTo")} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}", style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
                   ),
                   SmallButton(
+                    colorRole: ColorRoles.background,
                     onClick: (){
                       Navigator.of(context).pop();
                     },

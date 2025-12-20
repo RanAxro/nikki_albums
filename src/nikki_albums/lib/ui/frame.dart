@@ -1,3 +1,4 @@
+import "package:nikkialbums/game/uid.dart";
 import "package:nikkialbums/info.dart";
 import "package:nikkialbums/state.dart";
 import "package:nikkialbums/pages/setting/setting.dart";
@@ -47,12 +48,18 @@ class _FrameState extends State<Frame>{
       theme: AppState.theme.value,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+
         locale: context.locale,
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
         home: Scaffold(
           body: Builder(
             builder: (BuildContext context){
+
+              /// TODO 检测更新
+              // check(context);
+
+
               if(Platform.isWindows){
                 return WindowBorder(
                   color: Theme.of(context).colorScheme.secondary,
@@ -113,6 +120,8 @@ class WindowTitleBar extends StatelessWidget{
 
               const AccountButton(),
 
+              const GameShortcutBar(),
+
               /// top window button
               SmallSwitch(
                 colorRole: ColorRoles.secondary,
@@ -135,6 +144,23 @@ class WindowTitleBar extends StatelessWidget{
                 child: Image.asset("assets/icon/minimize.webp", height: 14, color: AppTheme.of(context)!.colorScheme.secondary.onColor),
               ),
 
+              /// maximizeOrRestore button
+              ValueListenableBuilder(
+                valueListenable: AppState.isUseMaximizeOrRestoreButton,
+                builder: (BuildContext context, bool isUseMaximizeOrRestoreButton, Widget? child){
+                  return SmallButton(
+                    width: windowTitleBarHeight + 10,
+                    height: windowTitleBarHeight,
+                    borderRadius: 0,
+                    colorRole: ColorRoles.secondary,
+                    onClick: (){
+                      appWindow.maximizeOrRestore();
+                    },
+                    child: Image.asset("assets/icon/maximizeOrRestore.webp", height: 16, color: AppTheme.of(context)!.colorScheme.secondary.onColor),
+                  );
+                },
+              ),
+
               /// close window button
               SmallButton(
                 width: windowTitleBarHeight + 10,
@@ -142,7 +168,7 @@ class WindowTitleBar extends StatelessWidget{
                 borderRadius: 0,
                 colorRole: ColorRoles.error,
                 onClick: () async{
-                  await AppState.save();
+                  await closeState();
                   appWindow.close();
                 },
                 child: Image.asset("assets/icon/cross.webp", height: 14, color: AppTheme.of(context)!.colorScheme.error.onColor),
@@ -174,10 +200,10 @@ class AccountButton extends StatelessWidget{
     );
   }
 
-  RFutureBuilder<List<String>> _itemBuilder(Game game){
-    return RFutureBuilder<List<String>>(
+  RFutureBuilder<List<Uid>> _itemBuilder(Game game){
+    return RFutureBuilder<List<Uid>>(
       future: game.findUid(),
-      builder: (BuildContext context, List<String> uidList){
+      builder: (BuildContext context, List<Uid> uidList){
         if(uidList.isEmpty){
           return MenuItemButton(
             onPressed: (){
@@ -194,19 +220,23 @@ class AccountButton extends StatelessWidget{
           menuChildren: List.generate(
             uidList.length,
             (int index){
-              final String uid = uidList[index];
+              final Uid uid = uidList[index];
               return MenuItemButton(
                 onPressed: (){
                   game.selectedUid = uid;
                   AppState.currentGame.value = game;
                 },
                 child: RFutureBuilder(
-                  future: game.findAvatarByUid(uid),
+                  future: uid.avatarImage,
                   waitingBuilder: (BuildContext context, Widget indicator){
-                    return _itemButton(context: context, text: uid);
+  /// TODO 替换uid
+  ///                   return _itemButton(context: context, text: "000001206" ?? uid);
+                    return _itemButton(context: context, text: uid.name);
                   },
                   builder: (BuildContext context, avatar){
-                    return _itemButton(context: context, image: avatar == null ? null : FileImage(avatar.file), text: uid);
+  /// TODO 替换uid
+  ///                  return _itemButton(context: context, image: avatar == null ? null : FileImage(avatar.file), text: "000001206" ?? uid);
+                    return _itemButton(context: context, image: avatar == null ? null : FileImage(avatar.file), text: uid.name);
                   },
                 ),
               );
@@ -222,7 +252,7 @@ class AccountButton extends StatelessWidget{
   Widget build(BuildContext context){
 
     /// menu
-    final Widget menu = ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: AppState.customGame,
       builder: (BuildContext context, List<Game> customGame, Widget? child){
         final List<Widget> menuChildren = <Widget>[];
@@ -268,15 +298,29 @@ class AccountButton extends StatelessWidget{
             backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
           ),
           builder: (BuildContext context, MenuController controller, Widget? child){
-            return SmallButton(
-              padding: const EdgeInsets.all(6),
-              width: null,
-              height: smallButtonSize,
-              colorRole: ColorRoles.secondary,
-              onClick: (){
-                controller.isOpen ? controller.close() : controller.open();
+            /// TODO finished 右键备注
+            return GestureDetector(
+              onSecondaryTap: (){
+                if(AppState.currentGame.value?.selectedUid == null) return;
+
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return EditUidNoteDialog(AppState.currentGame.value!.selectedUid!);
+                  }
+                );
               },
-              child: child,
+              child: SmallButton(
+                padding: const EdgeInsets.all(listSpacing),
+                width: null,
+                height: smallButtonSize,
+                colorRole: ColorRoles.secondary,
+                transparent: false,
+                onClick: (){
+                  controller.isOpen ? controller.close() : controller.open();
+                },
+                child: child,
+              ),
             );
           },
           menuChildren: menuChildren,
@@ -304,12 +348,40 @@ class AccountButton extends StatelessWidget{
                 spacing: listSpacing,
                 children: [
                   RFutureBuilder(
-                    future: currentGame.avatarImage,
+                    future: currentGame.selectedUid?.avatarImage,
                     builder: (BuildContext context, FileImage? image){
                       return Image(image: image ?? currentGame.logoImage);
                     },
                   ),
-                  Text(currentGame.selectedUid ?? currentGame.launcherChannel.name, style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
+
+                  /// launcher name/uid text
+                  ValueListenableBuilder(
+                    valueListenable: AppState.uidNotes,
+                    builder: (BuildContext context, Set<UidNote> notes, Widget? child){
+                      return Text(currentGame.selectedUid?.name ?? currentGame.launcherChannel.name, style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor));
+                    },
+                  ),
+
+                  /// nail button
+                  ValueListenableBuilder(
+                    valueListenable: AppState.gameShortcuts,
+                    builder: (BuildContext context, Set<GameShortcut> shortcuts, Widget? child){
+                      if(AppState.currentGame.value == null || AppState.currentGame.value!.selectedUid == null) return block0;
+
+                      final Game game = AppState.currentGame.value!;
+                      final GameShortcut shortcut = game.shortcut!;
+                      final bool isNailed = shortcut.isNailed;
+                      final String icon = isNailed ? "assets/icon/nail_fill.webp" : "assets/icon/nail.webp";
+
+                      return SmallButton(
+                        colorRole: ColorRoles.secondary,
+                        onClick: (){
+                          isNailed ? shortcut.remove() : shortcut.add();
+                        },
+                        child: Image.asset(icon, height: 20, color: AppTheme.of(context)!.colorScheme.secondary.onEnabledColor),
+                      );
+                    },
+                  ),
                 ],
               );
             }
@@ -318,14 +390,14 @@ class AccountButton extends StatelessWidget{
       ),
     );
 
-    return Expanded(
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: UnconstrainedBox(
-          child: menu,
-        ),
-      ),
-    );
+    // return Expanded(
+    //   child: Align(
+    //     alignment: Alignment.centerLeft,
+    //     child: UnconstrainedBox(
+    //       child: menu,
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -350,7 +422,7 @@ class _CustomAccountDialogState extends State<CustomAccountDialog>{
     if(Game.cacheGameList != null) existingGame.addAll(Game.cacheGameList!);
     existingGame.addAll(AppState.customGame.value);
 
-    return existingGame.any((game) => game.launcherPath?.path == launcherPath.value && game.installPath?.path == installPath.value);
+    return existingGame.any((game) => game.launcherPath.path == launcherPath.value && game.installPath.path == installPath.value);
   }
 
   void save(){
@@ -422,9 +494,9 @@ class _CustomAccountDialogState extends State<CustomAccountDialog>{
       },
       child: MultiValueListenableBuilder(
         listenables: [launcherPath, installPath, isAlreadyLocate],
-        builder: (BuildContext context, List<Object?> values){
-          final String? launcher = values[0] as String?;
-          final String? install = values[1] as String?;
+        builder: (BuildContext context, Widget? child){
+          final String? launcher = launcherPath.value;
+          final String? install = installPath.value;
 
           return Column(
             children: [
@@ -521,6 +593,210 @@ class _CustomAccountDialogState extends State<CustomAccountDialog>{
           ],
         ),
       ),
+    );
+  }
+}
+
+
+
+/// TODO 拖动排序功能
+class GameShortcutBar extends StatelessWidget{
+  const GameShortcutBar({super.key});
+
+  Widget _generateMoreMenu(BuildContext context, GameShortcut shortcut, ValueNotifier<bool> hover){
+    return MenuAnchor(
+      style: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
+      ),
+      builder: (BuildContext context, MenuController controller, Widget? child){
+        return ValueListenableBuilder(
+          valueListenable: hover,
+          builder: (BuildContext context, bool isHover, Widget? child){
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              width: isHover ? smallButtonSize : 0,
+              child: SmallButton(
+                colorRole: ColorRoles.secondary,
+                onClick: (){
+                  controller.isOpen ? controller.close() : controller.open();
+                },
+                child: Image.asset("assets/icon/more.webp", height: 16, color: AppTheme.of(context)!.colorScheme.secondary.onEnabledColor),
+              ),
+            );
+          },
+        );
+      },
+      menuChildren: [
+        /// remarks button
+        MenuItemButton(
+          onPressed: (){
+            showDialog(
+              context: context,
+              builder: (BuildContext context){
+                return EditUidNoteDialog(shortcut.selectedUid);
+              }
+            );
+          },
+          child: Row(
+            spacing: listSpacing,
+            children: [
+              Image.asset("assets/icon/edit.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onEnabledColor),
+              Text(context.tr("remarks"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ],
+          ),
+        ),
+
+        /// remove shortcut button
+        MenuItemButton(
+          onPressed: (){
+            shortcut.remove();
+          },
+          child: Row(
+            spacing: listSpacing,
+            children: [
+              Image.asset("assets/icon/cross.webp", height: 16, color: AppTheme.of(context)!.colorScheme.background.onEnabledColor),
+              Text(context.tr("delete"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  List<Widget> _generateChildren(BuildContext context, Set<GameShortcut> shortcuts){
+    return shortcuts.map<Widget>((GameShortcut shortcut){
+      final Game game = shortcut.game;
+      final ValueNotifier<bool> hover = ValueNotifier<bool>(false);
+
+      return MouseRegion(
+        onEnter: (_){
+          hover.value = true;
+        },
+        onExit: (_){
+          hover.value = false;
+        },
+        child: SmallButton(
+          padding: const EdgeInsets.fromLTRB(smallPadding, smallPadding, 0, smallPadding),
+          width: null,
+          colorRole: ColorRoles.secondary,
+          onClick: (){
+            AppState.currentGame.value = game;
+          },
+          child: Row(
+            spacing: listSpacing,
+            children: [
+              RFutureBuilder(
+                future: shortcut.selectedUid.avatarImage,
+                builder: (BuildContext context, FileImage? image){
+                  return Image(image: image ?? game.logoImage);
+                },
+              ),
+
+              ValueListenableBuilder(
+                valueListenable: AppState.uidNotes,
+                builder: (BuildContext context, Set<UidNote> notes, Widget? child){
+                  return Text(shortcut.selectedUid.name, style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor));
+                },
+              ),
+
+              _generateMoreMenu(context, shortcut, hover),
+            ],
+          ),
+        ),
+      );
+    }).toList()
+    ..add(
+      /// TODO 触发滚轮事件时, hover状态会被中断. 最后一个shortcut会抽搐
+      /// 在按钮末尾留出空间, 防止点不到关闭
+      SizedBox(
+        width: smallButtonSize,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Expanded(
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: bigPadding),
+          child: SmoothPointerScroll(
+            builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                controller: controller,
+                physics: physics,
+                child: ValueListenableBuilder(
+                  valueListenable: AppState.gameShortcuts,
+                  builder: (BuildContext context, Set<GameShortcut> shortcuts, Widget? child){
+                    return Row(
+                      children: _generateChildren(context, shortcuts),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class EditUidNoteDialog extends StatelessWidget{
+  final Uid uid;
+  const EditUidNoteDialog(this.uid, {super.key});
+
+  @override
+  Widget build(BuildContext context){
+    final TextEditingController controller = TextEditingController(text: uid.note);
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(smallBorderRadius),
+      ),
+      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+      child: Container(
+        padding: const EdgeInsets.all(smallPadding),
+        width: smallDialogMaxWidth,
+        child: Column(
+          spacing: smallPadding,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(context.tr("noteXAs", args: [uid.value]), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+
+            RTextFiled(
+              controller: controller,
+              labelText: context.tr("fillRemarks"),
+              colorRole: ColorRoles.background,
+            ),
+
+            SmallButton(
+              width: null,
+              colorRole: ColorRoles.background,
+              transparent: false,
+              onClick: (){
+                Navigator.of(context).pop();
+              },
+              child: Text(context.tr("cancel"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ),
+            SmallButton(
+              width: null,
+              colorRole: ColorRoles.background,
+              transparent: false,
+              onClick: (){
+                uid.note = controller.text == "" ? null : controller.text;
+                Navigator.of(context).pop();
+              },
+              child: Text(context.tr("save"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+            ),
+          ],
+        ),
+      )
     );
   }
 }

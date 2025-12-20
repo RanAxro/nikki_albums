@@ -92,84 +92,86 @@ class IndependentScrollbar extends StatelessWidget{
   Widget build(BuildContext context){
     bool isHover = false;
 
-    return SizedBox(
-      width: direction == Axis.vertical ? thickness : null,
-      height: direction == Axis.horizontal ? thickness : null,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints){
-          final viewport = constraints.maxHeight;
+    return Center(
+      child: SizedBox(
+        width: direction == Axis.vertical ? thickness : null,
+        height: direction == Axis.horizontal ? thickness : null,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints){
+            final viewport = constraints.maxHeight;
 
-          return ListenableBuilder(
-            listenable: controller,
-            builder: (BuildContext context, Widget? child){
-              double length = controller._virtualScrollViewExtent == null ?
-              min(thumbLength, 0.9 * viewport) :
-              (0.8 * viewport * viewport / controller._virtualScrollViewExtent!).clamp(thumbLength, viewport);
+            return ListenableBuilder(
+              listenable: controller,
+              builder: (BuildContext context, Widget? child){
+                double length = controller._virtualScrollViewExtent == null ?
+                min(thumbLength, 0.9 * viewport) :
+                (0.8 * viewport * viewport / controller._virtualScrollViewExtent!).clamp(thumbLength, viewport);
 
-              return Stack(
-                children: [
-                  child!,
-                  Positioned(
-                    left: 0,
-                    top: controller.progress * (viewport - length),
-                    right: 0,
-                    height: length,
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onVerticalDragDown: (DragDownDetails details){
-                        controller._startDrag();
-                      },
-                      onVerticalDragEnd: (DragEndDetails details){
-                        controller._endDrag();
-                      },
-                      onVerticalDragCancel: (){
-                        controller._endDrag();
-                      },
-                      onVerticalDragUpdate: (DragUpdateDetails details){
-                        switch(direction){
-                          case Axis.horizontal:
-                            controller.progress += details.delta.dx / (viewport - length);
-                            break;
-                          case Axis.vertical:
-                            controller.progress += details.delta.dy / (viewport - length);
-                            break;
-                        }
-                      },
-                      child: StatefulBuilder(
-                        builder: (BuildContext context, void Function(void Function()) setThumbState){
-                          return MouseRegion(
-                            onEnter: (PointerEnterEvent event){
-                              isHover = true;
-                              setThumbState((){});
-                            },
-                            onExit: (PointerExitEvent event){
-                              isHover = false;
-                              setThumbState((){});
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadiusDirectional.all(thumbRadius),
-                                color: controller.isDrag ? pressedColor : isHover ? hoveredColor : color,
-                              ),
-                            ),
-                          );
+                return Stack(
+                  children: [
+                    child!,
+                    Positioned(
+                      left: 0,
+                      top: controller.progress * (viewport - length),
+                      right: 0,
+                      height: length,
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onVerticalDragDown: (DragDownDetails details){
+                          controller._startDrag();
                         },
+                        onVerticalDragEnd: (DragEndDetails details){
+                          controller._endDrag();
+                        },
+                        onVerticalDragCancel: (){
+                          controller._endDrag();
+                        },
+                        onVerticalDragUpdate: (DragUpdateDetails details){
+                          switch(direction){
+                            case Axis.horizontal:
+                              controller.progress += details.delta.dx / (viewport - length);
+                              break;
+                            case Axis.vertical:
+                              controller.progress += details.delta.dy / (viewport - length);
+                              break;
+                          }
+                        },
+                        child: StatefulBuilder(
+                          builder: (BuildContext context, void Function(void Function()) setThumbState){
+                            return MouseRegion(
+                              onEnter: (PointerEnterEvent event){
+                                isHover = true;
+                                setThumbState((){});
+                              },
+                              onExit: (PointerExitEvent event){
+                                isHover = false;
+                                setThumbState((){});
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadiusDirectional.all(thumbRadius),
+                                  color: controller.isDrag ? pressedColor : isHover ? hoveredColor : color,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
+                  ],
+                );
+              },
+              child: Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.all(trackRadius),
+                    color: trackColor,
                   ),
-                ],
-              );
-            },
-            child: Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadiusDirectional.all(trackRadius),
-                  color: trackColor,
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

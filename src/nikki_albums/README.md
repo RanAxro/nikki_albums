@@ -1,17 +1,42 @@
+<a href="README.en.md">Read the English</a>
+
 <div align="center">
-  <img src="assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
+  <img src="src/nikki_albums/assets/logo/nikki_albums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
-  暖暖相册(Nikki Albums)
+  <h1>暖暖相册</h1>
 </div>
+
+<p>
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" />
+  
+  <a href="https://github.com/RanAxro/nikki_albums/releases/latest">
+    <img alt="Release" src="https://img.shields.io/github/v/release/RanAxro/nikki_albums?style=flat-square&color=brightgreen" />
+  </a>
+
+  <a href="https://nikki.ranaxro.com">
+    <img alt="website" src="https://img.shields.io/badge/website-visit-yellow?style=flat-square&logo=home-automation&logoColor=white" />
+  </a>
+
+  <a href="https://github.com/ChanIok/SpinningMomo/blob/main/LICENSE">
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" />
+  </a>
+</p>
+
+<p>
+  <img src="website/images/p1.zh.png" width="48%" />
+  <img src="website/images/p2.png" width="48%" />
+</p>
+
+
 
 <h2>🌟 游戏相册管理的得力助手</h2>
 
 暖暖相册（Nikki Albums）是一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。
 
-🚀 **当前版本**：3.0
+🚀 **当前版本**：3.02
 
 - **GitHub下载**：[点击这里](https://github.com/RanAxro/nikki_albums)  
-  在Release找到v3.0中的 **Nikki Albums-v3.0-Windows-x64.zip** 后下载。
+  在Release找到v3.02中的 **Nikki Albums-v3.02-Windows-x64.zip** 后下载。
 - **官网下载**：[点击这里](https://nikki.ranaxro.com)  
 
 💡 **交流群/bug反馈群**：1062670402  
@@ -33,6 +58,23 @@
 ***
 
 # 更新内容
+
+## v3.02
+* 1.支持给uid备注
+* 2.支持将常用的账号添加到快捷栏
+* 3.增加标记功能，可以给图片打标签
+* 4.修复了一些bug
+
+## v3.01
+* 1.增加了滚动条
+* 2.支持正序与倒序查看相册
+* 3.查看大图时可通过快捷键切换上一张或下一张
+* 4.查看大图时可通过点击图片以切换图片的选中状态
+* 5.增加了切换窗口最大化的按钮
+* 6.增加了删除自定义账号功能
+* 7.增加了检测更新功能
+
+## v3.0
 * 1.支持更多相册的查看
 * 2.删除图片时可以选择是否删除相同的图片
 * 3.支持导出图片到剪贴板

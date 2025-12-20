@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "testPermission.dart";
+import "test_permission.dart";
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:nikkialbums/info.dart";
 import "package:nikkialbums/game/game.dart";

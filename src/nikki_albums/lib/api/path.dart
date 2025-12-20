@@ -3,6 +3,13 @@ import "dart:io";
 import "system/system.dart";
 
 class Path{
+  static Path? from(dynamic value){
+    if(value is! String) return null;
+
+    return Path(value);
+  }
+
+
   final String _path;
 
   Path(String path) : _path = normalizePath(path);

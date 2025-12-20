@@ -16,9 +16,9 @@ enum LauncherChannel{
   steam,
   ;
 
-  static LauncherChannel fromName(String name){
+  static LauncherChannel from(dynamic value){
     return LauncherChannel.values.firstWhere(
-      (e) => e.name == name,
+      (e) => e.name == value,
       orElse: () => LauncherChannel.unknown,
     );
   }
@@ -104,7 +104,8 @@ const List<Map<String, dynamic>> androidPackages = [
 
 
 
-
+const AlbumType defaultAlbumTypeWithUid = AlbumType.NikkiPhotos_HighQuality;
+const AlbumType defaultAlbumTypeWithoutUid = AlbumType.ScreenShot;
 /// AlbumType 相册类型
 enum AlbumType{
   ClockInPhoto,
@@ -122,6 +123,14 @@ enum AlbumType{
   NikkiPhotos_LowQuality,
   ScreenShot,
   XSdkQrCode,
+  ;
+
+  static AlbumType from(dynamic value){
+    return AlbumType.values.firstWhere(
+      (e) => e.name == value,
+      orElse: () => AlbumType.ScreenShot,
+    );
+  }
 }
 /// 相册信息
 /// [AlbumsPathItem] item
@@ -332,7 +341,9 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
   ),
 };
 
-final locateToGamePlayPhotos = r"\X6Game\Saved\GamePlayPhotos";
+const String locateToGamePlayPhotos = r"\X6Game\Saved\GamePlayPhotos";
+
+const String locateToTag = r"\X6Game\Saved\nikkialbums_tag.json";
 
 
 

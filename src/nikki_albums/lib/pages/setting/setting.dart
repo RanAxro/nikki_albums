@@ -1,5 +1,5 @@
 import "personalization.dart";
-import "editCustomGame.dart";
+import "edit_custom_game.dart";
 import "versionInformation.dart";
 
 import "package:nikkialbums/info.dart";
@@ -36,6 +36,7 @@ class SettingDialog extends StatelessWidget{
                 physics: physics,
                 children: [
                   SmallButton(
+                    colorRole: ColorRoles.background,
                     onClick: (){
                       controller.jumpToPage(0);
                     },
@@ -43,6 +44,7 @@ class SettingDialog extends StatelessWidget{
                   ),
                   block5H,
                   SmallButton(
+                    colorRole: ColorRoles.background,
                     onClick: (){
                       controller.jumpToPage(1);
                     },
@@ -50,6 +52,7 @@ class SettingDialog extends StatelessWidget{
                   ),
                   block5H,
                   SmallButton(
+                    colorRole: ColorRoles.background,
                     onClick: (){
                       controller.jumpToPage(2);
                     },
@@ -69,10 +72,11 @@ class SettingDialog extends StatelessWidget{
           child: PageView(
             controller: controller,
             scrollDirection: Axis.vertical,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
-              Personalization(),
-              EditCustomGame(),
-              VersionInformation(),
+              const Personalization(),
+              const EditCustomGame(),
+              const VersionInformation(),
             ],
           ),
         ),
@@ -102,6 +106,7 @@ class SettingDialog extends StatelessWidget{
                   const ChangeLanguage(),
 
                   SmallButton(
+                    colorRole: ColorRoles.background,
                     onClick: (){
                       Navigator.of(context).pop();
                     },
@@ -194,6 +199,7 @@ class ChangeLanguage extends StatelessWidget{
         return SmallButton(
           padding: const EdgeInsets.symmetric(horizontal: smallPadding),
           width: null,
+          colorRole: ColorRoles.background,
           onClick: (){
             controller.isOpen ? controller.close() : controller.open();
           },

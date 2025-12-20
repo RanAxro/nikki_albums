@@ -111,97 +111,16 @@ class AppColorScheme{
         return background;
     }
   }
-
-  // final Color primary;
-  // final Color onPrimary;
-  // final Color primaryHovered;
-  // final Color onPrimaryHovered;
-  // final Color primaryPressed;
-  // final Color onPrimaryPressed;
-  //
-  // final Color secondary;
-  // final Color onSecondary;
-  // final Color secondaryHovered;
-  // final Color onSecondaryHovered;
-  // final Color secondaryPressed;
-  // final Color onSecondaryPressed;
-  //
-  // final Color error;
-  // final Color onError;
-  // final Color errorHovered;
-  // final Color onErrorHovered;
-  // final Color errorPressed;
-  // final Color onErrorPressed;
-  //
-  // final Color background;
-  // final Color onBackground;
 }
 
-
-
-// ColorScheme getColorScheme(int color){
-//   if(themeTable.containsKey(color)) return themeTable[color]!;
-//
-//   // default theme
-//   return theme2;
-// }
-//
-// const Map<int, ColorScheme> themeTable = {
-//   0xFF333333: theme2,
-//   0xFFC0E2F5: theme3,
-// };
-//
-// const ColorScheme theme2 = ColorScheme(
-//   brightness: Brightness.light,
-//   primary: Color(0xFF333333),
-//   onPrimary: Color(0xFFEEEEEE),
-//   primaryContainer: Color(0xFF666666),
-//   onPrimaryContainer: Color(0xFFEEEEEE),
-//   secondary: Color(0xFF444444),
-//   onSecondary: Color(0xFFEEEEEE),
-//   secondaryContainer: Color(0xFF666666),
-//   onSecondaryContainer: Color(0xFFEEEEEE),
-//   tertiary: Color(0xFF666666),
-//   error: Color(0xFFFF0000),
-//   onError: Color(0xFFEEEEEE),
-//   surface: Color(0xFF222222),
-//   onSurface: Color(0xFFEEEEEE),
-//   shadow: Color(0x99000000),
-// );
-
-// const ColorScheme theme3 = ColorScheme(
-//   brightness: Brightness.light,
-//
-//   primary: Color(0xFFC0E2F5),
-//   onPrimary: Color(0xFF21556E),
-//   primaryContainer: Color(0xFFa1d6f3),
-//   onPrimaryContainer: Color(0xFF21556E),
-//   primaryFixed: Color(0xFFa1d6f3),
-//   onPrimaryFixed: Color(0xFF21556E),
-//   primaryFixedDim: Color(0xFFa1d6f3),
-//   onPrimaryFixedVariant: Color(0xFF21556E),
-//
-//   secondary: Color(0xFFDCF2FF),
-//   onSecondary: Color(0xFF21556E),
-//   secondaryContainer: Color(0xFFc2e7fd),
-//   onSecondaryContainer: Color(0xFF21556E),
-//   secondaryFixed: Color(0xFFc2e7fd),
-//   onSecondaryFixed: Color(0xFF21556E),
-//   secondaryFixedDim: Color(0xFFc2e7fd),
-//   onSecondaryFixedVariant: Color(0xFF21556E),
-//
-//   tertiary: Color(0xFFB0CDED),
-//   error: Color(0xFFE25041),
-//   onError: Color(0xFF21556E),
-//   surface: Color(0xFFf1f7fc),
-//   onSurface: Color(0xFF21556E),
-//   shadow: Color(0x99000000),
-// );
 
 const AppColorScheme theme1 = AppColorScheme(
   primary: ColorRoleScheme(
     color: Color(0xFFFFFFFF),
     onColor: Color(0xFF333333),
+    enabledColor: Color(0xFFF3F3F3),
+    disabledColor: Color(0xAAF3F3F3),
+    onDisabledColor: Color(0x55333333),
     hoveredColor: Color(0xFFEEEEEE),
     onHoveredColor: Color(0xFF333333),
     pressedColor: Color(0xFFDDDDDD),
@@ -210,6 +129,9 @@ const AppColorScheme theme1 = AppColorScheme(
   secondary: ColorRoleScheme(
     color: Color(0xFFF5F5F5),
     onColor: Color(0xFF333333),
+    enabledColor: Color(0xFFE9E9E9),
+    disabledColor: Color(0xAAE9E9E9),
+    onDisabledColor: Color(0x55333333),
     hoveredColor: Color(0xFFE5E5E5),
     onHoveredColor: Color(0xFF333333),
     pressedColor: Color(0xFFD5D5D5),
@@ -218,6 +140,9 @@ const AppColorScheme theme1 = AppColorScheme(
   tertiary: ColorRoleScheme(
     color: Color(0xFFF5F5F5),
     onColor: Color(0xFF333333),
+    enabledColor: Color(0xFFE9E9E9),
+    disabledColor: Color(0xAAE9E9E9),
+    onDisabledColor: Color(0x55333333),
     hoveredColor: Color(0xFFE5E5E5),
     onHoveredColor: Color(0xFF333333),
     pressedColor: Color(0xFFD5D5D5),
@@ -243,6 +168,8 @@ const AppColorScheme theme1 = AppColorScheme(
     color: Color(0xFFFFFFFF),
     onColor: Color(0xFF333333),
     enabledColor: Color(0xFFF7F7F7),
+    disabledColor: Color(0xAAF7F7F7),
+    onDisabledColor: Color(0x55333333),
     hoveredColor: Color(0xFFE7E7E7),
     onHoveredColor: Color(0xFF333333),
     pressedColor: Color(0xFFD7D7D7),
@@ -256,6 +183,8 @@ const AppColorScheme theme2 = AppColorScheme(
   primary: ColorRoleScheme(
     color: Color(0xFF333333),
     onColor: Color(0xFFEEEEEE),
+    enabledColor: Color(0xFF404040),
+    onDisabledColor: Color(0x55EEEEEE),
     hoveredColor: Color(0xFF444444),
     onHoveredColor: Color(0xFFEEEEEE),
     pressedColor: Color(0xFF555555),
@@ -264,6 +193,8 @@ const AppColorScheme theme2 = AppColorScheme(
   secondary: ColorRoleScheme(
     color: Color(0xFF383838),
     onColor: Color(0xFFEEEEEE),
+    enabledColor: Color(0xFF444444),
+    onDisabledColor: Color(0x55EEEEEE),
     hoveredColor: Color(0xFF484848),
     onHoveredColor: Color(0xFFEEEEEE),
     pressedColor: Color(0xFF585858),
@@ -272,6 +203,8 @@ const AppColorScheme theme2 = AppColorScheme(
   tertiary: ColorRoleScheme(
     color: Color(0xFF383838),
     onColor: Color(0xFFEEEEEE),
+    enabledColor: Color(0xFF444444),
+    onDisabledColor: Color(0x55EEEEEE),
     hoveredColor: Color(0xFF484848),
     onHoveredColor: Color(0xFFEEEEEE),
     pressedColor: Color(0xFF585858),
@@ -297,6 +230,7 @@ const AppColorScheme theme2 = AppColorScheme(
     color: Color(0xFF444444),
     onColor: Color(0xFFEEEEEE),
     enabledColor: Color(0xFF494949),
+    onDisabledColor: Color(0x55EEEEEE),
     hoveredColor: Color(0xFF595959),
     onHoveredColor: Color(0xFFEEEEEE),
     pressedColor: Color(0xFF696969),
@@ -310,6 +244,8 @@ const AppColorScheme theme3 = AppColorScheme(
   primary: ColorRoleScheme(
     color: Color(0xFFCCE7F6),
     onColor: Color(0xFF21556E),
+    enabledColor: Color(0xFFB4DEF5),
+    onDisabledColor: Color(0x5521556E),
     hoveredColor: Color(0xFFAFDAF1),
     onHoveredColor: Color(0xFF21556E),
     pressedColor: Color(0xFF9AD3F1),
@@ -318,7 +254,9 @@ const AppColorScheme theme3 = AppColorScheme(
   secondary: ColorRoleScheme(
     color: Color(0xFFDCF2FF),
     onColor: Color(0xFF21556E),
-    hoveredColor: Color(0xFFc2e7fd),
+    enabledColor: Color(0xFFC6EAFF),
+    onDisabledColor: Color(0x5521556E),
+    hoveredColor: Color(0xFFC2E7FD),
     onHoveredColor: Color(0xFF21556E),
     pressedColor: Color(0xFFB0DDF7),
     onPressedColor: Color(0xFF21556E),
@@ -326,7 +264,9 @@ const AppColorScheme theme3 = AppColorScheme(
   tertiary: ColorRoleScheme(
     color: Color(0xFFDCF2FF),
     onColor: Color(0xFF21556E),
-    hoveredColor: Color(0xFFc2e7fd),
+    enabledColor: Color(0xFFC6EAFF),
+    onDisabledColor: Color(0x5521556E),
+    hoveredColor: Color(0xFFC2E7FD),
     onHoveredColor: Color(0xFF21556E),
     pressedColor: Color(0xFFc2e7fd),
     onPressedColor: Color(0xFF21556E),
@@ -351,6 +291,7 @@ const AppColorScheme theme3 = AppColorScheme(
     color: Color(0xFFECF3FB),
     onColor: Color(0xFF21556E),
     enabledColor: Color(0xFFE2E9F1),
+    onDisabledColor: Color(0x5521556E),
     hoveredColor: Color(0xFFB2D5EA),
     onHoveredColor: Color(0xFF21556E),
     pressedColor: Color(0xFF9ABDD1),
@@ -364,6 +305,8 @@ const AppColorScheme theme4 = AppColorScheme(
   primary: ColorRoleScheme(
     color: Color(0xFFFFE4F1),
     onColor: Color(0xFF7D2E50),
+    enabledColor: Color(0xFFFFD5E8),
+    onDisabledColor: Color(0x557D2E50),
     hoveredColor: Color(0xFFFFD1E4),
     onHoveredColor: Color(0xFF7D2E50),
     pressedColor: Color(0xFFFFBFD7),
@@ -372,6 +315,8 @@ const AppColorScheme theme4 = AppColorScheme(
   secondary: ColorRoleScheme(
     color: Color(0xFFFFEDF6),
     onColor: Color(0xFF7D2E50),
+    enabledColor: Color(0xFFFFDEEF),
+    onDisabledColor: Color(0x557D2E50),
     hoveredColor: Color(0xFFFFDAEB),
     onHoveredColor: Color(0xFF7D2E50),
     pressedColor: Color(0xFFFFC7E0),
@@ -380,7 +325,9 @@ const AppColorScheme theme4 = AppColorScheme(
   tertiary: ColorRoleScheme(
     color: Color(0xFFFFEDF6),
     onColor: Color(0xFF7D2E50),
+    enabledColor: Color(0xFFFFDEEF),
     hoveredColor: Color(0xFFFFDAEB),
+    onDisabledColor: Color(0x557D2E50),
     onHoveredColor: Color(0xFF7D2E50),
     pressedColor: Color(0xFFFFDAEB),
     onPressedColor: Color(0xFF7D2E50),
@@ -405,6 +352,7 @@ const AppColorScheme theme4 = AppColorScheme(
     color: Color(0xFFFFF5F9),
     onColor: Color(0xFF7D2E50),
     enabledColor: Color(0xFFFFEBF3),
+    onDisabledColor: Color(0x557D2E50),
     hoveredColor: Color(0xFFFFD1E4),
     onHoveredColor: Color(0xFF7D2E50),
     pressedColor: Color(0xFFFFBFD7),
@@ -418,6 +366,8 @@ const AppColorScheme theme5 = AppColorScheme(
   primary: ColorRoleScheme(
     color: Color(0xFFFFF8E1),
     onColor: Color(0xFF6B5200),
+    enabledColor: Color(0xFFFFF4C6),
+    onDisabledColor: Color(0x556B5200),
     hoveredColor: Color(0xFFFFF0C2),
     onHoveredColor: Color(0xFF6B5200),
     pressedColor: Color(0xFFFFE8A3),
@@ -426,6 +376,8 @@ const AppColorScheme theme5 = AppColorScheme(
   secondary: ColorRoleScheme(
     color: Color(0xFFFFFCF0),
     onColor: Color(0xFF6B5200),
+    enabledColor: Color(0xFFFFFCDA),
+    onDisabledColor: Color(0x556B5200),
     hoveredColor: Color(0xFFFFF8D6),
     onHoveredColor: Color(0xFF6B5200),
     pressedColor: Color(0xFFFFF4BC),
@@ -434,6 +386,8 @@ const AppColorScheme theme5 = AppColorScheme(
   tertiary: ColorRoleScheme(
     color: Color(0xFFFFFCF0),
     onColor: Color(0xFF6B5200),
+    enabledColor: Color(0xFFFFFCDA),
+    onDisabledColor: Color(0x556B5200),
     hoveredColor: Color(0xFFFFF8D6),
     onHoveredColor: Color(0xFF6B5200),
     pressedColor: Color(0xFFFFF8D6),
@@ -459,6 +413,7 @@ const AppColorScheme theme5 = AppColorScheme(
     color: Color(0xFFFFFCF5),
     onColor: Color(0xFF6B5200),
     enabledColor: Color(0xFFFFF8E7),
+    onDisabledColor: Color(0x556B5200),
     hoveredColor: Color(0xFFFFF0C2),
     onHoveredColor: Color(0xFF6B5200),
     pressedColor: Color(0xFFFFE8A3),
