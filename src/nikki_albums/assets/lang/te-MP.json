@@ -2,6 +2,9 @@
   "nikkialbums": "",
   "info": "",
 
+
+  "----------common----------": "----------common----------",
+
   "version": "",
   "setting": "",
   "name": "",
@@ -17,13 +20,14 @@
   "forward": "",
   "previous": "",
   "next": "",
-  "sort_reverse": "",
-  "sort_forward": "",
+  "ascending": "",
+  "descending": "",
   "filter": "",
   "play": "",
   "enable": "",
   "disable": "",
   "download": "",
+  "edit": "",
 
 
   "----------setting----------": "----------setting----------",
@@ -62,6 +66,9 @@
   "gameAlreadyExists": "",
   "toLocateGame": "",
   "Location failed": "",
+  "remarks": "",
+  "noteXAs": "{}",
+  "fillRemarks": "",
 
   "ClockInPhotoName": "",
   "CloudPhotos_LowQualityName": "",
@@ -103,10 +110,16 @@
 
 
   "----------album----------": "----------album----------",
+
   "currentGameIsNull": "",
-  "selectedAlbumIsNull": "",
-  "in-game": "",
-  "out-of-game": "",
+  "defaultTag": "",
+  "addCustomTag": "",
+  "tagName": "",
+  "tagAlreadyExists": "",
+  "manageTags": "",
+  "deleteXTag": "{}",
+  "inGame": "",
+  "outOfGame": "",
   "layout_minus": "",
   "layout_plus": "",
   "select": "",

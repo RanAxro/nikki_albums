@@ -2,6 +2,9 @@
   "nikkialbums": "暖暖相册",
   "info": "该软件还在测试阶段, 不代表最终品质\n 软件官网: nikki.ranaxro.com \n github: github.com/RanAxro/nikki_albums \n QQ交流群: 1062670402",
 
+
+  "----------common----------": "----------common----------",
+
   "version": "版本",
   "setting": "设置",
   "name": "名称",
@@ -17,13 +20,14 @@
   "forward": "前进",
   "previous": "下一个",
   "next": "上一个",
-  "sort_reverse": "倒序",
-  "sort_forward": "正序",
+  "ascending": "正序",
+  "descending": "倒序",
   "filter": "筛选",
   "play": "启动",
   "enable": "启用",
   "disable": "禁用",
   "download": "下载",
+  "edit": "编辑",
 
 
   "----------setting----------": "----------setting----------",
@@ -63,6 +67,9 @@
   "gameAlreadyExists": "已存在, 建议不要重复添加。如果确实需要添加, 请再次点击保存",
   "toLocateGame": "请先定位游戏",
   "Location failed": "定位失败",
+  "remarks": "备注",
+  "noteXAs": "将 {} 备注为",
+  "fillRemarks": "填写备注",
 
 
   "ClockInPhotoName": "世界巡游",
@@ -105,10 +112,16 @@
 
 
   "----------album----------": "----------album----------",
-  "currentGameIsNull": "",
-  "selectedAlbumIsNull": "未选择",
-  "in-game": "游戏内",
-  "out-of-game": "游戏外",
+
+  "currentGameIsNull": "请先选择账号",
+  "defaultTag": "默认标签",
+  "addCustomTag": "新建标签",
+  "tagName": "标签昵称",
+  "tagAlreadyExists": "该标签已存在",
+  "manageTags": "标签管理",
+  "deleteXTag": "你确定要删除标签 [ {} ] 吗",
+  "inGame": "游戏内",
+  "outOfGame": "游戏外",
   "layout_minus": "减少列数",
   "layout_plus": "增加列数",
   "select": "选择",

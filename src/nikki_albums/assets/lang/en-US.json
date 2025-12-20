@@ -2,6 +2,9 @@
   "nikkialbums": "Nikki Albums",
   "info": "This software is still in the testing phase and does not represent the final quality.\n The current version does not have networking capabilities. To get the latest version, please join the QQ group: 1062670402.\n Official website: nikki.ranaxro.com\n GitHub: github.com/RanAxro/nikki_albums",
 
+
+  "----------common----------": "----------common----------",
+
   "version": "Version",
   "setting": "Setting",
   "name": "Name",
@@ -17,13 +20,14 @@
   "forward": "Forward",
   "previous": "Previous",
   "next": "Next",
-  "sort_reverse": "Reverse order",
-  "sort_forward": "Forward order",
+  "ascending": "Forward order",
+  "descending": "Reverse order",
   "filter": "Filter",
   "play": "Play",
   "enable": "Enable",
   "disable": "Disable",
   "download": "Download",
+  "edit": "Edit",
 
 
   "----------setting----------": "----------setting----------",
@@ -62,6 +66,9 @@
   "gameAlreadyExists": "It already exists, duplicate addition is discouraged. If you really need to add it, please click Save again",
   "toLocateGame": "Please locate the game first",
   "Location failed": "Location failed",
+  "remarks": "Remarks",
+  "noteXAs": "Note {} As",
+  "fillRemarks": "Fill in the remarks",
 
 
   "ClockInPhotoName": "Expeditions",
@@ -105,10 +112,15 @@
 
   "----------album----------": "----------album----------",
 
-  "currentGameIsNull": "",
-  "selectedAlbumIsNull": "Unselected",
-  "in-game": "in-game images",
-  "out-of-game": "out-of-game images",
+  "currentGameIsNull": "Please select an account first",
+  "defaultTag": "Default",
+  "addCustomTag": "New Tag",
+  "tagName": "Tag Name",
+  "tagAlreadyExists": "This Tag already exists",
+  "manageTags": "Tag Management",
+  "deleteXTag": "Are you sure you want to delete the tag : {}",
+  "inGame": "in-game images",
+  "outOfGame": "out-of-game images",
   "layout_minus": "Fewer columns",
   "layout_plus": "More columns",
   "select": "Select",
