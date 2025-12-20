@@ -33,10 +33,10 @@
 
 暖暖相册（Nikki Albums）是一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。
 
-🚀 **当前版本**：3.01
+🚀 **当前版本**：3.02
 
 - **GitHub下载**：[点击这里](https://github.com/RanAxro/nikki_albums)  
-  在Release找到v3.0中的 **Nikki Albums-v3.0-Windows-x64.zip** 后下载。
+  在Release找到v3.02中的 **Nikki Albums-v3.02-Windows-x64.zip** 后下载。
 - **官网下载**：[点击这里](https://nikki.ranaxro.com)  
 
 💡 **交流群/bug反馈群**：1062670402  
@@ -58,6 +58,12 @@
 ***
 
 # 更新内容
+
+## v3.02
+* 1.支持给uid备注
+* 2.支持将常用的账号添加到快捷栏
+* 3.增加标记功能，可以给图片打标签
+* 4.修复了一些bug
 
 ## v3.01
 * 1.增加了滚动条

@@ -28,7 +28,7 @@
 
 Nikki Albums is an album management software specially designed for Infinity Nikki players, dedicated to helping you manage game albums easily and efficiently, making the gaming experience more smooth and worry-free
 
-🚀 **version**：3.01
+🚀 **version**：3.02
 
 - **GitHub**：[click here](https://github.com/RanAxro/nikki_albums)  
 - **Offical website**：[click here](https://nikki.ranaxro.com)  
@@ -49,6 +49,12 @@ Nikki Albums is an album management software specially designed for Infinity Nik
 ***
 
 # Updated content
+
+## v3.02
+* 1. Support adding remarks to uid
+* 2. Support adding frequently used accounts to the shortcut bar
+* 3. Add a marking function, allowing you to label pictures
+* 4. Fixed some bugs
 
 ## v3.01
 * 1. A scroll bar has been added
