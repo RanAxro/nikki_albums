@@ -1,0 +1,259 @@
+{
+  "nikkialbums": "Nikki Albums",
+  "info": "This software is still in the testing phase and does not represent the final quality.\n The current version does not have networking capabilities. To get the latest version, please join the QQ group: 1062670402.\n Official website: nikki.ranaxro.com\n GitHub: github.com/RanAxro/nikki_albums",
+
+
+  "----------common----------": "----------common----------",
+
+  "version": "Version",
+  "setting": "Setting",
+  "name": "Name",
+  "ok": "Ok",
+  "completed": "Completed",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "save": "Save",
+  "close": "Close",
+  "refresh": "Refresh",
+  "reset": "Reset",
+  "back": "Back",
+  "forward": "Forward",
+  "previous": "Previous",
+  "next": "Next",
+  "ascending": "Forward order",
+  "descending": "Reverse order",
+  "filter": "Filter",
+  "play": "Play",
+  "enable": "Enable",
+  "disable": "Disable",
+  "download": "Download",
+  "edit": "Edit",
+
+
+  "----------setting----------": "----------setting----------",
+  "theme": "Theme",
+  "lang": "English",
+  "language": "Language",
+
+  "personalization": "Personalization",
+  "accountManagement": "Account Management",
+  "versionInformation": "Version Information",
+
+  "maximizeOrRestoreButton": "Maximize Button",
+
+  "checkForUpdates": "Check for Updates",
+  "checkFailed": "Check Failed",
+  "alreadyTheLatestVersion": "You are up to date",
+  "findNewVersion": "New Version Found",
+  "updateMessage": "Release Notes",
+  "downloadFailed": "Download failed",
+  "toOfficialWebsite": "Visit the official website",
+
+
+
+  "----------frame----------": "----------frame----------",
+
+  "account": "Account",
+  "selectAccountButton": "Select account",
+  "deleteAccount": "Are you sure you want to delete this account",
+  "addCustomAccountButton": "Add",
+  "locateGame": "Locate the game",
+  "locateInfinityNikki": "Find \"InfinityNikki\",\"launcher\"or\"xstarter\"",
+  "locateX6GameDir": "Find \"X6Game\"",
+  "locate": "Locate",
+  "launcherDir": "Launcher directory",
+  "installDir": "Game installation directory",
+  "gameAlreadyExists": "It already exists, duplicate addition is discouraged. If you really need to add it, please click Save again",
+  "toLocateGame": "Please locate the game first",
+  "Location failed": "Location failed",
+  "remarks": "Remarks",
+  "noteXAs": "Note {} As",
+  "fillRemarks": "Fill in the remarks",
+
+
+  "ClockInPhotoName": "Expeditions",
+  "CloudPhotos_LowQualityName": "Cloud Photos 2",
+  "CloudPhotosName": "Cloud Photos 1",
+  "CustomAvatarName": "Avatar",
+  "CustomCardName": "Card",
+  "CustomHomeBoardPhotoName": "Home Signpost",
+  "DIYName": "Color Lookbook",
+  "HomeTemplatePhotoName": "Home Scheme",
+  "MagazinePhotosName": "ScrapBook",
+  "NikkiPhotos_HighQualityName": "Momo's Photos",
+  "NikkiPhotos_LowQualityName": "Thumbnail",
+  "ScreenShotName": "Screenshot",
+  "XSdkQrCodeName": "QR Code",
+
+  "ClockInPhotoDescription": "Your expeditions, please back them up promptly!",
+  "CloudPhotos_LowQualityDescription": "Low-res cache from Cloud Photos. Safe to delete.",
+  "CloudPhotosDescription": "Low-res cache from Cloud Photos. Safe to delete.",
+  "CustomAvatarDescription": "Previously used avatars. The game never cleans this folder—tidy it up yourself.",
+  "CustomCardDescription": "Previously used name-cards. The game never cleans this folder—tidy it up yourself.",
+  "CustomHomeBoardPhotoDescription": "Cover image for your Home signpost.",
+  "DIYDescription": "Last-edited image in the Color Lookbook. Only the most recent version is kept.",
+  "HomeTemplatePhotoDescription": "Cover image for your Home template.",
+  "MagazinePhotosDescription": "Your scrapbook, please back them up promptly!",
+  "NikkiPhotos_HighQualityDescription": "High-res shots from Momo’s camera with full metadata. Back them up and clean them out regularly!",
+  "NikkiPhotos_LowQualityDescription": "Auto-generated thumbnails.",
+  "ScreenShotDescription": "Every photo you take lands here. The game doesn’t manage this album.",
+  "XSdkQrCodeDescription": "QR code for sharing.",
+
+
+  "LauncherCacheImagesName": "Cache",
+  "MallPicName": "Mall",
+  "MoviesName": "CG/PV/Splash",
+
+  "LauncherCacheImagesDescription": "Images cached by the launcher.",
+  "MallPicDescription": "Images downloaded for the in-game Mall.",
+  "MoviesDescription": "",
+
+
+
+  "----------album----------": "----------album----------",
+
+  "currentGameIsNull": "Please select an account first",
+  "defaultTag": "Default",
+  "addCustomTag": "New Tag",
+  "tagName": "Tag Name",
+  "tagAlreadyExists": "This Tag already exists",
+  "manageTags": "Tag Management",
+  "deleteXTag": "Are you sure you want to delete the tag : {}",
+  "inGame": "in-game images",
+  "outOfGame": "out-of-game images",
+  "layout_minus": "Fewer columns",
+  "layout_plus": "More columns",
+  "select": "Select",
+  "deselect": "Deselect",
+  "selectAll": "Select all",
+  "invertSelect": "Invert Selection",
+  "viewSelect": "View selection",
+  "remove": "Remove",
+  "insert": "Insert",
+  "delete": "Delete",
+  "export": "Export",
+  "import": "Import",
+  "verticalFlip": "Vertical Flip",
+  "horizontalFlip": "Horizontal Flip",
+  "rotateLeft90": "Rotate 90° Counterclockwise",
+  "rotateRight90": "Rotate 90° Clockwise",
+  "toPreviousImage": "Previous",
+  "toNextImage": "Next",
+  "XImageFailedToBeProcessed": {
+    "one": "1 image failed to be processed",
+    "other": "{} images failed to be processed"
+  },
+  "deleteSameImage": "Delete the same pictures in the following albums",
+  "deleteXImage": {
+    "one": "Delete 1 image",
+    "other": "Delete {} images"
+  },
+  "dragArea": "Drag Area",
+  "exportToClipboard": "Copy to Clipboard",
+  "exportToLocal": "Export Locally",
+  "exportToNetwork": "Export to network device",
+  "exportXImage": {
+    "one": "Export 1 image to",
+    "other": "Export {} images to"
+  },
+  "xImageSelected": {
+    "zero": "No images selected",
+    "one": "1 image selected",
+    "other": "{} images selected"
+  },
+  "left-clickToSelectImage": "Left-click here to select an image",
+  "dragImageHere": "Drag and drop the image here",
+  "right-clickToPasteImage": "Right-click here to paste image from clipboard",
+  "importImageTo": "Import images to",
+  "importXImage": {
+    "one": "Import 1 image to",
+    "other": "Import {} images to"
+  },
+
+  "useSameNetworkDevice": "Please use a device on the same network to download",
+  "downloadLink": "Download link",
+  "stopSharing": "Stop sharing",
+  "methodX": "Method {}",
+  "packaging": "Packaging",
+  "packagingFailed": "File packaging failed",
+  "activatingNetwork": "Starting network service",
+  "activatingNetworkFailed": "Failed to start network service",
+
+
+  "----------start----------": "----------start----------",
+  "openDirectory": "Open in File Explorer",
+  "openLauncherDirectory": "Open Launcher Directory",
+  "openInstallDirectory": "Open Game Resource Directory",
+  "moveResource": "Move Game Resources",
+  "moveAlbumResource": "Move Album Resources Only",
+  "moveInstallResource": "Move All Game Resources",
+  "fileSize": "File Size",
+  "calculating": "Calculating",
+  "moveTo": "Move to",
+  "toSelectFolder": "Please select a folder",
+  "storageSpace": "Storage Space",
+  "availableSpaceOnXDrive": "Available space on drive {}",
+  "permission": "Permission",
+  "underTest": "Under Test",
+  "normal": "Normal",
+  "noPermission": "No Permission",
+  "retry": "Retry",
+  "startToMove": "Start Transfer",
+  "notCheck": "Check Not Completed",
+  "destinationIsNull": "Destination folder not selected",
+  "insufficientSpace": "Insufficient Space",
+  "existXInDestination": "The {} folder already exists",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "toSelectAccount": "Please select an account",
+  "addCustomAccount": "Add other launcher versions",
+  "toSelectVersion": "Select the launcher version",
+  "toSelectUid": "Select the uid",
+  "selectNoUid": "Do not select uid",
+  "getZeroUid": "Failed to retrieve uid",
+  "find no uid": "Please select a uid to view this album",
+  "find no directory": "Album folder not found",
+  "OpenFromFileExplorer": "Open the album from File Explorer",
+  "toAlbumType": "Select the album",
+  "gameAlbum": "Game Album",
+  "toGameAlbum": "Switch to Game Album",
+  "backupAlbum": "Backup Album",
+  "toBackupAlbum": "Switch to Backup Album",
+  "layoutMethod": "Layout method",
+  "toSelectLayoutMethod": "Select the layout method of the album",
+  "layout_masonry": "Masonry Layout",
+  "layout_grid_1_1": "Square Grid Layout",
+  "layout_grid_16_9": "16:9 Rectangle Grid Layout",
+  "classificationMethod": "Classification method",
+  "toSelectClassificationMethod": "Select the classification method of the album",
+  "classification_none": "No classification",
+  "classification_timeChanged": "Classify by creation time",
+  "classification_timeModified": "Classify by last-modified time",
+  "classification_timeFileName": "Classify by filename time",
+  "classification_orientation": "Classify by image orientation",
+  "classification_aspectRatio": "Classify by aspect ratio",
+  "sortMethod": "Sort key",
+  "toSelectSortMethod": "Select the sort method of the album",
+  "sortKey_timeChanged": "Sort by creation time",
+  "sortKey_timeModified": "Sort by last modified time",
+  "sortKey_timeFileName": "Sort by timestamp in filename",
+  "sortKey_fileName": "Sort by filename",
+  "sortKey_fileSize": "Sort by file size",
+  "sortKey_imageResolution": "Sort by image resolution",
+  "toSortForward": "Switch to ascending order",
+  "toSortReverse": "Switch to descending order",
+  "increaseColumns": "Increase the number of columns",
+  "decreaseColumns": "Decrease the number of columns"
+}
