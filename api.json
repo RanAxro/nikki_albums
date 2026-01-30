@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "versionString": "3.02",
-  "downloadLink": "https://1846454622.v.123pan.cn/1846454622/Nikki%20Albums/v3.02/%E6%9A%96%E6%9A%96%E7%9B%B8%E5%86%8C-v3.02-Windows-x64.zip",
-  "updateMessage": "1.支持给uid备注\n2.支持将常用的账号添加到快捷栏\n3.增加标记功能，可以给图片打标签\n4.修复了一些bug\n\n更新完成后请重启[暖暖相册], 新版本默认安装在桌面"
+  "version": 6,
+  "versionString": "3.03",
+  "downloadLink": "https://1846454622.v.123pan.cn/1846454622/Nikki%20Albums/v3.03/Nikki%20Albums-v3.03-Windows-x64.zip",
+  "updateMessage": "1.新的相册 \"花草拓拓拓\"\n2.增加回收站功能\n3.支持一键导出/备份所有图片\n4.将图片导出到互联网时, 下载方可在线预览/下载单张/下载全部\n5.支持下载其他用户分享的图片\n6.支持将图片打包为\"nikkias\"文件, 该打包方式会无损保留您图片的所有信息\n7.修复了一些bug\n\n更新完成后请重启[暖暖相册], 新版本默认安装在桌面"
 }
