@@ -1,4 +1,4 @@
- <a href="README_zh.md">阅读中文版</a>
+ <a href="README.zh.md">阅读中文版</a>
 
 <div align="center">
   <img src="src/nikki_albums/assets/logo/nikkialbums.webp" alt="Nikki Albums", width="100", height="100">
@@ -127,3 +127,4 @@ Join us to exchange tips with other players, report issues you encounter during 
 * ## Disclaimer
 
   This tool and its developers are not liable for any direct or indirect losses that may result from the use of this tool. By using this tool, users agree to and accept the above statements and disclaimer. This tool is not an official product of Infinity Nikki, Paper Games, bilibili, Steam, or TapTap.
+
