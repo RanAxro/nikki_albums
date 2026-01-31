@@ -1,4 +1,4 @@
- <a href="README.zh.md">阅读中文版</a>
+ <a href="README_zh.md">阅读中文版</a>
 
 <div align="center">
   <img src="src/nikki_albums/assets/logo/nikkialbums.webp" alt="Nikki Albums", width="100", height="100">
@@ -125,4 +125,5 @@ Join us to exchange tips with other players, report issues you encounter during 
 * ## Development Purpose Statement
   The purpose of developing this tool is to provide convenient game album management functionality, helping users better organize and display in-game pictures and screenshots. We do not encourage or support any form of game cheating or violations. When using this tool, users should comply with the official rules and terms of service of the game.
 * ## Disclaimer
+
   This tool and its developers are not liable for any direct or indirect losses that may result from the use of this tool. By using this tool, users agree to and accept the above statements and disclaimer. This tool is not an official product of Infinity Nikki, Paper Games, bilibili, Steam, or TapTap.
