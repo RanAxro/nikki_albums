@@ -17,48 +17,72 @@ import 'package:path/path.dart' as path;
 
 
 
-
-extension type const GameWeatherType(int value){
+extension type const GameWeatherType(int data){
   static const GameWeatherType sunny = GameWeatherType(0);
   static const GameWeatherType rainy = GameWeatherType(2);
 
-  static const Map<int, String> _keys = {
+  static const Map<int, String> _map = {
     0: "game_weather_0",
     2: "game_weather_2",
   };
 
-  String get key => _keys[value] ?? value.toString();
+  String get stringData => _map[data] ?? data.toString();
 
-  bool get isTranslateKey => _keys.containsKey(value);
+  bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GamePuzzleGame(int value){
+extension type const GameInteractivePhotoType(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameInteractivePhotoState(bool data){
+  static const GameInteractivePhotoState falseState = GameInteractivePhotoState(false);
+  static const GameInteractivePhotoState trueState = GameInteractivePhotoState(true);
+
+  static const Map<bool, String> _map = {
+    false: "game_interactive_photo_state_false",
+    true: "game_interactive_photo_state_true",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GamePuzzleGame(int data){
   static const GamePuzzleGame none = GamePuzzleGame(-1);
 
-  static const Map<int, String> _keys = {
+  static const Map<int, String> _map = {
     -1: "game_puzzle_game_-1",
   };
 
-  String get key => _keys[value] ?? value.toString();
+  String get stringData => _map[data] ?? data.toString();
 
-  bool get isTranslateKey => _keys.containsKey(value);
+  bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GamePortraitMode(int value){
+extension type const GamePortraitMode(int data){
   static const GamePortraitMode disable = GamePortraitMode(0);
   static const GamePortraitMode enable = GamePortraitMode(1);
 
-  static const Map<int, String> _keys = {
+  static const Map<int, String> _map = {
     0: "game_portrait_mode_0",
     1: "game_portrait_mode_1",
   };
 
-  String get key => _keys[value] ?? value.toString();
+  String get stringData => _map[data] ?? data.toString();
 
-  bool get isTranslateKey => _keys.containsKey(value);
+  bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GameApertureSection(int value){
+extension type const GameApertureSection(int data){
   static const GamePortraitMode f_1_2 = GamePortraitMode(1);
   static const GamePortraitMode f_1_4 = GamePortraitMode(2);
   static const GamePortraitMode f_2 = GamePortraitMode(3);
@@ -75,7 +99,7 @@ extension type const GameApertureSection(int value){
   static const GamePortraitMode f_11 = GamePortraitMode(14);
   static const GamePortraitMode f_16 = GamePortraitMode(15);
 
-  static const Map<int, String> _keys = {
+  static const Map<int, String> _map = {
     1: "f/1.2",
     2: "f/1.4",
     3: "f/2",
@@ -93,12 +117,12 @@ extension type const GameApertureSection(int value){
     15: "f/16",
   };
 
-  String get key => _keys[value] ?? value.toString();
+  String get stringData => _map[data] ?? data.toString();
 
-  bool get isTranslateKey => false;
+  bool get hasTranslation => false;
 }
 
-extension type const GameLightId(String value){
+extension type const GameLightId(String data){
   static const GameLightId None = GameLightId("None");
   static const GameLightId DirectionLight_L = GameLightId("DirectionLight_L");
   static const GameLightId DirectionLight_R = GameLightId("DirectionLight_R");
@@ -117,7 +141,7 @@ extension type const GameLightId(String value){
   static const GameLightId VibeLight_003 = GameLightId("VibeLight_003");
   static const GameLightId VibeLight_004 = GameLightId("VibeLight_004");
 
-  static const Map<String, String> _keys = {
+  static const Map<String, String> _map = {
     "None": "game_light_None",
     "DirectionLight_L": "game_light_DirectionLight_L",
     "DirectionLight_R": "game_light_DirectionLight_R",
@@ -137,12 +161,12 @@ extension type const GameLightId(String value){
     "VibeLight_004": "game_light_VibeLight_004",
   };
 
-  String get key => _keys[value] ?? value.toString();
+  String get stringData => _map[data] ?? data.toString();
 
-  bool get isTranslateKey => _keys.containsKey(value);
+  bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GameFilterId(String value){
+extension type const GameFilterId(String data){
   static const GameFilterId None = GameFilterId("None");
   static const GameFilterId Fresh_001 = GameFilterId("Fresh_001");
   static const GameFilterId Fresh_002 = GameFilterId("Fresh_002");
@@ -160,8 +184,8 @@ extension type const GameFilterId(String value){
   static const GameFilterId Vibe_004 = GameFilterId("Vibe_004");
   static const GameFilterId Vibe_005 = GameFilterId("Vibe_005");
 
-  static const Map<String, String> _keys = {
-    "None": "game_light_None",
+  static const Map<String, String> _map = {
+    "None": "game_filter_None",
     "Fresh_001": "game_filter_Fresh_001",
     "Fresh_002": "game_filter_Fresh_002",
     "Fresh_003": "game_filter_Fresh_003",
@@ -179,10 +203,222 @@ extension type const GameFilterId(String value){
     "Vibe_005": "game_filter_Vibe_005",
   };
 
-  String get key => _keys[value] ?? value.toString();
+  String get stringData => _map[data] ?? data.toString();
 
-  bool get isTranslateKey => _keys.containsKey(value);
+  bool get hasTranslation => _map.containsKey(data);
 }
+
+
+
+
+
+// 10位
+// 3b -> 102
+// 1b -> 服装状态
+//    服饰
+//        进化 0 -> 0进, 2 -> 换新, 3 -> 1进, 4 -> 2进, 5 -> 3进
+//    饰品
+//
+//    妆容-肤色
+//        不保存该数据(0 -> 无)
+//        1 -> 浓情夜宴
+//        2 -> 暮色倒影
+//        3 -> 雪上月华
+// 2b -> 类型
+//    发型(Hair) 10
+//    连衣裙(Dresses) 90
+//    外套(Outerwear) 20
+//    上衣(Tops) 30
+//    下装(Bottoms) 41
+//    袜子(Socks) 50
+//    鞋子(Shoes) 60
+//    饰品-发饰(Hair Accessories) 71
+//    饰品-帽子(Headwear) 72
+//    饰品-耳饰(Earrings) 73
+//    饰品-颈饰(Neckwear) 74
+//    饰品-腕饰(Bracelets) 75
+//    饰品-项圈(Chokers) 76
+//    饰品-手套(Gloves) 77
+//    饰品-面饰(Face Decorations) 92
+//    饰品-胸饰(Chest Accessories) 93
+//    饰品-挂饰(Pendants) 94
+//    饰品-背饰(Backpieces) 95
+//    饰品-戒指(Rings) 96
+//    饰品-臂饰(Arm Decorations) 97
+//    饰品-手持物(Handhelds) 78
+//    饰品-肤绘(Body Paint) 79
+//    妆容-全妆(Full Makeup) 不保存该数据(80) 底妆+眉妆+睫毛+美瞳+唇妆 同一套装
+//    妆容-底妆(Base Makeup) 81
+//    妆容-眉妆(Eyebrows) 82
+//    妆容-睫毛(Eyelashes) 83
+//    妆容-美瞳(Contacts) 84
+//    妆容-唇妆(Lips) 85
+//    妆容-肤色(Skin Tones) 86
+// 4b -> 套装id
+//    0042 -> 初始
+
+extension type const GameNikkiClothesAttireType(int data){
+  static const GameNikkiClothesAttireType clothing = GameNikkiClothesAttireType(1);
+  static const GameNikkiClothesAttireType accessories = GameNikkiClothesAttireType(2);
+  static const GameNikkiClothesAttireType makeup = GameNikkiClothesAttireType(3);
+
+  static const Map<int, String> _map = {
+    1: "game_nikki_clothes_clothing",
+    2: "game_nikki_clothes_accessories",
+    3: "game_nikki_clothes_makeup",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameNikkiClothesType(int data){
+  static const GameNikkiClothesType hair = GameNikkiClothesType(10);
+  static const GameNikkiClothesType dresses = GameNikkiClothesType(90);
+  static const GameNikkiClothesType outerwear = GameNikkiClothesType(20);
+  static const GameNikkiClothesType tops = GameNikkiClothesType(30);
+  static const GameNikkiClothesType bottoms = GameNikkiClothesType(41);
+  static const GameNikkiClothesType socks = GameNikkiClothesType(50);
+  static const GameNikkiClothesType shoes = GameNikkiClothesType(60);
+  static const GameNikkiClothesType hairAccessories = GameNikkiClothesType(71);
+  static const GameNikkiClothesType headwear = GameNikkiClothesType(72);
+  static const GameNikkiClothesType earrings = GameNikkiClothesType(73);
+  static const GameNikkiClothesType neckwear = GameNikkiClothesType(74);
+  static const GameNikkiClothesType bracelets = GameNikkiClothesType(75);
+  static const GameNikkiClothesType chokers = GameNikkiClothesType(76);
+  static const GameNikkiClothesType gloves = GameNikkiClothesType(77);
+  static const GameNikkiClothesType faceDecorations = GameNikkiClothesType(92);
+  static const GameNikkiClothesType chestAccessories = GameNikkiClothesType(93);
+  static const GameNikkiClothesType pendants = GameNikkiClothesType(94);
+  static const GameNikkiClothesType backpieces = GameNikkiClothesType(95);
+  static const GameNikkiClothesType rings = GameNikkiClothesType(96);
+  static const GameNikkiClothesType armDecorations = GameNikkiClothesType(97);
+  static const GameNikkiClothesType handhelds = GameNikkiClothesType(78);
+  static const GameNikkiClothesType bodyPaint = GameNikkiClothesType(79);
+  static const GameNikkiClothesType fullMakeup = GameNikkiClothesType(80);
+  static const GameNikkiClothesType baseMakeup = GameNikkiClothesType(81);
+  static const GameNikkiClothesType eyebrows = GameNikkiClothesType(82);
+  static const GameNikkiClothesType eyelashes = GameNikkiClothesType(83);
+  static const GameNikkiClothesType contacts = GameNikkiClothesType(84);
+  static const GameNikkiClothesType lips = GameNikkiClothesType(85);
+  static const GameNikkiClothesType skinTones = GameNikkiClothesType(86);
+
+  static const Map<int, String> _map = {
+    10: "game_nikki_clothes_clothing_hair",
+    90: "game_nikki_clothes_clothing_dresses",
+    20: "game_nikki_clothes_clothing_outerwear",
+    30: "game_nikki_clothes_clothing_tops",
+    41: "game_nikki_clothes_clothing_bottoms",
+    50: "game_nikki_clothes_clothing_socks",
+    60: "game_nikki_clothes_clothing_shoes",
+    71: "game_nikki_clothes_accessories_hair_accessories",
+    72: "game_nikki_clothes_accessories_headwear",
+    73: "game_nikki_clothes_accessories_earrings",
+    74: "game_nikki_clothes_accessories_neckwear",
+    75: "game_nikki_clothes_accessories_bracelets",
+    76: "game_nikki_clothes_accessories_chokers",
+    77: "game_nikki_clothes_accessories_gloves",
+    78: "game_nikki_clothes_accessories_handhelds",
+    92: "game_nikki_clothes_accessories_face_decorations",
+    93: "game_nikki_clothes_accessories_chest_accessories",
+    94: "game_nikki_clothes_accessories_pendants",
+    95: "game_nikki_clothes_accessories_backpieces",
+    96: "game_nikki_clothes_accessories_rings",
+    97: "game_nikki_clothes_accessories_arm_decorations",
+    79: "game_nikki_clothes_accessories_body_paint",
+    80: "game_nikki_clothes_makeup_full_makeup",
+    81: "game_nikki_clothes_makeup_base_makeup",
+    82: "game_nikki_clothes_makeup_eyebrows",
+    83: "game_nikki_clothes_makeup_eyelashes",
+    84: "game_nikki_clothes_makeup_contacts",
+    85: "game_nikki_clothes_makeup_lips",
+    86: "game_nikki_clothes_makeup_skin_tones",
+  };
+
+  GameNikkiClothesAttireType get attireType => switch(data){
+    >= 10 && <= 60 || 90 => GameNikkiClothesAttireType.clothing,
+    >= 70 && <= 79 || >= 92 && <= 97 => GameNikkiClothesAttireType.accessories,
+    >= 80 && <= 86 => GameNikkiClothesAttireType.makeup,
+    _ => GameNikkiClothesAttireType(0),
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameNikkiClothes(int data){
+
+
+  static const Map<int, String> _map = {
+
+  };
+
+  /// 102 0 71 0353
+  bool get isClothes => data >= 1e9 && data < 1e10;
+
+  int get prefixId => data ~/ 1e7;
+
+  int get state{
+    final int p = ((data ~/ 1e7) * 1e7).toInt();
+
+    return (data - p) ~/ 1e6;
+  }
+
+  GameNikkiClothesType get type{
+    final int p = ((data ~/ 1e6) * 1e6).toInt();
+
+    final int type = (data - p) ~/ 1e4;
+
+    return GameNikkiClothesType(type);
+  }
+
+  int get outfitsId{
+    final int p = ((data ~/ 1e4) * 1e4).toInt();
+
+    return data - p;
+  }
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameNikkiClothesOutfits(int data){
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+//  进化 0 -> 0进, 2 -> 换新, 3 -> 1进, 4 -> 2进, 5 -> 3进
+extension type const GameNikkiClothesClothingState(int data){
+  static const GameNikkiClothesClothingState evolution_0 = GameNikkiClothesClothingState(0);
+  static const GameNikkiClothesClothingState glowUp = GameNikkiClothesClothingState(2);
+  static const GameNikkiClothesClothingState evolution_1 = GameNikkiClothesClothingState(3);
+  static const GameNikkiClothesClothingState evolution_2 = GameNikkiClothesClothingState(4);
+  static const GameNikkiClothesClothingState evolution_3 = GameNikkiClothesClothingState(5);
+
+  static const Map<int, String> _map = {
+    0: "game_nikki_clothes_evolution_0",
+    2: "game_nikki_clothes_glow_up",
+    3: "game_nikki_clothes_evolution_1",
+    4: "game_nikki_clothes_evolution_2",
+    5: "game_nikki_clothes_evolution_3",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+
+
+
 
 
 
@@ -205,7 +441,7 @@ class Field<T>{
     this.isTranslateKey = true,
     this.value,
     String? stringValue,
-    this.isTranslateValue = true,
+    this.isTranslateValue = false,
     this.children = const <Field>[],
   }) :
     _stringValue = stringValue;
@@ -297,7 +533,7 @@ class CollageAddition extends Field{
 
     if(collageJson case {
       "TemplateId": int templateId,
-      "RegionPictures": Map regionPictures,
+      "RegionPictures": Map regionPicturesJson,
     }){
       res.addAll([
         Field<int>(
@@ -306,7 +542,7 @@ class CollageAddition extends Field{
         ),
         Field<int>(
           key: "ia_Collage_region_pictures",
-          children: parseRegionPictures(regionPictures),
+          children: parseRegionPictures(regionPicturesJson),
         ),
       ]);
     }
@@ -314,17 +550,17 @@ class CollageAddition extends Field{
     return res;
   }
 
-  static List<Field> parseRegionPictures(dynamic collageJson){
+  static List<Field> parseRegionPictures(dynamic regionPicturesJson){
     final List<Field> res = <Field>[];
 
-    if(collageJson is! Map) return res;
+    if(regionPicturesJson is! Map) return res;
 
-    if(collageJson case {
-      "Rotation": double rotation,
-      "oriCustomData": Map oriCustomData,
+    if(regionPicturesJson case {
       "Position": Map position,
-      "ImageId": String imageId,
+      "Rotation": double rotation,
       "Scale": double scale,
+      "oriCustomData": Map oriCustomData,
+      "ImageId": String imageId,
     }){
       if(position case {
         "x": num x,
@@ -375,6 +611,28 @@ class CollageAddition extends Field{
 
 
 class NikkiPhotoAddition extends Field{
+  static List<Field> parse(dynamic nikkiPhotoJson){
+    final List<Field> res = <Field>[];
+
+    if(nikkiPhotoJson is! Map) return res;
+
+    res.add(PhotographyInfo.fromGameJson(nikkiPhotoJson: nikkiPhotoJson));
+
+    res.add(CameraInfo.fromGameJson(nikkiPhotoJson: nikkiPhotoJson));
+
+    if(nikkiPhotoJson case {
+      "SocialPhoto": Map socialPhoto,
+    }){
+      if(socialPhoto case {
+        "PhotoInfo": Map photoInfo,
+      }){
+        res.add(NikkiInfo.fromGameJson(photoInfoJson: photoInfo));
+      }
+    }
+
+    return res;
+  }
+
   const NikkiPhotoAddition._({
     super.key = "ia_NikkiPhoto_addition",
     super.children,
@@ -386,10 +644,7 @@ class NikkiPhotoAddition extends Field{
   }){
     return NikkiPhotoAddition._(
       key: key,
-      children: [
-        PhotographyInfo.fromGameJson(nikkiPhotoJson: nikkiPhotoJson),
-        CameraInfo.fromGameJson(nikkiPhotoJson: nikkiPhotoJson),
-      ],
+      children: parse(nikkiPhotoJson),
     );
   }
 }
@@ -417,10 +672,11 @@ class PhotographyInfo extends Field{
         "WeatherType": int weatherType,
       }){
         final GameWeatherType weatherTypeInfo = GameWeatherType(weatherType);
-        res.add(Field<String>(
+        res.add(Field<int>(
           key: "ia_weather",
-          value: weatherTypeInfo.key,
-          isTranslateValue: weatherTypeInfo.isTranslateKey,
+          value: weatherTypeInfo.data,
+          stringValue: weatherTypeInfo.stringData,
+          isTranslateValue: weatherTypeInfo.hasTranslation,
         ));
       }
 
@@ -447,10 +703,11 @@ class PhotographyInfo extends Field{
         "Tag": int tag,
       }){
         final GamePuzzleGame puzzleGameInfo = GamePuzzleGame(tag);
-        res.add(Field<String>(
+        res.add(Field<int>(
           key: "ia_puzzle_game",
-          value: puzzleGameInfo.key,
-          isTranslateValue: puzzleGameInfo.isTranslateKey,
+          value: puzzleGameInfo.data,
+          stringValue: puzzleGameInfo.stringData,
+          isTranslateValue: puzzleGameInfo.hasTranslation,
         ));
       }
     }
@@ -460,12 +717,15 @@ class PhotographyInfo extends Field{
     }){
       for(final entry in interactivePhoto.entries){
         if(entry.key is int && entry.value is bool){
+          final GameInteractivePhotoType interactivePhotoTypeInfo = GameInteractivePhotoType(entry.key);
+          final GameInteractivePhotoState interactivePhotoStateInfo = GameInteractivePhotoState(entry.value);
+
           res.add(Field<bool>(
-            key: entry.key.toString(),
-            isTranslateKey: false,
-            value: entry.value,
-            stringValue: "ia_interactive_photo_${entry.value}",
-            isTranslateValue: true,
+            key: interactivePhotoTypeInfo.stringData,
+            isTranslateKey: interactivePhotoTypeInfo.hasTranslation,
+            value: interactivePhotoStateInfo.data,
+            stringValue: interactivePhotoStateInfo.stringData,
+            isTranslateValue: interactivePhotoStateInfo.hasTranslation,
           ));
         }
       }
@@ -551,10 +811,11 @@ class CameraInfo extends Field{
         "PortraitMode": int portraitMode,
       }){
         final GamePortraitMode portraitModeInfo = GamePortraitMode(portraitMode);
-        res.add(Field(
+        res.add(Field<int>(
           key: "ia_portrait_mode",
-          value: portraitModeInfo.key,
-          isTranslateValue: portraitModeInfo.isTranslateKey,
+          value: portraitModeInfo.data,
+          stringValue: portraitModeInfo.stringData,
+          isTranslateValue: portraitModeInfo.hasTranslation,
         ));
       }
     }
@@ -610,10 +871,11 @@ class CameraInfo extends Field{
           "apertureSection": num apertureSection,
         }){
           final GameApertureSection apertureSectionInfo = GameApertureSection(apertureSection.toInt());
-          res.add(Field<String>(
+          res.add(Field<int>(
             key: "ia_aperture_section",
-            value: apertureSectionInfo.key,
-            isTranslateValue: apertureSectionInfo.isTranslateKey,
+            value: apertureSectionInfo.data,
+            stringValue: apertureSectionInfo.stringData,
+            isTranslateValue: apertureSectionInfo.hasTranslation,
           ));
         }
 
@@ -626,10 +888,64 @@ class CameraInfo extends Field{
             stringValue: "${(vignetteIntensity * 100).toStringAsFixed(0)}%",
           ));
         }
+      }
 
-        /// TODO
+      /// TODO
+      if(socialPhoto case {
+        "CameraParams": String cameraParams,
+      }){
+        final decoded = GameCameraParamCodec.decode(cameraParams);
 
+        res.add(Field<double>(
+          key: "ia_bloom_intensity",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_bloom_threshold",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_brightness",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_exposure",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_contrast",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_saturation",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_vibrance",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_highlights",
+          value: 0,
+          stringValue: "-",
+        ));
+        res.add(Field<double>(
+          key: "ia_shadows",
+          value: 0,
+          stringValue: "-",
+        ));
+      }
 
+      if(socialPhoto case {
+        "PhotoInfo": Map photoInfo,
+      }){
         if(photoInfo case {
           "lightId": String lightId,
         }){
@@ -637,8 +953,9 @@ class CameraInfo extends Field{
 
           res.add(Field<String>(
             key: "ia_light_id",
-            value: lightIdInfo.key,
-            isTranslateValue: lightIdInfo.isTranslateKey,
+            value: lightIdInfo.data,
+            stringValue: lightIdInfo.stringData,
+            isTranslateValue: lightIdInfo.hasTranslation,
           ));
 
           if(lightIdInfo != GameLightId.None){
@@ -661,8 +978,9 @@ class CameraInfo extends Field{
 
           res.add(Field<String>(
             key: "ia_filter_id",
-            value: filterIdInfo.key,
-            isTranslateValue: filterIdInfo.isTranslateKey,
+            value: filterIdInfo.data,
+            stringValue: filterIdInfo.stringData,
+            isTranslateValue: filterIdInfo.hasTranslation,
           ));
 
           if(filterIdInfo != GameFilterId.None){
@@ -709,25 +1027,157 @@ class CameraInfo extends Field{
 }
 
 
+/// TODO 巨大化
 class NikkiInfo extends Field{
-  static List<Field> parse(dynamic nikkiPhotoJson){
+  static List<Field> parse(dynamic photoInfoJson){
     final List<Field> res = <Field>[];
 
-    if(nikkiPhotoJson is! Map) return res;
+    if(photoInfoJson is! Map) return res;
 
-    if(nikkiPhotoJson case {
-    "PortraitModeHandler": Map portraitModeHandler,
+    if(photoInfoJson case {
+      "nikkiHidden": bool nikkiHidden,
     }){
-      if(portraitModeHandler case {
-      "PortraitMode": int portraitMode,
-      }){
-        final GamePortraitMode portraitModeInfo = GamePortraitMode(portraitMode);
-        res.add(Field(
-          key: "ia_portrait_mode",
-          value: portraitModeInfo.key,
-          isTranslateValue: portraitModeInfo.isTranslateKey,
-        ));
+      res.add(Field<bool>(
+        key: "ia_nikki_hidden",
+        value: nikkiHidden,
+        stringValue: "ia_nikki_hidden_$nikkiHidden",
+        isTranslateValue: true,
+      ));
+    }
+
+    if(photoInfoJson case {
+      "nikkiLocX": num nikkiLocX,
+      "nikkiLocY": num nikkiLocY,
+      "nikkiLocZ": num nikkiLocZ,
+    }){
+      res.add(Loc3(
+        x: nikkiLocX,
+        y: nikkiLocY,
+        z: nikkiLocZ,
+      ));
+    }
+
+    if(photoInfoJson case {
+      "nikkiRotYaw": num nikkiRotYaw,
+      "nikkiRotPitch": num nikkiRotPitch,
+      "nikkiRotRoll": num nikkiRotRoll,
+    }){
+      res.add(Rot3(
+        yaw: nikkiRotYaw,
+        pitch: nikkiRotPitch,
+        roll: nikkiRotRoll,
+      ));
+    }
+
+    if(photoInfoJson case {
+      "nikkiScaleX": num nikkiScaleX,
+      "nikkiScaleY": num nikkiScaleY,
+      "nikkiScaleZ": num nikkiScaleZ,
+    }){
+      res.add(Scale3(
+        x: nikkiScaleX,
+        y: nikkiScaleY,
+        z: nikkiScaleZ,
+      ));
+    }
+
+    if(photoInfoJson case {
+      "nikkiClothes": List nikkiClothes,
+    }){
+      res.add(Field(
+        key: "ia_nikki_clothes",
+        children: parseNikkiClothe(nikkiClothes),
+      ));
+    }
+
+    return res;
+  }
+
+  static List<Field> parseNikkiClothe(dynamic nikkiClothesJson){
+    final List<Field> res = <Field>[];
+
+    final List<Field> clothingFields = <Field>[];
+    final List<Field> accessoriesFields = <Field>[];
+    final List<Field> makeupFields = <Field>[];
+
+    if(nikkiClothesJson is! List) return res;
+
+    for(final dynamic data in nikkiClothesJson){
+      if(data is int){
+        final GameNikkiClothes clothesInfo = GameNikkiClothes(data);
+
+        if(clothesInfo.isClothes){
+          final GameNikkiClothesType typeInfo = clothesInfo.type;
+          final GameNikkiClothesAttireType attireTypeInfo = typeInfo.attireType;
+
+          switch(attireTypeInfo){
+            case GameNikkiClothesAttireType.clothing:
+              final GameNikkiClothesOutfits outfitsInfo = GameNikkiClothesOutfits(clothesInfo.outfitsId);
+              final GameNikkiClothesClothingState stateInfo = GameNikkiClothesClothingState(clothesInfo.state);
+
+              clothingFields.add(Field<int>(
+                key: typeInfo.stringData,
+                isTranslateKey: typeInfo.hasTranslation,
+                value: clothesInfo.data,
+                stringValue: clothesInfo.stringData,
+                isTranslateValue: clothesInfo.hasTranslation,
+                children: [
+                  Field<int>(
+                    key: "ia_nikki_clothes_clothing_outfits",
+                    value: outfitsInfo.data,
+                    stringValue: outfitsInfo.stringData,
+                    isTranslateValue: outfitsInfo.hasTranslation,
+                  ),
+                  Field<int>(
+                    key: "ia_nikki_clothes_clothing_state",
+                    value: stateInfo.data,
+                    stringValue: stateInfo.stringData,
+                    isTranslateValue: stateInfo.hasTranslation,
+                  ),
+                ],
+              ));
+              break;
+            case GameNikkiClothesAttireType.accessories:
+              accessoriesFields.add(Field<int>(
+                key: typeInfo.stringData,
+                value: clothesInfo.data,
+                stringValue: clothesInfo.stringData,
+                isTranslateValue: clothesInfo.hasTranslation,
+              ));
+              break;
+            case GameNikkiClothesAttireType.makeup:
+              makeupFields.add(Field<int>(
+                key: typeInfo.stringData,
+                value: clothesInfo.data,
+                stringValue: clothesInfo.stringData,
+                isTranslateValue: clothesInfo.hasTranslation,
+              ));
+              break;
+          }
+        }
       }
+    }
+
+    if(clothingFields.isNotEmpty){
+      res.add(Field(
+        key: GameNikkiClothesAttireType.clothing.stringData,
+        isTranslateKey: GameNikkiClothesAttireType.clothing.hasTranslation,
+        children: clothingFields,
+      ));
+    }
+    if(accessoriesFields.isNotEmpty){
+      res.add(Field(
+        key: GameNikkiClothesAttireType.accessories.stringData,
+        isTranslateKey: GameNikkiClothesAttireType.accessories.hasTranslation,
+        children: accessoriesFields,
+      ));
+    }
+    if(makeupFields.isNotEmpty){
+      res.add(Field(
+        key: GameNikkiClothesAttireType.makeup.stringData,
+        isTranslateKey: GameNikkiClothesAttireType.makeup.hasTranslation,
+        children: makeupFields,
+      ));
     }
 
     return res;
@@ -740,11 +1190,11 @@ class NikkiInfo extends Field{
 
   factory NikkiInfo.fromGameJson({
     String key = "ia_nikki_info",
-    dynamic gameJson,
+    dynamic photoInfoJson,
   }){
     return NikkiInfo._(
       key: key,
-      children: parse(gameJson),
+      children: parse(photoInfoJson),
     );
   }
 }
@@ -779,6 +1229,8 @@ class NikkiInfo extends Field{
 //  祝福闪光 开关
 //  动态动作的帧
 //
+
+// 部分任务过场自动拍摄图为 {}
 const ex = {
   "SocialPhoto": {
     // 使用巨大化套装能力后为 true
@@ -1005,7 +1457,69 @@ const ex = {
         12244
       ],
       // 服饰染色数据
-      "nikkiDIY": {},
+      // 没数据时 "nikkiDIY": {}
+      "nikkiDIY": [
+        // 头发系列
+        {
+          // 区域 x
+          "TargetGroupID": 1,
+          "CoreData": {
+            "TargetColor0": {
+              "R": 0.062568999826908,
+              "B": 0.25274699926376,
+              "A": 1,
+              "G": 0.082763999700546
+            },
+            // 颜色id
+            "ColorGridID0": 17,
+            // 粗糙度
+            // 游戏里以光泽度显示
+            // 转换关系 Glossiness = 1−Roughness
+            "RoughnessOffset": 0,
+            "ColorGridID1": -1,
+            // 颜色混合模式 (可能没有 ? 无法调节光泽度时)
+            "HairColorMode": 1
+          },
+          "FeatureTag": 6,
+          "TargetClothID": 1023100128
+        },
+        /// 连衣裙 / 外套 / 上装 / 下装 / 袜子 / 鞋子 / 饰品 系列
+        {
+          // 染色区域
+          // ! 游戏里的区域由 TargetGroupID 与 FeatureTag 配合决定
+          "TargetGroupID": 1,
+          "CoreData": {
+            "B": 0.31389200687408,
+            // 颜色id
+            // -1 -> 自选色盘
+            // 1 - 8 -> 飞球果飘飘 色盘
+            // 9 - 16 -> 春日满满星 色盘
+            // 17 - 24 -> 星光果之梦 色盘
+            // 25 - 32 -> 眼影鱼碎闪 色盘
+            // 33 - 40 -> 围兜暖毛球 色盘
+            // 41 - 48 -> 星夜时光树 色盘
+            // 49 - 56 -> 崖上的壁灯 色盘
+            // 57 - 64 -> 风铃子腹语 色盘
+            // 65 - 72 -> 风絮草飘飞时 色盘
+            // 73 - 80 -> 雨夜路灯花 色盘
+            // 81 - 88 -> 耳坠萤未眠 色盘
+            // 89 - 96 -> 碧波裙摆湖 色盘
+            // 97 - 104 -> 星荧草来信 色盘
+            // 105 - 112 -> 丝巾蛾魅影 色盘
+            // 113 - 120 -> 花伞藤萝之雨 色盘
+            // 121 - 128 -> 兔耳草嫩蕊 色盘
+            // 129 - 136 -> 裙撑萤之歌 色盘
+            // 137 - 144 -> 名流鸦盛宴 色盘
+            "ColorGridID": 21,
+            "R": 0.13599300384521,
+            "A": 1,
+            "G": 0.17677299678326
+          },
+          // 部位特征
+          "FeatureTag": 1,
+          "TargetClothID": 1020900154
+        },
+      ],
       "nikkiRotPitch": 0,
       "nikkiRotYaw": -34.310001373291,
       "nikkiLocY": -62809.69140625,
@@ -1021,13 +1535,41 @@ const ex = {
       "customState": "Weapon.State.Open",
       "slotType": "Suit"
     },
+    // 载具数据
+    "CarrierInfo": {
+      "ScaleX": 1,
+      "ConfigObjID": 208408,
+      "LocX": -34447.333122682,
+      "RotYaw": -79.9067542905,
+      "LocY": 41263.716974831,
+      "RotRoll": 2.5560576006871,
+      "ScaleZ": 1,
+      "ScaleY": 1,
+      "Pose": "12000000000000000000A0BC00000000000000000000000000000000000000000000F03F000000000000000000000000000000000000000000000000000000000000F03F000000000000F03F000000000000F03FCD3B7F669EA0E63F00000000000000000000000000000000CD3B7F669EA0E6BF000000C00BF157C0000000007FEA204000000080E2824140000000000000F03F000000000000F03F000000000000F03FCD3B7F669EA0E63F00000000000000000000000000000000CD3B7F669EA0E6BF000000C00BF157C0000000007FEA20C000000080E2824140000000000000F03F000000000000F03F000000000000F03FCD3B7F669EA0E63F00000000000000000000000000000000CD3B7F669EA0E6BF000000E0A93B5840000000007FEA204000000080986D4140000000000000F03F000000000000F03F000000000000F03FCD3B7F669EA0E63F00000000000000000000000000000000CD3B7F669EA0E6BF000000E0A93B5840000000007FEA20C000000080986D4140000000000000F03F000000000000F03F000000000000F03F5BC4F2D9CEDDE8BFE630E7B95F0D69BEAF99275BCFE8633EE02B193B1924E43F0000000000000000000000C0DFD594BF000000C0DFD5C4B5000000000000F03F000000000000F03F000000000000F03F0000CCF22250A2BC00000000006ADCBB353D5A96A4D1433F4C78CD9DFFFFEF3F000000C00BF157C0FDFFFF7FE28241C000000000000000BD000000000000F03F000000000000F03F000000000000F03F3DBB27C8FD5B90BF7054D6C7D693C0BFBFA26848762FC0BFE96722D29F77EF3F00000060B7545340000000A0CFD859C000000000000020BD000000000000F03F000000000000F03F000000000000F03F00000000000080BC000000000000503C0D96C3FF1EA4E63F2A295E421D9DE63F600000A0833DFA3FFEFFFF5FCFD05140000000000000303D000000000000F03F000000000000F03F000000000000F03F00000030E3F074BC0000000020DB3ABC68A6FC399334C33F642B187643A3EFBF000000C0BB8F304004000020188054C0000000000000E4BE000000000000F03F000000000000F03F000000000000F03F000000000000000000000000000000000000000000000000010000000000F0BF010000809F015840040000407A3054C0000000000000103D000000000000F03F000000000000F03F000000000000F03F6C56AFCD7838943F6DA92D136F566CBF2BB4F2AE4516C63F2FE553B57283EF3F00000020994B40400600006071AD3EC0000000000000003D000000000000F03F000000000000F03F000000000000F03F02ABCF6F6C3894BFC086287666566C3F6C5145914516C6BFCC48A4B87283EF3F00FEFFFFFF9E9A3F000000E0FD702F40FFFFFF3F93203140000000000000F03F000000000000F03F000000000000F03FF6EE408FDC6194BFC0D8A38EF58F633F7046993558DCCCBFC59353D75B2BEF3F00FCFFFFFF8B9ABFFCFFFF9FF9702FC0FEFFFF1F701B2EC0000000000000F03F000000000000F03F000000000000F03F00000030E3F074BC0000000020DB3ABC68A6FC399334C33F642B187643A3EFBF000000C0FB1551C0040000C0108054C0000000000000C0BE000000000000F03F000000000000F03F000000000000F03FF5F1CF331927943F9A17154DE2476FBFDF7E41913F61C83F3174010D5B68EF3F0000000040284AC0050000C070AD3EC00000000000000000000000000000F03F000000000000F03F000000000000F03FD1DC24550C2794BF0044266FCB476F3FBBE3DD923F61C8BF90B9140F5B68EF3F00FBFFFFFF9D9A3FFEFFFF7FFC702F400000004093203140000000000000F03F000000000000F03F000000000000F03FB6790324995594BFE06972A4A787663F8FD624A69E20CFBFDF0D20E66108EF3F00010000008D9ABF03000000FB702FC0FDFFFFFF6F1B2EC0000000000000F03F000000000000F03F000000000000F03F",
+      "LocZ": -19963.649804431,
+      "RotPitch": -1.5918875026115
+    },
     // 天气
     // 0 -> 晴天 / 彩虹天
     // 2 -> 雨天
     // 4 ->
     "WeatherType": 0,
     "StaticInfos": {},
-    "Interactions": {},
+    // 摆饰数据
+    "Interactions": [
+      {
+        "ScaleX": 1,
+        "LocX": -33669.8984375,
+        "RotYaw": 16.319381713867,
+        "LocY": 40022.9296875,
+        "ScaleZ": 1,
+        "ScaleY": 1,
+        "RotPitch": 0,
+        "RotRoll": 0,
+        "LocZ": -19980.26171875,
+        "CfgID": 212021
+      }
+    ],
     // 大喵数据
     // “隐藏大喵” 开启后无数据
     "DaMiaoInfo": {
@@ -1047,6 +1589,8 @@ const ex = {
       "RotPitch": 0
     }
   },
+  // 任务过场 (一般自动拍摄  自动拍摄时只会包含该数据段)
+  // ? 猜测 : 旧版本自动拍摄时 只包含 PortraitModeHandler 数据段
   "PhotoWallPlugin": {
     "photoID": 171160301
     // 或者
@@ -1060,11 +1604,30 @@ const ex = {
   "PuzzleGamePlugin": {
     "Tag": -1
   },
+  // 部分任务过场自动拍摄图只会包含该数据段
   "PortraitModeHandler": {
     // 默认 0
     // 启用“竖构图” 为 1
     "PortraitMode": 1
   },
+  // 编辑图片的信息
+  "EditPhotoHandler": {
+    // 是否有贴纸
+    "hasSticker": true,
+    // 是否有文字
+    "hasText": false,
+    "editState": true
+  },
+  // 惊险拍摄
+  "RiskPhoto": [
+    // 自定义格式
+    //:21:true
+  ],
+  // 任务框
+  "InteractivePhoto": [
+    // 自定义格式
+    //:101369:true
+  ],
   // 该属性仅世界巡游图片拥有
   "ClockGamePlugin": {
     "Tag": 101020111
