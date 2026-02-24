@@ -1,3 +1,5 @@
+export "map.dart";
+import "map.dart";
 
 import 'dart:convert';
 import 'dart:io';
@@ -17,405 +19,6 @@ import 'package:path/path.dart' as path;
 
 
 
-extension type const GameWeatherType(int data){
-  static const GameWeatherType sunny = GameWeatherType(0);
-  static const GameWeatherType rainy = GameWeatherType(2);
-
-  static const Map<int, String> _map = {
-    0: "game_weather_0",
-    2: "game_weather_2",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameInteractivePhotoType(int data){
-
-  static const Map<int, String> _map = {
-
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameInteractivePhotoState(bool data){
-  static const GameInteractivePhotoState falseState = GameInteractivePhotoState(false);
-  static const GameInteractivePhotoState trueState = GameInteractivePhotoState(true);
-
-  static const Map<bool, String> _map = {
-    false: "game_interactive_photo_state_false",
-    true: "game_interactive_photo_state_true",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GamePuzzleGame(int data){
-  static const GamePuzzleGame none = GamePuzzleGame(-1);
-
-  static const Map<int, String> _map = {
-    -1: "game_puzzle_game_-1",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GamePortraitMode(int data){
-  static const GamePortraitMode disable = GamePortraitMode(0);
-  static const GamePortraitMode enable = GamePortraitMode(1);
-
-  static const Map<int, String> _map = {
-    0: "game_portrait_mode_0",
-    1: "game_portrait_mode_1",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameApertureSection(int data){
-  static const GamePortraitMode f_1_2 = GamePortraitMode(1);
-  static const GamePortraitMode f_1_4 = GamePortraitMode(2);
-  static const GamePortraitMode f_2 = GamePortraitMode(3);
-  static const GamePortraitMode f_2_2 = GamePortraitMode(4);
-  static const GamePortraitMode f_2_5 = GamePortraitMode(5);
-  static const GamePortraitMode f_2_8 = GamePortraitMode(6);
-  static const GamePortraitMode f_3_2 = GamePortraitMode(7);
-  static const GamePortraitMode f_3_5 = GamePortraitMode(8);
-  static const GamePortraitMode f_4 = GamePortraitMode(9);
-  static const GamePortraitMode f_4_5 = GamePortraitMode(10);
-  static const GamePortraitMode f_5 = GamePortraitMode(11);
-  static const GamePortraitMode f_5_6 = GamePortraitMode(12);
-  static const GamePortraitMode f_8 = GamePortraitMode(13);
-  static const GamePortraitMode f_11 = GamePortraitMode(14);
-  static const GamePortraitMode f_16 = GamePortraitMode(15);
-
-  static const Map<int, String> _map = {
-    1: "f/1.2",
-    2: "f/1.4",
-    3: "f/2",
-    4: "f/2.2",
-    5: "f/2.5",
-    6: "f/2.8",
-    7: "f/3.2",
-    8: "f/3.5",
-    9: "f/4",
-    10: "f/4.5",
-    11: "f/5",
-    12: "f/5.6",
-    13: "f/8",
-    14: "f/11",
-    15: "f/16",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => false;
-}
-
-extension type const GameLightId(String data){
-  static const GameLightId None = GameLightId("None");
-  static const GameLightId DirectionLight_L = GameLightId("DirectionLight_L");
-  static const GameLightId DirectionLight_R = GameLightId("DirectionLight_R");
-  static const GameLightId DirectionLight_T = GameLightId("DirectionLight_T");
-  static const GameLightId DirectionLight_B = GameLightId("DirectionLight_B");
-  static const GameLightId HueEdgeLight_001_L = GameLightId("HueEdgeLight_001_L");
-  static const GameLightId HueEdgeLight_001_R = GameLightId("HueEdgeLight_001_R");
-  static const GameLightId HueEdgeLight_002_L = GameLightId("HueEdgeLight_002_L");
-  static const GameLightId HueEdgeLight_002_R = GameLightId("HueEdgeLight_002_R");
-  static const GameLightId HueEdgeLight_003_L = GameLightId("HueEdgeLight_003_L");
-  static const GameLightId HueEdgeLight_003_R = GameLightId("HueEdgeLight_003_R");
-  static const GameLightId HueEdgeLight_004_L = GameLightId("HueEdgeLight_004_L");
-  static const GameLightId HueEdgeLight_004_R = GameLightId("HueEdgeLight_004_R");
-  static const GameLightId VibeLight_001 = GameLightId("VibeLight_001");
-  static const GameLightId VibeLight_002 = GameLightId("VibeLight_002");
-  static const GameLightId VibeLight_003 = GameLightId("VibeLight_003");
-  static const GameLightId VibeLight_004 = GameLightId("VibeLight_004");
-
-  static const Map<String, String> _map = {
-    "None": "game_light_None",
-    "DirectionLight_L": "game_light_DirectionLight_L",
-    "DirectionLight_R": "game_light_DirectionLight_R",
-    "DirectionLight_T": "game_light_DirectionLight_T",
-    "DirectionLight_B": "game_light_DirectionLight_B",
-    "HueEdgeLight_001_L": "game_light_HueEdgeLight_001_L",
-    "HueEdgeLight_001_R": "game_light_HueEdgeLight_001_R",
-    "HueEdgeLight_002_L": "game_light_HueEdgeLight_002_L",
-    "HueEdgeLight_002_R": "game_light_HueEdgeLight_002_R",
-    "HueEdgeLight_003_L": "game_light_HueEdgeLight_003_L",
-    "HueEdgeLight_003_R": "game_light_HueEdgeLight_003_R",
-    "HueEdgeLight_004_L": "game_light_HueEdgeLight_004_L",
-    "HueEdgeLight_004_R": "game_light_HueEdgeLight_004_R",
-    "VibeLight_001": "game_light_VibeLight_001",
-    "VibeLight_002": "game_light_VibeLight_002",
-    "VibeLight_003": "game_light_VibeLight_003",
-    "VibeLight_004": "game_light_VibeLight_004",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameFilterId(String data){
-  static const GameFilterId None = GameFilterId("None");
-  static const GameFilterId Fresh_001 = GameFilterId("Fresh_001");
-  static const GameFilterId Fresh_002 = GameFilterId("Fresh_002");
-  static const GameFilterId Fresh_003 = GameFilterId("Fresh_003");
-  static const GameFilterId Fresh_004 = GameFilterId("Fresh_004");
-  static const GameFilterId Fresh_005 = GameFilterId("Fresh_005");
-  static const GameFilterId Weather_001 = GameFilterId("Weather_001");
-  static const GameFilterId Weather_002 = GameFilterId("Weather_002");
-  static const GameFilterId Weather_003 = GameFilterId("Weather_003");
-  static const GameFilterId Weather_004 = GameFilterId("Weather_004");
-  static const GameFilterId Vibe_009 = GameFilterId("Vibe_009");
-  static const GameFilterId Vibe_001 = GameFilterId("Vibe_001");
-  static const GameFilterId Vibe_002 = GameFilterId("Vibe_002");
-  static const GameFilterId Vibe_003 = GameFilterId("Vibe_003");
-  static const GameFilterId Vibe_004 = GameFilterId("Vibe_004");
-  static const GameFilterId Vibe_005 = GameFilterId("Vibe_005");
-
-  static const Map<String, String> _map = {
-    "None": "game_filter_None",
-    "Fresh_001": "game_filter_Fresh_001",
-    "Fresh_002": "game_filter_Fresh_002",
-    "Fresh_003": "game_filter_Fresh_003",
-    "Fresh_004": "game_filter_Fresh_004",
-    "Fresh_005": "game_filter_Fresh_005",
-    "Weather_001": "game_filter_Weather_001",
-    "Weather_002": "game_filter_Weather_002",
-    "Weather_003": "game_filter_Weather_003",
-    "Weather_004": "game_filter_Weather_004",
-    "Vibe_009": "game_filter_Vibe_009",
-    "Vibe_001": "game_filter_Vibe_001",
-    "Vibe_002": "game_filter_Vibe_002",
-    "Vibe_003": "game_filter_Vibe_003",
-    "Vibe_004": "game_filter_Vibe_004",
-    "Vibe_005": "game_filter_Vibe_005",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-
-
-
-
-// 10位
-// 3b -> 102
-// 1b -> 服装状态
-//    服饰
-//        进化 0 -> 0进, 2 -> 换新, 3 -> 1进, 4 -> 2进, 5 -> 3进
-//    饰品
-//
-//    妆容-肤色
-//        不保存该数据(0 -> 无)
-//        1 -> 浓情夜宴
-//        2 -> 暮色倒影
-//        3 -> 雪上月华
-// 2b -> 类型
-//    发型(Hair) 10
-//    连衣裙(Dresses) 90
-//    外套(Outerwear) 20
-//    上衣(Tops) 30
-//    下装(Bottoms) 41
-//    袜子(Socks) 50
-//    鞋子(Shoes) 60
-//    饰品-发饰(Hair Accessories) 71
-//    饰品-帽子(Headwear) 72
-//    饰品-耳饰(Earrings) 73
-//    饰品-颈饰(Neckwear) 74
-//    饰品-腕饰(Bracelets) 75
-//    饰品-项圈(Chokers) 76
-//    饰品-手套(Gloves) 77
-//    饰品-面饰(Face Decorations) 92
-//    饰品-胸饰(Chest Accessories) 93
-//    饰品-挂饰(Pendants) 94
-//    饰品-背饰(Backpieces) 95
-//    饰品-戒指(Rings) 96
-//    饰品-臂饰(Arm Decorations) 97
-//    饰品-手持物(Handhelds) 78
-//    饰品-肤绘(Body Paint) 79
-//    妆容-全妆(Full Makeup) 不保存该数据(80) 底妆+眉妆+睫毛+美瞳+唇妆 同一套装
-//    妆容-底妆(Base Makeup) 81
-//    妆容-眉妆(Eyebrows) 82
-//    妆容-睫毛(Eyelashes) 83
-//    妆容-美瞳(Contacts) 84
-//    妆容-唇妆(Lips) 85
-//    妆容-肤色(Skin Tones) 86
-// 4b -> 套装id
-//    0042 -> 初始
-
-extension type const GameNikkiClothesAttireType(int data){
-  static const GameNikkiClothesAttireType clothing = GameNikkiClothesAttireType(1);
-  static const GameNikkiClothesAttireType accessories = GameNikkiClothesAttireType(2);
-  static const GameNikkiClothesAttireType makeup = GameNikkiClothesAttireType(3);
-
-  static const Map<int, String> _map = {
-    1: "game_nikki_clothes_clothing",
-    2: "game_nikki_clothes_accessories",
-    3: "game_nikki_clothes_makeup",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameNikkiClothesType(int data){
-  static const GameNikkiClothesType hair = GameNikkiClothesType(10);
-  static const GameNikkiClothesType dresses = GameNikkiClothesType(90);
-  static const GameNikkiClothesType outerwear = GameNikkiClothesType(20);
-  static const GameNikkiClothesType tops = GameNikkiClothesType(30);
-  static const GameNikkiClothesType bottoms = GameNikkiClothesType(41);
-  static const GameNikkiClothesType socks = GameNikkiClothesType(50);
-  static const GameNikkiClothesType shoes = GameNikkiClothesType(60);
-  static const GameNikkiClothesType hairAccessories = GameNikkiClothesType(71);
-  static const GameNikkiClothesType headwear = GameNikkiClothesType(72);
-  static const GameNikkiClothesType earrings = GameNikkiClothesType(73);
-  static const GameNikkiClothesType neckwear = GameNikkiClothesType(74);
-  static const GameNikkiClothesType bracelets = GameNikkiClothesType(75);
-  static const GameNikkiClothesType chokers = GameNikkiClothesType(76);
-  static const GameNikkiClothesType gloves = GameNikkiClothesType(77);
-  static const GameNikkiClothesType faceDecorations = GameNikkiClothesType(92);
-  static const GameNikkiClothesType chestAccessories = GameNikkiClothesType(93);
-  static const GameNikkiClothesType pendants = GameNikkiClothesType(94);
-  static const GameNikkiClothesType backpieces = GameNikkiClothesType(95);
-  static const GameNikkiClothesType rings = GameNikkiClothesType(96);
-  static const GameNikkiClothesType armDecorations = GameNikkiClothesType(97);
-  static const GameNikkiClothesType handhelds = GameNikkiClothesType(78);
-  static const GameNikkiClothesType bodyPaint = GameNikkiClothesType(79);
-  static const GameNikkiClothesType fullMakeup = GameNikkiClothesType(80);
-  static const GameNikkiClothesType baseMakeup = GameNikkiClothesType(81);
-  static const GameNikkiClothesType eyebrows = GameNikkiClothesType(82);
-  static const GameNikkiClothesType eyelashes = GameNikkiClothesType(83);
-  static const GameNikkiClothesType contacts = GameNikkiClothesType(84);
-  static const GameNikkiClothesType lips = GameNikkiClothesType(85);
-  static const GameNikkiClothesType skinTones = GameNikkiClothesType(86);
-
-  static const Map<int, String> _map = {
-    10: "game_nikki_clothes_clothing_hair",
-    90: "game_nikki_clothes_clothing_dresses",
-    20: "game_nikki_clothes_clothing_outerwear",
-    30: "game_nikki_clothes_clothing_tops",
-    41: "game_nikki_clothes_clothing_bottoms",
-    50: "game_nikki_clothes_clothing_socks",
-    60: "game_nikki_clothes_clothing_shoes",
-    71: "game_nikki_clothes_accessories_hair_accessories",
-    72: "game_nikki_clothes_accessories_headwear",
-    73: "game_nikki_clothes_accessories_earrings",
-    74: "game_nikki_clothes_accessories_neckwear",
-    75: "game_nikki_clothes_accessories_bracelets",
-    76: "game_nikki_clothes_accessories_chokers",
-    77: "game_nikki_clothes_accessories_gloves",
-    78: "game_nikki_clothes_accessories_handhelds",
-    92: "game_nikki_clothes_accessories_face_decorations",
-    93: "game_nikki_clothes_accessories_chest_accessories",
-    94: "game_nikki_clothes_accessories_pendants",
-    95: "game_nikki_clothes_accessories_backpieces",
-    96: "game_nikki_clothes_accessories_rings",
-    97: "game_nikki_clothes_accessories_arm_decorations",
-    79: "game_nikki_clothes_accessories_body_paint",
-    80: "game_nikki_clothes_makeup_full_makeup",
-    81: "game_nikki_clothes_makeup_base_makeup",
-    82: "game_nikki_clothes_makeup_eyebrows",
-    83: "game_nikki_clothes_makeup_eyelashes",
-    84: "game_nikki_clothes_makeup_contacts",
-    85: "game_nikki_clothes_makeup_lips",
-    86: "game_nikki_clothes_makeup_skin_tones",
-  };
-
-  GameNikkiClothesAttireType get attireType => switch(data){
-    >= 10 && <= 60 || 90 => GameNikkiClothesAttireType.clothing,
-    >= 70 && <= 79 || >= 92 && <= 97 => GameNikkiClothesAttireType.accessories,
-    >= 80 && <= 86 => GameNikkiClothesAttireType.makeup,
-    _ => GameNikkiClothesAttireType(0),
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameNikkiClothes(int data){
-
-
-  static const Map<int, String> _map = {
-
-  };
-
-  /// 102 0 71 0353
-  bool get isClothes => data >= 1e9 && data < 1e10;
-
-  int get prefixId => data ~/ 1e7;
-
-  int get state{
-    final int p = ((data ~/ 1e7) * 1e7).toInt();
-
-    return (data - p) ~/ 1e6;
-  }
-
-  GameNikkiClothesType get type{
-    final int p = ((data ~/ 1e6) * 1e6).toInt();
-
-    final int type = (data - p) ~/ 1e4;
-
-    return GameNikkiClothesType(type);
-  }
-
-  int get outfitsId{
-    final int p = ((data ~/ 1e4) * 1e4).toInt();
-
-    return data - p;
-  }
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-extension type const GameNikkiClothesOutfits(int data){
-  static const Map<int, String> _map = {
-
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
-//  进化 0 -> 0进, 2 -> 换新, 3 -> 1进, 4 -> 2进, 5 -> 3进
-extension type const GameNikkiClothesClothingState(int data){
-  static const GameNikkiClothesClothingState evolution_0 = GameNikkiClothesClothingState(0);
-  static const GameNikkiClothesClothingState glowUp = GameNikkiClothesClothingState(2);
-  static const GameNikkiClothesClothingState evolution_1 = GameNikkiClothesClothingState(3);
-  static const GameNikkiClothesClothingState evolution_2 = GameNikkiClothesClothingState(4);
-  static const GameNikkiClothesClothingState evolution_3 = GameNikkiClothesClothingState(5);
-
-  static const Map<int, String> _map = {
-    0: "game_nikki_clothes_evolution_0",
-    2: "game_nikki_clothes_glow_up",
-    3: "game_nikki_clothes_evolution_1",
-    4: "game_nikki_clothes_evolution_2",
-    5: "game_nikki_clothes_evolution_3",
-  };
-
-  String get stringData => _map[data] ?? data.toString();
-
-  bool get hasTranslation => _map.containsKey(data);
-}
-
 
 
 
@@ -429,9 +32,11 @@ class Field<T>{
   final bool visible;
   final String key;
   final bool isTranslateKey;
+  final List<String>? keyArgs;
   final T? value;
   final String? _stringValue;
   final bool isTranslateValue;
+  final List<String>? valueArgs;
   final List<Field> children;
 
   const Field({
@@ -439,9 +44,11 @@ class Field<T>{
     this.visible = true,
     required this.key,
     this.isTranslateKey = true,
+    this.keyArgs,
     this.value,
     String? stringValue,
     this.isTranslateValue = false,
+    this.valueArgs,
     this.children = const <Field>[],
   }) :
     _stringValue = stringValue;
@@ -522,6 +129,20 @@ class Scale3 extends Field<(num, num, num)>{
     );
 }
 
+class ColorRGBA extends Field<(num, num, num, num)>{
+  const ColorRGBA({
+    super.key = "ia_color_rgba",
+    required num r,
+    required num g,
+    required num b,
+    required num a,
+    String? stringValue,
+  }) :
+    super(
+    value: (r, g, b, a),
+    stringValue: stringValue ?? "($r, $g, $b, $a)",
+  );
+}
 
 
 
@@ -623,11 +244,7 @@ class NikkiPhotoAddition extends Field{
     if(nikkiPhotoJson case {
       "SocialPhoto": Map socialPhoto,
     }){
-      if(socialPhoto case {
-        "PhotoInfo": Map photoInfo,
-      }){
-        res.add(NikkiInfo.fromGameJson(photoInfoJson: photoInfo));
-      }
+      res.add(NikkiInfo.fromGameJson(socialPhotoJson: socialPhoto));
     }
 
     return res;
@@ -694,6 +311,9 @@ class PhotographyInfo extends Field{
   static List<Field> parseTaskData(dynamic nikkiPhotoJson){
     final List<Field> res = <Field>[];
 
+    final List<Field> riskPhotoFields = <Field>[];
+    final List<Field> taskPhotoFields = <Field>[];
+
     if(nikkiPhotoJson is! Map) return res;
 
     if(nikkiPhotoJson case {
@@ -713,6 +333,25 @@ class PhotographyInfo extends Field{
     }
 
     if(nikkiPhotoJson case {
+      "RiskPhoto": Map riskPhoto,
+    }){
+      for(final entry in riskPhoto.entries){
+        if(entry.key is int && entry.value is bool){
+          final GameRiskPhotoType riskPhotoTypeInfo = GameRiskPhotoType(entry.key);
+          final GameRiskPhotoState riskPhotoState = GameRiskPhotoState(entry.value);
+
+          riskPhotoFields.add(Field<bool>(
+            key: riskPhotoTypeInfo.stringData,
+            isTranslateKey: riskPhotoTypeInfo.hasTranslation,
+            value: riskPhotoState.data,
+            stringValue: riskPhotoState.stringData,
+            isTranslateValue: riskPhotoState.hasTranslation,
+          ));
+        }
+      }
+    }
+
+    if(nikkiPhotoJson case {
       "InteractivePhoto": Map interactivePhoto,
     }){
       for(final entry in interactivePhoto.entries){
@@ -720,7 +359,7 @@ class PhotographyInfo extends Field{
           final GameInteractivePhotoType interactivePhotoTypeInfo = GameInteractivePhotoType(entry.key);
           final GameInteractivePhotoState interactivePhotoStateInfo = GameInteractivePhotoState(entry.value);
 
-          res.add(Field<bool>(
+          taskPhotoFields.add(Field<bool>(
             key: interactivePhotoTypeInfo.stringData,
             isTranslateKey: interactivePhotoTypeInfo.hasTranslation,
             value: interactivePhotoStateInfo.data,
@@ -730,6 +369,22 @@ class PhotographyInfo extends Field{
         }
       }
     }
+
+    res.add(Field<bool>(
+      key: "ia_risk_photo",
+      value: riskPhotoFields.isNotEmpty,
+      stringValue: riskPhotoFields.isNotEmpty ? "ia_has_risk_photo" : "ia_has_no_risk_photo",
+      isTranslateValue: true,
+      children: riskPhotoFields,
+    ));
+
+    res.add(Field<bool>(
+      key: "ia_task_photo",
+      value: taskPhotoFields.isNotEmpty,
+      stringValue: taskPhotoFields.isNotEmpty ? "ia_has_task_photo" : "ia_has_no_task_photo",
+      isTranslateValue: true,
+      children: taskPhotoFields,
+    ));
 
     return res;
   }
@@ -1027,9 +682,35 @@ class CameraInfo extends Field{
 }
 
 
-/// TODO 巨大化
 class NikkiInfo extends Field{
-  static List<Field> parse(dynamic photoInfoJson){
+  static List<Field> parse(dynamic socialPhotoJson){
+    final List<Field> res = <Field>[];
+
+    if(socialPhotoJson is! Map) return res;
+
+    if(socialPhotoJson case {
+      "GiantState": bool giantState,
+    }){
+      final GameNikkiGiantState giantStateInfo = GameNikkiGiantState(giantState);
+
+      res.add(Field<bool>(
+        key: "ia_nikki_giant_state",
+        value: giantStateInfo.data,
+        stringValue: giantStateInfo.stringData,
+        isTranslateValue: giantStateInfo.hasTranslation,
+      ));
+    }
+
+    if(socialPhotoJson case {
+      "PhotoInfo": dynamic photoInfoJson,
+    }){
+      res.addAll(parsePhotoInfo(photoInfoJson));
+    }
+
+    return res;
+  }
+
+  static List<Field> parsePhotoInfo(dynamic photoInfoJson){
     final List<Field> res = <Field>[];
 
     if(photoInfoJson is! Map) return res;
@@ -1037,11 +718,13 @@ class NikkiInfo extends Field{
     if(photoInfoJson case {
       "nikkiHidden": bool nikkiHidden,
     }){
+      final GameNikkiHiddenState nikkiHiddenState = GameNikkiHiddenState(nikkiHidden);
+
       res.add(Field<bool>(
         key: "ia_nikki_hidden",
-        value: nikkiHidden,
-        stringValue: "ia_nikki_hidden_$nikkiHidden",
-        isTranslateValue: true,
+        value: nikkiHiddenState.data,
+        stringValue: nikkiHiddenState.stringData,
+        isTranslateValue: nikkiHiddenState.hasTranslation,
       ));
     }
 
@@ -1086,97 +769,540 @@ class NikkiInfo extends Field{
     }){
       res.add(Field(
         key: "ia_nikki_clothes",
-        children: parseNikkiClothe(nikkiClothes),
+        children: parseNikkiClothes(photoInfoJson),
       ));
     }
 
     return res;
   }
 
-  static List<Field> parseNikkiClothe(dynamic nikkiClothesJson){
+  static List<Field> parseNikkiClothes(dynamic photoInfoJson){
     final List<Field> res = <Field>[];
 
-    final List<Field> clothingFields = <Field>[];
-    final List<Field> accessoriesFields = <Field>[];
-    final List<Field> makeupFields = <Field>[];
+    if(photoInfoJson is! Map) return res;
 
-    if(nikkiClothesJson is! List) return res;
+    /// parse NikkiDIY
+    final List<Field> nikkiDIY = [];
 
-    for(final dynamic data in nikkiClothesJson){
-      if(data is int){
-        final GameNikkiClothes clothesInfo = GameNikkiClothes(data);
+    if(photoInfoJson case {
+      "nikkiDIY": dynamic nikkiDIYJson,
+    }){
+      nikkiDIY.addAll(parseNikkiDIY(nikkiDIYJson));
+    }
 
-        if(clothesInfo.isClothes){
-          final GameNikkiClothesType typeInfo = clothesInfo.type;
-          final GameNikkiClothesAttireType attireTypeInfo = typeInfo.attireType;
+    /// parse NikkiClothes
+    if(photoInfoJson case {
+      "nikkiClothes": dynamic nikkiClothesJson,
+    }){
+      final List<Field> accessoriesFields = <Field>[];
+      final List<Field> makeupFields = <Field>[];
 
-          switch(attireTypeInfo){
-            case GameNikkiClothesAttireType.clothing:
-              final GameNikkiClothesOutfits outfitsInfo = GameNikkiClothesOutfits(clothesInfo.outfitsId);
-              final GameNikkiClothesClothingState stateInfo = GameNikkiClothesClothingState(clothesInfo.state);
+      for(final dynamic data in nikkiClothesJson){
+        if(data is int){
+          final GameClothes clothesInfo = GameClothes(data);
 
-              clothingFields.add(Field<int>(
-                key: typeInfo.stringData,
-                isTranslateKey: typeInfo.hasTranslation,
-                value: clothesInfo.data,
-                stringValue: clothesInfo.stringData,
-                isTranslateValue: clothesInfo.hasTranslation,
-                children: [
-                  Field<int>(
-                    key: "ia_nikki_clothes_clothing_outfits",
-                    value: outfitsInfo.data,
-                    stringValue: outfitsInfo.stringData,
-                    isTranslateValue: outfitsInfo.hasTranslation,
-                  ),
-                  Field<int>(
-                    key: "ia_nikki_clothes_clothing_state",
-                    value: stateInfo.data,
-                    stringValue: stateInfo.stringData,
-                    isTranslateValue: stateInfo.hasTranslation,
-                  ),
-                ],
-              ));
-              break;
-            case GameNikkiClothesAttireType.accessories:
-              accessoriesFields.add(Field<int>(
-                key: typeInfo.stringData,
-                value: clothesInfo.data,
-                stringValue: clothesInfo.stringData,
-                isTranslateValue: clothesInfo.hasTranslation,
-              ));
-              break;
-            case GameNikkiClothesAttireType.makeup:
-              makeupFields.add(Field<int>(
-                key: typeInfo.stringData,
-                value: clothesInfo.data,
-                stringValue: clothesInfo.stringData,
-                isTranslateValue: clothesInfo.hasTranslation,
-              ));
-              break;
+          if(clothesInfo.isClothes){
+            final GameNikkiClothesType typeInfo = clothesInfo.type;
+            final GameNikkiClothesSlot slotInfo = typeInfo.slot;
+            final GameNikkiClothesOutfits outfitsInfo = GameNikkiClothesOutfits(clothesInfo.outfitsId);
+            final GameClothesState stateInfo = GameClothesState(clothesInfo.state);
+
+            final Field? clothesDIY = nikkiDIY.where((Field clothesDIYField) => clothesDIYField.key == clothesInfo.stringData).firstOrNull;
+            final Field clothesDIYFields = Field<String>(
+              key: "ia_nikki_clothes_DIY",
+              value: clothesDIY?.children.isEmpty != false ? "ia_nikki_clothes_has_no_DIY" : "ia_nikki_clothes_has_DIY",
+              isTranslateValue: true,
+              children: clothesDIY?.children ?? const <Field>[],
+            );
+
+            switch(slotInfo){
+              case GameNikkiClothesSlot.unknown:
+                res.add(Field<int>(
+                  key: typeInfo.stringData,
+                  value: clothesInfo.data,
+                  stringValue: clothesInfo.stringData,
+                  isTranslateValue: clothesInfo.hasTranslation,
+                  children: [
+                    clothesDIYFields,
+                  ]
+                ));
+                break;
+              case GameNikkiClothesSlot.accessories:
+                accessoriesFields.add(Field<int>(
+                  key: typeInfo.stringData,
+                  value: clothesInfo.data,
+                  stringValue: clothesInfo.stringData,
+                  isTranslateValue: clothesInfo.hasTranslation,
+                  children: [
+                    Field<int>(
+                      key: "ia_nikki_clothes_clothing_outfits",
+                      value: outfitsInfo.data,
+                      stringValue: outfitsInfo.stringData,
+                      isTranslateValue: outfitsInfo.hasTranslation,
+                    ),
+                    Field<int>(
+                      key: "ia_nikki_clothes_clothing_state",
+                      value: stateInfo.data,
+                      stringValue: stateInfo.stringData,
+                      isTranslateValue: stateInfo.hasTranslation,
+                    ),
+                    clothesDIYFields,
+                  ],
+                ));
+                break;
+              case GameNikkiClothesSlot.makeup:
+                makeupFields.add(Field<int>(
+                  key: typeInfo.stringData,
+                  value: clothesInfo.data,
+                  stringValue: clothesInfo.stringData,
+                  isTranslateValue: clothesInfo.hasTranslation,
+                  children: [
+                    /// 肤色为 42
+                    if(typeInfo != GameNikkiClothesType.skinTones)
+                      Field<int>(
+                        key: "ia_nikki_clothes_clothing_outfits",
+                        value: outfitsInfo.data,
+                        stringValue: outfitsInfo.stringData,
+                        isTranslateValue: outfitsInfo.hasTranslation,
+                      ),
+                    clothesDIYFields,
+                  ],
+                ));
+                break;
+              default:
+                res.add(Field<int>(
+                  key: typeInfo.stringData,
+                  isTranslateKey: typeInfo.hasTranslation,
+                  value: clothesInfo.data,
+                  stringValue: clothesInfo.stringData,
+                  isTranslateValue: clothesInfo.hasTranslation,
+                  children: [
+                    Field<int>(
+                      key: "ia_nikki_clothes_clothing_outfits",
+                      value: outfitsInfo.data,
+                      stringValue: outfitsInfo.stringData,
+                      isTranslateValue: outfitsInfo.hasTranslation,
+                    ),
+                    Field<int>(
+                      key: "ia_nikki_clothes_clothing_state",
+                      value: stateInfo.data,
+                      stringValue: stateInfo.stringData,
+                      isTranslateValue: stateInfo.hasTranslation,
+                    ),
+                    clothesDIYFields,
+                  ],
+                ));
+                break;
+            }
+          }
+        }
+      }
+
+      if(accessoriesFields.isNotEmpty){
+        res.add(Field(
+          key: GameNikkiClothesSlot.accessories.stringData,
+          isTranslateKey: GameNikkiClothesSlot.accessories.hasTranslation,
+          children: accessoriesFields,
+        ));
+      }
+      if(makeupFields.isNotEmpty){
+        res.add(Field(
+          key: GameNikkiClothesSlot.makeup.stringData,
+          isTranslateKey: GameNikkiClothesSlot.makeup.hasTranslation,
+          children: makeupFields,
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  static List<Field> parseNikkiDIY(dynamic nikkiDIYJson){
+    final List<Field> res = <Field>[];
+
+    if(nikkiDIYJson is Map){
+      nikkiDIYJson = [nikkiDIYJson];
+    }
+
+    if(nikkiDIYJson is! List) return res;
+
+    /// sort
+    final Map<int, Map<GameDIYType, List<Map>>> sortedArea = {};
+
+    for(final dynamic data in nikkiDIYJson){
+      if(data is Map){
+        if(data case {
+          "TargetClothID": int targetClothID,
+          "FeatureTag": int featureTag,
+          "TargetGroupID": int targetGroupID,
+          "CoreData": Map coreData,
+        }){
+          /// GameDIYType.outfitDye & not hair
+          if(coreData case {
+            "ColorGridID": num _,
+            "R": num _,
+            "G": num _,
+            "B": num _,
+            "A": num _,
+          }){
+            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
+            (clothMap[GameDIYType.outfitDye] ??= <Map>[]).add(data);
+          }
+          /// GameDIYType.outfitDye & hair
+          else if(coreData case {
+            "TargetColor0": Map _,
+            "ColorGridID0": num _,
+            "RoughnessOffset": num _,
+          }){
+            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
+            (clothMap[GameDIYType.outfitDye] ??= <Map>[]).add(data);
+          }
+          /// GameDIYType.specialEffect
+          else if(coreData case {
+            "ColorGridID": num _,
+            "CoverDIYColor": bool _,
+          }){
+            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
+            (clothMap[GameDIYType.specialEffect] ??= <Map>[]).add(data);
+          }
+          /// GameDIYType.patternCreation
+          else if(coreData case {
+            "ReplaceTextureID": num _,
+          }){
+            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
+            (clothMap[GameDIYType.patternCreation] ??= <Map>[]).add(data);
+          }
+          /// GameDIYType.patternCreation
+          else if(coreData case {
+            "TilingData": num _
+          }){
+            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
+            (clothMap[GameDIYType.patternCreation] ??= <Map>[]).add(data);
           }
         }
       }
     }
+    /// clothes field
+    final Map<int, List<Field>> fieldArea = {};
 
-    if(clothingFields.isNotEmpty){
-      res.add(Field(
-        key: GameNikkiClothesAttireType.clothing.stringData,
-        isTranslateKey: GameNikkiClothesAttireType.clothing.hasTranslation,
-        children: clothingFields,
-      ));
+    for(final MapEntry<int, Map<GameDIYType, List<Map>>> clothesEntry in sortedArea.entries){
+      final List<Field> typeFields = (fieldArea[clothesEntry.key] ??= <Field>[]);
+
+      final List<Field> outfitDyeFields = [];
+      final List<Field> specialEffectFields = [];
+      final List<Field> patternCreationFields = [];
+
+      for(final MapEntry<GameDIYType, List<Map>> DIYEntry in clothesEntry.value.entries){
+
+        for(final Map DIYJson in DIYEntry.value){
+          if(DIYJson case {
+            "TargetClothID": int targetClothID,
+            "FeatureTag": int featureTag,
+            "TargetGroupID": int targetGroupID,
+            "CoreData": Map coreData,
+          }){
+            switch(DIYEntry.key){
+              /// GameDIYType.outfitDye
+              case GameDIYType.outfitDye:
+                final List<Field> areaChildren = [];
+
+                /// hair
+                if(GameClothes(targetClothID).type == GameNikkiClothesType.hair){
+                  if(coreData case {
+                    "TargetColor0": Map targetColor0,
+                    "ColorGridID0": int colorGridID0,
+                  }){
+                    final GameDIYColorGrid colorGridInfo = GameDIYColorGrid(colorGridID0);
+
+                    if(colorGridInfo.isInGrid){
+                      if(targetColor0 case {
+                        "R": num r,
+                        "G": num g,
+                        "B": num b,
+                        "A": num a,
+                      }){
+                        areaChildren.add(ColorRGBA(r: r, g: g, b: b, a: a));
+                      }
+
+                      final GameDIYColorPalette colorPaletteInfo = colorGridInfo.palette;
+                      final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
+
+                      areaChildren.addAll([
+                        Field<int>(
+                          key: "ia_DIY_color_palette_X",
+                          keyArgs: ["1"],
+                          value: colorPaletteInfo.data,
+                          stringValue: colorPaletteInfo.stringData,
+                          isTranslateValue: colorPaletteInfo.hasTranslation,
+                        ),
+                        Field<int>(
+                          key: "ia_DIY_color_swatch_X",
+                          keyArgs: ["1"],
+                          value: colorSwatchInfo.data,
+                          stringValue: colorSwatchInfo.stringData,
+                          isTranslateValue: colorSwatchInfo.hasTranslation,
+                        ),
+                      ]);
+                    }
+                  }
+
+                  if(coreData case {
+                    "TargetColor1": Map targetColor1,
+                    "ColorGridID1": int colorGridID1,
+                  }){
+                    final GameDIYColorGrid colorGridInfo = GameDIYColorGrid(colorGridID1);
+
+                    if(colorGridInfo.isInGrid){
+                      if(targetColor1 case {
+                        "R": num r,
+                        "G": num g,
+                        "B": num b,
+                        "A": num a,
+                      }){
+                        areaChildren.add(ColorRGBA(r: r, g: g, b: b, a: a));
+                      }
+
+                      final GameDIYColorPalette colorPaletteInfo = colorGridInfo.palette;
+                      final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
+
+                      areaChildren.addAll([
+                        Field<int>(
+                          key: "ia_DIY_color_palette_X",
+                          keyArgs: ["2"],
+                          value: colorPaletteInfo.data,
+                          stringValue: colorPaletteInfo.stringData,
+                          isTranslateValue: colorPaletteInfo.hasTranslation,
+                        ),
+                        Field<int>(
+                          key: "ia_DIY_color_swatch_X",
+                          keyArgs: ["2"],
+                          value: colorSwatchInfo.data,
+                          stringValue: colorSwatchInfo.stringData,
+                          isTranslateValue: colorSwatchInfo.hasTranslation,
+                        ),
+                      ]);
+                    }
+                  }
+
+                  if(coreData case {
+                    "RoughnessOffset": num roughnessOffset,
+                  }){
+                    areaChildren.add(Field<double>(
+                      key: "ia_DIY_outfit_dye_glossiness",
+                      value: (1 - roughnessOffset).toDouble(),
+                    ));
+                  }
+
+                  if(coreData case {
+                    "HairColorMode": int hairColorMode,
+                  }){
+                    final GameDIYHairColorMode hairColorModeInfo = GameDIYHairColorMode(hairColorMode);
+
+                    areaChildren.add(Field<int>(
+                      key: "ia_DIY_outfit_dye_hair_color_mode",
+                      value: hairColorModeInfo.data,
+                      stringValue: hairColorModeInfo.stringData,
+                      isTranslateValue: hairColorModeInfo.hasTranslation,
+                    ));
+                  }
+                }
+                /// not hair
+                else{
+                  if(coreData case {
+                    "ColorGridID": int colorGridID,
+                    "R": num r,
+                    "G": num g,
+                    "B": num b,
+                    "A": num a,
+                  }){
+                    areaChildren.add(ColorRGBA(r: r, g: g, b: b, a: a));
+
+                    final GameDIYColorGrid colorGridInfo = GameDIYColorGrid(colorGridID);
+
+                    if(colorGridInfo.isInGrid){
+                      final GameDIYColorPalette colorPaletteInfo = colorGridInfo.palette;
+                      final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
+
+                      areaChildren.addAll([
+                        Field<int>(
+                          key: "ia_DIY_color_palette",
+                          value: colorPaletteInfo.data,
+                          stringValue: colorPaletteInfo.stringData,
+                          isTranslateValue: colorPaletteInfo.hasTranslation,
+                        ),
+                        Field<int>(
+                          key: "ia_DIY_color_swatch",
+                          value: colorSwatchInfo.data,
+                          stringValue: colorSwatchInfo.stringData,
+                          isTranslateValue: colorSwatchInfo.hasTranslation,
+                        ),
+                      ]);
+                    }
+                  }
+                }
+
+                outfitDyeFields.add(Field(
+                  key: "ia_diy_area_X",
+                  keyArgs: ["$featureTag-$targetGroupID"],
+                  children: areaChildren,
+                ));
+                break;
+              case GameDIYType.specialEffect:
+                final List<Field> areaChildren = [];
+
+                if(coreData case {
+                  "ColorGridID": int colorGridID,
+                  "CoverDIYColor": bool coverDIYColor,
+                }){
+                  final GameDIYColorGrid colorGridInfo = GameDIYColorGrid(colorGridID);
+
+                  if(colorGridInfo.isInGrid){
+                    final GameDIYColorPalette colorPaletteInfo = colorGridInfo.palette;
+                    final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
+
+                    areaChildren.addAll([
+                      Field<int>(
+                        key: "ia_DIY_color_palette",
+                        value: colorPaletteInfo.data,
+                        stringValue: colorPaletteInfo.stringData,
+                        isTranslateValue: colorPaletteInfo.hasTranslation,
+                      ),
+                      Field<int>(
+                        key: "ia_DIY_color_swatch",
+                        value: colorSwatchInfo.data,
+                        stringValue: colorSwatchInfo.stringData,
+                        isTranslateValue: colorSwatchInfo.hasTranslation,
+                      ),
+                    ]);
+                  }
+
+                  final GameDIYCoverDIYColor coverDIYColorInfo = GameDIYCoverDIYColor(coverDIYColor);
+                  areaChildren.add(Field<bool>(
+                    key: "ia_DIY_cover_DIY_color",
+                    value: coverDIYColorInfo.data,
+                    stringValue: coverDIYColorInfo.stringData,
+                    isTranslateValue: coverDIYColorInfo.hasTranslation,
+                  ));
+                }
+
+                specialEffectFields.add(Field(
+                  key: "ia_diy_area_X",
+                  keyArgs: ["$featureTag-$targetGroupID"],
+                  children: areaChildren,
+                ));
+                break;
+              case GameDIYType.patternCreation:
+                final List<Field> areaChildren = [];
+
+                if(coreData case {
+                  "ReplaceTextureID": int replaceTextureID,
+                }){
+                  final GameDIYPatternTexture patternTextureInfo = GameDIYPatternTexture(replaceTextureID);
+
+                  areaChildren.add(Field(
+                    key: "ia_DIY_pattern_texture",
+                    value: patternTextureInfo.data,
+                    stringValue: patternTextureInfo.stringData,
+                    isTranslateValue: patternTextureInfo.hasTranslation,
+                  ));
+
+                  if(coreData case {
+                    "OverridePatternA": bool overridePatternA,
+                  }){
+                    final GameDIYOverridePatternA overridePatternAInfo = GameDIYOverridePatternA(overridePatternA);
+                    areaChildren.add(Field(
+                      key: "ia_DIY_override_pattern_A_false",
+                      value: overridePatternAInfo.data,
+                      stringValue: overridePatternAInfo.stringData,
+                      isTranslateValue: overridePatternAInfo.hasTranslation,
+                    ));
+                  }else{
+                    areaChildren.add(Field(
+                      key: "ia_DIY_override_pattern_A_false",
+                      value: GameDIYOverridePatternA.defaultState.data,
+                      stringValue: GameDIYOverridePatternA.defaultState.stringData,
+                      isTranslateValue: GameDIYOverridePatternA.defaultState.hasTranslation,
+                    ));
+                  }
+                }
+                else if(coreData case {
+                  "TilingData": num tilingData,
+                }){
+                  areaChildren.add(Field<double>(
+                    key: "ia_DIY_tiling_data",
+                    value: tilingData.toDouble(),
+                    stringValue: tilingData.toStringAsFixed(2),
+                  ));
+                }
+
+                patternCreationFields.add(Field(
+                  key: "ia_diy_area_X",
+                  keyArgs: ["$featureTag-$targetGroupID"],
+                  children: areaChildren,
+                ));
+                break;
+            }
+          }
+        }
+      }
+
+      if(outfitDyeFields.isNotEmpty){
+        typeFields.add(Field(
+          key: GameDIYType.outfitDye.stringData,
+          isTranslateKey: GameDIYType.outfitDye.hasTranslation,
+          children: outfitDyeFields,
+        ));
+      }
+      if(specialEffectFields.isNotEmpty){
+        typeFields.add(Field(
+          key: GameDIYType.specialEffect.stringData,
+          isTranslateKey: GameDIYType.specialEffect.hasTranslation,
+          children: specialEffectFields,
+        ));
+      }
+      if(patternCreationFields.isNotEmpty){
+        /// 合并 TilingData
+        /// 寻找 TilingData
+        Field? tilingDataAreaField;
+        Field? tilingDataField;
+        for(final Field patternCreationAreaField in patternCreationFields){
+          for(final Field areaChildField in patternCreationAreaField.children){
+            if(areaChildField.key == "ia_DIY_tiling_data"){
+              tilingDataAreaField = patternCreationAreaField;
+              tilingDataField = areaChildField;
+              break;
+            }
+          }
+        }
+        /// 移出独立的 TilingData
+        patternCreationFields.remove(tilingDataAreaField);
+
+        /// 为每个 Field 添加 TilingData
+        if(tilingDataField != null){
+          for(final Field patternCreationAreaField in patternCreationFields){
+            patternCreationAreaField.children.add(tilingDataField);
+          }
+        }
+
+        typeFields.add(Field(
+          key: GameDIYType.patternCreation.stringData,
+          isTranslateKey: GameDIYType.patternCreation.hasTranslation,
+          children: [
+            ?tilingDataField,
+            ...patternCreationFields,
+          ],
+        ));
+      }
     }
-    if(accessoriesFields.isNotEmpty){
+
+    /// field
+    for(final MapEntry entry in fieldArea.entries){
+      final GameClothes clothesInfo = GameClothes(entry.key);
+
       res.add(Field(
-        key: GameNikkiClothesAttireType.accessories.stringData,
-        isTranslateKey: GameNikkiClothesAttireType.accessories.hasTranslation,
-        children: accessoriesFields,
-      ));
-    }
-    if(makeupFields.isNotEmpty){
-      res.add(Field(
-        key: GameNikkiClothesAttireType.makeup.stringData,
-        isTranslateKey: GameNikkiClothesAttireType.makeup.hasTranslation,
-        children: makeupFields,
+        key: clothesInfo.stringData,
+        isTranslateKey: clothesInfo.hasTranslation,
+        children: entry.value,
       ));
     }
 
@@ -1190,11 +1316,11 @@ class NikkiInfo extends Field{
 
   factory NikkiInfo.fromGameJson({
     String key = "ia_nikki_info",
-    dynamic photoInfoJson,
+    dynamic socialPhotoJson,
   }){
     return NikkiInfo._(
       key: key,
-      children: parse(photoInfoJson),
+      children: parse(socialPhotoJson),
     );
   }
 }
@@ -1459,6 +1585,7 @@ const ex = {
       // 服饰染色数据
       // 没数据时 "nikkiDIY": {}
       "nikkiDIY": [
+        /// 服装虹染
         // 头发系列
         {
           // 区域 x
@@ -1519,6 +1646,45 @@ const ex = {
           "FeatureTag": 1,
           "TargetClothID": 1020900154
         },
+
+        /// 特效调色
+        {
+          "TargetGroupID": 1,
+          "CoreData": {
+            "ColorGridID": 17,
+            // false -> 多彩调色
+            // true -> 单彩调色
+            "CoverDIYColor": true
+          },
+          "FeatureTag": 7,
+          "TargetClothID": 1025900128
+        },
+
+        /// 织纹绘制
+        {
+          "TargetGroupID": 1,
+          "CoreData": {
+            // 纹理id
+            "ReplaceTextureID": 1330020020,
+            // 可能没有, 默认false
+            // false -> 取消底色
+            // true -> 应用底色
+            "OverridePatternA": false
+          },
+          "FeatureTag": 2,
+          "TargetClothID": 1021300051
+        },
+        // 使用 织纹绘制 后才可能有该数据段
+        // 没有时默认 "密度调节" 为 1.0
+        {
+          "TargetGroupID": 1,
+          "CoreData": {
+            // 密度调节
+            "TilingData": 1.47
+          },
+          "FeatureTag": 5,
+          "TargetClothID": 1021300051
+        }
       ],
       "nikkiRotPitch": 0,
       "nikkiRotYaw": -34.310001373291,
