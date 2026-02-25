@@ -27,6 +27,7 @@ import 'package:path/path.dart' as path;
 
 
 
+
 class Field<T>{
   final String? iconName;
   final bool visible;
@@ -245,6 +246,8 @@ class NikkiPhotoAddition extends Field{
       "SocialPhoto": Map socialPhoto,
     }){
       res.add(NikkiInfo.fromGameJson(socialPhotoJson: socialPhoto));
+
+      res.add(MomoInfo.fromGameJson(socialPhotoJson: socialPhoto));
     }
 
     return res;
@@ -273,6 +276,14 @@ class PhotographyInfo extends Field{
 
     if(nikkiPhotoJson is! Map) return res;
 
+    final List<Field> editPhotoData = parseEditPhotoData(nikkiPhotoJson);
+    res.add(Field<String>(
+      key: "ia_edit_photo",
+      value: editPhotoData.isEmpty ? "ia_state_false_1" : null,
+      isTranslateValue: editPhotoData.isEmpty,
+      children: editPhotoData,
+    ));
+
     if(nikkiPhotoJson case {
       "SocialPhoto": Map socialPhoto,
     }){
@@ -296,13 +307,131 @@ class PhotographyInfo extends Field{
           isTranslateValue: weatherTypeInfo.hasTranslation,
         ));
       }
+    }
 
-      res.add(Field(
-        key: "ia_task",
-        children: parseTaskData(nikkiPhotoJson),
-      ));
+    final List<Field> photoWallData = parsePhotoWallData(nikkiPhotoJson);
+    res.add(Field(
+      key: "ia_photo_wall",
+      value: photoWallData.isEmpty ? "ia_state_false_1" : null,
+      isTranslateValue: photoWallData.isEmpty,
+      children: photoWallData,
+    ));
 
-      return res;
+    res.add(Field(
+      key: "ia_task",
+      children: parseTaskData(nikkiPhotoJson),
+    ));
+
+    return res;
+  }
+
+  static List<Field> parseEditPhotoData(dynamic nikkiPhotoJson){
+    final List<Field> res = <Field>[];
+
+    if(nikkiPhotoJson is! Map) return res;
+
+    if(nikkiPhotoJson case {
+      "EditPhotoHandler": Map editPhotoHandlerJson,
+    }){
+      if(editPhotoHandlerJson case {
+        "hasSticker": bool hasSticker,
+        "hasText": bool hasText,
+        "editState": bool editState,
+      }){
+        if(editState){
+          res.addAll([
+            Field<bool>(
+              key: "ia_edit_photo_has_sticker",
+              value: hasSticker,
+              stringValue: hasSticker ? "ia_state_true_1" : "ia_state_false_1",
+              isTranslateValue: true,
+            ),
+            Field<bool>(
+              key: "ia_edit_photo_has_text",
+              value: hasText,
+              stringValue: hasText ? "ia_state_true_1" : "ia_state_false_1",
+              isTranslateValue: true,
+            )
+          ]);
+        }
+      }
+    }
+
+    return res;
+  }
+
+  static List<Field> parseTimeData(dynamic timeJson){
+    final List<Field> res = <Field>[];
+
+    if(timeJson is! Map) return res;
+
+    if(timeJson case {
+      "day": num day,
+      "hour": num hour,
+      "min": num min,
+      "sec": num sec,
+    }){
+      res.addAll([
+        Field<num>(
+          key: "ia_time_day",
+          value: day,
+        ),
+        Field<num>(
+          key: "ia_time_hour",
+          value: hour,
+        ),
+        Field<num>(
+          key: "ia_time_min",
+          value: min,
+        ),
+        Field<num>(
+          key: "ia_time_sec",
+          value: sec,
+        ),
+      ]);
+    }
+
+    return res;
+  }
+
+  //// 任务过场 (一般自动拍摄  自动拍摄时只会包含该数据段)
+  //   // ? 猜测 : 旧版本自动拍摄时 只包含 PortraitModeHandler 数据段
+  //   "PhotoWallPlugin": {
+  //     "photoID": 171160301
+  //     // 或者
+  //     // "photoID": [
+  //     //    1101260306
+  //     //  ]
+  //   },
+
+  static List<Field> parsePhotoWallData(dynamic nikkiPhotoJson){
+    final List<Field> res = <Field>[];
+
+    if(nikkiPhotoJson is! Map) return res;
+
+    if(nikkiPhotoJson case {
+      "PhotoWallPlugin": Map photoWallPluginJson
+    }){
+      if(photoWallPluginJson case {
+        "photoID": dynamic photoIDJson,
+      }){
+        if(photoIDJson is int){
+          photoIDJson = [photoIDJson];
+        }
+
+        if(photoIDJson is List){
+          for(final dynamic photoId in photoIDJson){
+            if(photoId is int){
+              final GamePhotoWall photoWallInfo = GamePhotoWall(photoId);
+
+              res.add(Field(
+                key: photoWallInfo.stringData,
+                isTranslateKey: photoWallInfo.hasTranslation,
+              ));
+            }
+          }
+        }
+      }
     }
 
     return res;
@@ -389,39 +518,6 @@ class PhotographyInfo extends Field{
     return res;
   }
 
-  static List<Field> parseTimeData(dynamic timeJson){
-    final List<Field> res = <Field>[];
-
-    if(timeJson is! Map) return res;
-
-    if(timeJson case {
-      "day": num day,
-      "hour": num hour,
-      "min": num min,
-      "sec": num sec,
-    }){
-      res.addAll([
-        Field<num>(
-          key: "ia_time_day",
-          value: day,
-        ),
-        Field<num>(
-          key: "ia_time_hour",
-          value: hour,
-        ),
-        Field<num>(
-          key: "ia_time_min",
-          value: min,
-        ),
-        Field<num>(
-          key: "ia_time_sec",
-          value: sec,
-        ),
-      ]);
-    }
-
-    return res;
-  }
 
   const PhotographyInfo._({
     super.key = "ia_photography_info",
@@ -652,11 +748,15 @@ class CameraInfo extends Field{
         }
 
         if(photoInfo case {
-          "poseId": num poseId,
+          "poseId": int poseId,
         }){
-          res.add(Field<int>(
+          final GamePoseId poseIdInfo = GamePoseId(poseId);
+
+          res.add(Field<GamePoseId>(
             key: "ia_pose_id",
-            value: poseId.toInt(),
+            value: poseIdInfo,
+            stringValue: poseIdInfo.stringData,
+            isTranslateValue: poseIdInfo.hasTranslation,
           ));
         }
       }
@@ -704,13 +804,30 @@ class NikkiInfo extends Field{
     if(socialPhotoJson case {
       "PhotoInfo": dynamic photoInfoJson,
     }){
-      res.addAll(parsePhotoInfo(photoInfoJson));
+      res.addAll(parseNikkiTransformationData(photoInfoJson));
+
+      res.add(Field(
+        key: "ia_nikki_clothes",
+        children: parseNikkiClothesData(photoInfoJson),
+      ));
     }
+
+    res.add(parseWeaponData(socialPhotoJson));
+
+    final List<Field> interactionsData = parseInteractionsData(socialPhotoJson);
+    res.add(Field(
+      key: "ia_interaction",
+      value: interactionsData.isEmpty ? "ia_state_false_1" : null,
+      isTranslateValue: true,
+      children: interactionsData,
+    ));
+
+    res.add(parseCarrierData(socialPhotoJson));
 
     return res;
   }
 
-  static List<Field> parsePhotoInfo(dynamic photoInfoJson){
+  static List<Field> parseNikkiTransformationData(dynamic photoInfoJson){
     final List<Field> res = <Field>[];
 
     if(photoInfoJson is! Map) return res;
@@ -764,19 +881,10 @@ class NikkiInfo extends Field{
       ));
     }
 
-    if(photoInfoJson case {
-      "nikkiClothes": List nikkiClothes,
-    }){
-      res.add(Field(
-        key: "ia_nikki_clothes",
-        children: parseNikkiClothes(photoInfoJson),
-      ));
-    }
-
     return res;
   }
 
-  static List<Field> parseNikkiClothes(dynamic photoInfoJson){
+  static List<Field> parseNikkiClothesData(dynamic photoInfoJson){
     final List<Field> res = <Field>[];
 
     if(photoInfoJson is! Map) return res;
@@ -787,7 +895,14 @@ class NikkiInfo extends Field{
     if(photoInfoJson case {
       "nikkiDIY": dynamic nikkiDIYJson,
     }){
-      nikkiDIY.addAll(parseNikkiDIY(nikkiDIYJson));
+      nikkiDIY.addAll(parseNikkiDIYData(nikkiDIYJson));
+    }
+
+    final List<Field> eurekaData = [];
+    if(photoInfoJson case {
+      "magicballColorIds": dynamic magicballColorIdsJson,
+    }){
+      eurekaData.addAll(parseEurekaData(magicballColorIdsJson));
     }
 
     /// parse NikkiClothes
@@ -802,7 +917,7 @@ class NikkiInfo extends Field{
           final GameClothes clothesInfo = GameClothes(data);
 
           if(clothesInfo.isClothes){
-            final GameNikkiClothesType typeInfo = clothesInfo.type;
+            final GameNikkiClothesType typeInfo = GameNikkiClothesType(clothesInfo.type);
             final GameNikkiClothesSlot slotInfo = typeInfo.slot;
             final GameNikkiClothesOutfits outfitsInfo = GameNikkiClothesOutfits(clothesInfo.outfitsId);
             final GameClothesState stateInfo = GameClothesState(clothesInfo.state);
@@ -899,12 +1014,14 @@ class NikkiInfo extends Field{
       }
 
       if(accessoriesFields.isNotEmpty){
+
         res.add(Field(
           key: GameNikkiClothesSlot.accessories.stringData,
           isTranslateKey: GameNikkiClothesSlot.accessories.hasTranslation,
           children: accessoriesFields,
         ));
       }
+      /// TODO 全妆
       if(makeupFields.isNotEmpty){
         res.add(Field(
           key: GameNikkiClothesSlot.makeup.stringData,
@@ -912,12 +1029,20 @@ class NikkiInfo extends Field{
           children: makeupFields,
         ));
       }
+
+      /// 祝福闪光
+      res.add(Field(
+        key: "ia_eureka",
+        value: eurekaData.isEmpty ? "ia_state_false_1" : null,
+        isTranslateValue: true,
+        children: eurekaData,
+      ));
     }
 
     return res;
   }
 
-  static List<Field> parseNikkiDIY(dynamic nikkiDIYJson){
+  static List<Field> parseNikkiDIYData(dynamic nikkiDIYJson){
     final List<Field> res = <Field>[];
 
     if(nikkiDIYJson is Map){
@@ -927,7 +1052,7 @@ class NikkiInfo extends Field{
     if(nikkiDIYJson is! List) return res;
 
     /// sort
-    final Map<int, Map<GameDIYType, List<Map>>> sortedArea = {};
+    final Map<int, Map<GameDIYType, List<Map>>> sortedWrapper = {};
 
     for(final dynamic data in nikkiDIYJson){
       if(data is Map){
@@ -937,6 +1062,8 @@ class NikkiInfo extends Field{
           "TargetGroupID": int targetGroupID,
           "CoreData": Map coreData,
         }){
+          final Map<GameDIYType, List> clothMap = (sortedWrapper[targetClothID] ??= <GameDIYType, List<Map>>{});
+
           /// GameDIYType.outfitDye & not hair
           if(coreData case {
             "ColorGridID": num _,
@@ -945,7 +1072,6 @@ class NikkiInfo extends Field{
             "B": num _,
             "A": num _,
           }){
-            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
             (clothMap[GameDIYType.outfitDye] ??= <Map>[]).add(data);
           }
           /// GameDIYType.outfitDye & hair
@@ -954,7 +1080,6 @@ class NikkiInfo extends Field{
             "ColorGridID0": num _,
             "RoughnessOffset": num _,
           }){
-            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
             (clothMap[GameDIYType.outfitDye] ??= <Map>[]).add(data);
           }
           /// GameDIYType.specialEffect
@@ -962,31 +1087,28 @@ class NikkiInfo extends Field{
             "ColorGridID": num _,
             "CoverDIYColor": bool _,
           }){
-            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
             (clothMap[GameDIYType.specialEffect] ??= <Map>[]).add(data);
           }
           /// GameDIYType.patternCreation
           else if(coreData case {
             "ReplaceTextureID": num _,
           }){
-            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
             (clothMap[GameDIYType.patternCreation] ??= <Map>[]).add(data);
           }
           /// GameDIYType.patternCreation
           else if(coreData case {
             "TilingData": num _
           }){
-            final Map<GameDIYType, List> clothMap = (sortedArea[targetClothID] ??= <GameDIYType, List<Map>>{});
             (clothMap[GameDIYType.patternCreation] ??= <Map>[]).add(data);
           }
         }
       }
     }
     /// clothes field
-    final Map<int, List<Field>> fieldArea = {};
+    final Map<int, List<Field>> fieldWrapper = {};
 
-    for(final MapEntry<int, Map<GameDIYType, List<Map>>> clothesEntry in sortedArea.entries){
-      final List<Field> typeFields = (fieldArea[clothesEntry.key] ??= <Field>[]);
+    for(final MapEntry<int, Map<GameDIYType, List<Map>>> clothesEntry in sortedWrapper.entries){
+      final List<Field> typeFields = (fieldWrapper[clothesEntry.key] ??= <Field>[]);
 
       final List<Field> outfitDyeFields = [];
       final List<Field> specialEffectFields = [];
@@ -1296,7 +1418,7 @@ class NikkiInfo extends Field{
     }
 
     /// field
-    for(final MapEntry entry in fieldArea.entries){
+    for(final MapEntry entry in fieldWrapper.entries){
       final GameClothes clothesInfo = GameClothes(entry.key);
 
       res.add(Field(
@@ -1307,6 +1429,230 @@ class NikkiInfo extends Field{
     }
 
     return res;
+  }
+
+  static List<Field> parseEurekaData(dynamic magicballColorIdsJson){
+    final List<Field> res = <Field>[];
+
+    if(magicballColorIdsJson is! List) return res;
+
+    for(final dynamic eureka in magicballColorIdsJson){
+      if(eureka is int){
+        final GameEureka eurekaInfo = GameEureka(eureka);
+
+        if(eurekaInfo.isEureka){
+          final int id = eurekaInfo.id;
+          final GameEurekaAttachmentPoint attachmentPointInfo = eurekaInfo.attachmentPoint;
+          final GameEurekaLevel eurekaLevelInfo = eurekaInfo.level;
+          final int color = eurekaInfo.color;
+
+          res.add(Field<int>(
+            key: attachmentPointInfo.stringData,
+            isTranslateKey: attachmentPointInfo.hasTranslation,
+            value: eurekaInfo.data,
+            stringValue: eurekaInfo.stringData,
+            isTranslateValue: eurekaInfo.hasTranslation,
+            children: [
+              Field<int>(
+                key: "ia_eureka_outfits",
+                value: id,
+              ),
+              Field<int>(
+                key: "ia_eureka_level",
+                value: eurekaLevelInfo.data,
+                stringValue: eurekaLevelInfo.stringData,
+                isTranslateValue: eurekaLevelInfo.hasTranslation,
+              ),
+              Field<int>(
+                key: "ia_eureka_color",
+                value: color,
+              ),
+            ]
+          ));
+        }
+      }
+    }
+
+    return res;
+  }
+
+  static Field parseWeaponData(dynamic socialPhotoJson){
+    const Field noWeaponField = Field<String>(
+      key: "ia_weapon",
+      value: "ia_state_false_4",
+      isTranslateValue: true,
+    );
+
+    if(socialPhotoJson is! Map) return noWeaponField;
+
+    final List<Field> children = [];
+
+    if(socialPhotoJson case {
+      "WeaponSnapShot": Map weaponSnapShotJson
+    }){
+      if(weaponSnapShotJson case {
+        "weaponID": int weaponID,
+        "slotType": String slotType,
+      }){
+        final GameWeapon weaponInfo = GameWeapon(weaponID);
+        final GameWeaponSlotType slotTypeInfo = GameWeaponSlotType(slotType);
+
+        children.add(Field<String>(
+          key: "ia_weapon_slot",
+          value: slotTypeInfo.data,
+          stringValue: slotTypeInfo.stringData,
+          isTranslateValue: slotTypeInfo.hasTranslation,
+        ));
+
+        if(weaponSnapShotJson case {
+          "customState": String customState,
+        }){
+          final GameWeaponCustomState customStateInfo = GameWeaponCustomState(customState);
+
+          children.add(Field<String>(
+            key: "ia_weapon_custom_state",
+            value: customStateInfo.data,
+            stringValue: customStateInfo.stringData,
+            isTranslateValue: customStateInfo.hasTranslation,
+          ));
+        }
+
+        return Field<int>(
+          key: "ia_weapon",
+          value: weaponInfo.data,
+          stringValue: weaponInfo.stringData,
+          isTranslateValue: weaponInfo.hasTranslation,
+          children: children,
+        );
+      }
+    }
+
+    return noWeaponField;
+  }
+
+  static List<Field> parseInteractionsData(dynamic socialPhotoJson){
+    final List<Field> res = <Field>[];
+
+    if(socialPhotoJson is! Map) return res;
+
+    if(socialPhotoJson case {
+      "Interactions": dynamic interactionsJson,
+    }){
+      if(interactionsJson is Map){
+        interactionsJson = [interactionsJson];
+      }
+
+      if(interactionsJson is List){
+        for(final dynamic interaction in interactionsJson){
+          if(interaction is Map){
+            if(interaction case {
+              "CfgID": int cfgID,
+            }){
+              final GameInteraction interactionInfo = GameInteraction(cfgID);
+              final GameInteractionType interactionTypeInfo = interactionInfo.type;
+
+              final List<Field> children = [];
+
+              children.add(Field<GameInteractionType>(
+                key: "ia_interaction_type",
+                value: interactionTypeInfo,
+                stringValue: interactionTypeInfo.stringData,
+                isTranslateValue: interactionTypeInfo.hasTranslation,
+              ));
+
+              if(interaction case {
+                "LocX": num x,
+                "LocY": num y,
+                "LocZ": num z,
+              }){
+                children.add(Loc3(x: x, y: y, z: z));
+              }
+
+              if(interaction case {
+                "RotYaw": num yaw,
+                "RotPitch": num pitch,
+                "RotRoll": num roll,
+              }){
+                children.add(Rot3(yaw: yaw, pitch: pitch, roll: roll));
+              }
+
+              if(interaction case {
+                "ScaleX": num x,
+                "ScaleY": num y,
+                "ScaleZ": num z,
+              }){
+                children.add(Scale3(x: x, y: y, z: z));
+              }
+
+              res.add(Field<String>(
+                key: interactionInfo.stringData,
+                isTranslateKey: interactionInfo.hasTranslation,
+                isTranslateValue: true,
+                children: children,
+              ));
+            }
+          }
+        }
+      }
+    }
+
+    return res;
+  }
+
+  static Field parseCarrierData(dynamic socialPhotoJson){
+    const Field noCarrierField = Field<String>(
+      key: "ia_carrier",
+      value: "ia_state_false_3",
+      isTranslateValue: true,
+    );
+
+    if(socialPhotoJson is! Map) return noCarrierField;
+
+    if(socialPhotoJson case {
+      "CarrierInfo": Map carrierInfoJson
+    }){
+      if(carrierInfoJson case {
+        "ConfigObjID": int configObjID,
+      }){
+        final GameCarrier carrierInfo = GameCarrier(configObjID);
+
+        final List<Field> children = [];
+
+        if(carrierInfoJson case {
+          "LocX": num x,
+          "LocY": num y,
+          "LocZ": num z,
+        }){
+          children.add(Loc3(x: x, y: y, z: z));
+        }
+
+        if(carrierInfoJson case {
+          "RotYaw": num yaw,
+          "RotPitch": num pitch,
+          "RotRoll": num roll,
+        }){
+          children.add(Rot3(yaw: yaw, pitch: pitch, roll: roll));
+        }
+
+        if(carrierInfoJson case {
+          "ScaleX": num x,
+          "ScaleY": num y,
+          "ScaleZ": num z,
+        }){
+          children.add(Scale3(x: x, y: y, z: z));
+        }
+
+        return Field<GameCarrier>(
+          key: "ia_carrier",
+          value: carrierInfo,
+          stringValue: carrierInfo.stringData,
+          isTranslateValue: carrierInfo.hasTranslation,
+          children: children,
+        );
+      }
+    }
+
+    return noCarrierField;
   }
 
   const NikkiInfo._({
@@ -1326,8 +1672,102 @@ class NikkiInfo extends Field{
 }
 
 
+class MomoInfo extends Field{
+  static List<Field> parse(dynamic socialPhotoJson){
+    final List<Field> res = <Field>[];
 
+    if(socialPhotoJson is! Map) return res;
 
+    if(socialPhotoJson case {
+      "DaMiaoInfo": Map daMiaoInfoJson,
+    }){
+      if(daMiaoInfoJson.isNotEmpty){
+        res.add(Field<String>(
+          key: "ia_momo_hidden",
+          value: "ia_state_false_5",
+          isTranslateValue: true,
+        ));
+
+        if(daMiaoInfoJson case {
+          "LocX": num x,
+          "LocY": num y,
+          "LocZ": num z,
+        }){
+          res.add(Loc3(x: x, y: y, z: z));
+        }
+
+        if(daMiaoInfoJson case {
+          "RotYaw": num yaw,
+          "RotPitch": num pitch,
+          "RotRoll": num roll,
+        }){
+          res.add(Rot3(yaw: yaw, pitch: pitch, roll: roll));
+        }
+
+        if(daMiaoInfoJson case {
+          "ScaleX": num x,
+          "ScaleY": num y,
+          "ScaleZ": num z,
+        }){
+          res.add(Scale3(x: x, y: y, z: z));
+        }
+
+        if(daMiaoInfoJson case {
+          "ClothIDS": List clothIDSJson,
+        }){
+          final List<Field> clothesFields = [];
+
+          for(final dynamic clothes in clothIDSJson){
+            if(clothes is int){
+              final GameClothes clothesInfo = GameClothes(clothes);
+              final GameMomoClothesType clothesTypeInfo = GameMomoClothesType(clothesInfo.type);
+
+              clothesFields.add(Field(
+                key: clothesTypeInfo.stringData,
+                isTranslateKey: clothesTypeInfo.hasTranslation,
+                value: clothesInfo,
+                stringValue: clothesInfo.stringData,
+                isTranslateValue: clothesInfo.hasTranslation,
+              ));
+            }
+          }
+
+          res.add(Field(
+            key: "ia_momo_clothes",
+            value: clothesFields.isEmpty ? "ia_state_false_1" : null,
+            isTranslateValue: true,
+            children: clothesFields,
+          ));
+        }
+      }
+    }
+
+    if(res.isEmpty){
+      res.add(Field<String>(
+        key: "ia_momo_hidden",
+        value: "ia_state_true_5",
+        isTranslateValue: true,
+      ));
+    }
+
+    return res;
+  }
+
+  const MomoInfo._({
+    super.key = "ia_momo_info",
+    super.children,
+  });
+
+  factory MomoInfo.fromGameJson({
+    String key = "ia_momo_info",
+    dynamic socialPhotoJson,
+  }){
+    return MomoInfo._(
+      key: key,
+      children: parse(socialPhotoJson),
+    );
+  }
+}
 
 
 
@@ -1721,7 +2161,9 @@ const ex = {
     // 4 ->
     "WeatherType": 0,
     "StaticInfos": {},
-    // 摆饰数据
+    // 互动物数据
+    /// 注: 由于叠纸的bug, 该数据记录并不准确
+    /// 1) 坐椅子后与npc对话会出现该数据, 通常与npc对话不会出现状态. CfgID=100008, 其他数据正确记录
     "Interactions": [
       {
         "ScaleX": 1,
@@ -1733,6 +2175,8 @@ const ex = {
         "RotPitch": 0,
         "RotRoll": 0,
         "LocZ": -19980.26171875,
+        /// 800002 -> 大世界交互物(椅子)
+        /// 其他-> 摆饰
         "CfgID": 212021
       }
     ],
@@ -1745,7 +2189,8 @@ const ex = {
       "LocY": -62710.181307549,
       "ClothIDS": [
         1160100147,
-        1023860042
+        /// bug ?
+        /// 1023860042
       ],
       "ScaleZ": 1,
       "ScaleY": 1,

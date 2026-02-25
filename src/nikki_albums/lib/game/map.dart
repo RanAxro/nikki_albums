@@ -14,6 +14,17 @@ extension type const GameWeatherType(int data){
   bool get hasTranslation => _map.containsKey(data);
 }
 
+extension type const GamePhotoWall(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
 extension type const GameInteractivePhotoType(int data){
 
   static const Map<int, String> _map = {
@@ -216,6 +227,17 @@ extension type const GameFilterId(String data){
   bool get hasTranslation => _map.containsKey(data);
 }
 
+extension type const GamePoseId(int data){
+  static const GamePortraitMode none = GamePortraitMode(0);
+
+  static const Map<int, String> _map = {
+    0: "game_pose_none",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
 
 
 
@@ -299,7 +321,6 @@ extension type const GameClothes(int data){
 
   };
 
-  /// 102 0 71 0353
   bool get isClothes => data >= 1e9 && data < 1e10;
 
   // 102 -> 暖暖
@@ -312,12 +333,10 @@ extension type const GameClothes(int data){
     return (data - p) ~/ 1e6;
   }
 
-  GameNikkiClothesType get type{
+  int get type{
     final int p = ((data ~/ 1e6) * 1e6).toInt();
 
-    final int type = (data - p) ~/ 1e4;
-
-    return GameNikkiClothesType(type);
+    return (data - p) ~/ 1e4;
   }
 
   int get outfitsId{
@@ -488,6 +507,80 @@ extension type const GameMomoClothesType(int data){
 
   static const Map<int, String> _map = {
     10: "game_momo_clothes_cloak",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+
+extension type const GameEureka(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  bool get isEureka => data >= 1e3;
+
+  // 102 -> 暖暖
+  // 116 -> 大喵
+  int get id => data ~/ 1e3;
+
+  GameEurekaAttachmentPoint get attachmentPoint{
+    final int p = ((data ~/ 1e3) * 1e3).toInt();
+
+    final int attachmentPoint = (data - p) ~/ 1e2;
+
+    return GameEurekaAttachmentPoint(attachmentPoint);
+  }
+
+  GameEurekaLevel get level{
+    final int p = ((data ~/ 1e2) * 1e2).toInt();
+
+    final int level = (data - p) ~/ 1e1;
+
+    return GameEurekaLevel(level);
+  }
+
+  int get color{
+    final int p = ((data ~/ 1e1) * 1e1).toInt();
+
+    return data - p;
+  }
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameEurekaAttachmentPoint(int data){
+  static const GameEurekaAttachmentPoint head = GameEurekaAttachmentPoint(1);
+  static const GameEurekaAttachmentPoint hands = GameEurekaAttachmentPoint(2);
+  static const GameEurekaAttachmentPoint feet = GameEurekaAttachmentPoint(3);
+
+  static const Map<int, String> _map = {
+    1: "game_eureka_attachment_point_head",
+    2: "game_eureka_attachment_point_hands",
+    3: "game_eureka_attachment_point_feet",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameEurekaLevel(int data){
+  static const GameEurekaLevel levelNonMax = GameEurekaLevel(1);
+  static const GameEurekaLevel levelMaxStar_3 = GameEurekaLevel(2);
+  static const GameEurekaLevel levelMaxStar_4 = GameEurekaLevel(3);
+  static const GameEurekaLevel levelMaxStar_5 = GameEurekaLevel(4);
+
+  static const Map<int, String> _map = {
+    1: "game_eureka_level_non_max",
+    2: "game_eureka_level_max_star_3",
+    3: "game_eureka_level_max_star_4",
+    4: "game_eureka_level_max_star_5",
   };
 
   String get stringData => _map[data] ?? data.toString();
@@ -676,3 +769,89 @@ extension type const GameDIYOverridePatternA(bool data){
 
   bool get hasTranslation => _map.containsKey(data);
 }
+
+
+extension type const GameWeapon(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameWeaponSlotType(String data){
+  static const GameWeaponSlotType bubbleMachine = GameWeaponSlotType("BubbleMachine");
+  static const GameWeaponSlotType feedSnail = GameWeaponSlotType("FeedSnail");
+  static const GameWeaponSlotType suit = GameWeaponSlotType("Suit");
+
+  static const Map<String, String> _map = {
+    "BubbleMachine": "game_slot_type_bubble_machine",
+    "FeedSnail": "game_slot_type_feed_snail",
+    "Suit": "game_slot_type_suit",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameWeaponCustomState(String data){
+  static const GameWeaponCustomState close = GameWeaponCustomState("Weapon.State.Close");
+  static const GameWeaponCustomState open = GameWeaponCustomState("Weapon.State.Open");
+
+  static const Map<String, String> _map = {
+    "Weapon.State.Close": "game_weapon_custom_state_close",
+    "Weapon.State.Open": "game_weapon_custom_state_open",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+
+extension type const GameInteraction(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  GameInteractionType get type => switch(data){
+    800002 => GameInteractionType.chair,
+    _ => GameInteractionType.decoration,
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameInteractionType(int data){
+  static const GameInteractionType chair = GameInteractionType(1);
+  static const GameInteractionType decoration = GameInteractionType(2);
+
+  static const Map<int, String> _map = {
+    1: "game_interaction_type_chair",
+    2: "game_interaction_type_decoration",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+
+extension type const GameCarrier(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
