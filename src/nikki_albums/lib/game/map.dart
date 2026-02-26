@@ -1,8 +1,32 @@
 
 
-extension type const GameWeatherType(int data){
-  static const GameWeatherType sunny = GameWeatherType(0);
-  static const GameWeatherType rainy = GameWeatherType(2);
+
+
+extension type const GameCollageTemplate(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameExpedition(int data){
+
+  static const Map<int, String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameWeather(int data){
+  static const GameWeather sunny = GameWeather(0);
+  static const GameWeather rainy = GameWeather(2);
 
   static const Map<int, String> _map = {
     0: "game_weather_0",
@@ -25,7 +49,7 @@ extension type const GamePhotoWall(int data){
   bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GameInteractivePhotoType(int data){
+extension type const GameInteractivePhoto(int data){
 
   static const Map<int, String> _map = {
 
@@ -50,7 +74,7 @@ extension type const GameInteractivePhotoState(bool data){
   bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GameRiskPhotoType(int data){
+extension type const GameRiskPhoto(int data){
 
   static const Map<int, String> _map = {
 
@@ -141,24 +165,24 @@ extension type const GameApertureSection(int data){
   bool get hasTranslation => false;
 }
 
-extension type const GameLightId(String data){
-  static const GameLightId None = GameLightId("None");
-  static const GameLightId DirectionLight_L = GameLightId("DirectionLight_L");
-  static const GameLightId DirectionLight_R = GameLightId("DirectionLight_R");
-  static const GameLightId DirectionLight_T = GameLightId("DirectionLight_T");
-  static const GameLightId DirectionLight_B = GameLightId("DirectionLight_B");
-  static const GameLightId HueEdgeLight_001_L = GameLightId("HueEdgeLight_001_L");
-  static const GameLightId HueEdgeLight_001_R = GameLightId("HueEdgeLight_001_R");
-  static const GameLightId HueEdgeLight_002_L = GameLightId("HueEdgeLight_002_L");
-  static const GameLightId HueEdgeLight_002_R = GameLightId("HueEdgeLight_002_R");
-  static const GameLightId HueEdgeLight_003_L = GameLightId("HueEdgeLight_003_L");
-  static const GameLightId HueEdgeLight_003_R = GameLightId("HueEdgeLight_003_R");
-  static const GameLightId HueEdgeLight_004_L = GameLightId("HueEdgeLight_004_L");
-  static const GameLightId HueEdgeLight_004_R = GameLightId("HueEdgeLight_004_R");
-  static const GameLightId VibeLight_001 = GameLightId("VibeLight_001");
-  static const GameLightId VibeLight_002 = GameLightId("VibeLight_002");
-  static const GameLightId VibeLight_003 = GameLightId("VibeLight_003");
-  static const GameLightId VibeLight_004 = GameLightId("VibeLight_004");
+extension type const GameLight(String data){
+  static const GameLight None = GameLight("None");
+  static const GameLight DirectionLight_L = GameLight("DirectionLight_L");
+  static const GameLight DirectionLight_R = GameLight("DirectionLight_R");
+  static const GameLight DirectionLight_T = GameLight("DirectionLight_T");
+  static const GameLight DirectionLight_B = GameLight("DirectionLight_B");
+  static const GameLight HueEdgeLight_001_L = GameLight("HueEdgeLight_001_L");
+  static const GameLight HueEdgeLight_001_R = GameLight("HueEdgeLight_001_R");
+  static const GameLight HueEdgeLight_002_L = GameLight("HueEdgeLight_002_L");
+  static const GameLight HueEdgeLight_002_R = GameLight("HueEdgeLight_002_R");
+  static const GameLight HueEdgeLight_003_L = GameLight("HueEdgeLight_003_L");
+  static const GameLight HueEdgeLight_003_R = GameLight("HueEdgeLight_003_R");
+  static const GameLight HueEdgeLight_004_L = GameLight("HueEdgeLight_004_L");
+  static const GameLight HueEdgeLight_004_R = GameLight("HueEdgeLight_004_R");
+  static const GameLight VibeLight_001 = GameLight("VibeLight_001");
+  static const GameLight VibeLight_002 = GameLight("VibeLight_002");
+  static const GameLight VibeLight_003 = GameLight("VibeLight_003");
+  static const GameLight VibeLight_004 = GameLight("VibeLight_004");
 
   static const Map<String, String> _map = {
     "None": "game_light_None",
@@ -185,23 +209,23 @@ extension type const GameLightId(String data){
   bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GameFilterId(String data){
-  static const GameFilterId None = GameFilterId("None");
-  static const GameFilterId Fresh_001 = GameFilterId("Fresh_001");
-  static const GameFilterId Fresh_002 = GameFilterId("Fresh_002");
-  static const GameFilterId Fresh_003 = GameFilterId("Fresh_003");
-  static const GameFilterId Fresh_004 = GameFilterId("Fresh_004");
-  static const GameFilterId Fresh_005 = GameFilterId("Fresh_005");
-  static const GameFilterId Weather_001 = GameFilterId("Weather_001");
-  static const GameFilterId Weather_002 = GameFilterId("Weather_002");
-  static const GameFilterId Weather_003 = GameFilterId("Weather_003");
-  static const GameFilterId Weather_004 = GameFilterId("Weather_004");
-  static const GameFilterId Vibe_009 = GameFilterId("Vibe_009");
-  static const GameFilterId Vibe_001 = GameFilterId("Vibe_001");
-  static const GameFilterId Vibe_002 = GameFilterId("Vibe_002");
-  static const GameFilterId Vibe_003 = GameFilterId("Vibe_003");
-  static const GameFilterId Vibe_004 = GameFilterId("Vibe_004");
-  static const GameFilterId Vibe_005 = GameFilterId("Vibe_005");
+extension type const GameFilter(String data){
+  static const GameFilter None = GameFilter("None");
+  static const GameFilter Fresh_001 = GameFilter("Fresh_001");
+  static const GameFilter Fresh_002 = GameFilter("Fresh_002");
+  static const GameFilter Fresh_003 = GameFilter("Fresh_003");
+  static const GameFilter Fresh_004 = GameFilter("Fresh_004");
+  static const GameFilter Fresh_005 = GameFilter("Fresh_005");
+  static const GameFilter Weather_001 = GameFilter("Weather_001");
+  static const GameFilter Weather_002 = GameFilter("Weather_002");
+  static const GameFilter Weather_003 = GameFilter("Weather_003");
+  static const GameFilter Weather_004 = GameFilter("Weather_004");
+  static const GameFilter Vibe_009 = GameFilter("Vibe_009");
+  static const GameFilter Vibe_001 = GameFilter("Vibe_001");
+  static const GameFilter Vibe_002 = GameFilter("Vibe_002");
+  static const GameFilter Vibe_003 = GameFilter("Vibe_003");
+  static const GameFilter Vibe_004 = GameFilter("Vibe_004");
+  static const GameFilter Vibe_005 = GameFilter("Vibe_005");
 
   static const Map<String, String> _map = {
     "None": "game_filter_None",
@@ -227,8 +251,7 @@ extension type const GameFilterId(String data){
   bool get hasTranslation => _map.containsKey(data);
 }
 
-extension type const GamePoseId(int data){
-  static const GamePortraitMode none = GamePortraitMode(0);
+extension type const GamePose(int data){
 
   static const Map<int, String> _map = {
     0: "game_pose_none",
@@ -443,35 +466,35 @@ extension type const GameNikkiClothesType(int data){
   static const GameNikkiClothesType skinTones = GameNikkiClothesType(86);
 
   static const Map<int, String> _map = {
-    10: "game_nikki_clothes_clothing_hair",
-    90: "game_nikki_clothes_clothing_dresses",
-    20: "game_nikki_clothes_clothing_outerwear",
-    30: "game_nikki_clothes_clothing_tops",
-    41: "game_nikki_clothes_clothing_bottoms",
-    50: "game_nikki_clothes_clothing_socks",
-    60: "game_nikki_clothes_clothing_shoes",
-    71: "game_nikki_clothes_accessories_hair_accessories",
-    72: "game_nikki_clothes_accessories_headwear",
-    73: "game_nikki_clothes_accessories_earrings",
-    74: "game_nikki_clothes_accessories_neckwear",
-    75: "game_nikki_clothes_accessories_bracelets",
-    76: "game_nikki_clothes_accessories_chokers",
-    77: "game_nikki_clothes_accessories_gloves",
-    78: "game_nikki_clothes_accessories_handhelds",
-    92: "game_nikki_clothes_accessories_face_decorations",
-    93: "game_nikki_clothes_accessories_chest_accessories",
-    94: "game_nikki_clothes_accessories_pendants",
-    95: "game_nikki_clothes_accessories_backpieces",
-    96: "game_nikki_clothes_accessories_rings",
-    97: "game_nikki_clothes_accessories_arm_decorations",
-    79: "game_nikki_clothes_accessories_body_paint",
-    80: "game_nikki_clothes_makeup_full_makeup",
-    81: "game_nikki_clothes_makeup_base_makeup",
-    82: "game_nikki_clothes_makeup_eyebrows",
-    83: "game_nikki_clothes_makeup_eyelashes",
-    84: "game_nikki_clothes_makeup_contacts",
-    85: "game_nikki_clothes_makeup_lips",
-    86: "game_nikki_clothes_makeup_skin_tones",
+    10: "game_nikki_clothes_hair",
+    90: "game_nikki_clothes_dresses",
+    20: "game_nikki_clothes_outerwear",
+    30: "game_nikki_clothes_tops",
+    41: "game_nikki_clothes_bottoms",
+    50: "game_nikki_clothes_socks",
+    60: "game_nikki_clothes_shoes",
+    71: "game_nikki_clothes_hair_accessories",
+    72: "game_nikki_clothes_headwear",
+    73: "game_nikki_clothes_earrings",
+    74: "game_nikki_clothes_neckwear",
+    75: "game_nikki_clothes_bracelets",
+    76: "game_nikki_clothes_chokers",
+    77: "game_nikki_clothes_gloves",
+    78: "game_nikki_clothes_handhelds",
+    92: "game_nikki_clothes_face_decorations",
+    93: "game_nikki_clothes_chest_accessories",
+    94: "game_nikki_clothes_pendants",
+    95: "game_nikki_clothes_backpieces",
+    96: "game_nikki_clothes_rings",
+    97: "game_nikki_clothes_arm_decorations",
+    79: "game_nikki_clothes_body_paint",
+    80: "game_nikki_clothes_full_makeup",
+    81: "game_nikki_clothes_base_makeup",
+    82: "game_nikki_clothes_eyebrows",
+    83: "game_nikki_clothes_eyelashes",
+    84: "game_nikki_clothes_contacts",
+    85: "game_nikki_clothes_lips",
+    86: "game_nikki_clothes_skin_tones",
   };
 
   GameNikkiClothesSlot get slot => switch(data){
@@ -493,6 +516,7 @@ extension type const GameNikkiClothesType(int data){
 }
 
 extension type const GameNikkiClothesOutfits(int data){
+
   static const Map<int, String> _map = {
 
   };

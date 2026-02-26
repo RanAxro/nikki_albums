@@ -26,53 +26,72 @@ import 'package:path/path.dart' as path;
 
 
 
+enum SpecialData{
+  locateOnMap,
+  allowCopy,
+  color,
+}
 
-
-class Field<T>{
-  final String? iconName;
+class Field<K, V>{
   final bool visible;
-  final String key;
+  final String? keyIcon;
+  final K? key;
+  final String? _stringKey;
+  final SpecialData? specialKey;
   final bool isTranslateKey;
   final List<String>? keyArgs;
-  final T? value;
+  final String? valueIcon;
+  final V? value;
   final String? _stringValue;
+  final SpecialData? specialValue;
   final bool isTranslateValue;
   final List<String>? valueArgs;
   final List<Field> children;
+  final bool expand;
 
   const Field({
-    this.iconName,
     this.visible = true,
-    required this.key,
+    this.keyIcon,
+    this.key,
+    String? stringKey,
+    this.specialKey,
     this.isTranslateKey = true,
     this.keyArgs,
+    this.valueIcon,
     this.value,
     String? stringValue,
+    this.specialValue,
     this.isTranslateValue = false,
     this.valueArgs,
     this.children = const <Field>[],
+    this.expand = false,
   }) :
+    _stringKey = stringKey,
     _stringValue = stringValue;
+
+  String get stringKey => _stringKey ?? key.toString();
 
   String get stringValue => _stringValue ?? value.toString();
 }
 
-class Rot extends Field<num>{
+class Rot extends Field<String, num>{
   const Rot({
     super.key = "ia_rot",
     required num rot,
     super.stringValue,
+    super.specialValue,
   }) :
     super(value: rot);
 }
 
-class Rot3 extends Field<(num, num, num)>{
+class Rot3 extends Field<String, (num, num, num)>{
   const Rot3({
     super.key = "ia_rot3",
     required num yaw,
     required num pitch,
     required num roll,
     String? stringValue,
+    super.specialValue,
   }) :
     super(
       value: (yaw, pitch, roll),
@@ -80,12 +99,13 @@ class Rot3 extends Field<(num, num, num)>{
     );
 }
 
-class Loc2 extends Field<(num, num)>{
+class Loc2 extends Field<String, (num, num)>{
   const Loc2({
     super.key = "ia_loc2",
     required num x,
     required num y,
     String? stringValue,
+    super.specialValue,
   }) :
     super(
       value: (x, y),
@@ -93,13 +113,14 @@ class Loc2 extends Field<(num, num)>{
     );
 }
 
-class Loc3 extends Field<(num, num, num)>{
+class Loc3 extends Field<String, (num, num, num)>{
   const Loc3({
     super.key = "ia_loc3",
     required num x,
     required num y,
     required num z,
     String? stringValue,
+    super.specialValue,
   }) :
     super(
       value: (x, y, z),
@@ -107,22 +128,24 @@ class Loc3 extends Field<(num, num, num)>{
     );
 }
 
-class Scale extends Field<num>{
+class Scale extends Field<String, num>{
   const Scale({
     super.key = "ia_scale",
     required num scale,
     super.stringValue,
+    super.specialValue,
   }) :
     super(value: scale);
 }
 
-class Scale3 extends Field<(num, num, num)>{
+class Scale3 extends Field<String, (num, num, num)>{
   const Scale3({
     super.key = "ia_scale3",
     required num x,
     required num y,
     required num z,
     String? stringValue,
+    super.specialValue,
   }) :
     super(
       value: (x, y, z),
@@ -130,7 +153,7 @@ class Scale3 extends Field<(num, num, num)>{
     );
 }
 
-class ColorRGBA extends Field<(num, num, num, num)>{
+class ColorRGBA extends Field<String, (num, num, num, num)>{
   const ColorRGBA({
     super.key = "ia_color_rgba",
     required num r,
@@ -138,6 +161,7 @@ class ColorRGBA extends Field<(num, num, num, num)>{
     required num b,
     required num a,
     String? stringValue,
+    super.specialValue = SpecialData.color,
   }) :
     super(
     value: (r, g, b, a),
@@ -146,6 +170,12 @@ class ColorRGBA extends Field<(num, num, num, num)>{
 }
 
 
+
+class InvaildParamsAddition extends Field{
+  const InvaildParamsAddition({
+    super.key = "ia_invaild_params_addition",
+  });
+}
 
 class CollageAddition extends Field{
   static List<Field> parse(dynamic collageJson){
@@ -157,12 +187,16 @@ class CollageAddition extends Field{
       "TemplateId": int templateId,
       "RegionPictures": Map regionPicturesJson,
     }){
+      final GameCollageTemplate collageTemplateInfo = GameCollageTemplate(templateId);
+
       res.addAll([
-        Field<int>(
+        Field<String, GameCollageTemplate>(
           key: "ia_Collage_template_id",
-          value: templateId,
+          value: collageTemplateInfo,
+          stringValue: collageTemplateInfo.stringData,
+          isTranslateValue: collageTemplateInfo.hasTranslation,
         ),
-        Field<int>(
+        Field<String, int>(
           key: "ia_Collage_region_pictures",
           children: parseRegionPictures(regionPicturesJson),
         ),
@@ -178,20 +212,17 @@ class CollageAddition extends Field{
     if(regionPicturesJson is! Map) return res;
 
     if(regionPicturesJson case {
-      "Position": Map position,
-      "Rotation": double rotation,
-      "Scale": double scale,
-      "oriCustomData": Map oriCustomData,
+      "Position": Map positionJson,
+      "Rotation": num rotation,
+      "Scale": num scale,
+      "oriCustomData": Map oriCustomDataJson,
       "ImageId": String imageId,
     }){
-      if(position case {
+      if(positionJson case {
         "x": num x,
         "y": num y,
       }){
-        res.add(Loc2(
-          x: x,
-          y: y,
-        ));
+        res.add(Loc2(x: x, y: y));
       }
 
       res.addAll([
@@ -201,13 +232,13 @@ class CollageAddition extends Field{
         Scale(
           scale: scale,
         ),
-        Field<String>(
+        Field<String, String>(
           key: "ia_Collage_image_id",
           value: imageId,
         ),
         NikkiPhotoAddition.fromGameJson(
           key: "ia_Collage_oriCustomData",
-          nikkiPhotoJson: oriCustomData,
+          nikkiPhotoJson: oriCustomDataJson,
         ),
       ]);
     }
@@ -216,21 +247,70 @@ class CollageAddition extends Field{
   }
 
   const CollageAddition._({
-    super.key = "ia_Collage_addition",
+    super.key = "ia_collage_addition",
+    super.expand,
     super.children,
   });
 
   factory CollageAddition.fromGameJson({
-    String key = "ia_Collage_addition",
+    String key = "ia_collage_addition",
+    bool expand = true,
     dynamic collageJson,
   }){
     return CollageAddition._(
       key: key,
+      expand: expand,
       children: parse(collageJson),
     );
   }
 }
 
+class ExpeditionAddition extends Field{
+  static List<Field> parse(dynamic expeditionJson){
+    final List<Field> res = <Field>[];
+
+    if(expeditionJson is! Map) return res;
+
+    if(expeditionJson case {
+      "clockGamePlugin": Map clockGamePluginJson,
+    }){
+      if(clockGamePluginJson case {
+        "Tag": int tag,
+      }){
+        final GameExpedition expeditionInfo = GameExpedition(tag);
+
+        res.add(Field<String, GameExpedition>(
+          key: "ia_expedition",
+          value: expeditionInfo,
+          stringValue: expeditionInfo.stringData,
+          isTranslateValue: expeditionInfo.hasTranslation,
+        ));
+      }
+    }
+
+    res.addAll(NikkiPhotoAddition.fromGameJson(nikkiPhotoJson: expeditionJson).children);
+
+    return res;
+  }
+
+  const ExpeditionAddition._({
+    super.key = "ia_expedition_addition",
+    super.expand,
+    super.children,
+  });
+
+  factory ExpeditionAddition.fromGameJson({
+    String key = "ia_expedition_addition",
+    bool expand = true,
+    dynamic expeditionJson,
+  }){
+    return ExpeditionAddition._(
+      key: key,
+      expand: expand,
+      children: parse(expeditionJson),
+    );
+  }
+}
 
 class NikkiPhotoAddition extends Field{
   static List<Field> parse(dynamic nikkiPhotoJson){
@@ -243,31 +323,69 @@ class NikkiPhotoAddition extends Field{
     res.add(CameraInfo.fromGameJson(nikkiPhotoJson: nikkiPhotoJson));
 
     if(nikkiPhotoJson case {
-      "SocialPhoto": Map socialPhoto,
+      "SocialPhoto": Map socialPhotoJson,
     }){
-      res.add(NikkiInfo.fromGameJson(socialPhotoJson: socialPhoto));
+      res.add(NikkiInfo.fromGameJson(socialPhotoJson: socialPhotoJson));
 
-      res.add(MomoInfo.fromGameJson(socialPhotoJson: socialPhoto));
+      res.add(MomoInfo.fromGameJson(socialPhotoJson: socialPhotoJson));
     }
 
     return res;
   }
 
   const NikkiPhotoAddition._({
-    super.key = "ia_NikkiPhoto_addition",
+    super.key = "ia_nikki_photo_addition",
+    super.expand,
     super.children,
   });
 
   factory NikkiPhotoAddition.fromGameJson({
-    String key = "ia_NikkiPhoto_addition",
+    String key = "ia_nikki_photo_addition",
+    bool expand = true,
     dynamic nikkiPhotoJson,
   }){
     return NikkiPhotoAddition._(
       key: key,
+      expand: expand,
       children: parse(nikkiPhotoJson),
     );
   }
 }
+
+class DIYPhotoAddition extends Field{
+  static List<Field> parse(dynamic DIYPhotoJson){
+    final List<Field> res = <Field>[];
+
+    if(DIYPhotoJson is! Map) return res;
+
+    if(DIYPhotoJson case {
+      "Content": Map contentJson,
+    }){
+
+    }
+
+    return res;
+  }
+
+  const DIYPhotoAddition._({
+    super.key = "ia_collage_addition",
+    super.expand,
+    super.children,
+  });
+
+  factory DIYPhotoAddition.fromGameJson({
+    String key = "ia_collage_addition",
+    bool expand = true,
+    dynamic DIYPhotoJson,
+  }){
+    return DIYPhotoAddition._(
+      key: key,
+      expand: expand,
+      children: parse(DIYPhotoJson),
+    );
+  }
+}
+
 
 
 class PhotographyInfo extends Field{
@@ -277,7 +395,7 @@ class PhotographyInfo extends Field{
     if(nikkiPhotoJson is! Map) return res;
 
     final List<Field> editPhotoData = parseEditPhotoData(nikkiPhotoJson);
-    res.add(Field<String>(
+    res.add(Field<String, String>(
       key: "ia_edit_photo",
       value: editPhotoData.isEmpty ? "ia_state_false_1" : null,
       isTranslateValue: editPhotoData.isEmpty,
@@ -285,39 +403,40 @@ class PhotographyInfo extends Field{
     ));
 
     if(nikkiPhotoJson case {
-      "SocialPhoto": Map socialPhoto,
+      "SocialPhoto": Map socialPhotoJson,
     }){
-      if(socialPhoto case {
-        "Time": Map time,
+      if(socialPhotoJson case {
+        "Time": Map timeJson,
       }){
-        res.add(Field(
+        res.add(Field<String, dynamic>(
           key: "ia_time",
-          children: parseTimeData(time),
+          children: parseTimeData(timeJson),
         ));
       }
 
-      if(socialPhoto case {
+      if(socialPhotoJson case {
         "WeatherType": int weatherType,
       }){
-        final GameWeatherType weatherTypeInfo = GameWeatherType(weatherType);
-        res.add(Field<int>(
+        final GameWeather weatherTypeInfo = GameWeather(weatherType);
+
+        res.add(Field<String, GameWeather>(
           key: "ia_weather",
-          value: weatherTypeInfo.data,
+          value: weatherTypeInfo,
           stringValue: weatherTypeInfo.stringData,
           isTranslateValue: weatherTypeInfo.hasTranslation,
         ));
       }
     }
 
-    final List<Field> photoWallData = parsePhotoWallData(nikkiPhotoJson);
-    res.add(Field(
+    final List<Field> photoWallFields = parsePhotoWallData(nikkiPhotoJson);
+    res.add(Field<String, String?>(
       key: "ia_photo_wall",
-      value: photoWallData.isEmpty ? "ia_state_false_1" : null,
-      isTranslateValue: photoWallData.isEmpty,
-      children: photoWallData,
+      value: photoWallFields.isEmpty ? "ia_state_false_1" : null,
+      isTranslateValue: photoWallFields.isEmpty,
+      children: photoWallFields,
     ));
 
-    res.add(Field(
+    res.add(Field<String, dynamic>(
       key: "ia_task",
       children: parseTaskData(nikkiPhotoJson),
     ));
@@ -340,13 +459,13 @@ class PhotographyInfo extends Field{
       }){
         if(editState){
           res.addAll([
-            Field<bool>(
+            Field<String, bool>(
               key: "ia_edit_photo_has_sticker",
               value: hasSticker,
               stringValue: hasSticker ? "ia_state_true_1" : "ia_state_false_1",
               isTranslateValue: true,
             ),
-            Field<bool>(
+            Field<String, bool>(
               key: "ia_edit_photo_has_text",
               value: hasText,
               stringValue: hasText ? "ia_state_true_1" : "ia_state_false_1",
@@ -372,19 +491,19 @@ class PhotographyInfo extends Field{
       "sec": num sec,
     }){
       res.addAll([
-        Field<num>(
+        Field<String, num>(
           key: "ia_time_day",
           value: day,
         ),
-        Field<num>(
+        Field<String, num>(
           key: "ia_time_hour",
           value: hour,
         ),
-        Field<num>(
+        Field<String, num>(
           key: "ia_time_min",
           value: min,
         ),
-        Field<num>(
+        Field<String, num>(
           key: "ia_time_sec",
           value: sec,
         ),
@@ -393,16 +512,6 @@ class PhotographyInfo extends Field{
 
     return res;
   }
-
-  //// 任务过场 (一般自动拍摄  自动拍摄时只会包含该数据段)
-  //   // ? 猜测 : 旧版本自动拍摄时 只包含 PortraitModeHandler 数据段
-  //   "PhotoWallPlugin": {
-  //     "photoID": 171160301
-  //     // 或者
-  //     // "photoID": [
-  //     //    1101260306
-  //     //  ]
-  //   },
 
   static List<Field> parsePhotoWallData(dynamic nikkiPhotoJson){
     final List<Field> res = <Field>[];
@@ -424,8 +533,9 @@ class PhotographyInfo extends Field{
             if(photoId is int){
               final GamePhotoWall photoWallInfo = GamePhotoWall(photoId);
 
-              res.add(Field(
-                key: photoWallInfo.stringData,
+              res.add(Field<GamePhotoWall, dynamic>(
+                key: photoWallInfo,
+                stringKey: photoWallInfo.stringData,
                 isTranslateKey: photoWallInfo.hasTranslation,
               ));
             }
@@ -446,15 +556,15 @@ class PhotographyInfo extends Field{
     if(nikkiPhotoJson is! Map) return res;
 
     if(nikkiPhotoJson case {
-      "PuzzleGamePlugin": Map puzzleGamePlugin,
+      "PuzzleGamePlugin": Map puzzleGamePluginJson,
     }){
-      if(puzzleGamePlugin case {
+      if(puzzleGamePluginJson case {
         "Tag": int tag,
       }){
         final GamePuzzleGame puzzleGameInfo = GamePuzzleGame(tag);
-        res.add(Field<int>(
+        res.add(Field<String, GamePuzzleGame>(
           key: "ia_puzzle_game",
-          value: puzzleGameInfo.data,
+          value: puzzleGameInfo,
           stringValue: puzzleGameInfo.stringData,
           isTranslateValue: puzzleGameInfo.hasTranslation,
         ));
@@ -462,17 +572,18 @@ class PhotographyInfo extends Field{
     }
 
     if(nikkiPhotoJson case {
-      "RiskPhoto": Map riskPhoto,
+      "RiskPhoto": Map riskPhotoJson,
     }){
-      for(final entry in riskPhoto.entries){
-        if(entry.key is int && entry.value is bool){
-          final GameRiskPhotoType riskPhotoTypeInfo = GameRiskPhotoType(entry.key);
-          final GameRiskPhotoState riskPhotoState = GameRiskPhotoState(entry.value);
+      for(final riskPhotoEntry in riskPhotoJson.entries){
+        if(riskPhotoEntry.key is int && riskPhotoEntry.value is bool){
+          final GameRiskPhoto riskPhotoTypeInfo = GameRiskPhoto(riskPhotoEntry.key);
+          final GameRiskPhotoState riskPhotoState = GameRiskPhotoState(riskPhotoEntry.value);
 
-          riskPhotoFields.add(Field<bool>(
-            key: riskPhotoTypeInfo.stringData,
+          riskPhotoFields.add(Field<GameRiskPhoto, GameRiskPhotoState>(
+            key: riskPhotoTypeInfo,
+            stringKey: riskPhotoTypeInfo.stringData,
             isTranslateKey: riskPhotoTypeInfo.hasTranslation,
-            value: riskPhotoState.data,
+            value: riskPhotoState,
             stringValue: riskPhotoState.stringData,
             isTranslateValue: riskPhotoState.hasTranslation,
           ));
@@ -485,13 +596,14 @@ class PhotographyInfo extends Field{
     }){
       for(final entry in interactivePhoto.entries){
         if(entry.key is int && entry.value is bool){
-          final GameInteractivePhotoType interactivePhotoTypeInfo = GameInteractivePhotoType(entry.key);
+          final GameInteractivePhoto interactivePhotoTypeInfo = GameInteractivePhoto(entry.key);
           final GameInteractivePhotoState interactivePhotoStateInfo = GameInteractivePhotoState(entry.value);
 
-          taskPhotoFields.add(Field<bool>(
-            key: interactivePhotoTypeInfo.stringData,
+          taskPhotoFields.add(Field<GameInteractivePhoto, GameInteractivePhotoState>(
+            key: interactivePhotoTypeInfo,
+            stringKey: interactivePhotoTypeInfo.stringData,
             isTranslateKey: interactivePhotoTypeInfo.hasTranslation,
-            value: interactivePhotoStateInfo.data,
+            value: interactivePhotoStateInfo,
             stringValue: interactivePhotoStateInfo.stringData,
             isTranslateValue: interactivePhotoStateInfo.hasTranslation,
           ));
@@ -499,7 +611,7 @@ class PhotographyInfo extends Field{
       }
     }
 
-    res.add(Field<bool>(
+    res.add(Field<String, bool>(
       key: "ia_risk_photo",
       value: riskPhotoFields.isNotEmpty,
       stringValue: riskPhotoFields.isNotEmpty ? "ia_has_risk_photo" : "ia_has_no_risk_photo",
@@ -507,7 +619,7 @@ class PhotographyInfo extends Field{
       children: riskPhotoFields,
     ));
 
-    res.add(Field<bool>(
+    res.add(Field<String, bool>(
       key: "ia_task_photo",
       value: taskPhotoFields.isNotEmpty,
       stringValue: taskPhotoFields.isNotEmpty ? "ia_has_task_photo" : "ia_has_no_task_photo",
@@ -521,20 +633,22 @@ class PhotographyInfo extends Field{
 
   const PhotographyInfo._({
     super.key = "ia_photography_info",
+    super.expand,
     super.children,
   });
 
   factory PhotographyInfo.fromGameJson({
     String key = "ia_photography_info",
+    bool expand = false,
     dynamic nikkiPhotoJson,
   }){
     return PhotographyInfo._(
       key: key,
+      expand: expand,
       children: parse(nikkiPhotoJson),
     );
   }
 }
-
 
 class CameraInfo extends Field{
   static List<Field> parse(dynamic nikkiPhotoJson){
@@ -543,12 +657,12 @@ class CameraInfo extends Field{
     if(nikkiPhotoJson is! Map) return res;
 
     if(nikkiPhotoJson case {
-      "SocialPhoto": Map socialPhoto,
+      "SocialPhoto": Map socialPhotoJson,
     }){
-      if(socialPhoto case {
+      if(socialPhotoJson case {
         "CameraParams": String cameraParams,
       }){
-        res.add(Field<String>(
+        res.add(Field<String, String>(
           key: "ia_camera_params",
           value: cameraParams,
         ));
@@ -556,15 +670,16 @@ class CameraInfo extends Field{
     }
 
     if(nikkiPhotoJson case {
-      "PortraitModeHandler": Map portraitModeHandler,
+      "PortraitModeHandler": Map portraitModeHandlerJson,
     }){
-      if(portraitModeHandler case {
+      if(portraitModeHandlerJson case {
         "PortraitMode": int portraitMode,
       }){
         final GamePortraitMode portraitModeInfo = GamePortraitMode(portraitMode);
-        res.add(Field<int>(
+
+        res.add(Field<String, GamePortraitMode>(
           key: "ia_portrait_mode",
-          value: portraitModeInfo.data,
+          value: portraitModeInfo,
           stringValue: portraitModeInfo.stringData,
           isTranslateValue: portraitModeInfo.hasTranslation,
         ));
@@ -572,12 +687,13 @@ class CameraInfo extends Field{
     }
 
     if(nikkiPhotoJson case {
-      "SocialPhoto": Map socialPhoto,
+      "SocialPhoto": Map socialPhotoJson,
     }){
-      if(socialPhoto case {
-        "PhotoInfo": Map photoInfo,
+
+      if(socialPhotoJson case {
+        "PhotoInfo": Map photoInfoJson,
       }){
-        if(photoInfo case {
+        if(photoInfoJson case {
           "nikkiLocX": num nikkiLocX,
           "nikkiLocY": num nikkiLocY,
           "nikkiLocZ": num nikkiLocZ,
@@ -591,49 +707,50 @@ class CameraInfo extends Field{
           final double distance = sqrt(dx * dx + dy * dy + dz * dz);
           final double zoom = -0.0035 * distance + 6.45;
 
-          res.add(Field<double>(
+          res.add(Field<String, double>(
             key: "ia_camera_zoom",
             value: zoom,
             stringValue: "${zoom.toStringAsFixed(1)}x",
           ));
         }
 
-        if(photoInfo case {
+        if(photoInfoJson case {
           "cameraFocalLength": num cameraFocalLength,
         }){
-          res.add(Field<double>(
+          res.add(Field<String, double>(
             key: "ia_camera_focal_length",
             value: cameraFocalLength.toDouble(),
             stringValue: "${cameraFocalLength.toStringAsFixed(0)}mm",
           ));
         }
 
-        if(photoInfo case {
+        if(photoInfoJson case {
           "cameraActorRotRoll": num cameraActorRotRoll,
         }){
-          res.add(Field<double>(
+          res.add(Field<String, double>(
             key: "ia_camera_rotation",
             value: cameraActorRotRoll.toDouble(),
             stringValue: "${cameraActorRotRoll.toStringAsFixed(0)}°",
           ));
         }
 
-        if(photoInfo case {
+        if(photoInfoJson case {
           "apertureSection": num apertureSection,
         }){
           final GameApertureSection apertureSectionInfo = GameApertureSection(apertureSection.toInt());
-          res.add(Field<int>(
+
+          res.add(Field<String, GameApertureSection>(
             key: "ia_aperture_section",
-            value: apertureSectionInfo.data,
+            value: apertureSectionInfo,
             stringValue: apertureSectionInfo.stringData,
             isTranslateValue: apertureSectionInfo.hasTranslation,
           ));
         }
 
-        if(photoInfo case {
+        if(photoInfoJson case {
           "vignetteIntensity": num vignetteIntensity,
         }){
-          res.add(Field<double>(
+          res.add(Field<String, double>(
             key: "ia_vignette_intensity",
             value: vignetteIntensity.toDouble(),
             stringValue: "${(vignetteIntensity * 100).toStringAsFixed(0)}%",
@@ -642,78 +759,78 @@ class CameraInfo extends Field{
       }
 
       /// TODO
-      if(socialPhoto case {
+      if(socialPhotoJson case {
         "CameraParams": String cameraParams,
       }){
         final decoded = GameCameraParamCodec.decode(cameraParams);
 
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_bloom_intensity",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_bloom_threshold",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_brightness",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_exposure",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_contrast",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_saturation",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_vibrance",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_highlights",
           value: 0,
           stringValue: "-",
         ));
-        res.add(Field<double>(
+        res.add(Field<String, double>(
           key: "ia_shadows",
           value: 0,
           stringValue: "-",
         ));
       }
 
-      if(socialPhoto case {
-        "PhotoInfo": Map photoInfo,
+      if(socialPhotoJson case {
+        "PhotoInfo": Map photoInfoJson,
       }){
-        if(photoInfo case {
+        if(photoInfoJson case {
           "lightId": String lightId,
         }){
-          final GameLightId lightIdInfo = GameLightId(lightId);
+          final GameLight lightIdInfo = GameLight(lightId);
 
-          res.add(Field<String>(
+          res.add(Field<String, GameLight>(
             key: "ia_light_id",
-            value: lightIdInfo.data,
+            value: lightIdInfo,
             stringValue: lightIdInfo.stringData,
             isTranslateValue: lightIdInfo.hasTranslation,
           ));
 
-          if(lightIdInfo != GameLightId.None){
-            if(photoInfo case {
+          if(lightIdInfo != GameLight.None){
+            if(photoInfoJson case {
               "lightStrength": num lightStrength,
             }){
-              res.add(Field<double>(
+              res.add(Field<String, double>(
                 key: "ia_light_strength",
                 value: lightStrength.toDouble(),
                 stringValue: "${(lightStrength * 100).toStringAsFixed(0)}%",
@@ -722,23 +839,23 @@ class CameraInfo extends Field{
           }
         }
 
-        if(photoInfo case {
+        if(photoInfoJson case {
           "filterId": String filterId,
         }){
-          final GameFilterId filterIdInfo = GameFilterId(filterId);
+          final GameFilter filterIdInfo = GameFilter(filterId);
 
-          res.add(Field<String>(
+          res.add(Field<String, GameFilter>(
             key: "ia_filter_id",
-            value: filterIdInfo.data,
+            value: filterIdInfo,
             stringValue: filterIdInfo.stringData,
             isTranslateValue: filterIdInfo.hasTranslation,
           ));
 
-          if(filterIdInfo != GameFilterId.None){
-            if(photoInfo case {
+          if(filterIdInfo != GameFilter.None){
+            if(photoInfoJson case {
               "filterStrength": num filterStrength,
             }){
-              res.add(Field<double>(
+              res.add(Field<String, double>(
                 key: "ia_filter_strength",
                 value: filterStrength.toDouble(),
                 stringValue: "${(filterStrength * 100).toStringAsFixed(0)}%",
@@ -747,12 +864,12 @@ class CameraInfo extends Field{
           }
         }
 
-        if(photoInfo case {
+        if(photoInfoJson case {
           "poseId": int poseId,
         }){
-          final GamePoseId poseIdInfo = GamePoseId(poseId);
+          final GamePose poseIdInfo = GamePose(poseId);
 
-          res.add(Field<GamePoseId>(
+          res.add(Field<String, GamePose>(
             key: "ia_pose_id",
             value: poseIdInfo,
             stringValue: poseIdInfo.stringData,
@@ -767,20 +884,22 @@ class CameraInfo extends Field{
 
   const CameraInfo._({
     super.key = "ia_camera_info",
+    super.expand,
     super.children,
   });
 
   factory CameraInfo.fromGameJson({
     String key = "ia_camera_info",
+    bool expand = true,
     dynamic nikkiPhotoJson,
   }){
     return CameraInfo._(
       key: key,
+      expand: expand,
       children: parse(nikkiPhotoJson),
     );
   }
 }
-
 
 class NikkiInfo extends Field{
   static List<Field> parse(dynamic socialPhotoJson){
@@ -793,9 +912,9 @@ class NikkiInfo extends Field{
     }){
       final GameNikkiGiantState giantStateInfo = GameNikkiGiantState(giantState);
 
-      res.add(Field<bool>(
+      res.add(Field<String, GameNikkiGiantState>(
         key: "ia_nikki_giant_state",
-        value: giantStateInfo.data,
+        value: giantStateInfo,
         stringValue: giantStateInfo.stringData,
         isTranslateValue: giantStateInfo.hasTranslation,
       ));
@@ -806,7 +925,7 @@ class NikkiInfo extends Field{
     }){
       res.addAll(parseNikkiTransformationData(photoInfoJson));
 
-      res.add(Field(
+      res.add(Field<String, dynamic>(
         key: "ia_nikki_clothes",
         children: parseNikkiClothesData(photoInfoJson),
       ));
@@ -814,12 +933,12 @@ class NikkiInfo extends Field{
 
     res.add(parseWeaponData(socialPhotoJson));
 
-    final List<Field> interactionsData = parseInteractionsData(socialPhotoJson);
-    res.add(Field(
+    final List<Field> interactionsFields = parseInteractionsData(socialPhotoJson);
+    res.add(Field<String, String?>(
       key: "ia_interaction",
-      value: interactionsData.isEmpty ? "ia_state_false_1" : null,
+      value: interactionsFields.isEmpty ? "ia_state_false_1" : null,
       isTranslateValue: true,
-      children: interactionsData,
+      children: interactionsFields,
     ));
 
     res.add(parseCarrierData(socialPhotoJson));
@@ -837,9 +956,9 @@ class NikkiInfo extends Field{
     }){
       final GameNikkiHiddenState nikkiHiddenState = GameNikkiHiddenState(nikkiHidden);
 
-      res.add(Field<bool>(
+      res.add(Field<String, GameNikkiHiddenState>(
         key: "ia_nikki_hidden",
-        value: nikkiHiddenState.data,
+        value: nikkiHiddenState,
         stringValue: nikkiHiddenState.stringData,
         isTranslateValue: nikkiHiddenState.hasTranslation,
       ));
@@ -890,19 +1009,19 @@ class NikkiInfo extends Field{
     if(photoInfoJson is! Map) return res;
 
     /// parse NikkiDIY
-    final List<Field> nikkiDIY = [];
-
+    final List<Field> nikkiDIYFields = [];
     if(photoInfoJson case {
       "nikkiDIY": dynamic nikkiDIYJson,
     }){
-      nikkiDIY.addAll(parseNikkiDIYData(nikkiDIYJson));
+      nikkiDIYFields.addAll(parseNikkiDIYData(nikkiDIYJson));
     }
 
-    final List<Field> eurekaData = [];
+    /// parse eureka
+    final List<Field> eurekaFields = [];
     if(photoInfoJson case {
       "magicballColorIds": dynamic magicballColorIdsJson,
     }){
-      eurekaData.addAll(parseEurekaData(magicballColorIdsJson));
+      eurekaFields.addAll(parseEurekaData(magicballColorIdsJson));
     }
 
     /// parse NikkiClothes
@@ -922,8 +1041,8 @@ class NikkiInfo extends Field{
             final GameNikkiClothesOutfits outfitsInfo = GameNikkiClothesOutfits(clothesInfo.outfitsId);
             final GameClothesState stateInfo = GameClothesState(clothesInfo.state);
 
-            final Field? clothesDIY = nikkiDIY.where((Field clothesDIYField) => clothesDIYField.key == clothesInfo.stringData).firstOrNull;
-            final Field clothesDIYFields = Field<String>(
+            final Field? clothesDIY = nikkiDIYFields.where((Field clothesDIYField) => clothesDIYField.key == clothesInfo.stringData).firstOrNull;
+            final Field clothesDIYFields = Field<String, String>(
               key: "ia_nikki_clothes_DIY",
               value: clothesDIY?.children.isEmpty != false ? "ia_nikki_clothes_has_no_DIY" : "ia_nikki_clothes_has_DIY",
               isTranslateValue: true,
@@ -932,9 +1051,11 @@ class NikkiInfo extends Field{
 
             switch(slotInfo){
               case GameNikkiClothesSlot.unknown:
-                res.add(Field<int>(
-                  key: typeInfo.stringData,
-                  value: clothesInfo.data,
+                res.add(Field<GameNikkiClothesType, GameClothes>(
+                  key: typeInfo,
+                  stringKey: typeInfo.stringData,
+                  isTranslateKey: typeInfo.hasTranslation,
+                  value: clothesInfo,
                   stringValue: clothesInfo.stringData,
                   isTranslateValue: clothesInfo.hasTranslation,
                   children: [
@@ -943,21 +1064,23 @@ class NikkiInfo extends Field{
                 ));
                 break;
               case GameNikkiClothesSlot.accessories:
-                accessoriesFields.add(Field<int>(
-                  key: typeInfo.stringData,
-                  value: clothesInfo.data,
+                accessoriesFields.add(Field<GameNikkiClothesType, GameClothes>(
+                  key: typeInfo,
+                  stringKey: typeInfo.stringData,
+                  isTranslateKey: typeInfo.hasTranslation,
+                  value: clothesInfo,
                   stringValue: clothesInfo.stringData,
                   isTranslateValue: clothesInfo.hasTranslation,
                   children: [
-                    Field<int>(
+                    Field<String, GameNikkiClothesOutfits>(
                       key: "ia_nikki_clothes_clothing_outfits",
-                      value: outfitsInfo.data,
+                      value: outfitsInfo,
                       stringValue: outfitsInfo.stringData,
                       isTranslateValue: outfitsInfo.hasTranslation,
                     ),
-                    Field<int>(
+                    Field<String, GameClothesState>(
                       key: "ia_nikki_clothes_clothing_state",
-                      value: stateInfo.data,
+                      value: stateInfo,
                       stringValue: stateInfo.stringData,
                       isTranslateValue: stateInfo.hasTranslation,
                     ),
@@ -966,17 +1089,19 @@ class NikkiInfo extends Field{
                 ));
                 break;
               case GameNikkiClothesSlot.makeup:
-                makeupFields.add(Field<int>(
-                  key: typeInfo.stringData,
-                  value: clothesInfo.data,
+                makeupFields.add(Field<GameNikkiClothesType, GameClothes>(
+                  key: typeInfo,
+                  stringKey: typeInfo.stringData,
+                  isTranslateKey: typeInfo.hasTranslation,
+                  value: clothesInfo,
                   stringValue: clothesInfo.stringData,
                   isTranslateValue: clothesInfo.hasTranslation,
                   children: [
                     /// 肤色为 42
                     if(typeInfo != GameNikkiClothesType.skinTones)
-                      Field<int>(
+                      Field<String, GameNikkiClothesOutfits>(
                         key: "ia_nikki_clothes_clothing_outfits",
-                        value: outfitsInfo.data,
+                        value: outfitsInfo,
                         stringValue: outfitsInfo.stringData,
                         isTranslateValue: outfitsInfo.hasTranslation,
                       ),
@@ -985,22 +1110,23 @@ class NikkiInfo extends Field{
                 ));
                 break;
               default:
-                res.add(Field<int>(
-                  key: typeInfo.stringData,
+                res.add(Field<GameNikkiClothesType, GameClothes>(
+                  key: typeInfo,
+                  stringKey: typeInfo.stringData,
                   isTranslateKey: typeInfo.hasTranslation,
-                  value: clothesInfo.data,
+                  value: clothesInfo,
                   stringValue: clothesInfo.stringData,
                   isTranslateValue: clothesInfo.hasTranslation,
                   children: [
-                    Field<int>(
+                    Field<String, GameNikkiClothesOutfits>(
                       key: "ia_nikki_clothes_clothing_outfits",
-                      value: outfitsInfo.data,
+                      value: outfitsInfo,
                       stringValue: outfitsInfo.stringData,
                       isTranslateValue: outfitsInfo.hasTranslation,
                     ),
-                    Field<int>(
+                    Field<String, GameClothesState>(
                       key: "ia_nikki_clothes_clothing_state",
-                      value: stateInfo.data,
+                      value: stateInfo,
                       stringValue: stateInfo.stringData,
                       isTranslateValue: stateInfo.hasTranslation,
                     ),
@@ -1014,7 +1140,6 @@ class NikkiInfo extends Field{
       }
 
       if(accessoriesFields.isNotEmpty){
-
         res.add(Field(
           key: GameNikkiClothesSlot.accessories.stringData,
           isTranslateKey: GameNikkiClothesSlot.accessories.hasTranslation,
@@ -1033,9 +1158,9 @@ class NikkiInfo extends Field{
       /// 祝福闪光
       res.add(Field(
         key: "ia_eureka",
-        value: eurekaData.isEmpty ? "ia_state_false_1" : null,
+        value: eurekaFields.isEmpty ? "ia_state_false_1" : null,
         isTranslateValue: true,
-        children: eurekaData,
+        children: eurekaFields,
       ));
     }
 
@@ -1104,6 +1229,7 @@ class NikkiInfo extends Field{
         }
       }
     }
+
     /// clothes field
     final Map<int, List<Field>> fieldWrapper = {};
 
@@ -1121,7 +1247,7 @@ class NikkiInfo extends Field{
             "TargetClothID": int targetClothID,
             "FeatureTag": int featureTag,
             "TargetGroupID": int targetGroupID,
-            "CoreData": Map coreData,
+            "CoreData": Map coreDataJson,
           }){
             switch(DIYEntry.key){
               /// GameDIYType.outfitDye
@@ -1129,8 +1255,8 @@ class NikkiInfo extends Field{
                 final List<Field> areaChildren = [];
 
                 /// hair
-                if(GameClothes(targetClothID).type == GameNikkiClothesType.hair){
-                  if(coreData case {
+                if(GameClothes(targetClothID).type == GameNikkiClothesType.hair.data){
+                  if(coreDataJson case {
                     "TargetColor0": Map targetColor0,
                     "ColorGridID0": int colorGridID0,
                   }){
@@ -1150,17 +1276,17 @@ class NikkiInfo extends Field{
                       final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
 
                       areaChildren.addAll([
-                        Field<int>(
+                        Field<String, GameDIYColorPalette>(
                           key: "ia_DIY_color_palette_X",
                           keyArgs: ["1"],
-                          value: colorPaletteInfo.data,
+                          value: colorPaletteInfo,
                           stringValue: colorPaletteInfo.stringData,
                           isTranslateValue: colorPaletteInfo.hasTranslation,
                         ),
-                        Field<int>(
+                        Field<String, GameDIYColorSwatch>(
                           key: "ia_DIY_color_swatch_X",
                           keyArgs: ["1"],
-                          value: colorSwatchInfo.data,
+                          value: colorSwatchInfo,
                           stringValue: colorSwatchInfo.stringData,
                           isTranslateValue: colorSwatchInfo.hasTranslation,
                         ),
@@ -1168,7 +1294,7 @@ class NikkiInfo extends Field{
                     }
                   }
 
-                  if(coreData case {
+                  if(coreDataJson case {
                     "TargetColor1": Map targetColor1,
                     "ColorGridID1": int colorGridID1,
                   }){
@@ -1188,17 +1314,17 @@ class NikkiInfo extends Field{
                       final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
 
                       areaChildren.addAll([
-                        Field<int>(
+                        Field<String, GameDIYColorPalette>(
                           key: "ia_DIY_color_palette_X",
                           keyArgs: ["2"],
-                          value: colorPaletteInfo.data,
+                          value: colorPaletteInfo,
                           stringValue: colorPaletteInfo.stringData,
                           isTranslateValue: colorPaletteInfo.hasTranslation,
                         ),
-                        Field<int>(
+                        Field<String, GameDIYColorSwatch>(
                           key: "ia_DIY_color_swatch_X",
                           keyArgs: ["2"],
-                          value: colorSwatchInfo.data,
+                          value: colorSwatchInfo,
                           stringValue: colorSwatchInfo.stringData,
                           isTranslateValue: colorSwatchInfo.hasTranslation,
                         ),
@@ -1206,23 +1332,23 @@ class NikkiInfo extends Field{
                     }
                   }
 
-                  if(coreData case {
+                  if(coreDataJson case {
                     "RoughnessOffset": num roughnessOffset,
                   }){
-                    areaChildren.add(Field<double>(
+                    areaChildren.add(Field<String, double>(
                       key: "ia_DIY_outfit_dye_glossiness",
                       value: (1 - roughnessOffset).toDouble(),
                     ));
                   }
 
-                  if(coreData case {
+                  if(coreDataJson case {
                     "HairColorMode": int hairColorMode,
                   }){
                     final GameDIYHairColorMode hairColorModeInfo = GameDIYHairColorMode(hairColorMode);
 
-                    areaChildren.add(Field<int>(
+                    areaChildren.add(Field<String, GameDIYHairColorMode>(
                       key: "ia_DIY_outfit_dye_hair_color_mode",
-                      value: hairColorModeInfo.data,
+                      value: hairColorModeInfo,
                       stringValue: hairColorModeInfo.stringData,
                       isTranslateValue: hairColorModeInfo.hasTranslation,
                     ));
@@ -1230,7 +1356,7 @@ class NikkiInfo extends Field{
                 }
                 /// not hair
                 else{
-                  if(coreData case {
+                  if(coreDataJson case {
                     "ColorGridID": int colorGridID,
                     "R": num r,
                     "G": num g,
@@ -1246,15 +1372,15 @@ class NikkiInfo extends Field{
                       final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
 
                       areaChildren.addAll([
-                        Field<int>(
+                        Field<String, GameDIYColorPalette>(
                           key: "ia_DIY_color_palette",
-                          value: colorPaletteInfo.data,
+                          value: colorPaletteInfo,
                           stringValue: colorPaletteInfo.stringData,
                           isTranslateValue: colorPaletteInfo.hasTranslation,
                         ),
-                        Field<int>(
+                        Field<String, GameDIYColorSwatch>(
                           key: "ia_DIY_color_swatch",
-                          value: colorSwatchInfo.data,
+                          value: colorSwatchInfo,
                           stringValue: colorSwatchInfo.stringData,
                           isTranslateValue: colorSwatchInfo.hasTranslation,
                         ),
@@ -1272,7 +1398,7 @@ class NikkiInfo extends Field{
               case GameDIYType.specialEffect:
                 final List<Field> areaChildren = [];
 
-                if(coreData case {
+                if(coreDataJson case {
                   "ColorGridID": int colorGridID,
                   "CoverDIYColor": bool coverDIYColor,
                 }){
@@ -1283,15 +1409,15 @@ class NikkiInfo extends Field{
                     final GameDIYColorSwatch colorSwatchInfo = colorGridInfo.swatch;
 
                     areaChildren.addAll([
-                      Field<int>(
+                      Field<String, GameDIYColorPalette>(
                         key: "ia_DIY_color_palette",
-                        value: colorPaletteInfo.data,
+                        value: colorPaletteInfo,
                         stringValue: colorPaletteInfo.stringData,
                         isTranslateValue: colorPaletteInfo.hasTranslation,
                       ),
-                      Field<int>(
+                      Field<String, GameDIYColorSwatch>(
                         key: "ia_DIY_color_swatch",
-                        value: colorSwatchInfo.data,
+                        value: colorSwatchInfo,
                         stringValue: colorSwatchInfo.stringData,
                         isTranslateValue: colorSwatchInfo.hasTranslation,
                       ),
@@ -1299,15 +1425,15 @@ class NikkiInfo extends Field{
                   }
 
                   final GameDIYCoverDIYColor coverDIYColorInfo = GameDIYCoverDIYColor(coverDIYColor);
-                  areaChildren.add(Field<bool>(
+                  areaChildren.add(Field<String, GameDIYCoverDIYColor>(
                     key: "ia_DIY_cover_DIY_color",
-                    value: coverDIYColorInfo.data,
+                    value: coverDIYColorInfo,
                     stringValue: coverDIYColorInfo.stringData,
                     isTranslateValue: coverDIYColorInfo.hasTranslation,
                   ));
                 }
 
-                specialEffectFields.add(Field(
+                specialEffectFields.add(Field<String, dynamic>(
                   key: "ia_diy_area_X",
                   keyArgs: ["$featureTag-$targetGroupID"],
                   children: areaChildren,
@@ -1316,41 +1442,41 @@ class NikkiInfo extends Field{
               case GameDIYType.patternCreation:
                 final List<Field> areaChildren = [];
 
-                if(coreData case {
+                if(coreDataJson case {
                   "ReplaceTextureID": int replaceTextureID,
                 }){
                   final GameDIYPatternTexture patternTextureInfo = GameDIYPatternTexture(replaceTextureID);
 
-                  areaChildren.add(Field(
+                  areaChildren.add(Field<String, GameDIYPatternTexture>(
                     key: "ia_DIY_pattern_texture",
-                    value: patternTextureInfo.data,
+                    value: patternTextureInfo,
                     stringValue: patternTextureInfo.stringData,
                     isTranslateValue: patternTextureInfo.hasTranslation,
                   ));
 
-                  if(coreData case {
+                  if(coreDataJson case {
                     "OverridePatternA": bool overridePatternA,
                   }){
                     final GameDIYOverridePatternA overridePatternAInfo = GameDIYOverridePatternA(overridePatternA);
-                    areaChildren.add(Field(
+                    areaChildren.add(Field<String, GameDIYOverridePatternA>(
                       key: "ia_DIY_override_pattern_A_false",
-                      value: overridePatternAInfo.data,
+                      value: overridePatternAInfo,
                       stringValue: overridePatternAInfo.stringData,
                       isTranslateValue: overridePatternAInfo.hasTranslation,
                     ));
                   }else{
-                    areaChildren.add(Field(
+                    areaChildren.add(Field<String, GameDIYOverridePatternA>(
                       key: "ia_DIY_override_pattern_A_false",
-                      value: GameDIYOverridePatternA.defaultState.data,
+                      value: GameDIYOverridePatternA.defaultState,
                       stringValue: GameDIYOverridePatternA.defaultState.stringData,
                       isTranslateValue: GameDIYOverridePatternA.defaultState.hasTranslation,
                     ));
                   }
                 }
-                else if(coreData case {
+                else if(coreDataJson case {
                   "TilingData": num tilingData,
                 }){
-                  areaChildren.add(Field<double>(
+                  areaChildren.add(Field<String, double>(
                     key: "ia_DIY_tiling_data",
                     value: tilingData.toDouble(),
                     stringValue: tilingData.toStringAsFixed(2),
@@ -1446,24 +1572,25 @@ class NikkiInfo extends Field{
           final GameEurekaLevel eurekaLevelInfo = eurekaInfo.level;
           final int color = eurekaInfo.color;
 
-          res.add(Field<int>(
-            key: attachmentPointInfo.stringData,
+          res.add(Field<GameEurekaAttachmentPoint, GameEureka>(
+            key: attachmentPointInfo,
+            stringKey: attachmentPointInfo.stringData,
             isTranslateKey: attachmentPointInfo.hasTranslation,
-            value: eurekaInfo.data,
+            value: eurekaInfo,
             stringValue: eurekaInfo.stringData,
             isTranslateValue: eurekaInfo.hasTranslation,
             children: [
-              Field<int>(
+              Field<String, int>(
                 key: "ia_eureka_outfits",
                 value: id,
               ),
-              Field<int>(
+              Field<String, GameEurekaLevel>(
                 key: "ia_eureka_level",
-                value: eurekaLevelInfo.data,
+                value: eurekaLevelInfo,
                 stringValue: eurekaLevelInfo.stringData,
                 isTranslateValue: eurekaLevelInfo.hasTranslation,
               ),
-              Field<int>(
+              Field<String, int>(
                 key: "ia_eureka_color",
                 value: color,
               ),
@@ -1477,7 +1604,7 @@ class NikkiInfo extends Field{
   }
 
   static Field parseWeaponData(dynamic socialPhotoJson){
-    const Field noWeaponField = Field<String>(
+    const Field noWeaponField = Field<String, String>(
       key: "ia_weapon",
       value: "ia_state_false_4",
       isTranslateValue: true,
@@ -1497,9 +1624,9 @@ class NikkiInfo extends Field{
         final GameWeapon weaponInfo = GameWeapon(weaponID);
         final GameWeaponSlotType slotTypeInfo = GameWeaponSlotType(slotType);
 
-        children.add(Field<String>(
+        children.add(Field<String, GameWeaponSlotType>(
           key: "ia_weapon_slot",
-          value: slotTypeInfo.data,
+          value: slotTypeInfo,
           stringValue: slotTypeInfo.stringData,
           isTranslateValue: slotTypeInfo.hasTranslation,
         ));
@@ -1509,17 +1636,17 @@ class NikkiInfo extends Field{
         }){
           final GameWeaponCustomState customStateInfo = GameWeaponCustomState(customState);
 
-          children.add(Field<String>(
+          children.add(Field<String, GameWeaponCustomState>(
             key: "ia_weapon_custom_state",
-            value: customStateInfo.data,
+            value: customStateInfo,
             stringValue: customStateInfo.stringData,
             isTranslateValue: customStateInfo.hasTranslation,
           ));
         }
 
-        return Field<int>(
+        return Field<String, GameWeapon>(
           key: "ia_weapon",
-          value: weaponInfo.data,
+          value: weaponInfo,
           stringValue: weaponInfo.stringData,
           isTranslateValue: weaponInfo.hasTranslation,
           children: children,
@@ -1553,7 +1680,7 @@ class NikkiInfo extends Field{
 
               final List<Field> children = [];
 
-              children.add(Field<GameInteractionType>(
+              children.add(Field<String, GameInteractionType>(
                 key: "ia_interaction_type",
                 value: interactionTypeInfo,
                 stringValue: interactionTypeInfo.stringData,
@@ -1584,10 +1711,10 @@ class NikkiInfo extends Field{
                 children.add(Scale3(x: x, y: y, z: z));
               }
 
-              res.add(Field<String>(
-                key: interactionInfo.stringData,
+              res.add(Field<GameInteraction, dynamic>(
+                key: interactionInfo,
+                stringKey: interactionInfo.stringData,
                 isTranslateKey: interactionInfo.hasTranslation,
-                isTranslateValue: true,
                 children: children,
               ));
             }
@@ -1600,7 +1727,7 @@ class NikkiInfo extends Field{
   }
 
   static Field parseCarrierData(dynamic socialPhotoJson){
-    const Field noCarrierField = Field<String>(
+    const Field noCarrierField = Field<String, String>(
       key: "ia_carrier",
       value: "ia_state_false_3",
       isTranslateValue: true,
@@ -1642,7 +1769,7 @@ class NikkiInfo extends Field{
           children.add(Scale3(x: x, y: y, z: z));
         }
 
-        return Field<GameCarrier>(
+        return Field<String, GameCarrier>(
           key: "ia_carrier",
           value: carrierInfo,
           stringValue: carrierInfo.stringData,
@@ -1657,20 +1784,22 @@ class NikkiInfo extends Field{
 
   const NikkiInfo._({
     super.key = "ia_nikki_info",
+    super.expand,
     super.children,
   });
 
   factory NikkiInfo.fromGameJson({
     String key = "ia_nikki_info",
+    bool expand = true,
     dynamic socialPhotoJson,
   }){
     return NikkiInfo._(
       key: key,
+      expand: expand,
       children: parse(socialPhotoJson),
     );
   }
 }
-
 
 class MomoInfo extends Field{
   static List<Field> parse(dynamic socialPhotoJson){
@@ -1682,7 +1811,7 @@ class MomoInfo extends Field{
       "DaMiaoInfo": Map daMiaoInfoJson,
     }){
       if(daMiaoInfoJson.isNotEmpty){
-        res.add(Field<String>(
+        res.add(Field<String, String>(
           key: "ia_momo_hidden",
           value: "ia_state_false_5",
           isTranslateValue: true,
@@ -1722,8 +1851,9 @@ class MomoInfo extends Field{
               final GameClothes clothesInfo = GameClothes(clothes);
               final GameMomoClothesType clothesTypeInfo = GameMomoClothesType(clothesInfo.type);
 
-              clothesFields.add(Field(
-                key: clothesTypeInfo.stringData,
+              clothesFields.add(Field<GameMomoClothesType, GameClothes>(
+                key: clothesTypeInfo,
+                stringKey: clothesTypeInfo.stringData,
                 isTranslateKey: clothesTypeInfo.hasTranslation,
                 value: clothesInfo,
                 stringValue: clothesInfo.stringData,
@@ -1732,7 +1862,7 @@ class MomoInfo extends Field{
             }
           }
 
-          res.add(Field(
+          res.add(Field<String, String?>(
             key: "ia_momo_clothes",
             value: clothesFields.isEmpty ? "ia_state_false_1" : null,
             isTranslateValue: true,
@@ -1743,7 +1873,7 @@ class MomoInfo extends Field{
     }
 
     if(res.isEmpty){
-      res.add(Field<String>(
+      res.add(Field<String, String>(
         key: "ia_momo_hidden",
         value: "ia_state_true_5",
         isTranslateValue: true,
@@ -1755,15 +1885,18 @@ class MomoInfo extends Field{
 
   const MomoInfo._({
     super.key = "ia_momo_info",
+    super.expand,
     super.children,
   });
 
   factory MomoInfo.fromGameJson({
     String key = "ia_momo_info",
+    bool expand = false,
     dynamic socialPhotoJson,
   }){
     return MomoInfo._(
       key: key,
+      expand: expand,
       children: parse(socialPhotoJson),
     );
   }
@@ -1797,7 +1930,7 @@ class MomoInfo extends Field{
 //
 
 // 部分任务过场自动拍摄图为 {}
-const ex = {
+const nikkiPhotoTemplate = {
   "SocialPhoto": {
     // 使用巨大化套装能力后为 true
     "GiantState": false,
@@ -2245,6 +2378,33 @@ const ex = {
   },
 };
 
+
+
+
+const DIYPhotoTemplate = {
+  "Content": {
+    "patternData": [
+    // :1020600042:0
+    ],
+    "wearingClothes": [
+      1020100042,
+      1021410041,
+      1020600042,
+      1021780015,
+      1021300051
+    ],
+    "wearingDIYInfos": [
+      {
+        "TargetGroupID": 1,
+        "CoreData": {
+          "ReplaceTextureID": 1330020001
+        },
+        "FeatureTag": 2,
+        "TargetClothID": 1021300051
+      }
+    ]
+  }
+};
 
 
 
