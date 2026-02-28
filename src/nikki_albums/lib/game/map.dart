@@ -2,6 +2,311 @@
 
 
 
+
+mixin _GetLast{
+  static const List<int> _powMap = [1, 10, 100, 1000];
+
+  static int getLast(int data){
+    final int p = (data ~/ 10);
+    final int l = data - p * 10;
+
+    return p - (p ~/ _powMap[l]) * _powMap[l];
+  }
+}
+
+
+extension type const GameDimension(int data){
+  static const GameDimension miraland = GameDimension(1);
+  static const GameDimension seaOfStars = GameDimension(2);
+  static const GameDimension home = GameDimension(3);
+
+  static const Map<int, String> _map = {
+    1: "game_dimension_miraland",
+    2: "game_dimension_sea_of_stars",
+    3: "game_dimension_home",
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameNation(int data){
+  static const GameNation heartcraftKingdom = GameNation(111);
+  static const GameNation empireOfLight = GameNation(211);
+  static const GameNation terraAlliance = GameNation(311);
+  static const GameNation starhailFederation = GameNation(1411);
+  static const GameNation linlangEmpire = GameNation(511);
+  static const GameNation twinmoonKingdom = GameNation(611);
+  static const GameNation whalePort = GameNation(711);
+  static const GameNation umbraso = GameNation(811);
+
+  static const Map<int, String> _map = {
+    111: "game_nation_heartcraft_kingdom",
+    211: "game_nation_empire_of_light",
+    311: "game_nation_terra_alliance",
+    411: "game_nation_starhail_federation",
+    511: "game_nation_linlang_empire",
+    611: "game_nation_twinmoon_kingdom",
+    711: "game_nation_whale_port",
+    811: "game_nation_umbraso",
+  };
+
+  GameDimension get dimension{
+    return GameDimension(_GetLast.getLast(data));
+  }
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+
+
+
+extension type const GameMap(int data){
+  static const GameMap miraland = GameMap(1);
+  static const GameMap fireworkIsles = GameMap(2);
+  static const GameMap serenityIsland = GameMap(3);
+  static const GameMap danqingIsland = GameMap(4);
+  static const GameMap danqingRealm = GameMap(5);
+  static const GameMap wanxiangRealm = GameMap(6);
+
+  static const Map<int, String> _map = {
+    1: "assets/map/miraland.webp",
+    2: "assets/map/firework_isles.webp",
+    3: "assets/map/serenity_island.webp",
+    4: "assets/map/danqing_island.webp",
+    5: "assets/map/danqing_realm.webp",
+    6: "assets/map/wanxiang_realm.webp",
+  };
+
+  static const Map<int, (int, int)> _mapSize = {
+    1: (16383, 10756),
+  };
+
+  /// (pixel point, coord point)
+  static const Map<int, (((num, num), (num, num)), ((num, num), (num, num)))> _referencePoint = {
+    1: (((11491, 5234), (-13172, -54273)), ((3941, 3823), (-501245, -145560))),
+  };
+
+  (int, int) coordToPixel((num, num) coordinates){
+    final rp = _referencePoint[data] ?? _referencePoint[1]!;
+
+    final r1 = rp.$1;
+    final r2 = rp.$2;
+
+    final p1 = r1.$1;
+    final c1 = r1.$2;
+    final p2 = r2.$1;
+    final c2 = r2.$2;
+
+    final x = p1.$1 + (p2.$1 - p1.$1) * (coordinates.$1 - c1.$1) / (c2.$1 - c1.$1);
+    final y = p1.$2 + (p2.$2 - p1.$2) * (coordinates.$2 - c1.$2) / (c2.$2 - c1.$2);
+
+    return (x.toInt(), y.toInt());
+  }
+
+  String get assetName => _map[data] ?? _map[1]!;
+
+  (int, int) get mapSize => _mapSize[data] ?? _mapSize[1]!;
+}
+
+extension type const GamePhotoRegion(int data){
+  static const GamePhotoRegion unknown = GamePhotoRegion(-1);
+  static const GamePhotoRegion home = GamePhotoRegion(1);
+  static const GamePhotoRegion seaOfStars = GamePhotoRegion(2);
+  static const GamePhotoRegion memorialMountains = GamePhotoRegion(3);
+  static const GamePhotoRegion florawish = GamePhotoRegion(4);
+  static const GamePhotoRegion breezyMeadow = GamePhotoRegion(5);
+  static const GamePhotoRegion stoneville = GamePhotoRegion(6);
+  static const GamePhotoRegion abandonedDistrict = GamePhotoRegion(7);
+  static const GamePhotoRegion wishingWoods = GamePhotoRegion(8);
+  static const GamePhotoRegion fireworkIsles = GamePhotoRegion(9);
+  static const GamePhotoRegion serenityIsland = GamePhotoRegion(10);
+  static const GamePhotoRegion danqingIsland = GamePhotoRegion(11);
+  static const GamePhotoRegion danqingRealm = GamePhotoRegion(12);
+  static const GamePhotoRegion elderwoodForest = GamePhotoRegion(13);
+  static const GamePhotoRegion spira = GamePhotoRegion(14);
+  static const GamePhotoRegion wanxiangRealm = GamePhotoRegion(15);
+
+  static const Map<int, String> _map = {
+    -1: "game_photo_region_unknown",
+    1: "game_photo_region_home",
+    2: "game_photo_region_sea_of_stars",
+    3: "game_photo_region_memorial_mountains",
+    4: "game_photo_region_florawish",
+    5: "game_photo_region_breezy_meadow",
+    6: "game_photo_region_stoneville",
+    7: "game_photo_region_abandoned_district",
+    8: "game_photo_region_wishing_woods",
+    9: "game_photo_region_firework_isles",
+    10: "game_photo_region_serenity_island",
+    11: "game_photo_region_danqing_island",
+    12: "game_photo_region_danqing_realm",
+    13: "game_photo_region_elderwood_forest",
+    14: "game_photo_region_spira",
+    15: "game_photo_region_wanxiang_realm",
+  };
+
+  /// (最小高度, 最大高度, [(x, y)])
+  static const Map<int, (num, num, List<(num, num)>)> _enclosureMap = {
+    // 家园
+    1: (-300, 7000, [(-10174.93,-8472.43),(11535.34,-14879.2),(16067.64,-13760.11),(22306.55,-8108.73),(23733.38,1487.44),(17970.09,16790.94),(7590.57,25072.18),(8.76,25072.18),(-10482.68,17210.6),(-15658.45,4536.95),(-14007.8,-4052.04)]),
+    // 星海
+    2: (-21000, -16000, [(37807.43,72039.43),(-10490.97,65704.18),(-37023.73,52092.82),(-38591.86,43123.11),(-35392.88,33212.53),(-25105.94,24242.83),(-23914.16,16715.81),(-18143.45,11697.79),(-11118.22,12387.77),(-5222.06,16715.81),(6695.73,15524.03),(13030.98,9188.78),(20118.92,8436.08),(22627.93,10506.01),(18299.89,22674.7),(18299.89,27316.36),(25136.94,30828.98),(38873.76,32020.75),(45773.53,38544.17),(46651.68,43813.09),(43389.97,69781.32)]),
+    // 纪念山地
+    3: (double.negativeInfinity, double.infinity, [(-56614.89,-43412.28),(-26101.43,-48777.99),(-37026.8,-53303.29),(-40323.81,-59186.18),(-48469.35,-56600.3),(-52283.53,-62483.19),(-45948.11,-83040.99),(-95144.6,-80261.16)]),
+    // 花愿镇
+    4: (double.negativeInfinity, double.infinity, [(49277.16,-42636.51),(53349.93,-46192.1),(58651.0,-45674.93),(61948.0,-42636.51),(89616.98,-44705.22),(131766.93,-29707.08),(127694.16,-11670.52),(25163.77,-29448.49),(-25842.84,-47226.46),(-35992.45,-52592.17),(-40065.22,-59186.18),(-49245.12,-56858.89),(-52283.53,-63194.31),(-37285.39,-103081.61),(23095.06,-96487.6)]),
+    // 微风绿野 (相交: 星海)
+    5: (-25000, -6000, [(-57843.19,-42636.51),(-26360.02,-48519.4),(533.2,-15743.29),(16759.64,18261.11),(68089.48,54334.23),(68089.48,95191.23),(29947.66,133785.59),(-113439.75,102819.6),(-107621.5,42374.5),(-77172.69,6818.57),(-70578.68,-16001.88),(-79176.75,-36042.5)]),
+    // 小石树田村
+    6: (double.negativeInfinity, double.infinity, [(-71289.8,-15484.7),(-83249.52,32483.49),(-121326.7,26923.83),(-146474.44,-13480.64),(-146474.44,-29965.67),(-134773.31,-46450.69),(-116478.16,-54337.65)]),
+    // 石树田无人区
+    7: (double.negativeInfinity, double.infinity, [(-146733.03,-30482.84),(-140850.14,-41666.8),(-52283.53,-153829.63),(-173367.66,-244982.12),(-306152.93,-151049.8),(-300270.04,-89376.41),(-308674.17,-80713.69),(-307381.23,8628.69),(-188365.8,20265.18)]),
+    // 祈愿树林
+    8: (double.negativeInfinity, double.infinity, [(53091.34,-46192.1),(58651.0,-45480.99),(89616.98,-48002.23),(135322.53,-30741.43),(179476.54,-43153.69),(186587.73,-167793.41),(74942.08,-186605.74),(45204.39,-109417.03)]),
+    // 花焰群岛
+    9: (double.negativeInfinity, double.infinity, [(-231645.07,610721.77),(-190342.89,596028.51),(-186636.02,566951.78),(-211840.68,540972.71),(-240308.21,539888.52),(-267216.58,557204.46),(-271852.75,585362.23),(-259172.98,608099.08)]),
+    // 无忧岛 (相交: 家园)
+    10: (0, 35000, [(-57012.82,69452.59),(-16636.17,74358.82),(14406.68,21377.56),(-21303.07,-2196.26),(-54679.37,10169.02),(-61450.36,39815.79)]),
+    // 丹青屿 (相交: 丹青之境)
+    11: (-20000, 0, [(-259255.97,328276.73),(-224232.18,311115.98),(-215651.81,252870.23),(-276401.44,186410.52),(-320723.18,182837.91),(-333944.89,221067.89),(-317150.57,306474.64)]),
+    // 丹青之境
+    12: (-20000, -10000, [(-279384.94,307394.6),(-243497.55,303128.79),(-217917.92,271507.21),(-265175.72,189789.01),(-347258.25,148208.83),(-367145.09,162782.38),(-349383.56,249479.88)]),
+    // 巨木之森
+    13: (double.negativeInfinity, double.infinity, [(-545929.25,-254937.79),(-536296.82,-250865.01),(-523108.8,-250089.25),(-449475.69,-284352.24),(-388578.06,-261790.38),(-305053.93,-130815.24),(-299946.8,-89893.59),(-308092.35,-81036.92),(-557436.44,-1003.74),(-742327.32,-184472.38),(-623376.55,-310405.05)]),
+    // 蜗牛城
+    14: (double.negativeInfinity, double.infinity, [(-546187.84,-255907.49),(-535779.64,-250089.25),(-522074.45,-249830.66),(-504555.07,-259721.68),(-505072.24,-285128.01),(-558923.33,-296764.5)]),
+    // 万相境
+    15: (0, 60000, [(33713.85,104184.05),(118859.9,118094.84),(146941.68,109948.52),(142618.32,61490.93),(84573.3,4887.03),(46183.53,2244.98),(5892.28,64853.54),(12617.49,90033.07)]),
+  };
+
+  static const Map<Set<int>, int> _contradictionMap = {
+    // 家园 & 微风绿野, 相交部分微风绿野大部分高度低于星海
+    {2, 5}: 5,
+    // 家园 & 无忧岛, 相交部分为家园需解锁区域
+    {1, 10}: 10,
+    // 丹青屿 & 丹青之境
+    {11, 12}: 11,
+  };
+
+  /// 判断点是否在多边形内
+  static bool _isPointInPolygon(num x, num y, List<(num, num)> polygon) {
+    int windingNumber = 0;
+    int n = polygon.length;
+
+    for (int i = 0, j = n - 1; i < n; j = i++) {
+      final (xi, yi) = polygon[i];
+      final (xj, yj) = polygon[j];
+
+      if (yi <= y) {
+        if (yj > y && _isLeft(xi, yi, xj, yj, x, y) > 0) {
+          windingNumber++;
+        }
+      } else {
+        if (yj <= y && _isLeft(xi, yi, xj, yj, x, y) < 0) {
+          windingNumber--;
+        }
+      }
+    }
+    return windingNumber != 0;
+  }
+
+  static num _isLeft(num x1, num y1, num x2, num y2, num x, num y) {
+    return (x2 - x1) * (y - y1) - (x - x1) * (y2 - y1);
+  }
+
+  static List<GamePhotoRegion> byCoordinates((num, num, num) coordinates){
+    final (x, y, z) = coordinates;
+    final List<GamePhotoRegion> matches = [];
+
+    // 收集所有匹配的区域
+    for (final entry in _enclosureMap.entries) {
+      final (minHeight, maxHeight, polygon) = entry.value;
+
+      if (z < minHeight || z > maxHeight){
+        continue;
+      }
+      if (_isPointInPolygon(x, y, polygon)) {
+        matches.add(GamePhotoRegion(entry.key));
+      }
+    }
+
+    if (matches.isEmpty) return [GamePhotoRegion.unknown];
+    if (matches.length == 1) return matches;
+
+    return matches;
+
+    // 2. 修复冲突处理：使用 Set 提高查找效率
+    final matchIds = matches.map((r) => r.data).toSet();
+
+    // 按优先级分组
+    final priorityRegions = <int>[];
+    final remainingIds = matchIds.toSet();
+
+    for (final entry in _contradictionMap.entries) {
+      final conflictSet = entry.key;
+      final priorityId = entry.value;
+
+      // 检查是否包含此冲突对（子集检查）
+      if(matchIds.containsAll(conflictSet)){
+        priorityRegions.add(priorityId);
+        remainingIds.removeAll(conflictSet);
+        remainingIds.add(priorityId); // 保留优先级高的
+      }
+    }
+
+    // 构建结果：优先级高的在前，其余按原顺序
+    final result = <GamePhotoRegion>[];
+    final seen = <int>{};
+
+    // 先添加所有优先级区域
+    for (final id in priorityRegions) {
+      if (seen.add(id)) {
+        result.add(GamePhotoRegion(id));
+      }
+    }
+
+    // 再添加剩余区域
+    for (final region in matches) {
+      if (seen.add(region.data)) {
+        result.add(region);
+      }
+    }
+
+    return result;
+  }
+
+  GameMap get map => switch(data){
+    (>=3 && <= 8) || (>= 13 && <= 14) => GameMap.miraland,
+    9 => GameMap.fireworkIsles,
+    10 => GameMap.serenityIsland,
+    11 => GameMap.danqingIsland,
+    12 => GameMap.danqingRealm,
+    15 => GameMap.wanxiangRealm,
+    _ => GameMap.miraland,
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+extension type const GameCheckpoint((num, num, num) data){
+
+  static const Map<(num, num, num), String> _map = {
+
+  };
+
+  String get stringData => _map[data] ?? data.toString();
+
+  bool get hasTranslation => _map.containsKey(data);
+}
+
+
+
 extension type const GameCollageTemplate(int data){
 
   static const Map<int, String> _map = {

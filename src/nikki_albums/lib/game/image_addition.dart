@@ -1,23 +1,7 @@
 export "map.dart";
 import "map.dart";
-
-import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data';
-import 'package:crypto/crypto.dart';
-import 'package:encrypt/encrypt.dart' as encrypt;
-import 'package:nikkialbums/game/codec.dart';
-import 'package:path/path.dart' as path;
-
-
-
-
-
-
-
-
-
+import "dart:math";
+import "package:nikkialbums/game/codec.dart";
 
 
 
@@ -185,7 +169,7 @@ class CollageAddition extends Field{
 
     if(collageJson case {
       "TemplateId": int templateId,
-      "RegionPictures": Map regionPicturesJson,
+      "RegionPictures": dynamic regionPicturesJson,
     }){
       final GameCollageTemplate collageTemplateInfo = GameCollageTemplate(templateId);
 
@@ -209,38 +193,54 @@ class CollageAddition extends Field{
   static List<Field> parseRegionPictures(dynamic regionPicturesJson){
     final List<Field> res = <Field>[];
 
-    if(regionPicturesJson is! Map) return res;
+    if(regionPicturesJson is Map){
+      regionPicturesJson = [regionPicturesJson];
+    }
 
-    if(regionPicturesJson case {
-      "Position": Map positionJson,
-      "Rotation": num rotation,
-      "Scale": num scale,
-      "oriCustomData": Map oriCustomDataJson,
-      "ImageId": String imageId,
-    }){
-      if(positionJson case {
-        "x": num x,
-        "y": num y,
-      }){
-        res.add(Loc2(x: x, y: y));
+    if(regionPicturesJson is! List) return res;
+
+    for(final (int index, dynamic regionPictures) in regionPicturesJson.indexed){
+      if(regionPictures is Map){
+        final List<Field> children = [];
+
+        if(regionPictures case {
+          "Position": Map positionJson,
+          "Rotation": num rotation,
+          "Scale": num scale,
+          "oriCustomData": Map oriCustomDataJson,
+          "ImageId": String imageId,
+        }){
+          if(positionJson case {
+            "x": num x,
+            "y": num y,
+          }){
+            children.add(Loc2(x: x, y: y));
+          }
+
+          children.addAll([
+            Rot(
+              rot: rotation,
+            ),
+            Scale(
+              scale: scale,
+            ),
+            Field<String, String>(
+              key: "ia_Collage_image_id",
+              value: imageId,
+            ),
+            NikkiPhotoAddition.fromGameJson(
+              key: "ia_Collage_oriCustomData",
+              nikkiPhotoJson: oriCustomDataJson,
+            ),
+          ]);
+        }
+
+        res.add(Field(
+          key: "ia_Collage_region_pictures_X",
+          keyArgs: [(index + 1).toString()],
+          children: children,
+        ));
       }
-
-      res.addAll([
-        Rot(
-          rot: rotation,
-        ),
-        Scale(
-          scale: scale,
-        ),
-        Field<String, String>(
-          key: "ia_Collage_image_id",
-          value: imageId,
-        ),
-        NikkiPhotoAddition.fromGameJson(
-          key: "ia_Collage_oriCustomData",
-          nikkiPhotoJson: oriCustomDataJson,
-        ),
-      ]);
     }
 
     return res;
@@ -330,7 +330,24 @@ class NikkiPhotoAddition extends Field{
       res.add(MomoInfo.fromGameJson(socialPhotoJson: socialPhotoJson));
     }
 
-    return res;
+    late final Field autoShootField;
+    if(res.any((Field field) => field.key == "ia_nikki_info")){
+      autoShootField = Field<String, bool>(
+        key: "ia_auto_shoot",
+        value: false,
+        stringValue: "ia_state_false_2",
+        isTranslateValue: true,
+      );
+    }else{
+      autoShootField = Field<String, bool>(
+        key: "ia_auto_shoot",
+        value: true,
+        stringValue: "ia_state_true_2",
+        isTranslateValue: true,
+      );
+    }
+
+    return [autoShootField, ...res];
   }
 
   const NikkiPhotoAddition._({
@@ -412,6 +429,12 @@ class PhotographyInfo extends Field{
           key: "ia_time",
           children: parseTimeData(timeJson),
         ));
+      }
+
+      if(socialPhotoJson case {
+        "PhotoInfo": dynamic photoInfoJson,
+      }){
+        res.addAll(parsePhotoRegion(photoInfoJson));
       }
 
       if(socialPhotoJson case {
@@ -506,8 +529,43 @@ class PhotographyInfo extends Field{
         Field<String, num>(
           key: "ia_time_sec",
           value: sec,
+          stringValue: sec.toStringAsFixed(0)
         ),
       ]);
+    }
+
+    return res;
+  }
+
+  static List<Field> parsePhotoRegion(dynamic photoInfoJson){
+    final List<Field> res = <Field>[];
+
+    if(photoInfoJson is! Map) return res;
+
+    if(photoInfoJson case {
+      "nikkiLocX": num x,
+      "nikkiLocY": num y,
+      "nikkiLocZ": num z,
+    }){
+      final List<GamePhotoRegion> photoRegionInfoList = GamePhotoRegion.byCoordinates((x, y, z));
+
+      if(photoRegionInfoList.length == 1){
+        res.add(Field<String, (GamePhotoRegion, num, num, num)>(
+          key: "ia_photo_region",
+          value: (photoRegionInfoList.first, x, y, z),
+          stringValue: photoRegionInfoList.first.stringData,
+          isTranslateValue: photoRegionInfoList.first.hasTranslation,
+        ));
+      }else{
+        for(final GamePhotoRegion photoRegionInfo in photoRegionInfoList){
+          res.add(Field<String, (GamePhotoRegion, num, num, num)>(
+            key: "ia_possible_photo_region",
+            value: (photoRegionInfo, x, y, z),
+            stringValue: photoRegionInfo.stringData,
+            isTranslateValue: photoRegionInfo.hasTranslation,
+          ));
+        }
+      }
     }
 
     return res;
@@ -639,7 +697,7 @@ class PhotographyInfo extends Field{
 
   factory PhotographyInfo.fromGameJson({
     String key = "ia_photography_info",
-    bool expand = false,
+    bool expand = true,
     dynamic nikkiPhotoJson,
   }){
     return PhotographyInfo._(
