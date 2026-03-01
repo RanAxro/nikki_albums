@@ -1,0 +1,317 @@
+{
+  "nikkialbums": "暖暖相册",
+  "info": "该软件还在测试阶段, 不代表最终品质\n 软件官网: nikki.ranaxro.com \n github: github.com/RanAxro/nikki_albums \n QQ交流群: 1062670402",
+
+
+  "----------common----------": "----------common----------",
+
+  "version": "版本",
+  "setting": "设置",
+  "name": "名称",
+  "ok": "好的",
+  "completed": "已完成",
+  "cancel": "取消",
+  "confirm": "确认",
+  "save": "保存",
+  "saveAs": "另存为",
+  "close": "关闭",
+  "refresh": "刷新",
+  "reset": "重置",
+  "back": "回退",
+  "forward": "前进",
+  "previous": "下一个",
+  "next": "上一个",
+  "ascending": "正序",
+  "descending": "倒序",
+  "filter": "筛选",
+  "play": "启动",
+  "enable": "启用",
+  "disable": "禁用",
+  "download": "下载",
+  "edit": "编辑",
+  "quantity": "数量",
+  "type": "类型",
+  "restore": "恢复",
+
+
+  "----------setting----------": "----------setting----------",
+  "theme": "主题",
+  "lang": "简体中文",
+  "language": "语言",
+
+  "personalization": "个性化",
+  "accountManagement": "账号管理",
+  "versionInformation": "版本信息",
+
+  "maximizeOrRestoreButton": "最大化按钮",
+
+  "checkForUpdates": "检测更新",
+  "checkFailed": "检测失败",
+  "alreadyTheLatestVersion": "已是最新版本",
+  "findNewVersion": "发现新版本",
+  "updateMessage": "更新内容",
+  "downloadFailed": "下载失败",
+  "toOfficialWebsite": "前往官网",
+
+
+
+  "----------nikkias----------": "----------nikkias----------",
+  "nikkiasFile": "nikkias文件",
+  "selectNikkiasFile": "选择一个nikkias文件",
+  "importTo": "导入到",
+  "importToOther": "导入到其他渠道",
+  "saveDirectly": "直接保存",
+  "saveDecoded": "解码后保存",
+
+
+
+  "----------frame----------": "----------frame----------",
+
+
+  "account": "账号",
+  "selectAccountButton": "选择账号",
+  "deleteAccount": "你确定要删除该账号吗",
+  "addCustomAccountButton": "添加",
+  "locateGame": "定位游戏",
+  "locateInfinityNikki": "请选择\"无限暖暖\"、\"launcher\"或者\"xstarter\"",
+  "locateX6GameDir": "请选择\"X6Game\"",
+  "locate": "定位",
+  "launcherDir": "启动器位置",
+  "installDir": "游戏安装位置",
+  "gameAlreadyExists": "已存在, 建议不要重复添加。如果确实需要添加, 请再次点击保存",
+  "toLocateGame": "请先定位游戏",
+  "Location failed": "定位失败",
+  "remarks": "备注",
+  "noteXAs": "将 {} 备注为",
+  "fillRemarks": "填写备注",
+
+
+  "ClockInPhotoName": "世界巡游",
+  "CloudPhotos_LowQualityName": "云端照片缓存2",
+  "CloudPhotosName": "云端照片缓存1",
+  "CustomAvatarName": "头像",
+  "CustomCardName": "名片",
+  "CustomHomeBoardPhotoName": "家园路牌",
+  "DIYName": "星绘图册",
+  "HomeTemplatePhotoName": "家园方案",
+  "MagazinePhotosName": "旅行手账",
+  "NikkiPhotos_HighQualityName": "大喵相册",
+  "NikkiPhotos_LowQualityName": "缩略图",
+  "PlantDyeingName": "花草拓拓拓",
+  "ScreenShotName": "截图",
+  "XSdkQrCodeName": "分享码",
+
+  "ClockInPhotoDescription": "世界巡游打卡照片。请及时备份！",
+  "CloudPhotos_LowQualityDescription": "云端相册缓存，照片质量低，可放心清理",
+  "CloudPhotosDescription": "云端相册缓存，照片质量低，可放心清理",
+  "CustomAvatarDescription": "使用过头像，游戏不会清理该相册，请定期清理无用的图片",
+  "CustomCardDescription": "使用过名片，游戏不会清理该相册，请定期清理无用的图片",
+  "CustomHomeBoardPhotoDescription": "家园路牌封面图片",
+  "DIYDescription": "在星绘图册编辑过的图片，只保留最新的一张",
+  "HomeTemplatePhotoDescription": "家园模板封面图片",
+  "MagazinePhotosDescription": "旅行手账。请及时备份！",
+  "NikkiPhotos_HighQualityDescription": "大喵相机拍的高清图，存有拍摄信息。请及时备份与清理！",
+  "NikkiPhotos_LowQualityDescription": "自动生成的缩略图",
+  "PlantDyeingDescription": "花草拓拓拓",
+  "ScreenShotDescription": "拍过的图片都保存在这。游戏不会管理该相册",
+  "XSdkQrCodeDescription": "分享码二维码",
+
+
+  "LauncherCacheImagesName": "启动器缓存图片",
+  "MallPicName": "商城",
+  "MoviesName": "CG/PV/Splash",
+
+  "LauncherCacheImagesDescription": "启动器缓存的图像文件",
+  "MallPicDescription": "游戏商城的图像",
+  "MoviesDescription": "",
+
+
+
+  "----------album----------": "----------album----------",
+
+  "currentGameIsNull": "请先选择账号",
+  "tag": "标签",
+  "defaultTag": "默认标签",
+  "addCustomTag": "新建标签",
+  "tagName": "标签昵称",
+  "tagAlreadyExists": "该标签已存在",
+  "manageTags": "标签管理",
+  "deleteXTag": "你确定要删除标签 [ {} ] 吗",
+  "inGame": "游戏内",
+  "outOfGame": "游戏外",
+  "layout_minus": "减少列数",
+  "layout_plus": "增加列数",
+  "select": "选择",
+  "deselect": "取消选择",
+  "selectAll": "全选",
+  "invertSelect": "反选",
+  "viewSelect": "查看选中",
+  "remove": "移出",
+  "insert": "移入",
+  "delete": "删除",
+  "export": "导出",
+  "import": "导入",
+  "verticalFlip": "竖直翻转",
+  "horizontalFlip": "水平翻转",
+  "rotateLeft90": "逆时针旋转90度°",
+  "rotateRight90": "顺时针旋转90度°",
+  "toPreviousImage": "上一张",
+  "toNextImage": "下一张",
+  "XImageFailedToBeProcessed": {
+    "other": "{} 张图片处理失败"
+  },
+  "deleteSameImage": "同时删除以下相册的相同图片",
+  "deleteXImage": {
+    "other": "删除 {} 张图片"
+  },
+  "dragArea": "拖拽区",
+  "exportToClipboard": "导出到剪贴板",
+  "exportToLocal": "导出到本地",
+  "exportToNetwork": "导出到网络设备",
+  "exportNikkiasToLocal": "导出nikkias文件",
+  "exportXImage": {
+    "other": "导出 {} 张图片至"
+  },
+  "exportNikkiasFile": "导出nikkias文件至",
+  "xImageSelected": {
+    "zero": "未选择图片",
+    "other": "已选中 {} 张"
+  },
+  "left-clickToSelectImage": "左键单击此处选择图片",
+  "dragImageHere": "请图片拖拽到此处",
+  "right-clickToPasteImage": "右键单击此处导入剪贴板图片",
+  "importImageTo": "导入图片至",
+  "importXImage": {
+    "other": "导入 {} 张图片至"
+  },
+
+  "useSameNetworkDevice": "请使用同网络下的设备进行下载",
+  "downloadLink": "下载链接",
+  "stopSharing": "关闭分享",
+  "methodX": "方式{}",
+  "packaging": "打包中",
+  "packagingFailed": "文件打包失败",
+  "activatingNetwork": "正在开启网络服务",
+  "activatingNetworkFailed": "网络服务开启失败",
+
+
+
+
+  "----------file_transfer----------": "----------file_transfer----------",
+  "receiveFileSavePath": "文件保存位置",
+  "XGiBAvailable": "{} GiB可用",
+  "savePathIsNull": "请选择文件保存位置",
+  "selectSavePath": "选择文件保存位置",
+  "changeSavePath": "更改文件保存位置",
+  "openSavePath": "打开文件保存位置",
+
+  "inputDownloadUrl": "输入下载链接",
+  "downloadableContent": "可下载的内容",
+  "downloadAll": "下载全部",
+  "downloadNikkias": "下载nikkias文件",
+
+
+  "----------start----------": "----------start----------",
+  "openDirectory": "从文件资源管理器打开",
+  "openLauncherDirectory": "打开启动器目录",
+  "openInstallDirectory": "打开游戏资源目录",
+  "moveResource": "移动游戏资源",
+  "moveAlbumResource": "只移动相册资源",
+  "moveInstallResource": "移动所有游戏资源",
+  "fileSize": "文件大小",
+  "calculating": "计算中",
+  "moveTo": "移动到",
+  "toSelectFolder": "请先选择文件夹",
+  "storageSpace": "储存空间",
+  "availableSpaceOnXDrive": "{} 盘剩余大小",
+  "permission": "权限",
+  "underTest": "测试中",
+  "normal": "正常",
+  "noPermission": "无权限",
+  "retry": "重试",
+  "startToMove": "开始转移",
+  "notCheck": "未完成检测",
+  "destinationIsNull": "还未选择目标文件夹",
+  "insufficientSpace": "空间不足",
+  "existXInDestination": "已存在 {} 文件夹",
+
+  "backupAllAlbum": "备份所有图片",
+  "startBackupAllAlbum": "开始备份",
+  "uidToBeBackup": "需要备份图片的账号",
+  "saveBackupFileTo": "将备份文件保存到",
+  "backupFailed": "备份失败",
+  "sendBackupToNetwork": "发送到网络设备",
+
+
+
+  "----------recycle_bin----------": "----------recycle_bin----------",
+  "recycleBin": "回收站",
+  "moveToRecycleBin": "移动到回收站",
+  "clearRecycleBin": "清空回收站",
+  "deleteMessage": "您确定要删除这些图片吗? 删除后将无法恢复, 请谨慎选择!",
+  "clearRecycleBinMessage": "您确定要清空回收站吗? 删除后将无法恢复, 请谨慎选择!",
+  "failedToRestoreXImages": {
+    "other": "{}张图片恢复失败"
+  },
+  "permanentlyDelete": "永久删除",
+  "deletionCompleted": "删除已完成",
+  "deletionFailed": "删除失败",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "toSelectAccount": "请选择账号",
+  "addCustomAccount": "添加其他启动器版本",
+  "toSelectVersion": "选择启动器版本",
+  "toSelectUid": "选择uid",
+  "selectNoUid": "不选择uid",
+  "getZeroUid": "未获取到uid",
+  "find no uid": "需要选择uid后才能查看该相册",
+  "find no directory": "找不到相册文件夹",
+  "OpenFromFileExplorer": "从资源管理器打开",
+  "toAlbumType": "选择相册",
+  "gameAlbum": "游戏相册",
+  "toGameAlbum": "切换至游戏相册",
+  "backupAlbum": "备份相册",
+  "toBackupAlbum": "切换至备份相册",
+  "layoutMethod": "布局方式",
+  "toSelectLayoutMethod": "选择相册的布局方式",
+  "layout_masonry": "瀑布流布局",
+  "layout_grid_1_1": "正方形网格布局",
+  "layout_grid_16_9": "长方形(16:9)网格布局",
+  "classificationMethod": "分类方式",
+  "toSelectClassificationMethod": "选择相册图片的分类方式",
+  "classification_none": "不分类",
+  "classification_timeChanged": "按创建时间分类",
+  "classification_timeModified": "按最后修改时间分类",
+  "classification_timeFileName": "按文件名时间分类",
+  "classification_orientation": "按图像方向分类",
+  "classification_aspectRatio": "按图像比例分类",
+  "sortMethod": "排序方式",
+  "toSelectSortMethod": "选择相册图片的排序方式",
+  "sortKey_timeChanged": "按创建时间排序",
+  "sortKey_timeModified": "按最后修改时间排序",
+  "sortKey_timeFileName": "按文件名时间排序",
+  "sortKey_fileName": "按文件名排序",
+  "sortKey_fileSize": "按文件大小排序",
+  "sortKey_imageResolution": "按图像分辨率排序",
+  "toSortForward": "切换至正序排序",
+  "toSortReverse": "切换至倒序排序",
+  "increaseColumns": "增加列数",
+  "decreaseColumns": "减少列数"
+}
