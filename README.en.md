@@ -33,7 +33,7 @@
 
 Nikki Albums is a meticulously crafted album management software specifically designed for Infinity Nikki players, dedicated to helping you easily and efficiently manage your game albums for a smoother and more enjoyable gaming experience.
 
-🚀 **Current Version**: 3.03
+🚀 **Current Version**: 3.04
 
 - **GitHub Download**: [Click Here](https://github.com/RanAxro/nikki_albums )  
 - **Official Website**: [Click Here](https://nikki.ranaxro.com )  
@@ -57,6 +57,13 @@ Join us to exchange tips with other players, report issues you encounter during 
 ***
 
 # Changelog
+
+## v3.04
+*1. New photo albums: "Collage", "Original Collage", "Thumbnail of Collage"
+*2. Added album decoding function, supporting decoding of camera parameters, shooting location and other key information
+*3. Fixed the issue where exported images could not be downloaded to the network
+*4. Fixed the bug where the software would freeze upon startup
+*5. Optimized some user interfaces
 
 ## v3.03
 * 1. New album: "Floral Sketching"
@@ -125,6 +132,4 @@ Join us to exchange tips with other players, report issues you encounter during 
 * ## Development Purpose Statement
   The purpose of developing this tool is to provide convenient game album management functionality, helping users better organize and display in-game pictures and screenshots. We do not encourage or support any form of game cheating or violations. When using this tool, users should comply with the official rules and terms of service of the game.
 * ## Disclaimer
-
   This tool and its developers are not liable for any direct or indirect losses that may result from the use of this tool. By using this tool, users agree to and accept the above statements and disclaimer. This tool is not an official product of Infinity Nikki, Paper Games, bilibili, Steam, or TapTap.
-
