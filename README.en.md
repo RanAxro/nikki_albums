@@ -1,4 +1,4 @@
- <a href="README.zh.md">阅读中文版</a>
+<a href="README.zh.md">阅读中文版</a>
 
 <div align="center">
   <img src="src/nikki_albums/assets/logo/nikkialbums.webp" alt="Nikki Albums", width="100", height="100">
@@ -23,113 +23,103 @@
 </p>
 
 <p>
-  <img src="website/images/p1.zh.png" width="48%" />
-  <img src="website/images/p2.png" width="48%" />
+  <img src="website/images/p1.en.png" width="48%" />
+  <img src="website/images/p2.en.png" width="48%" />
 </p>
 
 
 
 <h2>🌟 Your Ultimate Game Album Management Assistant</h2>
 
-Nikki Albums is a meticulously crafted album management software specifically designed for Infinity Nikki players, dedicated to helping you easily and efficiently manage your game albums for a smoother and more enjoyable gaming experience.
+Nikki Albums is a dedicated album management software meticulously crafted for Infinity Nikki players, designed to help you easily and efficiently manage your game albums, ensuring a smoother and more enjoyable gaming experience.
 
 🚀 **Current Version**: 3.04
 
-- **GitHub Download**: [Click Here](https://github.com/RanAxro/nikki_albums )  
-- **Official Website**: [Click Here](https://nikki.ranaxro.com )  
-
-💡 **Community/Feedback Group**: 1062670402  
-Join us to exchange tips with other players, report issues you encounter during use, and collectively drive software optimization and upgrades.
+- **GitHub Download**: [Click here](https://github.com/RanAxro/nikki_albums )  
+- **Official Website Download**: [Click here](https://nikki.ranaxro.com )  
 
 ***
 
-## 🎯 Key Features
+# 🎯 Feature Highlights
 
-- **Automatic Game Detection**: No manual setup required. The software automatically detects your game and quickly locates album content, saving you time and effort.
-- **Multi-Account Management**: Easily manage albums for multiple game accounts without interference, keeping each account's album organized.
-- **Batch Operations**: Batch process photos in your albums—whether it's backup, restore, transfer, delete, copy, or cut—all done with one click, significantly improving management efficiency.
-- **Smart Duplicate Handling**: Automatically handles duplicate photos saved by the game during transfer or deletion, avoiding redundancy and keeping your albums clean and organized.
+- **Auto Game Detection**: No manual configuration required—the software automatically detects your game and quickly locates album content.
+- **Multi-Account Management**: Easily manage albums for multiple game accounts without interference, keeping each account's albums organized.
+- **Full Album Support**: Manage all 17 albums and 3 game resource albums.
+- **Batch Operations**: Batch process photos in your albums with one-click backup, restore, transfer, delete, copy, and move operations, significantly improving management efficiency.
+- **Smart Duplicate Handling**: Automatically handles duplicate photos saved by the game during transfer or deletion, avoiding redundancy and keeping albums clean and organized.
+- **Network Export**: Allows image transfer over the same network.
+- **Album Decoding**: View shooting locations and copy camera parameters to easily recreate beautiful shots you've taken.
 
 ---
 
-🎉 **Join us and start your efficient game album management journey for a more wonderful gaming experience!**
+🎉 **Join us and start your efficient game album management journey to make your gaming experience even more wonderful!**
 
 ***
 
-# Changelog
+# What's New
 
 ## v3.04
-*1. New photo albums: "Collage", "Original Collage", "Thumbnail of Collage"
-*2. Added album decoding function, supporting decoding of camera parameters, shooting location and other key information
-*3. Fixed the issue where exported images could not be downloaded to the network
-*4. Fixed the bug where the software would freeze upon startup
-*5. Optimized some user interfaces
-
-## v3.03
-* 1. New album: "Floral Sketching"
-* 2. Added Recycle Bin feature
-* 3. Support one-click export/backup of all images
-* 4. When exporting images to the internet, recipients can preview/download single images or download all online
-* 5. Support downloading images shared by other users
-* 6. Support packaging images as ".nikkias" files, which losslessly preserve all information of your images
-* 7. Fixed some bugs
-
-## v3.02
-* 1. Support adding nicknames to UIDs
-* 2. Support adding frequently used accounts to the quick access bar
-* 3. Added tagging feature to label images
-* 4. Fixed some bugs
-
-## v3.01
-* 1. Added scrollbar
-* 2. Support viewing albums in ascending or descending order
-* 3. When viewing large images, switch to previous/next image using hotkeys
-* 4. When viewing large images, click on the image to toggle its selection status
-* 5. Added button to toggle window maximization
-* 6. Added function to delete custom accounts
-* 7. Added update detection feature
-
-## v3.0
-* 1. Support viewing more albums
-* 2. Option to delete duplicate images when deleting pictures
-* 3. Support exporting images to clipboard
-* 4. Support sharing images within the same network
-* 5. Support drag-and-drop import of images
-* 6. Support importing images from clipboard
-* 7. Album images categorized by date
-* 8. Support for Chinese and English languages
-* 9. Support theme customization
-* 10. Ability to view some game resources
+* 1. New albums: "Fun Poster", "Fun Poster Original", "Fun Poster Thumbnail"
+* 2. Added album decoding feature, supporting decoding of camera parameters, shooting locations, and other key information
+* 3. Fixed the issue where exporting images to network could not be downloaded
+* 4. Fixed the bug where the software would freeze on startup
+* 5. Optimized parts of the UI
 
 ***
 
-# Legal Notices
+# Disclaimer
 
-* ## About This Tool
-  This tool is designed to provide Infinity Nikki enthusiasts with a convenient way to manage game albums, helping users better organize and display in-game pictures and screenshots. This tool is released under the MIT open-source license, and all code is available for review on GitHub.
-* ## Open Source License Statement
-  This tool is released under the MIT open-source license. See the LICENSE file for details. The original copyright notice is retained in all copies of the software, including source code and documentation. If third-party open-source code is used, its copyright notice will also be preserved.
-* ## Image and Logo Usage Statement
-  * ### Game Images and Logos
-    The [Infinity Nikki] images and logos used in this tool are sourced from [Wuhu Paper Network Technology Co., Ltd.], and are used solely for the display and functional implementation of this game album management tool, not for other commercial purposes. We respect the copyright of [Infinity Nikki]. This tool does not make any unauthorized modifications to or distributions of the game.
-  * ### bilibili, Steam, TapTap and Other Logos
-    The bilibili, Steam, TapTap and other logos used in this tool are solely for identifying and linking to the respective platforms to facilitate users in finding and accessing related content. We respect the copyright and trademark rights of bilibili, Steam, TapTap and other platforms. The use of these logos in this tool is not officially authorized by them and is solely for identification and linking to the respective platforms.
-* ## Third-Party Website Links Statement
-  This tool provides links to third-party websites solely for the convenience of users accessing relevant content. The content of these linked websites is the responsibility of their respective owners, and we are not responsible for the content, privacy policies, or practices of these websites. Users accessing these websites do so at their own risk and should ensure their actions comply with relevant laws and regulations. This tool and its developers assume no liability if users suffer any loss or damage from accessing these third-party websites.
-* ## Privacy Statement
-  We take user privacy and security very seriously. This tool does not collect, store, or share user account information, passwords, or other personal private data in any form. All information entered by users is only used for logging into the respective websites (such as the game official website, bilibili, etc.), and this information is not saved or transmitted to any third-party servers.
-* ## Technical Implementation Statement
-  This tool interacts directly with target websites through an embedded web browser component. Account and password information entered by users is processed directly on the user's local device and sent to the target website through a secure network connection. We do not intercept, store, or analyze this information at any stage. Since this tool is open-source, all code can be reviewed on GitHub, allowing users to verify that we do not perform any unauthorized data collection or storage operations. The open-source nature ensures code transparency and verifiability.
-* ## Security Measures
-  We have taken the following measures to protect user privacy and security:
-  Local Processing: Account and password information entered by users is processed only on the local device and is not sent to any third-party servers.
-  Encrypted Transmission: All communication with target websites is conducted through encrypted HTTPS protocol to ensure the security of data transmission.
-  Code Review: We welcome community members to review the code to ensure there are no potential privacy issues.
-* ## Compliance Statement
-  This tool is designed to provide game enthusiasts with a convenient game album management tool. We explicitly state that this tool does not make any form of modifications to the game, including but not limited to modifying game files, injecting code, or tampering with game data. This tool is intended solely for legitimate, non-commercial game album management purposes.
-* ## User Conduct Responsibility Statement
-  Users should ensure their use of this tool complies with the game's terms of service and relevant laws and regulations. If a user's game account is banned or suffers other losses due to modifying game files, using cheats, or other unauthorized activities, this tool and its developers assume no responsibility. Users bear all consequences resulting from their own actions.
-* ## Development Purpose Statement
-  The purpose of developing this tool is to provide convenient game album management functionality, helping users better organize and display in-game pictures and screenshots. We do not encourage or support any form of game cheating or violations. When using this tool, users should comply with the official rules and terms of service of the game.
-* ## Disclaimer
-  This tool and its developers are not liable for any direct or indirect losses that may result from the use of this tool. By using this tool, users agree to and accept the above statements and disclaimer. This tool is not an official product of Infinity Nikki, Paper Games, bilibili, Steam, or TapTap.
+## I. About This Tool
+
+This tool is designed to provide convenient game album management functionality for Infinity Nikki enthusiasts, helping users better organize and showcase in-game images and screenshots. This tool is licensed under the MIT open source license, and all code is available for review on GitHub.
+
+## II. Open Source License Statement
+
+This tool is licensed under the MIT open source license. See the LICENSE file for details. Original copyright notices are retained in all copies of the software (including source code, documentation, etc.). If third-party open source code is used, its copyright notices are also retained.
+
+**Exception Statement**: To prevent malicious use, game-related decryption algorithms are not open-sourced. This portion of the algorithm is provided in compiled binary form and is not included in the public repository.
+
+## III. Intellectual Property Statement
+
+### 3.1 Game Assets
+Images, game maps, and logos from Infinity Nikki used in this tool are sourced from Wuhu Paper Games Network Technology Co., Ltd. and are used solely for display and functional implementation of this game album management tool, not for other commercial purposes.
+
+### 3.2 Third-Party Platform Logos
+Logos for bilibili, Steam, TapTap, and others used in this tool are for identification and linking to the respective platforms only, facilitating users to find and access relevant content. We respect the copyright and trademark rights of the aforementioned platforms. Use of these logos is not officially authorized and is limited to identification and linking purposes only.
+
+## IV. Privacy Statement
+
+This tool does not collect, store, or share user account information, passwords, or other personal privacy data in any form.
+
+## V. Technical Implementation Statement
+
+1. **Algorithm Source**: The image decryption algorithm used in this tool was independently derived by the community and machine learning models through cryptanalysis techniques, analyzing user-legally exported game screenshot files (ciphertext) and the user's own UID (key). The developer has never performed reverse engineering, decompilation, or debugging on the Infinity Nikki game client.
+
+2. **Algorithm Protection**: To prevent malicious use, game-related decryption algorithms are not open-sourced and are provided only in compiled binary form. This measure is intended to prevent the algorithm from being used to illegally crack game resources, disrupt game balance, or infringe on intellectual property rights.
+
+3. **No Circumvention**: This tool does not involve circumvention or cracking of any technical protection measures (TPM). Algorithm derivation is based on the mathematical principles of Ciphertext-Only Attack, which falls within the scope of public cryptography research.
+
+4. **Data Ownership**: The tool only processes content generated by users themselves (in-game camera parameters) and does not extract, decrypt, or access core game resources (models, textures, story content, etc.).
+
+## VI. Compliance Statement
+
+This tool is intended for legitimate, non-commercial game album management purposes only and does not modify the game in any way, including but not limited to modifying game files, injecting code, or tampering with game data.
+
+## VII. User Behavior Responsibility Statement
+
+Users should ensure their use of this tool complies with the game's terms of service and relevant laws and regulations. If a user's account is banned or suffers other losses due to self-modification of game files, use of cheats, or other unauthorized activities, this tool and its developers assume no responsibility. Users bear all consequences resulting from their own actions.
+
+## VIII. Development Purpose Statement
+
+The development purpose of this tool is limited to providing convenient game album management functionality to help users better organize and showcase in-game images and screenshots. We do not encourage or support any form of game cheating or rule violations.
+
+## IX. Compliance Usage Recommendations
+
+- This tool is for personal learning and communication purposes only; please do not use for commercial purposes
+- For commercial use, please contact Paper Games to obtain authorization yourself
+
+## X. Disclaimer
+
+1. This tool and its developers are not responsible for any direct or indirect losses that may result from user use of this tool
+2. User use of this tool constitutes agreement to and acceptance of all the above statements
+3. **This tool is not an official product of Infinity Nikki, Paper Games, bilibili, Steam, or TapTap**
