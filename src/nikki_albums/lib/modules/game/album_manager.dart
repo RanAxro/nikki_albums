@@ -171,7 +171,7 @@ class AlbumManager extends ChangeNotifier with AlbumPath{
   }
 
   Future<void> selectAllImage() async{
-    _selectedImages.addAll(await _images);
+    _selectedImages.addAll(await flatProcess());
 
     _safeNotifySelected();
   }
@@ -228,8 +228,12 @@ class AlbumManager extends ChangeNotifier with AlbumPath{
   }
 
   bool isFilter(Filtration filtration) => _filtration.contains(filtration);
-  void filter(Filtration filtration){
+  Future<void> filter(Filtration filtration) async{
     _filtration.add(filtration);
+
+    final SplayTreeSet<ImageItem> processImages = await flatProcess();
+    _selectedImages.removeWhere((ImageItem item) => !processImages.contains(item));
+
     notifyListeners();
   }
   void unfilter(Filtration filtration){
@@ -286,10 +290,22 @@ class AlbumManager extends ChangeNotifier with AlbumPath{
     return false;
   }
 
+  Future<SplayTreeSet<ImageItem>> flatProcess() async{
+    final SplayTreeSet<ImageItem> res = SplayTreeSet<ImageItem>(AlbumComparison.itemBy(_sortOrder));
+
+    for(final ImageItem image in await images){
+      if(_filterItem(image)){
+        res.add(image);
+      }
+    }
+
+    return res;
+  }
+
   Future<ProcessedAlbumType> process() async{
     final Set<ImageItem> images = await this.images;
 
-    final ProcessedAlbumType res =  SplayTreeMap(AlbumComparison.headerBy(_sortOrder));
+    final ProcessedAlbumType res = SplayTreeMap(AlbumComparison.headerBy(_sortOrder));
 
     for(final ImageItem image in images){
       if(_filterItem(image)){
