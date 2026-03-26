@@ -1,4 +1,31 @@
 const config = {
+	"v3.05.01": {
+		"releaseDate": "2026-3-26",
+		"description": {
+			"zh": "修复bug: 全选图片会将被过滤的图片选中",
+			"en": "Fix bug: Selecting all images will also select the filtered images."
+		},
+		"downloads": [
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_exe",
+				"link": "https://file-nikki.ranaxro.com/app/v3.05.01/Nikki%20Albums.exe"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.05.01/Nikki%20Albums-v3.05.01-Windows-x64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_2",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.05.01/Nikki%20Albums-v3.05.01-Windows-x64-release.zip"
+			}
+		]
+	},
 	"v3.05": {
 		"releaseDate": "2026-3-26",
 		"description": {
