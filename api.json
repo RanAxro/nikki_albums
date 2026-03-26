@@ -1,6 +1,6 @@
 {
-  "version": 7,
-  "versionString": "3.04",
-  "downloadLink": "https://file-nikki.ranaxro.com/app/v3.04/Nikki%20Albums-v3.04-Windows-x64.zip",
-  "updateMessage": "* 1.新的相册 \"趣拼海报\"、\"趣拼海报原图\"、\"趣拼海报缩略图\"\n2.增加相册解码功能, 支持解码相机参数, 拍摄地点等关键信息\n3.修复导出图片到网络无法下载的问题\n4.修复启动软件卡住的bug\n5.优化部分ui"
+  "version": 8,
+  "versionString": "3.05",
+  "downloadLink": "https://file-nikki.ranaxro.com/app/v3.05/Nikki%20Albums-v3.05-Windows-x64.zip",
+  "updateMessage": "1.增加图片裁剪与调色功能\n2.支持筛选日常拍摄任务图片"
 }
