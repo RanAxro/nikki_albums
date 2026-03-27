@@ -1,4 +1,31 @@
 const config = {
+	"v3.05.02": {
+		"releaseDate": "2026-3-27",
+		"description": {
+			"zh": "修复bug: 导出图片到网络设备失败",
+			"en": "Fix bug: Failed to export image to network device"
+		},
+		"downloads": [
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_exe",
+				"link": "https://file-nikki.ranaxro.com/app/v3.05.02/Nikki%20Albums.exe"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.05.02/Nikki%20Albums-v3.05.02-Windows-x64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_2",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.05.02/Nikki%20Albums-v3.05.02-Windows-x64-release.zip"
+			}
+		]
+	},
 	"v3.05.01": {
 		"releaseDate": "2026-3-26",
 		"description": {
