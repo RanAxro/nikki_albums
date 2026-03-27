@@ -1,6 +1,6 @@
 {
-  "version": 9,
-  "versionString": "3.05.01",
-  "downloadLink": "https://file-nikki.ranaxro.com/app/v3.05.01/Nikki%20Albums-v3.05.01-Windows-x64.zip",
-  "updateMessage": "修复bug: 全选图片会将被过滤的图片选中\n1.增加图片裁剪与调色功能\n2.支持筛选日常拍摄任务图片"
+  "version": 10,
+  "versionString": "3.05.02",
+  "downloadLink": "https://file-nikki.ranaxro.com/app/v3.05.02/Nikki%20Albums-v3.05.02-Windows-x64.zip",
+  "updateMessage": "修复bug: 发送图片到网络设备页面空白\n修复bug: 全选图片会将被过滤的图片选中\n1.增加图片裁剪与调色功能\n2.支持筛选日常拍摄任务图片"
 }
