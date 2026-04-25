@@ -1,4 +1,31 @@
 const config = {
+	"v3.06": {
+		"releaseDate": "2026-3-27",
+		"description": {
+			"zh": "1.新的相册 \"动态影集\"、\"外部视频\" (/X6Game/Video)\n2.支持将视频转换为gif动图",
+			"en": "1. New Album \"Video Album\", \"External Video\"\n2. Support the conversion of videos into GIF animations"
+		},
+		"downloads": [
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_exe",
+				"link": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums.exe"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-Windows-x64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_2",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-Windows-x64-release.zip"
+			}
+		]
+	},
 	"v3.05.02": {
 		"releaseDate": "2026-3-27",
 		"description": {

@@ -33,7 +33,7 @@
 
 Nikki Albums is a dedicated album management software meticulously crafted for Infinity Nikki players, designed to help you easily and efficiently manage your game albums, ensuring a smoother and more enjoyable gaming experience.
 
-🚀 **Current Version**: 3.05
+🚀 **Current Version**: 3.06
 
 - **GitHub Download**: [Click here](https://github.com/RanAxro/nikki_albums )  
 - **Official Website Download**: [Click here](https://nikki.ranaxro.com )  
@@ -44,11 +44,12 @@ Nikki Albums is a dedicated album management software meticulously crafted for I
 
 - **Auto Game Detection**: No manual configuration required—the software automatically detects your game and quickly locates album content.
 - **Multi-Account Management**: Easily manage albums for multiple game accounts without interference, keeping each account's albums organized.
-- **Full Album Support**: Manage all 17 albums and 3 game resource albums.
+- **Full Album Support**: Manage all 19 albums and 3 game resource albums.
 - **Batch Operations**: Batch process photos in your albums with one-click backup, restore, transfer, delete, copy, and move operations, significantly improving management efficiency.
 - **Smart Duplicate Handling**: Automatically handles duplicate photos saved by the game during transfer or deletion, avoiding redundancy and keeping albums clean and organized.
 - **Simple creation**: Support simple image cropping and color adjustment.
 - **Network Export**: Allows image transfer over the same network.
+- **Convert GIF Animation**: Supports the conversion of videos from "Video Album" or "External Video" into GIF animations.
 - **Album Decoding**: View shooting locations and copy camera parameters to easily recreate beautiful shots you've taken.
 
 ---
@@ -59,9 +60,9 @@ Nikki Albums is a dedicated album management software meticulously crafted for I
 
 # What's New
 
-## v3.05
-* 1. Add image cropping and color adjustment functions
-* 2. Support filtering of daily shooting task images
+## v3.06
+* 1. New Album "Video Album", "External Video"
+* 2. Support the conversion of videos into GIF animations
 
 ***
 
