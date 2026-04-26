@@ -1,6 +1,6 @@
 const config = {
 	"v3.06": {
-		"releaseDate": "2026-3-27",
+		"releaseDate": "2026-4-25",
 		"description": {
 			"zh": "1.新的相册 \"动态影集\"、\"外部视频\" (/X6Game/Video)\n2.支持将视频转换为gif动图",
 			"en": "1. New Album \"Video Album\", \"External Video\"\n2. Support the conversion of videos into GIF animations"
