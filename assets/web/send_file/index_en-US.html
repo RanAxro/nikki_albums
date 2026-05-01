@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Nikki Albums - Download File</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* 基础样式 */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #121212; color: #e0e0e0; }
+
+    /* 标题栏 */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      background: #1e1e1e;
+      box-shadow: 0 1px 4px rgba(0,0,0,.8);
+    }
+    .header-left { display: flex; align-items: center; gap: 8px; }
+    .header-left img { width: 32px; height: 32px; }
+    .header-center { font-size: 18px; font-weight: 500; flex: 1; text-align: center; }
+
+    /* 工具栏 */
+    .toolbar {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      background: #1e1e1e;
+      border-bottom: 1px solid #333;
+    }
+    .toolbar button {
+      padding: 6px 14px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background: #0078d4;
+      border-color: #0078d4;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .toolbar button:hover { background: #106ebe; }
+
+    /* 图片网格 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      padding: 16px;
+    }
+    .card {
+      position: relative;
+      background: #1e1e1e;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.8);
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .card p {
+      color: #e0e0e0;
+      word-break: break-all;
+      overflow-wrap: break-word;
+    }
+    .card-footer {
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-footer button {
+      padding: 4px 10px;
+      font-size: 13px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background: #333;
+      color: #e0e0e0;
+      cursor: pointer;
+    }
+    .card-footer button:hover { background: #444; }
+
+    /* 响应式：窄屏变列表 */
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 标题栏 -->
+  <header class="header">
+    <div class="header-left">
+      <img src="favicon.ico" alt="icon">
+      <span class="name">Nikki Albums</span>
+    </div>
+    <div class="header-center">Receive File</div>
+    <div class="header-right"></div>
+  </header>
+
+  <!-- 工具栏 -->
+  <div id="toolbar" class="toolbar"></div>
+
+  <!-- 图片列表 -->
+  <div id="list" class="grid"></div>
+
+  <script>
+    
+    fetch('/api/downloadButtonTexts').then(r => r.json()).then(arr => {
+      const box = document.getElementById('toolbar');
+      arr.forEach((text, index) => {
+        if(text != ""){
+          const btn = document.createElement('button');
+          btn.onclick = () => downloadArchive(index);
+          btn.innerText = text;
+          box.appendChild(btn);
+        }
+      });
+    });
+
+    // 渲染图片列表
+    fetch('/api/list')
+      .then(r => r.json())
+      .then(arr => {
+        const box = document.getElementById('list');
+        arr.forEach(name => {
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          if(name.toLowerCase().endsWith("jpeg") || name.toLowerCase().endsWith("jpg") || name.toLowerCase().endsWith("webp") || name.toLowerCase().endsWith("png") || name.toLowerCase().endsWith("ico")){
+            const img = document.createElement('img');
+            img.src = `/${name}?preview=1`;
+            img.alt = name;
+            card.appendChild(img);
+          }else{
+            const p = document.createElement('p');
+            p.innerText = name;
+            card.appendChild(p);
+          }
+
+          const footer = document.createElement('div');
+          footer.className = 'card-footer';
+
+          const btn = document.createElement('button');
+          btn.textContent = 'Download';
+          btn.onclick = () => downloadSingle(name);
+
+          footer.appendChild(btn);
+
+          card.appendChild(footer);
+          box.appendChild(card);
+        });
+      });
+
+    // 下载单张
+    function downloadSingle(filename) {
+      const a = document.createElement('a');
+      a.href = `/${filename}`;
+      a.download = filename;
+      a.click();
+    }
+
+    function downloadArchive(index) {
+      const a = document.createElement('a');
+      a.href = `/api/download?index=${index}`;
+      a.click();
+    }
+  </script>
+</body>
+</html>

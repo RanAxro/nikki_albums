@@ -1,0 +1,3 @@
+class ImageExtendedData{
+  const ImageExtendedData();
+}
