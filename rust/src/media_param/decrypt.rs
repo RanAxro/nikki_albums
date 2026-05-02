@@ -1,13 +1,29 @@
+
+use crate::frb_generated::StreamSink;
 use flutter_rust_bridge::frb;
-use std::ffi::{c_char, CString};
+use std::ffi::{c_char, c_void, CString};
 use std::ptr;
+use std::sync::Arc;
 
 // ============================================================
-// FFI 绑定（保持不变）
+// FFI 绑定
 // ============================================================
 #[allow(non_snake_case, dead_code)]
 mod ffi {
-  use std::ffi::c_char;
+  use std::ffi::{c_char, c_void};
+
+  #[repr(u32)]
+  #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+  pub enum DecryptionStatus {
+    Success = 0,
+    NullPointer = 1,
+    DataLenIsNotAMultipleOf16 = 2,
+    DecodingBase64Failed = 3,
+    FindNoStartFlag = 4,
+    FindNoEndFlag = 5,
+    Io = 6,
+    IllegalUTF8 = 7,
+  }
 
   #[flutter_rust_bridge::frb(ignore)]
   #[repr(C)]
@@ -22,11 +38,13 @@ mod ffi {
     _private: [u8; 0],
   }
 
-  pub type ProgressCallback = Option<extern "C" fn(current: usize, total: usize)>;
+  pub type ProgressCallback = Option<extern "C" fn(current: usize, total: usize, userdata: *mut c_void)>;
 
   extern "C" {
+    pub fn abi_version() -> u32;
     pub fn free_decryption_result(result: DecryptionResult);
-    pub fn key_from_bytes(bytes: *const u8, len: usize) -> *mut Key;
+    pub fn free_results_array(arr: *mut DecryptionResult, count: usize);
+    pub fn free_results_array_and_data(arr: *mut DecryptionResult, count: usize);
     pub fn key_from_str_bytes(bytes: *const u8, len: usize) -> *mut Key;
     pub fn key_from_str(s: *const c_char) -> *mut Key;
     pub fn key_camera_param() -> *mut Key;
@@ -52,9 +70,8 @@ mod ffi {
       path_count: usize,
       key: *const Key,
       callback: ProgressCallback,
+      userdata: *mut c_void,
     ) -> *mut DecryptionResult;
-    pub fn free_results_array(arr: *mut DecryptionResult, count: usize);
-    pub fn free_results_array_and_data(arr: *mut DecryptionResult, count: usize);
   }
 }
 
@@ -80,15 +97,6 @@ unsafe impl Send for Key {}
 unsafe impl Sync for Key {}
 
 impl Key {
-  #[frb(sync, positional)]
-  pub fn from_bytes(bytes: Vec<u8>) -> anyhow::Result<Key> {
-    let ptr = unsafe { ffi::key_from_bytes(bytes.as_ptr(), bytes.len()) };
-    if ptr.is_null() {
-      anyhow::bail!("failed to create key from bytes");
-    }
-    Ok(Key { ptr })
-  }
-
   #[frb(sync, positional)]
   pub fn from_str_bytes(bytes: Vec<u8>) -> anyhow::Result<Key> {
     let ptr = unsafe { ffi::key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
@@ -192,6 +200,92 @@ pub fn decode_file_unchecked_sync(flag: Vec<u8>, path: String, key: &Key) -> Opt
 // 批量解密（带进度 Stream）
 // ============================================================
 
+#[frb]
+pub enum DecodeEvent {
+  Progress(f64),
+  Result(Vec<Option<CustomData>>),
+}
+#[frb]
+pub fn decode_files_unchecked(
+  flag: Vec<u8>,
+  paths: Vec<String>,
+  key: &Key,
+  progress_sink: StreamSink<DecodeEvent>,
+) -> anyhow::Result<()> {
+  if paths.is_empty() {
+    progress_sink.add(DecodeEvent::Result(vec![]));
+    return Ok(());
+  }
+
+  unsafe {
+    // 1. 路径转 CString，保持存活到 FFI 调用结束
+    let c_paths: Vec<CString> = paths
+      .into_iter()
+      .map(|p| CString::new(p).map_err(|e| anyhow::anyhow!("路径包含非法空字符: {}", e)))
+      .collect::<Result<_, _>>()?;
+    let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
+
+    // 2. Arc 包装 StreamSink，一份给 userdata，一份留在 Rust 侧发最终事件
+    let sink = Arc::new(progress_sink);
+    let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
+
+    extern "C" fn trampoline(
+      current: usize,
+      total: usize,
+      userdata: *mut c_void,
+    ) {
+      if userdata.is_null() || total == 0 {
+        return;
+      }
+      let sink = unsafe{ &*(userdata as *const StreamSink<DecodeEvent>) };
+      let percent = (current as f64 / total as f64);
+      let _ = sink.add(DecodeEvent::Progress(percent));
+    }
+
+    // 3. 调用 C 接口
+    let results_ptr = ffi::decode_files_unchecked(
+      flag.as_ptr(),
+      flag.len(),
+      path_ptrs.as_ptr(),
+      path_ptrs.len(),
+      key.ptr,
+      Some(trampoline),
+      userdata,
+    );
+
+    // 4. 释放 userdata 对应的 Arc，避免内存泄漏
+    let _ = Arc::from_raw(userdata as *const StreamSink<DecodeEvent>);
+
+    if results_ptr.is_null() {
+      return Err(anyhow::anyhow!("decode_files_unchecked 返回了空指针"));
+    }
+
+    // 5. 读取结果：深拷贝有效数据，失败标记为 Invalid
+    let mut decoded = Vec::with_capacity(path_ptrs.len());
+    for i in 0..path_ptrs.len() {
+      let raw = &*results_ptr.add(i);
+
+      let item = if raw.status == ffi::DecryptionStatus::Success as u32 && !raw.data.is_null()
+      {
+        let bytes = std::slice::from_raw_parts(raw.data, raw.len).to_vec();
+        Some(CustomData::Valid(bytes))
+      } else {
+        Some(CustomData::Invalid)
+      };
+
+      decoded.push(item);
+    }
+
+    // 6. 释放 C 侧分配的数组及内部 data 指针
+    ffi::free_results_array_and_data(results_ptr, path_ptrs.len());
+
+    // 7. 推送最终结果事件
+    sink.add(DecodeEvent::Result(decoded));
+
+    Ok(())
+  }
+}
+
 // #[frb]
 // pub enum DecodeEvent{
 //   Progress(u32),
@@ -280,6 +374,7 @@ pub fn decode_files_unchecked_no_progress(
       path_count,
       key.ptr,
       None,
+      ptr::null_mut(),
     )
   };
 

@@ -101,41 +101,6 @@ abstract class ImageAddition{
     return _imageAdditionList[path]!;
   }
 
-  static List<Field> filesSync(AlbumType albumType, List<String> paths, String uid, {void Function(int, int)? onProgress}){
-    final List<String> need = [];
-
-    for(final String path in paths){
-      if(_imageAdditionList.containsKey(path)){
-        continue;
-      }
-
-      need.add(path);
-    }
-
-    try{
-      // final List<dynamic> jsons = GameImageCodec.decodeFiles(need, uid, onProgress: onProgress);
-
-      final List<dynamic> jsons = [];
-
-      for(int i = 0; i < need.length; i++){
-        _imageAdditionList[need[i]] = toField(albumType, jsons[i]);
-      }
-    }catch(e){
-      for(int i = 0; i < need.length; i++){
-        _imageAdditionList[need[i]] = const InvaildParamsAddition();
-      }
-    }finally{
-      onProgress?.call(1, 1);
-    }
-
-    final List<Field> res = [];
-    for(final String path in paths){
-      res.add(_imageAdditionList[path]!);
-    }
-
-    return res;
-  }
-
   static Future<List<Field>> files(AlbumType albumType, List<String> paths, String uid, {void Function(int, int)? onProgress}) async{
     final List<String> need = [];
 
@@ -148,9 +113,7 @@ abstract class ImageAddition{
     }
 
     try{
-      final List<dynamic> jsons = await Isolate.run((){
-        return GameImageCodec.decodeFiles(need, uid);
-      });
+      final List<dynamic> jsons = await GameImageCodec.decodeFiles(need, uid, onProgress: onProgress);
 
       for(int i = 0; i < need.length; i++){
         _imageAdditionList[need[i]] = toField(albumType, jsons[i]);

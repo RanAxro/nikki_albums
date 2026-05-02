@@ -1,4 +1,4 @@
 
 mod frb_generated;
 pub mod api;
-mod error;
+pub mod media_param;

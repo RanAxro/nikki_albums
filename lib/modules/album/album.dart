@@ -2525,22 +2525,6 @@ class FiltrationButton extends StatelessWidget {
                       progress.value = 1;
                     }
 
-
-                    // for(final image in images){
-                    //   if(cancel) break;
-                    //   try{
-                    //     await image.getAddition(
-                    //       game.selectedUid?.value,
-                    //       AlbumType.NikkiPhotos_HighQuality,
-                    //     );
-                    //   }catch(e){
-                    //     e;
-                    //   }finally{
-                    //     current++;
-                    //     progress.value = (current / total).clamp(0, 1);
-                    //   }
-                    // }
-
                     game.album.filter(filtration);
 
                   }else{

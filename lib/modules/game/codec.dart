@@ -1,5 +1,6 @@
 
-import "package:nikki_albums/src/rust/api/media_param/decrypt.dart";
+
+import "package:nikki_albums/src/rust/media_param/decrypt.dart";
 
 import "dart:convert";
 import "dart:io";
@@ -87,25 +88,35 @@ abstract class GameImageCodec{
   static Future<List<dynamic>> decodeFiles(List<String> paths, String uid, {void Function(int, int)? onProgress}) async{
     final Key key = Key.fromStr(uid);
 
-    // final Stream<int> stream = decodeFilesUncheckedNoProgress(flag: imageFlag, paths: paths, key: key);
-
-    // await for(final int current in stream){
-    //
-    // }
-
-
-    // final List<c.Param?> data = c.decodeFiles(imageFlag, paths, key, onProgress: onProgress);
-    key.dispose();
+    final Stream<DecodeEvent> stream = decodeFilesUnchecked(flag: imageFlag, paths: paths, key: key);
 
     final List<dynamic> res = [];
-    // for(final c.Param? datum in data){
-    //   if(datum is c.ValidParam){
-    //     res.add(toJson(datum.data));
-    //   }else{
-    //     res.add(null);
-    //   }
-    // }
+    await for(final DecodeEvent current in stream){
+      current.when(
+        progress: (double progress){
+          onProgress?.call((progress * paths.length).toInt(), paths.length);
+        },
+        result: (List<CustomData?> data){
+          for(final CustomData? datum in data){
+            if(datum == null){
+              res.add(null);
+              continue;
+            }
 
+            datum.when(
+              invalid: (){
+                res.add(null);
+              },
+              valid: (Uint8List bytes){
+                res.add(toJson(bytes));
+              },
+            );
+          }
+        },
+      );
+    }
+
+    key.dispose();
     return res;
   }
 }
