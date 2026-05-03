@@ -1,9 +1,6 @@
 export "image_addition.dart";
 
-import "dart:isolate";
-
 import "package:easy_localization/easy_localization.dart";
-import "package:flutter/foundation.dart";
 import "package:nikki_albums/modules/game/codec.dart";
 
 import "image_addition.dart";
@@ -113,13 +110,14 @@ abstract class ImageAddition{
     }
 
     try{
-      final List<dynamic> jsons = await GameImageCodec.decodeFiles(need, uid, onProgress: onProgress);
+      final List<dynamic> jsons = await GameImageCodec.decodeFiles(need, uid, onProgress: (c, t) => onProgress?.call(c, t + 1));
 
       for(int i = 0; i < need.length; i++){
         _imageAdditionList[need[i]] = toField(albumType, jsons[i]);
       }
+
+      onProgress?.call(1, 1);
     }catch(e){
-      print(e);
       for(int i = 0; i < need.length; i++){
         _imageAdditionList[need[i]] = const InvaildParamsAddition();
       }

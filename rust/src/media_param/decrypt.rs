@@ -205,6 +205,7 @@ pub enum DecodeEvent {
   Progress(f64),
   Result(Vec<Option<CustomData>>),
 }
+
 #[frb]
 pub fn decode_files_unchecked(
   flag: Vec<u8>,
@@ -218,14 +219,14 @@ pub fn decode_files_unchecked(
   }
 
   unsafe {
-    // 1. 路径转 CString，保持存活到 FFI 调用结束
+    // 1. 路径转 CString
     let c_paths: Vec<CString> = paths
       .into_iter()
       .map(|p| CString::new(p).map_err(|e| anyhow::anyhow!("路径包含非法空字符: {}", e)))
       .collect::<Result<_, _>>()?;
     let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
-    // 2. Arc 包装 StreamSink，一份给 userdata，一份留在 Rust 侧发最终事件
+    // 2. Arc 包装 StreamSink
     let sink = Arc::new(progress_sink);
     let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
 
@@ -237,8 +238,8 @@ pub fn decode_files_unchecked(
       if userdata.is_null() || total == 0 {
         return;
       }
-      let sink = unsafe{ &*(userdata as *const StreamSink<DecodeEvent>) };
-      let percent = (current as f64 / total as f64);
+      let sink = unsafe { &*(userdata as *const StreamSink<DecodeEvent>) };
+      let percent = current as f64 / total as f64;
       let _ = sink.add(DecodeEvent::Progress(percent));
     }
 
@@ -253,31 +254,23 @@ pub fn decode_files_unchecked(
       userdata,
     );
 
-    // 4. 释放 userdata 对应的 Arc，避免内存泄漏
+    // 4. 释放 userdata 对应的 Arc
     let _ = Arc::from_raw(userdata as *const StreamSink<DecodeEvent>);
 
     if results_ptr.is_null() {
       return Err(anyhow::anyhow!("decode_files_unchecked 返回了空指针"));
     }
 
-    // 5. 读取结果：深拷贝有效数据，失败标记为 Invalid
+    // 5. 逐个移出 DecryptionResult，交给 convert_result 统一处理
     let mut decoded = Vec::with_capacity(path_ptrs.len());
     for i in 0..path_ptrs.len() {
-      let raw = &*results_ptr.add(i);
-
-      let item = if raw.status == ffi::DecryptionStatus::Success as u32 && !raw.data.is_null()
-      {
-        let bytes = std::slice::from_raw_parts(raw.data, raw.len).to_vec();
-        Some(CustomData::Valid(bytes))
-      } else {
-        Some(CustomData::Invalid)
-      };
-
-      decoded.push(item);
+      let result = ptr::read(results_ptr.add(i));
+      decoded.push(convert_result(result));
     }
 
-    // 6. 释放 C 侧分配的数组及内部 data 指针
-    ffi::free_results_array_and_data(results_ptr, path_ptrs.len());
+    // 6. convert_result 已经释放了每个元素的内部 data，
+    //    这里只释放 C 侧分配的数组外壳
+    ffi::free_results_array(results_ptr, path_ptrs.len());
 
     // 7. 推送最终结果事件
     sink.add(DecodeEvent::Result(decoded));
@@ -285,75 +278,6 @@ pub fn decode_files_unchecked(
     Ok(())
   }
 }
-
-// #[frb]
-// pub enum DecodeEvent{
-//   Progress(u32),
-//   Result(Vec<Option<CustomData>>),
-// }
-//
-// /// 使用 u32 百分比（0~100）作为 Stream 类型，避免自定义 struct 的 SseEncode 问题
-// thread_local! {
-//     static PROGRESS_SINK: RefCell<Option<StreamSink<u32>>> = RefCell::new(None);
-// }
-//
-// extern "C" fn progress_callback(current: usize, total: usize) {
-//   PROGRESS_SINK.with(|sink| {
-//     if let Some(ref s) = *sink.borrow() {
-//       let pct = if total > 0 {
-//         ((current as f64 / total as f64) * 100.0).min(100.0) as u32
-//       } else {
-//         0
-//       };
-//       let _ = s.add(pct);
-//     }
-//   });
-// }
-//
-// #[frb]
-// pub fn decode_files_unchecked(
-//   flag: Vec<u8>,
-//   paths: Vec<String>,
-//   key: &Key,
-//   progress_sink: StreamSink<u32>,
-// ) -> Vec<Option<CustomData>> {
-//   PROGRESS_SINK.with(|s| {
-//     *s.borrow_mut() = Some(progress_sink);
-//   });
-//
-//   let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
-//   let path_count = c_paths.len();
-//   let ptrs: Vec<*const c_char> = c_paths.iter().map(|c| c.as_ptr()).collect();
-//
-//   let results_ptr = unsafe {
-//     ffi::decode_files_unchecked(
-//       flag.as_ptr(),
-//       flag.len(),
-//       ptrs.as_ptr(),
-//       path_count,
-//       key.ptr,
-//       Some(progress_callback),
-//     )
-//   };
-//
-//   PROGRESS_SINK.with(|s| {
-//     *s.borrow_mut() = None;
-//   });
-//
-//   if results_ptr.is_null() {
-//     return vec![];
-//   }
-//
-//   let mut results = Vec::with_capacity(path_count);
-//   for i in 0..path_count {
-//     let item = unsafe { ptr::read(results_ptr.add(i)) };
-//     results.push(convert_result(item));
-//   }
-//
-//   unsafe { ffi::free_results_array(results_ptr, path_count) };
-//
-//   results
-// }
 
 /// 批量解密（无进度）
 #[frb]
