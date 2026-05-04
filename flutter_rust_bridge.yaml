@@ -1,3 +1,8 @@
 rust_input: crate
-rust_root: rust/
+rust_root: rust
 dart_output: lib/src/rust
+
+web: false
+enable_lifetime: true
+dart3: true          # 启用 Dart 3 特性，自动生成 RustAutoOpaque
+#full_dep: true       # 完整依赖模式，自动处理生命周期

@@ -26,7 +26,10 @@
 
 // Section: imports
 
-use crate::media_param::decrypt::*;
+use crate::nuan5_media_param::decrypt::*;
+use crate::nuan5_media_param::ext_type::*;
+use crate::nuan5_media_param::structs::image_custom_data::*;
+use crate::nuan5_media_param::structs::share_code::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
 use flutter_rust_bridge::{Handler, IntoIntoDart};
@@ -39,7 +42,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 201541959;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -447670456;
 
 // Section: executor
 
@@ -47,6 +50,491 @@ flutter_rust_bridge::frb_generated_default_handler!();
 
 // Section: wire_funcs
 
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_pattern_data_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_get_pattern_data",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.pattern_data.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_pose_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_get_pose_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.pose_id.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_wearing_clothes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_get_wearing_clothes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.wearing_clothes.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_wearing_diy_infos_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_get_wearing_diy_infos",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.wearing_diy_infos.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_pattern_data_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_set_pattern_data",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            let api_pattern_data = <IdMap<i64>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.pattern_data = api_pattern_data;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_pose_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_set_pose_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            let api_pose_id = <Option<i64>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.pose_id = api_pose_id;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_wearing_clothes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_set_wearing_clothes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            let api_wearing_clothes = <Vec<i64>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.wearing_clothes = api_wearing_clothes;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_wearing_diy_infos_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Content_auto_accessor_set_wearing_diy_infos",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+            >>::sse_decode(&mut deserializer);
+            let api_wearing_diy_infos = <AdaptiveArray<NikkiDIY>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.wearing_diy_infos = api_wearing_diy_infos;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__DiyCustomData_auto_accessor_get_content_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "DiyCustomData_auto_accessor_get_content",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.content.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__DiyCustomData_auto_accessor_set_content_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "DiyCustomData_auto_accessor_set_content",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>,
+            >>::sse_decode(&mut deserializer);
+            let api_content = <Content>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.content = api_content;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
 fn wire__crate__media_param__decrypt__Key_camera_param_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -71,7 +559,7 @@ fn wire__crate__media_param__decrypt__Key_camera_param_impl(
             deserializer.end();
             transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
                 (move || {
-                    let output_ok = crate::media_param::decrypt::Key::camera_param()?;
+                    let output_ok = crate::nuan5_media_param::decrypt::Key::camera_param()?;
                     Ok(output_ok)
                 })(),
             )
@@ -105,7 +593,7 @@ fn wire__crate__media_param__decrypt__Key_dispose_impl(
             move |context| {
                 transform_result_sse::<_, ()>((move || {
                     let output_ok = Result::<_, ()>::Ok({
-                        crate::media_param::decrypt::Key::dispose(api_that);
+                        crate::nuan5_media_param::decrypt::Key::dispose(api_that);
                     })?;
                     Ok(output_ok)
                 })())
@@ -138,7 +626,7 @@ fn wire__crate__media_param__decrypt__Key_from_str_impl(
             deserializer.end();
             transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
                 (move || {
-                    let output_ok = crate::media_param::decrypt::Key::from_str(api_s)?;
+                    let output_ok = crate::nuan5_media_param::decrypt::Key::from_str(api_s)?;
                     Ok(output_ok)
                 })(),
             )
@@ -170,10 +658,4747 @@ fn wire__crate__media_param__decrypt__Key_from_str_bytes_impl(
             deserializer.end();
             transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
                 (move || {
-                    let output_ok = crate::media_param::decrypt::Key::from_str_bytes(api_bytes)?;
+                    let output_ok = crate::nuan5_media_param::decrypt::Key::from_str_bytes(api_bytes)?;
                     Ok(output_ok)
                 })(),
             )
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_aperture_section_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_aperture_section",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.aperture_section.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_loc_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_actor_loc_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_actor_loc_x.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_loc_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_actor_loc_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_actor_loc_y.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_loc_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_actor_loc_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_actor_loc_z.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_rot_pitch_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_actor_rot_pitch",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_actor_rot_pitch.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_rot_roll_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_actor_rot_roll",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_actor_rot_roll.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_rot_yaw_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_actor_rot_yaw",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_actor_rot_yaw.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_loc_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_component_loc_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_component_loc_x.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_loc_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_component_loc_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_component_loc_y.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_loc_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_component_loc_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_component_loc_z.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_rot_pitch_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_component_rot_pitch",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok =
+                    Result::<_, ()>::Ok(api_that_guard.camera_component_rot_pitch.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_rot_roll_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_component_rot_roll",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok =
+                    Result::<_, ()>::Ok(api_that_guard.camera_component_rot_roll.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_rot_yaw_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_component_rot_yaw",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok =
+                    Result::<_, ()>::Ok(api_that_guard.camera_component_rot_yaw.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_focal_length_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_camera_focal_length",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_focal_length.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_filter_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_filter_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.filter_id.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_filter_strength_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_filter_strength",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.filter_strength.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_light_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_light_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.light_id.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_light_strength_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_light_strength",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.light_strength.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_magicball_color_ids_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_magicball_color_ids",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.magicball_color_ids.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_clothes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_clothes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_clothes.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_diy_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_diy",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_diy.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_hidden_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_hidden",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_hidden.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_loc_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_loc_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_loc_x.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_loc_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_loc_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_loc_y.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_loc_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_loc_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_loc_z.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_rot_pitch_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_rot_pitch",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_rot_pitch.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_rot_roll_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_rot_roll",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_rot_roll.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_rot_yaw_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_rot_yaw",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_rot_yaw.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_scale_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_scale_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_scale_x.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_scale_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_scale_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_scale_y.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_scale_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_scale_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_scale_z.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_weapon_tag_name_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_nikki_weapon_tag_name",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.nikki_weapon_tag_name.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_pose_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_pose_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.pose_id.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_vignette_intensity_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_get_vignette_intensity",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.vignette_intensity.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_aperture_section_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_aperture_section",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_aperture_section = <u8>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.aperture_section = api_aperture_section;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_loc_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_actor_loc_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_actor_loc_x = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_actor_loc_x = api_camera_actor_loc_x;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_loc_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_actor_loc_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_actor_loc_y = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_actor_loc_y = api_camera_actor_loc_y;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_loc_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_actor_loc_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_actor_loc_z = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_actor_loc_z = api_camera_actor_loc_z;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_rot_pitch_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_actor_rot_pitch",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_actor_rot_pitch = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_actor_rot_pitch = api_camera_actor_rot_pitch;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_rot_roll_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_actor_rot_roll",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_actor_rot_roll = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_actor_rot_roll = api_camera_actor_rot_roll;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_rot_yaw_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_actor_rot_yaw",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_actor_rot_yaw = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_actor_rot_yaw = api_camera_actor_rot_yaw;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_loc_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_component_loc_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_component_loc_x = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_component_loc_x = api_camera_component_loc_x;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_loc_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_component_loc_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_component_loc_y = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_component_loc_y = api_camera_component_loc_y;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_loc_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_component_loc_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_component_loc_z = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_component_loc_z = api_camera_component_loc_z;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_rot_pitch_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_component_rot_pitch",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_component_rot_pitch = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_component_rot_pitch = api_camera_component_rot_pitch;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_rot_roll_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_component_rot_roll",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_component_rot_roll = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_component_rot_roll = api_camera_component_rot_roll;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_rot_yaw_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_component_rot_yaw",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_component_rot_yaw = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_component_rot_yaw = api_camera_component_rot_yaw;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_focal_length_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_camera_focal_length",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_focal_length = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_focal_length = api_camera_focal_length;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_filter_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_filter_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_filter_id = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.filter_id = api_filter_id;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_filter_strength_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_filter_strength",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_filter_strength = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.filter_strength = api_filter_strength;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_light_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_light_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_light_id = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.light_id = api_light_id;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_light_strength_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_light_strength",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_light_strength = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.light_strength = api_light_strength;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_magicball_color_ids_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_magicball_color_ids",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_magicball_color_ids = <Option<Vec<i64>>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.magicball_color_ids = api_magicball_color_ids;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_clothes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_clothes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_clothes = <Option<Vec<i64>>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_clothes = api_nikki_clothes;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_diy_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_diy",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_diy = <AdaptiveArray<NikkiDIY>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_diy = api_nikki_diy;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_hidden_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_hidden",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_hidden = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_hidden = api_nikki_hidden;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_loc_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_loc_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_loc_x = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_loc_x = api_nikki_loc_x;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_loc_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_loc_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_loc_y = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_loc_y = api_nikki_loc_y;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_loc_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_loc_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_loc_z = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_loc_z = api_nikki_loc_z;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_rot_pitch_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_rot_pitch",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_rot_pitch = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_rot_pitch = api_nikki_rot_pitch;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_rot_roll_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_rot_roll",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_rot_roll = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_rot_roll = api_nikki_rot_roll;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_rot_yaw_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_rot_yaw",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_rot_yaw = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_rot_yaw = api_nikki_rot_yaw;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_scale_x_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_scale_x",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_scale_x = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_scale_x = api_nikki_scale_x;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_scale_y_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_scale_y",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_scale_y = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_scale_y = api_nikki_scale_y;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_scale_z_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_scale_z",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_scale_z = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_scale_z = api_nikki_scale_z;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_weapon_tag_name_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_nikki_weapon_tag_name",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_nikki_weapon_tag_name = <Option<String>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.nikki_weapon_tag_name = api_nikki_weapon_tag_name;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_pose_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_pose_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_pose_id = <i64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.pose_id = api_pose_id;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_vignette_intensity_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoInfo_auto_accessor_set_vignette_intensity",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+            >>::sse_decode(&mut deserializer);
+            let api_vignette_intensity = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.vignette_intensity = api_vignette_intensity;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoWallPlugin_auto_accessor_get_photo_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoWallPlugin_auto_accessor_get_photo_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.photo_id.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__PhotoWallPlugin_auto_accessor_set_photo_id_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "PhotoWallPlugin_auto_accessor_set_photo_id",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>,
+            >>::sse_decode(&mut deserializer);
+            let api_photo_id = <AdaptiveArray<i64>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.photo_id = api_photo_id;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__share_code__ShareCode_auto_accessor_get_content_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ShareCode_auto_accessor_get_content",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.content.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__share_code__ShareCode_auto_accessor_set_content_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ShareCode_auto_accessor_set_content",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>,
+            >>::sse_decode(&mut deserializer);
+            let api_content = <DIYCustomData>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.content = api_content;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_camera_params_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_camera_params",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.camera_params.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_carrier_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_carrier_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.carrier_info.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_da_miao_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_da_miao_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.da_miao_info.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_giant_state_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_giant_state",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.giant_state.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_interactions_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_interactions",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.interactions.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_local_transforms_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_local_transforms",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.local_transforms.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_mount_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_mount_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.mount_info.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_photo_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_photo_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.photo_info.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_static_infos_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_static_infos",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.static_infos.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_time_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_time",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.time.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_weapon_snap_shot_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_weapon_snap_shot",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.weapon_snap_shot.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_weather_type_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_get_weather_type",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(api_that_guard.weather_type.clone())?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_camera_params_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_camera_params",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_camera_params = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.camera_params = api_camera_params;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_carrier_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_carrier_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_carrier_info = <Option<
+                crate::nuan5_media_param::structs::image_custom_data::CarrierInfo,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.carrier_info = api_carrier_info;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_da_miao_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_da_miao_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_da_miao_info =
+                <crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption>::sse_decode(
+                    &mut deserializer,
+                );
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.da_miao_info = api_da_miao_info;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_giant_state_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_giant_state",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_giant_state = <Option<bool>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.giant_state = api_giant_state;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_interactions_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_interactions",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_interactions = <AdaptiveArray<Interactions>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.interactions = api_interactions;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_local_transforms_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_local_transforms",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_local_transforms = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.local_transforms = api_local_transforms;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_mount_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_mount_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_mount_info = <Option<
+                crate::nuan5_media_param::structs::image_custom_data::MountInfoOption,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.mount_info = api_mount_info;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_photo_info_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_photo_info",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_photo_info = <PhotoInfo>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.photo_info = api_photo_info;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_static_infos_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_static_infos",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_static_infos =
+                <crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption>::sse_decode(
+                    &mut deserializer,
+                );
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.static_infos = api_static_infos;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_time_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_time",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_time = <crate::nuan5_media_param::structs::image_custom_data::Time>::sse_decode(
+                &mut deserializer,
+            );
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.time = api_time;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_weapon_snap_shot_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_weapon_snap_shot",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_weapon_snap_shot = <Option<
+                crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.weapon_snap_shot = api_weapon_snap_shot;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_weather_type_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SocialPhoto_auto_accessor_set_weather_type",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+            >>::sse_decode(&mut deserializer);
+            let api_weather_type = <i64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, true,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                        _ => unreachable!(),
+                    }
+                }
+                let mut api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok({
+                    {
+                        api_that_guard.weather_type = api_weather_type;
+                    };
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__ext_type__convert_to_bool_id_map_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "convert_to_bool_id_map",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_map = <IdMap<bool>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_media_param::ext_type::convert_to_bool_id_map(api_map),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__media_param__ext_type__convert_to_int_id_map_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "convert_to_int_id_map",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_map = <IdMap<i64>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_media_param::ext_type::convert_to_int_id_map(api_map),
+                )?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -220,7 +5445,7 @@ fn wire__crate__media_param__decrypt__decode_file_bytes_unchecked_impl(
                 }
                 let api_key_guard = api_key_guard.unwrap();
                 let output_ok =
-                    Result::<_, ()>::Ok(crate::media_param::decrypt::decode_file_bytes_unchecked(
+                    Result::<_, ()>::Ok(crate::nuan5_media_param::decrypt::decode_file_bytes_unchecked(
                         api_flag,
                         api_bytes,
                         &*api_key_guard,
@@ -275,7 +5500,7 @@ fn wire__crate__media_param__decrypt__decode_file_unchecked_impl(
                     }
                     let api_key_guard = api_key_guard.unwrap();
                     let output_ok =
-                        Result::<_, ()>::Ok(crate::media_param::decrypt::decode_file_unchecked(
+                        Result::<_, ()>::Ok(crate::nuan5_media_param::decrypt::decode_file_unchecked(
                             api_flag,
                             api_path,
                             &*api_key_guard,
@@ -329,7 +5554,7 @@ fn wire__crate__media_param__decrypt__decode_file_unchecked_sync_impl(
                 }
                 let api_key_guard = api_key_guard.unwrap();
                 let output_ok =
-                    Result::<_, ()>::Ok(crate::media_param::decrypt::decode_file_unchecked_sync(
+                    Result::<_, ()>::Ok(crate::nuan5_media_param::decrypt::decode_file_unchecked_sync(
                         api_flag,
                         api_path,
                         &*api_key_guard,
@@ -367,7 +5592,7 @@ fn wire__crate__media_param__decrypt__decode_files_unchecked_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>,
             >>::sse_decode(&mut deserializer);
             let api_progress_sink = <StreamSink<
-                crate::media_param::decrypt::DecodeEvent,
+                crate::nuan5_media_param::decrypt::DecodeEvent,
                 flutter_rust_bridge::for_generated::SseCodec,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
@@ -388,7 +5613,7 @@ fn wire__crate__media_param__decrypt__decode_files_unchecked_impl(
                             }
                         }
                         let api_key_guard = api_key_guard.unwrap();
-                        let output_ok = crate::media_param::decrypt::decode_files_unchecked(
+                        let output_ok = crate::nuan5_media_param::decrypt::decode_files_unchecked(
                             api_flag,
                             api_paths,
                             &*api_key_guard,
@@ -446,12 +5671,50 @@ fn wire__crate__media_param__decrypt__decode_files_unchecked_no_progress_impl(
                     }
                     let api_key_guard = api_key_guard.unwrap();
                     let output_ok = Result::<_, ()>::Ok(
-                        crate::media_param::decrypt::decode_files_unchecked_no_progress(
+                        crate::nuan5_media_param::decrypt::decode_files_unchecked_no_progress(
                             api_flag,
                             api_paths,
                             &*api_key_guard,
                         ),
                     )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__media_param__decode__decode_param_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "decode_param",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_data = <crate::nuan5_media_param::decrypt::CustomData>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(crate::nuan5_media_param::decode::decode_param(
+                        api_param_type,
+                        api_data,
+                    ))?;
                     Ok(output_ok)
                 })())
             }
@@ -499,12 +5762,83 @@ fn wire__crate__media_param__decrypt__decrypt_impl(
                     }
                 }
                 let api_key_guard = api_key_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(crate::media_param::decrypt::decrypt(
+                let output_ok = Result::<_, ()>::Ok(crate::nuan5_media_param::decrypt::decrypt(
                     api_data,
                     &*api_key_guard,
                 ))?;
                 Ok(output_ok)
             })())
+        },
+    )
+}
+fn wire__crate__media_param__error__error_code_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "error_code(dart_style=fromCode)",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_code = <crate::nuan5_media_param::error::ErrorCode>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::nuan5_media_param::error::Error::code(api_code))?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__media_param__error__error_syntax_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "error_syntax",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_code = <crate::nuan5_media_param::error::ErrorCode>::sse_decode(&mut deserializer);
+            let api_line = <usize>::sse_decode(&mut deserializer);
+            let api_column = <usize>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(crate::nuan5_media_param::error::Error::syntax(
+                        api_code, api_line, api_column,
+                    ))?;
+                    Ok(output_ok)
+                })())
+            }
         },
     )
 }
@@ -608,7 +5942,40 @@ fn wire__crate__api__simple__test_add_impl(
 // Section: related_funcs
 
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<NikkiDIY>>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<i64>>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<bool>>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<i64>>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>
 );
 
 // Section: dart2rust
@@ -621,11 +5988,209 @@ impl SseDecode for flutter_rust_bridge::for_generated::anyhow::Error {
     }
 }
 
+impl SseDecode for AdaptiveArray<Interactions> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for AdaptiveArray<NikkiDIY> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<NikkiDIY>>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for AdaptiveArray<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<i64>>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for Content {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for DIYCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for IdMap<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<bool>>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for IdMap<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<i64>>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
 impl SseDecode for Key {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>>>::sse_decode(deserializer);
         return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for PhotoInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for PhotoWallPlugin {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for ShareCode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for SocialPhoto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i64, bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(i64, bool)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i64, i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(i64, i64)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<NikkiDIY>>,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<i64>>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<bool>>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<i64>>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
     }
 }
 
@@ -638,8 +6203,48 @@ impl SseDecode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpa
 }
 
 impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
     for StreamSink<
-        crate::media_param::decrypt::DecodeEvent,
+        crate::nuan5_media_param::decrypt::DecodeEvent,
         flutter_rust_bridge::for_generated::SseCodec,
     >
 {
@@ -658,17 +6263,165 @@ impl SseDecode for String {
     }
 }
 
-impl SseDecode for crate::media_param::decrypt::CustomData {
+impl SseDecode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u8().unwrap() != 0
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::camera_params::CameraParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_flag = <i64>::sse_decode(deserializer);
+        let mut var_portraitMode = <i64>::sse_decode(deserializer);
+        let mut var_dxCameraActor = <f64>::sse_decode(deserializer);
+        let mut var_dyCameraActor = <f64>::sse_decode(deserializer);
+        let mut var_dzCameraActor = <f64>::sse_decode(deserializer);
+        let mut var_dPitchCameraActor = <f64>::sse_decode(deserializer);
+        let mut var_dYawCameraActor = <f64>::sse_decode(deserializer);
+        let mut var_mode = <i64>::sse_decode(deserializer);
+        let mut var_dxCameraComponent = <f64>::sse_decode(deserializer);
+        let mut var_dyCameraComponent = <f64>::sse_decode(deserializer);
+        let mut var_dzCameraComponent = <f64>::sse_decode(deserializer);
+        let mut var_dPitchCameraComponent = <f64>::sse_decode(deserializer);
+        let mut var_dYawCameraComponent = <f64>::sse_decode(deserializer);
+        let mut var_dRollCameraActor = <f64>::sse_decode(deserializer);
+        let mut var_cameraFocalLength = <f64>::sse_decode(deserializer);
+        let mut var_apertureSection = <u8>::sse_decode(deserializer);
+        let mut var_dRollCameraComponent = <f64>::sse_decode(deserializer);
+        let mut var_lightId = <String>::sse_decode(deserializer);
+        let mut var_lightStrength = <f64>::sse_decode(deserializer);
+        let mut var_vignetteIntensity = <f64>::sse_decode(deserializer);
+        let mut var_bloomIntensity = <f64>::sse_decode(deserializer);
+        let mut var_bloomThreshold = <f64>::sse_decode(deserializer);
+        let mut var_brightness = <f64>::sse_decode(deserializer);
+        let mut var_exposure = <f64>::sse_decode(deserializer);
+        let mut var_contrast = <f64>::sse_decode(deserializer);
+        let mut var_saturation = <f64>::sse_decode(deserializer);
+        let mut var_vibrance = <f64>::sse_decode(deserializer);
+        let mut var_highlights = <f64>::sse_decode(deserializer);
+        let mut var_shadows = <f64>::sse_decode(deserializer);
+        let mut var_filterId = <String>::sse_decode(deserializer);
+        let mut var_filterStrength = <f64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::camera_params::CameraParams {
+            flag: var_flag,
+            portrait_mode: var_portraitMode,
+            dx_camera_actor: var_dxCameraActor,
+            dy_camera_actor: var_dyCameraActor,
+            dz_camera_actor: var_dzCameraActor,
+            d_pitch_camera_actor: var_dPitchCameraActor,
+            d_yaw_camera_actor: var_dYawCameraActor,
+            mode: var_mode,
+            dx_camera_component: var_dxCameraComponent,
+            dy_camera_component: var_dyCameraComponent,
+            dz_camera_component: var_dzCameraComponent,
+            d_pitch_camera_component: var_dPitchCameraComponent,
+            d_yaw_camera_component: var_dYawCameraComponent,
+            d_roll_camera_actor: var_dRollCameraActor,
+            camera_focal_length: var_cameraFocalLength,
+            aperture_section: var_apertureSection,
+            d_roll_camera_component: var_dRollCameraComponent,
+            light_id: var_lightId,
+            light_strength: var_lightStrength,
+            vignette_intensity: var_vignetteIntensity,
+            bloom_intensity: var_bloomIntensity,
+            bloom_threshold: var_bloomThreshold,
+            brightness: var_brightness,
+            exposure: var_exposure,
+            contrast: var_contrast,
+            saturation: var_saturation,
+            vibrance: var_vibrance,
+            highlights: var_highlights,
+            shadows: var_shadows,
+            filter_id: var_filterId,
+            filter_strength: var_filterStrength,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::CarrierInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_locX = <f64>::sse_decode(deserializer);
+        let mut var_locY = <f64>::sse_decode(deserializer);
+        let mut var_locZ = <f64>::sse_decode(deserializer);
+        let mut var_scaleX = <f64>::sse_decode(deserializer);
+        let mut var_scaleY = <f64>::sse_decode(deserializer);
+        let mut var_scaleZ = <f64>::sse_decode(deserializer);
+        let mut var_rotYaw = <f64>::sse_decode(deserializer);
+        let mut var_rotPitch = <f64>::sse_decode(deserializer);
+        let mut var_rotRoll = <f64>::sse_decode(deserializer);
+        let mut var_configObjId = <i64>::sse_decode(deserializer);
+        let mut var_pose = <String>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::CarrierInfo {
+            loc_x: var_locX,
+            loc_y: var_locY,
+            loc_z: var_locZ,
+            scale_x: var_scaleX,
+            scale_y: var_scaleY,
+            scale_z: var_scaleZ,
+            rot_yaw: var_rotYaw,
+            rot_pitch: var_rotPitch,
+            rot_roll: var_rotRoll,
+            config_obj_id: var_configObjId,
+            pose: var_pose,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_tag = <i64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin { tag: var_tag };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_clockGamePlugin =
+            <crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin>::sse_decode(
+                deserializer,
+            );
+        let mut var_portraitModeHandler = <Option<
+            crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler,
+        >>::sse_decode(deserializer);
+        let mut var_socialPhoto = <Option<SocialPhoto>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData {
+            clock_game_plugin: var_clockGamePlugin,
+            portrait_mode_handler: var_portraitModeHandler,
+            social_photo: var_socialPhoto,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::CollageCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_templateId = <i64>::sse_decode(deserializer);
+        let mut var_regionPictures = <Vec<
+            crate::nuan5_media_param::structs::image_custom_data::RegionPicture,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::CollageCustomData {
+            template_id: var_templateId,
+            region_pictures: var_regionPictures,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decrypt::CustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut tag_ = <i32>::sse_decode(deserializer);
         match tag_ {
             0 => {
-                return crate::media_param::decrypt::CustomData::Invalid;
+                return crate::nuan5_media_param::decrypt::CustomData::Invalid;
             }
             1 => {
                 let mut var_field0 = <Vec<u8>>::sse_decode(deserializer);
-                return crate::media_param::decrypt::CustomData::Valid(var_field0);
+                return crate::nuan5_media_param::decrypt::CustomData::Valid(var_field0);
             }
             _ => {
                 unimplemented!("");
@@ -677,21 +6430,211 @@ impl SseDecode for crate::media_param::decrypt::CustomData {
     }
 }
 
-impl SseDecode for crate::media_param::decrypt::DecodeEvent {
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_locX = <f64>::sse_decode(deserializer);
+        let mut var_locY = <f64>::sse_decode(deserializer);
+        let mut var_locZ = <f64>::sse_decode(deserializer);
+        let mut var_scaleX = <f64>::sse_decode(deserializer);
+        let mut var_scaleY = <f64>::sse_decode(deserializer);
+        let mut var_scaleZ = <f64>::sse_decode(deserializer);
+        let mut var_rotYaw = <f64>::sse_decode(deserializer);
+        let mut var_rotPitch = <f64>::sse_decode(deserializer);
+        let mut var_rotRoll = <f64>::sse_decode(deserializer);
+        let mut var_clothIds = <Vec<i64>>::sse_decode(deserializer);
+        let mut var_action = <String>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo {
+            loc_x: var_locX,
+            loc_y: var_locY,
+            loc_z: var_locZ,
+            scale_x: var_scaleX,
+            scale_y: var_scaleY,
+            scale_z: var_scaleZ,
+            rot_yaw: var_rotYaw,
+            rot_pitch: var_rotPitch,
+            rot_roll: var_rotRoll,
+            cloth_ids: var_clothIds,
+            action: var_action,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption::None;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption::Some(
+                    var_field0,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decrypt::DecodeEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut tag_ = <i32>::sse_decode(deserializer);
         match tag_ {
             0 => {
                 let mut var_field0 = <f64>::sse_decode(deserializer);
-                return crate::media_param::decrypt::DecodeEvent::Progress(var_field0);
+                return crate::nuan5_media_param::decrypt::DecodeEvent::Progress(var_field0);
             }
             1 => {
                 let mut var_field0 =
-                    <Vec<Option<crate::media_param::decrypt::CustomData>>>::sse_decode(
+                    <Vec<Option<crate::nuan5_media_param::decrypt::CustomData>>>::sse_decode(
                         deserializer,
                     );
-                return crate::media_param::decrypt::DecodeEvent::Result(var_field0);
+                return crate::nuan5_media_param::decrypt::DecodeEvent::Result(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_roleId = <String>::sse_decode(deserializer);
+        let mut var_timeStamp = <f64>::sse_decode(deserializer);
+        let mut var_shareCode = <String>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode {
+            role_id: var_roleId,
+            time_stamp: var_timeStamp,
+            share_code: var_shareCode,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_editState = <bool>::sse_decode(deserializer);
+        let mut var_hasSticker = <bool>::sse_decode(deserializer);
+        let mut var_hasText = <bool>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler {
+            edit_state: var_editState,
+            has_sticker: var_hasSticker,
+            has_text: var_hasText,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::error::Error {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_column = <usize>::sse_decode(deserializer);
+        let mut var_line = <usize>::sse_decode(deserializer);
+        let mut var_code = <crate::nuan5_media_param::error::ErrorCode>::sse_decode(deserializer);
+        return crate::nuan5_media_param::error::Error {
+            column: var_column,
+            line: var_line,
+            code: var_code,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::error::ErrorCode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedSomeValue;
+            }
+            1 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedSomeIdent;
+            }
+            2 => {
+                return crate::nuan5_media_param::error::ErrorCode::InvalidNumber;
+            }
+            3 => {
+                return crate::nuan5_media_param::error::ErrorCode::NumberOutOfRange;
+            }
+            4 => {
+                return crate::nuan5_media_param::error::ErrorCode::InvalidUnicodeCodePoint;
+            }
+            5 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedDoubleQuote;
+            }
+            6 => {
+                return crate::nuan5_media_param::error::ErrorCode::EofWhileParsingString;
+            }
+            7 => {
+                return crate::nuan5_media_param::error::ErrorCode::ControlCharacterWhileParsingString;
+            }
+            8 => {
+                return crate::nuan5_media_param::error::ErrorCode::InvalidEscape;
+            }
+            9 => {
+                return crate::nuan5_media_param::error::ErrorCode::LoneLeadingSurrogateInHexEscape;
+            }
+            10 => {
+                return crate::nuan5_media_param::error::ErrorCode::UnexpectedEndOfHexEscape;
+            }
+            11 => {
+                return crate::nuan5_media_param::error::ErrorCode::KeyMustBeAString;
+            }
+            12 => {
+                return crate::nuan5_media_param::error::ErrorCode::FloatKeyMustBeFinite;
+            }
+            13 => {
+                return crate::nuan5_media_param::error::ErrorCode::IdMapKeyMustBeAnInteger;
+            }
+            14 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedNumericKey;
+            }
+            15 => {
+                return crate::nuan5_media_param::error::ErrorCode::EofWhileParsingObject;
+            }
+            16 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedColon;
+            }
+            17 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedColonAtStart;
+            }
+            18 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedObjectCommaOrEnd;
+            }
+            19 => {
+                return crate::nuan5_media_param::error::ErrorCode::TrailingComma;
+            }
+            20 => {
+                return crate::nuan5_media_param::error::ErrorCode::EofWhileParsingIdMap;
+            }
+            21 => {
+                return crate::nuan5_media_param::error::ErrorCode::EofWhileParsingArray;
+            }
+            22 => {
+                return crate::nuan5_media_param::error::ErrorCode::ExpectedArrayCommaOrEnd;
+            }
+            23 => {
+                return crate::nuan5_media_param::error::ErrorCode::EofWhileParsingValue;
+            }
+            24 => {
+                return crate::nuan5_media_param::error::ErrorCode::TrailingCharacters;
+            }
+            25 => {
+                return crate::nuan5_media_param::error::ErrorCode::RecursionLimitExceeded;
+            }
+            26 => {
+                let mut var_field0 = <String>::sse_decode(deserializer);
+                return crate::nuan5_media_param::error::ErrorCode::Message(var_field0);
             }
             _ => {
                 unimplemented!("");
@@ -714,6 +6657,13 @@ impl SseDecode for i32 {
     }
 }
 
+impl SseDecode for i64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i64::<NativeEndian>().unwrap()
+    }
+}
+
 impl SseDecode for Vec<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -726,13 +6676,25 @@ impl SseDecode for Vec<String> {
     }
 }
 
-impl SseDecode for Vec<Option<crate::media_param::decrypt::CustomData>> {
+impl SseDecode for Vec<Option<crate::nuan5_media_param::decrypt::CustomData>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
-            ans_.push(<Option<crate::media_param::decrypt::CustomData>>::sse_decode(deserializer));
+            ans_.push(<Option<crate::nuan5_media_param::decrypt::CustomData>>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<i64>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -750,16 +6712,537 @@ impl SseDecode for Vec<u8> {
     }
 }
 
-impl SseDecode for Option<crate::media_param::decrypt::CustomData> {
+impl SseDecode for Vec<(i64, bool)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(i64, bool)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i64, i64)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(i64, i64)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::image_custom_data::RegionPicture> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::image_custom_data::RegionPicture>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        return crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData {};
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decode::MediaCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::decode::MediaCustomData::Invalid;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::decode::MediaParam>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaCustomData::Valid(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decode::MediaParam {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::camera_params::CameraParams>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::decode::MediaParam::CameraParams(var_field0);
+            }
+            1 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::NikkiPhoto(var_field0);
+            }
+            2 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::MagazinePhoto(var_field0);
+            }
+            3 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::ClockInPhoto(var_field0);
+            }
+            4 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::image_custom_data::CollageCustomData>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::decode::MediaParam::Collage(var_field0);
+            }
+            5 => {
+                let mut var_field0 = <DIYCustomData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::DIY(var_field0);
+            }
+            6 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::video_custom_data::VideoCustomData>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::decode::MediaParam::Video(var_field0);
+            }
+            7 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::VideoCover(var_field0);
+            }
+            8 => {
+                let mut var_field0 = <ShareCode>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::ShareCode(var_field0);
+            }
+            9 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::decode::MediaParam::DiyHistoryShareCode(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decode::MediaParamType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::decode::MediaParamType::CameraParams,
+            1 => crate::nuan5_media_param::decode::MediaParamType::NikkiPhoto,
+            2 => crate::nuan5_media_param::decode::MediaParamType::MagazinePhoto,
+            3 => crate::nuan5_media_param::decode::MediaParamType::ClockInPhoto,
+            4 => crate::nuan5_media_param::decode::MediaParamType::Collage,
+            5 => crate::nuan5_media_param::decode::MediaParamType::DIY,
+            6 => crate::nuan5_media_param::decode::MediaParamType::Video,
+            7 => crate::nuan5_media_param::decode::MediaParamType::VideoCover,
+            8 => crate::nuan5_media_param::decode::MediaParamType::ShareCode,
+            9 => crate::nuan5_media_param::decode::MediaParamType::DiyHistoryShareCode,
+            _ => unreachable!("Invalid variant for MediaParamType: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::MountInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_locX = <f64>::sse_decode(deserializer);
+        let mut var_locY = <f64>::sse_decode(deserializer);
+        let mut var_locZ = <f64>::sse_decode(deserializer);
+        let mut var_scaleX = <f64>::sse_decode(deserializer);
+        let mut var_scaleY = <f64>::sse_decode(deserializer);
+        let mut var_scaleZ = <f64>::sse_decode(deserializer);
+        let mut var_rotYaw = <f64>::sse_decode(deserializer);
+        let mut var_rotPitch = <f64>::sse_decode(deserializer);
+        let mut var_rotRoll = <f64>::sse_decode(deserializer);
+        let mut var_configId = <i64>::sse_decode(deserializer);
+        let mut var_pose = <String>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::MountInfo {
+            loc_x: var_locX,
+            loc_y: var_locY,
+            loc_z: var_locZ,
+            scale_x: var_scaleX,
+            scale_y: var_scaleY,
+            scale_z: var_scaleZ,
+            rot_yaw: var_rotYaw,
+            rot_pitch: var_rotPitch,
+            rot_roll: var_rotRoll,
+            config_id: var_configId,
+            pose: var_pose,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::MountInfoOption {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::structs::image_custom_data::MountInfoOption::None;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::image_custom_data::MountInfo>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::image_custom_data::MountInfoOption::Some(
+                    var_field0,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_editPhotoHandler = <Option<
+            crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler,
+        >>::sse_decode(deserializer);
+        let mut var_interactivePhoto = <Option<IdMap<bool>>>::sse_decode(deserializer);
+        let mut var_photoWallPlugin = <Option<PhotoWallPlugin>>::sse_decode(deserializer);
+        let mut var_portraitModeHandler = <Option<
+            crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler,
+        >>::sse_decode(deserializer);
+        let mut var_puzzleGamePlugin = <Option<
+            crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin,
+        >>::sse_decode(deserializer);
+        let mut var_riskPhoto = <Option<IdMap<bool>>>::sse_decode(deserializer);
+        let mut var_socialPhoto = <Option<SocialPhoto>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData {
+            edit_photo_handler: var_editPhotoHandler,
+            interactive_photo: var_interactivePhoto,
+            photo_wall_plugin: var_photoWallPlugin,
+            portrait_mode_handler: var_portraitModeHandler,
+            puzzle_game_plugin: var_puzzleGamePlugin,
+            risk_photo: var_riskPhoto,
+            social_photo: var_socialPhoto,
+        };
+    }
+}
+
+impl SseDecode for Option<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::media_param::decrypt::CustomData>::sse_decode(
+            return Some(<String>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<IdMap<bool>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<IdMap<bool>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<PhotoWallPlugin> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<PhotoWallPlugin>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<SocialPhoto> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<SocialPhoto>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<bool>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::image_custom_data::CarrierInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::image_custom_data::CarrierInfo>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::decrypt::CustomData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::nuan5_media_param::decrypt::CustomData>::sse_decode(
                 deserializer,
             ));
         } else {
             return None;
         }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<i64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::image_custom_data::MountInfoOption> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::image_custom_data::MountInfoOption>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<Vec<i64>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<i64>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_portraitMode = <i64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler {
+            portrait_mode: var_portraitMode,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::Position {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_x = <f64>::sse_decode(deserializer);
+        let mut var_y = <f64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::Position { x: var_x, y: var_y };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_tag = <i64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin { tag: var_tag };
+    }
+}
+
+impl SseDecode for (i64, bool) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i64>::sse_decode(deserializer);
+        let mut var_field1 = <bool>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i64, i64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i64>::sse_decode(deserializer);
+        let mut var_field1 = <i64>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::RegionPicture {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_imageId = <String>::sse_decode(deserializer);
+        let mut var_oriCustomData =
+            <crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData>::sse_decode(
+                deserializer,
+            );
+        let mut var_position =
+            <crate::nuan5_media_param::structs::image_custom_data::Position>::sse_decode(deserializer);
+        let mut var_rotation = <f64>::sse_decode(deserializer);
+        let mut var_scale = <f64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::RegionPicture {
+            image_id: var_imageId,
+            ori_custom_data: var_oriCustomData,
+            position: var_position,
+            rotation: var_rotation,
+            scale: var_scale,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::StaticInfos {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        return crate::nuan5_media_param::structs::image_custom_data::StaticInfos {};
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption::None;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::image_custom_data::StaticInfos>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption::Some(
+                    var_field0,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::Time {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_day = <i64>::sse_decode(deserializer);
+        let mut var_hour = <u8>::sse_decode(deserializer);
+        let mut var_min = <u8>::sse_decode(deserializer);
+        let mut var_sec = <f64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::Time {
+            day: var_day,
+            hour: var_hour,
+            min: var_min,
+            sec: var_sec,
+        };
+    }
+}
+
+impl SseDecode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u64::<NativeEndian>().unwrap()
     }
 }
 
@@ -782,10 +7265,104 @@ impl SseDecode for usize {
     }
 }
 
-impl SseDecode for bool {
+impl SseDecode for crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u8().unwrap() != 0
+        let mut var_videoCoverData =
+            <crate::nuan5_media_param::structs::video_custom_data::VideoCoverData>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData {
+            video_cover_data: var_videoCoverData,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::video_custom_data::VideoCoverData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_roleId = <u64>::sse_decode(deserializer);
+        let mut var_createTime = <u64>::sse_decode(deserializer);
+        let mut var_videoCustomData =
+            <crate::nuan5_media_param::structs::video_custom_data::VideoRecordData>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::video_custom_data::VideoCoverData {
+            role_id: var_roleId,
+            create_time: var_createTime,
+            video_custom_data: var_videoCustomData,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::video_custom_data::VideoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_videoRecordData =
+            <crate::nuan5_media_param::structs::video_custom_data::VideoRecordData>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::video_custom_data::VideoCustomData {
+            video_record_data: var_videoRecordData,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::video_custom_data::VideoRecordData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_createTime = <f64>::sse_decode(deserializer);
+        let mut var_crf = <u64>::sse_decode(deserializer);
+        let mut var_desiredHeight = <u64>::sse_decode(deserializer);
+        let mut var_desiredWidth = <u64>::sse_decode(deserializer);
+        let mut var_durationStr = <String>::sse_decode(deserializer);
+        let mut var_framesCount = <u64>::sse_decode(deserializer);
+        let mut var_frameEndWith = <String>::sse_decode(deserializer);
+        let mut var_frameRate = <u64>::sse_decode(deserializer);
+        let mut var_inputFilePath = <String>::sse_decode(deserializer);
+        let mut var_outputFilePath = <String>::sse_decode(deserializer);
+        let mut var_presetQuality = <String>::sse_decode(deserializer);
+        let mut var_roleId = <u64>::sse_decode(deserializer);
+        let mut var_sourceHeight = <u64>::sse_decode(deserializer);
+        let mut var_sourceWidth = <u64>::sse_decode(deserializer);
+        let mut var_videoSaveName = <String>::sse_decode(deserializer);
+        let mut var_viewportHeight = <u64>::sse_decode(deserializer);
+        let mut var_videoSavePath = <String>::sse_decode(deserializer);
+        let mut var_viewportWidth = <u64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::video_custom_data::VideoRecordData {
+            create_time: var_createTime,
+            crf: var_crf,
+            desired_height: var_desiredHeight,
+            desired_width: var_desiredWidth,
+            duration_str: var_durationStr,
+            frames_count: var_framesCount,
+            frame_end_with: var_frameEndWith,
+            frame_rate: var_frameRate,
+            input_file_path: var_inputFilePath,
+            output_file_path: var_outputFilePath,
+            preset_quality: var_presetQuality,
+            role_id: var_roleId,
+            source_height: var_sourceHeight,
+            source_width: var_sourceWidth,
+            video_save_name: var_videoSaveName,
+            viewport_height: var_viewportHeight,
+            video_save_path: var_videoSavePath,
+            viewport_width: var_viewportWidth,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_weaponId = <i64>::sse_decode(deserializer);
+        let mut var_customState = <String>::sse_decode(deserializer);
+        let mut var_slotType = <String>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot {
+            weapon_id: var_weaponId,
+            custom_state: var_customState,
+            slot_type: var_slotType,
+        };
     }
 }
 
@@ -798,26 +7375,35 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        2 => wire__crate__media_param__decrypt__Key_dispose_impl(port, ptr, rust_vec_len, data_len),
-        6 => wire__crate__media_param__decrypt__decode_file_unchecked_impl(
+        12 => {
+            wire__crate__media_param__decrypt__Key_dispose_impl(port, ptr, rust_vec_len, data_len)
+        }
+        114 => wire__crate__media_param__decrypt__decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        8 => wire__crate__media_param__decrypt__decode_files_unchecked_impl(
+        116 => wire__crate__media_param__decrypt__decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        9 => wire__crate__media_param__decrypt__decode_files_unchecked_no_progress_impl(
+        117 => wire__crate__media_param__decrypt__decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        12 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        118 => {
+            wire__crate__media_param__decode__decode_param_impl(port, ptr, rust_vec_len, data_len)
+        }
+        120 => wire__crate__media_param__error__error_code_impl(port, ptr, rust_vec_len, data_len),
+        121 => {
+            wire__crate__media_param__error__error_syntax_impl(port, ptr, rust_vec_len, data_len)
+        }
+        123 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -830,29 +7416,245 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        1 => wire__crate__media_param__decrypt__Key_camera_param_impl(ptr, rust_vec_len, data_len),
-        3 => wire__crate__media_param__decrypt__Key_from_str_impl(ptr, rust_vec_len, data_len),
-        4 => {
-            wire__crate__media_param__decrypt__Key_from_str_bytes_impl(ptr, rust_vec_len, data_len)
-        }
-        5 => wire__crate__media_param__decrypt__decode_file_bytes_unchecked_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        7 => wire__crate__media_param__decrypt__decode_file_unchecked_sync_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        10 => wire__crate__media_param__decrypt__decrypt_impl(ptr, rust_vec_len, data_len),
-        11 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        13 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        _ => unreachable!(),
-    }
+                        1 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_pattern_data_impl(ptr, rust_vec_len, data_len),
+2 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_pose_id_impl(ptr, rust_vec_len, data_len),
+3 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_wearing_clothes_impl(ptr, rust_vec_len, data_len),
+4 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_get_wearing_diy_infos_impl(ptr, rust_vec_len, data_len),
+5 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_pattern_data_impl(ptr, rust_vec_len, data_len),
+6 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_pose_id_impl(ptr, rust_vec_len, data_len),
+7 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_wearing_clothes_impl(ptr, rust_vec_len, data_len),
+8 => wire__crate__media_param__structs__image_custom_data__Content_auto_accessor_set_wearing_diy_infos_impl(ptr, rust_vec_len, data_len),
+9 => wire__crate__media_param__structs__image_custom_data__DiyCustomData_auto_accessor_get_content_impl(ptr, rust_vec_len, data_len),
+10 => wire__crate__media_param__structs__image_custom_data__DiyCustomData_auto_accessor_set_content_impl(ptr, rust_vec_len, data_len),
+11 => wire__crate__media_param__decrypt__Key_camera_param_impl(ptr, rust_vec_len, data_len),
+13 => wire__crate__media_param__decrypt__Key_from_str_impl(ptr, rust_vec_len, data_len),
+14 => wire__crate__media_param__decrypt__Key_from_str_bytes_impl(ptr, rust_vec_len, data_len),
+15 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_aperture_section_impl(ptr, rust_vec_len, data_len),
+16 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_loc_x_impl(ptr, rust_vec_len, data_len),
+17 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_loc_y_impl(ptr, rust_vec_len, data_len),
+18 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_loc_z_impl(ptr, rust_vec_len, data_len),
+19 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_rot_pitch_impl(ptr, rust_vec_len, data_len),
+20 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_rot_roll_impl(ptr, rust_vec_len, data_len),
+21 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_actor_rot_yaw_impl(ptr, rust_vec_len, data_len),
+22 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_loc_x_impl(ptr, rust_vec_len, data_len),
+23 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_loc_y_impl(ptr, rust_vec_len, data_len),
+24 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_loc_z_impl(ptr, rust_vec_len, data_len),
+25 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_rot_pitch_impl(ptr, rust_vec_len, data_len),
+26 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_rot_roll_impl(ptr, rust_vec_len, data_len),
+27 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_component_rot_yaw_impl(ptr, rust_vec_len, data_len),
+28 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_camera_focal_length_impl(ptr, rust_vec_len, data_len),
+29 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_filter_id_impl(ptr, rust_vec_len, data_len),
+30 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_filter_strength_impl(ptr, rust_vec_len, data_len),
+31 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_light_id_impl(ptr, rust_vec_len, data_len),
+32 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_light_strength_impl(ptr, rust_vec_len, data_len),
+33 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_magicball_color_ids_impl(ptr, rust_vec_len, data_len),
+34 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_clothes_impl(ptr, rust_vec_len, data_len),
+35 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_diy_impl(ptr, rust_vec_len, data_len),
+36 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_hidden_impl(ptr, rust_vec_len, data_len),
+37 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_loc_x_impl(ptr, rust_vec_len, data_len),
+38 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_loc_y_impl(ptr, rust_vec_len, data_len),
+39 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_loc_z_impl(ptr, rust_vec_len, data_len),
+40 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_rot_pitch_impl(ptr, rust_vec_len, data_len),
+41 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_rot_roll_impl(ptr, rust_vec_len, data_len),
+42 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_rot_yaw_impl(ptr, rust_vec_len, data_len),
+43 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_scale_x_impl(ptr, rust_vec_len, data_len),
+44 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_scale_y_impl(ptr, rust_vec_len, data_len),
+45 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_scale_z_impl(ptr, rust_vec_len, data_len),
+46 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_nikki_weapon_tag_name_impl(ptr, rust_vec_len, data_len),
+47 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_pose_id_impl(ptr, rust_vec_len, data_len),
+48 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_get_vignette_intensity_impl(ptr, rust_vec_len, data_len),
+49 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_aperture_section_impl(ptr, rust_vec_len, data_len),
+50 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_loc_x_impl(ptr, rust_vec_len, data_len),
+51 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_loc_y_impl(ptr, rust_vec_len, data_len),
+52 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_loc_z_impl(ptr, rust_vec_len, data_len),
+53 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_rot_pitch_impl(ptr, rust_vec_len, data_len),
+54 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_rot_roll_impl(ptr, rust_vec_len, data_len),
+55 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_actor_rot_yaw_impl(ptr, rust_vec_len, data_len),
+56 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_loc_x_impl(ptr, rust_vec_len, data_len),
+57 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_loc_y_impl(ptr, rust_vec_len, data_len),
+58 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_loc_z_impl(ptr, rust_vec_len, data_len),
+59 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_rot_pitch_impl(ptr, rust_vec_len, data_len),
+60 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_rot_roll_impl(ptr, rust_vec_len, data_len),
+61 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_component_rot_yaw_impl(ptr, rust_vec_len, data_len),
+62 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_camera_focal_length_impl(ptr, rust_vec_len, data_len),
+63 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_filter_id_impl(ptr, rust_vec_len, data_len),
+64 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_filter_strength_impl(ptr, rust_vec_len, data_len),
+65 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_light_id_impl(ptr, rust_vec_len, data_len),
+66 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_light_strength_impl(ptr, rust_vec_len, data_len),
+67 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_magicball_color_ids_impl(ptr, rust_vec_len, data_len),
+68 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_clothes_impl(ptr, rust_vec_len, data_len),
+69 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_diy_impl(ptr, rust_vec_len, data_len),
+70 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_hidden_impl(ptr, rust_vec_len, data_len),
+71 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_loc_x_impl(ptr, rust_vec_len, data_len),
+72 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_loc_y_impl(ptr, rust_vec_len, data_len),
+73 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_loc_z_impl(ptr, rust_vec_len, data_len),
+74 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_rot_pitch_impl(ptr, rust_vec_len, data_len),
+75 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_rot_roll_impl(ptr, rust_vec_len, data_len),
+76 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_rot_yaw_impl(ptr, rust_vec_len, data_len),
+77 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_scale_x_impl(ptr, rust_vec_len, data_len),
+78 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_scale_y_impl(ptr, rust_vec_len, data_len),
+79 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_scale_z_impl(ptr, rust_vec_len, data_len),
+80 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_nikki_weapon_tag_name_impl(ptr, rust_vec_len, data_len),
+81 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_pose_id_impl(ptr, rust_vec_len, data_len),
+82 => wire__crate__media_param__structs__image_custom_data__PhotoInfo_auto_accessor_set_vignette_intensity_impl(ptr, rust_vec_len, data_len),
+83 => wire__crate__media_param__structs__image_custom_data__PhotoWallPlugin_auto_accessor_get_photo_id_impl(ptr, rust_vec_len, data_len),
+84 => wire__crate__media_param__structs__image_custom_data__PhotoWallPlugin_auto_accessor_set_photo_id_impl(ptr, rust_vec_len, data_len),
+85 => wire__crate__media_param__structs__share_code__ShareCode_auto_accessor_get_content_impl(ptr, rust_vec_len, data_len),
+86 => wire__crate__media_param__structs__share_code__ShareCode_auto_accessor_set_content_impl(ptr, rust_vec_len, data_len),
+87 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_camera_params_impl(ptr, rust_vec_len, data_len),
+88 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_carrier_info_impl(ptr, rust_vec_len, data_len),
+89 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_da_miao_info_impl(ptr, rust_vec_len, data_len),
+90 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_giant_state_impl(ptr, rust_vec_len, data_len),
+91 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_interactions_impl(ptr, rust_vec_len, data_len),
+92 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_local_transforms_impl(ptr, rust_vec_len, data_len),
+93 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_mount_info_impl(ptr, rust_vec_len, data_len),
+94 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_photo_info_impl(ptr, rust_vec_len, data_len),
+95 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_static_infos_impl(ptr, rust_vec_len, data_len),
+96 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_time_impl(ptr, rust_vec_len, data_len),
+97 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_weapon_snap_shot_impl(ptr, rust_vec_len, data_len),
+98 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_get_weather_type_impl(ptr, rust_vec_len, data_len),
+99 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_camera_params_impl(ptr, rust_vec_len, data_len),
+100 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_carrier_info_impl(ptr, rust_vec_len, data_len),
+101 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_da_miao_info_impl(ptr, rust_vec_len, data_len),
+102 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_giant_state_impl(ptr, rust_vec_len, data_len),
+103 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_interactions_impl(ptr, rust_vec_len, data_len),
+104 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_local_transforms_impl(ptr, rust_vec_len, data_len),
+105 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_mount_info_impl(ptr, rust_vec_len, data_len),
+106 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_photo_info_impl(ptr, rust_vec_len, data_len),
+107 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_static_infos_impl(ptr, rust_vec_len, data_len),
+108 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_time_impl(ptr, rust_vec_len, data_len),
+109 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_weapon_snap_shot_impl(ptr, rust_vec_len, data_len),
+110 => wire__crate__media_param__structs__image_custom_data__SocialPhoto_auto_accessor_set_weather_type_impl(ptr, rust_vec_len, data_len),
+111 => wire__crate__media_param__ext_type__convert_to_bool_id_map_impl(ptr, rust_vec_len, data_len),
+112 => wire__crate__media_param__ext_type__convert_to_int_id_map_impl(ptr, rust_vec_len, data_len),
+113 => wire__crate__media_param__decrypt__decode_file_bytes_unchecked_impl(ptr, rust_vec_len, data_len),
+115 => wire__crate__media_param__decrypt__decode_file_unchecked_sync_impl(ptr, rust_vec_len, data_len),
+119 => wire__crate__media_param__decrypt__decrypt_impl(ptr, rust_vec_len, data_len),
+122 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+124 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+                        _ => unreachable!(),
+                    }
 }
 
 // Section: rust2dart
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<AdaptiveArray<Interactions>> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<AdaptiveArray<Interactions>>
+{
+}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<AdaptiveArray<Interactions>>>
+    for AdaptiveArray<Interactions>
+{
+    fn into_into_dart(self) -> FrbWrapper<AdaptiveArray<Interactions>> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<AdaptiveArray<NikkiDIY>> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<AdaptiveArray<NikkiDIY>>
+{
+}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<AdaptiveArray<NikkiDIY>>>
+    for AdaptiveArray<NikkiDIY>
+{
+    fn into_into_dart(self) -> FrbWrapper<AdaptiveArray<NikkiDIY>> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<AdaptiveArray<i64>> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<AdaptiveArray<i64>>
+{
+}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<AdaptiveArray<i64>>> for AdaptiveArray<i64> {
+    fn into_into_dart(self) -> FrbWrapper<AdaptiveArray<i64>> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<Content> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<Content> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<Content>> for Content {
+    fn into_into_dart(self) -> FrbWrapper<Content> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<DIYCustomData> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<DIYCustomData> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<DIYCustomData>> for DIYCustomData {
+    fn into_into_dart(self) -> FrbWrapper<DIYCustomData> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<IdMap<bool>> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<IdMap<bool>> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<IdMap<bool>>> for IdMap<bool> {
+    fn into_into_dart(self) -> FrbWrapper<IdMap<bool>> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<IdMap<i64>> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<IdMap<i64>> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<IdMap<i64>>> for IdMap<i64> {
+    fn into_into_dart(self) -> FrbWrapper<IdMap<i64>> {
+        self.into()
+    }
+}
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for FrbWrapper<Key> {
@@ -870,38 +7672,225 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<Key>> for Key {
 }
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::media_param::decrypt::CustomData {
+impl flutter_rust_bridge::IntoDart for FrbWrapper<PhotoInfo> {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            crate::media_param::decrypt::CustomData::Invalid => [0.into_dart()].into_dart(),
-            crate::media_param::decrypt::CustomData::Valid(field0) => {
-                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<PhotoInfo> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<PhotoInfo>> for PhotoInfo {
+    fn into_into_dart(self) -> FrbWrapper<PhotoInfo> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<PhotoWallPlugin> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<PhotoWallPlugin> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<PhotoWallPlugin>> for PhotoWallPlugin {
+    fn into_into_dart(self) -> FrbWrapper<PhotoWallPlugin> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<ShareCode> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<ShareCode> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<ShareCode>> for ShareCode {
+    fn into_into_dart(self) -> FrbWrapper<ShareCode> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<SocialPhoto> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<SocialPhoto> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<SocialPhoto>> for SocialPhoto {
+    fn into_into_dart(self) -> FrbWrapper<SocialPhoto> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::camera_params::CameraParams {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.flag.into_into_dart().into_dart(),
+            self.portrait_mode.into_into_dart().into_dart(),
+            self.dx_camera_actor.into_into_dart().into_dart(),
+            self.dy_camera_actor.into_into_dart().into_dart(),
+            self.dz_camera_actor.into_into_dart().into_dart(),
+            self.d_pitch_camera_actor.into_into_dart().into_dart(),
+            self.d_yaw_camera_actor.into_into_dart().into_dart(),
+            self.mode.into_into_dart().into_dart(),
+            self.dx_camera_component.into_into_dart().into_dart(),
+            self.dy_camera_component.into_into_dart().into_dart(),
+            self.dz_camera_component.into_into_dart().into_dart(),
+            self.d_pitch_camera_component.into_into_dart().into_dart(),
+            self.d_yaw_camera_component.into_into_dart().into_dart(),
+            self.d_roll_camera_actor.into_into_dart().into_dart(),
+            self.camera_focal_length.into_into_dart().into_dart(),
+            self.aperture_section.into_into_dart().into_dart(),
+            self.d_roll_camera_component.into_into_dart().into_dart(),
+            self.light_id.into_into_dart().into_dart(),
+            self.light_strength.into_into_dart().into_dart(),
+            self.vignette_intensity.into_into_dart().into_dart(),
+            self.bloom_intensity.into_into_dart().into_dart(),
+            self.bloom_threshold.into_into_dart().into_dart(),
+            self.brightness.into_into_dart().into_dart(),
+            self.exposure.into_into_dart().into_dart(),
+            self.contrast.into_into_dart().into_dart(),
+            self.saturation.into_into_dart().into_dart(),
+            self.vibrance.into_into_dart().into_dart(),
+            self.highlights.into_into_dart().into_dart(),
+            self.shadows.into_into_dart().into_dart(),
+            self.filter_id.into_into_dart().into_dart(),
+            self.filter_strength.into_into_dart().into_dart(),
+        ]
+        .into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::media_param::decrypt::CustomData
+    for crate::nuan5_media_param::structs::camera_params::CameraParams
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::media_param::decrypt::CustomData>
-    for crate::media_param::decrypt::CustomData
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::camera_params::CameraParams>
+    for crate::nuan5_media_param::structs::camera_params::CameraParams
 {
-    fn into_into_dart(self) -> crate::media_param::decrypt::CustomData {
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::camera_params::CameraParams {
         self
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::media_param::decrypt::DecodeEvent {
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::image_custom_data::CarrierInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.loc_x.into_into_dart().into_dart(),
+            self.loc_y.into_into_dart().into_dart(),
+            self.loc_z.into_into_dart().into_dart(),
+            self.scale_x.into_into_dart().into_dart(),
+            self.scale_y.into_into_dart().into_dart(),
+            self.scale_z.into_into_dart().into_dart(),
+            self.rot_yaw.into_into_dart().into_dart(),
+            self.rot_pitch.into_into_dart().into_dart(),
+            self.rot_roll.into_into_dart().into_dart(),
+            self.config_obj_id.into_into_dart().into_dart(),
+            self.pose.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::CarrierInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::CarrierInfo>
+    for crate::nuan5_media_param::structs::image_custom_data::CarrierInfo
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::CarrierInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.tag.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin,
+    > for crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.clock_game_plugin.into_into_dart().into_dart(),
+            self.portrait_mode_handler.into_into_dart().into_dart(),
+            self.social_photo.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData,
+    > for crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::CollageCustomData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.template_id.into_into_dart().into_dart(),
+            self.region_pictures.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::CollageCustomData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::CollageCustomData,
+    > for crate::nuan5_media_param::structs::image_custom_data::CollageCustomData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::CollageCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decrypt::CustomData {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
-            crate::media_param::decrypt::DecodeEvent::Progress(field0) => {
-                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::media_param::decrypt::DecodeEvent::Result(field0) => {
+            crate::nuan5_media_param::decrypt::CustomData::Invalid => [0.into_dart()].into_dart(),
+            crate::nuan5_media_param::decrypt::CustomData::Valid(field0) => {
                 [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
             _ => {
@@ -911,13 +7900,778 @@ impl flutter_rust_bridge::IntoDart for crate::media_param::decrypt::DecodeEvent 
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::media_param::decrypt::DecodeEvent
+    for crate::nuan5_media_param::decrypt::CustomData
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::media_param::decrypt::DecodeEvent>
-    for crate::media_param::decrypt::DecodeEvent
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decrypt::CustomData>
+    for crate::nuan5_media_param::decrypt::CustomData
 {
-    fn into_into_dart(self) -> crate::media_param::decrypt::DecodeEvent {
+    fn into_into_dart(self) -> crate::nuan5_media_param::decrypt::CustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.loc_x.into_into_dart().into_dart(),
+            self.loc_y.into_into_dart().into_dart(),
+            self.loc_z.into_into_dart().into_dart(),
+            self.scale_x.into_into_dart().into_dart(),
+            self.scale_y.into_into_dart().into_dart(),
+            self.scale_z.into_into_dart().into_dart(),
+            self.rot_yaw.into_into_dart().into_dart(),
+            self.rot_pitch.into_into_dart().into_dart(),
+            self.rot_roll.into_into_dart().into_dart(),
+            self.cloth_ids.into_into_dart().into_dart(),
+            self.action.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo>
+    for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption::None => {
+                [0.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption::Some(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption,
+    > for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decrypt::DecodeEvent {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::decrypt::DecodeEvent::Progress(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decrypt::DecodeEvent::Result(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decrypt::DecodeEvent
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decrypt::DecodeEvent>
+    for crate::nuan5_media_param::decrypt::DecodeEvent
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decrypt::DecodeEvent {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.role_id.into_into_dart().into_dart(),
+            self.time_stamp.into_into_dart().into_dart(),
+            self.share_code.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode>
+    for crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.edit_state.into_into_dart().into_dart(),
+            self.has_sticker.into_into_dart().into_dart(),
+            self.has_text.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler,
+    > for crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::error::Error {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.column.into_into_dart().into_dart(),
+            self.line.into_into_dart().into_dart(),
+            self.code.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::error::Error
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::error::Error>
+    for crate::nuan5_media_param::error::Error
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::error::Error {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::error::ErrorCode {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::error::ErrorCode::ExpectedSomeValue => [0.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::ExpectedSomeIdent => [1.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::InvalidNumber => [2.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::NumberOutOfRange => [3.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::InvalidUnicodeCodePoint => {
+                [4.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedDoubleQuote => {
+                [5.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingString => {
+                [6.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::ControlCharacterWhileParsingString => {
+                [7.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::InvalidEscape => [8.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::LoneLeadingSurrogateInHexEscape => {
+                [9.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::UnexpectedEndOfHexEscape => {
+                [10.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::KeyMustBeAString => [11.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::FloatKeyMustBeFinite => {
+                [12.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::IdMapKeyMustBeAnInteger => {
+                [13.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedNumericKey => {
+                [14.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingObject => {
+                [15.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedColon => [16.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::ExpectedColonAtStart => {
+                [17.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedObjectCommaOrEnd => {
+                [18.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::TrailingComma => [19.into_dart()].into_dart(),
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingIdMap => {
+                [20.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingArray => {
+                [21.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedArrayCommaOrEnd => {
+                [22.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingValue => {
+                [23.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::TrailingCharacters => {
+                [24.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::RecursionLimitExceeded => {
+                [25.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::error::ErrorCode::Message(field0) => {
+                [26.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::error::ErrorCode
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::error::ErrorCode>
+    for crate::nuan5_media_param::error::ErrorCode
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::error::ErrorCode {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        Vec::<u8>::new().into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData,
+    > for crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaCustomData {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::decode::MediaCustomData::Invalid => [0.into_dart()].into_dart(),
+            crate::nuan5_media_param::decode::MediaCustomData::Valid(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaCustomData
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaCustomData>
+    for crate::nuan5_media_param::decode::MediaCustomData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaParam {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::decode::MediaParam::CameraParams(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::NikkiPhoto(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::MagazinePhoto(field0) => {
+                [2.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::ClockInPhoto(field0) => {
+                [3.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::Collage(field0) => {
+                [4.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::DIY(field0) => {
+                [5.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::Video(field0) => {
+                [6.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::VideoCover(field0) => {
+                [7.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::ShareCode(field0) => {
+                [8.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::DiyHistoryShareCode(field0) => {
+                [9.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaParam
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaParam>
+    for crate::nuan5_media_param::decode::MediaParam
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaParam {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaParamType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::CameraParams => 0.into_dart(),
+            Self::NikkiPhoto => 1.into_dart(),
+            Self::MagazinePhoto => 2.into_dart(),
+            Self::ClockInPhoto => 3.into_dart(),
+            Self::Collage => 4.into_dart(),
+            Self::DIY => 5.into_dart(),
+            Self::Video => 6.into_dart(),
+            Self::VideoCover => 7.into_dart(),
+            Self::ShareCode => 8.into_dart(),
+            Self::DiyHistoryShareCode => 9.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaParamType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaParamType>
+    for crate::nuan5_media_param::decode::MediaParamType
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaParamType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::image_custom_data::MountInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.loc_x.into_into_dart().into_dart(),
+            self.loc_y.into_into_dart().into_dart(),
+            self.loc_z.into_into_dart().into_dart(),
+            self.scale_x.into_into_dart().into_dart(),
+            self.scale_y.into_into_dart().into_dart(),
+            self.scale_z.into_into_dart().into_dart(),
+            self.rot_yaw.into_into_dart().into_dart(),
+            self.rot_pitch.into_into_dart().into_dart(),
+            self.rot_roll.into_into_dart().into_dart(),
+            self.config_id.into_into_dart().into_dart(),
+            self.pose.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::MountInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::MountInfo>
+    for crate::nuan5_media_param::structs::image_custom_data::MountInfo
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::MountInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::MountInfoOption
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::image_custom_data::MountInfoOption::None => {
+                [0.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::image_custom_data::MountInfoOption::Some(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::MountInfoOption
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::MountInfoOption,
+    > for crate::nuan5_media_param::structs::image_custom_data::MountInfoOption
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::MountInfoOption {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.edit_photo_handler.into_into_dart().into_dart(),
+            self.interactive_photo.into_into_dart().into_dart(),
+            self.photo_wall_plugin.into_into_dart().into_dart(),
+            self.portrait_mode_handler.into_into_dart().into_dart(),
+            self.puzzle_game_plugin.into_into_dart().into_dart(),
+            self.risk_photo.into_into_dart().into_dart(),
+            self.social_photo.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData,
+    > for crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.portrait_mode.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler,
+    > for crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::image_custom_data::Position {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.x.into_into_dart().into_dart(),
+            self.y.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::Position
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::Position>
+    for crate::nuan5_media_param::structs::image_custom_data::Position
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::Position {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.tag.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin,
+    > for crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::RegionPicture
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.image_id.into_into_dart().into_dart(),
+            self.ori_custom_data.into_into_dart().into_dart(),
+            self.position.into_into_dart().into_dart(),
+            self.rotation.into_into_dart().into_dart(),
+            self.scale.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::RegionPicture
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::RegionPicture>
+    for crate::nuan5_media_param::structs::image_custom_data::RegionPicture
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::RegionPicture {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::image_custom_data::StaticInfos {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        Vec::<u8>::new().into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::StaticInfos
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::StaticInfos>
+    for crate::nuan5_media_param::structs::image_custom_data::StaticInfos
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::StaticInfos {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption::None => {
+                [0.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption::Some(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption,
+    > for crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::image_custom_data::Time {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.day.into_into_dart().into_dart(),
+            self.hour.into_into_dart().into_dart(),
+            self.min.into_into_dart().into_dart(),
+            self.sec.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::Time
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::image_custom_data::Time>
+    for crate::nuan5_media_param::structs::image_custom_data::Time
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::Time {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.video_cover_data.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData,
+    > for crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::video_custom_data::VideoCoverData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.role_id.into_into_dart().into_dart(),
+            self.create_time.into_into_dart().into_dart(),
+            self.video_custom_data.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::video_custom_data::VideoCoverData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::video_custom_data::VideoCoverData,
+    > for crate::nuan5_media_param::structs::video_custom_data::VideoCoverData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::video_custom_data::VideoCoverData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::video_custom_data::VideoCustomData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.video_record_data.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::video_custom_data::VideoCustomData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::video_custom_data::VideoCustomData,
+    > for crate::nuan5_media_param::structs::video_custom_data::VideoCustomData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::video_custom_data::VideoCustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::video_custom_data::VideoRecordData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.create_time.into_into_dart().into_dart(),
+            self.crf.into_into_dart().into_dart(),
+            self.desired_height.into_into_dart().into_dart(),
+            self.desired_width.into_into_dart().into_dart(),
+            self.duration_str.into_into_dart().into_dart(),
+            self.frames_count.into_into_dart().into_dart(),
+            self.frame_end_with.into_into_dart().into_dart(),
+            self.frame_rate.into_into_dart().into_dart(),
+            self.input_file_path.into_into_dart().into_dart(),
+            self.output_file_path.into_into_dart().into_dart(),
+            self.preset_quality.into_into_dart().into_dart(),
+            self.role_id.into_into_dart().into_dart(),
+            self.source_height.into_into_dart().into_dart(),
+            self.source_width.into_into_dart().into_dart(),
+            self.video_save_name.into_into_dart().into_dart(),
+            self.viewport_height.into_into_dart().into_dart(),
+            self.video_save_path.into_into_dart().into_dart(),
+            self.viewport_width.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::video_custom_data::VideoRecordData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::video_custom_data::VideoRecordData,
+    > for crate::nuan5_media_param::structs::video_custom_data::VideoRecordData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::video_custom_data::VideoRecordData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.weapon_id.into_into_dart().into_dart(),
+            self.custom_state.into_into_dart().into_dart(),
+            self.slot_type.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot,
+    > for crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot {
         self
     }
 }
@@ -926,6 +8680,65 @@ impl SseEncode for flutter_rust_bridge::for_generated::anyhow::Error {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(format!("{:?}", self), serializer);
+    }
+}
+
+impl SseEncode for AdaptiveArray<Interactions> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>,
+        >>::sse_encode(
+            flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for AdaptiveArray<NikkiDIY> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<NikkiDIY>>,
+        >>::sse_encode(
+            flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for AdaptiveArray<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray < i64 >>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for Content {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for DIYCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for IdMap<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap < bool >>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for IdMap<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap < i64 >>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
     }
 }
 
@@ -939,6 +8752,127 @@ impl SseEncode for Key {
     }
 }
 
+impl SseEncode for PhotoInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for PhotoWallPlugin {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for ShareCode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for SocialPhoto {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i64, bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i64, bool)>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i64, i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i64, i64)>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<NikkiDIY>>,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<i64>>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<bool>>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap<i64>>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
 impl SseEncode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -949,8 +8883,52 @@ impl SseEncode for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpa
 }
 
 impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
     for StreamSink<
-        crate::media_param::decrypt::DecodeEvent,
+        crate::nuan5_media_param::decrypt::DecodeEvent,
         flutter_rust_bridge::for_generated::SseCodec,
     >
 {
@@ -967,14 +8945,108 @@ impl SseEncode for String {
     }
 }
 
-impl SseEncode for crate::media_param::decrypt::CustomData {
+impl SseEncode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u8(self as _).unwrap();
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::camera_params::CameraParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.flag, serializer);
+        <i64>::sse_encode(self.portrait_mode, serializer);
+        <f64>::sse_encode(self.dx_camera_actor, serializer);
+        <f64>::sse_encode(self.dy_camera_actor, serializer);
+        <f64>::sse_encode(self.dz_camera_actor, serializer);
+        <f64>::sse_encode(self.d_pitch_camera_actor, serializer);
+        <f64>::sse_encode(self.d_yaw_camera_actor, serializer);
+        <i64>::sse_encode(self.mode, serializer);
+        <f64>::sse_encode(self.dx_camera_component, serializer);
+        <f64>::sse_encode(self.dy_camera_component, serializer);
+        <f64>::sse_encode(self.dz_camera_component, serializer);
+        <f64>::sse_encode(self.d_pitch_camera_component, serializer);
+        <f64>::sse_encode(self.d_yaw_camera_component, serializer);
+        <f64>::sse_encode(self.d_roll_camera_actor, serializer);
+        <f64>::sse_encode(self.camera_focal_length, serializer);
+        <u8>::sse_encode(self.aperture_section, serializer);
+        <f64>::sse_encode(self.d_roll_camera_component, serializer);
+        <String>::sse_encode(self.light_id, serializer);
+        <f64>::sse_encode(self.light_strength, serializer);
+        <f64>::sse_encode(self.vignette_intensity, serializer);
+        <f64>::sse_encode(self.bloom_intensity, serializer);
+        <f64>::sse_encode(self.bloom_threshold, serializer);
+        <f64>::sse_encode(self.brightness, serializer);
+        <f64>::sse_encode(self.exposure, serializer);
+        <f64>::sse_encode(self.contrast, serializer);
+        <f64>::sse_encode(self.saturation, serializer);
+        <f64>::sse_encode(self.vibrance, serializer);
+        <f64>::sse_encode(self.highlights, serializer);
+        <f64>::sse_encode(self.shadows, serializer);
+        <String>::sse_encode(self.filter_id, serializer);
+        <f64>::sse_encode(self.filter_strength, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::CarrierInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.loc_x, serializer);
+        <f64>::sse_encode(self.loc_y, serializer);
+        <f64>::sse_encode(self.loc_z, serializer);
+        <f64>::sse_encode(self.scale_x, serializer);
+        <f64>::sse_encode(self.scale_y, serializer);
+        <f64>::sse_encode(self.scale_z, serializer);
+        <f64>::sse_encode(self.rot_yaw, serializer);
+        <f64>::sse_encode(self.rot_pitch, serializer);
+        <f64>::sse_encode(self.rot_roll, serializer);
+        <i64>::sse_encode(self.config_obj_id, serializer);
+        <String>::sse_encode(self.pose, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.tag, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::nuan5_media_param::structs::image_custom_data::ClockGamePlugin>::sse_encode(
+            self.clock_game_plugin,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler>>::sse_encode(
+            self.portrait_mode_handler,
+            serializer,
+        );
+        <Option<SocialPhoto>>::sse_encode(self.social_photo, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::CollageCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.template_id, serializer);
+        <Vec<crate::nuan5_media_param::structs::image_custom_data::RegionPicture>>::sse_encode(
+            self.region_pictures,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decrypt::CustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         match self {
-            crate::media_param::decrypt::CustomData::Invalid => {
+            crate::nuan5_media_param::decrypt::CustomData::Invalid => {
                 <i32>::sse_encode(0, serializer);
             }
-            crate::media_param::decrypt::CustomData::Valid(field0) => {
+            crate::nuan5_media_param::decrypt::CustomData::Valid(field0) => {
                 <i32>::sse_encode(1, serializer);
                 <Vec<u8>>::sse_encode(field0, serializer);
             }
@@ -985,19 +9057,176 @@ impl SseEncode for crate::media_param::decrypt::CustomData {
     }
 }
 
-impl SseEncode for crate::media_param::decrypt::DecodeEvent {
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.loc_x, serializer);
+        <f64>::sse_encode(self.loc_y, serializer);
+        <f64>::sse_encode(self.loc_z, serializer);
+        <f64>::sse_encode(self.scale_x, serializer);
+        <f64>::sse_encode(self.scale_y, serializer);
+        <f64>::sse_encode(self.scale_z, serializer);
+        <f64>::sse_encode(self.rot_yaw, serializer);
+        <f64>::sse_encode(self.rot_pitch, serializer);
+        <f64>::sse_encode(self.rot_roll, serializer);
+        <Vec<i64>>::sse_encode(self.cloth_ids, serializer);
+        <String>::sse_encode(self.action, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         match self {
-            crate::media_param::decrypt::DecodeEvent::Progress(field0) => {
+            crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption::None => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfoOption::Some(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::DaMiaoInfo>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decrypt::DecodeEvent {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::decrypt::DecodeEvent::Progress(field0) => {
                 <i32>::sse_encode(0, serializer);
                 <f64>::sse_encode(field0, serializer);
             }
-            crate::media_param::decrypt::DecodeEvent::Result(field0) => {
+            crate::nuan5_media_param::decrypt::DecodeEvent::Result(field0) => {
                 <i32>::sse_encode(1, serializer);
-                <Vec<Option<crate::media_param::decrypt::CustomData>>>::sse_encode(
+                <Vec<Option<crate::nuan5_media_param::decrypt::CustomData>>>::sse_encode(
                     field0, serializer,
                 );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.role_id, serializer);
+        <f64>::sse_encode(self.time_stamp, serializer);
+        <String>::sse_encode(self.share_code, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.edit_state, serializer);
+        <bool>::sse_encode(self.has_sticker, serializer);
+        <bool>::sse_encode(self.has_text, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::error::Error {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <usize>::sse_encode(self.column, serializer);
+        <usize>::sse_encode(self.line, serializer);
+        <crate::nuan5_media_param::error::ErrorCode>::sse_encode(self.code, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::error::ErrorCode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::error::ErrorCode::ExpectedSomeValue => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedSomeIdent => {
+                <i32>::sse_encode(1, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::InvalidNumber => {
+                <i32>::sse_encode(2, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::NumberOutOfRange => {
+                <i32>::sse_encode(3, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::InvalidUnicodeCodePoint => {
+                <i32>::sse_encode(4, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedDoubleQuote => {
+                <i32>::sse_encode(5, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingString => {
+                <i32>::sse_encode(6, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ControlCharacterWhileParsingString => {
+                <i32>::sse_encode(7, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::InvalidEscape => {
+                <i32>::sse_encode(8, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::LoneLeadingSurrogateInHexEscape => {
+                <i32>::sse_encode(9, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::UnexpectedEndOfHexEscape => {
+                <i32>::sse_encode(10, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::KeyMustBeAString => {
+                <i32>::sse_encode(11, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::FloatKeyMustBeFinite => {
+                <i32>::sse_encode(12, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::IdMapKeyMustBeAnInteger => {
+                <i32>::sse_encode(13, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedNumericKey => {
+                <i32>::sse_encode(14, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingObject => {
+                <i32>::sse_encode(15, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedColon => {
+                <i32>::sse_encode(16, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedColonAtStart => {
+                <i32>::sse_encode(17, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedObjectCommaOrEnd => {
+                <i32>::sse_encode(18, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::TrailingComma => {
+                <i32>::sse_encode(19, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingIdMap => {
+                <i32>::sse_encode(20, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingArray => {
+                <i32>::sse_encode(21, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::ExpectedArrayCommaOrEnd => {
+                <i32>::sse_encode(22, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::EofWhileParsingValue => {
+                <i32>::sse_encode(23, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::TrailingCharacters => {
+                <i32>::sse_encode(24, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::RecursionLimitExceeded => {
+                <i32>::sse_encode(25, serializer);
+            }
+            crate::nuan5_media_param::error::ErrorCode::Message(field0) => {
+                <i32>::sse_encode(26, serializer);
+                <String>::sse_encode(field0, serializer);
             }
             _ => {
                 unimplemented!("");
@@ -1020,6 +9249,13 @@ impl SseEncode for i32 {
     }
 }
 
+impl SseEncode for i64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i64::<NativeEndian>(self).unwrap();
+    }
+}
+
 impl SseEncode for Vec<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -1030,12 +9266,22 @@ impl SseEncode for Vec<String> {
     }
 }
 
-impl SseEncode for Vec<Option<crate::media_param::decrypt::CustomData>> {
+impl SseEncode for Vec<Option<crate::nuan5_media_param::decrypt::CustomData>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <Option<crate::media_param::decrypt::CustomData>>::sse_encode(item, serializer);
+            <Option<crate::nuan5_media_param::decrypt::CustomData>>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <i64>::sse_encode(item, serializer);
         }
     }
 }
@@ -1050,13 +9296,453 @@ impl SseEncode for Vec<u8> {
     }
 }
 
-impl SseEncode for Option<crate::media_param::decrypt::CustomData> {
+impl SseEncode for Vec<(i64, bool)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i64, bool)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i64, i64)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i64, i64)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::image_custom_data::RegionPicture> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::image_custom_data::RegionPicture>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
+}
+
+impl SseEncode for crate::nuan5_media_param::decode::MediaCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::decode::MediaCustomData::Invalid => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaCustomData::Valid(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::decode::MediaParam>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decode::MediaParam {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::decode::MediaParam::CameraParams(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::nuan5_media_param::structs::camera_params::CameraParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::decode::MediaParam::NikkiPhoto(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::decode::MediaParam::MagazinePhoto(field0) => {
+                <i32>::sse_encode(2, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::MagazinePhotoCustomData>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::ClockInPhoto(field0) => {
+                <i32>::sse_encode(3, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::ClockInPhotoCustomData>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::Collage(field0) => {
+                <i32>::sse_encode(4, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::CollageCustomData>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::decode::MediaParam::DIY(field0) => {
+                <i32>::sse_encode(5, serializer);
+                <DIYCustomData>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::Video(field0) => {
+                <i32>::sse_encode(6, serializer);
+                <crate::nuan5_media_param::structs::video_custom_data::VideoCustomData>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::decode::MediaParam::VideoCover(field0) => {
+                <i32>::sse_encode(7, serializer);
+                <crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::decode::MediaParam::ShareCode(field0) => {
+                <i32>::sse_encode(8, serializer);
+                <ShareCode>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::DiyHistoryShareCode(field0) => {
+                <i32>::sse_encode(9, serializer);
+                <crate::nuan5_media_param::structs::share_code::DiyHistoryShareCode>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decode::MediaParamType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::decode::MediaParamType::CameraParams => 0,
+                crate::nuan5_media_param::decode::MediaParamType::NikkiPhoto => 1,
+                crate::nuan5_media_param::decode::MediaParamType::MagazinePhoto => 2,
+                crate::nuan5_media_param::decode::MediaParamType::ClockInPhoto => 3,
+                crate::nuan5_media_param::decode::MediaParamType::Collage => 4,
+                crate::nuan5_media_param::decode::MediaParamType::DIY => 5,
+                crate::nuan5_media_param::decode::MediaParamType::Video => 6,
+                crate::nuan5_media_param::decode::MediaParamType::VideoCover => 7,
+                crate::nuan5_media_param::decode::MediaParamType::ShareCode => 8,
+                crate::nuan5_media_param::decode::MediaParamType::DiyHistoryShareCode => 9,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::MountInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.loc_x, serializer);
+        <f64>::sse_encode(self.loc_y, serializer);
+        <f64>::sse_encode(self.loc_z, serializer);
+        <f64>::sse_encode(self.scale_x, serializer);
+        <f64>::sse_encode(self.scale_y, serializer);
+        <f64>::sse_encode(self.scale_z, serializer);
+        <f64>::sse_encode(self.rot_yaw, serializer);
+        <f64>::sse_encode(self.rot_pitch, serializer);
+        <f64>::sse_encode(self.rot_roll, serializer);
+        <i64>::sse_encode(self.config_id, serializer);
+        <String>::sse_encode(self.pose, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::MountInfoOption {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::image_custom_data::MountInfoOption::None => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::structs::image_custom_data::MountInfoOption::Some(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::MountInfo>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler>>::sse_encode(
+            self.edit_photo_handler,
+            serializer,
+        );
+        <Option<IdMap<bool>>>::sse_encode(self.interactive_photo, serializer);
+        <Option<PhotoWallPlugin>>::sse_encode(self.photo_wall_plugin, serializer);
+        <Option<crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler>>::sse_encode(
+            self.portrait_mode_handler,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin>>::sse_encode(
+            self.puzzle_game_plugin,
+            serializer,
+        );
+        <Option<IdMap<bool>>>::sse_encode(self.risk_photo, serializer);
+        <Option<SocialPhoto>>::sse_encode(self.social_photo, serializer);
+    }
+}
+
+impl SseEncode for Option<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
-            <crate::media_param::decrypt::CustomData>::sse_encode(value, serializer);
+            <String>::sse_encode(value, serializer);
         }
+    }
+}
+
+impl SseEncode for Option<IdMap<bool>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <IdMap<bool>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<PhotoWallPlugin> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <PhotoWallPlugin>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<SocialPhoto> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <SocialPhoto>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <bool>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::image_custom_data::CarrierInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::image_custom_data::CarrierInfo>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::decrypt::CustomData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::decrypt::CustomData>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::image_custom_data::EditPhotoHandler>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <i64>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::image_custom_data::MountInfoOption> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::image_custom_data::MountInfoOption>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<i64>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<i64>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::PortraitModeHandler {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.portrait_mode, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::Position {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.x, serializer);
+        <f64>::sse_encode(self.y, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::PuzzleGamePlugin {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.tag, serializer);
+    }
+}
+
+impl SseEncode for (i64, bool) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.0, serializer);
+        <bool>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i64, i64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.0, serializer);
+        <i64>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::RegionPicture {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.image_id, serializer);
+        <crate::nuan5_media_param::structs::image_custom_data::NikkiPhotoCustomData>::sse_encode(
+            self.ori_custom_data,
+            serializer,
+        );
+        <crate::nuan5_media_param::structs::image_custom_data::Position>::sse_encode(
+            self.position,
+            serializer,
+        );
+        <f64>::sse_encode(self.rotation, serializer);
+        <f64>::sse_encode(self.scale, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::StaticInfos {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption::None => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::structs::image_custom_data::StaticInfosOption::Some(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::image_custom_data::StaticInfos>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::Time {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.day, serializer);
+        <u8>::sse_encode(self.hour, serializer);
+        <u8>::sse_encode(self.min, serializer);
+        <f64>::sse_encode(self.sec, serializer);
+    }
+}
+
+impl SseEncode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u64::<NativeEndian>(self).unwrap();
     }
 }
 
@@ -1082,10 +9768,68 @@ impl SseEncode for usize {
     }
 }
 
-impl SseEncode for bool {
+impl SseEncode for crate::nuan5_media_param::structs::video_custom_data::VideoCoverCustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u8(self as _).unwrap();
+        <crate::nuan5_media_param::structs::video_custom_data::VideoCoverData>::sse_encode(
+            self.video_cover_data,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::video_custom_data::VideoCoverData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u64>::sse_encode(self.role_id, serializer);
+        <u64>::sse_encode(self.create_time, serializer);
+        <crate::nuan5_media_param::structs::video_custom_data::VideoRecordData>::sse_encode(
+            self.video_custom_data,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::video_custom_data::VideoCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::nuan5_media_param::structs::video_custom_data::VideoRecordData>::sse_encode(
+            self.video_record_data,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::video_custom_data::VideoRecordData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.create_time, serializer);
+        <u64>::sse_encode(self.crf, serializer);
+        <u64>::sse_encode(self.desired_height, serializer);
+        <u64>::sse_encode(self.desired_width, serializer);
+        <String>::sse_encode(self.duration_str, serializer);
+        <u64>::sse_encode(self.frames_count, serializer);
+        <String>::sse_encode(self.frame_end_with, serializer);
+        <u64>::sse_encode(self.frame_rate, serializer);
+        <String>::sse_encode(self.input_file_path, serializer);
+        <String>::sse_encode(self.output_file_path, serializer);
+        <String>::sse_encode(self.preset_quality, serializer);
+        <u64>::sse_encode(self.role_id, serializer);
+        <u64>::sse_encode(self.source_height, serializer);
+        <u64>::sse_encode(self.source_width, serializer);
+        <String>::sse_encode(self.video_save_name, serializer);
+        <u64>::sse_encode(self.viewport_height, serializer);
+        <String>::sse_encode(self.video_save_path, serializer);
+        <u64>::sse_encode(self.viewport_width, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::image_custom_data::WeaponSnapShot {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.weapon_id, serializer);
+        <String>::sse_encode(self.custom_state, serializer);
+        <String>::sse_encode(self.slot_type, serializer);
     }
 }
 
@@ -1097,7 +9841,10 @@ mod io {
     // Section: imports
 
     use super::*;
-    use crate::media_param::decrypt::*;
+    use crate::nuan5_media_param::decrypt::*;
+    use crate::nuan5_media_param::ext_type::*;
+    use crate::nuan5_media_param::structs::image_custom_data::*;
+    use crate::nuan5_media_param::structs::share_code::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
     };
@@ -1107,6 +9854,108 @@ mod io {
     // Section: boilerplate
 
     flutter_rust_bridge::frb_generated_boilerplate_io!();
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>,
+        >::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray<Interactions>>,
+        >::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray < NikkiDIY >>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray < NikkiDIY >>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray < i64 >>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AdaptiveArray < i64 >>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Content>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DIYCustomData>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap < bool >>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap < bool >>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap < i64 >>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<IdMap < i64 >>>::decrement_strong_count(ptr as _);
+    }
 
     #[unsafe(no_mangle)]
     pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
@@ -1121,45 +9970,62 @@ mod io {
     ) {
         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>>::decrement_strong_count(ptr as _);
     }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoInfo>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PhotoWallPlugin>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ShareCode>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SocialPhoto>>::decrement_strong_count(ptr as _);
+    }
 }
 #[cfg(not(target_family = "wasm"))]
 pub use io::*;
-
-/// cbindgen:ignore
-#[cfg(target_family = "wasm")]
-mod web {
-    // This file is automatically generated, so please do not edit it.
-    // @generated by `flutter_rust_bridge`@ 2.12.0.
-
-    // Section: imports
-
-    use super::*;
-    use crate::media_param::decrypt::*;
-    use flutter_rust_bridge::for_generated::byteorder::{
-        NativeEndian, ReadBytesExt, WriteBytesExt,
-    };
-    use flutter_rust_bridge::for_generated::wasm_bindgen;
-    use flutter_rust_bridge::for_generated::wasm_bindgen::prelude::*;
-    use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
-    use flutter_rust_bridge::{Handler, IntoIntoDart};
-
-    // Section: boilerplate
-
-    flutter_rust_bridge::frb_generated_boilerplate_web!();
-
-    #[wasm_bindgen]
-    pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>>::increment_strong_count(ptr as _);
-    }
-
-    #[wasm_bindgen]
-    pub fn rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>>::decrement_strong_count(ptr as _);
-    }
-}
-#[cfg(target_family = "wasm")]
-pub use web::*;

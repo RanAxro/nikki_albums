@@ -7,8 +7,16 @@ edition = "2021"
 crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
+rust_lib_nikki_albums_macro = { path = "macros" }
+
 flutter_rust_bridge = "=2.12.0"
 anyhow = "1.0.102"
+
+serde = { version = "1.0", features = ["derive"] }
+delegate = "0.13.5"
+itoa = "1.0.18"
+ryu = "1.0.23"
+memchr = "2.8.0"
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ["cfg(frb_expand)"] }

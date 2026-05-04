@@ -8,7 +8,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
+import 'media_param/decode.dart';
 import 'media_param/decrypt.dart';
+import 'media_param/error.dart';
+import 'media_param/ext_type.dart';
+import 'media_param/structs/camera_params.dart';
+import 'media_param/structs/image_custom_data.dart';
+import 'media_param/structs/share_code.dart';
+import 'media_param/structs/video_custom_data.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 
 abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
@@ -19,15 +26,173 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     required super.portManager,
   });
 
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_AdaptiveArrayInteractionsPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractionsPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_AdaptiveArrayNikkiDiyPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIYPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_AdaptiveArrayI64Ptr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64Ptr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_ContentPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContentPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_DiyCustomDataPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomDataPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_IdMapBoolPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapboolPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_IdMapI64Ptr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64Ptr;
+
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_KeyPtr => wire
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PhotoInfoPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfoPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PhotoWallPluginPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPluginPtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_ShareCodePtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCodePtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_SocialPhotoPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhotoPtr;
 
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw);
 
   @protected
+  AdaptiveArrayInteractions
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    dynamic raw,
+  );
+
+  @protected
+  AdaptiveArrayNikkiDiy
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    dynamic raw,
+  );
+
+  @protected
+  AdaptiveArrayI64
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    dynamic raw,
+  );
+
+  @protected
+  Content
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    dynamic raw,
+  );
+
+  @protected
+  DiyCustomData
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    dynamic raw,
+  );
+
+  @protected
+  IdMapBool
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    dynamic raw,
+  );
+
+  @protected
+  IdMapI64
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    dynamic raw,
+  );
+
+  @protected
   Key
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoInfo
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoWallPlugin
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    dynamic raw,
+  );
+
+  @protected
+  ShareCode
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    dynamic raw,
+  );
+
+  @protected
+  SocialPhoto
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    dynamic raw,
+  );
+
+  @protected
+  Content
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    dynamic raw,
+  );
+
+  @protected
+  DiyCustomData
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoInfo
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoWallPlugin
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    dynamic raw,
+  );
+
+  @protected
+  ShareCode
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    dynamic raw,
+  );
+
+  @protected
+  SocialPhoto
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    dynamic raw,
+  );
+
+  @protected
+  Content
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    dynamic raw,
+  );
+
+  @protected
+  DiyCustomData
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
     dynamic raw,
   );
 
@@ -38,8 +203,104 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PhotoInfo
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoWallPlugin
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    dynamic raw,
+  );
+
+  @protected
+  ShareCode
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    dynamic raw,
+  );
+
+  @protected
+  SocialPhoto
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    dynamic raw,
+  );
+
+  @protected
+  Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
+
+  @protected
+  Map<PlatformInt64, PlatformInt64> dco_decode_Map_i_64_i_64_None(dynamic raw);
+
+  @protected
+  AdaptiveArrayInteractions
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    dynamic raw,
+  );
+
+  @protected
+  AdaptiveArrayNikkiDiy
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    dynamic raw,
+  );
+
+  @protected
+  AdaptiveArrayI64
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    dynamic raw,
+  );
+
+  @protected
+  Content
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    dynamic raw,
+  );
+
+  @protected
+  DiyCustomData
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    dynamic raw,
+  );
+
+  @protected
+  IdMapBool
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    dynamic raw,
+  );
+
+  @protected
+  IdMapI64
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    dynamic raw,
+  );
+
+  @protected
   Key
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoInfo
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoWallPlugin
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    dynamic raw,
+  );
+
+  @protected
+  ShareCode
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    dynamic raw,
+  );
+
+  @protected
+  SocialPhoto
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
     dynamic raw,
   );
 
@@ -52,13 +313,140 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String dco_decode_String(dynamic raw);
 
   @protected
+  bool dco_decode_bool(dynamic raw);
+
+  @protected
+  IdMapBool
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoWallPlugin
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    dynamic raw,
+  );
+
+  @protected
+  SocialPhoto
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    dynamic raw,
+  );
+
+  @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw);
+
+  @protected
+  CameraParams dco_decode_box_autoadd_camera_params(dynamic raw);
+
+  @protected
+  CarrierInfo dco_decode_box_autoadd_carrier_info(dynamic raw);
+
+  @protected
+  ClockInPhotoCustomData dco_decode_box_autoadd_clock_in_photo_custom_data(
+    dynamic raw,
+  );
+
+  @protected
+  CollageCustomData dco_decode_box_autoadd_collage_custom_data(dynamic raw);
+
+  @protected
   CustomData dco_decode_box_autoadd_custom_data(dynamic raw);
+
+  @protected
+  DaMiaoInfo dco_decode_box_autoadd_da_miao_info(dynamic raw);
+
+  @protected
+  DiyHistoryShareCode dco_decode_box_autoadd_diy_history_share_code(
+    dynamic raw,
+  );
+
+  @protected
+  EditPhotoHandler dco_decode_box_autoadd_edit_photo_handler(dynamic raw);
+
+  @protected
+  ErrorCode dco_decode_box_autoadd_error_code(dynamic raw);
+
+  @protected
+  PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
+
+  @protected
+  MagazinePhotoCustomData dco_decode_box_autoadd_magazine_photo_custom_data(
+    dynamic raw,
+  );
+
+  @protected
+  MediaParam dco_decode_box_autoadd_media_param(dynamic raw);
+
+  @protected
+  MountInfo dco_decode_box_autoadd_mount_info(dynamic raw);
+
+  @protected
+  MountInfoOption dco_decode_box_autoadd_mount_info_option(dynamic raw);
+
+  @protected
+  NikkiPhotoCustomData dco_decode_box_autoadd_nikki_photo_custom_data(
+    dynamic raw,
+  );
+
+  @protected
+  PortraitModeHandler dco_decode_box_autoadd_portrait_mode_handler(dynamic raw);
+
+  @protected
+  PuzzleGamePlugin dco_decode_box_autoadd_puzzle_game_plugin(dynamic raw);
+
+  @protected
+  StaticInfos dco_decode_box_autoadd_static_infos(dynamic raw);
+
+  @protected
+  VideoCoverCustomData dco_decode_box_autoadd_video_cover_custom_data(
+    dynamic raw,
+  );
+
+  @protected
+  VideoCustomData dco_decode_box_autoadd_video_custom_data(dynamic raw);
+
+  @protected
+  WeaponSnapShot dco_decode_box_autoadd_weapon_snap_shot(dynamic raw);
+
+  @protected
+  CameraParams dco_decode_camera_params(dynamic raw);
+
+  @protected
+  CarrierInfo dco_decode_carrier_info(dynamic raw);
+
+  @protected
+  ClockGamePlugin dco_decode_clock_game_plugin(dynamic raw);
+
+  @protected
+  ClockInPhotoCustomData dco_decode_clock_in_photo_custom_data(dynamic raw);
+
+  @protected
+  CollageCustomData dco_decode_collage_custom_data(dynamic raw);
 
   @protected
   CustomData dco_decode_custom_data(dynamic raw);
 
   @protected
+  DaMiaoInfo dco_decode_da_miao_info(dynamic raw);
+
+  @protected
+  DaMiaoInfoOption dco_decode_da_miao_info_option(dynamic raw);
+
+  @protected
   DecodeEvent dco_decode_decode_event(dynamic raw);
+
+  @protected
+  DiyHistoryShareCode dco_decode_diy_history_share_code(dynamic raw);
+
+  @protected
+  EditPhotoHandler dco_decode_edit_photo_handler(dynamic raw);
+
+  @protected
+  Error dco_decode_error(dynamic raw);
+
+  @protected
+  ErrorCode dco_decode_error_code(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
@@ -67,10 +455,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int dco_decode_i_32(dynamic raw);
 
   @protected
+  PlatformInt64 dco_decode_i_64(dynamic raw);
+
+  @protected
   List<String> dco_decode_list_String(dynamic raw);
 
   @protected
   List<CustomData?> dco_decode_list_opt_box_autoadd_custom_data(dynamic raw);
+
+  @protected
+  Int64List dco_decode_list_prim_i_64_strict(dynamic raw);
 
   @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
@@ -79,7 +473,119 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
+  List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
+
+  @protected
+  List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
+    dynamic raw,
+  );
+
+  @protected
+  List<RegionPicture> dco_decode_list_region_picture(dynamic raw);
+
+  @protected
+  MagazinePhotoCustomData dco_decode_magazine_photo_custom_data(dynamic raw);
+
+  @protected
+  MediaCustomData dco_decode_media_custom_data(dynamic raw);
+
+  @protected
+  MediaParam dco_decode_media_param(dynamic raw);
+
+  @protected
+  MediaParamType dco_decode_media_param_type(dynamic raw);
+
+  @protected
+  MountInfo dco_decode_mount_info(dynamic raw);
+
+  @protected
+  MountInfoOption dco_decode_mount_info_option(dynamic raw);
+
+  @protected
+  NikkiPhotoCustomData dco_decode_nikki_photo_custom_data(dynamic raw);
+
+  @protected
+  String? dco_decode_opt_String(dynamic raw);
+
+  @protected
+  IdMapBool?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    dynamic raw,
+  );
+
+  @protected
+  PhotoWallPlugin?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    dynamic raw,
+  );
+
+  @protected
+  SocialPhoto?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    dynamic raw,
+  );
+
+  @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw);
+
+  @protected
+  CarrierInfo? dco_decode_opt_box_autoadd_carrier_info(dynamic raw);
+
+  @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
+
+  @protected
+  EditPhotoHandler? dco_decode_opt_box_autoadd_edit_photo_handler(dynamic raw);
+
+  @protected
+  PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
+
+  @protected
+  MountInfoOption? dco_decode_opt_box_autoadd_mount_info_option(dynamic raw);
+
+  @protected
+  PortraitModeHandler? dco_decode_opt_box_autoadd_portrait_mode_handler(
+    dynamic raw,
+  );
+
+  @protected
+  PuzzleGamePlugin? dco_decode_opt_box_autoadd_puzzle_game_plugin(dynamic raw);
+
+  @protected
+  WeaponSnapShot? dco_decode_opt_box_autoadd_weapon_snap_shot(dynamic raw);
+
+  @protected
+  Int64List? dco_decode_opt_list_prim_i_64_strict(dynamic raw);
+
+  @protected
+  PortraitModeHandler dco_decode_portrait_mode_handler(dynamic raw);
+
+  @protected
+  Position dco_decode_position(dynamic raw);
+
+  @protected
+  PuzzleGamePlugin dco_decode_puzzle_game_plugin(dynamic raw);
+
+  @protected
+  (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
+
+  @protected
+  (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
+
+  @protected
+  RegionPicture dco_decode_region_picture(dynamic raw);
+
+  @protected
+  StaticInfos dco_decode_static_infos(dynamic raw);
+
+  @protected
+  StaticInfosOption dco_decode_static_infos_option(dynamic raw);
+
+  @protected
+  Time dco_decode_time(dynamic raw);
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -91,11 +597,140 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt dco_decode_usize(dynamic raw);
 
   @protected
+  VideoCoverCustomData dco_decode_video_cover_custom_data(dynamic raw);
+
+  @protected
+  VideoCoverData dco_decode_video_cover_data(dynamic raw);
+
+  @protected
+  VideoCustomData dco_decode_video_custom_data(dynamic raw);
+
+  @protected
+  VideoRecordData dco_decode_video_record_data(dynamic raw);
+
+  @protected
+  WeaponSnapShot dco_decode_weapon_snap_shot(dynamic raw);
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
+
+  @protected
+  AdaptiveArrayInteractions
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdaptiveArrayNikkiDiy
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdaptiveArrayI64
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Content
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  DiyCustomData
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  IdMapBool
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  IdMapI64
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    SseDeserializer deserializer,
+  );
 
   @protected
   Key
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoInfo
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoWallPlugin
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ShareCode
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SocialPhoto
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Content
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  DiyCustomData
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoInfo
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoWallPlugin
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ShareCode
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SocialPhoto
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Content
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  DiyCustomData
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
     SseDeserializer deserializer,
   );
 
@@ -106,8 +741,108 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PhotoInfo
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoWallPlugin
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ShareCode
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SocialPhoto
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<PlatformInt64, PlatformInt64> sse_decode_Map_i_64_i_64_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdaptiveArrayInteractions
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdaptiveArrayNikkiDiy
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdaptiveArrayI64
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Content
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  DiyCustomData
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  IdMapBool
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  IdMapI64
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Key
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoInfo
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoWallPlugin
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ShareCode
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SocialPhoto
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
     SseDeserializer deserializer,
   );
 
@@ -120,19 +855,171 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
+  bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
+  IdMapBool
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoWallPlugin
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SocialPhoto
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
+  CameraParams sse_decode_box_autoadd_camera_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CarrierInfo sse_decode_box_autoadd_carrier_info(SseDeserializer deserializer);
+
+  @protected
+  ClockInPhotoCustomData sse_decode_box_autoadd_clock_in_photo_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CollageCustomData sse_decode_box_autoadd_collage_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CustomData sse_decode_box_autoadd_custom_data(SseDeserializer deserializer);
+
+  @protected
+  DaMiaoInfo sse_decode_box_autoadd_da_miao_info(SseDeserializer deserializer);
+
+  @protected
+  DiyHistoryShareCode sse_decode_box_autoadd_diy_history_share_code(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  EditPhotoHandler sse_decode_box_autoadd_edit_photo_handler(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ErrorCode sse_decode_box_autoadd_error_code(SseDeserializer deserializer);
+
+  @protected
+  PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
+
+  @protected
+  MagazinePhotoCustomData sse_decode_box_autoadd_magazine_photo_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MediaParam sse_decode_box_autoadd_media_param(SseDeserializer deserializer);
+
+  @protected
+  MountInfo sse_decode_box_autoadd_mount_info(SseDeserializer deserializer);
+
+  @protected
+  MountInfoOption sse_decode_box_autoadd_mount_info_option(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  NikkiPhotoCustomData sse_decode_box_autoadd_nikki_photo_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PortraitModeHandler sse_decode_box_autoadd_portrait_mode_handler(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PuzzleGamePlugin sse_decode_box_autoadd_puzzle_game_plugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  StaticInfos sse_decode_box_autoadd_static_infos(SseDeserializer deserializer);
+
+  @protected
+  VideoCoverCustomData sse_decode_box_autoadd_video_cover_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  VideoCustomData sse_decode_box_autoadd_video_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WeaponSnapShot sse_decode_box_autoadd_weapon_snap_shot(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CameraParams sse_decode_camera_params(SseDeserializer deserializer);
+
+  @protected
+  CarrierInfo sse_decode_carrier_info(SseDeserializer deserializer);
+
+  @protected
+  ClockGamePlugin sse_decode_clock_game_plugin(SseDeserializer deserializer);
+
+  @protected
+  ClockInPhotoCustomData sse_decode_clock_in_photo_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CollageCustomData sse_decode_collage_custom_data(
+    SseDeserializer deserializer,
+  );
 
   @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
 
   @protected
+  DaMiaoInfo sse_decode_da_miao_info(SseDeserializer deserializer);
+
+  @protected
+  DaMiaoInfoOption sse_decode_da_miao_info_option(SseDeserializer deserializer);
+
+  @protected
   DecodeEvent sse_decode_decode_event(SseDeserializer deserializer);
+
+  @protected
+  DiyHistoryShareCode sse_decode_diy_history_share_code(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  EditPhotoHandler sse_decode_edit_photo_handler(SseDeserializer deserializer);
+
+  @protected
+  Error sse_decode_error(SseDeserializer deserializer);
+
+  @protected
+  ErrorCode sse_decode_error_code(SseDeserializer deserializer);
 
   @protected
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
+
+  @protected
+  PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
 
   @protected
   List<String> sse_decode_list_String(SseDeserializer deserializer);
@@ -143,15 +1030,156 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Int64List sse_decode_list_prim_i_64_strict(SseDeserializer deserializer);
+
+  @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
+  List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<RegionPicture> sse_decode_list_region_picture(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MagazinePhotoCustomData sse_decode_magazine_photo_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MediaCustomData sse_decode_media_custom_data(SseDeserializer deserializer);
+
+  @protected
+  MediaParam sse_decode_media_param(SseDeserializer deserializer);
+
+  @protected
+  MediaParamType sse_decode_media_param_type(SseDeserializer deserializer);
+
+  @protected
+  MountInfo sse_decode_mount_info(SseDeserializer deserializer);
+
+  @protected
+  MountInfoOption sse_decode_mount_info_option(SseDeserializer deserializer);
+
+  @protected
+  NikkiPhotoCustomData sse_decode_nikki_photo_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer);
+
+  @protected
+  IdMapBool?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotoWallPlugin?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SocialPhoto?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
+  CarrierInfo? sse_decode_opt_box_autoadd_carrier_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CustomData? sse_decode_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   );
+
+  @protected
+  EditPhotoHandler? sse_decode_opt_box_autoadd_edit_photo_handler(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
+
+  @protected
+  MountInfoOption? sse_decode_opt_box_autoadd_mount_info_option(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PortraitModeHandler? sse_decode_opt_box_autoadd_portrait_mode_handler(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PuzzleGamePlugin? sse_decode_opt_box_autoadd_puzzle_game_plugin(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WeaponSnapShot? sse_decode_opt_box_autoadd_weapon_snap_shot(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Int64List? sse_decode_opt_list_prim_i_64_strict(SseDeserializer deserializer);
+
+  @protected
+  PortraitModeHandler sse_decode_portrait_mode_handler(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Position sse_decode_position(SseDeserializer deserializer);
+
+  @protected
+  PuzzleGamePlugin sse_decode_puzzle_game_plugin(SseDeserializer deserializer);
+
+  @protected
+  (PlatformInt64, bool) sse_decode_record_i_64_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (PlatformInt64, PlatformInt64) sse_decode_record_i_64_i_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  RegionPicture sse_decode_region_picture(SseDeserializer deserializer);
+
+  @protected
+  StaticInfos sse_decode_static_infos(SseDeserializer deserializer);
+
+  @protected
+  StaticInfosOption sse_decode_static_infos_option(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Time sse_decode_time(SseDeserializer deserializer);
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -163,11 +1191,74 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt sse_decode_usize(SseDeserializer deserializer);
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer);
+  VideoCoverCustomData sse_decode_video_cover_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  VideoCoverData sse_decode_video_cover_data(SseDeserializer deserializer);
+
+  @protected
+  VideoCustomData sse_decode_video_custom_data(SseDeserializer deserializer);
+
+  @protected
+  VideoRecordData sse_decode_video_record_data(SseDeserializer deserializer);
+
+  @protected
+  WeaponSnapShot sse_decode_weapon_snap_shot(SseDeserializer deserializer);
 
   @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    AdaptiveArrayInteractions self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    AdaptiveArrayNikkiDiy self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    AdaptiveArrayI64 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    Content self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    DiyCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    IdMapBool self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    IdMapI64 self,
     SseSerializer serializer,
   );
 
@@ -180,6 +1271,90 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    PhotoInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    PhotoWallPlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    ShareCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SocialPhoto self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    Content self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    DiyCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    PhotoInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    PhotoWallPlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    ShareCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SocialPhoto self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    Content self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    DiyCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
     Key self,
     SseSerializer serializer,
@@ -187,8 +1362,125 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    PhotoInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    PhotoWallPlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    ShareCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SocialPhoto self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_64_bool_None(
+    Map<PlatformInt64, bool> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_64_i_64_None(
+    Map<PlatformInt64, PlatformInt64> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    AdaptiveArrayInteractions self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    AdaptiveArrayNikkiDiy self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    AdaptiveArrayI64 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    Content self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    DiyCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    IdMapBool self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    IdMapI64 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
     Key self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    PhotoInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    PhotoWallPlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    ShareCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SocialPhoto self,
     SseSerializer serializer,
   );
 
@@ -202,8 +1494,179 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
+  void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    IdMapBool self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    PhotoWallPlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SocialPhoto self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_camera_params(
+    CameraParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_carrier_info(
+    CarrierInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_clock_in_photo_custom_data(
+    ClockInPhotoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_collage_custom_data(
+    CollageCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_custom_data(
     CustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_da_miao_info(
+    DaMiaoInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_diy_history_share_code(
+    DiyHistoryShareCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_edit_photo_handler(
+    EditPhotoHandler self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_error_code(
+    ErrorCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_i_64(
+    PlatformInt64 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_magazine_photo_custom_data(
+    MagazinePhotoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_media_param(
+    MediaParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_mount_info(
+    MountInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_mount_info_option(
+    MountInfoOption self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nikki_photo_custom_data(
+    NikkiPhotoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_portrait_mode_handler(
+    PortraitModeHandler self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_puzzle_game_plugin(
+    PuzzleGamePlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_static_infos(
+    StaticInfos self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_video_cover_custom_data(
+    VideoCoverCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_video_custom_data(
+    VideoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_weapon_snap_shot(
+    WeaponSnapShot self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_camera_params(CameraParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_carrier_info(CarrierInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_clock_game_plugin(
+    ClockGamePlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_clock_in_photo_custom_data(
+    ClockInPhotoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_collage_custom_data(
+    CollageCustomData self,
     SseSerializer serializer,
   );
 
@@ -211,7 +1674,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);
 
   @protected
+  void sse_encode_da_miao_info(DaMiaoInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_da_miao_info_option(
+    DaMiaoInfoOption self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_decode_event(DecodeEvent self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_diy_history_share_code(
+    DiyHistoryShareCode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_edit_photo_handler(
+    EditPhotoHandler self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_error(Error self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_error_code(ErrorCode self, SseSerializer serializer);
 
   @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
@@ -220,11 +1710,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_opt_box_autoadd_custom_data(
     List<CustomData?> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_prim_i_64_strict(
+    Int64List self,
     SseSerializer serializer,
   );
 
@@ -238,10 +1737,184 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_64_bool(
+    List<(PlatformInt64, bool)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_i_64_i_64(
+    List<(PlatformInt64, PlatformInt64)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_region_picture(
+    List<RegionPicture> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_magazine_photo_custom_data(
+    MagazinePhotoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_media_custom_data(
+    MediaCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_media_param(MediaParam self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_media_param_type(
+    MediaParamType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_mount_info(MountInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_mount_info_option(
+    MountInfoOption self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nikki_photo_custom_data(
+    NikkiPhotoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    IdMapBool? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    PhotoWallPlugin? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    SocialPhoto? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_carrier_info(
+    CarrierInfo? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_custom_data(
     CustomData? self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_opt_box_autoadd_edit_photo_handler(
+    EditPhotoHandler? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_i_64(
+    PlatformInt64? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_mount_info_option(
+    MountInfoOption? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_portrait_mode_handler(
+    PortraitModeHandler? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_puzzle_game_plugin(
+    PuzzleGamePlugin? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_weapon_snap_shot(
+    WeaponSnapShot? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_list_prim_i_64_strict(
+    Int64List? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_portrait_mode_handler(
+    PortraitModeHandler self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_position(Position self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_puzzle_game_plugin(
+    PuzzleGamePlugin self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_64_bool(
+    (PlatformInt64, bool) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_64_i_64(
+    (PlatformInt64, PlatformInt64) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_region_picture(RegionPicture self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_static_infos(StaticInfos self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_static_infos_option(
+    StaticInfosOption self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_time(Time self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
@@ -253,7 +1926,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_usize(BigInt self, SseSerializer serializer);
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer);
+  void sse_encode_video_cover_custom_data(
+    VideoCoverCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_video_cover_data(
+    VideoCoverData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_video_custom_data(
+    VideoCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_video_record_data(
+    VideoRecordData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_weapon_snap_shot(
+    WeaponSnapShot self,
+    SseSerializer serializer,
+  );
 }
 
 // Section: wire_class
@@ -269,6 +1969,244 @@ class RustLibWire implements BaseWire {
   /// The symbols are looked up in [dynamicLibrary].
   RustLibWire(ffi.DynamicLibrary dynamicLibrary)
     : _lookup = dynamicLibrary.lookup;
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractionsPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractionsPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractionsPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractions =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayInteractionsPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIYPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIYPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIYPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIY =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayNikkiDIYPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64 =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64Ptr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64 =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerAdaptiveArrayi64Ptr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContentPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContentPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContentPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContent =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerContentPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomDataPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomDataPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomData =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDIYCustomDataPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapboolPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapboolPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapboolPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapbool =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapboolPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64 =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64Ptr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64 =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIdMapi64Ptr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
@@ -302,5 +2240,141 @@ class RustLibWire implements BaseWire {
       );
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfoPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfo =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoInfoPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPluginPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPluginPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPluginPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPlugin =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPhotoWallPluginPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCodePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCodePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCodePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCode =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerShareCodePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhotoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhotoPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhotoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhoto =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSocialPhotoPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 }

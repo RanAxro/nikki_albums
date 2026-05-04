@@ -1,4 +1,3 @@
-
 use crate::frb_generated::StreamSink;
 use flutter_rust_bridge::frb;
 use std::ffi::{c_char, c_void, CString};
@@ -11,6 +10,7 @@ use std::sync::Arc;
 #[allow(non_snake_case, dead_code)]
 mod ffi {
   use std::ffi::{c_char, c_void};
+  use flutter_rust_bridge::frb;
 
   #[repr(u32)]
   #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -25,7 +25,7 @@ mod ffi {
     IllegalUTF8 = 7,
   }
 
-  #[flutter_rust_bridge::frb(ignore)]
+  #[frb(ignore)]
   #[repr(C)]
   pub struct DecryptionResult {
     pub status: u32,
@@ -33,6 +33,7 @@ mod ffi {
     pub len: usize,
   }
 
+  #[frb(ignore)]
   #[repr(C)]
   pub struct Key {
     _private: [u8; 0],
@@ -78,9 +79,8 @@ mod ffi {
 // ============================================================
 // CustomData
 // ============================================================
-#[frb]
 #[derive(Debug, Clone)]
-pub enum CustomData {
+pub enum CustomData{
   Invalid,
   Valid(Vec<u8>),
 }
