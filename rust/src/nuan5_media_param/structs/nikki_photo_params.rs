@@ -50,8 +50,7 @@ pub struct NikkiParams{
   pub loc: (f64, f64, f64),
   pub rot: (f64, f64, f64),
   pub scale: (f64, f64, f64),
-  // dressing 
-  pub clothes: Vec<Cloth>,
+  pub dressing: Vec<Cloth>,
   pub weapon: Option<Weapon>,
   pub interactions: Vec<Object>,
   pub mount: Option<Object>,
@@ -124,15 +123,75 @@ pub enum Filter{
 }
 
 #[derive(Clone)]
-pub struct Cloth{
+pub struct Dressing{
+  pub clothes: Vec<Cloth>,
+  pub magicball: Vec<i64>,
+}
 
+#[derive(Clone)]
+pub struct Cloth{
+  pub id: i64,
+  pub diy: Vec<Diy>,
+}
+
+#[derive(Clone)]
+pub enum Diy{
+  OutfitDye(Vec<OutfitDyeData>),
+  SpecialEffect(Vec<SpecialEffectData>),
+  PatternCreation(Vec<PatternCreationData>),
+}
+
+#[derive(Clone)]
+pub enum OutfitDyeData{
+  Hair(OutfitDyeHairData),
+  General(OutfitDyeGeneralData),
+}
+
+#[derive(Clone)]
+pub struct OutfitDyeHairData{
+  pub target_group_id: i64,
+  pub feature_tag: i64,
+  pub color_0: DyeColor,
+  pub color_1: Option<DyeColor>,
+  pub roughness: f64,
+  pub color_mode: Option<i64>,
+}
+
+#[derive(Clone)]
+pub struct OutfitDyeGeneralData{
+  pub target_group_id: i64,
+  pub feature_tag: i64,
+  pub color: DyeColor,
+}
+
+#[derive(Clone)]
+pub struct SpecialEffectData{
+  pub target_group_id: i64,
+  pub feature_tag: i64,
+  pub color_grid: u16,
+  pub cover_diy_color: bool,
+}
+
+#[derive(Clone)]
+pub struct PatternCreationData{
+  pub target_group_id: i64,
+  pub feature_tag: i64,
+  pub texture_id: i64,
+  pub override_pattern_a: bool,
+  pub tiling: f64,
+}
+
+#[derive(Clone)]
+pub struct DyeColor{
+  pub color: (f64, f64, f64, f64),
+  pub color_grid: u16,
 }
 
 #[derive(Clone)]
 pub struct Weapon{
-  id: i64,
-  slot_type: String,
-  state: Option<String>,
+  pub id: i64,
+  pub slot_type: String,
+  pub state: Option<String>,
 }
 
 #[derive(Clone)]
