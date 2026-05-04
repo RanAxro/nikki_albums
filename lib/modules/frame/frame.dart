@@ -1118,8 +1118,6 @@ class WindowTitleBar extends StatelessWidget {
                       print(greet(name: "rust"));
 
                       print(testAdd(num1: 12, num2: 13));
-
-                      // print(GameImageCodec.deriveKey("UserDB[108328049]").map((b) => b.toRadixString(16).padLeft(2, '0')).join());
                     },
                     child: RichText(
                       text: TextSpan(

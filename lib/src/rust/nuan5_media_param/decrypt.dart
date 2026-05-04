@@ -11,14 +11,14 @@ part 'decrypt.freezed.dart';
 // These functions are ignored because they are not marked as `pub`: `convert_result`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
 
-CustomData? decrypt(List<int> data, Key key) =>
-    RustLib.instance.api.crateMediaParamDecryptDecrypt(data: data, key: key);
+CustomData? decrypt(List<int> data, Key key) => RustLib.instance.api
+    .crateNuan5MediaParamDecryptDecrypt(data: data, key: key);
 
 CustomData? decodeFileBytesUnchecked({
   required List<int> flag,
   required List<int> bytes,
   required Key key,
-}) => RustLib.instance.api.crateMediaParamDecryptDecodeFileBytesUnchecked(
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFileBytesUnchecked(
   flag: flag,
   bytes: bytes,
   key: key,
@@ -28,7 +28,7 @@ Future<CustomData?> decodeFileUnchecked({
   required List<int> flag,
   required String path,
   required Key key,
-}) => RustLib.instance.api.crateMediaParamDecryptDecodeFileUnchecked(
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFileUnchecked(
   flag: flag,
   path: path,
   key: key,
@@ -38,7 +38,7 @@ CustomData? decodeFileUncheckedSync({
   required List<int> flag,
   required String path,
   required Key key,
-}) => RustLib.instance.api.crateMediaParamDecryptDecodeFileUncheckedSync(
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFileUncheckedSync(
   flag: flag,
   path: path,
   key: key,
@@ -48,7 +48,7 @@ Stream<DecodeEvent> decodeFilesUnchecked({
   required List<int> flag,
   required List<String> paths,
   required Key key,
-}) => RustLib.instance.api.crateMediaParamDecryptDecodeFilesUnchecked(
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFilesUnchecked(
   flag: flag,
   paths: paths,
   key: key,
@@ -59,25 +59,26 @@ Future<List<CustomData?>> decodeFilesUncheckedNoProgress({
   required List<int> flag,
   required List<String> paths,
   required Key key,
-}) => RustLib.instance.api.crateMediaParamDecryptDecodeFilesUncheckedNoProgress(
-  flag: flag,
-  paths: paths,
-  key: key,
-);
+}) => RustLib.instance.api
+    .crateNuan5MediaParamDecryptDecodeFilesUncheckedNoProgress(
+      flag: flag,
+      paths: paths,
+      key: key,
+    );
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>>
 abstract class Key implements RustOpaqueInterface {
   static Key cameraParam() =>
-      RustLib.instance.api.crateMediaParamDecryptKeyCameraParam();
+      RustLib.instance.api.crateNuan5MediaParamDecryptKeyCameraParam();
 
   @override
   Future<void> dispose();
 
   static Key fromStr(String s) =>
-      RustLib.instance.api.crateMediaParamDecryptKeyFromStr(s: s);
+      RustLib.instance.api.crateNuan5MediaParamDecryptKeyFromStr(s: s);
 
-  static Key fromStrBytes(List<int> bytes) =>
-      RustLib.instance.api.crateMediaParamDecryptKeyFromStrBytes(bytes: bytes);
+  static Key fromStrBytes(List<int> bytes) => RustLib.instance.api
+      .crateNuan5MediaParamDecryptKeyFromStrBytes(bytes: bytes);
 }
 
 @freezed

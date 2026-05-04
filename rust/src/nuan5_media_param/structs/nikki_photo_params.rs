@@ -17,7 +17,7 @@ pub struct PhotographyParams{
   pub location: Option<Location>,
   pub weather: Option<i64>,
   pub photo_wall: Vec<i64>,
-  pub task: Vec<Task>,
+  pub task: Vec<TaskParams>,
 }
 
 #[derive(Clone)]
@@ -38,8 +38,8 @@ pub struct CameraParams{
   pub vibrance: f64,
   pub highlights: f64,
   pub shadows: f64,
-  pub light: Light,
-  pub filter: Filter,
+  pub light: LightParams,
+  pub filter: FilterParams,
   pub pose: String,
 }
 
@@ -50,11 +50,11 @@ pub struct NikkiParams{
   pub loc: (f64, f64, f64),
   pub rot: (f64, f64, f64),
   pub scale: (f64, f64, f64),
-  pub dressing: Vec<Cloth>,
-  pub weapon: Option<Weapon>,
-  pub interactions: Vec<Object>,
-  pub mount: Option<Object>,
-  pub carrier: Option<Object>,
+  pub dressing: Vec<ClothParams>,
+  pub weapon: Option<WeaponParams>,
+  pub interactions: Vec<ObjectParams>,
+  pub mount: Option<ObjectParams>,
+  pub carrier: Option<ObjectParams>,
 }
 
 #[derive(Clone)]
@@ -68,7 +68,7 @@ pub struct MomoParams{
   pub loc: (f64, f64, f64),
   pub rot: (f64, f64, f64),
   pub scale: (f64, f64, f64),
-  pub clothes: Vec<Cloth>,
+  pub clothes: Vec<ClothParams>,
 }
 
 
@@ -98,14 +98,14 @@ pub struct ShootingTime{
 }
 
 #[derive(Clone)]
-pub enum Task{
+pub enum TaskParams{
   Puzzle(i64),
   Risk(HashMap<i64, bool>),
   Interactive(HashMap<i64, bool>),
 }
 
 #[derive(Clone)]
-pub enum Light{
+pub enum LightParams{
   Some{
     id: String,
     strength: f64,
@@ -114,7 +114,7 @@ pub enum Light{
 }
 
 #[derive(Clone)]
-pub enum Filter{
+pub enum FilterParams{
   Some{
     id: String,
     strength: f64,
@@ -123,19 +123,19 @@ pub enum Filter{
 }
 
 #[derive(Clone)]
-pub struct Dressing{
-  pub clothes: Vec<Cloth>,
+pub struct DressingParams{
+  pub clothes: Vec<ClothParams>,
   pub magicball: Vec<i64>,
 }
 
 #[derive(Clone)]
-pub struct Cloth{
+pub struct ClothParams{
   pub id: i64,
-  pub diy: Vec<Diy>,
+  pub diy: Vec<DiyData>,
 }
 
 #[derive(Clone)]
-pub enum Diy{
+pub enum DiyData{
   OutfitDye(Vec<OutfitDyeData>),
   SpecialEffect(Vec<SpecialEffectData>),
   PatternCreation(Vec<PatternCreationData>),
@@ -151,8 +151,8 @@ pub enum OutfitDyeData{
 pub struct OutfitDyeHairData{
   pub target_group_id: i64,
   pub feature_tag: i64,
-  pub color_0: DyeColor,
-  pub color_1: Option<DyeColor>,
+  pub color_0: DyeColorParams,
+  pub color_1: Option<DyeColorParams>,
   pub roughness: f64,
   pub color_mode: Option<i64>,
 }
@@ -161,7 +161,7 @@ pub struct OutfitDyeHairData{
 pub struct OutfitDyeGeneralData{
   pub target_group_id: i64,
   pub feature_tag: i64,
-  pub color: DyeColor,
+  pub color: DyeColorParams,
 }
 
 #[derive(Clone)]
@@ -182,20 +182,20 @@ pub struct PatternCreationData{
 }
 
 #[derive(Clone)]
-pub struct DyeColor{
+pub struct DyeColorParams{
   pub color: (f64, f64, f64, f64),
   pub color_grid: u16,
 }
 
 #[derive(Clone)]
-pub struct Weapon{
+pub struct WeaponParams{
   pub id: i64,
   pub slot_type: String,
   pub state: Option<String>,
 }
 
 #[derive(Clone)]
-pub struct Object{
+pub struct ObjectParams{
   pub id: i64,
   pub loc: (f64, f64, f64),
   pub rot: (f64, f64, f64),

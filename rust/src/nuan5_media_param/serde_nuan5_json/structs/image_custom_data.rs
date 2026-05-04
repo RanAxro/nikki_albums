@@ -354,19 +354,26 @@ pub enum CoreData{
 #[derive(Serialize, Deserialize)]
 pub struct HairCoreData{
   #[serde(rename = "TargetColor0")]
-  pub target_color_0: Color,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub target_color_0: Option<Color>,
 
   #[serde(rename = "ColorGridID0")]
   pub color_grid_id_0: i64,
 
+  #[serde(rename = "TargetColor1")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub target_color_1: Option<Color>,
+
+  #[serde(rename = "ColorGridID1")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub color_grid_id_1: Option<i64>,
+
   #[serde(rename = "RoughnessOffset")]
   pub roughness_offset: f64,
 
-  #[serde(rename = "ColorGridID1")]
-  pub color_grid_id_1: i64,
-
   #[serde(rename = "HairColorMode")]
-  pub hair_color_mode: i64,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub hair_color_mode: Option<i64>,
 }
 
 #[derive(Clone)]

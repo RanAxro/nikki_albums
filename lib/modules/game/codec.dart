@@ -1,10 +1,9 @@
 
+import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 
-import "package:nikki_albums/src/rust/media_param/decrypt.dart";
-
+import "package:flutter/foundation.dart" hide Key;
 import "dart:convert";
 import "dart:io";
-import "package:flutter/foundation.dart" hide Key;
 
 enum GameImageCodecException{
   lackFFD9,
