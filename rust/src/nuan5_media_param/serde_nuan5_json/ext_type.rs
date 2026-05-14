@@ -15,17 +15,17 @@ impl<T> IdMap<T>{
   }
 }
 
-impl IdMap<bool>{
-  pub fn as_bool(&self) -> &HashMap<i64, bool>{
-    &self.0
-  }
-}
-
-impl IdMap<i64>{
-  pub fn as_i64(&self) -> &HashMap<i64, i64>{
-    &self.0
-  }
-}
+// impl IdMap<bool>{
+//   pub fn as_bool(&self) -> &HashMap<i64, bool>{
+//     &self.0
+//   }
+// }
+//
+// impl IdMap<i64>{
+//   pub fn as_i64(&self) -> &HashMap<i64, i64>{
+//     &self.0
+//   }
+// }
 
 impl<T> Deref for IdMap<T>{
   type Target = HashMap<i64, T>;

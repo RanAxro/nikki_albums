@@ -1,6 +1,6 @@
 pub mod nikki_photo_params;
 pub mod world;
-mod clock_in_photo_params;
-mod collage_params;
-mod diy_params;
-mod share_code_params;
+pub mod clock_in_photo_params;
+pub mod collage_params;
+pub mod diy_params;
+pub mod share_code_params;
