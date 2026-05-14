@@ -22,11 +22,7 @@ use zune_png::PngDecoder;
 /// # 注意
 /// - 如果 width 和 height 都指定，会保持原图比例进行 **Fit**(适应)缩放
 /// - 如果都未指定，返回原图尺寸的 RGBA 数据
-pub fn generate_thumbnail(
-  png_bytes: Vec<u8>,
-  target_width: Option<u32>,
-  target_height: Option<u32>,
-) -> Result<(u32, u32, Vec<u8>), String> {
+pub fn generate_thumbnail(png_bytes: Vec<u8>, target_width: Option<u32>, target_height: Option<u32>) -> Result<Thumbnail, String>{
   // 配置解码器：强制 8bit 输出，避免 U16 分支
   let options = DecoderOptions::default().png_set_strip_to_8bit(true);
   let mut decoder = PngDecoder::new_with_options(ZCursor::new(&png_bytes), options);
@@ -72,7 +68,11 @@ pub fn generate_thumbnail(
 
   // 无需缩放时直接返回，避免 fast_image_resize 分配
   if dst_w == src_w && dst_h == src_h {
-    return Ok((src_w, src_h, rgba));
+    return Ok(Thumbnail{
+      width: src_w,
+      height: src_h,
+      bytes: rgba,
+    });
   }
 
   // SIMD 加速缩放（U8x4 = RGBA8）
@@ -91,5 +91,9 @@ pub fn generate_thumbnail(
     )
     .map_err(|e| format!("Resize error: {:?}", e))?;
 
-  Ok((dst_w, dst_h, dst_img.buffer().to_vec()))
+  Ok(Thumbnail{
+    width: dst_w,
+    height: dst_h,
+    bytes: dst_img.buffer().to_vec(),
+  })
 }
