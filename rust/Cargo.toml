@@ -6,6 +6,10 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "staticlib"]
 
+[profile.release]
+opt-level = 3
+lto = "thin"  # 或 "fat"，可提升 10-20%
+
 [dependencies]
 rust_lib_nikki_albums_macro = { path = "macros" }
 
@@ -17,6 +21,11 @@ delegate = "0.13.5"
 itoa = "1.0.18"
 ryu = "1.0.23"
 memchr = "2.8.0"
+
+zune-jpeg = "0.5"
+zune-core = "0.5"
+fast_image_resize = "6.0"
+png = "0.17"
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ["cfg(frb_expand)"] }
