@@ -22,10 +22,10 @@ itoa = "1.0.18"
 ryu = "1.0.23"
 memchr = "2.8.0"
 
-zune-jpeg = "0.5"
-zune-core = "0.5"
+zune-jpeg = "0.5.15"
+zune-png = { version = "0.5.2", default-features = false, features = ["std"] }
+zune-core = "0.5.1"
 fast_image_resize = "6.0"
-png = "0.17"
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ["cfg(frb_expand)"] }
