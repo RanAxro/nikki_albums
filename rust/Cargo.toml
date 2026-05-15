@@ -25,6 +25,9 @@ memchr = "2.8.0"
 zune-jpeg = "0.5.15"
 zune-png = { version = "0.5.2", default-features = false, features = ["std"] }
 zune-core = "0.5.1"
+mp4 = "0.14.0"
+rust_h264 = "0.4.0"
+yuv = "0.8.14"
 fast_image_resize = "6.0"
 
 [lints.rust]
