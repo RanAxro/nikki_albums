@@ -11,7 +11,7 @@ use zune_png::PngDecoder;
 /// 生成 PNG 缩略图
 ///
 /// # Arguments
-/// * `jpeg_bytes` - PNG 文件字节数据
+/// * `png_bytes` - PNG 文件字节数据
 /// * `target_width` - 目标宽度(None 表示按高度等比缩放)
 /// * `target_height` - 目标高度(None 表示按宽度等比缩放)
 ///
