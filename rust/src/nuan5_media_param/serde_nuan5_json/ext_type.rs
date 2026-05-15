@@ -27,6 +27,13 @@ impl<T> IdMap<T>{
 //   }
 // }
 
+
+impl<T: Copy> IdMap<T>{
+  pub fn as_map(&self) -> HashMap<i64, T>{
+    self.0.clone()
+  }
+}
+
 impl<T> Deref for IdMap<T>{
   type Target = HashMap<i64, T>;
   fn deref(&self) -> &Self::Target{
@@ -60,6 +67,19 @@ pub enum AdaptiveArray<T>{
   Empty{},
 }
 
+impl<T: Copy> AdaptiveArray<T>{
+  pub fn to_vec(&self) -> Vec<T>{
+    match self{
+      AdaptiveArray::Array(v) => {
+        v.clone()
+      },
+      AdaptiveArray::Item(v) => {
+        vec![v.clone()]
+      },
+      AdaptiveArray::Empty{} => vec![],
+    }
+  }
+}
 
 
 
