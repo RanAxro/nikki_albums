@@ -22,7 +22,7 @@ use zune_png::PngDecoder;
 /// # 注意
 /// - 如果 width 和 height 都指定，会保持原图比例进行 **Fit**(适应)缩放
 /// - 如果都未指定，返回原图尺寸的 RGBA 数据
-pub fn generate_thumbnail(png_bytes: Vec<u8>, target_width: Option<u32>, target_height: Option<u32>) -> Result<Thumbnail, String>{
+pub fn generate_thumbnail(png_bytes: &Vec<u8>, target_width: Option<u32>, target_height: Option<u32>) -> Result<Thumbnail, String>{
   // 配置解码器：强制 8bit 输出，避免 U16 分支
   let options = DecoderOptions::default().png_set_strip_to_8bit(true);
   let mut decoder = PngDecoder::new_with_options(ZCursor::new(&png_bytes), options);
