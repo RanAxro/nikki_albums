@@ -1,7 +1,7 @@
-use crate::nuan5_media_param::serde_nuan5_json::ext_type::{OptionMap};
+use std::collections::HashMap;
+use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
 use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
-use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data::MountInfo;
 use super::structs::nikki_photo_params::*;
 
 pub fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
@@ -186,4 +186,113 @@ pub fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData) -> Ve
   res
 }
 
-// pub fn convert_cloth()
+pub fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>) -> Vec<ClothParams>{
+
+
+
+
+  vec![]
+}
+
+fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<ClothParams>{
+  fn convert_color_params(data_color: &Option<image_custom_data::Color>, data_grid: &Option<i64>) -> Option<DyeColorParams>{
+    match (data_color, data_grid){
+      (Some(color), Some(grid)) => {
+        Some(DyeColorParams{
+          color: (color.r, color.g, color.b, color.a),
+          color_grid: grid.clone(),
+        })
+      },
+      (_, _) => None,
+    }
+  }
+
+
+  let mut clothes: HashMap<i64, ClothParams> = HashMap::new();
+
+  match data{
+    AdaptiveArray::Array(_) => {},
+    AdaptiveArray::Item(item) => {
+      clothes.insert(item.target_cloth_id, ClothParams{
+        id: item.target_cloth_id,
+        diy: vec![
+          match &item.core_data{
+            image_custom_data::CoreData::Hair(hair) => {
+              DiyData::OutfitDye(
+                vec![
+                  OutfitDyeData::Hair(OutfitDyeHairData{
+                    target_group_id: item.target_group_id,
+                    feature_tag: item.feature_tag,
+                    color_0: DyeColorParams{
+                      color: if let Some(color) = &hair.target_color_0 { (color.r, color.g, color.b, color.a) } else { (0.0, 0.0, 0.0, 0.0) },
+                      color_grid: hair.color_grid_id_0,
+                    },
+                    color_1: convert_color_params(&hair.target_color_1, &hair.color_grid_id_1),
+                    roughness: hair.roughness_offset,
+                    color_mode: hair.hair_color_mode,
+                  })
+                ]
+              )
+            },
+            image_custom_data::CoreData::General(general) => {
+              DiyData::OutfitDye(
+                vec![
+                  OutfitDyeData::General(OutfitDyeGeneralData{
+                    target_group_id: item.target_group_id,
+                    feature_tag: item.feature_tag,
+                    color: DyeColorParams{
+                      color: (general.r, general.g, general.b, general.a),
+                      color_grid: general.color_grid_id,
+                    },
+                  })
+                ]
+              )
+            }
+            image_custom_data::CoreData::SpecialEffect(special_effect) => {
+              DiyData::SpecialEffect(
+                vec![
+                  SpecialEffectData{
+                    target_group_id: item.target_group_id,
+                    feature_tag: item.feature_tag,
+                    color_grid: special_effect.color_grid_id,
+                    cover_diy_color: special_effect.cover_diy_color,
+                  }
+                ]
+              )
+            }
+            image_custom_data::CoreData::PatternCreation(pattern_creation) => {
+              DiyData::PatternCreation(
+                vec![
+                  PatternCreationData{
+                    target_group_id: item.target_group_id,
+                    feature_tag: item.feature_tag,
+                    texture_id: pattern_creation.replace_texture_id,
+                    override_pattern_a: pattern_creation.override_pattern_a,
+                    tiling: 0.0,
+                  }
+                ]
+              )
+            }
+            image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) => {
+              DiyData::PatternCreation(
+                vec![
+                  PatternCreationData{
+                    target_group_id: item.target_group_id,
+                    feature_tag: item.feature_tag,
+                    texture_id: 0,
+                    override_pattern_a: false,
+                    tiling: pattern_creation_ext.tiling_data,
+                  }
+                ]
+              )
+            }
+          }
+        ],
+      });
+    },
+    AdaptiveArray::Empty{} => {
+    },
+  };
+
+  clothes.into_values().collect()
+}
