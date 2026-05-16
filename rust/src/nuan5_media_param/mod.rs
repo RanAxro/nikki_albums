@@ -5,3 +5,4 @@ mod serde_nuan5_json;
 pub mod decode;
 mod converter;
 mod structs;
+pub mod parser;
