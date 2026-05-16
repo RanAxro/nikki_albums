@@ -207,89 +207,90 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
     }
   }
 
+  #[inline]
+  fn convert_hair(item: &image_custom_data::NikkiDIY, hair: &image_custom_data::HairCoreData) -> OutfitDyeData{
+    OutfitDyeData::Hair(OutfitDyeHairData{
+      target_group_id: item.target_group_id,
+      feature_tag: item.feature_tag,
+      color_0: DyeColorParams{
+        color: if let Some(color) = &hair.target_color_0 { (color.r, color.g, color.b, color.a) } else { (0.0, 0.0, 0.0, 0.0) },
+        color_grid: hair.color_grid_id_0,
+      },
+      color_1: convert_color_params(&hair.target_color_1, &hair.color_grid_id_1),
+      roughness: hair.roughness_offset,
+      color_mode: hair.hair_color_mode,
+    })
+  }
+  #[inline]
+  fn convert_general(item: &image_custom_data::NikkiDIY, general: &image_custom_data::GeneralCoreData) -> OutfitDyeData{
+    OutfitDyeData::General(OutfitDyeGeneralData{
+      target_group_id: item.target_group_id,
+      feature_tag: item.feature_tag,
+      color: DyeColorParams{
+        color: (general.r, general.g, general.b, general.a),
+        color_grid: general.color_grid_id,
+      },
+    })
+  }
+  #[inline]
+  fn convert_special_effect(item: &image_custom_data::NikkiDIY, special_effect: &image_custom_data::SpecialEffectCoreData) -> SpecialEffectData{
+    SpecialEffectData{
+      target_group_id: item.target_group_id,
+      feature_tag: item.feature_tag,
+      color_grid: special_effect.color_grid_id,
+      cover_diy_color: special_effect.cover_diy_color,
+    }
+  }
+  #[inline]
+  fn convert_pattern_creation(item: &image_custom_data::NikkiDIY, pattern_creation: &image_custom_data::PatternCreationCoreData) -> PatternCreationData{
+    PatternCreationData{
+      target_group_id: item.target_group_id,
+      feature_tag: item.feature_tag,
+      texture_id: pattern_creation.replace_texture_id,
+      override_pattern_a: pattern_creation.override_pattern_a,
+      tiling: 0.0,
+    }
+  }
+  #[inline]
+  fn convert_pattern_creation_ext(item: &image_custom_data::NikkiDIY, pattern_creation_ext: &image_custom_data::PatternCreationExtCoreData) -> PatternCreationData{
+    PatternCreationData{
+      target_group_id: item.target_group_id,
+      feature_tag: item.feature_tag,
+      texture_id: 0,
+      override_pattern_a: false,
+      tiling: pattern_creation_ext.tiling_data,
+    }
+  }
+
   fn resolve_item(item: &image_custom_data::NikkiDIY) -> ClothParams{
     ClothParams{
       id: item.target_cloth_id,
       diy: match &item.core_data{
-        image_custom_data::CoreData::Hair(hair) => {
-          DiyData{
-            outfit_dye: vec![
-              OutfitDyeData::Hair(OutfitDyeHairData{
-                target_group_id: item.target_group_id,
-                feature_tag: item.feature_tag,
-                color_0: DyeColorParams{
-                  color: if let Some(color) = &hair.target_color_0 { (color.r, color.g, color.b, color.a) } else { (0.0, 0.0, 0.0, 0.0) },
-                  color_grid: hair.color_grid_id_0,
-                },
-                color_1: convert_color_params(&hair.target_color_1, &hair.color_grid_id_1),
-                roughness: hair.roughness_offset,
-                color_mode: hair.hair_color_mode,
-              })
-            ],
-            special_effect: vec![],
-            pattern_creation: vec![],
-          }
+        image_custom_data::CoreData::Hair(hair) => DiyData{
+          outfit_dye: vec![convert_hair(item, hair)],
+          special_effect: vec![],
+          pattern_creation: vec![],
         },
-        image_custom_data::CoreData::General(general) => {
-          DiyData{
-            outfit_dye: vec![
-              OutfitDyeData::General(OutfitDyeGeneralData{
-                target_group_id: item.target_group_id,
-                feature_tag: item.feature_tag,
-                color: DyeColorParams{
-                  color: (general.r, general.g, general.b, general.a),
-                  color_grid: general.color_grid_id,
-                },
-              })
-            ],
-            special_effect: vec![],
-            pattern_creation: vec![],
-          }
-        }
-        image_custom_data::CoreData::SpecialEffect(special_effect) => {
-          DiyData{
-            outfit_dye: vec![],
-            special_effect: vec![
-              SpecialEffectData{
-                target_group_id: item.target_group_id,
-                feature_tag: item.feature_tag,
-                color_grid: special_effect.color_grid_id,
-                cover_diy_color: special_effect.cover_diy_color,
-              }
-            ],
-            pattern_creation: vec![],
-          }
-        }
-        image_custom_data::CoreData::PatternCreation(pattern_creation) => {
-          DiyData{
-            outfit_dye: vec![],
-            special_effect: vec![],
-            pattern_creation: vec![
-              PatternCreationData{
-                target_group_id: item.target_group_id,
-                feature_tag: item.feature_tag,
-                texture_id: pattern_creation.replace_texture_id,
-                override_pattern_a: pattern_creation.override_pattern_a,
-                tiling: 0.0,
-              }
-            ],
-          }
-        }
-        image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) => {
-          DiyData{
-            outfit_dye: vec![],
-            special_effect: vec![],
-            pattern_creation: vec![
-              PatternCreationData{
-                target_group_id: item.target_group_id,
-                feature_tag: item.feature_tag,
-                texture_id: 0,
-                override_pattern_a: false,
-                tiling: pattern_creation_ext.tiling_data,
-              }
-            ],
-          }
-        }
+        image_custom_data::CoreData::General(general) => DiyData{
+          outfit_dye: vec![convert_general(item, general)],
+          special_effect: vec![],
+          pattern_creation: vec![],
+        },
+        image_custom_data::CoreData::SpecialEffect(special_effect) => DiyData{
+          outfit_dye: vec![],
+          special_effect: vec![convert_special_effect(item, special_effect)],
+          pattern_creation: vec![],
+        },
+        image_custom_data::CoreData::PatternCreation(pattern_creation) => DiyData{
+          outfit_dye: vec![],
+          special_effect: vec![],
+          pattern_creation: vec![convert_pattern_creation(item, pattern_creation)],
+        },
+        image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) => DiyData{
+          outfit_dye: vec![],
+          special_effect: vec![],
+          pattern_creation: vec![convert_pattern_creation_ext(item, pattern_creation_ext)],
+        },
       },
     }
   }
@@ -306,44 +307,16 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
           Some(params) => {
             match &item.core_data{
               image_custom_data::CoreData::Hair(hair) => {
-                params.diy.outfit_dye.push(OutfitDyeData::Hair(OutfitDyeHairData{
-                  target_group_id: item.target_group_id,
-                  feature_tag: item.feature_tag,
-                  color_0: DyeColorParams{
-                    color: if let Some(color) = &hair.target_color_0 { (color.r, color.g, color.b, color.a) } else { (0.0, 0.0, 0.0, 0.0) },
-                    color_grid: hair.color_grid_id_0,
-                  },
-                  color_1: convert_color_params(&hair.target_color_1, &hair.color_grid_id_1),
-                  roughness: hair.roughness_offset,
-                  color_mode: hair.hair_color_mode,
-                }));
+                params.diy.outfit_dye.push(convert_hair(item, hair));
               },
               image_custom_data::CoreData::General(general) => {
-                params.diy.outfit_dye.push(OutfitDyeData::General(OutfitDyeGeneralData{
-                  target_group_id: item.target_group_id,
-                  feature_tag: item.feature_tag,
-                  color: DyeColorParams{
-                    color: (general.r, general.g, general.b, general.a),
-                    color_grid: general.color_grid_id,
-                  },
-                }));
+                params.diy.outfit_dye.push(convert_general(item, general));
               }
               image_custom_data::CoreData::SpecialEffect(special_effect) => {
-                params.diy.special_effect.push(SpecialEffectData{
-                  target_group_id: item.target_group_id,
-                  feature_tag: item.feature_tag,
-                  color_grid: special_effect.color_grid_id,
-                  cover_diy_color: special_effect.cover_diy_color,
-                });
+                params.diy.special_effect.push(convert_special_effect(item, special_effect));
               }
               image_custom_data::CoreData::PatternCreation(pattern_creation) => {
-                params.diy.pattern_creation.push(PatternCreationData{
-                  target_group_id: item.target_group_id,
-                  feature_tag: item.feature_tag,
-                  texture_id: pattern_creation.replace_texture_id,
-                  override_pattern_a: pattern_creation.override_pattern_a,
-                  tiling: 0.0,
-                });
+                params.diy.pattern_creation.push(convert_pattern_creation(item, pattern_creation));
               }
               image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) => {
                 pattern_creation_tiling.insert(item.target_cloth_id, pattern_creation_ext.tiling_data);
@@ -371,8 +344,7 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
     AdaptiveArray::Item(item) => {
       clothes.insert(item.target_cloth_id, resolve_item(item));
     },
-    AdaptiveArray::Empty{} => {
-    },
+    AdaptiveArray::Empty{} => {},
   };
 
   clothes.into_values().collect()
