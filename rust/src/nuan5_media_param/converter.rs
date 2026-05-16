@@ -187,11 +187,26 @@ pub fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData) -> Ve
 }
 
 pub fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>) -> Vec<ClothParams>{
-  
-  
-  
-  
-  vec![]
+  let mut res = Vec::new();
+
+  let mut set = HashSet::new();
+  if let Some(nikki_diy) = data_nikki_diy {
+    let diy_clothes = convert_nikki_diy(nikki_diy);
+
+    set.extend(diy_clothes.iter().map(|param| param.id));
+    res.extend_from_slice(&diy_clothes);
+  }
+
+  for cloth in data {
+    if !set.contains(cloth) {
+      res.push(ClothParams{
+        id: cloth.clone(),
+        diy: None,
+      })
+    }
+  }
+
+  res
 }
 
 fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<ClothParams>{
