@@ -45,7 +45,7 @@ pub(crate) enum AdaptiveArray<T>{
 }
 
 impl<T: Clone> AdaptiveArray<T>{
-  pub(crate) fn to_vec(&self) -> Vec<T>{
+  pub(crate) fn as_vec(&self) -> Vec<T>{
     match self{
       AdaptiveArray::Array(v) => {
         v.clone()
@@ -64,4 +64,22 @@ impl<T: Clone> AdaptiveArray<T>{
 pub(crate) enum OptionMap<T>{
   None{},
   Some(T),
+}
+
+impl<T: Clone> OptionMap<T>{
+  pub(crate) fn as_option(&self) -> Option<T>{
+    match self{
+      OptionMap::Some(v) => Some(v.clone()),
+      OptionMap::None{} => None,
+    }
+  }
+}
+
+impl<T> OptionMap<T>{
+  pub(crate) fn to_option(self) -> Option<T>{
+    match self{
+      OptionMap::Some(v) => Some(v),
+      OptionMap::None{} => None,
+    }
+  }
 }
