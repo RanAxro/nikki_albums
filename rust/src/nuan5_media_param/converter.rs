@@ -4,15 +4,7 @@ use super::structs::nikki_photo_params::*;
 
 pub fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
-    photography: PhotographyParams{
-      edit: EditPhotoState::Disabled,
-      date: None,
-      time: None,
-      location: None,
-      weather: None,
-      photo_wall: vec![],
-      task: vec![],
-    },
+    photography: convert_photography_params(data),
     camera: None,
     nikki: None,
     momo: data.social_photo.as_ref()
@@ -50,7 +42,7 @@ fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) ->
       Some(photo_wall) => photo_wall.photo_id.to_vec(),
       None => vec![],
     },
-    task: vec![],
+    task: convert_task_params(data),
   }
 }
 
