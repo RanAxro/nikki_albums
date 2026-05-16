@@ -7,8 +7,10 @@ use super::structs::nikki_photo_params::*;
 pub fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
     photography: convert_photography_params(data),
-    camera: None,
-    nikki: None,
+    camera: data.social_photo.as_ref().map(|social_photo|{
+      convert_camera_params(social_photo, &data.portrait_mode_handler)
+    }),
+    nikki: data.social_photo.as_ref().map(convert_nikki_params),
     momo: data.social_photo.as_ref()
       .map(|social_photo| &social_photo.da_miao_info)
       .map(convert_momo_params),
@@ -107,8 +109,12 @@ fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> NikkiParams{
     loc: (data.photo_info.nikki_loc_x, data.photo_info.nikki_loc_y, data.photo_info.nikki_loc_z),
     rot: (data.photo_info.nikki_rot_yaw, data.photo_info.nikki_rot_pitch, data.photo_info.nikki_rot_roll),
     scale: (data.photo_info.nikki_scale_x, data.photo_info.nikki_scale_y, data.photo_info.nikki_scale_z),
-    // TODO
-    dressing: vec![],
+    dressing: DressingParams{
+      clothes: data.photo_info.nikki_clothes.as_ref().map(|nikki_clothes|{
+        convert_cloth(nikki_clothes, Some(&data.photo_info.nikki_diy))
+      }).unwrap_or(vec![]),
+      magicball: data.photo_info.magicball_color_ids.clone().unwrap_or(vec![]),
+    },
     weapon: data.weapon_snap_shot.as_ref().map(|weapon_snap_shot|{
       WeaponParams{
         id: weapon_snap_shot.weapon_id,
