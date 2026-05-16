@@ -1,6 +1,7 @@
 use crate::nuan5_media_param::serde_nuan5_json::ext_type::{OptionMap};
 use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
+use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data::MountInfo;
 use super::structs::nikki_photo_params::*;
 
 pub fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
@@ -40,7 +41,7 @@ fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) ->
     location: None,
     weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
     photo_wall: match &data.photo_wall_plugin{
-      Some(photo_wall) => photo_wall.photo_id.to_vec(),
+      Some(photo_wall) => photo_wall.photo_id.as_vec(),
       None => vec![],
     },
     task: convert_task_params(data),
@@ -96,6 +97,54 @@ fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &
       }
     },
     pose: data.photo_info.pose_id,
+  }
+}
+
+fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> NikkiParams{
+  NikkiParams{
+    giant_state: if let Some(true) = data.giant_state { true } else { false },
+    hidden: data.photo_info.nikki_hidden,
+    loc: (data.photo_info.nikki_loc_x, data.photo_info.nikki_loc_y, data.photo_info.nikki_loc_z),
+    rot: (data.photo_info.nikki_rot_yaw, data.photo_info.nikki_rot_pitch, data.photo_info.nikki_rot_roll),
+    scale: (data.photo_info.nikki_scale_x, data.photo_info.nikki_scale_y, data.photo_info.nikki_scale_z),
+    // TODO
+    dressing: vec![],
+    weapon: data.weapon_snap_shot.as_ref().map(|weapon_snap_shot|{
+      WeaponParams{
+        id: weapon_snap_shot.weapon_id,
+        slot_type: weapon_snap_shot.slot_type.clone(),
+        state: weapon_snap_shot.custom_state.clone(),
+      }
+    }),
+    interactions: data.interactions.as_vec().iter().map(|interaction|{
+      ObjectParams{
+        id: interaction.cfg_id,
+        loc: (interaction.loc_x, interaction.loc_y, interaction.loc_z),
+        rot: (interaction.rot_yaw, interaction.rot_pitch, interaction.rot_roll),
+        scale: (interaction.scale_x, interaction.scale_y, interaction.scale_z),
+      }
+    }).collect(),
+    mount: match &data.mount_info{
+      Some(mount_info) => {
+        mount_info.as_option_ref().map(|mount|{
+          ObjectParams{
+            id: mount.config_id.clone(),
+            loc: (mount.loc_x, mount.loc_y, mount.loc_z),
+            rot: (mount.rot_yaw, mount.rot_pitch, mount.rot_roll),
+            scale: (mount.scale_x, mount.scale_y, mount.scale_z),
+          }
+        })
+      },
+      None => None,
+    },
+    carrier: data.carrier_info.as_ref().map(|carrier|{
+      ObjectParams{
+        id: carrier.config_obj_id.clone(),
+        loc: (carrier.loc_x, carrier.loc_y, carrier.loc_z),
+        rot: (carrier.rot_yaw, carrier.rot_pitch, carrier.rot_roll),
+        scale: (carrier.scale_x, carrier.scale_y, carrier.scale_z),
+      }
+    }),
   }
 }
 
