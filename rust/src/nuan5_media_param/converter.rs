@@ -48,7 +48,7 @@ fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) ->
 }
 
 fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &Option<image_custom_data::PortraitModeHandler>) -> CameraParams{
-  let params = parse_camera_params(data.camera_params.as_ref());
+  let params = parse_camera_params(&data.camera_params);
 
   CameraParams{
     params: data.camera_params.clone(),
