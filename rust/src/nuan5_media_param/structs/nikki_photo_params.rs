@@ -131,7 +131,7 @@ pub struct DressingParams{
 #[derive(Clone)]
 pub struct ClothParams{
   pub id: i64,
-  pub diy: DiyData,
+  pub diy: Option<DiyData>,
 }
 
 #[derive(Clone)]

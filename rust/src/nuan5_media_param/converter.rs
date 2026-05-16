@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
 use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
@@ -187,10 +187,10 @@ pub fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData) -> Ve
 }
 
 pub fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>) -> Vec<ClothParams>{
-
-
-
-
+  
+  
+  
+  
   vec![]
 }
 
@@ -265,7 +265,7 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
   fn resolve_item(item: &image_custom_data::NikkiDIY) -> ClothParams{
     ClothParams{
       id: item.target_cloth_id,
-      diy: match &item.core_data{
+      diy: Some(match &item.core_data{
         image_custom_data::CoreData::Hair(hair) => DiyData{
           outfit_dye: vec![convert_hair(item, hair)],
           special_effect: vec![],
@@ -291,7 +291,7 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
           special_effect: vec![],
           pattern_creation: vec![convert_pattern_creation_ext(item, pattern_creation_ext)],
         },
-      },
+      }),
     }
   }
 
@@ -300,6 +300,9 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
 
   match data{
     AdaptiveArray::Array(items) => {
+      // PatternCreationData 由 image_custom_data::CoreData::PatternCreation 与 image_custom_data::CoreData::PatternCreationExt 的数据组成
+      // 将 image_custom_data::CoreData::PatternCreationExt (tiling_data字段) 单独收集
+      // items 遍历完毕后, 再把 tiling_data 插回到 对应的 image_custom_data::CoreData::PatternCreation
       let mut pattern_creation_tiling: HashMap<i64, f64> = HashMap::new();
 
       for item in items {
@@ -307,16 +310,16 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
           Some(params) => {
             match &item.core_data{
               image_custom_data::CoreData::Hair(hair) => {
-                params.diy.outfit_dye.push(convert_hair(item, hair));
+                params.diy.as_mut().unwrap().outfit_dye.push(convert_hair(item, hair));
               },
               image_custom_data::CoreData::General(general) => {
-                params.diy.outfit_dye.push(convert_general(item, general));
+                params.diy.as_mut().unwrap().outfit_dye.push(convert_general(item, general));
               }
               image_custom_data::CoreData::SpecialEffect(special_effect) => {
-                params.diy.special_effect.push(convert_special_effect(item, special_effect));
+                params.diy.as_mut().unwrap().special_effect.push(convert_special_effect(item, special_effect));
               }
               image_custom_data::CoreData::PatternCreation(pattern_creation) => {
-                params.diy.pattern_creation.push(convert_pattern_creation(item, pattern_creation));
+                params.diy.as_mut().unwrap().pattern_creation.push(convert_pattern_creation(item, pattern_creation));
               }
               image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) => {
                 pattern_creation_tiling.insert(item.target_cloth_id, pattern_creation_ext.tiling_data);
@@ -335,12 +338,14 @@ fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<C
 
       for (id, params) in clothes.iter_mut(){
         if let Some(tiling) = pattern_creation_tiling.get(id) {
-          for pattern_creation in &mut params.diy.pattern_creation {
+          for pattern_creation in &mut params.diy.as_mut().unwrap().pattern_creation {
             pattern_creation.tiling = tiling.clone();
           }
         }
       }
     },
+    // 处理单例
+    // 理论上不应该出现 image_custom_data::CoreData::PatternCreationExt
     AdaptiveArray::Item(item) => {
       clothes.insert(item.target_cloth_id, resolve_item(item));
     },
