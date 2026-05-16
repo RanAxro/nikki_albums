@@ -435,7 +435,7 @@ pub struct PatternCreationCoreData{
 #[derive(Serialize, Deserialize)]
 pub struct PatternCreationExtCoreData{
   #[serde(rename = "TilingData")]
-  pub replace_texture_id: f64,
+  pub tiling_data: f64,
 }
 
 
