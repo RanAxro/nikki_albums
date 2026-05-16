@@ -168,7 +168,7 @@ pub struct OutfitDyeGeneralData{
 pub struct SpecialEffectData{
   pub target_group_id: i64,
   pub feature_tag: i64,
-  pub color_grid: u16,
+  pub color_grid: i64,
   pub cover_diy_color: bool,
 }
 
@@ -184,7 +184,7 @@ pub struct PatternCreationData{
 #[derive(Clone)]
 pub struct DyeColorParams{
   pub color: (f64, f64, f64, f64),
-  pub color_grid: u16,
+  pub color_grid: i64,
 }
 
 #[derive(Clone)]
