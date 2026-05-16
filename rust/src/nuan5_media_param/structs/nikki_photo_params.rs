@@ -50,7 +50,7 @@ pub struct NikkiParams{
   pub loc: (f64, f64, f64),
   pub rot: (f64, f64, f64),
   pub scale: (f64, f64, f64),
-  pub dressing: Vec<ClothParams>,
+  pub dressing: Vec<DressingParams>,
   pub weapon: Option<WeaponParams>,
   pub interactions: Vec<ObjectParams>,
   pub mount: Option<ObjectParams>,
