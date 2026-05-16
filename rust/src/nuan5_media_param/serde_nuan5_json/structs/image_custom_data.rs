@@ -333,7 +333,7 @@ pub struct WeaponSnapShot{
   pub weapon_id: i64,
 
   #[serde(rename = "customState")]
-  pub custom_state: String,
+  pub custom_state: Option<String>,
 
   #[serde(rename = "slotType")]
   pub slot_type: String,
