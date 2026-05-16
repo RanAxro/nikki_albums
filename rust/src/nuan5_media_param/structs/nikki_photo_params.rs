@@ -40,7 +40,7 @@ pub struct CameraParams{
   pub shadows: f64,
   pub light: LightParams,
   pub filter: FilterParams,
-  pub pose: String,
+  pub pose: i64,
 }
 
 #[derive(Clone)]
