@@ -82,4 +82,18 @@ impl<T> OptionMap<T>{
       OptionMap::None{} => None,
     }
   }
+
+  pub(crate) fn as_option_map_ref(&self) -> OptionMap<&T>{
+    match self{
+      OptionMap::Some(v) => OptionMap::Some(&v),
+      OptionMap::None{} => OptionMap::None{},
+    }
+  }
+
+  pub(crate) fn as_option_ref(&self) -> Option<&T>{
+    match self{
+      OptionMap::Some(v) => Some(&v),
+      OptionMap::None{} => None,
+    }
+  }
 }
