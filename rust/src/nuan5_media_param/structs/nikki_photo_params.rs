@@ -131,14 +131,14 @@ pub struct DressingParams{
 #[derive(Clone)]
 pub struct ClothParams{
   pub id: i64,
-  pub diy: Vec<DiyData>,
+  pub diy: DiyData,
 }
 
 #[derive(Clone)]
-pub enum DiyData{
-  OutfitDye(Vec<OutfitDyeData>),
-  SpecialEffect(Vec<SpecialEffectData>),
-  PatternCreation(Vec<PatternCreationData>),
+pub struct DiyData{
+  pub outfit_dye: Vec<OutfitDyeData>,
+  pub special_effect: Vec<SpecialEffectData>,
+  pub pattern_creation: Vec<PatternCreationData>,
 }
 
 #[derive(Clone)]
