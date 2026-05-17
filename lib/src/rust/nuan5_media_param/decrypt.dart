@@ -8,77 +8,79 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'decrypt.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `convert_result`
+// These functions are ignored because they are not marked as `pub`: `convert_media_result`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
 
-CustomData? decrypt(List<int> data, Key key) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptDecrypt(data: data, key: key);
+CustomData? mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
+    .crateNuan5MediaParamDecryptMediaDecrypt(data: data, key: key);
 
-CustomData? decodeFileBytesUnchecked({
+CustomData? mediaDecodeFileBytesUnchecked({
   required List<int> flag,
   required List<int> bytes,
-  required Key key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFileBytesUnchecked(
-  flag: flag,
-  bytes: bytes,
-  key: key,
-);
+  required MediaKey key,
+}) => RustLib.instance.api
+    .crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked(
+      flag: flag,
+      bytes: bytes,
+      key: key,
+    );
 
-Future<CustomData?> decodeFileUnchecked({
+Future<CustomData?> mediaDecodeFileUnchecked({
   required List<int> flag,
   required String path,
-  required Key key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFileUnchecked(
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptMediaDecodeFileUnchecked(
   flag: flag,
   path: path,
   key: key,
 );
 
-CustomData? decodeFileUncheckedSync({
+CustomData? mediaDecodeFileUncheckedSync({
   required List<int> flag,
   required String path,
-  required Key key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFileUncheckedSync(
-  flag: flag,
-  path: path,
-  key: key,
-);
+  required MediaKey key,
+}) => RustLib.instance.api
+    .crateNuan5MediaParamDecryptMediaDecodeFileUncheckedSync(
+      flag: flag,
+      path: path,
+      key: key,
+    );
 
-Stream<DecodeEvent> decodeFilesUnchecked({
+Stream<MediaDecodeEvent> mediaDecodeFilesUnchecked({
   required List<int> flag,
   required List<String> paths,
-  required Key key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptDecodeFilesUnchecked(
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptMediaDecodeFilesUnchecked(
   flag: flag,
   paths: paths,
   key: key,
 );
 
 /// 批量解密（无进度）
-Future<List<CustomData?>> decodeFilesUncheckedNoProgress({
+Future<List<CustomData?>> mediaDecodeFilesUncheckedNoProgress({
   required List<int> flag,
   required List<String> paths,
-  required Key key,
+  required MediaKey key,
 }) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptDecodeFilesUncheckedNoProgress(
+    .crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress(
       flag: flag,
       paths: paths,
       key: key,
     );
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Key>>
-abstract class Key implements RustOpaqueInterface {
-  static Key cameraParam() =>
-      RustLib.instance.api.crateNuan5MediaParamDecryptKeyCameraParam();
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
+abstract class MediaKey implements RustOpaqueInterface {
+  static MediaKey cameraParam() =>
+      RustLib.instance.api.crateNuan5MediaParamDecryptMediaKeyCameraParam();
 
   @override
   Future<void> dispose();
 
-  static Key fromStr(String s) =>
-      RustLib.instance.api.crateNuan5MediaParamDecryptKeyFromStr(s: s);
+  static MediaKey fromStr(String s) =>
+      RustLib.instance.api.crateNuan5MediaParamDecryptMediaKeyFromStr(s: s);
 
-  static Key fromStrBytes(List<int> bytes) => RustLib.instance.api
-      .crateNuan5MediaParamDecryptKeyFromStrBytes(bytes: bytes);
+  static MediaKey fromStrBytes(List<int> bytes) => RustLib.instance.api
+      .crateNuan5MediaParamDecryptMediaKeyFromStrBytes(bytes: bytes);
 }
 
 @freezed
@@ -90,10 +92,11 @@ sealed class CustomData with _$CustomData {
 }
 
 @freezed
-sealed class DecodeEvent with _$DecodeEvent {
-  const DecodeEvent._();
+sealed class MediaDecodeEvent with _$MediaDecodeEvent {
+  const MediaDecodeEvent._();
 
-  const factory DecodeEvent.progress(double field0) = DecodeEvent_Progress;
-  const factory DecodeEvent.result(List<CustomData?> field0) =
-      DecodeEvent_Result;
+  const factory MediaDecodeEvent.progress(double field0) =
+      MediaDecodeEvent_Progress;
+  const factory MediaDecodeEvent.result(List<CustomData?> field0) =
+      MediaDecodeEvent_Result;
 }

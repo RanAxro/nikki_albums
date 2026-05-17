@@ -270,7 +270,7 @@ as Uint8List,
 }
 
 /// @nodoc
-mixin _$DecodeEvent {
+mixin _$MediaDecodeEvent {
 
  Object get field0;
 
@@ -278,7 +278,7 @@ mixin _$DecodeEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DecodeEvent&&const DeepCollectionEquality().equals(other.field0, field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent&&const DeepCollectionEquality().equals(other.field0, field0));
 }
 
 
@@ -287,20 +287,20 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'DecodeEvent(field0: $field0)';
+  return 'MediaDecodeEvent(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-class $DecodeEventCopyWith<$Res>  {
-$DecodeEventCopyWith(DecodeEvent _, $Res Function(DecodeEvent) __);
+class $MediaDecodeEventCopyWith<$Res>  {
+$MediaDecodeEventCopyWith(MediaDecodeEvent _, $Res Function(MediaDecodeEvent) __);
 }
 
 
-/// Adds pattern-matching-related methods to [DecodeEvent].
-extension DecodeEventPatterns on DecodeEvent {
+/// Adds pattern-matching-related methods to [MediaDecodeEvent].
+extension MediaDecodeEventPatterns on MediaDecodeEvent {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -313,11 +313,11 @@ extension DecodeEventPatterns on DecodeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( DecodeEvent_Progress value)?  progress,TResult Function( DecodeEvent_Result value)?  result,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MediaDecodeEvent_Progress value)?  progress,TResult Function( MediaDecodeEvent_Result value)?  result,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case DecodeEvent_Progress() when progress != null:
-return progress(_that);case DecodeEvent_Result() when result != null:
+case MediaDecodeEvent_Progress() when progress != null:
+return progress(_that);case MediaDecodeEvent_Result() when result != null:
 return result(_that);case _:
   return orElse();
 
@@ -336,11 +336,11 @@ return result(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( DecodeEvent_Progress value)  progress,required TResult Function( DecodeEvent_Result value)  result,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MediaDecodeEvent_Progress value)  progress,required TResult Function( MediaDecodeEvent_Result value)  result,}){
 final _that = this;
 switch (_that) {
-case DecodeEvent_Progress():
-return progress(_that);case DecodeEvent_Result():
+case MediaDecodeEvent_Progress():
+return progress(_that);case MediaDecodeEvent_Result():
 return result(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -355,11 +355,11 @@ return result(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( DecodeEvent_Progress value)?  progress,TResult? Function( DecodeEvent_Result value)?  result,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MediaDecodeEvent_Progress value)?  progress,TResult? Function( MediaDecodeEvent_Result value)?  result,}){
 final _that = this;
 switch (_that) {
-case DecodeEvent_Progress() when progress != null:
-return progress(_that);case DecodeEvent_Result() when result != null:
+case MediaDecodeEvent_Progress() when progress != null:
+return progress(_that);case MediaDecodeEvent_Result() when result != null:
 return result(_that);case _:
   return null;
 
@@ -379,8 +379,8 @@ return result(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( double field0)?  progress,TResult Function( List<CustomData?> field0)?  result,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case DecodeEvent_Progress() when progress != null:
-return progress(_that.field0);case DecodeEvent_Result() when result != null:
+case MediaDecodeEvent_Progress() when progress != null:
+return progress(_that.field0);case MediaDecodeEvent_Result() when result != null:
 return result(_that.field0);case _:
   return orElse();
 
@@ -401,8 +401,8 @@ return result(_that.field0);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( double field0)  progress,required TResult Function( List<CustomData?> field0)  result,}) {final _that = this;
 switch (_that) {
-case DecodeEvent_Progress():
-return progress(_that.field0);case DecodeEvent_Result():
+case MediaDecodeEvent_Progress():
+return progress(_that.field0);case MediaDecodeEvent_Result():
 return result(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -419,8 +419,8 @@ return result(_that.field0);}
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( double field0)?  progress,TResult? Function( List<CustomData?> field0)?  result,}) {final _that = this;
 switch (_that) {
-case DecodeEvent_Progress() when progress != null:
-return progress(_that.field0);case DecodeEvent_Result() when result != null:
+case MediaDecodeEvent_Progress() when progress != null:
+return progress(_that.field0);case MediaDecodeEvent_Result() when result != null:
 return result(_that.field0);case _:
   return null;
 
@@ -432,23 +432,23 @@ return result(_that.field0);case _:
 /// @nodoc
 
 
-class DecodeEvent_Progress extends DecodeEvent {
-  const DecodeEvent_Progress(this.field0): super._();
+class MediaDecodeEvent_Progress extends MediaDecodeEvent {
+  const MediaDecodeEvent_Progress(this.field0): super._();
   
 
 @override final  double field0;
 
-/// Create a copy of DecodeEvent
+/// Create a copy of MediaDecodeEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$DecodeEvent_ProgressCopyWith<DecodeEvent_Progress> get copyWith => _$DecodeEvent_ProgressCopyWithImpl<DecodeEvent_Progress>(this, _$identity);
+$MediaDecodeEvent_ProgressCopyWith<MediaDecodeEvent_Progress> get copyWith => _$MediaDecodeEvent_ProgressCopyWithImpl<MediaDecodeEvent_Progress>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DecodeEvent_Progress&&(identical(other.field0, field0) || other.field0 == field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent_Progress&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
@@ -457,15 +457,15 @@ int get hashCode => Object.hash(runtimeType,field0);
 
 @override
 String toString() {
-  return 'DecodeEvent.progress(field0: $field0)';
+  return 'MediaDecodeEvent.progress(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $DecodeEvent_ProgressCopyWith<$Res> implements $DecodeEventCopyWith<$Res> {
-  factory $DecodeEvent_ProgressCopyWith(DecodeEvent_Progress value, $Res Function(DecodeEvent_Progress) _then) = _$DecodeEvent_ProgressCopyWithImpl;
+abstract mixin class $MediaDecodeEvent_ProgressCopyWith<$Res> implements $MediaDecodeEventCopyWith<$Res> {
+  factory $MediaDecodeEvent_ProgressCopyWith(MediaDecodeEvent_Progress value, $Res Function(MediaDecodeEvent_Progress) _then) = _$MediaDecodeEvent_ProgressCopyWithImpl;
 @useResult
 $Res call({
  double field0
@@ -476,17 +476,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$DecodeEvent_ProgressCopyWithImpl<$Res>
-    implements $DecodeEvent_ProgressCopyWith<$Res> {
-  _$DecodeEvent_ProgressCopyWithImpl(this._self, this._then);
+class _$MediaDecodeEvent_ProgressCopyWithImpl<$Res>
+    implements $MediaDecodeEvent_ProgressCopyWith<$Res> {
+  _$MediaDecodeEvent_ProgressCopyWithImpl(this._self, this._then);
 
-  final DecodeEvent_Progress _self;
-  final $Res Function(DecodeEvent_Progress) _then;
+  final MediaDecodeEvent_Progress _self;
+  final $Res Function(MediaDecodeEvent_Progress) _then;
 
-/// Create a copy of DecodeEvent
+/// Create a copy of MediaDecodeEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(DecodeEvent_Progress(
+  return _then(MediaDecodeEvent_Progress(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
 as double,
   ));
@@ -498,8 +498,8 @@ as double,
 /// @nodoc
 
 
-class DecodeEvent_Result extends DecodeEvent {
-  const DecodeEvent_Result(final  List<CustomData?> field0): _field0 = field0,super._();
+class MediaDecodeEvent_Result extends MediaDecodeEvent {
+  const MediaDecodeEvent_Result(final  List<CustomData?> field0): _field0 = field0,super._();
   
 
  final  List<CustomData?> _field0;
@@ -510,17 +510,17 @@ class DecodeEvent_Result extends DecodeEvent {
 }
 
 
-/// Create a copy of DecodeEvent
+/// Create a copy of MediaDecodeEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$DecodeEvent_ResultCopyWith<DecodeEvent_Result> get copyWith => _$DecodeEvent_ResultCopyWithImpl<DecodeEvent_Result>(this, _$identity);
+$MediaDecodeEvent_ResultCopyWith<MediaDecodeEvent_Result> get copyWith => _$MediaDecodeEvent_ResultCopyWithImpl<MediaDecodeEvent_Result>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DecodeEvent_Result&&const DeepCollectionEquality().equals(other._field0, _field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent_Result&&const DeepCollectionEquality().equals(other._field0, _field0));
 }
 
 
@@ -529,15 +529,15 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'DecodeEvent.result(field0: $field0)';
+  return 'MediaDecodeEvent.result(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $DecodeEvent_ResultCopyWith<$Res> implements $DecodeEventCopyWith<$Res> {
-  factory $DecodeEvent_ResultCopyWith(DecodeEvent_Result value, $Res Function(DecodeEvent_Result) _then) = _$DecodeEvent_ResultCopyWithImpl;
+abstract mixin class $MediaDecodeEvent_ResultCopyWith<$Res> implements $MediaDecodeEventCopyWith<$Res> {
+  factory $MediaDecodeEvent_ResultCopyWith(MediaDecodeEvent_Result value, $Res Function(MediaDecodeEvent_Result) _then) = _$MediaDecodeEvent_ResultCopyWithImpl;
 @useResult
 $Res call({
  List<CustomData?> field0
@@ -548,17 +548,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$DecodeEvent_ResultCopyWithImpl<$Res>
-    implements $DecodeEvent_ResultCopyWith<$Res> {
-  _$DecodeEvent_ResultCopyWithImpl(this._self, this._then);
+class _$MediaDecodeEvent_ResultCopyWithImpl<$Res>
+    implements $MediaDecodeEvent_ResultCopyWith<$Res> {
+  _$MediaDecodeEvent_ResultCopyWithImpl(this._self, this._then);
 
-  final DecodeEvent_Result _self;
-  final $Res Function(DecodeEvent_Result) _then;
+  final MediaDecodeEvent_Result _self;
+  final $Res Function(MediaDecodeEvent_Result) _then;
 
-/// Create a copy of DecodeEvent
+/// Create a copy of MediaDecodeEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(DecodeEvent_Result(
+  return _then(MediaDecodeEvent_Result(
 null == field0 ? _self._field0 : field0 // ignore: cast_nullable_to_non_nullable
 as List<CustomData?>,
   ));

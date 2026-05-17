@@ -11,6 +11,10 @@ import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
 import 'nuan5_media_param/decrypt.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'thumbnail.dart';
+import 'thumbnail/jpeg.dart';
+import 'thumbnail/mp4_h264.dart';
+import 'thumbnail/png.dart';
 
 /// Main entrypoint of the Rust API
 class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
@@ -67,7 +71,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -1316990671;
+  int get rustContentHash => 1422373251;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -79,61 +83,86 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  Key crateNuan5MediaParamDecryptKeyCameraParam();
+  MediaKey crateNuan5MediaParamDecryptMediaKeyCameraParam();
 
-  Future<void> crateNuan5MediaParamDecryptKeyDispose({required Key that});
+  Future<void> crateNuan5MediaParamDecryptMediaKeyDispose({
+    required MediaKey that,
+  });
 
-  Key crateNuan5MediaParamDecryptKeyFromStr({required String s});
+  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStr({required String s});
 
-  Key crateNuan5MediaParamDecryptKeyFromStrBytes({required List<int> bytes});
-
-  CustomData? crateNuan5MediaParamDecryptDecodeFileBytesUnchecked({
-    required List<int> flag,
+  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStrBytes({
     required List<int> bytes,
-    required Key key,
   });
 
-  Future<CustomData?> crateNuan5MediaParamDecryptDecodeFileUnchecked({
-    required List<int> flag,
-    required String path,
-    required Key key,
+  Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
+    required List<int> jpegBytes,
+    int? targetWidth,
+    int? targetHeight,
   });
 
-  CustomData? crateNuan5MediaParamDecryptDecodeFileUncheckedSync({
-    required List<int> flag,
-    required String path,
-    required Key key,
+  Future<Thumbnail> crateThumbnailMp4H264GenerateThumbnail({
+    required List<int> mp4Bytes,
+    int? targetWidth,
+    int? targetHeight,
   });
 
-  Stream<DecodeEvent> crateNuan5MediaParamDecryptDecodeFilesUnchecked({
-    required List<int> flag,
-    required List<String> paths,
-    required Key key,
-  });
-
-  Future<List<CustomData?>>
-  crateNuan5MediaParamDecryptDecodeFilesUncheckedNoProgress({
-    required List<int> flag,
-    required List<String> paths,
-    required Key key,
-  });
-
-  CustomData? crateNuan5MediaParamDecryptDecrypt({
-    required List<int> data,
-    required Key key,
+  Future<Thumbnail> crateThumbnailPngGenerateThumbnail({
+    required List<int> pngBytes,
+    int? targetWidth,
+    int? targetHeight,
   });
 
   String crateApiSimpleGreet({required String name});
 
   Future<void> crateApiSimpleInitApp();
 
+  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked({
+    required List<int> flag,
+    required List<int> bytes,
+    required MediaKey key,
+  });
+
+  Future<CustomData?> crateNuan5MediaParamDecryptMediaDecodeFileUnchecked({
+    required List<int> flag,
+    required String path,
+    required MediaKey key,
+  });
+
+  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileUncheckedSync({
+    required List<int> flag,
+    required String path,
+    required MediaKey key,
+  });
+
+  Stream<MediaDecodeEvent>
+  crateNuan5MediaParamDecryptMediaDecodeFilesUnchecked({
+    required List<int> flag,
+    required List<String> paths,
+    required MediaKey key,
+  });
+
+  Future<List<CustomData?>>
+  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress({
+    required List<int> flag,
+    required List<String> paths,
+    required MediaKey key,
+  });
+
+  CustomData? crateNuan5MediaParamDecryptMediaDecrypt({
+    required List<int> data,
+    required MediaKey key,
+  });
+
   int crateApiSimpleTestAdd({required int num1, required int num2});
 
-  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Key;
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_MediaKey;
 
-  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Key;
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_MediaKey;
 
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_KeyPtr;
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_MediaKeyPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -145,7 +174,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Key crateNuan5MediaParamDecryptKeyCameraParam() {
+  MediaKey crateNuan5MediaParamDecryptMediaKeyCameraParam() {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -154,26 +183,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey,
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptKeyCameraParamConstMeta,
+        constMeta: kCrateNuan5MediaParamDecryptMediaKeyCameraParamConstMeta,
         argValues: [],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptKeyCameraParamConstMeta =>
-      const TaskConstMeta(debugName: "Key_camera_param", argNames: []);
+  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyCameraParamConstMeta =>
+      const TaskConstMeta(debugName: "MediaKey_camera_param", argNames: []);
 
   @override
-  Future<void> crateNuan5MediaParamDecryptKeyDispose({required Key that}) {
+  Future<void> crateNuan5MediaParamDecryptMediaKeyDispose({
+    required MediaKey that,
+  }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
             that,
             serializer,
           );
@@ -188,18 +219,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_unit,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptKeyDisposeConstMeta,
+        constMeta: kCrateNuan5MediaParamDecryptMediaKeyDisposeConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptKeyDisposeConstMeta =>
-      const TaskConstMeta(debugName: "Key_dispose", argNames: ["that"]);
+  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyDisposeConstMeta =>
+      const TaskConstMeta(debugName: "MediaKey_dispose", argNames: ["that"]);
 
   @override
-  Key crateNuan5MediaParamDecryptKeyFromStr({required String s}) {
+  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStr({required String s}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -209,21 +240,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey,
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptKeyFromStrConstMeta,
+        constMeta: kCrateNuan5MediaParamDecryptMediaKeyFromStrConstMeta,
         argValues: [s],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptKeyFromStrConstMeta =>
-      const TaskConstMeta(debugName: "Key_from_str", argNames: ["s"]);
+  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyFromStrConstMeta =>
+      const TaskConstMeta(debugName: "MediaKey_from_str", argNames: ["s"]);
 
   @override
-  Key crateNuan5MediaParamDecryptKeyFromStrBytes({required List<int> bytes}) {
+  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStrBytes({
+    required List<int> bytes,
+  }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -233,72 +266,72 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey,
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptKeyFromStrBytesConstMeta,
+        constMeta: kCrateNuan5MediaParamDecryptMediaKeyFromStrBytesConstMeta,
         argValues: [bytes],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptKeyFromStrBytesConstMeta =>
-      const TaskConstMeta(debugName: "Key_from_str_bytes", argNames: ["bytes"]);
-
-  @override
-  CustomData? crateNuan5MediaParamDecryptDecodeFileBytesUnchecked({
-    required List<int> flag,
-    required List<int> bytes,
-    required Key key,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(flag, serializer);
-          sse_encode_list_prim_u_8_loose(bytes, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-            key,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5MediaParamDecryptDecodeFileBytesUncheckedConstMeta,
-        argValues: [flag, bytes, key],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecryptDecodeFileBytesUncheckedConstMeta =>
+  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyFromStrBytesConstMeta =>
       const TaskConstMeta(
-        debugName: "decode_file_bytes_unchecked",
-        argNames: ["flag", "bytes", "key"],
+        debugName: "MediaKey_from_str_bytes",
+        argNames: ["bytes"],
       );
 
   @override
-  Future<CustomData?> crateNuan5MediaParamDecryptDecodeFileUnchecked({
-    required List<int> flag,
-    required String path,
-    required Key key,
+  Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
+    required List<int> jpegBytes,
+    int? targetWidth,
+    int? targetHeight,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(flag, serializer);
-          sse_encode_String(path, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-            key,
+          sse_encode_list_prim_u_8_loose(jpegBytes, serializer);
+          sse_encode_opt_box_autoadd_u_32(targetWidth, serializer);
+          sse_encode_opt_box_autoadd_u_32(targetHeight, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
             serializer,
+            funcId: 5,
+            port: port_,
           );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_thumbnail,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateThumbnailJpegGenerateThumbnailConstMeta,
+        argValues: [jpegBytes, targetWidth, targetHeight],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateThumbnailJpegGenerateThumbnailConstMeta =>
+      const TaskConstMeta(
+        debugName: "generate_thumbnail",
+        argNames: ["jpegBytes", "targetWidth", "targetHeight"],
+      );
+
+  @override
+  Future<Thumbnail> crateThumbnailMp4H264GenerateThumbnail({
+    required List<int> mp4Bytes,
+    int? targetWidth,
+    int? targetHeight,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(mp4Bytes, serializer);
+          sse_encode_opt_box_autoadd_u_32(targetWidth, serializer);
+          sse_encode_opt_box_autoadd_u_32(targetHeight, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -307,175 +340,58 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_thumbnail,
+          decodeErrorData: sse_decode_String,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptDecodeFileUncheckedConstMeta,
-        argValues: [flag, path, key],
+        constMeta: kCrateThumbnailMp4H264GenerateThumbnailConstMeta,
+        argValues: [mp4Bytes, targetWidth, targetHeight],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptDecodeFileUncheckedConstMeta =>
+  TaskConstMeta get kCrateThumbnailMp4H264GenerateThumbnailConstMeta =>
       const TaskConstMeta(
-        debugName: "decode_file_unchecked",
-        argNames: ["flag", "path", "key"],
+        debugName: "generate_thumbnail",
+        argNames: ["mp4Bytes", "targetWidth", "targetHeight"],
       );
 
   @override
-  CustomData? crateNuan5MediaParamDecryptDecodeFileUncheckedSync({
-    required List<int> flag,
-    required String path,
-    required Key key,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(flag, serializer);
-          sse_encode_String(path, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-            key,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateNuan5MediaParamDecryptDecodeFileUncheckedSyncConstMeta,
-        argValues: [flag, path, key],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecryptDecodeFileUncheckedSyncConstMeta =>
-      const TaskConstMeta(
-        debugName: "decode_file_unchecked_sync",
-        argNames: ["flag", "path", "key"],
-      );
-
-  @override
-  Stream<DecodeEvent> crateNuan5MediaParamDecryptDecodeFilesUnchecked({
-    required List<int> flag,
-    required List<String> paths,
-    required Key key,
-  }) {
-    final progressSink = RustStreamSink<DecodeEvent>();
-    unawaited(
-      handler.executeNormal(
-        NormalTask(
-          callFfi: (port_) {
-            final serializer = SseSerializer(generalizedFrbRustBinding);
-            sse_encode_list_prim_u_8_loose(flag, serializer);
-            sse_encode_list_String(paths, serializer);
-            sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-              key,
-              serializer,
-            );
-            sse_encode_StreamSink_decode_event_Sse(progressSink, serializer);
-            pdeCallFfi(
-              generalizedFrbRustBinding,
-              serializer,
-              funcId: 8,
-              port: port_,
-            );
-          },
-          codec: SseCodec(
-            decodeSuccessData: sse_decode_unit,
-            decodeErrorData: sse_decode_AnyhowException,
-          ),
-          constMeta: kCrateNuan5MediaParamDecryptDecodeFilesUncheckedConstMeta,
-          argValues: [flag, paths, key, progressSink],
-          apiImpl: this,
-        ),
-      ),
-    );
-    return progressSink.stream;
-  }
-
-  TaskConstMeta get kCrateNuan5MediaParamDecryptDecodeFilesUncheckedConstMeta =>
-      const TaskConstMeta(
-        debugName: "decode_files_unchecked",
-        argNames: ["flag", "paths", "key", "progressSink"],
-      );
-
-  @override
-  Future<List<CustomData?>>
-  crateNuan5MediaParamDecryptDecodeFilesUncheckedNoProgress({
-    required List<int> flag,
-    required List<String> paths,
-    required Key key,
+  Future<Thumbnail> crateThumbnailPngGenerateThumbnail({
+    required List<int> pngBytes,
+    int? targetWidth,
+    int? targetHeight,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(flag, serializer);
-          sse_encode_list_String(paths, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-            key,
-            serializer,
-          );
+          sse_encode_list_prim_u_8_loose(pngBytes, serializer);
+          sse_encode_opt_box_autoadd_u_32(targetWidth, serializer);
+          sse_encode_opt_box_autoadd_u_32(targetHeight, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 9,
+            funcId: 7,
             port: port_,
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_list_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_thumbnail,
+          decodeErrorData: sse_decode_String,
         ),
-        constMeta:
-            kCrateNuan5MediaParamDecryptDecodeFilesUncheckedNoProgressConstMeta,
-        argValues: [flag, paths, key],
+        constMeta: kCrateThumbnailPngGenerateThumbnailConstMeta,
+        argValues: [pngBytes, targetWidth, targetHeight],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecryptDecodeFilesUncheckedNoProgressConstMeta =>
+  TaskConstMeta get kCrateThumbnailPngGenerateThumbnailConstMeta =>
       const TaskConstMeta(
-        debugName: "decode_files_unchecked_no_progress",
-        argNames: ["flag", "paths", "key"],
+        debugName: "generate_thumbnail",
+        argNames: ["pngBytes", "targetWidth", "targetHeight"],
       );
-
-  @override
-  CustomData? crateNuan5MediaParamDecryptDecrypt({
-    required List<int> data,
-    required Key key,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(data, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-            key,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateNuan5MediaParamDecryptDecryptConstMeta,
-        argValues: [data, key],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateNuan5MediaParamDecryptDecryptConstMeta =>
-      const TaskConstMeta(debugName: "decrypt", argNames: ["data", "key"]);
 
   @override
   String crateApiSimpleGreet({required String name}) {
@@ -484,7 +400,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -509,7 +425,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 9,
             port: port_,
           );
         },
@@ -528,6 +444,249 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
+  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked({
+    required List<int> flag,
+    required List<int> bytes,
+    required MediaKey key,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(flag, serializer);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5MediaParamDecryptMediaDecodeFileBytesUncheckedConstMeta,
+        argValues: [flag, bytes, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecryptMediaDecodeFileBytesUncheckedConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decode_file_bytes_unchecked",
+        argNames: ["flag", "bytes", "key"],
+      );
+
+  @override
+  Future<CustomData?> crateNuan5MediaParamDecryptMediaDecodeFileUnchecked({
+    required List<int> flag,
+    required String path,
+    required MediaKey key,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(flag, serializer);
+          sse_encode_String(path, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 11,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedConstMeta,
+        argValues: [flag, path, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decode_file_unchecked",
+        argNames: ["flag", "path", "key"],
+      );
+
+  @override
+  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileUncheckedSync({
+    required List<int> flag,
+    required String path,
+    required MediaKey key,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(flag, serializer);
+          sse_encode_String(path, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedSyncConstMeta,
+        argValues: [flag, path, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedSyncConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decode_file_unchecked_sync",
+        argNames: ["flag", "path", "key"],
+      );
+
+  @override
+  Stream<MediaDecodeEvent>
+  crateNuan5MediaParamDecryptMediaDecodeFilesUnchecked({
+    required List<int> flag,
+    required List<String> paths,
+    required MediaKey key,
+  }) {
+    final progressSink = RustStreamSink<MediaDecodeEvent>();
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_list_prim_u_8_loose(flag, serializer);
+            sse_encode_list_String(paths, serializer);
+            sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+              key,
+              serializer,
+            );
+            sse_encode_StreamSink_media_decode_event_Sse(
+              progressSink,
+              serializer,
+            );
+            pdeCallFfi(
+              generalizedFrbRustBinding,
+              serializer,
+              funcId: 13,
+              port: port_,
+            );
+          },
+          codec: SseCodec(
+            decodeSuccessData: sse_decode_unit,
+            decodeErrorData: sse_decode_AnyhowException,
+          ),
+          constMeta:
+              kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedConstMeta,
+          argValues: [flag, paths, key, progressSink],
+          apiImpl: this,
+        ),
+      ),
+    );
+    return progressSink.stream;
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decode_files_unchecked",
+        argNames: ["flag", "paths", "key", "progressSink"],
+      );
+
+  @override
+  Future<List<CustomData?>>
+  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress({
+    required List<int> flag,
+    required List<String> paths,
+    required MediaKey key,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(flag, serializer);
+          sse_encode_list_String(paths, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 14,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_opt_box_autoadd_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgressConstMeta,
+        argValues: [flag, paths, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgressConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decode_files_unchecked_no_progress",
+        argNames: ["flag", "paths", "key"],
+      );
+
+  @override
+  CustomData? crateNuan5MediaParamDecryptMediaDecrypt({
+    required List<int> data,
+    required MediaKey key,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(data, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5MediaParamDecryptMediaDecryptConstMeta,
+        argValues: [data, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaDecryptConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decrypt",
+        argNames: ["data", "key"],
+      );
+
+  @override
   int crateApiSimpleTestAdd({required int num1, required int num2}) {
     return handler.executeSync(
       SyncTask(
@@ -535,7 +694,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -552,12 +711,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "test_add", argNames: ["num1", "num2"]);
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_Key => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey;
+  get rust_arc_increment_strong_count_MediaKey => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey;
 
   RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_Key => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey;
+  get rust_arc_decrement_strong_count_MediaKey => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey;
 
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw) {
@@ -566,34 +725,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Key
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return KeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return MediaKeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
-  Key
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return KeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return MediaKeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
-  Key
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return KeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return MediaKeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
-  RustStreamSink<DecodeEvent> dco_decode_StreamSink_decode_event_Sse(
+  RustStreamSink<MediaDecodeEvent> dco_decode_StreamSink_media_decode_event_Sse(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -613,6 +772,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_box_autoadd_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   CustomData dco_decode_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -620,21 +785,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         return CustomData_Invalid();
       case 1:
         return CustomData_Valid(dco_decode_list_prim_u_8_strict(raw[1]));
-      default:
-        throw Exception("unreachable");
-    }
-  }
-
-  @protected
-  DecodeEvent dco_decode_decode_event(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return DecodeEvent_Progress(dco_decode_f_64(raw[1]));
-      case 1:
-        return DecodeEvent_Result(
-          dco_decode_list_opt_box_autoadd_custom_data(raw[1]),
-        );
       default:
         throw Exception("unreachable");
     }
@@ -679,9 +829,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MediaDecodeEvent dco_decode_media_decode_event(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return MediaDecodeEvent_Progress(dco_decode_f_64(raw[1]));
+      case 1:
+        return MediaDecodeEvent_Result(
+          dco_decode_list_opt_box_autoadd_custom_data(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_custom_data(raw);
+  }
+
+  @protected
+  int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
+  }
+
+  @protected
+  Thumbnail dco_decode_thumbnail(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return Thumbnail(
+      width: dco_decode_u_32(arr[0]),
+      height: dco_decode_u_32(arr[1]),
+      bytes: dco_decode_list_prim_u_8_strict(arr[2]),
+    );
+  }
+
+  @protected
+  int dco_decode_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
   }
 
   @protected
@@ -710,43 +900,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Key
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return KeyImpl.frbInternalSseDecode(
+    return MediaKeyImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
   }
 
   @protected
-  Key
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return KeyImpl.frbInternalSseDecode(
+    return MediaKeyImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
   }
 
   @protected
-  Key
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return KeyImpl.frbInternalSseDecode(
+    return MediaKeyImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
   }
 
   @protected
-  RustStreamSink<DecodeEvent> sse_decode_StreamSink_decode_event_Sse(
+  RustStreamSink<MediaDecodeEvent> sse_decode_StreamSink_media_decode_event_Sse(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -767,6 +957,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_box_autoadd_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_32(deserializer));
+  }
+
+  @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -777,25 +973,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 1:
         var var_field0 = sse_decode_list_prim_u_8_strict(deserializer);
         return CustomData_Valid(var_field0);
-      default:
-        throw UnimplementedError('');
-    }
-  }
-
-  @protected
-  DecodeEvent sse_decode_decode_event(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        var var_field0 = sse_decode_f_64(deserializer);
-        return DecodeEvent_Progress(var_field0);
-      case 1:
-        var var_field0 = sse_decode_list_opt_box_autoadd_custom_data(
-          deserializer,
-        );
-        return DecodeEvent_Result(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -854,6 +1031,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MediaDecodeEvent sse_decode_media_decode_event(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_f_64(deserializer);
+        return MediaDecodeEvent_Progress(var_field0);
+      case 1:
+        var var_field0 = sse_decode_list_opt_box_autoadd_custom_data(
+          deserializer,
+        );
+        return MediaDecodeEvent_Result(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   CustomData? sse_decode_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   ) {
@@ -864,6 +1060,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     } else {
       return null;
     }
+  }
+
+  @protected
+  int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_32(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Thumbnail sse_decode_thumbnail(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_width = sse_decode_u_32(deserializer);
+    var var_height = sse_decode_u_32(deserializer);
+    var var_bytes = sse_decode_list_prim_u_8_strict(deserializer);
+    return Thumbnail(width: var_width, height: var_height, bytes: var_bytes);
+  }
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint32();
   }
 
   @protected
@@ -900,53 +1122,53 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-    Key self,
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    MediaKey self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as KeyImpl).frbInternalSseEncode(move: true),
+      (self as MediaKeyImpl).frbInternalSseEncode(move: true),
       serializer,
     );
   }
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-    Key self,
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    MediaKey self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as KeyImpl).frbInternalSseEncode(move: false),
+      (self as MediaKeyImpl).frbInternalSseEncode(move: false),
       serializer,
     );
   }
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-    Key self,
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    MediaKey self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as KeyImpl).frbInternalSseEncode(move: null),
+      (self as MediaKeyImpl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
 
   @protected
-  void sse_encode_StreamSink_decode_event_Sse(
-    RustStreamSink<DecodeEvent> self,
+  void sse_encode_StreamSink_media_decode_event_Sse(
+    RustStreamSink<MediaDecodeEvent> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(
       self.setupAndSerialize(
         codec: SseCodec(
-          decodeSuccessData: sse_decode_decode_event,
+          decodeSuccessData: sse_decode_media_decode_event,
           decodeErrorData: sse_decode_AnyhowException,
         ),
       ),
@@ -970,6 +1192,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self, serializer);
+  }
+
+  @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -978,19 +1206,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case CustomData_Valid(field0: final field0):
         sse_encode_i_32(1, serializer);
         sse_encode_list_prim_u_8_strict(field0, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_decode_event(DecodeEvent self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case DecodeEvent_Progress(field0: final field0):
-        sse_encode_i_32(0, serializer);
-        sse_encode_f_64(field0, serializer);
-      case DecodeEvent_Result(field0: final field0):
-        sse_encode_i_32(1, serializer);
-        sse_encode_list_opt_box_autoadd_custom_data(field0, serializer);
     }
   }
 
@@ -1050,6 +1265,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_media_decode_event(
+    MediaDecodeEvent self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case MediaDecodeEvent_Progress(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_f_64(field0, serializer);
+      case MediaDecodeEvent_Result(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_list_opt_box_autoadd_custom_data(field0, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_custom_data(
     CustomData? self,
     SseSerializer serializer,
@@ -1060,6 +1291,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (self != null) {
       sse_encode_box_autoadd_custom_data(self, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_32(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_thumbnail(Thumbnail self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self.width, serializer);
+    sse_encode_u_32(self.height, serializer);
+    sse_encode_list_prim_u_8_strict(self.bytes, serializer);
+  }
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint32(self);
   }
 
   @protected
@@ -1087,24 +1342,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 }
 
 @sealed
-class KeyImpl extends RustOpaque implements Key {
+class MediaKeyImpl extends RustOpaque implements MediaKey {
   // Not to be used by end users
-  KeyImpl.frbInternalDcoDecode(List<dynamic> wire)
+  MediaKeyImpl.frbInternalDcoDecode(List<dynamic> wire)
     : super.frbInternalDcoDecode(wire, _kStaticData);
 
   // Not to be used by end users
-  KeyImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+  MediaKeyImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
     : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
     rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_Key,
+        RustLib.instance.api.rust_arc_increment_strong_count_MediaKey,
     rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_Key,
+        RustLib.instance.api.rust_arc_decrement_strong_count_MediaKey,
     rustArcDecrementStrongCountPtr:
-        RustLib.instance.api.rust_arc_decrement_strong_count_KeyPtr,
+        RustLib.instance.api.rust_arc_decrement_strong_count_MediaKeyPtr,
   );
 
-  Future<void> dispose() =>
-      RustLib.instance.api.crateNuan5MediaParamDecryptKeyDispose(that: this);
+  Future<void> dispose() => RustLib.instance.api
+      .crateNuan5MediaParamDecryptMediaKeyDispose(that: this);
 }

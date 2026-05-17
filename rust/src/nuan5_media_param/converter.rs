@@ -4,7 +4,7 @@ use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
 use super::structs::nikki_photo_params::*;
 
-pub fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
+pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
     photography: convert_photography_params(data),
     camera: data.social_photo.as_ref().map(|social_photo|{
@@ -17,7 +17,7 @@ pub fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData
   }
 }
 
-fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) -> PhotographyParams{
+pub(crate) fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) -> PhotographyParams{
   PhotographyParams{
     edit: match &data.edit_photo_handler{
       Some(edit_photo_handler) => {
@@ -50,7 +50,7 @@ fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) ->
   }
 }
 
-fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &Option<image_custom_data::PortraitModeHandler>) -> CameraParams{
+pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &Option<image_custom_data::PortraitModeHandler>) -> CameraParams{
   let params = parse_camera_params(&data.camera_params);
 
   CameraParams{
@@ -102,7 +102,7 @@ fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &
   }
 }
 
-fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> NikkiParams{
+pub(crate) fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> NikkiParams{
   NikkiParams{
     giant_state: if let Some(true) = data.giant_state { true } else { false },
     hidden: data.photo_info.nikki_hidden,
@@ -154,7 +154,7 @@ fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> NikkiParams{
   }
 }
 
-pub fn convert_momo_params(data: &OptionMap<image_custom_data::DaMiaoInfo>) -> MomoHiddenState{
+pub(crate) fn convert_momo_params(data: &OptionMap<image_custom_data::DaMiaoInfo>) -> MomoHiddenState{
   match &data{
     OptionMap::None{} => MomoHiddenState::Enabled,
     OptionMap::Some(momo_data) => {
@@ -168,7 +168,7 @@ pub fn convert_momo_params(data: &OptionMap<image_custom_data::DaMiaoInfo>) -> M
   }
 }
 
-pub fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData) -> Vec<TaskParams>{
+pub(crate) fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData) -> Vec<TaskParams>{
   let mut res = Vec::new();
 
   if let Some(puzzle_game) = &data.puzzle_game_plugin{
@@ -192,7 +192,7 @@ pub fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData) -> Ve
   res
 }
 
-pub fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>) -> Vec<ClothParams>{
+pub(crate) fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>) -> Vec<ClothParams>{
   let mut res = Vec::new();
 
   let mut set = HashSet::new();
@@ -215,7 +215,7 @@ pub fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<imag
   res
 }
 
-fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<ClothParams>{
+pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY>) -> Vec<ClothParams>{
   fn convert_color_params(data_color: &Option<image_custom_data::Color>, data_grid: &Option<i64>) -> Option<DyeColorParams>{
     match (data_color, data_grid){
       (Some(color), Some(grid)) => {

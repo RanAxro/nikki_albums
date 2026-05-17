@@ -47,9 +47,9 @@ abstract class GameImageCodec{
   }
 
   static Future<dynamic> decodeFile(String path, String uid) async{
-    final Key key = Key.fromStr(uid);
+    final MediaKey key = MediaKey.fromStr(uid);
 
-    final CustomData? data = await decodeFileUnchecked(flag: imageFlag, path: path, key: key);
+    final CustomData? data = await mediaDecodeFileUnchecked(flag: imageFlag, path: path, key: key);
     key.dispose();
     if(data == null){
       return null;
@@ -66,9 +66,9 @@ abstract class GameImageCodec{
   }
 
   static dynamic decodeFileSync(String path, String uid){
-    final Key key = Key.fromStr(uid);
+    final MediaKey key = MediaKey.fromStr(uid);
 
-    final CustomData? data = decodeFileUncheckedSync(flag: imageFlag, path: path, key: key);
+    final CustomData? data = mediaDecodeFileUncheckedSync(flag: imageFlag, path: path, key: key);
     key.dispose();
     if(data == null){
       return null;
@@ -85,12 +85,12 @@ abstract class GameImageCodec{
   }
 
   static Future<List<dynamic>> decodeFiles(List<String> paths, String uid, {void Function(int, int)? onProgress}) async{
-    final Key key = Key.fromStr(uid);
+    final MediaKey key = MediaKey.fromStr(uid);
 
-    final Stream<DecodeEvent> stream = decodeFilesUnchecked(flag: imageFlag, paths: paths, key: key);
+    final Stream<MediaDecodeEvent> stream = mediaDecodeFilesUnchecked(flag: imageFlag, paths: paths, key: key);
 
     final List<dynamic> res = [];
-    await for(final DecodeEvent current in stream){
+    await for(final MediaDecodeEvent current in stream){
       current.when(
         progress: (double progress){
           onProgress?.call((progress * paths.length).toInt(), paths.length);
@@ -363,8 +363,8 @@ abstract class GameJsonCodec {
 
 abstract class GameCameraParamCodec{
   static dynamic decode(String data){
-    final Key key = Key.cameraParam();
-    final CustomData? decryptedResult = decrypt(utf8.encode(data), key);
+    final MediaKey key = MediaKey.cameraParam();
+    final CustomData? decryptedResult = mediaDecrypt(utf8.encode(data), key);
     key.dispose();
 
     if(decryptedResult == null){

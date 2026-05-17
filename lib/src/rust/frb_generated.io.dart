@@ -10,6 +10,10 @@ import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
 import 'nuan5_media_param/decrypt.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
+import 'thumbnail.dart';
+import 'thumbnail/jpeg.dart';
+import 'thumbnail/mp4_h264.dart';
+import 'thumbnail/png.dart';
 
 abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RustLibApiImplPlatform({
@@ -19,32 +23,33 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     required super.portManager,
   });
 
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_KeyPtr => wire
-      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr;
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_MediaKeyPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr;
 
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw);
 
   @protected
-  Key
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
   );
 
   @protected
-  Key
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
   );
 
   @protected
-  Key
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
   );
 
   @protected
-  RustStreamSink<DecodeEvent> dco_decode_StreamSink_decode_event_Sse(
+  RustStreamSink<MediaDecodeEvent> dco_decode_StreamSink_media_decode_event_Sse(
     dynamic raw,
   );
 
@@ -55,10 +60,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CustomData dco_decode_box_autoadd_custom_data(dynamic raw);
 
   @protected
-  CustomData dco_decode_custom_data(dynamic raw);
+  int dco_decode_box_autoadd_u_32(dynamic raw);
 
   @protected
-  DecodeEvent dco_decode_decode_event(dynamic raw);
+  CustomData dco_decode_custom_data(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
@@ -79,7 +84,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
+  MediaDecodeEvent dco_decode_media_decode_event(dynamic raw);
+
+  @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
+
+  @protected
+  int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
+
+  @protected
+  Thumbnail dco_decode_thumbnail(dynamic raw);
+
+  @protected
+  int dco_decode_u_32(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -94,25 +111,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
-  Key
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
   );
 
   @protected
-  Key
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
   );
 
   @protected
-  Key
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  MediaKey
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
   );
 
   @protected
-  RustStreamSink<DecodeEvent> sse_decode_StreamSink_decode_event_Sse(
+  RustStreamSink<MediaDecodeEvent> sse_decode_StreamSink_media_decode_event_Sse(
     SseDeserializer deserializer,
   );
 
@@ -123,10 +140,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CustomData sse_decode_box_autoadd_custom_data(SseDeserializer deserializer);
 
   @protected
-  CustomData sse_decode_custom_data(SseDeserializer deserializer);
+  int sse_decode_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
-  DecodeEvent sse_decode_decode_event(SseDeserializer deserializer);
+  CustomData sse_decode_custom_data(SseDeserializer deserializer);
 
   @protected
   double sse_decode_f_64(SseDeserializer deserializer);
@@ -149,9 +166,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
+  MediaDecodeEvent sse_decode_media_decode_event(SseDeserializer deserializer);
+
+  @protected
   CustomData? sse_decode_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   );
+
+  @protected
+  int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
+
+  @protected
+  Thumbnail sse_decode_thumbnail(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -173,28 +202,28 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-    Key self,
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    MediaKey self,
     SseSerializer serializer,
   );
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-    Key self,
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    MediaKey self,
     SseSerializer serializer,
   );
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
-    Key self,
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    MediaKey self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_StreamSink_decode_event_Sse(
-    RustStreamSink<DecodeEvent> self,
+  void sse_encode_StreamSink_media_decode_event_Sse(
+    RustStreamSink<MediaDecodeEvent> self,
     SseSerializer serializer,
   );
 
@@ -208,10 +237,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_custom_data(CustomData self, SseSerializer serializer);
+  void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer);
 
   @protected
-  void sse_encode_decode_event(DecodeEvent self, SseSerializer serializer);
+  void sse_encode_custom_data(CustomData self, SseSerializer serializer);
 
   @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
@@ -238,10 +267,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_media_decode_event(
+    MediaDecodeEvent self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_custom_data(
     CustomData? self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_thumbnail(Thumbnail self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
@@ -271,36 +315,36 @@ class RustLibWire implements BaseWire {
     : _lookup = dynamicLibrary.lookup;
 
   void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     ffi.Pointer<ffi.Void> ptr,
   ) {
-    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
       ptr,
     );
   }
 
-  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr =
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey',
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey',
       );
-  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey =
-      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     ffi.Pointer<ffi.Void> ptr,
   ) {
-    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey(
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
       ptr,
     );
   }
 
-  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr =
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey',
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey',
       );
-  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKey =
-      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerKeyPtr
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 }

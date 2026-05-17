@@ -3,8 +3,8 @@ use super::super::serde_nuan5_json::de;
 use super::super::decrypt;
 
 pub fn parse_camera_params(params: &str) -> Option<camera_params::CameraParams>{
-  let key = decrypt::Key::camera_param().ok()?;
-  let decrypt::CustomData::Valid(data) = decrypt::decrypt(Vec::from(params), &key)? else {
+  let key = decrypt::MediaKey::camera_param().ok()?;
+  let decrypt::CustomData::Valid(data) = decrypt::media_decrypt(Vec::from(params), &key)? else {
     return None;
   };
   de::from_slice(&data).ok()
