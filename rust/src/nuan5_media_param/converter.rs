@@ -1,9 +1,47 @@
 use std::collections::{HashMap, HashSet};
 use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
-use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
-use crate::nuan5_media_param::parser::camera_params_parser::*;
+use crate::nuan5_media_param::serde_nuan5_json::structs::{image_custom_data, camera_params};
+use crate::nuan5_media_param::parser::momo_camera_params_parser::*;
 use crate::nuan5_media_param::parser::location_parser::parse_location;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
+
+pub(crate) fn convert_momo_camera_params(data: &camera_params::CameraParams) -> MomoCameraParams{
+  MomoCameraParams{
+    camera_actor_loc: (data.dx_camera_actor, data.dy_camera_actor, data.dz_camera_actor),
+    camera_actor_rot: (data.d_yaw_camera_actor, data.d_pitch_camera_actor, data.d_roll_camera_actor),
+    camera_component_loc: (data.dx_camera_component, data.dy_camera_component, data.dz_camera_component),
+    camera_component_rot: (data.d_yaw_camera_component, data.d_pitch_camera_component, data.d_roll_camera_component),
+    portrait_mode: data.portrait_mode,
+    camera_focal_length: data.camera_focal_length,
+    aperture_section: data.aperture_section,
+    vignette_intensity: data.vignette_intensity,
+    bloom_intensity: parse_bloom_intensity(data.bloom_intensity),
+    bloom_threshold: parse_bloom_threshold(data.bloom_threshold),
+    brightness: parse_brightness(data.brightness),
+    exposure: parse_exposure(data.exposure),
+    contrast: parse_contrast(data.contrast),
+    saturation: parse_saturation(data.saturation),
+    vibrance: parse_vibrance(data.vibrance),
+    highlights: parse_highlights(data.highlights),
+    shadows: parse_shadows(data.shadows),
+    light: if data.light_id == "None" {
+      LightParams::None
+    }else{
+      LightParams::Some{
+        id: data.light_id.clone(),
+        strength: data.light_strength,
+      }
+    },
+    filter: if data.filter_id == "None" {
+      FilterParams::None
+    }else{
+      FilterParams::Some{
+        id: data.filter_id.clone(),
+        strength: data.filter_strength,
+      }
+    },
+  }
+}
 
 pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
@@ -115,7 +153,29 @@ pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data
 }
 
 pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &Option<image_custom_data::PortraitModeHandler>) -> CameraParams{
-  let params = parse_camera_params(&data.camera_params);
+  const DEFAULT_MOMO_CAMERA_PARAMS: MomoCameraParams = MomoCameraParams{
+    camera_actor_loc: (0.0, 0.0, 0.0),
+    camera_actor_rot: (0.0, 0.0, 0.0),
+    camera_component_loc: (0.0, 0.0, 0.0),
+    camera_component_rot: (0.0, 0.0, 0.0),
+    portrait_mode: 0,
+    camera_focal_length: 0.0,
+    aperture_section: 0,
+    vignette_intensity: 0.0,
+    bloom_intensity: 0.0,
+    bloom_threshold: 0.0,
+    brightness: 0.0,
+    exposure: 0.0,
+    contrast: 0.0,
+    saturation: 0.0,
+    vibrance: 0.0,
+    highlights: 0.0,
+    shadows: 0.0,
+    light: LightParams::None,
+    filter: FilterParams::None,
+  };
+  
+  let params = parse_momo_camera_params(&data.camera_params).as_ref().map(convert_momo_camera_params);
 
   CameraParams{
     params: data.camera_params.clone(),
@@ -137,15 +197,15 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
     rotation: data.photo_info.camera_actor_rot_roll,
     aperture_section: data.photo_info.aperture_section,
     vignette_intensity: data.photo_info.vignette_intensity,
-    bloom_intensity: parse_bloom_intensity(&params),
-    bloom_threshold: parse_bloom_intensity(&params),
-    brightness: parse_brightness(&params),
-    exposure: parse_exposure(&params),
-    contrast: parse_contrast(&params),
-    saturation: parse_saturation(&params),
-    vibrance: parse_vibrance(&params),
-    highlights: parse_highlights(&params),
-    shadows: parse_shadows(&params),
+    bloom_intensity: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).bloom_intensity,
+    bloom_threshold: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).bloom_threshold,
+    brightness: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).brightness,
+    exposure: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).exposure,
+    contrast: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).contrast,
+    saturation: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).saturation,
+    vibrance: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).vibrance,
+    highlights: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).highlights,
+    shadows: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).shadows,
     light: if data.photo_info.light_id == "None" {
       LightParams::None
     }else{
