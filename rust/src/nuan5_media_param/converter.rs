@@ -3,10 +3,11 @@ use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, Option
 use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
 use super::structs::nikki_photo_params::*;
+use super::structs::clock_in_photo_params::*;
 
 pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
-    photography: convert_photography_params(data),
+    photography: convert_nikki_photo_photography_params(data),
     camera: data.social_photo.as_ref().map(|social_photo|{
       convert_camera_params(social_photo, &data.portrait_mode_handler)
     }),
@@ -17,7 +18,21 @@ pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCus
   }
 }
 
-pub(crate) fn convert_photography_params(data: &image_custom_data::NikkiPhotoCustomData) -> PhotographyParams{
+pub(crate) fn convert_clock_in_photo_params(data: &image_custom_data::ClockInPhotoCustomData) -> ClockInPhotoParams{
+  ClockInPhotoParams{
+    tag: data.clock_game_plugin.tag,
+    photography: convert_clock_in_photo_photography_params(&data),
+    camera: data.social_photo.as_ref().map(|social_photo|{
+      convert_camera_params(social_photo, &data.portrait_mode_handler)
+    }),
+    nikki: data.social_photo.as_ref().map(convert_nikki_params),
+    momo: data.social_photo.as_ref()
+      .map(|social_photo| &social_photo.da_miao_info)
+      .map(convert_momo_params),
+  }
+}
+
+pub(crate) fn convert_nikki_photo_photography_params(data: &image_custom_data::NikkiPhotoCustomData) -> PhotographyParams{
   PhotographyParams{
     edit: match &data.edit_photo_handler{
       Some(edit_photo_handler) => {
@@ -47,6 +62,28 @@ pub(crate) fn convert_photography_params(data: &image_custom_data::NikkiPhotoCus
       None => vec![],
     },
     task: convert_task_params(data),
+  }
+}
+
+pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data::ClockInPhotoCustomData) -> PhotographyParams{
+  PhotographyParams{
+    edit: EditPhotoState::Disabled,
+    date: data.social_photo.as_ref().map(|social_photo|{
+      ShootingDate{
+        day: social_photo.time.day,
+      }
+    }),
+    time: data.social_photo.as_ref().map(|social_photo|{
+      ShootingTime{
+        hour: social_photo.time.hour,
+        min: social_photo.time.min,
+        sec: social_photo.time.sec,
+      }
+    }),
+    location: None,
+    weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
+    photo_wall: vec![],
+    task: vec![],
   }
 }
 
