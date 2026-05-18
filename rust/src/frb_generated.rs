@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1422373251;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 702642369;
 
 // Section: executor
 
@@ -171,10 +171,50 @@ fn wire__crate__nuan5_media_param__decrypt__MediaKey_from_str_bytes_impl(
             transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
                 (move || {
                     let output_ok =
-                        crate::nuan5_media_param::decrypt::MediaKey::from_str_bytes(api_bytes)?;
+                        crate::nuan5_media_param::decrypt::MediaKey::from_str_bytes(&api_bytes)?;
                     Ok(output_ok)
                 })(),
             )
+        },
+    )
+}
+fn wire__crate__nuan5_media_param__decode__decode_media_param_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "decode_media_param",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_data =
+                <crate::nuan5_media_param::decrypt::CustomData>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::nuan5_media_param::decode::decode_media_param(
+                            api_param_type,
+                            &api_data,
+                        ))?;
+                    Ok(output_ok)
+                })())
+            }
         },
     )
 }
@@ -403,8 +443,8 @@ fn wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_im
                 let api_key_guard = api_key_guard.unwrap();
                 let output_ok = Result::<_, ()>::Ok(
                     crate::nuan5_media_param::decrypt::media_decode_file_bytes_unchecked(
-                        api_flag,
-                        api_bytes,
+                        &api_flag,
+                        &api_bytes,
                         &*api_key_guard,
                     ),
                 )?;
@@ -459,7 +499,7 @@ fn wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
                     let api_key_guard = api_key_guard.unwrap();
                     let output_ok = Result::<_, ()>::Ok(
                         crate::nuan5_media_param::decrypt::media_decode_file_unchecked(
-                            api_flag,
+                            &api_flag,
                             api_path,
                             &*api_key_guard,
                         ),
@@ -514,7 +554,7 @@ fn wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_imp
                 let api_key_guard = api_key_guard.unwrap();
                 let output_ok = Result::<_, ()>::Ok(
                     crate::nuan5_media_param::decrypt::media_decode_file_unchecked_sync(
-                        api_flag,
+                        &api_flag,
                         api_path,
                         &*api_key_guard,
                     ),
@@ -575,7 +615,7 @@ fn wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
                         let api_key_guard = api_key_guard.unwrap();
                         let output_ok =
                             crate::nuan5_media_param::decrypt::media_decode_files_unchecked(
-                                api_flag,
+                                &api_flag,
                                 api_paths,
                                 &*api_key_guard,
                                 api_progress_sink,
@@ -633,7 +673,7 @@ fn wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_no_prog
                     let api_key_guard = api_key_guard.unwrap();
                     let output_ok = Result::<_, ()>::Ok(
                         crate::nuan5_media_param::decrypt::media_decode_files_unchecked_no_progress(
-                            api_flag,
+                            &api_flag,
                             api_paths,
                             &*api_key_guard,
                         ),
@@ -686,7 +726,7 @@ fn wire__crate__nuan5_media_param__decrypt__media_decrypt_impl(
                 }
                 let api_key_guard = api_key_guard.unwrap();
                 let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_media_param::decrypt::media_decrypt(api_data, &*api_key_guard),
+                    crate::nuan5_media_param::decrypt::media_decrypt(&api_data, &*api_key_guard),
                 )?;
                 Ok(output_ok)
             })())
@@ -752,6 +792,22 @@ impl SseDecode for MediaKey {
     }
 }
 
+impl SseDecode for std::collections::HashMap<i64, bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(i64, bool)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i64, i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(i64, i64)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
 impl SseDecode
     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
 {
@@ -783,6 +839,146 @@ impl SseDecode for String {
     }
 }
 
+impl SseDecode for crate::nuan5_media_param::structs::world::Area {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::structs::world::Area::MemorialMountains,
+            1 => crate::nuan5_media_param::structs::world::Area::Florawish,
+            2 => crate::nuan5_media_param::structs::world::Area::BreezyMeadow,
+            3 => crate::nuan5_media_param::structs::world::Area::Stoneville,
+            4 => crate::nuan5_media_param::structs::world::Area::AbandonedDistrict,
+            5 => crate::nuan5_media_param::structs::world::Area::WishingWoods,
+            6 => crate::nuan5_media_param::structs::world::Area::FireworkIsles,
+            7 => crate::nuan5_media_param::structs::world::Area::SerenityIsland,
+            8 => crate::nuan5_media_param::structs::world::Area::DanqingIsland,
+            9 => crate::nuan5_media_param::structs::world::Area::DanqingRealm,
+            10 => crate::nuan5_media_param::structs::world::Area::ItzalandCanyon,
+            11 => crate::nuan5_media_param::structs::world::Area::ElderwoodForest,
+            12 => crate::nuan5_media_param::structs::world::Area::Spira,
+            13 => crate::nuan5_media_param::structs::world::Area::Boneyard,
+            14 => crate::nuan5_media_param::structs::world::Area::WanxiangRealm,
+            _ => unreachable!("Invalid variant for Area: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u8().unwrap() != 0
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::CameraParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_params = <String>::sse_decode(deserializer);
+        let mut var_portraitMode = <bool>::sse_decode(deserializer);
+        let mut var_zoom = <f64>::sse_decode(deserializer);
+        let mut var_focalLength = <f64>::sse_decode(deserializer);
+        let mut var_rotation = <f64>::sse_decode(deserializer);
+        let mut var_apertureSection = <u8>::sse_decode(deserializer);
+        let mut var_vignetteIntensity = <f64>::sse_decode(deserializer);
+        let mut var_bloomIntensity = <f64>::sse_decode(deserializer);
+        let mut var_bloomThreshold = <f64>::sse_decode(deserializer);
+        let mut var_brightness = <f64>::sse_decode(deserializer);
+        let mut var_exposure = <f64>::sse_decode(deserializer);
+        let mut var_contrast = <f64>::sse_decode(deserializer);
+        let mut var_saturation = <f64>::sse_decode(deserializer);
+        let mut var_vibrance = <f64>::sse_decode(deserializer);
+        let mut var_highlights = <f64>::sse_decode(deserializer);
+        let mut var_shadows = <f64>::sse_decode(deserializer);
+        let mut var_light =
+            <crate::nuan5_media_param::structs::nikki_photo_params::LightParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_filter =
+            <crate::nuan5_media_param::structs::nikki_photo_params::FilterParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_pose = <i64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::CameraParams {
+            params: var_params,
+            portrait_mode: var_portraitMode,
+            zoom: var_zoom,
+            focal_length: var_focalLength,
+            rotation: var_rotation,
+            aperture_section: var_apertureSection,
+            vignette_intensity: var_vignetteIntensity,
+            bloom_intensity: var_bloomIntensity,
+            bloom_threshold: var_bloomThreshold,
+            brightness: var_brightness,
+            exposure: var_exposure,
+            contrast: var_contrast,
+            saturation: var_saturation,
+            vibrance: var_vibrance,
+            highlights: var_highlights,
+            shadows: var_shadows,
+            light: var_light,
+            filter: var_filter,
+            pose: var_pose,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_tag = <i64>::sse_decode(deserializer);
+        let mut var_photography =
+            <crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_camera = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::CameraParams,
+        >>::sse_decode(deserializer);
+        let mut var_nikki = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams,
+        >>::sse_decode(deserializer);
+        let mut var_momo = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams {
+            tag: var_tag,
+            photography: var_photography,
+            camera: var_camera,
+            nikki: var_nikki,
+            momo: var_momo,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_id = <i64>::sse_decode(deserializer);
+        let mut var_diy =
+            <Option<crate::nuan5_media_param::structs::nikki_photo_params::DiyData>>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+            id: var_id,
+            diy: var_diy,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::collage_params::CollageParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_templateId = <i64>::sse_decode(deserializer);
+        let mut var_regionPictures = <Vec<
+            crate::nuan5_media_param::structs::collage_params::RegionPicture,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::collage_params::CollageParams {
+            template_id: var_templateId,
+            region_pictures: var_regionPictures,
+        };
+    }
+}
+
 impl SseDecode for crate::nuan5_media_param::decrypt::CustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -802,10 +998,139 @@ impl SseDecode for crate::nuan5_media_param::decrypt::CustomData {
     }
 }
 
+impl SseDecode for crate::nuan5_media_param::structs::world::Dimension {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::structs::world::Dimension::Miraland,
+            1 => crate::nuan5_media_param::structs::world::Dimension::SeaOfStars,
+            2 => crate::nuan5_media_param::structs::world::Dimension::Home,
+            _ => unreachable!("Invalid variant for Dimension: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::DiyData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_outfitDye = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData,
+        >>::sse_decode(deserializer);
+        let mut var_specialEffect = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData,
+        >>::sse_decode(deserializer);
+        let mut var_patternCreation = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::DiyData {
+            outfit_dye: var_outfitDye,
+            special_effect: var_specialEffect,
+            pattern_creation: var_patternCreation,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::diy_params::DiyParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_poseId = <Option<i64>>::sse_decode(deserializer);
+        let mut var_patternData = <std::collections::HashMap<i64, i64>>::sse_decode(deserializer);
+        let mut var_clothes = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::ClothParams,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::diy_params::DiyParams {
+            pose_id: var_poseId,
+            pattern_data: var_patternData,
+            clothes: var_clothes,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::DressingParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_clothes = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::ClothParams,
+        >>::sse_decode(deserializer);
+        let mut var_magicball = <Vec<i64>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::DressingParams {
+            clothes: var_clothes,
+            magicball: var_magicball,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_color = <(f64, f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_colorGrid = <i64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams {
+            color: var_color,
+            color_grid: var_colorGrid,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_hasSticker = <bool>::sse_decode(deserializer);
+        let mut var_hasText = <bool>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams {
+            has_sticker: var_hasSticker,
+            has_text: var_hasText,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState::Enabled(var_field0);
+            }
+            1 => {
+                return crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState::Disabled;
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseDecode for f64 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         deserializer.cursor.read_f64::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::FilterParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_id = <String>::sse_decode(deserializer);
+                let mut var_strength = <f64>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::FilterParams::Some {
+                    id: var_id,
+                    strength: var_strength,
+                };
+            }
+            1 => {
+                return crate::nuan5_media_param::structs::nikki_photo_params::FilterParams::None;
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 
@@ -816,6 +1141,36 @@ impl SseDecode for i32 {
     }
 }
 
+impl SseDecode for i64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i64::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::LightParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_id = <String>::sse_decode(deserializer);
+                let mut var_strength = <f64>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::LightParams::Some {
+                    id: var_id,
+                    strength: var_strength,
+                };
+            }
+            1 => {
+                return crate::nuan5_media_param::structs::nikki_photo_params::LightParams::None;
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseDecode for Vec<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -823,6 +1178,52 @@ impl SseDecode for Vec<String> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<String>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::ClothParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::world::Location> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::world::Location>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>::sse_decode(
+                    deserializer,
+                ),
+            );
         }
         return ans_;
     }
@@ -842,6 +1243,46 @@ impl SseDecode for Vec<Option<crate::nuan5_media_param::decrypt::CustomData>> {
     }
 }
 
+impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<i64>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<u8> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -851,6 +1292,193 @@ impl SseDecode for Vec<u8> {
             ans_.push(<u8>::sse_decode(deserializer));
         }
         return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i64, bool)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(i64, bool)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i64, i64)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(i64, i64)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::collage_params::RegionPicture> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::collage_params::RegionPicture>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::TaskParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::nikki_photo_params::TaskParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::world::Location {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_dimension =
+                    <Option<crate::nuan5_media_param::structs::world::Dimension>>::sse_decode(
+                        deserializer,
+                    );
+                let mut var_nation =
+                    <Option<crate::nuan5_media_param::structs::world::Nation>>::sse_decode(
+                        deserializer,
+                    );
+                let mut var_region =
+                    <Option<crate::nuan5_media_param::structs::world::Region>>::sse_decode(
+                        deserializer,
+                    );
+                let mut var_area =
+                    <Option<crate::nuan5_media_param::structs::world::Area>>::sse_decode(
+                        deserializer,
+                    );
+                let mut var_subarea =
+                    <Option<crate::nuan5_media_param::structs::world::Subarea>>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::world::Location::Standard {
+                    dimension: var_dimension,
+                    nation: var_nation,
+                    region: var_region,
+                    area: var_area,
+                    subarea: var_subarea,
+                };
+            }
+            1 => {
+                let mut var_dimension =
+                    <Option<crate::nuan5_media_param::structs::world::Dimension>>::sse_decode(
+                        deserializer,
+                    );
+                let mut var_subarea =
+                    <Option<crate::nuan5_media_param::structs::world::Subarea>>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::world::Location::Special {
+                    dimension: var_dimension,
+                    subarea: var_subarea,
+                };
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::LocationParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_pos = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_loc =
+            <crate::nuan5_media_param::structs::nikki_photo_params::LocationType>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::nikki_photo_params::LocationParams {
+            pos: var_pos,
+            loc: var_loc,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::LocationType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Unknown;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::world::Location>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Exact(
+                    var_field0,
+                );
+            }
+            2 => {
+                let mut var_field0 =
+                    <Vec<crate::nuan5_media_param::structs::world::Location>>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Guessed(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decode::MediaCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::decode::MediaCustomData::Invalid;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::decode::MediaParam>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaCustomData::Valid(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 
@@ -877,6 +1505,288 @@ impl SseDecode for crate::nuan5_media_param::decrypt::MediaDecodeEvent {
     }
 }
 
+impl SseDecode for crate::nuan5_media_param::decode::MediaParam {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::MomoCameraParams(var_field0);
+            }
+            1 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::NikkiPhoto(var_field0);
+            }
+            2 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams>::sse_decode(deserializer);
+                return crate::nuan5_media_param::decode::MediaParam::ClockInPhoto(var_field0);
+            }
+            3 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::collage_params::CollageParams>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::decode::MediaParam::Collage(var_field0);
+            }
+            4 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::diy_params::DiyParams>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::decode::MediaParam::DIY(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decode::MediaParamType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::decode::MediaParamType::MomoCameraParams,
+            1 => crate::nuan5_media_param::decode::MediaParamType::NikkiPhoto,
+            2 => crate::nuan5_media_param::decode::MediaParamType::ClockInPhoto,
+            3 => crate::nuan5_media_param::decode::MediaParamType::Collage,
+            4 => crate::nuan5_media_param::decode::MediaParamType::DIY,
+            _ => unreachable!("Invalid variant for MediaParamType: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_cameraActorLoc = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_cameraActorRot = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_cameraComponentLoc = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_cameraComponentRot = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_portraitMode = <i64>::sse_decode(deserializer);
+        let mut var_cameraFocalLength = <f64>::sse_decode(deserializer);
+        let mut var_apertureSection = <u8>::sse_decode(deserializer);
+        let mut var_vignetteIntensity = <f64>::sse_decode(deserializer);
+        let mut var_bloomIntensity = <f64>::sse_decode(deserializer);
+        let mut var_bloomThreshold = <f64>::sse_decode(deserializer);
+        let mut var_brightness = <f64>::sse_decode(deserializer);
+        let mut var_exposure = <f64>::sse_decode(deserializer);
+        let mut var_contrast = <f64>::sse_decode(deserializer);
+        let mut var_saturation = <f64>::sse_decode(deserializer);
+        let mut var_vibrance = <f64>::sse_decode(deserializer);
+        let mut var_highlights = <f64>::sse_decode(deserializer);
+        let mut var_shadows = <f64>::sse_decode(deserializer);
+        let mut var_light =
+            <crate::nuan5_media_param::structs::nikki_photo_params::LightParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_filter =
+            <crate::nuan5_media_param::structs::nikki_photo_params::FilterParams>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams {
+            camera_actor_loc: var_cameraActorLoc,
+            camera_actor_rot: var_cameraActorRot,
+            camera_component_loc: var_cameraComponentLoc,
+            camera_component_rot: var_cameraComponentRot,
+            portrait_mode: var_portraitMode,
+            camera_focal_length: var_cameraFocalLength,
+            aperture_section: var_apertureSection,
+            vignette_intensity: var_vignetteIntensity,
+            bloom_intensity: var_bloomIntensity,
+            bloom_threshold: var_bloomThreshold,
+            brightness: var_brightness,
+            exposure: var_exposure,
+            contrast: var_contrast,
+            saturation: var_saturation,
+            vibrance: var_vibrance,
+            highlights: var_highlights,
+            shadows: var_shadows,
+            light: var_light,
+            filter: var_filter,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState::Enabled;
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_media_param::structs::nikki_photo_params::MomoParams>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState::Disabled(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::MomoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_loc = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_rot = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_scale = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_clothes = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::ClothParams,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::MomoParams {
+            loc: var_loc,
+            rot: var_rot,
+            scale: var_scale,
+            clothes: var_clothes,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::world::Nation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::structs::world::Nation::HeartcraftKingdom,
+            1 => crate::nuan5_media_param::structs::world::Nation::EmpireOfLight,
+            2 => crate::nuan5_media_param::structs::world::Nation::TerraAlliance,
+            3 => crate::nuan5_media_param::structs::world::Nation::StarhailFederation,
+            4 => crate::nuan5_media_param::structs::world::Nation::LinlangEmpire,
+            5 => crate::nuan5_media_param::structs::world::Nation::TwinmoonKingdom,
+            6 => crate::nuan5_media_param::structs::world::Nation::WhalePort,
+            7 => crate::nuan5_media_param::structs::world::Nation::Umbraso,
+            _ => unreachable!("Invalid variant for Nation: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_giantState = <bool>::sse_decode(deserializer);
+        let mut var_hidden = <bool>::sse_decode(deserializer);
+        let mut var_loc = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_rot = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_scale = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_dressing =
+            <crate::nuan5_media_param::structs::nikki_photo_params::DressingParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_weapon = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams,
+        >>::sse_decode(deserializer);
+        let mut var_interactions = <Vec<
+            crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams,
+        >>::sse_decode(deserializer);
+        let mut var_mount = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams,
+        >>::sse_decode(deserializer);
+        let mut var_carrier = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams {
+            giant_state: var_giantState,
+            hidden: var_hidden,
+            loc: var_loc,
+            rot: var_rot,
+            scale: var_scale,
+            dressing: var_dressing,
+            weapon: var_weapon,
+            interactions: var_interactions,
+            mount: var_mount,
+            carrier: var_carrier,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_photography =
+            <crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_camera = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::CameraParams,
+        >>::sse_decode(deserializer);
+        let mut var_nikki = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams,
+        >>::sse_decode(deserializer);
+        let mut var_momo = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams {
+            photography: var_photography,
+            camera: var_camera,
+            nikki: var_nikki,
+            momo: var_momo,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_id = <i64>::sse_decode(deserializer);
+        let mut var_loc = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_rot = <(f64, f64, f64)>::sse_decode(deserializer);
+        let mut var_scale = <(f64, f64, f64)>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams {
+            id: var_id,
+            loc: var_loc,
+            rot: var_rot,
+            scale: var_scale,
+        };
+    }
+}
+
+impl SseDecode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<String>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::world::Area> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::world::Area>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::CameraParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::CameraParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::nuan5_media_param::decrypt::CustomData> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -890,6 +1800,185 @@ impl SseDecode for Option<crate::nuan5_media_param::decrypt::CustomData> {
     }
 }
 
+impl SseDecode for Option<crate::nuan5_media_param::structs::world::Dimension> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::world::Dimension>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::DiyData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::DiyData>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<i64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::LocationParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::LocationParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::world::Nation> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::world::Nation>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::world::Region> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::world::Region>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::world::Subarea> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::world::Subarea>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<u32> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -897,6 +1986,402 @@ impl SseDecode for Option<u32> {
             return Some(<u32>::sse_decode(deserializer));
         } else {
             return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData::Hair(
+                    var_field0,
+                );
+            }
+            1 => {
+                let mut var_field0 = <crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData::General(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_targetGroupId = <i64>::sse_decode(deserializer);
+        let mut var_featureTag = <i64>::sse_decode(deserializer);
+        let mut var_color =
+            <crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData {
+            target_group_id: var_targetGroupId,
+            feature_tag: var_featureTag,
+            color: var_color,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_targetGroupId = <i64>::sse_decode(deserializer);
+        let mut var_featureTag = <i64>::sse_decode(deserializer);
+        let mut var_color0 =
+            <crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>::sse_decode(
+                deserializer,
+            );
+        let mut var_color1 = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams,
+        >>::sse_decode(deserializer);
+        let mut var_roughness = <f64>::sse_decode(deserializer);
+        let mut var_colorMode = <Option<i64>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData {
+            target_group_id: var_targetGroupId,
+            feature_tag: var_featureTag,
+            color_0: var_color0,
+            color_1: var_color1,
+            roughness: var_roughness,
+            color_mode: var_colorMode,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_targetGroupId = <i64>::sse_decode(deserializer);
+        let mut var_featureTag = <i64>::sse_decode(deserializer);
+        let mut var_textureId = <i64>::sse_decode(deserializer);
+        let mut var_overridePatternA = <bool>::sse_decode(deserializer);
+        let mut var_tiling = <f64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData {
+            target_group_id: var_targetGroupId,
+            feature_tag: var_featureTag,
+            texture_id: var_textureId,
+            override_pattern_a: var_overridePatternA,
+            tiling: var_tiling,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_edit =
+            <crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState>::sse_decode(
+                deserializer,
+            );
+        let mut var_date = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate,
+        >>::sse_decode(deserializer);
+        let mut var_time = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime,
+        >>::sse_decode(deserializer);
+        let mut var_location = <Option<
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationParams,
+        >>::sse_decode(deserializer);
+        let mut var_weather = <Option<i64>>::sse_decode(deserializer);
+        let mut var_photoWall = <Vec<i64>>::sse_decode(deserializer);
+        let mut var_task =
+            <Vec<crate::nuan5_media_param::structs::nikki_photo_params::TaskParams>>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams {
+            edit: var_edit,
+            date: var_date,
+            time: var_time,
+            location: var_location,
+            weather: var_weather,
+            photo_wall: var_photoWall,
+            task: var_task,
+        };
+    }
+}
+
+impl SseDecode for (f64, f64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <f64>::sse_decode(deserializer);
+        let mut var_field1 = <f64>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (f64, f64, f64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <f64>::sse_decode(deserializer);
+        let mut var_field1 = <f64>::sse_decode(deserializer);
+        let mut var_field2 = <f64>::sse_decode(deserializer);
+        return (var_field0, var_field1, var_field2);
+    }
+}
+
+impl SseDecode for (f64, f64, f64, f64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <f64>::sse_decode(deserializer);
+        let mut var_field1 = <f64>::sse_decode(deserializer);
+        let mut var_field2 = <f64>::sse_decode(deserializer);
+        let mut var_field3 = <f64>::sse_decode(deserializer);
+        return (var_field0, var_field1, var_field2, var_field3);
+    }
+}
+
+impl SseDecode for (i64, bool) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i64>::sse_decode(deserializer);
+        let mut var_field1 = <bool>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i64, i64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i64>::sse_decode(deserializer);
+        let mut var_field1 = <i64>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::world::Region {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::structs::world::Region::Wishfield,
+            1 => crate::nuan5_media_param::structs::world::Region::Itzaland,
+            _ => unreachable!("Invalid variant for Region: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::collage_params::RegionPicture {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_position = <(f64, f64)>::sse_decode(deserializer);
+        let mut var_rotation = <f64>::sse_decode(deserializer);
+        let mut var_scale = <f64>::sse_decode(deserializer);
+        let mut var_imageId = <String>::sse_decode(deserializer);
+        let mut var_oriCustomData =
+            <crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_media_param::structs::collage_params::RegionPicture {
+            position: var_position,
+            rotation: var_rotation,
+            scale: var_scale,
+            image_id: var_imageId,
+            ori_custom_data: var_oriCustomData,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_day = <i64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate {
+            day: var_day,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_hour = <u8>::sse_decode(deserializer);
+        let mut var_min = <u8>::sse_decode(deserializer);
+        let mut var_sec = <f64>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime {
+            hour: var_hour,
+            min: var_min,
+            sec: var_sec,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_targetGroupId = <i64>::sse_decode(deserializer);
+        let mut var_featureTag = <i64>::sse_decode(deserializer);
+        let mut var_colorGrid = <i64>::sse_decode(deserializer);
+        let mut var_coverDiyColor = <bool>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData {
+            target_group_id: var_targetGroupId,
+            feature_tag: var_featureTag,
+            color_grid: var_colorGrid,
+            cover_diy_color: var_coverDiyColor,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::world::Subarea {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_media_param::structs::world::Subarea::OldFlorawishMemorial,
+            1 => crate::nuan5_media_param::structs::world::Subarea::StylistGuildMemorial,
+            2 => crate::nuan5_media_param::structs::world::Subarea::DreamwovenRuins,
+            3 => crate::nuan5_media_param::structs::world::Subarea::FortuneFalls,
+            4 => crate::nuan5_media_param::structs::world::Subarea::GreatWishtreeSquare,
+            5 => crate::nuan5_media_param::structs::world::Subarea::LakesideDistrict,
+            6 => crate::nuan5_media_param::structs::world::Subarea::OutskirtsForest,
+            7 => crate::nuan5_media_param::structs::world::Subarea::AbandonedFanaticWisherCamp,
+            8 => crate::nuan5_media_param::structs::world::Subarea::BreezyMeadowActivityArea,
+            9 => crate::nuan5_media_param::structs::world::Subarea::BugSongHills,
+            10 => crate::nuan5_media_param::structs::world::Subarea::CiciaHighlands,
+            11 => crate::nuan5_media_param::structs::world::Subarea::HeartcraftKingdomOutpost,
+            12 => crate::nuan5_media_param::structs::world::Subarea::LakesideHill,
+            13 => crate::nuan5_media_param::structs::world::Subarea::MeadowWharf,
+            14 => crate::nuan5_media_param::structs::world::Subarea::QueenPalaceRuins,
+            15 => crate::nuan5_media_param::structs::world::Subarea::RelicHill,
+            16 => crate::nuan5_media_param::structs::world::Subarea::SleepyFishHills,
+            17 => crate::nuan5_media_param::structs::world::Subarea::SwanGazebo,
+            18 => crate::nuan5_media_param::structs::world::Subarea::DyeWorkshop,
+            19 => crate::nuan5_media_param::structs::world::Subarea::FlowerFieldsResidence,
+            20 => crate::nuan5_media_param::structs::world::Subarea::RockfallValley,
+            21 => crate::nuan5_media_param::structs::world::Subarea::StonevilleMarket,
+            22 => crate::nuan5_media_param::structs::world::Subarea::ChooChooStation,
+            23 => crate::nuan5_media_param::structs::world::Subarea::GoldenFields,
+            24 => crate::nuan5_media_param::structs::world::Subarea::MarketOfMirth,
+            25 => crate::nuan5_media_param::structs::world::Subarea::Prosperville,
+            26 => crate::nuan5_media_param::structs::world::Subarea::RippleEstate,
+            27 => crate::nuan5_media_param::structs::world::Subarea::StellarFishingGround,
+            28 => crate::nuan5_media_param::structs::world::Subarea::Stonecrown,
+            29 => crate::nuan5_media_param::structs::world::Subarea::WindriderMill,
+            30 => crate::nuan5_media_param::structs::world::Subarea::BrookwoodForest,
+            31 => crate::nuan5_media_param::structs::world::Subarea::CavernOfWishes,
+            32 => crate::nuan5_media_param::structs::world::Subarea::FallenWishHighlands,
+            33 => crate::nuan5_media_param::structs::world::Subarea::GrandTreeValley,
+            34 => crate::nuan5_media_param::structs::world::Subarea::SacredMountains,
+            35 => crate::nuan5_media_param::structs::world::Subarea::ValleyOfBlossoms,
+            36 => crate::nuan5_media_param::structs::world::Subarea::ClearheartLake,
+            37 => crate::nuan5_media_param::structs::world::Subarea::CrescentMoonRuins,
+            38 => crate::nuan5_media_param::structs::world::Subarea::FlamingForest,
+            39 => crate::nuan5_media_param::structs::world::Subarea::RelicIsles,
+            40 => crate::nuan5_media_param::structs::world::Subarea::SongbreezeHighland,
+            41 => crate::nuan5_media_param::structs::world::Subarea::SparkheartIsland,
+            42 => crate::nuan5_media_param::structs::world::Subarea::OldRuins,
+            43 => crate::nuan5_media_param::structs::world::Subarea::Soakville,
+            44 => crate::nuan5_media_param::structs::world::Subarea::SoakvilleOutskirts,
+            45 => crate::nuan5_media_param::structs::world::Subarea::Steamville,
+            46 => crate::nuan5_media_param::structs::world::Subarea::DanqingIsland_BackMountain,
+            47 => crate::nuan5_media_param::structs::world::Subarea::BambooGrove,
+            48 => crate::nuan5_media_param::structs::world::Subarea::DanqingIsland_Inkville,
+            49 => crate::nuan5_media_param::structs::world::Subarea::InkwashStream,
+            50 => crate::nuan5_media_param::structs::world::Subarea::LoongPagoda,
+            51 => crate::nuan5_media_param::structs::world::Subarea::LoongPeak,
+            52 => crate::nuan5_media_param::structs::world::Subarea::ReedblossomShore,
+            53 => crate::nuan5_media_param::structs::world::Subarea::GreenBambooGrove,
+            54 => crate::nuan5_media_param::structs::world::Subarea::InkPool,
+            55 => crate::nuan5_media_param::structs::world::Subarea::InkshorePlain,
+            56 => crate::nuan5_media_param::structs::world::Subarea::DanqingRealm_Inkville,
+            57 => crate::nuan5_media_param::structs::world::Subarea::WildfieldWaterside,
+            58 => crate::nuan5_media_param::structs::world::Subarea::BehemothObservationSite,
+            59 => crate::nuan5_media_param::structs::world::Subarea::Coliseum,
+            60 => crate::nuan5_media_param::structs::world::Subarea::ElderwoodShade,
+            61 => crate::nuan5_media_param::structs::world::Subarea::ElderwoodWharf,
+            62 => crate::nuan5_media_param::structs::world::Subarea::ForestOfSlumber,
+            63 => crate::nuan5_media_param::structs::world::Subarea::ForgottenStreet,
+            64 => crate::nuan5_media_param::structs::world::Subarea::GiantVineForest,
+            65 => crate::nuan5_media_param::structs::world::Subarea::LeafRiver,
+            66 => crate::nuan5_media_param::structs::world::Subarea::MothershroomWoods,
+            67 => crate::nuan5_media_param::structs::world::Subarea::ParkyaCraterLake,
+            68 => crate::nuan5_media_param::structs::world::Subarea::Pottsville,
+            69 => crate::nuan5_media_param::structs::world::Subarea::RockvilleRuins,
+            70 => crate::nuan5_media_param::structs::world::Subarea::ShellIsland,
+            71 => crate::nuan5_media_param::structs::world::Subarea::Shroomville,
+            72 => crate::nuan5_media_param::structs::world::Subarea::SnailRanch,
+            73 => crate::nuan5_media_param::structs::world::Subarea::SpiraWaterfall,
+            74 => crate::nuan5_media_param::structs::world::Subarea::TitanGraveyard,
+            75 => crate::nuan5_media_param::structs::world::Subarea::TitansOutpostRuins,
+            76 => crate::nuan5_media_param::structs::world::Subarea::Spira1F,
+            77 => crate::nuan5_media_param::structs::world::Subarea::Spira2F,
+            78 => crate::nuan5_media_param::structs::world::Subarea::Spira3F,
+            79 => crate::nuan5_media_param::structs::world::Subarea::SpiraShelldome,
+            80 => crate::nuan5_media_param::structs::world::Subarea::BluePools,
+            81 => crate::nuan5_media_param::structs::world::Subarea::Cultivarium,
+            82 => crate::nuan5_media_param::structs::world::Subarea::DragonRuins,
+            83 => crate::nuan5_media_param::structs::world::Subarea::DragonrestFlowerfield,
+            84 => crate::nuan5_media_param::structs::world::Subarea::GlimmeringLake,
+            85 => crate::nuan5_media_param::structs::world::Subarea::GreatLumieville,
+            86 => crate::nuan5_media_param::structs::world::Subarea::HealingGround,
+            87 => crate::nuan5_media_param::structs::world::Subarea::HollowbreathPassage,
+            88 => crate::nuan5_media_param::structs::world::Subarea::LonestoneShore,
+            89 => crate::nuan5_media_param::structs::world::Subarea::SoulSpring,
+            90 => crate::nuan5_media_param::structs::world::Subarea::WanxiangRealm_BackMountain,
+            91 => crate::nuan5_media_param::structs::world::Subarea::CaiYeMarket,
+            92 => crate::nuan5_media_param::structs::world::Subarea::CaiYeOutskirts,
+            93 => crate::nuan5_media_param::structs::world::Subarea::DazzlebloomMeadow,
+            94 => crate::nuan5_media_param::structs::world::Subarea::DeepValleySpring,
+            95 => crate::nuan5_media_param::structs::world::Subarea::JiuhuaPavilion,
+            96 => crate::nuan5_media_param::structs::world::Subarea::JiuhuaPenitentiary,
+            97 => crate::nuan5_media_param::structs::world::Subarea::ValleyPath,
+            98 => crate::nuan5_media_param::structs::world::Subarea::WhereWoodEchoes,
+            99 => crate::nuan5_media_param::structs::world::Subarea::Crystalvale,
+            100 => crate::nuan5_media_param::structs::world::Subarea::DreamStarIsles,
+            101 => crate::nuan5_media_param::structs::world::Subarea::Starshore,
+            102 => crate::nuan5_media_param::structs::world::Subarea::UnboundWharf,
+            103 => crate::nuan5_media_param::structs::world::Subarea::DockArea,
+            _ => unreachable!("Invalid variant for Subarea: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::TaskParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 = <i64>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Puzzle(
+                    var_field0,
+                );
+            }
+            1 => {
+                let mut var_field0 =
+                    <std::collections::HashMap<i64, bool>>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Risk(
+                    var_field0,
+                );
+            }
+            2 => {
+                let mut var_field0 =
+                    <std::collections::HashMap<i64, bool>>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Interactive(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
         }
     }
 }
@@ -941,10 +2426,17 @@ impl SseDecode for usize {
     }
 }
 
-impl SseDecode for bool {
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u8().unwrap() != 0
+        let mut var_id = <i64>::sse_decode(deserializer);
+        let mut var_slotType = <String>::sse_decode(deserializer);
+        let mut var_state = <Option<String>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams {
+            id: var_id,
+            slot_type: var_slotType,
+            state: var_state,
+        };
     }
 }
 
@@ -963,32 +2455,38 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        5 => {
+        5 => wire__crate__nuan5_media_param__decode__decode_media_param_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        6 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        6 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        7 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        7 => {
+        8 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        9 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        11 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
+        10 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        12 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
+        14 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        14 => {
+        15 => {
             wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_no_progress_impl(
                 port,
                 ptr,
@@ -1023,21 +2521,21 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        8 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        10 => wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_impl(
+        9 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        11 => wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        12 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_impl(
+        13 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => {
+        16 => {
             wire__crate__nuan5_media_param__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len)
         }
-        16 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        17 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -1060,6 +2558,162 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<MediaKey>> for MediaKey {
 }
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Area {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::MemorialMountains => 0.into_dart(),
+            Self::Florawish => 1.into_dart(),
+            Self::BreezyMeadow => 2.into_dart(),
+            Self::Stoneville => 3.into_dart(),
+            Self::AbandonedDistrict => 4.into_dart(),
+            Self::WishingWoods => 5.into_dart(),
+            Self::FireworkIsles => 6.into_dart(),
+            Self::SerenityIsland => 7.into_dart(),
+            Self::DanqingIsland => 8.into_dart(),
+            Self::DanqingRealm => 9.into_dart(),
+            Self::ItzalandCanyon => 10.into_dart(),
+            Self::ElderwoodForest => 11.into_dart(),
+            Self::Spira => 12.into_dart(),
+            Self::Boneyard => 13.into_dart(),
+            Self::WanxiangRealm => 14.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::world::Area
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::world::Area>
+    for crate::nuan5_media_param::structs::world::Area
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::world::Area {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::CameraParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.params.into_into_dart().into_dart(),
+            self.portrait_mode.into_into_dart().into_dart(),
+            self.zoom.into_into_dart().into_dart(),
+            self.focal_length.into_into_dart().into_dart(),
+            self.rotation.into_into_dart().into_dart(),
+            self.aperture_section.into_into_dart().into_dart(),
+            self.vignette_intensity.into_into_dart().into_dart(),
+            self.bloom_intensity.into_into_dart().into_dart(),
+            self.bloom_threshold.into_into_dart().into_dart(),
+            self.brightness.into_into_dart().into_dart(),
+            self.exposure.into_into_dart().into_dart(),
+            self.contrast.into_into_dart().into_dart(),
+            self.saturation.into_into_dart().into_dart(),
+            self.vibrance.into_into_dart().into_dart(),
+            self.highlights.into_into_dart().into_dart(),
+            self.shadows.into_into_dart().into_dart(),
+            self.light.into_into_dart().into_dart(),
+            self.filter.into_into_dart().into_dart(),
+            self.pose.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::CameraParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::CameraParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::CameraParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::CameraParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.tag.into_into_dart().into_dart(),
+            self.photography.into_into_dart().into_dart(),
+            self.camera.into_into_dart().into_dart(),
+            self.nikki.into_into_dart().into_dart(),
+            self.momo.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams,
+    > for crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.diy.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::ClothParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::collage_params::CollageParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.template_id.into_into_dart().into_dart(),
+            self.region_pictures.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::collage_params::CollageParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::collage_params::CollageParams,
+    > for crate::nuan5_media_param::structs::collage_params::CollageParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::collage_params::CollageParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decrypt::CustomData {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
@@ -1081,6 +2735,394 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decrypt::Custom
     for crate::nuan5_media_param::decrypt::CustomData
 {
     fn into_into_dart(self) -> crate::nuan5_media_param::decrypt::CustomData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Dimension {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Miraland => 0.into_dart(),
+            Self::SeaOfStars => 1.into_dart(),
+            Self::Home => 2.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::world::Dimension
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::world::Dimension>
+    for crate::nuan5_media_param::structs::world::Dimension
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::world::Dimension {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::DiyData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.outfit_dye.into_into_dart().into_dart(),
+            self.special_effect.into_into_dart().into_dart(),
+            self.pattern_creation.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::DiyData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::DiyData,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::DiyData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::DiyData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::diy_params::DiyParams {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.pose_id.into_into_dart().into_dart(),
+            self.pattern_data.into_into_dart().into_dart(),
+            self.clothes.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::diy_params::DiyParams
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::diy_params::DiyParams>
+    for crate::nuan5_media_param::structs::diy_params::DiyParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::diy_params::DiyParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::DressingParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.clothes.into_into_dart().into_dart(),
+            self.magicball.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::DressingParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::DressingParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::DressingParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::DressingParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.color.into_into_dart().into_dart(),
+            self.color_grid.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.has_sticker.into_into_dart().into_dart(),
+            self.has_text.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState::Enabled(
+                field0,
+            ) => [0.into_dart(), field0.into_into_dart().into_dart()].into_dart(),
+            crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState::Disabled => {
+                [1.into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::FilterParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::FilterParams::Some {
+                id,
+                strength,
+            } => [
+                0.into_dart(),
+                id.into_into_dart().into_dart(),
+                strength.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::nuan5_media_param::structs::nikki_photo_params::FilterParams::None => {
+                [1.into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::FilterParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::FilterParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::FilterParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::FilterParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::LightParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::LightParams::Some {
+                id,
+                strength,
+            } => [
+                0.into_dart(),
+                id.into_into_dart().into_dart(),
+                strength.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::nuan5_media_param::structs::nikki_photo_params::LightParams::None => {
+                [1.into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::LightParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::LightParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::LightParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::LightParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Location {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::world::Location::Standard {
+                dimension,
+                nation,
+                region,
+                area,
+                subarea,
+            } => [
+                0.into_dart(),
+                dimension.into_into_dart().into_dart(),
+                nation.into_into_dart().into_dart(),
+                region.into_into_dart().into_dart(),
+                area.into_into_dart().into_dart(),
+                subarea.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::nuan5_media_param::structs::world::Location::Special { dimension, subarea } => [
+                1.into_dart(),
+                dimension.into_into_dart().into_dart(),
+                subarea.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::world::Location
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::world::Location>
+    for crate::nuan5_media_param::structs::world::Location
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::world::Location {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::LocationParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.pos.into_into_dart().into_dart(),
+            self.loc.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::LocationParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::LocationParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::LocationParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::LocationParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::LocationType
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Unknown => {
+                [0.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Exact(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Guessed(
+                field0,
+            ) => [2.into_dart(), field0.into_into_dart().into_dart()].into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::LocationType
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::LocationType,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::LocationType
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::LocationType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaCustomData {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::decode::MediaCustomData::Invalid => {
+                [0.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaCustomData::Valid(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaCustomData
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaCustomData>
+    for crate::nuan5_media_param::decode::MediaCustomData
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaCustomData {
         self
     }
 }
@@ -1112,6 +3154,722 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decrypt::MediaD
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaParam {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::decode::MediaParam::MomoCameraParams(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::NikkiPhoto(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::ClockInPhoto(field0) => {
+                [2.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::Collage(field0) => {
+                [3.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::decode::MediaParam::DIY(field0) => {
+                [4.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaParam
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaParam>
+    for crate::nuan5_media_param::decode::MediaParam
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaParam {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaParamType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::MomoCameraParams => 0.into_dart(),
+            Self::NikkiPhoto => 1.into_dart(),
+            Self::ClockInPhoto => 2.into_dart(),
+            Self::Collage => 3.into_dart(),
+            Self::DIY => 4.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaParamType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaParamType>
+    for crate::nuan5_media_param::decode::MediaParamType
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaParamType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.camera_actor_loc.into_into_dart().into_dart(),
+            self.camera_actor_rot.into_into_dart().into_dart(),
+            self.camera_component_loc.into_into_dart().into_dart(),
+            self.camera_component_rot.into_into_dart().into_dart(),
+            self.portrait_mode.into_into_dart().into_dart(),
+            self.camera_focal_length.into_into_dart().into_dart(),
+            self.aperture_section.into_into_dart().into_dart(),
+            self.vignette_intensity.into_into_dart().into_dart(),
+            self.bloom_intensity.into_into_dart().into_dart(),
+            self.bloom_threshold.into_into_dart().into_dart(),
+            self.brightness.into_into_dart().into_dart(),
+            self.exposure.into_into_dart().into_dart(),
+            self.contrast.into_into_dart().into_dart(),
+            self.saturation.into_into_dart().into_dart(),
+            self.vibrance.into_into_dart().into_dart(),
+            self.highlights.into_into_dart().into_dart(),
+            self.shadows.into_into_dart().into_dart(),
+            self.light.into_into_dart().into_dart(),
+            self.filter.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams,
+    > for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState::Enabled => {
+                [0.into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState::Disabled(
+                field0,
+            ) => [1.into_dart(), field0.into_into_dart().into_dart()].into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::MomoParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.loc.into_into_dart().into_dart(),
+            self.rot.into_into_dart().into_dart(),
+            self.scale.into_into_dart().into_dart(),
+            self.clothes.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::MomoParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::MomoParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::MomoParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::MomoParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Nation {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::HeartcraftKingdom => 0.into_dart(),
+            Self::EmpireOfLight => 1.into_dart(),
+            Self::TerraAlliance => 2.into_dart(),
+            Self::StarhailFederation => 3.into_dart(),
+            Self::LinlangEmpire => 4.into_dart(),
+            Self::TwinmoonKingdom => 5.into_dart(),
+            Self::WhalePort => 6.into_dart(),
+            Self::Umbraso => 7.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::world::Nation
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::world::Nation>
+    for crate::nuan5_media_param::structs::world::Nation
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::world::Nation {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.giant_state.into_into_dart().into_dart(),
+            self.hidden.into_into_dart().into_dart(),
+            self.loc.into_into_dart().into_dart(),
+            self.rot.into_into_dart().into_dart(),
+            self.scale.into_into_dart().into_dart(),
+            self.dressing.into_into_dart().into_dart(),
+            self.weapon.into_into_dart().into_dart(),
+            self.interactions.into_into_dart().into_dart(),
+            self.mount.into_into_dart().into_dart(),
+            self.carrier.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.photography.into_into_dart().into_dart(),
+            self.camera.into_into_dart().into_dart(),
+            self.nikki.into_into_dart().into_dart(),
+            self.momo.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.loc.into_into_dart().into_dart(),
+            self.rot.into_into_dart().into_dart(),
+            self.scale.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData::Hair(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData::General(
+                field0,
+            ) => [1.into_dart(), field0.into_into_dart().into_dart()].into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.target_group_id.into_into_dart().into_dart(),
+            self.feature_tag.into_into_dart().into_dart(),
+            self.color.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.target_group_id.into_into_dart().into_dart(),
+            self.feature_tag.into_into_dart().into_dart(),
+            self.color_0.into_into_dart().into_dart(),
+            self.color_1.into_into_dart().into_dart(),
+            self.roughness.into_into_dart().into_dart(),
+            self.color_mode.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.target_group_id.into_into_dart().into_dart(),
+            self.feature_tag.into_into_dart().into_dart(),
+            self.texture_id.into_into_dart().into_dart(),
+            self.override_pattern_a.into_into_dart().into_dart(),
+            self.tiling.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.edit.into_into_dart().into_dart(),
+            self.date.into_into_dart().into_dart(),
+            self.time.into_into_dart().into_dart(),
+            self.location.into_into_dart().into_dart(),
+            self.weather.into_into_dart().into_dart(),
+            self.photo_wall.into_into_dart().into_dart(),
+            self.task.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Region {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Wishfield => 0.into_dart(),
+            Self::Itzaland => 1.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::world::Region
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::world::Region>
+    for crate::nuan5_media_param::structs::world::Region
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::world::Region {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::collage_params::RegionPicture
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.position.into_into_dart().into_dart(),
+            self.rotation.into_into_dart().into_dart(),
+            self.scale.into_into_dart().into_dart(),
+            self.image_id.into_into_dart().into_dart(),
+            self.ori_custom_data.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::collage_params::RegionPicture
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::collage_params::RegionPicture,
+    > for crate::nuan5_media_param::structs::collage_params::RegionPicture
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::collage_params::RegionPicture {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.day.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.hour.into_into_dart().into_dart(),
+            self.min.into_into_dart().into_dart(),
+            self.sec.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.target_group_id.into_into_dart().into_dart(),
+            self.feature_tag.into_into_dart().into_dart(),
+            self.color_grid.into_into_dart().into_dart(),
+            self.cover_diy_color.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Subarea {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::OldFlorawishMemorial => 0.into_dart(),
+            Self::StylistGuildMemorial => 1.into_dart(),
+            Self::DreamwovenRuins => 2.into_dart(),
+            Self::FortuneFalls => 3.into_dart(),
+            Self::GreatWishtreeSquare => 4.into_dart(),
+            Self::LakesideDistrict => 5.into_dart(),
+            Self::OutskirtsForest => 6.into_dart(),
+            Self::AbandonedFanaticWisherCamp => 7.into_dart(),
+            Self::BreezyMeadowActivityArea => 8.into_dart(),
+            Self::BugSongHills => 9.into_dart(),
+            Self::CiciaHighlands => 10.into_dart(),
+            Self::HeartcraftKingdomOutpost => 11.into_dart(),
+            Self::LakesideHill => 12.into_dart(),
+            Self::MeadowWharf => 13.into_dart(),
+            Self::QueenPalaceRuins => 14.into_dart(),
+            Self::RelicHill => 15.into_dart(),
+            Self::SleepyFishHills => 16.into_dart(),
+            Self::SwanGazebo => 17.into_dart(),
+            Self::DyeWorkshop => 18.into_dart(),
+            Self::FlowerFieldsResidence => 19.into_dart(),
+            Self::RockfallValley => 20.into_dart(),
+            Self::StonevilleMarket => 21.into_dart(),
+            Self::ChooChooStation => 22.into_dart(),
+            Self::GoldenFields => 23.into_dart(),
+            Self::MarketOfMirth => 24.into_dart(),
+            Self::Prosperville => 25.into_dart(),
+            Self::RippleEstate => 26.into_dart(),
+            Self::StellarFishingGround => 27.into_dart(),
+            Self::Stonecrown => 28.into_dart(),
+            Self::WindriderMill => 29.into_dart(),
+            Self::BrookwoodForest => 30.into_dart(),
+            Self::CavernOfWishes => 31.into_dart(),
+            Self::FallenWishHighlands => 32.into_dart(),
+            Self::GrandTreeValley => 33.into_dart(),
+            Self::SacredMountains => 34.into_dart(),
+            Self::ValleyOfBlossoms => 35.into_dart(),
+            Self::ClearheartLake => 36.into_dart(),
+            Self::CrescentMoonRuins => 37.into_dart(),
+            Self::FlamingForest => 38.into_dart(),
+            Self::RelicIsles => 39.into_dart(),
+            Self::SongbreezeHighland => 40.into_dart(),
+            Self::SparkheartIsland => 41.into_dart(),
+            Self::OldRuins => 42.into_dart(),
+            Self::Soakville => 43.into_dart(),
+            Self::SoakvilleOutskirts => 44.into_dart(),
+            Self::Steamville => 45.into_dart(),
+            Self::DanqingIsland_BackMountain => 46.into_dart(),
+            Self::BambooGrove => 47.into_dart(),
+            Self::DanqingIsland_Inkville => 48.into_dart(),
+            Self::InkwashStream => 49.into_dart(),
+            Self::LoongPagoda => 50.into_dart(),
+            Self::LoongPeak => 51.into_dart(),
+            Self::ReedblossomShore => 52.into_dart(),
+            Self::GreenBambooGrove => 53.into_dart(),
+            Self::InkPool => 54.into_dart(),
+            Self::InkshorePlain => 55.into_dart(),
+            Self::DanqingRealm_Inkville => 56.into_dart(),
+            Self::WildfieldWaterside => 57.into_dart(),
+            Self::BehemothObservationSite => 58.into_dart(),
+            Self::Coliseum => 59.into_dart(),
+            Self::ElderwoodShade => 60.into_dart(),
+            Self::ElderwoodWharf => 61.into_dart(),
+            Self::ForestOfSlumber => 62.into_dart(),
+            Self::ForgottenStreet => 63.into_dart(),
+            Self::GiantVineForest => 64.into_dart(),
+            Self::LeafRiver => 65.into_dart(),
+            Self::MothershroomWoods => 66.into_dart(),
+            Self::ParkyaCraterLake => 67.into_dart(),
+            Self::Pottsville => 68.into_dart(),
+            Self::RockvilleRuins => 69.into_dart(),
+            Self::ShellIsland => 70.into_dart(),
+            Self::Shroomville => 71.into_dart(),
+            Self::SnailRanch => 72.into_dart(),
+            Self::SpiraWaterfall => 73.into_dart(),
+            Self::TitanGraveyard => 74.into_dart(),
+            Self::TitansOutpostRuins => 75.into_dart(),
+            Self::Spira1F => 76.into_dart(),
+            Self::Spira2F => 77.into_dart(),
+            Self::Spira3F => 78.into_dart(),
+            Self::SpiraShelldome => 79.into_dart(),
+            Self::BluePools => 80.into_dart(),
+            Self::Cultivarium => 81.into_dart(),
+            Self::DragonRuins => 82.into_dart(),
+            Self::DragonrestFlowerfield => 83.into_dart(),
+            Self::GlimmeringLake => 84.into_dart(),
+            Self::GreatLumieville => 85.into_dart(),
+            Self::HealingGround => 86.into_dart(),
+            Self::HollowbreathPassage => 87.into_dart(),
+            Self::LonestoneShore => 88.into_dart(),
+            Self::SoulSpring => 89.into_dart(),
+            Self::WanxiangRealm_BackMountain => 90.into_dart(),
+            Self::CaiYeMarket => 91.into_dart(),
+            Self::CaiYeOutskirts => 92.into_dart(),
+            Self::DazzlebloomMeadow => 93.into_dart(),
+            Self::DeepValleySpring => 94.into_dart(),
+            Self::JiuhuaPavilion => 95.into_dart(),
+            Self::JiuhuaPenitentiary => 96.into_dart(),
+            Self::ValleyPath => 97.into_dart(),
+            Self::WhereWoodEchoes => 98.into_dart(),
+            Self::Crystalvale => 99.into_dart(),
+            Self::DreamStarIsles => 100.into_dart(),
+            Self::Starshore => 101.into_dart(),
+            Self::UnboundWharf => 102.into_dart(),
+            Self::DockArea => 103.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::world::Subarea
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::world::Subarea>
+    for crate::nuan5_media_param::structs::world::Subarea
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::world::Subarea {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::TaskParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Puzzle(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Risk(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Interactive(
+                field0,
+            ) => [2.into_dart(), field0.into_into_dart().into_dart()].into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::TaskParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::TaskParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::TaskParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::TaskParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::thumbnail::Thumbnail {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -1130,6 +3888,32 @@ impl flutter_rust_bridge::IntoIntoDart<crate::thumbnail::Thumbnail>
         self
     }
 }
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.slot_type.into_into_dart().into_dart(),
+            self.state.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams,
+    > for crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams {
+        self
+    }
+}
 
 impl SseEncode for flutter_rust_bridge::for_generated::anyhow::Error {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -1142,6 +3926,20 @@ impl SseEncode for MediaKey {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i64, bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i64, bool)>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i64, i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i64, i64)>>::sse_encode(self.into_iter().collect(), serializer);
     }
 }
 
@@ -1175,6 +3973,112 @@ impl SseEncode for String {
     }
 }
 
+impl SseEncode for crate::nuan5_media_param::structs::world::Area {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::structs::world::Area::MemorialMountains => 0,
+                crate::nuan5_media_param::structs::world::Area::Florawish => 1,
+                crate::nuan5_media_param::structs::world::Area::BreezyMeadow => 2,
+                crate::nuan5_media_param::structs::world::Area::Stoneville => 3,
+                crate::nuan5_media_param::structs::world::Area::AbandonedDistrict => 4,
+                crate::nuan5_media_param::structs::world::Area::WishingWoods => 5,
+                crate::nuan5_media_param::structs::world::Area::FireworkIsles => 6,
+                crate::nuan5_media_param::structs::world::Area::SerenityIsland => 7,
+                crate::nuan5_media_param::structs::world::Area::DanqingIsland => 8,
+                crate::nuan5_media_param::structs::world::Area::DanqingRealm => 9,
+                crate::nuan5_media_param::structs::world::Area::ItzalandCanyon => 10,
+                crate::nuan5_media_param::structs::world::Area::ElderwoodForest => 11,
+                crate::nuan5_media_param::structs::world::Area::Spira => 12,
+                crate::nuan5_media_param::structs::world::Area::Boneyard => 13,
+                crate::nuan5_media_param::structs::world::Area::WanxiangRealm => 14,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u8(self as _).unwrap();
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::CameraParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.params, serializer);
+        <bool>::sse_encode(self.portrait_mode, serializer);
+        <f64>::sse_encode(self.zoom, serializer);
+        <f64>::sse_encode(self.focal_length, serializer);
+        <f64>::sse_encode(self.rotation, serializer);
+        <u8>::sse_encode(self.aperture_section, serializer);
+        <f64>::sse_encode(self.vignette_intensity, serializer);
+        <f64>::sse_encode(self.bloom_intensity, serializer);
+        <f64>::sse_encode(self.bloom_threshold, serializer);
+        <f64>::sse_encode(self.brightness, serializer);
+        <f64>::sse_encode(self.exposure, serializer);
+        <f64>::sse_encode(self.contrast, serializer);
+        <f64>::sse_encode(self.saturation, serializer);
+        <f64>::sse_encode(self.vibrance, serializer);
+        <f64>::sse_encode(self.highlights, serializer);
+        <f64>::sse_encode(self.shadows, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::LightParams>::sse_encode(
+            self.light, serializer,
+        );
+        <crate::nuan5_media_param::structs::nikki_photo_params::FilterParams>::sse_encode(
+            self.filter,
+            serializer,
+        );
+        <i64>::sse_encode(self.pose, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.tag, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams>::sse_encode(
+            self.photography,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::CameraParams>>::sse_encode(
+            self.camera,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams>>::sse_encode(
+            self.nikki, serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState>>::sse_encode(self.momo, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.id, serializer);
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::DiyData>>::sse_encode(
+            self.diy, serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::collage_params::CollageParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.template_id, serializer);
+        <Vec<crate::nuan5_media_param::structs::collage_params::RegionPicture>>::sse_encode(
+            self.region_pictures,
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for crate::nuan5_media_param::decrypt::CustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -1193,10 +4097,123 @@ impl SseEncode for crate::nuan5_media_param::decrypt::CustomData {
     }
 }
 
+impl SseEncode for crate::nuan5_media_param::structs::world::Dimension {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::structs::world::Dimension::Miraland => 0,
+                crate::nuan5_media_param::structs::world::Dimension::SeaOfStars => 1,
+                crate::nuan5_media_param::structs::world::Dimension::Home => 2,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::DiyData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData>>::sse_encode(
+            self.outfit_dye,
+            serializer,
+        );
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData>>::sse_encode(
+            self.special_effect,
+            serializer,
+        );
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData>>::sse_encode(self.pattern_creation, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::diy_params::DiyParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<i64>>::sse_encode(self.pose_id, serializer);
+        <std::collections::HashMap<i64, i64>>::sse_encode(self.pattern_data, serializer);
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>>::sse_encode(
+            self.clothes,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::DressingParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>>::sse_encode(
+            self.clothes,
+            serializer,
+        );
+        <Vec<i64>>::sse_encode(self.magicball, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <(f64, f64, f64, f64)>::sse_encode(self.color, serializer);
+        <i64>::sse_encode(self.color_grid, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.has_sticker, serializer);
+        <bool>::sse_encode(self.has_text, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState::Enabled(
+                field0,
+            ) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoParams>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState::Disabled => {
+                <i32>::sse_encode(1, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseEncode for f64 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         serializer.cursor.write_f64::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::FilterParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::FilterParams::Some {
+                id,
+                strength,
+            } => {
+                <i32>::sse_encode(0, serializer);
+                <String>::sse_encode(id, serializer);
+                <f64>::sse_encode(strength, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::FilterParams::None => {
+                <i32>::sse_encode(1, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 
@@ -1207,12 +4224,75 @@ impl SseEncode for i32 {
     }
 }
 
+impl SseEncode for i64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i64::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::LightParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::LightParams::Some {
+                id,
+                strength,
+            } => {
+                <i32>::sse_encode(0, serializer);
+                <String>::sse_encode(id, serializer);
+                <f64>::sse_encode(strength, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::LightParams::None => {
+                <i32>::sse_encode(1, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseEncode for Vec<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <String>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::ClothParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::world::Location> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::world::Location>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>::sse_encode(
+                item, serializer,
+            );
         }
     }
 }
@@ -1227,12 +4307,200 @@ impl SseEncode for Vec<Option<crate::nuan5_media_param::decrypt::CustomData>> {
     }
 }
 
+impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <i64>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<u8> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <u8>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i64, bool)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i64, bool)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i64, i64)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i64, i64)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::collage_params::RegionPicture> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::collage_params::RegionPicture>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::TaskParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::TaskParams>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::world::Location {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::world::Location::Standard {
+                dimension,
+                nation,
+                region,
+                area,
+                subarea,
+            } => {
+                <i32>::sse_encode(0, serializer);
+                <Option<crate::nuan5_media_param::structs::world::Dimension>>::sse_encode(
+                    dimension, serializer,
+                );
+                <Option<crate::nuan5_media_param::structs::world::Nation>>::sse_encode(
+                    nation, serializer,
+                );
+                <Option<crate::nuan5_media_param::structs::world::Region>>::sse_encode(
+                    region, serializer,
+                );
+                <Option<crate::nuan5_media_param::structs::world::Area>>::sse_encode(
+                    area, serializer,
+                );
+                <Option<crate::nuan5_media_param::structs::world::Subarea>>::sse_encode(
+                    subarea, serializer,
+                );
+            }
+            crate::nuan5_media_param::structs::world::Location::Special { dimension, subarea } => {
+                <i32>::sse_encode(1, serializer);
+                <Option<crate::nuan5_media_param::structs::world::Dimension>>::sse_encode(
+                    dimension, serializer,
+                );
+                <Option<crate::nuan5_media_param::structs::world::Subarea>>::sse_encode(
+                    subarea, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::LocationParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <(f64, f64, f64)>::sse_encode(self.pos, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::LocationType>::sse_encode(
+            self.loc, serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::LocationType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Unknown => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Exact(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::world::Location>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::LocationType::Guessed(
+                field0,
+            ) => {
+                <i32>::sse_encode(2, serializer);
+                <Vec<crate::nuan5_media_param::structs::world::Location>>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decode::MediaCustomData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::decode::MediaCustomData::Invalid => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaCustomData::Valid(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::decode::MediaParam>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
         }
     }
 }
@@ -1258,6 +4526,237 @@ impl SseEncode for crate::nuan5_media_param::decrypt::MediaDecodeEvent {
     }
 }
 
+impl SseEncode for crate::nuan5_media_param::decode::MediaParam {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::decode::MediaParam::MomoCameraParams(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::NikkiPhoto(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::ClockInPhoto(field0) => {
+                <i32>::sse_encode(2, serializer);
+                <crate::nuan5_media_param::structs::clock_in_photo_params::ClockInPhotoParams>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::decode::MediaParam::Collage(field0) => {
+                <i32>::sse_encode(3, serializer);
+                <crate::nuan5_media_param::structs::collage_params::CollageParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            crate::nuan5_media_param::decode::MediaParam::DIY(field0) => {
+                <i32>::sse_encode(4, serializer);
+                <crate::nuan5_media_param::structs::diy_params::DiyParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decode::MediaParamType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::decode::MediaParamType::MomoCameraParams => 0,
+                crate::nuan5_media_param::decode::MediaParamType::NikkiPhoto => 1,
+                crate::nuan5_media_param::decode::MediaParamType::ClockInPhoto => 2,
+                crate::nuan5_media_param::decode::MediaParamType::Collage => 3,
+                crate::nuan5_media_param::decode::MediaParamType::DIY => 4,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <(f64, f64, f64)>::sse_encode(self.camera_actor_loc, serializer);
+        <(f64, f64, f64)>::sse_encode(self.camera_actor_rot, serializer);
+        <(f64, f64, f64)>::sse_encode(self.camera_component_loc, serializer);
+        <(f64, f64, f64)>::sse_encode(self.camera_component_rot, serializer);
+        <i64>::sse_encode(self.portrait_mode, serializer);
+        <f64>::sse_encode(self.camera_focal_length, serializer);
+        <u8>::sse_encode(self.aperture_section, serializer);
+        <f64>::sse_encode(self.vignette_intensity, serializer);
+        <f64>::sse_encode(self.bloom_intensity, serializer);
+        <f64>::sse_encode(self.bloom_threshold, serializer);
+        <f64>::sse_encode(self.brightness, serializer);
+        <f64>::sse_encode(self.exposure, serializer);
+        <f64>::sse_encode(self.contrast, serializer);
+        <f64>::sse_encode(self.saturation, serializer);
+        <f64>::sse_encode(self.vibrance, serializer);
+        <f64>::sse_encode(self.highlights, serializer);
+        <f64>::sse_encode(self.shadows, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::LightParams>::sse_encode(
+            self.light, serializer,
+        );
+        <crate::nuan5_media_param::structs::nikki_photo_params::FilterParams>::sse_encode(
+            self.filter,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState::Enabled => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState::Disabled(
+                field0,
+            ) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::nikki_photo_params::MomoParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::MomoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <(f64, f64, f64)>::sse_encode(self.loc, serializer);
+        <(f64, f64, f64)>::sse_encode(self.rot, serializer);
+        <(f64, f64, f64)>::sse_encode(self.scale, serializer);
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>>::sse_encode(
+            self.clothes,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::world::Nation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::structs::world::Nation::HeartcraftKingdom => 0,
+                crate::nuan5_media_param::structs::world::Nation::EmpireOfLight => 1,
+                crate::nuan5_media_param::structs::world::Nation::TerraAlliance => 2,
+                crate::nuan5_media_param::structs::world::Nation::StarhailFederation => 3,
+                crate::nuan5_media_param::structs::world::Nation::LinlangEmpire => 4,
+                crate::nuan5_media_param::structs::world::Nation::TwinmoonKingdom => 5,
+                crate::nuan5_media_param::structs::world::Nation::WhalePort => 6,
+                crate::nuan5_media_param::structs::world::Nation::Umbraso => 7,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.giant_state, serializer);
+        <bool>::sse_encode(self.hidden, serializer);
+        <(f64, f64, f64)>::sse_encode(self.loc, serializer);
+        <(f64, f64, f64)>::sse_encode(self.rot, serializer);
+        <(f64, f64, f64)>::sse_encode(self.scale, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::DressingParams>::sse_encode(
+            self.dressing,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams>>::sse_encode(
+            self.weapon,
+            serializer,
+        );
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>>::sse_encode(
+            self.interactions,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>>::sse_encode(
+            self.mount, serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>>::sse_encode(
+            self.carrier,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams>::sse_encode(
+            self.photography,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::CameraParams>>::sse_encode(
+            self.camera,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams>>::sse_encode(
+            self.nikki, serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState>>::sse_encode(self.momo, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.id, serializer);
+        <(f64, f64, f64)>::sse_encode(self.loc, serializer);
+        <(f64, f64, f64)>::sse_encode(self.rot, serializer);
+        <(f64, f64, f64)>::sse_encode(self.scale, serializer);
+    }
+}
+
+impl SseEncode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <String>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::world::Area> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::world::Area>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::CameraParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::CameraParams>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
 impl SseEncode for Option<crate::nuan5_media_param::decrypt::CustomData> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -1268,12 +4767,497 @@ impl SseEncode for Option<crate::nuan5_media_param::decrypt::CustomData> {
     }
 }
 
+impl SseEncode for Option<crate::nuan5_media_param::structs::world::Dimension> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::world::Dimension>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::DiyData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::DiyData>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<i64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <i64>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::LocationParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::LocationParams>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::MomoHiddenState>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::world::Nation> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::world::Nation>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::NikkiParams>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::ObjectParams>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::world::Region> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::world::Region>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::world::Subarea> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::world::Subarea>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<u32> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <u32>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData::Hair(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData::General(
+                field0,
+            ) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeGeneralData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.target_group_id, serializer);
+        <i64>::sse_encode(self.feature_tag, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>::sse_encode(
+            self.color, serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeHairData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.target_group_id, serializer);
+        <i64>::sse_encode(self.feature_tag, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>::sse_encode(
+            self.color_0,
+            serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::DyeColorParams>>::sse_encode(
+            self.color_1,
+            serializer,
+        );
+        <f64>::sse_encode(self.roughness, serializer);
+        <Option<i64>>::sse_encode(self.color_mode, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::PatternCreationData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.target_group_id, serializer);
+        <i64>::sse_encode(self.feature_tag, serializer);
+        <i64>::sse_encode(self.texture_id, serializer);
+        <bool>::sse_encode(self.override_pattern_a, serializer);
+        <f64>::sse_encode(self.tiling, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::PhotographyParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState>::sse_encode(
+            self.edit, serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate>>::sse_encode(
+            self.date, serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime>>::sse_encode(
+            self.time, serializer,
+        );
+        <Option<crate::nuan5_media_param::structs::nikki_photo_params::LocationParams>>::sse_encode(
+            self.location,
+            serializer,
+        );
+        <Option<i64>>::sse_encode(self.weather, serializer);
+        <Vec<i64>>::sse_encode(self.photo_wall, serializer);
+        <Vec<crate::nuan5_media_param::structs::nikki_photo_params::TaskParams>>::sse_encode(
+            self.task, serializer,
+        );
+    }
+}
+
+impl SseEncode for (f64, f64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.0, serializer);
+        <f64>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (f64, f64, f64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.0, serializer);
+        <f64>::sse_encode(self.1, serializer);
+        <f64>::sse_encode(self.2, serializer);
+    }
+}
+
+impl SseEncode for (f64, f64, f64, f64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.0, serializer);
+        <f64>::sse_encode(self.1, serializer);
+        <f64>::sse_encode(self.2, serializer);
+        <f64>::sse_encode(self.3, serializer);
+    }
+}
+
+impl SseEncode for (i64, bool) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.0, serializer);
+        <bool>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i64, i64) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.0, serializer);
+        <i64>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::world::Region {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::structs::world::Region::Wishfield => 0,
+                crate::nuan5_media_param::structs::world::Region::Itzaland => 1,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::collage_params::RegionPicture {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <(f64, f64)>::sse_encode(self.position, serializer);
+        <f64>::sse_encode(self.rotation, serializer);
+        <f64>::sse_encode(self.scale, serializer);
+        <String>::sse_encode(self.image_id, serializer);
+        <crate::nuan5_media_param::structs::nikki_photo_params::NikkiPhotoParams>::sse_encode(
+            self.ori_custom_data,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::ShootingDate {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.day, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::ShootingTime {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u8>::sse_encode(self.hour, serializer);
+        <u8>::sse_encode(self.min, serializer);
+        <f64>::sse_encode(self.sec, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::SpecialEffectData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.target_group_id, serializer);
+        <i64>::sse_encode(self.feature_tag, serializer);
+        <i64>::sse_encode(self.color_grid, serializer);
+        <bool>::sse_encode(self.cover_diy_color, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::world::Subarea {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_media_param::structs::world::Subarea::OldFlorawishMemorial => 0,
+                crate::nuan5_media_param::structs::world::Subarea::StylistGuildMemorial => 1,
+                crate::nuan5_media_param::structs::world::Subarea::DreamwovenRuins => 2,
+                crate::nuan5_media_param::structs::world::Subarea::FortuneFalls => 3,
+                crate::nuan5_media_param::structs::world::Subarea::GreatWishtreeSquare => 4,
+                crate::nuan5_media_param::structs::world::Subarea::LakesideDistrict => 5,
+                crate::nuan5_media_param::structs::world::Subarea::OutskirtsForest => 6,
+                crate::nuan5_media_param::structs::world::Subarea::AbandonedFanaticWisherCamp => 7,
+                crate::nuan5_media_param::structs::world::Subarea::BreezyMeadowActivityArea => 8,
+                crate::nuan5_media_param::structs::world::Subarea::BugSongHills => 9,
+                crate::nuan5_media_param::structs::world::Subarea::CiciaHighlands => 10,
+                crate::nuan5_media_param::structs::world::Subarea::HeartcraftKingdomOutpost => 11,
+                crate::nuan5_media_param::structs::world::Subarea::LakesideHill => 12,
+                crate::nuan5_media_param::structs::world::Subarea::MeadowWharf => 13,
+                crate::nuan5_media_param::structs::world::Subarea::QueenPalaceRuins => 14,
+                crate::nuan5_media_param::structs::world::Subarea::RelicHill => 15,
+                crate::nuan5_media_param::structs::world::Subarea::SleepyFishHills => 16,
+                crate::nuan5_media_param::structs::world::Subarea::SwanGazebo => 17,
+                crate::nuan5_media_param::structs::world::Subarea::DyeWorkshop => 18,
+                crate::nuan5_media_param::structs::world::Subarea::FlowerFieldsResidence => 19,
+                crate::nuan5_media_param::structs::world::Subarea::RockfallValley => 20,
+                crate::nuan5_media_param::structs::world::Subarea::StonevilleMarket => 21,
+                crate::nuan5_media_param::structs::world::Subarea::ChooChooStation => 22,
+                crate::nuan5_media_param::structs::world::Subarea::GoldenFields => 23,
+                crate::nuan5_media_param::structs::world::Subarea::MarketOfMirth => 24,
+                crate::nuan5_media_param::structs::world::Subarea::Prosperville => 25,
+                crate::nuan5_media_param::structs::world::Subarea::RippleEstate => 26,
+                crate::nuan5_media_param::structs::world::Subarea::StellarFishingGround => 27,
+                crate::nuan5_media_param::structs::world::Subarea::Stonecrown => 28,
+                crate::nuan5_media_param::structs::world::Subarea::WindriderMill => 29,
+                crate::nuan5_media_param::structs::world::Subarea::BrookwoodForest => 30,
+                crate::nuan5_media_param::structs::world::Subarea::CavernOfWishes => 31,
+                crate::nuan5_media_param::structs::world::Subarea::FallenWishHighlands => 32,
+                crate::nuan5_media_param::structs::world::Subarea::GrandTreeValley => 33,
+                crate::nuan5_media_param::structs::world::Subarea::SacredMountains => 34,
+                crate::nuan5_media_param::structs::world::Subarea::ValleyOfBlossoms => 35,
+                crate::nuan5_media_param::structs::world::Subarea::ClearheartLake => 36,
+                crate::nuan5_media_param::structs::world::Subarea::CrescentMoonRuins => 37,
+                crate::nuan5_media_param::structs::world::Subarea::FlamingForest => 38,
+                crate::nuan5_media_param::structs::world::Subarea::RelicIsles => 39,
+                crate::nuan5_media_param::structs::world::Subarea::SongbreezeHighland => 40,
+                crate::nuan5_media_param::structs::world::Subarea::SparkheartIsland => 41,
+                crate::nuan5_media_param::structs::world::Subarea::OldRuins => 42,
+                crate::nuan5_media_param::structs::world::Subarea::Soakville => 43,
+                crate::nuan5_media_param::structs::world::Subarea::SoakvilleOutskirts => 44,
+                crate::nuan5_media_param::structs::world::Subarea::Steamville => 45,
+                crate::nuan5_media_param::structs::world::Subarea::DanqingIsland_BackMountain => 46,
+                crate::nuan5_media_param::structs::world::Subarea::BambooGrove => 47,
+                crate::nuan5_media_param::structs::world::Subarea::DanqingIsland_Inkville => 48,
+                crate::nuan5_media_param::structs::world::Subarea::InkwashStream => 49,
+                crate::nuan5_media_param::structs::world::Subarea::LoongPagoda => 50,
+                crate::nuan5_media_param::structs::world::Subarea::LoongPeak => 51,
+                crate::nuan5_media_param::structs::world::Subarea::ReedblossomShore => 52,
+                crate::nuan5_media_param::structs::world::Subarea::GreenBambooGrove => 53,
+                crate::nuan5_media_param::structs::world::Subarea::InkPool => 54,
+                crate::nuan5_media_param::structs::world::Subarea::InkshorePlain => 55,
+                crate::nuan5_media_param::structs::world::Subarea::DanqingRealm_Inkville => 56,
+                crate::nuan5_media_param::structs::world::Subarea::WildfieldWaterside => 57,
+                crate::nuan5_media_param::structs::world::Subarea::BehemothObservationSite => 58,
+                crate::nuan5_media_param::structs::world::Subarea::Coliseum => 59,
+                crate::nuan5_media_param::structs::world::Subarea::ElderwoodShade => 60,
+                crate::nuan5_media_param::structs::world::Subarea::ElderwoodWharf => 61,
+                crate::nuan5_media_param::structs::world::Subarea::ForestOfSlumber => 62,
+                crate::nuan5_media_param::structs::world::Subarea::ForgottenStreet => 63,
+                crate::nuan5_media_param::structs::world::Subarea::GiantVineForest => 64,
+                crate::nuan5_media_param::structs::world::Subarea::LeafRiver => 65,
+                crate::nuan5_media_param::structs::world::Subarea::MothershroomWoods => 66,
+                crate::nuan5_media_param::structs::world::Subarea::ParkyaCraterLake => 67,
+                crate::nuan5_media_param::structs::world::Subarea::Pottsville => 68,
+                crate::nuan5_media_param::structs::world::Subarea::RockvilleRuins => 69,
+                crate::nuan5_media_param::structs::world::Subarea::ShellIsland => 70,
+                crate::nuan5_media_param::structs::world::Subarea::Shroomville => 71,
+                crate::nuan5_media_param::structs::world::Subarea::SnailRanch => 72,
+                crate::nuan5_media_param::structs::world::Subarea::SpiraWaterfall => 73,
+                crate::nuan5_media_param::structs::world::Subarea::TitanGraveyard => 74,
+                crate::nuan5_media_param::structs::world::Subarea::TitansOutpostRuins => 75,
+                crate::nuan5_media_param::structs::world::Subarea::Spira1F => 76,
+                crate::nuan5_media_param::structs::world::Subarea::Spira2F => 77,
+                crate::nuan5_media_param::structs::world::Subarea::Spira3F => 78,
+                crate::nuan5_media_param::structs::world::Subarea::SpiraShelldome => 79,
+                crate::nuan5_media_param::structs::world::Subarea::BluePools => 80,
+                crate::nuan5_media_param::structs::world::Subarea::Cultivarium => 81,
+                crate::nuan5_media_param::structs::world::Subarea::DragonRuins => 82,
+                crate::nuan5_media_param::structs::world::Subarea::DragonrestFlowerfield => 83,
+                crate::nuan5_media_param::structs::world::Subarea::GlimmeringLake => 84,
+                crate::nuan5_media_param::structs::world::Subarea::GreatLumieville => 85,
+                crate::nuan5_media_param::structs::world::Subarea::HealingGround => 86,
+                crate::nuan5_media_param::structs::world::Subarea::HollowbreathPassage => 87,
+                crate::nuan5_media_param::structs::world::Subarea::LonestoneShore => 88,
+                crate::nuan5_media_param::structs::world::Subarea::SoulSpring => 89,
+                crate::nuan5_media_param::structs::world::Subarea::WanxiangRealm_BackMountain => 90,
+                crate::nuan5_media_param::structs::world::Subarea::CaiYeMarket => 91,
+                crate::nuan5_media_param::structs::world::Subarea::CaiYeOutskirts => 92,
+                crate::nuan5_media_param::structs::world::Subarea::DazzlebloomMeadow => 93,
+                crate::nuan5_media_param::structs::world::Subarea::DeepValleySpring => 94,
+                crate::nuan5_media_param::structs::world::Subarea::JiuhuaPavilion => 95,
+                crate::nuan5_media_param::structs::world::Subarea::JiuhuaPenitentiary => 96,
+                crate::nuan5_media_param::structs::world::Subarea::ValleyPath => 97,
+                crate::nuan5_media_param::structs::world::Subarea::WhereWoodEchoes => 98,
+                crate::nuan5_media_param::structs::world::Subarea::Crystalvale => 99,
+                crate::nuan5_media_param::structs::world::Subarea::DreamStarIsles => 100,
+                crate::nuan5_media_param::structs::world::Subarea::Starshore => 101,
+                crate::nuan5_media_param::structs::world::Subarea::UnboundWharf => 102,
+                crate::nuan5_media_param::structs::world::Subarea::DockArea => 103,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::TaskParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Puzzle(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <i64>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Risk(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <std::collections::HashMap<i64, bool>>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_media_param::structs::nikki_photo_params::TaskParams::Interactive(
+                field0,
+            ) => {
+                <i32>::sse_encode(2, serializer);
+                <std::collections::HashMap<i64, bool>>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
         }
     }
 }
@@ -1316,10 +5300,12 @@ impl SseEncode for usize {
     }
 }
 
-impl SseEncode for bool {
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::WeaponParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u8(self as _).unwrap();
+        <i64>::sse_encode(self.id, serializer);
+        <String>::sse_encode(self.slot_type, serializer);
+        <Option<String>>::sse_encode(self.state, serializer);
     }
 }
 

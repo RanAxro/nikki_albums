@@ -83,7 +83,7 @@ fn test_1(){
   use super::decrypt::*;
 
   let key = MediaKey::camera_param().unwrap();
-  let res = media_decrypt(Vec::from(r"q9NiCtwkEpChN5CBIvlM+7UBOn0L5iliMe9/0bUiezw2eSdCZ9TzUfs/JWBGlNv0kMcqySc5lGDPnNjAsqnZ01/iVK/X71xtAImj3Gcd03r0zGE3xXrq4ToOG8KSqPiv7+ecY4UX6H/8PO5yheO24u0LcWKh0Rzk3l9EA07xksHWQlc84xBVcOKWnYNpwGkN"), &key);
+  let res = media_decrypt(b"q9NiCtwkEpChN5CBIvlM+7UBOn0L5iliMe9/0bUiezw2eSdCZ9TzUfs/JWBGlNv0kMcqySc5lGDPnNjAsqnZ01/iVK/X71xtAImj3Gcd03r0zGE3xXrq4ToOG8KSqPiv7+ecY4UX6H/8PO5yheO24u0LcWKh0Rzk3l9EA07xksHWQlc84xBVcOKWnYNpwGkN", &key);
 
   if let Some(custom_data) = res {
     let media_custom_data = decode_media_param(MediaParamType::MomoCameraParams, &custom_data);
@@ -101,7 +101,7 @@ fn test_2(){
   use super::decrypt::*;
 
   let key = MediaKey::from_str(String::from("108328049")).unwrap();
-  let res = media_decode_file_unchecked(Vec::from(b"\xff\xd9"), String::from(r"image path"), &key);
+  let res = media_decode_file_unchecked(&Vec::from(b"\xff\xd9"), String::from(r"image path"), &key);
 
   if let Some(custom_data) = res {
     let media_custom_data = decode_media_param(MediaParamType::NikkiPhoto, &custom_data);

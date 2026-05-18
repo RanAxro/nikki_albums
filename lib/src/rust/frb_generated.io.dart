@@ -8,7 +8,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
+import 'nuan5_media_param/decode.dart';
 import 'nuan5_media_param/decrypt.dart';
+import 'nuan5_media_param/structs/clock_in_photo_params.dart';
+import 'nuan5_media_param/structs/collage_params.dart';
+import 'nuan5_media_param/structs/diy_params.dart';
+import 'nuan5_media_param/structs/momo_camera_params.dart';
+import 'nuan5_media_param/structs/nikki_photo_params.dart';
+import 'nuan5_media_param/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -43,6 +50,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
+
+  @protected
+  Map<PlatformInt64, PlatformInt64> dco_decode_Map_i_64_i_64_None(dynamic raw);
+
+  @protected
   MediaKey
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
@@ -57,25 +70,174 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String dco_decode_String(dynamic raw);
 
   @protected
+  Area dco_decode_area(dynamic raw);
+
+  @protected
+  bool dco_decode_bool(dynamic raw);
+
+  @protected
+  Area dco_decode_box_autoadd_area(dynamic raw);
+
+  @protected
+  CameraParams dco_decode_box_autoadd_camera_params(dynamic raw);
+
+  @protected
+  ClockInPhotoParams dco_decode_box_autoadd_clock_in_photo_params(dynamic raw);
+
+  @protected
+  CollageParams dco_decode_box_autoadd_collage_params(dynamic raw);
+
+  @protected
   CustomData dco_decode_box_autoadd_custom_data(dynamic raw);
+
+  @protected
+  Dimension dco_decode_box_autoadd_dimension(dynamic raw);
+
+  @protected
+  DiyData dco_decode_box_autoadd_diy_data(dynamic raw);
+
+  @protected
+  DiyParams dco_decode_box_autoadd_diy_params(dynamic raw);
+
+  @protected
+  DyeColorParams dco_decode_box_autoadd_dye_color_params(dynamic raw);
+
+  @protected
+  EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
+
+  @protected
+  PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
+
+  @protected
+  Location dco_decode_box_autoadd_location(dynamic raw);
+
+  @protected
+  LocationParams dco_decode_box_autoadd_location_params(dynamic raw);
+
+  @protected
+  MediaParam dco_decode_box_autoadd_media_param(dynamic raw);
+
+  @protected
+  MomoCameraParams dco_decode_box_autoadd_momo_camera_params(dynamic raw);
+
+  @protected
+  MomoHiddenState dco_decode_box_autoadd_momo_hidden_state(dynamic raw);
+
+  @protected
+  MomoParams dco_decode_box_autoadd_momo_params(dynamic raw);
+
+  @protected
+  Nation dco_decode_box_autoadd_nation(dynamic raw);
+
+  @protected
+  NikkiParams dco_decode_box_autoadd_nikki_params(dynamic raw);
+
+  @protected
+  NikkiPhotoParams dco_decode_box_autoadd_nikki_photo_params(dynamic raw);
+
+  @protected
+  ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
+
+  @protected
+  OutfitDyeGeneralData dco_decode_box_autoadd_outfit_dye_general_data(
+    dynamic raw,
+  );
+
+  @protected
+  OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw);
+
+  @protected
+  Region dco_decode_box_autoadd_region(dynamic raw);
+
+  @protected
+  ShootingDate dco_decode_box_autoadd_shooting_date(dynamic raw);
+
+  @protected
+  ShootingTime dco_decode_box_autoadd_shooting_time(dynamic raw);
+
+  @protected
+  Subarea dco_decode_box_autoadd_subarea(dynamic raw);
 
   @protected
   int dco_decode_box_autoadd_u_32(dynamic raw);
 
   @protected
+  WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw);
+
+  @protected
+  CameraParams dco_decode_camera_params(dynamic raw);
+
+  @protected
+  ClockInPhotoParams dco_decode_clock_in_photo_params(dynamic raw);
+
+  @protected
+  ClothParams dco_decode_cloth_params(dynamic raw);
+
+  @protected
+  CollageParams dco_decode_collage_params(dynamic raw);
+
+  @protected
   CustomData dco_decode_custom_data(dynamic raw);
+
+  @protected
+  Dimension dco_decode_dimension(dynamic raw);
+
+  @protected
+  DiyData dco_decode_diy_data(dynamic raw);
+
+  @protected
+  DiyParams dco_decode_diy_params(dynamic raw);
+
+  @protected
+  DressingParams dco_decode_dressing_params(dynamic raw);
+
+  @protected
+  DyeColorParams dco_decode_dye_color_params(dynamic raw);
+
+  @protected
+  EditPhotoParams dco_decode_edit_photo_params(dynamic raw);
+
+  @protected
+  EditPhotoState dco_decode_edit_photo_state(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
 
   @protected
+  FilterParams dco_decode_filter_params(dynamic raw);
+
+  @protected
   int dco_decode_i_32(dynamic raw);
+
+  @protected
+  PlatformInt64 dco_decode_i_64(dynamic raw);
+
+  @protected
+  LightParams dco_decode_light_params(dynamic raw);
 
   @protected
   List<String> dco_decode_list_String(dynamic raw);
 
   @protected
+  List<ClothParams> dco_decode_list_cloth_params(dynamic raw);
+
+  @protected
+  List<Location> dco_decode_list_location(dynamic raw);
+
+  @protected
+  List<ObjectParams> dco_decode_list_object_params(dynamic raw);
+
+  @protected
   List<CustomData?> dco_decode_list_opt_box_autoadd_custom_data(dynamic raw);
+
+  @protected
+  List<OutfitDyeData> dco_decode_list_outfit_dye_data(dynamic raw);
+
+  @protected
+  List<PatternCreationData> dco_decode_list_pattern_creation_data(dynamic raw);
+
+  @protected
+  Int64List dco_decode_list_prim_i_64_strict(dynamic raw);
 
   @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
@@ -84,13 +246,173 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
+  List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
+
+  @protected
+  List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
+    dynamic raw,
+  );
+
+  @protected
+  List<RegionPicture> dco_decode_list_region_picture(dynamic raw);
+
+  @protected
+  List<SpecialEffectData> dco_decode_list_special_effect_data(dynamic raw);
+
+  @protected
+  List<TaskParams> dco_decode_list_task_params(dynamic raw);
+
+  @protected
+  Location dco_decode_location(dynamic raw);
+
+  @protected
+  LocationParams dco_decode_location_params(dynamic raw);
+
+  @protected
+  LocationType dco_decode_location_type(dynamic raw);
+
+  @protected
+  MediaCustomData dco_decode_media_custom_data(dynamic raw);
+
+  @protected
   MediaDecodeEvent dco_decode_media_decode_event(dynamic raw);
+
+  @protected
+  MediaParam dco_decode_media_param(dynamic raw);
+
+  @protected
+  MediaParamType dco_decode_media_param_type(dynamic raw);
+
+  @protected
+  MomoCameraParams dco_decode_momo_camera_params(dynamic raw);
+
+  @protected
+  MomoHiddenState dco_decode_momo_hidden_state(dynamic raw);
+
+  @protected
+  MomoParams dco_decode_momo_params(dynamic raw);
+
+  @protected
+  Nation dco_decode_nation(dynamic raw);
+
+  @protected
+  NikkiParams dco_decode_nikki_params(dynamic raw);
+
+  @protected
+  NikkiPhotoParams dco_decode_nikki_photo_params(dynamic raw);
+
+  @protected
+  ObjectParams dco_decode_object_params(dynamic raw);
+
+  @protected
+  String? dco_decode_opt_String(dynamic raw);
+
+  @protected
+  Area? dco_decode_opt_box_autoadd_area(dynamic raw);
+
+  @protected
+  CameraParams? dco_decode_opt_box_autoadd_camera_params(dynamic raw);
 
   @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
 
   @protected
+  Dimension? dco_decode_opt_box_autoadd_dimension(dynamic raw);
+
+  @protected
+  DiyData? dco_decode_opt_box_autoadd_diy_data(dynamic raw);
+
+  @protected
+  DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
+
+  @protected
+  PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
+
+  @protected
+  LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw);
+
+  @protected
+  MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw);
+
+  @protected
+  Nation? dco_decode_opt_box_autoadd_nation(dynamic raw);
+
+  @protected
+  NikkiParams? dco_decode_opt_box_autoadd_nikki_params(dynamic raw);
+
+  @protected
+  ObjectParams? dco_decode_opt_box_autoadd_object_params(dynamic raw);
+
+  @protected
+  Region? dco_decode_opt_box_autoadd_region(dynamic raw);
+
+  @protected
+  ShootingDate? dco_decode_opt_box_autoadd_shooting_date(dynamic raw);
+
+  @protected
+  ShootingTime? dco_decode_opt_box_autoadd_shooting_time(dynamic raw);
+
+  @protected
+  Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
+
+  @protected
+  WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw);
+
+  @protected
+  OutfitDyeData dco_decode_outfit_dye_data(dynamic raw);
+
+  @protected
+  OutfitDyeGeneralData dco_decode_outfit_dye_general_data(dynamic raw);
+
+  @protected
+  OutfitDyeHairData dco_decode_outfit_dye_hair_data(dynamic raw);
+
+  @protected
+  PatternCreationData dco_decode_pattern_creation_data(dynamic raw);
+
+  @protected
+  PhotographyParams dco_decode_photography_params(dynamic raw);
+
+  @protected
+  (double, double) dco_decode_record_f_64_f_64(dynamic raw);
+
+  @protected
+  (double, double, double) dco_decode_record_f_64_f_64_f_64(dynamic raw);
+
+  @protected
+  (double, double, double, double) dco_decode_record_f_64_f_64_f_64_f_64(
+    dynamic raw,
+  );
+
+  @protected
+  (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
+
+  @protected
+  (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
+
+  @protected
+  Region dco_decode_region(dynamic raw);
+
+  @protected
+  RegionPicture dco_decode_region_picture(dynamic raw);
+
+  @protected
+  ShootingDate dco_decode_shooting_date(dynamic raw);
+
+  @protected
+  ShootingTime dco_decode_shooting_time(dynamic raw);
+
+  @protected
+  SpecialEffectData dco_decode_special_effect_data(dynamic raw);
+
+  @protected
+  Subarea dco_decode_subarea(dynamic raw);
+
+  @protected
+  TaskParams dco_decode_task_params(dynamic raw);
 
   @protected
   Thumbnail dco_decode_thumbnail(dynamic raw);
@@ -108,6 +430,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt dco_decode_usize(dynamic raw);
 
   @protected
+  WeaponParams dco_decode_weapon_params(dynamic raw);
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
@@ -119,6 +444,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   MediaKey
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<PlatformInt64, PlatformInt64> sse_decode_Map_i_64_i_64_None(
     SseDeserializer deserializer,
   );
 
@@ -137,27 +472,212 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
+  Area sse_decode_area(SseDeserializer deserializer);
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
+  Area sse_decode_box_autoadd_area(SseDeserializer deserializer);
+
+  @protected
+  CameraParams sse_decode_box_autoadd_camera_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ClockInPhotoParams sse_decode_box_autoadd_clock_in_photo_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CollageParams sse_decode_box_autoadd_collage_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CustomData sse_decode_box_autoadd_custom_data(SseDeserializer deserializer);
+
+  @protected
+  Dimension sse_decode_box_autoadd_dimension(SseDeserializer deserializer);
+
+  @protected
+  DiyData sse_decode_box_autoadd_diy_data(SseDeserializer deserializer);
+
+  @protected
+  DiyParams sse_decode_box_autoadd_diy_params(SseDeserializer deserializer);
+
+  @protected
+  DyeColorParams sse_decode_box_autoadd_dye_color_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  EditPhotoParams sse_decode_box_autoadd_edit_photo_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
+
+  @protected
+  Location sse_decode_box_autoadd_location(SseDeserializer deserializer);
+
+  @protected
+  LocationParams sse_decode_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MediaParam sse_decode_box_autoadd_media_param(SseDeserializer deserializer);
+
+  @protected
+  MomoCameraParams sse_decode_box_autoadd_momo_camera_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MomoHiddenState sse_decode_box_autoadd_momo_hidden_state(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MomoParams sse_decode_box_autoadd_momo_params(SseDeserializer deserializer);
+
+  @protected
+  Nation sse_decode_box_autoadd_nation(SseDeserializer deserializer);
+
+  @protected
+  NikkiParams sse_decode_box_autoadd_nikki_params(SseDeserializer deserializer);
+
+  @protected
+  NikkiPhotoParams sse_decode_box_autoadd_nikki_photo_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ObjectParams sse_decode_box_autoadd_object_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  OutfitDyeGeneralData sse_decode_box_autoadd_outfit_dye_general_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  OutfitDyeHairData sse_decode_box_autoadd_outfit_dye_hair_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Region sse_decode_box_autoadd_region(SseDeserializer deserializer);
+
+  @protected
+  ShootingDate sse_decode_box_autoadd_shooting_date(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ShootingTime sse_decode_box_autoadd_shooting_time(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
   int sse_decode_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
+  WeaponParams sse_decode_box_autoadd_weapon_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CameraParams sse_decode_camera_params(SseDeserializer deserializer);
+
+  @protected
+  ClockInPhotoParams sse_decode_clock_in_photo_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ClothParams sse_decode_cloth_params(SseDeserializer deserializer);
+
+  @protected
+  CollageParams sse_decode_collage_params(SseDeserializer deserializer);
+
+  @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
+
+  @protected
+  Dimension sse_decode_dimension(SseDeserializer deserializer);
+
+  @protected
+  DiyData sse_decode_diy_data(SseDeserializer deserializer);
+
+  @protected
+  DiyParams sse_decode_diy_params(SseDeserializer deserializer);
+
+  @protected
+  DressingParams sse_decode_dressing_params(SseDeserializer deserializer);
+
+  @protected
+  DyeColorParams sse_decode_dye_color_params(SseDeserializer deserializer);
+
+  @protected
+  EditPhotoParams sse_decode_edit_photo_params(SseDeserializer deserializer);
+
+  @protected
+  EditPhotoState sse_decode_edit_photo_state(SseDeserializer deserializer);
 
   @protected
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
+  FilterParams sse_decode_filter_params(SseDeserializer deserializer);
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
+
+  @protected
+  PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
+
+  @protected
+  LightParams sse_decode_light_params(SseDeserializer deserializer);
 
   @protected
   List<String> sse_decode_list_String(SseDeserializer deserializer);
 
   @protected
+  List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer);
+
+  @protected
+  List<Location> sse_decode_list_location(SseDeserializer deserializer);
+
+  @protected
+  List<ObjectParams> sse_decode_list_object_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<CustomData?> sse_decode_list_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   );
+
+  @protected
+  List<OutfitDyeData> sse_decode_list_outfit_dye_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<PatternCreationData> sse_decode_list_pattern_creation_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Int64List sse_decode_list_prim_i_64_strict(SseDeserializer deserializer);
 
   @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
@@ -166,7 +686,80 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
+  List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<RegionPicture> sse_decode_list_region_picture(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<SpecialEffectData> sse_decode_list_special_effect_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<TaskParams> sse_decode_list_task_params(SseDeserializer deserializer);
+
+  @protected
+  Location sse_decode_location(SseDeserializer deserializer);
+
+  @protected
+  LocationParams sse_decode_location_params(SseDeserializer deserializer);
+
+  @protected
+  LocationType sse_decode_location_type(SseDeserializer deserializer);
+
+  @protected
+  MediaCustomData sse_decode_media_custom_data(SseDeserializer deserializer);
+
+  @protected
   MediaDecodeEvent sse_decode_media_decode_event(SseDeserializer deserializer);
+
+  @protected
+  MediaParam sse_decode_media_param(SseDeserializer deserializer);
+
+  @protected
+  MediaParamType sse_decode_media_param_type(SseDeserializer deserializer);
+
+  @protected
+  MomoCameraParams sse_decode_momo_camera_params(SseDeserializer deserializer);
+
+  @protected
+  MomoHiddenState sse_decode_momo_hidden_state(SseDeserializer deserializer);
+
+  @protected
+  MomoParams sse_decode_momo_params(SseDeserializer deserializer);
+
+  @protected
+  Nation sse_decode_nation(SseDeserializer deserializer);
+
+  @protected
+  NikkiParams sse_decode_nikki_params(SseDeserializer deserializer);
+
+  @protected
+  NikkiPhotoParams sse_decode_nikki_photo_params(SseDeserializer deserializer);
+
+  @protected
+  ObjectParams sse_decode_object_params(SseDeserializer deserializer);
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer);
+
+  @protected
+  Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer);
+
+  @protected
+  CameraParams? sse_decode_opt_box_autoadd_camera_params(
+    SseDeserializer deserializer,
+  );
 
   @protected
   CustomData? sse_decode_opt_box_autoadd_custom_data(
@@ -174,7 +767,132 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Dimension? sse_decode_opt_box_autoadd_dimension(SseDeserializer deserializer);
+
+  @protected
+  DiyData? sse_decode_opt_box_autoadd_diy_data(SseDeserializer deserializer);
+
+  @protected
+  DyeColorParams? sse_decode_opt_box_autoadd_dye_color_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
+
+  @protected
+  LocationParams? sse_decode_opt_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MomoHiddenState? sse_decode_opt_box_autoadd_momo_hidden_state(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nation? sse_decode_opt_box_autoadd_nation(SseDeserializer deserializer);
+
+  @protected
+  NikkiParams? sse_decode_opt_box_autoadd_nikki_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ObjectParams? sse_decode_opt_box_autoadd_object_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Region? sse_decode_opt_box_autoadd_region(SseDeserializer deserializer);
+
+  @protected
+  ShootingDate? sse_decode_opt_box_autoadd_shooting_date(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ShootingTime? sse_decode_opt_box_autoadd_shooting_time(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer);
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
+
+  @protected
+  WeaponParams? sse_decode_opt_box_autoadd_weapon_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  OutfitDyeData sse_decode_outfit_dye_data(SseDeserializer deserializer);
+
+  @protected
+  OutfitDyeGeneralData sse_decode_outfit_dye_general_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  OutfitDyeHairData sse_decode_outfit_dye_hair_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PatternCreationData sse_decode_pattern_creation_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PhotographyParams sse_decode_photography_params(SseDeserializer deserializer);
+
+  @protected
+  (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
+
+  @protected
+  (double, double, double) sse_decode_record_f_64_f_64_f_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (double, double, double, double) sse_decode_record_f_64_f_64_f_64_f_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (PlatformInt64, bool) sse_decode_record_i_64_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (PlatformInt64, PlatformInt64) sse_decode_record_i_64_i_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Region sse_decode_region(SseDeserializer deserializer);
+
+  @protected
+  RegionPicture sse_decode_region_picture(SseDeserializer deserializer);
+
+  @protected
+  ShootingDate sse_decode_shooting_date(SseDeserializer deserializer);
+
+  @protected
+  ShootingTime sse_decode_shooting_time(SseDeserializer deserializer);
+
+  @protected
+  SpecialEffectData sse_decode_special_effect_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Subarea sse_decode_subarea(SseDeserializer deserializer);
+
+  @protected
+  TaskParams sse_decode_task_params(SseDeserializer deserializer);
 
   @protected
   Thumbnail sse_decode_thumbnail(SseDeserializer deserializer);
@@ -192,7 +910,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt sse_decode_usize(SseDeserializer deserializer);
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer);
+  WeaponParams sse_decode_weapon_params(SseDeserializer deserializer);
 
   @protected
   void sse_encode_AnyhowException(
@@ -215,6 +933,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_i_64_bool_None(
+    Map<PlatformInt64, bool> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_64_i_64_None(
+    Map<PlatformInt64, PlatformInt64> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     MediaKey self,
@@ -231,29 +961,269 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
+  void sse_encode_area(Area self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_area(Area self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_camera_params(
+    CameraParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_clock_in_photo_params(
+    ClockInPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_collage_params(
+    CollageParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_custom_data(
     CustomData self,
     SseSerializer serializer,
   );
 
   @protected
+  void sse_encode_box_autoadd_dimension(
+    Dimension self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_diy_data(DiyData self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_diy_params(
+    DiyParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_dye_color_params(
+    DyeColorParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_edit_photo_params(
+    EditPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_i_64(
+    PlatformInt64 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_location(Location self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_location_params(
+    LocationParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_media_param(
+    MediaParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_momo_camera_params(
+    MomoCameraParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_momo_hidden_state(
+    MomoHiddenState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_momo_params(
+    MomoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nation(Nation self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_nikki_params(
+    NikkiParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nikki_photo_params(
+    NikkiPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_object_params(
+    ObjectParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_outfit_dye_general_data(
+    OutfitDyeGeneralData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_outfit_dye_hair_data(
+    OutfitDyeHairData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_region(Region self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_shooting_date(
+    ShootingDate self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_shooting_time(
+    ShootingTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_weapon_params(
+    WeaponParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_camera_params(CameraParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_clock_in_photo_params(
+    ClockInPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_cloth_params(ClothParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_collage_params(CollageParams self, SseSerializer serializer);
 
   @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);
 
   @protected
+  void sse_encode_dimension(Dimension self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_diy_data(DiyData self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_diy_params(DiyParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_dressing_params(
+    DressingParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_dye_color_params(
+    DyeColorParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_edit_photo_params(
+    EditPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_edit_photo_state(
+    EditPhotoState self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_light_params(LightParams self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_cloth_params(
+    List<ClothParams> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_location(List<Location> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_object_params(
+    List<ObjectParams> self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_list_opt_box_autoadd_custom_data(
     List<CustomData?> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_outfit_dye_data(
+    List<OutfitDyeData> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_pattern_creation_data(
+    List<PatternCreationData> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_prim_i_64_strict(
+    Int64List self,
     SseSerializer serializer,
   );
 
@@ -267,8 +1237,107 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_64_bool(
+    List<(PlatformInt64, bool)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_i_64_i_64(
+    List<(PlatformInt64, PlatformInt64)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_region_picture(
+    List<RegionPicture> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_special_effect_data(
+    List<SpecialEffectData> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_task_params(
+    List<TaskParams> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_location(Location self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_location_params(
+    LocationParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_location_type(LocationType self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_media_custom_data(
+    MediaCustomData self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_media_decode_event(
     MediaDecodeEvent self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_media_param(MediaParam self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_media_param_type(
+    MediaParamType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_momo_camera_params(
+    MomoCameraParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_momo_hidden_state(
+    MomoHiddenState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_momo_params(MomoParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_nation(Nation self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_nikki_photo_params(
+    NikkiPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_object_params(ObjectParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_camera_params(
+    CameraParams? self,
     SseSerializer serializer,
   );
 
@@ -279,7 +1348,172 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_dimension(
+    Dimension? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_diy_data(
+    DiyData? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_dye_color_params(
+    DyeColorParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_i_64(
+    PlatformInt64? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_location_params(
+    LocationParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_momo_hidden_state(
+    MomoHiddenState? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_nation(
+    Nation? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_nikki_params(
+    NikkiParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_object_params(
+    ObjectParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_region(
+    Region? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_shooting_date(
+    ShootingDate? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_shooting_time(
+    ShootingTime? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_subarea(
+    Subarea? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_weapon_params(
+    WeaponParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_outfit_dye_data(OutfitDyeData self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_outfit_dye_general_data(
+    OutfitDyeGeneralData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_outfit_dye_hair_data(
+    OutfitDyeHairData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_pattern_creation_data(
+    PatternCreationData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_photography_params(
+    PhotographyParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_f_64_f_64(
+    (double, double) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_f_64_f_64_f_64(
+    (double, double, double) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_f_64_f_64_f_64_f_64(
+    (double, double, double, double) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_64_bool(
+    (PlatformInt64, bool) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_64_i_64(
+    (PlatformInt64, PlatformInt64) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_region(Region self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_region_picture(RegionPicture self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_shooting_date(ShootingDate self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_shooting_time(ShootingTime self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_special_effect_data(
+    SpecialEffectData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_subarea(Subarea self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_task_params(TaskParams self, SseSerializer serializer);
 
   @protected
   void sse_encode_thumbnail(Thumbnail self, SseSerializer serializer);
@@ -297,7 +1531,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_usize(BigInt self, SseSerializer serializer);
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer);
+  void sse_encode_weapon_params(WeaponParams self, SseSerializer serializer);
 }
 
 // Section: wire_class

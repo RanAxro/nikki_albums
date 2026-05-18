@@ -8,13 +8,13 @@ use std::sync::Arc;
 // FFI 绑定
 // ============================================================
 #[allow(non_snake_case, dead_code)]
-mod ffi {
+mod ffi{
   use std::ffi::{c_char, c_void};
   use flutter_rust_bridge::frb;
 
   #[repr(u32)]
   #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-  pub enum DecryptionStatus {
+  pub enum DecryptionStatus{
     Success = 0,
     NullPointer = 1,
     DataLenIsNotAMultipleOf16 = 2,
@@ -27,7 +27,7 @@ mod ffi {
 
   #[frb(ignore)]
   #[repr(C)]
-  pub struct MediaDecryptionResult {
+  pub struct MediaDecryptionResult{
     pub status: u32,
     pub data: *mut u8,
     pub len: usize,
@@ -35,7 +35,7 @@ mod ffi {
 
   #[frb(ignore)]
   #[repr(C)]
-  pub struct MediaKey {
+  pub struct MediaKey{
     _private: [u8; 0],
   }
 
@@ -89,45 +89,45 @@ pub enum CustomData{
 // Key 封装
 // ============================================================
 #[frb(opaque)]
-pub struct MediaKey {
+pub struct MediaKey{
   ptr: *mut ffi::MediaKey,
 }
 
-unsafe impl Send for MediaKey {}
-unsafe impl Sync for MediaKey {}
+unsafe impl Send for MediaKey{}
+unsafe impl Sync for MediaKey{}
 
-impl MediaKey {
+impl MediaKey{
   #[frb(sync, positional)]
-  pub fn from_str_bytes(bytes: Vec<u8>) -> anyhow::Result<MediaKey> {
-    let ptr = unsafe { ffi::media_key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
+  pub fn from_str_bytes(bytes: &[u8]) -> anyhow::Result<MediaKey>{
+    let ptr = unsafe{ ffi::media_key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
     if ptr.is_null() {
       anyhow::bail!("failed to create key from str bytes");
     }
-    Ok(MediaKey { ptr })
+    Ok(MediaKey{ ptr })
   }
 
   #[frb(sync, positional)]
-  pub fn from_str(s: String) -> anyhow::Result<MediaKey> {
+  pub fn from_str(s: String) -> anyhow::Result<MediaKey>{
     let c_str = CString::new(s).map_err(|e| anyhow::anyhow!("invalid string: {e}"))?;
-    let ptr = unsafe { ffi::media_key_from_str(c_str.as_ptr()) };
+    let ptr = unsafe{ ffi::media_key_from_str(c_str.as_ptr()) };
     if ptr.is_null() {
       anyhow::bail!("failed to create key from string");
     }
-    Ok(MediaKey { ptr })
+    Ok(MediaKey{ ptr })
   }
 
   #[frb(sync)]
-  pub fn camera_param() -> anyhow::Result<MediaKey> {
-    let ptr = unsafe { ffi::media_key_camera_param() };
+  pub fn camera_param() -> anyhow::Result<MediaKey>{
+    let ptr = unsafe{ ffi::media_key_camera_param() };
     if ptr.is_null() {
       anyhow::bail!("failed to create camera param key");
     }
-    Ok(MediaKey { ptr })
+    Ok(MediaKey{ ptr })
   }
 
-  pub fn dispose(self) {
+  pub fn dispose(self){
     if !self.ptr.is_null() {
-      unsafe { ffi::free_media_key(self.ptr) };
+      unsafe{ ffi::free_media_key(self.ptr) };
     }
   }
 }
@@ -135,17 +135,17 @@ impl MediaKey {
 // ============================================================
 // 内部辅助：转换 DecryptionResult
 // ============================================================
-fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData> {
+fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
   if result.status != 0 {
-    unsafe { ffi::free_media_decryption_result(result) };
+    unsafe{ ffi::free_media_decryption_result(result) };
     return None;
   }
 
   if result.data.is_null() || result.len == 0 {
-    unsafe { ffi::free_media_decryption_result(result) };
+    unsafe{ ffi::free_media_decryption_result(result) };
     Some(CustomData::Invalid)
-  } else {
-    let data = unsafe {
+  }else{
+    let data = unsafe{
       let slice = std::slice::from_raw_parts(result.data, result.len);
       let vec = slice.to_vec();
       ffi::free_media_decryption_result(result);
@@ -159,18 +159,18 @@ fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData
 // 单文件/内存解密
 // ============================================================
 #[frb(sync, positional)]
-pub fn media_decrypt(data: Vec<u8>, key: &MediaKey) -> Option<CustomData> {
-  let result = unsafe { ffi::media_decrypt(data.as_ptr(), data.len(), key.ptr) };
+pub fn media_decrypt(data: &[u8], key: &MediaKey) -> Option<CustomData>{
+  let result = unsafe{ ffi::media_decrypt(data.as_ptr(), data.len(), key.ptr) };
   convert_media_result(result)
 }
 
 #[frb(sync)]
 pub fn media_decode_file_bytes_unchecked(
-  flag: Vec<u8>,
-  bytes: Vec<u8>,
+  flag: &[u8],
+  bytes: &[u8],
   key: &MediaKey,
-) -> Option<CustomData> {
-  let result = unsafe {
+) -> Option<CustomData>{
+  let result = unsafe{
     ffi::media_decode_file_bytes_unchecked(
       flag.as_ptr(),
       flag.len(),
@@ -183,16 +183,16 @@ pub fn media_decode_file_bytes_unchecked(
 }
 
 #[frb]
-pub fn media_decode_file_unchecked(flag: Vec<u8>, path: String, key: &MediaKey) -> Option<CustomData> {
+pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) -> Option<CustomData>{
   let c_path = CString::new(path).ok()?;
-  let result = unsafe {
+  let result = unsafe{
     ffi::media_decode_file_unchecked(flag.as_ptr(), flag.len(), c_path.as_ptr(), key.ptr)
   };
   convert_media_result(result)
 }
 
 #[frb(sync)]
-pub fn media_decode_file_unchecked_sync(flag: Vec<u8>, path: String, key: &MediaKey) -> Option<CustomData> {
+pub fn media_decode_file_unchecked_sync(flag: &[u8], path: String, key: &MediaKey) -> Option<CustomData>{
   media_decode_file_unchecked(flag, path, key)
 }
 
@@ -201,24 +201,24 @@ pub fn media_decode_file_unchecked_sync(flag: Vec<u8>, path: String, key: &Media
 // ============================================================
 
 #[frb]
-pub enum MediaDecodeEvent {
+pub enum MediaDecodeEvent{
   Progress(f64),
   Result(Vec<Option<CustomData>>),
 }
 
 #[frb]
 pub fn media_decode_files_unchecked(
-  flag: Vec<u8>,
+  flag: &[u8],
   paths: Vec<String>,
   key: &MediaKey,
   progress_sink: StreamSink<MediaDecodeEvent>,
-) -> anyhow::Result<()> {
+) -> anyhow::Result<()>{
   if paths.is_empty() {
     progress_sink.add(MediaDecodeEvent::Result(vec![]));
     return Ok(());
   }
 
-  unsafe {
+  unsafe{
     // 1. 路径转 CString
     let c_paths: Vec<CString> = paths
       .into_iter()
@@ -234,11 +234,11 @@ pub fn media_decode_files_unchecked(
       current: usize,
       total: usize,
       userdata: *mut c_void,
-    ) {
+    ){
       if userdata.is_null() || total == 0 {
         return;
       }
-      let sink = unsafe { &*(userdata as *const StreamSink<MediaDecodeEvent>) };
+      let sink = unsafe{ &*(userdata as *const StreamSink<MediaDecodeEvent>) };
       let percent = current as f64 / total as f64;
       let _ = sink.add(MediaDecodeEvent::Progress(percent));
     }
@@ -282,15 +282,15 @@ pub fn media_decode_files_unchecked(
 /// 批量解密（无进度）
 #[frb]
 pub fn media_decode_files_unchecked_no_progress(
-  flag: Vec<u8>,
+  flag: &[u8],
   paths: Vec<String>,
   key: &MediaKey,
-) -> Vec<Option<CustomData>> {
+) -> Vec<Option<CustomData>>{
   let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
   let path_count = c_paths.len();
   let ptrs: Vec<*const c_char> = c_paths.iter().map(|c| c.as_ptr()).collect();
 
-  let results_ptr = unsafe {
+  let results_ptr = unsafe{
     ffi::media_decode_files_unchecked(
       flag.as_ptr(),
       flag.len(),
@@ -308,11 +308,11 @@ pub fn media_decode_files_unchecked_no_progress(
 
   let mut results = Vec::with_capacity(path_count);
   for i in 0..path_count {
-    let item = unsafe { ptr::read(results_ptr.add(i)) };
+    let item = unsafe{ ptr::read(results_ptr.add(i)) };
     results.push(convert_media_result(item));
   }
 
-  unsafe { ffi::free_media_results_array(results_ptr, path_count) };
+  unsafe{ ffi::free_media_results_array(results_ptr, path_count) };
 
   results
 }

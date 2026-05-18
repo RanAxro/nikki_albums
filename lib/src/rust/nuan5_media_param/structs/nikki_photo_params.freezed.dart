@@ -790,6 +790,351 @@ String toString() {
 
 
 /// @nodoc
+mixin _$LocationType {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LocationType()';
+}
+
+
+}
+
+/// @nodoc
+class $LocationTypeCopyWith<$Res>  {
+$LocationTypeCopyWith(LocationType _, $Res Function(LocationType) __);
+}
+
+
+/// Adds pattern-matching-related methods to [LocationType].
+extension LocationTypePatterns on LocationType {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LocationType_Unknown value)?  unknown,TResult Function( LocationType_Exact value)?  exact,TResult Function( LocationType_Guessed value)?  guessed,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LocationType_Unknown() when unknown != null:
+return unknown(_that);case LocationType_Exact() when exact != null:
+return exact(_that);case LocationType_Guessed() when guessed != null:
+return guessed(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LocationType_Unknown value)  unknown,required TResult Function( LocationType_Exact value)  exact,required TResult Function( LocationType_Guessed value)  guessed,}){
+final _that = this;
+switch (_that) {
+case LocationType_Unknown():
+return unknown(_that);case LocationType_Exact():
+return exact(_that);case LocationType_Guessed():
+return guessed(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LocationType_Unknown value)?  unknown,TResult? Function( LocationType_Exact value)?  exact,TResult? Function( LocationType_Guessed value)?  guessed,}){
+final _that = this;
+switch (_that) {
+case LocationType_Unknown() when unknown != null:
+return unknown(_that);case LocationType_Exact() when exact != null:
+return exact(_that);case LocationType_Guessed() when guessed != null:
+return guessed(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  unknown,TResult Function( Location field0)?  exact,TResult Function( List<Location> field0)?  guessed,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LocationType_Unknown() when unknown != null:
+return unknown();case LocationType_Exact() when exact != null:
+return exact(_that.field0);case LocationType_Guessed() when guessed != null:
+return guessed(_that.field0);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  unknown,required TResult Function( Location field0)  exact,required TResult Function( List<Location> field0)  guessed,}) {final _that = this;
+switch (_that) {
+case LocationType_Unknown():
+return unknown();case LocationType_Exact():
+return exact(_that.field0);case LocationType_Guessed():
+return guessed(_that.field0);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  unknown,TResult? Function( Location field0)?  exact,TResult? Function( List<Location> field0)?  guessed,}) {final _that = this;
+switch (_that) {
+case LocationType_Unknown() when unknown != null:
+return unknown();case LocationType_Exact() when exact != null:
+return exact(_that.field0);case LocationType_Guessed() when guessed != null:
+return guessed(_that.field0);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class LocationType_Unknown extends LocationType {
+  const LocationType_Unknown(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Unknown);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LocationType.unknown()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class LocationType_Exact extends LocationType {
+  const LocationType_Exact(this.field0): super._();
+  
+
+ final  Location field0;
+
+/// Create a copy of LocationType
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LocationType_ExactCopyWith<LocationType_Exact> get copyWith => _$LocationType_ExactCopyWithImpl<LocationType_Exact>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Exact&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'LocationType.exact(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LocationType_ExactCopyWith<$Res> implements $LocationTypeCopyWith<$Res> {
+  factory $LocationType_ExactCopyWith(LocationType_Exact value, $Res Function(LocationType_Exact) _then) = _$LocationType_ExactCopyWithImpl;
+@useResult
+$Res call({
+ Location field0
+});
+
+
+$LocationCopyWith<$Res> get field0;
+
+}
+/// @nodoc
+class _$LocationType_ExactCopyWithImpl<$Res>
+    implements $LocationType_ExactCopyWith<$Res> {
+  _$LocationType_ExactCopyWithImpl(this._self, this._then);
+
+  final LocationType_Exact _self;
+  final $Res Function(LocationType_Exact) _then;
+
+/// Create a copy of LocationType
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(LocationType_Exact(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as Location,
+  ));
+}
+
+/// Create a copy of LocationType
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocationCopyWith<$Res> get field0 {
+  
+  return $LocationCopyWith<$Res>(_self.field0, (value) {
+    return _then(_self.copyWith(field0: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class LocationType_Guessed extends LocationType {
+  const LocationType_Guessed(final  List<Location> field0): _field0 = field0,super._();
+  
+
+ final  List<Location> _field0;
+ List<Location> get field0 {
+  if (_field0 is EqualUnmodifiableListView) return _field0;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_field0);
+}
+
+
+/// Create a copy of LocationType
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LocationType_GuessedCopyWith<LocationType_Guessed> get copyWith => _$LocationType_GuessedCopyWithImpl<LocationType_Guessed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Guessed&&const DeepCollectionEquality().equals(other._field0, _field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+
+@override
+String toString() {
+  return 'LocationType.guessed(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LocationType_GuessedCopyWith<$Res> implements $LocationTypeCopyWith<$Res> {
+  factory $LocationType_GuessedCopyWith(LocationType_Guessed value, $Res Function(LocationType_Guessed) _then) = _$LocationType_GuessedCopyWithImpl;
+@useResult
+$Res call({
+ List<Location> field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$LocationType_GuessedCopyWithImpl<$Res>
+    implements $LocationType_GuessedCopyWith<$Res> {
+  _$LocationType_GuessedCopyWithImpl(this._self, this._then);
+
+  final LocationType_Guessed _self;
+  final $Res Function(LocationType_Guessed) _then;
+
+/// Create a copy of LocationType
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(LocationType_Guessed(
+null == field0 ? _self._field0 : field0 // ignore: cast_nullable_to_non_nullable
+as List<Location>,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$MomoHiddenState {
 
 

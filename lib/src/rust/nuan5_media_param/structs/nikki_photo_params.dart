@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 import 'world.dart';
 part 'nikki_photo_params.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class CameraParams {
   final String params;
@@ -228,6 +228,34 @@ sealed class LightParams with _$LightParams {
     required double strength,
   }) = LightParams_Some;
   const factory LightParams.none() = LightParams_None;
+}
+
+class LocationParams {
+  final (double, double, double) pos;
+  final LocationType loc;
+
+  const LocationParams({required this.pos, required this.loc});
+
+  @override
+  int get hashCode => pos.hashCode ^ loc.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LocationParams &&
+          runtimeType == other.runtimeType &&
+          pos == other.pos &&
+          loc == other.loc;
+}
+
+@freezed
+sealed class LocationType with _$LocationType {
+  const LocationType._();
+
+  const factory LocationType.unknown() = LocationType_Unknown;
+  const factory LocationType.exact(Location field0) = LocationType_Exact;
+  const factory LocationType.guessed(List<Location> field0) =
+      LocationType_Guessed;
 }
 
 @freezed
@@ -491,7 +519,7 @@ class PhotographyParams {
   final EditPhotoState edit;
   final ShootingDate? date;
   final ShootingTime? time;
-  final Location? location;
+  final LocationParams? location;
   final PlatformInt64? weather;
   final Int64List photoWall;
   final List<TaskParams> task;

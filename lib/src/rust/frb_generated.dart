@@ -9,7 +9,14 @@ import 'dart:convert';
 import 'frb_generated.dart';
 import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
+import 'nuan5_media_param/decode.dart';
 import 'nuan5_media_param/decrypt.dart';
+import 'nuan5_media_param/structs/clock_in_photo_params.dart';
+import 'nuan5_media_param/structs/collage_params.dart';
+import 'nuan5_media_param/structs/diy_params.dart';
+import 'nuan5_media_param/structs/momo_camera_params.dart';
+import 'nuan5_media_param/structs/nikki_photo_params.dart';
+import 'nuan5_media_param/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -71,7 +78,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1422373251;
+  int get rustContentHash => 702642369;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -93,6 +100,11 @@ abstract class RustLibApi extends BaseApi {
 
   MediaKey crateNuan5MediaParamDecryptMediaKeyFromStrBytes({
     required List<int> bytes,
+  });
+
+  Future<MediaCustomData> crateNuan5MediaParamDecodeDecodeMediaParam({
+    required MediaParamType paramType,
+    required CustomData data,
   });
 
   Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
@@ -283,6 +295,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<MediaCustomData> crateNuan5MediaParamDecodeDecodeMediaParam({
+    required MediaParamType paramType,
+    required CustomData data,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_media_param_type(paramType, serializer);
+          sse_encode_box_autoadd_custom_data(data, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 5,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_media_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5MediaParamDecodeDecodeMediaParamConstMeta,
+        argValues: [paramType, data],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5MediaParamDecodeDecodeMediaParamConstMeta =>
+      const TaskConstMeta(
+        debugName: "decode_media_param",
+        argNames: ["paramType", "data"],
+      );
+
+  @override
   Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
     required List<int> jpegBytes,
     int? targetWidth,
@@ -298,7 +345,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 5,
+            funcId: 6,
             port: port_,
           );
         },
@@ -335,7 +382,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 6,
+            funcId: 7,
             port: port_,
           );
         },
@@ -372,7 +419,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 7,
+            funcId: 8,
             port: port_,
           );
         },
@@ -400,7 +447,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -425,7 +472,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 9,
+            funcId: 10,
             port: port_,
           );
         },
@@ -459,7 +506,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -499,7 +546,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 11,
+            funcId: 12,
             port: port_,
           );
         },
@@ -538,7 +585,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -585,7 +632,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 13,
+              funcId: 14,
               port: port_,
             );
           },
@@ -630,7 +677,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 14,
+            funcId: 15,
             port: port_,
           );
         },
@@ -667,7 +714,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -694,7 +741,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -743,6 +790,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_64_bool(raw).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<PlatformInt64, PlatformInt64> dco_decode_Map_i_64_i_64_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_64_i_64(raw).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
   MediaKey
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     dynamic raw,
@@ -766,15 +829,259 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Area dco_decode_area(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Area.values[raw as int];
+  }
+
+  @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  Area dco_decode_box_autoadd_area(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_area(raw);
+  }
+
+  @protected
+  CameraParams dco_decode_box_autoadd_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_camera_params(raw);
+  }
+
+  @protected
+  ClockInPhotoParams dco_decode_box_autoadd_clock_in_photo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_clock_in_photo_params(raw);
+  }
+
+  @protected
+  CollageParams dco_decode_box_autoadd_collage_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_collage_params(raw);
+  }
+
+  @protected
   CustomData dco_decode_box_autoadd_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_custom_data(raw);
   }
 
   @protected
+  Dimension dco_decode_box_autoadd_dimension(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_dimension(raw);
+  }
+
+  @protected
+  DiyData dco_decode_box_autoadd_diy_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_diy_data(raw);
+  }
+
+  @protected
+  DiyParams dco_decode_box_autoadd_diy_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_diy_params(raw);
+  }
+
+  @protected
+  DyeColorParams dco_decode_box_autoadd_dye_color_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_dye_color_params(raw);
+  }
+
+  @protected
+  EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_edit_photo_params(raw);
+  }
+
+  @protected
+  PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_i_64(raw);
+  }
+
+  @protected
+  Location dco_decode_box_autoadd_location(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_location(raw);
+  }
+
+  @protected
+  LocationParams dco_decode_box_autoadd_location_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_location_params(raw);
+  }
+
+  @protected
+  MediaParam dco_decode_box_autoadd_media_param(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_media_param(raw);
+  }
+
+  @protected
+  MomoCameraParams dco_decode_box_autoadd_momo_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_momo_camera_params(raw);
+  }
+
+  @protected
+  MomoHiddenState dco_decode_box_autoadd_momo_hidden_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_momo_hidden_state(raw);
+  }
+
+  @protected
+  MomoParams dco_decode_box_autoadd_momo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_momo_params(raw);
+  }
+
+  @protected
+  Nation dco_decode_box_autoadd_nation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nation(raw);
+  }
+
+  @protected
+  NikkiParams dco_decode_box_autoadd_nikki_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nikki_params(raw);
+  }
+
+  @protected
+  NikkiPhotoParams dco_decode_box_autoadd_nikki_photo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nikki_photo_params(raw);
+  }
+
+  @protected
+  ObjectParams dco_decode_box_autoadd_object_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_object_params(raw);
+  }
+
+  @protected
+  OutfitDyeGeneralData dco_decode_box_autoadd_outfit_dye_general_data(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_outfit_dye_general_data(raw);
+  }
+
+  @protected
+  OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_outfit_dye_hair_data(raw);
+  }
+
+  @protected
+  Region dco_decode_box_autoadd_region(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_region(raw);
+  }
+
+  @protected
+  ShootingDate dco_decode_box_autoadd_shooting_date(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_shooting_date(raw);
+  }
+
+  @protected
+  ShootingTime dco_decode_box_autoadd_shooting_time(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_shooting_time(raw);
+  }
+
+  @protected
+  Subarea dco_decode_box_autoadd_subarea(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_subarea(raw);
+  }
+
+  @protected
   int dco_decode_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
+  }
+
+  @protected
+  WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_weapon_params(raw);
+  }
+
+  @protected
+  CameraParams dco_decode_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 19)
+      throw Exception('unexpected arr length: expect 19 but see ${arr.length}');
+    return CameraParams(
+      params: dco_decode_String(arr[0]),
+      portraitMode: dco_decode_bool(arr[1]),
+      zoom: dco_decode_f_64(arr[2]),
+      focalLength: dco_decode_f_64(arr[3]),
+      rotation: dco_decode_f_64(arr[4]),
+      apertureSection: dco_decode_u_8(arr[5]),
+      vignetteIntensity: dco_decode_f_64(arr[6]),
+      bloomIntensity: dco_decode_f_64(arr[7]),
+      bloomThreshold: dco_decode_f_64(arr[8]),
+      brightness: dco_decode_f_64(arr[9]),
+      exposure: dco_decode_f_64(arr[10]),
+      contrast: dco_decode_f_64(arr[11]),
+      saturation: dco_decode_f_64(arr[12]),
+      vibrance: dco_decode_f_64(arr[13]),
+      highlights: dco_decode_f_64(arr[14]),
+      shadows: dco_decode_f_64(arr[15]),
+      light: dco_decode_light_params(arr[16]),
+      filter: dco_decode_filter_params(arr[17]),
+      pose: dco_decode_i_64(arr[18]),
+    );
+  }
+
+  @protected
+  ClockInPhotoParams dco_decode_clock_in_photo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return ClockInPhotoParams(
+      tag: dco_decode_i_64(arr[0]),
+      photography: dco_decode_photography_params(arr[1]),
+      camera: dco_decode_opt_box_autoadd_camera_params(arr[2]),
+      nikki: dco_decode_opt_box_autoadd_nikki_params(arr[3]),
+      momo: dco_decode_opt_box_autoadd_momo_hidden_state(arr[4]),
+    );
+  }
+
+  @protected
+  ClothParams dco_decode_cloth_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return ClothParams(
+      id: dco_decode_i_64(arr[0]),
+      diy: dco_decode_opt_box_autoadd_diy_data(arr[1]),
+    );
+  }
+
+  @protected
+  CollageParams dco_decode_collage_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return CollageParams(
+      templateId: dco_decode_i_64(arr[0]),
+      regionPictures: dco_decode_list_region_picture(arr[1]),
+    );
   }
 
   @protected
@@ -791,9 +1098,108 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Dimension dco_decode_dimension(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Dimension.values[raw as int];
+  }
+
+  @protected
+  DiyData dco_decode_diy_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return DiyData(
+      outfitDye: dco_decode_list_outfit_dye_data(arr[0]),
+      specialEffect: dco_decode_list_special_effect_data(arr[1]),
+      patternCreation: dco_decode_list_pattern_creation_data(arr[2]),
+    );
+  }
+
+  @protected
+  DiyParams dco_decode_diy_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return DiyParams(
+      poseId: dco_decode_opt_box_autoadd_i_64(arr[0]),
+      patternData: dco_decode_Map_i_64_i_64_None(arr[1]),
+      clothes: dco_decode_list_cloth_params(arr[2]),
+    );
+  }
+
+  @protected
+  DressingParams dco_decode_dressing_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return DressingParams(
+      clothes: dco_decode_list_cloth_params(arr[0]),
+      magicball: dco_decode_list_prim_i_64_strict(arr[1]),
+    );
+  }
+
+  @protected
+  DyeColorParams dco_decode_dye_color_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return DyeColorParams(
+      color: dco_decode_record_f_64_f_64_f_64_f_64(arr[0]),
+      colorGrid: dco_decode_i_64(arr[1]),
+    );
+  }
+
+  @protected
+  EditPhotoParams dco_decode_edit_photo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return EditPhotoParams(
+      hasSticker: dco_decode_bool(arr[0]),
+      hasText: dco_decode_bool(arr[1]),
+    );
+  }
+
+  @protected
+  EditPhotoState dco_decode_edit_photo_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return EditPhotoState_Enabled(
+          dco_decode_box_autoadd_edit_photo_params(raw[1]),
+        );
+      case 1:
+        return EditPhotoState_Disabled();
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
+  }
+
+  @protected
+  FilterParams dco_decode_filter_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return FilterParams_Some(
+          id: dco_decode_String(raw[1]),
+          strength: dco_decode_f_64(raw[2]),
+        );
+      case 1:
+        return FilterParams_None();
+      default:
+        throw Exception("unreachable");
+    }
   }
 
   @protected
@@ -803,9 +1209,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PlatformInt64 dco_decode_i_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeI64(raw);
+  }
+
+  @protected
+  LightParams dco_decode_light_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return LightParams_Some(
+          id: dco_decode_String(raw[1]),
+          strength: dco_decode_f_64(raw[2]),
+        );
+      case 1:
+        return LightParams_None();
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   List<String> dco_decode_list_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_String).toList();
+  }
+
+  @protected
+  List<ClothParams> dco_decode_list_cloth_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_cloth_params).toList();
+  }
+
+  @protected
+  List<Location> dco_decode_list_location(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_location).toList();
+  }
+
+  @protected
+  List<ObjectParams> dco_decode_list_object_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_object_params).toList();
   }
 
   @protected
@@ -814,6 +1260,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return (raw as List<dynamic>)
         .map(dco_decode_opt_box_autoadd_custom_data)
         .toList();
+  }
+
+  @protected
+  List<OutfitDyeData> dco_decode_list_outfit_dye_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_outfit_dye_data).toList();
+  }
+
+  @protected
+  List<PatternCreationData> dco_decode_list_pattern_creation_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_pattern_creation_data)
+        .toList();
+  }
+
+  @protected
+  Int64List dco_decode_list_prim_i_64_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeInt64List(raw);
   }
 
   @protected
@@ -826,6 +1292,102 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
+  }
+
+  @protected
+  List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_record_i_64_bool).toList();
+  }
+
+  @protected
+  List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_record_i_64_i_64).toList();
+  }
+
+  @protected
+  List<RegionPicture> dco_decode_list_region_picture(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_region_picture).toList();
+  }
+
+  @protected
+  List<SpecialEffectData> dco_decode_list_special_effect_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_special_effect_data).toList();
+  }
+
+  @protected
+  List<TaskParams> dco_decode_list_task_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_task_params).toList();
+  }
+
+  @protected
+  Location dco_decode_location(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return Location_Standard(
+          dimension: dco_decode_opt_box_autoadd_dimension(raw[1]),
+          nation: dco_decode_opt_box_autoadd_nation(raw[2]),
+          region: dco_decode_opt_box_autoadd_region(raw[3]),
+          area: dco_decode_opt_box_autoadd_area(raw[4]),
+          subarea: dco_decode_opt_box_autoadd_subarea(raw[5]),
+        );
+      case 1:
+        return Location_Special(
+          dimension: dco_decode_opt_box_autoadd_dimension(raw[1]),
+          subarea: dco_decode_opt_box_autoadd_subarea(raw[2]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  LocationParams dco_decode_location_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return LocationParams(
+      pos: dco_decode_record_f_64_f_64_f_64(arr[0]),
+      loc: dco_decode_location_type(arr[1]),
+    );
+  }
+
+  @protected
+  LocationType dco_decode_location_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return LocationType_Unknown();
+      case 1:
+        return LocationType_Exact(dco_decode_box_autoadd_location(raw[1]));
+      case 2:
+        return LocationType_Guessed(dco_decode_list_location(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  MediaCustomData dco_decode_media_custom_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return MediaCustomData_Invalid();
+      case 1:
+        return MediaCustomData_Valid(
+          dco_decode_box_autoadd_media_param(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
   }
 
   @protected
@@ -844,15 +1406,479 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MediaParam dco_decode_media_param(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return MediaParam_MomoCameraParams(
+          dco_decode_box_autoadd_momo_camera_params(raw[1]),
+        );
+      case 1:
+        return MediaParam_NikkiPhoto(
+          dco_decode_box_autoadd_nikki_photo_params(raw[1]),
+        );
+      case 2:
+        return MediaParam_ClockInPhoto(
+          dco_decode_box_autoadd_clock_in_photo_params(raw[1]),
+        );
+      case 3:
+        return MediaParam_Collage(
+          dco_decode_box_autoadd_collage_params(raw[1]),
+        );
+      case 4:
+        return MediaParam_DIY(dco_decode_box_autoadd_diy_params(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  MediaParamType dco_decode_media_param_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return MediaParamType.values[raw as int];
+  }
+
+  @protected
+  MomoCameraParams dco_decode_momo_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 19)
+      throw Exception('unexpected arr length: expect 19 but see ${arr.length}');
+    return MomoCameraParams(
+      cameraActorLoc: dco_decode_record_f_64_f_64_f_64(arr[0]),
+      cameraActorRot: dco_decode_record_f_64_f_64_f_64(arr[1]),
+      cameraComponentLoc: dco_decode_record_f_64_f_64_f_64(arr[2]),
+      cameraComponentRot: dco_decode_record_f_64_f_64_f_64(arr[3]),
+      portraitMode: dco_decode_i_64(arr[4]),
+      cameraFocalLength: dco_decode_f_64(arr[5]),
+      apertureSection: dco_decode_u_8(arr[6]),
+      vignetteIntensity: dco_decode_f_64(arr[7]),
+      bloomIntensity: dco_decode_f_64(arr[8]),
+      bloomThreshold: dco_decode_f_64(arr[9]),
+      brightness: dco_decode_f_64(arr[10]),
+      exposure: dco_decode_f_64(arr[11]),
+      contrast: dco_decode_f_64(arr[12]),
+      saturation: dco_decode_f_64(arr[13]),
+      vibrance: dco_decode_f_64(arr[14]),
+      highlights: dco_decode_f_64(arr[15]),
+      shadows: dco_decode_f_64(arr[16]),
+      light: dco_decode_light_params(arr[17]),
+      filter: dco_decode_filter_params(arr[18]),
+    );
+  }
+
+  @protected
+  MomoHiddenState dco_decode_momo_hidden_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return MomoHiddenState_Enabled();
+      case 1:
+        return MomoHiddenState_Disabled(
+          dco_decode_box_autoadd_momo_params(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  MomoParams dco_decode_momo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return MomoParams(
+      loc: dco_decode_record_f_64_f_64_f_64(arr[0]),
+      rot: dco_decode_record_f_64_f_64_f_64(arr[1]),
+      scale: dco_decode_record_f_64_f_64_f_64(arr[2]),
+      clothes: dco_decode_list_cloth_params(arr[3]),
+    );
+  }
+
+  @protected
+  Nation dco_decode_nation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Nation.values[raw as int];
+  }
+
+  @protected
+  NikkiParams dco_decode_nikki_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    return NikkiParams(
+      giantState: dco_decode_bool(arr[0]),
+      hidden: dco_decode_bool(arr[1]),
+      loc: dco_decode_record_f_64_f_64_f_64(arr[2]),
+      rot: dco_decode_record_f_64_f_64_f_64(arr[3]),
+      scale: dco_decode_record_f_64_f_64_f_64(arr[4]),
+      dressing: dco_decode_dressing_params(arr[5]),
+      weapon: dco_decode_opt_box_autoadd_weapon_params(arr[6]),
+      interactions: dco_decode_list_object_params(arr[7]),
+      mount: dco_decode_opt_box_autoadd_object_params(arr[8]),
+      carrier: dco_decode_opt_box_autoadd_object_params(arr[9]),
+    );
+  }
+
+  @protected
+  NikkiPhotoParams dco_decode_nikki_photo_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return NikkiPhotoParams(
+      photography: dco_decode_photography_params(arr[0]),
+      camera: dco_decode_opt_box_autoadd_camera_params(arr[1]),
+      nikki: dco_decode_opt_box_autoadd_nikki_params(arr[2]),
+      momo: dco_decode_opt_box_autoadd_momo_hidden_state(arr[3]),
+    );
+  }
+
+  @protected
+  ObjectParams dco_decode_object_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return ObjectParams(
+      id: dco_decode_i_64(arr[0]),
+      loc: dco_decode_record_f_64_f_64_f_64(arr[1]),
+      rot: dco_decode_record_f_64_f_64_f_64(arr[2]),
+      scale: dco_decode_record_f_64_f_64_f_64(arr[3]),
+    );
+  }
+
+  @protected
+  String? dco_decode_opt_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_String(raw);
+  }
+
+  @protected
+  Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_area(raw);
+  }
+
+  @protected
+  CameraParams? dco_decode_opt_box_autoadd_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_camera_params(raw);
+  }
+
+  @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_custom_data(raw);
   }
 
   @protected
+  Dimension? dco_decode_opt_box_autoadd_dimension(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_dimension(raw);
+  }
+
+  @protected
+  DiyData? dco_decode_opt_box_autoadd_diy_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_diy_data(raw);
+  }
+
+  @protected
+  DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_dye_color_params(raw);
+  }
+
+  @protected
+  PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_i_64(raw);
+  }
+
+  @protected
+  LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_location_params(raw);
+  }
+
+  @protected
+  MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_momo_hidden_state(raw);
+  }
+
+  @protected
+  Nation? dco_decode_opt_box_autoadd_nation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_nation(raw);
+  }
+
+  @protected
+  NikkiParams? dco_decode_opt_box_autoadd_nikki_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_nikki_params(raw);
+  }
+
+  @protected
+  ObjectParams? dco_decode_opt_box_autoadd_object_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_object_params(raw);
+  }
+
+  @protected
+  Region? dco_decode_opt_box_autoadd_region(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_region(raw);
+  }
+
+  @protected
+  ShootingDate? dco_decode_opt_box_autoadd_shooting_date(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_shooting_date(raw);
+  }
+
+  @protected
+  ShootingTime? dco_decode_opt_box_autoadd_shooting_time(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_shooting_time(raw);
+  }
+
+  @protected
+  Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_subarea(raw);
+  }
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
+  }
+
+  @protected
+  WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_weapon_params(raw);
+  }
+
+  @protected
+  OutfitDyeData dco_decode_outfit_dye_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return OutfitDyeData_Hair(
+          dco_decode_box_autoadd_outfit_dye_hair_data(raw[1]),
+        );
+      case 1:
+        return OutfitDyeData_General(
+          dco_decode_box_autoadd_outfit_dye_general_data(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  OutfitDyeGeneralData dco_decode_outfit_dye_general_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return OutfitDyeGeneralData(
+      targetGroupId: dco_decode_i_64(arr[0]),
+      featureTag: dco_decode_i_64(arr[1]),
+      color: dco_decode_dye_color_params(arr[2]),
+    );
+  }
+
+  @protected
+  OutfitDyeHairData dco_decode_outfit_dye_hair_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return OutfitDyeHairData(
+      targetGroupId: dco_decode_i_64(arr[0]),
+      featureTag: dco_decode_i_64(arr[1]),
+      color0: dco_decode_dye_color_params(arr[2]),
+      color1: dco_decode_opt_box_autoadd_dye_color_params(arr[3]),
+      roughness: dco_decode_f_64(arr[4]),
+      colorMode: dco_decode_opt_box_autoadd_i_64(arr[5]),
+    );
+  }
+
+  @protected
+  PatternCreationData dco_decode_pattern_creation_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return PatternCreationData(
+      targetGroupId: dco_decode_i_64(arr[0]),
+      featureTag: dco_decode_i_64(arr[1]),
+      textureId: dco_decode_i_64(arr[2]),
+      overridePatternA: dco_decode_bool(arr[3]),
+      tiling: dco_decode_f_64(arr[4]),
+    );
+  }
+
+  @protected
+  PhotographyParams dco_decode_photography_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 7)
+      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    return PhotographyParams(
+      edit: dco_decode_edit_photo_state(arr[0]),
+      date: dco_decode_opt_box_autoadd_shooting_date(arr[1]),
+      time: dco_decode_opt_box_autoadd_shooting_time(arr[2]),
+      location: dco_decode_opt_box_autoadd_location_params(arr[3]),
+      weather: dco_decode_opt_box_autoadd_i_64(arr[4]),
+      photoWall: dco_decode_list_prim_i_64_strict(arr[5]),
+      task: dco_decode_list_task_params(arr[6]),
+    );
+  }
+
+  @protected
+  (double, double) dco_decode_record_f_64_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_f_64(arr[0]), dco_decode_f_64(arr[1]));
+  }
+
+  @protected
+  (double, double, double) dco_decode_record_f_64_f_64_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3) {
+      throw Exception('Expected 3 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_f_64(arr[0]),
+      dco_decode_f_64(arr[1]),
+      dco_decode_f_64(arr[2]),
+    );
+  }
+
+  @protected
+  (double, double, double, double) dco_decode_record_f_64_f_64_f_64_f_64(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4) {
+      throw Exception('Expected 4 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_f_64(arr[0]),
+      dco_decode_f_64(arr[1]),
+      dco_decode_f_64(arr[2]),
+      dco_decode_f_64(arr[3]),
+    );
+  }
+
+  @protected
+  (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_64(arr[0]), dco_decode_bool(arr[1]));
+  }
+
+  @protected
+  (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_64(arr[0]), dco_decode_i_64(arr[1]));
+  }
+
+  @protected
+  Region dco_decode_region(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Region.values[raw as int];
+  }
+
+  @protected
+  RegionPicture dco_decode_region_picture(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return RegionPicture(
+      position: dco_decode_record_f_64_f_64(arr[0]),
+      rotation: dco_decode_f_64(arr[1]),
+      scale: dco_decode_f_64(arr[2]),
+      imageId: dco_decode_String(arr[3]),
+      oriCustomData: dco_decode_nikki_photo_params(arr[4]),
+    );
+  }
+
+  @protected
+  ShootingDate dco_decode_shooting_date(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return ShootingDate(day: dco_decode_i_64(arr[0]));
+  }
+
+  @protected
+  ShootingTime dco_decode_shooting_time(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return ShootingTime(
+      hour: dco_decode_u_8(arr[0]),
+      min: dco_decode_u_8(arr[1]),
+      sec: dco_decode_f_64(arr[2]),
+    );
+  }
+
+  @protected
+  SpecialEffectData dco_decode_special_effect_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return SpecialEffectData(
+      targetGroupId: dco_decode_i_64(arr[0]),
+      featureTag: dco_decode_i_64(arr[1]),
+      colorGrid: dco_decode_i_64(arr[2]),
+      coverDiyColor: dco_decode_bool(arr[3]),
+    );
+  }
+
+  @protected
+  Subarea dco_decode_subarea(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Subarea.values[raw as int];
+  }
+
+  @protected
+  TaskParams dco_decode_task_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return TaskParams_Puzzle(dco_decode_i_64(raw[1]));
+      case 1:
+        return TaskParams_Risk(dco_decode_Map_i_64_bool_None(raw[1]));
+      case 2:
+        return TaskParams_Interactive(dco_decode_Map_i_64_bool_None(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
   }
 
   @protected
@@ -893,6 +1919,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  WeaponParams dco_decode_weapon_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return WeaponParams(
+      id: dco_decode_i_64(arr[0]),
+      slotType: dco_decode_String(arr[1]),
+      state: dco_decode_opt_String(arr[2]),
+    );
+  }
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_String(deserializer);
@@ -924,6 +1963,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_64_bool(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<PlatformInt64, PlatformInt64> sse_decode_Map_i_64_i_64_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_64_i_64(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
   MediaKey
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     SseDeserializer deserializer,
@@ -951,15 +2008,305 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Area sse_decode_area(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Area.values[inner];
+  }
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
+  Area sse_decode_box_autoadd_area(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_area(deserializer));
+  }
+
+  @protected
+  CameraParams sse_decode_box_autoadd_camera_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_camera_params(deserializer));
+  }
+
+  @protected
+  ClockInPhotoParams sse_decode_box_autoadd_clock_in_photo_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_clock_in_photo_params(deserializer));
+  }
+
+  @protected
+  CollageParams sse_decode_box_autoadd_collage_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_collage_params(deserializer));
+  }
+
+  @protected
   CustomData sse_decode_box_autoadd_custom_data(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_custom_data(deserializer));
   }
 
   @protected
+  Dimension sse_decode_box_autoadd_dimension(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_dimension(deserializer));
+  }
+
+  @protected
+  DiyData sse_decode_box_autoadd_diy_data(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_diy_data(deserializer));
+  }
+
+  @protected
+  DiyParams sse_decode_box_autoadd_diy_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_diy_params(deserializer));
+  }
+
+  @protected
+  DyeColorParams sse_decode_box_autoadd_dye_color_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_dye_color_params(deserializer));
+  }
+
+  @protected
+  EditPhotoParams sse_decode_box_autoadd_edit_photo_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_edit_photo_params(deserializer));
+  }
+
+  @protected
+  PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_i_64(deserializer));
+  }
+
+  @protected
+  Location sse_decode_box_autoadd_location(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_location(deserializer));
+  }
+
+  @protected
+  LocationParams sse_decode_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_location_params(deserializer));
+  }
+
+  @protected
+  MediaParam sse_decode_box_autoadd_media_param(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_media_param(deserializer));
+  }
+
+  @protected
+  MomoCameraParams sse_decode_box_autoadd_momo_camera_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_momo_camera_params(deserializer));
+  }
+
+  @protected
+  MomoHiddenState sse_decode_box_autoadd_momo_hidden_state(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_momo_hidden_state(deserializer));
+  }
+
+  @protected
+  MomoParams sse_decode_box_autoadd_momo_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_momo_params(deserializer));
+  }
+
+  @protected
+  Nation sse_decode_box_autoadd_nation(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_nation(deserializer));
+  }
+
+  @protected
+  NikkiParams sse_decode_box_autoadd_nikki_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_nikki_params(deserializer));
+  }
+
+  @protected
+  NikkiPhotoParams sse_decode_box_autoadd_nikki_photo_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_nikki_photo_params(deserializer));
+  }
+
+  @protected
+  ObjectParams sse_decode_box_autoadd_object_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_object_params(deserializer));
+  }
+
+  @protected
+  OutfitDyeGeneralData sse_decode_box_autoadd_outfit_dye_general_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_outfit_dye_general_data(deserializer));
+  }
+
+  @protected
+  OutfitDyeHairData sse_decode_box_autoadd_outfit_dye_hair_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_outfit_dye_hair_data(deserializer));
+  }
+
+  @protected
+  Region sse_decode_box_autoadd_region(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_region(deserializer));
+  }
+
+  @protected
+  ShootingDate sse_decode_box_autoadd_shooting_date(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_shooting_date(deserializer));
+  }
+
+  @protected
+  ShootingTime sse_decode_box_autoadd_shooting_time(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_shooting_time(deserializer));
+  }
+
+  @protected
+  Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_subarea(deserializer));
+  }
+
+  @protected
   int sse_decode_box_autoadd_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_u_32(deserializer));
+  }
+
+  @protected
+  WeaponParams sse_decode_box_autoadd_weapon_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_weapon_params(deserializer));
+  }
+
+  @protected
+  CameraParams sse_decode_camera_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_params = sse_decode_String(deserializer);
+    var var_portraitMode = sse_decode_bool(deserializer);
+    var var_zoom = sse_decode_f_64(deserializer);
+    var var_focalLength = sse_decode_f_64(deserializer);
+    var var_rotation = sse_decode_f_64(deserializer);
+    var var_apertureSection = sse_decode_u_8(deserializer);
+    var var_vignetteIntensity = sse_decode_f_64(deserializer);
+    var var_bloomIntensity = sse_decode_f_64(deserializer);
+    var var_bloomThreshold = sse_decode_f_64(deserializer);
+    var var_brightness = sse_decode_f_64(deserializer);
+    var var_exposure = sse_decode_f_64(deserializer);
+    var var_contrast = sse_decode_f_64(deserializer);
+    var var_saturation = sse_decode_f_64(deserializer);
+    var var_vibrance = sse_decode_f_64(deserializer);
+    var var_highlights = sse_decode_f_64(deserializer);
+    var var_shadows = sse_decode_f_64(deserializer);
+    var var_light = sse_decode_light_params(deserializer);
+    var var_filter = sse_decode_filter_params(deserializer);
+    var var_pose = sse_decode_i_64(deserializer);
+    return CameraParams(
+      params: var_params,
+      portraitMode: var_portraitMode,
+      zoom: var_zoom,
+      focalLength: var_focalLength,
+      rotation: var_rotation,
+      apertureSection: var_apertureSection,
+      vignetteIntensity: var_vignetteIntensity,
+      bloomIntensity: var_bloomIntensity,
+      bloomThreshold: var_bloomThreshold,
+      brightness: var_brightness,
+      exposure: var_exposure,
+      contrast: var_contrast,
+      saturation: var_saturation,
+      vibrance: var_vibrance,
+      highlights: var_highlights,
+      shadows: var_shadows,
+      light: var_light,
+      filter: var_filter,
+      pose: var_pose,
+    );
+  }
+
+  @protected
+  ClockInPhotoParams sse_decode_clock_in_photo_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_tag = sse_decode_i_64(deserializer);
+    var var_photography = sse_decode_photography_params(deserializer);
+    var var_camera = sse_decode_opt_box_autoadd_camera_params(deserializer);
+    var var_nikki = sse_decode_opt_box_autoadd_nikki_params(deserializer);
+    var var_momo = sse_decode_opt_box_autoadd_momo_hidden_state(deserializer);
+    return ClockInPhotoParams(
+      tag: var_tag,
+      photography: var_photography,
+      camera: var_camera,
+      nikki: var_nikki,
+      momo: var_momo,
+    );
+  }
+
+  @protected
+  ClothParams sse_decode_cloth_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_i_64(deserializer);
+    var var_diy = sse_decode_opt_box_autoadd_diy_data(deserializer);
+    return ClothParams(id: var_id, diy: var_diy);
+  }
+
+  @protected
+  CollageParams sse_decode_collage_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_templateId = sse_decode_i_64(deserializer);
+    var var_regionPictures = sse_decode_list_region_picture(deserializer);
+    return CollageParams(
+      templateId: var_templateId,
+      regionPictures: var_regionPictures,
+    );
   }
 
   @protected
@@ -979,15 +2326,130 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Dimension sse_decode_dimension(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Dimension.values[inner];
+  }
+
+  @protected
+  DiyData sse_decode_diy_data(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_outfitDye = sse_decode_list_outfit_dye_data(deserializer);
+    var var_specialEffect = sse_decode_list_special_effect_data(deserializer);
+    var var_patternCreation = sse_decode_list_pattern_creation_data(
+      deserializer,
+    );
+    return DiyData(
+      outfitDye: var_outfitDye,
+      specialEffect: var_specialEffect,
+      patternCreation: var_patternCreation,
+    );
+  }
+
+  @protected
+  DiyParams sse_decode_diy_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_poseId = sse_decode_opt_box_autoadd_i_64(deserializer);
+    var var_patternData = sse_decode_Map_i_64_i_64_None(deserializer);
+    var var_clothes = sse_decode_list_cloth_params(deserializer);
+    return DiyParams(
+      poseId: var_poseId,
+      patternData: var_patternData,
+      clothes: var_clothes,
+    );
+  }
+
+  @protected
+  DressingParams sse_decode_dressing_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_clothes = sse_decode_list_cloth_params(deserializer);
+    var var_magicball = sse_decode_list_prim_i_64_strict(deserializer);
+    return DressingParams(clothes: var_clothes, magicball: var_magicball);
+  }
+
+  @protected
+  DyeColorParams sse_decode_dye_color_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_color = sse_decode_record_f_64_f_64_f_64_f_64(deserializer);
+    var var_colorGrid = sse_decode_i_64(deserializer);
+    return DyeColorParams(color: var_color, colorGrid: var_colorGrid);
+  }
+
+  @protected
+  EditPhotoParams sse_decode_edit_photo_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_hasSticker = sse_decode_bool(deserializer);
+    var var_hasText = sse_decode_bool(deserializer);
+    return EditPhotoParams(hasSticker: var_hasSticker, hasText: var_hasText);
+  }
+
+  @protected
+  EditPhotoState sse_decode_edit_photo_state(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_box_autoadd_edit_photo_params(deserializer);
+        return EditPhotoState_Enabled(var_field0);
+      case 1:
+        return EditPhotoState_Disabled();
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat64();
   }
 
   @protected
+  FilterParams sse_decode_filter_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_id = sse_decode_String(deserializer);
+        var var_strength = sse_decode_f_64(deserializer);
+        return FilterParams_Some(id: var_id, strength: var_strength);
+      case 1:
+        return FilterParams_None();
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getInt32();
+  }
+
+  @protected
+  PlatformInt64 sse_decode_i_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getPlatformInt64();
+  }
+
+  @protected
+  LightParams sse_decode_light_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_id = sse_decode_String(deserializer);
+        var var_strength = sse_decode_f_64(deserializer);
+        return LightParams_Some(id: var_id, strength: var_strength);
+      case 1:
+        return LightParams_None();
+      default:
+        throw UnimplementedError('');
+    }
   }
 
   @protected
@@ -998,6 +2460,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <String>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_String(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <ClothParams>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_cloth_params(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Location> sse_decode_list_location(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Location>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_location(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<ObjectParams> sse_decode_list_object_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <ObjectParams>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_object_params(deserializer));
     }
     return ans_;
   }
@@ -1017,6 +2517,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<OutfitDyeData> sse_decode_list_outfit_dye_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <OutfitDyeData>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_outfit_dye_data(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<PatternCreationData> sse_decode_list_pattern_creation_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <PatternCreationData>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_pattern_creation_data(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  Int64List sse_decode_list_prim_i_64_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var len_ = sse_decode_i_32(deserializer);
+    return deserializer.buffer.getInt64List(len_);
+  }
+
+  @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
@@ -1028,6 +2563,145 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
+  List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(PlatformInt64, bool)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_64_bool(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(PlatformInt64, PlatformInt64)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_64_i_64(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<RegionPicture> sse_decode_list_region_picture(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <RegionPicture>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_region_picture(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<SpecialEffectData> sse_decode_list_special_effect_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <SpecialEffectData>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_special_effect_data(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<TaskParams> sse_decode_list_task_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <TaskParams>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_task_params(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  Location sse_decode_location(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_dimension = sse_decode_opt_box_autoadd_dimension(deserializer);
+        var var_nation = sse_decode_opt_box_autoadd_nation(deserializer);
+        var var_region = sse_decode_opt_box_autoadd_region(deserializer);
+        var var_area = sse_decode_opt_box_autoadd_area(deserializer);
+        var var_subarea = sse_decode_opt_box_autoadd_subarea(deserializer);
+        return Location_Standard(
+          dimension: var_dimension,
+          nation: var_nation,
+          region: var_region,
+          area: var_area,
+          subarea: var_subarea,
+        );
+      case 1:
+        var var_dimension = sse_decode_opt_box_autoadd_dimension(deserializer);
+        var var_subarea = sse_decode_opt_box_autoadd_subarea(deserializer);
+        return Location_Special(dimension: var_dimension, subarea: var_subarea);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  LocationParams sse_decode_location_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_pos = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_loc = sse_decode_location_type(deserializer);
+    return LocationParams(pos: var_pos, loc: var_loc);
+  }
+
+  @protected
+  LocationType sse_decode_location_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return LocationType_Unknown();
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_location(deserializer);
+        return LocationType_Exact(var_field0);
+      case 2:
+        var var_field0 = sse_decode_list_location(deserializer);
+        return LocationType_Guessed(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  MediaCustomData sse_decode_media_custom_data(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return MediaCustomData_Invalid();
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_media_param(deserializer);
+        return MediaCustomData_Valid(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
   }
 
   @protected
@@ -1050,6 +2724,220 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MediaParam sse_decode_media_param(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_box_autoadd_momo_camera_params(
+          deserializer,
+        );
+        return MediaParam_MomoCameraParams(var_field0);
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_nikki_photo_params(
+          deserializer,
+        );
+        return MediaParam_NikkiPhoto(var_field0);
+      case 2:
+        var var_field0 = sse_decode_box_autoadd_clock_in_photo_params(
+          deserializer,
+        );
+        return MediaParam_ClockInPhoto(var_field0);
+      case 3:
+        var var_field0 = sse_decode_box_autoadd_collage_params(deserializer);
+        return MediaParam_Collage(var_field0);
+      case 4:
+        var var_field0 = sse_decode_box_autoadd_diy_params(deserializer);
+        return MediaParam_DIY(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  MediaParamType sse_decode_media_param_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return MediaParamType.values[inner];
+  }
+
+  @protected
+  MomoCameraParams sse_decode_momo_camera_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_cameraActorLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_cameraActorRot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_cameraComponentLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_cameraComponentRot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_portraitMode = sse_decode_i_64(deserializer);
+    var var_cameraFocalLength = sse_decode_f_64(deserializer);
+    var var_apertureSection = sse_decode_u_8(deserializer);
+    var var_vignetteIntensity = sse_decode_f_64(deserializer);
+    var var_bloomIntensity = sse_decode_f_64(deserializer);
+    var var_bloomThreshold = sse_decode_f_64(deserializer);
+    var var_brightness = sse_decode_f_64(deserializer);
+    var var_exposure = sse_decode_f_64(deserializer);
+    var var_contrast = sse_decode_f_64(deserializer);
+    var var_saturation = sse_decode_f_64(deserializer);
+    var var_vibrance = sse_decode_f_64(deserializer);
+    var var_highlights = sse_decode_f_64(deserializer);
+    var var_shadows = sse_decode_f_64(deserializer);
+    var var_light = sse_decode_light_params(deserializer);
+    var var_filter = sse_decode_filter_params(deserializer);
+    return MomoCameraParams(
+      cameraActorLoc: var_cameraActorLoc,
+      cameraActorRot: var_cameraActorRot,
+      cameraComponentLoc: var_cameraComponentLoc,
+      cameraComponentRot: var_cameraComponentRot,
+      portraitMode: var_portraitMode,
+      cameraFocalLength: var_cameraFocalLength,
+      apertureSection: var_apertureSection,
+      vignetteIntensity: var_vignetteIntensity,
+      bloomIntensity: var_bloomIntensity,
+      bloomThreshold: var_bloomThreshold,
+      brightness: var_brightness,
+      exposure: var_exposure,
+      contrast: var_contrast,
+      saturation: var_saturation,
+      vibrance: var_vibrance,
+      highlights: var_highlights,
+      shadows: var_shadows,
+      light: var_light,
+      filter: var_filter,
+    );
+  }
+
+  @protected
+  MomoHiddenState sse_decode_momo_hidden_state(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return MomoHiddenState_Enabled();
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_momo_params(deserializer);
+        return MomoHiddenState_Disabled(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  MomoParams sse_decode_momo_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_loc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_rot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_scale = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_clothes = sse_decode_list_cloth_params(deserializer);
+    return MomoParams(
+      loc: var_loc,
+      rot: var_rot,
+      scale: var_scale,
+      clothes: var_clothes,
+    );
+  }
+
+  @protected
+  Nation sse_decode_nation(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Nation.values[inner];
+  }
+
+  @protected
+  NikkiParams sse_decode_nikki_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_giantState = sse_decode_bool(deserializer);
+    var var_hidden = sse_decode_bool(deserializer);
+    var var_loc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_rot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_scale = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_dressing = sse_decode_dressing_params(deserializer);
+    var var_weapon = sse_decode_opt_box_autoadd_weapon_params(deserializer);
+    var var_interactions = sse_decode_list_object_params(deserializer);
+    var var_mount = sse_decode_opt_box_autoadd_object_params(deserializer);
+    var var_carrier = sse_decode_opt_box_autoadd_object_params(deserializer);
+    return NikkiParams(
+      giantState: var_giantState,
+      hidden: var_hidden,
+      loc: var_loc,
+      rot: var_rot,
+      scale: var_scale,
+      dressing: var_dressing,
+      weapon: var_weapon,
+      interactions: var_interactions,
+      mount: var_mount,
+      carrier: var_carrier,
+    );
+  }
+
+  @protected
+  NikkiPhotoParams sse_decode_nikki_photo_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_photography = sse_decode_photography_params(deserializer);
+    var var_camera = sse_decode_opt_box_autoadd_camera_params(deserializer);
+    var var_nikki = sse_decode_opt_box_autoadd_nikki_params(deserializer);
+    var var_momo = sse_decode_opt_box_autoadd_momo_hidden_state(deserializer);
+    return NikkiPhotoParams(
+      photography: var_photography,
+      camera: var_camera,
+      nikki: var_nikki,
+      momo: var_momo,
+    );
+  }
+
+  @protected
+  ObjectParams sse_decode_object_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_i_64(deserializer);
+    var var_loc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_rot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_scale = sse_decode_record_f_64_f_64_f_64(deserializer);
+    return ObjectParams(
+      id: var_id,
+      loc: var_loc,
+      rot: var_rot,
+      scale: var_scale,
+    );
+  }
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_area(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  CameraParams? sse_decode_opt_box_autoadd_camera_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_camera_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   CustomData? sse_decode_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   ) {
@@ -1063,6 +2951,165 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Dimension? sse_decode_opt_box_autoadd_dimension(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_dimension(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  DiyData? sse_decode_opt_box_autoadd_diy_data(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_diy_data(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  DyeColorParams? sse_decode_opt_box_autoadd_dye_color_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_dye_color_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_i_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  LocationParams? sse_decode_opt_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_location_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  MomoHiddenState? sse_decode_opt_box_autoadd_momo_hidden_state(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_momo_hidden_state(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Nation? sse_decode_opt_box_autoadd_nation(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nation(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  NikkiParams? sse_decode_opt_box_autoadd_nikki_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nikki_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ObjectParams? sse_decode_opt_box_autoadd_object_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_object_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Region? sse_decode_opt_box_autoadd_region(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_region(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ShootingDate? sse_decode_opt_box_autoadd_shooting_date(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_shooting_date(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ShootingTime? sse_decode_opt_box_autoadd_shooting_time(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_shooting_time(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_subarea(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -1070,6 +3117,253 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       return (sse_decode_box_autoadd_u_32(deserializer));
     } else {
       return null;
+    }
+  }
+
+  @protected
+  WeaponParams? sse_decode_opt_box_autoadd_weapon_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_weapon_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  OutfitDyeData sse_decode_outfit_dye_data(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_box_autoadd_outfit_dye_hair_data(
+          deserializer,
+        );
+        return OutfitDyeData_Hair(var_field0);
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_outfit_dye_general_data(
+          deserializer,
+        );
+        return OutfitDyeData_General(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  OutfitDyeGeneralData sse_decode_outfit_dye_general_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_targetGroupId = sse_decode_i_64(deserializer);
+    var var_featureTag = sse_decode_i_64(deserializer);
+    var var_color = sse_decode_dye_color_params(deserializer);
+    return OutfitDyeGeneralData(
+      targetGroupId: var_targetGroupId,
+      featureTag: var_featureTag,
+      color: var_color,
+    );
+  }
+
+  @protected
+  OutfitDyeHairData sse_decode_outfit_dye_hair_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_targetGroupId = sse_decode_i_64(deserializer);
+    var var_featureTag = sse_decode_i_64(deserializer);
+    var var_color0 = sse_decode_dye_color_params(deserializer);
+    var var_color1 = sse_decode_opt_box_autoadd_dye_color_params(deserializer);
+    var var_roughness = sse_decode_f_64(deserializer);
+    var var_colorMode = sse_decode_opt_box_autoadd_i_64(deserializer);
+    return OutfitDyeHairData(
+      targetGroupId: var_targetGroupId,
+      featureTag: var_featureTag,
+      color0: var_color0,
+      color1: var_color1,
+      roughness: var_roughness,
+      colorMode: var_colorMode,
+    );
+  }
+
+  @protected
+  PatternCreationData sse_decode_pattern_creation_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_targetGroupId = sse_decode_i_64(deserializer);
+    var var_featureTag = sse_decode_i_64(deserializer);
+    var var_textureId = sse_decode_i_64(deserializer);
+    var var_overridePatternA = sse_decode_bool(deserializer);
+    var var_tiling = sse_decode_f_64(deserializer);
+    return PatternCreationData(
+      targetGroupId: var_targetGroupId,
+      featureTag: var_featureTag,
+      textureId: var_textureId,
+      overridePatternA: var_overridePatternA,
+      tiling: var_tiling,
+    );
+  }
+
+  @protected
+  PhotographyParams sse_decode_photography_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_edit = sse_decode_edit_photo_state(deserializer);
+    var var_date = sse_decode_opt_box_autoadd_shooting_date(deserializer);
+    var var_time = sse_decode_opt_box_autoadd_shooting_time(deserializer);
+    var var_location = sse_decode_opt_box_autoadd_location_params(deserializer);
+    var var_weather = sse_decode_opt_box_autoadd_i_64(deserializer);
+    var var_photoWall = sse_decode_list_prim_i_64_strict(deserializer);
+    var var_task = sse_decode_list_task_params(deserializer);
+    return PhotographyParams(
+      edit: var_edit,
+      date: var_date,
+      time: var_time,
+      location: var_location,
+      weather: var_weather,
+      photoWall: var_photoWall,
+      task: var_task,
+    );
+  }
+
+  @protected
+  (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_f_64(deserializer);
+    var var_field1 = sse_decode_f_64(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (double, double, double) sse_decode_record_f_64_f_64_f_64(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_f_64(deserializer);
+    var var_field1 = sse_decode_f_64(deserializer);
+    var var_field2 = sse_decode_f_64(deserializer);
+    return (var_field0, var_field1, var_field2);
+  }
+
+  @protected
+  (double, double, double, double) sse_decode_record_f_64_f_64_f_64_f_64(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_f_64(deserializer);
+    var var_field1 = sse_decode_f_64(deserializer);
+    var var_field2 = sse_decode_f_64(deserializer);
+    var var_field3 = sse_decode_f_64(deserializer);
+    return (var_field0, var_field1, var_field2, var_field3);
+  }
+
+  @protected
+  (PlatformInt64, bool) sse_decode_record_i_64_bool(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_64(deserializer);
+    var var_field1 = sse_decode_bool(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (PlatformInt64, PlatformInt64) sse_decode_record_i_64_i_64(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_64(deserializer);
+    var var_field1 = sse_decode_i_64(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  Region sse_decode_region(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Region.values[inner];
+  }
+
+  @protected
+  RegionPicture sse_decode_region_picture(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_position = sse_decode_record_f_64_f_64(deserializer);
+    var var_rotation = sse_decode_f_64(deserializer);
+    var var_scale = sse_decode_f_64(deserializer);
+    var var_imageId = sse_decode_String(deserializer);
+    var var_oriCustomData = sse_decode_nikki_photo_params(deserializer);
+    return RegionPicture(
+      position: var_position,
+      rotation: var_rotation,
+      scale: var_scale,
+      imageId: var_imageId,
+      oriCustomData: var_oriCustomData,
+    );
+  }
+
+  @protected
+  ShootingDate sse_decode_shooting_date(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_day = sse_decode_i_64(deserializer);
+    return ShootingDate(day: var_day);
+  }
+
+  @protected
+  ShootingTime sse_decode_shooting_time(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_hour = sse_decode_u_8(deserializer);
+    var var_min = sse_decode_u_8(deserializer);
+    var var_sec = sse_decode_f_64(deserializer);
+    return ShootingTime(hour: var_hour, min: var_min, sec: var_sec);
+  }
+
+  @protected
+  SpecialEffectData sse_decode_special_effect_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_targetGroupId = sse_decode_i_64(deserializer);
+    var var_featureTag = sse_decode_i_64(deserializer);
+    var var_colorGrid = sse_decode_i_64(deserializer);
+    var var_coverDiyColor = sse_decode_bool(deserializer);
+    return SpecialEffectData(
+      targetGroupId: var_targetGroupId,
+      featureTag: var_featureTag,
+      colorGrid: var_colorGrid,
+      coverDiyColor: var_coverDiyColor,
+    );
+  }
+
+  @protected
+  Subarea sse_decode_subarea(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Subarea.values[inner];
+  }
+
+  @protected
+  TaskParams sse_decode_task_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_i_64(deserializer);
+        return TaskParams_Puzzle(var_field0);
+      case 1:
+        var var_field0 = sse_decode_Map_i_64_bool_None(deserializer);
+        return TaskParams_Risk(var_field0);
+      case 2:
+        var var_field0 = sse_decode_Map_i_64_bool_None(deserializer);
+        return TaskParams_Interactive(var_field0);
+      default:
+        throw UnimplementedError('');
     }
   }
 
@@ -1106,9 +3400,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
+  WeaponParams sse_decode_weapon_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
+    var var_id = sse_decode_i_64(deserializer);
+    var var_slotType = sse_decode_String(deserializer);
+    var var_state = sse_decode_opt_String(deserializer);
+    return WeaponParams(id: var_id, slotType: var_slotType, state: var_state);
   }
 
   @protected
@@ -1142,6 +3439,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as MediaKeyImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_64_bool_None(
+    Map<PlatformInt64, bool> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_64_bool(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_64_i_64_None(
+    Map<PlatformInt64, PlatformInt64> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_64_i_64(
+      self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
   }
@@ -1183,6 +3504,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_area(Area self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_area(Area self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_area(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_camera_params(
+    CameraParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_camera_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_clock_in_photo_params(
+    ClockInPhotoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_clock_in_photo_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_collage_params(
+    CollageParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_collage_params(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_custom_data(
     CustomData self,
     SseSerializer serializer,
@@ -1192,9 +3558,255 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_dimension(
+    Dimension self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_dimension(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_diy_data(DiyData self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_diy_data(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_diy_params(
+    DiyParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_diy_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_dye_color_params(
+    DyeColorParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_dye_color_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_edit_photo_params(
+    EditPhotoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_edit_photo_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_i_64(
+    PlatformInt64 self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_location(
+    Location self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_location(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_location_params(
+    LocationParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_location_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_media_param(
+    MediaParam self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_media_param(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_momo_camera_params(
+    MomoCameraParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_momo_camera_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_momo_hidden_state(
+    MomoHiddenState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_momo_hidden_state(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_momo_params(
+    MomoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_momo_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_nation(Nation self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_nation(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_nikki_params(
+    NikkiParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_nikki_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_nikki_photo_params(
+    NikkiPhotoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_nikki_photo_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_object_params(
+    ObjectParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_object_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_outfit_dye_general_data(
+    OutfitDyeGeneralData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_outfit_dye_general_data(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_outfit_dye_hair_data(
+    OutfitDyeHairData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_outfit_dye_hair_data(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_region(Region self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_region(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_shooting_date(
+    ShootingDate self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_shooting_date(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_shooting_time(
+    ShootingTime self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_shooting_time(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_subarea(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_32(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_weapon_params(
+    WeaponParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_weapon_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_camera_params(CameraParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.params, serializer);
+    sse_encode_bool(self.portraitMode, serializer);
+    sse_encode_f_64(self.zoom, serializer);
+    sse_encode_f_64(self.focalLength, serializer);
+    sse_encode_f_64(self.rotation, serializer);
+    sse_encode_u_8(self.apertureSection, serializer);
+    sse_encode_f_64(self.vignetteIntensity, serializer);
+    sse_encode_f_64(self.bloomIntensity, serializer);
+    sse_encode_f_64(self.bloomThreshold, serializer);
+    sse_encode_f_64(self.brightness, serializer);
+    sse_encode_f_64(self.exposure, serializer);
+    sse_encode_f_64(self.contrast, serializer);
+    sse_encode_f_64(self.saturation, serializer);
+    sse_encode_f_64(self.vibrance, serializer);
+    sse_encode_f_64(self.highlights, serializer);
+    sse_encode_f_64(self.shadows, serializer);
+    sse_encode_light_params(self.light, serializer);
+    sse_encode_filter_params(self.filter, serializer);
+    sse_encode_i_64(self.pose, serializer);
+  }
+
+  @protected
+  void sse_encode_clock_in_photo_params(
+    ClockInPhotoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.tag, serializer);
+    sse_encode_photography_params(self.photography, serializer);
+    sse_encode_opt_box_autoadd_camera_params(self.camera, serializer);
+    sse_encode_opt_box_autoadd_nikki_params(self.nikki, serializer);
+    sse_encode_opt_box_autoadd_momo_hidden_state(self.momo, serializer);
+  }
+
+  @protected
+  void sse_encode_cloth_params(ClothParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.id, serializer);
+    sse_encode_opt_box_autoadd_diy_data(self.diy, serializer);
+  }
+
+  @protected
+  void sse_encode_collage_params(CollageParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.templateId, serializer);
+    sse_encode_list_region_picture(self.regionPictures, serializer);
   }
 
   @protected
@@ -1210,9 +3822,89 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_dimension(Dimension self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_diy_data(DiyData self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_outfit_dye_data(self.outfitDye, serializer);
+    sse_encode_list_special_effect_data(self.specialEffect, serializer);
+    sse_encode_list_pattern_creation_data(self.patternCreation, serializer);
+  }
+
+  @protected
+  void sse_encode_diy_params(DiyParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_i_64(self.poseId, serializer);
+    sse_encode_Map_i_64_i_64_None(self.patternData, serializer);
+    sse_encode_list_cloth_params(self.clothes, serializer);
+  }
+
+  @protected
+  void sse_encode_dressing_params(
+    DressingParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_cloth_params(self.clothes, serializer);
+    sse_encode_list_prim_i_64_strict(self.magicball, serializer);
+  }
+
+  @protected
+  void sse_encode_dye_color_params(
+    DyeColorParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_record_f_64_f_64_f_64_f_64(self.color, serializer);
+    sse_encode_i_64(self.colorGrid, serializer);
+  }
+
+  @protected
+  void sse_encode_edit_photo_params(
+    EditPhotoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.hasSticker, serializer);
+    sse_encode_bool(self.hasText, serializer);
+  }
+
+  @protected
+  void sse_encode_edit_photo_state(
+    EditPhotoState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case EditPhotoState_Enabled(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_edit_photo_params(field0, serializer);
+      case EditPhotoState_Disabled():
+        sse_encode_i_32(1, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat64(self);
+  }
+
+  @protected
+  void sse_encode_filter_params(FilterParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case FilterParams_Some(id: final id, strength: final strength):
+        sse_encode_i_32(0, serializer);
+        sse_encode_String(id, serializer);
+        sse_encode_f_64(strength, serializer);
+      case FilterParams_None():
+        sse_encode_i_32(1, serializer);
+    }
   }
 
   @protected
@@ -1222,11 +3914,63 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putPlatformInt64(self);
+  }
+
+  @protected
+  void sse_encode_light_params(LightParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case LightParams_Some(id: final id, strength: final strength):
+        sse_encode_i_32(0, serializer);
+        sse_encode_String(id, serializer);
+        sse_encode_f_64(strength, serializer);
+      case LightParams_None():
+        sse_encode_i_32(1, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_String(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_cloth_params(
+    List<ClothParams> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_cloth_params(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_location(List<Location> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_location(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_object_params(
+    List<ObjectParams> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_object_params(item, serializer);
     }
   }
 
@@ -1240,6 +3984,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     for (final item in self) {
       sse_encode_opt_box_autoadd_custom_data(item, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_list_outfit_dye_data(
+    List<OutfitDyeData> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_outfit_dye_data(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_pattern_creation_data(
+    List<PatternCreationData> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_pattern_creation_data(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_prim_i_64_strict(
+    Int64List self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    serializer.buffer.putInt64List(self);
   }
 
   @protected
@@ -1265,6 +4043,130 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_record_i_64_bool(
+    List<(PlatformInt64, bool)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_64_bool(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_64_i_64(
+    List<(PlatformInt64, PlatformInt64)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_64_i_64(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_region_picture(
+    List<RegionPicture> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_region_picture(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_special_effect_data(
+    List<SpecialEffectData> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_special_effect_data(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_task_params(
+    List<TaskParams> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_task_params(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_location(Location self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case Location_Standard(
+        dimension: final dimension,
+        nation: final nation,
+        region: final region,
+        area: final area,
+        subarea: final subarea,
+      ):
+        sse_encode_i_32(0, serializer);
+        sse_encode_opt_box_autoadd_dimension(dimension, serializer);
+        sse_encode_opt_box_autoadd_nation(nation, serializer);
+        sse_encode_opt_box_autoadd_region(region, serializer);
+        sse_encode_opt_box_autoadd_area(area, serializer);
+        sse_encode_opt_box_autoadd_subarea(subarea, serializer);
+      case Location_Special(dimension: final dimension, subarea: final subarea):
+        sse_encode_i_32(1, serializer);
+        sse_encode_opt_box_autoadd_dimension(dimension, serializer);
+        sse_encode_opt_box_autoadd_subarea(subarea, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_location_params(
+    LocationParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_record_f_64_f_64_f_64(self.pos, serializer);
+    sse_encode_location_type(self.loc, serializer);
+  }
+
+  @protected
+  void sse_encode_location_type(LocationType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case LocationType_Unknown():
+        sse_encode_i_32(0, serializer);
+      case LocationType_Exact(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_location(field0, serializer);
+      case LocationType_Guessed(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_list_location(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_media_custom_data(
+    MediaCustomData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case MediaCustomData_Invalid():
+        sse_encode_i_32(0, serializer);
+      case MediaCustomData_Valid(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_media_param(field0, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_media_decode_event(
     MediaDecodeEvent self,
     SseSerializer serializer,
@@ -1277,6 +4179,163 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case MediaDecodeEvent_Result(field0: final field0):
         sse_encode_i_32(1, serializer);
         sse_encode_list_opt_box_autoadd_custom_data(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_media_param(MediaParam self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case MediaParam_MomoCameraParams(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_momo_camera_params(field0, serializer);
+      case MediaParam_NikkiPhoto(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_nikki_photo_params(field0, serializer);
+      case MediaParam_ClockInPhoto(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_box_autoadd_clock_in_photo_params(field0, serializer);
+      case MediaParam_Collage(field0: final field0):
+        sse_encode_i_32(3, serializer);
+        sse_encode_box_autoadd_collage_params(field0, serializer);
+      case MediaParam_DIY(field0: final field0):
+        sse_encode_i_32(4, serializer);
+        sse_encode_box_autoadd_diy_params(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_media_param_type(
+    MediaParamType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_momo_camera_params(
+    MomoCameraParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_record_f_64_f_64_f_64(self.cameraActorLoc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraActorRot, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraComponentLoc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraComponentRot, serializer);
+    sse_encode_i_64(self.portraitMode, serializer);
+    sse_encode_f_64(self.cameraFocalLength, serializer);
+    sse_encode_u_8(self.apertureSection, serializer);
+    sse_encode_f_64(self.vignetteIntensity, serializer);
+    sse_encode_f_64(self.bloomIntensity, serializer);
+    sse_encode_f_64(self.bloomThreshold, serializer);
+    sse_encode_f_64(self.brightness, serializer);
+    sse_encode_f_64(self.exposure, serializer);
+    sse_encode_f_64(self.contrast, serializer);
+    sse_encode_f_64(self.saturation, serializer);
+    sse_encode_f_64(self.vibrance, serializer);
+    sse_encode_f_64(self.highlights, serializer);
+    sse_encode_f_64(self.shadows, serializer);
+    sse_encode_light_params(self.light, serializer);
+    sse_encode_filter_params(self.filter, serializer);
+  }
+
+  @protected
+  void sse_encode_momo_hidden_state(
+    MomoHiddenState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case MomoHiddenState_Enabled():
+        sse_encode_i_32(0, serializer);
+      case MomoHiddenState_Disabled(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_momo_params(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_momo_params(MomoParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_record_f_64_f_64_f_64(self.loc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.rot, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.scale, serializer);
+    sse_encode_list_cloth_params(self.clothes, serializer);
+  }
+
+  @protected
+  void sse_encode_nation(Nation self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.giantState, serializer);
+    sse_encode_bool(self.hidden, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.loc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.rot, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.scale, serializer);
+    sse_encode_dressing_params(self.dressing, serializer);
+    sse_encode_opt_box_autoadd_weapon_params(self.weapon, serializer);
+    sse_encode_list_object_params(self.interactions, serializer);
+    sse_encode_opt_box_autoadd_object_params(self.mount, serializer);
+    sse_encode_opt_box_autoadd_object_params(self.carrier, serializer);
+  }
+
+  @protected
+  void sse_encode_nikki_photo_params(
+    NikkiPhotoParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_photography_params(self.photography, serializer);
+    sse_encode_opt_box_autoadd_camera_params(self.camera, serializer);
+    sse_encode_opt_box_autoadd_nikki_params(self.nikki, serializer);
+    sse_encode_opt_box_autoadd_momo_hidden_state(self.momo, serializer);
+  }
+
+  @protected
+  void sse_encode_object_params(ObjectParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.id, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.loc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.rot, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.scale, serializer);
+  }
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_area(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_camera_params(
+    CameraParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_camera_params(self, serializer);
     }
   }
 
@@ -1294,12 +4353,380 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_dimension(
+    Dimension? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_dimension(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_diy_data(
+    DiyData? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_diy_data(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_dye_color_params(
+    DyeColorParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_dye_color_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_i_64(
+    PlatformInt64? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_i_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_location_params(
+    LocationParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_location_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_momo_hidden_state(
+    MomoHiddenState? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_momo_hidden_state(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nation(
+    Nation? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nation(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nikki_params(
+    NikkiParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nikki_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_object_params(
+    ObjectParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_object_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_region(
+    Region? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_region(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_shooting_date(
+    ShootingDate? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_shooting_date(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_shooting_time(
+    ShootingTime? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_shooting_time(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_subarea(
+    Subarea? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_subarea(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_u_32(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_weapon_params(
+    WeaponParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_weapon_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_outfit_dye_data(
+    OutfitDyeData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case OutfitDyeData_Hair(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_outfit_dye_hair_data(field0, serializer);
+      case OutfitDyeData_General(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_outfit_dye_general_data(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_outfit_dye_general_data(
+    OutfitDyeGeneralData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.targetGroupId, serializer);
+    sse_encode_i_64(self.featureTag, serializer);
+    sse_encode_dye_color_params(self.color, serializer);
+  }
+
+  @protected
+  void sse_encode_outfit_dye_hair_data(
+    OutfitDyeHairData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.targetGroupId, serializer);
+    sse_encode_i_64(self.featureTag, serializer);
+    sse_encode_dye_color_params(self.color0, serializer);
+    sse_encode_opt_box_autoadd_dye_color_params(self.color1, serializer);
+    sse_encode_f_64(self.roughness, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.colorMode, serializer);
+  }
+
+  @protected
+  void sse_encode_pattern_creation_data(
+    PatternCreationData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.targetGroupId, serializer);
+    sse_encode_i_64(self.featureTag, serializer);
+    sse_encode_i_64(self.textureId, serializer);
+    sse_encode_bool(self.overridePatternA, serializer);
+    sse_encode_f_64(self.tiling, serializer);
+  }
+
+  @protected
+  void sse_encode_photography_params(
+    PhotographyParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_edit_photo_state(self.edit, serializer);
+    sse_encode_opt_box_autoadd_shooting_date(self.date, serializer);
+    sse_encode_opt_box_autoadd_shooting_time(self.time, serializer);
+    sse_encode_opt_box_autoadd_location_params(self.location, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.weather, serializer);
+    sse_encode_list_prim_i_64_strict(self.photoWall, serializer);
+    sse_encode_list_task_params(self.task, serializer);
+  }
+
+  @protected
+  void sse_encode_record_f_64_f_64(
+    (double, double) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.$1, serializer);
+    sse_encode_f_64(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_f_64_f_64_f_64(
+    (double, double, double) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.$1, serializer);
+    sse_encode_f_64(self.$2, serializer);
+    sse_encode_f_64(self.$3, serializer);
+  }
+
+  @protected
+  void sse_encode_record_f_64_f_64_f_64_f_64(
+    (double, double, double, double) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.$1, serializer);
+    sse_encode_f_64(self.$2, serializer);
+    sse_encode_f_64(self.$3, serializer);
+    sse_encode_f_64(self.$4, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_64_bool(
+    (PlatformInt64, bool) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.$1, serializer);
+    sse_encode_bool(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_64_i_64(
+    (PlatformInt64, PlatformInt64) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.$1, serializer);
+    sse_encode_i_64(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_region(Region self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_region_picture(RegionPicture self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_record_f_64_f_64(self.position, serializer);
+    sse_encode_f_64(self.rotation, serializer);
+    sse_encode_f_64(self.scale, serializer);
+    sse_encode_String(self.imageId, serializer);
+    sse_encode_nikki_photo_params(self.oriCustomData, serializer);
+  }
+
+  @protected
+  void sse_encode_shooting_date(ShootingDate self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.day, serializer);
+  }
+
+  @protected
+  void sse_encode_shooting_time(ShootingTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_8(self.hour, serializer);
+    sse_encode_u_8(self.min, serializer);
+    sse_encode_f_64(self.sec, serializer);
+  }
+
+  @protected
+  void sse_encode_special_effect_data(
+    SpecialEffectData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.targetGroupId, serializer);
+    sse_encode_i_64(self.featureTag, serializer);
+    sse_encode_i_64(self.colorGrid, serializer);
+    sse_encode_bool(self.coverDiyColor, serializer);
+  }
+
+  @protected
+  void sse_encode_subarea(Subarea self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_task_params(TaskParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case TaskParams_Puzzle(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_i_64(field0, serializer);
+      case TaskParams_Risk(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_Map_i_64_bool_None(field0, serializer);
+      case TaskParams_Interactive(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_Map_i_64_bool_None(field0, serializer);
     }
   }
 
@@ -1335,9 +4762,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
+  void sse_encode_weapon_params(WeaponParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
+    sse_encode_i_64(self.id, serializer);
+    sse_encode_String(self.slotType, serializer);
+    sse_encode_opt_String(self.state, serializer);
   }
 }
 
