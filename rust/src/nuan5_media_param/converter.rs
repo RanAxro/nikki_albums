@@ -4,6 +4,7 @@ use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
 use super::structs::nikki_photo_params::*;
 use super::structs::clock_in_photo_params::*;
+use super::structs::collage_params::*;
 
 pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
@@ -29,6 +30,21 @@ pub(crate) fn convert_clock_in_photo_params(data: &image_custom_data::ClockInPho
     momo: data.social_photo.as_ref()
       .map(|social_photo| &social_photo.da_miao_info)
       .map(convert_momo_params),
+  }
+}
+
+pub(crate) fn convert_collage_params(data: &image_custom_data::CollageCustomData) -> CollageParams{
+  CollageParams{
+    template_id: data.template_id,
+    region_pictures: data.region_pictures.iter().map(|region_picture|{
+      RegionPicture{
+        position: (region_picture.position.x, region_picture.position.y),
+        rotation: region_picture.rotation,
+        scale: region_picture.scale,
+        image_id: region_picture.image_id.clone(),
+        ori_custom_data: convert_nikki_photo_params(&region_picture.ori_custom_data),
+      }
+    }).collect(),
   }
 }
 
