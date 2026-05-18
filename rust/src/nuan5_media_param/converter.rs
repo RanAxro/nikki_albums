@@ -5,6 +5,7 @@ use crate::nuan5_media_param::parser::camera_params_parser::*;
 use super::structs::nikki_photo_params::*;
 use super::structs::clock_in_photo_params::*;
 use super::structs::collage_params::*;
+use super::structs::diy_params::*;
 
 pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
@@ -45,6 +46,14 @@ pub(crate) fn convert_collage_params(data: &image_custom_data::CollageCustomData
         ori_custom_data: convert_nikki_photo_params(&region_picture.ori_custom_data),
       }
     }).collect(),
+  }
+}
+
+pub(crate) fn convert_diy_params(data: &image_custom_data::DIYCustomData) -> DiyParams{
+  DiyParams{
+    pose_id: data.content.pose_id,
+    pattern_data: data.content.pattern_data.as_map(),
+    clothes: convert_cloth(&data.content.wearing_clothes, Some(&data.content.wearing_diy_infos)),
   }
 }
 
