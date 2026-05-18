@@ -4,6 +4,7 @@ use super::decrypt;
 use super::serde_nuan5_json::de::from_slice;
 use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
 
+#[frb]
 pub enum MediaParamType{
   MomoCameraParams,
   NikkiPhoto,
@@ -17,7 +18,7 @@ pub enum MediaParamType{
   // DiyHistoryShareCode,
 }
 
-#[frb(non_opaque)]
+#[frb]
 #[derive(Clone)]
 pub enum MediaParam{
   MomoCameraParams(MomoCameraParams),
@@ -32,7 +33,7 @@ pub enum MediaParam{
   // DiyHistoryShareCode(DiyHistoryShareCodeParams),
 }
 
-#[frb(non_opaque)]
+#[frb]
 #[derive(Clone)]
 pub enum MediaCustomData{
   Invalid,
@@ -54,6 +55,7 @@ pub enum MediaCustomData{
 //   }
 // }
 
+#[frb]
 pub fn decode_media_param(param_type: MediaParamType, data: &decrypt::CustomData) -> MediaCustomData{
   match data{
     decrypt::CustomData::Valid(bytes) => {
@@ -97,7 +99,7 @@ fn test_1(){
 #[test]
 fn test_2(){
   use super::decrypt::*;
-  
+
   let key = MediaKey::from_str(String::from("108328049")).unwrap();
   let res = media_decode_file_unchecked(Vec::from(b"\xff\xd9"), String::from(r"image path"), &key);
 
