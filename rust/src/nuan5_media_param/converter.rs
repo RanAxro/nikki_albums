@@ -2,10 +2,8 @@ use std::collections::{HashMap, HashSet};
 use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
 use crate::nuan5_media_param::serde_nuan5_json::structs::image_custom_data;
 use crate::nuan5_media_param::parser::camera_params_parser::*;
-use super::structs::nikki_photo_params::*;
-use super::structs::clock_in_photo_params::*;
-use super::structs::collage_params::*;
-use super::structs::diy_params::*;
+use crate::nuan5_media_param::parser::location_parser::parse_location;
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*};
 
 pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
@@ -80,7 +78,9 @@ pub(crate) fn convert_nikki_photo_photography_params(data: &image_custom_data::N
         sec: social_photo.time.sec,
       }
     }),
-    location: None,
+    location: data.social_photo.as_ref().map(|social_photo|{
+      parse_location(social_photo.photo_info.nikki_loc_x, social_photo.photo_info.nikki_loc_y, social_photo.photo_info.nikki_loc_z)
+    }),
     weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
     photo_wall: match &data.photo_wall_plugin{
       Some(photo_wall) => photo_wall.photo_id.as_vec(),
@@ -105,7 +105,9 @@ pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data
         sec: social_photo.time.sec,
       }
     }),
-    location: None,
+    location: data.social_photo.as_ref().map(|social_photo|{
+      parse_location(social_photo.photo_info.nikki_loc_x, social_photo.photo_info.nikki_loc_y, social_photo.photo_info.nikki_loc_z)
+    }),
     weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
     photo_wall: vec![],
     task: vec![],

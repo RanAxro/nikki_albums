@@ -14,7 +14,7 @@ pub struct PhotographyParams{
   pub edit: EditPhotoState,
   pub date: Option<ShootingDate>,
   pub time: Option<ShootingTime>,
-  pub location: Option<Location>,
+  pub location: Option<LocationParams>,
   pub weather: Option<i64>,
   pub photo_wall: Vec<i64>,
   pub task: Vec<TaskParams>,
@@ -95,6 +95,19 @@ pub struct ShootingTime{
   pub hour: u8,
   pub min: u8,
   pub sec: f64,
+}
+
+#[derive(Clone)]
+pub struct LocationParams{
+  pub pos: (f64, f64, f64),
+  pub loc: LocationType,
+}
+
+#[derive(Clone)]
+pub enum LocationType{
+  Unknown,
+  Exact(Location),
+  Guessed(Vec<Location>),
 }
 
 #[derive(Clone)]
