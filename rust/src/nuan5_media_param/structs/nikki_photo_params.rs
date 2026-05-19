@@ -1,6 +1,16 @@
 use std::collections::HashMap;
 use super::world::Location;
 
+
+#[derive(Clone)]
+pub struct NikkiPhotoMainParams{
+  pub camera: Option<CameraParams>,
+  pub dressing: DressingParams,
+  pub time: Option<ShootingTime>,
+  pub weather: Option<i64>,
+  pub location: Option<LocationParams>,
+}
+
 #[derive(Clone)]
 pub struct NikkiPhotoParams{
   pub photography: PhotographyParams,
