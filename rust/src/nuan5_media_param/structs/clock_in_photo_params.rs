@@ -1,4 +1,15 @@
-use super::nikki_photo_params::{CameraParams, MomoHiddenState, NikkiParams, PhotographyParams};
+use super::nikki_photo_params::{CameraParams, DressingParams, LocationParams, MomoHiddenState, NikkiParams, PhotographyParams, ShootingTime};
+
+
+#[derive(Clone)]
+pub struct ClockInPhotoMainParams{
+  pub tag: i64,
+  pub camera: Option<CameraParams>,
+  pub dressing: DressingParams,
+  pub time: Option<ShootingTime>,
+  pub weather: Option<i64>,
+  pub location: Option<LocationParams>,
+}
 
 #[derive(Clone)]
 pub struct ClockInPhotoParams{
