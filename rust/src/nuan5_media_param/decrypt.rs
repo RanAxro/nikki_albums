@@ -3,12 +3,13 @@ use flutter_rust_bridge::frb;
 use std::ffi::{c_char, c_void, CString};
 use std::ptr;
 use std::sync::Arc;
+use crate::nuan5_media_param::decrypt::ffi::free_media_decryption_result;
 
 // ============================================================
 // FFI 绑定
 // ============================================================
 #[allow(non_snake_case, dead_code)]
-mod ffi{
+pub(super) mod ffi{
   use std::ffi::{c_char, c_void};
   use flutter_rust_bridge::frb;
 
@@ -39,7 +40,9 @@ mod ffi{
     _private: [u8; 0],
   }
 
-  pub type ProgressCallback = Option<extern "C" fn(current: usize, total: usize, userdata: *mut c_void)>;
+  pub type MediaProgressCallback = Option<extern "C" fn(current: usize, total: usize, userdata: *mut c_void)>;
+
+  pub type MediaStreamCallback = extern "C" fn(index: usize, result: *mut MediaDecryptionResult, userdata: *mut c_void);
 
   extern "C" {
     pub fn abi_version() -> u32;
@@ -70,9 +73,18 @@ mod ffi{
       paths: *const *const c_char,
       path_count: usize,
       key: *const MediaKey,
-      callback: ProgressCallback,
+      callback: MediaProgressCallback,
       userdata: *mut c_void,
     ) -> *mut MediaDecryptionResult;
+    pub fn media_decode_files_unchecked_stream(
+      flag: *const u8,
+      flag_len: usize,
+      paths: *const *const c_char,
+      path_count: usize,
+      key: *const MediaKey,
+      callback: MediaStreamCallback,
+      userdata: *mut c_void,
+    );
   }
 }
 
@@ -90,7 +102,7 @@ pub enum CustomData{
 // ============================================================
 #[frb(opaque)]
 pub struct MediaKey{
-  ptr: *mut ffi::MediaKey,
+  pub(super) ptr: *mut ffi::MediaKey,
 }
 
 unsafe impl Send for MediaKey{}
@@ -135,7 +147,7 @@ impl MediaKey{
 // ============================================================
 // 内部辅助：转换 DecryptionResult
 // ============================================================
-fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
+pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
   if result.status != 0 {
     unsafe{ ffi::free_media_decryption_result(result) };
     return None;
@@ -315,4 +327,74 @@ pub fn media_decode_files_unchecked_no_progress(
   unsafe{ ffi::free_media_results_array(results_ptr, path_count) };
 
   results
+}
+
+// ============================================================
+// 【新增】批量解密：流式回调（并行执行，每完成一个文件立即返回）
+// ============================================================
+
+/// 流式批量解密的单文件结果
+#[frb]
+pub struct MediaStreamResult{
+  pub index: usize,
+  pub data: Option<CustomData>,
+}
+
+/// 批量解密文件（流式回调，并行执行）。
+#[frb]
+pub fn media_decode_files_unchecked_stream(
+  flag: &[u8],
+  paths: Vec<String>,
+  key: &MediaKey,
+  sink: StreamSink<MediaStreamResult>,
+) -> anyhow::Result<()>{
+  if paths.is_empty() {
+    return Ok(());
+  }
+
+  let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
+  let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
+
+  // 2. Arc 包装 StreamSink，作为 userdata 传入 C 侧
+  let sink = Arc::new(sink);
+  let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
+
+  // 3. 流式回调 trampoline
+  extern "C" fn stream_trampoline(
+    index: usize,
+    result: *mut ffi::MediaDecryptionResult,
+    userdata: *mut c_void,
+  ){
+    if userdata.is_null() {
+      return;
+    }
+    let sink = unsafe{ &*(userdata as *const StreamSink<MediaStreamResult>) };
+
+    if result.is_null() {
+      let _ = sink.add(MediaStreamResult{ index, data: None });
+      return;
+    }
+
+    let data = unsafe{ convert_media_result(ptr::read(result)) };
+
+    let _ = sink.add(MediaStreamResult{ index, data });
+  }
+
+  // 4. 调用 C 流式接口
+  unsafe{
+    ffi::media_decode_files_unchecked_stream(
+      flag.as_ptr(),
+      flag.len(),
+      path_ptrs.as_ptr(),
+      path_ptrs.len(),
+      key.ptr,
+      stream_trampoline,
+      userdata,
+    );
+  }
+
+  // 5. 释放 userdata 对应的 Arc（假设 C 函数在所有回调完成后才返回）
+  let _ = unsafe{ Arc::from_raw(userdata as *const StreamSink<MediaStreamResult>) };
+
+  Ok(())
 }
