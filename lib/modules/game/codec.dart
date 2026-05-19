@@ -1,4 +1,5 @@
 
+import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 
 import "package:flutter/foundation.dart" hide Key;
@@ -60,7 +61,13 @@ abstract class GameImageCodec{
         return null;
       },
       valid: (Uint8List bytes){
-        return toJson(bytes);
+        late final dynamic json;
+        try{
+          json = toJson(bytes);
+        }catch(e){
+          json = null;
+        }
+        return json;
       },
     );
   }
@@ -79,7 +86,13 @@ abstract class GameImageCodec{
         return null;
       },
       valid: (Uint8List bytes){
-        return toJson(bytes);
+        late final dynamic json;
+        try{
+          json = toJson(bytes);
+        }catch(e){
+          json = null;
+        }
+        return json;
       },
     );
   }
@@ -107,7 +120,13 @@ abstract class GameImageCodec{
                 res.add(null);
               },
               valid: (Uint8List bytes){
-                res.add(toJson(bytes));
+                late final dynamic json;
+                try{
+                  json = toJson(bytes);
+                }catch(e){
+                  json = null;
+                }
+                res.add(json);
               },
             );
           }
