@@ -15,7 +15,9 @@ import 'structs/nikki_photo_params.dart';
 import 'structs/world.dart';
 part 'decode.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`
+// These functions are ignored because they are not marked as `pub`: `get_flag`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `MediaStreamCallbackContext`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`
 
 Future<MediaCustomData> decodeMediaParam({
   required MediaParamType paramType,
@@ -25,6 +27,56 @@ Future<MediaCustomData> decodeMediaParam({
   data: data,
 );
 
+Future<MediaCustomData?> mediaDe({
+  required MediaParamType paramType,
+  required List<int> data,
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDe(
+  paramType: paramType,
+  data: data,
+  key: key,
+);
+
+Future<MediaCustomData?> mediaDeFileBytesUnchecked({
+  required MediaParamType paramType,
+  required List<int> bytes,
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFileBytesUnchecked(
+  paramType: paramType,
+  bytes: bytes,
+  key: key,
+);
+
+Future<MediaCustomData?> mediaDeFileUnchecked({
+  required MediaParamType paramType,
+  required String path,
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFileUnchecked(
+  paramType: paramType,
+  path: path,
+  key: key,
+);
+
+MediaCustomData? mediaDeFileUncheckedSync({
+  required MediaParamType paramType,
+  required String path,
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFileUncheckedSync(
+  paramType: paramType,
+  path: path,
+  key: key,
+);
+
+Stream<MediaCustomDataResult> mediaDeFilesUnchecked({
+  required MediaParamType paramType,
+  required List<String> paths,
+  required MediaKey key,
+}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFilesUnchecked(
+  paramType: paramType,
+  paths: paths,
+  key: key,
+);
+
 @freezed
 sealed class MediaCustomData with _$MediaCustomData {
   const MediaCustomData._();
@@ -32,6 +84,24 @@ sealed class MediaCustomData with _$MediaCustomData {
   const factory MediaCustomData.invalid() = MediaCustomData_Invalid;
   const factory MediaCustomData.valid(MediaParam field0) =
       MediaCustomData_Valid;
+}
+
+class MediaCustomDataResult {
+  final BigInt index;
+  final MediaCustomData? data;
+
+  const MediaCustomDataResult({required this.index, this.data});
+
+  @override
+  int get hashCode => index.hashCode ^ data.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MediaCustomDataResult &&
+          runtimeType == other.runtimeType &&
+          index == other.index &&
+          data == other.data;
 }
 
 @freezed

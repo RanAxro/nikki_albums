@@ -68,6 +68,21 @@ Future<List<CustomData?>> mediaDecodeFilesUncheckedNoProgress({
       key: key,
     );
 
+/// 批量解密文件（流式回调，并行执行）。
+///
+/// 每完成一个文件立即通过 `sink` 推送 `MediaStreamResult`，
+/// 无需等待全部文件处理完毕。C 函数返回后，所有结果已推送完毕。
+Stream<MediaStreamResult> mediaDecodeFilesUncheckedStream({
+  required List<int> flag,
+  required List<String> paths,
+  required MediaKey key,
+}) => RustLib.instance.api
+    .crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStream(
+      flag: flag,
+      paths: paths,
+      key: key,
+    );
+
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
 abstract class MediaKey implements RustOpaqueInterface {
   static MediaKey cameraParam() =>
@@ -99,4 +114,23 @@ sealed class MediaDecodeEvent with _$MediaDecodeEvent {
       MediaDecodeEvent_Progress;
   const factory MediaDecodeEvent.result(List<CustomData?> field0) =
       MediaDecodeEvent_Result;
+}
+
+/// 流式批量解密的单文件结果
+class MediaStreamResult {
+  final BigInt index;
+  final CustomData? data;
+
+  const MediaStreamResult({required this.index, this.data});
+
+  @override
+  int get hashCode => index.hashCode ^ data.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MediaStreamResult &&
+          runtimeType == other.runtimeType &&
+          index == other.index &&
+          data == other.data;
 }

@@ -62,9 +62,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  RustStreamSink<MediaCustomDataResult>
+  dco_decode_StreamSink_media_custom_data_result_Sse(dynamic raw);
+
+  @protected
   RustStreamSink<MediaDecodeEvent> dco_decode_StreamSink_media_decode_event_Sse(
     dynamic raw,
   );
+
+  @protected
+  RustStreamSink<MediaStreamResult>
+  dco_decode_StreamSink_media_stream_result_Sse(dynamic raw);
 
   @protected
   String dco_decode_String(dynamic raw);
@@ -113,6 +121,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams dco_decode_box_autoadd_location_params(dynamic raw);
+
+  @protected
+  MediaCustomData dco_decode_box_autoadd_media_custom_data(dynamic raw);
 
   @protected
   MediaParam dco_decode_box_autoadd_media_param(dynamic raw);
@@ -275,6 +286,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MediaCustomData dco_decode_media_custom_data(dynamic raw);
 
   @protected
+  MediaCustomDataResult dco_decode_media_custom_data_result(dynamic raw);
+
+  @protected
   MediaDecodeEvent dco_decode_media_decode_event(dynamic raw);
 
   @protected
@@ -282,6 +296,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MediaParamType dco_decode_media_param_type(dynamic raw);
+
+  @protected
+  MediaStreamResult dco_decode_media_stream_result(dynamic raw);
 
   @protected
   MomoCameraParams dco_decode_momo_camera_params(dynamic raw);
@@ -330,6 +347,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw);
+
+  @protected
+  MediaCustomData? dco_decode_opt_box_autoadd_media_custom_data(dynamic raw);
 
   @protected
   MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw);
@@ -464,9 +484,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  RustStreamSink<MediaCustomDataResult>
+  sse_decode_StreamSink_media_custom_data_result_Sse(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   RustStreamSink<MediaDecodeEvent> sse_decode_StreamSink_media_decode_event_Sse(
     SseDeserializer deserializer,
   );
+
+  @protected
+  RustStreamSink<MediaStreamResult>
+  sse_decode_StreamSink_media_stream_result_Sse(SseDeserializer deserializer);
 
   @protected
   String sse_decode_String(SseDeserializer deserializer);
@@ -525,6 +555,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams sse_decode_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MediaCustomData sse_decode_box_autoadd_media_custom_data(
     SseDeserializer deserializer,
   );
 
@@ -721,6 +756,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MediaCustomData sse_decode_media_custom_data(SseDeserializer deserializer);
 
   @protected
+  MediaCustomDataResult sse_decode_media_custom_data_result(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   MediaDecodeEvent sse_decode_media_decode_event(SseDeserializer deserializer);
 
   @protected
@@ -728,6 +768,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MediaParamType sse_decode_media_param_type(SseDeserializer deserializer);
+
+  @protected
+  MediaStreamResult sse_decode_media_stream_result(
+    SseDeserializer deserializer,
+  );
 
   @protected
   MomoCameraParams sse_decode_momo_camera_params(SseDeserializer deserializer);
@@ -782,6 +827,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams? sse_decode_opt_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MediaCustomData? sse_decode_opt_box_autoadd_media_custom_data(
     SseDeserializer deserializer,
   );
 
@@ -952,8 +1002,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_StreamSink_media_custom_data_result_Sse(
+    RustStreamSink<MediaCustomDataResult> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_StreamSink_media_decode_event_Sse(
     RustStreamSink<MediaDecodeEvent> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_StreamSink_media_stream_result_Sse(
+    RustStreamSink<MediaStreamResult> self,
     SseSerializer serializer,
   );
 
@@ -1032,6 +1094,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_location_params(
     LocationParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_media_custom_data(
+    MediaCustomData self,
     SseSerializer serializer,
   );
 
@@ -1285,6 +1353,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_media_custom_data_result(
+    MediaCustomDataResult self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_media_decode_event(
     MediaDecodeEvent self,
     SseSerializer serializer,
@@ -1296,6 +1370,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_media_param_type(
     MediaParamType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_media_stream_result(
+    MediaStreamResult self,
     SseSerializer serializer,
   );
 
@@ -1374,6 +1454,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_location_params(
     LocationParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_media_custom_data(
+    MediaCustomData? self,
     SseSerializer serializer,
   );
 

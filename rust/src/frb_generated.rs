@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 702642369;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1096580229;
 
 // Section: executor
 
@@ -209,7 +209,7 @@ fn wire__crate__nuan5_media_param__decode__decode_media_param_impl(
                 transform_result_sse::<_, ()>((move || {
                     let output_ok =
                         Result::<_, ()>::Ok(crate::nuan5_media_param::decode::decode_media_param(
-                            api_param_type,
+                            &api_param_type,
                             &api_data,
                         ))?;
                     Ok(output_ok)
@@ -395,6 +395,297 @@ fn wire__crate__api__simple__init_app_impl(
                     })?;
                     Ok(output_ok)
                 })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_media_param__decode__media_de_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "media_de",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_data = <Vec<u8>>::sse_decode(&mut deserializer);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_key_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_key, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_key_guard = api_key_guard.unwrap();
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::nuan5_media_param::decode::media_de(
+                            &api_param_type,
+                            &api_data,
+                            &*api_key_guard,
+                        ))?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_media_param__decode__media_de_file_bytes_unchecked_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "media_de_file_bytes_unchecked",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_bytes = <Vec<u8>>::sse_decode(&mut deserializer);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_key_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_key, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_key_guard = api_key_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_media_param::decode::media_de_file_bytes_unchecked(
+                            &api_param_type,
+                            &api_bytes,
+                            &*api_key_guard,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_media_param__decode__media_de_file_unchecked_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "media_de_file_unchecked",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_key_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_key, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_key_guard = api_key_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_media_param::decode::media_de_file_unchecked(
+                            &api_param_type,
+                            api_path,
+                            &*api_key_guard,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_media_param__decode__media_de_file_unchecked_sync_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "media_de_file_unchecked_sync",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_key_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_key, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_key_guard = api_key_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_media_param::decode::media_de_file_unchecked_sync(
+                        &api_param_type,
+                        api_path,
+                        &*api_key_guard,
+                    ),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__nuan5_media_param__decode__media_de_files_unchecked_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "media_de_files_unchecked",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_media_param::decode::MediaParamType>::sse_decode(&mut deserializer);
+            let api_paths = <Vec<String>>::sse_decode(&mut deserializer);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+            >>::sse_decode(&mut deserializer);
+            let api_sink = <StreamSink<
+                crate::nuan5_media_param::decode::MediaCustomDataResult,
+                flutter_rust_bridge::for_generated::SseCodec,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok = crate::nuan5_media_param::decode::media_de_files_unchecked(
+                            &api_param_type,
+                            api_paths,
+                            &*api_key_guard,
+                            api_sink,
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -684,6 +975,69 @@ fn wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_no_prog
         },
     )
 }
+fn wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_stream_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "media_decode_files_unchecked_stream",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_flag = <Vec<u8>>::sse_decode(&mut deserializer);
+            let api_paths = <Vec<String>>::sse_decode(&mut deserializer);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+            >>::sse_decode(&mut deserializer);
+            let api_sink = <StreamSink<
+                crate::nuan5_media_param::decrypt::MediaStreamResult,
+                flutter_rust_bridge::for_generated::SseCodec,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok =
+                            crate::nuan5_media_param::decrypt::media_decode_files_unchecked_stream(
+                                &api_flag,
+                                api_paths,
+                                &*api_key_guard,
+                                api_sink,
+                            )?;
+                        Ok(output_ok)
+                    })(),
+                )
+            }
+        },
+    )
+}
 fn wire__crate__nuan5_media_param__decrypt__media_decrypt_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -820,7 +1174,33 @@ impl SseDecode
 
 impl SseDecode
     for StreamSink<
+        crate::nuan5_media_param::decode::MediaCustomDataResult,
+        flutter_rust_bridge::for_generated::SseCodec,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <String>::sse_decode(deserializer);
+        return StreamSink::deserialize(inner);
+    }
+}
+
+impl SseDecode
+    for StreamSink<
         crate::nuan5_media_param::decrypt::MediaDecodeEvent,
+        flutter_rust_bridge::for_generated::SseCodec,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <String>::sse_decode(deserializer);
+        return StreamSink::deserialize(inner);
+    }
+}
+
+impl SseDecode
+    for StreamSink<
+        crate::nuan5_media_param::decrypt::MediaStreamResult,
         flutter_rust_bridge::for_generated::SseCodec,
     >
 {
@@ -1482,6 +1862,19 @@ impl SseDecode for crate::nuan5_media_param::decode::MediaCustomData {
     }
 }
 
+impl SseDecode for crate::nuan5_media_param::decode::MediaCustomDataResult {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_index = <usize>::sse_decode(deserializer);
+        let mut var_data =
+            <Option<crate::nuan5_media_param::decode::MediaCustomData>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::decode::MediaCustomDataResult {
+            index: var_index,
+            data: var_data,
+        };
+    }
+}
+
 impl SseDecode for crate::nuan5_media_param::decrypt::MediaDecodeEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1554,6 +1947,19 @@ impl SseDecode for crate::nuan5_media_param::decode::MediaParamType {
             3 => crate::nuan5_media_param::decode::MediaParamType::Collage,
             4 => crate::nuan5_media_param::decode::MediaParamType::DIY,
             _ => unreachable!("Invalid variant for MediaParamType: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::decrypt::MediaStreamResult {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_index = <usize>::sse_decode(deserializer);
+        let mut var_data =
+            <Option<crate::nuan5_media_param::decrypt::CustomData>>::sse_decode(deserializer);
+        return crate::nuan5_media_param::decrypt::MediaStreamResult {
+            index: var_index,
+            data: var_data,
         };
     }
 }
@@ -1862,6 +2268,19 @@ impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params:
                 <crate::nuan5_media_param::structs::nikki_photo_params::LocationParams>::sse_decode(
                     deserializer,
                 ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_media_param::decode::MediaCustomData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_media_param::decode::MediaCustomData>::sse_decode(deserializer),
             );
         } else {
             return None;
@@ -2474,19 +2893,40 @@ fn pde_ffi_dispatcher_primary_impl(
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
         10 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        12 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
+        11 => {
+            wire__crate__nuan5_media_param__decode__media_de_impl(port, ptr, rust_vec_len, data_len)
+        }
+        12 => wire__crate__nuan5_media_param__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        14 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
+        13 => wire__crate__nuan5_media_param__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => {
+        15 => wire__crate__nuan5_media_param__decode__media_de_files_unchecked_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        17 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        19 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        20 => {
             wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_no_progress_impl(
                 port,
                 ptr,
@@ -2494,6 +2934,12 @@ fn pde_ffi_dispatcher_primary_impl(
                 data_len,
             )
         }
+        21 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_stream_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
         _ => unreachable!(),
     }
 }
@@ -2522,20 +2968,25 @@ fn pde_ffi_dispatcher_sync_impl(
             data_len,
         ),
         9 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        11 => wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_impl(
+        14 => wire__crate__nuan5_media_param__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_impl(
+        16 => wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        16 => {
+        18 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        22 => {
             wire__crate__nuan5_media_param__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len)
         }
-        17 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        23 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -3127,6 +3578,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaCu
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decode::MediaCustomDataResult {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.index.into_into_dart().into_dart(),
+            self.data.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decode::MediaCustomDataResult
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaCustomDataResult>
+    for crate::nuan5_media_param::decode::MediaCustomDataResult
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaCustomDataResult {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decrypt::MediaDecodeEvent {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
@@ -3210,6 +3682,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decode::MediaPa
     for crate::nuan5_media_param::decode::MediaParamType
 {
     fn into_into_dart(self) -> crate::nuan5_media_param::decode::MediaParamType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::decrypt::MediaStreamResult {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.index.into_into_dart().into_dart(),
+            self.data.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::decrypt::MediaStreamResult
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::decrypt::MediaStreamResult>
+    for crate::nuan5_media_param::decrypt::MediaStreamResult
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::decrypt::MediaStreamResult {
         self
     }
 }
@@ -3956,7 +4449,31 @@ impl SseEncode
 
 impl SseEncode
     for StreamSink<
+        crate::nuan5_media_param::decode::MediaCustomDataResult,
+        flutter_rust_bridge::for_generated::SseCodec,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        unimplemented!("")
+    }
+}
+
+impl SseEncode
+    for StreamSink<
         crate::nuan5_media_param::decrypt::MediaDecodeEvent,
+        flutter_rust_bridge::for_generated::SseCodec,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        unimplemented!("")
+    }
+}
+
+impl SseEncode
+    for StreamSink<
+        crate::nuan5_media_param::decrypt::MediaStreamResult,
         flutter_rust_bridge::for_generated::SseCodec,
     >
 {
@@ -4505,6 +5022,16 @@ impl SseEncode for crate::nuan5_media_param::decode::MediaCustomData {
     }
 }
 
+impl SseEncode for crate::nuan5_media_param::decode::MediaCustomDataResult {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <usize>::sse_encode(self.index, serializer);
+        <Option<crate::nuan5_media_param::decode::MediaCustomData>>::sse_encode(
+            self.data, serializer,
+        );
+    }
+}
+
 impl SseEncode for crate::nuan5_media_param::decrypt::MediaDecodeEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -4577,6 +5104,14 @@ impl SseEncode for crate::nuan5_media_param::decode::MediaParamType {
             },
             serializer,
         );
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::decrypt::MediaStreamResult {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <usize>::sse_encode(self.index, serializer);
+        <Option<crate::nuan5_media_param::decrypt::CustomData>>::sse_encode(self.data, serializer);
     }
 }
 
@@ -4819,6 +5354,16 @@ impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params:
             <crate::nuan5_media_param::structs::nikki_photo_params::LocationParams>::sse_encode(
                 value, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_media_param::decode::MediaCustomData> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::decode::MediaCustomData>::sse_encode(value, serializer);
         }
     }
 }

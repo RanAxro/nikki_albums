@@ -97,39 +97,67 @@ abstract class GameImageCodec{
     );
   }
 
+  // static Future<List<dynamic>> decodeFiles(List<String> paths, String uid, {void Function(int, int)? onProgress}) async{
+  //   final MediaKey key = MediaKey.fromStr(uid);
+  //
+  //   final Stream<MediaDecodeEvent> stream = mediaDecodeFilesUnchecked(flag: imageFlag, paths: paths, key: key);
+  //
+  //   final List<dynamic> res = [];
+  //   await for(final MediaDecodeEvent current in stream){
+  //     current.when(
+  //       progress: (double progress){
+  //         onProgress?.call((progress * paths.length).toInt(), paths.length);
+  //       },
+  //       result: (List<CustomData?> data){
+  //         for(final CustomData? datum in data){
+  //           if(datum == null){
+  //             res.add(null);
+  //             continue;
+  //           }
+  //
+  //           datum.when(
+  //             invalid: (){
+  //               res.add(null);
+  //             },
+  //             valid: (Uint8List bytes){
+  //               late final dynamic json;
+  //               try{
+  //                 json = toJson(bytes);
+  //               }catch(e){
+  //                 json = null;
+  //               }
+  //               res.add(json);
+  //             },
+  //           );
+  //         }
+  //       },
+  //     );
+  //   }
+  //
+  //   key.dispose();
+  //   return res;
+  // }
+
   static Future<List<dynamic>> decodeFiles(List<String> paths, String uid, {void Function(int, int)? onProgress}) async{
     final MediaKey key = MediaKey.fromStr(uid);
 
-    final Stream<MediaDecodeEvent> stream = mediaDecodeFilesUnchecked(flag: imageFlag, paths: paths, key: key);
+    final Stream<MediaStreamResult> stream = mediaDecodeFilesUncheckedStream(flag: imageFlag, paths: paths, key: key);
 
-    final List<dynamic> res = [];
-    await for(final MediaDecodeEvent current in stream){
-      current.when(
-        progress: (double progress){
-          onProgress?.call((progress * paths.length).toInt(), paths.length);
-        },
-        result: (List<CustomData?> data){
-          for(final CustomData? datum in data){
-            if(datum == null){
-              res.add(null);
-              continue;
-            }
+    final List<dynamic> res = List.filled(paths.length, null);
+    await for(final MediaStreamResult current in stream){
+      if(current.data == null){
+        continue;
+      }
 
-            datum.when(
-              invalid: (){
-                res.add(null);
-              },
-              valid: (Uint8List bytes){
-                late final dynamic json;
-                try{
-                  json = toJson(bytes);
-                }catch(e){
-                  json = null;
-                }
-                res.add(json);
-              },
-            );
+      current.data!.whenOrNull(
+        valid: (Uint8List bytes){
+          late final dynamic json;
+          try{
+            json = toJson(bytes);
+          }catch(e){
+            json = null;
           }
+          res[current.index.toInt()] = json;
         },
       );
     }

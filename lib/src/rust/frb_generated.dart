@@ -78,7 +78,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 702642369;
+  int get rustContentHash => 1096580229;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -129,6 +129,37 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiSimpleInitApp();
 
+  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDe({
+    required MediaParamType paramType,
+    required List<int> data,
+    required MediaKey key,
+  });
+
+  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileBytesUnchecked({
+    required MediaParamType paramType,
+    required List<int> bytes,
+    required MediaKey key,
+  });
+
+  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileUnchecked({
+    required MediaParamType paramType,
+    required String path,
+    required MediaKey key,
+  });
+
+  MediaCustomData? crateNuan5MediaParamDecodeMediaDeFileUncheckedSync({
+    required MediaParamType paramType,
+    required String path,
+    required MediaKey key,
+  });
+
+  Stream<MediaCustomDataResult>
+  crateNuan5MediaParamDecodeMediaDeFilesUnchecked({
+    required MediaParamType paramType,
+    required List<String> paths,
+    required MediaKey key,
+  });
+
   CustomData? crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked({
     required List<int> flag,
     required List<int> bytes,
@@ -156,6 +187,13 @@ abstract class RustLibApi extends BaseApi {
 
   Future<List<CustomData?>>
   crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress({
+    required List<int> flag,
+    required List<String> paths,
+    required MediaKey key,
+  });
+
+  Stream<MediaStreamResult>
+  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStream({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
@@ -491,6 +529,213 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
+  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDe({
+    required MediaParamType paramType,
+    required List<int> data,
+    required MediaKey key,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_media_param_type(paramType, serializer);
+          sse_encode_list_prim_u_8_loose(data, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 11,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5MediaParamDecodeMediaDeConstMeta,
+        argValues: [paramType, data, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5MediaParamDecodeMediaDeConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_de",
+        argNames: ["paramType", "data", "key"],
+      );
+
+  @override
+  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileBytesUnchecked({
+    required MediaParamType paramType,
+    required List<int> bytes,
+    required MediaKey key,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_media_param_type(paramType, serializer);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 12,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5MediaParamDecodeMediaDeFileBytesUncheckedConstMeta,
+        argValues: [paramType, bytes, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecodeMediaDeFileBytesUncheckedConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_de_file_bytes_unchecked",
+        argNames: ["paramType", "bytes", "key"],
+      );
+
+  @override
+  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileUnchecked({
+    required MediaParamType paramType,
+    required String path,
+    required MediaKey key,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_media_param_type(paramType, serializer);
+          sse_encode_String(path, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 13,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5MediaParamDecodeMediaDeFileUncheckedConstMeta,
+        argValues: [paramType, path, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5MediaParamDecodeMediaDeFileUncheckedConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_de_file_unchecked",
+        argNames: ["paramType", "path", "key"],
+      );
+
+  @override
+  MediaCustomData? crateNuan5MediaParamDecodeMediaDeFileUncheckedSync({
+    required MediaParamType paramType,
+    required String path,
+    required MediaKey key,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_media_param_type(paramType, serializer);
+          sse_encode_String(path, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+            key,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5MediaParamDecodeMediaDeFileUncheckedSyncConstMeta,
+        argValues: [paramType, path, key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecodeMediaDeFileUncheckedSyncConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_de_file_unchecked_sync",
+        argNames: ["paramType", "path", "key"],
+      );
+
+  @override
+  Stream<MediaCustomDataResult>
+  crateNuan5MediaParamDecodeMediaDeFilesUnchecked({
+    required MediaParamType paramType,
+    required List<String> paths,
+    required MediaKey key,
+  }) {
+    final sink = RustStreamSink<MediaCustomDataResult>();
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_media_param_type(paramType, serializer);
+            sse_encode_list_String(paths, serializer);
+            sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+              key,
+              serializer,
+            );
+            sse_encode_StreamSink_media_custom_data_result_Sse(
+              sink,
+              serializer,
+            );
+            pdeCallFfi(
+              generalizedFrbRustBinding,
+              serializer,
+              funcId: 15,
+              port: port_,
+            );
+          },
+          codec: SseCodec(
+            decodeSuccessData: sse_decode_unit,
+            decodeErrorData: sse_decode_AnyhowException,
+          ),
+          constMeta: kCrateNuan5MediaParamDecodeMediaDeFilesUncheckedConstMeta,
+          argValues: [paramType, paths, key, sink],
+          apiImpl: this,
+        ),
+      ),
+    );
+    return sink.stream;
+  }
+
+  TaskConstMeta get kCrateNuan5MediaParamDecodeMediaDeFilesUncheckedConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_de_files_unchecked",
+        argNames: ["paramType", "paths", "key", "sink"],
+      );
+
+  @override
   CustomData? crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked({
     required List<int> flag,
     required List<int> bytes,
@@ -506,7 +751,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -546,7 +791,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 17,
             port: port_,
           );
         },
@@ -585,7 +830,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -632,7 +877,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 14,
+              funcId: 19,
               port: port_,
             );
           },
@@ -677,7 +922,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 15,
+            funcId: 20,
             port: port_,
           );
         },
@@ -701,6 +946,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Stream<MediaStreamResult>
+  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStream({
+    required List<int> flag,
+    required List<String> paths,
+    required MediaKey key,
+  }) {
+    final sink = RustStreamSink<MediaStreamResult>();
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_list_prim_u_8_loose(flag, serializer);
+            sse_encode_list_String(paths, serializer);
+            sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+              key,
+              serializer,
+            );
+            sse_encode_StreamSink_media_stream_result_Sse(sink, serializer);
+            pdeCallFfi(
+              generalizedFrbRustBinding,
+              serializer,
+              funcId: 21,
+              port: port_,
+            );
+          },
+          codec: SseCodec(
+            decodeSuccessData: sse_decode_unit,
+            decodeErrorData: sse_decode_AnyhowException,
+          ),
+          constMeta:
+              kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStreamConstMeta,
+          argValues: [flag, paths, key, sink],
+          apiImpl: this,
+        ),
+      ),
+    );
+    return sink.stream;
+  }
+
+  TaskConstMeta
+  get kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStreamConstMeta =>
+      const TaskConstMeta(
+        debugName: "media_decode_files_unchecked_stream",
+        argNames: ["flag", "paths", "key", "sink"],
+      );
+
+  @override
   CustomData? crateNuan5MediaParamDecryptMediaDecrypt({
     required List<int> data,
     required MediaKey key,
@@ -714,7 +1007,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -741,7 +1034,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -815,9 +1108,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RustStreamSink<MediaCustomDataResult>
+  dco_decode_StreamSink_media_custom_data_result_Sse(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError();
+  }
+
+  @protected
   RustStreamSink<MediaDecodeEvent> dco_decode_StreamSink_media_decode_event_Sse(
     dynamic raw,
   ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError();
+  }
+
+  @protected
+  RustStreamSink<MediaStreamResult>
+  dco_decode_StreamSink_media_stream_result_Sse(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
   }
@@ -916,6 +1223,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   LocationParams dco_decode_box_autoadd_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_location_params(raw);
+  }
+
+  @protected
+  MediaCustomData dco_decode_box_autoadd_media_custom_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_media_custom_data(raw);
   }
 
   @protected
@@ -1391,6 +1704,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MediaCustomDataResult dco_decode_media_custom_data_result(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return MediaCustomDataResult(
+      index: dco_decode_usize(arr[0]),
+      data: dco_decode_opt_box_autoadd_media_custom_data(arr[1]),
+    );
+  }
+
+  @protected
   MediaDecodeEvent dco_decode_media_decode_event(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -1436,6 +1761,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MediaParamType dco_decode_media_param_type(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return MediaParamType.values[raw as int];
+  }
+
+  @protected
+  MediaStreamResult dco_decode_media_stream_result(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return MediaStreamResult(
+      index: dco_decode_usize(arr[0]),
+      data: dco_decode_opt_box_autoadd_custom_data(arr[1]),
+    );
   }
 
   @protected
@@ -1602,6 +1939,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_location_params(raw);
+  }
+
+  @protected
+  MediaCustomData? dco_decode_opt_box_autoadd_media_custom_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_media_custom_data(raw);
   }
 
   @protected
@@ -1993,9 +2336,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RustStreamSink<MediaCustomDataResult>
+  sse_decode_StreamSink_media_custom_data_result_Sse(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    throw UnimplementedError('Unreachable ()');
+  }
+
+  @protected
   RustStreamSink<MediaDecodeEvent> sse_decode_StreamSink_media_decode_event_Sse(
     SseDeserializer deserializer,
   ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    throw UnimplementedError('Unreachable ()');
+  }
+
+  @protected
+  RustStreamSink<MediaStreamResult>
+  sse_decode_StreamSink_media_stream_result_Sse(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     throw UnimplementedError('Unreachable ()');
   }
@@ -2108,6 +2467,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_location_params(deserializer));
+  }
+
+  @protected
+  MediaCustomData sse_decode_box_autoadd_media_custom_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_media_custom_data(deserializer));
   }
 
   @protected
@@ -2705,6 +3072,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MediaCustomDataResult sse_decode_media_custom_data_result(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_index = sse_decode_usize(deserializer);
+    var var_data = sse_decode_opt_box_autoadd_media_custom_data(deserializer);
+    return MediaCustomDataResult(index: var_index, data: var_data);
+  }
+
+  @protected
   MediaDecodeEvent sse_decode_media_decode_event(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -2760,6 +3137,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_32(deserializer);
     return MediaParamType.values[inner];
+  }
+
+  @protected
+  MediaStreamResult sse_decode_media_stream_result(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_index = sse_decode_usize(deserializer);
+    var var_data = sse_decode_opt_box_autoadd_custom_data(deserializer);
+    return MediaStreamResult(index: var_index, data: var_data);
   }
 
   @protected
@@ -3006,6 +3393,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_location_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  MediaCustomData? sse_decode_opt_box_autoadd_media_custom_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_media_custom_data(deserializer));
     } else {
       return null;
     }
@@ -3481,6 +3881,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_StreamSink_media_custom_data_result_Sse(
+    RustStreamSink<MediaCustomDataResult> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(
+      self.setupAndSerialize(
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_media_custom_data_result,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+      ),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_StreamSink_media_decode_event_Sse(
     RustStreamSink<MediaDecodeEvent> self,
     SseSerializer serializer,
@@ -3490,6 +3907,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.setupAndSerialize(
         codec: SseCodec(
           decodeSuccessData: sse_decode_media_decode_event,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+      ),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_StreamSink_media_stream_result_Sse(
+    RustStreamSink<MediaStreamResult> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(
+      self.setupAndSerialize(
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_media_stream_result,
           decodeErrorData: sse_decode_AnyhowException,
         ),
       ),
@@ -3624,6 +4058,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_location_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_media_custom_data(
+    MediaCustomData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_media_custom_data(self, serializer);
   }
 
   @protected
@@ -4167,6 +4610,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_media_custom_data_result(
+    MediaCustomDataResult self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(self.index, serializer);
+    sse_encode_opt_box_autoadd_media_custom_data(self.data, serializer);
+  }
+
+  @protected
   void sse_encode_media_decode_event(
     MediaDecodeEvent self,
     SseSerializer serializer,
@@ -4211,6 +4664,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_media_stream_result(
+    MediaStreamResult self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(self.index, serializer);
+    sse_encode_opt_box_autoadd_custom_data(self.data, serializer);
   }
 
   @protected
@@ -4414,6 +4877,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_location_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_media_custom_data(
+    MediaCustomData? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_media_custom_data(self, serializer);
     }
   }
 
