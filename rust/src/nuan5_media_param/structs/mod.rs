@@ -5,3 +5,4 @@ pub mod collage_params;
 pub mod diy_params;
 pub mod share_code_params;
 pub mod momo_camera_params;
+pub mod cloth;
