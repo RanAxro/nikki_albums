@@ -1,6 +1,6 @@
 pub mod transform;
 pub mod se;
-
+pub mod de;
 
 pub struct FTransformFormat{
   pub endian: Endianness,
@@ -39,4 +39,11 @@ pub enum FTransformFieldOrder{
   // TSR,
   // SRT,
   // STR,
+}
+
+#[derive(Debug)]
+pub enum ErrorCode{
+  BufferOverrun,
+  InvalidHex,
+  ExceedingLength,
 }
