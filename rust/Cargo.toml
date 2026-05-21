@@ -21,6 +21,7 @@ delegate = "0.13.5"
 itoa = "1.0.18"
 ryu = "1.0.23"
 memchr = "2.8.0"
+faster-hex = "0.10.0"
 
 zune-jpeg = "0.5.15"
 zune-png = { version = "0.5.2", default-features = false, features = ["std"] }

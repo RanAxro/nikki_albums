@@ -1,7 +1,4 @@
-use serde::{Deserialize, Serialize};
-
 #[derive(Clone)]
-#[derive(Serialize, Deserialize)]
 pub struct FQuat{
   pub x: f64,
   pub y: f64,
@@ -10,7 +7,6 @@ pub struct FQuat{
 }
 
 #[derive(Clone)]
-#[derive(Serialize, Deserialize)]
 pub struct FVector{
   pub x: f64,
   pub y: f64,
@@ -18,7 +14,6 @@ pub struct FVector{
 }
 
 #[derive(Clone)]
-#[derive(Serialize, Deserialize)]
 pub struct FTransform{
   pub rotation: FQuat,
   pub translation: FVector,
