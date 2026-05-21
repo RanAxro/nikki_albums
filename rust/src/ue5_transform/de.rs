@@ -9,59 +9,42 @@ struct Deserializer<P: Parser, T: FTransformDeserializer>{
   transform_deserializer: T,
 }
 
+macro_rules! read_count{
+  ($count_type:expr, $parser:expr, $value:expr, $index:expr, $max_len:expr, {
+    $($count:ident => $read_fn:ident),* $(,)?
+  }) => {
+    match $count_type {
+      $(
+        CountType::$count => {
+          let len = $parser.$read_fn($value, &mut $index)?;
+          if let Some(max) = $max_len {
+            if len as usize > max {
+              return Err(ErrorCode::BufferOverrun);
+            }
+          }
+          Vec::with_capacity(len as usize)
+        },
+      )*
+      CountType::None => Vec::new(),
+    }
+  };
+}
+
 impl<P: Parser, T: FTransformDeserializer> Deserializer<P, T>{
   #[inline]
   fn deserialize(&self, value: &[u8], max_len: Option<usize>) -> Result<FTransforms, ErrorCode>{
     let mut index = 0;
 
-    let mut transforms = match self.count_type{
-      CountType::U8 => {
-        let len = self.parser.read_u8(value, &mut index)?;
-        if let Some(max) = max_len {
-          if len as usize > max {
-            return Err(ErrorCode::BufferOverrun);
-          }
-        }
-        Vec::with_capacity(len as usize)
-      },
-      CountType::U16 => {
-        let len = self.parser.read_u16(value, &mut index)?;
-        if let Some(max) = max_len {
-          if len as usize > max {
-            return Err(ErrorCode::BufferOverrun);
-          }
-        }
-        Vec::with_capacity(len as usize)
-      },
-      CountType::U32 => {
-        let len = self.parser.read_u32(value, &mut index)?;
-        if let Some(max) = max_len {
-          if len as usize > max {
-            return Err(ErrorCode::BufferOverrun);
-          }
-        }
-        Vec::with_capacity(len as usize)
-      },
-      CountType::U64 => {
-        let len = self.parser.read_u64(value, &mut index)?;
-        if let Some(max) = max_len {
-          if len as usize > max {
-            return Err(ErrorCode::BufferOverrun);
-          }
-        }
-        Vec::with_capacity(len as usize)
-      },
-      CountType::U128 => {
-        let len = self.parser.read_u128(value, &mut index)?;
-        if let Some(max) = max_len {
-          if len as usize > max {
-            return Err(ErrorCode::BufferOverrun);
-          }
-        }
-        Vec::with_capacity(len as usize)
-      },
-      CountType::None => Vec::new(),
-    };
+    let mut transforms = read_count!(
+      self.count_type, self.parser, value, index, max_len,
+      {
+        U8   => read_u8,
+        U16  => read_u16,
+        U32  => read_u32,
+        U64  => read_u64,
+        U128 => read_u128,
+      }
+    );
 
     while index < value.len() {
       transforms.push(self.transform_deserializer.deserialize(&self.parser, value, &mut index)?);
@@ -161,140 +144,51 @@ trait Parser{
   fn read_f64(&self, input: &[u8], index: &mut usize) -> Result<f64, ErrorCode>;
 }
 
+macro_rules! __endian_from_bytes{
+  (le, $type:ty, $bytes:expr) => {
+    <$type>::from_le_bytes($bytes)
+  };
+  (be, $type:ty, $bytes:expr) => {
+    <$type>::from_be_bytes($bytes)
+  };
+}
+macro_rules! define_read{
+  ($name:ident, $type:ty, $size:expr, $endian:tt) => {
+    #[inline]
+    fn $name(&self, input: &[u8], index: &mut usize) -> Result<$type, ErrorCode>{
+      let bytes: [u8; $size] = input
+        .get(*index..*index + $size)
+        .ok_or(ErrorCode::BufferOverrun)?
+        .try_into()
+        .map_err(|_| ErrorCode::BufferOverrun)?;
+      *index += $size;
+      Ok(__endian_from_bytes!($endian, $type, bytes))
+    }
+  };
+}
+
 struct LeParser{}
 
 impl Parser for LeParser{
-  #[inline]
-  fn read_u8(&self, input: &[u8], index: &mut usize) -> Result<u8, ErrorCode>{
-    let bytes: [u8; 1] = input.get(*index..*index + 1)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 1;
-    Ok(u8::from_le_bytes(bytes))
-  }
-  #[inline]
-  fn read_u16(&self, input: &[u8], index: &mut usize) -> Result<u16, ErrorCode>{
-    let bytes: [u8; 2] = input.get(*index..*index + 2)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 2;
-    Ok(u16::from_le_bytes(bytes))
-  }
-  #[inline]
-  fn read_u32(&self, input: &[u8], index: &mut usize) -> Result<u32, ErrorCode>{
-    let bytes: [u8; 4] = input.get(*index..*index + 4)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 4;
-    Ok(u32::from_le_bytes(bytes))
-  }
-  #[inline]
-  fn read_u64(&self, input: &[u8], index: &mut usize) -> Result<u64, ErrorCode>{
-    let bytes: [u8; 8] = input.get(*index..*index + 8)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 8;
-    Ok(u64::from_le_bytes(bytes))
-  }
-  #[inline]
-  fn read_u128(&self, input: &[u8], index: &mut usize) -> Result<u128, ErrorCode>{
-    let bytes: [u8; 16] = input.get(*index..*index + 16)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 16;
-    Ok(u128::from_le_bytes(bytes))
-  }
-  #[inline]
-  fn read_f32(&self, input: &[u8], index: &mut usize) -> Result<f32, ErrorCode>{
-    let bytes: [u8; 4] = input.get(*index..*index + 4)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 4;
-    Ok(f32::from_le_bytes(bytes))
-  }
-  #[inline]
-  fn read_f64(&self, input: &[u8], index: &mut usize) -> Result<f64, ErrorCode>{
-    let bytes: [u8; 8] = input.get(*index..*index + 8)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 8;
-    Ok(f64::from_le_bytes(bytes))
-  }
+  define_read!(read_u8, u8, 1, le);
+  define_read!(read_u16, u16, 2, le);
+  define_read!(read_u32, u32, 4, le);
+  define_read!(read_u64, u64, 8, le);
+  define_read!(read_u128, u128, 16, le);
+  define_read!(read_f32, f32, 4, le);
+  define_read!(read_f64, f64, 8, le);
 }
 
 struct BeParser{}
 
 impl Parser for BeParser{
-  #[inline]
-  fn read_u8(&self, input: &[u8], index: &mut usize) -> Result<u8, ErrorCode>{
-    let bytes: [u8; 1] = input.get(*index..*index + 1)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 1;
-    Ok(u8::from_be_bytes(bytes))
-  }
-  #[inline]
-  fn read_u16(&self, input: &[u8], index: &mut usize) -> Result<u16, ErrorCode>{
-    let bytes: [u8; 2] = input.get(*index..*index + 2)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 2;
-    Ok(u16::from_be_bytes(bytes))
-  }
-  #[inline]
-  fn read_u32(&self, input: &[u8], index: &mut usize) -> Result<u32, ErrorCode>{
-    let bytes: [u8; 4] = input.get(*index..*index + 4)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 4;
-    Ok(u32::from_be_bytes(bytes))
-  }
-  #[inline]
-  fn read_u64(&self, input: &[u8], index: &mut usize) -> Result<u64, ErrorCode>{
-    let bytes: [u8; 8] = input.get(*index..*index + 8)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 8;
-    Ok(u64::from_be_bytes(bytes))
-  }
-  #[inline]
-  fn read_u128(&self, input: &[u8], index: &mut usize) -> Result<u128, ErrorCode>{
-    let bytes: [u8; 16] = input.get(*index..*index + 16)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 16;
-    Ok(u128::from_be_bytes(bytes))
-  }
-  #[inline]
-  fn read_f32(&self, input: &[u8], index: &mut usize) -> Result<f32, ErrorCode>{
-    let bytes: [u8; 4] = input.get(*index..*index + 4)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 4;
-    Ok(f32::from_be_bytes(bytes))
-  }
-  #[inline]
-  fn read_f64(&self, input: &[u8], index: &mut usize) -> Result<f64, ErrorCode>{
-    let bytes: [u8; 8] = input.get(*index..*index + 8)
-      .ok_or(ErrorCode::BufferOverrun)?
-      .try_into()
-      .map_err(|_| ErrorCode::BufferOverrun)?;
-    *index += 8;
-    Ok(f64::from_be_bytes(bytes))
-  }
+  define_read!(read_u8, u8, 1, be);
+  define_read!(read_u16, u16, 2, be);
+  define_read!(read_u32, u32, 4, be);
+  define_read!(read_u64, u64, 8, be);
+  define_read!(read_u128, u128, 16, be);
+  define_read!(read_f32, f32, 4, be);
+  define_read!(read_f64, f64, 8, be);
 }
 
 
