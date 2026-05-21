@@ -15,6 +15,15 @@ impl<P: Parser, T: FTransformDeserializer> Deserializer<P, T>{
     let mut index = 0;
 
     let mut transforms = match self.count_type{
+      CountType::U8 => {
+        let len = self.parser.read_u8(value, &mut index)?;
+        if let Some(max) = max_len {
+          if len as usize > max {
+            return Err(ErrorCode::BufferOverrun);
+          }
+        }
+        Vec::with_capacity(len as usize)
+      },
       CountType::U16 => {
         let len = self.parser.read_u16(value, &mut index)?;
         if let Some(max) = max_len {
@@ -35,6 +44,15 @@ impl<P: Parser, T: FTransformDeserializer> Deserializer<P, T>{
       },
       CountType::U64 => {
         let len = self.parser.read_u64(value, &mut index)?;
+        if let Some(max) = max_len {
+          if len as usize > max {
+            return Err(ErrorCode::BufferOverrun);
+          }
+        }
+        Vec::with_capacity(len as usize)
+      },
+      CountType::U128 => {
+        let len = self.parser.read_u128(value, &mut index)?;
         if let Some(max) = max_len {
           if len as usize > max {
             return Err(ErrorCode::BufferOverrun);

@@ -59,9 +59,11 @@ impl<F: Formatter, T: FTransformSerializer> Serializer<F, T>{
     let mut output = Output::new();
 
     match self.count_type{
+      CountType::U8 => self.formatter.write_u8(&mut output, value.len() as u8),
       CountType::U16 => self.formatter.write_u16(&mut output, value.len() as u16),
       CountType::U32 => self.formatter.write_u32(&mut output, value.len() as u32),
       CountType::U64 => self.formatter.write_u64(&mut output, value.len() as u64),
+      CountType::U128 => self.formatter.write_u128(&mut output, value.len() as u128),
       CountType::None => {},
     };
 
