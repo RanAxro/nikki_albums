@@ -17,6 +17,10 @@ import 'nuan5_media_param/structs/momo_camera_params.dart';
 import 'nuan5_media_param/structs/nikki_photo_params.dart';
 import 'nuan5_media_param/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
+import 'serde_config/de.dart';
+import 'serde_config/se.dart';
+import 'serde_config/structs/text.dart';
+import 'serde_config/structs/theme.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
 import 'thumbnail/mp4_h264.dart';
@@ -150,6 +154,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
 
   @protected
+  OrdinaryText dco_decode_box_autoadd_ordinary_text(dynamic raw);
+
+  @protected
   OutfitDyeGeneralData dco_decode_box_autoadd_outfit_dye_general_data(
     dynamic raw,
   );
@@ -170,6 +177,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea dco_decode_box_autoadd_subarea(dynamic raw);
 
   @protected
+  ThemeConfigV1 dco_decode_box_autoadd_theme_config_v_1(dynamic raw);
+
+  @protected
+  ThemeConfigWrapper dco_decode_box_autoadd_theme_config_wrapper(dynamic raw);
+
+  @protected
+  TranslateText dco_decode_box_autoadd_translate_text(dynamic raw);
+
+  @protected
   int dco_decode_box_autoadd_u_32(dynamic raw);
 
   @protected
@@ -186,6 +202,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams dco_decode_collage_params(dynamic raw);
+
+  @protected
+  ColorRoleScheme dco_decode_color_role_scheme(dynamic raw);
+
+  @protected
+  ColorScheme dco_decode_color_scheme(dynamic raw);
 
   @protected
   CustomData dco_decode_custom_data(dynamic raw);
@@ -382,6 +404,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw);
 
   @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw);
+
+  @protected
+  OrdinaryText dco_decode_ordinary_text(dynamic raw);
+
+  @protected
   OutfitDyeData dco_decode_outfit_dye_data(dynamic raw);
 
   @protected
@@ -414,6 +442,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
 
   @protected
+  (int, int, int) dco_decode_record_u_8_u_8_u_8(dynamic raw);
+
+  @protected
   Region dco_decode_region(dynamic raw);
 
   @protected
@@ -435,7 +466,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TaskParams dco_decode_task_params(dynamic raw);
 
   @protected
+  Text dco_decode_text(dynamic raw);
+
+  @protected
+  ThemeConfigV1 dco_decode_theme_config_v_1(dynamic raw);
+
+  @protected
+  ThemeConfigWrapper dco_decode_theme_config_wrapper(dynamic raw);
+
+  @protected
   Thumbnail dco_decode_thumbnail(dynamic raw);
+
+  @protected
+  TranslateText dco_decode_translate_text(dynamic raw);
 
   @protected
   int dco_decode_u_32(dynamic raw);
@@ -596,6 +639,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  OrdinaryText sse_decode_box_autoadd_ordinary_text(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   OutfitDyeGeneralData sse_decode_box_autoadd_outfit_dye_general_data(
     SseDeserializer deserializer,
   );
@@ -622,6 +670,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
+  ThemeConfigV1 sse_decode_box_autoadd_theme_config_v_1(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ThemeConfigWrapper sse_decode_box_autoadd_theme_config_wrapper(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TranslateText sse_decode_box_autoadd_translate_text(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   int sse_decode_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
@@ -642,6 +705,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams sse_decode_collage_params(SseDeserializer deserializer);
+
+  @protected
+  ColorRoleScheme sse_decode_color_role_scheme(SseDeserializer deserializer);
+
+  @protected
+  ColorScheme sse_decode_color_scheme(SseDeserializer deserializer);
 
   @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
@@ -878,6 +947,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer);
+
+  @protected
+  OrdinaryText sse_decode_ordinary_text(SseDeserializer deserializer);
+
+  @protected
   OutfitDyeData sse_decode_outfit_dye_data(SseDeserializer deserializer);
 
   @protected
@@ -922,6 +997,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, int, int) sse_decode_record_u_8_u_8_u_8(SseDeserializer deserializer);
+
+  @protected
   Region sse_decode_region(SseDeserializer deserializer);
 
   @protected
@@ -945,7 +1023,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TaskParams sse_decode_task_params(SseDeserializer deserializer);
 
   @protected
+  Text sse_decode_text(SseDeserializer deserializer);
+
+  @protected
+  ThemeConfigV1 sse_decode_theme_config_v_1(SseDeserializer deserializer);
+
+  @protected
+  ThemeConfigWrapper sse_decode_theme_config_wrapper(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Thumbnail sse_decode_thumbnail(SseDeserializer deserializer);
+
+  @protected
+  TranslateText sse_decode_translate_text(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_32(SseDeserializer deserializer);
@@ -1149,6 +1241,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_ordinary_text(
+    OrdinaryText self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_outfit_dye_general_data(
     OutfitDyeGeneralData self,
     SseSerializer serializer,
@@ -1179,6 +1277,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_theme_config_v_1(
+    ThemeConfigV1 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_theme_config_wrapper(
+    ThemeConfigWrapper self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_translate_text(
+    TranslateText self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer);
 
   @protected
@@ -1201,6 +1317,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_collage_params(CollageParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_color_role_scheme(
+    ColorRoleScheme self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_color_scheme(ColorScheme self, SseSerializer serializer);
 
   @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);
@@ -1521,6 +1646,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_list_String(List<String>? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ordinary_text(OrdinaryText self, SseSerializer serializer);
+
+  @protected
   void sse_encode_outfit_dye_data(OutfitDyeData self, SseSerializer serializer);
 
   @protected
@@ -1578,6 +1709,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_u_8_u_8_u_8(
+    (int, int, int) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_region(Region self, SseSerializer serializer);
 
   @protected
@@ -1602,7 +1739,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_task_params(TaskParams self, SseSerializer serializer);
 
   @protected
+  void sse_encode_text(Text self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_theme_config_v_1(
+    ThemeConfigV1 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_theme_config_wrapper(
+    ThemeConfigWrapper self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_thumbnail(Thumbnail self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_translate_text(TranslateText self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_32(int self, SseSerializer serializer);

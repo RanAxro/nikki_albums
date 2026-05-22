@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1096580229;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 342351106;
 
 // Section: executor
 
@@ -214,6 +214,42 @@ fn wire__crate__nuan5_media_param__decode__decode_media_param_impl(
                         ))?;
                     Ok(output_ok)
                 })())
+            }
+        },
+    )
+}
+fn wire__crate__serde_config__de__deserialize_theme_config_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "deserialize_theme_config",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_value = <Vec<u8>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || {
+                        let output_ok =
+                            crate::serde_config::de::deserialize_theme_config(&api_value)?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -1087,6 +1123,46 @@ fn wire__crate__nuan5_media_param__decrypt__media_decrypt_impl(
         },
     )
 }
+fn wire__crate__serde_config__se__serialize_theme_config_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "serialize_theme_config",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_value = <crate::serde_config::structs::theme::ThemeConfigWrapper>::sse_decode(
+                &mut deserializer,
+            );
+            let api_pretty = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || {
+                        let output_ok = crate::serde_config::se::serialize_theme_config(
+                            &api_value, api_pretty,
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__simple__test_add_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -1357,6 +1433,63 @@ impl SseDecode for crate::nuan5_media_param::structs::collage_params::CollagePar
         return crate::nuan5_media_param::structs::collage_params::CollageParams {
             template_id: var_templateId,
             region_pictures: var_regionPictures,
+        };
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::theme::ColorRoleScheme {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_color = <u32>::sse_decode(deserializer);
+        let mut var_onColor = <u32>::sse_decode(deserializer);
+        let mut var_enabledColor = <u32>::sse_decode(deserializer);
+        let mut var_onEnabledColor = <u32>::sse_decode(deserializer);
+        let mut var_disabledColor = <u32>::sse_decode(deserializer);
+        let mut var_onDisabledColor = <u32>::sse_decode(deserializer);
+        let mut var_hoveredColor = <u32>::sse_decode(deserializer);
+        let mut var_onHoveredColor = <u32>::sse_decode(deserializer);
+        let mut var_pressedColor = <u32>::sse_decode(deserializer);
+        let mut var_onPressedColor = <u32>::sse_decode(deserializer);
+        return crate::serde_config::structs::theme::ColorRoleScheme {
+            color: var_color,
+            on_color: var_onColor,
+            enabled_color: var_enabledColor,
+            on_enabled_color: var_onEnabledColor,
+            disabled_color: var_disabledColor,
+            on_disabled_color: var_onDisabledColor,
+            hovered_color: var_hoveredColor,
+            on_hovered_color: var_onHoveredColor,
+            pressed_color: var_pressedColor,
+            on_pressed_color: var_onPressedColor,
+        };
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::theme::ColorScheme {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_primary =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        let mut var_secondary =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        let mut var_tertiary =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        let mut var_success =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        let mut var_error =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        let mut var_background =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        let mut var_highlight =
+            <crate::serde_config::structs::theme::ColorRoleScheme>::sse_decode(deserializer);
+        return crate::serde_config::structs::theme::ColorScheme {
+            primary: var_primary,
+            secondary: var_secondary,
+            tertiary: var_tertiary,
+            success: var_success,
+            error: var_error,
+            background: var_background,
+            highlight: var_highlight,
         };
     }
 }
@@ -2426,6 +2559,25 @@ impl SseDecode for Option<crate::nuan5_media_param::structs::nikki_photo_params:
     }
 }
 
+impl SseDecode for Option<Vec<String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<String>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::text::OrdinaryText {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_text = <String>::sse_decode(deserializer);
+        return crate::serde_config::structs::text::OrdinaryText { text: var_text };
+    }
+}
+
 impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2587,6 +2739,16 @@ impl SseDecode for (i64, i64) {
         let mut var_field0 = <i64>::sse_decode(deserializer);
         let mut var_field1 = <i64>::sse_decode(deserializer);
         return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (u8, u8, u8) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <u8>::sse_decode(deserializer);
+        let mut var_field1 = <u8>::sse_decode(deserializer);
+        let mut var_field2 = <u8>::sse_decode(deserializer);
+        return (var_field0, var_field1, var_field2);
     }
 }
 
@@ -2807,6 +2969,62 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::TaskPa
     }
 }
 
+impl SseDecode for crate::serde_config::structs::text::Text {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 =
+                    <crate::serde_config::structs::text::OrdinaryText>::sse_decode(deserializer);
+                return crate::serde_config::structs::text::Text::Ordinary(var_field0);
+            }
+            1 => {
+                let mut var_field0 =
+                    <crate::serde_config::structs::text::TranslateText>::sse_decode(deserializer);
+                return crate::serde_config::structs::text::Text::Translate(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::theme::ThemeConfigV1 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_v1 = <bool>::sse_decode(deserializer);
+        let mut var_name = <crate::serde_config::structs::text::Text>::sse_decode(deserializer);
+        let mut var_color = <(u8, u8, u8)>::sse_decode(deserializer);
+        let mut var_scheme =
+            <crate::serde_config::structs::theme::ColorScheme>::sse_decode(deserializer);
+        return crate::serde_config::structs::theme::ThemeConfigV1 {
+            v1: var_v1,
+            name: var_name,
+            color: var_color,
+            scheme: var_scheme,
+        };
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::theme::ThemeConfigWrapper {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 =
+                    <crate::serde_config::structs::theme::ThemeConfigV1>::sse_decode(deserializer);
+                return crate::serde_config::structs::theme::ThemeConfigWrapper::V1(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseDecode for crate::thumbnail::Thumbnail {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2817,6 +3035,22 @@ impl SseDecode for crate::thumbnail::Thumbnail {
             width: var_width,
             height: var_height,
             bytes: var_bytes,
+        };
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::text::TranslateText {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_key = <String>::sse_decode(deserializer);
+        let mut var_args = <Option<Vec<String>>>::sse_decode(deserializer);
+        let mut var_namedArgs = <Option<Vec<String>>>::sse_decode(deserializer);
+        let mut var_gender = <Option<String>>::sse_decode(deserializer);
+        return crate::serde_config::structs::text::TranslateText {
+            key: var_key,
+            args: var_args,
+            named_args: var_namedArgs,
+            gender: var_gender,
         };
     }
 }
@@ -2882,53 +3116,59 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        6 => {
+        6 => wire__crate__serde_config__de__deserialize_theme_config_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        7 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        7 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        8 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        8 => {
+        9 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        10 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        11 => {
+        11 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        12 => {
             wire__crate__nuan5_media_param__decode__media_de_impl(port, ptr, rust_vec_len, data_len)
         }
-        12 => wire__crate__nuan5_media_param__decode__media_de_file_bytes_unchecked_impl(
+        13 => wire__crate__nuan5_media_param__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__nuan5_media_param__decode__media_de_file_unchecked_impl(
+        14 => wire__crate__nuan5_media_param__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => wire__crate__nuan5_media_param__decode__media_de_files_unchecked_impl(
+        16 => wire__crate__nuan5_media_param__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        17 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
+        18 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        19 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
+        20 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        20 => {
+        21 => {
             wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_no_progress_impl(
                 port,
                 ptr,
@@ -2936,7 +3176,13 @@ fn pde_ffi_dispatcher_primary_impl(
                 data_len,
             )
         }
-        21 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_stream_impl(
+        22 => wire__crate__nuan5_media_param__decrypt__media_decode_files_unchecked_stream_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        24 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -2969,26 +3215,26 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        9 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        14 => wire__crate__nuan5_media_param__decode__media_de_file_unchecked_sync_impl(
+        10 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        15 => wire__crate__nuan5_media_param__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        16 => wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_impl(
+        17 => wire__crate__nuan5_media_param__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        18 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_impl(
+        19 => wire__crate__nuan5_media_param__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        22 => {
+        23 => {
             wire__crate__nuan5_media_param__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len)
         }
-        23 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        25 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -3164,6 +3410,61 @@ impl
     > for crate::nuan5_media_param::structs::collage_params::CollageParams
 {
     fn into_into_dart(self) -> crate::nuan5_media_param::structs::collage_params::CollageParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::theme::ColorRoleScheme {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.color.into_into_dart().into_dart(),
+            self.on_color.into_into_dart().into_dart(),
+            self.enabled_color.into_into_dart().into_dart(),
+            self.on_enabled_color.into_into_dart().into_dart(),
+            self.disabled_color.into_into_dart().into_dart(),
+            self.on_disabled_color.into_into_dart().into_dart(),
+            self.hovered_color.into_into_dart().into_dart(),
+            self.on_hovered_color.into_into_dart().into_dart(),
+            self.pressed_color.into_into_dart().into_dart(),
+            self.on_pressed_color.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::theme::ColorRoleScheme
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::theme::ColorRoleScheme>
+    for crate::serde_config::structs::theme::ColorRoleScheme
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::theme::ColorRoleScheme {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::theme::ColorScheme {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.primary.into_into_dart().into_dart(),
+            self.secondary.into_into_dart().into_dart(),
+            self.tertiary.into_into_dart().into_dart(),
+            self.success.into_into_dart().into_dart(),
+            self.error.into_into_dart().into_dart(),
+            self.background.into_into_dart().into_dart(),
+            self.highlight.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::theme::ColorScheme
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::theme::ColorScheme>
+    for crate::serde_config::structs::theme::ColorScheme
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::theme::ColorScheme {
         self
     }
 }
@@ -3930,6 +4231,23 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::text::OrdinaryText {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.text.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::text::OrdinaryText
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::text::OrdinaryText>
+    for crate::serde_config::structs::text::OrdinaryText
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::text::OrdinaryText {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
     for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData
 {
@@ -4366,6 +4684,80 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::text::Text {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::serde_config::structs::text::Text::Ordinary(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::serde_config::structs::text::Text::Translate(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::text::Text
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::text::Text>
+    for crate::serde_config::structs::text::Text
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::text::Text {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::theme::ThemeConfigV1 {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.v1.into_into_dart().into_dart(),
+            self.name.into_into_dart().into_dart(),
+            self.color.into_into_dart().into_dart(),
+            self.scheme.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::theme::ThemeConfigV1
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::theme::ThemeConfigV1>
+    for crate::serde_config::structs::theme::ThemeConfigV1
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::theme::ThemeConfigV1 {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::theme::ThemeConfigWrapper {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::serde_config::structs::theme::ThemeConfigWrapper::V1(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::theme::ThemeConfigWrapper
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::theme::ThemeConfigWrapper>
+    for crate::serde_config::structs::theme::ThemeConfigWrapper
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::theme::ThemeConfigWrapper {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::thumbnail::Thumbnail {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -4381,6 +4773,29 @@ impl flutter_rust_bridge::IntoIntoDart<crate::thumbnail::Thumbnail>
     for crate::thumbnail::Thumbnail
 {
     fn into_into_dart(self) -> crate::thumbnail::Thumbnail {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::text::TranslateText {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.key.into_into_dart().into_dart(),
+            self.args.into_into_dart().into_dart(),
+            self.named_args.into_into_dart().into_dart(),
+            self.gender.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::text::TranslateText
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::text::TranslateText>
+    for crate::serde_config::structs::text::TranslateText
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::text::TranslateText {
         self
     }
 }
@@ -4595,6 +5010,53 @@ impl SseEncode for crate::nuan5_media_param::structs::collage_params::CollagePar
         <i64>::sse_encode(self.template_id, serializer);
         <Vec<crate::nuan5_media_param::structs::collage_params::RegionPicture>>::sse_encode(
             self.region_pictures,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::theme::ColorRoleScheme {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u32>::sse_encode(self.color, serializer);
+        <u32>::sse_encode(self.on_color, serializer);
+        <u32>::sse_encode(self.enabled_color, serializer);
+        <u32>::sse_encode(self.on_enabled_color, serializer);
+        <u32>::sse_encode(self.disabled_color, serializer);
+        <u32>::sse_encode(self.on_disabled_color, serializer);
+        <u32>::sse_encode(self.hovered_color, serializer);
+        <u32>::sse_encode(self.on_hovered_color, serializer);
+        <u32>::sse_encode(self.pressed_color, serializer);
+        <u32>::sse_encode(self.on_pressed_color, serializer);
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::theme::ColorScheme {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(
+            self.primary,
+            serializer,
+        );
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(
+            self.secondary,
+            serializer,
+        );
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(
+            self.tertiary,
+            serializer,
+        );
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(
+            self.success,
+            serializer,
+        );
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(self.error, serializer);
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(
+            self.background,
+            serializer,
+        );
+        <crate::serde_config::structs::theme::ColorRoleScheme>::sse_encode(
+            self.highlight,
             serializer,
         );
     }
@@ -5484,6 +5946,23 @@ impl SseEncode for Option<crate::nuan5_media_param::structs::nikki_photo_params:
     }
 }
 
+impl SseEncode for Option<Vec<String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<String>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::text::OrdinaryText {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.text, serializer);
+    }
+}
+
 impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::OutfitDyeData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -5609,6 +6088,15 @@ impl SseEncode for (i64, i64) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.0, serializer);
         <i64>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (u8, u8, u8) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u8>::sse_encode(self.0, serializer);
+        <u8>::sse_encode(self.1, serializer);
+        <u8>::sse_encode(self.2, serializer);
     }
 }
 
@@ -5811,12 +6299,68 @@ impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::TaskPa
     }
 }
 
+impl SseEncode for crate::serde_config::structs::text::Text {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::serde_config::structs::text::Text::Ordinary(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::serde_config::structs::text::OrdinaryText>::sse_encode(field0, serializer);
+            }
+            crate::serde_config::structs::text::Text::Translate(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::serde_config::structs::text::TranslateText>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::theme::ThemeConfigV1 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.v1, serializer);
+        <crate::serde_config::structs::text::Text>::sse_encode(self.name, serializer);
+        <(u8, u8, u8)>::sse_encode(self.color, serializer);
+        <crate::serde_config::structs::theme::ColorScheme>::sse_encode(self.scheme, serializer);
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::theme::ThemeConfigWrapper {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::serde_config::structs::theme::ThemeConfigWrapper::V1(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::serde_config::structs::theme::ThemeConfigV1>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseEncode for crate::thumbnail::Thumbnail {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <u32>::sse_encode(self.width, serializer);
         <u32>::sse_encode(self.height, serializer);
         <Vec<u8>>::sse_encode(self.bytes, serializer);
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::text::TranslateText {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.key, serializer);
+        <Option<Vec<String>>>::sse_encode(self.args, serializer);
+        <Option<Vec<String>>>::sse_encode(self.named_args, serializer);
+        <Option<String>>::sse_encode(self.gender, serializer);
     }
 }
 

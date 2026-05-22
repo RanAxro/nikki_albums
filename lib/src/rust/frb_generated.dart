@@ -18,6 +18,10 @@ import 'nuan5_media_param/structs/momo_camera_params.dart';
 import 'nuan5_media_param/structs/nikki_photo_params.dart';
 import 'nuan5_media_param/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'serde_config/de.dart';
+import 'serde_config/se.dart';
+import 'serde_config/structs/text.dart';
+import 'serde_config/structs/theme.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
 import 'thumbnail/mp4_h264.dart';
@@ -78,7 +82,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1096580229;
+  int get rustContentHash => 342351106;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -105,6 +109,10 @@ abstract class RustLibApi extends BaseApi {
   Future<MediaCustomData> crateNuan5MediaParamDecodeDecodeMediaParam({
     required MediaParamType paramType,
     required CustomData data,
+  });
+
+  Future<ThemeConfigWrapper> crateSerdeConfigDeDeserializeThemeConfig({
+    required List<int> value,
   });
 
   Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
@@ -202,6 +210,11 @@ abstract class RustLibApi extends BaseApi {
   CustomData? crateNuan5MediaParamDecryptMediaDecrypt({
     required List<int> data,
     required MediaKey key,
+  });
+
+  Future<Uint8List> crateSerdeConfigSeSerializeThemeConfig({
+    required ThemeConfigWrapper value,
+    required bool pretty,
   });
 
   int crateApiSimpleTestAdd({required int num1, required int num2});
@@ -368,6 +381,39 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<ThemeConfigWrapper> crateSerdeConfigDeDeserializeThemeConfig({
+    required List<int> value,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(value, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 6,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_theme_config_wrapper,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateSerdeConfigDeDeserializeThemeConfigConstMeta,
+        argValues: [value],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateSerdeConfigDeDeserializeThemeConfigConstMeta =>
+      const TaskConstMeta(
+        debugName: "deserialize_theme_config",
+        argNames: ["value"],
+      );
+
+  @override
   Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
     required List<int> jpegBytes,
     int? targetWidth,
@@ -383,7 +429,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 6,
+            funcId: 7,
             port: port_,
           );
         },
@@ -420,7 +466,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 7,
+            funcId: 8,
             port: port_,
           );
         },
@@ -457,7 +503,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 8,
+            funcId: 9,
             port: port_,
           );
         },
@@ -485,7 +531,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -510,7 +556,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 10,
+            funcId: 11,
             port: port_,
           );
         },
@@ -547,7 +593,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 11,
+            funcId: 12,
             port: port_,
           );
         },
@@ -587,7 +633,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 13,
             port: port_,
           );
         },
@@ -629,7 +675,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 13,
+            funcId: 14,
             port: port_,
           );
         },
@@ -666,7 +712,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
@@ -712,7 +758,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 15,
+              funcId: 16,
               port: port_,
             );
           },
@@ -751,7 +797,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -791,7 +837,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 17,
+            funcId: 18,
             port: port_,
           );
         },
@@ -830,7 +876,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -877,7 +923,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 19,
+              funcId: 20,
               port: port_,
             );
           },
@@ -922,7 +968,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 20,
+            funcId: 21,
             port: port_,
           );
         },
@@ -968,7 +1014,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 21,
+              funcId: 22,
               port: port_,
             );
           },
@@ -1007,7 +1053,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
@@ -1027,6 +1073,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Uint8List> crateSerdeConfigSeSerializeThemeConfig({
+    required ThemeConfigWrapper value,
+    required bool pretty,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_theme_config_wrapper(value, serializer);
+          sse_encode_bool(pretty, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateSerdeConfigSeSerializeThemeConfigConstMeta,
+        argValues: [value, pretty],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateSerdeConfigSeSerializeThemeConfigConstMeta =>
+      const TaskConstMeta(
+        debugName: "serialize_theme_config",
+        argNames: ["value", "pretty"],
+      );
+
+  @override
   int crateApiSimpleTestAdd({required int num1, required int num2}) {
     return handler.executeSync(
       SyncTask(
@@ -1034,7 +1115,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 25)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -1280,6 +1361,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  OrdinaryText dco_decode_box_autoadd_ordinary_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ordinary_text(raw);
+  }
+
+  @protected
   OutfitDyeGeneralData dco_decode_box_autoadd_outfit_dye_general_data(
     dynamic raw,
   ) {
@@ -1315,6 +1402,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Subarea dco_decode_box_autoadd_subarea(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_subarea(raw);
+  }
+
+  @protected
+  ThemeConfigV1 dco_decode_box_autoadd_theme_config_v_1(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_theme_config_v_1(raw);
+  }
+
+  @protected
+  ThemeConfigWrapper dco_decode_box_autoadd_theme_config_wrapper(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_theme_config_wrapper(raw);
+  }
+
+  @protected
+  TranslateText dco_decode_box_autoadd_translate_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_translate_text(raw);
   }
 
   @protected
@@ -1395,6 +1500,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return CollageParams(
       templateId: dco_decode_i_64(arr[0]),
       regionPictures: dco_decode_list_region_picture(arr[1]),
+    );
+  }
+
+  @protected
+  ColorRoleScheme dco_decode_color_role_scheme(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    return ColorRoleScheme(
+      color: dco_decode_u_32(arr[0]),
+      onColor: dco_decode_u_32(arr[1]),
+      enabledColor: dco_decode_u_32(arr[2]),
+      onEnabledColor: dco_decode_u_32(arr[3]),
+      disabledColor: dco_decode_u_32(arr[4]),
+      onDisabledColor: dco_decode_u_32(arr[5]),
+      hoveredColor: dco_decode_u_32(arr[6]),
+      onHoveredColor: dco_decode_u_32(arr[7]),
+      pressedColor: dco_decode_u_32(arr[8]),
+      onPressedColor: dco_decode_u_32(arr[9]),
+    );
+  }
+
+  @protected
+  ColorScheme dco_decode_color_scheme(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 7)
+      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    return ColorScheme(
+      primary: dco_decode_color_role_scheme(arr[0]),
+      secondary: dco_decode_color_role_scheme(arr[1]),
+      tertiary: dco_decode_color_role_scheme(arr[2]),
+      success: dco_decode_color_role_scheme(arr[3]),
+      error: dco_decode_color_role_scheme(arr[4]),
+      background: dco_decode_color_role_scheme(arr[5]),
+      highlight: dco_decode_color_role_scheme(arr[6]),
     );
   }
 
@@ -2009,6 +2151,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_String(raw);
+  }
+
+  @protected
+  OrdinaryText dco_decode_ordinary_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return OrdinaryText(text: dco_decode_String(arr[0]));
+  }
+
+  @protected
   OutfitDyeData dco_decode_outfit_dye_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -2148,6 +2305,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, int, int) dco_decode_record_u_8_u_8_u_8(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3) {
+      throw Exception('Expected 3 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_u_8(arr[0]),
+      dco_decode_u_8(arr[1]),
+      dco_decode_u_8(arr[2]),
+    );
+  }
+
+  @protected
   Region dco_decode_region(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Region.values[raw as int];
@@ -2226,6 +2397,46 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Text dco_decode_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return Text_Ordinary(dco_decode_box_autoadd_ordinary_text(raw[1]));
+      case 1:
+        return Text_Translate(dco_decode_box_autoadd_translate_text(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  ThemeConfigV1 dco_decode_theme_config_v_1(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return ThemeConfigV1(
+      v1: dco_decode_bool(arr[0]),
+      name: dco_decode_text(arr[1]),
+      color: dco_decode_record_u_8_u_8_u_8(arr[2]),
+      scheme: dco_decode_color_scheme(arr[3]),
+    );
+  }
+
+  @protected
+  ThemeConfigWrapper dco_decode_theme_config_wrapper(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return ThemeConfigWrapper_V1(
+          dco_decode_box_autoadd_theme_config_v_1(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   Thumbnail dco_decode_thumbnail(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -2235,6 +2446,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       width: dco_decode_u_32(arr[0]),
       height: dco_decode_u_32(arr[1]),
       bytes: dco_decode_list_prim_u_8_strict(arr[2]),
+    );
+  }
+
+  @protected
+  TranslateText dco_decode_translate_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return TranslateText(
+      key: dco_decode_String(arr[0]),
+      args: dco_decode_opt_list_String(arr[1]),
+      namedArgs: dco_decode_opt_list_String(arr[2]),
+      gender: dco_decode_opt_String(arr[3]),
     );
   }
 
@@ -2537,6 +2762,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  OrdinaryText sse_decode_box_autoadd_ordinary_text(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ordinary_text(deserializer));
+  }
+
+  @protected
   OutfitDyeGeneralData sse_decode_box_autoadd_outfit_dye_general_data(
     SseDeserializer deserializer,
   ) {
@@ -2578,6 +2811,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_subarea(deserializer));
+  }
+
+  @protected
+  ThemeConfigV1 sse_decode_box_autoadd_theme_config_v_1(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_theme_config_v_1(deserializer));
+  }
+
+  @protected
+  ThemeConfigWrapper sse_decode_box_autoadd_theme_config_wrapper(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_theme_config_wrapper(deserializer));
+  }
+
+  @protected
+  TranslateText sse_decode_box_autoadd_translate_text(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_translate_text(deserializer));
   }
 
   @protected
@@ -2676,6 +2933,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return CollageParams(
       templateId: var_templateId,
       regionPictures: var_regionPictures,
+    );
+  }
+
+  @protected
+  ColorRoleScheme sse_decode_color_role_scheme(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_color = sse_decode_u_32(deserializer);
+    var var_onColor = sse_decode_u_32(deserializer);
+    var var_enabledColor = sse_decode_u_32(deserializer);
+    var var_onEnabledColor = sse_decode_u_32(deserializer);
+    var var_disabledColor = sse_decode_u_32(deserializer);
+    var var_onDisabledColor = sse_decode_u_32(deserializer);
+    var var_hoveredColor = sse_decode_u_32(deserializer);
+    var var_onHoveredColor = sse_decode_u_32(deserializer);
+    var var_pressedColor = sse_decode_u_32(deserializer);
+    var var_onPressedColor = sse_decode_u_32(deserializer);
+    return ColorRoleScheme(
+      color: var_color,
+      onColor: var_onColor,
+      enabledColor: var_enabledColor,
+      onEnabledColor: var_onEnabledColor,
+      disabledColor: var_disabledColor,
+      onDisabledColor: var_onDisabledColor,
+      hoveredColor: var_hoveredColor,
+      onHoveredColor: var_onHoveredColor,
+      pressedColor: var_pressedColor,
+      onPressedColor: var_onPressedColor,
+    );
+  }
+
+  @protected
+  ColorScheme sse_decode_color_scheme(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_primary = sse_decode_color_role_scheme(deserializer);
+    var var_secondary = sse_decode_color_role_scheme(deserializer);
+    var var_tertiary = sse_decode_color_role_scheme(deserializer);
+    var var_success = sse_decode_color_role_scheme(deserializer);
+    var var_error = sse_decode_color_role_scheme(deserializer);
+    var var_background = sse_decode_color_role_scheme(deserializer);
+    var var_highlight = sse_decode_color_role_scheme(deserializer);
+    return ColorScheme(
+      primary: var_primary,
+      secondary: var_secondary,
+      tertiary: var_tertiary,
+      success: var_success,
+      error: var_error,
+      background: var_background,
+      highlight: var_highlight,
     );
   }
 
@@ -3537,6 +3842,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  OrdinaryText sse_decode_ordinary_text(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_text = sse_decode_String(deserializer);
+    return OrdinaryText(text: var_text);
+  }
+
+  @protected
   OutfitDyeData sse_decode_outfit_dye_data(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3687,6 +4010,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, int, int) sse_decode_record_u_8_u_8_u_8(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_u_8(deserializer);
+    var var_field1 = sse_decode_u_8(deserializer);
+    var var_field2 = sse_decode_u_8(deserializer);
+    return (var_field0, var_field1, var_field2);
+  }
+
+  @protected
   Region sse_decode_region(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_32(deserializer);
@@ -3771,12 +4103,75 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Text sse_decode_text(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_box_autoadd_ordinary_text(deserializer);
+        return Text_Ordinary(var_field0);
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_translate_text(deserializer);
+        return Text_Translate(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  ThemeConfigV1 sse_decode_theme_config_v_1(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_v1 = sse_decode_bool(deserializer);
+    var var_name = sse_decode_text(deserializer);
+    var var_color = sse_decode_record_u_8_u_8_u_8(deserializer);
+    var var_scheme = sse_decode_color_scheme(deserializer);
+    return ThemeConfigV1(
+      v1: var_v1,
+      name: var_name,
+      color: var_color,
+      scheme: var_scheme,
+    );
+  }
+
+  @protected
+  ThemeConfigWrapper sse_decode_theme_config_wrapper(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_box_autoadd_theme_config_v_1(deserializer);
+        return ThemeConfigWrapper_V1(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   Thumbnail sse_decode_thumbnail(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_width = sse_decode_u_32(deserializer);
     var var_height = sse_decode_u_32(deserializer);
     var var_bytes = sse_decode_list_prim_u_8_strict(deserializer);
     return Thumbnail(width: var_width, height: var_height, bytes: var_bytes);
+  }
+
+  @protected
+  TranslateText sse_decode_translate_text(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_key = sse_decode_String(deserializer);
+    var var_args = sse_decode_opt_list_String(deserializer);
+    var var_namedArgs = sse_decode_opt_list_String(deserializer);
+    var var_gender = sse_decode_opt_String(deserializer);
+    return TranslateText(
+      key: var_key,
+      args: var_args,
+      namedArgs: var_namedArgs,
+      gender: var_gender,
+    );
   }
 
   @protected
@@ -4142,6 +4537,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_ordinary_text(
+    OrdinaryText self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ordinary_text(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_outfit_dye_general_data(
     OutfitDyeGeneralData self,
     SseSerializer serializer,
@@ -4187,6 +4591,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_subarea(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_theme_config_v_1(
+    ThemeConfigV1 self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_theme_config_v_1(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_theme_config_wrapper(
+    ThemeConfigWrapper self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_theme_config_wrapper(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_translate_text(
+    TranslateText self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_translate_text(self, serializer);
   }
 
   @protected
@@ -4254,6 +4685,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.templateId, serializer);
     sse_encode_list_region_picture(self.regionPictures, serializer);
+  }
+
+  @protected
+  void sse_encode_color_role_scheme(
+    ColorRoleScheme self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self.color, serializer);
+    sse_encode_u_32(self.onColor, serializer);
+    sse_encode_u_32(self.enabledColor, serializer);
+    sse_encode_u_32(self.onEnabledColor, serializer);
+    sse_encode_u_32(self.disabledColor, serializer);
+    sse_encode_u_32(self.onDisabledColor, serializer);
+    sse_encode_u_32(self.hoveredColor, serializer);
+    sse_encode_u_32(self.onHoveredColor, serializer);
+    sse_encode_u_32(self.pressedColor, serializer);
+    sse_encode_u_32(self.onPressedColor, serializer);
+  }
+
+  @protected
+  void sse_encode_color_scheme(ColorScheme self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_color_role_scheme(self.primary, serializer);
+    sse_encode_color_role_scheme(self.secondary, serializer);
+    sse_encode_color_role_scheme(self.tertiary, serializer);
+    sse_encode_color_role_scheme(self.success, serializer);
+    sse_encode_color_role_scheme(self.error, serializer);
+    sse_encode_color_role_scheme(self.background, serializer);
+    sse_encode_color_role_scheme(self.highlight, serializer);
   }
 
   @protected
@@ -5025,6 +5486,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_list_String(
+    List<String>? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_ordinary_text(OrdinaryText self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.text, serializer);
+  }
+
+  @protected
   void sse_encode_outfit_dye_data(
     OutfitDyeData self,
     SseSerializer serializer,
@@ -5147,6 +5627,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_record_u_8_u_8_u_8(
+    (int, int, int) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_8(self.$1, serializer);
+    sse_encode_u_8(self.$2, serializer);
+    sse_encode_u_8(self.$3, serializer);
+  }
+
+  @protected
   void sse_encode_region(Region self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.index, serializer);
@@ -5211,11 +5702,58 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_text(Text self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case Text_Ordinary(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_ordinary_text(field0, serializer);
+      case Text_Translate(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_translate_text(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_theme_config_v_1(
+    ThemeConfigV1 self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.v1, serializer);
+    sse_encode_text(self.name, serializer);
+    sse_encode_record_u_8_u_8_u_8(self.color, serializer);
+    sse_encode_color_scheme(self.scheme, serializer);
+  }
+
+  @protected
+  void sse_encode_theme_config_wrapper(
+    ThemeConfigWrapper self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case ThemeConfigWrapper_V1(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_theme_config_v_1(field0, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_thumbnail(Thumbnail self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_32(self.width, serializer);
     sse_encode_u_32(self.height, serializer);
     sse_encode_list_prim_u_8_strict(self.bytes, serializer);
+  }
+
+  @protected
+  void sse_encode_translate_text(TranslateText self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.key, serializer);
+    sse_encode_opt_list_String(self.args, serializer);
+    sse_encode_opt_list_String(self.namedArgs, serializer);
+    sse_encode_opt_String(self.gender, serializer);
   }
 
   @protected
