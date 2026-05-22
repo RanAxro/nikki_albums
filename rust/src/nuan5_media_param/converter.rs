@@ -223,6 +223,7 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
       }
     },
     pose: data.photo_info.pose_id,
+    framed_moment: 0,
   }
 }
 

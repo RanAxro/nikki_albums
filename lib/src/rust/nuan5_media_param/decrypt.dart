@@ -69,9 +69,6 @@ Future<List<CustomData?>> mediaDecodeFilesUncheckedNoProgress({
     );
 
 /// 批量解密文件（流式回调，并行执行）。
-///
-/// 每完成一个文件立即通过 `sink` 推送 `MediaStreamResult`，
-/// 无需等待全部文件处理完毕。C 函数返回后，所有结果已推送完毕。
 Stream<MediaStreamResult> mediaDecodeFilesUncheckedStream({
   required List<int> flag,
   required List<String> paths,

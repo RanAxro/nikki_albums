@@ -3,6 +3,8 @@ import "package:desktop_drop/desktop_drop.dart";
 import "package:flutter/foundation.dart";
 import "package:nikki_albums/modules/game/codec.dart";
 import "package:nikki_albums/src/rust/api/simple.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 
 import "package:nikki_albums/utils/system/windows.dart";
 import "../setting/versionInformation.dart";
@@ -1118,6 +1120,28 @@ class WindowTitleBar extends StatelessWidget {
                       print(greet(name: "rust"));
 
                       print(testAdd(num1: 12, num2: 13));
+
+                      final files = await Directory(r"E:\game\InfinityNikki\InfinityNikki Launcher\InfinityNikki\X6Game\Saved\GamePlayPhotos\108328049\NikkiPhotos_HighQuality").list().map((f) => f.path).toList();
+
+                      final MediaKey key = MediaKey.fromStr("108328049");
+                      final stopwatch = Stopwatch()..start();
+                      await for(final data in mediaDeFilesUnchecked(paramType: MediaParamType.nikkiPhoto, paths: files, key: key)){
+                        if(data.data != null){
+                          data.data!.whenOrNull(
+                            valid: (params){
+                              params.whenOrNull(
+                                nikkiPhoto: (nik){
+                                  print(nik.camera?.params);
+                                }
+                              );
+                            }
+                          );
+                        }
+                      }
+                      key.dispose();
+                      stopwatch.stop();
+                      print('函数运行时长: ${stopwatch.elapsedMilliseconds} ms');
+
                     },
                     child: RichText(
                       text: TextSpan(

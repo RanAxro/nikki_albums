@@ -9,7 +9,8 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 import 'world.dart';
 part 'nikki_photo_params.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `NikkiPhotoMainParams`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class CameraParams {
   final String params;
@@ -31,6 +32,7 @@ class CameraParams {
   final LightParams light;
   final FilterParams filter;
   final PlatformInt64 pose;
+  final PlatformInt64 framedMoment;
 
   const CameraParams({
     required this.params,
@@ -52,6 +54,7 @@ class CameraParams {
     required this.light,
     required this.filter,
     required this.pose,
+    required this.framedMoment,
   });
 
   @override
@@ -74,7 +77,8 @@ class CameraParams {
       shadows.hashCode ^
       light.hashCode ^
       filter.hashCode ^
-      pose.hashCode;
+      pose.hashCode ^
+      framedMoment.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -99,7 +103,8 @@ class CameraParams {
           shadows == other.shadows &&
           light == other.light &&
           filter == other.filter &&
-          pose == other.pose;
+          pose == other.pose &&
+          framedMoment == other.framedMoment;
 }
 
 class ClothParams {

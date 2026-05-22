@@ -1279,6 +1279,7 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::Camera
                 deserializer,
             );
         let mut var_pose = <i64>::sse_decode(deserializer);
+        let mut var_framedMoment = <i64>::sse_decode(deserializer);
         return crate::nuan5_media_param::structs::nikki_photo_params::CameraParams {
             params: var_params,
             portrait_mode: var_portraitMode,
@@ -1299,6 +1300,7 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::Camera
             light: var_light,
             filter: var_filter,
             pose: var_pose,
+            framed_moment: var_framedMoment,
         };
     }
 }
@@ -3067,6 +3069,7 @@ impl flutter_rust_bridge::IntoDart
             self.light.into_into_dart().into_dart(),
             self.filter.into_into_dart().into_dart(),
             self.pose.into_into_dart().into_dart(),
+            self.framed_moment.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -4553,6 +4556,7 @@ impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::Camera
             serializer,
         );
         <i64>::sse_encode(self.pose, serializer);
+        <i64>::sse_encode(self.framed_moment, serializer);
     }
 }
 

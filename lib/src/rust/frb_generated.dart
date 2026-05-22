@@ -1333,8 +1333,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   CameraParams dco_decode_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 19)
-      throw Exception('unexpected arr length: expect 19 but see ${arr.length}');
+    if (arr.length != 20)
+      throw Exception('unexpected arr length: expect 20 but see ${arr.length}');
     return CameraParams(
       params: dco_decode_String(arr[0]),
       portraitMode: dco_decode_bool(arr[1]),
@@ -1355,6 +1355,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       light: dco_decode_light_params(arr[16]),
       filter: dco_decode_filter_params(arr[17]),
       pose: dco_decode_i_64(arr[18]),
+      framedMoment: dco_decode_i_64(arr[19]),
     );
   }
 
@@ -2615,6 +2616,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_light = sse_decode_light_params(deserializer);
     var var_filter = sse_decode_filter_params(deserializer);
     var var_pose = sse_decode_i_64(deserializer);
+    var var_framedMoment = sse_decode_i_64(deserializer);
     return CameraParams(
       params: var_params,
       portraitMode: var_portraitMode,
@@ -2635,6 +2637,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       light: var_light,
       filter: var_filter,
       pose: var_pose,
+      framedMoment: var_framedMoment,
     );
   }
 
@@ -4223,6 +4226,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_light_params(self.light, serializer);
     sse_encode_filter_params(self.filter, serializer);
     sse_encode_i_64(self.pose, serializer);
+    sse_encode_i_64(self.framedMoment, serializer);
   }
 
   @protected

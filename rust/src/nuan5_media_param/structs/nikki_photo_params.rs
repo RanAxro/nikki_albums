@@ -51,6 +51,7 @@ pub struct CameraParams{
   pub light: LightParams,
   pub filter: FilterParams,
   pub pose: i64,
+  pub framed_moment: i64,
 }
 
 #[derive(Clone)]
