@@ -127,7 +127,7 @@ const List<InfinityNikkiInfo> infinityNikkiInfos = [
         path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikkiGlobal Launcher",
         key: "DisplayIcon",
         locateToLauncher: r"\..",
-        locateToInstall: r"\InfinityNikkiGlobal",
+        locateToInstall: r"\..\InfinityNikkiGlobal",
         configPath: r"C:\Users\$username$\AppData\Local\InfinityNikkiGlobal Launcher\config.ini",
       ),
       WindowsRegistryInfo(
