@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use super::common::*;
 
 
@@ -10,11 +11,36 @@ pub struct GameConfig{
 
   #[serde(skip_serializing_if = "Option::is_none")]
   pub icon: Option<String>,
+  pub albums_config: Vec<GameAlbumConfig>,
   pub windows: Option<WindowsGameConfig>,
   pub macos: Option<MacOSGameConfig>,
   pub android: Option<AndroidGameConfig>,
 }
 
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct GameAlbumConfig{
+  pub id: String,
+  pub visible: bool,
+  pub unimportance: bool,
+  pub name: Text,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub description: Option<Text>,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub icon: Option<String>,
+  pub require_uid: bool,
+  pub locate: String,
+  pub to_media: String,
+  pub to_cover: Option<String>,
+  pub to_thumbnail: Option<String>,
+  pub allow_move: bool,
+  pub allow_delete: bool,
+  pub cache_by_name: bool,
+  pub chain_deletion: HashMap<String, bool>,
+  pub platforms: Vec<Platform>,
+}
 
 /// -----------------
 /// WindowsGameConfig

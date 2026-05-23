@@ -55,6 +55,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw);
+
+  @protected
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
 
   @protected
@@ -301,6 +304,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FilterParams dco_decode_filter_params(dynamic raw);
 
   @protected
+  GameAlbumConfig dco_decode_game_album_config(dynamic raw);
+
+  @protected
   GameConfig dco_decode_game_config(dynamic raw);
 
   @protected
@@ -329,6 +335,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<GameAlbumConfig> dco_decode_list_game_album_config(dynamic raw);
+
+  @protected
   List<Location> dco_decode_list_location(dynamic raw);
 
   @protected
@@ -349,6 +358,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<PatternCreationData> dco_decode_list_pattern_creation_data(dynamic raw);
 
   @protected
+  List<Platform> dco_decode_list_platform(dynamic raw);
+
+  @protected
   Int64List dco_decode_list_prim_i_64_strict(dynamic raw);
 
   @protected
@@ -364,6 +376,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
     dynamic raw,
   );
+
+  @protected
+  List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
 
   @protected
   List<RegionPicture> dco_decode_list_region_picture(dynamic raw);
@@ -564,6 +579,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotographyParams dco_decode_photography_params(dynamic raw);
 
   @protected
+  Platform dco_decode_platform(dynamic raw);
+
+  @protected
   (double, double) dco_decode_record_f_64_f_64(dynamic raw);
 
   @protected
@@ -579,6 +597,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
+
+  @protected
+  (String, bool) dco_decode_record_string_bool(dynamic raw);
 
   @protected
   (int, int, int) dco_decode_record_u_8_u_8_u_8(dynamic raw);
@@ -668,6 +689,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   MediaKey
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<String, bool> sse_decode_Map_String_bool_None(
     SseDeserializer deserializer,
   );
 
@@ -976,6 +1002,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
 
   @protected
+  GameAlbumConfig sse_decode_game_album_config(SseDeserializer deserializer);
+
+  @protected
   GameConfig sse_decode_game_config(SseDeserializer deserializer);
 
   @protected
@@ -1000,6 +1029,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<FileEntityLocationConfig> sse_decode_list_file_entity_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<GameAlbumConfig> sse_decode_list_game_album_config(
     SseDeserializer deserializer,
   );
 
@@ -1032,6 +1066,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<Platform> sse_decode_list_platform(SseDeserializer deserializer);
+
+  @protected
   Int64List sse_decode_list_prim_i_64_strict(SseDeserializer deserializer);
 
   @protected
@@ -1047,6 +1084,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(String, bool)> sse_decode_list_record_string_bool(
     SseDeserializer deserializer,
   );
 
@@ -1297,6 +1339,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotographyParams sse_decode_photography_params(SseDeserializer deserializer);
 
   @protected
+  Platform sse_decode_platform(SseDeserializer deserializer);
+
+  @protected
   (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
 
   @protected
@@ -1318,6 +1363,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (PlatformInt64, PlatformInt64) sse_decode_record_i_64_i_64(
     SseDeserializer deserializer,
   );
+
+  @protected
+  (String, bool) sse_decode_record_string_bool(SseDeserializer deserializer);
 
   @protected
   (int, int, int) sse_decode_record_u_8_u_8_u_8(SseDeserializer deserializer);
@@ -1424,6 +1472,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     MediaKey self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_String_bool_None(
+    Map<String, bool> self,
     SseSerializer serializer,
   );
 
@@ -1816,6 +1870,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
 
   @protected
+  void sse_encode_game_album_config(
+    GameAlbumConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_game_config(GameConfig self, SseSerializer serializer);
 
   @protected
@@ -1845,6 +1905,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_file_entity_location_config(
     List<FileEntityLocationConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_game_album_config(
+    List<GameAlbumConfig> self,
     SseSerializer serializer,
   );
 
@@ -1882,6 +1948,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_platform(List<Platform> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_prim_i_64_strict(
     Int64List self,
     SseSerializer serializer,
@@ -1905,6 +1974,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_record_i_64_i_64(
     List<(PlatformInt64, PlatformInt64)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_string_bool(
+    List<(String, bool)> self,
     SseSerializer serializer,
   );
 
@@ -2233,6 +2308,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_platform(Platform self, SseSerializer serializer);
+
+  @protected
   void sse_encode_record_f_64_f_64(
     (double, double) self,
     SseSerializer serializer,
@@ -2259,6 +2337,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_64_i_64(
     (PlatformInt64, PlatformInt64) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_string_bool(
+    (String, bool) self,
     SseSerializer serializer,
   );
 

@@ -1120,7 +1120,6 @@ class WindowTitleBar extends StatelessWidget {
                   AppButton.smallText(
                     onClick: () async{
                       serializeGameConfig(value: infinityNikkiConfig, pretty: true).then((v){
-                        print(v);
                         File(r"E:\work\nikki_albums_file\game_config.json").writeAsBytes(v);
                       });
 

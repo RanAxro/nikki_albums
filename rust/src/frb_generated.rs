@@ -1293,6 +1293,14 @@ impl SseDecode for MediaKey {
     }
 }
 
+impl SseDecode for std::collections::HashMap<String, bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(String, bool)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
 impl SseDecode for std::collections::HashMap<i64, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1823,12 +1831,59 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::Filter
     }
 }
 
+impl SseDecode for crate::serde_config::structs::game_config::GameAlbumConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_id = <String>::sse_decode(deserializer);
+        let mut var_visible = <bool>::sse_decode(deserializer);
+        let mut var_unimportance = <bool>::sse_decode(deserializer);
+        let mut var_name = <crate::serde_config::structs::common::Text>::sse_decode(deserializer);
+        let mut var_description =
+            <Option<crate::serde_config::structs::common::Text>>::sse_decode(deserializer);
+        let mut var_icon = <Option<String>>::sse_decode(deserializer);
+        let mut var_requireUid = <bool>::sse_decode(deserializer);
+        let mut var_locate = <String>::sse_decode(deserializer);
+        let mut var_toMedia = <String>::sse_decode(deserializer);
+        let mut var_toCover = <Option<String>>::sse_decode(deserializer);
+        let mut var_toThumbnail = <Option<String>>::sse_decode(deserializer);
+        let mut var_allowMove = <bool>::sse_decode(deserializer);
+        let mut var_allowDelete = <bool>::sse_decode(deserializer);
+        let mut var_cacheByName = <bool>::sse_decode(deserializer);
+        let mut var_chainDeletion =
+            <std::collections::HashMap<String, bool>>::sse_decode(deserializer);
+        let mut var_platforms =
+            <Vec<crate::serde_config::structs::common::Platform>>::sse_decode(deserializer);
+        return crate::serde_config::structs::game_config::GameAlbumConfig {
+            id: var_id,
+            visible: var_visible,
+            unimportance: var_unimportance,
+            name: var_name,
+            description: var_description,
+            icon: var_icon,
+            require_uid: var_requireUid,
+            locate: var_locate,
+            to_media: var_toMedia,
+            to_cover: var_toCover,
+            to_thumbnail: var_toThumbnail,
+            allow_move: var_allowMove,
+            allow_delete: var_allowDelete,
+            cache_by_name: var_cacheByName,
+            chain_deletion: var_chainDeletion,
+            platforms: var_platforms,
+        };
+    }
+}
+
 impl SseDecode for crate::serde_config::structs::game_config::GameConfig {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <String>::sse_decode(deserializer);
         let mut var_name = <crate::serde_config::structs::common::Text>::sse_decode(deserializer);
         let mut var_icon = <Option<String>>::sse_decode(deserializer);
+        let mut var_albumsConfig =
+            <Vec<crate::serde_config::structs::game_config::GameAlbumConfig>>::sse_decode(
+                deserializer,
+            );
         let mut var_windows =
             <Option<crate::serde_config::structs::game_config::WindowsGameConfig>>::sse_decode(
                 deserializer,
@@ -1845,6 +1900,7 @@ impl SseDecode for crate::serde_config::structs::game_config::GameConfig {
             id: var_id,
             name: var_name,
             icon: var_icon,
+            albums_config: var_albumsConfig,
             windows: var_windows,
             macos: var_macos,
             android: var_android,
@@ -1949,6 +2005,22 @@ impl SseDecode for Vec<crate::serde_config::structs::common::FileEntityLocationC
     }
 }
 
+impl SseDecode for Vec<crate::serde_config::structs::game_config::GameAlbumConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::serde_config::structs::game_config::GameAlbumConfig>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<crate::nuan5_media_param::structs::world::Location> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2037,6 +2109,18 @@ impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::Pa
     }
 }
 
+impl SseDecode for Vec<crate::serde_config::structs::common::Platform> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::serde_config::structs::common::Platform>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2080,6 +2164,18 @@ impl SseDecode for Vec<(i64, i64)> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<(i64, i64)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(String, bool)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(String, bool)>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -3168,6 +3264,19 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::Photog
     }
 }
 
+impl SseDecode for crate::serde_config::structs::common::Platform {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::serde_config::structs::common::Platform::Windows,
+            1 => crate::serde_config::structs::common::Platform::MacOS,
+            2 => crate::serde_config::structs::common::Platform::Android,
+            _ => unreachable!("Invalid variant for Platform: {}", inner),
+        };
+    }
+}
+
 impl SseDecode for (f64, f64) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3212,6 +3321,15 @@ impl SseDecode for (i64, i64) {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <i64>::sse_decode(deserializer);
         let mut var_field1 = <i64>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (String, bool) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <String>::sse_decode(deserializer);
+        let mut var_field1 = <bool>::sse_decode(deserializer);
         return (var_field0, var_field1);
     }
 }
@@ -4509,12 +4627,48 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::game_config::GameAlbumConfig {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.visible.into_into_dart().into_dart(),
+            self.unimportance.into_into_dart().into_dart(),
+            self.name.into_into_dart().into_dart(),
+            self.description.into_into_dart().into_dart(),
+            self.icon.into_into_dart().into_dart(),
+            self.require_uid.into_into_dart().into_dart(),
+            self.locate.into_into_dart().into_dart(),
+            self.to_media.into_into_dart().into_dart(),
+            self.to_cover.into_into_dart().into_dart(),
+            self.to_thumbnail.into_into_dart().into_dart(),
+            self.allow_move.into_into_dart().into_dart(),
+            self.allow_delete.into_into_dart().into_dart(),
+            self.cache_by_name.into_into_dart().into_dart(),
+            self.chain_deletion.into_into_dart().into_dart(),
+            self.platforms.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::game_config::GameAlbumConfig
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::game_config::GameAlbumConfig>
+    for crate::serde_config::structs::game_config::GameAlbumConfig
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::game_config::GameAlbumConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::game_config::GameConfig {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.id.into_into_dart().into_dart(),
             self.name.into_into_dart().into_dart(),
             self.icon.into_into_dart().into_dart(),
+            self.albums_config.into_into_dart().into_dart(),
             self.windows.into_into_dart().into_dart(),
             self.macos.into_into_dart().into_dart(),
             self.android.into_into_dart().into_dart(),
@@ -5321,6 +5475,28 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::common::Platform {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Windows => 0.into_dart(),
+            Self::MacOS => 1.into_dart(),
+            Self::Android => 2.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::common::Platform
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::common::Platform>
+    for crate::serde_config::structs::common::Platform
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::common::Platform {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::world::Region {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
@@ -5953,6 +6129,13 @@ impl SseEncode for MediaKey {
     }
 }
 
+impl SseEncode for std::collections::HashMap<String, bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(String, bool)>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
 impl SseEncode for std::collections::HashMap<i64, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -6405,12 +6588,44 @@ impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::Filter
     }
 }
 
+impl SseEncode for crate::serde_config::structs::game_config::GameAlbumConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.id, serializer);
+        <bool>::sse_encode(self.visible, serializer);
+        <bool>::sse_encode(self.unimportance, serializer);
+        <crate::serde_config::structs::common::Text>::sse_encode(self.name, serializer);
+        <Option<crate::serde_config::structs::common::Text>>::sse_encode(
+            self.description,
+            serializer,
+        );
+        <Option<String>>::sse_encode(self.icon, serializer);
+        <bool>::sse_encode(self.require_uid, serializer);
+        <String>::sse_encode(self.locate, serializer);
+        <String>::sse_encode(self.to_media, serializer);
+        <Option<String>>::sse_encode(self.to_cover, serializer);
+        <Option<String>>::sse_encode(self.to_thumbnail, serializer);
+        <bool>::sse_encode(self.allow_move, serializer);
+        <bool>::sse_encode(self.allow_delete, serializer);
+        <bool>::sse_encode(self.cache_by_name, serializer);
+        <std::collections::HashMap<String, bool>>::sse_encode(self.chain_deletion, serializer);
+        <Vec<crate::serde_config::structs::common::Platform>>::sse_encode(
+            self.platforms,
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for crate::serde_config::structs::game_config::GameConfig {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.id, serializer);
         <crate::serde_config::structs::common::Text>::sse_encode(self.name, serializer);
         <Option<String>>::sse_encode(self.icon, serializer);
+        <Vec<crate::serde_config::structs::game_config::GameAlbumConfig>>::sse_encode(
+            self.albums_config,
+            serializer,
+        );
         <Option<crate::serde_config::structs::game_config::WindowsGameConfig>>::sse_encode(
             self.windows,
             serializer,
@@ -6507,6 +6722,18 @@ impl SseEncode for Vec<crate::serde_config::structs::common::FileEntityLocationC
     }
 }
 
+impl SseEncode for Vec<crate::serde_config::structs::game_config::GameAlbumConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::serde_config::structs::game_config::GameAlbumConfig>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
 impl SseEncode for Vec<crate::nuan5_media_param::structs::world::Location> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -6573,6 +6800,16 @@ impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::Pa
     }
 }
 
+impl SseEncode for Vec<crate::serde_config::structs::common::Platform> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::serde_config::structs::common::Platform>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -6609,6 +6846,16 @@ impl SseEncode for Vec<(i64, i64)> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <(i64, i64)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(String, bool)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(String, bool)>::sse_encode(item, serializer);
         }
     }
 }
@@ -7485,6 +7732,23 @@ impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::Photog
     }
 }
 
+impl SseEncode for crate::serde_config::structs::common::Platform {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::serde_config::structs::common::Platform::Windows => 0,
+                crate::serde_config::structs::common::Platform::MacOS => 1,
+                crate::serde_config::structs::common::Platform::Android => 2,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for (f64, f64) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -7525,6 +7789,14 @@ impl SseEncode for (i64, i64) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.0, serializer);
         <i64>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (String, bool) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.0, serializer);
+        <bool>::sse_encode(self.1, serializer);
     }
 }
 

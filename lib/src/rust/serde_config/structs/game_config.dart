@@ -9,7 +9,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'game_config.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class AndroidCustomGameConfig {
   final Text? toLauncherTip;
@@ -102,10 +102,90 @@ class AndroidGameSearcherConfig {
           toInstall == other.toInstall;
 }
 
+class GameAlbumConfig {
+  final String id;
+  final bool visible;
+  final bool unimportance;
+  final Text name;
+  final Text? description;
+  final String? icon;
+  final bool requireUid;
+  final String locate;
+  final String toMedia;
+  final String? toCover;
+  final String? toThumbnail;
+  final bool allowMove;
+  final bool allowDelete;
+  final bool cacheByName;
+  final Map<String, bool> chainDeletion;
+  final List<Platform> platforms;
+
+  const GameAlbumConfig({
+    required this.id,
+    required this.visible,
+    required this.unimportance,
+    required this.name,
+    this.description,
+    this.icon,
+    required this.requireUid,
+    required this.locate,
+    required this.toMedia,
+    this.toCover,
+    this.toThumbnail,
+    required this.allowMove,
+    required this.allowDelete,
+    required this.cacheByName,
+    required this.chainDeletion,
+    required this.platforms,
+  });
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      visible.hashCode ^
+      unimportance.hashCode ^
+      name.hashCode ^
+      description.hashCode ^
+      icon.hashCode ^
+      requireUid.hashCode ^
+      locate.hashCode ^
+      toMedia.hashCode ^
+      toCover.hashCode ^
+      toThumbnail.hashCode ^
+      allowMove.hashCode ^
+      allowDelete.hashCode ^
+      cacheByName.hashCode ^
+      chainDeletion.hashCode ^
+      platforms.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GameAlbumConfig &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          visible == other.visible &&
+          unimportance == other.unimportance &&
+          name == other.name &&
+          description == other.description &&
+          icon == other.icon &&
+          requireUid == other.requireUid &&
+          locate == other.locate &&
+          toMedia == other.toMedia &&
+          toCover == other.toCover &&
+          toThumbnail == other.toThumbnail &&
+          allowMove == other.allowMove &&
+          allowDelete == other.allowDelete &&
+          cacheByName == other.cacheByName &&
+          chainDeletion == other.chainDeletion &&
+          platforms == other.platforms;
+}
+
 class GameConfig {
   final String id;
   final Text name;
   final String? icon;
+  final List<GameAlbumConfig> albumsConfig;
   final WindowsGameConfig? windows;
   final MacOSGameConfig? macos;
   final AndroidGameConfig? android;
@@ -114,6 +194,7 @@ class GameConfig {
     required this.id,
     required this.name,
     this.icon,
+    required this.albumsConfig,
     this.windows,
     this.macos,
     this.android,
@@ -124,6 +205,7 @@ class GameConfig {
       id.hashCode ^
       name.hashCode ^
       icon.hashCode ^
+      albumsConfig.hashCode ^
       windows.hashCode ^
       macos.hashCode ^
       android.hashCode;
@@ -136,6 +218,7 @@ class GameConfig {
           id == other.id &&
           name == other.name &&
           icon == other.icon &&
+          albumsConfig == other.albumsConfig &&
           windows == other.windows &&
           macos == other.macos &&
           android == other.android;
