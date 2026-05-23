@@ -5,13 +5,22 @@
 
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'structs/text.dart';
+import 'structs/common.dart';
+import 'structs/game_config.dart';
 import 'structs/theme.dart';
 
 Future<Uint8List> serializeThemeConfig({
   required ThemeConfigWrapper value,
   required bool pretty,
 }) => RustLib.instance.api.crateSerdeConfigSeSerializeThemeConfig(
+  value: value,
+  pretty: pretty,
+);
+
+Future<Uint8List> serializeGameConfig({
+  required GameConfig value,
+  required bool pretty,
+}) => RustLib.instance.api.crateSerdeConfigSeSerializeGameConfig(
   value: value,
   pretty: pretty,
 );

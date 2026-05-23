@@ -7,6 +7,8 @@ use super::common::*;
 pub struct GameConfig{
   pub id: String,
   pub name: Text,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub icon: Option<String>,
   pub windows: Option<WindowsGameConfig>,
   pub macos: Option<MacOSGameConfig>,
@@ -46,8 +48,12 @@ pub enum WindowsGameSearcherConfig{
     path: String,
     config_type: ConfigFileType,
     to_launcher: Option<String>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
     to_launcher_regex: Option<String>,
     to_install: String,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
     to_install_regex: Option<String>,
   }
 }
@@ -58,6 +64,8 @@ pub struct WindowsRegistryConfig{
   pub hive: WindowsRegistryHive,
   pub path: String,
   pub key: String,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub regex: Option<String>,
   pub locate: String,
 }
@@ -65,11 +73,18 @@ pub struct WindowsRegistryConfig{
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct WindowsCustomGameConfig{
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub to_launcher_tip: Option<Text>,
   pub to_launcher: Option<Vec<FileEntityLocationConfig>>,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub to_launcher_then_to_install: Option<Vec<String>>,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub to_install_tip: Option<Text>,
   pub to_install: Vec<FileEntityLocationConfig>,
+
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub to_install_then_to_launcher: Option<Vec<String>>,
 }
 
@@ -103,6 +118,7 @@ pub struct MacOSGameSearcherConfig{
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct MacOSCustomGameConfig{
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub to_launcher_tip: Option<Text>,
   pub to_launcher_then_to_install: String,
 }
@@ -136,6 +152,7 @@ pub struct AndroidGameSearcherConfig{
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct AndroidCustomGameConfig{
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub to_launcher_tip: Option<Text>,
   pub to_launcher_then_to_install: String,
 }

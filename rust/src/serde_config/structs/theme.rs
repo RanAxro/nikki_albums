@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use super::text::Text;
+use super::common::Text;
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]

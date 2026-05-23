@@ -19,7 +19,8 @@ import 'nuan5_media_param/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'serde_config/de.dart';
 import 'serde_config/se.dart';
-import 'serde_config/structs/text.dart';
+import 'serde_config/structs/common.dart';
+import 'serde_config/structs/game_config.dart';
 import 'serde_config/structs/theme.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -82,10 +83,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String dco_decode_String(dynamic raw);
 
   @protected
+  AndroidCustomGameConfig dco_decode_android_custom_game_config(dynamic raw);
+
+  @protected
+  AndroidGameConfig dco_decode_android_game_config(dynamic raw);
+
+  @protected
+  AndroidGameLocationConfig dco_decode_android_game_location_config(
+    dynamic raw,
+  );
+
+  @protected
+  AndroidGameSearcherConfig dco_decode_android_game_searcher_config(
+    dynamic raw,
+  );
+
+  @protected
   Area dco_decode_area(dynamic raw);
 
   @protected
   bool dco_decode_bool(dynamic raw);
+
+  @protected
+  AndroidCustomGameConfig dco_decode_box_autoadd_android_custom_game_config(
+    dynamic raw,
+  );
+
+  @protected
+  AndroidGameConfig dco_decode_box_autoadd_android_game_config(dynamic raw);
 
   @protected
   Area dco_decode_box_autoadd_area(dynamic raw);
@@ -118,6 +143,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
 
   @protected
+  GameConfig dco_decode_box_autoadd_game_config(dynamic raw);
+
+  @protected
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
 
   @protected
@@ -125,6 +153,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams dco_decode_box_autoadd_location_params(dynamic raw);
+
+  @protected
+  MacOSCustomGameConfig dco_decode_box_autoadd_mac_os_custom_game_config(
+    dynamic raw,
+  );
+
+  @protected
+  MacOSGameConfig dco_decode_box_autoadd_mac_os_game_config(dynamic raw);
 
   @protected
   MediaCustomData dco_decode_box_autoadd_media_custom_data(dynamic raw);
@@ -177,6 +213,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea dco_decode_box_autoadd_subarea(dynamic raw);
 
   @protected
+  Text dco_decode_box_autoadd_text(dynamic raw);
+
+  @protected
   ThemeConfigV1 dco_decode_box_autoadd_theme_config_v_1(dynamic raw);
 
   @protected
@@ -190,6 +229,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw);
+
+  @protected
+  WindowsCustomGameConfig dco_decode_box_autoadd_windows_custom_game_config(
+    dynamic raw,
+  );
+
+  @protected
+  WindowsGameConfig dco_decode_box_autoadd_windows_game_config(dynamic raw);
+
+  @protected
+  WindowsRegistryConfig dco_decode_box_autoadd_windows_registry_config(
+    dynamic raw,
+  );
 
   @protected
   CameraParams dco_decode_camera_params(dynamic raw);
@@ -208,6 +260,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ColorScheme dco_decode_color_scheme(dynamic raw);
+
+  @protected
+  ConfigFileType dco_decode_config_file_type(dynamic raw);
 
   @protected
   CustomData dco_decode_custom_data(dynamic raw);
@@ -237,7 +292,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double dco_decode_f_64(dynamic raw);
 
   @protected
+  FileEntityLocationConfig dco_decode_file_entity_location_config(dynamic raw);
+
+  @protected
+  FileEntityType dco_decode_file_entity_type(dynamic raw);
+
+  @protected
   FilterParams dco_decode_filter_params(dynamic raw);
+
+  @protected
+  GameConfig dco_decode_game_config(dynamic raw);
 
   @protected
   int dco_decode_i_32(dynamic raw);
@@ -252,10 +316,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<String> dco_decode_list_String(dynamic raw);
 
   @protected
+  List<AndroidGameLocationConfig> dco_decode_list_android_game_location_config(
+    dynamic raw,
+  );
+
+  @protected
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw);
 
   @protected
+  List<FileEntityLocationConfig> dco_decode_list_file_entity_location_config(
+    dynamic raw,
+  );
+
+  @protected
   List<Location> dco_decode_list_location(dynamic raw);
+
+  @protected
+  List<MacOSGameLocationConfig> dco_decode_list_mac_os_game_location_config(
+    dynamic raw,
+  );
 
   @protected
   List<ObjectParams> dco_decode_list_object_params(dynamic raw);
@@ -296,6 +375,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<TaskParams> dco_decode_list_task_params(dynamic raw);
 
   @protected
+  List<WindowsGameLocationConfig> dco_decode_list_windows_game_location_config(
+    dynamic raw,
+  );
+
+  @protected
+  List<WindowsGameSearcherConfig> dco_decode_list_windows_game_searcher_config(
+    dynamic raw,
+  );
+
+  @protected
   Location dco_decode_location(dynamic raw);
 
   @protected
@@ -303,6 +392,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationType dco_decode_location_type(dynamic raw);
+
+  @protected
+  MacOSCustomGameConfig dco_decode_mac_os_custom_game_config(dynamic raw);
+
+  @protected
+  MacOSGameConfig dco_decode_mac_os_game_config(dynamic raw);
+
+  @protected
+  MacOSGameLocationConfig dco_decode_mac_os_game_location_config(dynamic raw);
+
+  @protected
+  MacOSGameSearcherConfig dco_decode_mac_os_game_searcher_config(dynamic raw);
 
   @protected
   MediaCustomData dco_decode_media_custom_data(dynamic raw);
@@ -347,6 +448,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String? dco_decode_opt_String(dynamic raw);
 
   @protected
+  AndroidCustomGameConfig?
+  dco_decode_opt_box_autoadd_android_custom_game_config(dynamic raw);
+
+  @protected
+  AndroidGameConfig? dco_decode_opt_box_autoadd_android_game_config(
+    dynamic raw,
+  );
+
+  @protected
   Area? dco_decode_opt_box_autoadd_area(dynamic raw);
 
   @protected
@@ -369,6 +479,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw);
+
+  @protected
+  MacOSCustomGameConfig? dco_decode_opt_box_autoadd_mac_os_custom_game_config(
+    dynamic raw,
+  );
+
+  @protected
+  MacOSGameConfig? dco_decode_opt_box_autoadd_mac_os_game_config(dynamic raw);
 
   @protected
   MediaCustomData? dco_decode_opt_box_autoadd_media_custom_data(dynamic raw);
@@ -398,13 +516,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
 
   @protected
+  Text? dco_decode_opt_box_autoadd_text(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw);
 
   @protected
+  WindowsCustomGameConfig?
+  dco_decode_opt_box_autoadd_windows_custom_game_config(dynamic raw);
+
+  @protected
+  WindowsGameConfig? dco_decode_opt_box_autoadd_windows_game_config(
+    dynamic raw,
+  );
+
+  @protected
+  WindowsRegistryConfig? dco_decode_opt_box_autoadd_windows_registry_config(
+    dynamic raw,
+  );
+
+  @protected
   List<String>? dco_decode_opt_list_String(dynamic raw);
+
+  @protected
+  List<FileEntityLocationConfig>?
+  dco_decode_opt_list_file_entity_location_config(dynamic raw);
 
   @protected
   OrdinaryText dco_decode_ordinary_text(dynamic raw);
@@ -496,6 +635,28 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   WeaponParams dco_decode_weapon_params(dynamic raw);
 
   @protected
+  WindowsCustomGameConfig dco_decode_windows_custom_game_config(dynamic raw);
+
+  @protected
+  WindowsGameConfig dco_decode_windows_game_config(dynamic raw);
+
+  @protected
+  WindowsGameLocationConfig dco_decode_windows_game_location_config(
+    dynamic raw,
+  );
+
+  @protected
+  WindowsGameSearcherConfig dco_decode_windows_game_searcher_config(
+    dynamic raw,
+  );
+
+  @protected
+  WindowsRegistryConfig dco_decode_windows_registry_config(dynamic raw);
+
+  @protected
+  WindowsRegistryHive dco_decode_windows_registry_hive(dynamic raw);
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
@@ -545,10 +706,40 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
+  AndroidCustomGameConfig sse_decode_android_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AndroidGameConfig sse_decode_android_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AndroidGameLocationConfig sse_decode_android_game_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AndroidGameSearcherConfig sse_decode_android_game_searcher_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Area sse_decode_area(SseDeserializer deserializer);
 
   @protected
   bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
+  AndroidCustomGameConfig sse_decode_box_autoadd_android_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AndroidGameConfig sse_decode_box_autoadd_android_game_config(
+    SseDeserializer deserializer,
+  );
 
   @protected
   Area sse_decode_box_autoadd_area(SseDeserializer deserializer);
@@ -591,6 +782,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer);
+
+  @protected
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
@@ -598,6 +792,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams sse_decode_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MacOSCustomGameConfig sse_decode_box_autoadd_mac_os_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MacOSGameConfig sse_decode_box_autoadd_mac_os_game_config(
     SseDeserializer deserializer,
   );
 
@@ -670,6 +874,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
+  Text sse_decode_box_autoadd_text(SseDeserializer deserializer);
+
+  @protected
   ThemeConfigV1 sse_decode_box_autoadd_theme_config_v_1(
     SseDeserializer deserializer,
   );
@@ -693,6 +900,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  WindowsCustomGameConfig sse_decode_box_autoadd_windows_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsGameConfig sse_decode_box_autoadd_windows_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsRegistryConfig sse_decode_box_autoadd_windows_registry_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CameraParams sse_decode_camera_params(SseDeserializer deserializer);
 
   @protected
@@ -711,6 +933,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ColorScheme sse_decode_color_scheme(SseDeserializer deserializer);
+
+  @protected
+  ConfigFileType sse_decode_config_file_type(SseDeserializer deserializer);
 
   @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
@@ -740,7 +965,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
+  FileEntityLocationConfig sse_decode_file_entity_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FileEntityType sse_decode_file_entity_type(SseDeserializer deserializer);
+
+  @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
+
+  @protected
+  GameConfig sse_decode_game_config(SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -755,10 +991,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<String> sse_decode_list_String(SseDeserializer deserializer);
 
   @protected
+  List<AndroidGameLocationConfig> sse_decode_list_android_game_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer);
 
   @protected
+  List<FileEntityLocationConfig> sse_decode_list_file_entity_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<Location> sse_decode_list_location(SseDeserializer deserializer);
+
+  @protected
+  List<MacOSGameLocationConfig> sse_decode_list_mac_os_game_location_config(
+    SseDeserializer deserializer,
+  );
 
   @protected
   List<ObjectParams> sse_decode_list_object_params(
@@ -813,6 +1064,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<TaskParams> sse_decode_list_task_params(SseDeserializer deserializer);
 
   @protected
+  List<WindowsGameLocationConfig> sse_decode_list_windows_game_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<WindowsGameSearcherConfig> sse_decode_list_windows_game_searcher_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Location sse_decode_location(SseDeserializer deserializer);
 
   @protected
@@ -820,6 +1081,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationType sse_decode_location_type(SseDeserializer deserializer);
+
+  @protected
+  MacOSCustomGameConfig sse_decode_mac_os_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MacOSGameConfig sse_decode_mac_os_game_config(SseDeserializer deserializer);
+
+  @protected
+  MacOSGameLocationConfig sse_decode_mac_os_game_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MacOSGameSearcherConfig sse_decode_mac_os_game_searcher_config(
+    SseDeserializer deserializer,
+  );
 
   @protected
   MediaCustomData sse_decode_media_custom_data(SseDeserializer deserializer);
@@ -868,6 +1147,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
+  AndroidCustomGameConfig?
+  sse_decode_opt_box_autoadd_android_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AndroidGameConfig? sse_decode_opt_box_autoadd_android_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer);
 
   @protected
@@ -896,6 +1186,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LocationParams? sse_decode_opt_box_autoadd_location_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MacOSCustomGameConfig? sse_decode_opt_box_autoadd_mac_os_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MacOSGameConfig? sse_decode_opt_box_autoadd_mac_os_game_config(
     SseDeserializer deserializer,
   );
 
@@ -939,6 +1239,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
+  Text? sse_decode_opt_box_autoadd_text(SseDeserializer deserializer);
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
@@ -947,7 +1250,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  WindowsCustomGameConfig?
+  sse_decode_opt_box_autoadd_windows_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsGameConfig? sse_decode_opt_box_autoadd_windows_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsRegistryConfig? sse_decode_opt_box_autoadd_windows_registry_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<String>? sse_decode_opt_list_String(SseDeserializer deserializer);
+
+  @protected
+  List<FileEntityLocationConfig>?
+  sse_decode_opt_list_file_entity_location_config(SseDeserializer deserializer);
 
   @protected
   OrdinaryText sse_decode_ordinary_text(SseDeserializer deserializer);
@@ -1055,6 +1378,36 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   WeaponParams sse_decode_weapon_params(SseDeserializer deserializer);
 
   @protected
+  WindowsCustomGameConfig sse_decode_windows_custom_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsGameConfig sse_decode_windows_game_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsGameLocationConfig sse_decode_windows_game_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsGameSearcherConfig sse_decode_windows_game_searcher_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsRegistryConfig sse_decode_windows_registry_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WindowsRegistryHive sse_decode_windows_registry_hive(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
     SseSerializer serializer,
@@ -1115,10 +1468,46 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
+  void sse_encode_android_custom_game_config(
+    AndroidCustomGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_android_game_config(
+    AndroidGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_android_game_location_config(
+    AndroidGameLocationConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_android_game_searcher_config(
+    AndroidGameSearcherConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_area(Area self, SseSerializer serializer);
 
   @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_android_custom_game_config(
+    AndroidCustomGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_android_game_config(
+    AndroidGameConfig self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_area(Area self, SseSerializer serializer);
@@ -1175,6 +1564,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_game_config(
+    GameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_i_64(
     PlatformInt64 self,
     SseSerializer serializer,
@@ -1186,6 +1581,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_location_params(
     LocationParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_mac_os_custom_game_config(
+    MacOSCustomGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_mac_os_game_config(
+    MacOSGameConfig self,
     SseSerializer serializer,
   );
 
@@ -1277,6 +1684,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_text(Text self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_theme_config_v_1(
     ThemeConfigV1 self,
     SseSerializer serializer,
@@ -1304,6 +1714,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_windows_custom_game_config(
+    WindowsCustomGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_windows_game_config(
+    WindowsGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_windows_registry_config(
+    WindowsRegistryConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_camera_params(CameraParams self, SseSerializer serializer);
 
   @protected
@@ -1326,6 +1754,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_color_scheme(ColorScheme self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_config_file_type(
+    ConfigFileType self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);
@@ -1367,7 +1801,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_f_64(double self, SseSerializer serializer);
 
   @protected
+  void sse_encode_file_entity_location_config(
+    FileEntityLocationConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_file_entity_type(
+    FileEntityType self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_game_config(GameConfig self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -1382,13 +1831,31 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_android_game_location_config(
+    List<AndroidGameLocationConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_cloth_params(
     List<ClothParams> self,
     SseSerializer serializer,
   );
 
   @protected
+  void sse_encode_list_file_entity_location_config(
+    List<FileEntityLocationConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_location(List<Location> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_mac_os_game_location_config(
+    List<MacOSGameLocationConfig> self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_list_object_params(
@@ -1460,6 +1927,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_windows_game_location_config(
+    List<WindowsGameLocationConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_windows_game_searcher_config(
+    List<WindowsGameSearcherConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_location(Location self, SseSerializer serializer);
 
   @protected
@@ -1470,6 +1949,30 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_location_type(LocationType self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_mac_os_custom_game_config(
+    MacOSCustomGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_mac_os_game_config(
+    MacOSGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_mac_os_game_location_config(
+    MacOSGameLocationConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_mac_os_game_searcher_config(
+    MacOSGameSearcherConfig self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_media_custom_data(
@@ -1538,6 +2041,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_box_autoadd_android_custom_game_config(
+    AndroidCustomGameConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_android_game_config(
+    AndroidGameConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer);
 
   @protected
@@ -1579,6 +2094,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_location_params(
     LocationParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_mac_os_custom_game_config(
+    MacOSCustomGameConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_mac_os_game_config(
+    MacOSGameConfig? self,
     SseSerializer serializer,
   );
 
@@ -1637,6 +2164,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_text(Text? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
 
   @protected
@@ -1646,7 +2176,31 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_windows_custom_game_config(
+    WindowsCustomGameConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_windows_game_config(
+    WindowsGameConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_windows_registry_config(
+    WindowsRegistryConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_list_String(List<String>? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_list_file_entity_location_config(
+    List<FileEntityLocationConfig>? self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_ordinary_text(OrdinaryText self, SseSerializer serializer);
@@ -1773,6 +2327,42 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_weapon_params(WeaponParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_windows_custom_game_config(
+    WindowsCustomGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_windows_game_config(
+    WindowsGameConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_windows_game_location_config(
+    WindowsGameLocationConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_windows_game_searcher_config(
+    WindowsGameSearcherConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_windows_registry_config(
+    WindowsRegistryConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_windows_registry_hive(
+    WindowsRegistryHive self,
+    SseSerializer serializer,
+  );
 }
 
 // Section: wire_class

@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use crate::serde_config::structs::text::Text;
+use crate::serde_config::structs::common::Text;
 
 
 #[derive(Clone)]

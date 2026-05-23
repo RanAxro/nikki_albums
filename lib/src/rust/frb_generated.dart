@@ -20,7 +20,8 @@ import 'nuan5_media_param/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'serde_config/de.dart';
 import 'serde_config/se.dart';
-import 'serde_config/structs/text.dart';
+import 'serde_config/structs/common.dart';
+import 'serde_config/structs/game_config.dart';
 import 'serde_config/structs/theme.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -82,7 +83,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 342351106;
+  int get rustContentHash => 1280400328;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -212,12 +213,21 @@ abstract class RustLibApi extends BaseApi {
     required MediaKey key,
   });
 
+  Future<Uint8List> crateSerdeConfigSeSerializeGameConfig({
+    required GameConfig value,
+    required bool pretty,
+  });
+
   Future<Uint8List> crateSerdeConfigSeSerializeThemeConfig({
     required ThemeConfigWrapper value,
     required bool pretty,
   });
 
   int crateApiSimpleTestAdd({required int num1, required int num2});
+
+  TranslateText crateSerdeConfigStructsCommonTranslateTextFromKey({
+    required String key,
+  });
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_MediaKey;
@@ -1073,6 +1083,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Uint8List> crateSerdeConfigSeSerializeGameConfig({
+    required GameConfig value,
+    required bool pretty,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_game_config(value, serializer);
+          sse_encode_bool(pretty, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateSerdeConfigSeSerializeGameConfigConstMeta,
+        argValues: [value, pretty],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateSerdeConfigSeSerializeGameConfigConstMeta =>
+      const TaskConstMeta(
+        debugName: "serialize_game_config",
+        argNames: ["value", "pretty"],
+      );
+
+  @override
   Future<Uint8List> crateSerdeConfigSeSerializeThemeConfig({
     required ThemeConfigWrapper value,
     required bool pretty,
@@ -1086,7 +1131,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 24,
+            funcId: 25,
             port: port_,
           );
         },
@@ -1115,7 +1160,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 25)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 26)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -1130,6 +1175,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateApiSimpleTestAddConstMeta =>
       const TaskConstMeta(debugName: "test_add", argNames: ["num1", "num2"]);
+
+  @override
+  TranslateText crateSerdeConfigStructsCommonTranslateTextFromKey({
+    required String key,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(key, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 27)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_translate_text,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateSerdeConfigStructsCommonTranslateTextFromKeyConstMeta,
+        argValues: [key],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateSerdeConfigStructsCommonTranslateTextFromKeyConstMeta =>
+      const TaskConstMeta(
+        debugName: "translate_text_from_key",
+        argNames: ["key"],
+      );
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_MediaKey => wire
@@ -1217,6 +1291,60 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AndroidCustomGameConfig dco_decode_android_custom_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return AndroidCustomGameConfig(
+      toLauncherTip: dco_decode_opt_box_autoadd_text(arr[0]),
+      toLauncherThenToInstall: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
+  AndroidGameConfig dco_decode_android_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return AndroidGameConfig(
+      locate: dco_decode_list_android_game_location_config(arr[0]),
+      custom: dco_decode_opt_box_autoadd_android_custom_game_config(arr[1]),
+    );
+  }
+
+  @protected
+  AndroidGameLocationConfig dco_decode_android_game_location_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return AndroidGameLocationConfig(
+      channel: dco_decode_String(arr[0]),
+      name: dco_decode_text(arr[1]),
+      icon: dco_decode_String(arr[2]),
+      searcher: dco_decode_android_game_searcher_config(arr[3]),
+    );
+  }
+
+  @protected
+  AndroidGameSearcherConfig dco_decode_android_game_searcher_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return AndroidGameSearcherConfig(
+      applicationId: dco_decode_String(arr[0]),
+      toInstall: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
   Area dco_decode_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Area.values[raw as int];
@@ -1226,6 +1354,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   bool dco_decode_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as bool;
+  }
+
+  @protected
+  AndroidCustomGameConfig dco_decode_box_autoadd_android_custom_game_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_android_custom_game_config(raw);
+  }
+
+  @protected
+  AndroidGameConfig dco_decode_box_autoadd_android_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_android_game_config(raw);
   }
 
   @protected
@@ -1289,6 +1431,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GameConfig dco_decode_box_autoadd_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_game_config(raw);
+  }
+
+  @protected
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_i_64(raw);
@@ -1304,6 +1452,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   LocationParams dco_decode_box_autoadd_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_location_params(raw);
+  }
+
+  @protected
+  MacOSCustomGameConfig dco_decode_box_autoadd_mac_os_custom_game_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_mac_os_custom_game_config(raw);
+  }
+
+  @protected
+  MacOSGameConfig dco_decode_box_autoadd_mac_os_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_mac_os_game_config(raw);
   }
 
   @protected
@@ -1405,6 +1567,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Text dco_decode_box_autoadd_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_text(raw);
+  }
+
+  @protected
   ThemeConfigV1 dco_decode_box_autoadd_theme_config_v_1(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_theme_config_v_1(raw);
@@ -1432,6 +1600,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_weapon_params(raw);
+  }
+
+  @protected
+  WindowsCustomGameConfig dco_decode_box_autoadd_windows_custom_game_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_windows_custom_game_config(raw);
+  }
+
+  @protected
+  WindowsGameConfig dco_decode_box_autoadd_windows_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_windows_game_config(raw);
+  }
+
+  @protected
+  WindowsRegistryConfig dco_decode_box_autoadd_windows_registry_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_windows_registry_config(raw);
   }
 
   @protected
@@ -1541,6 +1731,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ConfigFileType dco_decode_config_file_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ConfigFileType.values[raw as int];
+  }
+
+  @protected
   CustomData dco_decode_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -1643,6 +1839,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FileEntityLocationConfig dco_decode_file_entity_location_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return FileEntityLocationConfig(
+      entityType: dco_decode_file_entity_type(arr[0]),
+      on_: dco_decode_String(arr[1]),
+      locate: dco_decode_String(arr[2]),
+      andDiscoverFile: dco_decode_opt_list_String(arr[3]),
+      andDiscoverDirectory: dco_decode_opt_list_String(arr[4]),
+    );
+  }
+
+  @protected
+  FileEntityType dco_decode_file_entity_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FileEntityType.values[raw as int];
+  }
+
+  @protected
   FilterParams dco_decode_filter_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -1656,6 +1873,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  GameConfig dco_decode_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return GameConfig(
+      id: dco_decode_String(arr[0]),
+      name: dco_decode_text(arr[1]),
+      icon: dco_decode_opt_String(arr[2]),
+      windows: dco_decode_opt_box_autoadd_windows_game_config(arr[3]),
+      macos: dco_decode_opt_box_autoadd_mac_os_game_config(arr[4]),
+      android: dco_decode_opt_box_autoadd_android_game_config(arr[5]),
+    );
   }
 
   @protected
@@ -1693,15 +1926,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<AndroidGameLocationConfig> dco_decode_list_android_game_location_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_android_game_location_config)
+        .toList();
+  }
+
+  @protected
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_cloth_params).toList();
   }
 
   @protected
+  List<FileEntityLocationConfig> dco_decode_list_file_entity_location_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_file_entity_location_config)
+        .toList();
+  }
+
+  @protected
   List<Location> dco_decode_list_location(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_location).toList();
+  }
+
+  @protected
+  List<MacOSGameLocationConfig> dco_decode_list_mac_os_game_location_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_mac_os_game_location_config)
+        .toList();
   }
 
   @protected
@@ -1783,6 +2046,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<WindowsGameLocationConfig> dco_decode_list_windows_game_location_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_windows_game_location_config)
+        .toList();
+  }
+
+  @protected
+  List<WindowsGameSearcherConfig> dco_decode_list_windows_game_searcher_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_windows_game_searcher_config)
+        .toList();
+  }
+
+  @protected
   Location dco_decode_location(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -1829,6 +2112,56 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  MacOSCustomGameConfig dco_decode_mac_os_custom_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return MacOSCustomGameConfig(
+      toLauncherTip: dco_decode_opt_box_autoadd_text(arr[0]),
+      toLauncherThenToInstall: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
+  MacOSGameConfig dco_decode_mac_os_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return MacOSGameConfig(
+      locate: dco_decode_list_mac_os_game_location_config(arr[0]),
+      custom: dco_decode_opt_box_autoadd_mac_os_custom_game_config(arr[1]),
+    );
+  }
+
+  @protected
+  MacOSGameLocationConfig dco_decode_mac_os_game_location_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return MacOSGameLocationConfig(
+      channel: dco_decode_String(arr[0]),
+      name: dco_decode_text(arr[1]),
+      icon: dco_decode_String(arr[2]),
+      searcher: dco_decode_mac_os_game_searcher_config(arr[3]),
+    );
+  }
+
+  @protected
+  MacOSGameSearcherConfig dco_decode_mac_os_game_searcher_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return MacOSGameSearcherConfig(
+      bundleId: dco_decode_String(arr[0]),
+      toInstall: dco_decode_String(arr[1]),
+    );
   }
 
   @protected
@@ -2037,6 +2370,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AndroidCustomGameConfig?
+  dco_decode_opt_box_autoadd_android_custom_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_android_custom_game_config(raw);
+  }
+
+  @protected
+  AndroidGameConfig? dco_decode_opt_box_autoadd_android_game_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_android_game_config(raw);
+  }
+
+  @protected
   Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_area(raw);
@@ -2082,6 +2432,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_location_params(raw);
+  }
+
+  @protected
+  MacOSCustomGameConfig? dco_decode_opt_box_autoadd_mac_os_custom_game_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_mac_os_custom_game_config(raw);
+  }
+
+  @protected
+  MacOSGameConfig? dco_decode_opt_box_autoadd_mac_os_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_mac_os_game_config(raw);
   }
 
   @protected
@@ -2139,6 +2505,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Text? dco_decode_opt_box_autoadd_text(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_text(raw);
+  }
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
@@ -2151,9 +2523,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  WindowsCustomGameConfig?
+  dco_decode_opt_box_autoadd_windows_custom_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_windows_custom_game_config(raw);
+  }
+
+  @protected
+  WindowsGameConfig? dco_decode_opt_box_autoadd_windows_game_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_windows_game_config(raw);
+  }
+
+  @protected
+  WindowsRegistryConfig? dco_decode_opt_box_autoadd_windows_registry_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_windows_registry_config(raw);
+  }
+
+  @protected
   List<String>? dco_decode_opt_list_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_list_String(raw);
+  }
+
+  @protected
+  List<FileEntityLocationConfig>?
+  dco_decode_opt_list_file_entity_location_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_list_file_entity_location_config(raw);
   }
 
   @protected
@@ -2501,6 +2909,100 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  WindowsCustomGameConfig dco_decode_windows_custom_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return WindowsCustomGameConfig(
+      toLauncherTip: dco_decode_opt_box_autoadd_text(arr[0]),
+      toLauncher: dco_decode_opt_list_file_entity_location_config(arr[1]),
+      toLauncherThenToInstall: dco_decode_opt_list_String(arr[2]),
+      toInstallTip: dco_decode_opt_box_autoadd_text(arr[3]),
+      toInstall: dco_decode_list_file_entity_location_config(arr[4]),
+      toInstallThenToLauncher: dco_decode_opt_list_String(arr[5]),
+    );
+  }
+
+  @protected
+  WindowsGameConfig dco_decode_windows_game_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return WindowsGameConfig(
+      locate: dco_decode_list_windows_game_location_config(arr[0]),
+      custom: dco_decode_opt_box_autoadd_windows_custom_game_config(arr[1]),
+    );
+  }
+
+  @protected
+  WindowsGameLocationConfig dco_decode_windows_game_location_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return WindowsGameLocationConfig(
+      channel: dco_decode_String(arr[0]),
+      name: dco_decode_text(arr[1]),
+      icon: dco_decode_String(arr[2]),
+      requireLauncher: dco_decode_bool(arr[3]),
+      searcher: dco_decode_list_windows_game_searcher_config(arr[4]),
+    );
+  }
+
+  @protected
+  WindowsGameSearcherConfig dco_decode_windows_game_searcher_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return WindowsGameSearcherConfig_Registry(
+          toLauncher: dco_decode_opt_box_autoadd_windows_registry_config(
+            raw[1],
+          ),
+          toInstall: dco_decode_box_autoadd_windows_registry_config(raw[2]),
+          useConfigFile: dco_decode_bool(raw[3]),
+        );
+      case 1:
+        return WindowsGameSearcherConfig_ConfigFile(
+          path: dco_decode_String(raw[1]),
+          configType: dco_decode_config_file_type(raw[2]),
+          toLauncher: dco_decode_opt_String(raw[3]),
+          toLauncherRegex: dco_decode_opt_String(raw[4]),
+          toInstall: dco_decode_String(raw[5]),
+          toInstallRegex: dco_decode_opt_String(raw[6]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  WindowsRegistryConfig dco_decode_windows_registry_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return WindowsRegistryConfig(
+      hive: dco_decode_windows_registry_hive(arr[0]),
+      path: dco_decode_String(arr[1]),
+      key: dco_decode_String(arr[2]),
+      regex: dco_decode_opt_String(arr[3]),
+      locate: dco_decode_String(arr[4]),
+    );
+  }
+
+  @protected
+  WindowsRegistryHive dco_decode_windows_registry_hive(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return WindowsRegistryHive.values[raw as int];
+  }
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_String(deserializer);
@@ -2593,6 +3095,61 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AndroidCustomGameConfig sse_decode_android_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_toLauncherTip = sse_decode_opt_box_autoadd_text(deserializer);
+    var var_toLauncherThenToInstall = sse_decode_String(deserializer);
+    return AndroidCustomGameConfig(
+      toLauncherTip: var_toLauncherTip,
+      toLauncherThenToInstall: var_toLauncherThenToInstall,
+    );
+  }
+
+  @protected
+  AndroidGameConfig sse_decode_android_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_locate = sse_decode_list_android_game_location_config(deserializer);
+    var var_custom = sse_decode_opt_box_autoadd_android_custom_game_config(
+      deserializer,
+    );
+    return AndroidGameConfig(locate: var_locate, custom: var_custom);
+  }
+
+  @protected
+  AndroidGameLocationConfig sse_decode_android_game_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_channel = sse_decode_String(deserializer);
+    var var_name = sse_decode_text(deserializer);
+    var var_icon = sse_decode_String(deserializer);
+    var var_searcher = sse_decode_android_game_searcher_config(deserializer);
+    return AndroidGameLocationConfig(
+      channel: var_channel,
+      name: var_name,
+      icon: var_icon,
+      searcher: var_searcher,
+    );
+  }
+
+  @protected
+  AndroidGameSearcherConfig sse_decode_android_game_searcher_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_applicationId = sse_decode_String(deserializer);
+    var var_toInstall = sse_decode_String(deserializer);
+    return AndroidGameSearcherConfig(
+      applicationId: var_applicationId,
+      toInstall: var_toInstall,
+    );
+  }
+
+  @protected
   Area sse_decode_area(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_32(deserializer);
@@ -2603,6 +3160,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   bool sse_decode_bool(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
+  AndroidCustomGameConfig sse_decode_box_autoadd_android_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_android_custom_game_config(deserializer));
+  }
+
+  @protected
+  AndroidGameConfig sse_decode_box_autoadd_android_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_android_game_config(deserializer));
   }
 
   @protected
@@ -2676,6 +3249,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_game_config(deserializer));
+  }
+
+  @protected
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_i_64(deserializer));
@@ -2693,6 +3272,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_location_params(deserializer));
+  }
+
+  @protected
+  MacOSCustomGameConfig sse_decode_box_autoadd_mac_os_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_mac_os_custom_game_config(deserializer));
+  }
+
+  @protected
+  MacOSGameConfig sse_decode_box_autoadd_mac_os_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_mac_os_game_config(deserializer));
   }
 
   @protected
@@ -2814,6 +3409,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Text sse_decode_box_autoadd_text(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_text(deserializer));
+  }
+
+  @protected
   ThemeConfigV1 sse_decode_box_autoadd_theme_config_v_1(
     SseDeserializer deserializer,
   ) {
@@ -2849,6 +3450,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_weapon_params(deserializer));
+  }
+
+  @protected
+  WindowsCustomGameConfig sse_decode_box_autoadd_windows_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_windows_custom_game_config(deserializer));
+  }
+
+  @protected
+  WindowsGameConfig sse_decode_box_autoadd_windows_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_windows_game_config(deserializer));
+  }
+
+  @protected
+  WindowsRegistryConfig sse_decode_box_autoadd_windows_registry_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_windows_registry_config(deserializer));
   }
 
   @protected
@@ -2985,6 +3610,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ConfigFileType sse_decode_config_file_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ConfigFileType.values[inner];
+  }
+
+  @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3082,6 +3714,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FileEntityLocationConfig sse_decode_file_entity_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_entityType = sse_decode_file_entity_type(deserializer);
+    var var_on_ = sse_decode_String(deserializer);
+    var var_locate = sse_decode_String(deserializer);
+    var var_andDiscoverFile = sse_decode_opt_list_String(deserializer);
+    var var_andDiscoverDirectory = sse_decode_opt_list_String(deserializer);
+    return FileEntityLocationConfig(
+      entityType: var_entityType,
+      on_: var_on_,
+      locate: var_locate,
+      andDiscoverFile: var_andDiscoverFile,
+      andDiscoverDirectory: var_andDiscoverDirectory,
+    );
+  }
+
+  @protected
+  FileEntityType sse_decode_file_entity_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return FileEntityType.values[inner];
+  }
+
+  @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3096,6 +3754,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  GameConfig sse_decode_game_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_String(deserializer);
+    var var_name = sse_decode_text(deserializer);
+    var var_icon = sse_decode_opt_String(deserializer);
+    var var_windows = sse_decode_opt_box_autoadd_windows_game_config(
+      deserializer,
+    );
+    var var_macos = sse_decode_opt_box_autoadd_mac_os_game_config(deserializer);
+    var var_android = sse_decode_opt_box_autoadd_android_game_config(
+      deserializer,
+    );
+    return GameConfig(
+      id: var_id,
+      name: var_name,
+      icon: var_icon,
+      windows: var_windows,
+      macos: var_macos,
+      android: var_android,
+    );
   }
 
   @protected
@@ -3140,6 +3821,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<AndroidGameLocationConfig> sse_decode_list_android_game_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <AndroidGameLocationConfig>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_android_game_location_config(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3152,6 +3847,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<FileEntityLocationConfig> sse_decode_list_file_entity_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <FileEntityLocationConfig>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_file_entity_location_config(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<Location> sse_decode_list_location(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3159,6 +3868,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <Location>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_location(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<MacOSGameLocationConfig> sse_decode_list_mac_os_game_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <MacOSGameLocationConfig>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_mac_os_game_location_config(deserializer));
     }
     return ans_;
   }
@@ -3309,6 +4032,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<WindowsGameLocationConfig> sse_decode_list_windows_game_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <WindowsGameLocationConfig>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_windows_game_location_config(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<WindowsGameSearcherConfig> sse_decode_list_windows_game_searcher_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <WindowsGameSearcherConfig>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_windows_game_searcher_config(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   Location sse_decode_location(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3361,6 +4112,59 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  MacOSCustomGameConfig sse_decode_mac_os_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_toLauncherTip = sse_decode_opt_box_autoadd_text(deserializer);
+    var var_toLauncherThenToInstall = sse_decode_String(deserializer);
+    return MacOSCustomGameConfig(
+      toLauncherTip: var_toLauncherTip,
+      toLauncherThenToInstall: var_toLauncherThenToInstall,
+    );
+  }
+
+  @protected
+  MacOSGameConfig sse_decode_mac_os_game_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_locate = sse_decode_list_mac_os_game_location_config(deserializer);
+    var var_custom = sse_decode_opt_box_autoadd_mac_os_custom_game_config(
+      deserializer,
+    );
+    return MacOSGameConfig(locate: var_locate, custom: var_custom);
+  }
+
+  @protected
+  MacOSGameLocationConfig sse_decode_mac_os_game_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_channel = sse_decode_String(deserializer);
+    var var_name = sse_decode_text(deserializer);
+    var var_icon = sse_decode_String(deserializer);
+    var var_searcher = sse_decode_mac_os_game_searcher_config(deserializer);
+    return MacOSGameLocationConfig(
+      channel: var_channel,
+      name: var_name,
+      icon: var_icon,
+      searcher: var_searcher,
+    );
+  }
+
+  @protected
+  MacOSGameSearcherConfig sse_decode_mac_os_game_searcher_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_bundleId = sse_decode_String(deserializer);
+    var var_toInstall = sse_decode_String(deserializer);
+    return MacOSGameSearcherConfig(
+      bundleId: var_bundleId,
+      toInstall: var_toInstall,
+    );
   }
 
   @protected
@@ -3609,6 +4413,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AndroidCustomGameConfig?
+  sse_decode_opt_box_autoadd_android_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_android_custom_game_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  AndroidGameConfig? sse_decode_opt_box_autoadd_android_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_android_game_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3701,6 +4532,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_location_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  MacOSCustomGameConfig? sse_decode_opt_box_autoadd_mac_os_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_mac_os_custom_game_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  MacOSGameConfig? sse_decode_opt_box_autoadd_mac_os_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_mac_os_game_config(deserializer));
     } else {
       return null;
     }
@@ -3818,6 +4675,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Text? sse_decode_opt_box_autoadd_text(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_text(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3842,11 +4710,65 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  WindowsCustomGameConfig?
+  sse_decode_opt_box_autoadd_windows_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_windows_custom_game_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  WindowsGameConfig? sse_decode_opt_box_autoadd_windows_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_windows_game_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  WindowsRegistryConfig? sse_decode_opt_box_autoadd_windows_registry_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_windows_registry_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   List<String>? sse_decode_opt_list_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_list_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<FileEntityLocationConfig>?
+  sse_decode_opt_list_file_entity_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_file_entity_location_config(deserializer));
     } else {
       return null;
     }
@@ -4207,6 +5129,133 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  WindowsCustomGameConfig sse_decode_windows_custom_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_toLauncherTip = sse_decode_opt_box_autoadd_text(deserializer);
+    var var_toLauncher = sse_decode_opt_list_file_entity_location_config(
+      deserializer,
+    );
+    var var_toLauncherThenToInstall = sse_decode_opt_list_String(deserializer);
+    var var_toInstallTip = sse_decode_opt_box_autoadd_text(deserializer);
+    var var_toInstall = sse_decode_list_file_entity_location_config(
+      deserializer,
+    );
+    var var_toInstallThenToLauncher = sse_decode_opt_list_String(deserializer);
+    return WindowsCustomGameConfig(
+      toLauncherTip: var_toLauncherTip,
+      toLauncher: var_toLauncher,
+      toLauncherThenToInstall: var_toLauncherThenToInstall,
+      toInstallTip: var_toInstallTip,
+      toInstall: var_toInstall,
+      toInstallThenToLauncher: var_toInstallThenToLauncher,
+    );
+  }
+
+  @protected
+  WindowsGameConfig sse_decode_windows_game_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_locate = sse_decode_list_windows_game_location_config(deserializer);
+    var var_custom = sse_decode_opt_box_autoadd_windows_custom_game_config(
+      deserializer,
+    );
+    return WindowsGameConfig(locate: var_locate, custom: var_custom);
+  }
+
+  @protected
+  WindowsGameLocationConfig sse_decode_windows_game_location_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_channel = sse_decode_String(deserializer);
+    var var_name = sse_decode_text(deserializer);
+    var var_icon = sse_decode_String(deserializer);
+    var var_requireLauncher = sse_decode_bool(deserializer);
+    var var_searcher = sse_decode_list_windows_game_searcher_config(
+      deserializer,
+    );
+    return WindowsGameLocationConfig(
+      channel: var_channel,
+      name: var_name,
+      icon: var_icon,
+      requireLauncher: var_requireLauncher,
+      searcher: var_searcher,
+    );
+  }
+
+  @protected
+  WindowsGameSearcherConfig sse_decode_windows_game_searcher_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_toLauncher = sse_decode_opt_box_autoadd_windows_registry_config(
+          deserializer,
+        );
+        var var_toInstall = sse_decode_box_autoadd_windows_registry_config(
+          deserializer,
+        );
+        var var_useConfigFile = sse_decode_bool(deserializer);
+        return WindowsGameSearcherConfig_Registry(
+          toLauncher: var_toLauncher,
+          toInstall: var_toInstall,
+          useConfigFile: var_useConfigFile,
+        );
+      case 1:
+        var var_path = sse_decode_String(deserializer);
+        var var_configType = sse_decode_config_file_type(deserializer);
+        var var_toLauncher = sse_decode_opt_String(deserializer);
+        var var_toLauncherRegex = sse_decode_opt_String(deserializer);
+        var var_toInstall = sse_decode_String(deserializer);
+        var var_toInstallRegex = sse_decode_opt_String(deserializer);
+        return WindowsGameSearcherConfig_ConfigFile(
+          path: var_path,
+          configType: var_configType,
+          toLauncher: var_toLauncher,
+          toLauncherRegex: var_toLauncherRegex,
+          toInstall: var_toInstall,
+          toInstallRegex: var_toInstallRegex,
+        );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  WindowsRegistryConfig sse_decode_windows_registry_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_hive = sse_decode_windows_registry_hive(deserializer);
+    var var_path = sse_decode_String(deserializer);
+    var var_key = sse_decode_String(deserializer);
+    var var_regex = sse_decode_opt_String(deserializer);
+    var var_locate = sse_decode_String(deserializer);
+    return WindowsRegistryConfig(
+      hive: var_hive,
+      path: var_path,
+      key: var_key,
+      regex: var_regex,
+      locate: var_locate,
+    );
+  }
+
+  @protected
+  WindowsRegistryHive sse_decode_windows_registry_hive(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return WindowsRegistryHive.values[inner];
+  }
+
+  @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
     SseSerializer serializer,
@@ -4336,6 +5385,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_android_custom_game_config(
+    AndroidCustomGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_text(self.toLauncherTip, serializer);
+    sse_encode_String(self.toLauncherThenToInstall, serializer);
+  }
+
+  @protected
+  void sse_encode_android_game_config(
+    AndroidGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_android_game_location_config(self.locate, serializer);
+    sse_encode_opt_box_autoadd_android_custom_game_config(
+      self.custom,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_android_game_location_config(
+    AndroidGameLocationConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.channel, serializer);
+    sse_encode_text(self.name, serializer);
+    sse_encode_String(self.icon, serializer);
+    sse_encode_android_game_searcher_config(self.searcher, serializer);
+  }
+
+  @protected
+  void sse_encode_android_game_searcher_config(
+    AndroidGameSearcherConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.applicationId, serializer);
+    sse_encode_String(self.toInstall, serializer);
+  }
+
+  @protected
   void sse_encode_area(Area self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.index, serializer);
@@ -4345,6 +5439,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_bool(bool self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_android_custom_game_config(
+    AndroidCustomGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_android_custom_game_config(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_android_game_config(
+    AndroidGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_android_game_config(self, serializer);
   }
 
   @protected
@@ -4432,6 +5544,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_game_config(
+    GameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_game_config(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_i_64(
     PlatformInt64 self,
     SseSerializer serializer,
@@ -4456,6 +5577,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_location_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_mac_os_custom_game_config(
+    MacOSCustomGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_mac_os_custom_game_config(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_mac_os_game_config(
+    MacOSGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_mac_os_game_config(self, serializer);
   }
 
   @protected
@@ -4594,6 +5733,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_text(Text self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_text(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_theme_config_v_1(
     ThemeConfigV1 self,
     SseSerializer serializer,
@@ -4633,6 +5778,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_weapon_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_windows_custom_game_config(
+    WindowsCustomGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_windows_custom_game_config(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_windows_game_config(
+    WindowsGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_windows_game_config(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_windows_registry_config(
+    WindowsRegistryConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_windows_registry_config(self, serializer);
   }
 
   @protected
@@ -4715,6 +5887,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_color_role_scheme(self.error, serializer);
     sse_encode_color_role_scheme(self.background, serializer);
     sse_encode_color_role_scheme(self.highlight, serializer);
+  }
+
+  @protected
+  void sse_encode_config_file_type(
+    ConfigFileType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
   }
 
   @protected
@@ -4803,6 +5984,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_file_entity_location_config(
+    FileEntityLocationConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_file_entity_type(self.entityType, serializer);
+    sse_encode_String(self.on_, serializer);
+    sse_encode_String(self.locate, serializer);
+    sse_encode_opt_list_String(self.andDiscoverFile, serializer);
+    sse_encode_opt_list_String(self.andDiscoverDirectory, serializer);
+  }
+
+  @protected
+  void sse_encode_file_entity_type(
+    FileEntityType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -4813,6 +6016,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case FilterParams_None():
         sse_encode_i_32(1, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_game_config(GameConfig self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.id, serializer);
+    sse_encode_text(self.name, serializer);
+    sse_encode_opt_String(self.icon, serializer);
+    sse_encode_opt_box_autoadd_windows_game_config(self.windows, serializer);
+    sse_encode_opt_box_autoadd_mac_os_game_config(self.macos, serializer);
+    sse_encode_opt_box_autoadd_android_game_config(self.android, serializer);
   }
 
   @protected
@@ -4850,6 +6064,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_android_game_location_config(
+    List<AndroidGameLocationConfig> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_android_game_location_config(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_cloth_params(
     List<ClothParams> self,
     SseSerializer serializer,
@@ -4862,11 +6088,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_file_entity_location_config(
+    List<FileEntityLocationConfig> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_file_entity_location_config(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_location(List<Location> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_location(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_mac_os_game_location_config(
+    List<MacOSGameLocationConfig> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_mac_os_game_location_config(item, serializer);
     }
   }
 
@@ -5011,6 +6261,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_windows_game_location_config(
+    List<WindowsGameLocationConfig> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_windows_game_location_config(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_windows_game_searcher_config(
+    List<WindowsGameSearcherConfig> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_windows_game_searcher_config(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_location(Location self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -5057,6 +6331,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_i_32(2, serializer);
         sse_encode_list_location(field0, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_mac_os_custom_game_config(
+    MacOSCustomGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_text(self.toLauncherTip, serializer);
+    sse_encode_String(self.toLauncherThenToInstall, serializer);
+  }
+
+  @protected
+  void sse_encode_mac_os_game_config(
+    MacOSGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_mac_os_game_location_config(self.locate, serializer);
+    sse_encode_opt_box_autoadd_mac_os_custom_game_config(
+      self.custom,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_mac_os_game_location_config(
+    MacOSGameLocationConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.channel, serializer);
+    sse_encode_text(self.name, serializer);
+    sse_encode_String(self.icon, serializer);
+    sse_encode_mac_os_game_searcher_config(self.searcher, serializer);
+  }
+
+  @protected
+  void sse_encode_mac_os_game_searcher_config(
+    MacOSGameSearcherConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.bundleId, serializer);
+    sse_encode_String(self.toInstall, serializer);
   }
 
   @protected
@@ -5245,6 +6564,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_android_custom_game_config(
+    AndroidCustomGameConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_android_custom_game_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_android_game_config(
+    AndroidGameConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_android_game_config(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -5342,6 +6687,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_location_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_mac_os_custom_game_config(
+    MacOSCustomGameConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_mac_os_custom_game_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_mac_os_game_config(
+    MacOSGameConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_mac_os_game_config(self, serializer);
     }
   }
 
@@ -5463,6 +6834,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_text(Text? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_text(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -5486,6 +6867,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_windows_custom_game_config(
+    WindowsCustomGameConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_windows_custom_game_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_windows_game_config(
+    WindowsGameConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_windows_game_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_windows_registry_config(
+    WindowsRegistryConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_windows_registry_config(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_list_String(
     List<String>? self,
     SseSerializer serializer,
@@ -5495,6 +6915,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_list_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_file_entity_location_config(
+    List<FileEntityLocationConfig>? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_file_entity_location_config(self, serializer);
     }
   }
 
@@ -5785,6 +7218,108 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_64(self.id, serializer);
     sse_encode_String(self.slotType, serializer);
     sse_encode_opt_String(self.state, serializer);
+  }
+
+  @protected
+  void sse_encode_windows_custom_game_config(
+    WindowsCustomGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_text(self.toLauncherTip, serializer);
+    sse_encode_opt_list_file_entity_location_config(
+      self.toLauncher,
+      serializer,
+    );
+    sse_encode_opt_list_String(self.toLauncherThenToInstall, serializer);
+    sse_encode_opt_box_autoadd_text(self.toInstallTip, serializer);
+    sse_encode_list_file_entity_location_config(self.toInstall, serializer);
+    sse_encode_opt_list_String(self.toInstallThenToLauncher, serializer);
+  }
+
+  @protected
+  void sse_encode_windows_game_config(
+    WindowsGameConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_windows_game_location_config(self.locate, serializer);
+    sse_encode_opt_box_autoadd_windows_custom_game_config(
+      self.custom,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_windows_game_location_config(
+    WindowsGameLocationConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.channel, serializer);
+    sse_encode_text(self.name, serializer);
+    sse_encode_String(self.icon, serializer);
+    sse_encode_bool(self.requireLauncher, serializer);
+    sse_encode_list_windows_game_searcher_config(self.searcher, serializer);
+  }
+
+  @protected
+  void sse_encode_windows_game_searcher_config(
+    WindowsGameSearcherConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case WindowsGameSearcherConfig_Registry(
+        toLauncher: final toLauncher,
+        toInstall: final toInstall,
+        useConfigFile: final useConfigFile,
+      ):
+        sse_encode_i_32(0, serializer);
+        sse_encode_opt_box_autoadd_windows_registry_config(
+          toLauncher,
+          serializer,
+        );
+        sse_encode_box_autoadd_windows_registry_config(toInstall, serializer);
+        sse_encode_bool(useConfigFile, serializer);
+      case WindowsGameSearcherConfig_ConfigFile(
+        path: final path,
+        configType: final configType,
+        toLauncher: final toLauncher,
+        toLauncherRegex: final toLauncherRegex,
+        toInstall: final toInstall,
+        toInstallRegex: final toInstallRegex,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_String(path, serializer);
+        sse_encode_config_file_type(configType, serializer);
+        sse_encode_opt_String(toLauncher, serializer);
+        sse_encode_opt_String(toLauncherRegex, serializer);
+        sse_encode_String(toInstall, serializer);
+        sse_encode_opt_String(toInstallRegex, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_windows_registry_config(
+    WindowsRegistryConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_windows_registry_hive(self.hive, serializer);
+    sse_encode_String(self.path, serializer);
+    sse_encode_String(self.key, serializer);
+    sse_encode_opt_String(self.regex, serializer);
+    sse_encode_String(self.locate, serializer);
+  }
+
+  @protected
+  void sse_encode_windows_registry_hive(
+    WindowsRegistryHive self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
   }
 }
 

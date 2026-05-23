@@ -1,2 +1,5 @@
 pub mod theme;
-pub mod text;
+pub mod common;
+pub mod config;
+pub mod game_model;
+pub mod game_config;
