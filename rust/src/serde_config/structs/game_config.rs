@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use crate::serde_config::structs::common::{ConfigFileType, FileEntityLocationConfig, Text};
+use super::common::*;
 
 
 #[derive(Clone)]
@@ -40,6 +40,7 @@ pub enum WindowsGameSearcherConfig{
   Registry{
     to_launcher: Option<WindowsRegistryConfig>,
     to_install: WindowsRegistryConfig,
+    use_config_file: bool,
   },
   ConfigFile{
     path: String,
@@ -54,7 +55,7 @@ pub enum WindowsGameSearcherConfig{
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct WindowsRegistryConfig{
-  pub hive: i64,
+  pub hive: WindowsRegistryHive,
   pub path: String,
   pub key: String,
   pub regex: Option<String>,
@@ -66,10 +67,10 @@ pub struct WindowsRegistryConfig{
 pub struct WindowsCustomGameConfig{
   pub to_launcher_tip: Option<Text>,
   pub to_launcher: Option<Vec<FileEntityLocationConfig>>,
-  pub to_launcher_then_to_install: Option<String>,
+  pub to_launcher_then_to_install: Option<Vec<String>>,
   pub to_install_tip: Option<Text>,
   pub to_install: Vec<FileEntityLocationConfig>,
-  pub to_install_then_to_launcher: Option<String>,
+  pub to_install_then_to_launcher: Option<Vec<String>>,
 }
 
 
