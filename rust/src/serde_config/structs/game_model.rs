@@ -7,26 +7,46 @@ use crate::serde_config::structs::text::Text;
 pub struct GameModel{
   pub launcher: LauncherModel,
   pub install_path: Vec<String>,
+  pub uid: Option<String>,
 }
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub enum LauncherModel{
-  Windows,
-  Android,
-  MacOS,
+  Windows(WindowsLauncherModel),
+  MacOS(MacOSLauncherModel),
+  Android(AndroidLauncherModel),
 }
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
-pub enum WindowsLauncherConfig{
+pub enum WindowsLauncherModel{
   System{
-    channel: i64,
+    channel: String,
     path: Vec<String>,
   },
   Custom{
     name: Text,
     path: Vec<String>,
+  },
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub enum MacOSLauncherModel{
+  System{
+    channel: String,
+    bundle_id: String,
+  },
+}
+
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub enum AndroidLauncherModel{
+  System{
+    channel: String,
+    application_id: String,
   },
 }
 
