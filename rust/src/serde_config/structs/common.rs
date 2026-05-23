@@ -1,5 +1,36 @@
 use serde::{Deserialize, Serialize};
 
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub enum Platform{
+  Windows,
+  MacOS,
+  Android,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub enum ConfigFileType{
+  Json,
+  Ini,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub enum FileEntityType{
+  File,
+  Directory,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct FileEntityLocationConfig{
+  pub entity_type: FileEntityType,
+  pub on: String,
+  pub locate: String,
+}
+
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 #[serde(untagged)]
