@@ -11,6 +11,7 @@ pub enum PluginSource{
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct PluginInfo{
+  pub as_extension_of: Option<String>,
   pub id: String,
   pub name: Text,
   pub description: Text,
