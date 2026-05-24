@@ -310,6 +310,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameConfig dco_decode_game_config(dynamic raw);
 
   @protected
+  GameSelectorConfig dco_decode_game_selector_config(dynamic raw);
+
+  @protected
+  GameUidConfig dco_decode_game_uid_config(dynamic raw);
+
+  @protected
   int dco_decode_i_32(dynamic raw);
 
   @protected
@@ -1006,6 +1012,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   GameConfig sse_decode_game_config(SseDeserializer deserializer);
+
+  @protected
+  GameSelectorConfig sse_decode_game_selector_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  GameUidConfig sse_decode_game_uid_config(SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -1877,6 +1891,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_game_config(GameConfig self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_game_selector_config(
+    GameSelectorConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_game_uid_config(GameUidConfig self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);

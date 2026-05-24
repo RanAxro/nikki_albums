@@ -9,7 +9,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'game_config.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class AndroidCustomGameConfig {
   final Text? toLauncherTip;
@@ -102,6 +102,9 @@ class AndroidGameSearcherConfig {
           toInstall == other.toInstall;
 }
 
+/// ---------------
+/// GameAlbumConfig
+/// ---------------
 class GameAlbumConfig {
   final String id;
   final bool visible;
@@ -186,6 +189,8 @@ class GameConfig {
   final Text name;
   final String? icon;
   final List<GameAlbumConfig> albumsConfig;
+  final GameUidConfig uidConfig;
+  final GameSelectorConfig selectorConfig;
   final WindowsGameConfig? windows;
   final MacOSGameConfig? macos;
   final AndroidGameConfig? android;
@@ -195,6 +200,8 @@ class GameConfig {
     required this.name,
     this.icon,
     required this.albumsConfig,
+    required this.uidConfig,
+    required this.selectorConfig,
     this.windows,
     this.macos,
     this.android,
@@ -206,6 +213,8 @@ class GameConfig {
       name.hashCode ^
       icon.hashCode ^
       albumsConfig.hashCode ^
+      uidConfig.hashCode ^
+      selectorConfig.hashCode ^
       windows.hashCode ^
       macos.hashCode ^
       android.hashCode;
@@ -219,9 +228,73 @@ class GameConfig {
           name == other.name &&
           icon == other.icon &&
           albumsConfig == other.albumsConfig &&
+          uidConfig == other.uidConfig &&
+          selectorConfig == other.selectorConfig &&
           windows == other.windows &&
           macos == other.macos &&
           android == other.android;
+}
+
+/// ------------------
+/// GameSelectorConfig
+/// ------------------
+class GameSelectorConfig {
+  final bool necessaryUid;
+  final bool allowCustomUid;
+  final String defaultAlbum;
+  final String? defaultAlbumNoUid;
+
+  const GameSelectorConfig({
+    required this.necessaryUid,
+    required this.allowCustomUid,
+    required this.defaultAlbum,
+    this.defaultAlbumNoUid,
+  });
+
+  @override
+  int get hashCode =>
+      necessaryUid.hashCode ^
+      allowCustomUid.hashCode ^
+      defaultAlbum.hashCode ^
+      defaultAlbumNoUid.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GameSelectorConfig &&
+          runtimeType == other.runtimeType &&
+          necessaryUid == other.necessaryUid &&
+          allowCustomUid == other.allowCustomUid &&
+          defaultAlbum == other.defaultAlbum &&
+          defaultAlbumNoUid == other.defaultAlbumNoUid;
+}
+
+/// -------------
+/// GameUidConfig
+/// -------------
+class GameUidConfig {
+  final String formatRegex;
+  final String? toUsername;
+  final String? toAvatar;
+
+  const GameUidConfig({
+    required this.formatRegex,
+    this.toUsername,
+    this.toAvatar,
+  });
+
+  @override
+  int get hashCode =>
+      formatRegex.hashCode ^ toUsername.hashCode ^ toAvatar.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GameUidConfig &&
+          runtimeType == other.runtimeType &&
+          formatRegex == other.formatRegex &&
+          toUsername == other.toUsername &&
+          toAvatar == other.toAvatar;
 }
 
 class MacOSCustomGameConfig {
@@ -245,9 +318,9 @@ class MacOSCustomGameConfig {
           toLauncherThenToInstall == other.toLauncherThenToInstall;
 }
 
-/// -----------------
+/// ---------------
 /// MacOSGameConfig
-/// -----------------
+/// ---------------
 class MacOSGameConfig {
   final List<MacOSGameLocationConfig> locate;
   final MacOSCustomGameConfig? custom;

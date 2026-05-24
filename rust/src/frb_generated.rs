@@ -1884,6 +1884,12 @@ impl SseDecode for crate::serde_config::structs::game_config::GameConfig {
             <Vec<crate::serde_config::structs::game_config::GameAlbumConfig>>::sse_decode(
                 deserializer,
             );
+        let mut var_uidConfig =
+            <crate::serde_config::structs::game_config::GameUidConfig>::sse_decode(deserializer);
+        let mut var_selectorConfig =
+            <crate::serde_config::structs::game_config::GameSelectorConfig>::sse_decode(
+                deserializer,
+            );
         let mut var_windows =
             <Option<crate::serde_config::structs::game_config::WindowsGameConfig>>::sse_decode(
                 deserializer,
@@ -1901,9 +1907,41 @@ impl SseDecode for crate::serde_config::structs::game_config::GameConfig {
             name: var_name,
             icon: var_icon,
             albums_config: var_albumsConfig,
+            uid_config: var_uidConfig,
+            selector_config: var_selectorConfig,
             windows: var_windows,
             macos: var_macos,
             android: var_android,
+        };
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::game_config::GameSelectorConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_necessaryUid = <bool>::sse_decode(deserializer);
+        let mut var_allowCustomUid = <bool>::sse_decode(deserializer);
+        let mut var_defaultAlbum = <String>::sse_decode(deserializer);
+        let mut var_defaultAlbumNoUid = <Option<String>>::sse_decode(deserializer);
+        return crate::serde_config::structs::game_config::GameSelectorConfig {
+            necessary_uid: var_necessaryUid,
+            allow_custom_uid: var_allowCustomUid,
+            default_album: var_defaultAlbum,
+            default_album_no_uid: var_defaultAlbumNoUid,
+        };
+    }
+}
+
+impl SseDecode for crate::serde_config::structs::game_config::GameUidConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_formatRegex = <String>::sse_decode(deserializer);
+        let mut var_toUsername = <Option<String>>::sse_decode(deserializer);
+        let mut var_toAvatar = <Option<String>>::sse_decode(deserializer);
+        return crate::serde_config::structs::game_config::GameUidConfig {
+            format_regex: var_formatRegex,
+            to_username: var_toUsername,
+            to_avatar: var_toAvatar,
         };
     }
 }
@@ -4669,6 +4707,8 @@ impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::game_config
             self.name.into_into_dart().into_dart(),
             self.icon.into_into_dart().into_dart(),
             self.albums_config.into_into_dart().into_dart(),
+            self.uid_config.into_into_dart().into_dart(),
+            self.selector_config.into_into_dart().into_dart(),
             self.windows.into_into_dart().into_dart(),
             self.macos.into_into_dart().into_dart(),
             self.android.into_into_dart().into_dart(),
@@ -4684,6 +4724,54 @@ impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::game_config
     for crate::serde_config::structs::game_config::GameConfig
 {
     fn into_into_dart(self) -> crate::serde_config::structs::game_config::GameConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::serde_config::structs::game_config::GameSelectorConfig
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.necessary_uid.into_into_dart().into_dart(),
+            self.allow_custom_uid.into_into_dart().into_dart(),
+            self.default_album.into_into_dart().into_dart(),
+            self.default_album_no_uid.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::game_config::GameSelectorConfig
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::game_config::GameSelectorConfig>
+    for crate::serde_config::structs::game_config::GameSelectorConfig
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::game_config::GameSelectorConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::game_config::GameUidConfig {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.format_regex.into_into_dart().into_dart(),
+            self.to_username.into_into_dart().into_dart(),
+            self.to_avatar.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::serde_config::structs::game_config::GameUidConfig
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::game_config::GameUidConfig>
+    for crate::serde_config::structs::game_config::GameUidConfig
+{
+    fn into_into_dart(self) -> crate::serde_config::structs::game_config::GameUidConfig {
         self
     }
 }
@@ -6626,6 +6714,14 @@ impl SseEncode for crate::serde_config::structs::game_config::GameConfig {
             self.albums_config,
             serializer,
         );
+        <crate::serde_config::structs::game_config::GameUidConfig>::sse_encode(
+            self.uid_config,
+            serializer,
+        );
+        <crate::serde_config::structs::game_config::GameSelectorConfig>::sse_encode(
+            self.selector_config,
+            serializer,
+        );
         <Option<crate::serde_config::structs::game_config::WindowsGameConfig>>::sse_encode(
             self.windows,
             serializer,
@@ -6637,6 +6733,25 @@ impl SseEncode for crate::serde_config::structs::game_config::GameConfig {
             self.android,
             serializer,
         );
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::game_config::GameSelectorConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.necessary_uid, serializer);
+        <bool>::sse_encode(self.allow_custom_uid, serializer);
+        <String>::sse_encode(self.default_album, serializer);
+        <Option<String>>::sse_encode(self.default_album_no_uid, serializer);
+    }
+}
+
+impl SseEncode for crate::serde_config::structs::game_config::GameUidConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.format_regex, serializer);
+        <Option<String>>::sse_encode(self.to_username, serializer);
+        <Option<String>>::sse_encode(self.to_avatar, serializer);
     }
 }
 

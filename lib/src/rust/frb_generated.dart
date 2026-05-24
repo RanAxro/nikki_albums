@@ -1913,16 +1913,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   GameConfig dco_decode_game_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 7)
-      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    if (arr.length != 9)
+      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
     return GameConfig(
       id: dco_decode_String(arr[0]),
       name: dco_decode_text(arr[1]),
       icon: dco_decode_opt_String(arr[2]),
       albumsConfig: dco_decode_list_game_album_config(arr[3]),
-      windows: dco_decode_opt_box_autoadd_windows_game_config(arr[4]),
-      macos: dco_decode_opt_box_autoadd_mac_os_game_config(arr[5]),
-      android: dco_decode_opt_box_autoadd_android_game_config(arr[6]),
+      uidConfig: dco_decode_game_uid_config(arr[4]),
+      selectorConfig: dco_decode_game_selector_config(arr[5]),
+      windows: dco_decode_opt_box_autoadd_windows_game_config(arr[6]),
+      macos: dco_decode_opt_box_autoadd_mac_os_game_config(arr[7]),
+      android: dco_decode_opt_box_autoadd_android_game_config(arr[8]),
+    );
+  }
+
+  @protected
+  GameSelectorConfig dco_decode_game_selector_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return GameSelectorConfig(
+      necessaryUid: dco_decode_bool(arr[0]),
+      allowCustomUid: dco_decode_bool(arr[1]),
+      defaultAlbum: dco_decode_String(arr[2]),
+      defaultAlbumNoUid: dco_decode_opt_String(arr[3]),
+    );
+  }
+
+  @protected
+  GameUidConfig dco_decode_game_uid_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return GameUidConfig(
+      formatRegex: dco_decode_String(arr[0]),
+      toUsername: dco_decode_opt_String(arr[1]),
+      toAvatar: dco_decode_opt_String(arr[2]),
     );
   }
 
@@ -3880,6 +3909,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_name = sse_decode_text(deserializer);
     var var_icon = sse_decode_opt_String(deserializer);
     var var_albumsConfig = sse_decode_list_game_album_config(deserializer);
+    var var_uidConfig = sse_decode_game_uid_config(deserializer);
+    var var_selectorConfig = sse_decode_game_selector_config(deserializer);
     var var_windows = sse_decode_opt_box_autoadd_windows_game_config(
       deserializer,
     );
@@ -3892,9 +3923,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       name: var_name,
       icon: var_icon,
       albumsConfig: var_albumsConfig,
+      uidConfig: var_uidConfig,
+      selectorConfig: var_selectorConfig,
       windows: var_windows,
       macos: var_macos,
       android: var_android,
+    );
+  }
+
+  @protected
+  GameSelectorConfig sse_decode_game_selector_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_necessaryUid = sse_decode_bool(deserializer);
+    var var_allowCustomUid = sse_decode_bool(deserializer);
+    var var_defaultAlbum = sse_decode_String(deserializer);
+    var var_defaultAlbumNoUid = sse_decode_opt_String(deserializer);
+    return GameSelectorConfig(
+      necessaryUid: var_necessaryUid,
+      allowCustomUid: var_allowCustomUid,
+      defaultAlbum: var_defaultAlbum,
+      defaultAlbumNoUid: var_defaultAlbumNoUid,
+    );
+  }
+
+  @protected
+  GameUidConfig sse_decode_game_uid_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_formatRegex = sse_decode_String(deserializer);
+    var var_toUsername = sse_decode_opt_String(deserializer);
+    var var_toAvatar = sse_decode_opt_String(deserializer);
+    return GameUidConfig(
+      formatRegex: var_formatRegex,
+      toUsername: var_toUsername,
+      toAvatar: var_toAvatar,
     );
   }
 
@@ -6235,9 +6298,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_text(self.name, serializer);
     sse_encode_opt_String(self.icon, serializer);
     sse_encode_list_game_album_config(self.albumsConfig, serializer);
+    sse_encode_game_uid_config(self.uidConfig, serializer);
+    sse_encode_game_selector_config(self.selectorConfig, serializer);
     sse_encode_opt_box_autoadd_windows_game_config(self.windows, serializer);
     sse_encode_opt_box_autoadd_mac_os_game_config(self.macos, serializer);
     sse_encode_opt_box_autoadd_android_game_config(self.android, serializer);
+  }
+
+  @protected
+  void sse_encode_game_selector_config(
+    GameSelectorConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.necessaryUid, serializer);
+    sse_encode_bool(self.allowCustomUid, serializer);
+    sse_encode_String(self.defaultAlbum, serializer);
+    sse_encode_opt_String(self.defaultAlbumNoUid, serializer);
+  }
+
+  @protected
+  void sse_encode_game_uid_config(
+    GameUidConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.formatRegex, serializer);
+    sse_encode_opt_String(self.toUsername, serializer);
+    sse_encode_opt_String(self.toAvatar, serializer);
   }
 
   @protected

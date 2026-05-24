@@ -358,6 +358,18 @@ const GameConfig infinityNikkiConfig = GameConfig(
     ),
   ],
 
+  uidConfig: GameUidConfig(
+    formatRegex: r"^\d{9}$",
+    toAvatar: r"/X6Game/Saved/CustomAvatar/$uid$",
+  ),
+
+  selectorConfig: GameSelectorConfig(
+    necessaryUid: true,
+    allowCustomUid: true,
+    defaultAlbum: "NikkiPhotos_HighQuality",
+    defaultAlbumNoUid: "ScreenShot",
+  ),
+
   /// Windows
   windows: WindowsGameConfig(
     locate: [

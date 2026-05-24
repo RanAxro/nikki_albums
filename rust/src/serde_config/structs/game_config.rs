@@ -12,11 +12,17 @@ pub struct GameConfig{
   #[serde(skip_serializing_if = "Option::is_none")]
   pub icon: Option<String>,
   pub albums_config: Vec<GameAlbumConfig>,
+  pub uid_config: GameUidConfig,
+  pub selector_config: GameSelectorConfig,
   pub windows: Option<WindowsGameConfig>,
   pub macos: Option<MacOSGameConfig>,
   pub android: Option<AndroidGameConfig>,
 }
 
+
+/// ---------------
+/// GameAlbumConfig
+/// ---------------
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct GameAlbumConfig{
@@ -41,6 +47,32 @@ pub struct GameAlbumConfig{
   pub chain_deletion: HashMap<String, bool>,
   pub platforms: Vec<Platform>,
 }
+
+
+/// -------------
+/// GameUidConfig
+/// -------------
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct GameUidConfig{
+  pub format_regex: String,
+  pub to_username: Option<String>,
+  pub to_avatar: Option<String>,
+}
+
+
+/// ------------------
+/// GameSelectorConfig
+/// ------------------
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct GameSelectorConfig{
+  pub necessary_uid: bool,
+  pub allow_custom_uid: bool,
+  pub default_album: String,
+  pub default_album_no_uid: Option<String>,
+}
+
 
 /// -----------------
 /// WindowsGameConfig
@@ -115,9 +147,9 @@ pub struct WindowsCustomGameConfig{
 }
 
 
-/// -----------------
+/// ---------------
 /// MacOSGameConfig
-/// -----------------
+/// ---------------
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct MacOSGameConfig{
