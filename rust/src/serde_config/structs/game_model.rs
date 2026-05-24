@@ -5,6 +5,8 @@ use crate::serde_config::structs::common::Text;
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 pub struct GameModel{
+  pub plugin: String,
+  pub game: String,
   pub launcher: LauncherModel,
   pub install_path: Vec<String>,
   pub uid: Option<String>,
