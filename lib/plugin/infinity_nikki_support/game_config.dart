@@ -257,7 +257,7 @@ const GameConfig infinityNikkiConfig = GameConfig(
       visible: true,
       unimportance: false,
       name: Text.translate(TranslateText(key: "infinity_nikki.album_name.cloud_photos_low_quality")),
-      icon: "cloud_photos_low_quality.webp",
+      icon: "cloud_photos.webp",
       requireUid: true,
       locate: r"/X6Game/Saved/GamePlayPhotos/$uid$/CloudPhotos_LowQuality",
       toMedia: "",

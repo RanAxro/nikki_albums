@@ -1,4 +1,24 @@
-
 const List<String> iconList = [
-  "assets/infinity_nikki.webp"
+  "assets/plugin/infinity_nikki_support/infinity_nikki.webp",
+  "assets/plugin/infinity_nikki_support/nikki_photos_high_quality.webp",
+  "assets/plugin/infinity_nikki_support/video.webp",
+  "assets/plugin/infinity_nikki_support/magazine_photos.webp",
+  "assets/plugin/infinity_nikki_support/clock_in_photo.webp",
+  "assets/plugin/infinity_nikki_support/collage_high_quality.webp",
+  "assets/plugin/infinity_nikki_support/collage_collage_photo.webp",
+  "assets/plugin/infinity_nikki_support/custom_avatar.webp",
+  "assets/plugin/infinity_nikki_support/custom_card.webp",
+  "assets/plugin/infinity_nikki_support/plant_dyeing.webp",
+  "assets/plugin/infinity_nikki_support/diy.webp",
+  "assets/plugin/infinity_nikki_support/cloud_photos.webp",
+  "assets/plugin/infinity_nikki_support/custom_home_board_photo.webp",
+  "assets/plugin/infinity_nikki_support/home_template_photo.webp",
+  "assets/plugin/infinity_nikki_support/qr_code.webp",
+  "assets/plugin/infinity_nikki_support/screen_shot.webp",
+  "assets/plugin/infinity_nikki_support/video.webp",
+
+  "assets/plugin/infinity_nikki_support/paper.webp",
+  "assets/plugin/infinity_nikki_support/taptap.webp",
+  "assets/plugin/infinity_nikki_support/bilibili.webp",
+  "assets/plugin/infinity_nikki_support/steam.webp",
 ];
