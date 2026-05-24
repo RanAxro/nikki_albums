@@ -1,22 +1,6 @@
 use serde::{Deserialize, Serialize};
 use crate::serde_config::structs::common::Text;
 
-
-
-#[derive(Clone)]
-#[derive(Serialize, Deserialize)]
-pub enum Channel{
-  NikkiAlbums,
-  Plugin(PluginConfig),
-}
-
-#[derive(Clone)]
-#[derive(Serialize, Deserialize)]
-pub struct PluginConfig{
-  pub id: i64,
-  pub name: Text,
-}
-
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
 #[serde(untagged)]
@@ -29,8 +13,8 @@ pub enum UserConfigWrapper{
 pub struct UserConfigV1{
   pub v1: bool,
   pub is_agree_agreement: bool,
-  pub lang: (String, Channel),
-  pub theme: (String, Channel),
+  pub lang: String,
+  pub theme: String,
   // pub current_game: (GameConfig, Channel),
 }
 

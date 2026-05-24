@@ -15,11 +15,11 @@ pub struct PluginInfo{
   pub name: Text,
   pub description: Text,
   pub icon: Option<String>,
-  pub version: u64,
+  pub version: u32,
   pub author: Option<String>,
   pub web: Option<String>,
   pub download_url: Option<String>,
   pub plugin_list: Option<String>,
-  pub app_version: u64,
+  pub app_version: u32,
   pub platforms: Vec<Platform>,
 }

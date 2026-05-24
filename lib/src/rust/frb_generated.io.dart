@@ -21,6 +21,7 @@ import 'serde_config/de.dart';
 import 'serde_config/se.dart';
 import 'serde_config/structs/common.dart';
 import 'serde_config/structs/game_config.dart';
+import 'serde_config/structs/plugin_info.dart';
 import 'serde_config/structs/theme.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -202,6 +203,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw);
+
+  @protected
+  PluginInfo dco_decode_box_autoadd_plugin_info(dynamic raw);
 
   @protected
   Region dco_decode_box_autoadd_region(dynamic raw);
@@ -588,6 +592,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Platform dco_decode_platform(dynamic raw);
 
   @protected
+  PluginInfo dco_decode_plugin_info(dynamic raw);
+
+  @protected
   (double, double) dco_decode_record_f_64_f_64(dynamic raw);
 
   @protected
@@ -888,6 +895,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OutfitDyeHairData sse_decode_box_autoadd_outfit_dye_hair_data(
     SseDeserializer deserializer,
   );
+
+  @protected
+  PluginInfo sse_decode_box_autoadd_plugin_info(SseDeserializer deserializer);
 
   @protected
   Region sse_decode_box_autoadd_region(SseDeserializer deserializer);
@@ -1356,6 +1366,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Platform sse_decode_platform(SseDeserializer deserializer);
 
   @protected
+  PluginInfo sse_decode_plugin_info(SseDeserializer deserializer);
+
+  @protected
   (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
 
   @protected
@@ -1730,6 +1743,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_outfit_dye_hair_data(
     OutfitDyeHairData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_plugin_info(
+    PluginInfo self,
     SseSerializer serializer,
   );
 
@@ -2332,6 +2351,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_platform(Platform self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_plugin_info(PluginInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_record_f_64_f_64(

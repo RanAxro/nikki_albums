@@ -1,4 +1,3 @@
-
 import "package:nikki_albums/src/rust/serde_config/structs/game_config.dart";
 import "package:nikki_albums/src/rust/serde_config/structs/common.dart";
 

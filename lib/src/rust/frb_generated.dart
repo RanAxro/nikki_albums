@@ -22,6 +22,7 @@ import 'serde_config/de.dart';
 import 'serde_config/se.dart';
 import 'serde_config/structs/common.dart';
 import 'serde_config/structs/game_config.dart';
+import 'serde_config/structs/plugin_info.dart';
 import 'serde_config/structs/theme.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -83,7 +84,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1280400328;
+  int get rustContentHash => 962890692;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -215,6 +216,11 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Uint8List> crateSerdeConfigSeSerializeGameConfig({
     required GameConfig value,
+    required bool pretty,
+  });
+
+  Future<Uint8List> crateSerdeConfigSeSerializePluginInfo({
+    required PluginInfo value,
     required bool pretty,
   });
 
@@ -1118,6 +1124,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Uint8List> crateSerdeConfigSeSerializePluginInfo({
+    required PluginInfo value,
+    required bool pretty,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_plugin_info(value, serializer);
+          sse_encode_bool(pretty, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 25,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateSerdeConfigSeSerializePluginInfoConstMeta,
+        argValues: [value, pretty],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateSerdeConfigSeSerializePluginInfoConstMeta =>
+      const TaskConstMeta(
+        debugName: "serialize_plugin_info",
+        argNames: ["value", "pretty"],
+      );
+
+  @override
   Future<Uint8List> crateSerdeConfigSeSerializeThemeConfig({
     required ThemeConfigWrapper value,
     required bool pretty,
@@ -1131,7 +1172,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 26,
             port: port_,
           );
         },
@@ -1160,7 +1201,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 26)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 27)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -1185,7 +1226,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(key, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 27)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 28)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_translate_text,
@@ -1548,6 +1589,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_outfit_dye_hair_data(raw);
+  }
+
+  @protected
+  PluginInfo dco_decode_box_autoadd_plugin_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_plugin_info(raw);
   }
 
   @protected
@@ -2740,6 +2787,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PluginInfo dco_decode_plugin_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 11)
+      throw Exception('unexpected arr length: expect 11 but see ${arr.length}');
+    return PluginInfo(
+      id: dco_decode_String(arr[0]),
+      name: dco_decode_text(arr[1]),
+      description: dco_decode_text(arr[2]),
+      icon: dco_decode_opt_String(arr[3]),
+      version: dco_decode_u_32(arr[4]),
+      author: dco_decode_opt_String(arr[5]),
+      web: dco_decode_opt_String(arr[6]),
+      downloadUrl: dco_decode_opt_String(arr[7]),
+      pluginList: dco_decode_opt_String(arr[8]),
+      appVersion: dco_decode_u_32(arr[9]),
+      platforms: dco_decode_list_platform(arr[10]),
+    );
+  }
+
+  @protected
   (double, double) dco_decode_record_f_64_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3485,6 +3553,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_outfit_dye_hair_data(deserializer));
+  }
+
+  @protected
+  PluginInfo sse_decode_box_autoadd_plugin_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_plugin_info(deserializer));
   }
 
   @protected
@@ -5110,6 +5184,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PluginInfo sse_decode_plugin_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_String(deserializer);
+    var var_name = sse_decode_text(deserializer);
+    var var_description = sse_decode_text(deserializer);
+    var var_icon = sse_decode_opt_String(deserializer);
+    var var_version = sse_decode_u_32(deserializer);
+    var var_author = sse_decode_opt_String(deserializer);
+    var var_web = sse_decode_opt_String(deserializer);
+    var var_downloadUrl = sse_decode_opt_String(deserializer);
+    var var_pluginList = sse_decode_opt_String(deserializer);
+    var var_appVersion = sse_decode_u_32(deserializer);
+    var var_platforms = sse_decode_list_platform(deserializer);
+    return PluginInfo(
+      id: var_id,
+      name: var_name,
+      description: var_description,
+      icon: var_icon,
+      version: var_version,
+      author: var_author,
+      web: var_web,
+      downloadUrl: var_downloadUrl,
+      pluginList: var_pluginList,
+      appVersion: var_appVersion,
+      platforms: var_platforms,
+    );
+  }
+
+  @protected
   (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_f_64(deserializer);
@@ -5949,6 +6052,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_outfit_dye_hair_data(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_plugin_info(
+    PluginInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_plugin_info(self, serializer);
   }
 
   @protected
@@ -7342,6 +7454,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_platform(Platform self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_plugin_info(PluginInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.id, serializer);
+    sse_encode_text(self.name, serializer);
+    sse_encode_text(self.description, serializer);
+    sse_encode_opt_String(self.icon, serializer);
+    sse_encode_u_32(self.version, serializer);
+    sse_encode_opt_String(self.author, serializer);
+    sse_encode_opt_String(self.web, serializer);
+    sse_encode_opt_String(self.downloadUrl, serializer);
+    sse_encode_opt_String(self.pluginList, serializer);
+    sse_encode_u_32(self.appVersion, serializer);
+    sse_encode_list_platform(self.platforms, serializer);
   }
 
   @protected
