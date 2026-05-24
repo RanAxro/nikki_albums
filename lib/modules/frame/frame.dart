@@ -1,7 +1,7 @@
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:flutter/foundation.dart";
-import "package:nikki_albums/plugin/infinity_nikki_support/infinity_nikki.dart";
+import "package:nikki_albums/plugin/infinity_nikki_support/game_config.dart";
 import "package:nikki_albums/modules/game/codec.dart";
 import "package:nikki_albums/src/rust/api/simple.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
