@@ -13,21 +13,23 @@ import "package:path/path.dart" as p;
 
 void buildPlugin(PluginBuilderConfig config, Directory output) async{
 
+  if(config.info.id == "") return;
+
   final String pluginPath = p.join(output.path, config.info.id);
   final Directory pluginDir = Directory(pluginPath);
 
   if(await pluginDir.exists()){
-    pluginDir.delete(recursive: true);
+    await pluginDir.delete(recursive: true);
   }
-  pluginDir.create(recursive: true);
+  await pluginDir.create(recursive: true);
 
   final Uint8List infoBytes = await serializePluginInfo(value: config.info, pretty: true);
-  await File(p.join(pluginPath, "plugin.json")).create();
+  await File(p.join(pluginPath, "plugin.json")).create(recursive: true);
   await File(p.join(pluginPath, "plugin.json")).writeAsBytes(infoBytes);
 
   for(final MapEntry<String, dynamic> langEntry in config.languageList.entries){
     final String jsonStr = jsonEncode(langEntry.value);
-    await File(p.join(pluginPath, "lang", "${langEntry.key}.json")).create();
+    await File(p.join(pluginPath, "lang", "${langEntry.key}.json")).create(recursive: true);
     await File(p.join(pluginPath, "lang", "${langEntry.key}.json")).writeAsString(jsonStr);
   }
 
@@ -37,7 +39,7 @@ void buildPlugin(PluginBuilderConfig config, Directory output) async{
 
   for(final GameConfig gameConfig in config.gameConfigList){
     final Uint8List gameConfigBytes = await serializeGameConfig(value: gameConfig, pretty: true);
-    await File(p.join(pluginPath, "game_config", "${gameConfig.id}.json")).create();
+    await File(p.join(pluginPath, "game_config", "${gameConfig.id}.json")).create(recursive: true);
     await File(p.join(pluginPath, "game_config", "${gameConfig.id}.json")).writeAsBytes(gameConfigBytes);
   }
 }
