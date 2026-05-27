@@ -6,7 +6,24 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'structs/common.dart';
+import 'structs/game_config.dart';
+import 'structs/plugin_info.dart';
 import 'structs/theme.dart';
 
 Future<ThemeConfigWrapper> deserializeThemeConfig({required List<int> value}) =>
     RustLib.instance.api.crateSerdeConfigDeDeserializeThemeConfig(value: value);
+
+Future<ThemeConfigWrapper> decodeThemeConfigFile({required String path}) =>
+    RustLib.instance.api.crateSerdeConfigDeDecodeThemeConfigFile(path: path);
+
+Future<GameConfig> deserializeGameConfig({required List<int> value}) =>
+    RustLib.instance.api.crateSerdeConfigDeDeserializeGameConfig(value: value);
+
+Future<GameConfig> decodeGameConfigFile({required String path}) =>
+    RustLib.instance.api.crateSerdeConfigDeDecodeGameConfigFile(path: path);
+
+Future<PluginInfo> deserializePluginInfo({required List<int> value}) =>
+    RustLib.instance.api.crateSerdeConfigDeDeserializePluginInfo(value: value);
+
+Future<PluginInfo> decodePluginInfoFile({required String path}) =>
+    RustLib.instance.api.crateSerdeConfigDeDecodePluginInfoFile(path: path);
