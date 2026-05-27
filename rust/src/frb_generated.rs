@@ -3371,6 +3371,7 @@ impl SseDecode for crate::serde_config::structs::plugin_info::PluginInfo {
         let mut var_platforms =
             <Vec<crate::serde_config::structs::common::Platform>>::sse_decode(deserializer);
         return crate::serde_config::structs::plugin_info::PluginInfo {
+            as_extension_of: None,
             id: var_id,
             name: var_name,
             description: var_description,

@@ -1,5 +1,6 @@
 export "image.dart";
 
+import "package:nikki_albums/modules/game/domain/provider/game_searcher.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:win32/win32.dart";
 
@@ -679,163 +680,11 @@ class Game extends ChangeNotifier with AlbumPath {
 
 extension FindGame on Game {
   static Future<List<Game>> find() async {
-    if (Platform.isWindows) {
-      return findInWindows();
-    } else if (Platform.isAndroid) {
-      return findInAndroid();
-    } else {
-      return <Game>[];
-    }
+    final list = await GameSearcher.find();
+    Game.cacheGameList = list;
+    return list;
   }
 
-  static Future<List<Game>> findInWindows() async {
-    final List<Game> gameList = <Game>[];
-    final Set<LauncherChannel> finishList = <LauncherChannel>{};
-
-    for (final InfinityNikkiInfo info in infinityNikkiInfos) {
-      for (final WindowsRegistryInfo registryInfo
-          in info.locateByWindowsRegistry) {
-        // 去重
-        if (finishList.contains(info.channel)) continue;
-
-        // 读注册表
-        late final String? value;
-        try {
-          final key = Registry.openPath(
-            registryInfo.hive,
-            path: registryInfo.path,
-            desiredAccessRights: AccessRights.readOnly,
-          );
-          value = key.getStringValue(registryInfo.key);
-          key.close();
-        } on WindowsException catch (e) {
-          // 键值/路径不存在 ERROR_FILE_NOT_FOUND == 2
-          if (e.hr == ERROR_FILE_NOT_FOUND) {
-            value = null;
-          } else {
-            /// @ 1
-            AppState.writeError("game.Game.static.find.@1", e.toString());
-            value = null;
-          }
-        }
-
-        // 读不到值则退出当前循环
-        if (value == null) continue;
-
-        // launcher路径
-        final Path launcherPath = Path(value) + registryInfo.locateToLauncher;
-        // 判断launcher文件夹是否存在
-        bool isLauncherExist =
-            await launcherPath.typeAsync == FileSystemEntityType.directory;
-        if (!isLauncherExist) continue;
-
-        // 找install路径
-        Path installPath = launcherPath + registryInfo.locateToInstall;
-        // 判断install文件夹是否存在
-        bool isInstallExist =
-            await installPath.typeAsync == FileSystemEntityType.directory;
-
-        // 若找不到install文件玩则去 config.ini 找
-        if (isInstallExist == false && registryInfo.configPath != null) {
-          // 获取用户名
-          final username = await getWindowsUserName();
-          if (username == null) continue;
-
-          // 获取配置文件
-          final Path ini = Path(
-            registryInfo.configPath!.replaceAll(r"$username$", username),
-          );
-          // 若配置文件不存在, 则退出当前循环
-          if (await ini.typeAsync != FileSystemEntityType.file) continue;
-          // 读取配置文件的 Download.gameDir值
-          late final String iniText;
-          try {
-            iniText = await ini.file.readAsString();
-          } catch (e) {
-            /// @ 2
-            AppState.writeError("game.Game.static.find.@2", e.toString());
-            continue;
-          }
-          // 解析ini
-          late final Map<String, Map<String, String>> jsonMap;
-          try {
-            jsonMap = parseIni(iniText);
-          } catch (e) {
-            /// @ 3
-            AppState.writeError("game.Game.static.find.@3", e.toString());
-            continue;
-          }
-          if (jsonMap["Download"] is Map &&
-              jsonMap["Download"]!["gameDir"] is String) {
-            // 判断install是否存在
-            installPath = Path(jsonMap["Download"]!["gameDir"]!);
-            isInstallExist =
-                await installPath.typeAsync == FileSystemEntityType.directory;
-          }
-        }
-
-        // 成功获取到install路径
-        if (isInstallExist) {
-          finishList.add(info.channel);
-          gameList.add(
-            Game(
-              launcherChannel: info.channel,
-              launcherPath: launcherPath,
-              installPath: installPath,
-            ),
-          );
-        }
-      }
-    }
-
-    Game.cacheGameList = gameList;
-    return gameList;
-  }
-
-  static Future<List<Game>> findInAndroid() async {
-    final List<Game> gameList = <Game>[];
-    // final Set<LauncherChannel> finishList = <LauncherChannel>{};
-    //
-    // for(final InfinityNikkiInfo info in infinityNikkiInfos){
-    //
-    //
-    //   for(final AndroidApplicationIdInfo applicationIdInfo in info.locateByAndroidApplicationId){
-    //
-    //     // 去重
-    //     if(finishList.contains(info.channel)) continue;
-    //
-    //     // 包名
-    //     final Path launcherPath = Path(applicationIdInfo.applicationId);
-    //     // 判断应用是否安装
-    //     bool isLauncherExist = await DeviceApps.isAppInstalled(launcherPath.path);
-    //     if(!isLauncherExist) continue;
-    //
-    //
-    //     // 找install路径
-    //     final Path? dataDir = await getAndroidDataDir(launcherPath);
-    //     if(dataDir == null) continue;
-    //
-    //     Path installPath = dataDir + applicationIdInfo.locateToInstall;
-    //     // 判断install文件夹是否存在
-    //     bool isInstallExist = await installPath.typeAsync == FileSystemEntityType.directory;
-    //     isInstallExist = true;
-    //
-    //     // 成功获取到install路径
-    //     if(isInstallExist){
-    //       finishList.add(info.channel);
-    //       gameList.add(
-    //         Game(
-    //           launcherChannel: info.channel,
-    //           launcherPath: launcherPath,
-    //           installPath: installPath,
-    //         )
-    //       );
-    //     }
-    //   }
-    // }
-
-    return gameList;
-  }
 }
 
 /// 验证文件是否属于InfinityNikki
