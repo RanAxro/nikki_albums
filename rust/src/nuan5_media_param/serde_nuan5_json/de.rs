@@ -814,7 +814,7 @@ impl<'a> Deserializer<'a>{
 
 
   fn parse_escape<'de>(&mut self, validate: bool) -> Result<(), Error>{
-    match self.expect_peek()?{
+    match self.expect_next()?{
       b'"' => self.scratch.push(b'"'),
       b'\\' => self.scratch.push(b'\\'),
       b'/' => self.scratch.push(b'/'),
