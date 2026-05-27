@@ -29,7 +29,7 @@ class MacOsSystemServices implements SystemServices {
   Path? getDesktopPath() {
     final home = Platform.environment['HOME'];
     if (home != null) {
-      return '$home/Desktop';
+      return Path('$home/Desktop');
     }
     return null;
   }
@@ -51,13 +51,13 @@ class MacOsSystemServices implements SystemServices {
   Future<int> compress(List<Path> paths, Path to, [void Function(double)? onProcess]) async {
     try {
       final encoder = ZipFileEncoder();
-      encoder.create(to);
+      encoder.create(to.path);
       for (final path in paths) {
-        final stat = FileStat.statSync(path);
+        final stat = FileStat.statSync(path.path);
         if (stat.type == FileSystemEntityType.directory) {
-          encoder.addDirectory(Directory(path));
+          encoder.addDirectory(Directory(path.path));
         } else if (stat.type == FileSystemEntityType.file) {
-          encoder.addFile(File(path));
+          encoder.addFile(File(path.path));
         }
       }
       encoder.close();
@@ -70,17 +70,17 @@ class MacOsSystemServices implements SystemServices {
   @override
   Future<int> decompress(Path zipPath, Path to) async {
     try {
-      final bytes = File(zipPath).readAsBytesSync();
+      final bytes = File(zipPath.path).readAsBytesSync();
       final archive = ZipDecoder().decodeBytes(bytes);
       for (final file in archive) {
         final filename = file.name;
         if (file.isFile) {
           final data = file.content as List<int>;
-          File('$to/$filename')
+          File('${to.path}/$filename')
             ..createSync(recursive: true)
             ..writeAsBytesSync(data);
         } else {
-          Directory('$to/$filename').createSync(recursive: true);
+          Directory('${to.path}/$filename').createSync(recursive: true);
         }
       }
       return 0;

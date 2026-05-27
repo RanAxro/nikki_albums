@@ -86,6 +86,10 @@ class _FrameState extends State<Frame> {
               else if (Platform.isAndroid) {
                 return AndroidFrame(key: frameKey);
               }
+              /// macOS
+              else if (Platform.isMacOS) {
+                return ContentBuildInWindow(key: frameKey);
+              }
 
               return Placeholder();
             },

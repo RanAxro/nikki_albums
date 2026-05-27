@@ -1,68 +1,64 @@
-import 'dart:io';
+import 'dart:io' as io;
 import 'package:path/path.dart' as p;
 
 import '../../model/launcher_channel.dart';
-import '../../model/infinity_nikki_info.dart';
 import 'package:nikki_albums/modules/game/lib/launcher.dart';
 import 'package:nikki_albums/modules/game/lib/game.dart';
+import 'package:nikki_albums/utils/common/platform.dart' as app_platform;
 import 'game_search_strategy.dart';
 
 class MacOsSearchStrategy implements GameSearchStrategy {
   @override
   Future<List<Game>> find(Set<LauncherChannel> finished) async {
     final List<Game> gameList = <Game>[];
-    final String? home = Platform.environment['HOME'];
+    final String? home = io.Platform.environment['HOME'];
     if (home == null) return gameList;
 
-    // Check containers
     final containerPath = p.join(home, 'Library', 'Containers');
-    final containerDir = Directory(containerPath);
+    final containerDir = io.Directory(containerPath);
     if (!await containerDir.exists()) return gameList;
 
-    final List<FileSystemEntity> entities = await containerDir.list().toList();
+    final List<io.FileSystemEntity> entities = await containerDir.list().toList();
 
-    for(final InfinityNikkiInfo info in infinityNikkiInfos) {
-      if(finished.contains(info.channel)) continue;
+    for (final io.FileSystemEntity entity in entities) {
+      if (entity is! io.Directory) continue;
+      final dirName = p.basename(entity.path);
+      // Match com.infoldgames.infinitynikki with optional language suffix (e.g. "en", "jp", etc.)
+      if (!dirName.startsWith('com.infoldgames.infinitynikki')) continue;
 
-      for (final FileSystemEntity entity in entities) {
-        if (entity is Directory) {
-          final dirName = p.basename(entity.path);
-          if (dirName.startsWith('com.infoldgames.infinitynikki')) {
-            final installPath = p.join(entity.path, 'Data', 'Library', 'Application Support', 'Epic');
-            final installDir = Directory(installPath);
-            
-            if (await installDir.exists()) {
-              final x6GameDir = Directory(p.join(installPath, 'X6Game'));
-              if (await x6GameDir.exists()) {
-                finished.add(info.channel);
-                gameList.add(Game(
-                  // Launcher doesn't really apply in the same way, but we can provide a dummy or point to the app bundle
-                  launcher: MacOsGameLauncher(
-                    channel: info.channel,
-                    path: entity.path,
-                  ),
-                  installPath: installPath,
-                ));
-              }
-            }
-          }
-        }
-      }
+      final installPath = p.join(entity.path, 'Data', 'Library', 'Application Support', 'Epic');
+      final x6GameDir = io.Directory(p.join(installPath, 'X6Game'));
+      if (!await x6GameDir.exists()) continue;
+
+      // On macOS, use 'paper' channel for all variants since the module's
+      // LauncherChannel enum doesn't distinguish global vs CN
+      final channel = LauncherChannel.paper;
+
+      if (finished.contains(channel)) continue;
+      finished.add(channel);
+
+      gameList.add(Game(
+        launcher: MacOsGameLauncher(
+          channel: channel,
+          path: entity.path,
+        ),
+        installPath: installPath,
+      ));
     }
 
     return gameList;
   }
 }
 
-class MacOsGameLauncher extends Launcher {
-  MacOsGameLauncher({
+class MacOsGameLauncher extends GameLauncher {
+  @override
+  final String path;
+
+  const MacOsGameLauncher({
     required super.channel,
-    required super.path,
+    required this.path,
   });
 
   @override
-  Future<void> run() async {
-    // Basic implementation to launch the app bundle if needed
-    Process.run('open', [path]);
-  }
+  app_platform.Platform get platform => app_platform.Platform.macOs;
 }

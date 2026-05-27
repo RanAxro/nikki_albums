@@ -16,7 +16,8 @@ abstract class UidSearcher{
     for(AlbumInfo info in albumInfos.values){
       if(!info.isRequireUid) continue;
 
-      final String rootPath = p.join(game.installPath, info.locateInGame.split(r"$uid$").first);
+      final String locatePart = info.locateInGame.split(r"$uid$").first.replaceAll(r"\", "/");
+      final String rootPath = p.join(game.installPath, locatePart);
       final Directory rootDir = Directory(rootPath);
       try{
         // 判断文件夹合法性

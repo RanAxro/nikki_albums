@@ -2,7 +2,6 @@ export "image.dart";
 
 import "package:nikki_albums/modules/game/domain/provider/game_searcher.dart";
 import "package:nikki_albums/utils/system/system.dart";
-import "package:win32/win32.dart";
 
 import "uid.dart";
 import "album_manager.dart";
@@ -19,7 +18,7 @@ import "dart:io";
 import "dart:async";
 import "dart:convert";
 
-import "package:win32_registry/win32_registry.dart";
+// import "package:win32_registry/win32_registry.dart";
 // import 'package:device_apps/device_apps.dart';
 
 class GameShortcut {
@@ -680,7 +679,13 @@ class Game extends ChangeNotifier with AlbumPath {
 
 extension FindGame on Game {
   static Future<List<Game>> find() async {
-    final list = await GameSearcher.find();
+    final libGames = await GameSearcher.find();
+    final List<Game> list = libGames.map((g) => Game(
+      launcherChannel: LauncherChannel.from(g.launcher?.channel.name),
+      launcherPath: Path(g.launcher?.path ?? ''),
+      launcherName: g.name,
+      installPath: Path(g.installPath),
+    )).toList();
     Game.cacheGameList = list;
     return list;
   }

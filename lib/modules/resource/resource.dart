@@ -36,7 +36,7 @@ class Resource extends StatelessWidget {
 
     if (info.onlyWindows) {
       if (Platform.isWindows) {
-        final String? username = await getWindowsUserName();
+        final String? username = await SystemFactory.instance.getUserName();
         if (username == null) return null;
 
         return Path(info.locate.replaceAll(r"$username$", username));
@@ -294,7 +294,7 @@ class ListViewer extends StatelessWidget {
                   child: SmallButton(
                     colorRole: ColorRole.background,
                     onClick: () {
-                      playBk2VideoInWindows(movies[index]);
+                      SystemFactory.instance.playBk2Video(movies[index]);
                     },
                     child: Row(
                       children: [

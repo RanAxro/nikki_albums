@@ -227,6 +227,21 @@ abstract class AppState {
 Future<void> initApp() async {
   await AppState.read();
 
+  // Auto-detect game on first launch if no game is saved
+  if (AppState.currentGame.value == null) {
+    try {
+      final games = await FindGame.find();
+      if (games.isNotEmpty) {
+        final game = games.first;
+        final uids = await game.findUid();
+        if (uids.isNotEmpty) {
+          game.selectedUid = uids.first;
+        }
+        AppState.currentGame.value = game;
+      }
+    } catch (_) {}
+  }
+
   Nikkias.init();
 }
 
