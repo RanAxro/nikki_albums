@@ -11,7 +11,7 @@ import "package:path/path.dart" as p;
 import "package:uuid/uuid.dart";
 
 
-void buildPlugin(PluginBuilderConfig config, Directory output) async{
+Future<void> buildPlugin(PluginBuilderConfig config, Directory output) async{
   if(!Uuid.isValidUUID(fromString: config.info.uuid)){
     return;
   }
