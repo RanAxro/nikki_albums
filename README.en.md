@@ -1,7 +1,7 @@
 <a href="README.zh.md">阅读中文版</a>
 
 <div align="center">
-  <img src="src/nikki_albums/assets/logo/nikkialbums.webp" alt="Nikki Albums", width="100", height="100">
+  <img src="assets/logo/nikkialbums.webp" alt="Nikki Albums", width="100", height="100">
   <br/>
   <h1>Nikki Albums</h1>
 </div>
