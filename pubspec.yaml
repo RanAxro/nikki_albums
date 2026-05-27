@@ -63,7 +63,7 @@ dependencies:
   #  multicast_dns: ^0.3.3
   qr_flutter: ^4.1.0
   network_info_plus: ^7.0.0
-  connectivity_plus: ^7.0.0
+  connectivity_plus: ">=7.0.0 <7.1.0"
 
   # Windows
   bitsdojo_window: ^0.1.6
