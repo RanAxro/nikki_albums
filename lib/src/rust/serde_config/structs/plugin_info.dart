@@ -11,7 +11,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`
 
 class PluginInfo {
-  final String id;
+  final String? asExtensionOf;
+  final String uuid;
   final Text name;
   final Text description;
   final String? icon;
@@ -24,7 +25,8 @@ class PluginInfo {
   final List<Platform> platforms;
 
   const PluginInfo({
-    required this.id,
+    this.asExtensionOf,
+    required this.uuid,
     required this.name,
     required this.description,
     this.icon,
@@ -39,7 +41,8 @@ class PluginInfo {
 
   @override
   int get hashCode =>
-      id.hashCode ^
+      asExtensionOf.hashCode ^
+      uuid.hashCode ^
       name.hashCode ^
       description.hashCode ^
       icon.hashCode ^
@@ -56,7 +59,8 @@ class PluginInfo {
       identical(this, other) ||
       other is PluginInfo &&
           runtimeType == other.runtimeType &&
-          id == other.id &&
+          asExtensionOf == other.asExtensionOf &&
+          uuid == other.uuid &&
           name == other.name &&
           description == other.description &&
           icon == other.icon &&

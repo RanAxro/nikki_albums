@@ -3357,7 +3357,8 @@ impl SseDecode for crate::serde_config::structs::common::Platform {
 impl SseDecode for crate::serde_config::structs::plugin_info::PluginInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_id = <String>::sse_decode(deserializer);
+        let mut var_asExtensionOf = <Option<String>>::sse_decode(deserializer);
+        let mut var_uuid = <String>::sse_decode(deserializer);
         let mut var_name = <crate::serde_config::structs::common::Text>::sse_decode(deserializer);
         let mut var_description =
             <crate::serde_config::structs::common::Text>::sse_decode(deserializer);
@@ -3371,7 +3372,8 @@ impl SseDecode for crate::serde_config::structs::plugin_info::PluginInfo {
         let mut var_platforms =
             <Vec<crate::serde_config::structs::common::Platform>>::sse_decode(deserializer);
         return crate::serde_config::structs::plugin_info::PluginInfo {
-            id: var_id,
+            as_extension_of: var_asExtensionOf,
+            uuid: var_uuid,
             name: var_name,
             description: var_description,
             icon: var_icon,
@@ -5665,7 +5667,8 @@ impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::common::Pla
 impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::plugin_info::PluginInfo {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
-            self.id.into_into_dart().into_dart(),
+            self.as_extension_of.into_into_dart().into_dart(),
+            self.uuid.into_into_dart().into_dart(),
             self.name.into_into_dart().into_dart(),
             self.description.into_into_dart().into_dart(),
             self.icon.into_into_dart().into_dart(),
@@ -7974,7 +7977,8 @@ impl SseEncode for crate::serde_config::structs::common::Platform {
 impl SseEncode for crate::serde_config::structs::plugin_info::PluginInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.id, serializer);
+        <Option<String>>::sse_encode(self.as_extension_of, serializer);
+        <String>::sse_encode(self.uuid, serializer);
         <crate::serde_config::structs::common::Text>::sse_encode(self.name, serializer);
         <crate::serde_config::structs::common::Text>::sse_encode(self.description, serializer);
         <Option<String>>::sse_encode(self.icon, serializer);

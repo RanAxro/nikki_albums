@@ -2790,20 +2790,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PluginInfo dco_decode_plugin_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 11)
-      throw Exception('unexpected arr length: expect 11 but see ${arr.length}');
+    if (arr.length != 12)
+      throw Exception('unexpected arr length: expect 12 but see ${arr.length}');
     return PluginInfo(
-      id: dco_decode_String(arr[0]),
-      name: dco_decode_text(arr[1]),
-      description: dco_decode_text(arr[2]),
-      icon: dco_decode_opt_String(arr[3]),
-      version: dco_decode_u_32(arr[4]),
-      author: dco_decode_opt_String(arr[5]),
-      web: dco_decode_opt_String(arr[6]),
-      downloadUrl: dco_decode_opt_String(arr[7]),
-      pluginList: dco_decode_opt_String(arr[8]),
-      appVersion: dco_decode_u_32(arr[9]),
-      platforms: dco_decode_list_platform(arr[10]),
+      asExtensionOf: dco_decode_opt_String(arr[0]),
+      uuid: dco_decode_String(arr[1]),
+      name: dco_decode_text(arr[2]),
+      description: dco_decode_text(arr[3]),
+      icon: dco_decode_opt_String(arr[4]),
+      version: dco_decode_u_32(arr[5]),
+      author: dco_decode_opt_String(arr[6]),
+      web: dco_decode_opt_String(arr[7]),
+      downloadUrl: dco_decode_opt_String(arr[8]),
+      pluginList: dco_decode_opt_String(arr[9]),
+      appVersion: dco_decode_u_32(arr[10]),
+      platforms: dco_decode_list_platform(arr[11]),
     );
   }
 
@@ -5186,7 +5187,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   PluginInfo sse_decode_plugin_info(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_id = sse_decode_String(deserializer);
+    var var_asExtensionOf = sse_decode_opt_String(deserializer);
+    var var_uuid = sse_decode_String(deserializer);
     var var_name = sse_decode_text(deserializer);
     var var_description = sse_decode_text(deserializer);
     var var_icon = sse_decode_opt_String(deserializer);
@@ -5198,7 +5200,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_appVersion = sse_decode_u_32(deserializer);
     var var_platforms = sse_decode_list_platform(deserializer);
     return PluginInfo(
-      id: var_id,
+      asExtensionOf: var_asExtensionOf,
+      uuid: var_uuid,
       name: var_name,
       description: var_description,
       icon: var_icon,
@@ -7459,7 +7462,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_plugin_info(PluginInfo self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.id, serializer);
+    sse_encode_opt_String(self.asExtensionOf, serializer);
+    sse_encode_String(self.uuid, serializer);
     sse_encode_text(self.name, serializer);
     sse_encode_text(self.description, serializer);
     sse_encode_opt_String(self.icon, serializer);
