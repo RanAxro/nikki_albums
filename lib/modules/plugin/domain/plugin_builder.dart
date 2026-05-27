@@ -1,21 +1,22 @@
 
-import "dart:convert";
-
 import "../model/plugin_builder_config.dart";
 import "package:nikki_albums/src/rust/serde_config/se.dart";
 import "package:nikki_albums/src/rust/serde_config/structs/game_config.dart";
 
 import "dart:io";
 import "dart:typed_data";
+import "dart:convert";
 
 import "package:path/path.dart" as p;
+import "package:uuid/uuid.dart";
 
 
-void buildPlugin(PluginBuilderConfig config, Directory output) async{
+Future<void> buildPlugin(PluginBuilderConfig config, Directory output) async{
+  if(!Uuid.isValidUUID(fromString: config.info.uuid)){
+    return;
+  }
 
-  if(config.info.id == "") return;
-
-  final String pluginPath = p.join(output.path, config.info.id);
+  final String pluginPath = p.join(output.path, config.info.uuid);
   final Directory pluginDir = Directory(pluginPath);
 
   if(await pluginDir.exists()){

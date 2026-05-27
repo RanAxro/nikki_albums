@@ -12,7 +12,7 @@ pub enum PluginSource{
 #[derive(Serialize, Deserialize)]
 pub struct PluginInfo{
   pub as_extension_of: Option<String>,
-  pub id: String,
+  pub uuid: String,
   pub name: Text,
   pub description: Text,
   pub icon: Option<String>,
