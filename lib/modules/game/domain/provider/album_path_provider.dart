@@ -1,9 +1,11 @@
+import "dart:io" show Platform;
 import "../../model/album_type.dart";
 import "../../model/album_info.dart";
 import "../../model/exception/album_path_provider_exception.dart";
 
 import "package:path/path.dart" as p;
 
+String _normalizeSep(String path) => Platform.isWindows ? path : path.replaceAll(r"\", "/");
 
 abstract class AlbumPathProvider{
   static String forGame(String installPath, AlbumType type, [String? uid]){
@@ -19,7 +21,7 @@ abstract class AlbumPathProvider{
       path = path.replaceAll(r"$uid$", uid!);
     }
 
-    return p.join(installPath, path);
+    return p.join(installPath, _normalizeSep(path));
   }
 
   static String? forBackup(String installPath, AlbumType type, [String? uid]){
@@ -39,7 +41,7 @@ abstract class AlbumPathProvider{
       path = path.replaceAll(r"$uid$", uid!);
     }
 
-    return p.join(installPath, path);
+    return p.join(installPath, _normalizeSep(path));
   }
 
   static String forRecycleBin(String installPath, AlbumType type, String msSinceEpoch, [String? uid]){
@@ -57,6 +59,6 @@ abstract class AlbumPathProvider{
       path = path.replaceAll(r"$uid$", uid!);
     }
 
-    return p.join(installPath, path);
+    return p.join(installPath, _normalizeSep(path));
   }
 }

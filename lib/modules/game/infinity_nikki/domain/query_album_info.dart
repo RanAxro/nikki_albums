@@ -1,9 +1,11 @@
+import "dart:io" show Platform;
 import "../model/album_type.dart";
 import "../model/album_info.dart";
 import "../model/exception.dart";
 
 import "package:path/path.dart" as p;
 
+String _normalizeSep(String path) => Platform.isWindows ? path : path.replaceAll(r"\", "/");
 
 AlbumInfo queryAlbumInfo(AlbumType type){
   return albumInfos[type]!;
@@ -26,7 +28,7 @@ String queryPathForGame(AlbumType type, String installPath, [String? uid]){
     path = path.replaceAll(r"$uid$", uid!);
   }
 
-  return p.join(installPath, path);
+  return p.join(installPath, _normalizeSep(path));
 }
 
 String? queryPathForBackup(AlbumType type, String installPath, [String? uid]){
@@ -46,7 +48,7 @@ String? queryPathForBackup(AlbumType type, String installPath, [String? uid]){
     path = path.replaceAll(r"$uid$", uid!);
   }
 
-  return p.join(installPath, path);
+  return p.join(installPath, _normalizeSep(path));
 }
 
 String queryPathForRecycleBin(AlbumType type, String msSinceEpoch, String installPath, [String? uid]){
@@ -64,5 +66,5 @@ String queryPathForRecycleBin(AlbumType type, String msSinceEpoch, String instal
     path = path.replaceAll(r"$uid$", uid!);
   }
 
-  return p.join(installPath, path);
+  return p.join(installPath, _normalizeSep(path));
 }

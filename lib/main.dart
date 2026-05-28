@@ -10,7 +10,8 @@ import 'package:nikki_albums/src/rust/frb_generated.dart';
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/utils/system/system.dart";
-
+import "package:nikki_albums/utils/system/system_service_windows.dart";
+import "package:nikki_albums/utils/system/system_service_macos.dart";
 import "package:flutter/material.dart";
 import "dart:ui" hide Path;
 import "dart:io";
@@ -26,6 +27,12 @@ void main(List<String> args) async{
   await RustLib.init();
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows) {
+    SystemFactory.register(WindowsSystemServices());
+  } else if (Platform.isMacOS) {
+    SystemFactory.register(MacOsSystemServices());
+  }
 
   MediaKit.ensureInitialized();
 

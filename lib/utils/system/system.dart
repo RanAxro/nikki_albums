@@ -1,13 +1,11 @@
-export "windows.dart";
-export "android.dart";
+import 'dart:io';
 
-import "dart:io";
+import '../path.dart';
+import 'system_service.dart';
+import 'package:path_provider/path_provider.dart';
 
-import "package:nikki_albums/utils/system/windows.dart";
-
-import "../path.dart";
-
-import "package:path_provider/path_provider.dart";
+export 'system_service.dart';
+export 'system_service.dart';
 
 Future<Path> getAppDataDirectoryPath() async {
   final Directory directory = await getApplicationDocumentsDirectory();
@@ -45,10 +43,7 @@ Future<void> compress(
   Path to, [
   void Function(double)? onProcess,
 ]) async {
-  if (Platform.isWindows) {
-    await compressInWindows(paths, to, onProcess);
-  } else if (Platform.isAndroid) {
-  } else {}
+  await SystemFactory.instance.compress(paths, to, onProcess);
 }
 
 Future<void> decompress(
@@ -56,9 +51,28 @@ Future<void> decompress(
   Path to, [
   void Function(double)? onProcess,
 ]) async {
-  if (Platform.isWindows) {
-    await decompressInWindows(zipPath, to);
-    onProcess?.call(1);
-  } else if (Platform.isAndroid) {
-  } else {}
+  await SystemFactory.instance.decompress(zipPath, to);
+  onProcess?.call(1);
+}
+
+// Wrapper for existing global functions to maintain compatibility
+
+(int, int) getWindowsScreenSize() => SystemFactory.instance.getScreenSize();
+
+void doTopWindow(bool isTop, {int? hwnd}) => SystemFactory.instance.doTopWindow(isTop, hwnd: hwnd);
+
+void toForeground() => SystemFactory.instance.toForeground();
+
+List<int> getAllWindowHandle() => SystemFactory.instance.getAllWindowHandle();
+
+Path? getWindowsDesktopPath() => SystemFactory.instance.getDesktopPath();
+
+(int, int, int) getDiskFreeSpaceEx(Path path) => SystemFactory.instance.getDiskFreeSpaceEx(path);
+
+Future<bool> runWindowsCommandAsAdmin(List<String> commands) => SystemFactory.instance.runCommandAsAdmin(commands);
+
+class Explorer {
+  static void open() => SystemFactory.instance.openExplorer();
+  static void openFile(File file) => SystemFactory.instance.openFileInExplorer(file);
+  static void openDir(Directory dir) => SystemFactory.instance.openDirInExplorer(dir);
 }
