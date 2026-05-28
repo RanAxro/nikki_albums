@@ -18,6 +18,8 @@ import "dart:io";
 import "dart:async";
 import "dart:convert";
 
+import "package:easy_localization/easy_localization.dart";
+
 // import "package:win32_registry/win32_registry.dart";
 // import 'package:device_apps/device_apps.dart';
 
@@ -299,7 +301,7 @@ class Game extends ChangeNotifier with AlbumPath {
     if (launcherChannel == LauncherChannel.unknown) {
       return launcherName ?? "";
     }
-    return launcherChannel.name;
+    return tr("infinity_nikki.launcher_channel.${launcherChannel.name}");
   }
 
   GameShortcut? get shortcut => selectedUid == null

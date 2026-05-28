@@ -523,7 +523,19 @@
 
 
 
+  "infinity_nikki": {
+    "infinity_nikki": "Infinity Nikki",
+    "infinity_nikki_pc": "Infinity Nikki PC",
+    "infinity_nikki_android": "Infinity Nikki Android",
 
+    "launcher_channel": {
+      "paper": "China Server",
+      "paperGlobal": "Global Server",
+      "taptap": "TapTap",
+      "bilibili": "bilibili",
+      "steam": "steam"
+    }
+  },
 
   "image_edit": {
     "temperature": "Temperature",

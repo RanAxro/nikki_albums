@@ -531,7 +531,7 @@
 
     "launcher_channel": {
       "paper": "国服",
-      "paper_global": "国际服",
+      "paperGlobal": "国际服",
       "taptap": "TapTap",
       "bilibili": "bilibili",
       "steam": "steam"
