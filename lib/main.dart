@@ -63,7 +63,7 @@ void main(List<String> args) async{
     )
   );
 
-  if(Platform.isWindows){
+  if(Platform.isWindows || Platform.isMacOS){
     WidgetsBinding.instance.addPostFrameCallback((_){
       doWhenWindowReady((){
         appWindow.minSize = Size(0, 0);
