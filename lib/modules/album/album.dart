@@ -53,6 +53,7 @@ class AlbumValuePool extends InheritedWidget {
   final ValueNotifier<bool> isDragScrollbar = ValueNotifier<bool>(false);
   final ValueNotifier<bool> isShowTimeHeader = ValueNotifier<bool>(true);
   final ValueNotifier<bool> isPressTag = ValueNotifier<bool>(false);
+  final Map<AlbumType, double> offset = {};
 
   AlbumValuePool({super.key, required super.child});
 
@@ -876,6 +877,7 @@ class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader> {
   @override
   Widget build(BuildContext context) {
     return SmoothPointerScroll(
+      initialScrollOffset: AlbumValuePool.of(context).offset[widget.game.selectedAlbum] ?? 0,
       scrollbarController: scrollbarController,
       builder:
           (
@@ -884,6 +886,12 @@ class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader> {
             ScrollPhysics physics,
             IndependentScrollbarController scrollbarController,
           ) {
+            controller.addListener((){
+              if(controller.hasClients){
+                AlbumValuePool.of(context).offset[widget.game.selectedAlbum] = controller.offset;
+              }
+            });
+
             return Padding(
               padding: EdgeInsets.only(top: topBarHeight),
               child: Stack(
