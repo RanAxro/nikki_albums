@@ -1,5 +1,6 @@
 export "image_addition.dart";
 
+import "dart:io" show Platform;
 import "package:easy_localization/easy_localization.dart";
 import "package:nikki_albums/modules/game/codec.dart";
 
@@ -195,9 +196,14 @@ mixin AlbumPath {
 
     final AlbumsInfoItem info = albumsInfoMap[type]!;
 
-    final String locate = source == ImageSource.game
+    String locate = source == ImageSource.game
         ? info.locateInGame
         : info.locateInBackup!;
+
+    // macOS path override: ScreenShot is under Saved/ on macOS
+    if (Platform.isMacOS && type == AlbumType.ScreenShot && source == ImageSource.game) {
+      locate = r"\X6Game\Saved\ScreenShot";
+    }
 
     if (info.isRequireUid) {
       if (uid == null) return null;

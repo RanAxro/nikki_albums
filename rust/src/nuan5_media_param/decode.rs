@@ -3,7 +3,7 @@ use std::ptr;
 use std::sync::Arc;
 use flutter_rust_bridge::frb;
 use crate::frb_generated::StreamSink;
-use crate::nuan5_media_param::decrypt::{convert_media_result, MediaKey, MediaStreamResult};
+use crate::nuan5_media_param::decrypt::{MediaKey, MediaStreamResult};
 use super::converter::*;
 use super::decrypt;
 use super::serde_nuan5_json::de::from_slice;
@@ -132,58 +132,65 @@ pub fn media_de_files_unchecked(
     return Ok(());
   }
 
-  let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
-  let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
+  #[cfg(target_os = "windows")]
+  {
+    use crate::nuan5_media_param::decrypt::convert_media_result;
+    let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
+    let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
-  // 打包上下文到 Arc
-  let context = Arc::new(MediaStreamCallbackContext{ sink, param_type });
-  let userdata = Arc::into_raw(Arc::clone(&context)) as *mut c_void;
+    let context = Arc::new(MediaStreamCallbackContext{ sink, param_type });
+    let userdata = Arc::into_raw(Arc::clone(&context)) as *mut c_void;
 
-  extern "C" fn stream_trampoline(
-    index: usize,
-    result: *mut crate::nuan5_media_param::decrypt::ffi::MediaDecryptionResult,
-    userdata: *mut c_void,
-  ){
-    if userdata.is_null() {
-      return;
+    extern "C" fn stream_trampoline(
+      index: usize,
+      result: *mut crate::nuan5_media_param::decrypt::ffi::MediaDecryptionResult,
+      userdata: *mut c_void,
+    ){
+      if userdata.is_null() {
+        return;
+      }
+
+      let ctx = unsafe{ &*(userdata as *const MediaStreamCallbackContext) };
+      let sink = &ctx.sink;
+      let param_type = &ctx.param_type;
+
+      if result.is_null() {
+        let _ = sink.add(MediaCustomDataResult { index, data: None });
+        return;
+      }
+
+      let data = unsafe{ convert_media_result(ptr::read(result)) };
+
+      let _ = sink.add(MediaCustomDataResult{
+        index,
+        data: data.as_ref().map(|decrypted|{
+          decode_media_param(param_type.clone(), decrypted)
+        }),
+      });
     }
 
-    // 恢复 Arc 引用（不获取所有权，只是借用）
-    let ctx = unsafe{ &*(userdata as *const MediaStreamCallbackContext) };
-    let sink = &ctx.sink;
-    let param_type = &ctx.param_type;
+    let flag = get_flag(&param_type);
 
-    if result.is_null() {
-      let _ = sink.add(MediaCustomDataResult { index, data: None });
-      return;
+    unsafe{
+      decrypt::ffi::media_decode_files_unchecked_stream(
+        flag.as_ptr(),
+        flag.len(),
+        path_ptrs.as_ptr(),
+        path_ptrs.len(),
+        key.ptr,
+        stream_trampoline,
+        userdata,
+      );
     }
 
-    let data = unsafe{ convert_media_result(ptr::read(result)) };
-
-    let _ = sink.add(MediaCustomDataResult{
-      index,
-      data: data.as_ref().map(|decrypted|{
-        decode_media_param(param_type.clone(), decrypted)
-      }),
-    });
+    let _ = unsafe{ Arc::from_raw(userdata as *const MediaStreamCallbackContext) };
   }
-
-  let flag = get_flag(&param_type);
-
-  unsafe{
-    decrypt::ffi::media_decode_files_unchecked_stream(
-      flag.as_ptr(),
-      flag.len(),
-      path_ptrs.as_ptr(),
-      path_ptrs.len(),
-      key.ptr,
-      stream_trampoline,
-      userdata,
-    );
+  #[cfg(not(target_os = "windows"))]
+  {
+    for (i, _) in paths.iter().enumerate() {
+      let _ = sink.add(MediaCustomDataResult { index: i, data: None });
+    }
   }
-
-  // 释放 Arc 所有权
-  let _ = unsafe{ Arc::from_raw(userdata as *const MediaStreamCallbackContext) };
 
   Ok(())
 }

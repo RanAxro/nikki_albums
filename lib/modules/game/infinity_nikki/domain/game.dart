@@ -72,7 +72,8 @@ class InfinityNikkiSession extends GameSession{
 
       if(!info.isRequireUid) continue;
 
-      final String rootPath = p.join(installPath, info.locateInGame.split(r"$uid$").first);
+      final String locatePart = info.locateInGame.split(r"$uid$").first.replaceAll(r"\", "/");
+      final String rootPath = p.join(installPath, locatePart);
       final Directory rootDir = Directory(rootPath);
       try{
         // 判断文件夹合法性

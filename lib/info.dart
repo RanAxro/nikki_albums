@@ -22,7 +22,8 @@ const String qqGroup = r"1062670402";
 const int inWindows = 1 << 0;
 const int inAndroid = 1 << 1;
 const int inIos = 1 << 2;
-const int inAllPlatforms = inWindows | inAndroid | inIos;
+const int inMacOS = 1 << 3;
+const int inAllPlatforms = inWindows | inAndroid | inIos | inMacOS;
 
 extension PlatformBits on int {
   bool get canRunPlatform {
@@ -30,6 +31,7 @@ extension PlatformBits on int {
     if (Platform.isWindows) return this & inWindows != 0;
     if (Platform.isAndroid) return this & inAndroid != 0;
     if (Platform.isIOS) return this & inIos != 0;
+    if (Platform.isMacOS) return this & inMacOS != 0;
     return false;
   }
 }
@@ -372,7 +374,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
       AlbumType.ClockInPhoto: false,
       AlbumType.Collage_CollagePhoto: false,
     },
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   AlbumType.Video: AlbumsInfoItem(
     type: "Video",
@@ -386,7 +388,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     chainDeletion: {
       AlbumType.ExternalVideo: true,
     },
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
     videoInfo: VideoAlbumInfo(
       locateToVideo: r"\$filename$.Mp4",
       locateToCover: r"\$filename$_cover.jpeg",
@@ -411,7 +413,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
       AlbumType.ClockInPhoto: false,
       AlbumType.Collage_CollagePhoto: false,
     },
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 旅行手账 删了游戏内显示的是初始的/官方默认 与世界巡游照片同理
   AlbumType.MagazinePhotos: AlbumsInfoItem(
@@ -431,7 +433,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
       AlbumType.ClockInPhoto: false,
       AlbumType.Collage_CollagePhoto: false,
     },
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 世界巡游照片 没有云端 删除后游戏内有图片损坏的图案 显示官方默认照片"这张是大喵拍摄的备用照片哦~"
   AlbumType.ClockInPhoto: AlbumsInfoItem(
@@ -451,7 +453,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
       AlbumType.MagazinePhotos: false,
       AlbumType.Collage_CollagePhoto: false,
     },
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 趣拼海报
   AlbumType.Collage_HighQuality: AlbumsInfoItem(
@@ -465,7 +467,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\Collage_HighQuality\$uid$",
     chainDeletion: {AlbumType.Collage_LowQuality: true},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 趣拼海报缩略图
   AlbumType.Collage_LowQuality: AlbumsInfoItem(
@@ -479,7 +481,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\Collage_LowQuality\$uid$",
     chainDeletion: {AlbumType.Collage_LowQuality: false},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 趣拼海报原图
   AlbumType.Collage_CollagePhoto: AlbumsInfoItem(
@@ -500,7 +502,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
       AlbumType.ClockInPhoto: false,
       AlbumType.Collage_CollagePhoto: false,
     },
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 使用过的头像
   AlbumType.CustomAvatar: AlbumsInfoItem(
@@ -514,7 +516,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\CustomAvatar\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 使用过的名片 有云端 删除名片后不会删除本地照片
   // 图像文件后会下缩略图(1k?)到GamePlayPhotos\uid\CloudPhotos\temp
@@ -531,7 +533,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\CustomCard\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   AlbumType.PlantDyeing: AlbumsInfoItem(
     type: "PlantDyeing",
@@ -544,7 +546,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\PlantDyeing",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 从染色分享保存到星绘图册的图片, 只会保留最新的一张
   AlbumType.DIY: AlbumsInfoItem(
@@ -558,7 +560,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\DIY\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   AlbumType.CloudPhotos: AlbumsInfoItem(
     type: "CloudPhotos",
@@ -571,7 +573,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\CloudPhotos\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   AlbumType.CloudPhotos_LowQuality: AlbumsInfoItem(
     type: "CloudPhotos_LowQuality",
@@ -584,7 +586,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\CloudPhotos_LowQuality\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 家园路牌封面图片
   AlbumType.CustomHomeBoardPhoto: AlbumsInfoItem(
@@ -598,7 +600,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\CustomHomeBoardPhoto\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 家园模板封面图片
   AlbumType.HomeTemplatePhoto: AlbumsInfoItem(
@@ -612,7 +614,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\HomeTemplatePhoto\$uid$",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   // 分享码
   AlbumType.XSdkQrCode: AlbumsInfoItem(
@@ -626,7 +628,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\XSdkQrCode",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
   AlbumType.ScreenShot: AlbumsInfoItem(
     type: "ScreenShot",
@@ -638,7 +640,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInBackup: null,
     locateInRecycleBin: r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\ScreenShot",
     chainDeletion: {},
-    supportedPlatforms: inWindows,
+    supportedPlatforms: inWindows | inMacOS,
   ),
   AlbumType.ExternalVideo: AlbumsInfoItem(
     type: "ExternalVideo",
@@ -650,7 +652,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInBackup: null,
     locateInRecycleBin: r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\ExternalVideos",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid,
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
     videoInfo: VideoAlbumInfo(
       locateToVideo: r"",
       locateToCover: null,

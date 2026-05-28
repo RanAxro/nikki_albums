@@ -39,8 +39,9 @@ class Path {
   }
 
   String get extension {
-    final idx = path.split("/").last.lastIndexOf(".");
-    return (idx < 0 || idx == path.length - 1) ? "" : path.substring(idx + 1);
+    final String filename = path.split("/").last;
+    final idx = filename.lastIndexOf(".");
+    return (idx < 0 || idx == filename.length - 1) ? "" : filename.substring(idx + 1);
   }
 
   FileStat? _cacheStat;
