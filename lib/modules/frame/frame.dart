@@ -1,6 +1,9 @@
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:flutter/foundation.dart";
+import "package:nikki_albums/modules/plugin/domain/plugin_builder.dart";
+import "package:nikki_albums/modules/plugin/domain/plugin_loader.dart";
+import "package:nikki_albums/plugin/infinity_nikki_support/builder_config.dart";
 import "package:nikki_albums/plugin/infinity_nikki_support/game_config.dart";
 import "package:nikki_albums/modules/game/codec.dart";
 import "package:nikki_albums/src/rust/api/simple.dart";
@@ -9,6 +12,7 @@ import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 import "package:nikki_albums/src/rust/serde_config/se.dart";
 
 import "package:nikki_albums/utils/system/windows.dart";
+import "package:path_provider/path_provider.dart";
 import "../setting/versionInformation.dart";
 import "ui_android.dart";
 
@@ -1119,13 +1123,24 @@ class WindowTitleBar extends StatelessWidget {
                 if(kDebugMode)
                   AppButton.smallText(
                     onClick: () async{
-                      serializeGameConfig(value: infinityNikkiConfig, pretty: true).then((v){
-                        File(r"E:\work\nikki_albums_file\game_config.json").writeAsBytes(v);
-                      });
+                      // print((await getPluginDirectory()).path);
 
-                      print(greet(name: "rust"));
+                      await buildPlugin(builderConfig, Directory(r"E:\work\nikki_albums_file\plugin"));
 
-                      print(testAdd(num1: 12, num2: 13));
+                      final p = await loadPlugin(Directory(r"E:\work\nikki_albums_file\plugin\05d5e067-ac1a-44c2-9f87-5ccaae613954"));
+                      print(p?.enable);
+                      print(p?.langPathList);
+                      print(p?.iconPathList);
+                      print(p?.gameConfigList);
+
+
+                      // serializeGameConfig(value: infinityNikkiConfig, pretty: true).then((v){
+                      //   File(r"E:\work\nikki_albums_file\game_config.json").writeAsBytes(v);
+                      // });
+                      //
+                      // print(greet(name: "rust"));
+                      //
+                      // print(testAdd(num1: 12, num2: 13));
 
                       // final files = await Directory(r"E:\game\InfinityNikki\InfinityNikki Launcher\InfinityNikki\X6Game\Saved\GamePlayPhotos\108328049\NikkiPhotos_HighQuality").list().map((f) => f.path).toList();
                       //
