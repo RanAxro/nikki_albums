@@ -80,7 +80,9 @@ class _FrameState extends State<Frame> {
           body: Builder(
             builder: (BuildContext context) {
               /// TODO 检测更新
-              // check(context);
+             if(!kDebugMode){
+               check(context);
+             }
 
               /// Windows
               if (Platform.isWindows) {
@@ -92,7 +94,7 @@ class _FrameState extends State<Frame> {
               }
               /// macOS
               else if (Platform.isMacOS) {
-                return ContentBuildInWindow(key: frameKey);
+                return MacOSFrame(key: frameKey);
               }
 
               return Placeholder();
@@ -222,22 +224,24 @@ class AccountButton extends StatelessWidget {
         );
 
         /// the last is "add" button, user can add custom Game
-        menuChildren.add(
-          MenuItemButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => CustomAccountEditor(),
-              );
-            },
-            child: Text(
-              context.tr("addCustomAccountButton"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+        if(Platform.isWindows){
+          menuChildren.add(
+            MenuItemButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => CustomAccountEditor(),
+                );
+              },
+              child: Text(
+                context.tr("addCustomAccountButton"),
+                style: TextStyle(
+                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+                ),
               ),
             ),
-          ),
-        );
+          );
+        }
 
         return MenuAnchor(
           style: MenuStyle(
@@ -1222,6 +1226,8 @@ class WindowTitleBar extends StatelessWidget {
   }
 }
 
+
+
 class ContentBuildInWindow extends StatelessWidget {
   const ContentBuildInWindow({super.key});
 
@@ -1328,6 +1334,107 @@ class ContentBuildInWindow extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+
+
+///////////////////
+//     MacOS     //
+///////////////////
+class MacOSFrame extends StatelessWidget {
+  const MacOSFrame({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DropTarget(
+      onDragDone: (DropDoneDetails details) {
+        final Path path = Path(details.files.first.path);
+        parseNikkiasFile(context, path.file);
+
+        /// TODO 将窗口提前
+      },
+      child: WindowBorder(
+        color: Theme.of(context).colorScheme.secondary,
+        width: 1,
+        child: Column(
+          children: [
+            const MacOSTitleBar(),
+            Expanded(child: ContentBuildInWindow()),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MacOSTitleBar extends StatelessWidget {
+  const MacOSTitleBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBackground(
+      colorRole: ColorRole.secondary,
+      child: SizedBox(
+        height: windowTitleBarHeight,
+        child: Stack(
+          children: [
+            Positioned.fill(child: MoveWindow()),
+            Row(
+              children: [
+                const SizedBox(width: 0.5 * topBarHeight),
+
+                /// close window button
+                GestureDetector(
+                  onTap: appWindow.close,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFED6A5F),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+
+                /// minimize window button
+                GestureDetector(
+                  onTap: appWindow.minimize,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFFFBD44),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+
+                /// maximizeOrRestore button
+                GestureDetector(
+                  onTap: appWindow.maximizeOrRestore,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF00CA4E),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 0.5 * topBarHeight),
+
+                const AccountButton(),
+
+                const GameShortcutBar(),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
