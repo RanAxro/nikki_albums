@@ -39,6 +39,7 @@ extension PlatformBits on int {
 enum LauncherChannel {
   unknown,
   paper,
+  paperGlobal,
   taptap,
   bilibili,
   steam;
@@ -106,30 +107,95 @@ const List<InfinityNikkiInfo> infinityNikkiInfos = [
     channel: LauncherChannel.paper,
     locateByWindowsRegistry: [
       WindowsRegistryInfo(
-        hive: RegistryHive.localMachine,
-        path:
-            r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikki Launcher",
-        key: "DisplayIcon",
-        locateToLauncher: r"\..",
+        hive: RegistryHive.currentUser,
+        path: r"Software\InfinityNikki Launcher",
+        key: "",
+        locateToLauncher: "",
         locateToInstall: r"\InfinityNikki",
-        configPath:
-            r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
       ),
       WindowsRegistryInfo(
         hive: RegistryHive.localMachine,
-        path:
-            r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikki Launcher",
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\InfinityNikki Launcher.exe",
+        key: "",
+        locateToLauncher: r"\..",
+        locateToInstall: r"\..\InfinityNikki",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+      WindowsRegistryInfo(
+        hive: RegistryHive.localMachine,
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikki Launcher",
+        key: "DisplayIcon",
+        locateToLauncher: r"\..",
+        locateToInstall: r"\..\InfinityNikki",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+      WindowsRegistryInfo(
+        hive: RegistryHive.localMachine,
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikki Launcher",
         key: "UninstallString",
         locateToLauncher: r"\..",
-        locateToInstall: r"\InfinityNikki",
-        configPath:
-            r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+        locateToInstall: r"\..\InfinityNikki",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
       ),
     ],
     locateByAndroidApplicationId: [
       AndroidApplicationIdInfo(
         locateToLauncher: r"com.papegames.infinitynikki",
         applicationId: r"com.papegames.infinitynikki",
+        appData: 2,
+        locateToInstall: r"/files/UnrealGame/X6Game",
+      ),
+    ],
+  ),
+  InfinityNikkiInfo(
+    channel: LauncherChannel.paperGlobal,
+    locateByWindowsRegistry: [
+      WindowsRegistryInfo(
+        hive: RegistryHive.currentUser,
+        path: r"Software\InfinityNikkiGlobal Launcher",
+        key: "",
+        locateToLauncher: r"",
+        locateToInstall: r"\InfinityNikkiGlobal",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+      WindowsRegistryInfo(
+        hive: RegistryHive.localMachine,
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\InfinityNikkiGlobal Launcher.exe",
+        key: "",
+        locateToLauncher: r"\..",
+        locateToInstall: r"\..\InfinityNikkiGlobal",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+      WindowsRegistryInfo(
+        hive: RegistryHive.localMachine,
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikkiGlobal Launcher",
+        key: "DisplayIcon",
+        locateToLauncher: r"\..",
+        locateToInstall: r"\..\InfinityNikkiGlobal",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+      WindowsRegistryInfo(
+        hive: RegistryHive.localMachine,
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikkiGlobal Launcher",
+        key: "InstallPath",
+        locateToLauncher: r"",
+        locateToInstall: r"\InfinityNikkiGlobal",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+      WindowsRegistryInfo(
+        hive: RegistryHive.localMachine,
+        path: r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfinityNikkiGlobal Launcher",
+        key: "UninstallString",
+        locateToLauncher: r"\..",
+        locateToInstall: r"\..\InfinityNikkiGlobal",
+        configPath: r"C:\Users\$username$\AppData\Local\InfinityNikki Launcher\config.ini",
+      ),
+    ],
+    locateByAndroidApplicationId: [
+      AndroidApplicationIdInfo(
+        locateToLauncher: r"com.infoldgames.infinitynikkien",
+        applicationId: r"com.infoldgames.infinitynikkien",
         appData: 2,
         locateToInstall: r"/files/UnrealGame/X6Game",
       ),
