@@ -1383,49 +1383,8 @@ class MacOSTitleBar extends StatelessWidget {
             Positioned.fill(child: MoveWindow()),
             Row(
               children: [
-                const SizedBox(width: 0.5 * topBarHeight),
-
-                /// close window button
-                GestureDetector(
-                  onTap: appWindow.close,
-                  child: Container(
-                    width: 14,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFED6A5F),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-
-                /// minimize window button
-                GestureDetector(
-                  onTap: appWindow.minimize,
-                  child: Container(
-                    width: 14,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFFFBD44),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-
-                /// maximizeOrRestore button
-                GestureDetector(
-                  onTap: appWindow.maximizeOrRestore,
-                  child: Container(
-                    width: 14,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFF00CA4E),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 0.5 * topBarHeight),
+                // Leave space for native traffic light buttons
+                const SizedBox(width: 78),
 
                 const AccountButton(),
 
