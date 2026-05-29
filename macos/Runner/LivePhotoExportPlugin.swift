@@ -38,6 +38,13 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
             return
         }
         importLivePhotoToLibrary(coverPath: coverPath, videoPath: videoPath, result: result)
+    case "importToPhotoLibrary":
+        guard let args = call.arguments as? [String: Any],
+              let filePath = args["filePath"] as? String else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        importFileToPhotoLibrary(filePath: filePath, result: result)
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -122,46 +129,31 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
   }
 
   private func importLivePhotoToLibrary(coverPath: String, videoPath: String, result: @escaping FlutterResult) {
+      // Photos.app recognizes a Live Photo when importing a .jpg/.heic that has
+      // MakerApple key 17 UUID matching a .mov with the same UUID in the same directory.
+      // We open only the image — Photos.app will automatically pick up the paired video.
       let coverURL = URL(fileURLWithPath: coverPath)
-      let videoURL = URL(fileURLWithPath: videoPath)
-
-      let performImport = {
-          PHPhotoLibrary.shared().performChanges({
-              let request = PHAssetCreationRequest.forAsset()
-              request.addResource(with: .photo, fileURL: coverURL, options: nil)
-              
-              let videoOptions = PHAssetResourceCreationOptions()
-              request.addResource(with: .pairedVideo, fileURL: videoURL, options: videoOptions)
-          }) { success, error in
-              DispatchQueue.main.async {
-                  if success {
-                      result(true)
-                  } else {
-                      let errorMsg = error?.localizedDescription ?? "Unknown error"
-                      result(FlutterError(code: "IMPORT_FAILED", message: errorMsg, details: nil))
-                  }
+      
+      NSWorkspace.shared.open([coverURL], withApplicationAt: URL(fileURLWithPath: "/System/Applications/Photos.app"), configuration: NSWorkspace.OpenConfiguration()) { _, error in
+          DispatchQueue.main.async {
+              if let error = error {
+                  result(FlutterError(code: "IMPORT_FAILED", message: error.localizedDescription, details: nil))
+              } else {
+                  result(true)
               }
           }
       }
+  }
 
-      if #available(macOS 11.0, *) {
-          PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-              if status == .authorized || status == .limited {
-                  performImport()
+  private func importFileToPhotoLibrary(filePath: String, result: @escaping FlutterResult) {
+      let fileURL = URL(fileURLWithPath: filePath)
+      
+      NSWorkspace.shared.open([fileURL], withApplicationAt: URL(fileURLWithPath: "/System/Applications/Photos.app"), configuration: NSWorkspace.OpenConfiguration()) { _, error in
+          DispatchQueue.main.async {
+              if let error = error {
+                  result(FlutterError(code: "IMPORT_FAILED", message: error.localizedDescription, details: nil))
               } else {
-                  DispatchQueue.main.async {
-                      result(FlutterError(code: "UNAUTHORIZED", message: "Photo library access not authorized. Please grant access in System Settings > Privacy & Security > Photos.", details: nil))
-                  }
-              }
-          }
-      } else {
-          PHPhotoLibrary.requestAuthorization { status in
-              if status == .authorized {
-                  performImport()
-              } else {
-                  DispatchQueue.main.async {
-                      result(FlutterError(code: "UNAUTHORIZED", message: "Photo library access not authorized", details: nil))
-                  }
+                  result(true)
               }
           }
       }

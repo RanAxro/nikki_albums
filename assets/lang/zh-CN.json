@@ -51,6 +51,12 @@
 
   "maximizeOrRestoreButton": "最大化按钮",
 
+  "livePhotoExportFormat": "实况照片导出格式",
+  "livePhotoExportFormat_none": "不转换",
+  "livePhotoExportFormat_apple": "Live Photo (苹果生态)",
+  "livePhotoExportFormat_google": "Motion Photo (谷歌/安卓生态)",
+  "livePhotoExportFormat_description": "导出「动态影集」相册时，将封面图与视频自动转换为对应平台的实况照片格式",
+
   "checkForUpdates": "检测更新",
   "checkFailed": "检测失败",
   "alreadyTheLatestVersion": "已是最新版本",
@@ -145,6 +151,7 @@
   "exportToClipboard": "导出到剪贴板",
   "exportToLocal": "导出到本地",
   "exportToNetwork": "导出到网络设备",
+  "exportToPhotoLibrary": "导出到系统相册",
   "exportNikkiasToLocal": "导出nikkias文件",
   "exportXImage": {
     "other": "导出 {} 张图片至"

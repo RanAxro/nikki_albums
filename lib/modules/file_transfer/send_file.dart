@@ -4,6 +4,7 @@ import "package:nikki_albums/modules/nikkias/nikkias.dart";
 import "package:nikki_albums/info.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/modules/game/game.dart";
+import "package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/utils/system/system.dart";
@@ -133,7 +134,36 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
     albumType: game.selectedAlbum,
   );
 
+  Directory? livePhotoTempDir;
+
   try {
+    final String liveFormat = AppState.livePhotoExportFormat.value;
+    final bool isVideoAlbum = game.selectedAlbum == AlbumType.Video;
+    List<File> filesToZip;
+    List<Path> zipNames;
+
+    if (isVideoAlbum && liveFormat != "none") {
+      // Convert to live photo format first
+      livePhotoTempDir = await Directory.systemTemp.createTemp('nikki_net_');
+      final exporter = LivePhotoExportService();
+      for (final item in game.album.selectedImages) {
+        if (item.cover != null && await File(item.cover!).exists()) {
+          await exporter.export(
+            format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+            coverImage: File(item.cover!),
+            sourceVideo: item.path.file,
+            outputPath: livePhotoTempDir!.path,
+          );
+        }
+      }
+      final convertedFiles = await livePhotoTempDir!.list().where((e) => e is File).cast<File>().toList();
+      filesToZip = convertedFiles;
+      zipNames = convertedFiles.map((f) => Path(f.uri.pathSegments.last)).toList();
+    } else {
+      filesToZip = game.album.selectedImages.map((ImageItem item) => item.path.file).toList();
+      zipNames = game.album.selectedImages.map((ImageItem item) => Path(item.name)).toList();
+    }
+
     final ImageTransferNikkiasCodec codec = ImageTransferNikkiasCodec(
       manifest,
       nikkiasPath.file,
@@ -145,12 +175,8 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
     await Future.wait([
       // encode archive
       compressZipIoX(
-        game.album.selectedImages
-            .map((ImageItem item) => item.path.file)
-            .toList(),
-        game.album.selectedImages
-            .map((ImageItem item) => Path(item.name))
-            .toList(),
+        filesToZip,
+        zipNames,
         zipPath.file,
         onProcess: (double encodeProgress) {
           progressDetail[0] = encodeProgress;
@@ -168,6 +194,9 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
   } catch (e) {
     errorMessage = e.toString();
   } finally {
+    if (livePhotoTempDir != null && await livePhotoTempDir.exists()) {
+      await livePhotoTempDir.delete(recursive: true);
+    }
     progress.value = 1;
   }
 }

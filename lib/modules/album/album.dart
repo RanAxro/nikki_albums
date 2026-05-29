@@ -24,8 +24,6 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter/gestures.dart";
 import 'package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart';
-import 'package:nikki_albums/modules/game/infinity_nikki/service/strategies/export_strategy_base.dart';
-import 'package:path/path.dart' as p;
 import "dart:io";
 import "dart:ui" hide Path;
 
@@ -3015,43 +3013,51 @@ class ExportImagesButton extends StatelessWidget {
         /// copy images to clipboard
         MenuItemButton(
           onPressed: () async {
-            final List<Path> paths = images
-                .map((item) => item.path)
-                .toList(growable: false);
+            final String liveFormat = AppState.livePhotoExportFormat.value;
+            final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
 
             final ValueNotifier<double?> progress = ValueNotifier<double?>(
               null,
             );
             bool isError = false;
 
-            // showProgressBar(
-            //   context: context,
-            //   barrierDismissible: false,
-            //   autoClose: false,
-            //   valueListenable: progress,
-            //   completedBuilder: (BuildContext context, void Function() close){
-            //     return Column(
-            //       spacing: listSpacing,
-            //       mainAxisSize: MainAxisSize.min,
-            //       children: [
-            //         if(isError)
-            //           Text(context.plural("XImageFailedToBeProcessed", paths.length), style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor)),
-            //         SmallButton(
-            //           width: null,
-            //           colorRole: ColorRole.background,
-            //           transparent: false,
-            //           onClick: close,
-            //           child: Text(context.tr("close"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-            //         ),
-            //       ],
-            //     );
-            //   }
-            // );
-
             AppToast.showMessage(context: context, message: "复制中");
 
             try {
-              await copyFilesToClipboard(paths);
+              if (isVideoAlbum && liveFormat != "none") {
+                // Convert to live photo format in temp dir, then copy
+                final tempDir = await Directory.systemTemp.createTemp('nikki_live_');
+                final exporter = LivePhotoExportService();
+                final List<Path> outputPaths = [];
+
+                for (final item in images) {
+                  if (item.cover != null && await File(item.cover!).exists()) {
+                    await exporter.export(
+                      format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+                      coverImage: File(item.cover!),
+                      sourceVideo: item.path.file,
+                      outputPath: tempDir.path,
+                    );
+                    // Collect output files
+                    await for (final entity in tempDir.list()) {
+                      if (entity is File) {
+                        outputPaths.add(Path(entity.path));
+                      }
+                    }
+                  } else {
+                    outputPaths.add(item.path);
+                  }
+                }
+
+                await copyFilesToClipboard(outputPaths);
+                // Clean up temp dir
+                await tempDir.delete(recursive: true);
+              } else {
+                final List<Path> paths = images
+                    .map((item) => item.path)
+                    .toList(growable: false);
+                await copyFilesToClipboard(paths);
+              }
             } catch (e) {
               isError = true;
             } finally {
@@ -3140,8 +3146,27 @@ class ExportImagesButton extends StatelessWidget {
 
             for (ImageItem item in images) {
               try {
-                final Path destination = root + item.path.name;
-                await item.path.file.copy(destination.path);
+                final String liveFormat = AppState.livePhotoExportFormat.value;
+                final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+
+                if (isVideoAlbum && liveFormat != "none" && item.cover != null) {
+                  final coverFile = File(item.cover!);
+                  if (await coverFile.exists()) {
+                    final exporter = LivePhotoExportService();
+                    await exporter.export(
+                      format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+                      coverImage: coverFile,
+                      sourceVideo: item.path.file,
+                      outputPath: root.path,
+                    );
+                  } else {
+                    final Path destination = root + item.path.name;
+                    await item.path.file.copy(destination.path);
+                  }
+                } else {
+                  final Path destination = root + item.path.name;
+                  await item.path.file.copy(destination.path);
+                }
               } catch (e) {
                 errorNum++;
               } finally {
@@ -3181,6 +3206,96 @@ class ExportImagesButton extends StatelessWidget {
             ),
           ),
         ),
+
+        /// export to macOS Photo Library (only for Video album on macOS)
+        if (Platform.isMacOS)
+          MenuItemButton(
+            onPressed: () async {
+              final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+              final int total = images.length;
+              int current = 0;
+              int errorNum = 0;
+
+              if (context.mounted) {
+                showProgressBar(
+                  context: context,
+                  barrierDismissible: false,
+                  autoClose: false,
+                  valueListenable: progress,
+                  completedBuilder: (BuildContext context, void Function() close) {
+                    return Column(
+                      spacing: listSpacing,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (errorNum != 0)
+                          Text(
+                            context.plural("XImageFailedToBeProcessed", errorNum),
+                            style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
+                          ),
+                        SmallButton(
+                          width: null,
+                          colorRole: ColorRole.background,
+                          transparent: false,
+                          onClick: close,
+                          child: Text(context.tr("close"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+
+              final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+              final String liveFormat = AppState.livePhotoExportFormat.value;
+              const channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
+
+              for (ImageItem item in images) {
+                try {
+                  if (isVideoAlbum && liveFormat == "apple" && item.cover != null && await File(item.cover!).exists()) {
+                    // Video album with Apple Live Photo setting: import as Live Photo
+                    // Files must stay in the same directory with matching base names
+                    // for Photos.app to recognize them as a Live Photo pair
+                    final String assetIdentifier = DateTime.now().microsecondsSinceEpoch.toRadixString(36).toUpperCase();
+                    final tempDir = await Directory.systemTemp.createTemp('nikki_livephoto_');
+                    final String baseName = item.path.subName;
+                    final String tempVideo = '${tempDir.path}/$baseName.mov';
+                    final String tempImage = '${tempDir.path}/$baseName.jpg';
+
+                    await channel.invokeMethod('remuxMp4ToMov', {
+                      'inputPath': item.path.path,
+                      'outputPath': tempVideo,
+                      'assetIdentifier': assetIdentifier,
+                    });
+                    await channel.invokeMethod('injectImageMetadata', {
+                      'inputPath': item.cover!,
+                      'outputPath': tempImage,
+                      'assetIdentifier': assetIdentifier,
+                    });
+                    await channel.invokeMethod('importLivePhoto', {
+                      'coverPath': tempImage,
+                      'videoPath': tempVideo,
+                    });
+                    // Don't delete — Photos.app needs time to read the files
+                  } else {
+                    // General photos/videos: import directly to Photo Library
+                    await channel.invokeMethod('importToPhotoLibrary', {'filePath': item.path.path});
+                  }
+                } catch (e) {
+                  errorNum++;
+                } finally {
+                  current++;
+                  progress.value = current / total;
+                }
+              }
+              progress.value = 1;
+            },
+            child: Text(
+              context.tr("exportToPhotoLibrary"),
+              style: TextStyle(
+                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+              ),
+            ),
+          ),
 
         /// encode and export nikkias file to native device
         MenuItemButton(
@@ -3288,115 +3403,8 @@ class ExportImagesButton extends StatelessWidget {
             ),
           ),
         ),
-
-        /// Export to Live Photo (Apple)
-        if (AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
-          MenuItemButton(
-            onPressed: () async {
-              _exportLivePhoto(context, ExportFormat.appleLivePhoto);
-            },
-            child: Text(
-              "🍏 导出为 Live Photo (Apple)",
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-              ),
-            ),
-          ),
-
-        /// Export to Motion Photo (Google)
-        if (AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
-          MenuItemButton(
-            onPressed: () async {
-              _exportLivePhoto(context, ExportFormat.googleMotionPhoto);
-            },
-            child: Text(
-              "🤖 导出为 Motion Photo (Google)",
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-              ),
-            ),
-          ),
       ],
     );
-  }
-
-  Future<void> _exportLivePhoto(BuildContext context, ExportFormat format) async {
-    final String? location = await FilePicker.platform.getDirectoryPath(
-      dialogTitle: context.plural("exportXImage", images.length),
-      lockParentWindow: true,
-    );
-    if (location == null) return;
-
-    final Path root = Path(location);
-    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
-    final int total = images.length;
-    int current = 0;
-    int errorNum = 0;
-
-    if (context.mounted) {
-      showProgressBar(
-        context: context,
-        barrierDismissible: false,
-        autoClose: false,
-        valueListenable: progress,
-        completedBuilder: (BuildContext context, void Function() close) {
-          return Column(
-            spacing: listSpacing,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (errorNum != 0)
-                Text(
-                  context.plural("XImageFailedToBeProcessed", errorNum),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.error.pressedColor,
-                  ),
-                ),
-              SmallButton(
-                width: null,
-                colorRole: ColorRole.background,
-                transparent: false,
-                onClick: close,
-                child: Text(
-                  context.tr("close"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    final exporter = LivePhotoExportService();
-
-    for (ImageItem item in images) {
-      try {
-        final videoFile = item.path.file;
-        final String? coverPath = item.cover;
-
-        if (coverPath == null || !await File(coverPath).exists()) {
-          errorNum++;
-          continue;
-        }
-
-        final coverFile = File(coverPath);
-        
-        await exporter.export(
-          format: format,
-          coverImage: coverFile,
-          sourceVideo: videoFile,
-          outputPath: root.path,
-        );
-      } catch (e) {
-        errorNum++;
-      } finally {
-        current++;
-        progress.value = current / total;
-      }
-    }
-    progress.value = 1;
   }
 }
 
