@@ -15,6 +15,7 @@ class MainFlutterWindow: BitsdojoWindow {
     self.setFrame(windowFrame, display: true)
 
     RegisterGeneratedPlugins(registry: flutterViewController)
+    LivePhotoExportPlugin.register(with: flutterViewController.registrar(forPlugin: "LivePhotoExportPlugin"))
 
     super.awakeFromNib()
   }
