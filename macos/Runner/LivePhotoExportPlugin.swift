@@ -20,6 +20,15 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
             return
         }
         remuxAndInjectVideoMetadata(inputPath: inputPath, outputPath: outputPath, assetIdentifier: assetIdentifier, result: result)
+    case "injectImageMetadata":
+        guard let args = call.arguments as? [String: Any],
+              let inputPath = args["inputPath"] as? String,
+              let outputPath = args["outputPath"] as? String,
+              let assetIdentifier = args["assetIdentifier"] as? String else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        injectLivePhotoMetadataToImage(inputPath: inputPath, outputPath: outputPath, assetIdentifier: assetIdentifier, result: result)
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -62,6 +71,44 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
                 result(FlutterError(code: "EXPORT_UNKNOWN", message: "Unknown export status", details: nil))
             }
         }
+    }
+  }
+
+  private func injectLivePhotoMetadataToImage(inputPath: String, outputPath: String, assetIdentifier: String, result: @escaping FlutterResult) {
+    let inputURL = URL(fileURLWithPath: inputPath)
+    let outputURL = URL(fileURLWithPath: outputPath)
+    
+    // Remove output file if it already exists
+    if FileManager.default.fileExists(atPath: outputPath) {
+        try? FileManager.default.removeItem(at: outputURL)
+    }
+
+    guard let imageSource = CGImageSourceCreateWithURL(inputURL as CFURL, nil),
+          let imageType = CGImageSourceGetType(imageSource) else {
+        result(FlutterError(code: "IMAGE_READ_FAILED", message: "Cannot read source image", details: nil))
+        return
+    }
+
+    guard let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any] else {
+        result(FlutterError(code: "IMAGE_PROPERTIES_FAILED", message: "Cannot read image properties", details: nil))
+        return
+    }
+
+    var metadata = imageProperties
+    var appleMakerDict = metadata[kCGImagePropertyMakerAppleDictionary] as? [String: Any] ?? [String: Any]()
+    appleMakerDict["17"] = assetIdentifier
+    metadata[kCGImagePropertyMakerAppleDictionary] = appleMakerDict
+
+    guard let destination = CGImageDestinationCreateWithURL(outputURL as CFURL, imageType, 1, nil) else {
+        result(FlutterError(code: "IMAGE_WRITE_FAILED", message: "Cannot create image destination", details: nil))
+        return
+    }
+
+    CGImageDestinationAddImageFromSource(destination, imageSource, 0, metadata as CFDictionary)
+    if CGImageDestinationFinalize(destination) {
+        result(true)
+    } else {
+        result(FlutterError(code: "IMAGE_FINALIZE_FAILED", message: "Cannot finalize image destination", details: nil))
     }
   }
 }
