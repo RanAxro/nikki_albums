@@ -45,6 +45,13 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
             return
         }
         importFileToPhotoLibrary(filePath: filePath, result: result)
+    case "importBatchToPhotoLibrary":
+        guard let args = call.arguments as? [String: Any],
+              let filePaths = args["filePaths"] as? [String] else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        importBatchToPhotoLibrary(filePaths: filePaths, result: result)
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -54,7 +61,6 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
     let inputURL = URL(fileURLWithPath: inputPath)
     let outputURL = URL(fileURLWithPath: outputPath)
 
-    // Remove output file if it already exists
     if FileManager.default.fileExists(atPath: outputPath) {
         try? FileManager.default.removeItem(at: outputURL)
     }
@@ -129,12 +135,35 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
   }
 
   private func importLivePhotoToLibrary(coverPath: String, videoPath: String, result: @escaping FlutterResult) {
-      // Photos.app recognizes a Live Photo when importing a .jpg/.heic that has
-      // MakerApple key 17 UUID matching a .mov with the same UUID in the same directory.
-      // We open only the image — Photos.app will automatically pick up the paired video.
       let coverURL = URL(fileURLWithPath: coverPath)
+      let videoURL = URL(fileURLWithPath: videoPath)
       
-      NSWorkspace.shared.open([coverURL], withApplicationAt: URL(fileURLWithPath: "/System/Applications/Photos.app"), configuration: NSWorkspace.OpenConfiguration()) { _, error in
+      if let service = NSSharingService(named: .addToIPhoto) {
+          let items: [URL] = [coverURL, videoURL]
+          if service.canPerform(withItems: items) {
+              service.perform(withItems: items)
+              result(true)
+              return
+          }
+      }
+      // Fallback: reveal in Finder
+      NSWorkspace.shared.activateFileViewerSelecting([coverURL, videoURL])
+      result(true)
+  }
+
+  private func importFileToPhotoLibrary(filePath: String, result: @escaping FlutterResult) {
+      let fileURL = URL(fileURLWithPath: filePath)
+      
+      if let service = NSSharingService(named: .addToIPhoto) {
+          let items: [URL] = [fileURL]
+          if service.canPerform(withItems: items) {
+              service.perform(withItems: items)
+              result(true)
+              return
+          }
+      }
+      // Fallback: open in Photos.app
+      NSWorkspace.shared.open([fileURL], withApplicationAt: URL(fileURLWithPath: "/System/Applications/Photos.app"), configuration: NSWorkspace.OpenConfiguration()) { _, error in
           DispatchQueue.main.async {
               if let error = error {
                   result(FlutterError(code: "IMPORT_FAILED", message: error.localizedDescription, details: nil))
@@ -145,17 +174,18 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
       }
   }
 
-  private func importFileToPhotoLibrary(filePath: String, result: @escaping FlutterResult) {
-      let fileURL = URL(fileURLWithPath: filePath)
+  private func importBatchToPhotoLibrary(filePaths: [String], result: @escaping FlutterResult) {
+      let urls = filePaths.map { URL(fileURLWithPath: $0) }
       
-      NSWorkspace.shared.open([fileURL], withApplicationAt: URL(fileURLWithPath: "/System/Applications/Photos.app"), configuration: NSWorkspace.OpenConfiguration()) { _, error in
-          DispatchQueue.main.async {
-              if let error = error {
-                  result(FlutterError(code: "IMPORT_FAILED", message: error.localizedDescription, details: nil))
-              } else {
-                  result(true)
-              }
+      if let service = NSSharingService(named: .addToIPhoto) {
+          if service.canPerform(withItems: urls) {
+              service.perform(withItems: urls)
+              result(true)
+              return
           }
       }
+      // Fallback: reveal in Finder
+      NSWorkspace.shared.activateFileViewerSelecting(urls)
+      result(true)
   }
 }

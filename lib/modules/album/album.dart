@@ -24,6 +24,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter/gestures.dart";
 import 'package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart';
+import 'package:uuid/uuid.dart';
 import "dart:io";
 import "dart:ui" hide Path;
 
@@ -3249,13 +3250,12 @@ class ExportImagesButton extends StatelessWidget {
               final String liveFormat = AppState.livePhotoExportFormat.value;
               const channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
 
+              final List<String> allFilesToImport = [];
+
               for (ImageItem item in images) {
                 try {
                   if (isVideoAlbum && liveFormat == "apple" && item.cover != null && await File(item.cover!).exists()) {
-                    // Video album with Apple Live Photo setting: import as Live Photo
-                    // Files must stay in the same directory with matching base names
-                    // for Photos.app to recognize them as a Live Photo pair
-                    final String assetIdentifier = DateTime.now().microsecondsSinceEpoch.toRadixString(36).toUpperCase();
+                    final String assetIdentifier = const Uuid().v4().toUpperCase();
                     final tempDir = await Directory.systemTemp.createTemp('nikki_livephoto_');
                     final String baseName = item.path.subName;
                     final String tempVideo = '${tempDir.path}/$baseName.mov';
@@ -3271,20 +3271,27 @@ class ExportImagesButton extends StatelessWidget {
                       'outputPath': tempImage,
                       'assetIdentifier': assetIdentifier,
                     });
-                    await channel.invokeMethod('importLivePhoto', {
-                      'coverPath': tempImage,
-                      'videoPath': tempVideo,
-                    });
-                    // Don't delete — Photos.app needs time to read the files
+                    allFilesToImport.add(tempImage);
+                    allFilesToImport.add(tempVideo);
                   } else {
-                    // General photos/videos: import directly to Photo Library
-                    await channel.invokeMethod('importToPhotoLibrary', {'filePath': item.path.path});
+                    allFilesToImport.add(item.path.path);
                   }
                 } catch (e) {
                   errorNum++;
                 } finally {
                   current++;
                   progress.value = current / total;
+                }
+              }
+
+              // Import all files at once via NSSharingService
+              if (allFilesToImport.isNotEmpty) {
+                try {
+                  await channel.invokeMethod('importBatchToPhotoLibrary', {
+                    'filePaths': allFilesToImport,
+                  });
+                } catch (e) {
+                  errorNum++;
                 }
               }
               progress.value = 1;
