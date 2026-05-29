@@ -1,6 +1,7 @@
 import Cocoa
 import FlutterMacOS
 import AVFoundation
+import Photos
 
 public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -29,6 +30,14 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
             return
         }
         injectLivePhotoMetadataToImage(inputPath: inputPath, outputPath: outputPath, assetIdentifier: assetIdentifier, result: result)
+    case "importLivePhoto":
+        guard let args = call.arguments as? [String: Any],
+              let coverPath = args["coverPath"] as? String,
+              let videoPath = args["videoPath"] as? String else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        importLivePhotoToLibrary(coverPath: coverPath, videoPath: videoPath, result: result)
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -110,5 +119,36 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
     } else {
         result(FlutterError(code: "IMAGE_FINALIZE_FAILED", message: "Cannot finalize image destination", details: nil))
     }
+  }
+
+  private func importLivePhotoToLibrary(coverPath: String, videoPath: String, result: @escaping FlutterResult) {
+      let coverURL = URL(fileURLWithPath: coverPath)
+      let videoURL = URL(fileURLWithPath: videoPath)
+
+      PHPhotoLibrary.requestAuthorization { status in
+          if status != .authorized && status != .limited {
+              DispatchQueue.main.async {
+                  result(FlutterError(code: "UNAUTHORIZED", message: "Photo library access not authorized", details: nil))
+              }
+              return
+          }
+
+          PHPhotoLibrary.shared().performChanges({
+              let request = PHAssetCreationRequest.forAsset()
+              request.addResource(with: .photo, fileURL: coverURL, options: nil)
+              
+              let videoOptions = PHAssetResourceCreationOptions()
+              request.addResource(with: .pairedVideo, fileURL: videoURL, options: videoOptions)
+          }) { success, error in
+              DispatchQueue.main.async {
+                  if success {
+                      result(true)
+                  } else {
+                      let errorMsg = error?.localizedDescription ?? "Unknown error"
+                      result(FlutterError(code: "IMPORT_FAILED", message: errorMsg, details: nil))
+                  }
+              }
+          }
+      }
   }
 }
