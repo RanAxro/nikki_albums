@@ -1,5 +1,6 @@
 import "personalization.dart";
 import "edit_custom_game.dart";
+import "live_photo_settings.dart";
 import "versionInformation.dart";
 
 import "package:nikki_albums/modules/app_base/state.dart";
@@ -60,6 +61,14 @@ class SettingDialog extends StatelessWidget {
                                 height: smallButtonSize,
                                 onClick: () {
                                   controller.jumpToPage(2);
+                                },
+                                child: AppText("livePhotoSettings"),
+                              ),
+                              AppRawButton(
+                                width: constraints.maxWidth,
+                                height: smallButtonSize,
+                                onClick: () {
+                                  controller.jumpToPage(3);
                                 },
                                 child: AppText("versionInformation"),
                               ),
@@ -134,6 +143,7 @@ class SettingDialog extends StatelessWidget {
             children: [
               const Personalization(),
               const EditCustomGame(),
+              const LivePhotoSettings(),
               const VersionInformation(),
             ],
           ),
