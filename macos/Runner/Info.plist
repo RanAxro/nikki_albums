@@ -28,5 +28,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Nikki Albums needs access to your Photo Library to export Live Photos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Nikki Albums needs access to save Live Photos to your Photo Library.</string>
 </dict>
 </plist>
