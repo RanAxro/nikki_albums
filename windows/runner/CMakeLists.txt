@@ -38,3 +38,15 @@ target_include_directories(${BINARY_NAME} PRIVATE "${CMAKE_SOURCE_DIR}")
 
 # Run the Flutter tool portions of the build. This must not be removed.
 add_dependencies(${BINARY_NAME} flutter_assemble)
+
+# ---------------------------------------------
+# 复制 nuan5_decryption.dll 到 Flutter 构建输出目录
+# ---------------------------------------------
+set(NATIVE_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../rust/lib/windows")
+
+add_custom_command(TARGET ${BINARY_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+  "${NATIVE_LIB_DIR}/nuan5_decryption.dll"
+  $<TARGET_FILE_DIR:${BINARY_NAME}>
+  COMMENT "Copying nuan5_decryption.dll to output directory"
+)

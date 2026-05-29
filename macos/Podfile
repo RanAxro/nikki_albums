@@ -35,8 +35,61 @@ target 'Runner' do
   end
 end
 
+def inject_dylib_copy_phase
+  require 'xcodeproj'
+
+  project_path = File.join(__dir__, 'Runner.xcodeproj')
+  return unless File.exist?(project_path)
+
+  project = Xcodeproj::Project.open(project_path)
+  runner_target = project.targets.find { |t| t.name == 'Runner' }
+  return unless runner_target
+
+  phase_name = 'Copy Native Dylib'
+
+  # 避免重复添加
+  already_exists = runner_target.build_phases.any? { |bp|
+    bp.is_a?(Xcodeproj::Project::PBXShellScriptBuildPhase) && bp.name == phase_name
+  }
+  return if already_exists
+
+  # 创建 Shell Script Build Phase
+  phase = runner_target.new_shell_script_build_phase(phase_name)
+  phase.shell_script = <<-'SCRIPT'
+# 根据构建架构选择对应 dylib
+if [ "$ARCHS" == "arm64" ] || [ "$CURRENT_ARCH" == "arm64" ]; then
+    DYLIB_SRC="$SRCROOT/../../rust/lib/macos/aarch64/libnuan5_decryption.dylib"
+else
+    DYLIB_SRC="$SRCROOT/../../rust/lib/macos/x86_64/libnuan5_decryption.dylib"
+fi
+
+FRAMEWORKS_DIR="$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH"
+mkdir -p "$FRAMEWORKS_DIR"
+
+if [ -f "$DYLIB_SRC" ]; then
+    cp "$DYLIB_SRC" "$FRAMEWORKS_DIR/"
+    echo "Copied $(basename $DYLIB_SRC) to Frameworks"
+else
+    echo "error: Native dylib not found at $DYLIB_SRC"
+    exit 1
+fi
+  SCRIPT
+
+  new_phase = runner_target.build_phases.pop
+  sources_idx = runner_target.build_phases.index { |bp|
+    bp.is_a?(Xcodeproj::Project::PBXSourcesBuildPhase)
+  }
+  insert_idx = sources_idx ? sources_idx + 1 : 1
+  runner_target.build_phases.insert(insert_idx, new_phase)
+
+  project.save
+  puts "[Podfile] ✅ 已自动添加 '#{phase_name}' Build Phase 到 Runner"
+end
+
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_macos_build_settings(target)
   end
+
+  inject_dylib_copy_phase
 end
