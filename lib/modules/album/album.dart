@@ -23,6 +23,9 @@ import "package:nikki_albums/utils/clipboard.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter/gestures.dart";
+import 'package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart';
+import 'package:nikki_albums/modules/game/infinity_nikki/service/strategies/export_strategy_base.dart';
+import 'package:path/path.dart' as p;
 import "dart:ui" hide Path;
 
 import "package:easy_localization/easy_localization.dart";
@@ -3284,8 +3287,117 @@ class ExportImagesButton extends StatelessWidget {
             ),
           ),
         ),
+
+        /// Export to Live Photo (Apple)
+        if (AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
+          MenuItemButton(
+            onPressed: () async {
+              _exportLivePhoto(context, ExportFormat.appleLivePhoto);
+            },
+            child: Text(
+              "🍏 导出为 Live Photo (Apple)",
+              style: TextStyle(
+                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+              ),
+            ),
+          ),
+
+        /// Export to Motion Photo (Google)
+        if (AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
+          MenuItemButton(
+            onPressed: () async {
+              _exportLivePhoto(context, ExportFormat.googleMotionPhoto);
+            },
+            child: Text(
+              "🤖 导出为 Motion Photo (Google)",
+              style: TextStyle(
+                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+              ),
+            ),
+          ),
       ],
     );
+  }
+
+  Future<void> _exportLivePhoto(BuildContext context, ExportFormat format) async {
+    final String? location = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: context.plural("exportXImage", images.length),
+      lockParentWindow: true,
+    );
+    if (location == null) return;
+
+    final Path root = Path(location);
+    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+    final int total = images.length;
+    int current = 0;
+    int errorNum = 0;
+
+    if (context.mounted) {
+      showProgressBar(
+        context: context,
+        barrierDismissible: false,
+        autoClose: false,
+        valueListenable: progress,
+        completedBuilder: (BuildContext context, void Function() close) {
+          return Column(
+            spacing: listSpacing,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (errorNum != 0)
+                Text(
+                  context.plural("XImageFailedToBeProcessed", errorNum),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.error.pressedColor,
+                  ),
+                ),
+              SmallButton(
+                width: null,
+                colorRole: ColorRole.background,
+                transparent: false,
+                onClick: close,
+                child: Text(
+                  context.tr("close"),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.background.onColor,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    final exporter = LivePhotoExportService();
+
+    for (ImageItem item in images) {
+      try {
+        final coverFile = item.path.file;
+        // In Nikki, video is named the same as the cover but with .Mp4 extension
+        final String videoPathStr = p.join(item.path.parent.path, "\${p.basenameWithoutExtension(item.path.name)}.Mp4");
+        final videoFile = File(videoPathStr);
+
+        if (!await videoFile.exists()) {
+          errorNum++;
+          continue;
+        }
+
+        final outputPath = (root + "\${p.basenameWithoutExtension(item.path.name)}.jpg").path;
+        
+        await exporter.export(
+          format: format,
+          coverImage: coverFile,
+          sourceVideo: videoFile,
+          outputPath: outputPath,
+        );
+      } catch (e) {
+        errorNum++;
+      } finally {
+        current++;
+        progress.value = current / total;
+      }
+    }
+    progress.value = 1;
   }
 }
 
