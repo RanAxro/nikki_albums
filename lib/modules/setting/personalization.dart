@@ -1,3 +1,4 @@
+import "dart:io";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
@@ -55,7 +56,7 @@ class LivePhotoFormatSetting extends StatelessWidget {
                 spacing: listSpacing,
                 children: [
                   _buildOption(context, "none", format),
-                  _buildOption(context, "apple", format),
+                  if (Platform.isMacOS) _buildOption(context, "apple", format),
                   _buildOption(context, "google", format),
                 ],
               ),

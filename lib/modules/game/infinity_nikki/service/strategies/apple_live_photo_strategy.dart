@@ -14,6 +14,9 @@ class AppleLivePhotoStrategy implements LivePhotoExportStrategy {
     required File sourceVideo,
     required String outputPath,
   }) async {
+    if (!Platform.isMacOS) {
+      throw UnsupportedError('Apple Live Photo export is only supported on macOS');
+    }
     final String assetIdentifier = const Uuid().v4().toUpperCase();
     final String baseName = p.basenameWithoutExtension(sourceVideo.path);
     
