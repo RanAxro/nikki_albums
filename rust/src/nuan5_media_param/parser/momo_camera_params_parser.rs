@@ -46,3 +46,20 @@ pub fn parse_highlights(highlights: f64) -> f64{
 pub fn parse_shadows(shadows: f64) -> f64{
   shadows
 }
+
+#[inline]
+pub fn parse_horizontal(horizontal: f64) -> f64{
+  horizontal * 400.0
+}
+#[inline]
+pub fn parse_distance(distance: f64) -> f64{
+  distance * 400.0
+}
+#[inline]
+pub fn parse_height(height: f64) -> f64{
+  height * 400.0
+}
+#[inline]
+pub fn parse_rotate_momo(rotate_momo: f64) -> f64{
+  rotate_momo * 180.0
+}

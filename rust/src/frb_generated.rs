@@ -2823,6 +2823,9 @@ impl SseDecode for crate::nuan5_media_param::structs::momo_camera_params::MomoCa
             <crate::nuan5_media_param::structs::nikki_photo_params::FilterParams>::sse_decode(
                 deserializer,
             );
+        let mut var_momo = <Option<
+            crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden,
+        >>::sse_decode(deserializer);
         return crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams {
             camera_actor_loc: var_cameraActorLoc,
             camera_actor_rot: var_cameraActorRot,
@@ -2843,7 +2846,36 @@ impl SseDecode for crate::nuan5_media_param::structs::momo_camera_params::MomoCa
             shadows: var_shadows,
             light: var_light,
             filter: var_filter,
+            momo: var_momo,
         };
+    }
+}
+
+impl SseDecode
+    for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden::Enable;
+            }
+            1 => {
+                let mut var_momoPose = <i64>::sse_decode(deserializer);
+                let mut var_horizontal = <f64>::sse_decode(deserializer);
+                let mut var_distance = <f64>::sse_decode(deserializer);
+                let mut var_height = <f64>::sse_decode(deserializer);
+                let mut var_rotateMomo = <f64>::sse_decode(deserializer);
+                let mut var_autoGroundSnap = <bool>::sse_decode(deserializer);
+                let mut var_floatingEffect = <bool>::sse_decode(deserializer);
+                let mut var_poseWithNikki = <bool>::sse_decode(deserializer);
+                return crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden::Disable{momo_pose: var_momoPose, horizontal: var_horizontal, distance: var_distance, height: var_height, rotate_momo: var_rotateMomo, auto_ground_snap: var_autoGroundSnap, floating_effect: var_floatingEffect, pose_with_nikki: var_poseWithNikki};
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 
@@ -3173,6 +3205,19 @@ impl SseDecode for Option<crate::nuan5_media_param::decode::MediaCustomData> {
             return Some(
                 <crate::nuan5_media_param::decode::MediaCustomData>::sse_decode(deserializer),
             );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode
+    for Option<crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -5485,6 +5530,7 @@ impl flutter_rust_bridge::IntoDart
             self.shadows.into_into_dart().into_dart(),
             self.light.into_into_dart().into_dart(),
             self.filter.into_into_dart().into_dart(),
+            self.momo.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -5501,6 +5547,39 @@ impl
     fn into_into_dart(
         self,
     ) -> crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden::Enable => { [0.into_dart()].into_dart() }
+crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden::Disable{momo_pose,horizontal,distance,height,rotate_momo,auto_ground_snap,floating_effect,pose_with_nikki} => { [1.into_dart(),
+momo_pose.into_into_dart().into_dart(),
+horizontal.into_into_dart().into_dart(),
+distance.into_into_dart().into_dart(),
+height.into_into_dart().into_dart(),
+rotate_momo.into_into_dart().into_dart(),
+auto_ground_snap.into_into_dart().into_dart(),
+floating_effect.into_into_dart().into_dart(),
+pose_with_nikki.into_into_dart().into_dart()].into_dart() }
+ _ => { unimplemented!(""); }}
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden,
+    > for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden {
         self
     }
 }
@@ -7621,6 +7700,26 @@ impl SseEncode for crate::nuan5_media_param::structs::momo_camera_params::MomoCa
             self.filter,
             serializer,
         );
+        <Option<crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden>>::sse_encode(self.momo, serializer);
+    }
+}
+
+impl SseEncode
+    for crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden::Enable => { <i32>::sse_encode(0, serializer);  }
+crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden::Disable{momo_pose,horizontal,distance,height,rotate_momo,auto_ground_snap,floating_effect,pose_with_nikki} => { <i32>::sse_encode(1, serializer); <i64>::sse_encode(momo_pose, serializer);
+<f64>::sse_encode(horizontal, serializer);
+<f64>::sse_encode(distance, serializer);
+<f64>::sse_encode(height, serializer);
+<f64>::sse_encode(rotate_momo, serializer);
+<bool>::sse_encode(auto_ground_snap, serializer);
+<bool>::sse_encode(floating_effect, serializer);
+<bool>::sse_encode(pose_with_nikki, serializer);
+ }
+ _ => { unimplemented!(""); }}
     }
 }
 
@@ -7891,6 +7990,18 @@ impl SseEncode for Option<crate::nuan5_media_param::decode::MediaCustomData> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::nuan5_media_param::decode::MediaCustomData>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode
+    for Option<crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_media_param::structs::momo_camera_params::MomoCameraParamsMomoHidden>::sse_encode(value, serializer);
         }
     }
 }

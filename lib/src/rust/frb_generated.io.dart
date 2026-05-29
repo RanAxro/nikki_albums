@@ -176,6 +176,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MomoCameraParams dco_decode_box_autoadd_momo_camera_params(dynamic raw);
 
   @protected
+  MomoCameraParamsMomoHidden
+  dco_decode_box_autoadd_momo_camera_params_momo_hidden(dynamic raw);
+
+  @protected
   MomoHiddenState dco_decode_box_autoadd_momo_hidden_state(dynamic raw);
 
   @protected
@@ -452,6 +456,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MomoCameraParams dco_decode_momo_camera_params(dynamic raw);
 
   @protected
+  MomoCameraParamsMomoHidden dco_decode_momo_camera_params_momo_hidden(
+    dynamic raw,
+  );
+
+  @protected
   MomoHiddenState dco_decode_momo_hidden_state(dynamic raw);
 
   @protected
@@ -515,6 +524,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MediaCustomData? dco_decode_opt_box_autoadd_media_custom_data(dynamic raw);
+
+  @protected
+  MomoCameraParamsMomoHidden?
+  dco_decode_opt_box_autoadd_momo_camera_params_momo_hidden(dynamic raw);
 
   @protected
   MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw);
@@ -858,6 +871,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  MomoCameraParamsMomoHidden
+  sse_decode_box_autoadd_momo_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   MomoHiddenState sse_decode_box_autoadd_momo_hidden_state(
     SseDeserializer deserializer,
   );
@@ -1192,6 +1211,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MomoCameraParams sse_decode_momo_camera_params(SseDeserializer deserializer);
 
   @protected
+  MomoCameraParamsMomoHidden sse_decode_momo_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   MomoHiddenState sse_decode_momo_hidden_state(SseDeserializer deserializer);
 
   @protected
@@ -1267,6 +1291,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MediaCustomData? sse_decode_opt_box_autoadd_media_custom_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MomoCameraParamsMomoHidden?
+  sse_decode_opt_box_autoadd_momo_camera_params_momo_hidden(
     SseDeserializer deserializer,
   );
 
@@ -1692,6 +1722,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_momo_camera_params(
     MomoCameraParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_momo_camera_params_momo_hidden(
+    MomoCameraParamsMomoHidden self,
     SseSerializer serializer,
   );
 
@@ -2131,6 +2167,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_momo_camera_params_momo_hidden(
+    MomoCameraParamsMomoHidden self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_momo_hidden_state(
     MomoHiddenState self,
     SseSerializer serializer,
@@ -2229,6 +2271,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_media_custom_data(
     MediaCustomData? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_momo_camera_params_momo_hidden(
+    MomoCameraParamsMomoHidden? self,
     SseSerializer serializer,
   );
 

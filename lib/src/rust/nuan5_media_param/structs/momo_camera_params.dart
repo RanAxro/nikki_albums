@@ -6,8 +6,10 @@
 import '../../frb_generated.dart';
 import 'nikki_photo_params.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'momo_camera_params.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`
 
 class MomoCameraParams {
   final (double, double, double) cameraActorLoc;
@@ -29,6 +31,7 @@ class MomoCameraParams {
   final double shadows;
   final LightParams light;
   final FilterParams filter;
+  final MomoCameraParamsMomoHidden? momo;
 
   const MomoCameraParams({
     required this.cameraActorLoc,
@@ -50,6 +53,7 @@ class MomoCameraParams {
     required this.shadows,
     required this.light,
     required this.filter,
+    this.momo,
   });
 
   @override
@@ -72,7 +76,8 @@ class MomoCameraParams {
       highlights.hashCode ^
       shadows.hashCode ^
       light.hashCode ^
-      filter.hashCode;
+      filter.hashCode ^
+      momo.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -97,5 +102,24 @@ class MomoCameraParams {
           highlights == other.highlights &&
           shadows == other.shadows &&
           light == other.light &&
-          filter == other.filter;
+          filter == other.filter &&
+          momo == other.momo;
+}
+
+@freezed
+sealed class MomoCameraParamsMomoHidden with _$MomoCameraParamsMomoHidden {
+  const MomoCameraParamsMomoHidden._();
+
+  const factory MomoCameraParamsMomoHidden.enable() =
+      MomoCameraParamsMomoHidden_Enable;
+  const factory MomoCameraParamsMomoHidden.disable({
+    required PlatformInt64 momoPose,
+    required double horizontal,
+    required double distance,
+    required double height,
+    required double rotateMomo,
+    required bool autoGroundSnap,
+    required bool floatingEffect,
+    required bool poseWithNikki,
+  }) = MomoCameraParamsMomoHidden_Disable;
 }
