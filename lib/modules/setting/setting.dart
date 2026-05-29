@@ -9,136 +9,79 @@ import "package:nikki_albums/widgets/common/component.dart";
 
 import "package:flutter/material.dart";
 
-import "package:easy_localization/easy_localization.dart";
+class SettingDialog extends StatelessWidget{
+  final int initialPage;
+  final PageController controller;
 
-class SettingDialog extends StatelessWidget {
-  final PageController controller = PageController(initialPage: 0);
-
-  SettingDialog({super.key});
+  SettingDialog({
+    super.key,
+    this.initialPage = 0,
+  }) :
+    controller = PageController(initialPage: initialPage);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     final Widget content = Row(
       spacing: listSpacing,
       children: [
         SizedBox(
           width: sideBarExpandWidth,
           child: SmoothPointerScroll(
-            builder:
-                (
-                  BuildContext context,
-                  ScrollController scrollController,
-                  ScrollPhysics physics,
-                  IndependentScrollbarController scrollbarController,
-                ) {
-                  return LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                          return ListenableBuilder(
-                            listenable: controller,
-                            builder: (BuildContext context, Widget? child){
-                              return AppRadioStack(
-                                direction: Axis.vertical,
-                                buttonWidth: constraints.maxWidth,
-                                buttonHeight: smallButtonSize,
-                                selectedIndex: controller.page?.toInt() ?? 0,
-                                children: [
-                                  AppRawButton(
-                                    width: constraints.maxWidth,
-                                    height: smallButtonSize,
-                                    onClick: () {
-                                      controller.jumpToPage(0);
-                                    },
-                                    child: AppText("personalization"),
-                                  ),
-                                  AppRawButton(
-                                    width: constraints.maxWidth,
-                                    height: smallButtonSize,
-                                    onClick: () {
-                                      controller.jumpToPage(1);
-                                    },
-                                    child: AppText("accountManagement"),
-                                  ),
-                                  AppRawButton(
-                                    width: constraints.maxWidth,
-                                    height: smallButtonSize,
-                                    onClick: () {
-                                      controller.jumpToPage(2);
-                                    },
-                                    child: AppText("livePhotoSettings"),
-                                  ),
-                                  AppRawButton(
-                                    width: constraints.maxWidth,
-                                    height: smallButtonSize,
-                                    onClick: () {
-                                      controller.jumpToPage(3);
-                                    },
-                                    child: AppText("versionInformation"),
-                                  ),
-                                ],
-                              );
+            builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController) {
+              return LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints){
+                  return ListenableBuilder(
+                    listenable: controller,
+                    builder: (BuildContext context, Widget? child){
+                      return AppRadioStack(
+                        direction: Axis.vertical,
+                        buttonWidth: constraints.maxWidth,
+                        buttonHeight: smallButtonSize,
+                        selectedIndex: controller.page?.toInt() ?? initialPage,
+                        children: [
+                          AppRawButton(
+                            width: constraints.maxWidth,
+                            height: smallButtonSize,
+                            onClick: () {
+                              controller.jumpToPage(0);
                             },
-                          );
-                        },
-                  );
-
-                  return ListView(
-                    controller: scrollController,
-                    physics: physics,
-                    children: [
-                      SmallButton(
-                        colorRole: ColorRole.background,
-                        onClick: () {
-                          controller.jumpToPage(0);
-                        },
-                        child: Text(
-                          context.tr("personalization"),
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.background.onColor,
+                            child: AppText("personalization"),
                           ),
-                        ),
-                      ),
-                      block5H,
-                      SmallButton(
-                        colorRole: ColorRole.background,
-                        onClick: () {
-                          controller.jumpToPage(1);
-                        },
-                        child: Text(
-                          context.tr("accountManagement"),
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.background.onColor,
+                          AppRawButton(
+                            width: constraints.maxWidth,
+                            height: smallButtonSize,
+                            onClick: () {
+                              controller.jumpToPage(1);
+                            },
+                            child: AppText("accountManagement"),
                           ),
-                        ),
-                      ),
-                      block5H,
-                      SmallButton(
-                        colorRole: ColorRole.background,
-                        onClick: () {
-                          controller.jumpToPage(2);
-                        },
-                        child: Text(
-                          context.tr("versionInformation"),
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.background.onColor,
+                          AppRawButton(
+                            width: constraints.maxWidth,
+                            height: smallButtonSize,
+                            onClick: () {
+                              controller.jumpToPage(2);
+                            },
+                            child: AppText("livePhotoSettings"),
                           ),
-                        ),
-                      ),
-                    ],
+                          AppRawButton(
+                            width: constraints.maxWidth,
+                            height: smallButtonSize,
+                            onClick: () {
+                              controller.jumpToPage(3);
+                            },
+                            child: AppText("versionInformation"),
+                          ),
+                        ],
+                      );
+                    },
                   );
                 },
+          );
+            },
           ),
         ),
 
-        SmallVerticalDivider(
-          color: AppTheme.of(context)!.colorScheme.background.hoveredColor,
-        ),
+        SmallVerticalDivider(color: AppTheme.of(context)!.colorScheme.background.hoveredColor),
 
         Expanded(
           child: PageView(
@@ -150,16 +93,20 @@ class SettingDialog extends StatelessWidget {
               const EditCustomGame(),
               const LivePhotoSettings(),
               const VersionInformation(),
-            ],
+            ].map((Widget page){
+              return SlideFadeIn(
+                offsetBegin: Offset(50, 0),
+                opacityBegin: 0.6,
+                child: page,
+              );
+            }).toList(),
           ),
         ),
       ],
     );
 
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(smallBorderRadius),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(smallBorderRadius)),
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
       child: Container(
         padding: const EdgeInsets.all(smallPadding),
@@ -173,30 +120,17 @@ class SettingDialog extends StatelessWidget {
                 children: [
                   block10W,
                   Expanded(
-                    child: Text(
-                      context.tr("setting"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
+                    child: AppText("setting"),
                   ),
 
                   const ChangeLanguage(),
 
-                  SmallButton(
+                  AppButton.smallIcon(
                     colorRole: ColorRole.background,
                     onClick: () {
                       Navigator.of(context).pop();
                     },
-                    child: Image.asset(
-                      "assets/icon/cross.webp",
-                      height: 20,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
+                    child: AppIcon("cross", height: 20),
                   ),
                 ],
               ),
@@ -209,11 +143,11 @@ class SettingDialog extends StatelessWidget {
   }
 }
 
-class ChangeTheme extends StatelessWidget {
+class ChangeTheme extends StatelessWidget{
   const ChangeTheme({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return SizedBox(
       height: smallCardMaxHeight,
       child: Row(
@@ -221,12 +155,7 @@ class ChangeTheme extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.topCenter,
-            child: Text(
-              context.tr("theme"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            child: AppText("theme"),
           ),
           Expanded(
             child: GridView.builder(
@@ -237,12 +166,10 @@ class ChangeTheme extends StatelessWidget {
                 childAspectRatio: 1 / 1,
               ),
               itemCount: AppColorScheme.table.length,
-              itemBuilder: (BuildContext context, int index) {
-                final int color = AppColorScheme.table.keys.toList(
-                  growable: false,
-                )[index];
+              itemBuilder: (BuildContext context, int index){
+                final int color = AppColorScheme.table.keys.toList(growable: false)[index];
                 return GestureDetector(
-                  onTap: () {
+                  onTap: (){
                     AppState.theme.value = color;
                   },
                   child: ClipOval(child: Container(color: Color(color))),
@@ -256,78 +183,47 @@ class ChangeTheme extends StatelessWidget {
   }
 }
 
-class ChangeLanguage extends StatelessWidget {
+class ChangeLanguage extends StatelessWidget{
   const ChangeLanguage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MenuAnchor(
       style: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(
-          AppTheme.of(context)!.colorScheme.background.color,
-        ),
+        backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
       ),
       menuChildren: [
         MenuItemButton(
-          onPressed: () {
+          onPressed: (){
             AppState.lang.value = "zh-CN";
           },
-          child: Text(
-            "简体中文",
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText("简体中文", isTranslate: false),
         ),
         MenuItemButton(
-          onPressed: () {
+          onPressed: (){
             AppState.lang.value = "en-US";
           },
-          child: Text(
-            "English",
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText("English", isTranslate: false),
         ),
       ],
-      builder:
-          (BuildContext context, MenuController controller, Widget? child) {
-            return SmallButton(
-              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-              width: null,
-              colorRole: ColorRole.background,
-              onClick: () {
-                controller.isOpen ? controller.close() : controller.open();
-              },
-              child: Row(
-                spacing: listSpacing,
-                children: [
-                  Image.asset(
-                    "assets/icon/language.webp",
-                    height: 16,
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                  Text(
-                    context.tr("language"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
-                  Text(
-                    context.tr("lang"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
-                ],
-              ),
-            );
+      builder: (BuildContext context, MenuController controller, Widget? child){
+        return SmallButton(
+          padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+          width: null,
+          colorRole: ColorRole.background,
+          onClick: (){
+            controller.isOpen ? controller.close() : controller.open();
           },
+          child: Row(
+            spacing: listSpacing,
+            children: [
+              AppIcon("language", height: 16),
+              AppText("language"),
+              AppText("lang"),
+            ],
+          ),
+        );
+      },
     );
   }
 }
