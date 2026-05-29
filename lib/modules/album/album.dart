@@ -33,6 +33,7 @@ import "package:file_picker/file_picker.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:media_kit/media_kit.dart";
 import "package:media_kit_video/media_kit_video.dart";
+import "package:path/path.dart" as p;
 
 final ContentItem item = ContentItem(
   name: "album",
@@ -3027,9 +3028,14 @@ class ExportImagesButton extends StatelessWidget {
             try {
               if (isVideoAlbum && liveFormat != "none") {
                 // Convert to live photo format in temp dir, then copy
-                final tempDir = await Directory.systemTemp.createTemp('nikki_live_');
+                final tempDir = Directory(p.join(Directory.systemTemp.path, "nikki_albums_live_photo_temp"));
+                if(await tempDir.exists()){
+                  await tempDir.delete(recursive: true);
+                }
+                await tempDir.create(recursive: true);
+
                 final exporter = LivePhotoExportService();
-                final List<Path> outputPaths = [];
+                final Set<Path> outputPaths = {};
 
                 for (final item in images) {
                   if (item.cover != null && await File(item.cover!).exists()) {
@@ -3049,10 +3055,7 @@ class ExportImagesButton extends StatelessWidget {
                     outputPaths.add(item.path);
                   }
                 }
-
-                await copyFilesToClipboard(outputPaths);
-                // Clean up temp dir
-                await tempDir.delete(recursive: true);
+                await copyFilesToClipboard(outputPaths.toList());
               } else {
                 final List<Path> paths = images
                     .map((item) => item.path)
