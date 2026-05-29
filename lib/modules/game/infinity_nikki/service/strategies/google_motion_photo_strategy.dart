@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart' as p;
 import 'export_strategy_base.dart';
 
 /// 谷歌 Motion Photo 导出策略 (纯 Dart 字节拼接合成单文件)
@@ -73,7 +74,8 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     resultBytes.addAll(videoBytes);
     
     // 6. 写入到 outputPath
-    final outputFile = File(outputPath);
+    final String outFilePath = p.join(outputPath, '${p.basenameWithoutExtension(sourceVideo.path)}.jpg');
+    final outputFile = File(outFilePath);
     await outputFile.writeAsBytes(resultBytes);
   }
 }

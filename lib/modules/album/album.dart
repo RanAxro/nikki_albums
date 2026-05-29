@@ -26,6 +26,7 @@ import "package:flutter/gestures.dart";
 import 'package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart';
 import 'package:nikki_albums/modules/game/infinity_nikki/service/strategies/export_strategy_base.dart';
 import 'package:path/path.dart' as p;
+import "dart:io";
 import "dart:ui" hide Path;
 
 import "package:easy_localization/easy_localization.dart";
@@ -3372,23 +3373,21 @@ class ExportImagesButton extends StatelessWidget {
 
     for (ImageItem item in images) {
       try {
-        final coverFile = item.path.file;
-        // In Nikki, video is named the same as the cover but with .Mp4 extension
-        final String videoPathStr = p.join(item.path.parent.path, "\${p.basenameWithoutExtension(item.path.name)}.Mp4");
-        final videoFile = File(videoPathStr);
+        final videoFile = item.path.file;
+        final String? coverPath = item.cover;
 
-        if (!await videoFile.exists()) {
+        if (coverPath == null || !await File(coverPath).exists()) {
           errorNum++;
           continue;
         }
 
-        final outputPath = (root + "\${p.basenameWithoutExtension(item.path.name)}.jpg").path;
+        final coverFile = File(coverPath);
         
         await exporter.export(
           format: format,
           coverImage: coverFile,
           sourceVideo: videoFile,
-          outputPath: outputPath,
+          outputPath: root.path,
         );
       } catch (e) {
         errorNum++;

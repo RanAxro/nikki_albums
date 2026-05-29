@@ -12,45 +12,37 @@ class AppleLivePhotoStrategy implements LivePhotoExportStrategy {
   Future<void> export({
     required File coverImage,
     required File sourceVideo,
-    required String outputPath, // 可选，对于 Live Photo，我们可以导出到临时目录然后再导入相册
+    required String outputPath,
   }) async {
     final String assetIdentifier = const Uuid().v4().toUpperCase();
+    final String baseName = p.basenameWithoutExtension(sourceVideo.path);
     
-    // 生成临时路径
-    final tempDir = Directory.systemTemp;
-    final String tempVideoPath = p.join(tempDir.path, '${assetIdentifier}.mov');
-    final String tempImagePath = p.join(tempDir.path, '${assetIdentifier}.jpg'); // Live Photo 要求 jpg 格式
+    // Output paired files to the user-selected directory
+    final String outVideoPath = p.join(outputPath, '$baseName.mov');
+    final String outImagePath = p.join(outputPath, '$baseName.jpg');
 
+    // 1. Remux Video and Inject UUID
+    await _channel.invokeMethod('remuxMp4ToMov', {
+      'inputPath': sourceVideo.path,
+      'outputPath': outVideoPath,
+      'assetIdentifier': assetIdentifier,
+    });
+
+    // 2. Inject UUID to Image Metadata
+    await _channel.invokeMethod('injectImageMetadata', {
+      'inputPath': coverImage.path,
+      'outputPath': outImagePath,
+      'assetIdentifier': assetIdentifier,
+    });
+
+    // 3. Try to import to Photos Library (best effort)
     try {
-      // 1. Remux Video and Inject UUID
-      await _channel.invokeMethod('remuxMp4ToMov', {
-        'inputPath': sourceVideo.path,
-        'outputPath': tempVideoPath,
-        'assetIdentifier': assetIdentifier,
-      });
-
-      // 2. Inject UUID to Image Metadata
-      await _channel.invokeMethod('injectImageMetadata', {
-        'inputPath': coverImage.path,
-        'outputPath': tempImagePath,
-        'assetIdentifier': assetIdentifier,
-      });
-
-      // 3. Import to Photos Library
       await _channel.invokeMethod('importLivePhoto', {
-        'coverPath': tempImagePath,
-        'videoPath': tempVideoPath,
+        'coverPath': outImagePath,
+        'videoPath': outVideoPath,
       });
-    } finally {
-      // 清理临时文件
-      final tempVideoFile = File(tempVideoPath);
-      if (await tempVideoFile.exists()) {
-        await tempVideoFile.delete();
-      }
-      final tempImageFile = File(tempImagePath);
-      if (await tempImageFile.exists()) {
-        await tempImageFile.delete();
-      }
+    } on PlatformException {
+      // If Photos access is denied, the paired files are still available in outputPath
     }
   }
 }

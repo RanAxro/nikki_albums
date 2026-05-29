@@ -59,8 +59,8 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
     }
 
     let identifierItem = AVMutableMetadataItem()
-    identifierItem.keySpace = .quicktimeMetadata
-    identifierItem.key = "com.apple.quicktime.content.identifier" as NSString
+    identifierItem.keySpace = AVMetadataKeySpace.quickTimeMetadata
+    identifierItem.key = AVMetadataKey.quickTimeMetadataKeyContentIdentifier as NSString
     identifierItem.value = assetIdentifier as NSString
 
     exportSession.metadata = [identifierItem]
@@ -125,14 +125,7 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
       let coverURL = URL(fileURLWithPath: coverPath)
       let videoURL = URL(fileURLWithPath: videoPath)
 
-      PHPhotoLibrary.requestAuthorization { status in
-          if status != .authorized && status != .limited {
-              DispatchQueue.main.async {
-                  result(FlutterError(code: "UNAUTHORIZED", message: "Photo library access not authorized", details: nil))
-              }
-              return
-          }
-
+      let performImport = {
           PHPhotoLibrary.shared().performChanges({
               let request = PHAssetCreationRequest.forAsset()
               request.addResource(with: .photo, fileURL: coverURL, options: nil)
@@ -146,6 +139,28 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
                   } else {
                       let errorMsg = error?.localizedDescription ?? "Unknown error"
                       result(FlutterError(code: "IMPORT_FAILED", message: errorMsg, details: nil))
+                  }
+              }
+          }
+      }
+
+      if #available(macOS 11.0, *) {
+          PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+              if status == .authorized || status == .limited {
+                  performImport()
+              } else {
+                  DispatchQueue.main.async {
+                      result(FlutterError(code: "UNAUTHORIZED", message: "Photo library access not authorized. Please grant access in System Settings > Privacy & Security > Photos.", details: nil))
+                  }
+              }
+          }
+      } else {
+          PHPhotoLibrary.requestAuthorization { status in
+              if status == .authorized {
+                  performImport()
+              } else {
+                  DispatchQueue.main.async {
+                      result(FlutterError(code: "UNAUTHORIZED", message: "Photo library access not authorized", details: nil))
                   }
               }
           }
