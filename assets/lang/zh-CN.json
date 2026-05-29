@@ -154,6 +154,7 @@
   "exportToNetwork": "导出到网络设备",
   "exportToPhotoLibrary": "导出到系统相册",
   "exportNikkiasToLocal": "导出nikkias文件",
+  "config_of_export": "配置项",
   "exportXImage": {
     "other": "导出 {} 张图片至"
   },

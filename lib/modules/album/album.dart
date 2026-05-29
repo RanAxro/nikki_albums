@@ -3,6 +3,7 @@ import "package:nikki_albums/modules/album/mp4_to_gif.dart";
 
 import "package:nikki_albums/modules/game/field_tree.dart";
 import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";
+import "package:nikki_albums/modules/setting/setting.dart";
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/modules/file_transfer/file_transfer.dart";
@@ -3212,7 +3213,7 @@ class ExportImagesButton extends StatelessWidget {
         ),
 
         /// export to macOS Photo Library (only for Video album on macOS)
-        if (Platform.isMacOS)
+        if(Platform.isMacOS)
           MenuItemButton(
             onPressed: () async {
               final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
@@ -3413,6 +3414,30 @@ class ExportImagesButton extends StatelessWidget {
             ),
           ),
         ),
+
+        if(AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
+          AppButton.smallText(
+            useConfiguration: false,
+            borderRadius: 0,
+            height: mediumButtonSize,
+            onClick: (){
+              showDialog(
+                context: context,
+                builder: (BuildContext context){
+                  return SettingDialog(
+                    initialPage: 2,
+                  );
+                },
+              );
+            },
+            child: Row(
+              spacing: listSpacing,
+              children: [
+                AppIcon("setting", height: 20),
+                AppText("config_of_export")
+              ],
+            ),
+          ),
       ],
     );
   }

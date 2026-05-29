@@ -146,6 +146,7 @@
   "exportToNetwork": "Export to network device",
   "exportToPhotoLibrary": "Export to Photo Library",
   "exportNikkiasToLocal": "Export nikkias file",
+  "config_of_export": "Configuration",
   "exportXImage": {
     "one": "Export 1 image to",
     "other": "Export {} images to"
