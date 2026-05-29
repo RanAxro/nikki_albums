@@ -2,6 +2,7 @@
 
 import "dart:ffi" hide Size;
 
+import "package:flutter/foundation.dart";
 import 'package:flutter/material.dart';
 import 'package:nikki_albums/src/rust/api/simple.dart';
 import 'package:nikki_albums/src/rust/frb_generated.dart';
@@ -28,21 +29,23 @@ void main(List<String> args) async{
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (Platform.isWindows) {
+  if(Platform.isWindows){
     SystemFactory.register(WindowsSystemServices());
-  } else if (Platform.isMacOS) {
+  }else if (Platform.isMacOS){
     SystemFactory.register(MacOsSystemServices());
   }
 
   MediaKit.ensureInitialized();
 
-  // if(Platform.isWindows){
-  //   await WindowsSingleInstance.ensureSingleInstance(
-  //     args,
-  //     "com_ranaxro_nikki_nikkialbums",
-  //     onSecondWindow: parseArgs,
-  //   );
-  // }
+  if(!kDebugMode){
+    if(Platform.isWindows){
+      await WindowsSingleInstance.ensureSingleInstance(
+        args,
+        "com_ranaxro_nikki_nikkialbums",
+        onSecondWindow: parseArgs,
+      );
+    }
+  }
   parseArgs(args);
 
   await EasyLocalization.ensureInitialized();
@@ -70,49 +73,13 @@ void main(List<String> args) async{
         appWindow.alignment = Alignment.center;
         appWindow.title = "Nikki Albums";
         appWindow.show();
+
+        Future.delayed(const Duration(milliseconds: 1000)).then((_){
+          appWindow.size = appWindow.size;
+          appWindow.show();
+        });
       });
     });
-
-    // doWhenWindowReady(() async{
-    //   WidgetsBinding.instance.addPostFrameCallback((_){
-    //     // double dpr = 1;
-    //     // try{
-    //     //   dpr = PlatformDispatcher.instance.views.first.devicePixelRatio;
-    //     //   dpr = dpr == 0 ? 1 : dpr;
-    //     // }catch(e){
-    //     //   dpr = 1;
-    //     // }
-    //     // final (int screenX, int screenY) = getWindowsScreenSize();
-    //     // appWindow.size = Size(0.7 * screenX / dpr, 0.7 * screenY / dpr);
-    //
-    //     appWindow.minSize = Size(0, 0);
-    //     appWindow.alignment = Alignment.center;
-    //     appWindow.title = "Nikki Albums";
-    //     appWindow.show();
-    //
-    //     // Future.delayed(const Duration(milliseconds: 500)).then((_){
-    //     //   appWindow.size = appWindow.size;
-    //     //   appWindow.show();
-    //     //
-    //     //   Future.delayed(const Duration(milliseconds: 500)).then((_){
-    //     //     appWindow.size = appWindow.size;
-    //     //     appWindow.show();
-    //     //
-    //     //     Future.delayed(const Duration(milliseconds: 500)).then((_){
-    //     //       appWindow.size = appWindow.size;
-    //     //       appWindow.show();
-    //     //
-    //     //       Future.delayed(const Duration(milliseconds: 1000)).then((_){
-    //     //         appWindow.size = appWindow.size;
-    //     //         appWindow.show();
-    //     //       });
-    //     //     });
-    //     //   });
-    //     // });
-    //
-    //   });
-    // });
-
   }
 }
 
