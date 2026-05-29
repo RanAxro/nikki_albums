@@ -18,7 +18,6 @@ class LivePhotoSettings extends StatelessWidget {
         builder: (BuildContext context, String format, Widget? child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: bigListSpacing,
             children: [
               Text(
                 context.tr("livePhotoExportFormat"),
@@ -27,6 +26,8 @@ class LivePhotoSettings extends StatelessWidget {
                   color: AppTheme.of(context)!.colorScheme.background.onColor,
                 ),
               ),
+              block10H,
+
               Text(
                 context.tr("livePhotoExportFormat_description"),
                 style: TextStyle(
@@ -34,6 +35,8 @@ class LivePhotoSettings extends StatelessWidget {
                   color: AppTheme.of(context)!.colorScheme.background.onColor.withOpacity(0.6),
                 ),
               ),
+              block10H,
+
               _buildRadioOption(context, "none", format),
               if (Platform.isMacOS) _buildRadioOption(context, "apple", format),
               _buildRadioOption(context, "google", format),
@@ -46,29 +49,28 @@ class LivePhotoSettings extends StatelessWidget {
 
   Widget _buildRadioOption(BuildContext context, String value, String current) {
     final bool selected = value == current;
-    return GestureDetector(
-      onTap: () {
-        AppState.livePhotoExportFormat.value = value;
-      },
-      child: Row(
-        spacing: listSpacing,
-        children: [
-          Icon(
-            selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-            size: 20,
-            color: selected
-                ? AppTheme.of(context)!.colorScheme.primary.color
-                : AppTheme.of(context)!.colorScheme.background.onColor.withOpacity(0.6),
-          ),
-          Expanded(
-            child: Text(
+    return IntrinsicWidth(
+      child: AppButton.smallText(
+        onClick: (){
+          AppState.livePhotoExportFormat.value = value;
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: listSpacing,
+          children: [
+            Icon(
+              selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              size: 20,
+              color: AppTheme.of(context)!.colorScheme.background.onColor,
+            ),
+            Text(
               context.tr("livePhotoExportFormat_$value"),
               style: TextStyle(
                 color: AppTheme.of(context)!.colorScheme.background.onColor,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

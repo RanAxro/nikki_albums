@@ -34,45 +34,50 @@ class SettingDialog extends StatelessWidget {
                   return LayoutBuilder(
                     builder:
                         (BuildContext context, BoxConstraints constraints) {
-                          return AppRadioStack(
-                            direction: Axis.vertical,
-                            buttonWidth: constraints.maxWidth,
-                            buttonHeight: smallButtonSize,
-                            selectedIndex: controller.page?.toInt(),
-                            children: [
-                              AppRawButton(
-                                width: constraints.maxWidth,
-                                height: smallButtonSize,
-                                onClick: () {
-                                  controller.jumpToPage(0);
-                                },
-                                child: AppText("personalization"),
-                              ),
-                              AppRawButton(
-                                width: constraints.maxWidth,
-                                height: smallButtonSize,
-                                onClick: () {
-                                  controller.jumpToPage(1);
-                                },
-                                child: AppText("accountManagement"),
-                              ),
-                              AppRawButton(
-                                width: constraints.maxWidth,
-                                height: smallButtonSize,
-                                onClick: () {
-                                  controller.jumpToPage(2);
-                                },
-                                child: AppText("livePhotoSettings"),
-                              ),
-                              AppRawButton(
-                                width: constraints.maxWidth,
-                                height: smallButtonSize,
-                                onClick: () {
-                                  controller.jumpToPage(3);
-                                },
-                                child: AppText("versionInformation"),
-                              ),
-                            ],
+                          return ListenableBuilder(
+                            listenable: controller,
+                            builder: (BuildContext context, Widget? child){
+                              return AppRadioStack(
+                                direction: Axis.vertical,
+                                buttonWidth: constraints.maxWidth,
+                                buttonHeight: smallButtonSize,
+                                selectedIndex: controller.page?.toInt() ?? 0,
+                                children: [
+                                  AppRawButton(
+                                    width: constraints.maxWidth,
+                                    height: smallButtonSize,
+                                    onClick: () {
+                                      controller.jumpToPage(0);
+                                    },
+                                    child: AppText("personalization"),
+                                  ),
+                                  AppRawButton(
+                                    width: constraints.maxWidth,
+                                    height: smallButtonSize,
+                                    onClick: () {
+                                      controller.jumpToPage(1);
+                                    },
+                                    child: AppText("accountManagement"),
+                                  ),
+                                  AppRawButton(
+                                    width: constraints.maxWidth,
+                                    height: smallButtonSize,
+                                    onClick: () {
+                                      controller.jumpToPage(2);
+                                    },
+                                    child: AppText("livePhotoSettings"),
+                                  ),
+                                  AppRawButton(
+                                    width: constraints.maxWidth,
+                                    height: smallButtonSize,
+                                    onClick: () {
+                                      controller.jumpToPage(3);
+                                    },
+                                    child: AppText("versionInformation"),
+                                  ),
+                                ],
+                              );
+                            },
                           );
                         },
                   );
