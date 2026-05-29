@@ -65,6 +65,10 @@ abstract class AppState {
   static final ValueNotifier<bool> needFileAssociationHelper =
       _createStateValue<bool>(true);
 
+  /// live photo export format: "none", "apple", "google"
+  static final ValueNotifier<String> livePhotoExportFormat =
+      _createStateValue<String>(Platform.isMacOS ? "apple" : "none");
+
   static ValueNotifier<T> _createStateValue<T>(T initValue) {
     final ValueNotifier<T> vn = ValueNotifier<T>(initValue);
     vn.addListener(() {
@@ -154,6 +158,10 @@ abstract class AppState {
       "needFileAssociationHelper",
       (bool value) => needFileAssociationHelper.value = value,
     );
+    assign<String>(
+      "livePhotoExportFormat",
+      (String value) => livePhotoExportFormat.value = value,
+    );
   }
 
   static Future<void> save() async {
@@ -183,6 +191,7 @@ abstract class AppState {
       "creationDirectoryPath": creationDirectoryPath.value,
       "isUseMaximizeOrRestoreButton": isUseMaximizeOrRestoreButton.value,
       "needFileAssociationHelper": needFileAssociationHelper.value,
+      "livePhotoExportFormat": livePhotoExportFormat.value,
     };
 
     try {

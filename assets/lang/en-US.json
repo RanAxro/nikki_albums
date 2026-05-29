@@ -42,6 +42,12 @@
 
   "maximizeOrRestoreButton": "Maximize Button",
 
+  "livePhotoExportFormat": "Live Photo Export Format",
+  "livePhotoExportFormat_none": "No conversion",
+  "livePhotoExportFormat_apple": "Live Photo (Apple)",
+  "livePhotoExportFormat_google": "Motion Photo (Google/Android)",
+  "livePhotoExportFormat_description": "When exporting from the Video album, automatically convert cover image and video into the corresponding platform's live photo format",
+
   "checkForUpdates": "Check for Updates",
   "checkFailed": "Check Failed",
   "alreadyTheLatestVersion": "You are up to date",
@@ -137,6 +143,7 @@
   "exportToClipboard": "Copy to Clipboard",
   "exportToLocal": "Export Locally",
   "exportToNetwork": "Export to network device",
+  "exportToPhotoLibrary": "Export to Photo Library",
   "exportNikkiasToLocal": "Export nikkias file",
   "exportXImage": {
     "one": "Export 1 image to",
