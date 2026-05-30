@@ -535,11 +535,137 @@ class Album extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlbumValuePool(
-      child: Stack(
-        children: [
-          AlbumExhibition(),
-          ToolBar(),
-        ],
+      child: Builder(
+        builder: (BuildContext context){
+          return CallbackShortcuts(
+            bindings: {
+              /// 刷新
+              const SingleActivator(LogicalKeyboardKey.f5): (){
+                if(AppState.currentGame.value != null){
+                  AlbumHandler.of(context).refresh(AppState.currentGame.value!);
+                }
+              },
+              /// 增加列数
+              const SingleActivator(LogicalKeyboardKey.equal): (){
+                if(AppState.currentGame.value != null){
+                  AlbumHandler.of(context).layoutPlus();
+                }
+              },
+              /// 减少列数
+              const SingleActivator(LogicalKeyboardKey.minus): (){
+                if(AppState.currentGame.value != null){
+                  AlbumHandler.of(context).layoutMinus();
+                }
+              },
+              /// 反选
+              const SingleActivator(LogicalKeyboardKey.keyD, control: true): (){
+                if(AppState.currentGame.value != null){
+                  AlbumHandler.of(context).deselect(AppState.currentGame.value!);
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyD, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null){
+                    AlbumHandler.of(context).deselect(AppState.currentGame.value!);
+                  }
+                }
+              },
+              /// 全选
+              const SingleActivator(LogicalKeyboardKey.keyA, control: true): (){
+                if(AppState.currentGame.value != null){
+                  AlbumHandler.of(context).selectAll(AppState.currentGame.value!);
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyA, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null){
+                    AlbumHandler.of(context).selectAll(AppState.currentGame.value!);
+                  }
+                }
+              },
+              /// 移出
+              const SingleActivator(LogicalKeyboardKey.keyO, control: true): (){
+                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                  AlbumHandler.of(context).moveOutside(context, AppState.currentGame.value!);
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyO, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                    AlbumHandler.of(context).moveOutside(context, AppState.currentGame.value!);
+                  }
+                }
+              },
+              /// 移入
+              const SingleActivator(LogicalKeyboardKey.keyI, control: true): (){
+                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                  AlbumHandler.of(context).moveInside(context, AppState.currentGame.value!);
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyI, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                    AlbumHandler.of(context).moveInside(context, AppState.currentGame.value!);
+                  }
+                }
+              },
+              /// 删除
+              const SingleActivator(LogicalKeyboardKey.delete): (){
+                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                  AlbumHandler.of(context).delete(context, AppState.currentGame.value!);
+                }
+              },
+              /// 导出到剪贴板
+              const SingleActivator(LogicalKeyboardKey.keyC, control: true): (){
+                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                  AlbumHandler.of(context).copy(context, AppState.currentGame.value!.album.selectedImages.toList());
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyC, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                    AlbumHandler.of(context).copy(context, AppState.currentGame.value!.album.selectedImages.toList());
+                  }
+                }
+              },
+              /// 导出到本地
+              const SingleActivator(LogicalKeyboardKey.keyS, control: true): (){
+                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                  AlbumHandler.of(context).exportToLocal(context, AppState.currentGame.value!.album.selectedImages.toList());
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyS, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                    AlbumHandler.of(context).exportToLocal(context, AppState.currentGame.value!.album.selectedImages.toList());
+                  }
+                }
+              },
+              /// 导出到网络
+              const SingleActivator(LogicalKeyboardKey.keyW, control: true): (){
+                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                  AlbumHandler.of(context).exportToNetwork(context);
+                }
+              },
+              const SingleActivator(LogicalKeyboardKey.keyW, meta: true): (){
+                if(Platform.isMacOS){
+                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+                    AlbumHandler.of(context).exportToNetwork(context);
+                  }
+                }
+              },
+            },
+            child: Focus(
+              autofocus: true,
+              child: Stack(
+                children: [
+                  AlbumExhibition(),
+                  ToolBar(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
