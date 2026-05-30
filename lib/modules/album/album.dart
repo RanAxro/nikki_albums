@@ -583,6 +583,12 @@ class Album extends StatelessWidget {
                   }
                 }
               },
+              /// 查看选中
+              const SingleActivator(LogicalKeyboardKey.keyV): (){
+                if(AppState.currentGame.value != null){
+                  AlbumHandler.of(context).viewSelect(context, AppState.currentGame.value!);
+                }
+              },
               /// 移出
               const SingleActivator(LogicalKeyboardKey.keyO, control: true): (){
                 if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
@@ -738,6 +744,7 @@ class _ToolBarState extends State<ToolBar> {
                 /// 刷新
                 AppRawButton(
                   toolTip: "refresh",
+                  toolTipShortcut: [LogicalKeyboardKey.f5],
                   onClick: () {
                     AlbumHandler.of(context).refresh(game);
                   },
@@ -787,6 +794,7 @@ class _ToolBarState extends State<ToolBar> {
                 /// 减少列数
                 AppRawButton(
                   toolTip: "pa_layout_minus",
+                  toolTipShortcut: [LogicalKeyboardKey.minus],
                   onClick: AlbumHandler.of(context).layoutMinus,
                   child: AppIcon("layout_minus", height: 20),
                 ),
@@ -794,6 +802,7 @@ class _ToolBarState extends State<ToolBar> {
                 /// 增加列数
                 AppRawButton(
                   toolTip: "pa_layout_plus",
+                  toolTipShortcut: [LogicalKeyboardKey.add],
                   onClick: AlbumHandler.of(context).layoutPlus,
                   child: AppIcon("layout_plus", height: 20),
                 ),
@@ -801,6 +810,7 @@ class _ToolBarState extends State<ToolBar> {
                 /// 取消选择
                 AppRawButton(
                   toolTip: "deselect",
+                  toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyD],
                   onClick: () {
                     AlbumHandler.of(context).deselect(game);
                   },
@@ -810,6 +820,7 @@ class _ToolBarState extends State<ToolBar> {
                 /// 全选
                 AppRawButton(
                   toolTip: "select_all",
+                  toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyA],
                   onClick: () {
                     AlbumHandler.of(context).selectAll(game);
                   },
@@ -834,6 +845,7 @@ class _ToolBarState extends State<ToolBar> {
 
                   return AppRawButton(
                     toolTip: usable ? "viewSelect" : "",
+                    toolTipShortcut: [LogicalKeyboardKey.keyV],
                     onClick: () {
                       AlbumHandler.of(context).viewSelect(context, game);
                     },
@@ -851,6 +863,7 @@ class _ToolBarState extends State<ToolBar> {
 
                   return AppRawButton(
                     toolTip: usable ? "remove" : "",
+                    toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyO],
                     onClick: () {
                       AlbumHandler.of(context).moveOutside(context, game);
                     },
@@ -868,6 +881,7 @@ class _ToolBarState extends State<ToolBar> {
 
                   return AppRawButton(
                     toolTip: usable ? "insert" : "",
+                    toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyI],
                     onClick: () {
                       AlbumHandler.of(context).moveInside(context, game);
                     },
@@ -885,6 +899,7 @@ class _ToolBarState extends State<ToolBar> {
 
                   return AppRawButton(
                     toolTip: usable ? "delete" : "",
+                    toolTipShortcut: [LogicalKeyboardKey.delete],
                     onClick: () {
                       AlbumHandler.of(context).delete(context, game);
                     },
@@ -3356,6 +3371,7 @@ class ExportImagesButton extends StatelessWidget {
           onPressed: (){
             AlbumHandler.of(context).copy(context, images);
           },
+          trailingIcon: AppText(getKeyboardCharacter([LogicalKeyboardKey.control, LogicalKeyboardKey.keyC]), isTranslate: false),
           child: Text(
             context.tr("exportToClipboard"),
             style: TextStyle(
@@ -3369,6 +3385,7 @@ class ExportImagesButton extends StatelessWidget {
           onPressed: (){
             AlbumHandler.of(context).exportToLocal(context, images);
           },
+          trailingIcon: AppText(getKeyboardCharacter([LogicalKeyboardKey.control, LogicalKeyboardKey.keyS]), isTranslate: false),
           child: Text(
             context.tr("exportToLocal"),
             style: TextStyle(
@@ -3382,6 +3399,7 @@ class ExportImagesButton extends StatelessWidget {
           onPressed: (){
             AlbumHandler.of(context).exportToNetwork(context);
           },
+          trailingIcon: AppText(getKeyboardCharacter([LogicalKeyboardKey.control, LogicalKeyboardKey.keyW]), isTranslate: false),
           child: Text(
             context.tr("exportToNetwork"),
             style: TextStyle(

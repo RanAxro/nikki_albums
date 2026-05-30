@@ -148,6 +148,7 @@ final Map<int, String> keyboardCharacterMap = {
   0x200000105: "RAlt",
   0x200000106: "Meta",
   0x200000107: "RMeta",
+  0x2000001f0: "Ctrl",
   0x20000020d: "NumEnter",
   0x200000228: "Num(",
   0x200000229: "Num)",
@@ -178,17 +179,44 @@ final Map<int, String> keyboardCharacterMap = {
 };
 
 String getKeyboardCharacter(List<LogicalKeyboardKey> keys) {
-  if (Platform.isWindows) {
-    String res = "";
+  String res = "";
 
-    for (final LogicalKeyboardKey key in keys) {
-      res += " + [ ${keyboardCharacterMap[key.keyId]} ]" ?? "";
-    }
-
-    return res.isNotEmpty ? res.substring(2) : res;
-  } else {
-    return "";
+  if(keys.isEmpty){
+    return res;
   }
+
+  if(Platform.isWindows){
+    res += "[";
+    for(final LogicalKeyboardKey key in keys){
+      final String c = keyboardCharacterMap[key.keyId] ?? "";
+
+      if(res == "["){
+        res += c;
+      }else{
+        res += " + $c";
+      }
+    }
+    res += "]";
+  }else if(Platform.isMacOS){
+    res += "[";
+    for(final LogicalKeyboardKey key in keys){
+      late final String c;
+      if(key.keyId == LogicalKeyboardKey.control.keyId){
+        c = "⌘";
+      }else{
+        c = keyboardCharacterMap[key.keyId] ?? "";
+      }
+
+      if(res == "["){
+        res += c;
+      }else{
+        res += " + $c";
+      }
+    }
+    res += "]";
+  }
+
+  return res;
 }
 
 // abstract class AppKeyTexts{

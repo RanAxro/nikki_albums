@@ -4,6 +4,7 @@ import "component.dart";
 
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
 import "package:easy_localization/easy_localization.dart";
 
@@ -451,6 +452,7 @@ class AppRawButton extends StatefulWidget {
 
   final String? toolTip;
   final bool isTranslate;
+  final List<LogicalKeyboardKey>? toolTipShortcut;
   final bool usable;
   final void Function()? onClick;
   final Widget? child;
@@ -477,6 +479,7 @@ class AppRawButton extends StatefulWidget {
     this.useConfiguration = true,
     this.toolTip,
     this.isTranslate = true,
+    this.toolTipShortcut,
     this.usable = true,
     this.onClick,
     this.child,
@@ -553,10 +556,13 @@ class _AppRawButtonState extends State<AppRawButton> {
     );
 
     if (widget.toolTip != null && widget.usable) {
+      String? message = widget.isTranslate ? context.tr(widget.toolTip.toString()) : widget.toolTip;
+      if(widget.toolTipShortcut != null){
+        message = "${message ?? ""} ${getKeyboardCharacter(widget.toolTipShortcut!)}";
+      }
+
       button = Tooltip(
-        message: widget.isTranslate
-            ? context.tr(widget.toolTip!)
-            : widget.toolTip,
+        message: message,
         child: button,
       );
     }
