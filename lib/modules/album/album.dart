@@ -54,6 +54,7 @@ final ContentItem item = ContentItem(
 // }
 
 class AlbumValuePool extends InheritedWidget {
+  final AlbumHandler handler = AlbumHandler();
   final ValueNotifier<bool> isPrimaryMouseDown = ValueNotifier<bool>(false);
   final ValueNotifier<bool> isDragScrollbar = ValueNotifier<bool>(false);
   final ValueNotifier<bool> isShowTimeHeader = ValueNotifier<bool>(true);
@@ -71,13 +72,475 @@ class AlbumValuePool extends InheritedWidget {
   }
 }
 
+class AlbumHandler{
+  const AlbumHandler();
+
+  void refresh(Game game){
+    game.refresh();
+  }
+
+  void changeSortOrder(Game game){
+    if(game.album.sortOrder == SortOrder.descending){
+      game.album.sortOrder = SortOrder.ascending;
+    }else{
+      game.album.sortOrder = SortOrder.descending;
+    }
+  }
+
+  void layoutMinus(){
+    if(AppState.albumColumn.value > 1) AppState.albumColumn.value--;
+  }
+
+  void layoutPlus(){
+    AppState.albumColumn.value++;
+  }
+
+  void deselect(Game game){
+    game.album.deselectAllImage();
+  }
+
+  void selectAll(Game game){
+    game.album.selectAllImage();
+  }
+
+  void invertSelect(Game game){
+    game.album.invertAllImage();
+  }
+
+  void viewSelect(BuildContext context, Game game){
+    showAppDialog(
+      context: context,
+      builder: (BuildContext context) => SelectionViewerDialog(game: game),
+    );
+  }
+
+  void moveOutside(BuildContext context, Game game){
+    final ValueNotifier<double> progress = ValueNotifier(0);
+    int errorNum = 0;
+
+    showProgressBar(
+      context: context,
+      valueListenable: progress,
+      autoClose: false,
+      completedBuilder: (BuildContext context, void Function() close){
+        if(errorNum == 0){
+          close();
+          return block0;
+        }
+
+        return Column(
+          spacing: listSpacing,
+          children: [
+            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
+            const FailToCopyFileSystemEntry(),
+            SmallButton(
+              width: null,
+              onClick: close,
+              child: Text(context.tr("ok")),
+            ),
+          ],
+        );
+      },
+    );
+
+    game.backupSelectedImages(
+      onProgress: (double currentProgress){
+        progress.value = currentProgress;
+      },
+      onError: (Set items){
+        errorNum = items.length;
+      },
+    );
+  }
+
+  void moveInside(BuildContext context, Game game){
+    final ValueNotifier<double> progress = ValueNotifier(0);
+    int errorNum = 0;
+
+    showProgressBar(
+      context: context,
+      valueListenable: progress,
+      autoClose: false,
+      completedBuilder: (BuildContext context, void Function() close){
+        if(errorNum == 0){
+          close();
+          return block0;
+        }
+
+        return Column(
+          spacing: listSpacing,
+          children: [
+            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
+            const FailToCopyFileSystemEntry(),
+            SmallButton(
+              width: null,
+              onClick: close,
+              child: Text(context.tr("ok")),
+            ),
+          ],
+        );
+      },
+    );
+
+    game.restoreSelectedImages(
+      onProgress: (double currentProgress){
+        progress.value = currentProgress;
+      },
+      onError: (Set items){
+        errorNum = items.length;
+      },
+    );
+  }
+
+  void delete(BuildContext context, Game game){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => DeleteImagesDialog(game: game),
+    );
+  }
+
+  void import(BuildContext context, Game game){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ImportImagesDialog(game),
+    );
+  }
+
+  /// copy images to clipboard
+  Future<void> copy(BuildContext context, List<ImageItem> images) async{
+    final String liveFormat = AppState.livePhotoExportFormat.value;
+    final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+
+    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+    bool isError = false;
+
+    AppToast.showMessage(context: context, message: "复制中");
+
+    try{
+      if(isVideoAlbum && liveFormat != "none"){
+        // Convert to live photo format in temp dir, then copy
+        final Directory tempDir = Directory(p.join(Directory.systemTemp.path, "nikki_albums_live_photo_temp"));
+        if(await tempDir.exists()){
+          await tempDir.delete(recursive: true);
+        }
+        await tempDir.create(recursive: true);
+
+        final LivePhotoExportService exporter = LivePhotoExportService();
+        final Set<Path> outputPaths = {};
+
+        for(final ImageItem item in images){
+          if(item.cover != null && await File(item.cover!).exists()){
+            await exporter.export(
+              format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+              coverImage: File(item.cover!),
+              sourceVideo: item.path.file,
+              outputPath: tempDir.path,
+            );
+            // Collect output files
+            await for(final FileSystemEntity entity in tempDir.list()){
+              if(entity is File){
+                outputPaths.add(Path(entity.path));
+              }
+            }
+          }else{
+            outputPaths.add(item.path);
+          }
+        }
+        await copyFilesToClipboard(outputPaths.toList());
+      }else{
+        final List<Path> paths = images.map((item) => item.path).toList(growable: false);
+        await copyFilesToClipboard(paths);
+      }
+    }catch(e){
+      isError = true;
+    }finally{
+      progress.value = 1;
+    }
+
+    if(context.mounted){
+      AppToast.showMessage(
+        context: context,
+        message: context.tr(isError ? "pa_copy_failed" : "pa_copy_successful"),
+        state: !isError,
+      );
+    }
+  }
+
+  /// export images to native device
+  Future<void> exportToLocal(BuildContext context, List<ImageItem> images)async{
+    final String? location = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: context.plural("exportXImage", images.length),
+      lockParentWindow: true,
+    );
+    if(location == null) return;
+
+    final Path root = Path(location);
+
+    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+    final int total = images.length;
+    int current = 0;
+    int errorNum = 0;
+
+    if(context.mounted){
+      showProgressBar(
+        context: context,
+        barrierDismissible: false,
+        autoClose: false,
+        valueListenable: progress,
+        completedBuilder: (BuildContext context, void Function() close){
+          return Column(
+            spacing: listSpacing,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if(errorNum != 0)
+                Text(
+                  context.plural("XImageFailedToBeProcessed", errorNum),
+                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
+                ),
+              SmallButton(
+                width: null,
+                colorRole: ColorRole.background,
+                transparent: false,
+                onClick: close,
+                child: Text(
+                  context.tr("close"),
+                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor,),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    for(final ImageItem item in images){
+      try{
+        final String liveFormat = AppState.livePhotoExportFormat.value;
+        final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+
+        if(isVideoAlbum && liveFormat != "none" && item.cover != null){
+          final File coverFile = File(item.cover!);
+          if(await coverFile.exists()){
+            final LivePhotoExportService exporter = LivePhotoExportService();
+            await exporter.export(
+              format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+              coverImage: coverFile,
+              sourceVideo: item.path.file,
+              outputPath: root.path,
+            );
+          }else{
+            final Path destination = root + item.path.name;
+            await item.path.file.copy(destination.path);
+          }
+        }else{
+          final Path destination = root + item.path.name;
+          await item.path.file.copy(destination.path);
+        }
+      }catch(e){
+        errorNum++;
+      }finally{
+        current++;
+        progress.value = current / total;
+      }
+    }
+    progress.value = 1;
+  }
+
+  /// export images to network device
+  void exportToNetwork(BuildContext context){
+    if(AppState.currentGame.value != null){
+      exportImageToNetwork(context, AppState.currentGame.value!);
+    }
+  }
+
+  /// export to macOS Photo Library (only for Video album on macOS)
+  Future<void> exportToPhotoLibrary(BuildContext context, List<ImageItem> images) async{
+    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+    final int total = images.length;
+    int current = 0;
+    int errorNum = 0;
+
+    if(context.mounted){
+      showProgressBar(
+        context: context,
+        barrierDismissible: false,
+        autoClose: false,
+        valueListenable: progress,
+        completedBuilder: (BuildContext context, void Function() close){
+          return Column(
+            spacing: listSpacing,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if(errorNum != 0)
+                Text(
+                  context.plural("XImageFailedToBeProcessed", errorNum),
+                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
+                ),
+              SmallButton(
+                width: null,
+                colorRole: ColorRole.background,
+                transparent: false,
+                onClick: close,
+                child: Text(context.tr("close"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+    final String liveFormat = AppState.livePhotoExportFormat.value;
+    const channel = MethodChannel("com.ranaxro.nikki.nikkiAlbums/live_photo");
+
+    final List<String> allFilesToImport = [];
+
+    for(final ImageItem item in images){
+      try{
+        if(isVideoAlbum && liveFormat == "apple" && item.cover != null && await File(item.cover!).exists()){
+          final String assetIdentifier = const Uuid().v4().toUpperCase();
+          final tempDir = await Directory.systemTemp.createTemp("nikki_livephoto_");
+          final String baseName = item.path.subName;
+          final String tempVideo = "${tempDir.path}/$baseName.mov";
+          final String tempImage = "${tempDir.path}/$baseName.jpg";
+
+          await channel.invokeMethod("remuxMp4ToMov", {
+            "inputPath": item.path.path,
+            "outputPath": tempVideo,
+            "assetIdentifier": assetIdentifier,
+          });
+          await channel.invokeMethod("injectImageMetadata", {
+            "inputPath": item.cover!,
+            "outputPath": tempImage,
+            "assetIdentifier": assetIdentifier,
+          });
+          allFilesToImport.add(tempImage);
+          allFilesToImport.add(tempVideo);
+        }else{
+          allFilesToImport.add(item.path.path);
+        }
+      }catch(e){
+        errorNum++;
+      }finally{
+        current++;
+        progress.value = current / total;
+      }
+    }
+
+    // Import all files at once via NSSharingService
+    if(allFilesToImport.isNotEmpty){
+      try{
+        await channel.invokeMethod("importBatchToPhotoLibrary", {
+          "filePaths": allFilesToImport,
+        });
+      }catch(e){
+        errorNum++;
+      }
+    }
+    progress.value = 1;
+  }
+
+  /// encode and export nikkias file to native device
+  Future<void> exportNikkiasToLocal(BuildContext context, List<ImageItem> images) async{
+    if(AppState.currentGame.value == null) return;
+    final Game game = AppState.currentGame.value!;
+
+    final String? location = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: context.tr("exportNikkiasFile"),
+      lockParentWindow: true,
+    );
+    if(location == null) return;
+
+    final Path root = Path(location);
+    final String filename = "${DateTime.now().millisecondsSinceEpoch}.$nikkiasExtension";
+    final Path savePath = root + filename;
+
+    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+    bool isError = false;
+
+    if(context.mounted){
+      showProgressBar(
+        context: context,
+        barrierDismissible: false,
+        autoClose: false,
+        valueListenable: progress,
+        completedBuilder: (BuildContext context, void Function() close){
+          return Column(
+            spacing: listSpacing,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              isError ? Text(context.plural("XImageFailedToBeProcessed", images.length),
+                style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
+              ) : Text(
+                filename,
+                style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.onColor),
+              ),
+              SmallButton(
+                width: null,
+                colorRole: ColorRole.background,
+                transparent: false,
+                onClick: close,
+                child: Text(
+                  context.tr("close"),
+                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    final ImageTransferNikkiasManifest manifest = ImageTransferNikkiasManifest(
+      launcherChannel: game.launcherChannel,
+      uid: game.selectedUid?.value ?? "",
+      albumType: game.selectedAlbum,
+    );
+    try{
+      final ImageTransferNikkiasCodec codec = ImageTransferNikkiasCodec(
+        manifest,
+        savePath.file,
+        game.installPath,
+      );
+      codec.filenameWhitelist = game.album.selectedImages.map((ImageItem item) => item.name).toList();
+      await codec.encode((double encodeProgress) => progress.value = encodeProgress,);
+    }catch (e){
+      isError = true;
+    }finally{
+      progress.value = 1;
+      Explorer.openFile(savePath.file);
+    }
+  }
+
+  /// The "Export" option for the "AlbumType.Video" category
+  void openVideoExportSetting(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return SettingDialog(
+          initialPage: 2,
+        );
+      },
+    );
+  }
+
+  static AlbumHandler of(BuildContext context){
+    return AlbumValuePool.of(context).handler;
+  }
+}
+
 class Album extends StatelessWidget {
   const Album({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AlbumValuePool(
-      child: Stack(children: [AlbumExhibition(), ToolBar()]),
+      child: Stack(
+        children: [
+          AlbumExhibition(),
+          ToolBar(),
+        ],
+      ),
     );
   }
 }
@@ -87,257 +550,11 @@ class Album extends StatelessWidget {
 class ToolBar extends StatefulWidget {
   const ToolBar({super.key});
 
-  void _refresh(Game game) {
-    game.refresh();
-  }
-
-  void _layoutMinus() {
-    if (AppState.albumColumn.value > 1) AppState.albumColumn.value--;
-  }
-
-  void _layoutPlus() {
-    AppState.albumColumn.value++;
-  }
-
-  void _deselect(Game game) {
-    game.album.deselectAllImage();
-  }
-
-  void _selectAll(Game game) {
-    game.album.selectAllImage();
-  }
-
-  void _invertSelect(Game game) {
-    game.album.invertAllImage();
-  }
-
-  void _viewSelect(BuildContext context, Game game) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => SelectionViewerDialog(game: game),
-    );
-  }
-
-  void _remove(BuildContext context, Game game) {
-    final ValueNotifier<double> progress = ValueNotifier(0);
-    int errorNum = 0;
-
-    showProgressBar(
-      context: context,
-      valueListenable: progress,
-      autoClose: false,
-      completedBuilder: (BuildContext context, void Function() close) {
-        if (errorNum == 0) {
-          close();
-          return block0;
-        }
-
-        return Column(
-          spacing: listSpacing,
-          children: [
-            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
-            const FailToCopyFileSystemEntry(),
-            SmallButton(
-              width: null,
-              onClick: close,
-              child: Text(context.tr("ok")),
-            ),
-          ],
-        );
-      },
-    );
-
-    game.backupSelectedImages(
-      onProgress: (double currentProgress) {
-        progress.value = currentProgress;
-      },
-      onError: (Set items) {
-        errorNum = items.length;
-      },
-    );
-  }
-
-  void _insert(BuildContext context, Game game) {
-    final ValueNotifier<double> progress = ValueNotifier(0);
-    int errorNum = 0;
-
-    showProgressBar(
-      context: context,
-      valueListenable: progress,
-      autoClose: false,
-      completedBuilder: (BuildContext context, void Function() close) {
-        if (errorNum == 0) {
-          close();
-          return block0;
-        }
-
-        return Column(
-          spacing: listSpacing,
-          children: [
-            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
-            const FailToCopyFileSystemEntry(),
-            SmallButton(
-              width: null,
-              onClick: close,
-              child: Text(context.tr("ok")),
-            ),
-          ],
-        );
-      },
-    );
-
-    game.restoreSelectedImages(
-      onProgress: (double currentProgress) {
-        progress.value = currentProgress;
-      },
-      onError: (Set items) {
-        errorNum = items.length;
-      },
-    );
-  }
-
-  void _delete(BuildContext context, Game game) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => DeleteImagesDialog(game: game),
-    );
-  }
-
-  void _import(BuildContext context, Game game) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => ImportImagesDialog(game),
-    );
-  }
-
   @override
   State<ToolBar> createState() => _ToolBarState();
 }
 
 class _ToolBarState extends State<ToolBar> {
-  void refresh(Game game) {
-    game.refresh();
-  }
-
-  void layoutMinus() {
-    if (AppState.albumColumn.value > 1) AppState.albumColumn.value--;
-  }
-
-  void layoutPlus() {
-    AppState.albumColumn.value++;
-  }
-
-  void deselect(Game game) {
-    game.album.deselectAllImage();
-  }
-
-  void selectAll(Game game) {
-    game.album.selectAllImage();
-  }
-
-  void invertSelect(Game game) {
-    game.album.invertAllImage();
-  }
-
-  void viewSelect(BuildContext context, Game game) {
-    showAppDialog(
-      context: context,
-      builder: (BuildContext context) => SelectionViewerDialog(game: game),
-    );
-  }
-
-  void moveOutside(BuildContext context, Game game) {
-    final ValueNotifier<double> progress = ValueNotifier(0);
-    int errorNum = 0;
-
-    showProgressBar(
-      context: context,
-      valueListenable: progress,
-      autoClose: false,
-      completedBuilder: (BuildContext context, void Function() close) {
-        if (errorNum == 0) {
-          close();
-          return block0;
-        }
-
-        return Column(
-          spacing: listSpacing,
-          children: [
-            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
-            const FailToCopyFileSystemEntry(),
-            SmallButton(
-              width: null,
-              onClick: close,
-              child: Text(context.tr("ok")),
-            ),
-          ],
-        );
-      },
-    );
-
-    game.backupSelectedImages(
-      onProgress: (double currentProgress) {
-        progress.value = currentProgress;
-      },
-      onError: (Set items) {
-        errorNum = items.length;
-      },
-    );
-  }
-
-  void moveInside(BuildContext context, Game game) {
-    final ValueNotifier<double> progress = ValueNotifier(0);
-    int errorNum = 0;
-
-    showProgressBar(
-      context: context,
-      valueListenable: progress,
-      autoClose: false,
-      completedBuilder: (BuildContext context, void Function() close) {
-        if (errorNum == 0) {
-          close();
-          return block0;
-        }
-
-        return Column(
-          spacing: listSpacing,
-          children: [
-            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
-            const FailToCopyFileSystemEntry(),
-            SmallButton(
-              width: null,
-              onClick: close,
-              child: Text(context.tr("ok")),
-            ),
-          ],
-        );
-      },
-    );
-
-    game.restoreSelectedImages(
-      onProgress: (double currentProgress) {
-        progress.value = currentProgress;
-      },
-      onError: (Set items) {
-        errorNum = items.length;
-      },
-    );
-  }
-
-  void delete(BuildContext context, Game game) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => DeleteImagesDialog(game: game),
-    );
-  }
-
-  void import(BuildContext context, Game game) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => ImportImagesDialog(game),
-    );
-  }
-
   Widget gameListenerBuilder(
     Game game,
     Widget Function(bool isExistSelectedImage, bool isAllowBackup) builder,
@@ -396,7 +613,7 @@ class _ToolBarState extends State<ToolBar> {
                 AppRawButton(
                   toolTip: "refresh",
                   onClick: () {
-                    widget._refresh(game);
+                    AlbumHandler.of(context).refresh(game);
                   },
                   child: AppIcon("refresh", height: 18),
                 ),
@@ -424,13 +641,8 @@ class _ToolBarState extends State<ToolBar> {
                           message: text,
                           child: SmallButton(
                             colorRole: ColorRole.secondary,
-                            onClick: () {
-                              if (game.album.sortOrder ==
-                                  SortOrder.descending) {
-                                game.album.sortOrder = SortOrder.ascending;
-                              } else {
-                                game.album.sortOrder = SortOrder.descending;
-                              }
+                            onClick: (){
+                              AlbumHandler.of(context).changeSortOrder(game);
                             },
                             child: Image.asset(
                               icon,
@@ -449,14 +661,14 @@ class _ToolBarState extends State<ToolBar> {
                 /// 减少列数
                 AppRawButton(
                   toolTip: "pa_layout_minus",
-                  onClick: layoutMinus,
+                  onClick: AlbumHandler.of(context).layoutMinus,
                   child: AppIcon("layout_minus", height: 20),
                 ),
 
                 /// 增加列数
                 AppRawButton(
                   toolTip: "pa_layout_plus",
-                  onClick: layoutPlus,
+                  onClick: AlbumHandler.of(context).layoutPlus,
                   child: AppIcon("layout_plus", height: 20),
                 ),
 
@@ -464,7 +676,7 @@ class _ToolBarState extends State<ToolBar> {
                 AppRawButton(
                   toolTip: "deselect",
                   onClick: () {
-                    deselect(game);
+                    AlbumHandler.of(context).deselect(game);
                   },
                   child: AppIcon("deselect", height: 20),
                 ),
@@ -473,7 +685,7 @@ class _ToolBarState extends State<ToolBar> {
                 AppRawButton(
                   toolTip: "select_all",
                   onClick: () {
-                    selectAll(game);
+                    AlbumHandler.of(context).selectAll(game);
                   },
                   child: AppIcon("select_all", height: 20),
                 ),
@@ -482,7 +694,7 @@ class _ToolBarState extends State<ToolBar> {
                 AppRawButton(
                   toolTip: "invert_select",
                   onClick: () {
-                    invertSelect(game);
+                    AlbumHandler.of(context).invertSelect(game);
                   },
                   child: AppIcon("invert", height: 16),
                 ),
@@ -497,7 +709,7 @@ class _ToolBarState extends State<ToolBar> {
                   return AppRawButton(
                     toolTip: usable ? "viewSelect" : "",
                     onClick: () {
-                      viewSelect(context, game);
+                      AlbumHandler.of(context).viewSelect(context, game);
                     },
                     usable: (game.selectedAlbum == AlbumType.Video || game.selectedAlbum == AlbumType.ExternalVideo) ? false : usable,
                     child: AppIcon("view", height: 18),
@@ -514,7 +726,7 @@ class _ToolBarState extends State<ToolBar> {
                   return AppRawButton(
                     toolTip: usable ? "remove" : "",
                     onClick: () {
-                      moveOutside(context, game);
+                      AlbumHandler.of(context).moveOutside(context, game);
                     },
                     usable: usable,
                     child: AppIcon("remove", height: 20),
@@ -531,7 +743,7 @@ class _ToolBarState extends State<ToolBar> {
                   return AppRawButton(
                     toolTip: usable ? "insert" : "",
                     onClick: () {
-                      moveInside(context, game);
+                      AlbumHandler.of(context).moveInside(context, game);
                     },
                     usable: usable,
                     child: AppIcon("insert", height: 16),
@@ -548,7 +760,7 @@ class _ToolBarState extends State<ToolBar> {
                   return AppRawButton(
                     toolTip: usable ? "delete" : "",
                     onClick: () {
-                      delete(context, game);
+                      AlbumHandler.of(context).delete(context, game);
                     },
                     usable: usable,
                     child: AppIcon("delete", height: 20),
@@ -570,7 +782,7 @@ class _ToolBarState extends State<ToolBar> {
                 AppRawButton(
                   toolTip: "import",
                   onClick: () {
-                    import(context, game);
+                    AlbumHandler.of(context).import(context, game);
                   },
                   usable: game.selectedAlbum != AlbumType.Video,
                   child: AppIcon("import", height: 18),
@@ -3015,69 +3227,8 @@ class ExportImagesButton extends StatelessWidget {
       menuChildren: [
         /// copy images to clipboard
         MenuItemButton(
-          onPressed: () async {
-            final String liveFormat = AppState.livePhotoExportFormat.value;
-            final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
-
-            final ValueNotifier<double?> progress = ValueNotifier<double?>(
-              null,
-            );
-            bool isError = false;
-
-            AppToast.showMessage(context: context, message: "复制中");
-
-            try {
-              if (isVideoAlbum && liveFormat != "none") {
-                // Convert to live photo format in temp dir, then copy
-                final tempDir = Directory(p.join(Directory.systemTemp.path, "nikki_albums_live_photo_temp"));
-                if(await tempDir.exists()){
-                  await tempDir.delete(recursive: true);
-                }
-                await tempDir.create(recursive: true);
-
-                final exporter = LivePhotoExportService();
-                final Set<Path> outputPaths = {};
-
-                for (final item in images) {
-                  if (item.cover != null && await File(item.cover!).exists()) {
-                    await exporter.export(
-                      format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
-                      coverImage: File(item.cover!),
-                      sourceVideo: item.path.file,
-                      outputPath: tempDir.path,
-                    );
-                    // Collect output files
-                    await for (final entity in tempDir.list()) {
-                      if (entity is File) {
-                        outputPaths.add(Path(entity.path));
-                      }
-                    }
-                  } else {
-                    outputPaths.add(item.path);
-                  }
-                }
-                await copyFilesToClipboard(outputPaths.toList());
-              } else {
-                final List<Path> paths = images
-                    .map((item) => item.path)
-                    .toList(growable: false);
-                await copyFilesToClipboard(paths);
-              }
-            } catch (e) {
-              isError = true;
-            } finally {
-              progress.value = 1;
-            }
-
-            if (context.mounted) {
-              AppToast.showMessage(
-                context: context,
-                message: context.tr(
-                  isError ? "pa_copy_failed" : "pa_copy_successful",
-                ),
-                state: !isError,
-              );
-            }
+          onPressed: (){
+            AlbumHandler.of(context).copy(context, images);
           },
           child: Text(
             context.tr("exportToClipboard"),
@@ -3089,97 +3240,8 @@ class ExportImagesButton extends StatelessWidget {
 
         /// export images to native device
         MenuItemButton(
-          onPressed: () async {
-            final String? location = await FilePicker.platform.getDirectoryPath(
-              dialogTitle: context.plural("exportXImage", images.length),
-              lockParentWindow: true,
-            );
-            if (location == null) return;
-
-            final Path root = Path(location);
-
-            final ValueNotifier<double?> progress = ValueNotifier<double?>(
-              null,
-            );
-            final int total = images.length;
-            int current = 0;
-            int errorNum = 0;
-
-            if (context.mounted) {
-              showProgressBar(
-                context: context,
-                barrierDismissible: false,
-                autoClose: false,
-                valueListenable: progress,
-                completedBuilder:
-                    (BuildContext context, void Function() close) {
-                      return Column(
-                        spacing: listSpacing,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (errorNum != 0)
-                            Text(
-                              context.plural(
-                                "XImageFailedToBeProcessed",
-                                errorNum,
-                              ),
-                              style: TextStyle(
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.error.pressedColor,
-                              ),
-                            ),
-                          SmallButton(
-                            width: null,
-                            colorRole: ColorRole.background,
-                            transparent: false,
-                            onClick: close,
-                            child: Text(
-                              context.tr("close"),
-                              style: TextStyle(
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-              );
-            }
-
-            for (ImageItem item in images) {
-              try {
-                final String liveFormat = AppState.livePhotoExportFormat.value;
-                final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
-
-                if (isVideoAlbum && liveFormat != "none" && item.cover != null) {
-                  final coverFile = File(item.cover!);
-                  if (await coverFile.exists()) {
-                    final exporter = LivePhotoExportService();
-                    await exporter.export(
-                      format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
-                      coverImage: coverFile,
-                      sourceVideo: item.path.file,
-                      outputPath: root.path,
-                    );
-                  } else {
-                    final Path destination = root + item.path.name;
-                    await item.path.file.copy(destination.path);
-                  }
-                } else {
-                  final Path destination = root + item.path.name;
-                  await item.path.file.copy(destination.path);
-                }
-              } catch (e) {
-                errorNum++;
-              } finally {
-                current++;
-                progress.value = current / total;
-              }
-            }
-            progress.value = 1;
+          onPressed: (){
+            AlbumHandler.of(context).exportToLocal(context, images);
           },
           child: Text(
             context.tr("exportToLocal"),
@@ -3191,18 +3253,8 @@ class ExportImagesButton extends StatelessWidget {
 
         /// export images to network device
         MenuItemButton(
-          onPressed: () {
-            if (AppState.currentGame.value != null) {
-              exportImageToNetwork(context, AppState.currentGame.value!);
-            }
-
-            // showDialog(
-            //   barrierDismissible: false,
-            //   context: context,
-            //   builder: (BuildContext context){
-            //     return ExportNetworkDialog(images: images);
-            //   }
-            // );
+          onPressed: (){
+            AlbumHandler.of(context).exportToNetwork(context);
           },
           child: Text(
             context.tr("exportToNetwork"),
@@ -3215,90 +3267,8 @@ class ExportImagesButton extends StatelessWidget {
         /// export to macOS Photo Library (only for Video album on macOS)
         if(Platform.isMacOS)
           MenuItemButton(
-            onPressed: () async {
-              final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
-              final int total = images.length;
-              int current = 0;
-              int errorNum = 0;
-
-              if (context.mounted) {
-                showProgressBar(
-                  context: context,
-                  barrierDismissible: false,
-                  autoClose: false,
-                  valueListenable: progress,
-                  completedBuilder: (BuildContext context, void Function() close) {
-                    return Column(
-                      spacing: listSpacing,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (errorNum != 0)
-                          Text(
-                            context.plural("XImageFailedToBeProcessed", errorNum),
-                            style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
-                          ),
-                        SmallButton(
-                          width: null,
-                          colorRole: ColorRole.background,
-                          transparent: false,
-                          onClick: close,
-                          child: Text(context.tr("close"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
-
-              final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
-              final String liveFormat = AppState.livePhotoExportFormat.value;
-              const channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
-
-              final List<String> allFilesToImport = [];
-
-              for (ImageItem item in images) {
-                try {
-                  if (isVideoAlbum && liveFormat == "apple" && item.cover != null && await File(item.cover!).exists()) {
-                    final String assetIdentifier = const Uuid().v4().toUpperCase();
-                    final tempDir = await Directory.systemTemp.createTemp('nikki_livephoto_');
-                    final String baseName = item.path.subName;
-                    final String tempVideo = '${tempDir.path}/$baseName.mov';
-                    final String tempImage = '${tempDir.path}/$baseName.jpg';
-
-                    await channel.invokeMethod('remuxMp4ToMov', {
-                      'inputPath': item.path.path,
-                      'outputPath': tempVideo,
-                      'assetIdentifier': assetIdentifier,
-                    });
-                    await channel.invokeMethod('injectImageMetadata', {
-                      'inputPath': item.cover!,
-                      'outputPath': tempImage,
-                      'assetIdentifier': assetIdentifier,
-                    });
-                    allFilesToImport.add(tempImage);
-                    allFilesToImport.add(tempVideo);
-                  } else {
-                    allFilesToImport.add(item.path.path);
-                  }
-                } catch (e) {
-                  errorNum++;
-                } finally {
-                  current++;
-                  progress.value = current / total;
-                }
-              }
-
-              // Import all files at once via NSSharingService
-              if (allFilesToImport.isNotEmpty) {
-                try {
-                  await channel.invokeMethod('importBatchToPhotoLibrary', {
-                    'filePaths': allFilesToImport,
-                  });
-                } catch (e) {
-                  errorNum++;
-                }
-              }
-              progress.value = 1;
+            onPressed: (){
+              AlbumHandler.of(context).exportToPhotoLibrary(context, images);
             },
             child: Text(
               context.tr("exportToPhotoLibrary"),
@@ -3310,102 +3280,8 @@ class ExportImagesButton extends StatelessWidget {
 
         /// encode and export nikkias file to native device
         MenuItemButton(
-          onPressed: () async {
-            if (AppState.currentGame.value == null) return;
-            final Game game = AppState.currentGame.value!;
-
-            final String? location = await FilePicker.platform.getDirectoryPath(
-              dialogTitle: context.tr("exportNikkiasFile"),
-              lockParentWindow: true,
-            );
-            if (location == null) return;
-
-            final Path root = Path(location);
-            final String filename =
-                "${DateTime.now().millisecondsSinceEpoch}.$nikkiasExtension";
-            final Path savePath = root + filename;
-
-            final ValueNotifier<double?> progress = ValueNotifier<double?>(
-              null,
-            );
-            bool isError = false;
-
-            if (context.mounted) {
-              showProgressBar(
-                context: context,
-                barrierDismissible: false,
-                autoClose: false,
-                valueListenable: progress,
-                completedBuilder:
-                    (BuildContext context, void Function() close) {
-                      return Column(
-                        spacing: listSpacing,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          isError
-                              ? Text(
-                                  context.plural(
-                                    "XImageFailedToBeProcessed",
-                                    images.length,
-                                  ),
-                                  style: TextStyle(
-                                    color: AppTheme.of(
-                                      context,
-                                    )!.colorScheme.error.pressedColor,
-                                  ),
-                                )
-                              : Text(
-                                  filename,
-                                  style: TextStyle(
-                                    color: AppTheme.of(
-                                      context,
-                                    )!.colorScheme.error.onColor,
-                                  ),
-                                ),
-                          SmallButton(
-                            width: null,
-                            colorRole: ColorRole.background,
-                            transparent: false,
-                            onClick: close,
-                            child: Text(
-                              context.tr("close"),
-                              style: TextStyle(
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-              );
-            }
-
-            final ImageTransferNikkiasManifest manifest =
-                ImageTransferNikkiasManifest(
-                  launcherChannel: game.launcherChannel,
-                  uid: game.selectedUid?.value ?? "",
-                  albumType: game.selectedAlbum,
-                );
-            try {
-              final ImageTransferNikkiasCodec codec = ImageTransferNikkiasCodec(
-                manifest,
-                savePath.file,
-                game.installPath,
-              );
-              codec.filenameWhitelist = game.album.selectedImages
-                  .map((ImageItem item) => item.name)
-                  .toList();
-              await codec.encode(
-                (double encodeProgress) => progress.value = encodeProgress,
-              );
-            } catch (e) {
-              isError = true;
-            } finally {
-              progress.value = 1;
-              Explorer.openFile(savePath.file);
-            }
+          onPressed: (){
+            AlbumHandler.of(context).exportNikkiasToLocal(context, images);
           },
           child: Text(
             context.tr("exportNikkiasToLocal"),
@@ -3415,20 +3291,14 @@ class ExportImagesButton extends StatelessWidget {
           ),
         ),
 
+        /// The "Export" option for the "AlbumType.Video" category
         if(AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
           AppButton.smallText(
             useConfiguration: false,
             borderRadius: 0,
             height: mediumButtonSize,
             onClick: (){
-              showDialog(
-                context: context,
-                builder: (BuildContext context){
-                  return SettingDialog(
-                    initialPage: 2,
-                  );
-                },
-              );
+              AlbumHandler.of(context).openVideoExportSetting(context);
             },
             child: Row(
               spacing: listSpacing,
