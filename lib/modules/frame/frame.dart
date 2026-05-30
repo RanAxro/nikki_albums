@@ -13,6 +13,8 @@ import "package:nikki_albums/src/rust/serde_config/se.dart";
 
 import "package:nikki_albums/utils/system/windows.dart";
 import "package:path_provider/path_provider.dart";
+import "../nuan5_params/domain/tree_node_generator.dart";
+import "../nuan5_params/presentation/media_params_tree.dart";
 import "../setting/versionInformation.dart";
 import "ui_android.dart";
 
@@ -1133,13 +1135,38 @@ class WindowTitleBar extends StatelessWidget {
                     onClick: () async{
                       // print((await getPluginDirectory()).path);
 
-                      await buildPlugin(builderConfig, Directory(r"E:\work\nikki_albums_file\plugin"));
+                      final MediaKey key = MediaKey.fromStr("108328049");
+                      final MediaCustomData? d = await mediaDeFileUnchecked(paramType: MediaParamType.nikkiPhoto, path: r"E:\game\InfinityNikki\InfinityNikki Launcher\InfinityNikki\X6Game\Saved\GamePlayPhotos\108328049\NikkiPhotos_HighQuality\2026_05_30_22_36_10_254303.jpeg", key: key);
+                      if(d != null){
+                        d.whenOrNull(
+                          valid: (MediaParam params){
+                            params.whenOrNull(
+                              nikkiPhoto: (nikki){
+                                genNikkiPhotoParams(nikki);
+                                showAppDialog(context: context, builder: (c){
+                                  return AppDialog(
+                                    useIntrinsicHeight: false,
+                                    child: TreeViewPage(root: [genNikkiPhotoParams(nikki)]),
+                                  );
+                                });
+                              }
+                            );
+                          }
+                        );
+                      }
+                      key.dispose();
 
-                      final p = await loadPlugin(Directory(r"E:\work\nikki_albums_file\plugin\05d5e067-ac1a-44c2-9f87-5ccaae613954"));
-                      print(p?.enable);
-                      print(p?.langPathList);
-                      print(p?.iconPathList);
-                      print(p?.gameConfigList);
+                      // showAppDialog(context: context, builder: (c){
+                      //   return TreeViewPage();
+                      // });
+
+                      // await buildPlugin(builderConfig, Directory(r"E:\work\nikki_albums_file\plugin"));
+                      //
+                      // final p = await loadPlugin(Directory(r"E:\work\nikki_albums_file\plugin\05d5e067-ac1a-44c2-9f87-5ccaae613954"));
+                      // print(p?.enable);
+                      // print(p?.langPathList);
+                      // print(p?.iconPathList);
+                      // print(p?.gameConfigList);
 
 
                       // serializeGameConfig(value: infinityNikkiConfig, pretty: true).then((v){

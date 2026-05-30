@@ -10,7 +10,7 @@ import 'world.dart';
 part 'nikki_photo_params.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `NikkiPhotoMainParams`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class CameraParams {
   final String params;
@@ -33,6 +33,7 @@ class CameraParams {
   final FilterParams filter;
   final PlatformInt64 pose;
   final PlatformInt64 framedMoment;
+  final CameraParamsMomoHidden? momo;
 
   const CameraParams({
     required this.params,
@@ -55,6 +56,7 @@ class CameraParams {
     required this.filter,
     required this.pose,
     required this.framedMoment,
+    this.momo,
   });
 
   @override
@@ -78,7 +80,8 @@ class CameraParams {
       light.hashCode ^
       filter.hashCode ^
       pose.hashCode ^
-      framedMoment.hashCode;
+      framedMoment.hashCode ^
+      momo.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -104,7 +107,25 @@ class CameraParams {
           light == other.light &&
           filter == other.filter &&
           pose == other.pose &&
-          framedMoment == other.framedMoment;
+          framedMoment == other.framedMoment &&
+          momo == other.momo;
+}
+
+@freezed
+sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
+  const CameraParamsMomoHidden._();
+
+  const factory CameraParamsMomoHidden.enable() = CameraParamsMomoHidden_Enable;
+  const factory CameraParamsMomoHidden.disable({
+    required PlatformInt64 momoPose,
+    required double horizontal,
+    required double distance,
+    required double height,
+    required double rotateMomo,
+    required bool autoGroundSnap,
+    required bool floatingEffect,
+    required bool poseWithNikki,
+  }) = CameraParamsMomoHidden_Disable;
 }
 
 class ClothParams {

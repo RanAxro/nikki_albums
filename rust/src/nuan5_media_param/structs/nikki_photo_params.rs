@@ -52,6 +52,22 @@ pub struct CameraParams{
   pub filter: FilterParams,
   pub pose: i64,
   pub framed_moment: i64,
+  pub momo: Option<CameraParamsMomoHidden>,
+}
+
+#[derive(Clone)]
+pub enum CameraParamsMomoHidden{
+  Enable,
+  Disable{
+    momo_pose: i64,
+    horizontal: f64,
+    distance: f64,
+    height: f64,
+    rotate_momo: f64,
+    auto_ground_snap: bool,
+    floating_effect: bool,
+    pose_with_nikki: bool,
+  },
 }
 
 #[derive(Clone)]

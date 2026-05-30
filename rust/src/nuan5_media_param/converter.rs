@@ -116,6 +116,16 @@ pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCus
   }
 }
 
+// pub(crate) fn convert_nikki_photo_main_params(data: &NikkiPhotoParams) -> NikkiPhotoMainParams{
+//   NikkiPhotoMainParams{
+//     camera: data.camera,
+//     dressing: data.nikki.unwrap().dressing,
+//     time: data.photography.time,
+//     weather: data.photography.weather,
+//     location: data.photography.location,
+//   }
+// }
+
 pub(crate) fn convert_clock_in_photo_params(data: &image_custom_data::ClockInPhotoCustomData) -> ClockInPhotoParams{
   ClockInPhotoParams{
     tag: data.clock_game_plugin.tag,
@@ -285,6 +295,30 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
     },
     pose: data.photo_info.pose_id,
     framed_moment: 0,
+    momo: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).momo.clone().map(|momo_hidden|{
+      match momo_hidden{
+        MomoCameraParamsMomoHidden::Enable => CameraParamsMomoHidden::Enable,
+        MomoCameraParamsMomoHidden::Disable{
+          momo_pose,
+          horizontal,
+          distance,
+          height,
+          rotate_momo,
+          auto_ground_snap,
+          floating_effect,
+          pose_with_nikki,
+        } => CameraParamsMomoHidden::Disable{
+          momo_pose,
+          horizontal,
+          distance,
+          height,
+          rotate_momo,
+          auto_ground_snap,
+          floating_effect,
+          pose_with_nikki,
+        },
+      }
+    }),
   }
 }
 

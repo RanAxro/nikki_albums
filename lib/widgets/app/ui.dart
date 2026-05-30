@@ -777,6 +777,7 @@ class AppButton extends StatelessWidget {
 
   final String? toolTip;
   final bool isTranslate;
+  final List<LogicalKeyboardKey>? toolTipShortcut;
   final bool usable;
   final void Function()? onClick;
   final Widget? child;
@@ -803,6 +804,7 @@ class AppButton extends StatelessWidget {
     this.isTransparent = true,
     this.useConfiguration = true,
     this.toolTip,
+    this.toolTipShortcut,
     this.isTranslate = true,
     this.usable = true,
     this.onClick,
@@ -855,6 +857,8 @@ class AppButton extends StatelessWidget {
       },
       useConfiguration: useConfiguration,
       toolTip: toolTip,
+      isTranslate: isTranslate,
+      toolTipShortcut: toolTipShortcut,
       usable: usable,
       onClick: onClick,
       builder: builder,
@@ -878,6 +882,7 @@ class AppButton extends StatelessWidget {
     bool useConfiguration = true,
     String? toolTip,
     bool isTranslate = true,
+    List<LogicalKeyboardKey>? toolTipShortcut,
     bool usable = true,
     void Function()? onClick,
     Widget? child,
@@ -899,6 +904,7 @@ class AppButton extends StatelessWidget {
       useConfiguration: useConfiguration,
       toolTip: toolTip,
       isTranslate: isTranslate,
+      toolTipShortcut: toolTipShortcut,
       usable: usable,
       onClick: onClick,
       builder: builder,
@@ -924,6 +930,7 @@ class AppButton extends StatelessWidget {
     bool useConfiguration = true,
     String? toolTip,
     bool isTranslate = true,
+    List<LogicalKeyboardKey>? toolTipShortcut,
     bool usable = true,
     void Function()? onClick,
     Widget? child,
@@ -945,6 +952,7 @@ class AppButton extends StatelessWidget {
       useConfiguration: useConfiguration,
       toolTip: toolTip,
       isTranslate: isTranslate,
+      toolTipShortcut: toolTipShortcut,
       usable: usable,
       onClick: onClick,
       builder: builder,
@@ -2332,6 +2340,8 @@ class AppText extends StatelessWidget {
   final bool isTranslate;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final TextOverflow? overflow;
+  final bool? softWrap;
 
   const AppText(
     this.data, {
@@ -2339,6 +2349,8 @@ class AppText extends StatelessWidget {
     this.isTranslate = true,
     this.fontSize,
     this.fontWeight,
+    this.overflow,
+    this.softWrap,
   });
 
   @override
@@ -2348,11 +2360,11 @@ class AppText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
-        color: AppColorScheme.of(
-          context,
-        ).byRole(ColorRole.of(context)).onByState(ColorState.of(context)),
+        color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onByState(ColorState.of(context)),
         // color: AppTheme.of(context).colorScheme.byRole(AppThemeRole.of(context).colorRole).onByState(AppThemeState.of(context).colorState),
       ),
+      overflow: overflow,
+      softWrap: softWrap,
     );
   }
 }

@@ -573,6 +573,178 @@
       "biological_investigation": "生物调查",
       "corner": "犄角旮旯",
       "editor_photo": "编辑照片"
+    },
+
+    "common": {
+      "click_to_copy_param": "点击复制参数"
+    },
+
+    "media_params": {
+      "true_1": "是",
+      "false_1": "否",
+      "true_2": "有",
+      "false_2": "无",
+      "true_3": "已完成",
+      "false_3": "未完成",
+      "true_4": "开",
+      "false_4": "关",
+      "true_5": "单彩调色",
+      "false_5": "多彩调色",
+      "true_6": "应用底色",
+      "false_6": "取消底色",
+
+      "nikki_photo_params": "图片信息",
+      "photography_params": "拍摄信息",
+      "edit": "图片编辑",
+      "has_sticker": "贴纸",
+      "has_text": "文字",
+      "date": "拍摄日期",
+      "time": "拍摄时间",
+      "location": "拍摄地点",
+      "location_m": "...",
+      "weather": {
+        "name": "天气",
+        "unknown": "未知",
+        "sunny": "晴天",
+        "rainy": "雨天",
+        "rainbow": "彩虹",
+        "seaOfStars": "星海"
+      },
+      "photo_wall": "照片墙",
+      "task": "任务",
+      "puzzle": "错位摄影",
+      "risk": "惊险拍摄",
+      "interactive": "拍摄任务",
+
+      "camera_params": "相机信息",
+      "momo_camera_params": "相机参数",
+      "portrait_mode": "竖构图",
+      "zoom": "缩放",
+      "focal_length": "焦距",
+      "rotation": "镜头旋转",
+      "aperture_section": {
+        "name": "光圈",
+        "f_1_2": "f/1.2",
+        "f_1_4": "f/1.4",
+        "f_2": "f/2",
+        "f_2_2": "f/2.2",
+        "f_2_5": "f/2.5",
+        "f_2_8": "f/2.8",
+        "f_3_2": "f/3.2",
+        "f_3_5": "f/3.5",
+        "f_4": "f/4",
+        "f_4_5": "f/4.5",
+        "f_5": "f/5",
+        "f_5_6": "f/5.6",
+        "f_8": "f/8",
+        "f_11": "f/11",
+        "f_16": "f/16"
+      },
+      "vignette_intensity": "晕影",
+      "bloom_intensity": "柔光强度",
+      "bloom_threshold": "柔光范围",
+      "brightness": "亮度",
+      "exposure": "曝光",
+      "contrast": "对比度",
+      "saturation": "饱和度",
+      "vibrance": "自然饱和度",
+      "highlights": "高光",
+      "shadows": "阴影",
+      "light": "灯光",
+      "light_strength": "灯光强度",
+      "filter": "滤镜",
+      "filter_strength": "滤镜强度",
+      "pose": "动作",
+      "framed_moment": "场景定格",
+      "momo_hidden": "隐藏大喵",
+      "momo_pose": "大喵动作",
+      "horizontal": "左右调整",
+      "distance": "前后调整",
+      "height": "高度调整",
+      "rotate_momo": "旋转大喵",
+      "auto_ground_snap": "自动贴地",
+      "floating_effect": "漂浮特效",
+      "pose_with_nikki": "暖暖合拍",
+
+      "nikki_params": "暖暖信息",
+      "giant_state": "巨大化",
+      "hidden": "隐藏暖暖",
+      "loc": "位置",
+      "rot": "旋转",
+      "scale": "缩放",
+      "dressing": "搭配",
+      "eureka": "祝福闪光",
+      "outfit_dye": "服装虹染",
+      "special_effect": "特效调色",
+      "pattern_creation": "织纹绘制",
+      "diy_zone": "区域",
+      "color": "颜色",
+      "color_1": "颜色1",
+      "color_2": "颜色2",
+      "glossiness": "光泽度",
+      "roughness": "粗糙度",
+      "color_mode": "模式",
+      "cover_diy_color": "类型",
+      "texture": "织纹",
+      "override_pattern_a": "类型",
+      "tiling": "密度",
+      "weapon": "手持物",
+      "slot_type": "栏位",
+      "weapon_state": "状态",
+      "interactions": "交互物",
+      "mount": "坐骑",
+      "carrier": "载具",
+
+      "momo_params": "大喵信息",
+      "momo_hidden_state": "隐藏大喵"
+    },
+    "photo_wall": {
+
+    },
+    "puzzle": {
+      "-1": "无"
+    },
+    "risk": {
+
+    },
+    "interactive": {
+
+    },
+    "light": {
+
+    },
+    "filter": {
+
+    },
+    "pose": {
+      "0": "无"
+    },
+    "framed_moment": {
+      "0": "无"
+    },
+    "momo_pose": {
+
+    },
+    "cloth": {
+
+    },
+    "pattern_creation_texture": {
+
+    },
+    "weapon": {
+
+    },
+    "slot_type": {
+
+    },
+    "interactions": {
+
+    },
+    "mount": {
+
+    },
+    "carrier": {
+
     }
   },
 

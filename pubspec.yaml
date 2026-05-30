@@ -33,6 +33,7 @@ dependencies:
   # ui
   easy_localization: ^3.0.8
   multi_split_view: ^3.6.1
+  flutter_fancy_tree_view: ^1.6.0
   media_kit: ^1.2.6
   media_kit_video: ^2.0.1
   media_kit_libs_video: ^1.0.7

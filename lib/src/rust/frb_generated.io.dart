@@ -123,6 +123,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CameraParams dco_decode_box_autoadd_camera_params(dynamic raw);
 
   @protected
+  CameraParamsMomoHidden dco_decode_box_autoadd_camera_params_momo_hidden(
+    dynamic raw,
+  );
+
+  @protected
   ClockInPhotoParams dco_decode_box_autoadd_clock_in_photo_params(dynamic raw);
 
   @protected
@@ -256,6 +261,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParams dco_decode_camera_params(dynamic raw);
+
+  @protected
+  CameraParamsMomoHidden dco_decode_camera_params_momo_hidden(dynamic raw);
 
   @protected
   ClockInPhotoParams dco_decode_clock_in_photo_params(dynamic raw);
@@ -495,6 +503,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParams? dco_decode_opt_box_autoadd_camera_params(dynamic raw);
+
+  @protected
+  CameraParamsMomoHidden? dco_decode_opt_box_autoadd_camera_params_momo_hidden(
+    dynamic raw,
+  );
 
   @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
@@ -802,6 +815,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CameraParamsMomoHidden sse_decode_box_autoadd_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClockInPhotoParams sse_decode_box_autoadd_clock_in_photo_params(
     SseDeserializer deserializer,
   );
@@ -977,6 +995,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParams sse_decode_camera_params(SseDeserializer deserializer);
+
+  @protected
+  CameraParamsMomoHidden sse_decode_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ClockInPhotoParams sse_decode_clock_in_photo_params(
@@ -1252,6 +1275,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParams? sse_decode_opt_box_autoadd_camera_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CameraParamsMomoHidden? sse_decode_opt_box_autoadd_camera_params_momo_hidden(
     SseDeserializer deserializer,
   );
 
@@ -1630,6 +1658,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_camera_params_momo_hidden(
+    CameraParamsMomoHidden self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_clock_in_photo_params(
     ClockInPhotoParams self,
     SseSerializer serializer,
@@ -1856,6 +1890,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_camera_params(CameraParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_camera_params_momo_hidden(
+    CameraParamsMomoHidden self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_clock_in_photo_params(
@@ -2217,6 +2257,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_camera_params(
     CameraParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_camera_params_momo_hidden(
+    CameraParamsMomoHidden? self,
     SseSerializer serializer,
   );
 
