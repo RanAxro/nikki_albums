@@ -66,12 +66,32 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     app1.add(_xmpNsBytes);
     app1.add(xmpBytes);
 
-    // Strip existing XMP
+    // Strip existing XMP only
     final strippedImage = _stripExistingXmp(imageBytes);
 
-    // Assemble: SOI + XMP APP1 + original segments + video
+    // Static EXIF APP1 segment containing UserComment: oplus_8388608
+    final exifApp1 = Uint8List.fromList([
+      0xFF, 0xE1, // APP1 marker
+      0x00, 0x4A, // Length: 74 bytes
+      0x45, 0x78, 0x69, 0x66, 0x00, 0x00, // "Exif\0\0"
+      0x4D, 0x4D, 0x00, 0x2A, // TIFF Header (Big Endian)
+      0x00, 0x00, 0x00, 0x08, // Offset to 0th IFD
+      0x00, 0x01, // 0th IFD: 1 entry
+      0x87, 0x69, 0x00, 0x04, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x1A,
+      0x00, 0x00, 0x00, 0x00, // Next IFD: none
+      0x00, 0x01, // Exif IFD: 1 entry
+      0x92, 0x86, 0x00, 0x07, 0x00, 0x00, 0x00, 0x15, 0x00, 0x00, 0x00, 0x2C,
+      0x00, 0x00, 0x00, 0x00, // Next IFD: none
+      0x41, 0x53, 0x43, 0x49, 0x49, 0x00, 0x00, 0x00, // "ASCII\0\0\0"
+      0x6F, 0x70, 0x6C, 0x75, 0x73, 0x5F, 0x38, 0x33, 0x38, 0x38, 0x36, 0x30, 0x38, // "oplus_8388608"
+      0x00 // Padding for even TIFF alignment
+    ]);
+
+    // Assemble: SOI + EXIF APP1 + XMP APP1 + original segments + video
+    // Same pattern as main, but with EXIF prepended before XMP.
     final out = BytesBuilder(copy: false);
     out.add([0xFF, 0xD8]);
+    out.add(exifApp1);
     out.add(app1.takeBytes());
     out.add(strippedImage);
     out.add(videoBytes);
