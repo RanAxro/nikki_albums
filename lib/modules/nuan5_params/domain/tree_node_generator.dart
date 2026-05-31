@@ -189,19 +189,21 @@ TreeNode genPhotographyParams(PhotographyParams params){
 
       TreeNode(
         title: trText("task"),
-        message: params.photoWall.isEmpty ? trBool(false, index: 2) : null,
+        message: params.task.isEmpty ? trBool(false, index: 2) : null,
+        initiallyExpanded: true,
         children: params.task.map((TaskParams taskParams){
           return taskParams.when(
             puzzle: (int puzzle){
               return TreeNode(
-                title: "puzzle",
+                title: trText("puzzle"),
                 message: trText(puzzle.toString(), category: "puzzle"),
               );
             },
             risk: (Map<int, bool> risk){
               return TreeNode(
-                title: "risk",
+                title: trText("risk"),
                 message: risk.isEmpty ? trBool(false) : null,
+                initiallyExpanded: true,
                 children: risk.keys.map((int id){
                   return TreeNode(
                     title: trText(id.toString(), category: "risk"),
@@ -212,8 +214,9 @@ TreeNode genPhotographyParams(PhotographyParams params){
             },
             interactive: (Map<int, bool> interactive){
               return TreeNode(
-                title: "interactive",
+                title: trText("interactive"),
                 message: interactive.isEmpty ? trBool(false) : null,
+                initiallyExpanded: true,
                 children: interactive.keys.map((int id){
                   return TreeNode(
                     title: trText(id.toString(), category: "interactive"),
