@@ -21,6 +21,14 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
             return
         }
         remuxAndInjectVideoMetadata(inputPath: inputPath, outputPath: outputPath, assetIdentifier: assetIdentifier, result: result)
+    case "normalizeVideo":
+        guard let args = call.arguments as? [String: Any],
+              let inputPath = args["inputPath"] as? String,
+              let outputPath = args["outputPath"] as? String else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        normalizeVideo(inputPath: inputPath, outputPath: outputPath, result: result)
     case "injectImageMetadata":
         guard let args = call.arguments as? [String: Any],
               let inputPath = args["inputPath"] as? String,
@@ -188,4 +196,82 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
       NSWorkspace.shared.activateFileViewerSelecting(urls)
       result(true)
   }
+
+  private func normalizeVideo(inputPath: String, outputPath: String, result: @escaping FlutterResult) {
+      let inputURL = URL(fileURLWithPath: inputPath)
+      let outputURL = URL(fileURLWithPath: outputPath)
+
+      if FileManager.default.fileExists(atPath: outputPath) {
+          try? FileManager.default.removeItem(at: outputURL)
+      }
+
+      let asset = AVAsset(url: inputURL)
+      
+      var videoComposition: AVMutableVideoComposition? = nil
+
+      if let track = asset.tracks(withMediaType: .video).first {
+          let width = abs(track.naturalSize.width)
+          let height = abs(track.naturalSize.height)
+          if width > 3840 || height > 2160 {
+              let widthRatio = 3840.0 / width
+              let heightRatio = 2160.0 / height
+              let scale = min(widthRatio, heightRatio)
+              
+              let newWidth = CGFloat(round((width * scale) / 2.0) * 2.0)
+              let newHeight = CGFloat(round((height * scale) / 2.0) * 2.0)
+              
+              let composition = AVMutableVideoComposition()
+              composition.renderSize = CGSize(width: newWidth, height: newHeight)
+              
+              // Safe frameDuration fallback
+              var frameDur = track.minFrameDuration
+              if !frameDur.isValid || frameDur.seconds <= 0 || frameDur.timescale == 0 {
+                  frameDur = CMTimeMake(value: 1, timescale: 30)
+              }
+              composition.frameDuration = frameDur
+              
+              let instruction = AVMutableVideoCompositionInstruction()
+              // Use track's timeRange to ensure validity
+              instruction.timeRange = track.timeRange
+              
+              let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
+              var transform = track.preferredTransform
+              transform = transform.scaledBy(x: scale, y: scale)
+              layerInstruction.setTransform(transform, at: .zero)
+              
+              instruction.layerInstructions = [layerInstruction]
+              composition.instructions = [instruction]
+              
+              videoComposition = composition
+          }
+      }
+
+      guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality) else {
+          result(FlutterError(code: "EXPORT_SESSION_FAILED", message: "Cannot create AVAssetExportSession", details: nil))
+          return
+      }
+
+      if let vc = videoComposition {
+          exportSession.videoComposition = vc
+      }
+
+      exportSession.outputURL = outputURL
+      exportSession.outputFileType = .mp4
+      exportSession.shouldOptimizeForNetworkUse = true
+
+      exportSession.exportAsynchronously {
+          DispatchQueue.main.async {
+              switch exportSession.status {
+              case .completed:
+                  result(true)
+              case .failed:
+                  let errorMsg = exportSession.error?.localizedDescription ?? "Unknown error"
+                  result(FlutterError(code: "EXPORT_FAILED", message: errorMsg, details: nil))
+              default:
+                  result(FlutterError(code: "EXPORT_UNKNOWN", message: "Unknown export status", details: nil))
+              }
+          }
+      }
+  }
 }
+
