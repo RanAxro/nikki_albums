@@ -1,7 +1,7 @@
 CFBundleDisplayName = "Nikki Albums";
 CFBundleName = "Nikki Albums";
-NSPhotoLibraryUsageDescription = "Nikki Albums needs access to your Photo Library to export Live Photos.";
-NSPhotoLibraryAddUsageDescription = "Nikki Albums needs access to save Live Photos to your Photo Library.";
+NSPhotoLibraryUsageDescription = "Nikki Albums needs access to your Photo Library to export photos.";
+NSPhotoLibraryAddUsageDescription = "Nikki Albums needs access to save photos to your Photo Library.";
 NSDocumentsFolderUsageDescription = "Nikki Albums needs access to your Documents to read Infinity Nikki game albums.";
 NSDesktopFolderUsageDescription = "Nikki Albums needs access to your Desktop to read Infinity Nikki game albums.";
 NSDownloadsFolderUsageDescription = "Nikki Albums needs access to your Downloads to read Infinity Nikki game albums.";
