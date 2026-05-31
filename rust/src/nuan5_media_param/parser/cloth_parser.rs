@@ -8,7 +8,7 @@ const SPECIES_SIZE: i64 = 1000;
 pub fn parse_cloth(id: &i64) -> Cloth{
   let mut op_id = id.clone();
 
-  let outfit = op_id % OUTFIT_SIZE;
+  let mut outfit = OUTFIT_SIZE + op_id % OUTFIT_SIZE;
   op_id /= OUTFIT_SIZE;
 
   let cloth_type = (op_id % CLOTH_TYPE_SIZE) as u8;
@@ -19,6 +19,10 @@ pub fn parse_cloth(id: &i64) -> Cloth{
 
   let species = (op_id % SPECIES_SIZE) as u16;
   op_id /= SPECIES_SIZE;
+
+  if state != 0 {
+    outfit = outfit * 100 + (state as i64);
+  }
 
   Cloth{
     id: id.clone(),

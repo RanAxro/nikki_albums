@@ -159,6 +159,11 @@ TreeNode genPhotographyParams(PhotographyParams params){
       if(params.location != null)
         TreeNode(
           title: trText("location"),
+          icon: Builder(
+            builder: (BuildContext context){
+              return Icon(Icons.map, color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onEnabledColor);
+            },
+          ),
           /// TODO
           tooltip: trText("click_to_view_map", category: "common"),
           message: trText("location_m"),
