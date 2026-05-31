@@ -1,8 +1,8 @@
 use super::super::structs::eureka::Eureka;
 
-const COLOR_SIZE: i64 = 1;
-const LEVEL_SIZE: i64 = 1;
-const ATTACHMENT_POINT_SIZE: i64 = 1;
+const COLOR_SIZE: i64 = 10;
+const LEVEL_SIZE: i64 = 10;
+const ATTACHMENT_POINT_SIZE: i64 = 10;
 
 pub fn parse_eureka(id: &i64) -> Eureka{
   let mut op_id = id.clone();

@@ -4,6 +4,8 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../../frb_generated.dart';
+import 'cloth.dart';
+import 'eureka.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 import 'world.dart';
@@ -129,20 +131,20 @@ sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
 }
 
 class ClothParams {
-  final PlatformInt64 id;
+  final Cloth cloth;
   final DiyData? diy;
 
-  const ClothParams({required this.id, this.diy});
+  const ClothParams({required this.cloth, this.diy});
 
   @override
-  int get hashCode => id.hashCode ^ diy.hashCode;
+  int get hashCode => cloth.hashCode ^ diy.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ClothParams &&
           runtimeType == other.runtimeType &&
-          id == other.id &&
+          cloth == other.cloth &&
           diy == other.diy;
 }
 
@@ -173,12 +175,12 @@ class DiyData {
 
 class DressingParams {
   final List<ClothParams> clothes;
-  final Int64List magicball;
+  final List<Eureka> eureka;
 
-  const DressingParams({required this.clothes, required this.magicball});
+  const DressingParams({required this.clothes, required this.eureka});
 
   @override
-  int get hashCode => clothes.hashCode ^ magicball.hashCode;
+  int get hashCode => clothes.hashCode ^ eureka.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -186,7 +188,7 @@ class DressingParams {
       other is DressingParams &&
           runtimeType == other.runtimeType &&
           clothes == other.clothes &&
-          magicball == other.magicball;
+          eureka == other.eureka;
 }
 
 class DyeColorParams {

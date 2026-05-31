@@ -1180,9 +1180,7 @@ extension type const GameDIYColorPalette(int data) {
   static const GameDIYColorPalette chimecadaMurmur = GameDIYColorPalette(8);
   static const GameDIYColorPalette windbloomWhirl = GameDIYColorPalette(9);
   static const GameDIYColorPalette lampbloomMist = GameDIYColorPalette(10);
-  static const GameDIYColorPalette sleeplessGlimmerdrop = GameDIYColorPalette(
-    11,
-  );
+  static const GameDIYColorPalette sleeplessGlimmerdrop = GameDIYColorPalette(11);
   static const GameDIYColorPalette silkenLakeEmerald = GameDIYColorPalette(12);
   static const GameDIYColorPalette glimmergrassLetter = GameDIYColorPalette(13);
   static const GameDIYColorPalette scarfmothPhantom = GameDIYColorPalette(14);

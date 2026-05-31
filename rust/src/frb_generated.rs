@@ -1796,16 +1796,35 @@ impl SseDecode for crate::nuan5_media_param::structs::clock_in_photo_params::Clo
     }
 }
 
-impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+impl SseDecode for crate::nuan5_media_param::structs::cloth::Cloth {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <i64>::sse_decode(deserializer);
+        let mut var_outfit = <i64>::sse_decode(deserializer);
+        let mut var_species = <u16>::sse_decode(deserializer);
+        let mut var_clothType = <u8>::sse_decode(deserializer);
+        let mut var_state = <u8>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::cloth::Cloth {
+            id: var_id,
+            outfit: var_outfit,
+            species: var_species,
+            cloth_type: var_clothType,
+            state: var_state,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_cloth =
+            <crate::nuan5_media_param::structs::cloth::Cloth>::sse_decode(deserializer);
         let mut var_diy =
             <Option<crate::nuan5_media_param::structs::nikki_photo_params::DiyData>>::sse_decode(
                 deserializer,
             );
         return crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
-            id: var_id,
+            cloth: var_cloth,
             diy: var_diy,
         };
     }
@@ -1968,10 +1987,11 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::Dressi
         let mut var_clothes = <Vec<
             crate::nuan5_media_param::structs::nikki_photo_params::ClothParams,
         >>::sse_decode(deserializer);
-        let mut var_magicball = <Vec<i64>>::sse_decode(deserializer);
+        let mut var_eureka =
+            <Vec<crate::nuan5_media_param::structs::eureka::Eureka>>::sse_decode(deserializer);
         return crate::nuan5_media_param::structs::nikki_photo_params::DressingParams {
             clothes: var_clothes,
-            magicball: var_magicball,
+            eureka: var_eureka,
         };
     }
 }
@@ -2016,6 +2036,24 @@ impl SseDecode for crate::nuan5_media_param::structs::nikki_photo_params::EditPh
                 unimplemented!("");
             }
         }
+    }
+}
+
+impl SseDecode for crate::nuan5_media_param::structs::eureka::Eureka {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_id = <i64>::sse_decode(deserializer);
+        let mut var_outfit = <i64>::sse_decode(deserializer);
+        let mut var_attachmentPoint = <u8>::sse_decode(deserializer);
+        let mut var_level = <u8>::sse_decode(deserializer);
+        let mut var_color = <u8>::sse_decode(deserializer);
+        return crate::nuan5_media_param::structs::eureka::Eureka {
+            id: var_id,
+            outfit: var_outfit,
+            attachment_point: var_attachmentPoint,
+            level: var_level,
+            color: var_color,
+        };
     }
 }
 
@@ -2270,6 +2308,20 @@ impl SseDecode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::Cl
                 <crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>::sse_decode(
                     deserializer,
                 ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_media_param::structs::eureka::Eureka> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::nuan5_media_param::structs::eureka::Eureka>::sse_decode(deserializer),
             );
         }
         return ans_;
@@ -4026,6 +4078,13 @@ impl SseDecode for crate::serde_config::structs::common::TranslateText {
     }
 }
 
+impl SseDecode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u16::<NativeEndian>().unwrap()
+    }
+}
+
 impl SseDecode for u32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4655,12 +4714,36 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::cloth::Cloth {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.outfit.into_into_dart().into_dart(),
+            self.species.into_into_dart().into_dart(),
+            self.cloth_type.into_into_dart().into_dart(),
+            self.state.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::cloth::Cloth
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::cloth::Cloth>
+    for crate::nuan5_media_param::structs::cloth::Cloth
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::cloth::Cloth {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
     for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
-            self.id.into_into_dart().into_dart(),
+            self.cloth.into_into_dart().into_dart(),
             self.diy.into_into_dart().into_dart(),
         ]
         .into_dart()
@@ -4882,7 +4965,7 @@ impl flutter_rust_bridge::IntoDart
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.clothes.into_into_dart().into_dart(),
-            self.magicball.into_into_dart().into_dart(),
+            self.eureka.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -4986,6 +5069,30 @@ impl
     fn into_into_dart(
         self,
     ) -> crate::nuan5_media_param::structs::nikki_photo_params::EditPhotoState {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_media_param::structs::eureka::Eureka {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.outfit.into_into_dart().into_dart(),
+            self.attachment_point.into_into_dart().into_dart(),
+            self.level.into_into_dart().into_dart(),
+            self.color.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_media_param::structs::eureka::Eureka
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_media_param::structs::eureka::Eureka>
+    for crate::nuan5_media_param::structs::eureka::Eureka
+{
+    fn into_into_dart(self) -> crate::nuan5_media_param::structs::eureka::Eureka {
         self
     }
 }
@@ -6918,10 +7025,21 @@ impl SseEncode for crate::nuan5_media_param::structs::clock_in_photo_params::Clo
     }
 }
 
-impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+impl SseEncode for crate::nuan5_media_param::structs::cloth::Cloth {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.id, serializer);
+        <i64>::sse_encode(self.outfit, serializer);
+        <u16>::sse_encode(self.species, serializer);
+        <u8>::sse_encode(self.cloth_type, serializer);
+        <u8>::sse_encode(self.state, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::ClothParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::nuan5_media_param::structs::cloth::Cloth>::sse_encode(self.cloth, serializer);
         <Option<crate::nuan5_media_param::structs::nikki_photo_params::DiyData>>::sse_encode(
             self.diy, serializer,
         );
@@ -7071,7 +7189,10 @@ impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::Dressi
             self.clothes,
             serializer,
         );
-        <Vec<i64>>::sse_encode(self.magicball, serializer);
+        <Vec<crate::nuan5_media_param::structs::eureka::Eureka>>::sse_encode(
+            self.eureka,
+            serializer,
+        );
     }
 }
 
@@ -7108,6 +7229,17 @@ impl SseEncode for crate::nuan5_media_param::structs::nikki_photo_params::EditPh
                 unimplemented!("");
             }
         }
+    }
+}
+
+impl SseEncode for crate::nuan5_media_param::structs::eureka::Eureka {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.id, serializer);
+        <i64>::sse_encode(self.outfit, serializer);
+        <u8>::sse_encode(self.attachment_point, serializer);
+        <u8>::sse_encode(self.level, serializer);
+        <u8>::sse_encode(self.color, serializer);
     }
 }
 
@@ -7315,6 +7447,16 @@ impl SseEncode for Vec<crate::nuan5_media_param::structs::nikki_photo_params::Cl
             <crate::nuan5_media_param::structs::nikki_photo_params::ClothParams>::sse_encode(
                 item, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_media_param::structs::eureka::Eureka> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_media_param::structs::eureka::Eureka>::sse_encode(item, serializer);
         }
     }
 }
@@ -8748,6 +8890,13 @@ impl SseEncode for crate::serde_config::structs::common::TranslateText {
         <Option<Vec<String>>>::sse_encode(self.args, serializer);
         <Option<Vec<String>>>::sse_encode(self.named_args, serializer);
         <Option<String>>::sse_encode(self.gender, serializer);
+    }
+}
+
+impl SseEncode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u16::<NativeEndian>(self).unwrap();
     }
 }
 

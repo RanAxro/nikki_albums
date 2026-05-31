@@ -1,4 +1,4 @@
-
+#[derive(Clone)]
 pub struct Eureka{
   pub id: i64,
   pub outfit: i64,

@@ -4,6 +4,8 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../../frb_generated.dart';
+import 'cloth.dart';
+import 'eureka.dart';
 import 'nikki_photo_params.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'world.dart';

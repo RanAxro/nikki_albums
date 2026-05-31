@@ -576,6 +576,8 @@
     },
 
     "common": {
+      "click_to_view_map": "点击定位到地图",
+      "lack_data": "数据缺失",
       "click_to_copy_param": "点击复制参数"
     },
 
@@ -674,6 +676,50 @@
       "scale": "缩放",
       "dressing": "搭配",
       "eureka": "祝福闪光",
+      "cloth_type": {
+        "unknow": "未知",
+        "hair": "发型",
+        "dresses": "连衣裙",
+        "outerwear": "外套",
+        "tops": "上衣",
+        "bottoms": "下装",
+        "socks": "袜子",
+        "shoes": "鞋子",
+        "hairAccessories": "发饰",
+        "headwear": "帽子",
+        "earrings": "耳饰",
+        "neckwear": "颈饰",
+        "bracelets": "腕饰",
+        "chokers": "项圈",
+        "gloves": "手套",
+        "faceDecorations": "面饰",
+        "chestAccessories": "胸饰",
+        "pendants": "挂饰",
+        "backpieces": "背饰",
+        "rings": "戒指",
+        "armDecorations": "臂饰",
+        "handhelds": "手持物",
+        "bodyPaint": "肤绘",
+        "fullMakeup": "全妆",
+        "baseMakeup": "底妆",
+        "eyebrows": "眉妆",
+        "eyelashes": "睫毛",
+        "contacts": "美瞳",
+        "lips": "唇妆",
+        "skinTones": "肤色"
+      },
+      "outfit": "套装",
+      "nikki_cloth_state": {
+        "name": "进化/焕新",
+        "evolution_0": "无",
+        "value_1": "无(1)",
+        "glowUp": "焕新",
+        "evolution_1": "1进",
+        "evolution_2": "2进",
+        "evolution_3": "3进",
+        "value_9": "无(9)"
+      },
+      "diy": "染色",
       "outfit_dye": "服装虹染",
       "special_effect": "特效调色",
       "pattern_creation": "织纹绘制",
@@ -681,6 +727,40 @@
       "color": "颜色",
       "color_1": "颜色1",
       "color_2": "颜色2",
+      "color_palette": {
+        "name": "色盘",
+        "custom": "自选",
+        "flightFruitFlutter": "飞球果飘飘",
+        "springStarlitBreath": "春日满满星",
+        "stellarFruitDream": "星光果之梦",
+        "palettetailShimmer": "眼影鱼碎闪",
+        "bibcoonFurballHug": "围兜暖毛球",
+        "starlitChronosTree": "星夜时光树",
+        "lanternByTheCliff": "崖上的壁灯",
+        "chimecadaMurmur": "风铃子腹语",
+        "windbloomWhirl": "风絮草飘飞时",
+        "lampbloomMist": "雨夜路灯花",
+        "sleeplessGlimmerdrop": "耳坠萤未眠",
+        "silkenLakeEmerald": "碧波裙摆湖",
+        "glimmergrassLetter": "星荧草来信",
+        "scarfmothPhantom": "丝巾蛾魅影",
+        "wisteriasolRain": "花伞藤萝之雨",
+        "buddingHareEars": "兔耳草嫩蕊",
+        "bustleflySong": "裙撑萤之歌",
+        "celebcrowFeast": "名流鸦盛宴"
+      },
+      "color_swatch": {
+        "name": "色格",
+        "unknown": "未知",
+        "palette_1": "第1格",
+        "palette_2": "第2格",
+        "palette_3": "第3格",
+        "palette_4": "第4格",
+        "palette_5": "第5格",
+        "palette_6": "第6格",
+        "palette_7": "第7格",
+        "palette_8": "第8格"
+      },
       "glossiness": "光泽度",
       "roughness": "粗糙度",
       "color_mode": "模式",
@@ -688,6 +768,12 @@
       "texture": "织纹",
       "override_pattern_a": "类型",
       "tiling": "密度",
+      "eureka_attachment_point": {
+        "head": "头部",
+        "hands": "手部",
+        "feet": "脚部"
+      },
+      "level": "等级",
       "weapon": "手持物",
       "slot_type": "栏位",
       "weapon_state": "状态",
@@ -728,7 +814,16 @@
     "cloth": {
 
     },
+    "cloth_outfit": {
+
+    },
     "pattern_creation_texture": {
+
+    },
+    "eureka": {
+
+    },
+    "eureka_outfit": {
 
     },
     "weapon": {

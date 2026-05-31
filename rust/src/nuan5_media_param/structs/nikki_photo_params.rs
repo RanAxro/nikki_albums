@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 use super::world::Location;
+use super::cloth::Cloth;
+use super::eureka::Eureka;
 
 
 #[derive(Clone)]
@@ -165,12 +167,12 @@ pub enum FilterParams{
 #[derive(Clone)]
 pub struct DressingParams{
   pub clothes: Vec<ClothParams>,
-  pub magicball: Vec<i64>,
+  pub eureka: Vec<Eureka>,
 }
 
 #[derive(Clone)]
 pub struct ClothParams{
-  pub id: i64,
+  pub cloth: Cloth,
   pub diy: Option<DiyData>,
 }
 

@@ -1,4 +1,5 @@
 
+#[derive(Clone)]
 pub struct Cloth{
   pub id: i64,
   pub outfit: i64,

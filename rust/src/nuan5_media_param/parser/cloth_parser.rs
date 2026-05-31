@@ -1,9 +1,9 @@
 use super::super::structs::cloth::*;
 
-const OUTFIT_SIZE: i64 = 4;
-const CLOTH_TYPE_SIZE: i64 = 2;
-const STATE_SIZE: i64 = 1;
-const SPECIES_SIZE: i64 = 3;
+const OUTFIT_SIZE: i64 = 10000;
+const CLOTH_TYPE_SIZE: i64 = 100;
+const STATE_SIZE: i64 = 10;
+const SPECIES_SIZE: i64 = 1000;
 
 pub fn parse_cloth(id: &i64) -> Cloth{
   let mut op_id = id.clone();

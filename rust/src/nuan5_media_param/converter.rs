@@ -3,6 +3,8 @@ use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, Option
 use crate::nuan5_media_param::serde_nuan5_json::structs::{image_custom_data, camera_params};
 use crate::nuan5_media_param::parser::momo_camera_params_parser::*;
 use crate::nuan5_media_param::parser::location_parser::parse_location;
+use crate::nuan5_media_param::parser::cloth_parser::parse_cloth;
+use crate::nuan5_media_param::parser::eureka_parser::parse_eureka;
 use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
 
 pub(crate) fn convert_momo_camera_params(data: &camera_params::CameraParams) -> MomoCameraParams{
@@ -333,7 +335,7 @@ pub(crate) fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> Nik
       clothes: data.photo_info.nikki_clothes.as_ref().map(|nikki_clothes|{
         convert_cloth(nikki_clothes, Some(&data.photo_info.nikki_diy))
       }).unwrap_or(vec![]),
-      magicball: data.photo_info.magicball_color_ids.clone().unwrap_or(vec![]),
+      eureka: data.photo_info.magicball_color_ids.clone().unwrap_or(vec![]).iter().map(parse_eureka).collect(),
     },
     weapon: data.weapon_snap_shot.as_ref().map(|weapon_snap_shot|{
       WeaponParams{
@@ -419,14 +421,14 @@ pub(crate) fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArr
   if let Some(nikki_diy) = data_nikki_diy {
     let diy_clothes = convert_nikki_diy(nikki_diy);
 
-    set.extend(diy_clothes.iter().map(|param| param.id));
+    set.extend(diy_clothes.iter().map(|param| param.cloth.id));
     res.extend_from_slice(&diy_clothes);
   }
 
   for cloth in data {
     if !set.contains(cloth) {
       res.push(ClothParams{
-        id: cloth.clone(),
+        cloth: parse_cloth(cloth),
         diy: None,
       })
     }
@@ -505,7 +507,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
 
   fn resolve_item(item: &image_custom_data::NikkiDIY) -> ClothParams{
     ClothParams{
-      id: item.target_cloth_id,
+      cloth: parse_cloth(&item.target_cloth_id),
       diy: Some(match &item.core_data{
         image_custom_data::CoreData::Hair(hair) => DiyData{
           outfit_dye: vec![convert_hair(item, hair)],

@@ -12,8 +12,10 @@ import 'frb_generated.io.dart'
 import 'nuan5_media_param/decode.dart';
 import 'nuan5_media_param/decrypt.dart';
 import 'nuan5_media_param/structs/clock_in_photo_params.dart';
+import 'nuan5_media_param/structs/cloth.dart';
 import 'nuan5_media_param/structs/collage_params.dart';
 import 'nuan5_media_param/structs/diy_params.dart';
+import 'nuan5_media_param/structs/eureka.dart';
 import 'nuan5_media_param/structs/momo_camera_params.dart';
 import 'nuan5_media_param/structs/nikki_photo_params.dart';
 import 'nuan5_media_param/structs/world.dart';
@@ -1948,13 +1950,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Cloth dco_decode_cloth(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return Cloth(
+      id: dco_decode_i_64(arr[0]),
+      outfit: dco_decode_i_64(arr[1]),
+      species: dco_decode_u_16(arr[2]),
+      clothType: dco_decode_u_8(arr[3]),
+      state: dco_decode_u_8(arr[4]),
+    );
+  }
+
+  @protected
   ClothParams dco_decode_cloth_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 2)
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return ClothParams(
-      id: dco_decode_i_64(arr[0]),
+      cloth: dco_decode_cloth(arr[0]),
       diy: dco_decode_opt_box_autoadd_diy_data(arr[1]),
     );
   }
@@ -2067,7 +2084,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return DressingParams(
       clothes: dco_decode_list_cloth_params(arr[0]),
-      magicball: dco_decode_list_prim_i_64_strict(arr[1]),
+      eureka: dco_decode_list_eureka(arr[1]),
     );
   }
 
@@ -2108,6 +2125,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  Eureka dco_decode_eureka(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return Eureka(
+      id: dco_decode_i_64(arr[0]),
+      outfit: dco_decode_i_64(arr[1]),
+      attachmentPoint: dco_decode_u_8(arr[2]),
+      level: dco_decode_u_8(arr[3]),
+      color: dco_decode_u_8(arr[4]),
+    );
   }
 
   @protected
@@ -2273,6 +2305,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_cloth_params).toList();
+  }
+
+  @protected
+  List<Eureka> dco_decode_list_eureka(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_eureka).toList();
   }
 
   @protected
@@ -3306,6 +3344,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   int dco_decode_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -4047,11 +4091,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ClothParams sse_decode_cloth_params(SseDeserializer deserializer) {
+  Cloth sse_decode_cloth(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_id = sse_decode_i_64(deserializer);
+    var var_outfit = sse_decode_i_64(deserializer);
+    var var_species = sse_decode_u_16(deserializer);
+    var var_clothType = sse_decode_u_8(deserializer);
+    var var_state = sse_decode_u_8(deserializer);
+    return Cloth(
+      id: var_id,
+      outfit: var_outfit,
+      species: var_species,
+      clothType: var_clothType,
+      state: var_state,
+    );
+  }
+
+  @protected
+  ClothParams sse_decode_cloth_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_cloth = sse_decode_cloth(deserializer);
     var var_diy = sse_decode_opt_box_autoadd_diy_data(deserializer);
-    return ClothParams(id: var_id, diy: var_diy);
+    return ClothParams(cloth: var_cloth, diy: var_diy);
   }
 
   @protected
@@ -4175,8 +4236,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   DressingParams sse_decode_dressing_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_clothes = sse_decode_list_cloth_params(deserializer);
-    var var_magicball = sse_decode_list_prim_i_64_strict(deserializer);
-    return DressingParams(clothes: var_clothes, magicball: var_magicball);
+    var var_eureka = sse_decode_list_eureka(deserializer);
+    return DressingParams(clothes: var_clothes, eureka: var_eureka);
   }
 
   @protected
@@ -4209,6 +4270,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  Eureka sse_decode_eureka(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_i_64(deserializer);
+    var var_outfit = sse_decode_i_64(deserializer);
+    var var_attachmentPoint = sse_decode_u_8(deserializer);
+    var var_level = sse_decode_u_8(deserializer);
+    var var_color = sse_decode_u_8(deserializer);
+    return Eureka(
+      id: var_id,
+      outfit: var_outfit,
+      attachmentPoint: var_attachmentPoint,
+      level: var_level,
+      color: var_color,
+    );
   }
 
   @protected
@@ -4421,6 +4499,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <ClothParams>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_cloth_params(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Eureka> sse_decode_list_eureka(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Eureka>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_eureka(deserializer));
     }
     return ans_;
   }
@@ -5829,6 +5919,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint16();
+  }
+
+  @protected
   int sse_decode_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint32();
@@ -6649,9 +6745,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_cloth_params(ClothParams self, SseSerializer serializer) {
+  void sse_encode_cloth(Cloth self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.id, serializer);
+    sse_encode_i_64(self.outfit, serializer);
+    sse_encode_u_16(self.species, serializer);
+    sse_encode_u_8(self.clothType, serializer);
+    sse_encode_u_8(self.state, serializer);
+  }
+
+  @protected
+  void sse_encode_cloth_params(ClothParams self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_cloth(self.cloth, serializer);
     sse_encode_opt_box_autoadd_diy_data(self.diy, serializer);
   }
 
@@ -6742,7 +6848,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_cloth_params(self.clothes, serializer);
-    sse_encode_list_prim_i_64_strict(self.magicball, serializer);
+    sse_encode_list_eureka(self.eureka, serializer);
   }
 
   @protected
@@ -6778,6 +6884,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case EditPhotoState_Disabled():
         sse_encode_i_32(1, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_eureka(Eureka self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.id, serializer);
+    sse_encode_i_64(self.outfit, serializer);
+    sse_encode_u_8(self.attachmentPoint, serializer);
+    sse_encode_u_8(self.level, serializer);
+    sse_encode_u_8(self.color, serializer);
   }
 
   @protected
@@ -6937,6 +7053,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_cloth_params(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_eureka(List<Eureka> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_eureka(item, serializer);
     }
   }
 
@@ -8167,6 +8292,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_opt_list_String(self.args, serializer);
     sse_encode_opt_list_String(self.namedArgs, serializer);
     sse_encode_opt_String(self.gender, serializer);
+  }
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint16(self);
   }
 
   @protected

@@ -11,8 +11,10 @@ import 'frb_generated.dart';
 import 'nuan5_media_param/decode.dart';
 import 'nuan5_media_param/decrypt.dart';
 import 'nuan5_media_param/structs/clock_in_photo_params.dart';
+import 'nuan5_media_param/structs/cloth.dart';
 import 'nuan5_media_param/structs/collage_params.dart';
 import 'nuan5_media_param/structs/diy_params.dart';
+import 'nuan5_media_param/structs/eureka.dart';
 import 'nuan5_media_param/structs/momo_camera_params.dart';
 import 'nuan5_media_param/structs/nikki_photo_params.dart';
 import 'nuan5_media_param/structs/world.dart';
@@ -269,6 +271,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ClockInPhotoParams dco_decode_clock_in_photo_params(dynamic raw);
 
   @protected
+  Cloth dco_decode_cloth(dynamic raw);
+
+  @protected
   ClothParams dco_decode_cloth_params(dynamic raw);
 
   @protected
@@ -306,6 +311,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   EditPhotoState dco_decode_edit_photo_state(dynamic raw);
+
+  @protected
+  Eureka dco_decode_eureka(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
@@ -350,6 +358,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw);
+
+  @protected
+  List<Eureka> dco_decode_list_eureka(dynamic raw);
 
   @protected
   List<FileEntityLocationConfig> dco_decode_list_file_entity_location_config(
@@ -680,6 +691,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TranslateText dco_decode_translate_text(dynamic raw);
 
   @protected
+  int dco_decode_u_16(dynamic raw);
+
+  @protected
   int dco_decode_u_32(dynamic raw);
 
   @protected
@@ -1007,6 +1021,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Cloth sse_decode_cloth(SseDeserializer deserializer);
+
+  @protected
   ClothParams sse_decode_cloth_params(SseDeserializer deserializer);
 
   @protected
@@ -1044,6 +1061,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   EditPhotoState sse_decode_edit_photo_state(SseDeserializer deserializer);
+
+  @protected
+  Eureka sse_decode_eureka(SseDeserializer deserializer);
 
   @protected
   double sse_decode_f_64(SseDeserializer deserializer);
@@ -1092,6 +1112,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer);
+
+  @protected
+  List<Eureka> sse_decode_list_eureka(SseDeserializer deserializer);
 
   @protected
   List<FileEntityLocationConfig> sse_decode_list_file_entity_location_config(
@@ -1494,6 +1517,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   TranslateText sse_decode_translate_text(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_32(SseDeserializer deserializer);
@@ -1904,6 +1930,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_cloth(Cloth self, SseSerializer serializer);
+
+  @protected
   void sse_encode_cloth_params(ClothParams self, SseSerializer serializer);
 
   @protected
@@ -1959,6 +1988,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     EditPhotoState self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_eureka(Eureka self, SseSerializer serializer);
 
   @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
@@ -2019,6 +2051,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     List<ClothParams> self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_list_eureka(List<Eureka> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_file_entity_location_config(
@@ -2535,6 +2570,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_translate_text(TranslateText self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_32(int self, SseSerializer serializer);
