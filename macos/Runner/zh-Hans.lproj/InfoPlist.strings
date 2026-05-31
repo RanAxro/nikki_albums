@@ -2,4 +2,6 @@ CFBundleDisplayName = "暖暖相册";
 CFBundleName = "暖暖相册";
 NSPhotoLibraryUsageDescription = "我们需要访问您的相册以便为您导出和保存照片。";
 NSPhotoLibraryAddUsageDescription = "我们需要访问您的相册以便为您保存照片。";
+NSRemovableVolumesUsageDescription = "我们需要访问您的外部磁盘以便为您导出照片。";
+NSNetworkVolumesUsageDescription = "我们需要访问您的网络磁盘以便为您导出照片。";
 
