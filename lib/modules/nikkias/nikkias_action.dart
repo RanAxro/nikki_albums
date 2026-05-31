@@ -12,27 +12,34 @@ import "dart:io";
 import "package:easy_localization/easy_localization.dart";
 import "package:file_picker/file_picker.dart";
 
-void parseNikkiasFile(BuildContext context, File file) {
-  final manifest = getNikkiasManifest(file);
+Future<void> parseNikkiasFile(BuildContext context, File file) async{
+  final manifest = await getNikkiasManifest(file);
 
-  if (manifest == null) return;
-
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(smallBorderRadius),
-        ),
-        backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-        child: Container(
-          padding: const EdgeInsets.all(smallPadding),
-          width: smallCardMaxWidth,
-          child: NikkiasAction(manifest: manifest, nikkiasFile: file),
-        ),
+  if(manifest == null){
+    if(context.mounted){
+      AppToast.showMessage(context: context, message: context.tr("not_nikkias"), state: false);
+    }
+  }else{
+    if(context.mounted){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(smallBorderRadius),
+            ),
+            backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+            child: Container(
+              padding: const EdgeInsets.all(smallPadding),
+              width: smallCardMaxWidth,
+              child: NikkiasAction(manifest: manifest, nikkiasFile: file),
+            ),
+          );
+        },
       );
-    },
-  );
+    }
+  }
+
 }
 
 class NikkiasAction extends StatelessWidget {

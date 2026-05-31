@@ -48,6 +48,7 @@
   "personalization": "个性化",
   "livePhotoSettings": "实况照片",
   "accountManagement": "账号管理",
+  "nikkias_setting": "Nikkias文件",
   "version_information": "版本信息",
 
   "maximizeOrRestoreButton": "最大化按钮",
@@ -57,6 +58,13 @@
   "livePhotoExportFormat_apple": "Live Photo (苹果生态)",
   "livePhotoExportFormat_google": "Motion Photo (谷歌/安卓生态)",
   "livePhotoExportFormat_description": "导出「动态影集」相册时，将封面图与视频自动转换为对应平台的实况照片格式",
+
+  "open_nikkias_file": "打开一个Nikkias文件",
+  "drag_nikkias_file_here": "您可以把Nikkias文件拖动到此处打开",
+  "register_nikkias_file_association": "将 .nikkias 文件与本应用关联",
+  "unregister_nikkias_file_association": "取消将 .nikkias 文件与本应用关联",
+  "association_successful": "关联成功",
+  "association_cancelled_successfully": "已取消关联",
 
   "checkForUpdates": "检测更新",
   "checkFailed": "检测失败",
@@ -71,6 +79,7 @@
   "----------nikkias----------": "----------nikkias----------",
   "nikkiasFile": "nikkias文件",
   "selectNikkiasFile": "选择一个nikkias文件",
+  "not_nikkias": "这不是有效的Nikkias文件",
   "importTo": "导入到",
   "importToOther": "导入到其他渠道",
   "saveDirectly": "直接保存",

@@ -76,7 +76,7 @@ class _FrameState extends State<Frame> {
              // if(!kDebugMode){
              //   checkAppUpdates(context);
              // }
-              checkAppUpdates(context);
+             //  checkAppUpdates(context);
 
               /// Windows
               if (Platform.isWindows) {

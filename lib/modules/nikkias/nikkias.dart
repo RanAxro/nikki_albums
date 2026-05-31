@@ -30,30 +30,34 @@ const String nikkiasFileFriendlyName = "Nikki Albums Images Archive";
 //  manifest
 //  testcomp.zip
 //  null
-NikkiasManifest? getNikkiasManifest(File file) {
+Future<NikkiasManifest?> getNikkiasManifest(File file) async{
   try {
-    if (!file.existsSync()) return null;
+    return await Future(() async{
+      if (!(await file.exists())) return null;
 
-    final InputFileStream inputStream = InputFileStream(file.path);
-    final Archive archive = ZipDecoder().decodeStream(inputStream);
+      final inputStream = InputFileStream(file.path);
+      final archive = ZipDecoder().decodeStream(inputStream);
 
-    for (final ArchiveFile archiveFile in archive) {
-      if (!archiveFile.isFile) continue;
+      try {
+        for (final archiveFile in archive) {
+          if (!archiveFile.isFile) continue;
+          if (archiveFile.name.toLowerCase() != nikkiasManifestFileName) continue;
 
-      if (archiveFile.name.toLowerCase() != nikkiasManifestFileName) continue;
+          final jsonStr = utf8.decode(archiveFile.content);
+          final manifest = NikkiasManifest.decode(jsonStr);
+          if (manifest == null) continue;
 
-      final String jsonStr = utf8.decode(archiveFile.content);
-
-      final NikkiasManifest? manifest = NikkiasManifest.decode(jsonStr);
-
-      if (manifest == null) continue;
-
-      inputStream.close();
-      return manifest;
-    }
-
-    inputStream.close();
-    return null;
+          return manifest;
+        }
+        return null;
+      } finally {
+        inputStream.close();
+      }
+      // ------------------------------
+    }).timeout(
+      const Duration(seconds: 2),
+      onTimeout: () => null,
+    );
   } catch (e) {
     return null;
   }
@@ -427,7 +431,7 @@ abstract class Nikkias {
     AppState.nikkiasToBeParsed.addListener(_appStateProcessor);
 
     if (Platform.isWindows && AppState.needFileAssociationHelper.value) {
-      await registerFileAssociation();
+      await registerFileAssociationWindows();
       AppState.needFileAssociationHelper.value = false;
     }
   }
@@ -448,7 +452,7 @@ abstract class Nikkias {
     AppState.nikkiasToBeParsed.value = null;
   }
 
-  static Future<void> registerFileAssociation() async {
+  static Future<void> registerFileAssociationWindows() async {
     final exePath = Platform.resolvedExecutable;
 
     // 打开 HKCU\Software\Classes
@@ -483,10 +487,10 @@ abstract class Nikkias {
       hkcu.close();
     }
 
-    _notifySettingsChange();
+    _notifySettingsChangeWindows();
   }
 
-  static Future<void> unRegisterFileAssociation() async {
+  static Future<void> unRegisterFileAssociationWindows() async {
     final hkcu = Registry.openPath(RegistryHive.currentUser);
 
     try {
@@ -503,10 +507,10 @@ abstract class Nikkias {
       hkcu.close();
     }
 
-    _notifySettingsChange();
+    _notifySettingsChangeWindows();
   }
 
-  static void _notifySettingsChange() {
+  static void _notifySettingsChangeWindows() {
     final shell32 = DynamicLibrary.open("shell32.dll");
     final shChangeNotify = shell32
         .lookupFunction<

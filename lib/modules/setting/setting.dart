@@ -1,6 +1,7 @@
 import "personalization.dart";
 import "edit_custom_game.dart";
 import "live_photo_settings.dart";
+import "nikkias_setting/presentation/nikkias_setting.dart";
 import "version_information/presentation/version_information.dart";
 
 import "package:nikki_albums/modules/app_base/state.dart";
@@ -69,6 +70,14 @@ class SettingDialog extends StatelessWidget{
                             onClick: () {
                               controller.jumpToPage(3);
                             },
+                            child: AppText("nikkias_setting"),
+                          ),
+                          AppRawButton(
+                            width: constraints.maxWidth,
+                            height: smallButtonSize,
+                            onClick: () {
+                              controller.jumpToPage(4);
+                            },
                             child: AppText("version_information"),
                           ),
                         ],
@@ -92,6 +101,7 @@ class SettingDialog extends StatelessWidget{
               const Personalization(),
               const EditCustomGame(),
               const LivePhotoSettings(),
+              const NikkiasSetting(),
               const VersionInformation(),
             ].map((Widget page){
               return SlideFadeIn(

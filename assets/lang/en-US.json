@@ -39,7 +39,8 @@
   "personalization": "Personalization",
   "livePhotoSettings": "Live Photo",
   "accountManagement": "Account Management",
-  "versionInformation": "Version Information",
+  "nikkias_setting": "Nikkias File",
+  "version_information": "Version Information",
 
   "maximizeOrRestoreButton": "Maximize Button",
 
@@ -48,6 +49,13 @@
   "livePhotoExportFormat_apple": "Live Photo (Apple)",
   "livePhotoExportFormat_google": "Motion Photo (Google/Android)",
   "livePhotoExportFormat_description": "When exporting from the Video album, automatically convert cover image and video into the corresponding platform's live photo format",
+
+  "open_nikkias_file": "Open a Nikkias File",
+  "drag_nikkias_file_here": "You can simply drag the Nikkias file here to open it.",
+  "register_nikkias_file_association": "Associate .nikkias files with this application",
+  "unregister_nikkias_file_association": "Remove .nikkias file association",
+  "association_successful": "Associated",
+  "association_cancelled_successfully": "Association has been cancelled.",
 
   "checkForUpdates": "Check for Updates",
   "checkFailed": "Check Failed",
@@ -62,6 +70,7 @@
   "----------nikkias----------": "----------nikkias----------",
   "nikkiasFile": "nikkias File",
   "selectNikkiasFile": "Select a nikkias File",
+  "not_nikkias": "This is not a valid Nikkias file.",
   "importTo": "Import to",
   "importToOther": "Import to other channels",
   "saveDirectly": "Save Directly",
