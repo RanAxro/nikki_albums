@@ -29,8 +29,12 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Nikki Albums needs access to your Photo Library to export Live Photos.</string>
+	<string>Nikki Albums needs access to your Photo Library to export photos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Nikki Albums needs access to save Live Photos to your Photo Library.</string>
+	<string>Nikki Albums needs access to save photos to your Photo Library.</string>
+	<key>NSRemovableVolumesUsageDescription</key>
+	<string>Nikki Albums needs access to external volumes to export photos.</string>
+	<key>NSNetworkVolumesUsageDescription</key>
+	<string>Nikki Albums needs access to network volumes to export photos.</string>
 </dict>
 </plist>
