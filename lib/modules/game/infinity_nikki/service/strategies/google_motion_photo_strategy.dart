@@ -1,13 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'export_strategy_base.dart';
+
+class _Size {
+  final int width;
+  final int height;
+  _Size(this.width, this.height);
+}
 
 /// 谷歌 Motion Photo 导出策略 (纯 Dart 字节拼接合成单文件)
 /// 使用 Motion Photo v2 格式 (Container:Directory XMP + 视频直接追加)
 class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
   static final _xmpNsBytes = utf8.encode("http://ns.adobe.com/xap/1.0/\x00");
+  static const MethodChannel _channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
 
   @override
   Future<void> export({
@@ -15,11 +24,45 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     required File sourceVideo,
     required String outputPath,
   }) async {
-    final videoBytes = await sourceVideo.readAsBytes();
     final imageBytes = await coverImage.readAsBytes();
 
     if (imageBytes.length < 2 || imageBytes[0] != 0xFF || imageBytes[1] != 0xD8) {
       throw FormatException('Cover image is not a valid JPEG.');
+    }
+
+    Uint8List videoBytes;
+
+    if (Platform.isMacOS) {
+      final imgSize = _getJpegSize(imageBytes);
+      // Only normalize if the dimensions exceed iOS hardware decoding safe limits
+      if (imgSize.width > 3840 || imgSize.height > 2160) {
+        // Create a temporary path for the normalized video
+        final tempNormVideoPath = p.join(outputPath, '.temp_norm_video_${DateTime.now().millisecondsSinceEpoch}.mp4');
+        
+        try {
+          await _channel.invokeMethod('normalizeVideo', {
+            'inputPath': sourceVideo.path,
+            'outputPath': tempNormVideoPath,
+          });
+          
+          final normVideo = File(tempNormVideoPath);
+          if (await normVideo.exists()) {
+            videoBytes = await normVideo.readAsBytes();
+            await normVideo.delete();
+          } else {
+            videoBytes = await sourceVideo.readAsBytes();
+          }
+        } catch (e) {
+          debugPrint('Warning: Video normalization failed: $e');
+          videoBytes = await sourceVideo.readAsBytes();
+        }
+      } else {
+        // Safe dimensions, bypass normalization overhead
+        videoBytes = await sourceVideo.readAsBytes();
+      }
+    } else {
+      // Windows/Linux/etc: just use raw video for now
+      videoBytes = await sourceVideo.readAsBytes();
     }
 
     final videoSize = videoBytes.length;
@@ -141,4 +184,29 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     }
     return true;
   }
+
+  _Size _getJpegSize(Uint8List bytes) {
+    int i = 2; // skip FFD8
+    while (i < bytes.length - 1) {
+      if (bytes[i] == 0xFF) {
+        final marker = bytes[i + 1];
+        if (marker == 0xC0 || marker == 0xC2) { // SOF0 or SOF2
+          if (i + 8 < bytes.length) {
+            int height = (bytes[i + 5] << 8) | bytes[i + 6];
+            int width = (bytes[i + 7] << 8) | bytes[i + 8];
+            return _Size(width, height);
+          }
+        } else if (marker == 0xD8 || marker == 0xD9 || marker == 0xFF || (marker >= 0xD0 && marker <= 0xD7) || marker == 0x01) {
+          i += 2;
+        } else {
+          int length = (bytes[i + 2] << 8) | bytes[i + 3];
+          i += length + 2;
+        }
+      } else {
+        i++;
+      }
+    }
+    return _Size(0, 0);
+  }
 }
+
