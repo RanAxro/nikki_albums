@@ -2,8 +2,13 @@ import "package:multi_split_view/multi_split_view.dart";
 import "package:nikki_albums/modules/album/mp4_to_gif.dart";
 
 import "package:nikki_albums/modules/game/field_tree.dart";
+import "package:nikki_albums/modules/game/infinity_nikki/domain/param_codec.dart";
 import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
+import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
 import "package:nikki_albums/modules/setting/setting.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
+import "../nuan5_params/presentation/media_params_tree.dart";
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/modules/file_transfer/file_transfer.dart";
@@ -2501,21 +2506,16 @@ class ImageViewerDialog extends StatelessWidget {
 
     return Focus(
       autofocus: true,
-      onKeyEvent: (FocusNode node, KeyEvent event) {
-        if (event is KeyDownEvent &&
-            (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
-                event.logicalKey == LogicalKeyboardKey.keyA)) {
+      onKeyEvent: (FocusNode node, KeyEvent event){
+        if(event is KeyDownEvent && (event.logicalKey == LogicalKeyboardKey.arrowLeft || event.logicalKey == LogicalKeyboardKey.keyA)){
           controller.toPreviousImage();
           return KeyEventResult.handled;
         }
-        if (event is KeyDownEvent &&
-            (event.logicalKey == LogicalKeyboardKey.arrowRight ||
-                event.logicalKey == LogicalKeyboardKey.keyD)) {
+        if(event is KeyDownEvent && (event.logicalKey == LogicalKeyboardKey.arrowRight || event.logicalKey == LogicalKeyboardKey.keyD)){
           controller.toNextImage();
           return KeyEventResult.handled;
         }
-        if (event is KeyDownEvent &&
-            event.logicalKey == LogicalKeyboardKey.space) {
+        if(event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.space){
           _invertImage();
           return KeyEventResult.handled;
         }
@@ -2531,169 +2531,56 @@ class ImageViewerDialog extends StatelessWidget {
             Expanded(
               child: ValueListenableBuilder(
                 valueListenable: AppState.isShowImageCustomData,
-                builder:
-                    (
-                      BuildContext context,
-                      bool isShowImageCustomData,
-                      Widget? child,
-                    ) {
-                      if (!isShowImageCustomData) return child ?? block0;
+                builder: (BuildContext context, bool isShowImageCustomData, Widget? child,){
+                  if(!isShowImageCustomData) return child ?? block0;
 
-                      return MultiSplitViewTheme(
-                        data: MultiSplitViewThemeData(
-                          dividerPainter: DividerPainters.grooved1(
-                            color: AppColorScheme.of(
-                              context,
-                            ).byRole(ColorRole.of(context)).pressedColor,
-                            highlightedColor: AppColorScheme.of(
-                              context,
-                            ).byRole(ColorRole.of(context)).onPressedColor,
+                  return MultiSplitViewTheme(
+                    data: MultiSplitViewThemeData(
+                      dividerPainter: DividerPainters.grooved1(color: AppColorScheme.of(context).byRole(ColorRole.of(context)).pressedColor,
+                      highlightedColor: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor),
+                    ),
+                    child: MultiSplitView(
+                      initialAreas: [
+                        Area(data: "image"),
+                        AppState.imageCustomDataWidgetSize.value == null ?
+                          Area(data: "data_panel", flex: 1) :
+                          Area(
+                            data: "data_panel",
+                            size: AppState.imageCustomDataWidgetSize.value,
                           ),
-                        ),
-                        child: MultiSplitView(
-                          initialAreas: [
-                            Area(data: "image"),
-                            AppState.imageCustomDataWidgetSize.value == null
-                                ? Area(data: "data_panel", flex: 1)
-                                : Area(
-                                    data: "data_panel",
-                                    size: AppState
-                                        .imageCustomDataWidgetSize
-                                        .value,
-                                  ),
-                          ],
-                          builder: (BuildContext context, Area area) {
-                            if (area.data == "image") {
-                              return child ?? block0;
-                            } else {
-                              return ListenableBuilder(
-                                listenable: controller,
-                                builder: (BuildContext context, Widget? child) {
-                                  return LayoutBuilder(
-                                    builder:
-                                        (
-                                          BuildContext context,
-                                          BoxConstraints constraint,
-                                        ) {
-                                          AppState
-                                                  .imageCustomDataWidgetSize
-                                                  .value =
-                                              constraint.maxWidth;
+                      ],
+                      builder: (BuildContext context, Area area){
+                        if(area.data == "image"){
+                          return child ?? block0;
+                        }else{
+                          return ListenableBuilder(
+                            listenable: controller,
+                            builder: (BuildContext context, Widget? child){
+                              return LayoutBuilder(
+                                builder: (BuildContext context, BoxConstraints constraint) {
+                                  AppState.imageCustomDataWidgetSize.value = constraint.maxWidth;
 
-                                          late final Field rootField;
+                                  late final TreeNode? node;
+                                  if(controller.isAttach){
+                                    node = images[controller.index].getParamNodeSync(game?.selectedUid?.value, game?.selectedAlbum);
+                                  }else{
+                                    node = initImage.getParamNodeSync(game?.selectedUid?.value, game?.selectedAlbum);
+                                  }
 
-                                          if (controller.isAttach) {
-                                            rootField = images[controller.index]
-                                                .getAdditionSync(
-                                                  game?.selectedUid?.value,
-                                                  game?.selectedAlbum,
-                                                );
-                                          } else {
-                                            rootField = initImage
-                                                .getAdditionSync(
-                                                  game?.selectedUid?.value,
-                                                  game?.selectedAlbum,
-                                                );
-                                          }
-
-                                          return FieldTree(
-                                            root: rootField,
-                                            config: FieldTreeConfiguration(
-                                              onFieldTap: (Field field) async {
-                                                if (field.key ==
-                                                    "ia_camera_params") {
-                                                  bool isError = false;
-
-                                                  try {
-                                                    await copyTextToClipboard(
-                                                      field.value.toString(),
-                                                    );
-                                                  } catch (e) {
-                                                    isError = true;
-                                                  }
-
-                                                  if (context.mounted) {
-                                                    AppToast.showMessage(
-                                                      context: context,
-                                                      message: context.tr(
-                                                        isError
-                                                            ? "pa_copy_failed"
-                                                            : "pa_copy_successful",
-                                                      ),
-                                                      state: !isError,
-                                                    );
-                                                  }
-                                                } else if (field.key ==
-                                                        "ia_photo_region" ||
-                                                    field.key ==
-                                                        "ia_possible_photo_region") {
-                                                  final (
-                                                    GamePhotoRegion
-                                                    photoRegionInfo,
-                                                    num x,
-                                                    num y,
-                                                    num z,
-                                                  ) = field.value;
-
-                                                  final (
-                                                    int px,
-                                                    int py,
-                                                  ) = photoRegionInfo.map
-                                                      .coordToPixel((x, y));
-
-                                                  showAppDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return AppDialog(
-                                                        title: photoRegionInfo
-                                                            .stringData,
-                                                        child: GestureDetector(
-                                                          onSecondaryTap: () {
-                                                            Navigator.of(
-                                                              context,
-                                                            ).pop();
-                                                          },
-                                                          child: AppMapViewer(
-                                                            assetName:
-                                                                photoRegionInfo
-                                                                    .map
-                                                                    .assetName,
-                                                            imageSize: Size(
-                                                              photoRegionInfo
-                                                                  .map
-                                                                  .mapSize
-                                                                  .$1
-                                                                  .toDouble(),
-                                                              photoRegionInfo
-                                                                  .map
-                                                                  .mapSize
-                                                                  .$2
-                                                                  .toDouble(),
-                                                            ),
-                                                            markerPixel: Offset(
-                                                              px.toDouble(),
-                                                              py.toDouble(),
-                                                            ),
-                                                            maxScale: 28,
-                                                            initScale: 2,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          );
-                                        },
+                                  return TreeViewPage(
+                                    root: [
+                                      ?node,
+                                    ],
                                   );
                                 },
                               );
-                            }
-                          },
-                        ),
-                      );
-                    },
+                            },
+                          );
+                        }
+                      },
+                    ),
+                  );
+                },
                 child: Listener(
                   onPointerDown: (e) {
                     /// TODO 拖拽图片时不要切换状态
@@ -2879,13 +2766,25 @@ class FiltrationButton extends StatelessWidget {
 
 
                     if(game.selectedUid?.value != null && images.isNotEmpty){
-                      await ImageAddition.files(
-                        AlbumType.NikkiPhotos_HighQuality,
+                      // await ImageAddition.files(
+                      //   AlbumType.NikkiPhotos_HighQuality,
+                      //   images.map((ImageItem item) => item.path.path).toList(),
+                      //   game.selectedUid!.value,
+                      //   onProgress: (c, t){
+                      //     progress.value = (c / t).clamp(0, 1);
+                      //   }
+                      // );
+
+                      int count = 0;
+                      final int total = images.length;
+
+                      await InfinityNikkiParamCodec.decodeFilesUncheckedStream(
+                        MediaParamType.nikkiPhoto,
                         images.map((ImageItem item) => item.path.path).toList(),
-                        game.selectedUid!.value,
-                        onProgress: (c, t){
-                          progress.value = (c / t).clamp(0, 1);
-                        }
+                        uid: game.selectedUid?.value,
+                        callback: (String path, MediaCustomData? data){
+                          progress.value = (count++ / total).clamp(0, 1);
+                        },
                       );
 
                       progress.value = 1;

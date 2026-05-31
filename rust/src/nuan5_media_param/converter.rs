@@ -407,7 +407,7 @@ pub(crate) fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData
 
   if let Some(interactive_photo) = &data.interactive_photo{
     if !interactive_photo.is_empty() {
-      res.push(TaskParams::Risk(interactive_photo.as_map()))
+      res.push(TaskParams::Interactive(interactive_photo.as_map()))
     }
   };
 

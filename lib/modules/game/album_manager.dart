@@ -1,5 +1,7 @@
 import "package:nikki_albums/modules/game/infinity_nikki/model/album_info.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/structs/nikki_photo_params.dart";
 
+import "../../src/rust/nuan5_media_param/decode.dart";
 import "uid.dart";
 import "image.dart";
 import "package:nikki_albums/widgets/common/component.dart";
@@ -294,62 +296,91 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     notifyListeners();
   }
 
-  bool _filterItem(ImageItem item) {
+  bool _filterItem(ImageItem item){
     bool res = false;
-    if (_filtration.contains(Filtration.inGame)) {
-      if (item.source == ImageSource.game) res = true;
+    if(_filtration.contains(Filtration.inGame)){
+      if(item.source == ImageSource.game) res = true;
     }
-    if (_filtration.contains(Filtration.outOfGame)) {
-      if (item.source == ImageSource.backup) res = true;
+    if(_filtration.contains(Filtration.outOfGame)){
+      if(item.source == ImageSource.backup) res = true;
     }
-    if (!res) return false;
+    if(!res) return false;
 
-    if (_filtration.contains(Filtration.onlyDailyTask)) {
-      if (type != AlbumType.NikkiPhotos_HighQuality) return false;
-      if (item.isObtainedAddition()) {
-        final Field field = item.getAdditionSync(
-          uid?.value,
-          AlbumType.NikkiPhotos_HighQuality,
-        );
+    if(_filtration.contains(Filtration.onlyDailyTask)){
+      if(type != AlbumType.NikkiPhotos_HighQuality) return false;
 
-        final List<Field>? taskFieldList = field["ia_photography_info"]
-            .firstOrNull?["ia_task"]
-            .firstOrNull?["ia_task_photo"]
-            .firstOrNull
-            ?.children;
+      final MediaCustomData? data = item.getParamSync(uid?.value, AlbumType.NikkiPhotos_HighQuality);
+      return data?.whenOrNull(
+        valid: (MediaParam param){
+          return param.whenOrNull(
+            nikkiPhoto: (nikkiPhoto){
+              for(final task in nikkiPhoto.photography.task){
+                final bool? exist = task.whenOrNull(
+                  interactive: (interactive){
+                    for(final int taskId in interactive.keys){
+                      /// TODO
+                      /// 15002 套配合地点判断，需判断地点位于“星海”
+                      // const List<int> taskIdList = [15002, 15006, 15008, 11120, 11121];
+                      const List<int> taskIdList = [15006, 15008, 11120, 11121];
 
-        if (taskFieldList == null) return false;
+                      if(taskIdList.contains(taskId)){
+                        return true;
+                      }
+                    }
+                    return false;
+                  },
+                );
 
-        bool res = false;
-        const List<int> task = [15002, 15006, 15008, 11120, 11121];
-        for (final Field taskField in taskFieldList) {
-          if (taskField.key is GameInteractivePhoto &&
-              task.contains((taskField.key as GameInteractivePhoto).data)) {
-            res = true;
-            break;
-          }
-        }
-        if (!res) return false;
+                if(exist == true){
+                  return true;
+                }
+              }
 
-        final List<Field>? photoRegionTaskList = field["ia_photography_info"]
-            .firstOrNull?["ia_possible_photo_region"];
-        if (photoRegionTaskList == null || photoRegionTaskList.isEmpty){
-          return false;
-        }
+              return false;
+            },
+          );
+        },
+      ) ?? false;
 
-        for (final Field photoRegionTask in photoRegionTaskList) {
-          if (photoRegionTask.value is (GamePhotoRegion, num, num, num)) {
-            if ((photoRegionTask.value as (GamePhotoRegion, num, num, num))
-                    .$1
-                    .data ==
-                2)
-              return true;
-          }
-        }
-
-        return false;
-      }
-    } else {
+      // if(item.isObtainedAddition()){
+      //   final Field field = item.getAdditionSync(
+      //     uid?.value,
+      //     AlbumType.NikkiPhotos_HighQuality,
+      //   );
+      //
+      //
+      //   final List<Field>? taskFieldList = field["ia_photography_info"]
+      //       .firstOrNull?["ia_task"]
+      //       .firstOrNull?["ia_task_photo"]
+      //       .firstOrNull
+      //       ?.children;
+      //
+      //   if (taskFieldList == null) return false;
+      //
+      //   bool res = false;
+      //   const List<int> task = [15002, 15006, 15008, 11120, 11121];
+      //   for(final Field taskField in taskFieldList){
+      //     if(taskField.key is GameInteractivePhoto && task.contains((taskField.key as GameInteractivePhoto).data)){
+      //       res = true;
+      //       break;
+      //     }
+      //   }
+      //   if(!res) return false;
+      //
+      //   final List<Field>? photoRegionTaskList = field["ia_photography_info"].firstOrNull?["ia_possible_photo_region"];
+      //   if(photoRegionTaskList == null || photoRegionTaskList.isEmpty){
+      //     return false;
+      //   }
+      //
+      //   for(final Field photoRegionTask in photoRegionTaskList){
+      //     if (photoRegionTask.value is (GamePhotoRegion, num, num, num)) {
+      //       if((photoRegionTask.value as (GamePhotoRegion, num, num, num)).$1.data == 2) return true;
+      //     }
+      //   }
+      //
+      //   return false;
+      // }
+    }else{
       return true;
     }
 

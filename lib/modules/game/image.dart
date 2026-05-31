@@ -1,139 +1,13 @@
-export "image_addition.dart";
 
-import "dart:io" show Platform;
-import "package:easy_localization/easy_localization.dart";
-import "package:nikki_albums/modules/game/codec.dart";
-
-import "image_addition.dart";
 import "uid.dart";
 import "package:nikki_albums/info.dart";
 import "package:nikki_albums/utils/path.dart";
+import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
+import "infinity_nikki/domain/param_codec.dart";
 
-final Map<String, Field> _imageAdditionList = {};
-
-void printAddition(String path){
-  final a = _imageAdditionList[path];
-
-  String tre(Field f, [int level = 0]){
-    String res = "${"  " * level}${f.isTranslateKey ? tr(f.stringKey, args: f.keyArgs) : f.key}";
-    if(f.value != null){
-      res = "$res : ${f.isTranslateValue ? tr(f.stringValue, args: f.valueArgs) : f.stringValue}";
-    }
-    if(f.children.isNotEmpty){
-      for(final c in f.children){
-        res = "$res\n${tre(c, level + 1)}";
-      }
-    }
-    return res;
-  }
-
-  print(a == null ? null : tre(a));
-}
-
-
-abstract class ImageAddition{
-  static Field toField(AlbumType albumType, dynamic json){
-    switch(albumType){
-      case AlbumType.NikkiPhotos_HighQuality || AlbumType.Collage_CollagePhoto:
-        return NikkiPhotoAddition.fromGameJson(
-          nikkiPhotoJson: json,
-        );
-      case AlbumType.Collage_HighQuality:
-        return CollageAddition.fromGameJson(
-          collageJson: json,
-        );
-      case AlbumType.ClockInPhoto:
-        return ExpeditionAddition.fromGameJson(
-          expeditionJson: json,
-        );
-      case AlbumType.DIY:
-        return DIYPhotoAddition.fromGameJson(
-          DIYPhotoJson: json,
-        );
-      default:
-        return const InvaildParamsAddition();
-    }
-  }
-
-  static Field fileSync(AlbumType albumType, String path, String uid){
-    // if(!kDebugMode){
-    //   if(_imageAdditionList.containsKey(path)){
-    //     return _imageAdditionList[path]!;
-    //   }
-    // }
-
-    if(_imageAdditionList.containsKey(path)){
-      return _imageAdditionList[path]!;
-    }
-
-    try{
-      final dynamic json = GameImageCodec.decodeFileSync(path, uid);
-
-      _imageAdditionList[path] = toField(albumType, json);
-    }catch(e){
-      _imageAdditionList[path] = const InvaildParamsAddition();
-    }
-
-    return _imageAdditionList[path]!;
-  }
-
-  static Future<Field> file(AlbumType albumType, String path, String uid) async{
-    // if(!kDebugMode){
-    //   if(_imageAdditionList.containsKey(path)){
-    //     return _imageAdditionList[path]!;
-    //   }
-    // }
-
-    if(_imageAdditionList.containsKey(path)){
-      return _imageAdditionList[path]!;
-    }
-
-    try{
-      final dynamic json = await GameImageCodec.decodeFile(path, uid);
-
-      _imageAdditionList[path] = toField(albumType, json);
-    }catch(e){
-      _imageAdditionList[path] = const InvaildParamsAddition();
-    }
-
-    return _imageAdditionList[path]!;
-  }
-
-  static Future<List<Field>> files(AlbumType albumType, List<String> paths, String uid, {void Function(int, int)? onProgress}) async{
-    final List<String> need = [];
-
-    for(final String path in paths){
-      if(_imageAdditionList.containsKey(path)){
-        continue;
-      }
-
-      need.add(path);
-    }
-
-    try{
-      final List<dynamic> jsons = await GameImageCodec.decodeFiles(need, uid, onProgress: (c, t) => onProgress?.call(c, t + 1));
-
-      for(int i = 0; i < need.length; i++){
-        _imageAdditionList[need[i]] = toField(albumType, jsons[i]);
-      }
-
-      onProgress?.call(1, 1);
-    }catch(e){
-      for(int i = 0; i < need.length; i++){
-        _imageAdditionList[need[i]] = const InvaildParamsAddition();
-      }
-    }finally{
-      onProgress?.call(1, 1);
-    }
-
-    final List<Field> res = [];
-    for(final String path in paths){
-      res.add(_imageAdditionList[path]!);
-    }
-
-    return res;
-  }
-}
+import "dart:io" show Platform;
 
 
 enum ImageSource{
@@ -156,21 +30,23 @@ class ImageItem {
 
   String get name => path.name;
 
-  bool isObtainedAddition(){
-    return _imageAdditionList.containsKey(path.path);
+  Future<MediaCustomData?> getParam(String? uid, AlbumType? albumType){
+    return InfinityNikkiParamCodec.decodeFileUnchecked(convertAlbumType(albumType ?? AlbumType.NikkiPhotos_HighQuality), path.path, uid: uid);
+  }
+  Future<TreeNode?> getParamNode(String? uid, AlbumType? albumType) async{
+    final MediaCustomData? data = await getParam(uid, albumType);
+    return convertMediaData(data);
   }
 
-  Field getAdditionSync(String? uid, AlbumType? albumType){
-    if(uid == null || albumType == null) return InvaildParamsAddition();
-
-    return ImageAddition.fileSync(albumType, path.path, uid);
+  MediaCustomData? getParamSync(String? uid, AlbumType? albumType){
+    return InfinityNikkiParamCodec.decodeFileUncheckedSync(convertAlbumType(albumType ?? AlbumType.NikkiPhotos_HighQuality), path.path, uid: uid);
+  }
+  TreeNode? getParamNodeSync(String? uid, AlbumType? albumType){
+    final MediaCustomData? data = getParamSync(uid, albumType);
+    return convertMediaData(data);
   }
 
-  Future<Field> getAddition(String? uid, AlbumType? albumType) async{
-    if(uid == null || albumType == null) return InvaildParamsAddition();
 
-    return await ImageAddition.file(albumType, path.path, uid);
-  }
 
   @override
   bool operator ==(Object other) =>
@@ -181,6 +57,47 @@ class ImageItem {
   @override
   int get hashCode => path.hashCode;
 }
+
+
+MediaParamType convertAlbumType(AlbumType albumType){
+  switch(albumType){
+    case AlbumType.Collage_HighQuality:
+      return MediaParamType.collage;
+    case AlbumType.ClockInPhoto:
+      return MediaParamType.clockInPhoto;
+    case AlbumType.DIY:
+      return MediaParamType.diy;
+    case AlbumType.NikkiPhotos_HighQuality:
+      return MediaParamType.nikkiPhoto;
+    default:
+      return MediaParamType.nikkiPhoto;
+  }
+}
+
+TreeNode? convertMediaData(MediaCustomData? data){
+  return data?.whenOrNull(
+    valid: (MediaParam param){
+      return param.when(
+        momoCameraParams: (momoCameraParams){
+          return null;
+        },
+        nikkiPhoto: (nikkiPhoto){
+          return genNikkiPhotoParams(nikkiPhoto);
+        },
+        clockInPhoto: (clockInPhoto){
+          return genClockInPhotoParams(clockInPhoto);
+        },
+        collage: (collage){
+          return genCollageParams(collage);
+        },
+        diy: (diy){
+          return genDiyParams(diy);
+        },
+      );
+    },
+  );
+}
+
 
 mixin AlbumPath {
   bool isAllowBackup(AlbumType type) =>
