@@ -73,13 +73,6 @@ void main(List<String> args) async{
         appWindow.alignment = Alignment.center;
         appWindow.title = "Nikki Albums";
         appWindow.show();
-
-        if(Platform.isWindows){
-          Future.delayed(const Duration(milliseconds: 1000)).then((_){
-            appWindow.size = appWindow.size;
-            appWindow.show();
-          });
-        }
       });
     });
   }
