@@ -162,3 +162,18 @@ bool filterOnlyRiskTask(ImageItem item, Uid? uid, AlbumType type){
     },
   ) ?? false;
 }
+
+bool filterOnlyPhotoWall(ImageItem item, Uid? uid, AlbumType type){
+  if(type != AlbumType.NikkiPhotos_HighQuality) return false;
+
+  final MediaCustomData? data = item.getParamSync(uid?.value, AlbumType.NikkiPhotos_HighQuality);
+  return data?.whenOrNull(
+    valid: (MediaParam param){
+      return param.whenOrNull(
+        nikkiPhoto: (nikkiPhoto){
+          return nikkiPhoto.photography.photoWall.isNotEmpty;
+        },
+      );
+    },
+  ) ?? false;
+}

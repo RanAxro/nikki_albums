@@ -2742,7 +2742,8 @@ class FiltrationButton extends StatelessWidget {
                     filtration == Filtration.hasCompletedTask ||
                     filtration == Filtration.hasUnfinishedTask ||
                     filtration == Filtration.onlyPuzzleTask ||
-                    filtration == Filtration.onlyRiskTask
+                    filtration == Filtration.onlyRiskTask ||
+                    filtration == Filtration.onlyPhotoWall
                   ){
                     final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
                     bool cancel = false;
@@ -2787,6 +2788,7 @@ class FiltrationButton extends StatelessWidget {
                     if(game.album.isFilter(Filtration.hasUnfinishedTask)) game.album.unfilter(Filtration.hasUnfinishedTask);
                     if(game.album.isFilter(Filtration.onlyPuzzleTask)) game.album.unfilter(Filtration.onlyPuzzleTask);
                     if(game.album.isFilter(Filtration.onlyRiskTask)) game.album.unfilter(Filtration.onlyRiskTask);
+                    if(game.album.isFilter(Filtration.onlyPhotoWall)) game.album.unfilter(Filtration.onlyPhotoWall);
                     game.album.filter(filtration);
 
                   }else{
@@ -2858,6 +2860,8 @@ class FiltrationButton extends StatelessWidget {
               _buttonBuilder(Filtration.onlyPuzzleTask),
             if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.onlyRiskTask),
+            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+              _buttonBuilder(Filtration.onlyPhotoWall),
           ],
         );
       },

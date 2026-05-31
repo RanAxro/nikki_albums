@@ -324,6 +324,10 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     else if(_filtration.contains(Filtration.onlyRiskTask)){
       return filterOnlyRiskTask(item, uid, type);
     }
+    /// only risk task
+    else if(_filtration.contains(Filtration.onlyPhotoWall)){
+      return filterOnlyPhotoWall(item, uid, type);
+    }
     else{
       return true;
     }
@@ -408,6 +412,7 @@ enum Filtration{
   hasUnfinishedTask,
   onlyPuzzleTask,
   onlyRiskTask,
+  onlyPhotoWall,
 }
 
 abstract class AlbumComparison {

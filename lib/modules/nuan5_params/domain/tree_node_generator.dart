@@ -180,6 +180,7 @@ TreeNode genPhotographyParams(PhotographyParams params){
       TreeNode(
         title: trText("photo_wall"),
         message: params.photoWall.isEmpty ? trBool(false, index: 2) : null,
+        initiallyExpanded: true,
         children: params.photoWall.map((id){
           return TreeNode(
             title: trText(id.toString(), category: "photo_wall"),
