@@ -1,0 +1,9 @@
+CFBundleDisplayName = "暖暖相册";
+CFBundleName = "暖暖相册";
+NSPhotoLibraryUsageDescription = "我们需要访问您的相册以便为您导出和保存实况照片。";
+NSPhotoLibraryAddUsageDescription = "我们需要访问您的相册以便为您保存实况照片。";
+NSDocumentsFolderUsageDescription = "我们需要访问您的文稿以便读取《无限暖暖》的游戏存档数据。";
+NSDesktopFolderUsageDescription = "我们需要访问您的桌面以便读取《无限暖暖》的游戏存档数据。";
+NSDownloadsFolderUsageDescription = "我们需要访问您的下载文件夹以便读取《无限暖暖》的游戏存档数据。";
+NSRemovableVolumesUsageDescription = "我们需要访问您的外部磁盘以便读取《无限暖暖》的游戏存档数据。";
+NSNetworkVolumesUsageDescription = "我们需要访问您的网络磁盘以便读取《无限暖暖》的游戏存档数据。";
