@@ -1,7 +1,7 @@
 import "personalization.dart";
 import "edit_custom_game.dart";
 import "live_photo_settings.dart";
-import "versionInformation.dart";
+import "version_information/presentation/version_information.dart";
 
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
@@ -69,7 +69,7 @@ class SettingDialog extends StatelessWidget{
                             onClick: () {
                               controller.jumpToPage(3);
                             },
-                            child: AppText("versionInformation"),
+                            child: AppText("version_information"),
                           ),
                         ],
                       );

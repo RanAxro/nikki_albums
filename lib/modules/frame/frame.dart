@@ -5,7 +5,7 @@ import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 import "package:nikki_albums/utils/system/windows.dart";
 import "../nuan5_params/domain/tree_node_generator.dart";
 import "../nuan5_params/presentation/media_params_tree.dart";
-import "../setting/versionInformation.dart";
+import "package:nikki_albums/modules/setting/version_information/domain/check_app_updates.dart";
 import "ui_android.dart";
 
 import "package:nikki_albums/modules/game/uid.dart";
@@ -74,7 +74,7 @@ class _FrameState extends State<Frame> {
             builder: (BuildContext context) {
               /// TODO 检测更新
              if(!kDebugMode){
-               check(context);
+               checkAppUpdates(context);
              }
 
               /// Windows
