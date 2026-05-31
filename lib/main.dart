@@ -69,10 +69,19 @@ void main(List<String> args) async{
   if(Platform.isWindows || Platform.isMacOS){
     WidgetsBinding.instance.addPostFrameCallback((_){
       doWhenWindowReady((){
-        appWindow.minSize = Size(0, 0);
-        appWindow.alignment = Alignment.center;
-        appWindow.title = "Nikki Albums";
-        appWindow.show();
+        final win = appWindow;
+        final initialSize = win.size;
+        
+        // 专门修复 Windows 隐藏启动时的白屏 Bug：在显示前微调一次尺寸强制引擎同步
+        if(Platform.isWindows){
+          win.size = Size(initialSize.width, initialSize.height + 1);
+          win.size = initialSize;
+        }
+
+        win.minSize = const Size(0, 0);
+        win.alignment = Alignment.center;
+        win.title = "Nikki Albums";
+        win.show();
       });
     });
   }
