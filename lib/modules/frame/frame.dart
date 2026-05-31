@@ -1,18 +1,8 @@
-import "package:bitsdojo_window/bitsdojo_window.dart";
-import "package:desktop_drop/desktop_drop.dart";
-import "package:flutter/foundation.dart";
-import "package:nikki_albums/modules/plugin/domain/plugin_builder.dart";
-import "package:nikki_albums/modules/plugin/domain/plugin_loader.dart";
-import "package:nikki_albums/plugin/infinity_nikki_support/builder_config.dart";
-import "package:nikki_albums/plugin/infinity_nikki_support/game_config.dart";
-import "package:nikki_albums/modules/game/codec.dart";
-import "package:nikki_albums/src/rust/api/simple.dart";
+
 import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
-import "package:nikki_albums/src/rust/serde_config/se.dart";
 
 import "package:nikki_albums/utils/system/windows.dart";
-import "package:path_provider/path_provider.dart";
 import "../nuan5_params/domain/tree_node_generator.dart";
 import "../nuan5_params/presentation/media_params_tree.dart";
 import "../setting/versionInformation.dart";
@@ -30,17 +20,18 @@ import "package:nikki_albums/utils/path.dart";
 
 import "dart:io";
 import "package:flutter/material.dart";
+import "package:flutter/foundation.dart";
 
+import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
 import "package:easy_localization/easy_localization.dart";
 
 import "package:nikki_albums/modules/album/album.dart" as album_page;
 import "package:nikki_albums/modules/start/start.dart" as start_page;
 import "package:nikki_albums/modules/resource/resource.dart" as resource_page;
-import "package:nikki_albums/modules/file_transfer/file_transfer.dart"
-    as file_transfer_page;
-import "package:nikki_albums/modules/recycle_bin/recycle_bin.dart"
-    as recycle_bin;
+import "package:nikki_albums/modules/file_transfer/file_transfer.dart" as file_transfer_page;
+import "package:nikki_albums/modules/recycle_bin/recycle_bin.dart" as recycle_bin;
 
 class Frame extends StatefulWidget {
   const Frame(key) : super(key: key);

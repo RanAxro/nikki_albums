@@ -1,42 +1,39 @@
-import "package:multi_split_view/multi_split_view.dart";
-import "package:nikki_albums/modules/album/mp4_to_gif.dart";
-
-import "package:nikki_albums/modules/game/field_tree.dart";
-import "package:nikki_albums/modules/game/infinity_nikki/domain/param_codec.dart";
-import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
-import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
-import "package:nikki_albums/modules/setting/setting.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
-import "../nuan5_params/presentation/media_params_tree.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/media_params_tree.dart";
 import "album_view.dart";
 import "album_previewer.dart";
-import "package:nikki_albums/modules/file_transfer/file_transfer.dart";
 import "package:nikki_albums/info.dart";
-import "package:nikki_albums/modules/app_base/state.dart";
+import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/modules/game/game.dart";
 import "package:nikki_albums/modules/game/album_manager.dart";
+import "package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart";
+import "package:nikki_albums/modules/game/infinity_nikki/domain/param_codec.dart";
+import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
+import "package:nikki_albums/modules/album/mp4_to_gif.dart";
+import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";
+import "package:nikki_albums/modules/setting/setting.dart";
+import "package:nikki_albums/modules/file_transfer/file_transfer.dart";
+import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/modules/nikkias/nikkias.dart";
-import "package:nikki_albums/modules/frame/frame.dart";
+import "package:nikki_albums/modules/tutorial/tutorial.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
-import "package:nikki_albums/modules/tutorial/tutorial.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/utils/Image.dart";
 import "package:nikki_albums/utils/clipboard.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter/gestures.dart";
-import 'package:nikki_albums/modules/game/infinity_nikki/service/live_photo_export_service.dart';
-import 'package:uuid/uuid.dart';
 import "dart:io";
 import "dart:ui" hide Path;
 
+import "package:multi_split_view/multi_split_view.dart";
 import "package:easy_localization/easy_localization.dart";
 import "package:file_picker/file_picker.dart";
 import "package:desktop_drop/desktop_drop.dart";
+import "package:uuid/uuid.dart";
 import "package:media_kit/media_kit.dart";
 import "package:media_kit_video/media_kit_video.dart";
 import "package:path/path.dart" as p;
@@ -2766,15 +2763,6 @@ class FiltrationButton extends StatelessWidget {
 
 
                     if(game.selectedUid?.value != null && images.isNotEmpty){
-                      // await ImageAddition.files(
-                      //   AlbumType.NikkiPhotos_HighQuality,
-                      //   images.map((ImageItem item) => item.path.path).toList(),
-                      //   game.selectedUid!.value,
-                      //   onProgress: (c, t){
-                      //     progress.value = (c / t).clamp(0, 1);
-                      //   }
-                      // );
-
                       int count = 0;
                       final int total = images.length;
 
@@ -2821,27 +2809,6 @@ class FiltrationButton extends StatelessWidget {
       },
     );
   }
-  // Widget _buttonBuilder(valueListenable, String text){
-  //   return ValueListenableBuilder<bool>(
-  //     valueListenable: valueListenable,
-  //     common: (BuildContext context, bool value, Widget? child){
-  //       final Color color = value ? AppTheme.of(context)!.colorScheme.background.onColor : AppTheme.of(context)!.colorScheme.background.onColor.withAlpha(0);
-  //
-  //       return MenuItemButton(
-  //         onPressed: () async{
-  //           valueListenable.value = !valueListenable.value;
-  //         },
-  //         child: Row(
-  //           spacing: listSpacing,
-  //           children: [
-  //             Image.asset("assets/icon/tick.webp", height: 16, color: color),
-  //             Text(text, style: TextStyle(color: AppTheme.of(context)!.colorScheme.secondary.onColor)),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
