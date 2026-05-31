@@ -2733,12 +2733,17 @@ class FiltrationButton extends StatelessWidget {
               width: null,
               height: mediumButtonSize,
               onClick: () async {
-                if (isFilter) {
+                if(isFilter){
                   game.album.unfilter(filtration);
-                } else {
+                }else{
 
-                  /// onlyDailyTask
-                  if(filtration == Filtration.onlyDailyTask){
+                  /// Only single-choice option
+                  if(filtration == Filtration.onlyDailyTask ||
+                    filtration == Filtration.hasCompletedTask ||
+                    filtration == Filtration.hasUnfinishedTask ||
+                    filtration == Filtration.onlyPuzzleTask ||
+                    filtration == Filtration.onlyRiskTask
+                  ){
                     final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
                     bool cancel = false;
 
@@ -2761,7 +2766,6 @@ class FiltrationButton extends StatelessWidget {
 
                     final Set<ImageItem> images = await game.album.images;
 
-
                     if(game.selectedUid?.value != null && images.isNotEmpty){
                       int count = 0;
                       final int total = images.length;
@@ -2778,6 +2782,11 @@ class FiltrationButton extends StatelessWidget {
                       progress.value = 1;
                     }
 
+                    if(game.album.isFilter(Filtration.onlyDailyTask)) game.album.unfilter(Filtration.onlyDailyTask);
+                    if(game.album.isFilter(Filtration.hasCompletedTask)) game.album.unfilter(Filtration.hasCompletedTask);
+                    if(game.album.isFilter(Filtration.hasUnfinishedTask)) game.album.unfilter(Filtration.hasUnfinishedTask);
+                    if(game.album.isFilter(Filtration.onlyPuzzleTask)) game.album.unfilter(Filtration.onlyPuzzleTask);
+                    if(game.album.isFilter(Filtration.onlyRiskTask)) game.album.unfilter(Filtration.onlyRiskTask);
                     game.album.filter(filtration);
 
                   }else{
@@ -2793,14 +2802,7 @@ class FiltrationButton extends StatelessWidget {
                     height: 16,
                     color: color,
                   ),
-                  Text(
-                    context.tr(filtration.name),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.secondary.onColor,
-                    ),
-                  ),
+                  AppText(filtration.name),
                 ],
               ),
             );
@@ -2846,8 +2848,16 @@ class FiltrationButton extends StatelessWidget {
           menuChildren: [
             _buttonBuilder(Filtration.inGame),
             _buttonBuilder(Filtration.outOfGame),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.onlyDailyTask),
+            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+              _buttonBuilder(Filtration.hasCompletedTask),
+            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+              _buttonBuilder(Filtration.hasUnfinishedTask),
+            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+              _buttonBuilder(Filtration.onlyPuzzleTask),
+            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+              _buttonBuilder(Filtration.onlyRiskTask),
           ],
         );
       },

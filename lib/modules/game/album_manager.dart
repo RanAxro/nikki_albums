@@ -1,9 +1,7 @@
-import "package:nikki_albums/modules/game/infinity_nikki/model/album_info.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/structs/nikki_photo_params.dart";
 
-import "../../src/rust/nuan5_media_param/decode.dart";
 import "uid.dart";
 import "image.dart";
+import "infinity_nikki/domain/param_filter.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/info.dart";
 import "package:nikki_albums/utils/path.dart";
@@ -306,81 +304,27 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     }
     if(!res) return false;
 
+    /// only daily task
     if(_filtration.contains(Filtration.onlyDailyTask)){
-      if(type != AlbumType.NikkiPhotos_HighQuality) return false;
-
-      final MediaCustomData? data = item.getParamSync(uid?.value, AlbumType.NikkiPhotos_HighQuality);
-      return data?.whenOrNull(
-        valid: (MediaParam param){
-          return param.whenOrNull(
-            nikkiPhoto: (nikkiPhoto){
-              for(final task in nikkiPhoto.photography.task){
-                final bool? exist = task.whenOrNull(
-                  interactive: (interactive){
-                    for(final int taskId in interactive.keys){
-                      /// TODO
-                      /// 15002 套配合地点判断，需判断地点位于“星海”
-                      // const List<int> taskIdList = [15002, 15006, 15008, 11120, 11121];
-                      const List<int> taskIdList = [15006, 15008, 11120, 11121];
-
-                      if(taskIdList.contains(taskId)){
-                        return true;
-                      }
-                    }
-                    return false;
-                  },
-                );
-
-                if(exist == true){
-                  return true;
-                }
-              }
-
-              return false;
-            },
-          );
-        },
-      ) ?? false;
-
-      // if(item.isObtainedAddition()){
-      //   final Field field = item.getAdditionSync(
-      //     uid?.value,
-      //     AlbumType.NikkiPhotos_HighQuality,
-      //   );
-      //
-      //
-      //   final List<Field>? taskFieldList = field["ia_photography_info"]
-      //       .firstOrNull?["ia_task"]
-      //       .firstOrNull?["ia_task_photo"]
-      //       .firstOrNull
-      //       ?.children;
-      //
-      //   if (taskFieldList == null) return false;
-      //
-      //   bool res = false;
-      //   const List<int> task = [15002, 15006, 15008, 11120, 11121];
-      //   for(final Field taskField in taskFieldList){
-      //     if(taskField.key is GameInteractivePhoto && task.contains((taskField.key as GameInteractivePhoto).data)){
-      //       res = true;
-      //       break;
-      //     }
-      //   }
-      //   if(!res) return false;
-      //
-      //   final List<Field>? photoRegionTaskList = field["ia_photography_info"].firstOrNull?["ia_possible_photo_region"];
-      //   if(photoRegionTaskList == null || photoRegionTaskList.isEmpty){
-      //     return false;
-      //   }
-      //
-      //   for(final Field photoRegionTask in photoRegionTaskList){
-      //     if (photoRegionTask.value is (GamePhotoRegion, num, num, num)) {
-      //       if((photoRegionTask.value as (GamePhotoRegion, num, num, num)).$1.data == 2) return true;
-      //     }
-      //   }
-      //
-      //   return false;
-      // }
-    }else{
+      return filterOnlyDailyTask(item, uid, type);
+    }
+    /// has completed task
+    else if(_filtration.contains(Filtration.hasCompletedTask)){
+      return filterHasCompletedTask(item, uid, type);
+    }
+    /// has unfinished task
+    else if(_filtration.contains(Filtration.hasUnfinishedTask)){
+      return filterHasUnfinishedTask(item, uid, type);
+    }
+    /// only puzzle task
+    else if(_filtration.contains(Filtration.onlyPuzzleTask)){
+      return filterOnlyPuzzleTask(item, uid, type);
+    }
+    /// only risk task
+    else if(_filtration.contains(Filtration.onlyRiskTask)){
+      return filterOnlyRiskTask(item, uid, type);
+    }
+    else{
       return true;
     }
 
@@ -455,7 +399,16 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
 
 enum SortOrder { ascending, descending }
 
-enum Filtration { inGame, outOfGame, onlyDailyTask }
+enum Filtration{
+  inGame,
+  outOfGame,
+  /// 单选
+  onlyDailyTask,
+  hasCompletedTask,
+  hasUnfinishedTask,
+  onlyPuzzleTask,
+  onlyRiskTask,
+}
 
 abstract class AlbumComparison {
   static int Function(DateTime a, DateTime b) headerBy(SortOrder order) {
