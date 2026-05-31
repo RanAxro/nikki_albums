@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'export_strategy_base.dart';
 
@@ -8,6 +10,7 @@ import 'export_strategy_base.dart';
 /// 使用 Motion Photo v2 格式 (Container:Directory XMP + 视频直接追加)
 class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
   static final _xmpNsBytes = utf8.encode("http://ns.adobe.com/xap/1.0/\x00");
+  static const MethodChannel _channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
 
   @override
   Future<void> export({
@@ -15,7 +18,36 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     required File sourceVideo,
     required String outputPath,
   }) async {
-    final videoBytes = await sourceVideo.readAsBytes();
+    Uint8List videoBytes;
+
+    if (Platform.isMacOS) {
+      // Create a temporary path for the normalized video
+      final tempNormVideoPath = p.join(outputPath, '.temp_norm_video_${DateTime.now().millisecondsSinceEpoch}.mp4');
+      
+      try {
+        await _channel.invokeMethod('normalizeVideo', {
+          'inputPath': sourceVideo.path,
+          'outputPath': tempNormVideoPath,
+        });
+        
+        final normVideo = File(tempNormVideoPath);
+        if (await normVideo.exists()) {
+          videoBytes = await normVideo.readAsBytes();
+          await normVideo.delete();
+        } else {
+          // Fallback if normalization mysteriously fails but doesn't throw
+          videoBytes = await sourceVideo.readAsBytes();
+        }
+      } catch (e) {
+        // Fallback to raw video if native call fails
+        debugPrint('Warning: Video normalization failed: $e');
+        videoBytes = await sourceVideo.readAsBytes();
+      }
+    } else {
+      // Windows/Linux/etc: just use raw video for now
+      videoBytes = await sourceVideo.readAsBytes();
+    }
+
     final imageBytes = await coverImage.readAsBytes();
 
     if (imageBytes.length < 2 || imageBytes[0] != 0xFF || imageBytes[1] != 0xD8) {
