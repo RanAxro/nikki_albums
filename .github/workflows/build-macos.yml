@@ -17,10 +17,14 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - name: Disable Swift Package Manager
         run: flutter config --no-enable-swift-package-manager
@@ -28,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build macOS app
-        run: flutter build macos --release
+      - name: Build macOS app (arm64 only)
+        run: FLUTTER_XCODE_ARCHS=arm64 flutter build macos --release
 
       - name: Ad-Hoc Sign macOS app
         run: codesign --force --deep --sign - build/macos/Build/Products/Release/nikki_albums.app
