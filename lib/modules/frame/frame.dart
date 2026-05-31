@@ -73,9 +73,10 @@ class _FrameState extends State<Frame> {
           body: Builder(
             builder: (BuildContext context) {
               /// TODO 检测更新
-             if(!kDebugMode){
-               checkAppUpdates(context);
-             }
+             // if(!kDebugMode){
+             //   checkAppUpdates(context);
+             // }
+              checkAppUpdates(context);
 
               /// Windows
               if (Platform.isWindows) {
