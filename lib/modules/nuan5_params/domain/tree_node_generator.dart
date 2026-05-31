@@ -1,6 +1,9 @@
 import "../model/tree_node.dart";
 import "../model/enumeration.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/structs/nikki_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/structs/clock_in_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/structs/collage_params.dart";
+import "package:nikki_albums/src/rust/nuan5_media_param/structs/diy_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/utils/clipboard.dart";
@@ -35,6 +38,80 @@ TreeNode genNikkiPhotoParams(NikkiPhotoParams params){
         genNikkiParams(params.nikki!),
       if(params.momo != null)
         genMomoHiddenState(params.momo!),
+    ],
+  );
+}
+
+TreeNode genClockInPhotoParams(ClockInPhotoParams params){
+  return TreeNode(
+    title: trText("clock_in_photo_params"),
+    initiallyExpanded: true,
+    children: [
+      TreeNode(
+        title: trText("expedition"),
+        message: trText(params.tag.toString(), category: "expedition"),
+      ),
+      genPhotographyParams(params.photography),
+      if(params.camera != null)
+        genCameraParams(params.camera!),
+      if(params.nikki != null)
+        genNikkiParams(params.nikki!),
+      if(params.momo != null)
+        genMomoHiddenState(params.momo!),
+    ],
+  );
+}
+
+TreeNode genCollageParams(CollageParams params){
+  return TreeNode(
+    title: trText("collage_params"),
+    initiallyExpanded: true,
+    children: [
+      TreeNode(
+        title: trText("template_id"),
+        message: trText(params.templateId.toString(), category: "template_id"),
+      ),
+      ...params.regionPictures.map((RegionPicture regionPicture){
+        return TreeNode(
+          title: trText("zone"),
+          message: params.regionPictures.indexOf(regionPicture).toString(),
+          children: [
+            TreeNode(
+              title: trText("loc"),
+              message: regionPicture.position.toString(),
+            ),
+            TreeNode(
+              title: trText("rot"),
+              message: regionPicture.rotation.toStringAsFixed(1),
+            ),
+            TreeNode(
+              title: trText("scale"),
+              message: regionPicture.scale.toStringAsFixed(1),
+            ),
+            TreeNode(
+              title: trText("image_id"),
+              message: regionPicture.imageId,
+            ),
+            genNikkiPhotoParams(regionPicture.oriCustomData),
+          ],
+        );
+      }),
+    ],
+  );
+}
+
+TreeNode genDiyParams(DiyParams params){
+  return TreeNode(
+    title: trText("diy_params"),
+    children: [
+      TreeNode(
+        title: trText("pose"),
+        message: trText(params.poseId.toString(), category: "pose"),
+      ),
+      TreeNode(
+        title: trText("dressing"),
+        children: params.clothes.map(genClothParams),
+      ),
     ],
   );
 }
@@ -377,129 +454,7 @@ TreeNode genNikkiParams(NikkiParams params){
         title: trText("dressing"),
         initiallyExpanded: true,
         children:[
-          ...params.dressing.clothes.map((ClothParams clothParams){
-            return TreeNode(
-              title: trText("cloth_type.${ClothType.fromFlag(clothParams.cloth.clothType).name}"),
-              message: trText(clothParams.cloth.id.toString(), category: "cloth"),
-              children: [
-                TreeNode(
-                  title: trText("outfit"),
-                  message: trText(clothParams.cloth.outfit.toString(), category: "cloth_outfit"),
-                ),
-                TreeNode(
-                  title: trText("nikki_cloth_state.name"),
-                  message: trText("nikki_cloth_state.${NikkiClothState.fromFlag(clothParams.cloth.state).name}"),
-                ),
-                TreeNode(
-                  title: trText("diy"),
-                  message: clothParams.diy == null ? trBool(false, index: 2) : null,
-                  initiallyExpanded: true,
-                  children: clothParams.diy == null ? const [] : [
-                    if(clothParams.diy!.outfitDye.isNotEmpty)
-                      TreeNode(
-                        title: trText("outfit_dye"),
-                        children: clothParams.diy!.outfitDye.map((OutfitDyeData outfitDyeData){
-                          return outfitDyeData.when(
-                            hair: (OutfitDyeHairData outfitDyeHairData){
-                              return TreeNode(
-                                title: trText("diy_zone"),
-                                message: "${outfitDyeHairData.targetGroupId}-${outfitDyeHairData.featureTag}",
-                                children: [
-                                  TreeNode(
-                                    title: trText("color_1"),
-                                    icon: ColoredBox(color: convertColor(outfitDyeHairData.color0.color)),
-                                    children: genColorGrid(outfitDyeHairData.color0.colorGrid),
-                                  ),
-                                  if(outfitDyeHairData.color1 != null)
-                                    TreeNode(
-                                      title: trText("color_2"),
-                                      icon: ColoredBox(color: convertColor(outfitDyeHairData.color1!.color)),
-                                      children: genColorGrid(outfitDyeHairData.color1!.colorGrid),
-                                    ),
-
-                                  TreeNode(
-                                    title: trText("glossiness"),
-                                    message: (1 - outfitDyeHairData.roughness).toStringAsFixed(1),
-                                  ),
-                                  TreeNode(
-                                    title: trText("roughness"),
-                                    message: outfitDyeHairData.roughness.toStringAsFixed(1),
-                                  ),
-                                  TreeNode(
-                                    title: trText("color_mode"),
-                                    message: outfitDyeHairData.colorMode.toString(),
-                                  ),
-                                ],
-                              );
-                            },
-                            general: (OutfitDyeGeneralData outfitDyeGeneralData){
-                              return TreeNode(
-                                title: trText("diy_zone"),
-                                message: "${outfitDyeGeneralData.targetGroupId}-${outfitDyeGeneralData.featureTag}",
-                                children: [
-                                  TreeNode(
-                                    title: trText("color"),
-                                    icon: ColoredBox(color: convertColor(outfitDyeGeneralData.color.color)),
-                                    children: genColorGrid(outfitDyeGeneralData.color.colorGrid),
-                                  ),
-                                ],
-                              );
-                            }
-                          );
-                        }),
-                      ),
-
-                    if(clothParams.diy != null && clothParams.diy!.specialEffect.isNotEmpty)
-                      TreeNode(
-                        title: trText("special_effect"),
-                        children: clothParams.diy!.specialEffect.map((SpecialEffectData specialEffectData){
-                          return TreeNode(
-                            title: trText("diy_zone"),
-                            message: "${specialEffectData.targetGroupId}-${specialEffectData.featureTag}",
-                            children: [
-                              TreeNode(
-                                title: trText("color"),
-                                children: genColorGrid(specialEffectData.colorGrid),
-                              ),
-                              TreeNode(
-                                title: trText("cover_diy_color"),
-                                message: trBool(specialEffectData.coverDiyColor, index: 5),
-                              ),
-                            ],
-                          );
-                        }),
-                      ),
-
-                    if(clothParams.diy != null && clothParams.diy!.patternCreation.isNotEmpty)
-                      TreeNode(
-                        title: trText("pattern_creation"),
-                        children: clothParams.diy!.patternCreation.map((PatternCreationData patternCreation){
-                          return TreeNode(
-                            title: trText("diy_zone"),
-                            message: "${patternCreation.targetGroupId}-${patternCreation.featureTag}",
-                            children: [
-                              TreeNode(
-                                title: trText("texture"),
-                                message: trText(patternCreation.textureId.toString(), category: "pattern_creation_texture"),
-                              ),
-                              TreeNode(
-                                title: trText("override_pattern_a"),
-                                message: trBool(patternCreation.overridePatternA, index: 6),
-                              ),
-                              TreeNode(
-                                title: trText("tiling"),
-                                message: patternCreation.tiling.toStringAsFixed(1),
-                              ),
-                            ],
-                          );
-                        }),
-                      ),
-                  ]
-                ),
-
-              ],
-            );
-          }),
+          ...params.dressing.clothes.map(genClothParams),
 
           TreeNode(
             title: trText("eureka"),
@@ -616,6 +571,129 @@ TreeNode genNikkiParams(NikkiParams params){
         message: params.scale.toString(),
       ),
 
+    ],
+  );
+}
+
+TreeNode genClothParams(ClothParams params){
+  return TreeNode(
+    title: trText("cloth_type.${ClothType.fromFlag(params.cloth.clothType).name}"),
+    message: trText(params.cloth.id.toString(), category: "cloth"),
+    children: [
+      TreeNode(
+        title: trText("outfit"),
+        message: trText(params.cloth.outfit.toString(), category: "cloth_outfit"),
+      ),
+      TreeNode(
+        title: trText("nikki_cloth_state.name"),
+        message: trText("nikki_cloth_state.${NikkiClothState.fromFlag(params.cloth.state).name}"),
+      ),
+      TreeNode(
+        title: trText("diy"),
+        message: params.diy == null ? trBool(false, index: 2) : null,
+        initiallyExpanded: true,
+        children: params.diy == null ? const [] : [
+          if(params.diy!.outfitDye.isNotEmpty)
+            TreeNode(
+              title: trText("outfit_dye"),
+              children: params.diy!.outfitDye.map((OutfitDyeData outfitDyeData){
+                return outfitDyeData.when(
+                  hair: (OutfitDyeHairData outfitDyeHairData){
+                    return TreeNode(
+                      title: trText("diy_zone"),
+                      message: "${outfitDyeHairData.targetGroupId}-${outfitDyeHairData.featureTag}",
+                      children: [
+                        TreeNode(
+                          title: trText("color_1"),
+                          icon: ColoredBox(color: convertColor(outfitDyeHairData.color0.color)),
+                          children: genColorGrid(outfitDyeHairData.color0.colorGrid),
+                        ),
+                        if(outfitDyeHairData.color1 != null)
+                          TreeNode(
+                            title: trText("color_2"),
+                            icon: ColoredBox(color: convertColor(outfitDyeHairData.color1!.color)),
+                            children: genColorGrid(outfitDyeHairData.color1!.colorGrid),
+                          ),
+
+                        TreeNode(
+                          title: trText("glossiness"),
+                          message: (1 - outfitDyeHairData.roughness).toStringAsFixed(1),
+                        ),
+                        TreeNode(
+                          title: trText("roughness"),
+                          message: outfitDyeHairData.roughness.toStringAsFixed(1),
+                        ),
+                        TreeNode(
+                          title: trText("color_mode"),
+                          message: outfitDyeHairData.colorMode.toString(),
+                        ),
+                      ],
+                    );
+                  },
+                  general: (OutfitDyeGeneralData outfitDyeGeneralData){
+                    return TreeNode(
+                      title: trText("diy_zone"),
+                      message: "${outfitDyeGeneralData.targetGroupId}-${outfitDyeGeneralData.featureTag}",
+                      children: [
+                        TreeNode(
+                          title: trText("color"),
+                          icon: ColoredBox(color: convertColor(outfitDyeGeneralData.color.color)),
+                          children: genColorGrid(outfitDyeGeneralData.color.colorGrid),
+                        ),
+                      ],
+                    );
+                  }
+                );
+              }),
+            ),
+
+          if(params.diy!.specialEffect.isNotEmpty)
+            TreeNode(
+              title: trText("special_effect"),
+              children: params.diy!.specialEffect.map((SpecialEffectData specialEffectData){
+                return TreeNode(
+                  title: trText("diy_zone"),
+                  message: "${specialEffectData.targetGroupId}-${specialEffectData.featureTag}",
+                  children: [
+                    TreeNode(
+                      title: trText("color"),
+                      children: genColorGrid(specialEffectData.colorGrid),
+                    ),
+                    TreeNode(
+                      title: trText("cover_diy_color"),
+                      message: trBool(specialEffectData.coverDiyColor, index: 5),
+                    ),
+                  ],
+                );
+              }),
+            ),
+
+          if(params.diy!.patternCreation.isNotEmpty)
+            TreeNode(
+              title: trText("pattern_creation"),
+              children: params.diy!.patternCreation.map((PatternCreationData patternCreation){
+                return TreeNode(
+                  title: trText("diy_zone"),
+                  message: "${patternCreation.targetGroupId}-${patternCreation.featureTag}",
+                  children: [
+                    TreeNode(
+                      title: trText("texture"),
+                      message: trText(patternCreation.textureId.toString(), category: "pattern_creation_texture"),
+                    ),
+                    TreeNode(
+                      title: trText("override_pattern_a"),
+                      message: trBool(patternCreation.overridePatternA, index: 6),
+                    ),
+                    TreeNode(
+                      title: trText("tiling"),
+                      message: patternCreation.tiling.toStringAsFixed(1),
+                    ),
+                  ],
+                );
+              }),
+            ),
+        ]
+      ),
     ],
   );
 }

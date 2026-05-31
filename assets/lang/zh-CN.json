@@ -595,7 +595,11 @@
       "true_6": "应用底色",
       "false_6": "取消底色",
 
-      "nikki_photo_params": "图片信息",
+      "nikki_photo_params": "暖暖图片信息",
+      "clock_in_photo_params": "世界巡游信息",
+      "collage_params": "趣拼海报信息",
+      "diy_params": "染色信息",
+
       "photography_params": "拍摄信息",
       "edit": "图片编辑",
       "has_sticker": "贴纸",
@@ -782,7 +786,12 @@
       "carrier": "载具",
 
       "momo_params": "大喵信息",
-      "momo_hidden_state": "隐藏大喵"
+      "momo_hidden_state": "隐藏大喵",
+
+      "expedition": "世界巡游",
+      "template_id": "模板",
+      "zone": "区域",
+      "image_id": "原图id"
     },
     "photo_wall": {
 
@@ -839,6 +848,12 @@
 
     },
     "carrier": {
+
+    },
+    "expedition": {
+
+    },
+    "template_id": {
 
     }
   },
