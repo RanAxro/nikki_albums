@@ -95,6 +95,7 @@ class _SmoothPointerScroll extends State<SmoothPointerScroll>{
     WidgetsBinding.instance.addPostFrameCallback((_){
       if(scrollController.hasClients){
         scrollbarController.virtualScrollViewExtent = scrollController.position.maxScrollExtent;
+        scrollbarController.progress = scrollController.offset / scrollController.position.maxScrollExtent;
         scrollController.jumpTo(_offset);
       }else{
         scrollbarController.virtualScrollViewExtent = 0;
