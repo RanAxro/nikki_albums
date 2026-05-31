@@ -74,10 +74,12 @@ void main(List<String> args) async{
         appWindow.title = "Nikki Albums";
         appWindow.show();
 
-        Future.delayed(const Duration(milliseconds: 1000)).then((_){
-          appWindow.size = appWindow.size;
-          appWindow.show();
-        });
+        if(Platform.isWindows){
+          Future.delayed(const Duration(milliseconds: 1000)).then((_){
+            appWindow.size = appWindow.size;
+            appWindow.show();
+          });
+        }
       });
     });
   }

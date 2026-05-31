@@ -718,7 +718,7 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInBackup: null,
     locateInRecycleBin: r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\ExternalVideos",
     chainDeletion: {},
-    supportedPlatforms: inWindows | inAndroid | inMacOS,
+    supportedPlatforms: inWindows,
     videoInfo: VideoAlbumInfo(
       locateToVideo: r"",
       locateToCover: null,
