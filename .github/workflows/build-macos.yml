@@ -31,6 +31,9 @@ jobs:
       - name: Build macOS app
         run: flutter build macos --release
 
+      - name: Ad-Hoc Sign macOS app
+        run: codesign --force --deep --sign - build/macos/Build/Products/Release/nikki_albums.app
+
       - name: Zip app bundle
         run: |
           cd build/macos/Build/Products/Release
