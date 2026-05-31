@@ -32,15 +32,5 @@
 	<string>Nikki Albums needs access to your Photo Library to export photos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Nikki Albums needs access to save photos to your Photo Library.</string>
-	<key>NSDocumentsFolderUsageDescription</key>
-	<string>Nikki Albums needs access to your Documents to read Infinity Nikki game albums.</string>
-	<key>NSDesktopFolderUsageDescription</key>
-	<string>Nikki Albums needs access to your Desktop to read Infinity Nikki game albums.</string>
-	<key>NSDownloadsFolderUsageDescription</key>
-	<string>Nikki Albums needs access to your Downloads to read Infinity Nikki game albums.</string>
-	<key>NSRemovableVolumesUsageDescription</key>
-	<string>Nikki Albums needs access to external volumes to read Infinity Nikki game albums.</string>
-	<key>NSNetworkVolumesUsageDescription</key>
-	<string>Nikki Albums needs access to network volumes to read Infinity Nikki game albums.</string>
 </dict>
 </plist>
