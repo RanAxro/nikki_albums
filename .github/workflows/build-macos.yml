@@ -35,13 +35,13 @@ jobs:
       - name: Build macOS app (arm64 only)
         run: FLUTTER_XCODE_ARCHS=arm64 flutter build macos --release
 
-      - name: Ad-Hoc Sign macOS app
-        run: codesign --force --deep --sign - build/macos/Build/Products/Release/nikki_albums.app
+      - name: Code sign the App
+        run: codesign --force --deep --sign - "build/macos/Build/Products/Release/Nikki Albums.app"
 
-      - name: Zip app bundle
+      - name: Zip the App Bundle
         run: |
           cd build/macos/Build/Products/Release
-          zip -r -y nikki_albums-macos.zip nikki_albums.app
+          zip -r -y nikki_albums-macos.zip "Nikki Albums.app"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
