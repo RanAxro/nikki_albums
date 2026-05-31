@@ -24,9 +24,6 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
 
     final videoSize = videoBytes.length;
 
-    // ISOLATION TEST: XMP is 100% identical to main (NO OpCamera).
-    // EXIF APP1 with oplus_8388608 IS injected.
-    // Purpose: determine if EXIF injection alone breaks iOS.
     final xmp = '<?xpacket begin="\u{FEFF}" id="W5M0MpCehiHzreSzNTczkc9d"?>'
         '<x:xmpmeta xmlns:x="adobe:ns:meta/">'
         '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
