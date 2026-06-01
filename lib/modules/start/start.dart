@@ -145,7 +145,12 @@ class OpenFolderButton extends StatelessWidget {
             final game = AppState.currentGame.value;
             if (game != null) {
               if (Platform.isMacOS) {
-                Process.run("open", ["-R", game.launcherPath.path]);
+                final String p = game.launcherPath.path;
+                if (p.endsWith(".app") || p.endsWith(".app/")) {
+                  Process.run("open", ["-R", p]);
+                } else {
+                  Process.run("open", ["-R", "/Applications/Infinity Nikki.app"]);
+                }
               } else {
                 game.launcherPath.open();
               }
