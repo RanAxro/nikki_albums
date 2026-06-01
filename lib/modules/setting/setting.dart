@@ -116,9 +116,12 @@ class SettingDialog extends StatelessWidget{
     );
 
     return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(smallBorderRadius)),
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-      child: Container(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 700),
+        child: Container(
         padding: const EdgeInsets.all(smallPadding),
         child: Column(
           spacing: bigListSpacing,
@@ -148,6 +151,7 @@ class SettingDialog extends StatelessWidget{
             Expanded(child: content),
           ],
         ),
+      ),
       ),
     );
   }
