@@ -1,24 +1,24 @@
 {
-  "version": 11,
-  "versionString": "3.06",
-  "downloadLink": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-Windows-x64.zip",
-  "updateMessage": "1.新的相册 \"动态影集\"、\"外部视频\" (/X6Game/Video)\n2.支持将视频转换为gif动图",
+  "version": 12,
+  "versionString": "3.07",
+  "downloadLink": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums-v3.07-Windows-x64.zip",
+  "updateMessage": "1. 国际服支持, 自动识别国际服的相册\n2. 实况图转换, 可以将\"动态影集\"转换成实况Motion Photo或Live Photo(仅MacOS)\n3. 性能优化, 筛选功能的性能提升92%\n4. 更多筛选选项, 新增\"已完成的拍摄任务\", \"未完成的拍摄任务\", \"错位摄影\", \"惊险摄影\", \"照片墙\"筛选项\n5. 全参数解码\n6. 乘骑参数解码\n7. 优化参数显示位置, 将不重要的参数移动到尾部\n8. 为常用功能增加快捷键操作\n9. 相册位置缓存，避免刷新, 移动, 删除, 导入操作后页面跳回顶部\n10. 修复windows应用启动时窗口白屏bug\n11. 设置里增加nikkias配置项\n12. 增加主题跟随系统功能\n13. 修复启动应用时语言恒为中文的bug",
   "windows": {
     "version": 12,
-    "versionString": "3.06(测试)",
-    "downloadLink": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-Windows-x64.zip",
+    "versionString": "3.07",
+    "downloadLink": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums-v3.07-Windows-x64.zip",
     "updateMessage": {
-      "zh-CN": "测试信息(中文)",
-      "en-US": "Test Info (English)"
+      "zh-CN": "1. 国际服支持, 自动识别国际服的相册\n2. 实况图转换, 可以将\"动态影集\"转换成实况Motion Photo或Live Photo(仅MacOS)\n3. 性能优化, 筛选功能的性能提升92%\n4. 更多筛选选项, 新增\"已完成的拍摄任务\", \"未完成的拍摄任务\", \"错位摄影\", \"惊险摄影\", \"照片墙\"筛选项\n5. 全参数解码\n6. 乘骑参数解码\n7. 优化参数显示位置, 将不重要的参数移动到尾部\n8. 为常用功能增加快捷键操作\n9. 相册位置缓存，避免刷新, 移动, 删除, 导入操作后页面跳回顶部\n10. 修复windows应用启动时窗口白屏bug\n11. 设置里增加nikkias配置项\n12. 增加主题跟随系统功能\n13. 修复启动应用时语言恒为中文的bug",
+      "en-US": "1. International server support, automatically recognizes international server albums\n2. Live photo conversion, can convert \"Dynamic Albums\" to Motion Photo or Live Photo (macOS only)\n3. Performance optimization, filter function performance improved by 92%\n4. More filter options, added \"Completed shooting tasks\", \"Incomplete shooting tasks\", \"Misaligned photography\", \"Thrilling photography\", \"Photo wall\" filters\n5. Full parameter decoding\n6. Mount parameter decoding\n7. Optimized parameter display position, moved less important parameters to the end\n8. Added keyboard shortcuts for frequently used functions\n9. Album position cache, prevents page from jumping back to top after refresh, move, delete, or import operations\n10. Fixed white screen bug when launching Windows app\n11. Added nikkias configuration option in settings\n12. Added theme follow system feature\n13. Fixed bug where language was always Chinese when launching the app"
     }
   },
   "macos": {
     "version": 12,
-    "versionString": "3.06(测试)",
-    "downloadLink": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-MacOS-arm64.zip",
+    "versionString": "3.07",
+    "downloadLink": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums-v3.07-MacOS-arm64.zip",
     "updateMessage": {
-      "zh-CN": "测试信息(中文)",
-      "en-US": "Test Info (English)"
+      "zh-CN": "1. 国际服支持, 自动识别国际服的相册\n2. 实况图转换, 可以将\"动态影集\"转换成实况Motion Photo或Live Photo(仅MacOS)\n3. 性能优化, 筛选功能的性能提升92%\n4. 更多筛选选项, 新增\"已完成的拍摄任务\", \"未完成的拍摄任务\", \"错位摄影\", \"惊险摄影\", \"照片墙\"筛选项\n5. 全参数解码\n6. 乘骑参数解码\n7. 优化参数显示位置, 将不重要的参数移动到尾部\n8. 为常用功能增加快捷键操作\n9. 相册位置缓存，避免刷新, 移动, 删除, 导入操作后页面跳回顶部\n10. 修复windows应用启动时窗口白屏bug\n11. 设置里增加nikkias配置项\n12. 增加主题跟随系统功能\n13. 修复启动应用时语言恒为中文的bug",
+      "en-US": "1. International server support, automatically recognizes international server albums\n2. Live photo conversion, can convert \"Dynamic Albums\" to Motion Photo or Live Photo (macOS only)\n3. Performance optimization, filter function performance improved by 92%\n4. More filter options, added \"Completed shooting tasks\", \"Incomplete shooting tasks\", \"Misaligned photography\", \"Thrilling photography\", \"Photo wall\" filters\n5. Full parameter decoding\n6. Mount parameter decoding\n7. Optimized parameter display position, moved less important parameters to the end\n8. Added keyboard shortcuts for frequently used functions\n9. Album position cache, prevents page from jumping back to top after refresh, move, delete, or import operations\n10. Fixed white screen bug when launching Windows app\n11. Added nikkias configuration option in settings\n12. Added theme follow system feature\n13. Fixed bug where language was always Chinese when launching the app"
     }
   }
 }

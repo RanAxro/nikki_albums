@@ -1,4 +1,38 @@
 const config = {
+	"v3.07": {
+		"releaseDate": "2026-6-1",
+		"description": {
+			"zh": "1. macos支持\n2. 国际服支持, 自动识别国际服的相册\n3. 实况图转换, 可以将\"动态影集\"转换成实况Motion Photo或Live Photo(仅MacOS)\n4. 性能优化, 筛选功能的性能提升92%\n5. 更多筛选选项, 新增\"已完成的拍摄任务\", \"未完成的拍摄任务\", \"错位摄影\", \"惊险摄影\", \"照片墙\"筛选项\n6. 全参数解码\n7. 乘骑参数解码\n8. 优化参数显示位置, 将不重要的参数移动到尾部\n9. 为常用功能增加快捷键操作\n10. 相册位置缓存，避免刷新, 移动, 删除, 导入操作后页面跳回顶部\n11. 修复windows应用启动时窗口白屏bug\n12. 设置里增加nikkias配置项\n13. 增加主题跟随系统功能\n14. 修复启动应用时语言恒为中文的bug",
+			"en": "1. macOS Support\n2. International Server Support, automatically recognizes international server albums\n3. Live Photo Conversion, can convert \"Dynamic Albums\" to Motion Photo or Live Photo (macOS only)\n4. Performance Optimization, filter function performance improved by 92%\n5. More Filter Options, added \"Completed Shooting Tasks\", \"Incomplete Shooting Tasks\", \"Misaligned Photography\", \"Thrilling Photography\", \"Photo Wall\" filters\n6. Full Parameter Decoding\n7. Mount Parameter Decoding\n8. Optimized Parameter Display Position, moved less important parameters to the end\n9. Added Keyboard Shortcuts for Frequently Used Functions\n10. Album Position Cache, prevents page from jumping back to top after refresh, move, delete, or import operations\n11. Fixed white screen bug when launching Windows app\n12. Added nikkias configuration option in settings\n13. Added Theme Follow System feature\n14. Fixed bug where language was always Chinese when launching the app"
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums-v3.07-MacOS-arm64.zip"
+			},
+
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_exe",
+				"link": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums.exe"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums-v3.07-Windows-x64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_2",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.07/Nikki%20Albums-v3.07-Windows-x64-release.zip"
+			}
+		]
+	},
 	"v3.06": {
 		"releaseDate": "2026-4-25",
 		"description": {
