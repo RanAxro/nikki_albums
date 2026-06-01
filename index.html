@@ -355,8 +355,83 @@ main{
 	color: var(--onct-color);
 }
 
-		
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+    opacity: 0; visibility: hidden;
+    transition: 0.3s;
+}
+.modal-overlay.active {
+    opacity: 1; visibility: visible;
+}
+.modal-content {
+    background: var(--onbg-color);
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 500px; width: 90%;
+    color: var(--ct-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.modal-content h3 { margin-top: 0; margin-bottom: 15px; color: #FFF; }
+.modal-content p { line-height: 1.6; color: var(--onct-color); }
+.modal-actions { margin-top: 25px; text-align: right; }
+.modal-btn {
+    background: #0078D4; color: #FFF;
+    padding: 10px 24px; border-radius: 8px;
+    cursor: pointer; font-size: 16px; font-weight: bold;
+    transition: 0.2s; border: none;
+}
+.modal-btn:hover { background: #0068C0; }
+
 </style>
+<script src="website/pages/version_info.js"></script>
+<script>
+function handleMainDownload(e) {
+    e.preventDefault();
+    
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const versions = Object.keys(config);
+    if (versions.length === 0) return;
+    
+    const latestVersion = versions[0];
+    const latestData = config[latestVersion];
+    
+    let downloadLink = '';
+    
+    if (isMac) {
+        const macItem = latestData.downloads.find(d => d.system === 'system_macos');
+        if (macItem) {
+            downloadLink = macItem.link;
+        }
+    } else {
+        const winItem = latestData.downloads.find(d => d.system === 'system_windows' && d.suffix === 'suffix_zip' && d.type === 'type_1') 
+                     || latestData.downloads.find(d => d.system === 'system_windows' && d.suffix === 'suffix_exe')
+                     || latestData.downloads.find(d => d.system === 'system_windows');
+        if (winItem) {
+            downloadLink = winItem.link;
+        }
+    }
+    
+    if (!downloadLink) {
+        window.location.href = "website/pages/zh/download.html";
+        return;
+    }
+    
+    window.location.href = downloadLink;
+    
+    if (isMac) {
+        document.getElementById('macOsModal').classList.add('active');
+    }
+}
+
+function closeMacOsModal() {
+    document.getElementById('macOsModal').classList.remove('active');
+}
+</script>
 </head>
 <body>
 	<header>
@@ -415,7 +490,7 @@ main{
 
 		<!-- fast visit -->
 		<section id="fast_vist">
-			<a id="download_app_box" class="fast_vist_item_box" href="website/pages/zh/download.html">
+			<a id="download_app_box" class="fast_vist_item_box" href="website/pages/zh/download.html" onclick="handleMainDownload(event)">
 				<div style="display: flex; gap: 8px; margin-left: 10px;">
 					<img src="website/assets/windows.svg" alt="Windows版本" style="height: 32px;">
 					<img src="website/assets/macos.svg" alt="macOS版本" style="height: 32px; filter: invert(1);">
@@ -457,5 +532,16 @@ main{
 			</article>
 		</section>
 	</main>
+
+	<!-- macOS 拦截提示模态框 -->
+	<div id="macOsModal" class="modal-overlay">
+		<div class="modal-content">
+			<h3 id="macOsModalTitle">首次运行 macOS 版的重要提示</h3>
+			<p id="macOsModalDesc">由于当前程序是免签名的便携版，首次打开可能会被系统拦截。<br><br>请按照以下步骤正常打开：<br>1. 若弹出“Apple 无法检查 App 是否包含恶意软件”，请点按 <b>好</b>。<br>2. 打开系统的 <b>系统设置</b> > <b>隐私与安全性</b>。（你可能需要向下滚动。）<br>3. 前往“安全性”部分，找到关于 Nikki Albums 的提示，然后点按 <b>打开</b>。<br>4. 点按 <b>仍要打开</b>，输入你的登录密码，然后点按 <b>好</b>。</p>
+			<div class="modal-actions">
+				<button class="modal-btn" onclick="closeMacOsModal()">我已了解</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

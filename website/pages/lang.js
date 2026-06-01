@@ -47,8 +47,8 @@ const lang = {
 		"en": "Since this is an ad-hoc signed portable app, macOS Gatekeeper might block it on the first run.<br><br>Please follow these steps to open it normally:<br>1. If a dialog says 'Apple can’t check app for malicious software', click <b>OK</b>.<br>2. Open <b>System Settings</b> > <b>Privacy & Security</b>. (You may need to scroll down.)<br>3. Go to Security, find the message about Nikki Albums, then click <b>Open</b>.<br>4. Click <b>Open Anyway</b>, enter your login password, then click <b>OK</b>."
 	},
 	"macos_gatekeeper_confirm": {
-		"zh": "我已了解，立即下载",
-		"en": "Understood, Download Now"
+		"zh": "我已了解",
+		"en": "Understood"
 	},
 
 	"system_windows": {

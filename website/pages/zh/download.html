@@ -1315,9 +1315,8 @@ document.addEventListener('click', (e) => {
 });
 
 
-let currentMacDownloadLink = '';
 function showMacOsModal(link) {
-	currentMacDownloadLink = link;
+	window.location.href = link;
 	document.getElementById('macOsModalTitle').innerText = tr('macos_gatekeeper_title');
 	document.getElementById('macOsModalDesc').innerHTML = tr('macos_gatekeeper_desc');
 	document.getElementById('macOsModalConfirm').innerText = tr('macos_gatekeeper_confirm');
@@ -1326,7 +1325,6 @@ function showMacOsModal(link) {
 document.addEventListener('DOMContentLoaded', () => {
 	document.getElementById('macOsModalConfirm').addEventListener('click', () => {
 		document.getElementById('macOsModal').classList.remove('active');
-		window.open(currentMacDownloadLink, '_blank');
 	});
 });
 
