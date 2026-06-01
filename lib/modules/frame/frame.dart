@@ -21,6 +21,7 @@ import "package:nikki_albums/utils/path.dart";
 import "dart:io";
 import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
+import "package:flutter/services.dart";
 
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:desktop_drop/desktop_drop.dart";
@@ -72,26 +73,43 @@ class _FrameState extends State<Frame> {
         home: Scaffold(
           body: Builder(
             builder: (BuildContext context) {
-              /// TODO 检测更新
-             // if(!kDebugMode){
-             //   checkAppUpdates(context);
-             // }
-             //  checkAppUpdates(context);
-
-              /// Windows
+              Widget child;
               if (Platform.isWindows) {
-                return WindowsFrame(key: frameKey);
-              }
-              /// Android
-              else if (Platform.isAndroid) {
-                return AndroidFrame(key: frameKey);
-              }
-              /// macOS
-              else if (Platform.isMacOS) {
-                return MacOSFrame(key: frameKey);
+                child = WindowsFrame(key: frameKey);
+              } else if (Platform.isAndroid) {
+                child = AndroidFrame(key: frameKey);
+              } else if (Platform.isMacOS) {
+                child = MacOSFrame(key: frameKey);
+              } else {
+                child = const Placeholder();
               }
 
-              return Placeholder();
+              return CallbackShortcuts(
+                bindings: <ShortcutActivator, VoidCallback>{
+                  if (Platform.isMacOS)
+                    const SingleActivator(LogicalKeyboardKey.comma, meta: true): () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SettingDialog();
+                        },
+                      );
+                    },
+                  if (Platform.isWindows)
+                    const SingleActivator(LogicalKeyboardKey.comma, control: true): () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SettingDialog();
+                        },
+                      );
+                    },
+                },
+                child: Focus(
+                  autofocus: true,
+                  child: child,
+                ),
+              );
             },
           ),
         ),

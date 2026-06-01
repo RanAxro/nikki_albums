@@ -846,6 +846,38 @@ body{
 		font-size: 14px;
 	}
 }
+
+.modal-overlay {
+	position: fixed;
+	top: 0; left: 0; width: 100vw; height: 100vh;
+	background: rgba(0,0,0,0.5);
+	backdrop-filter: blur(5px);
+	display: flex; align-items: center; justify-content: center;
+	z-index: 9999;
+	opacity: 0; pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+.modal-overlay.active {
+	opacity: 1; pointer-events: auto;
+}
+.modal-content {
+	background: white; border-radius: 16px; padding: 24px;
+	width: 480px; max-width: 90vw;
+	box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+	transform: translateY(20px);
+	transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-content {
+	transform: translateY(0);
+}
+.modal-content h3 { color: #1a237e; margin-bottom: 16px; }
+.modal-content p { color: #455a64; line-height: 1.6; font-size: 14px; margin-bottom: 24px; }
+.modal-actions { text-align: right; }
+.modal-btn {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white; border: none; padding: 10px 24px; border-radius: 8px;
+	cursor: pointer; font-weight: 600; font-size: 14px;
+}
 </style>
 </head>
 <body>
@@ -903,6 +935,18 @@ body{
 <script src="../icon.js"></script>
 <script src="../version_info.js"></script>
 <script src="../lang.js"></script>
+
+<!-- macOS 拦截提示模态框 -->
+<div id="macOsModal" class="modal-overlay">
+	<div class="modal-content">
+		<h3 id="macOsModalTitle"></h3>
+		<p id="macOsModalDesc"></p>
+		<div class="modal-actions">
+			<button id="macOsModalConfirm" class="modal-btn"></button>
+		</div>
+	</div>
+</div>
+
 <script>
 	
 // 获取页面语言（从html标签的lang属性）
@@ -1097,13 +1141,20 @@ function init(){
 		versionData.downloads.forEach(item => {
 			const downloadItem = document.createElement('a');
 			downloadItem.className = 'download-item';
-			downloadItem.href = item.link;
+			
+            if (item.system === 'system_macos') {
+                downloadItem.href = "javascript:void(0)";
+                downloadItem.onclick = (e) => { e.preventDefault(); showMacOsModal(item.link); };
+            } else {
+                downloadItem.href = item.link;
+            }
+
 			downloadItem.target = '_blank';
 			
 			const typeLabel = item.type ? tr(item.type) : '';
 			const variantLabel = item.variant ? tr(item.variant) : '';
-			const platformIcon = item.system === 'system_windows' ? icons.windows : icons.android;
-			const platformAlt = item.system === 'system_windows' ? tr("alt_windows") : tr("alt_android");
+			const platformIcon = item.system === 'system_windows' ? icons.windows : (item.system === 'system_macos' ? icons.macos : icons.android);
+			const platformAlt = item.system === 'system_windows' ? tr("alt_windows") : (item.system === 'system_macos' ? tr("alt_macos") : tr("alt_android"));
 			
 			downloadItem.innerHTML = `
 				<div class="download-info">
@@ -1261,6 +1312,22 @@ document.addEventListener('click', (e) => {
 	if (!dropdownContainer.contains(e.target) && isDropdownOpen) {
 		toggleDropdown();
 	}
+});
+
+
+let currentMacDownloadLink = '';
+function showMacOsModal(link) {
+	currentMacDownloadLink = link;
+	document.getElementById('macOsModalTitle').innerText = tr('macos_gatekeeper_title');
+	document.getElementById('macOsModalDesc').innerHTML = tr('macos_gatekeeper_desc');
+	document.getElementById('macOsModalConfirm').innerText = tr('macos_gatekeeper_confirm');
+	document.getElementById('macOsModal').classList.add('active');
+}
+document.addEventListener('DOMContentLoaded', () => {
+	document.getElementById('macOsModalConfirm').addEventListener('click', () => {
+		document.getElementById('macOsModal').classList.remove('active');
+		window.open(currentMacDownloadLink, '_blank');
+	});
 });
 
 // 页面加载完成后初始化

@@ -60,9 +60,16 @@ class Start extends StatelessWidget {
                   transparent: false,
                   onClick: () {
                     if (AppState.currentGame.value?.launcherPath != null) {
-                      (AppState.currentGame.value!.launcherPath +
-                              "launcher.exe")
-                          .open();
+                      final Path path = AppState.currentGame.value!.launcherPath;
+                      if (Platform.isMacOS) {
+                        if (path.path.endsWith(".app") || path.path.endsWith(".app/")) {
+                          path.open();
+                        } else {
+                          Path("/Applications/Infinity Nikki.app").open();
+                        }
+                      } else {
+                        (path + "launcher.exe").open();
+                      }
                     }
                   },
                   child: Text(
@@ -135,7 +142,19 @@ class OpenFolderButton extends StatelessWidget {
       menuChildren: [
         MenuItemButton(
           onPressed: () {
-            AppState.currentGame.value?.launcherPath.open();
+            final game = AppState.currentGame.value;
+            if (game != null) {
+              if (Platform.isMacOS) {
+                final String p = game.launcherPath.path;
+                if (p.endsWith(".app") || p.endsWith(".app/")) {
+                  Process.run("open", ["-R", p]);
+                } else {
+                  Process.run("open", ["-R", "/Applications/Infinity Nikki.app"]);
+                }
+              } else {
+                game.launcherPath.open();
+              }
+            }
           },
           child: Text(context.tr("openLauncherDirectory")),
         ),

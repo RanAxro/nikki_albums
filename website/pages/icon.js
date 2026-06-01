@@ -2,6 +2,7 @@
 const icons = {
 	logo: "../../assets/favicon.ico",
 	windows: "../../assets/windows.svg",
+	macos: "../../assets/macos.svg",
 	android: "../../assets/android.svg",
 	arrowDown: "../../assets/arrow-down.svg",
 	check: "../../assets/check.svg",

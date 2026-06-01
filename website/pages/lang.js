@@ -29,6 +29,28 @@ const lang = {
 	},
 	
 	// 系统名称
+	
+	"system_macos": {
+		"zh": "macOS",
+		"en": "macOS"
+	},
+	"alt_macos": {
+		"zh": "macOS",
+		"en": "macOS"
+	},
+	"macos_gatekeeper_title": {
+		"zh": "首次运行 macOS 版的重要提示",
+		"en": "Important Note for macOS"
+	},
+	"macos_gatekeeper_desc": {
+		"zh": "由于当前程序是免签名的便携版，首次打开可能会被系统拦截。<br><br>请按照以下步骤正常打开：<br>1. 若弹出“Apple 无法检查其是否包含恶意软件...”，请点击 <b>完成</b>。<br>2. 打开系统的 <b>系统设置</b> - <b>隐私与安全</b>。<br>3. 向下滚动，找到提示“已阻挡 Nikki Albums 的使用”，点击旁边的 <b>强制打开</b>。<br>4. 再次打开应用并在新弹窗中点击 <b>打开</b> 即可。",
+		"en": "Since this is an ad-hoc signed portable app, macOS Gatekeeper might block it on the first run.<br><br>Please follow these steps to open it normally:<br>1. If a dialog says 'Apple cannot check it for malicious software', click <b>Done</b>.<br>2. Open <b>System Settings</b> > <b>Privacy & Security</b>.<br>3. Scroll down to find the message 'Nikki Albums was blocked from use...' and click <b>Open Anyway</b> next to it.<br>4. Open the app again and click <b>Open</b>."
+	},
+	"macos_gatekeeper_confirm": {
+		"zh": "我已了解，立即下载",
+		"en": "Understood, Download Now"
+	},
+
 	"system_windows": {
 		"zh": "Windows",
 		"en": "Windows"
