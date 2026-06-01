@@ -23,8 +23,8 @@
 </p>
 
 <p>
-  <img src="website/images/p1.zh.png" width="48%" />
-  <img src="website/images/p2.zh.png" width="48%" />
+  <img src="website/assets/p1.zh.png" width="48%" />
+  <img src="website/assets/p2.zh.png" width="48%" />
 </p>
 
 
