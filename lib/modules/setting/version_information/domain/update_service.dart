@@ -111,9 +111,85 @@ class WindowsUpdater extends Updater{
 
 
 class MacOSUpdater extends Updater{
+  const MacOSUpdater();
+
   @override
-  Future<void> update(UpdateInfo info, {void Function(double)? onProgress, void Function(String)? onError}) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(UpdateInfo info, {void Function(double)? onProgress, void Function(String)? onError}) async{
+    if(info.platformDownloadLink == ""){
+      launchOfficialWebsite();
+      return;
+    }
+
+    String errorMessage = "";
+
+    // download
+    final String archiveSavePath = p.join((await getTempPath()).path, "${tr("nikkialbums")}_Update.zip");
+    bool isDownload = false;
+
+    try{
+      final Dio dio = Dio();
+
+      final Response response = await dio.download(
+        info.platformDownloadLink,
+        archiveSavePath,
+        onReceiveProgress: (int received, int total){
+          onProgress?.call((received / total - 0.1).clamp(0, 1));
+        },
+        options: Options(headers: {"Referer": "https://nikki.ranaxro.com"}),
+      );
+
+      isDownload = true;
+    }catch(e){
+      isDownload = false;
+      errorMessage = e.toString();
+    }
+
+    // decompress
+    final String? home = Platform.environment['HOME'];
+    final String decompressPath = home != null ? p.join(home, 'Downloads') : (await getTempPath()).path;
+    bool isDecompress = false;
+
+    String? appFilename;
+
+    final InputFileStream inputStream = InputFileStream(archiveSavePath);
+    try{
+      final Archive archive = ZipDecoder().decodeStream(
+        inputStream,
+        callback: (ArchiveFile archiveFile){
+          final String name = archiveFile.name;
+          if(name.endsWith(".app/") && name.split("/").length == 2){
+            appFilename = name.substring(0, name.length - 1);
+          } else if (name.endsWith(".app") && !name.contains("/")) {
+            appFilename = name;
+          }
+        },
+      );
+
+      await extractArchiveToDisk(archive, decompressPath);
+
+      isDecompress = true;
+    }catch(e){
+      isDecompress = false;
+      errorMessage = e.toString();
+      await inputStream.close();
+    }
+
+    onProgress?.call(1);
+
+    if(isDownload){
+      if(isDecompress){
+        if(appFilename != null){
+          Process.run("open", ["-R", p.join(decompressPath, appFilename!)]);
+        }else{
+          Process.run("open", [decompressPath]);
+        }
+      }else{
+        Process.run("open", ["-R", archiveSavePath]);
+      }
+
+      await closeApp();
+    }else{
+      onError?.call(errorMessage);
+    }
   }
 }
