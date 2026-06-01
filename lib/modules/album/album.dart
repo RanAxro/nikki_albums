@@ -2299,37 +2299,6 @@ class ImageViewerDialog extends StatelessWidget {
     final Widget toolButtons = AppButtonStack(
       divider: game == null ? const [1, 4, 2] : const [1, 4, 2, 2],
       children: [
-        // Tooltip(
-        //   richMessage: TextSpan(
-        //     children: [
-        //       TextSpan(text: context.tr("close")),
-        //       // WidgetSpan(
-        //       //   child: Text(
-        //       //     "\u{f06a}\u{f07a}",
-        //       //     style: TextStyle(
-        //       //       fontFamily: "RanAppKey",
-        //       //       fontSize: 16,
-        //       //     ),
-        //       //   ),
-        //       //   alignment: PlaceholderAlignment.middle,
-        //       //   baseline: TextBaseline.alphabetic,
-        //       // ),
-        //       TextSpan(
-        //         text: "\u{f06a}\u{f07a}",
-        //         style: TextStyle(fontFamily: "RanAppKey", fontSize: 20),
-        //       ),
-        //     ],
-        //   ),
-        //   child: AppRawButton(
-        //     // toolTip: context.tr("close") + getKeyboardCharacter([LogicalKeyboardKey.escape]),
-        //     isTranslate: false,
-        //     onClick: () {
-        //       Navigator.of(context).pop();
-        //     },
-        //     child: AppIcon("cross", height: 20),
-        //   ),
-        // ),
-
         AppRawButton(
           toolTip: "reset",
           onClick: controller.reset,
@@ -2381,83 +2350,60 @@ class ImageViewerDialog extends StatelessWidget {
 
         ValueListenableBuilder(
           valueListenable: AppState.isShowImageCustomData,
-          builder:
-              (
-                BuildContext context,
-                bool isShowImageCustomData,
-                Widget? child,
-              ) {
-                return Tooltip(
-                  message: context.tr("pa_show_image_data"),
-                  child: AppUncontrolledSwitch(
-                    initValue: isShowImageCustomData,
-                    width: smallButtonSize,
-                    height: smallButtonSize,
-                    onChanged: (bool value) {
-                      AppState.isShowImageCustomData.value =
-                          !AppState.isShowImageCustomData.value;
-                    },
-                    child: AppIcon("image_custom_data", height: 22),
-                  ),
-                );
-              },
+          builder: (BuildContext context, bool isShowImageCustomData, Widget? child) {
+            return Tooltip(
+              message: context.tr("pa_show_image_data"),
+              child: AppUncontrolledSwitch(
+                initValue: isShowImageCustomData,
+                width: smallButtonSize,
+                height: smallButtonSize,
+                onChanged: (bool value){
+                  AppState.isShowImageCustomData.value = !AppState.isShowImageCustomData.value;
+                },
+                child: AppIcon("image_custom_data", height: 22),
+              ),
+            );
+          },
         ),
 
         AppRawButton(
-          toolTip:
-              context.tr("pa_to_previous_image") +
-              getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
+          toolTip: context.tr("pa_to_previous_image") + getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
           isTranslate: false,
           onClick: controller.toPreviousImage,
           child: AppIcon("back", height: 20),
         ),
 
         AppRawButton(
-          toolTip:
-              context.tr("pa_to_next_image") +
-              getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
+          toolTip: context.tr("pa_to_next_image") + getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
           isTranslate: false,
           onClick: controller.toNextImage,
           child: AppIcon("forward", height: 20),
         ),
 
-        if (game != null)
+        if(game != null)
           ListenableBuilder(
             listenable: controller,
             builder: (BuildContext context, Widget? child) {
-              return controller.isAttach
-                  ? TagMenu(
-                      game: game!,
-                      value: images[controller.index].name,
-                      builder:
-                          (
-                            BuildContext context,
-                            Color? color,
-                            Widget? child,
-                            void Function() trigger,
-                          ) {
-                            final String icon = color == null
-                                ? "assets/icon/tag.webp"
-                                : "assets/icon/tag_fill.webp";
+              return controller.isAttach ?
+                TagMenu(
+                  game: game!,
+                  value: images[controller.index].name,
+                  builder: (BuildContext context, Color? color, Widget? child, void Function() trigger){
+                    final String icon = color == null ? "assets/icon/tag.webp" : "assets/icon/tag_fill.webp";
 
-                            return Tooltip(
-                              message: context.tr("tag"),
-                              child: SmallButton(
-                                onClick: trigger,
-                                child: Image.asset(
-                                  icon,
-                                  height: 18,
-                                  color:
-                                      color ??
-                                      AppTheme.of(
-                                        context,
-                                      )!.colorScheme.background.onColor,
-                                ),
-                              ),
-                            );
-                          },
-                    )
-                  : AppButton.smallIcon();
+                    return Tooltip(
+                      message: context.tr("tag"),
+                      child: SmallButton(
+                        onClick: trigger,
+                        child: Image.asset(
+                          icon,
+                          height: 18,
+                          color: color ?? AppTheme.of(context)!.colorScheme.background.onColor,
+                        ),
+                      ),
+                    );
+                  },
+                ) : AppButton.smallIcon();
             },
           ),
 

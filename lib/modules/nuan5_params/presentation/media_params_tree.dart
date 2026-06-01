@@ -22,11 +22,9 @@ class TreeViewPage extends StatefulWidget{
 }
 
 class _TreeViewPageState extends State<TreeViewPage>{
-  late final TreeController<TreeNode> treeController;
+  late TreeController<TreeNode> treeController;
 
-  @override
-  void initState() {
-    super.initState();
+  void initController(){
     treeController = TreeController<TreeNode>(
       roots: widget.root,
       childrenProvider: (node) => node.children,
@@ -35,6 +33,21 @@ class _TreeViewPageState extends State<TreeViewPage>{
 
     // 展开标记了 initiallyExpanded 的节点
     _expandDefaultNodes(widget.root);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    initController();
+  }
+
+  @override
+  void didUpdateWidget(TreeViewPage oldWidget){
+    super.didUpdateWidget(oldWidget);
+
+    if(widget.root != oldWidget.root){
+      initController();
+    }
   }
 
   /// 递归遍历，展开默认节点
