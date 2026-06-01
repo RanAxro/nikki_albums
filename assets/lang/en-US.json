@@ -1,14 +1,11 @@
 {
   "nikkialbums": "Nikki Albums",
-  "info": "This software is still in the testing phase and does not represent the final quality.\n The current version does not have networking capabilities. To get the latest version, please join the QQ group: 1062670402.\n Official website: nikki.ranaxro.com\n GitHub: github.com/RanAxro/nikki_albums",
-
-
+  "info": "This software is still in the testing phase and does not represent the final quality.\n QQ Group: 1062670402\n",
   "----------common----------": "----------common----------",
-
   "version": "Version",
-  "setting": "Setting",
+  "setting": "Settings",
   "name": "Name",
-  "ok": "Ok",
+  "ok": "OK",
   "completed": "Completed",
   "cancel": "Cancel",
   "confirm": "Confirm",
@@ -18,8 +15,8 @@
   "forward": "Forward",
   "previous": "Previous",
   "next": "Next",
-  "ascending": "Forward order",
-  "descending": "Reverse order",
+  "ascending": "Ascending",
+  "descending": "Descending",
   "filter": "Filter",
   "play": "Play",
   "enable": "Enable",
@@ -29,13 +26,9 @@
   "quantity": "Quantity",
   "type": "Type",
   "restore": "Restore",
-
-
   "----------initial_startup----------": "----------initial_startup----------",
-  "welcome": "Welcome to use the Nikki Albums",
-  "start": "Start using",
-
-
+  "welcome": "Welcome to Nikki Albums",
+  "start": "Get Started",
   "----------setting----------": "----------setting----------",
   "imageCustomDataWidgetSize": "Custom info badge scaling factor",
   "theme": "Theme",
@@ -43,28 +36,23 @@
   "experimental": "Experimental",
   "lang": "English",
   "language": "Language",
-
   "personalization": "Personalization",
   "livePhotoSettings": "Live Photo",
   "accountManagement": "Account Management",
   "nikkias_setting": "Nikkias File",
   "version_information": "Version Information",
-
   "maximizeOrRestoreButton": "Maximize Button",
-
   "livePhotoExportFormat": "Live Photo Export Format",
   "livePhotoExportFormat_none": "No conversion",
   "livePhotoExportFormat_apple": "Live Photo (Apple)",
   "livePhotoExportFormat_google": "Motion Photo (Google/Android)",
   "livePhotoExportFormat_description": "When exporting from the Video album, automatically convert cover image and video into the corresponding platform's live photo format",
-
   "open_nikkias_file": "Open a Nikkias File",
   "drag_nikkias_file_here": "You can simply drag the Nikkias file here to open it.",
   "register_nikkias_file_association": "Associate .nikkias files with this application",
   "unregister_nikkias_file_association": "Remove .nikkias file association",
   "association_successful": "Associated",
   "association_cancelled_successfully": "Association has been cancelled.",
-
   "checkForUpdates": "Check for Updates",
   "checkFailed": "Check Failed",
   "alreadyTheLatestVersion": "You are up to date",
@@ -72,9 +60,7 @@
   "updateMessage": "Release Notes",
   "downloadFailed": "Download failed",
   "toOfficialWebsite": "Visit the official website",
-
-
-
+  "toGitHub": "GitHub",
   "----------nikkias----------": "----------nikkias----------",
   "nikkiasFile": "nikkias File",
   "selectNikkiasFile": "Select a nikkias File",
@@ -83,43 +69,30 @@
   "importToOther": "Import to other channels",
   "saveDirectly": "Save Directly",
   "saveDecoded": "Save after decoding",
-
-
-
   "----------frame----------": "----------frame----------",
-
   "account": "Account",
   "selectAccountButton": "Select account",
   "deleteAccount": "Are you sure you want to delete this account",
   "addCustomAccountButton": "Add",
   "locateGame": "Locate the game",
-  "locateInfinityNikki": "Find \"InfinityNikki\",\"launcher\"or\"xstarter\"",
+  "locateInfinityNikki": "Find \"InfinityNikki\", \"launcher\", or \"xstarter\"",
   "locateX6GameDir": "Find \"X6Game\"",
   "locate": "Locate",
   "launcherDir": "Launcher directory",
   "installDir": "Game installation directory",
-  "gameAlreadyExists": "It already exists, duplicate addition is discouraged. If you really need to add it, please click Save again",
+  "gameAlreadyExists": "This game already exists. To add it anyway, click Save again.",
   "toLocateGame": "Please locate the game first",
-  "Location failed": "Location failed",
+  "Location failed": "Failed to locate game",
   "remarks": "Remarks",
   "noteXAs": "Note {} As",
   "fillRemarks": "Fill in the remarks",
-
-
-
-
   "LauncherCacheImagesName": "Cache",
   "MallPicName": "Mall",
   "MoviesName": "CG/PV/Splash",
-
   "LauncherCacheImagesDescription": "Images cached by the launcher.",
   "MallPicDescription": "Images downloaded for the in-game Mall.",
   "MoviesDescription": "",
-
-
-
   "----------album----------": "----------album----------",
-
   "currentGameIsNull": "Please select an account first",
   "tag": "Tag",
   "defaultTag": "Default",
@@ -187,7 +160,6 @@
     "one": "Import 1 image to",
     "other": "Import {} images to"
   },
-
   "useSameNetworkDevice": "Please use a device on the same network to download",
   "downloadLink": "Download link",
   "stopSharing": "Stop sharing",
@@ -196,10 +168,6 @@
   "packagingFailed": "File packaging failed",
   "activatingNetwork": "Starting network service",
   "activatingNetworkFailed": "Failed to start network service",
-
-
-
-
   "----------file_transfer----------": "----------file_transfer----------",
   "receiveFileSavePath": "File save path",
   "XGiBAvailable": "{}GiB Available",
@@ -207,15 +175,10 @@
   "selectSavePath": "Select the file saving location",
   "changeSavePath": "Change the file saving location",
   "openSavePath": "Open from Explorer",
-
   "inputDownloadUrl": "Input download link",
   "downloadableContent": "Downloadable content",
   "downloadAll": "Download all",
   "downloadNikkias": "Download nikkias",
-
-
-
-
   "----------start----------": "----------start----------",
   "openDirectory": "Open in File Explorer",
   "openLauncherDirectory": "Open Launcher Directory",
@@ -239,16 +202,12 @@
   "destinationIsNull": "Destination folder not selected",
   "insufficientSpace": "Insufficient Space",
   "existXInDestination": "The {} folder already exists",
-
   "backupAllAlbum": "Back up all the pictures",
   "startBackupAllAlbum": "Start the backup",
   "uidToBeBackup": "Accounts that require image backups",
   "saveBackupFileTo": "Save the backup file to",
   "backupFailed": "Backup failed",
   "sendBackupToNetwork": "Send to network device",
-
-
-
   "----------recycle_bin----------": "----------recycle_bin----------",
   "recycleBin": "Recycle Bin",
   "moveToRecycleBin": "Move to the Recycle Bin",
@@ -262,20 +221,6 @@
   "permanentlyDelete": "Permanently Delete",
   "deletionCompleted": "Deletion Completed",
   "deletionFailed": "Deletion Failed",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "toSelectAccount": "Please select an account",
   "addCustomAccount": "Add other launcher versions",
   "toSelectVersion": "Select the launcher version",
@@ -315,34 +260,6 @@
   "toSortReverse": "Switch to descending order",
   "increaseColumns": "Increase the number of columns",
   "decreaseColumns": "Decrease the number of columns",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "----------_----------": "----------common----------",
   "": "",
   "close": "Close",
@@ -351,13 +268,8 @@
   "deselect": "Deselect",
   "select_all": "Select All",
   "invert_select": "Invert Selection",
-
-
   "----------ui----------": "----------ui----------",
   "ui_toast_tip": "Tip",
-
-
-
   "----------pa----------": "----------page_album----------",
   "pa_select_X_image": {
     "other": "{} image(s) selected"
@@ -373,17 +285,7 @@
   "pa_show_image_data": "Image Info",
   "pa_copy_successful": "Copied Successfully",
   "pa_copy_failed": "Copy Failed",
-
-
-
-
-
-
-
-
-
   "----------ai----------": "----------album_info----------",
-
   "ai_Collage_CollagePhotoName": "Original Collage Poster",
   "ai_Collage_HighQualityName": "Collage Poster",
   "ai_Collage_LowQualityName": "Thumbnail",
@@ -403,7 +305,6 @@
   "ai_ScreenShotName": "Screenshot",
   "ai_VideoName": "Video Album",
   "ai_XSdkQrCodeName": "QR Code",
-
   "ai_Collage_CollagePhotoDescription": "Original Collage Poster",
   "ai_Collage_HighQualityDescription": "Collage Poster",
   "ai_Collage_LowQualityDescription": "Thumbnail",
@@ -423,18 +324,7 @@
   "ai_ScreenShotDescription": "Every photo you take lands here. The game doesn’t manage this album.",
   "ai_VideoDescription": "Video Album",
   "ai_XSdkQrCodeDescription": "QR code for sharing.",
-
-
-
-
-
-
-
-
-
-
   "----------ia----------": "----------image_addition----------",
-
   "ia_state_false_1": "None",
   "ia_state_true_1": "Present",
   "ia_state_false_2": "No",
@@ -445,7 +335,6 @@
   "ia_state_true_4": "Held",
   "ia_state_false_5": "Off",
   "ia_state_true_5": "On",
-
   "ia_rot": "Rotation",
   "ia_rot3": "Rotation",
   "ia_loc2": "Position",
@@ -453,22 +342,18 @@
   "ia_scale": "Scale",
   "ia_scale3": "Scale",
   "ia_color_rgba": "Color",
-
   "ia_addition": "Image Data",
   "ia_invaild_params_addition": "No Data",
   "ia_auto_shoot": "Auto Shoot",
   "ia_collage_addition": "Collage Poster Data",
   "ia_expedition_addition": "World Expedition Data",
   "ia_nikki_photo_addition": "Image Data",
-
   "ia_Collage_template_id": "Template",
   "ia_Collage_region_pictures": "Image Info",
   "ia_Collage_region_pictures_X": "Image Info {}",
   "ia_Collage_image_id": "Original Image ID",
   "ia_Collage_oriCustomData": "Original Image Data",
-
   "ia_expedition": "Check-in Type",
-
   "ia_photography_info": "Photography Info",
   "ia_edit_photo": "Photo Edit",
   "ia_edit_photo_has_sticker": "Sticker",
@@ -490,7 +375,6 @@
   "ia_task_photo": "Photo Task",
   "ia_has_task_photo": "",
   "ia_has_no_task_photo": "None",
-
   "ia_camera_info": "Camera Info",
   "ia_portrait_mode": "Portrait Mode",
   "ia_camera_params": "Camera Parameters",
@@ -513,7 +397,6 @@
   "ia_filter_id": "Filter",
   "ia_filter_strength": "Filter Intensity",
   "ia_pose_id": "Pose",
-
   "ia_nikki_info": "Nikki Info",
   "ia_nikki_giant_state": "Giant Outfit Ability",
   "ia_nikki_hidden": "Hide Nikki",
@@ -545,22 +428,13 @@
   "ia_interaction": "Interactive Object",
   "ia_interaction_type": "Type",
   "ia_carrier": "Vehicle",
-
   "ia_momo_info": "Momo Info",
   "ia_momo_hidden": "Hide Momo",
   "ia_momo_clothes": "Outfit",
-
-
-
-
-
-
-
   "infinity_nikki": {
     "infinity_nikki": "Infinity Nikki",
     "infinity_nikki_pc": "Infinity Nikki PC",
     "infinity_nikki_android": "Infinity Nikki Android",
-
     "launcher_channel": {
       "paper": "China Server",
       "paperGlobal": "Global Server",
@@ -568,13 +442,11 @@
       "bilibili": "bilibili",
       "steam": "steam"
     },
-
     "common": {
       "click_to_view_map": "Click to locate on the map",
       "lack_data": "Data missing",
       "click_to_copy_param": "Click to copy parameters"
     },
-
     "media_params": {
       "true_1": "Yes",
       "false_1": "No",
@@ -584,16 +456,14 @@
       "false_3": "Unfinished",
       "true_4": "Enable",
       "false_4": "Disable",
-      "true_5": "单彩调色",
-      "false_5": "多彩调色",
-      "true_6": "应用底色",
-      "false_6": "取消底色",
-
+      "true_5": "Single-Color Toning",
+      "false_5": "Multi-Color Toning",
+      "true_6": "Apply Base Color",
+      "false_6": "Remove Base Color",
       "nikki_photo_params": "Nikki Photo Info",
       "clock_in_photo_params": "World Expedition Info",
       "collage_params": "Collage Poster Data",
       "diy_params": "DIY Data",
-
       "photography_params": "Photography Params",
       "edit": "Image Edit",
       "has_sticker": "Sticker",
@@ -615,7 +485,6 @@
       "puzzle": "Displaced Photography",
       "risk": "Risk Photography",
       "interactive": "Task Photography",
-
       "camera_params": "Camera Info",
       "momo_camera_params": "Camera Params",
       "portrait_mode": "Portrait Mode",
@@ -665,7 +534,6 @@
       "auto_ground_snap": "Auto Ground-snap",
       "floating_effect": "Floating Effect",
       "pose_with_nikki": "Pose With Nikki",
-
       "nikki_params": "Nikki Info",
       "giant_state": "Giant Outfit Ability",
       "hidden": "Hide Nikki",
@@ -778,26 +646,20 @@
       "interactions": "Interactions",
       "mount": "Mount",
       "carrier": "Carrier",
-
       "momo_params": "Momo Info",
       "momo_hidden_state": "Hide Momo",
-
       "expedition": "Expedition",
       "template_id": "Template",
       "zone": "Zone",
       "image_id": "Image Id"
     },
-    "photo_wall": {
-
-    },
+    "photo_wall": {},
     "puzzle": {
       "-1": "None",
       "30": "Grave site - Yearning to fly - Skarelle with outstretched wings",
       "31": "Grave site - Nativity observance - Nativity site in the instrument"
     },
-    "risk": {
-
-    },
+    "risk": {},
     "interactive": {
       "206001": "2.6 The Day at the End of the Tides - Intermission Collection Day 1: Take one photo of any booth from any of the four departments.",
       "261003": "Task - Farewell, for Reunion - Take a photo of Mirina and Silian together",
@@ -806,7 +668,7 @@
       "42031203": "Shadow Memory 3 - The Departed Old Path"
     },
     "light": {
-      "None": "无",
+      "None": "None",
       "DirectionLight_L": "DirectionLight Left",
       "DirectionLight_R": "DirectionLight Right",
       "DirectionLight_T": "DirectionLight Top",
@@ -825,7 +687,7 @@
       "VibeLight_004": "VibeLight Softly flowing waves of light"
     },
     "filter": {
-      "None": "无",
+      "None": "None",
       "Fresh_001": "Fresh - Morning Mist",
       "Fresh_002": "Fresh - Cherry Blossom",
       "Fresh_003": "Fresh - Soft Cream",
@@ -849,9 +711,7 @@
     "framed_moment": {
       "0": "None"
     },
-    "momo_pose": {
-
-    },
+    "momo_pose": {},
     "cloth": {
       "1020100001": "Signal of Time",
       "1020100002": "Verdant Summer",
@@ -8882,30 +8742,14 @@
       "20057": "Mark of Time",
       "20061": "Contrarian March"
     },
-    "pattern_creation_texture": {
-
-    },
-    "eureka": {
-
-    },
-    "eureka_outfit": {
-
-    },
-    "weapon": {
-
-    },
-    "slot_type": {
-
-    },
-    "interactions": {
-
-    },
-    "mount": {
-
-    },
-    "carrier": {
-
-    },
+    "pattern_creation_texture": {},
+    "eureka": {},
+    "eureka_outfit": {},
+    "weapon": {},
+    "slot_type": {},
+    "interactions": {},
+    "mount": {},
+    "carrier": {},
     "expedition": {
       "101020301": "Itzaland - Great Ram Settlement",
       "101020302": "Itzaland - Hall of Return",
@@ -8916,11 +8760,8 @@
       "101020307": "Itzaland - Memorial Grounds",
       "101020308": "Itzaland - Azure Pool"
     },
-    "template_id": {
-
-    }
+    "template_id": {}
   },
-
   "image_edit": {
     "temperature": "Temperature",
     "tint": "Tint",
@@ -8942,7 +8783,6 @@
     "yellow_blue": "Yellow-Blue",
     "clarity": "Clarity",
     "fade": "Fade",
-
     "rotate_left_90": "Rotate Left 90°",
     "rotate_right_90": "Rotate Right 90°",
     "reset_rotation": "Reset Rotation",
@@ -8964,7 +8804,6 @@
     "w4h5": "4:5",
     "w21h9": "21:9",
     "w9h21": "9:21",
-
     "undo": "Undo",
     "redo": "Redo",
     "crop": "Crop",
@@ -8975,19 +8814,10 @@
     "export_successful": "Export Successful!",
     "export_failed": "Export Failed!"
   },
-
-
-
-
-
-
-
-
   "----------game_map----------": "----------game_map----------",
   "game_dimension_miraland": "Miraland",
   "game_dimension_sea_of_stars": "Sea Of Stars",
   "game_dimension_home": "Home ",
-
   "game_photo_region_unknown": "unknown",
   "game_photo_region_home": "Home",
   "game_photo_region_sea_of_stars": "Sea Of Stars",
@@ -9004,66 +8834,55 @@
   "game_photo_region_elderwood_forest": "Elderwood Forest",
   "game_photo_region_spira": "Spira",
   "game_photo_region_wanxiang_realm": "Wanxiang Realm",
-
   "game_weather_0": "Sunny",
   "game_weather_2": "Rainy",
   "game_weather_4": "Rainbow",
   "game_weather_7": "Sea of Stars",
-
-  "game_interactive_photo_state_false": "未识别",
-  "game_interactive_photo_state_true": "已识别",
-
-  "game_risk_photo_state_false": "未识别",
-  "game_risk_photo_state_true": "已识别",
-
-  "game_puzzle_game_-1": "无",
-
-  "game_portrait_mode_0": "关",
-  "game_portrait_mode_1": "开",
-
-  "game_light_None": "无",
-  "game_light_DirectionLight_L": "方向补光-侧光-左",
-  "game_light_DirectionLight_R": "方向补光-侧光-右",
-  "game_light_DirectionLight_T": "方向补光-顶光",
-  "game_light_DirectionLight_B": "方向补光-底光",
-  "game_light_HueEdgeLight_001_L": "色相边光-柔黄-左",
-  "game_light_HueEdgeLight_001_R": "色相边光-柔黄-右",
-  "game_light_HueEdgeLight_002_L": "色相边光-月蓝-左",
-  "game_light_HueEdgeLight_002_R": "色相边光-月蓝-右",
-  "game_light_HueEdgeLight_003_L": "色相边光-明紫-左",
-  "game_light_HueEdgeLight_003_R": "色相边光-明紫-右",
-  "game_light_HueEdgeLight_004_L": "色相边光-轻粉-左",
-  "game_light_HueEdgeLight_004_R": "色相边光-轻粉-右",
-  "game_light_VibeLight_001": "氛围灯光-轻白边光",
-  "game_light_VibeLight_002": "氛围灯光-梦幻虹光",
-  "game_light_VibeLight_003": "氛围灯光-绚丽极光",
-  "game_light_VibeLight_004": "氛围灯光-柔纱波光",
-
-  "game_filter_None": "无",
-  "game_filter_Fresh_001": "清新-薄雾",
-  "game_filter_Fresh_002": "清新-粉樱",
-  "game_filter_Fresh_003": "清新-奶油",
-  "game_filter_Fresh_004": "清新-暖阳",
-  "game_filter_Fresh_005": "清新-晴日",
-  "game_filter_Weather_001": "氛围-暮色",
-  "game_filter_Weather_002": "氛围-月白",
-  "game_filter_Weather_003": "氛围-夜雨",
-  "game_filter_Weather_004": "氛围-融雪",
-  "game_filter_Vibe_009": "氛围-夜河",
-  "game_filter_Vibe_001": "风格-复古胶片",
-  "game_filter_Vibe_002": "风格-悠然海岸",
-  "game_filter_Vibe_003": "风格-夏日午后",
-  "game_filter_Vibe_004": "风格-曼妙珠光",
-  "game_filter_Vibe_005": "风格-红蓝交响",
-
-  "game_pose_none": "无",
-
-  "game_giant_state_false": "未使用",
-  "game_giant_state_true": "使用",
-
-  "game_hidden_state_false": "关",
-  "game_hidden_state_true": "开",
-
+  "game_interactive_photo_state_false": "Unrecognized",
+  "game_interactive_photo_state_true": "Recognized",
+  "game_risk_photo_state_false": "Unrecognized",
+  "game_risk_photo_state_true": "Recognized",
+  "game_puzzle_game_-1": "None",
+  "game_portrait_mode_0": "Off",
+  "game_portrait_mode_1": "On",
+  "game_light_None": "None",
+  "game_light_DirectionLight_L": "DirectionLight Left",
+  "game_light_DirectionLight_R": "DirectionLight Right",
+  "game_light_DirectionLight_T": "DirectionLight Top",
+  "game_light_DirectionLight_B": "DirectionLight Bottom",
+  "game_light_HueEdgeLight_001_L": "HueEdgeLight Soft-yellow Left",
+  "game_light_HueEdgeLight_001_R": "HueEdgeLight Soft-yellow Right",
+  "game_light_HueEdgeLight_002_L": "HueEdgeLight Moon-Blue Left",
+  "game_light_HueEdgeLight_002_R": "HueEdgeLight Moon-Blue Right",
+  "game_light_HueEdgeLight_003_L": "HueEdgeLight Ming-Zi Left",
+  "game_light_HueEdgeLight_003_R": "HueEdgeLight Ming-Zi Right",
+  "game_light_HueEdgeLight_004_L": "HueEdgeLight White-powder Left",
+  "game_light_HueEdgeLight_004_R": "HueEdgeLight White-powder Right",
+  "game_light_VibeLight_001": "VibeLight Soft white edge light",
+  "game_light_VibeLight_002": "VibeLight Dreamy Rainbow",
+  "game_light_VibeLight_003": "VibeLight Breathtaking aurora",
+  "game_light_VibeLight_004": "VibeLight Softly flowing waves of light",
+  "game_filter_None": "None",
+  "game_filter_Fresh_001": "Fresh - Morning Mist",
+  "game_filter_Fresh_002": "Fresh - Cherry Blossom",
+  "game_filter_Fresh_003": "Fresh - Soft Cream",
+  "game_filter_Fresh_004": "Fresh - Warm Sunlight",
+  "game_filter_Fresh_005": "Fresh - Sunny Day",
+  "game_filter_Weather_001": "Mood - Dusk Glow",
+  "game_filter_Weather_002": "Mood - Moonlight",
+  "game_filter_Weather_003": "Mood - Night Rain",
+  "game_filter_Weather_004": "Mood - Snow Melt",
+  "game_filter_Vibe_009": "Vibe - Night River",
+  "game_filter_Vibe_001": "Style - Vintage Film",
+  "game_filter_Vibe_002": "Style - Breezy Coast",
+  "game_filter_Vibe_003": "Style - Summer Afternoon",
+  "game_filter_Vibe_004": "Style - Pearl Shimmer",
+  "game_filter_Vibe_005": "Style - Red & Blue Symphony",
+  "game_pose_none": "None",
+  "game_giant_state_false": "Unused",
+  "game_giant_state_true": "Used",
+  "game_hidden_state_false": "Off",
+  "game_hidden_state_true": "On",
   "game_nikki_clothes_slot_unknown": "unknown",
   "game_nikki_clothes_slot_outfits": "Outfits",
   "game_nikki_clothes_slot_hair": "Hair",
@@ -9075,7 +8894,6 @@
   "game_nikki_clothes_slot_shoes": "Shoes",
   "game_nikki_clothes_slot_accessories": "Accessories",
   "game_nikki_clothes_slot_makeup": "Makeup",
-
   "game_nikki_clothes_hair": "Hair",
   "game_nikki_clothes_dresses": "Dresses",
   "game_nikki_clothes_outerwear": "Outerwear",
@@ -9105,72 +8923,60 @@
   "game_nikki_clothes_contacts": "Contacts",
   "game_nikki_clothes_lips": "Lips",
   "game_nikki_clothes_skin_tones": "Skin tones",
-
-  "game_nikki_clothes_evolution_0": "无",
-  "game_nikki_clothes_value_1": "无",
-  "game_nikki_clothes_glow_up": "焕新",
-  "game_nikki_clothes_evolution_1": "1进",
-  "game_nikki_clothes_evolution_2": "2进",
-  "game_nikki_clothes_evolution_3": "3进",
-  "game_nikki_clothes_value_9": "无",
-
-  "game_momo_clothes_cloak": "大喵斗篷",
-
+  "game_nikki_clothes_evolution_0": "None",
+  "game_nikki_clothes_value_1": "None",
+  "game_nikki_clothes_glow_up": "Glow Up",
+  "game_nikki_clothes_evolution_1": "Evolution Level 1",
+  "game_nikki_clothes_evolution_2": "Evolution Level 2",
+  "game_nikki_clothes_evolution_3": "Evolution Level 3",
+  "game_nikki_clothes_value_9": "None",
+  "game_momo_clothes_cloak": "Momo Cloak",
   "game_DIY_outfit_dye": "Outfit Dye",
   "game_DIY_special_effect": "Special Effect",
   "game_DIY_pattern_creation": "Pattern Creation",
-
-  "game_DIY_color_palette_custom": "自选",
-  "game_DIY_color_palette_flight_fruit_flutter": "飞球果飘飘",
-  "game_DIY_color_palette_spring_starlit_breath": "春日满满星",
-  "game_DIY_color_palette_stellar_fruit_dream": "星光果之梦",
-  "game_DIY_color_palette_palettetail_shimmer": "眼影鱼碎闪",
-  "game_DIY_color_palette_bibcoon_furball_hug": "围兜暖毛球",
-  "game_DIY_color_palette_starlit_chronos_tree": "星夜时光树",
-  "game_DIY_color_palette_lantern_by_the_cliff": "崖上的壁灯",
-  "game_DIY_color_palette_chimecada_murmur": "风铃子腹语",
-  "game_DIY_color_palette_windbloom_whirl": "风絮草飘飞时",
-  "game_DIY_color_palette_lampbloom_mist": "雨夜路灯花",
-  "game_DIY_color_palette_sleepless_glimmerdrop": "耳坠萤未眠",
-  "game_DIY_color_palette_silken_lake_emerald": "碧波裙摆湖",
-  "game_DIY_color_palette_glimmergrass_letter": "星荧草来信",
-  "game_DIY_color_palette_scarfmoth_phantom": "丝巾蛾魅影",
-  "game_DIY_color_palette_wisteriasol_rain": "花伞藤萝之雨",
-  "game_DIY_color_palette_budding_hare_ears": "兔耳草嫩蕊",
-  "game_DIY_color_palette_bustlefly_song": "裙撑萤之歌",
-  "game_DIY_color_palette_celebcrow_feast": "名流鸦盛宴",
-
-  "game_DIY_color_palette_1": "第1格",
-  "game_DIY_color_palette_2": "第2格",
-  "game_DIY_color_palette_3": "第3格",
-  "game_DIY_color_palette_4": "第4格",
-  "game_DIY_color_palette_5": "第5格",
-  "game_DIY_color_palette_6": "第6格",
-  "game_DIY_color_palette_7": "第7格",
-  "game_DIY_color_palette_8": "第8格",
-
-  "game_DIY_cover_DIY_color_false": "多彩调色",
-  "game_DIY_cover_DIY_color_true": "单彩调色",
-
-  "game_DIY_override_pattern_A_false": "取消底色",
-  "game_DIY_override_pattern_A_true": "应用底色",
-
-  "game_eureka_attachment_point_head": "头部",
-  "game_eureka_attachment_point_hands": "手部",
-  "game_eureka_attachment_point_feet": "脚部",
-
-  "game_eureka_level_non_max": "未满级",
-  "game_eureka_level_max_star_3": "3星满级",
-  "game_eureka_level_max_star_4": "4星满级",
-  "game_eureka_level_max_star_5": "5星满级",
-
-  "game_slot_type_bubble_machine": "泡泡机",
-  "game_slot_type_feed_snail": "蜗牛食物",
-  "game_slot_type_suit": "饰品",
-
-  "game_weapon_custom_state_close": "关闭",
-  "game_weapon_custom_state_open": "开启",
-
-  "game_interaction_type_chair": "椅子",
-  "game_interaction_type_decoration": "摆饰"
+  "game_DIY_color_palette_custom": "Custom",
+  "game_DIY_color_palette_flight_fruit_flutter": "Flight Fruit Flutter",
+  "game_DIY_color_palette_spring_starlit_breath": "Spring Starlit Breath",
+  "game_DIY_color_palette_stellar_fruit_dream": "Stellar Fruit Dream",
+  "game_DIY_color_palette_palettetail_shimmer": "Palettetail Shimmer",
+  "game_DIY_color_palette_bibcoon_furball_hug": "Bibcoon Furball Hug",
+  "game_DIY_color_palette_starlit_chronos_tree": "Starlit Chronos Tree",
+  "game_DIY_color_palette_lantern_by_the_cliff": "Lantern By The Cliff",
+  "game_DIY_color_palette_chimecada_murmur": "Chimecada Murmur",
+  "game_DIY_color_palette_windbloom_whirl": "Windbloom Whirl",
+  "game_DIY_color_palette_lampbloom_mist": "Lampbloom Mist",
+  "game_DIY_color_palette_sleepless_glimmerdrop": "Sleepless Glimmerdrop",
+  "game_DIY_color_palette_silken_lake_emerald": "Silken Lake Emerald",
+  "game_DIY_color_palette_glimmergrass_letter": "Glimmergrass Letter",
+  "game_DIY_color_palette_scarfmoth_phantom": "Scarfmoth Phantom",
+  "game_DIY_color_palette_wisteriasol_rain": "Wisteriasol Rain",
+  "game_DIY_color_palette_budding_hare_ears": "Budding Hare Ears",
+  "game_DIY_color_palette_bustlefly_song": "Bustlefly Song",
+  "game_DIY_color_palette_celebcrow_feast": "Celebcrow Feast",
+  "game_DIY_color_palette_1": "Palette 1",
+  "game_DIY_color_palette_2": "Palette 2",
+  "game_DIY_color_palette_3": "Palette 3",
+  "game_DIY_color_palette_4": "Palette 4",
+  "game_DIY_color_palette_5": "Palette 5",
+  "game_DIY_color_palette_6": "Palette 6",
+  "game_DIY_color_palette_7": "Palette 7",
+  "game_DIY_color_palette_8": "Palette 8",
+  "game_DIY_cover_DIY_color_false": "Multi-Color Toning",
+  "game_DIY_cover_DIY_color_true": "Single-Color Toning",
+  "game_DIY_override_pattern_A_false": "Remove Base Color",
+  "game_DIY_override_pattern_A_true": "Apply Base Color",
+  "game_eureka_attachment_point_head": "Head",
+  "game_eureka_attachment_point_hands": "Hands",
+  "game_eureka_attachment_point_feet": "Feet",
+  "game_eureka_level_non_max": "Not Max Level",
+  "game_eureka_level_max_star_3": "3-Star Max Level",
+  "game_eureka_level_max_star_4": "4-Star Max Level",
+  "game_eureka_level_max_star_5": "5-Star Max Level",
+  "game_slot_type_bubble_machine": "Bubble Machine",
+  "game_slot_type_feed_snail": "Snail Food",
+  "game_slot_type_suit": "Accessory",
+  "game_weapon_custom_state_close": "Off",
+  "game_weapon_custom_state_open": "On",
+  "game_interaction_type_chair": "Chair",
+  "game_interaction_type_decoration": "Decoration"
 }

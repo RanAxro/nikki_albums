@@ -1,10 +1,7 @@
 {
   "nikkialbums": "暖暖相册",
-  "info": "该软件还在测试阶段, 不代表最终品质\n 软件官网: nikki.ranaxro.com \n github: github.com/RanAxro/nikki_albums \n QQ交流群: 1062670402",
-
-
+  "info": "该软件还在测试阶段, 不代表最终品质\n QQ交流群: 1062670402\n",
   "----------common----------": "----------common----------",
-
   "version": "版本",
   "setting": "设置",
   "name": "名称",
@@ -29,7 +26,6 @@
   "quantity": "数量",
   "type": "类型",
   "restore": "恢复",
-
   "width": "宽度",
   "height": "高度",
   "fps": "帧率",
@@ -38,40 +34,31 @@
   "cannotIsNegativeNumber": "不能为负数",
   "cannotIsZero": "不能为0",
   "valueIsTooHigh": "值太大",
-
-
   "----------initial_startup----------": "----------initial_startup----------",
   "welcome": "欢迎使用暖暖相册",
   "start": "开始使用",
-
-
   "----------setting----------": "----------setting----------",
   "theme": "主题",
   "followSystemAppearance": "跟随系统外观",
   "lang": "简体中文",
   "language": "语言",
-
   "personalization": "个性化",
   "livePhotoSettings": "实况照片",
   "accountManagement": "账号管理",
   "nikkias_setting": "Nikkias文件",
   "version_information": "版本信息",
-
   "maximizeOrRestoreButton": "最大化按钮",
-
   "livePhotoExportFormat": "实况照片导出格式",
   "livePhotoExportFormat_none": "不转换",
   "livePhotoExportFormat_apple": "Live Photo (苹果生态)",
   "livePhotoExportFormat_google": "Motion Photo (谷歌/安卓生态)",
   "livePhotoExportFormat_description": "导出「动态影集」相册时，将封面图与视频自动转换为对应平台的实况照片格式",
-
   "open_nikkias_file": "打开一个Nikkias文件",
   "drag_nikkias_file_here": "您可以把Nikkias文件拖动到此处打开",
   "register_nikkias_file_association": "将 .nikkias 文件与本应用关联",
   "unregister_nikkias_file_association": "取消将 .nikkias 文件与本应用关联",
   "association_successful": "关联成功",
   "association_cancelled_successfully": "已取消关联",
-
   "checkForUpdates": "检测更新",
   "checkFailed": "检测失败",
   "alreadyTheLatestVersion": "已是最新版本",
@@ -79,9 +66,6 @@
   "updateMessage": "更新内容",
   "downloadFailed": "下载失败",
   "toOfficialWebsite": "前往官网",
-
-
-
   "----------nikkias----------": "----------nikkias----------",
   "nikkiasFile": "nikkias文件",
   "selectNikkiasFile": "选择一个nikkias文件",
@@ -90,12 +74,7 @@
   "importToOther": "导入到其他渠道",
   "saveDirectly": "直接保存",
   "saveDecoded": "解码后保存",
-
-
-
   "----------frame----------": "----------frame----------",
-
-
   "account": "账号",
   "selectAccountButton": "选择账号",
   "deleteAccount": "你确定要删除该账号吗",
@@ -112,22 +91,13 @@
   "remarks": "备注",
   "noteXAs": "将 {} 备注为",
   "fillRemarks": "填写备注",
-
-
-
-
   "LauncherCacheImagesName": "启动器缓存图片",
   "MallPicName": "商城",
   "MoviesName": "CG/PV/Splash",
-
   "LauncherCacheImagesDescription": "启动器缓存的图像文件",
   "MallPicDescription": "游戏商城的图像",
   "MoviesDescription": "",
-
-
-
   "----------album----------": "----------album----------",
-
   "currentGameIsNull": "请先选择账号",
   "tag": "标签",
   "defaultTag": "默认标签",
@@ -190,7 +160,6 @@
   "importXImage": {
     "other": "导入 {} 张图片至"
   },
-
   "useSameNetworkDevice": "请使用同网络下的设备进行下载",
   "downloadLink": "下载链接",
   "stopSharing": "关闭分享",
@@ -199,10 +168,6 @@
   "packagingFailed": "文件打包失败",
   "activatingNetwork": "正在开启网络服务",
   "activatingNetworkFailed": "网络服务开启失败",
-
-
-
-
   "----------file_transfer----------": "----------file_transfer----------",
   "receiveFileSavePath": "文件保存位置",
   "XGiBAvailable": "{} GiB可用",
@@ -210,13 +175,10 @@
   "selectSavePath": "选择文件保存位置",
   "changeSavePath": "更改文件保存位置",
   "openSavePath": "打开文件保存位置",
-
   "inputDownloadUrl": "输入下载链接",
   "downloadableContent": "可下载的内容",
   "downloadAll": "下载全部",
   "downloadNikkias": "下载nikkias文件",
-
-
   "----------start----------": "----------start----------",
   "openDirectory": "从文件资源管理器打开",
   "openLauncherDirectory": "打开启动器目录",
@@ -240,16 +202,12 @@
   "destinationIsNull": "还未选择目标文件夹",
   "insufficientSpace": "空间不足",
   "existXInDestination": "已存在 {} 文件夹",
-
   "backupAllAlbum": "备份所有图片",
   "startBackupAllAlbum": "开始备份",
   "uidToBeBackup": "需要备份图片的账号",
   "saveBackupFileTo": "将备份文件保存到",
   "backupFailed": "备份失败",
   "sendBackupToNetwork": "发送到网络设备",
-
-
-
   "----------recycle_bin----------": "----------recycle_bin----------",
   "recycleBin": "回收站",
   "moveToRecycleBin": "移动到回收站",
@@ -262,25 +220,6 @@
   "permanentlyDelete": "永久删除",
   "deletionCompleted": "删除已完成",
   "deletionFailed": "删除失败",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "toSelectAccount": "请选择账号",
   "addCustomAccount": "添加其他启动器版本",
   "toSelectVersion": "选择启动器版本",
@@ -320,32 +259,6 @@
   "toSortReverse": "切换至倒序排序",
   "increaseColumns": "增加列数",
   "decreaseColumns": "减少列数",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "----------_----------": "----------common----------",
   "": "",
   "close": "关闭",
@@ -354,13 +267,8 @@
   "deselect": "取消选择",
   "select_all": "全选",
   "invert_select": "反选",
-
-
   "----------ui----------": "----------ui----------",
   "ui_toast_tip": "提示",
-
-
-
   "----------pa----------": "----------page_album----------",
   "pa_select_X_image": {
     "other": "已选中{}张图片"
@@ -376,14 +284,7 @@
   "pa_show_image_data": "图片信息",
   "pa_copy_successful": "复制成功",
   "pa_copy_failed": "复制失败",
-
-
-
-
-
-
   "----------ai----------": "----------album_info----------",
-
   "ai_Collage_CollagePhotoName": "趣拼海报原图",
   "ai_Collage_HighQualityName": "趣拼海报",
   "ai_Collage_LowQualityName": "缩略图",
@@ -403,7 +304,6 @@
   "ai_ScreenShotName": "截图",
   "ai_VideoName": "动态影集",
   "ai_XSdkQrCodeName": "分享码",
-
   "ai_Collage_CollagePhotoDescription": "趣拼海报原图",
   "ai_Collage_HighQualityDescription": "趣拼海报",
   "ai_Collage_LowQualityDescription": "缩略图",
@@ -423,14 +323,6 @@
   "ai_ScreenShotDescription": "拍过的图片都保存在这。游戏不会管理该相册",
   "ai_VideoDescription": "外部视频",
   "ai_XSdkQrCodeDescription": "分享码二维码",
-
-
-
-
-
-
-
-
   "----------ia----------": "----------image_addition----------",
   "ia_state_false_1": "无",
   "ia_state_true_1": "有",
@@ -442,7 +334,6 @@
   "ia_state_true_4": "已持有",
   "ia_state_false_5": "关",
   "ia_state_true_5": "开",
-
   "ia_rot": "旋转",
   "ia_rot3": "旋转",
   "ia_loc2": "位置",
@@ -450,22 +341,18 @@
   "ia_scale": "缩放",
   "ia_scale3": "缩放",
   "ia_color_rgba": "颜色",
-
   "ia_addition": "图片数据",
   "ia_invaild_params_addition": "无数据",
   "ia_auto_shoot": "自动拍摄",
   "ia_collage_addition": "趣拼海报数据",
   "ia_expedition_addition": "世界巡游数据",
   "ia_nikki_photo_addition": "图片数据",
-
   "ia_Collage_template_id": "模板",
   "ia_Collage_region_pictures": "图片信息",
   "ia_Collage_region_pictures_X": "图片信息{}",
   "ia_Collage_image_id": "原图id",
   "ia_Collage_oriCustomData": "原图数据",
-
   "ia_expedition": "打卡类型",
-
   "ia_photography_info": "拍摄信息",
   "ia_edit_photo": "图片编辑",
   "ia_edit_photo_has_sticker": "贴纸",
@@ -487,7 +374,6 @@
   "ia_task_photo": "拍摄任务",
   "ia_has_task_photo": "",
   "ia_has_no_task_photo": "无",
-
   "ia_camera_info": "相机信息",
   "ia_portrait_mode": "竖构图",
   "ia_camera_params": "相机参数",
@@ -510,7 +396,6 @@
   "ia_filter_id": "滤镜",
   "ia_filter_strength": "滤镜强度",
   "ia_pose_id": "动作",
-
   "ia_nikki_info": "暖暖信息",
   "ia_nikki_giant_state": "巨大化套装能力",
   "ia_nikki_hidden": "隐藏暖暖",
@@ -542,22 +427,13 @@
   "ia_interaction": "互动物",
   "ia_interaction_type": "类型",
   "ia_carrier": "载具",
-
   "ia_momo_info": "大喵信息",
   "ia_momo_hidden": "隐藏大喵",
   "ia_momo_clothes": "服饰",
-
-
-
-
-
-
-
   "infinity_nikki": {
     "infinity_nikki": "无限暖暖",
     "infinity_nikki_pc": "无限暖暖 PC",
     "infinity_nikki_android": "无限暖暖 Android",
-
     "launcher_channel": {
       "paper": "国服",
       "paperGlobal": "国际服",
@@ -565,7 +441,6 @@
       "bilibili": "bilibili",
       "steam": "steam"
     },
-
     "album_type": {
       "collage": {
         "collage_photo": "趣拼海报原图",
@@ -588,19 +463,16 @@
       "plant_dyeing": "花草拓拓拓",
       "screen_shot": "截图",
       "x_sdk_qr_code": "分享码",
-
       "paper_cache": "账号头像缓存",
       "biological_investigation": "生物调查",
       "corner": "犄角旮旯",
       "editor_photo": "编辑照片"
     },
-
     "common": {
       "click_to_view_map": "点击定位到地图",
       "lack_data": "数据缺失",
       "click_to_copy_param": "点击复制参数"
     },
-
     "media_params": {
       "true_1": "是",
       "false_1": "否",
@@ -614,12 +486,10 @@
       "false_5": "多彩调色",
       "true_6": "应用底色",
       "false_6": "取消底色",
-
       "nikki_photo_params": "暖暖图片信息",
       "clock_in_photo_params": "世界巡游信息",
       "collage_params": "趣拼海报信息",
       "diy_params": "染色信息",
-
       "photography_params": "拍摄信息",
       "edit": "图片编辑",
       "has_sticker": "贴纸",
@@ -641,7 +511,6 @@
       "puzzle": "错位摄影",
       "risk": "惊险拍摄",
       "interactive": "拍摄任务",
-
       "camera_params": "相机信息",
       "momo_camera_params": "相机参数",
       "portrait_mode": "竖构图",
@@ -691,7 +560,6 @@
       "auto_ground_snap": "自动贴地",
       "floating_effect": "漂浮特效",
       "pose_with_nikki": "暖暖合拍",
-
       "nikki_params": "暖暖信息",
       "giant_state": "巨大化",
       "hidden": "隐藏暖暖",
@@ -804,26 +672,20 @@
       "interactions": "交互物",
       "mount": "坐骑",
       "carrier": "载具",
-
       "momo_params": "大喵信息",
       "momo_hidden_state": "隐藏大喵",
-
       "expedition": "世界巡游",
       "template_id": "模板",
       "zone": "区域",
       "image_id": "原图id"
     },
-    "photo_wall": {
-
-    },
+    "photo_wall": {},
     "puzzle": {
       "-1": "无",
       "30": "埋骨地 - 渴望飞翔 - 长出翅膀的思凯莱",
       "31": "埋骨地 - 神诞地观测- 仪器中的神诞地"
     },
-    "risk": {
-
-    },
+    "risk": {},
     "interactive": {
       "206001": "2.6 潮汐尽头的明天 旅间收集 Day1 拍摄1张四大部门任意摊位的照片",
       "261003": "任务 - 再见，为了重逢 - 给米瑞娜和西里安拍一张合照",
@@ -875,9 +737,7 @@
     "framed_moment": {
       "0": "无"
     },
-    "momo_pose": {
-
-    },
+    "momo_pose": {},
     "cloth": {
       "1020100001": "时光讯号",
       "1020100002": "芊芊知夏",
@@ -8908,30 +8768,14 @@
       "20057": "岁月之证",
       "20061": "反调进行曲"
     },
-    "pattern_creation_texture": {
-
-    },
-    "eureka": {
-
-    },
-    "eureka_outfit": {
-
-    },
-    "weapon": {
-
-    },
-    "slot_type": {
-
-    },
-    "interactions": {
-
-    },
-    "mount": {
-
-    },
-    "carrier": {
-
-    },
+    "pattern_creation_texture": {},
+    "eureka": {},
+    "eureka_outfit": {},
+    "weapon": {},
+    "slot_type": {},
+    "interactions": {},
+    "mount": {},
+    "carrier": {},
     "expedition": {
       "101020301": "伊赞之土 - 大拉姆居落",
       "101020302": "伊赞之土 - 往归摆厅",
@@ -8942,11 +8786,8 @@
       "101020307": "伊赞之土 - 纪念地",
       "101020308": "伊赞之土 - 蓝池"
     },
-    "template_id": {
-
-    }
+    "template_id": {}
   },
-
   "image_edit": {
     "temperature": "色温",
     "tint": "色调",
@@ -8968,7 +8809,6 @@
     "yellow_blue": "黄蓝平衡",
     "clarity": "清晰度",
     "fade": "褪色",
-
     "rotate_left_90": "逆时针旋转90°",
     "rotate_right_90": "顺时针旋转90°",
     "reset_rotation": "重置旋转",
@@ -8990,7 +8830,6 @@
     "w4h5": "4:5",
     "w21h9": "21:9",
     "w9h21": "9:21",
-
     "undo": "撤销",
     "redo": "重做",
     "crop": "裁剪",
@@ -9001,19 +8840,10 @@
     "export_successful": "导出成功!",
     "export_failed": "导出失败!"
   },
-
-
-
-
-
-
-
-
   "----------game_map----------": "----------game_map----------",
   "game_dimension_miraland": "奇迹大陆",
   "game_dimension_sea_of_stars": "星海",
   "game_dimension_home": "家园",
-
   "game_photo_region_unknown": "未知",
   "game_photo_region_home": "家园",
   "game_photo_region_sea_of_stars": "星海",
@@ -9030,23 +8860,17 @@
   "game_photo_region_elderwood_forest": "巨木之森",
   "game_photo_region_spira": "蜗牛城",
   "game_photo_region_wanxiang_realm": "万相境",
-
   "game_weather_0": "晴天",
   "game_weather_2": "雨天",
   "game_weather_4": "彩虹",
   "game_weather_7": "星海",
-
   "game_interactive_photo_state_false": "未识别",
   "game_interactive_photo_state_true": "已识别",
-
   "game_risk_photo_state_false": "未识别",
   "game_risk_photo_state_true": "已识别",
-
   "game_puzzle_game_-1": "无",
-
   "game_portrait_mode_0": "关",
   "game_portrait_mode_1": "开",
-
   "game_light_None": "无",
   "game_light_DirectionLight_L": "方向补光-侧光-左",
   "game_light_DirectionLight_R": "方向补光-侧光-右",
@@ -9064,7 +8888,6 @@
   "game_light_VibeLight_002": "氛围灯光-梦幻虹光",
   "game_light_VibeLight_003": "氛围灯光-绚丽极光",
   "game_light_VibeLight_004": "氛围灯光-柔纱波光",
-
   "game_filter_None": "无",
   "game_filter_Fresh_001": "清新-薄雾",
   "game_filter_Fresh_002": "清新-粉樱",
@@ -9081,15 +8904,11 @@
   "game_filter_Vibe_003": "风格-夏日午后",
   "game_filter_Vibe_004": "风格-曼妙珠光",
   "game_filter_Vibe_005": "风格-红蓝交响",
-
   "game_pose_none": "无",
-
   "game_giant_state_false": "未使用",
   "game_giant_state_true": "使用",
-
   "game_hidden_state_false": "关",
   "game_hidden_state_true": "开",
-
   "game_nikki_clothes_slot_unknown": "未知",
   "game_nikki_clothes_slot_outfits": "套装",
   "game_nikki_clothes_slot_hair": "发型",
@@ -9101,7 +8920,6 @@
   "game_nikki_clothes_slot_shoes": "鞋子",
   "game_nikki_clothes_slot_accessories": "饰品",
   "game_nikki_clothes_slot_makeup": "妆容",
-
   "game_nikki_clothes_hair": "发型",
   "game_nikki_clothes_dresses": "连衣裙",
   "game_nikki_clothes_outerwear": "外套",
@@ -9131,7 +8949,6 @@
   "game_nikki_clothes_contacts": "美瞳",
   "game_nikki_clothes_lips": "唇妆",
   "game_nikki_clothes_skin_tones": "肤色",
-
   "game_nikki_clothes_evolution_0": "无",
   "game_nikki_clothes_value_1": "无",
   "game_nikki_clothes_glow_up": "焕新",
@@ -9139,13 +8956,10 @@
   "game_nikki_clothes_evolution_2": "2进",
   "game_nikki_clothes_evolution_3": "3进",
   "game_nikki_clothes_value_9": "无",
-
   "game_momo_clothes_cloak": "大喵斗篷",
-
   "game_DIY_outfit_dye": "服装虹染",
   "game_DIY_special_effect": "特效调色",
   "game_DIY_pattern_creation": "织纹绘制",
-
   "game_DIY_color_palette_custom": "自选",
   "game_DIY_color_palette_flight_fruit_flutter": "飞球果飘飘",
   "game_DIY_color_palette_spring_starlit_breath": "春日满满星",
@@ -9165,7 +8979,6 @@
   "game_DIY_color_palette_budding_hare_ears": "兔耳草嫩蕊",
   "game_DIY_color_palette_bustlefly_song": "裙撑萤之歌",
   "game_DIY_color_palette_celebcrow_feast": "名流鸦盛宴",
-
   "game_DIY_color_palette_1": "第1格",
   "game_DIY_color_palette_2": "第2格",
   "game_DIY_color_palette_3": "第3格",
@@ -9174,30 +8987,23 @@
   "game_DIY_color_palette_6": "第6格",
   "game_DIY_color_palette_7": "第7格",
   "game_DIY_color_palette_8": "第8格",
-
   "game_DIY_cover_DIY_color_false": "多彩调色",
   "game_DIY_cover_DIY_color_true": "单彩调色",
-
   "game_DIY_override_pattern_A_false": "取消底色",
   "game_DIY_override_pattern_A_true": "应用底色",
-
   "game_eureka_attachment_point_head": "头部",
   "game_eureka_attachment_point_hands": "手部",
   "game_eureka_attachment_point_feet": "脚部",
-
   "game_eureka_level_non_max": "未满级",
   "game_eureka_level_max_star_3": "3星满级",
   "game_eureka_level_max_star_4": "4星满级",
   "game_eureka_level_max_star_5": "5星满级",
-
   "game_slot_type_bubble_machine": "泡泡机",
   "game_slot_type_feed_snail": "蜗牛食物",
   "game_slot_type_suit": "饰品",
-
   "game_weapon_custom_state_close": "关闭",
   "game_weapon_custom_state_open": "开启",
-
   "game_interaction_type_chair": "椅子",
-  "game_interaction_type_decoration": "摆饰"
+  "game_interaction_type_decoration": "摆饰",
+  "toGitHub": "GitHub"
 }
-

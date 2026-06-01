@@ -136,7 +136,7 @@ class SettingDialog extends StatelessWidget{
                 children: [
                   block10W,
                   Expanded(
-                    child: AppText("setting"),
+                    child: AppText("setting", fontSize: 18, fontWeight: FontWeight.bold),
                   ),
 
                   const ChangeLanguage(),
