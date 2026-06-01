@@ -7,6 +7,13 @@ const config = {
 		},
 		"downloads": [
 			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-MacOS-arm64.zip"
+			},
+
+			{
 				"system": "system_windows",
 				"type": "type_1",
 				"suffix": "suffix_exe",
