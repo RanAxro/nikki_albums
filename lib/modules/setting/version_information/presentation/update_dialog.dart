@@ -84,10 +84,10 @@ class UpdateDialog extends StatelessWidget{
             ),
 
             /// 下载按钮
-            SmallButton(
+            AppButton.smallText(
               width: null,
-              colorRole: ColorRole.secondary,
-              transparent: true,
+              colorRole: ColorRole.highlight,
+              isTransparent: false,
               onClick: () async{
                 late final Updater updater;
                 if(Platform.isWindows){
@@ -119,10 +119,9 @@ class UpdateDialog extends StatelessWidget{
             ),
 
             /// 关闭按钮
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.secondary,
-              transparent: true,
+              isTransparent: false,
               onClick: (){
                 Navigator.of(context).pop();
               },

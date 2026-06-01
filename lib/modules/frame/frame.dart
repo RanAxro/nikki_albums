@@ -85,50 +85,56 @@ class _FrameState extends State<Frame> {
               supportedLocales: context.supportedLocales,
               localizationsDelegates: context.localizationDelegates,
               home: Scaffold(
-          body: Builder(
-            builder: (BuildContext context) {
-              Widget child;
-              if (Platform.isWindows) {
-                child = WindowsFrame(key: frameKey);
-              } else if (Platform.isAndroid) {
-                child = AndroidFrame(key: frameKey);
-              } else if (Platform.isMacOS) {
-                child = MacOSFrame(key: frameKey);
-              } else {
-                child = const Placeholder();
-              }
+                body: Builder(
+                  builder: (BuildContext context) {
 
-              return CallbackShortcuts(
-                bindings: <ShortcutActivator, VoidCallback>{
-                  if (Platform.isMacOS)
-                    const SingleActivator(LogicalKeyboardKey.comma, meta: true): () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SettingDialog();
-                        },
-                      );
-                    },
-                  if (Platform.isWindows)
-                    const SingleActivator(LogicalKeyboardKey.comma, control: true): () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SettingDialog();
-                        },
-                      );
-                    },
-                },
-                child: Focus(
-                  autofocus: true,
-                  child: child,
+                    /// TODO check
+                    if(!kDebugMode){
+                      checkAppUpdates(context);
+                    }
+
+                    Widget child;
+                    if (Platform.isWindows) {
+                      child = WindowsFrame(key: frameKey);
+                    } else if (Platform.isAndroid) {
+                      child = AndroidFrame(key: frameKey);
+                    } else if (Platform.isMacOS) {
+                      child = MacOSFrame(key: frameKey);
+                    } else {
+                      child = const Placeholder();
+                    }
+
+                    return CallbackShortcuts(
+                      bindings: <ShortcutActivator, VoidCallback>{
+                        if (Platform.isMacOS)
+                          const SingleActivator(LogicalKeyboardKey.comma, meta: true): () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SettingDialog();
+                              },
+                            );
+                          },
+                        if (Platform.isWindows)
+                          const SingleActivator(LogicalKeyboardKey.comma, control: true): () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SettingDialog();
+                              },
+                            );
+                          },
+                      },
+                      child: Focus(
+                        autofocus: true,
+                        child: child,
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
+              ),
+            ),
+          );
         },
       ),
     );
