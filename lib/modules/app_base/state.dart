@@ -55,7 +55,7 @@ abstract class AppState {
   /// album
   static final ValueNotifier<int> albumColumn = _createStateValue<int>(4);
   static final ValueNotifier<bool> isShowImageCustomData =
-      _createStateValue<bool>(false);
+      _createStateValue<bool>(true);
   static final ValueNotifier<double?> imageCustomDataWidgetSize =
       _createStateValue<double?>(null);
 
