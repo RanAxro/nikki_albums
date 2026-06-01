@@ -2,9 +2,7 @@
 
 import "dart:async";
 import "dart:io";
-
-import "package:bitsdojo_window/bitsdojo_window.dart";
-
+import "package:window_manager/window_manager.dart";
 final List<FutureOr Function()> _runBeforeExitApp = [];
 
 void onExitApp(FutureOr Function() fn){
@@ -19,7 +17,7 @@ Future<void> exitApp() async{
   // await AppState.save();
 
   if(Platform.isWindows || Platform.isLinux || Platform.isMacOS){
-    appWindow.close();
+    await windowManager.close();
   }else{
     exit(0);
   }

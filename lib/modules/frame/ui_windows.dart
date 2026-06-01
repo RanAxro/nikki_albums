@@ -5,7 +5,7 @@ import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/utils/system/system.dart";
 
 import "package:flutter/material.dart";
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:window_manager/window_manager.dart";
 
 // class WindowsFrame extends StatelessWidget{
 //   const WindowsFrame({super.key});
@@ -44,7 +44,7 @@ class WindowTitleBar extends StatelessWidget {
       color: AppTheme.of(context)!.colorScheme.secondary.color,
       child: Stack(
         children: [
-          Positioned.fill(child: MoveWindow()),
+          Positioned.fill(child: DragToMoveArea(child: Container())),
           Row(
             children: [
               // Icon
@@ -82,8 +82,8 @@ class WindowTitleBar extends StatelessWidget {
                 height: windowTitleBarHeight,
                 borderRadius: 0,
                 colorRole: ColorRole.secondary,
-                onClick: () {
-                  appWindow.minimize();
+                onClick: () async {
+                  await windowManager.minimize();
                 },
                 child: Image.asset(
                   "assets/icon/minimize.webp",
@@ -108,8 +108,12 @@ class WindowTitleBar extends StatelessWidget {
                         height: windowTitleBarHeight,
                         borderRadius: 0,
                         colorRole: ColorRole.secondary,
-                        onClick: () {
-                          appWindow.maximizeOrRestore();
+                        onClick: () async {
+                          if (await windowManager.isMaximized()) {
+                            await windowManager.unmaximize();
+                          } else {
+                            await windowManager.maximize();
+                          }
                         },
                         child: Image.asset(
                           "assets/icon/maximizeOrRestore.webp",

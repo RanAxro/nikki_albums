@@ -18,7 +18,7 @@ import "dart:ui" hide Path;
 import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:window_manager/window_manager.dart";
 import "package:windows_single_instance/windows_single_instance.dart";
 import "package:media_kit/media_kit.dart";
 
@@ -52,6 +52,19 @@ void main(List<String> args) async{
 
   await initApp();
 
+  if (Platform.isWindows || Platform.isMacOS) {
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(1280, 720),
+      title: "Nikki Albums",
+      titleBarStyle: TitleBarStyle.hidden,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -65,26 +78,6 @@ void main(List<String> args) async{
       child: Frame(ancestor),
     )
   );
-
-  if(Platform.isWindows || Platform.isMacOS){
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      doWhenWindowReady((){
-        final win = appWindow;
-        final initialSize = win.size;
-        
-        // 专门修复 Windows 隐藏启动时的白屏 Bug：在显示前微调一次尺寸强制引擎同步
-        if(Platform.isWindows){
-          win.size = Size(initialSize.width, initialSize.height + 1);
-          win.size = initialSize;
-        }
-
-        win.minSize = const Size(0, 0);
-        win.alignment = Alignment.center;
-        win.title = "Nikki Albums";
-        win.show();
-      });
-    });
-  }
 }
 
 

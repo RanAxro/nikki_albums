@@ -1,6 +1,6 @@
 import "dart:async";
 
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:window_manager/window_manager.dart";
 import "package:nikki_albums/modules/nikkias/nikkias.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/path.dart";
@@ -237,6 +237,12 @@ Future<void> initApp() async {
   await AppState.read();
 
   // Auto-detect game on first launch if no game is saved
+  await autoDetectGame();
+
+  Nikkias.init();
+}
+
+Future<void> autoDetectGame() async {
   if (AppState.currentGame.value == null) {
     try {
       final games = await FindGame.find();
@@ -250,8 +256,6 @@ Future<void> initApp() async {
       }
     } catch (_) {}
   }
-
-  Nikkias.init();
 }
 
 final List<FutureOr<void> Function()> _runBeforeCloseApp = [];
@@ -266,7 +270,7 @@ Future<void> closeApp() async {
 
   await AppState.save();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    appWindow.close();
+    await windowManager.close();
   } else {
     exit(0);
   }
