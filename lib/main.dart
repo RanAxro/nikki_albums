@@ -56,6 +56,7 @@ void main(List<String> args) async{
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
       size: Size(1280, 720),
+      center: true,
       title: "Nikki Albums",
       titleBarStyle: TitleBarStyle.hidden,
     );
