@@ -8,6 +8,7 @@ import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 
+import "dart:io";
 import "package:flutter/material.dart";
 
 class SettingDialog extends StatelessWidget{
@@ -23,6 +24,7 @@ class SettingDialog extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     final Widget content = Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       spacing: listSpacing,
       children: [
         SizedBox(
@@ -48,6 +50,7 @@ class SettingDialog extends StatelessWidget{
                             },
                             child: AppText("personalization"),
                           ),
+                          if(Platform.isWindows)
                           AppRawButton(
                             width: constraints.maxWidth,
                             height: smallButtonSize,
@@ -60,7 +63,7 @@ class SettingDialog extends StatelessWidget{
                             width: constraints.maxWidth,
                             height: smallButtonSize,
                             onClick: () {
-                              controller.jumpToPage(2);
+                              controller.jumpToPage(Platform.isWindows ? 2 : 1);
                             },
                             child: AppText("livePhotoSettings"),
                           ),
@@ -68,7 +71,7 @@ class SettingDialog extends StatelessWidget{
                             width: constraints.maxWidth,
                             height: smallButtonSize,
                             onClick: () {
-                              controller.jumpToPage(3);
+                              controller.jumpToPage(Platform.isWindows ? 3 : 2);
                             },
                             child: AppText("nikkias_setting"),
                           ),
@@ -76,7 +79,7 @@ class SettingDialog extends StatelessWidget{
                             width: constraints.maxWidth,
                             height: smallButtonSize,
                             onClick: () {
-                              controller.jumpToPage(4);
+                              controller.jumpToPage(Platform.isWindows ? 4 : 3);
                             },
                             child: AppText("version_information"),
                           ),
@@ -99,7 +102,7 @@ class SettingDialog extends StatelessWidget{
             physics: const NeverScrollableScrollPhysics(),
             children: [
               const Personalization(),
-              const EditCustomGame(),
+              if(Platform.isWindows) const EditCustomGame(),
               const LivePhotoSettings(),
               const NikkiasSetting(),
               const VersionInformation(),
