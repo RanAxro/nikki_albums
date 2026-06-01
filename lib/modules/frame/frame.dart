@@ -1427,6 +1427,7 @@ class ContentBuildInWindow extends StatelessWidget {
 ///////////////////
 //     MacOS     //
 ///////////////////
+
 class MacOSFrame extends StatelessWidget {
   const MacOSFrame({super.key});
 
@@ -1439,19 +1440,11 @@ class MacOSFrame extends StatelessWidget {
 
         /// TODO 将窗口提前
       },
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).colorScheme.secondary,
-            width: 1,
-          ),
-        ),
-        child: Column(
-          children: [
-            const MacOSTitleBar(),
-            Expanded(child: ContentBuildInWindow()),
-          ],
-        ),
+      child: Column(
+        children: [
+          const MacOSTitleBar(),
+          Expanded(child: ContentBuildInWindow()),
+        ],
       ),
     );
   }

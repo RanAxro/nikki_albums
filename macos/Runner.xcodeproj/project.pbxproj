@@ -243,6 +243,7 @@
 			buildPhases = (
 				60FDA934C2DE16F4BB291FE3 /* [CP] Check Pods Manifest.lock */,
 				33CC10E92044A3C60003C045 /* Sources */,
+				27D82BDA52E29389B3FFC651 /* Copy Native Dylib */,
 				33CC10EA2044A3C60003C045 /* Frameworks */,
 				33CC10EB2044A3C60003C045 /* Resources */,
 				33CC110E2044A8840003C045 /* Bundle Framework */,
@@ -331,6 +332,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		27D82BDA52E29389B3FFC651 /* Copy Native Dylib */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Native Dylib";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DYLIB_SRC=\"$SRCROOT/../rust/lib/macos/aarch64/libnuan5_decryption.dylib\"\n\nFRAMEWORKS_DIR=\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH\"\nmkdir -p \"$FRAMEWORKS_DIR\"\n\nif [ -f \"$DYLIB_SRC\" ]; then\n    cp \"$DYLIB_SRC\" \"$FRAMEWORKS_DIR/\"\n    echo \"Copied $(basename $DYLIB_SRC) to Frameworks\"\nelse\n    echo \"error: Native dylib not found at $DYLIB_SRC\"\n    exit 1\nfi\n";
+		};
 		3399D490228B24CF009A79C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
