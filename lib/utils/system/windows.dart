@@ -9,7 +9,7 @@ import "../path.dart";
 import "dart:ffi" hide Size;
 import "package:ffi/ffi.dart";
 import "package:win32/win32.dart";
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:window_manager/window_manager.dart";
 
 /// 获取屏幕大小
 (int, int) getWindowsScreenSize() {
@@ -25,48 +25,13 @@ import "package:bitsdojo_window/bitsdojo_window.dart";
 }
 
 /// 是否置顶window窗口
-void doTopWindow(bool isTop, {int? hwnd}) {
-  if (!Platform.isWindows) return;
-
-  try {
-    final lib = DynamicLibrary.open("user32.dll");
-    final setWindowPos = lib
-        .lookupFunction<
-          Void Function(
-            Int hwnd,
-            Int hwndInsertAfter,
-            Int x,
-            Int y,
-            Int cx,
-            Int cy,
-            Int uFlags,
-          ),
-          void Function(
-            int hwnd,
-            int hwndInsertAfter,
-            int x,
-            int y,
-            int cx,
-            int cy,
-            int uFlags,
-          )
-        >("SetWindowPos");
-
-    hwnd = hwnd ?? appWindow.handle;
-    if (hwnd == null) {
-      AppState.writeError("utils.system.doTopWindow", "Cannot get the hwnd");
-      return;
-    }
-    setWindowPos(hwnd, isTop ? -1 : -2, 0, 0, 0, 0, 0x0001 | 0x0002);
-  } catch (e) {
-    AppState.writeError("utils.system.doTopWindow", e.toString());
-  }
+void doTopWindow(bool isTop, {int? hwnd}) async {
+  await windowManager.setAlwaysOnTop(isTop);
 }
 
-void toForeground() {
-  appWindow.show();
-  BringWindowToTop(appWindow.handle!);
-  SetForegroundWindow(appWindow.handle!);
+void toForeground() async {
+  await windowManager.show();
+  await windowManager.focus();
 }
 
 List<int> getAllWindowHandle() {

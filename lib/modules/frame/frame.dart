@@ -23,7 +23,7 @@ import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/services.dart";
 
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:window_manager/window_manager.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
 import "package:easy_localization/easy_localization.dart";
@@ -1087,9 +1087,13 @@ class WindowsFrame extends StatelessWidget {
 
         /// TODO 将窗口提前
       },
-      child: WindowBorder(
-        color: Theme.of(context).colorScheme.secondary,
-        width: 1,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Theme.of(context).colorScheme.secondary,
+            width: 1,
+          ),
+        ),
         child: Column(
           children: [
             const WindowTitleBar(),
@@ -1112,7 +1116,7 @@ class WindowTitleBar extends StatelessWidget {
         height: windowTitleBarHeight,
         child: Stack(
           children: [
-            Positioned.fill(child: MoveWindow()),
+            Positioned.fill(child: DragToMoveArea(child: Container())),
             Row(
               children: [
                 /// Icon
@@ -1222,7 +1226,7 @@ class WindowTitleBar extends StatelessWidget {
                 AppButton(
                   width: windowTitleBarHeight + 10,
                   height: windowTitleBarHeight,
-                  onClick: appWindow.minimize,
+                  onClick: () async { await windowManager.minimize(); },
                   child: AppIcon("minimize", height: 14),
                 ),
 
@@ -1240,7 +1244,13 @@ class WindowTitleBar extends StatelessWidget {
                               ? windowTitleBarHeight + 10
                               : 0,
                           height: windowTitleBarHeight,
-                          onClick: appWindow.maximizeOrRestore,
+                          onClick: () async {
+                            if (await windowManager.isMaximized()) {
+                              await windowManager.unmaximize();
+                            } else {
+                              await windowManager.maximize();
+                            }
+                          },
                           child: AppIcon("maximizeOrRestore", height: 16),
                         );
                       },
@@ -1392,9 +1402,13 @@ class MacOSFrame extends StatelessWidget {
 
         /// TODO 将窗口提前
       },
-      child: WindowBorder(
-        color: Theme.of(context).colorScheme.secondary,
-        width: 1,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Theme.of(context).colorScheme.secondary,
+            width: 1,
+          ),
+        ),
         child: Column(
           children: [
             const MacOSTitleBar(),
@@ -1417,7 +1431,7 @@ class MacOSTitleBar extends StatelessWidget {
         height: windowTitleBarHeight,
         child: Stack(
           children: [
-            Positioned.fill(child: MoveWindow()),
+            Positioned.fill(child: DragToMoveArea(child: Container())),
             Row(
               children: [
                 // Leave space for native traffic light buttons

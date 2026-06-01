@@ -4,7 +4,7 @@ import "package:nikki_albums/widgets/common/component.dart";
 
 import "component.dart";
 
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:window_manager/window_manager.dart";
 import "package:flutter/services.dart";
 
 import "package:flutter/material.dart";
@@ -30,9 +30,9 @@ Future<T?> showAppDialog<T extends Object?>({
             Navigator.pop(context);
           }
         },
-        onPanStart: (_) {
+        onPanStart: (_) async {
           if (Platform.isWindows) {
-            appWindow.startDragging();
+            await windowManager.startDragging();
           }
         },
         child: Container(
