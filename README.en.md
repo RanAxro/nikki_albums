@@ -7,7 +7,7 @@
 </div>
 
 <p>
-  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square " />
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-blue?style=flat-square" />
   
   <a href="https://github.com/RanAxro/nikki_albums/releases/latest ">
     <img alt="Release" src="https://img.shields.io/github/v/release/RanAxro/nikki_albums?style=flat-square&color=brightgreen " />
