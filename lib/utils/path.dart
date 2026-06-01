@@ -149,6 +149,8 @@ class Path {
 
           if (Platform.isWindows) {
             Process.start(path, [], mode: ProcessStartMode.detached);
+          } else if (Platform.isMacOS) {
+            Process.start("open", [path], mode: ProcessStartMode.detached);
           } else if (Platform.isAndroid) {}
           break;
         case FileSystemEntityType.directory:
@@ -158,6 +160,8 @@ class Path {
 
           if (Platform.isWindows) {
             Process.run("explorer", [path]);
+          } else if (Platform.isMacOS) {
+            Process.run("open", [path]);
           } else if (Platform.isAndroid) {}
           break;
         default:
