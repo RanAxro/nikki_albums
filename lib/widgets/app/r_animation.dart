@@ -2,7 +2,7 @@ import "component.dart";
 
 import "package:flutter/material.dart";
 
-class SlideFadeIn extends StatefulWidget {
+class FadeIn extends StatefulWidget {
   final Duration duration;
   final Curve curve;
 
@@ -11,7 +11,7 @@ class SlideFadeIn extends StatefulWidget {
 
   final Widget child;
 
-  const SlideFadeIn({
+  const FadeIn({
     super.key,
     this.duration = animationTime,
     this.curve = Curves.easeOut,
@@ -21,10 +21,10 @@ class SlideFadeIn extends StatefulWidget {
   });
 
   @override
-  State<SlideFadeIn> createState() => _SlideFadeInState();
+  State<FadeIn> createState() => _FadeInState();
 }
 
-class _SlideFadeInState extends State<SlideFadeIn>
+class _FadeInState extends State<FadeIn>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
@@ -56,7 +56,7 @@ class _SlideFadeInState extends State<SlideFadeIn>
   }
 
   @override
-  void didUpdateWidget(SlideFadeIn oldWidget) {
+  void didUpdateWidget(FadeIn oldWidget) {
     super.didUpdateWidget(oldWidget);
     // 每次rebuild时重新播放动画
     _controller.reset();

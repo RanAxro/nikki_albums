@@ -2753,7 +2753,7 @@ class _AppDropdownState extends State<AppDropdown> {
       ),
       controller: controller,
       menuChildren: [
-        SlideFadeIn(
+        FadeIn(
           offsetBegin: Offset(0, -20),
           opacityBegin: 0.7,
           child: Stack(

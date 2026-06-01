@@ -107,9 +107,9 @@ class SettingDialog extends StatelessWidget{
               const NikkiasSetting(),
               const VersionInformation(),
             ].map((Widget page){
-              return SlideFadeIn(
-                offsetBegin: Offset(50, 0),
-                opacityBegin: 0.6,
+              return FadeIn(
+                offsetBegin: Offset.zero,
+                opacityBegin: 0.0,
                 child: page,
               );
             }).toList(),

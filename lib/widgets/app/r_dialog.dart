@@ -294,7 +294,7 @@ abstract class AppToast {
             color: AppThemeColor.transparent,
             child: AppThemeRole(
               colorRole: colorRole,
-              child: SlideFadeIn(
+              child: FadeIn(
                 offsetBegin: Offset(100, 0),
                 child: Container(
                   padding: const EdgeInsets.only(

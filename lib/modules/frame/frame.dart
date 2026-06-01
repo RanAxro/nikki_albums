@@ -1407,9 +1407,9 @@ class ContentBuildInWindow extends StatelessWidget {
               return ListenableBuilder(
                 listenable: contentController,
                 builder: (BuildContext context, Widget? child) {
-                  return SlideFadeIn(
-                    offsetBegin: Offset(50, 0),
-                    opacityBegin: 0.6,
+                  return FadeIn(
+                    offsetBegin: Offset.zero,
+                    opacityBegin: 0.0,
                     child: pages[index],
                   );
                 },
