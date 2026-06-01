@@ -7,7 +7,7 @@ use std::sync::Arc;
 // ============================================================
 // FFI 绑定
 // ============================================================
-#[cfg(target_os = "windows")]
+#[cfg(any(target_os = "windows", target_os = "macos"))]
 #[allow(non_snake_case, dead_code)]
 pub(super) mod ffi{
   use std::ffi::{c_char, c_void};
@@ -101,9 +101,9 @@ pub enum CustomData{
 // ============================================================
 #[frb(opaque)]
 pub struct MediaKey{
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   pub(super) ptr: *mut ffi::MediaKey,
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   _dummy: u8,
 }
 
@@ -113,7 +113,7 @@ unsafe impl Sync for MediaKey{}
 impl MediaKey{
   #[frb(sync, positional)]
   pub fn from_str_bytes(bytes: &[u8]) -> anyhow::Result<MediaKey>{
-    #[cfg(target_os = "windows")]
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let ptr = unsafe{ ffi::media_key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
       if ptr.is_null() {
@@ -121,7 +121,7 @@ impl MediaKey{
       }
       Ok(MediaKey{ ptr })
     }
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
       Ok(MediaKey{ _dummy: 0 })
     }
@@ -129,7 +129,7 @@ impl MediaKey{
 
   #[frb(sync, positional)]
   pub fn from_str(s: String) -> anyhow::Result<MediaKey>{
-    #[cfg(target_os = "windows")]
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let c_str = CString::new(s).map_err(|e| anyhow::anyhow!("invalid string: {e}"))?;
       let ptr = unsafe{ ffi::media_key_from_str(c_str.as_ptr()) };
@@ -138,7 +138,7 @@ impl MediaKey{
       }
       Ok(MediaKey{ ptr })
     }
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
       Ok(MediaKey{ _dummy: 0 })
     }
@@ -146,7 +146,7 @@ impl MediaKey{
 
   #[frb(sync)]
   pub fn camera_param() -> anyhow::Result<MediaKey>{
-    #[cfg(target_os = "windows")]
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let ptr = unsafe{ ffi::media_key_camera_param() };
       if ptr.is_null() {
@@ -154,14 +154,14 @@ impl MediaKey{
       }
       Ok(MediaKey{ ptr })
     }
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
       Ok(MediaKey{ _dummy: 0 })
     }
   }
 
   pub fn dispose(self){
-    #[cfg(target_os = "windows")]
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       if !self.ptr.is_null() {
         unsafe{ ffi::free_media_key(self.ptr) };
@@ -173,7 +173,7 @@ impl MediaKey{
 // ============================================================
 // 内部辅助：转换 DecryptionResult
 // ============================================================
-#[cfg(target_os = "windows")]
+#[cfg(any(target_os = "windows", target_os = "macos"))]
 pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
   if result.status != 0 {
     unsafe{ ffi::free_media_decryption_result(result) };
@@ -199,12 +199,12 @@ pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option
 // ============================================================
 #[frb(sync, positional)]
 pub fn media_decrypt(data: &[u8], key: &MediaKey) -> Option<CustomData>{
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   {
     let result = unsafe{ ffi::media_decrypt(data.as_ptr(), data.len(), key.ptr) };
     convert_media_result(result)
   }
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   {
     None
   }
@@ -216,7 +216,7 @@ pub fn media_decode_file_bytes_unchecked(
   bytes: &[u8],
   key: &MediaKey,
 ) -> Option<CustomData>{
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   {
     let result = unsafe{
       ffi::media_decode_file_bytes_unchecked(
@@ -229,7 +229,7 @@ pub fn media_decode_file_bytes_unchecked(
     };
     convert_media_result(result)
   }
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   {
     None
   }
@@ -237,7 +237,7 @@ pub fn media_decode_file_bytes_unchecked(
 
 #[frb]
 pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) -> Option<CustomData>{
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   {
     let c_path = CString::new(path).ok()?;
     let result = unsafe{
@@ -245,7 +245,7 @@ pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) ->
     };
     convert_media_result(result)
   }
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   {
     None
   }
@@ -278,7 +278,7 @@ pub fn media_decode_files_unchecked(
     return Ok(());
   }
 
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   {
     unsafe{
       let c_paths: Vec<CString> = paths
@@ -331,7 +331,7 @@ pub fn media_decode_files_unchecked(
       Ok(())
     }
   }
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   {
     let count = paths.len();
     progress_sink.add(MediaDecodeEvent::Progress(1.0));
@@ -347,7 +347,7 @@ pub fn media_decode_files_unchecked_no_progress(
   paths: Vec<String>,
   key: &MediaKey,
 ) -> Vec<Option<CustomData>>{
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   {
     let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
     let path_count = c_paths.len();
@@ -379,7 +379,7 @@ pub fn media_decode_files_unchecked_no_progress(
 
     results
   }
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   {
     vec![None; paths.len()]
   }
@@ -408,7 +408,7 @@ pub fn media_decode_files_unchecked_stream(
     return Ok(());
   }
 
-  #[cfg(target_os = "windows")]
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
   {
     let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
     let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
@@ -452,7 +452,7 @@ pub fn media_decode_files_unchecked_stream(
 
     Ok(())
   }
-  #[cfg(not(target_os = "windows"))]
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
   {
     for (i, _) in paths.iter().enumerate() {
       let _ = sink.add(MediaStreamResult { index: i, data: None });

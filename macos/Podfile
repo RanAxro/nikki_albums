@@ -55,11 +55,7 @@ def inject_dylib_copy_phase
   # 创建 Shell Script Build Phase
   phase = runner_target.new_shell_script_build_phase(phase_name)
   phase.shell_script = <<-'SCRIPT'
-if [[ "$ARCHS" == *"arm64"* ]] || [[ "$CURRENT_ARCH" == "arm64" ]]; then
-    DYLIB_SRC="$SRCROOT/../rust/lib/macos/aarch64/libnuan5_decryption.dylib"
-else
-    DYLIB_SRC="$SRCROOT/../rust/lib/macos/x86_64/libnuan5_decryption.dylib"
-fi
+DYLIB_SRC="$SRCROOT/../rust/lib/macos/aarch64/libnuan5_decryption.dylib"
 
 FRAMEWORKS_DIR="$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH"
 mkdir -p "$FRAMEWORKS_DIR"

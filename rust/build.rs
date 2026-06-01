@@ -20,11 +20,6 @@ fn main() {
       "nuan5_decryption.lib",
       Some("nuan5_decryption.dll"),
     ),
-    ("macos", "x86_64") => (
-      PathBuf::from("./lib/macos/x86_64"),
-      "libnuan5_decryption.dylib",
-      Some("libnuan5_decryption.dylib"),
-    ),
     ("macos", "aarch64") => (
       PathBuf::from("./lib/macos/aarch64"),
       "libnuan5_decryption.dylib",
