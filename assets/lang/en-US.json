@@ -32,7 +32,10 @@
 
 
   "----------setting----------": "----------setting----------",
+  "imageCustomDataWidgetSize": "Custom info badge scaling factor",
   "theme": "Theme",
+  "followSystemAppearance": "Follow System Appearance",
+  "experimental": "Experimental",
   "lang": "English",
   "language": "Language",
 

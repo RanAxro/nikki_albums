@@ -16,6 +16,7 @@ class Personalization extends StatelessWidget {
         spacing: bigListSpacing,
         children: [
           const MaximizeOrRestoreButtonSwitch(),
+          const FollowSystemSwitch(),
           const ChangeTheme(),
         ],
       ),
@@ -69,6 +70,48 @@ class MaximizeOrRestoreButtonSwitch extends StatelessWidget {
   }
 }
 
+class FollowSystemSwitch extends StatelessWidget {
+  const FollowSystemSwitch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: AppState.isThemeFollowSystem,
+      builder:
+          (
+            BuildContext context,
+            bool isThemeFollowSystem,
+            Widget? child,
+          ) {
+            return Align(
+              alignment: Alignment.centerLeft,
+              child: SmallButton(
+                padding: const EdgeInsets.all(smallPadding),
+                colorRole: ColorRole.background,
+                transparent: false,
+                width: smallDialogMaxWidth,
+                height: mediumButtonSize,
+                onClick: () {
+                  AppState.isThemeFollowSystem.value = !isThemeFollowSystem;
+                },
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "${context.tr("followSystemAppearance")}: ${isThemeFollowSystem ? context.tr("enable") : context.tr("disable")}",
+                    style: TextStyle(
+                      color: AppTheme.of(
+                        context,
+                      )!.colorScheme.background.onColor,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+    );
+  }
+}
+
 class ChangeTheme extends StatelessWidget {
   const ChangeTheme({super.key});
 
@@ -103,6 +146,13 @@ class ChangeTheme extends StatelessWidget {
                 )[index];
                 return GestureDetector(
                   onTap: () {
+                    if (AppState.isThemeFollowSystem.value) {
+                      final bool isClickedDark = (color == 0xFF333333);
+                      final bool isSystemDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
+                      if (isClickedDark != isSystemDark) {
+                        AppState.isThemeFollowSystem.value = false;
+                      }
+                    }
                     AppState.theme.value = color;
                   },
                   child: ClipOval(child: Container(color: Color(color))),

@@ -33,6 +33,10 @@ abstract class AppState {
   static final ValueNotifier<int> theme = _createStateValue<int>(
     0xFFEEEEEE,
   ); // theme 0xFFEEEEEE
+
+  static final ValueNotifier<bool> isThemeFollowSystem = _createStateValue<bool>(
+    true,
+  );
   static final ValueNotifier<int> animationDuration = _createStateValue<int>(
     100,
   );
@@ -104,6 +108,10 @@ abstract class AppState {
     );
     assign<String>("lang", (String value) => lang.value = value);
     assign<int>("theme", (int value) => theme.value = value);
+    assign<bool>(
+      "isThemeFollowSystem",
+      (bool value) => isThemeFollowSystem.value = value,
+    );
     assign<int>(
       "animationDuration",
       (int value) => animationDuration.value = value,
@@ -174,6 +182,7 @@ abstract class AppState {
       "isAgreeAgreement": isAgreeAgreement.value,
       "lang": lang.value,
       "theme": theme.value,
+      "isThemeFollowSystem": isThemeFollowSystem.value,
       "animationDuration": animationDuration.value,
       "currentGame": Game.toJsonMap(currentGame.value),
       "customGame": customGame.value

@@ -58,19 +58,33 @@ class _FrameState extends State<Frame> {
     super.initState();
     AppState.lang.addListener(whenLangChanged);
     AppState.theme.addListener(whenThemeChanged);
+    AppState.isThemeFollowSystem.addListener(whenThemeChanged);
   }
 
   @override
   Widget build(BuildContext context) {
-    return AppTheme(
-      theme: AppState.theme.value,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+    return MediaQuery.fromView(
+      view: View.of(context),
+      child: Builder(
+        builder: (context) {
+          int currentTheme = AppState.theme.value;
+          if (AppState.isThemeFollowSystem.value) {
+            final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+            if (brightness == Brightness.dark) {
+              currentTheme = 0xFF333333; // Dark theme
+            } else {
+              currentTheme = (currentTheme == 0xFF333333) ? 0xFFEEEEEE : currentTheme;
+            }
+          }
 
-        locale: context.locale,
-        supportedLocales: context.supportedLocales,
-        localizationsDelegates: context.localizationDelegates,
-        home: Scaffold(
+          return AppTheme(
+            theme: currentTheme,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              locale: context.locale,
+              supportedLocales: context.supportedLocales,
+              localizationsDelegates: context.localizationDelegates,
+              home: Scaffold(
           body: Builder(
             builder: (BuildContext context) {
               Widget child;
@@ -115,6 +129,9 @@ class _FrameState extends State<Frame> {
         ),
       ),
     );
+        },
+      ),
+    );
   }
 
   @override
@@ -122,6 +139,7 @@ class _FrameState extends State<Frame> {
     super.dispose();
     AppState.lang.removeListener(whenLangChanged);
     AppState.theme.removeListener(whenThemeChanged);
+    AppState.isThemeFollowSystem.removeListener(whenThemeChanged);
   }
 }
 
