@@ -1,4 +1,5 @@
 
+import "package:nikki_albums/modules/initial_startup/presentation/initial_startup_setting.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 
@@ -85,8 +86,14 @@ class _FrameState extends State<Frame> {
               supportedLocales: context.supportedLocales,
               localizationsDelegates: context.localizationDelegates,
               home: Scaffold(
-                body: Builder(
-                  builder: (BuildContext context) {
+                body: ValueListenableBuilder(
+                  valueListenable: AppState.isInitialStartup,
+                  builder: (BuildContext context, bool value, Widget? child) {
+
+                    /// 首次使用软件
+                    if(value){
+                      return InitialStartupSetting();
+                    }
 
                     /// TODO check
                     if(!kDebugMode){

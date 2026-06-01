@@ -40,6 +40,11 @@
   "valueIsTooHigh": "值太大",
 
 
+  "----------initial_startup----------": "----------initial_startup----------",
+  "welcome": "欢迎使用暖暖相册",
+  "start": "开始使用",
+
+
   "----------setting----------": "----------setting----------",
   "theme": "主题",
   "followSystemAppearance": "跟随系统外观",

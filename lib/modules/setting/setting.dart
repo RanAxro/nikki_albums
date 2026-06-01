@@ -194,7 +194,12 @@ class ChangeTheme extends StatelessWidget{
 }
 
 class ChangeLanguage extends StatelessWidget{
-  const ChangeLanguage({super.key});
+  final Widget Function(BuildContext context, MenuController controller, Widget? child)? builder;
+
+  const ChangeLanguage({
+    super.key,
+    this.builder,
+  });
 
   @override
   Widget build(BuildContext context){
@@ -216,7 +221,7 @@ class ChangeLanguage extends StatelessWidget{
           child: AppText("English", isTranslate: false),
         ),
       ],
-      builder: (BuildContext context, MenuController controller, Widget? child){
+      builder: builder ?? (BuildContext context, MenuController controller, Widget? child){
         return SmallButton(
           padding: const EdgeInsets.symmetric(horizontal: smallPadding),
           width: null,

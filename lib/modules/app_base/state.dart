@@ -20,58 +20,37 @@ final ContentController contentController = ContentController(1);
 
 abstract class AppState {
   /// common
-  static final ValueNotifier<bool> isAgreeAgreement = _createStateValue<bool>(
-    false,
-  ); // 用户是否同意软件使用协议
-  static final ValueNotifier<String?> sfxPath = ValueNotifier<String?>(
-    null,
-  ); // sfx 路径
-  static final ValueNotifier<String?> nikkiasToBeParsed =
-      ValueNotifier<String?>(null); // 需要解析的 nikkias 文件路径
+  static final ValueNotifier<bool> isAgreeAgreement = _createStateValue<bool>(false); // 用户是否同意软件使用协议
+  static final ValueNotifier<bool> isInitialStartup = _createStateValue<bool>(true); // 是否首次启动软件
+  static final ValueNotifier<String?> sfxPath = ValueNotifier<String?>(null); // sfx 路径
+  static final ValueNotifier<String?> nikkiasToBeParsed = ValueNotifier<String?>(null); // 需要解析的 nikkias 文件路径
   /// app common
   static final ValueNotifier<String> lang = _createStateValue<String>("zh-CN");
-  static final ValueNotifier<int> theme = _createStateValue<int>(
-    0xFFEEEEEE,
-  ); // theme 0xFFEEEEEE
+  static final ValueNotifier<int> theme = _createStateValue<int>(0xFFEEEEEE); // theme 0xFFEEEEEE
 
-  static final ValueNotifier<bool> isThemeFollowSystem = _createStateValue<bool>(
-    true,
-  );
-  static final ValueNotifier<int> animationDuration = _createStateValue<int>(
-    100,
-  );
+  static final ValueNotifier<bool> isThemeFollowSystem = _createStateValue<bool>(true);
+  static final ValueNotifier<int> animationDuration = _createStateValue<int>(100);
 
   /// frame
-  static final ValueNotifier<Game?> currentGame = _createStateValue<Game?>(
-    null,
-  );
-  static final ValueNotifier<List<Game>> customGame =
-      _createStateValue<List<Game>>([]);
-  static final ValueNotifier<Set<UidNote>> uidNotes =
-      _createStateValue<Set<UidNote>>({});
-  static final ValueNotifier<Set<GameShortcut>> gameShortcuts =
-      _createStateValue<Set<GameShortcut>>({});
+  static final ValueNotifier<Game?> currentGame = _createStateValue<Game?>(null);
+  static final ValueNotifier<List<Game>> customGame = _createStateValue<List<Game>>([]);
+  static final ValueNotifier<Set<UidNote>> uidNotes = _createStateValue<Set<UidNote>>({});
+  static final ValueNotifier<Set<GameShortcut>> gameShortcuts = _createStateValue<Set<GameShortcut>>({});
 
   /// album
   static final ValueNotifier<int> albumColumn = _createStateValue<int>(4);
-  static final ValueNotifier<bool> isShowImageCustomData =
-      _createStateValue<bool>(true);
-  static final ValueNotifier<double?> imageCustomDataWidgetSize =
-      _createStateValue<double?>(null);
+  static final ValueNotifier<bool> isShowImageCustomData = _createStateValue<bool>(true);
+  static final ValueNotifier<double?> imageCustomDataWidgetSize = _createStateValue<double?>(null);
 
   /// creation
-  static final ValueNotifier<String?> creationDirectoryPath =
-      _createStateValue<String?>(null);
+  static final ValueNotifier<String?> creationDirectoryPath = _createStateValue<String?>(null);
 
   /// only windows
-  static final ValueNotifier<bool> isUseMaximizeOrRestoreButton =
-      _createStateValue<bool>(true);
-  static final ValueNotifier<bool> needFileAssociationHelper =
-      _createStateValue<bool>(true);
+  static final ValueNotifier<bool> isUseMaximizeOrRestoreButton = _createStateValue<bool>(true);
+  static final ValueNotifier<bool> needFileAssociationHelper = _createStateValue<bool>(true);
 
   /// live photo export format: "none", "apple", "google"
-  static final ValueNotifier<String> livePhotoExportFormat =
-      _createStateValue<String>(Platform.isMacOS ? "apple" : "none");
+  static final ValueNotifier<String> livePhotoExportFormat = _createStateValue<String>(Platform.isMacOS ? "apple" : "none");
 
   static ValueNotifier<T> _createStateValue<T>(T initValue) {
     final ValueNotifier<T> vn = ValueNotifier<T>(initValue);
@@ -106,6 +85,7 @@ abstract class AppState {
       "isAgreeAgreement",
       (bool value) => isAgreeAgreement.value = value,
     );
+    assign<bool>("isInitialStartup", (bool value) => isInitialStartup.value = value);
     assign<String>("lang", (String value) => lang.value = value);
     assign<int>("theme", (int value) => theme.value = value);
     assign<bool>(
@@ -180,6 +160,7 @@ abstract class AppState {
 
     final Map jsonMap = {
       "isAgreeAgreement": isAgreeAgreement.value,
+      "isInitialStartup": isInitialStartup.value,
       "lang": lang.value,
       "theme": theme.value,
       "isThemeFollowSystem": isThemeFollowSystem.value,
