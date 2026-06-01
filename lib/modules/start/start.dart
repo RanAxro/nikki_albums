@@ -142,7 +142,14 @@ class OpenFolderButton extends StatelessWidget {
       menuChildren: [
         MenuItemButton(
           onPressed: () {
-            AppState.currentGame.value?.launcherPath.open();
+            final game = AppState.currentGame.value;
+            if (game != null) {
+              if (Platform.isMacOS) {
+                Process.run("open", ["-R", game.launcherPath.path]);
+              } else {
+                game.launcherPath.open();
+              }
+            }
           },
           child: Text(context.tr("openLauncherDirectory")),
         ),
