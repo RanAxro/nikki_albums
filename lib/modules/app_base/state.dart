@@ -38,7 +38,7 @@ abstract class AppState {
   static final ValueNotifier<Set<GameShortcut>> gameShortcuts = _createStateValue<Set<GameShortcut>>({});
 
   /// album
-  static final ValueNotifier<int> albumColumn = _createStateValue<int>(4);
+  static final ValueNotifier<int> albumColumn = _createStateValue<int>(7);
   static final ValueNotifier<bool> isShowImageCustomData = _createStateValue<bool>(true);
   static final ValueNotifier<double?> imageCustomDataWidgetSize = _createStateValue<double?>(null);
 
