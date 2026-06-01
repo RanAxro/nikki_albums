@@ -302,11 +302,11 @@ main{
 	font-size: 28px;
 }
 
-#download_windows_box{
-	background-color: #0078D4;
+#download_app_box{
+	background: linear-gradient(135deg, #0078D4 0%, #333333 100%);
 }
-#download_windows_box:hover{
-	background-color: #0068C0;
+#download_app_box:hover{
+	background: linear-gradient(135deg, #0068C0 0%, #1a1a1a 100%);
 }
 #go_to_github_box{
 	outline: solid 3px;
@@ -415,9 +415,11 @@ main{
 
 		<!-- fast visit -->
 		<section id="fast_vist">
-			<a id="download_windows_box" class="fast_vist_item_box" href="https://file-nikki.ranaxro.com/app/v3.06/Nikki%20Albums-v3.06-Windows-x64.zip" target="_blank">
-			<!-- <a id="download_windows_box" class="fast_vist_item_box" target="_blank" onclick="console.log('pr')"> -->
-				<img src="website/images/windows.svg" alt="下载Windows版本">
+			<a id="download_app_box" class="fast_vist_item_box" href="website/pages/zh/download.html">
+				<div style="display: flex; gap: 8px; margin-left: 10px;">
+					<img src="website/images/windows.svg" alt="Windows版本" style="height: 32px;">
+					<img src="website/images/macos.svg" alt="macOS版本" style="height: 32px; filter: invert(1);">
+				</div>
 				<p>下载</p>
 			</a>
 			<a id="go_to_github_box" class="fast_vist_item_box" href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
