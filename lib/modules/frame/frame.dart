@@ -1465,11 +1465,19 @@ class MacOSTitleBar extends StatelessWidget {
             Row(
               children: [
                 // Leave space for native traffic light buttons
-                const SizedBox(width: 78),
+                const SizedBox(width: 88),
 
-                const AccountButton(),
+                Expanded(
+                  child: Row(
+                    children: [
+                      const AccountButton(),
 
-                const GameShortcutBar(),
+                      const GameShortcutBar(),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(width: 8),
               ],
             ),
           ],
