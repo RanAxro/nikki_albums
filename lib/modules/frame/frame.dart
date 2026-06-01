@@ -78,6 +78,10 @@ class _FrameState extends State<Frame> {
             }
           }
 
+          /// 加载语言
+          final List lang = AppState.lang.value.split("-");
+          context.setLocale(Locale(lang[0], lang[1]));
+
           return AppTheme(
             theme: currentTheme,
             child: MaterialApp(
