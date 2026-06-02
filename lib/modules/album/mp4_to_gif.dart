@@ -409,9 +409,6 @@ class _VideoToGifPanelState extends State<VideoToGifPanel>{
                             final String? output = await FilePicker.platform.saveFile(
                               dialogTitle: context.tr("export"),
                               fileName: "${p.basenameWithoutExtension(widget.videoPath)}.gif",
-                              type: FileType.custom,
-                              allowedExtensions: ["gif"],
-                              lockParentWindow: true,
                             );
 
                             if(output == null) return;
