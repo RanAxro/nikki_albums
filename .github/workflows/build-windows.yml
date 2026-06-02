@@ -56,6 +56,14 @@ jobs:
       - name: Hide Console Window
         run: editbin /subsystem:windows "Nikki Albums.exe"
 
+      - name: Restore Executable Icon and Properties
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe" -OutFile rcedit.exe
+          .\rcedit.exe "Nikki Albums.exe" --set-icon "windows\runner\resources\app_icon.ico"
+          .\rcedit.exe "Nikki Albums.exe" --set-version-string "CompanyName" "com.ranaxro.nikki"
+          .\rcedit.exe "Nikki Albums.exe" --set-version-string "FileDescription" "Nikki Albums"
+          .\rcedit.exe "Nikki Albums.exe" --set-version-string "ProductName" "Nikki Albums"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
