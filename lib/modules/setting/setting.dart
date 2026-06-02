@@ -1,3 +1,5 @@
+import "package:flutter/foundation.dart";
+
 import "personalization.dart";
 import "edit_custom_game.dart";
 import "live_photo_settings.dart";
@@ -84,14 +86,15 @@ class SettingDialog extends StatelessWidget{
                             },
                             child: AppText("version_information"),
                           ),
-                          AppRawButton(
-                            width: constraints.maxWidth,
-                            height: smallButtonSize,
-                            onClick: () {
-                              controller.jumpToPage(Platform.isWindows ? 5 : 3);
-                            },
-                            child: AppText("Debug Panel", isTranslate: false),
-                          ),
+                          if(kDebugMode)
+                            AppRawButton(
+                              width: constraints.maxWidth,
+                              height: smallButtonSize,
+                              onClick: () {
+                                controller.jumpToPage(Platform.isWindows ? 5 : 3);
+                              },
+                              child: AppText("Debug Panel", isTranslate: false),
+                            ),
                         ],
                       );
                     },
@@ -115,7 +118,7 @@ class SettingDialog extends StatelessWidget{
               const LivePhotoSettings(),
               const NikkiasSetting(),
               const VersionInformation(),
-              const DebugPanel(),
+              if(kDebugMode) const DebugPanel(),
             ].map((Widget page){
               return FadeIn(
                 offsetBegin: Offset.zero,
