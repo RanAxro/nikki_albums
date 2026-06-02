@@ -52,6 +52,12 @@ abstract class AppState {
   /// live photo export format: "none", "apple", "google"
   static final ValueNotifier<String> livePhotoExportFormat = _createStateValue<String>(Platform.isMacOS ? "apple" : "none");
 
+  /// debug
+  static final ValueNotifier<String?> debugNuan5DecryptionOutput = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionInput = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionKey = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionFlag = _createStateValue<String?>(null);
+
   static ValueNotifier<T> _createStateValue<T>(T initValue) {
     final ValueNotifier<T> vn = ValueNotifier<T>(initValue);
     vn.addListener(() {
@@ -150,6 +156,11 @@ abstract class AppState {
       "livePhotoExportFormat",
       (String value) => livePhotoExportFormat.value = value,
     );
+
+    assign<String?>("debugNuan5DecryptionOutput", (String? value) => debugNuan5DecryptionOutput.value = value);
+    assign<String?>("debugNuan5DecryptionInput", (String? value) => debugNuan5DecryptionInput.value = value);
+    assign<String?>("debugNuan5DecryptionKey", (String? value) => debugNuan5DecryptionKey.value = value);
+    assign<String?>("debugNuan5DecryptionFlag", (String? value) => debugNuan5DecryptionFlag.value = value);
   }
 
   static Future<void> save() async {
@@ -182,6 +193,11 @@ abstract class AppState {
       "isUseMaximizeOrRestoreButton": isUseMaximizeOrRestoreButton.value,
       "needFileAssociationHelper": needFileAssociationHelper.value,
       "livePhotoExportFormat": livePhotoExportFormat.value,
+
+      "debugNuan5DecryptionOutput": debugNuan5DecryptionOutput.value,
+      "debugNuan5DecryptionInput": debugNuan5DecryptionInput.value,
+      "debugNuan5DecryptionKey": debugNuan5DecryptionKey.value,
+      "debugNuan5DecryptionFlag": debugNuan5DecryptionFlag.value,
     };
 
     try {

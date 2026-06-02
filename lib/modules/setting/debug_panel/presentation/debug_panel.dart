@@ -1,4 +1,6 @@
+
 import "app_state_debug.dart";
+import "nuan5_decryption_debug.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -63,7 +65,7 @@ class DebugPanel extends StatelessWidget{
             physics: const NeverScrollableScrollPhysics(),
             children: [
               AppStateDebug(),
-              block0,
+              Nuan5DecryptionDebug(),
             ],
           ),
         ),
