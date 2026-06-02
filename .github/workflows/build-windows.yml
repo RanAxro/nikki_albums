@@ -48,11 +48,11 @@ jobs:
 
       - name: Pack to Portable Executable
         run: |
-          .\warp-packer.exe --arch windows-x64 --input_dir build\windows\x64\runner\Release --exec nikki_albums.exe --output nikki_albums_portable.exe
+          .\warp-packer.exe --arch windows-x64 --input_dir build\windows\x64\runner\Release --exec nikki_albums.exe --output "Nikki Albums.exe"
 
       - name: Zip the Executable
         run: |
-          Compress-Archive -Path nikki_albums_portable.exe -DestinationPath nikki_albums-windows.zip
+          Compress-Archive -Path "Nikki Albums.exe" -DestinationPath nikki_albums-windows.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
