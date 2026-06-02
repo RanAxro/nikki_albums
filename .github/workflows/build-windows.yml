@@ -45,7 +45,7 @@ jobs:
       - name: Pack to Portable Executable (7-Zip SFX)
         run: |
           # Download 7z extra for 7zSD.sfx
-          Invoke-WebRequest -Uri "https://www.7-zip.org/a/lzma2405.7z" -OutFile lzma.7z
+          Invoke-WebRequest -Uri "https://www.7-zip.org/a/lzma2601.7z" -OutFile lzma.7z
           7z e lzma.7z bin/7zSD.sfx
           
           # Download rcedit
