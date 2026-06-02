@@ -8978,5 +8978,10 @@
   "game_weapon_custom_state_close": "Off",
   "game_weapon_custom_state_open": "On",
   "game_interaction_type_chair": "Chair",
-  "game_interaction_type_decoration": "Decoration"
+  "game_interaction_type_decoration": "Decoration",
+  "extraComponentRequired": "Extra Component Required",
+  "ffmpegDownloadDescription": "Exporting Live Photos in Apple format requires downloading and installing the open-source component FFmpeg. The download process will run in the background (approx. 30MB).",
+  "downloadingFFmpeg": "Downloading FFmpeg...",
+  "extractingFFmpeg": "Extracting FFmpeg...",
+  "ffmpegDownloadFailed": "Download failed. Please check your network connection or try again later."
 }

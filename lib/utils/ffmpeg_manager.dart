@@ -10,8 +10,9 @@ import 'package:path/path.dart' as p;
 
 class FFmpegManager {
   static const List<String> _mirrors = [
+    'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip',
+    'https://github.moeyy.xyz/https://github.com/GyanD/codexffmpeg/releases/download/2024-05-23-git-98ffdf14b9/ffmpeg-2024-05-23-git-98ffdf14b9-essentials_build.zip',
     'https://mirror.ghproxy.com/https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip',
-    'https://ghproxy.net/https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip',
     'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip',
   ];
 
@@ -45,37 +46,39 @@ class FFmpegManager {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return AppDialog(
-          maxWidth: 400,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: listSpacing,
-            children: [
-              AppText("extraComponentRequired", fontSize: 18, fontWeight: FontWeight.bold),
-              block10H,
-              AppText("ffmpegDownloadDescription"),
-              block20H,
-              Row(
-                spacing: listSpacing,
-                children: [
-                  Expanded(
-                    child: AppButton.smallText(
-                      onClick: () => Navigator.of(context).pop(false),
-                      child: AppText("cancel"),
+        return Center(
+          child: AppDialog(
+            maxWidth: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: listSpacing,
+              children: [
+                AppText(context.tr("extraComponentRequired"), fontSize: 18, fontWeight: FontWeight.bold),
+                block10H,
+                AppText(context.tr("ffmpegDownloadDescription")),
+                block20H,
+                Row(
+                  spacing: listSpacing,
+                  children: [
+                    Expanded(
+                      child: AppButton.smallText(
+                        onClick: () => Navigator.of(context).pop(false),
+                        child: AppText(context.tr("cancel")),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: AppButton.smallText(
-                      colorRole: ColorRole.highlight,
-                      isTransparent: false,
-                      onClick: () => Navigator.of(context).pop(true),
-                      child: AppText("download"),
+                    Expanded(
+                      child: AppButton.smallText(
+                        colorRole: ColorRole.highlight,
+                        isTransparent: false,
+                        onClick: () => Navigator.of(context).pop(true),
+                        child: AppText(context.tr("download")),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -102,35 +105,37 @@ class FFmpegManager {
       builder: (context) {
         return PopScope(
           canPop: false,
-          child: AppDialog(
-            maxWidth: 400,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: listSpacing,
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: statusNotifier,
-                  builder: (context, status, _) => AppText(status, fontWeight: FontWeight.bold),
-                ),
-                block10H,
-                ValueListenableBuilder(
-                  valueListenable: progressNotifier,
-                  builder: (context, progress, _) {
-                    if (progress == null) {
-                      return const LinearProgressIndicator();
-                    }
-                    return LinearProgressIndicator(value: progress);
-                  },
-                ),
-                block20H,
-                AppButton.smallText(
-                  onClick: () {
-                    cancelToken.cancel();
-                    Navigator.of(context).pop();
-                  },
-                  child: AppText("cancel"),
-                ),
-              ],
+          child: Center(
+            child: AppDialog(
+              maxWidth: 400,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                spacing: listSpacing,
+                children: [
+                  ValueListenableBuilder(
+                    valueListenable: statusNotifier,
+                    builder: (context, status, _) => AppText(context.tr(status), fontWeight: FontWeight.bold),
+                  ),
+                  block10H,
+                  ValueListenableBuilder(
+                    valueListenable: progressNotifier,
+                    builder: (context, progress, _) {
+                      if (progress == null) {
+                        return const LinearProgressIndicator();
+                      }
+                      return LinearProgressIndicator(value: progress);
+                    },
+                  ),
+                  block20H,
+                  AppButton.smallText(
+                    onClick: () {
+                      cancelToken.cancel();
+                      Navigator.of(context).pop();
+                    },
+                    child: AppText(context.tr("cancel")),
+                  ),
+                ],
+              ),
             ),
           ),
         );
