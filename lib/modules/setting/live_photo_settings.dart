@@ -52,8 +52,11 @@ class LivePhotoSettings extends StatelessWidget {
     final bool selected = value == current;
     return IntrinsicWidth(
       child: AppButton.smallText(
-        onClick: (){
+        onClick: () {
           AppState.livePhotoExportFormat.value = value;
+          if (Platform.isWindows && value == "apple") {
+            FFmpegManager.checkAndDownload(context);
+          }
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -75,7 +78,11 @@ class LivePhotoSettings extends StatelessWidget {
                 valueListenable: FFmpegManager.isInstalledNotifier,
                 builder: (context, isInstalled, _) {
                   if (!isInstalled) {
-                    return const Icon(Icons.cloud_download_outlined, size: 16);
+                    return Icon(
+                      Icons.cloud_download_outlined,
+                      size: 16,
+                      color: AppTheme.of(context)!.colorScheme.background.onColor,
+                    );
                   }
                   return const SizedBox.shrink();
                 },
