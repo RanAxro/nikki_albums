@@ -44,11 +44,12 @@ class FFmpegManager {
     // UI Guardrail: 明确告知用户需要下载组件
     final bool? shouldDownload = await showDialog<bool>(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
       builder: (context) {
         return Center(
           child: AppDialog(
             maxWidth: 400,
+            useIntrinsicHeight: false,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,6 +109,7 @@ class FFmpegManager {
           child: Center(
             child: AppDialog(
               maxWidth: 400,
+              useIntrinsicHeight: false,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 spacing: listSpacing,
