@@ -14,10 +14,11 @@ class Personalization extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(smallPadding),
       child: Column(
-        spacing: bigListSpacing,
+        spacing: listSpacing,
         children: [
           if(!Platform.isMacOS) const MaximizeOrRestoreButtonSwitch(),
           const FollowSystemSwitch(),
+          block5H,
           const ChangeTheme(),
         ],
       ),
@@ -32,40 +33,15 @@ class MaximizeOrRestoreButtonSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: AppState.isUseMaximizeOrRestoreButton,
-      builder:
-          (
-            BuildContext context,
-            bool isUseMaximizeOrRestoreButton,
-            Widget? child,
-          ) {
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                child: Row(
-                  children: [
-                    Text(
-                      context.tr("maximizeOrRestoreButton"),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppTheme.of(context)!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    const Spacer(),
-                    Transform.scale(
-                      scale: 0.8,
-                      child: Switch(
-                        value: isUseMaximizeOrRestoreButton,
-                        onChanged: (bool value) {
-                          AppState.isUseMaximizeOrRestoreButton.value = value;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+      builder: (BuildContext context, bool isUseMaximizeOrRestoreButton, Widget? child){
+        return AppSwitchButton(
+          value: isUseMaximizeOrRestoreButton,
+          onChanged: (bool value) {
+            AppState.isUseMaximizeOrRestoreButton.value = value;
           },
+          child: AppText("maximizeOrRestoreButton", fontSize: 14),
+        );
+      },
     );
   }
 }
@@ -77,40 +53,15 @@ class FollowSystemSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: AppState.isThemeFollowSystem,
-      builder:
-          (
-            BuildContext context,
-            bool isThemeFollowSystem,
-            Widget? child,
-          ) {
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                child: Row(
-                  children: [
-                    Text(
-                      context.tr("followSystemAppearance"),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppTheme.of(context)!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    const Spacer(),
-                    Transform.scale(
-                      scale: 0.8,
-                      child: Switch(
-                        value: isThemeFollowSystem,
-                        onChanged: (bool value) {
-                          AppState.isThemeFollowSystem.value = value;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+      builder: (BuildContext context, bool isThemeFollowSystem, Widget? child){
+        return AppSwitchButton(
+          value: isThemeFollowSystem,
+          onChanged: (bool value) {
+            AppState.isThemeFollowSystem.value = value;
           },
+          child: AppText("followSystemAppearance", fontSize: 14),
+        );
+      },
     );
   }
 }
