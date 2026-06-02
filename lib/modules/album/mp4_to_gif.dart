@@ -416,12 +416,15 @@ class _VideoToGifPanelState extends State<VideoToGifPanel>{
 
                             final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
                             if(context.mounted){
+                              final navContext = Navigator.of(context).context;
                               Navigator.of(context).pop();
                               WidgetsBinding.instance.addPostFrameCallback((_){
-                                showProgressBar(
-                                  context: context,
-                                  valueListenable: progress,
-                                );
+                                if (navContext.mounted) {
+                                  showProgressBar(
+                                    context: navContext,
+                                    valueListenable: progress,
+                                  );
+                                }
                               });
                             }
 
