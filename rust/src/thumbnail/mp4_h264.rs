@@ -165,3 +165,15 @@ pub fn generate_thumbnail(mp4_bytes: &Vec<u8>, target_width: Option<u32>, target
     bytes: dst_img.buffer().to_vec(),
   })
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_generate_thumbnail_invalid_bytes() {
+        let invalid_bytes = vec![0, 1, 2, 3];
+        let result = generate_thumbnail(&invalid_bytes, Some(100), Some(100));
+        assert!(result.is_err());
+    }
+}

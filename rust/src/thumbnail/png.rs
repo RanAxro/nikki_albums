@@ -97,3 +97,30 @@ pub fn generate_thumbnail(png_bytes: &Vec<u8>, target_width: Option<u32>, target
     bytes: dst_img.buffer().to_vec(),
   })
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_generate_thumbnail_invalid_bytes() {
+        let invalid_bytes = vec![0, 1, 2, 3];
+        let result = generate_thumbnail(&invalid_bytes, Some(100), Some(100));
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_generate_thumbnail_valid_1x1_png() {
+        let png_hex = "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000a49444154789c63000100000500010d0a2db40000000049454e44ae426082";
+        let mut bytes = vec![0; png_hex.len() / 2];
+        faster_hex::hex_decode(png_hex.as_bytes(), &mut bytes).unwrap();
+        
+        let result = generate_thumbnail(&bytes, None, None);
+        assert!(result.is_ok());
+        if let Ok(thumb) = result {
+            assert_eq!(thumb.width, 1);
+            assert_eq!(thumb.height, 1);
+            assert_eq!(thumb.bytes.len(), 4);
+        }
+    }
+}
