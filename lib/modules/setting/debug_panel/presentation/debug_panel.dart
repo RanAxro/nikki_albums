@@ -1,4 +1,4 @@
-
+import "app_state_debug.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -62,7 +62,7 @@ class DebugPanel extends StatelessWidget{
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              block0,
+              AppStateDebug(),
               block0,
             ],
           ),
