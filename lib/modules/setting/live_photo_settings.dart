@@ -52,10 +52,14 @@ class LivePhotoSettings extends StatelessWidget {
     final bool selected = value == current;
     return IntrinsicWidth(
       child: AppButton.smallText(
-        onClick: () {
-          AppState.livePhotoExportFormat.value = value;
+        onClick: () async {
           if (Platform.isWindows && value == "apple") {
-            FFmpegManager.checkAndDownload(context);
+            final success = await FFmpegManager.checkAndDownload(context);
+            if (success) {
+              AppState.livePhotoExportFormat.value = value;
+            }
+          } else {
+            AppState.livePhotoExportFormat.value = value;
           }
         },
         child: Row(
