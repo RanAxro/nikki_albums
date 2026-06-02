@@ -42,24 +42,31 @@ jobs:
       - name: Build Windows app
         run: flutter build windows --release
 
-      - name: Pack to Portable Executable
+      - name: Pack to Portable Executable (7-Zip SFX)
         run: |
-          Invoke-WebRequest -Uri "https://github.com/dgiagio/warp/releases/download/v0.3.0/windows-x64.warp-packer.exe" -OutFile warp-packer.exe
-          .\warp-packer.exe --arch windows-x64 --input_dir build\windows\x64\runner\Release --exec nikki_albums.exe --output "Nikki Albums.exe"
-
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Hide Console Window
-        run: editbin /subsystem:windows "Nikki Albums.exe"
-
-      - name: Restore Executable Icon and Properties
-        run: |
+          # Download 7z extra for 7zSD.sfx
+          Invoke-WebRequest -Uri "https://www.7-zip.org/a/lzma2405.7z" -OutFile lzma.7z
+          7z e lzma.7z bin/7zSD.sfx
+          
+          # Download rcedit
           Invoke-WebRequest -Uri "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe" -OutFile rcedit.exe
-          .\rcedit.exe "Nikki Albums.exe" --set-icon "windows\runner\resources\app_icon.ico"
-          .\rcedit.exe "Nikki Albums.exe" --set-version-string "CompanyName" "com.ranaxro.nikki"
-          .\rcedit.exe "Nikki Albums.exe" --set-version-string "FileDescription" "Nikki Albums"
-          .\rcedit.exe "Nikki Albums.exe" --set-version-string "ProductName" "Nikki Albums"
+          
+          # Set icon and properties on the SFX stub BEFORE appending the archive
+          .\rcedit.exe "7zSD.sfx" --set-icon "windows\runner\resources\app_icon.ico"
+          .\rcedit.exe "7zSD.sfx" --set-version-string "CompanyName" "com.ranaxro.nikki"
+          .\rcedit.exe "7zSD.sfx" --set-version-string "FileDescription" "Nikki Albums"
+          .\rcedit.exe "7zSD.sfx" --set-version-string "ProductName" "Nikki Albums"
+          
+          # Create silent config without BOM
+          $config = ";!@Install@!UTF-8!`r`nRunProgram=`"nikki_albums.exe`"`r`nGUIMode=`"2`"`r`n;!@InstallEnd@!`r`n"
+          $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+          [IO.File]::WriteAllText("config.txt", $config, $utf8NoBom)
+          
+          # Archive the app
+          7z a app.7z .\build\windows\x64\runner\Release\*
+          
+          # Combine stub, config, and archive into the final executable
+          cmd /c "copy /b 7zSD.sfx + config.txt + app.7z `"Nikki Albums.exe`""
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
