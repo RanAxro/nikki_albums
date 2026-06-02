@@ -3,6 +3,7 @@ import "edit_custom_game.dart";
 import "live_photo_settings.dart";
 import "nikkias_setting/presentation/nikkias_setting.dart";
 import "version_information/presentation/version_information.dart";
+import "debug_panel/presentation/debug_panel.dart";
 
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
@@ -83,6 +84,14 @@ class SettingDialog extends StatelessWidget{
                             },
                             child: AppText("version_information"),
                           ),
+                          AppRawButton(
+                            width: constraints.maxWidth,
+                            height: smallButtonSize,
+                            onClick: () {
+                              controller.jumpToPage(Platform.isWindows ? 5 : 3);
+                            },
+                            child: AppText("Debug Panel", isTranslate: false),
+                          ),
                         ],
                       );
                     },
@@ -106,6 +115,7 @@ class SettingDialog extends StatelessWidget{
               const LivePhotoSettings(),
               const NikkiasSetting(),
               const VersionInformation(),
+              const DebugPanel(),
             ].map((Widget page){
               return FadeIn(
                 offsetBegin: Offset.zero,
@@ -122,39 +132,41 @@ class SettingDialog extends StatelessWidget{
       insetPadding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(smallBorderRadius)),
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 700),
-        child: Container(
-        padding: const EdgeInsets.all(smallPadding),
-        child: Column(
-          spacing: bigListSpacing,
-          children: [
-            SizedBox(
-              height: topBarHeight,
-              child: Row(
-                spacing: bigListSpacing,
-                children: [
-                  block10W,
-                  Expanded(
-                    child: AppText("setting", fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints){
+          return Container(
+            padding: const EdgeInsets.all(smallPadding),
+            width: constraints.maxWidth - 88,
+            child: Column(
+              spacing: bigListSpacing,
+              children: [
+                SizedBox(
+                  height: topBarHeight,
+                  child: Row(
+                    spacing: bigListSpacing,
+                    children: [
+                      block10W,
+                      Expanded(
+                        child: AppText("setting", fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
 
-                  const ChangeLanguage(),
+                      const ChangeLanguage(),
 
-                  AppButton.smallIcon(
-                    colorRole: ColorRole.background,
-                    onClick: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: AppIcon("cross", height: 20),
+                      AppButton.smallIcon(
+                        colorRole: ColorRole.background,
+                        onClick: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: AppIcon("cross", height: 20),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Expanded(child: content),
+              ],
             ),
-            Expanded(child: content),
-          ],
-        ),
-      ),
+          );
+        },
       ),
     );
   }
