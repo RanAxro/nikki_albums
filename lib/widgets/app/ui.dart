@@ -2899,3 +2899,150 @@ class _AppMapViewerState extends State<AppMapViewer> {
     );
   }
 }
+
+class AppRawSwitch extends StatelessWidget{
+  final bool value;
+  final void Function(bool)? onChanged;
+
+  const AppRawSwitch({
+    super.key,
+    required this.value,
+    this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context){
+    return Transform.scale(
+      scale: 0.8,
+      child: Switch(
+        value: value,
+        onChanged: onChanged,
+        thumbColor: WidgetStateProperty.fromMap({
+          WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).color,
+          WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+          WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).pressedColor,
+          ~WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
+          ~WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).onHoveredColor,
+          ~WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor,
+        }),
+        trackColor: WidgetStateProperty.fromMap({
+          ~WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).color,
+          ~WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+          ~WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).pressedColor,
+          WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
+          WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).onHoveredColor,
+          WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor,
+        }),
+        trackOutlineColor: WidgetStateProperty.fromMap({
+          WidgetState.any: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
+        }),
+      ),
+    );
+  }
+}
+
+class AppSwitchButton extends StatefulWidget{
+  final Duration duration;
+  final Curve curve;
+
+  final bool value;
+  final void Function(bool)? onChanged;
+  final bool expand;
+
+  final AlignmentGeometry alignment;
+  final EdgeInsetsGeometry? padding;
+  final double? width;
+  final double? height;
+  final BoxConstraints? constraints;
+  final EdgeInsetsGeometry? margin;
+  final double? borderRadius;
+  final ColorRole? colorRole;
+  final bool isTransparent;
+  final bool useConfiguration;
+
+  final String? toolTip;
+  final bool isTranslate;
+  final List<LogicalKeyboardKey>? toolTipShortcut;
+  final bool usable;
+  final Widget? child;
+
+  const AppSwitchButton({
+    super.key,
+    this.duration = animationTime,
+    this.curve = Curves.linear,
+    required this.value,
+    this.onChanged,
+    this.expand = true,
+    this.alignment = Alignment.center,
+    this.padding = const EdgeInsets.symmetric(horizontal: smallPadding),
+    this.width,
+    this.height = smallButtonSize,
+    this.constraints,
+    this.margin,
+    this.borderRadius = smallBorderRadius,
+    this.colorRole,
+    this.isTransparent = true,
+    this.useConfiguration = true,
+    this.toolTip,
+    this.toolTipShortcut,
+    this.isTranslate = true,
+    this.usable = true,
+    this.child,
+  });
+
+  @override
+  State<AppSwitchButton> createState() => _AppSwitchButtonState();
+}
+class _AppSwitchButtonState extends State<AppSwitchButton>{
+  late bool value;
+
+  @override
+  void initState(){
+    super.initState();
+    value = widget.value;
+  }
+
+  @override
+  Widget build(BuildContext context){
+    final Widget switchWidget = AppRawSwitch(
+      value: value,
+      onChanged: (bool newValue){
+        value = newValue;
+        widget.onChanged?.call(value);
+      },
+    );
+
+    return AppButton(
+      key: widget.key,
+      duration: widget.duration,
+      curve: widget.curve,
+      alignment: widget.alignment,
+      padding: widget.padding,
+      width: widget.width,
+      height: widget.height,
+      constraints: widget.constraints,
+      margin: widget.margin,
+      borderRadius: widget.borderRadius,
+      colorRole: widget.colorRole,
+      isTransparent: widget.isTransparent,
+      useConfiguration: widget.useConfiguration,
+      toolTip: widget.toolTip,
+      isTranslate: widget.isTranslate,
+      toolTipShortcut: widget.toolTipShortcut,
+      usable: widget.usable,
+      onClick: (){
+        setState((){
+          value = !value;
+          widget.onChanged?.call(value);
+        });
+      },
+      child: widget.child == null ? switchWidget : Row(
+        children: [
+          Expanded(child: widget.child!),
+
+          switchWidget,
+        ],
+      ),
+    );
+  }
+}
