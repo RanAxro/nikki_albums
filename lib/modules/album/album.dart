@@ -1247,6 +1247,7 @@ class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader> {
   @override
   void initState() {
     super.initState();
+    FFmpegManager.init();
     scrollbarController.addListener(onDrag);
   }
 
@@ -2643,12 +2644,19 @@ class _VideoViewerDialogState extends State<VideoViewerDialog>{
                         }
                       );
                     },
-                    child: Row(
-                      spacing: listSpacing,
-                      children: [
-                        AppIcon("forward"),
-                        AppText("导出gif动图"),
-                      ],
+                    child: ValueListenableBuilder<bool>(
+                      valueListenable: FFmpegManager.isInstalledNotifier,
+                      builder: (context, isInstalled, _) {
+                        return Row(
+                          spacing: listSpacing,
+                          children: [
+                            AppIcon("forward"),
+                            AppText("导出gif动图"),
+                            if (Platform.isWindows && !isInstalled)
+                              const Icon(Icons.cloud_download_outlined, size: 16),
+                          ],
+                        );
+                      },
                     ),
                   )
                 ],

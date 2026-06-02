@@ -1,6 +1,7 @@
 import "dart:io";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/utils/ffmpeg_manager.dart";
 
 import "package:flutter/material.dart";
 
@@ -38,7 +39,7 @@ class LivePhotoSettings extends StatelessWidget {
               block10H,
 
               _buildRadioOption(context, "none", format),
-              if (Platform.isMacOS) _buildRadioOption(context, "apple", format),
+              _buildRadioOption(context, "apple", format),
               _buildRadioOption(context, "google", format),
             ],
           );
@@ -69,6 +70,16 @@ class LivePhotoSettings extends StatelessWidget {
                 color: AppTheme.of(context)!.colorScheme.background.onColor,
               ),
             ),
+            if (Platform.isWindows && value == "apple")
+              ValueListenableBuilder<bool>(
+                valueListenable: FFmpegManager.isInstalledNotifier,
+                builder: (context, isInstalled, _) {
+                  if (!isInstalled) {
+                    return const Icon(Icons.cloud_download_outlined, size: 16);
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
           ],
         ),
       ),

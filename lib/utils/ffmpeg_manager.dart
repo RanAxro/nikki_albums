@@ -15,6 +15,12 @@ class FFmpegManager {
     'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip',
   ];
 
+  static final ValueNotifier<bool> isInstalledNotifier = ValueNotifier<bool>(true);
+
+  static Future<void> init() async {
+    isInstalledNotifier.value = await isInstalled();
+  }
+
   static Future<String> get _ffmpegPath async {
     final appSupportDir = await getApplicationSupportDirectory();
     final binDir = Directory(p.join(appSupportDir.path, 'bin'));
@@ -197,6 +203,10 @@ class FFmpegManager {
 
       if (context.mounted) {
         Navigator.of(context).pop(); // 关掉进度条
+      }
+
+      if (found) {
+        isInstalledNotifier.value = true;
       }
 
       return found;

@@ -433,7 +433,22 @@ class _VideoToGifPanelState extends State<VideoToGifPanel>{
                           colorRole: ColorRole.highlight,
                           isTransparent: false,
                           usable: usable,
-                          child: AppText("export"),
+                          child: ValueListenableBuilder<bool>(
+                            valueListenable: FFmpegManager.isInstalledNotifier,
+                            builder: (context, isInstalled, _) {
+                              if (Platform.isWindows && !isInstalled) {
+                                return Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  spacing: smallPadding,
+                                  children: [
+                                    AppText("export"),
+                                    const Icon(Icons.cloud_download_outlined, size: 16),
+                                  ],
+                                );
+                              }
+                              return AppText("export");
+                            },
+                          ),
                           onClick: () async{
                             if (Platform.isWindows) {
                               if (!await FFmpegManager.checkAndDownload(context)) {
