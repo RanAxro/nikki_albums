@@ -2,6 +2,7 @@ import Cocoa
 import FlutterMacOS
 import AVFoundation
 import Photos
+import UniformTypeIdentifiers
 
 public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -12,6 +13,18 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
+    case "exportToGif":
+        guard let args = call.arguments as? [String: Any],
+              let inputPath = args["inputPath"] as? String,
+              let outputPath = args["outputPath"] as? String,
+              let fps = (args["fps"] as? NSNumber)?.intValue,
+              let width = (args["width"] as? NSNumber)?.intValue,
+              let startTime = (args["startTime"] as? NSNumber)?.doubleValue,
+              let duration = (args["duration"] as? NSNumber)?.doubleValue else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        exportToGif(inputPath: inputPath, outputPath: outputPath, fps: fps, width: width, startTime: startTime, duration: duration, result: result)
     case "remuxMp4ToMov":
         guard let args = call.arguments as? [String: Any],
               let inputPath = args["inputPath"] as? String,
@@ -270,6 +283,83 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
               default:
                   result(FlutterError(code: "EXPORT_UNKNOWN", message: "Unknown export status", details: nil))
               }
+          }
+      }
+  }
+
+  private func exportToGif(inputPath: String, outputPath: String, fps: Int, width: Int, startTime: Double, duration: Double, result: @escaping FlutterResult) {
+      let inputURL = URL(fileURLWithPath: inputPath)
+      let outputURL = URL(fileURLWithPath: outputPath)
+
+      if FileManager.default.fileExists(atPath: outputPath) {
+          try? FileManager.default.removeItem(at: outputURL)
+      }
+
+      let asset = AVAsset(url: inputURL)
+      let generator = AVAssetImageGenerator(asset: asset)
+      generator.appliesPreferredTrackTransform = true
+      generator.requestedTimeToleranceBefore = .zero
+      generator.requestedTimeToleranceAfter = .zero
+      
+      if let track = asset.tracks(withMediaType: .video).first {
+          let natSize = track.naturalSize
+          if natSize.width > 0 {
+              let ratio = natSize.height / natSize.width
+              let height = Int(CGFloat(width) * ratio)
+              generator.maximumSize = CGSize(width: width, height: height)
+          }
+      }
+
+      let totalSeconds = asset.duration.seconds
+      let validStartTime = max(0, startTime)
+      let endSeconds = duration > 0 ? min(totalSeconds, validStartTime + duration) : totalSeconds
+      let validDuration = endSeconds - validStartTime
+
+      if validDuration <= 0 {
+          result(FlutterError(code: "INVALID_DURATION", message: "Duration must be positive", details: nil))
+          return
+      }
+
+      let frameCount = Int(ceil(validDuration * Double(fps)))
+      let frameInterval = validDuration / Double(frameCount)
+
+      var times = [CMTime]()
+      for i in 0..<frameCount {
+          let time = CMTime(seconds: validStartTime + Double(i) * frameInterval, preferredTimescale: 600)
+          times.append(time)
+      }
+
+      guard let destination = CGImageDestinationCreateWithURL(outputURL as CFURL, UTType.gif.identifier as CFString, frameCount, nil) else {
+          result(FlutterError(code: "DESTINATION_ERROR", message: "Could not create GIF destination", details: nil))
+          return
+      }
+
+      let delayTime = 1.0 / Double(fps)
+      let frameProperties = [
+          kCGImagePropertyGIFDictionary as String: [
+              kCGImagePropertyGIFDelayTime as String: delayTime
+          ]
+      ]
+      let gifProperties = [
+          kCGImagePropertyGIFDictionary as String: [
+              kCGImagePropertyGIFLoopCount as String: 0
+          ]
+      ]
+      CGImageDestinationSetProperties(destination, gifProperties as CFDictionary)
+
+      DispatchQueue.global(qos: .userInitiated).async {
+          for time in times {
+              do {
+                  let image = try generator.copyCGImage(at: time, actualTime: nil)
+                  CGImageDestinationAddImage(destination, image, frameProperties as CFDictionary)
+              } catch {
+                  // Skip frame on error
+              }
+          }
+          if CGImageDestinationFinalize(destination) {
+              DispatchQueue.main.async { result(true) }
+          } else {
+              DispatchQueue.main.async { result(FlutterError(code: "FINALIZE_ERROR", message: "Could not finalize GIF", details: nil)) }
           }
       }
   }

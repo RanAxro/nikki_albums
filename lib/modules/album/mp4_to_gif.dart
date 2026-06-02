@@ -12,6 +12,7 @@ import 'package:nikki_albums/utils/system/system.dart';
 import 'package:nikki_albums/widgets/app/component.dart';
 import 'package:nikki_albums/widgets/common/component.dart';
 import "package:path/path.dart" as p;
+import 'package:flutter/services.dart';
 
 class Mp4ToGifConverter{
   static Future<void> init() async{
@@ -65,6 +66,19 @@ class Mp4ToGifConverter{
     double? duration,
     void Function(int current, int total)? onProgress,
   }) async {
+    const MethodChannel _channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
+    if (Platform.isMacOS) {
+      await _channel.invokeMethod('exportToGif', {
+        'inputPath': videoPath,
+        'outputPath': outputPath,
+        'fps': fps,
+        'width': width,
+        'startTime': startTime,
+        'duration': duration ?? -1.0,
+      });
+      return;
+    }
+
     final player = Player();
     final controller = VideoController(player);
 
@@ -389,11 +403,13 @@ class _VideoToGifPanelState extends State<VideoToGifPanel>{
                         return AppButton.smallText(
                           colorRole: ColorRole.highlight,
                           isTransparent: false,
+                          usable: usable,
+                          child: AppText("export"),
                           onClick: () async{
                             final String? output = await FilePicker.platform.saveFile(
                               dialogTitle: context.tr("export"),
                               fileName: "${p.basenameWithoutExtension(widget.videoPath)}.gif",
-                              type: FileType.image,
+                              type: FileType.custom,
                               allowedExtensions: ["gif"],
                               lockParentWindow: true,
                             );
@@ -412,19 +428,21 @@ class _VideoToGifPanelState extends State<VideoToGifPanel>{
                               });
                             }
 
-                            await Mp4ToGifConverter.init();
-                            await Mp4ToGifConverter.convert(
-                              videoPath: widget.videoPath,
-                              outputPath: output,
-                              fps: fps.value,
-                              width: width.value.toInt(),
-                              onProgress: (c, t) => progress.value = c / t,
-                            );
+                            try {
+                              await Mp4ToGifConverter.init();
+                              await Mp4ToGifConverter.convert(
+                                videoPath: widget.videoPath,
+                                outputPath: output,
+                                fps: fps.value,
+                                width: width.value.toInt(),
+                                onProgress: (c, t) => progress.value = c / t,
+                              );
+                            } finally {
+                              progress.value = 1.0;
+                            }
 
                             Explorer.openFile(File(output));
                           },
-                          usable: usable,
-                          child: AppText("export"),
                         );
                       },
                     ),
