@@ -13,6 +13,8 @@ import 'package:nikki_albums/widgets/app/component.dart';
 import 'package:nikki_albums/widgets/common/component.dart';
 import "package:path/path.dart" as p;
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:nikki_albums/utils/ffmpeg_manager.dart';
 
 class Mp4ToGifConverter{
   static Future<void> init() async{
@@ -79,6 +81,33 @@ class Mp4ToGifConverter{
       return;
     }
 
+    if (Platform.isWindows) {
+      // Assuming FFmpeg is already checked/downloaded before calling this
+      final List<String> args = [
+        '-y',
+        '-ss', startTime.toStringAsFixed(3),
+      ];
+      if (duration != null && duration > 0) {
+        args.addAll(['-t', duration.toStringAsFixed(3)]);
+      }
+      args.addAll([
+        '-i', videoPath,
+        '-vf', 'fps=$fps,scale=$width:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse',
+        '-loop', '0',
+        outputPath
+      ]);
+      
+      final result = await Process.run(
+        p.join((await getApplicationSupportDirectory()).path, 'bin', 'ffmpeg.exe'),
+        args,
+      );
+      if (result.exitCode != 0) {
+        throw Exception('FFmpeg GIF conversion failed: ${result.stderr}');
+      }
+      return;
+    }
+
+    // --- Fallback Dart implementation ---
     final player = Player();
     final controller = VideoController(player);
 
@@ -406,6 +435,12 @@ class _VideoToGifPanelState extends State<VideoToGifPanel>{
                           usable: usable,
                           child: AppText("export"),
                           onClick: () async{
+                            if (Platform.isWindows) {
+                              if (!await FFmpegManager.checkAndDownload(context)) {
+                                return;
+                              }
+                            }
+
                             final String? output = await FilePicker.platform.saveFile(
                               dialogTitle: context.tr("export"),
                               fileName: "${p.basenameWithoutExtension(widget.videoPath)}.gif",

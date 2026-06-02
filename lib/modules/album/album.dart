@@ -9,6 +9,7 @@ import "package:nikki_albums/modules/game/infinity_nikki/service/live_photo_expo
 import "package:nikki_albums/modules/game/infinity_nikki/domain/param_codec.dart";
 import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
 import "package:nikki_albums/modules/album/mp4_to_gif.dart";
+import 'package:nikki_albums/utils/ffmpeg_manager.dart';
 import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";
 import "package:nikki_albums/modules/setting/setting.dart";
 import "package:nikki_albums/modules/file_transfer/file_transfer.dart";
@@ -213,6 +214,12 @@ class AlbumHandler{
     final String liveFormat = AppState.livePhotoExportFormat.value;
     final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
 
+    if (Platform.isWindows && isVideoAlbum && liveFormat == "apple") {
+      if (!await FFmpegManager.checkAndDownload(context)) {
+        return;
+      }
+    }
+
     final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
     bool isError = false;
 
@@ -270,6 +277,15 @@ class AlbumHandler{
 
   /// export images to native device
   Future<void> exportToLocal(BuildContext context, List<ImageItem> images)async{
+    final String liveFormat = AppState.livePhotoExportFormat.value;
+    final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+
+    if (Platform.isWindows && isVideoAlbum && liveFormat == "apple") {
+      if (!await FFmpegManager.checkAndDownload(context)) {
+        return;
+      }
+    }
+
     final String? location = await FilePicker.platform.getDirectoryPath(
       dialogTitle: context.plural("exportXImage", images.length),
       lockParentWindow: true,
