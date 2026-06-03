@@ -29,7 +29,7 @@
   "width": "宽度",
   "height": "高度",
   "fps": "帧率",
-  "exportToGif": "导出gif动图",
+  "exportToGif": "导出GIF动图",
   "mustIsNumber": "必须为数字",
   "cannotIsNegativeNumber": "不能为负数",
   "cannotIsZero": "不能为0",
