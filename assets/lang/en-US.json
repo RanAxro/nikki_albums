@@ -138,6 +138,7 @@
   "dragArea": "Drag Area",
   "exportToClipboard": "Copy to Clipboard",
   "exportToLocal": "Export Locally",
+  "exportToGif": "Export as GIF",
   "exportToNetwork": "Export to network device",
   "exportToPhotoLibrary": "Export to Photo Library",
   "exportNikkiasToLocal": "Export nikkias file",

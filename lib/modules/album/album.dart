@@ -2947,7 +2947,7 @@ class _VideoViewerDialogState extends State<VideoViewerDialog> {
                     },
                     child: Row(
                       spacing: listSpacing,
-                      children: [AppIcon("forward"), AppText("导出gif动图")],
+                      children: [AppIcon("forward"), AppText("exportToGif")],
                     ),
                   ),
                 ],
