@@ -52,7 +52,7 @@ class AppDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return direction == Axis.horizontal
+    return direction == Axis.vertical
         ? VerticalDivider(
             width: thickness,
             thickness: thickness,
@@ -1170,7 +1170,7 @@ class _AppButtonStackState extends State<AppButtonStack> {
             child: IgnorePointer(
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: AppDivider(direction: widget.direction, thickness: 1),
+                child: AppDivider(direction: widget.direction == Axis.horizontal ? Axis.vertical : Axis.horizontal, thickness: 1),
               ),
             ),
           ),
