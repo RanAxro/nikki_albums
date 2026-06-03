@@ -38,15 +38,8 @@ class AppleLivePhotoStrategy implements LivePhotoExportStrategy {
         'assetIdentifier': assetIdentifier,
       });
 
-      // 3. Try to import to Photos Library (best effort)
-      try {
-        await _channel.invokeMethod('importLivePhoto', {
-          'coverPath': outImagePath,
-          'videoPath': outVideoPath,
-        });
-      } on PlatformException {
-        // Ignored
-      }
+      // Removed automatic import to Photos Library, as this strategy is used for Local/Clipboard exports.
+      // Photo Library importing is handled separately in AlbumHandler.exportToPhotoLibrary.
       return;
     }
 

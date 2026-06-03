@@ -114,34 +114,35 @@ class _FrameState extends State<Frame> {
                       child = const Placeholder();
                     }
 
-                    return child;
-
-                    // return CallbackShortcuts(
-                    //   bindings: <ShortcutActivator, VoidCallback>{
-                    //     if (Platform.isMacOS)
-                    //       const SingleActivator(LogicalKeyboardKey.comma, meta: true): () {
-                    //         showDialog(
-                    //           context: context,
-                    //           builder: (BuildContext context) {
-                    //             return SettingDialog();
-                    //           },
-                    //         );
-                    //       },
-                    //     if (Platform.isWindows)
-                    //       const SingleActivator(LogicalKeyboardKey.comma, control: true): () {
-                    //         showDialog(
-                    //           context: context,
-                    //           builder: (BuildContext context) {
-                    //             return SettingDialog();
-                    //           },
-                    //         );
-                    //       },
-                    //   },
-                    //   child: Focus(
-                    //     autofocus: true,
-                    //     child: child,
-                    //   ),
-                    // );
+                    return CallbackShortcuts(
+                      bindings: <ShortcutActivator, VoidCallback>{
+                        if (Platform.isMacOS)
+                          const SingleActivator(
+                            LogicalKeyboardKey.comma,
+                            meta: true,
+                          ): () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SettingDialog();
+                              },
+                            );
+                          },
+                        if (Platform.isWindows)
+                          const SingleActivator(
+                            LogicalKeyboardKey.comma,
+                            control: true,
+                          ): () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SettingDialog();
+                              },
+                            );
+                          },
+                      },
+                      child: Focus(autofocus: true, child: child),
+                    );
                   },
                 ),
               ),
