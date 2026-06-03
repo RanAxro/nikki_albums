@@ -59,9 +59,9 @@ class _FrameState extends State<Frame> {
       final isComma = event.logicalKey == LogicalKeyboardKey.comma;
 
       if (isComma && ((isMac && isCmd) || (!isMac && isCtrl))) {
-        if (mounted) {
+        if (mounted && frameKey.currentContext != null) {
           showDialog(
-            context: context,
+            context: frameKey.currentContext!,
             builder: (BuildContext context) {
               return SettingDialog(initialPage: SettingPage.personalization);
             },
