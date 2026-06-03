@@ -57,6 +57,8 @@ abstract class AppState {
   static final ValueNotifier<String?> debugNuan5DecryptionInput = _createStateValue<String?>(null);
   static final ValueNotifier<String?> debugNuan5DecryptionKey = _createStateValue<String?>(null);
   static final ValueNotifier<String?> debugNuan5DecryptionFlag = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionCameraParams = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionShareCode = _createStateValue<String?>(null);
 
   static ValueNotifier<T> _createStateValue<T>(T initValue) {
     final ValueNotifier<T> vn = ValueNotifier<T>(initValue);
@@ -161,6 +163,8 @@ abstract class AppState {
     assign<String?>("debugNuan5DecryptionInput", (String? value) => debugNuan5DecryptionInput.value = value);
     assign<String?>("debugNuan5DecryptionKey", (String? value) => debugNuan5DecryptionKey.value = value);
     assign<String?>("debugNuan5DecryptionFlag", (String? value) => debugNuan5DecryptionFlag.value = value);
+    assign<String?>("debugNuan5DecryptionCameraParams", (String? value) => debugNuan5DecryptionCameraParams.value = value);
+    assign<String?>("debugNuan5DecryptionShareCode", (String? value) => debugNuan5DecryptionShareCode.value = value);
   }
 
   static Future<void> save() async {
@@ -198,6 +202,8 @@ abstract class AppState {
       "debugNuan5DecryptionInput": debugNuan5DecryptionInput.value,
       "debugNuan5DecryptionKey": debugNuan5DecryptionKey.value,
       "debugNuan5DecryptionFlag": debugNuan5DecryptionFlag.value,
+      "debugNuan5DecryptionCameraParams": debugNuan5DecryptionCameraParams.value,
+      "debugNuan5DecryptionShareCode": debugNuan5DecryptionShareCode.value,
     };
 
     try {

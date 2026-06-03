@@ -47,6 +47,8 @@ class Nuan5DecryptionDebug extends StatelessWidget{
             },
           ),
 
+          AppDivider(),
+
           ValueListenableBuilder(
             valueListenable: AppState.debugNuan5DecryptionInput,
             builder: (BuildContext context, String? debugNuan5DecryptionInput, Widget? child){
@@ -132,15 +134,31 @@ class Nuan5DecryptionDebug extends StatelessWidget{
 
           AppButton.smallText(
             onClick: () async{
-              if(AppState.debugNuan5DecryptionOutput.value == null || AppState.debugNuan5DecryptionInput.value == null || AppState.debugNuan5DecryptionKey.value == null || AppState.debugNuan5DecryptionFlag.value == null){
-                AppToast.showMessage(context: context, message: "值不能为null", state: false);
+              if(AppState.debugNuan5DecryptionOutput.value == null){
+                AppToast.showMessage(context: context, message: "解码文件保存文件夹不能为空", state: false);
+                return;
+              }
+              if(AppState.debugNuan5DecryptionInput.value == null){
+                AppToast.showMessage(context: context, message: "需解码的危机不能为空", state: false);
+                return;
+              }
+              if(AppState.debugNuan5DecryptionKey.value == null){
+                AppToast.showMessage(context: context, message: "密钥不能为空", state: false);
+                return;
+              }
+              if(AppState.debugNuan5DecryptionFlag.value == null){
+                AppToast.showMessage(context: context, message: "flag不能为空", state: false);
                 return;
               }
 
               final MediaKey key = MediaKey.fromStr(AppState.debugNuan5DecryptionKey.value!);
               final flag = base64Decode(AppState.debugNuan5DecryptionFlag.value!);
               final CustomData? d = await mediaDecodeFileUnchecked(flag: flag, path: AppState.debugNuan5DecryptionInput.value!, key: key);
-              if(d != null){
+              if(d == null){
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: "解码失败", state: false);
+                }
+              }else{
                 d.when(
                   invalid: (){
                     AppToast.showMessage(context: context, message: "解码成功: Invalid Params");
@@ -157,6 +175,93 @@ class Nuan5DecryptionDebug extends StatelessWidget{
               key.dispose();
             },
             child: AppText("开始解码", isTranslate: false),
+          ),
+
+
+          AppDivider(),
+
+          ValueListenableBuilder(
+            valueListenable: AppState.debugNuan5DecryptionCameraParams,
+            builder: (BuildContext context, String? debugNuan5DecryptionCameraParams, Widget? child){
+              return AppTextFiled(
+                labelText: "相机参数",
+                isTranslateLabel: false,
+                controller: TextEditingController(text: debugNuan5DecryptionCameraParams ?? ""),
+                onChanged: (String value){
+                  AppState.debugNuan5DecryptionCameraParams.value = value;
+                },
+              );
+            },
+          ),
+
+          AppButton.smallText(
+            onClick: () async{
+              if(AppState.debugNuan5DecryptionOutput.value == null){
+                AppToast.showMessage(context: context, message: "解码文件保存文件夹不能为空", state: false);
+                return;
+              }
+              if(AppState.debugNuan5DecryptionCameraParams.value == null){
+                AppToast.showMessage(context: context, message: "相机参数不能为空", state: false);
+                return;
+              }
+
+              final MediaKey key = MediaKey.cameraParam();
+              final CustomData? d = mediaDecrypt(utf8.encode(AppState.debugNuan5DecryptionCameraParams.value!), key);
+              if(d == null){
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: "解码失败", state: false);
+                }
+              }else{
+                d.when(
+                  invalid: (){
+                    AppToast.showMessage(context: context, message: "解码成功: Invalid Params");
+                  },
+                  valid: (Uint8List valid) async{
+                    final String output = p.join(AppState.debugNuan5DecryptionOutput.value!, "decrypted.json");
+                    await File(output).writeAsBytes(valid);
+                    if(context.mounted){
+                      AppToast.showMessage(context: context, message: "解码成功: 已保存到 $output");
+                    }
+                  },
+                );
+              }
+              key.dispose();
+            },
+            child: AppText("解码相机参数", isTranslate: false),
+          ),
+
+
+          AppDivider(),
+
+
+          ValueListenableBuilder(
+            valueListenable: AppState.debugNuan5DecryptionShareCode,
+            builder: (BuildContext context, String? debugNuan5DecryptionShareCode, Widget? child){
+              return AppTextFiled(
+                labelText: "分享码",
+                isTranslateLabel: false,
+                controller: TextEditingController(text: debugNuan5DecryptionShareCode ?? ""),
+                onChanged: (String value){
+                  AppState.debugNuan5DecryptionShareCode.value = value;
+                },
+              );
+            },
+          ),
+
+          AppButton.smallText(
+            child: AppText("解码分享码", isTranslate: false),
+          ),
+
+
+          AppDivider(),
+
+          AppTextFiled(
+            labelText: "家园码",
+            isTranslateLabel: false,
+          ),
+
+          AppButton.smallText(
+            child: AppText("解码家园码", isTranslate: false),
           ),
 
           // AppButton.smallText(
