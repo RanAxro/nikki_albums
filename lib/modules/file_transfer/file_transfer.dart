@@ -4,11 +4,10 @@ export "receive_file.dart";
 import "receive_file.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/utils/network.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
-
-import "package:network_info_plus/network_info_plus.dart";
 
 final ContentItem item = ContentItem(
   name: "file_transfer",
@@ -44,26 +43,20 @@ class FileTransfer extends StatelessWidget {
 class TransmissionInfo {
   static Future<String?> getCode() async {
     try {
-      final wifiIP = await NetworkInfo().getWifiIP();
-      final submask = await NetworkInfo().getWifiSubmask();
+      final wifiIP = await NetworkIPHelper.getWifiIP();
 
-      if (wifiIP == null || submask == null) return null;
+      if (wifiIP == null) return null;
 
       final ip = InternetAddress.tryParse(wifiIP);
-      final mask = InternetAddress.tryParse(submask);
 
-      if (ip?.type != InternetAddressType.IPv4 ||
-          mask?.type != InternetAddressType.IPv4) {
+      if (ip?.type != InternetAddressType.IPv4) {
         return null;
       }
 
       final ipBytes = ip!.rawAddress;
-      final maskBytes = mask!.rawAddress;
 
-      int code = 0;
-      for (int i = 0; i < 4; i++) {
-        code = (code << 8) | (ipBytes[i] & ~maskBytes[i]);
-      }
+      // Use last octet as the code (simple, works for /24 subnets)
+      int code = ipBytes[3];
 
       return code.toString();
     } catch (e) {

@@ -129,19 +129,39 @@ class NetworkIPHelper {
 
       // 检查列表中是否包含特定网络类型（按优先级）
       if (results.contains(ConnectivityResult.ethernet)) {
-        return getEthernetIP();
+        final ip = await getEthernetIP();
+        if (ip != null) return ip;
       }
       if (results.contains(ConnectivityResult.wifi)) {
-        return getWifiIP();
+        final ip = await getWifiIP();
+        if (ip != null) return ip;
       }
       if (results.contains(ConnectivityResult.mobile)) {
-        return getMobileIP();
+        final ip = await getMobileIP();
+        if (ip != null) return ip;
       }
+    } catch (_) {}
 
-      return null;
-    } catch (e) {
-      return null;
-    }
+    // Fallback: try all interface types directly if connectivity_plus fails
+    // or returns unexpected results (common on non-sandboxed macOS)
+    final ip = await getWifiIP() ?? await getEthernetIP() ?? await getMobileIP();
+    if (ip != null) return ip;
+
+    // Last resort: return first available non-loopback IPv4 address
+    try {
+      final interfaces = await NetworkInterface.list(
+        includeLoopback: false,
+        includeLinkLocal: false,
+        type: InternetAddressType.IPv4,
+      );
+      for (var interface in interfaces) {
+        if (interface.addresses.isNotEmpty) {
+          return interface.addresses.first.address;
+        }
+      }
+    } catch (_) {}
+
+    return null;
   }
 
   /// 获取所有活跃网络的 IP 列表

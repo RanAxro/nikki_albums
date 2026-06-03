@@ -21,7 +21,6 @@ import "package:qr_flutter/qr_flutter.dart";
 import "package:shelf/shelf.dart";
 import "package:shelf/shelf_io.dart" as shelf_io;
 import "package:shelf_static/shelf_static.dart";
-import "package:network_info_plus/network_info_plus.dart";
 
 Future<void> exportImageToNetwork(BuildContext context, Game game) async {
   final Path zipPath = (await getTempPath()) + r"NikkiImages.zip";
@@ -238,16 +237,25 @@ class _UdpBroadcastBuilderState extends State<UdpBroadcastBuilder> {
   Future<void> startBroadcastUdp() async {
     stopBroadcastUdp();
 
+    final String bindIp = await NetworkIPHelper.getWifiIP() ?? "127.0.0.1";
+
     socket = await RawDatagramSocket.bind(
-      await NetworkInfo().getWifiIP() ?? "127.0.0.1",
+      bindIp,
       5555,
     );
     socket!.broadcastEnabled = true;
 
     final data = utf8.encode(widget.info.toString());
 
-    final wifiBroadcast = await NetworkInfo().getWifiBroadcast();
-    final broadcast = InternetAddress(wifiBroadcast ?? "192.168.1.255");
+    // Compute broadcast address from the bind IP (assume /24 subnet)
+    final parts = bindIp.split('.');
+    final String broadcastAddr;
+    if (parts.length == 4 && bindIp != "127.0.0.1") {
+      broadcastAddr = "${parts[0]}.${parts[1]}.${parts[2]}.255";
+    } else {
+      broadcastAddr = "192.168.1.255";
+    }
+    final broadcast = InternetAddress(broadcastAddr);
 
     timer = Timer.periodic(udpBroadcastFrequency, (timer) {
       socket!.send(data, broadcast, udpPort);
@@ -436,8 +444,7 @@ class _SendFileBuilderState extends State<SendFileBuilder> {
     final String code =
         await TransmissionInfo.getCode() ?? Random().nextInt(100).toString();
     final String ip =
-        await NetworkInfo().getWifiIP() ??
-        server!.address.address ??
+        await NetworkIPHelper.getActiveNetworkIP() ??
         "127.0.0.1";
     final String port = server!.port.toString();
 

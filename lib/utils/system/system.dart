@@ -32,11 +32,21 @@ Future<Path> getTempPath() async {
 }
 
 Path getBinPath() {
+  if (Platform.isMacOS) {
+    // macOS: assets are in App.framework inside the .app bundle
+    final String execDir = Path(Platform.resolvedExecutable).cut(1).path;
+    return Path(execDir) + "/../Frameworks/App.framework/Versions/A/Resources/flutter_assets/assets/bin";
+  }
   return Path(Platform.resolvedExecutable).cut(1) +
       "/data/flutter_assets/assets/bin";
 }
 
 Path getWebPath() {
+  if (Platform.isMacOS) {
+    // macOS: assets are in App.framework inside the .app bundle
+    final String execDir = Path(Platform.resolvedExecutable).cut(1).path;
+    return Path(execDir) + "/../Frameworks/App.framework/Versions/A/Resources/flutter_assets/assets/web";
+  }
   return Path(Platform.resolvedExecutable).cut(1) +
       "/data/flutter_assets/assets/web";
 }
