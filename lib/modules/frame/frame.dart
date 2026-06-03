@@ -22,6 +22,7 @@ import "package:flutter/services.dart";
 import "package:window_manager/window_manager.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
+import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:easy_localization/easy_localization.dart";
 
 import "package:nikki_albums/modules/album/album.dart" as album_page;
@@ -523,7 +524,7 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
             installPath.value = paths["installPath"]?.path;
 
             if (launcherPath.value != null && installPath.value == null) {
-              final installLocation = await FilePicker.platform
+              final installLocation = await NativeFilePicker
                   .getDirectoryPath(
                     dialogTitle: context.tr("locateX6GameDir"),
                     lockParentWindow: true,

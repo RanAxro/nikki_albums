@@ -16,7 +16,7 @@ import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:qr_flutter/qr_flutter.dart";
-import "package:file_picker/file_picker.dart";
+import "package:nikki_albums/utils/native_file_picker.dart";
 
 final ContentItem item = ContentItem(
   name: "start",
@@ -360,8 +360,8 @@ class MoveFolderDialog extends StatelessWidget {
               Expanded(child: Text(pathStr ?? context.tr("toSelectFolder"))),
               SmallButton(
                 onClick: () async {
-                  destination.value = await FilePicker.platform
-                      .getDirectoryPath(lockParentWindow: true);
+                  destination.value = await NativeFilePicker
+                      .getDirectoryPath(dialogTitle: context.tr("toSelectFolder"), lockParentWindow: true);
                 },
                 child: Image.asset(
                   "assets/icon/folder.webp",
@@ -643,7 +643,7 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
   bool init = false;
 
   Future<void> startExport(BuildContext context) async {
-    final String? location = await FilePicker.platform.getDirectoryPath(
+    final String? location = await NativeFilePicker.getDirectoryPath(
       dialogTitle: context.tr("saveBackupFileTo"),
       lockParentWindow: true,
     );

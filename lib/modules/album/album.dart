@@ -34,6 +34,7 @@ import "dart:ui" hide Path;
 import "package:multi_split_view/multi_split_view.dart";
 import "package:easy_localization/easy_localization.dart";
 import "package:file_picker/file_picker.dart";
+import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:uuid/uuid.dart";
 import "package:media_kit/media_kit.dart";
@@ -298,7 +299,7 @@ class AlbumHandler {
       }
     }
 
-    final String? location = await FilePicker.platform.getDirectoryPath(
+    final String? location = await NativeFilePicker.getDirectoryPath(
       dialogTitle: context.plural("exportXImage", images.length),
       lockParentWindow: true,
     );
@@ -521,7 +522,7 @@ class AlbumHandler {
     if (AppState.currentGame.value == null) return;
     final Game game = AppState.currentGame.value!;
 
-    final String? location = await FilePicker.platform.getDirectoryPath(
+    final String? location = await NativeFilePicker.getDirectoryPath(
       dialogTitle: context.tr("exportNikkiasFile"),
       lockParentWindow: true,
     );
@@ -3634,7 +3635,7 @@ class ImportImagesDialog extends StatelessWidget {
     final FilePickerResult? location = await FilePicker.platform.pickFiles(
       dialogTitle: context.tr("importImageTo"),
       lockParentWindow: true,
-      type: FileType.image,
+      type: FileType.custom,
       allowedExtensions: imageExtension.toList(growable: false),
       allowMultiple: true,
     );

@@ -10,7 +10,7 @@ import "package:flutter/material.dart";
 import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
-import "package:file_picker/file_picker.dart";
+import "package:nikki_albums/utils/native_file_picker.dart";
 
 Future<void> parseNikkiasFile(BuildContext context, File file) async{
   final manifest = await getNikkiasManifest(file);
@@ -434,7 +434,7 @@ class _SaveAsButton extends StatelessWidget {
   Future<void> saveRawFile(BuildContext context) async {
     final Path nikkiasPath = Path(nikkiasFile.path);
 
-    final String? location = await FilePicker.platform.getDirectoryPath(
+    final String? location = await NativeFilePicker.getDirectoryPath(
       dialogTitle: context.tr("saveAs"),
       lockParentWindow: true,
     );
@@ -463,7 +463,7 @@ class _SaveAsButton extends StatelessWidget {
   }
 
   Future<void> saveDecodedFile(BuildContext context) async {
-    final String? location = await FilePicker.platform.getDirectoryPath(
+    final String? location = await NativeFilePicker.getDirectoryPath(
       dialogTitle: context.tr("saveAs"),
       lockParentWindow: true,
     );

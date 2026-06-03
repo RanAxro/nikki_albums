@@ -5,14 +5,32 @@ import Photos
 import UniformTypeIdentifiers
 
 public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
+  var registrar: FlutterPluginRegistrar?
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "com.ranaxro.nikki.nikkiAlbums/live_photo", binaryMessenger: registrar.messenger)
     let instance = LivePhotoExportPlugin()
+    instance.registrar = registrar
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
+    case "getDirectoryPath":
+        guard let args = call.arguments as? [String: Any],
+              let dialogTitle = args["dialogTitle"] as? String else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        getDirectoryPath(dialogTitle: dialogTitle, result: result)
+    case "saveFile":
+        guard let args = call.arguments as? [String: Any],
+              let dialogTitle = args["dialogTitle"] as? String,
+              let fileName = args["fileName"] as? String else {
+            result(FlutterError(code: "INVALID_ARGUMENTS", message: "Missing arguments", details: nil))
+            return
+        }
+        saveFile(dialogTitle: dialogTitle, fileName: fileName, result: result)
     case "exportToGif":
         guard let args = call.arguments as? [String: Any],
               let inputPath = args["inputPath"] as? String,
@@ -360,6 +378,89 @@ public class LivePhotoExportPlugin: NSObject, FlutterPlugin {
               DispatchQueue.main.async { result(true) }
           } else {
               DispatchQueue.main.async { result(FlutterError(code: "FINALIZE_ERROR", message: "Could not finalize GIF", details: nil)) }
+          }
+      }
+  }
+
+  // MARK: - Directory Picker for Non-Sandboxed Apps
+  private func getDirectoryPath(dialogTitle: String, result: @escaping FlutterResult) {
+      DispatchQueue.main.async {
+          // Ensure app is active
+          NSApp.activate(ignoringOtherApps: true)
+
+          let openPanel = NSOpenPanel()
+          openPanel.title = dialogTitle
+          openPanel.message = dialogTitle
+          openPanel.canChooseFiles = false
+          openPanel.canChooseDirectories = true
+          openPanel.allowsMultipleSelection = false
+          openPanel.canCreateDirectories = true
+          openPanel.showsHiddenFiles = false
+          openPanel.treatsFilePackagesAsDirectories = false
+
+          // Get the main window for sheet attachment
+          let mainWindow = NSApp.mainWindow
+
+          if let window = mainWindow {
+              // Show as sheet attached to the main window
+              openPanel.beginSheetModal(for: window) { response in
+                  if response == .OK, let url = openPanel.url {
+                      // Resolve symlinks and get the real path
+                      let resolvedPath = (url.path as NSString).resolvingSymlinksInPath
+                      result(resolvedPath)
+                  } else {
+                      result(nil)
+                  }
+              }
+          } else {
+              // Fallback: show as modal dialog
+              let response = openPanel.runModal()
+              if response == .OK, let url = openPanel.url {
+                  let resolvedPath = (url.path as NSString).resolvingSymlinksInPath
+                  result(resolvedPath)
+              } else {
+                  result(nil)
+              }
+          }
+      }
+  }
+
+  // MARK: - Save File Dialog for Non-Sandboxed Apps
+  private func saveFile(dialogTitle: String, fileName: String, result: @escaping FlutterResult) {
+      DispatchQueue.main.async {
+          // Ensure app is active
+          NSApp.activate(ignoringOtherApps: true)
+
+          let savePanel = NSSavePanel()
+          savePanel.title = dialogTitle
+          savePanel.message = dialogTitle
+          savePanel.nameFieldStringValue = fileName
+          savePanel.canCreateDirectories = true
+          savePanel.showsHiddenFiles = false
+          savePanel.treatsFilePackagesAsDirectories = false
+
+          // Get the main window for sheet attachment
+          let mainWindow = NSApp.mainWindow
+
+          if let window = mainWindow {
+              // Show as sheet attached to the main window
+              savePanel.beginSheetModal(for: window) { response in
+                  if response == .OK, let url = savePanel.url {
+                      let resolvedPath = (url.path as NSString).resolvingSymlinksInPath
+                      result(resolvedPath)
+                  } else {
+                      result(nil)
+                  }
+              }
+          } else {
+              // Fallback: show as modal dialog
+              let response = savePanel.runModal()
+              if response == .OK, let url = savePanel.url {
+                  let resolvedPath = (url.path as NSString).resolvingSymlinksInPath
+                  result(resolvedPath)
+              } else {
+                  result(nil)
+              }
           }
       }
   }

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:nikki_albums/utils/native_file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -335,7 +335,7 @@ class _VideoToGifPanelState extends State<VideoToGifPanel> {
                           child: AppText("export"),
                           onClick: () async {
                             final String?
-                            output = await FilePicker.platform.saveFile(
+                            output = await NativeFilePicker.saveFile(
                               dialogTitle: context.tr("export"),
                               fileName:
                                   "${p.basenameWithoutExtension(widget.videoPath)}.gif",

@@ -15,7 +15,7 @@ import "dart:io";
 import "dart:typed_data";
 
 import "package:multi_split_view/multi_split_view.dart";
-import "package:file_picker/file_picker.dart";
+import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:path/path.dart" as p;
 
 class ImageEditor extends StatefulWidget {
@@ -158,12 +158,9 @@ class _ImageEditorState extends State<ImageEditor> {
     final String filename =
         "${p.basenameWithoutExtension(widget.imagePath)}.png";
 
-    final String? outputFile = await FilePicker.platform.saveFile(
+    final String? outputFile = await NativeFilePicker.saveFile(
       dialogTitle: context.tr("image_edit.export_to"),
       fileName: filename,
-      type: FileType.custom,
-      allowedExtensions: ["png"],
-      lockParentWindow: true,
     );
 
     if (outputFile == null) return false;

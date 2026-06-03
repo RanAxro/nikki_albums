@@ -4,6 +4,7 @@ import "dart:io";
 import "dart:typed_data";
 
 import "package:file_picker/file_picker.dart";
+import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 import "package:nikki_albums/utils/clipboard.dart";
@@ -31,7 +32,9 @@ class Nuan5DecryptionDebug extends StatelessWidget{
             builder: (BuildContext context, String? debugNuan5DecryptionOutput, Widget? child){
               return AppButton.smallText(
                 onClick: () async{
-                  final String? output = await FilePicker.platform.getDirectoryPath();
+                  final String? output = await NativeFilePicker.getDirectoryPath(
+                    dialogTitle: "Select Output Folder",
+                  );
                   AppState.debugNuan5DecryptionOutput.value = output;
                 },
                 child: Row(
