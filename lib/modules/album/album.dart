@@ -609,12 +609,7 @@ class AlbumHandler {
 
   /// The "Export" option for the "AlbumType.Video" category
   void openVideoExportSetting(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SettingDialog(initialPage: SettingPage.livePhotoSettings);
-      },
-    );
+    SettingDialog.show(context, initialPage: SettingPage.livePhotoSettings);
   }
 
   static AlbumHandler of(BuildContext context) {

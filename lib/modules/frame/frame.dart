@@ -60,11 +60,9 @@ class _FrameState extends State<Frame> {
 
       if (isComma && ((isMac && isCmd) || (!isMac && isCtrl))) {
         if (mounted && frameKey.currentContext != null) {
-          showDialog(
-            context: frameKey.currentContext!,
-            builder: (BuildContext context) {
-              return SettingDialog(initialPage: SettingPage.personalization);
-            },
+          SettingDialog.show(
+            frameKey.currentContext!,
+            initialPage: SettingPage.personalization,
           );
           return true; // handled
         }
@@ -1181,13 +1179,9 @@ class WindowTitleBar extends StatelessWidget {
                     colorRole: ColorRole.background,
                     isTransparent: false,
                     onClick: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SettingDialog(
-                            initialPage: SettingPage.debugPanel,
-                          );
-                        },
+                      SettingDialog.show(
+                        context,
+                        initialPage: SettingPage.debugPanel,
                       );
                     },
                     child: Row(
@@ -1319,13 +1313,9 @@ class ContentBuildInWindow extends StatelessWidget {
                   child: SmallButton(
                     margin: const EdgeInsets.only(bottom: listSpacing),
                     onClick: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SettingDialog(
-                            initialPage: SettingPage.personalization,
-                          );
-                        },
+                      SettingDialog.show(
+                        context,
+                        initialPage: SettingPage.personalization,
                       );
                     },
                     child: Image.asset(
@@ -1421,13 +1411,9 @@ class MacOSTitleBar extends StatelessWidget {
                     colorRole: ColorRole.background,
                     isTransparent: false,
                     onClick: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SettingDialog(
-                            initialPage: SettingPage.debugPanel,
-                          );
-                        },
+                      SettingDialog.show(
+                        context,
+                        initialPage: SettingPage.debugPanel,
                       );
                     },
                     child: Row(

@@ -24,6 +24,26 @@ enum SettingPage {
 }
 
 class SettingDialog extends StatelessWidget {
+  static bool _isOpen = false;
+
+  static Future<void> show(
+    BuildContext context, {
+    SettingPage initialPage = SettingPage.personalization,
+  }) async {
+    if (_isOpen) return;
+    _isOpen = true;
+    try {
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SettingDialog(initialPage: initialPage);
+        },
+      );
+    } finally {
+      _isOpen = false;
+    }
+  }
+
   final SettingPage initialPage;
   final PageController controller;
   final List<SettingPage> activePages;
