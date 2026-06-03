@@ -14,18 +14,42 @@ import "package:nikki_albums/widgets/common/component.dart";
 import "dart:io";
 import "package:flutter/material.dart";
 
-class SettingDialog extends StatelessWidget{
-  final int initialPage;
-  final PageController controller;
+enum SettingPage {
+  personalization,
+  accountManagement,
+  livePhotoSettings,
+  nikkiasSetting,
+  versionInformation,
+  debugPanel,
+}
 
-  SettingDialog({
-    super.key,
-    this.initialPage = 0,
-  }) :
-    controller = PageController(initialPage: initialPage);
+class SettingDialog extends StatelessWidget {
+  final SettingPage initialPage;
+  final PageController controller;
+  final List<SettingPage> activePages;
+
+  static List<SettingPage> _getActivePages() {
+    return [
+      SettingPage.personalization,
+      if (Platform.isWindows) SettingPage.accountManagement,
+      SettingPage.livePhotoSettings,
+      SettingPage.nikkiasSetting,
+      SettingPage.versionInformation,
+      if (kDebugMode) SettingPage.debugPanel,
+    ];
+  }
+
+  static int _getInitialIndex(SettingPage page) {
+    int index = _getActivePages().indexOf(page);
+    return index == -1 ? 0 : index;
+  }
+
+  SettingDialog({super.key, this.initialPage = SettingPage.personalization})
+    : activePages = _getActivePages(),
+      controller = PageController(initialPage: _getInitialIndex(initialPage));
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final Widget content = Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: listSpacing,
@@ -33,97 +57,107 @@ class SettingDialog extends StatelessWidget{
         SizedBox(
           width: sideBarExpandWidth,
           child: SmoothPointerScroll(
-            builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController) {
-              return LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints){
-                  return ListenableBuilder(
-                    listenable: controller,
-                    builder: (BuildContext context, Widget? child){
-                      return AppRadioStack(
-                        direction: Axis.vertical,
-                        buttonWidth: constraints.maxWidth,
-                        buttonHeight: smallButtonSize,
-                        selectedIndex: controller.page?.toInt() ?? initialPage,
-                        children: [
-                          AppRawButton(
-                            width: constraints.maxWidth,
-                            height: smallButtonSize,
-                            onClick: () {
-                              controller.jumpToPage(0);
+            builder:
+                (
+                  BuildContext context,
+                  ScrollController scrollController,
+                  ScrollPhysics physics,
+                  IndependentScrollbarController scrollbarController,
+                ) {
+                  return LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                          return ListenableBuilder(
+                            listenable: controller,
+                            builder: (BuildContext context, Widget? child) {
+                              return AppRadioStack(
+                                direction: Axis.vertical,
+                                buttonWidth: constraints.maxWidth,
+                                buttonHeight: smallButtonSize,
+                                selectedIndex:
+                                    controller.page?.toInt() ??
+                                    _getInitialIndex(initialPage),
+                                children: activePages.map((page) {
+                                  String title = "";
+                                  switch (page) {
+                                    case SettingPage.personalization:
+                                      title = "personalization";
+                                      break;
+                                    case SettingPage.accountManagement:
+                                      title = "accountManagement";
+                                      break;
+                                    case SettingPage.livePhotoSettings:
+                                      title = "livePhotoSettings";
+                                      break;
+                                    case SettingPage.nikkiasSetting:
+                                      title = "nikkias_setting";
+                                      break;
+                                    case SettingPage.versionInformation:
+                                      title = "version_information";
+                                      break;
+                                    case SettingPage.debugPanel:
+                                      title = "Debug Panel";
+                                      break;
+                                  }
+                                  return AppRawButton(
+                                    width: constraints.maxWidth,
+                                    height: smallButtonSize,
+                                    onClick: () {
+                                      controller.jumpToPage(
+                                        activePages.indexOf(page),
+                                      );
+                                    },
+                                    child: AppText(
+                                      title,
+                                      isTranslate:
+                                          page != SettingPage.debugPanel,
+                                    ),
+                                  );
+                                }).toList(),
+                              );
                             },
-                            child: AppText("personalization"),
-                          ),
-                          if(Platform.isWindows)
-                          AppRawButton(
-                            width: constraints.maxWidth,
-                            height: smallButtonSize,
-                            onClick: () {
-                              controller.jumpToPage(1);
-                            },
-                            child: AppText("accountManagement"),
-                          ),
-                          AppRawButton(
-                            width: constraints.maxWidth,
-                            height: smallButtonSize,
-                            onClick: () {
-                              controller.jumpToPage(Platform.isWindows ? 2 : 1);
-                            },
-                            child: AppText("livePhotoSettings"),
-                          ),
-                          AppRawButton(
-                            width: constraints.maxWidth,
-                            height: smallButtonSize,
-                            onClick: () {
-                              controller.jumpToPage(Platform.isWindows ? 3 : 2);
-                            },
-                            child: AppText("nikkias_setting"),
-                          ),
-                          AppRawButton(
-                            width: constraints.maxWidth,
-                            height: smallButtonSize,
-                            onClick: () {
-                              controller.jumpToPage(Platform.isWindows ? 4 : 3);
-                            },
-                            child: AppText("version_information"),
-                          ),
-                          if(kDebugMode)
-                            AppRawButton(
-                              width: constraints.maxWidth,
-                              height: smallButtonSize,
-                              onClick: () {
-                                controller.jumpToPage(Platform.isWindows ? 5 : 3);
-                              },
-                              child: AppText("Debug Panel", isTranslate: false),
-                            ),
-                        ],
-                      );
-                    },
+                          );
+                        },
                   );
                 },
-          );
-            },
           ),
         ),
 
-        SmallVerticalDivider(color: AppTheme.of(context)!.colorScheme.background.hoveredColor),
+        SmallVerticalDivider(
+          color: AppTheme.of(context)!.colorScheme.background.hoveredColor,
+        ),
 
         Expanded(
           child: PageView(
             controller: controller,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const Personalization(),
-              if(Platform.isWindows) const EditCustomGame(),
-              const LivePhotoSettings(),
-              const NikkiasSetting(),
-              const VersionInformation(),
-              if(kDebugMode) const DebugPanel(),
-            ].map((Widget page){
+            children: activePages.map((page) {
+              Widget pageWidget;
+              switch (page) {
+                case SettingPage.personalization:
+                  pageWidget = const Personalization();
+                  break;
+                case SettingPage.accountManagement:
+                  pageWidget = const EditCustomGame();
+                  break;
+                case SettingPage.livePhotoSettings:
+                  pageWidget = const LivePhotoSettings();
+                  break;
+                case SettingPage.nikkiasSetting:
+                  pageWidget = const NikkiasSetting();
+                  break;
+                case SettingPage.versionInformation:
+                  pageWidget = const VersionInformation();
+                  break;
+                case SettingPage.debugPanel:
+                  pageWidget = const DebugPanel();
+                  break;
+              }
               return FadeIn(
                 offsetBegin: Offset.zero,
                 opacityBegin: 0.0,
-                child: page,
+                child: pageWidget,
               );
             }).toList(),
           ),
@@ -133,10 +167,12 @@ class SettingDialog extends StatelessWidget{
 
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(smallBorderRadius)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(smallBorderRadius),
+      ),
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
       child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints){
+        builder: (BuildContext context, BoxConstraints constraints) {
           return Container(
             padding: const EdgeInsets.all(smallPadding),
             width: constraints.maxWidth - 88,
@@ -150,7 +186,11 @@ class SettingDialog extends StatelessWidget{
                     children: [
                       block10W,
                       Expanded(
-                        child: AppText("setting", fontSize: 18, fontWeight: FontWeight.bold),
+                        child: AppText(
+                          "setting",
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
 
                       const ChangeLanguage(),
@@ -175,20 +215,17 @@ class SettingDialog extends StatelessWidget{
   }
 }
 
-class ChangeTheme extends StatelessWidget{
+class ChangeTheme extends StatelessWidget {
   const ChangeTheme({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return SizedBox(
       height: smallCardMaxHeight,
       child: Row(
         spacing: bigListSpacing,
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: AppText("theme"),
-          ),
+          Align(alignment: Alignment.topCenter, child: AppText("theme")),
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -198,10 +235,12 @@ class ChangeTheme extends StatelessWidget{
                 childAspectRatio: 1 / 1,
               ),
               itemCount: AppColorScheme.table.length,
-              itemBuilder: (BuildContext context, int index){
-                final int color = AppColorScheme.table.keys.toList(growable: false)[index];
+              itemBuilder: (BuildContext context, int index) {
+                final int color = AppColorScheme.table.keys.toList(
+                  growable: false,
+                )[index];
                 return GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     AppState.theme.value = color;
                   },
                   child: ClipOval(child: Container(color: Color(color))),
@@ -215,52 +254,58 @@ class ChangeTheme extends StatelessWidget{
   }
 }
 
-class ChangeLanguage extends StatelessWidget{
-  final Widget Function(BuildContext context, MenuController controller, Widget? child)? builder;
+class ChangeLanguage extends StatelessWidget {
+  final Widget Function(
+    BuildContext context,
+    MenuController controller,
+    Widget? child,
+  )?
+  builder;
 
-  const ChangeLanguage({
-    super.key,
-    this.builder,
-  });
+  const ChangeLanguage({super.key, this.builder});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MenuAnchor(
       style: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
+        backgroundColor: WidgetStateProperty.all(
+          AppTheme.of(context)!.colorScheme.background.color,
+        ),
       ),
       menuChildren: [
         MenuItemButton(
-          onPressed: (){
+          onPressed: () {
             AppState.lang.value = "zh-CN";
           },
           child: AppText("简体中文", isTranslate: false),
         ),
         MenuItemButton(
-          onPressed: (){
+          onPressed: () {
             AppState.lang.value = "en-US";
           },
           child: AppText("English", isTranslate: false),
         ),
       ],
-      builder: builder ?? (BuildContext context, MenuController controller, Widget? child){
-        return SmallButton(
-          padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-          width: null,
-          colorRole: ColorRole.background,
-          onClick: (){
-            controller.isOpen ? controller.close() : controller.open();
+      builder:
+          builder ??
+          (BuildContext context, MenuController controller, Widget? child) {
+            return SmallButton(
+              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+              width: null,
+              colorRole: ColorRole.background,
+              onClick: () {
+                controller.isOpen ? controller.close() : controller.open();
+              },
+              child: Row(
+                spacing: listSpacing,
+                children: [
+                  AppIcon("language", height: 16),
+                  AppText("language"),
+                  AppText("lang"),
+                ],
+              ),
+            );
           },
-          child: Row(
-            spacing: listSpacing,
-            children: [
-              AppIcon("language", height: 16),
-              AppText("language"),
-              AppText("lang"),
-            ],
-          ),
-        );
-      },
     );
   }
 }

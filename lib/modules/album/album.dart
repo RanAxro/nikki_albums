@@ -612,7 +612,7 @@ class AlbumHandler {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return SettingDialog(initialPage: Platform.isWindows ? 2 : 1);
+        return SettingDialog(initialPage: SettingPage.livePhotoSettings);
       },
     );
   }

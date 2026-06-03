@@ -50,12 +50,35 @@ class _FrameState extends State<Frame> {
     setState(() {});
   }
 
+  bool _handleKeyEvent(KeyEvent event) {
+    if (event is KeyDownEvent) {
+      final isMac = Platform.isMacOS;
+      final isCmd = HardwareKeyboard.instance.isMetaPressed;
+      final isCtrl = HardwareKeyboard.instance.isControlPressed;
+      final isComma = event.logicalKey == LogicalKeyboardKey.comma;
+
+      if (isComma && ((isMac && isCmd) || (!isMac && isCtrl))) {
+        if (mounted) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SettingDialog(initialPage: SettingPage.personalization);
+            },
+          );
+          return true; // handled
+        }
+      }
+    }
+    return false; // not handled
+  }
+
   @override
   void initState() {
     super.initState();
     AppState.lang.addListener(whenLangChanged);
     AppState.theme.addListener(whenThemeChanged);
     AppState.isThemeFollowSystem.addListener(whenThemeChanged);
+    HardwareKeyboard.instance.addHandler(_handleKeyEvent);
   }
 
   @override
@@ -103,46 +126,15 @@ class _FrameState extends State<Frame> {
                       checkAppUpdates(context);
                     }
 
-                    Widget child;
                     if (Platform.isWindows) {
-                      child = WindowsFrame(key: frameKey);
+                      return WindowsFrame(key: frameKey);
                     } else if (Platform.isAndroid) {
-                      child = AndroidFrame(key: frameKey);
+                      return AndroidFrame(key: frameKey);
                     } else if (Platform.isMacOS) {
-                      child = MacOSFrame(key: frameKey);
+                      return MacOSFrame(key: frameKey);
                     } else {
-                      child = const Placeholder();
+                      return const Placeholder();
                     }
-
-                    return CallbackShortcuts(
-                      bindings: <ShortcutActivator, VoidCallback>{
-                        if (Platform.isMacOS)
-                          const SingleActivator(
-                            LogicalKeyboardKey.comma,
-                            meta: true,
-                          ): () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return SettingDialog();
-                              },
-                            );
-                          },
-                        if (Platform.isWindows)
-                          const SingleActivator(
-                            LogicalKeyboardKey.comma,
-                            control: true,
-                          ): () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return SettingDialog();
-                              },
-                            );
-                          },
-                      },
-                      child: Focus(autofocus: true, child: child),
-                    );
                   },
                 ),
               ),
@@ -155,6 +147,7 @@ class _FrameState extends State<Frame> {
 
   @override
   void dispose() {
+    HardwareKeyboard.instance.removeHandler(_handleKeyEvent);
     super.dispose();
     AppState.lang.removeListener(whenLangChanged);
     AppState.theme.removeListener(whenThemeChanged);
@@ -1190,7 +1183,9 @@ class WindowTitleBar extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return SettingDialog(initialPage: 5);
+                          return SettingDialog(
+                            initialPage: SettingPage.debugPanel,
+                          );
                         },
                       );
                     },
@@ -1326,7 +1321,9 @@ class ContentBuildInWindow extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return SettingDialog();
+                          return SettingDialog(
+                            initialPage: SettingPage.personalization,
+                          );
                         },
                       );
                     },
@@ -1426,7 +1423,9 @@ class MacOSTitleBar extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return SettingDialog(initialPage: 5);
+                          return SettingDialog(
+                            initialPage: SettingPage.debugPanel,
+                          );
                         },
                       );
                     },
