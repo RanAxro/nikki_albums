@@ -41,7 +41,9 @@ class Path {
   String get extension {
     final String filename = path.split("/").last;
     final idx = filename.lastIndexOf(".");
-    return (idx < 0 || idx == filename.length - 1) ? "" : filename.substring(idx + 1);
+    return (idx < 0 || idx == filename.length - 1)
+        ? ""
+        : filename.substring(idx + 1);
   }
 
   FileStat? _cacheStat;
@@ -144,8 +146,9 @@ class Path {
     try {
       switch (await typeAsync) {
         case FileSystemEntityType.file:
-          if (targetType != null && targetType != FileSystemEntityType.file)
+          if (targetType != null && targetType != FileSystemEntityType.file) {
             return;
+          }
 
           if (Platform.isWindows) {
             Process.start(path, [], mode: ProcessStartMode.detached);
@@ -155,8 +158,9 @@ class Path {
           break;
         case FileSystemEntityType.directory:
           if (targetType != null &&
-              targetType != FileSystemEntityType.directory)
+              targetType != FileSystemEntityType.directory) {
             return;
+          }
 
           if (Platform.isWindows) {
             Process.run("explorer", [path]);

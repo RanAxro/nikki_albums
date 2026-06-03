@@ -1,4 +1,4 @@
-library uid_note;
+library;
 
 import "uid.dart";
 import "package:path/path.dart" as p;

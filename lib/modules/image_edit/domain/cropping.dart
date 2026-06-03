@@ -484,21 +484,26 @@ class ImageCroppingProcessor {
       min(toRB, toLB),
     );
     if (minDistanceSquaredFromPoint <= e * e) {
-      if (minDistanceSquaredFromPoint == toLT)
+      if (minDistanceSquaredFromPoint == toLT) {
         return CropFrameAnchorPoint.leftTop;
-      if (minDistanceSquaredFromPoint == toRT)
+      }
+      if (minDistanceSquaredFromPoint == toRT) {
         return CropFrameAnchorPoint.rightTop;
-      if (minDistanceSquaredFromPoint == toRB)
+      }
+      if (minDistanceSquaredFromPoint == toRB) {
         return CropFrameAnchorPoint.rightBottom;
-      if (minDistanceSquaredFromPoint == toLB)
+      }
+      if (minDistanceSquaredFromPoint == toLB) {
         return CropFrameAnchorPoint.leftBottom;
+      }
     }
 
     if (pos.x < left - e ||
         pos.x > right + e ||
         pos.y < top - e ||
-        pos.y > bottom + e)
+        pos.y > bottom + e) {
       return CropFrameAnchorPoint.none;
+    }
 
     final double toL = (pos.x - left).abs();
     final double toT = (pos.y - top).abs();

@@ -1,9 +1,7 @@
-import "package:nikki_albums/src/rust/serde_config/structs/common.dart";
 import "package:nikki_albums/src/rust/serde_config/structs/plugin_info.dart";
 import "package:nikki_albums/src/rust/serde_config/structs/game_config.dart";
 
-
-class PluginBuilderConfig{
+class PluginBuilderConfig {
   final PluginInfo info;
   final Map<String, dynamic> languageList;
   final List<String> iconList;

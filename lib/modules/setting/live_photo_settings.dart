@@ -33,7 +33,9 @@ class LivePhotoSettings extends StatelessWidget {
                 context.tr("livePhotoExportFormat_description"),
                 style: TextStyle(
                   fontSize: 12,
-                  color: AppTheme.of(context)!.colorScheme.background.onColor.withOpacity(0.6),
+                  color: AppTheme.of(
+                    context,
+                  )!.colorScheme.background.onColor.withValues(alpha: 0.6),
                 ),
               ),
               block10H,
@@ -67,7 +69,9 @@ class LivePhotoSettings extends StatelessWidget {
           spacing: listSpacing,
           children: [
             Icon(
-              selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              selected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
               size: 20,
               color: AppTheme.of(context)!.colorScheme.background.onColor,
             ),
@@ -77,20 +81,6 @@ class LivePhotoSettings extends StatelessWidget {
                 color: AppTheme.of(context)!.colorScheme.background.onColor,
               ),
             ),
-            if (Platform.isWindows && value == "apple")
-              ValueListenableBuilder<bool>(
-                valueListenable: FFmpegManager.isInstalledNotifier,
-                builder: (context, isInstalled, _) {
-                  if (!isInstalled) {
-                    return Icon(
-                      Icons.cloud_download_outlined,
-                      size: 16,
-                      color: AppTheme.of(context)!.colorScheme.background.onColor,
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
           ],
         ),
       ),

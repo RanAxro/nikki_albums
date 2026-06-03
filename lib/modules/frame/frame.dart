@@ -1,11 +1,6 @@
-
 import "package:nikki_albums/modules/initial_startup/presentation/initial_startup_setting.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
 
 import "package:nikki_albums/utils/system/windows.dart";
-import "../nuan5_params/domain/tree_node_generator.dart";
-import "../nuan5_params/presentation/media_params_tree.dart";
 import "package:nikki_albums/modules/setting/version_information/domain/check_app_updates.dart";
 import "ui_android.dart";
 
@@ -22,7 +17,6 @@ import "package:nikki_albums/utils/path.dart";
 import "dart:io";
 import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/services.dart";
 
 import "package:window_manager/window_manager.dart";
 import "package:desktop_drop/desktop_drop.dart";
@@ -32,8 +26,10 @@ import "package:easy_localization/easy_localization.dart";
 import "package:nikki_albums/modules/album/album.dart" as album_page;
 import "package:nikki_albums/modules/start/start.dart" as start_page;
 import "package:nikki_albums/modules/resource/resource.dart" as resource_page;
-import "package:nikki_albums/modules/file_transfer/file_transfer.dart" as file_transfer_page;
-import "package:nikki_albums/modules/recycle_bin/recycle_bin.dart" as recycle_bin;
+import "package:nikki_albums/modules/file_transfer/file_transfer.dart"
+    as file_transfer_page;
+import "package:nikki_albums/modules/recycle_bin/recycle_bin.dart"
+    as recycle_bin;
 
 class Frame extends StatefulWidget {
   const Frame(key) : super(key: key);
@@ -70,11 +66,15 @@ class _FrameState extends State<Frame> {
         builder: (context) {
           int currentTheme = AppState.theme.value;
           if (AppState.isThemeFollowSystem.value) {
-            final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+            final Brightness brightness = MediaQuery.platformBrightnessOf(
+              context,
+            );
             if (brightness == Brightness.dark) {
               currentTheme = 0xFF333333; // Dark theme
             } else {
-              currentTheme = (currentTheme == 0xFF333333) ? 0xFFEEEEEE : currentTheme;
+              currentTheme = (currentTheme == 0xFF333333)
+                  ? 0xFFEEEEEE
+                  : currentTheme;
             }
           }
 
@@ -93,14 +93,13 @@ class _FrameState extends State<Frame> {
                 body: ValueListenableBuilder(
                   valueListenable: AppState.isInitialStartup,
                   builder: (BuildContext context, bool value, Widget? child) {
-
                     /// 首次使用软件
-                    if(value){
+                    if (value) {
                       return InitialStartupSetting();
                     }
 
                     /// TODO check
-                    if(!kDebugMode){
+                    if (!kDebugMode) {
                       checkAppUpdates(context);
                     }
 
@@ -273,7 +272,7 @@ class AccountButton extends StatelessWidget {
         );
 
         /// the last is "add" button, user can add custom Game
-        if(Platform.isWindows){
+        if (Platform.isWindows) {
           menuChildren.add(
             MenuItemButton(
               onPressed: () {
@@ -400,8 +399,9 @@ class AccountButton extends StatelessWidget {
                           Widget? child,
                         ) {
                           if (AppState.currentGame.value == null ||
-                              AppState.currentGame.value!.selectedUid == null)
+                              AppState.currentGame.value!.selectedUid == null) {
                             return block0;
+                          }
 
                           final Game game = AppState.currentGame.value!;
                           final GameShortcut shortcut = game.shortcut!;
@@ -1181,24 +1181,25 @@ class WindowTitleBar extends StatelessWidget {
 
                 block5W,
 
-                if(kDebugMode)
+                if (kDebugMode)
                   AppButton.smallText(
                     colorRole: ColorRole.background,
                     isTransparent: false,
-                    onClick: (){
+                    onClick: () {
                       showDialog(
                         context: context,
-                        builder: (BuildContext context){
-                          return SettingDialog(
-                            initialPage: 5,
-                          );
+                        builder: (BuildContext context) {
+                          return SettingDialog(initialPage: 5);
                         },
                       );
                     },
                     child: Row(
                       spacing: listSpacing,
                       children: [
-                        Icon(Icons.bug_report_outlined, color: AppColorScheme.of(context).background.onColor),
+                        Icon(
+                          Icons.bug_report_outlined,
+                          color: AppColorScheme.of(context).background.onColor,
+                        ),
                         AppText("Debug Panel", isTranslate: false),
                       ],
                     ),
@@ -1208,7 +1209,9 @@ class WindowTitleBar extends StatelessWidget {
                 AppButton(
                   width: windowTitleBarHeight + 10,
                   height: windowTitleBarHeight,
-                  onClick: () async { await windowManager.minimize(); },
+                  onClick: () async {
+                    await windowManager.minimize();
+                  },
                   child: AppIcon("minimize", height: 14),
                 ),
 
@@ -1254,8 +1257,6 @@ class WindowTitleBar extends StatelessWidget {
     );
   }
 }
-
-
 
 class ContentBuildInWindow extends StatelessWidget {
   const ContentBuildInWindow({super.key});
@@ -1367,8 +1368,6 @@ class ContentBuildInWindow extends StatelessWidget {
   }
 }
 
-
-
 ///////////////////
 //     MacOS     //
 ///////////////////
@@ -1414,32 +1413,29 @@ class MacOSTitleBar extends StatelessWidget {
 
                 Expanded(
                   child: Row(
-                    children: [
-                      const AccountButton(),
-
-                      const GameShortcutBar(),
-                    ],
+                    children: [const AccountButton(), const GameShortcutBar()],
                   ),
                 ),
 
-                if(kDebugMode)
+                if (kDebugMode)
                   AppButton.smallText(
                     colorRole: ColorRole.background,
                     isTransparent: false,
-                    onClick: (){
+                    onClick: () {
                       showDialog(
                         context: context,
-                        builder: (BuildContext context){
-                          return SettingDialog(
-                            initialPage: 5,
-                          );
+                        builder: (BuildContext context) {
+                          return SettingDialog(initialPage: 5);
                         },
                       );
                     },
                     child: Row(
                       spacing: listSpacing,
                       children: [
-                        Icon(Icons.bug_report_outlined, color: AppColorScheme.of(context).background.onColor),
+                        Icon(
+                          Icons.bug_report_outlined,
+                          color: AppColorScheme.of(context).background.onColor,
+                        ),
                         AppText("Debug Panel", isTranslate: false),
                       ],
                     ),

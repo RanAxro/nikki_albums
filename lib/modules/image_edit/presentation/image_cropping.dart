@@ -318,7 +318,7 @@ class ImageCroppingFramePainter extends CustomPainter {
 
     // 4. 绘制九宫格白线
     final Paint gridPaint = Paint()
-      ..color = decoration.borderColor.withOpacity(0.6)
+      ..color = decoration.borderColor.withValues(alpha: 0.6)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 

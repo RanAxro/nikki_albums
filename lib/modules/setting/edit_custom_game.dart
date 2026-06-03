@@ -97,8 +97,9 @@ class DeleteCustomGameDialog extends StatelessWidget {
     ];
 
     /// current game
-    if (toDeleteGame == AppState.currentGame.value)
+    if (toDeleteGame == AppState.currentGame.value) {
       AppState.currentGame.value = null;
+    }
 
     /// shortcut
     AppState.gameShortcuts.value = {

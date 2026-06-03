@@ -284,8 +284,9 @@ Future<void> decompressZip(
     final Archive archive = ZipDecoder().decodeStream(
       inputStream,
       callback: (ArchiveFile archiveFile) {
-        if (archiveFile.isFile)
+        if (archiveFile.isFile) {
           files[archiveFile.name] = archiveFile.lastModDateTime;
+        }
 
         current += lastFileSize;
         lastFileSize = archiveFile.size;

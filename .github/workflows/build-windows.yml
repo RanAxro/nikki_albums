@@ -9,10 +9,58 @@ on:
       - 'website/**'
 
 jobs:
+  build-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache FFmpeg
+        id: cache-ffmpeg
+        uses: actions/cache@v4
+        with:
+          path: ffmpeg_bin
+          key: ${{ runner.os }}-ffmpeg-${{ hashFiles('scripts/build_ffmpeg_windows.sh') }}
+
+      - name: Build FFmpeg
+        if: steps.cache-ffmpeg.outputs.cache-hit != 'true'
+        run: ./scripts/build_ffmpeg_windows.sh
+
+      - name: Cache ExifTool
+        id: cache-exiftool
+        uses: actions/cache@v4
+        with:
+          path: exiftool_bin
+          key: ${{ runner.os }}-exiftool-${{ hashFiles('scripts/fetch_exiftool_windows.sh') }}
+
+      - name: Fetch ExifTool
+        if: steps.cache-exiftool.outputs.cache-hit != 'true'
+        run: ./scripts/fetch_exiftool_windows.sh
+
+      - name: Upload FFmpeg Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-bin
+          path: ffmpeg_bin/ffmpeg.exe
+          retention-days: 1
+
+      - name: Upload ExifTool Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: exiftool-bin
+          path: exiftool_bin/
+          retention-days: 1
+
   build-windows:
+    needs: build-dependencies
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Download FFmpeg and ExifTool Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: windows/runner/resources/bin/
+          merge-multiple: true
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable

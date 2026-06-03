@@ -579,21 +579,26 @@ class ImageCroppingProcessor extends ChangeNotifier {
       min(toRB, toLB),
     );
     if (minDistanceSquaredFromPoint <= e * e) {
-      if (minDistanceSquaredFromPoint == toLT)
+      if (minDistanceSquaredFromPoint == toLT) {
         return CropFrameAnchorPoint.leftTop;
-      if (minDistanceSquaredFromPoint == toRT)
+      }
+      if (minDistanceSquaredFromPoint == toRT) {
         return CropFrameAnchorPoint.rightTop;
-      if (minDistanceSquaredFromPoint == toRB)
+      }
+      if (minDistanceSquaredFromPoint == toRB) {
         return CropFrameAnchorPoint.rightBottom;
-      if (minDistanceSquaredFromPoint == toLB)
+      }
+      if (minDistanceSquaredFromPoint == toLB) {
         return CropFrameAnchorPoint.leftBottom;
+      }
     }
 
     if (point.x < _virtuality.leftTop.x - e ||
         point.x > _virtuality.rightBottom.x + e ||
         point.y < _virtuality.leftTop.y - e ||
-        point.y > _virtuality.rightBottom.y + e)
+        point.y > _virtuality.rightBottom.y + e) {
       return CropFrameAnchorPoint.none;
+    }
 
     final double toL = (point.x - _virtuality.leftTop.x).abs();
     final double toT = (point.y - _virtuality.leftTop.y).abs();
@@ -1476,21 +1481,26 @@ class RectCroppingProcessor extends ChangeNotifier {
       min(toRB, toLB),
     );
     if (minDistanceSquaredFromPoint <= e * e) {
-      if (minDistanceSquaredFromPoint == toLT)
+      if (minDistanceSquaredFromPoint == toLT) {
         return CropFrameAnchorPoint.leftTop;
-      if (minDistanceSquaredFromPoint == toRT)
+      }
+      if (minDistanceSquaredFromPoint == toRT) {
         return CropFrameAnchorPoint.rightTop;
-      if (minDistanceSquaredFromPoint == toRB)
+      }
+      if (minDistanceSquaredFromPoint == toRB) {
         return CropFrameAnchorPoint.rightBottom;
-      if (minDistanceSquaredFromPoint == toLB)
+      }
+      if (minDistanceSquaredFromPoint == toLB) {
         return CropFrameAnchorPoint.leftBottom;
+      }
     }
 
     if (offset.dx < left - e ||
         offset.dx > right + e ||
         offset.dy < top - e ||
-        offset.dy > bottom + e)
+        offset.dy > bottom + e) {
       return CropFrameAnchorPoint.none;
+    }
 
     final double toL = (offset.dx - left).abs();
     final double toT = (offset.dy - top).abs();

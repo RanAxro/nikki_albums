@@ -325,12 +325,13 @@ class DeletionBox extends StatelessWidget {
                   onClick: () {
                     final AlbumType? type = deletionRecord.suggestedAlbumType;
 
-                    if (type != null)
+                    if (type != null) {
                       Explorer.openDir(
                         deletionRecord
                             .getAlbumRecycleBinPathWith(type)
                             .directory,
                       );
+                    }
                   },
                   child: Row(
                     children: [
@@ -436,8 +437,9 @@ class DeletionRecord {
 
   Path getAlbumGamePathWith(AlbumType albumType) {
     String gameRelativePath = albumsInfoMap[albumType]!.locateInGame;
-    if (albumsInfoMap[albumType]!.isRequireUid)
+    if (albumsInfoMap[albumType]!.isRequireUid) {
       gameRelativePath = gameRelativePath.replaceAll(r"$uid$", uid!);
+    }
     final Path gameAbsolutePath = installPath + gameRelativePath;
     return gameAbsolutePath;
   }
@@ -448,8 +450,9 @@ class DeletionRecord {
           r"$msSinceEpoch$",
           deletionTime.millisecondsSinceEpoch.toString(),
         );
-    if (albumsInfoMap[albumType]!.isRequireUid)
+    if (albumsInfoMap[albumType]!.isRequireUid) {
       recycleRelativePath = recycleRelativePath.replaceAll(r"$uid$", uid!);
+    }
     final Path recycleAbsolutePath = installPath + recycleRelativePath;
     return recycleAbsolutePath;
   }

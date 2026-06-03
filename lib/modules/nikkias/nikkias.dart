@@ -30,9 +30,9 @@ const String nikkiasFileFriendlyName = "Nikki Albums Images Archive";
 //  manifest
 //  testcomp.zip
 //  null
-Future<NikkiasManifest?> getNikkiasManifest(File file) async{
+Future<NikkiasManifest?> getNikkiasManifest(File file) async {
   try {
-    return await Future(() async{
+    return await Future(() async {
       if (!(await file.exists())) return null;
 
       final inputStream = InputFileStream(file.path);
@@ -41,7 +41,8 @@ Future<NikkiasManifest?> getNikkiasManifest(File file) async{
       try {
         for (final archiveFile in archive) {
           if (!archiveFile.isFile) continue;
-          if (archiveFile.name.toLowerCase() != nikkiasManifestFileName) continue;
+          if (archiveFile.name.toLowerCase() != nikkiasManifestFileName)
+            continue;
 
           final jsonStr = utf8.decode(archiveFile.content);
           final manifest = NikkiasManifest.decode(jsonStr);
@@ -54,10 +55,7 @@ Future<NikkiasManifest?> getNikkiasManifest(File file) async{
         inputStream.close();
       }
       // ------------------------------
-    }).timeout(
-      const Duration(seconds: 2),
-      onTimeout: () => null,
-    );
+    }).timeout(const Duration(seconds: 2), onTimeout: () => null);
   } catch (e) {
     return null;
   }
@@ -125,8 +123,9 @@ abstract class NikkiasCodec {
   ]) async {
     final Path savePath = Path(to.path) + Path(nikkiasFile.path).subName;
     try {
-      if (await savePath.directory.exists())
+      if (await savePath.directory.exists()) {
         await savePath.directory.delete(recursive: true);
+      }
 
       await decompressZipIo(nikkiasFile, savePath.directory, (
         double decompressProgress,
@@ -205,8 +204,9 @@ class AlbumBackupNikkiasCodec extends NikkiasCodec {
 
     for (final MapEntry<AlbumType, AlbumsInfoItem> info
         in albumsInfoMap.entries) {
-      if (albumWhitelist != null && !albumWhitelist!.contains(info.key))
+      if (albumWhitelist != null && !albumWhitelist!.contains(info.key)) {
         continue;
+      }
 
       if (info.value.isRequireUid) {
         for (final Uid uid in uidList) {
@@ -388,8 +388,9 @@ class OtherNikkiasCodec extends NikkiasCodec {
   Future<void> decode(void Function(double)? onProgress) async {
     final Path savePath = saveDir + Path(nikkiasFile.path).subName;
 
-    if (await savePath.directory.exists())
+    if (await savePath.directory.exists()) {
       await savePath.directory.delete(recursive: true);
+    }
 
     await decompressZipIo(nikkiasFile, savePath.directory, (
       double decompressProgress,

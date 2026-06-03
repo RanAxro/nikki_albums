@@ -1,17 +1,14 @@
 export "image.dart";
 
 import "package:nikki_albums/modules/game/domain/provider/game_searcher.dart";
-import "package:nikki_albums/utils/system/system.dart";
 
 import "uid.dart";
 import "album_manager.dart";
 import "image.dart";
 import "tag.dart";
-import "package:nikki_albums/modules/album/album.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/info.dart";
 import "package:nikki_albums/utils/path.dart";
-import "package:nikki_albums/utils/ini.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
@@ -341,8 +338,9 @@ class Game extends ChangeNotifier with AlbumPath {
         for (FileSystemEntity entity in entities) {
           String uidValue = entity.path.split(Path.symbol).last;
           // 去重并且判断是否为6-12位数字格式
-          if (RegExp(r"^\d{6,12}$").hasMatch(uidValue))
+          if (RegExp(r"^\d{6,12}$").hasMatch(uidValue)) {
             uidList.add(Uid(value: uidValue, installPath: _installPath));
+          }
         }
       } catch (e) {
         /// @ 1
@@ -546,8 +544,9 @@ class Game extends ChangeNotifier with AlbumPath {
 
       for (final MapEntry<AlbumType, bool> chain in chainDeletion.entries) {
         if (!chain.value) continue;
-        if (!albumsInfoMap[chain.key]!.supportedPlatforms.canRunPlatform)
+        if (!albumsInfoMap[chain.key]!.supportedPlatforms.canRunPlatform) {
           continue;
+        }
 
         final Path? gameAlbumPath = getAlbumPath(
           installPath,
@@ -609,8 +608,9 @@ class Game extends ChangeNotifier with AlbumPath {
     } else {
       String recycleRelativePath = albumsInfoMap[albumType]!.locateInRecycleBin
           .replaceAll(r"$msSinceEpoch$", msSinceEpoch);
-      if (albumsInfoMap[albumType]!.isRequireUid)
+      if (albumsInfoMap[albumType]!.isRequireUid) {
         recycleRelativePath = recycleRelativePath.replaceAll(r"$uid$", uid!);
+      }
       final Path recycleAbsolutePath = installPath + recycleRelativePath;
       final Path imageRecyclePath = recycleAbsolutePath + imagePath.name;
 
@@ -682,16 +682,19 @@ class Game extends ChangeNotifier with AlbumPath {
 extension FindGame on Game {
   static Future<List<Game>> find() async {
     final libGames = await GameSearcher.find();
-    final List<Game> list = libGames.map((g) => Game(
-      launcherChannel: LauncherChannel.from(g.launcher?.channel.name),
-      launcherPath: Path(g.launcher?.path ?? ''),
-      launcherName: g.name,
-      installPath: Path(g.installPath),
-    )).toList();
+    final List<Game> list = libGames
+        .map(
+          (g) => Game(
+            launcherChannel: LauncherChannel.from(g.launcher?.channel.name),
+            launcherPath: Path(g.launcher?.path ?? ''),
+            launcherName: g.name,
+            installPath: Path(g.installPath),
+          ),
+        )
+        .toList();
     Game.cacheGameList = list;
     return list;
   }
-
 }
 
 /// 验证文件是否属于InfinityNikki

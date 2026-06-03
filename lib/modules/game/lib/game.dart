@@ -1,5 +1,4 @@
-library game;
-
+library;
 
 import "package:nikki_albums/modules/game/domain/provider/uid_searcher.dart";
 

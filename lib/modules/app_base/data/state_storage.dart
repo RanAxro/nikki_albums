@@ -1,15 +1,8 @@
-
 import "dart:convert";
-import "dart:io";
 
-import "../domain/work_path_provider.dart";
 import "../model/state.dart";
 
-import "package:path/path.dart" as p;
-
-abstract class AppStateStorage{
-
-
+abstract class AppStateStorage {
   // Future<AppStateSnapshot> load() async{
   //   final String appConfigFilePath = await getAppConfigFilePath();
   //
@@ -22,14 +15,11 @@ abstract class AppStateStorage{
   //   }
   // }
 
-  Future<void> save(AppStateSnapshot state) async{
-
-  }
+  Future<void> save(AppStateSnapshot state) async {}
 }
 
-
-abstract class AppStateSerDe{
-  String serialize(AppStateSnapshot source){
+abstract class AppStateSerDe {
+  String serialize(AppStateSnapshot source) {
     return jsonEncode({
       "isAgreeAgreement": source.isAgreeAgreement,
       "lang": source.lang,

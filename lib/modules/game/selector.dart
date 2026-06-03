@@ -256,8 +256,9 @@ class AccountSelector {
     final Map<Game, List<Uid>> res = {};
 
     for (final Game game in await gameList) {
-      if (whitelist != null && !whitelist!.contains(game.launcherChannel))
+      if (whitelist != null && !whitelist!.contains(game.launcherChannel)) {
         continue;
+      }
 
       if (!isSelectUid) {
         res[game] = <Uid>[];

@@ -1,0 +1,39 @@
+#!/bin/sh
+# pre-commit hook to run dart fix, dart format, and rustfmt on staged files
+
+# Function to get staged files matching a pattern
+get_staged_files() {
+    git diff --cached --name-only --diff-filter=ACM | grep "$1" || true
+}
+
+DART_FILES=$(get_staged_files '\.dart$')
+RUST_FILES=$(get_staged_files '\.rs$')
+
+# 1. Format and fix Dart files
+if [ -n "$DART_FILES" ]; then
+    echo "Formatting staged Dart files..."
+    # We run formatting in parallel where possible, but dart format handles multiple files
+    echo "$DART_FILES" | xargs dart format
+    echo "Applying Dart fixes..."
+    echo "$DART_FILES" | xargs dart fix --apply
+    echo "$DART_FILES" | xargs git add
+fi
+
+# 2. Format Rust files
+if [ -n "$RUST_FILES" ]; then
+    echo "Formatting staged Rust files..."
+    # If rustfmt is available, use it directly on the staged files to be fast and safe
+    if command -v rustfmt >/dev/null 2>&1; then
+        echo "$RUST_FILES" | xargs rustfmt --edition 2021
+        echo "$RUST_FILES" | xargs git add
+    else
+        echo "rustfmt not found, falling back to cargo fmt for the entire workspace..."
+        cargo fmt --manifest-path rust/Cargo.toml
+        # Add all rust files just in case cargo fmt touched other files, or just add staged ones?
+        # We only add staged ones back to avoid staging unstaged files accidentally
+        echo "$RUST_FILES" | xargs git add
+    fi
+fi
+
+echo "✅ Pre-commit hooks passed successfully!"
+exit 0

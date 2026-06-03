@@ -12,8 +12,9 @@ Future<Path> getAppDataDirectoryPath() async {
 
   final Path appDataDirectoryPath = Path(directory.path) + "Nikki Albums";
 
-  if (!await appDataDirectoryPath.directory.exists())
+  if (!await appDataDirectoryPath.directory.exists()) {
     appDataDirectoryPath.directory.create(recursive: true);
+  }
 
   return appDataDirectoryPath;
 }
@@ -23,14 +24,16 @@ Future<Path> getTempPath() async {
 
   final Path tempDirectoryPath = appDataDirectoryPath + "temp";
 
-  if (!await tempDirectoryPath.directory.exists())
+  if (!await tempDirectoryPath.directory.exists()) {
     tempDirectoryPath.directory.create(recursive: true);
+  }
 
   return tempDirectoryPath;
 }
 
 Path getBinPath() {
-  return Path(Platform.resolvedExecutable).cut(1) + "/data/flutter_assets/assets/bin";
+  return Path(Platform.resolvedExecutable).cut(1) +
+      "/data/flutter_assets/assets/bin";
 }
 
 Path getWebPath() {
@@ -59,7 +62,8 @@ Future<void> decompress(
 
 (int, int) getWindowsScreenSize() => SystemFactory.instance.getScreenSize();
 
-void doTopWindow(bool isTop, {int? hwnd}) => SystemFactory.instance.doTopWindow(isTop, hwnd: hwnd);
+void doTopWindow(bool isTop, {int? hwnd}) =>
+    SystemFactory.instance.doTopWindow(isTop, hwnd: hwnd);
 
 void toForeground() => SystemFactory.instance.toForeground();
 
@@ -67,12 +71,16 @@ List<int> getAllWindowHandle() => SystemFactory.instance.getAllWindowHandle();
 
 Path? getWindowsDesktopPath() => SystemFactory.instance.getDesktopPath();
 
-(int, int, int) getDiskFreeSpaceEx(Path path) => SystemFactory.instance.getDiskFreeSpaceEx(path);
+(int, int, int) getDiskFreeSpaceEx(Path path) =>
+    SystemFactory.instance.getDiskFreeSpaceEx(path);
 
-Future<bool> runWindowsCommandAsAdmin(List<String> commands) => SystemFactory.instance.runCommandAsAdmin(commands);
+Future<bool> runWindowsCommandAsAdmin(List<String> commands) =>
+    SystemFactory.instance.runCommandAsAdmin(commands);
 
 class Explorer {
   static void open() => SystemFactory.instance.openExplorer();
-  static void openFile(File file) => SystemFactory.instance.openFileInExplorer(file);
-  static void openDir(Directory dir) => SystemFactory.instance.openDirInExplorer(dir);
+  static void openFile(File file) =>
+      SystemFactory.instance.openFileInExplorer(file);
+  static void openDir(Directory dir) =>
+      SystemFactory.instance.openDirInExplorer(dir);
 }

@@ -10,6 +10,7 @@ import "package:nikki_albums/modules/game/infinity_nikki/domain/param_codec.dart
 import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
 import "package:nikki_albums/modules/album/mp4_to_gif.dart";
 import 'package:nikki_albums/utils/ffmpeg_manager.dart';
+import 'package:nikki_albums/utils/exiftool_manager.dart';
 import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";
 import "package:nikki_albums/modules/setting/setting.dart";
 import "package:nikki_albums/modules/file_transfer/file_transfer.dart";
@@ -75,49 +76,49 @@ class AlbumValuePool extends InheritedWidget {
   }
 }
 
-class AlbumHandler{
+class AlbumHandler {
   const AlbumHandler();
 
-  void refresh(Game game){
+  void refresh(Game game) {
     game.refresh();
   }
 
-  void changeSortOrder(Game game){
-    if(game.album.sortOrder == SortOrder.descending){
+  void changeSortOrder(Game game) {
+    if (game.album.sortOrder == SortOrder.descending) {
       game.album.sortOrder = SortOrder.ascending;
-    }else{
+    } else {
       game.album.sortOrder = SortOrder.descending;
     }
   }
 
-  void layoutMinus(){
-    if(AppState.albumColumn.value > 1) AppState.albumColumn.value--;
+  void layoutMinus() {
+    if (AppState.albumColumn.value > 1) AppState.albumColumn.value--;
   }
 
-  void layoutPlus(){
+  void layoutPlus() {
     AppState.albumColumn.value++;
   }
 
-  void deselect(Game game){
+  void deselect(Game game) {
     game.album.deselectAllImage();
   }
 
-  void selectAll(Game game){
+  void selectAll(Game game) {
     game.album.selectAllImage();
   }
 
-  void invertSelect(Game game){
+  void invertSelect(Game game) {
     game.album.invertAllImage();
   }
 
-  void viewSelect(BuildContext context, Game game){
+  void viewSelect(BuildContext context, Game game) {
     showAppDialog(
       context: context,
       builder: (BuildContext context) => SelectionViewerDialog(game: game),
     );
   }
 
-  void moveOutside(BuildContext context, Game game){
+  void moveOutside(BuildContext context, Game game) {
     final ValueNotifier<double> progress = ValueNotifier(0);
     int errorNum = 0;
 
@@ -125,8 +126,8 @@ class AlbumHandler{
       context: context,
       valueListenable: progress,
       autoClose: false,
-      completedBuilder: (BuildContext context, void Function() close){
-        if(errorNum == 0){
+      completedBuilder: (BuildContext context, void Function() close) {
+        if (errorNum == 0) {
           close();
           return block0;
         }
@@ -147,16 +148,16 @@ class AlbumHandler{
     );
 
     game.backupSelectedImages(
-      onProgress: (double currentProgress){
+      onProgress: (double currentProgress) {
         progress.value = currentProgress;
       },
-      onError: (Set items){
+      onError: (Set items) {
         errorNum = items.length;
       },
     );
   }
 
-  void moveInside(BuildContext context, Game game){
+  void moveInside(BuildContext context, Game game) {
     final ValueNotifier<double> progress = ValueNotifier(0);
     int errorNum = 0;
 
@@ -164,8 +165,8 @@ class AlbumHandler{
       context: context,
       valueListenable: progress,
       autoClose: false,
-      completedBuilder: (BuildContext context, void Function() close){
-        if(errorNum == 0){
+      completedBuilder: (BuildContext context, void Function() close) {
+        if (errorNum == 0) {
           close();
           return block0;
         }
@@ -186,23 +187,23 @@ class AlbumHandler{
     );
 
     game.restoreSelectedImages(
-      onProgress: (double currentProgress){
+      onProgress: (double currentProgress) {
         progress.value = currentProgress;
       },
-      onError: (Set items){
+      onError: (Set items) {
         errorNum = items.length;
       },
     );
   }
 
-  void delete(BuildContext context, Game game){
+  void delete(BuildContext context, Game game) {
     showDialog(
       context: context,
       builder: (BuildContext context) => DeleteImagesDialog(game: game),
     );
   }
 
-  void import(BuildContext context, Game game){
+  void import(BuildContext context, Game game) {
     showDialog(
       context: context,
       builder: (BuildContext context) => ImportImagesDialog(game),
@@ -210,9 +211,10 @@ class AlbumHandler{
   }
 
   /// copy images to clipboard
-  Future<void> copy(BuildContext context, List<ImageItem> images) async{
+  Future<void> copy(BuildContext context, List<ImageItem> images) async {
     final String liveFormat = AppState.livePhotoExportFormat.value;
-    final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+    final bool isVideoAlbum =
+        AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
 
     if (Platform.isWindows && isVideoAlbum && liveFormat == "apple") {
       if (!await FFmpegManager.checkAndDownload(context)) {
@@ -225,11 +227,13 @@ class AlbumHandler{
 
     AppToast.showMessage(context: context, message: "复制中");
 
-    try{
-      if(isVideoAlbum && liveFormat != "none"){
+    try {
+      if (isVideoAlbum && liveFormat != "none") {
         // Convert to live photo format in temp dir, then copy
-        final Directory tempDir = Directory(p.join(Directory.systemTemp.path, "nikki_albums_live_photo_temp"));
-        if(await tempDir.exists()){
+        final Directory tempDir = Directory(
+          p.join(Directory.systemTemp.path, "nikki_albums_live_photo_temp"),
+        );
+        if (await tempDir.exists()) {
           await tempDir.delete(recursive: true);
         }
         await tempDir.create(recursive: true);
@@ -237,36 +241,40 @@ class AlbumHandler{
         final LivePhotoExportService exporter = LivePhotoExportService();
         final Set<Path> outputPaths = {};
 
-        for(final ImageItem item in images){
-          if(item.cover != null && await File(item.cover!).exists()){
+        for (final ImageItem item in images) {
+          if (item.cover != null && await File(item.cover!).exists()) {
             await exporter.export(
-              format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+              format: liveFormat == "apple"
+                  ? ExportFormat.appleLivePhoto
+                  : ExportFormat.googleMotionPhoto,
               coverImage: File(item.cover!),
               sourceVideo: item.path.file,
               outputPath: tempDir.path,
             );
             // Collect output files
-            await for(final FileSystemEntity entity in tempDir.list()){
-              if(entity is File){
+            await for (final FileSystemEntity entity in tempDir.list()) {
+              if (entity is File) {
                 outputPaths.add(Path(entity.path));
               }
             }
-          }else{
+          } else {
             outputPaths.add(item.path);
           }
         }
         await copyFilesToClipboard(outputPaths.toList());
-      }else{
-        final List<Path> paths = images.map((item) => item.path).toList(growable: false);
+      } else {
+        final List<Path> paths = images
+            .map((item) => item.path)
+            .toList(growable: false);
         await copyFilesToClipboard(paths);
       }
-    }catch(e){
+    } catch (e) {
       isError = true;
-    }finally{
+    } finally {
       progress.value = 1;
     }
 
-    if(context.mounted){
+    if (context.mounted) {
       AppToast.showMessage(
         context: context,
         message: context.tr(isError ? "pa_copy_failed" : "pa_copy_successful"),
@@ -276,9 +284,13 @@ class AlbumHandler{
   }
 
   /// export images to native device
-  Future<void> exportToLocal(BuildContext context, List<ImageItem> images)async{
+  Future<void> exportToLocal(
+    BuildContext context,
+    List<ImageItem> images,
+  ) async {
     final String liveFormat = AppState.livePhotoExportFormat.value;
-    final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+    final bool isVideoAlbum =
+        AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
 
     if (Platform.isWindows && isVideoAlbum && liveFormat == "apple") {
       if (!await FFmpegManager.checkAndDownload(context)) {
@@ -290,7 +302,7 @@ class AlbumHandler{
       dialogTitle: context.plural("exportXImage", images.length),
       lockParentWindow: true,
     );
-    if(location == null) return;
+    if (location == null) return;
 
     final Path root = Path(location);
 
@@ -298,22 +310,133 @@ class AlbumHandler{
     final int total = images.length;
     int current = 0;
     int errorNum = 0;
+    List<String> errors = [];
 
-    if(context.mounted){
+    if (context.mounted) {
       showProgressBar(
         context: context,
         barrierDismissible: false,
         autoClose: false,
         valueListenable: progress,
-        completedBuilder: (BuildContext context, void Function() close){
+        completedBuilder: (BuildContext context, void Function() close) {
           return Column(
             spacing: listSpacing,
             mainAxisSize: MainAxisSize.min,
             children: [
-              if(errorNum != 0)
+              if (errorNum != 0) ...[
                 Text(
                   context.plural("XImageFailedToBeProcessed", errorNum),
-                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.error.pressedColor,
+                  ),
+                ),
+                Text(
+                  errors.take(3).join('\n'),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.error.color,
+                    fontSize: 12,
+                  ),
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+              SmallButton(
+                width: null,
+                colorRole: ColorRole.background,
+                transparent: false,
+                onClick: close,
+                child: Text(
+                  context.tr("close"),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.background.onColor,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    for (final ImageItem item in images) {
+      try {
+        final String liveFormat = AppState.livePhotoExportFormat.value;
+        final bool isVideoAlbum =
+            AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+
+        if (isVideoAlbum && liveFormat != "none" && item.cover != null) {
+          final File coverFile = File(item.cover!);
+          if (await coverFile.exists()) {
+            final LivePhotoExportService exporter = LivePhotoExportService();
+            await exporter.export(
+              format: liveFormat == "apple"
+                  ? ExportFormat.appleLivePhoto
+                  : ExportFormat.googleMotionPhoto,
+              coverImage: coverFile,
+              sourceVideo: item.path.file,
+              outputPath: root.path,
+            );
+          } else {
+            final Path destination = root + item.path.name;
+            await item.path.file.copy(destination.path);
+          }
+        } else {
+          final Path destination = root + item.path.name;
+          await item.path.file.copy(destination.path);
+        }
+      } catch (e) {
+        errorNum++;
+        errors.add(e.toString());
+      } finally {
+        current++;
+        progress.value = current / total;
+      }
+    }
+    progress.value = 1;
+    if (errors.isNotEmpty) {
+      try {
+        final File logFile = File('${root.path}/export_debug.log');
+        await logFile.writeAsString(
+          '--- Export Errors ---\n\n${errors.join('\n\n')}',
+        );
+      } catch (_) {}
+    }
+  }
+
+  /// export images to network device
+  void exportToNetwork(BuildContext context) {
+    if (AppState.currentGame.value != null) {
+      exportImageToNetwork(context, AppState.currentGame.value!);
+    }
+  }
+
+  /// export to macOS Photo Library (only for Video album on macOS)
+  Future<void> exportToPhotoLibrary(
+    BuildContext context,
+    List<ImageItem> images,
+  ) async {
+    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+    final int total = images.length;
+    int current = 0;
+    int errorNum = 0;
+
+    if (context.mounted) {
+      showProgressBar(
+        context: context,
+        barrierDismissible: false,
+        autoClose: false,
+        valueListenable: progress,
+        completedBuilder: (BuildContext context, void Function() close) {
+          return Column(
+            spacing: listSpacing,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (errorNum != 0)
+                Text(
+                  context.plural("XImageFailedToBeProcessed", errorNum),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.error.pressedColor,
+                  ),
                 ),
               SmallButton(
                 width: null,
@@ -322,7 +445,9 @@ class AlbumHandler{
                 onClick: close,
                 child: Text(
                   context.tr("close"),
-                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor,),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.background.onColor,
+                  ),
                 ),
               ),
             ],
@@ -331,93 +456,23 @@ class AlbumHandler{
       );
     }
 
-    for(final ImageItem item in images){
-      try{
-        final String liveFormat = AppState.livePhotoExportFormat.value;
-        final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
-
-        if(isVideoAlbum && liveFormat != "none" && item.cover != null){
-          final File coverFile = File(item.cover!);
-          if(await coverFile.exists()){
-            final LivePhotoExportService exporter = LivePhotoExportService();
-            await exporter.export(
-              format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
-              coverImage: coverFile,
-              sourceVideo: item.path.file,
-              outputPath: root.path,
-            );
-          }else{
-            final Path destination = root + item.path.name;
-            await item.path.file.copy(destination.path);
-          }
-        }else{
-          final Path destination = root + item.path.name;
-          await item.path.file.copy(destination.path);
-        }
-      }catch(e){
-        errorNum++;
-      }finally{
-        current++;
-        progress.value = current / total;
-      }
-    }
-    progress.value = 1;
-  }
-
-  /// export images to network device
-  void exportToNetwork(BuildContext context){
-    if(AppState.currentGame.value != null){
-      exportImageToNetwork(context, AppState.currentGame.value!);
-    }
-  }
-
-  /// export to macOS Photo Library (only for Video album on macOS)
-  Future<void> exportToPhotoLibrary(BuildContext context, List<ImageItem> images) async{
-    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
-    final int total = images.length;
-    int current = 0;
-    int errorNum = 0;
-
-    if(context.mounted){
-      showProgressBar(
-        context: context,
-        barrierDismissible: false,
-        autoClose: false,
-        valueListenable: progress,
-        completedBuilder: (BuildContext context, void Function() close){
-          return Column(
-            spacing: listSpacing,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if(errorNum != 0)
-                Text(
-                  context.plural("XImageFailedToBeProcessed", errorNum),
-                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
-                ),
-              SmallButton(
-                width: null,
-                colorRole: ColorRole.background,
-                transparent: false,
-                onClick: close,
-                child: Text(context.tr("close"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    final bool isVideoAlbum = AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+    final bool isVideoAlbum =
+        AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
     final String liveFormat = AppState.livePhotoExportFormat.value;
     const channel = MethodChannel("com.ranaxro.nikki.nikkiAlbums/live_photo");
 
     final List<String> allFilesToImport = [];
 
-    for(final ImageItem item in images){
-      try{
-        if(isVideoAlbum && liveFormat == "apple" && item.cover != null && await File(item.cover!).exists()){
+    for (final ImageItem item in images) {
+      try {
+        if (isVideoAlbum &&
+            liveFormat == "apple" &&
+            item.cover != null &&
+            await File(item.cover!).exists()) {
           final String assetIdentifier = const Uuid().v4().toUpperCase();
-          final tempDir = await Directory.systemTemp.createTemp("nikki_livephoto_");
+          final tempDir = await Directory.systemTemp.createTemp(
+            "nikki_livephoto_",
+          );
           final String baseName = item.path.subName;
           final String tempVideo = "${tempDir.path}/$baseName.mov";
           final String tempImage = "${tempDir.path}/$baseName.jpg";
@@ -434,24 +489,24 @@ class AlbumHandler{
           });
           allFilesToImport.add(tempImage);
           allFilesToImport.add(tempVideo);
-        }else{
+        } else {
           allFilesToImport.add(item.path.path);
         }
-      }catch(e){
+      } catch (e) {
         errorNum++;
-      }finally{
+      } finally {
         current++;
         progress.value = current / total;
       }
     }
 
     // Import all files at once via NSSharingService
-    if(allFilesToImport.isNotEmpty){
-      try{
+    if (allFilesToImport.isNotEmpty) {
+      try {
         await channel.invokeMethod("importBatchToPhotoLibrary", {
           "filePaths": allFilesToImport,
         });
-      }catch(e){
+      } catch (e) {
         errorNum++;
       }
     }
@@ -459,40 +514,56 @@ class AlbumHandler{
   }
 
   /// encode and export nikkias file to native device
-  Future<void> exportNikkiasToLocal(BuildContext context, List<ImageItem> images) async{
-    if(AppState.currentGame.value == null) return;
+  Future<void> exportNikkiasToLocal(
+    BuildContext context,
+    List<ImageItem> images,
+  ) async {
+    if (AppState.currentGame.value == null) return;
     final Game game = AppState.currentGame.value!;
 
     final String? location = await FilePicker.platform.getDirectoryPath(
       dialogTitle: context.tr("exportNikkiasFile"),
       lockParentWindow: true,
     );
-    if(location == null) return;
+    if (location == null) return;
 
     final Path root = Path(location);
-    final String filename = "${DateTime.now().millisecondsSinceEpoch}.$nikkiasExtension";
+    final String filename =
+        "${DateTime.now().millisecondsSinceEpoch}.$nikkiasExtension";
     final Path savePath = root + filename;
 
     final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
     bool isError = false;
 
-    if(context.mounted){
+    if (context.mounted) {
       showProgressBar(
         context: context,
         barrierDismissible: false,
         autoClose: false,
         valueListenable: progress,
-        completedBuilder: (BuildContext context, void Function() close){
+        completedBuilder: (BuildContext context, void Function() close) {
           return Column(
             spacing: listSpacing,
             mainAxisSize: MainAxisSize.min,
             children: [
-              isError ? Text(context.plural("XImageFailedToBeProcessed", images.length),
-                style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.pressedColor),
-              ) : Text(
-                filename,
-                style: TextStyle(color: AppTheme.of(context)!.colorScheme.error.onColor),
-              ),
+              isError
+                  ? Text(
+                      context.plural(
+                        "XImageFailedToBeProcessed",
+                        images.length,
+                      ),
+                      style: TextStyle(
+                        color: AppTheme.of(
+                          context,
+                        )!.colorScheme.error.pressedColor,
+                      ),
+                    )
+                  : Text(
+                      filename,
+                      style: TextStyle(
+                        color: AppTheme.of(context)!.colorScheme.error.onColor,
+                      ),
+                    ),
               SmallButton(
                 width: null,
                 colorRole: ColorRole.background,
@@ -500,7 +571,9 @@ class AlbumHandler{
                 onClick: close,
                 child: Text(
                   context.tr("close"),
-                  style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor),
+                  style: TextStyle(
+                    color: AppTheme.of(context)!.colorScheme.background.onColor,
+                  ),
                 ),
               ),
             ],
@@ -514,35 +587,37 @@ class AlbumHandler{
       uid: game.selectedUid?.value ?? "",
       albumType: game.selectedAlbum,
     );
-    try{
+    try {
       final ImageTransferNikkiasCodec codec = ImageTransferNikkiasCodec(
         manifest,
         savePath.file,
         game.installPath,
       );
-      codec.filenameWhitelist = game.album.selectedImages.map((ImageItem item) => item.name).toList();
-      await codec.encode((double encodeProgress) => progress.value = encodeProgress,);
-    }catch (e){
+      codec.filenameWhitelist = game.album.selectedImages
+          .map((ImageItem item) => item.name)
+          .toList();
+      await codec.encode(
+        (double encodeProgress) => progress.value = encodeProgress,
+      );
+    } catch (e) {
       isError = true;
-    }finally{
+    } finally {
       progress.value = 1;
       Explorer.openFile(savePath.file);
     }
   }
 
   /// The "Export" option for the "AlbumType.Video" category
-  void openVideoExportSetting(BuildContext context){
+  void openVideoExportSetting(BuildContext context) {
     showDialog(
       context: context,
-      builder: (BuildContext context){
-        return SettingDialog(
-          initialPage: 2,
-        );
+      builder: (BuildContext context) {
+        return SettingDialog(initialPage: 2);
       },
     );
   }
 
-  static AlbumHandler of(BuildContext context){
+  static AlbumHandler of(BuildContext context) {
     return AlbumValuePool.of(context).handler;
   }
 }
@@ -554,126 +629,262 @@ class Album extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlbumValuePool(
       child: Builder(
-        builder: (BuildContext context){
+        builder: (BuildContext context) {
           return CallbackShortcuts(
             bindings: {
               /// 刷新
-              const SingleActivator(LogicalKeyboardKey.f5): (){
-                if(AppState.currentGame.value != null){
+              const SingleActivator(LogicalKeyboardKey.f5): () {
+                if (AppState.currentGame.value != null) {
                   AlbumHandler.of(context).refresh(AppState.currentGame.value!);
                 }
               },
+
               /// 增加列数
-              const SingleActivator(LogicalKeyboardKey.equal): (){
-                if(AppState.currentGame.value != null){
+              const SingleActivator(LogicalKeyboardKey.equal): () {
+                if (AppState.currentGame.value != null) {
                   AlbumHandler.of(context).layoutPlus();
                 }
               },
+
               /// 减少列数
-              const SingleActivator(LogicalKeyboardKey.minus): (){
-                if(AppState.currentGame.value != null){
+              const SingleActivator(LogicalKeyboardKey.minus): () {
+                if (AppState.currentGame.value != null) {
                   AlbumHandler.of(context).layoutMinus();
                 }
               },
+
               /// 反选
-              const SingleActivator(LogicalKeyboardKey.keyD, control: true): (){
-                if(AppState.currentGame.value != null){
-                  AlbumHandler.of(context).deselect(AppState.currentGame.value!);
+              const SingleActivator(
+                LogicalKeyboardKey.keyD,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null) {
+                  AlbumHandler.of(
+                    context,
+                  ).deselect(AppState.currentGame.value!);
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyD, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null){
-                    AlbumHandler.of(context).deselect(AppState.currentGame.value!);
+              const SingleActivator(LogicalKeyboardKey.keyD, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null) {
+                    AlbumHandler.of(
+                      context,
+                    ).deselect(AppState.currentGame.value!);
                   }
                 }
               },
+
               /// 全选
-              const SingleActivator(LogicalKeyboardKey.keyA, control: true): (){
-                if(AppState.currentGame.value != null){
-                  AlbumHandler.of(context).selectAll(AppState.currentGame.value!);
+              const SingleActivator(
+                LogicalKeyboardKey.keyA,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null) {
+                  AlbumHandler.of(
+                    context,
+                  ).selectAll(AppState.currentGame.value!);
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyA, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null){
-                    AlbumHandler.of(context).selectAll(AppState.currentGame.value!);
+              const SingleActivator(LogicalKeyboardKey.keyA, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null) {
+                    AlbumHandler.of(
+                      context,
+                    ).selectAll(AppState.currentGame.value!);
                   }
                 }
               },
+
               /// 查看选中
-              const SingleActivator(LogicalKeyboardKey.keyV): (){
-                if(AppState.currentGame.value != null){
-                  AlbumHandler.of(context).viewSelect(context, AppState.currentGame.value!);
+              const SingleActivator(LogicalKeyboardKey.keyV): () {
+                if (AppState.currentGame.value != null) {
+                  AlbumHandler.of(
+                    context,
+                  ).viewSelect(context, AppState.currentGame.value!);
                 }
               },
+
               /// 移出
-              const SingleActivator(LogicalKeyboardKey.keyO, control: true): (){
-                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                  AlbumHandler.of(context).moveOutside(context, AppState.currentGame.value!);
+              const SingleActivator(
+                LogicalKeyboardKey.keyO,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null &&
+                    AppState.currentGame.value!.album.backupAlbumPath != null &&
+                    AppState
+                        .currentGame
+                        .value!
+                        .album
+                        .selectedImages
+                        .isNotEmpty) {
+                  AlbumHandler.of(
+                    context,
+                  ).moveOutside(context, AppState.currentGame.value!);
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyO, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                    AlbumHandler.of(context).moveOutside(context, AppState.currentGame.value!);
+              const SingleActivator(LogicalKeyboardKey.keyO, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null &&
+                      AppState.currentGame.value!.album.backupAlbumPath !=
+                          null &&
+                      AppState
+                          .currentGame
+                          .value!
+                          .album
+                          .selectedImages
+                          .isNotEmpty) {
+                    AlbumHandler.of(
+                      context,
+                    ).moveOutside(context, AppState.currentGame.value!);
                   }
                 }
               },
+
               /// 移入
-              const SingleActivator(LogicalKeyboardKey.keyI, control: true): (){
-                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                  AlbumHandler.of(context).moveInside(context, AppState.currentGame.value!);
+              const SingleActivator(
+                LogicalKeyboardKey.keyI,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null &&
+                    AppState.currentGame.value!.album.backupAlbumPath != null &&
+                    AppState
+                        .currentGame
+                        .value!
+                        .album
+                        .selectedImages
+                        .isNotEmpty) {
+                  AlbumHandler.of(
+                    context,
+                  ).moveInside(context, AppState.currentGame.value!);
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyI, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.backupAlbumPath != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                    AlbumHandler.of(context).moveInside(context, AppState.currentGame.value!);
+              const SingleActivator(LogicalKeyboardKey.keyI, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null &&
+                      AppState.currentGame.value!.album.backupAlbumPath !=
+                          null &&
+                      AppState
+                          .currentGame
+                          .value!
+                          .album
+                          .selectedImages
+                          .isNotEmpty) {
+                    AlbumHandler.of(
+                      context,
+                    ).moveInside(context, AppState.currentGame.value!);
                   }
                 }
               },
+
               /// 删除
-              const SingleActivator(LogicalKeyboardKey.delete): (){
-                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                  AlbumHandler.of(context).delete(context, AppState.currentGame.value!);
+              const SingleActivator(LogicalKeyboardKey.delete): () {
+                if (AppState.currentGame.value != null &&
+                    AppState
+                        .currentGame
+                        .value!
+                        .album
+                        .selectedImages
+                        .isNotEmpty) {
+                  AlbumHandler.of(
+                    context,
+                  ).delete(context, AppState.currentGame.value!);
                 }
               },
+
               /// 导出到剪贴板
-              const SingleActivator(LogicalKeyboardKey.keyC, control: true): (){
-                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                  AlbumHandler.of(context).copy(context, AppState.currentGame.value!.album.selectedImages.toList());
+              const SingleActivator(
+                LogicalKeyboardKey.keyC,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null &&
+                    AppState
+                        .currentGame
+                        .value!
+                        .album
+                        .selectedImages
+                        .isNotEmpty) {
+                  AlbumHandler.of(context).copy(
+                    context,
+                    AppState.currentGame.value!.album.selectedImages.toList(),
+                  );
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyC, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                    AlbumHandler.of(context).copy(context, AppState.currentGame.value!.album.selectedImages.toList());
+              const SingleActivator(LogicalKeyboardKey.keyC, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null &&
+                      AppState
+                          .currentGame
+                          .value!
+                          .album
+                          .selectedImages
+                          .isNotEmpty) {
+                    AlbumHandler.of(context).copy(
+                      context,
+                      AppState.currentGame.value!.album.selectedImages.toList(),
+                    );
                   }
                 }
               },
+
               /// 导出到本地
-              const SingleActivator(LogicalKeyboardKey.keyS, control: true): (){
-                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                  AlbumHandler.of(context).exportToLocal(context, AppState.currentGame.value!.album.selectedImages.toList());
+              const SingleActivator(
+                LogicalKeyboardKey.keyS,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null &&
+                    AppState
+                        .currentGame
+                        .value!
+                        .album
+                        .selectedImages
+                        .isNotEmpty) {
+                  AlbumHandler.of(context).exportToLocal(
+                    context,
+                    AppState.currentGame.value!.album.selectedImages.toList(),
+                  );
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyS, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
-                    AlbumHandler.of(context).exportToLocal(context, AppState.currentGame.value!.album.selectedImages.toList());
+              const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null &&
+                      AppState
+                          .currentGame
+                          .value!
+                          .album
+                          .selectedImages
+                          .isNotEmpty) {
+                    AlbumHandler.of(context).exportToLocal(
+                      context,
+                      AppState.currentGame.value!.album.selectedImages.toList(),
+                    );
                   }
                 }
               },
+
               /// 导出到网络
-              const SingleActivator(LogicalKeyboardKey.keyW, control: true): (){
-                if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+              const SingleActivator(
+                LogicalKeyboardKey.keyW,
+                control: true,
+              ): () {
+                if (AppState.currentGame.value != null &&
+                    AppState
+                        .currentGame
+                        .value!
+                        .album
+                        .selectedImages
+                        .isNotEmpty) {
                   AlbumHandler.of(context).exportToNetwork(context);
                 }
               },
-              const SingleActivator(LogicalKeyboardKey.keyW, meta: true): (){
-                if(Platform.isMacOS){
-                  if(AppState.currentGame.value != null && AppState.currentGame.value!.album.selectedImages.isNotEmpty){
+              const SingleActivator(LogicalKeyboardKey.keyW, meta: true): () {
+                if (Platform.isMacOS) {
+                  if (AppState.currentGame.value != null &&
+                      AppState
+                          .currentGame
+                          .value!
+                          .album
+                          .selectedImages
+                          .isNotEmpty) {
                     AlbumHandler.of(context).exportToNetwork(context);
                   }
                 }
@@ -681,12 +892,7 @@ class Album extends StatelessWidget {
             },
             child: Focus(
               autofocus: true,
-              child: Stack(
-                children: [
-                  AlbumExhibition(),
-                  ToolBar(),
-                ],
-              ),
+              child: Stack(children: [AlbumExhibition(), ToolBar()]),
             ),
           );
         },
@@ -792,7 +998,7 @@ class _ToolBarState extends State<ToolBar> {
                           message: text,
                           child: SmallButton(
                             colorRole: ColorRole.secondary,
-                            onClick: (){
+                            onClick: () {
                               AlbumHandler.of(context).changeSortOrder(game);
                             },
                             child: Image.asset(
@@ -828,7 +1034,10 @@ class _ToolBarState extends State<ToolBar> {
                 /// 取消选择
                 AppRawButton(
                   toolTip: "deselect",
-                  toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyD],
+                  toolTipShortcut: [
+                    LogicalKeyboardKey.control,
+                    LogicalKeyboardKey.keyD,
+                  ],
                   onClick: () {
                     AlbumHandler.of(context).deselect(game);
                   },
@@ -838,7 +1047,10 @@ class _ToolBarState extends State<ToolBar> {
                 /// 全选
                 AppRawButton(
                   toolTip: "select_all",
-                  toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyA],
+                  toolTipShortcut: [
+                    LogicalKeyboardKey.control,
+                    LogicalKeyboardKey.keyA,
+                  ],
                   onClick: () {
                     AlbumHandler.of(context).selectAll(game);
                   },
@@ -867,7 +1079,11 @@ class _ToolBarState extends State<ToolBar> {
                     onClick: () {
                       AlbumHandler.of(context).viewSelect(context, game);
                     },
-                    usable: (game.selectedAlbum == AlbumType.Video || game.selectedAlbum == AlbumType.ExternalVideo) ? false : usable,
+                    usable:
+                        (game.selectedAlbum == AlbumType.Video ||
+                            game.selectedAlbum == AlbumType.ExternalVideo)
+                        ? false
+                        : usable,
                     child: AppIcon("view", height: 18),
                   );
                 }),
@@ -881,7 +1097,10 @@ class _ToolBarState extends State<ToolBar> {
 
                   return AppRawButton(
                     toolTip: usable ? "remove" : "",
-                    toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyO],
+                    toolTipShortcut: [
+                      LogicalKeyboardKey.control,
+                      LogicalKeyboardKey.keyO,
+                    ],
                     onClick: () {
                       AlbumHandler.of(context).moveOutside(context, game);
                     },
@@ -899,7 +1118,10 @@ class _ToolBarState extends State<ToolBar> {
 
                   return AppRawButton(
                     toolTip: usable ? "insert" : "",
-                    toolTipShortcut: [LogicalKeyboardKey.control, LogicalKeyboardKey.keyI],
+                    toolTipShortcut: [
+                      LogicalKeyboardKey.control,
+                      LogicalKeyboardKey.keyI,
+                    ],
                     onClick: () {
                       AlbumHandler.of(context).moveInside(context, game);
                     },
@@ -1254,7 +1476,8 @@ class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader> {
   @override
   Widget build(BuildContext context) {
     return SmoothPointerScroll(
-      initialScrollOffset: AlbumValuePool.of(context).offset[widget.game.selectedAlbum] ?? 0,
+      initialScrollOffset:
+          AlbumValuePool.of(context).offset[widget.game.selectedAlbum] ?? 0,
       scrollbarController: scrollbarController,
       builder:
           (
@@ -1263,9 +1486,10 @@ class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader> {
             ScrollPhysics physics,
             IndependentScrollbarController scrollbarController,
           ) {
-            controller.addListener((){
-              if(controller.hasClients){
-                AlbumValuePool.of(context).offset[widget.game.selectedAlbum] = controller.offset;
+            controller.addListener(() {
+              if (controller.hasClients) {
+                AlbumValuePool.of(context).offset[widget.game.selectedAlbum] =
+                    controller.offset;
               }
             });
 
@@ -1420,6 +1644,7 @@ class Exhibit extends StatefulWidget {
   @override
   State<Exhibit> createState() => _ExhibitState();
 }
+
 class _ExhibitState extends State<Exhibit> {
   Widget _generateTagButton(BuildContext context, bool isHover) {
     return Positioned(
@@ -1466,17 +1691,17 @@ class _ExhibitState extends State<Exhibit> {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return RFutureBuilder(
-      future: Future((){
-        if(widget.imageItem.cover == null){
+      future: Future(() {
+        if (widget.imageItem.cover == null) {
           return MediaThumbnail.fromCache(
             id: widget.imageItem.name,
             imagePath: widget.imageItem.path,
             targetWidth: 720,
             isVideo: widget.imageItem.isVideo,
           );
-        }else{
+        } else {
           return MediaThumbnail.fromCache(
             id: widget.imageItem.cover!,
             imagePath: Path(widget.imageItem.cover!),
@@ -1511,14 +1736,20 @@ class _ExhibitState extends State<Exhibit> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+                          color: AppTheme.of(
+                            context,
+                          )!.colorScheme.secondary.onColor,
                           width: smallBorder,
                         ),
-                        color: AppTheme.of(context)!.colorScheme.secondary.onColor,
+                        color: AppTheme.of(
+                          context,
+                        )!.colorScheme.secondary.onColor,
                       ),
                       child: Image.asset(
                         "assets/icon/tick.webp",
-                        color: AppTheme.of(context)!.colorScheme.secondary.color,
+                        color: AppTheme.of(
+                          context,
+                        )!.colorScheme.secondary.color,
                       ),
                     ),
                   ),
@@ -1541,12 +1772,14 @@ class _ExhibitState extends State<Exhibit> {
                   return RFutureBuilder(
                     future: widget.game.album.images,
                     builder: (BuildContext context, Set<ImageItem> images) {
-                      if(widget.imageItem.isVideo){
+                      if (widget.imageItem.isVideo) {
                         return VideoViewerDialog(video: widget.imageItem);
-                      }else{
+                      } else {
                         return ImageViewerDialog(
                           game: widget.game,
-                          images: widget.game.album.sortImages(images).toList(growable: false),
+                          images: widget.game.album
+                              .sortImages(images)
+                              .toList(growable: false),
                           initImage: widget.imageItem,
                         );
                       }
@@ -1579,8 +1812,9 @@ class _ExhibitState extends State<Exhibit> {
                       context,
                     ).isPressTag.value;
                     // 长按多选
-                    if (isPrimaryMouseDown && !isDragScrollbar && !isPressTag)
+                    if (isPrimaryMouseDown && !isDragScrollbar && !isPressTag) {
                       widget.game.album.invertImage(widget.imageItem);
+                    }
 
                     setButtonState(() {
                       isHover = true;
@@ -1600,7 +1834,8 @@ class _ExhibitState extends State<Exhibit> {
                     children: [
                       groundLayout,
 
-                      if(widget.game.selectedAlbum != AlbumType.Video && widget.game.selectedAlbum != AlbumType.ExternalVideo)
+                      if (widget.game.selectedAlbum != AlbumType.Video &&
+                          widget.game.selectedAlbum != AlbumType.ExternalVideo)
                         _generateTagButton(context, isHover),
                     ],
                   ),
@@ -2367,60 +2602,83 @@ class ImageViewerDialog extends StatelessWidget {
 
         ValueListenableBuilder(
           valueListenable: AppState.isShowImageCustomData,
-          builder: (BuildContext context, bool isShowImageCustomData, Widget? child) {
-            return Tooltip(
-              message: context.tr("pa_show_image_data"),
-              child: AppUncontrolledSwitch(
-                initValue: isShowImageCustomData,
-                width: smallButtonSize,
-                height: smallButtonSize,
-                onChanged: (bool value){
-                  AppState.isShowImageCustomData.value = !AppState.isShowImageCustomData.value;
-                },
-                child: AppIcon("image_custom_data", height: 22),
-              ),
-            );
-          },
+          builder:
+              (
+                BuildContext context,
+                bool isShowImageCustomData,
+                Widget? child,
+              ) {
+                return Tooltip(
+                  message: context.tr("pa_show_image_data"),
+                  child: AppUncontrolledSwitch(
+                    initValue: isShowImageCustomData,
+                    width: smallButtonSize,
+                    height: smallButtonSize,
+                    onChanged: (bool value) {
+                      AppState.isShowImageCustomData.value =
+                          !AppState.isShowImageCustomData.value;
+                    },
+                    child: AppIcon("image_custom_data", height: 22),
+                  ),
+                );
+              },
         ),
 
         AppRawButton(
-          toolTip: context.tr("pa_to_previous_image") + getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
+          toolTip:
+              context.tr("pa_to_previous_image") +
+              getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
           isTranslate: false,
           onClick: controller.toPreviousImage,
           child: AppIcon("back", height: 20),
         ),
 
         AppRawButton(
-          toolTip: context.tr("pa_to_next_image") + getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
+          toolTip:
+              context.tr("pa_to_next_image") +
+              getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
           isTranslate: false,
           onClick: controller.toNextImage,
           child: AppIcon("forward", height: 20),
         ),
 
-        if(game != null)
+        if (game != null)
           ListenableBuilder(
             listenable: controller,
             builder: (BuildContext context, Widget? child) {
-              return controller.isAttach ?
-                TagMenu(
-                  game: game!,
-                  value: images[controller.index].name,
-                  builder: (BuildContext context, Color? color, Widget? child, void Function() trigger){
-                    final String icon = color == null ? "assets/icon/tag.webp" : "assets/icon/tag_fill.webp";
+              return controller.isAttach
+                  ? TagMenu(
+                      game: game!,
+                      value: images[controller.index].name,
+                      builder:
+                          (
+                            BuildContext context,
+                            Color? color,
+                            Widget? child,
+                            void Function() trigger,
+                          ) {
+                            final String icon = color == null
+                                ? "assets/icon/tag.webp"
+                                : "assets/icon/tag_fill.webp";
 
-                    return Tooltip(
-                      message: context.tr("tag"),
-                      child: SmallButton(
-                        onClick: trigger,
-                        child: Image.asset(
-                          icon,
-                          height: 18,
-                          color: color ?? AppTheme.of(context)!.colorScheme.background.onColor,
-                        ),
-                      ),
-                    );
-                  },
-                ) : AppButton.smallIcon();
+                            return Tooltip(
+                              message: context.tr("tag"),
+                              child: SmallButton(
+                                onClick: trigger,
+                                child: Image.asset(
+                                  icon,
+                                  height: 18,
+                                  color:
+                                      color ??
+                                      AppTheme.of(
+                                        context,
+                                      )!.colorScheme.background.onColor,
+                                ),
+                              ),
+                            );
+                          },
+                    )
+                  : AppButton.smallIcon();
             },
           ),
 
@@ -2466,16 +2724,21 @@ class ImageViewerDialog extends StatelessWidget {
 
     return Focus(
       autofocus: true,
-      onKeyEvent: (FocusNode node, KeyEvent event){
-        if(event is KeyDownEvent && (event.logicalKey == LogicalKeyboardKey.arrowLeft || event.logicalKey == LogicalKeyboardKey.keyA)){
+      onKeyEvent: (FocusNode node, KeyEvent event) {
+        if (event is KeyDownEvent &&
+            (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
+                event.logicalKey == LogicalKeyboardKey.keyA)) {
           controller.toPreviousImage();
           return KeyEventResult.handled;
         }
-        if(event is KeyDownEvent && (event.logicalKey == LogicalKeyboardKey.arrowRight || event.logicalKey == LogicalKeyboardKey.keyD)){
+        if (event is KeyDownEvent &&
+            (event.logicalKey == LogicalKeyboardKey.arrowRight ||
+                event.logicalKey == LogicalKeyboardKey.keyD)) {
           controller.toNextImage();
           return KeyEventResult.handled;
         }
-        if(event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.space){
+        if (event is KeyDownEvent &&
+            event.logicalKey == LogicalKeyboardKey.space) {
           _invertImage();
           return KeyEventResult.handled;
         }
@@ -2491,56 +2754,79 @@ class ImageViewerDialog extends StatelessWidget {
             Expanded(
               child: ValueListenableBuilder(
                 valueListenable: AppState.isShowImageCustomData,
-                builder: (BuildContext context, bool isShowImageCustomData, Widget? child,){
-                  if(!isShowImageCustomData) return child ?? block0;
+                builder:
+                    (
+                      BuildContext context,
+                      bool isShowImageCustomData,
+                      Widget? child,
+                    ) {
+                      if (!isShowImageCustomData) return child ?? block0;
 
-                  return MultiSplitViewTheme(
-                    data: MultiSplitViewThemeData(
-                      dividerPainter: DividerPainters.grooved1(color: AppColorScheme.of(context).byRole(ColorRole.of(context)).pressedColor,
-                      highlightedColor: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor),
-                    ),
-                    child: MultiSplitView(
-                      initialAreas: [
-                        Area(data: "image"),
-                        AppState.imageCustomDataWidgetSize.value == null ?
-                          Area(data: "data_panel", flex: 1) :
-                          Area(
-                            data: "data_panel",
-                            size: AppState.imageCustomDataWidgetSize.value,
+                      return MultiSplitViewTheme(
+                        data: MultiSplitViewThemeData(
+                          dividerPainter: DividerPainters.grooved1(
+                            color: AppColorScheme.of(
+                              context,
+                            ).byRole(ColorRole.of(context)).pressedColor,
+                            highlightedColor: AppColorScheme.of(
+                              context,
+                            ).byRole(ColorRole.of(context)).onPressedColor,
                           ),
-                      ],
-                      builder: (BuildContext context, Area area){
-                        if(area.data == "image"){
-                          return child ?? block0;
-                        }else{
-                          return ListenableBuilder(
-                            listenable: controller,
-                            builder: (BuildContext context, Widget? child){
-                              return LayoutBuilder(
-                                builder: (BuildContext context, BoxConstraints constraint) {
-                                  AppState.imageCustomDataWidgetSize.value = constraint.maxWidth;
+                        ),
+                        child: MultiSplitView(
+                          initialAreas: [
+                            Area(data: "image"),
+                            AppState.imageCustomDataWidgetSize.value == null
+                                ? Area(data: "data_panel", flex: 1)
+                                : Area(
+                                    data: "data_panel",
+                                    size: AppState
+                                        .imageCustomDataWidgetSize
+                                        .value,
+                                  ),
+                          ],
+                          builder: (BuildContext context, Area area) {
+                            if (area.data == "image") {
+                              return child ?? block0;
+                            } else {
+                              return ListenableBuilder(
+                                listenable: controller,
+                                builder: (BuildContext context, Widget? child) {
+                                  return LayoutBuilder(
+                                    builder:
+                                        (
+                                          BuildContext context,
+                                          BoxConstraints constraint,
+                                        ) {
+                                          AppState
+                                                  .imageCustomDataWidgetSize
+                                                  .value =
+                                              constraint.maxWidth;
 
-                                  late final TreeNode? node;
-                                  if(controller.isAttach){
-                                    node = images[controller.index].getParamNodeSync(game?.selectedUid?.value, game?.selectedAlbum);
-                                  }else{
-                                    node = initImage.getParamNodeSync(game?.selectedUid?.value, game?.selectedAlbum);
-                                  }
+                                          late final TreeNode? node;
+                                          if (controller.isAttach) {
+                                            node = images[controller.index]
+                                                .getParamNodeSync(
+                                                  game?.selectedUid?.value,
+                                                  game?.selectedAlbum,
+                                                );
+                                          } else {
+                                            node = initImage.getParamNodeSync(
+                                              game?.selectedUid?.value,
+                                              game?.selectedAlbum,
+                                            );
+                                          }
 
-                                  return TreeViewPage(
-                                    root: [
-                                      ?node,
-                                    ],
+                                          return TreeViewPage(root: [?node]);
+                                        },
                                   );
                                 },
                               );
-                            },
-                          );
-                        }
-                      },
-                    ),
-                  );
-                },
+                            }
+                          },
+                        ),
+                      );
+                    },
                 child: Listener(
                   onPointerDown: (e) {
                     /// TODO 拖拽图片时不要切换状态
@@ -2574,21 +2860,17 @@ class ImageViewerDialog extends StatelessWidget {
   }
 }
 
-
-class VideoViewerDialog extends StatefulWidget{
+class VideoViewerDialog extends StatefulWidget {
   final Game? game;
   final ImageItem video;
 
-  const VideoViewerDialog({
-    super.key,
-    this.game,
-    required this.video,
-  });
+  const VideoViewerDialog({super.key, this.game, required this.video});
 
   @override
   State<VideoViewerDialog> createState() => _VideoViewerDialogState();
 }
-class _VideoViewerDialogState extends State<VideoViewerDialog>{
+
+class _VideoViewerDialogState extends State<VideoViewerDialog> {
   late final player = Player();
   late final controller = VideoController(player);
 
@@ -2599,16 +2881,17 @@ class _VideoViewerDialogState extends State<VideoViewerDialog>{
   }
 
   @override
-  void dispose(){
+  void dispose() {
     player.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Listener(
-      onPointerDown: (e) async{
-        if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
+      onPointerDown: (e) async {
+        if (e.kind == PointerDeviceKind.mouse &&
+            e.buttons == kSecondaryMouseButton) {
           Navigator.of(context).pop();
         }
       },
@@ -2624,7 +2907,7 @@ class _VideoViewerDialogState extends State<VideoViewerDialog>{
               child: Row(
                 children: [
                   AppButton.smallIcon(
-                    onClick: (){
+                    onClick: () {
                       Navigator.of(context).pop();
                     },
                     child: AppIcon("cross"),
@@ -2633,32 +2916,40 @@ class _VideoViewerDialogState extends State<VideoViewerDialog>{
                   Expanded(child: block0),
 
                   AppButton.smallText(
-                    onClick: (){
+                    onClick: () async {
+                      if (Platform.isWindows) {
+                        if (!await FFmpegManager.checkAndDownload(context)) {
+                          return;
+                        }
+                        if (!await ExifToolManager.ensureInstalled()) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "ExifTool 缺失！请确保运行过打包脚本。/ ExifTool is missing from bundle.",
+                                ),
+                              ),
+                            );
+                          }
+                          return;
+                        }
+                      }
+                      if (!context.mounted) return;
                       showAppDialog(
                         isBarrier: true,
                         context: context,
-                        builder: (BuildContext context){
+                        builder: (BuildContext context) {
                           return VideoToGifPanel(
                             videoPath: widget.video.path.path,
                           );
-                        }
+                        },
                       );
                     },
-                    child: ValueListenableBuilder<bool>(
-                      valueListenable: FFmpegManager.isInstalledNotifier,
-                      builder: (context, isInstalled, _) {
-                        return Row(
-                          spacing: listSpacing,
-                          children: [
-                            AppIcon("forward"),
-                            AppText("导出gif动图"),
-                            if (Platform.isWindows && !isInstalled)
-                              const Icon(Icons.cloud_download_outlined, size: 16),
-                          ],
-                        );
-                      },
+                    child: Row(
+                      spacing: listSpacing,
+                      children: [AppIcon("forward"), AppText("导出gif动图")],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -2703,22 +2994,21 @@ class FiltrationButton extends StatelessWidget {
               width: null,
               height: mediumButtonSize,
               onClick: () async {
-                if(isFilter){
+                if (isFilter) {
                   game.album.unfilter(filtration);
-                }else{
-
+                } else {
                   /// Only single-choice option
-                  if(filtration == Filtration.onlyDailyTask ||
-                    filtration == Filtration.hasCompletedTask ||
-                    filtration == Filtration.hasUnfinishedTask ||
-                    filtration == Filtration.onlyPuzzleTask ||
-                    filtration == Filtration.onlyRiskTask ||
-                    filtration == Filtration.onlyPhotoWall
-                  ){
-                    final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
+                  if (filtration == Filtration.onlyDailyTask ||
+                      filtration == Filtration.hasCompletedTask ||
+                      filtration == Filtration.hasUnfinishedTask ||
+                      filtration == Filtration.onlyPuzzleTask ||
+                      filtration == Filtration.onlyRiskTask ||
+                      filtration == Filtration.onlyPhotoWall) {
+                    final ValueNotifier<double?> progress =
+                        ValueNotifier<double?>(null);
                     bool cancel = false;
 
-                    if(context.mounted){
+                    if (context.mounted) {
                       showProgressBar(
                         context: context,
                         valueListenable: progress,
@@ -2737,7 +3027,7 @@ class FiltrationButton extends StatelessWidget {
 
                     final Set<ImageItem> images = await game.album.images;
 
-                    if(game.selectedUid?.value != null && images.isNotEmpty){
+                    if (game.selectedUid?.value != null && images.isNotEmpty) {
                       int count = 0;
                       final int total = images.length;
 
@@ -2745,7 +3035,7 @@ class FiltrationButton extends StatelessWidget {
                         MediaParamType.nikkiPhoto,
                         images.map((ImageItem item) => item.path.path).toList(),
                         uid: game.selectedUid?.value,
-                        callback: (String path, MediaCustomData? data){
+                        callback: (String path, MediaCustomData? data) {
                           progress.value = (count++ / total).clamp(0, 1);
                         },
                       );
@@ -2753,15 +3043,26 @@ class FiltrationButton extends StatelessWidget {
                       progress.value = 1;
                     }
 
-                    if(game.album.isFilter(Filtration.onlyDailyTask)) game.album.unfilter(Filtration.onlyDailyTask);
-                    if(game.album.isFilter(Filtration.hasCompletedTask)) game.album.unfilter(Filtration.hasCompletedTask);
-                    if(game.album.isFilter(Filtration.hasUnfinishedTask)) game.album.unfilter(Filtration.hasUnfinishedTask);
-                    if(game.album.isFilter(Filtration.onlyPuzzleTask)) game.album.unfilter(Filtration.onlyPuzzleTask);
-                    if(game.album.isFilter(Filtration.onlyRiskTask)) game.album.unfilter(Filtration.onlyRiskTask);
-                    if(game.album.isFilter(Filtration.onlyPhotoWall)) game.album.unfilter(Filtration.onlyPhotoWall);
+                    if (game.album.isFilter(Filtration.onlyDailyTask)) {
+                      game.album.unfilter(Filtration.onlyDailyTask);
+                    }
+                    if (game.album.isFilter(Filtration.hasCompletedTask)) {
+                      game.album.unfilter(Filtration.hasCompletedTask);
+                    }
+                    if (game.album.isFilter(Filtration.hasUnfinishedTask)) {
+                      game.album.unfilter(Filtration.hasUnfinishedTask);
+                    }
+                    if (game.album.isFilter(Filtration.onlyPuzzleTask)) {
+                      game.album.unfilter(Filtration.onlyPuzzleTask);
+                    }
+                    if (game.album.isFilter(Filtration.onlyRiskTask)) {
+                      game.album.unfilter(Filtration.onlyRiskTask);
+                    }
+                    if (game.album.isFilter(Filtration.onlyPhotoWall)) {
+                      game.album.unfilter(Filtration.onlyPhotoWall);
+                    }
                     game.album.filter(filtration);
-
-                  }else{
+                  } else {
                     game.album.filter(filtration);
                   }
                 }
@@ -2820,17 +3121,17 @@ class FiltrationButton extends StatelessWidget {
           menuChildren: [
             _buttonBuilder(Filtration.inGame),
             _buttonBuilder(Filtration.outOfGame),
-            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.onlyDailyTask),
-            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.hasCompletedTask),
-            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.hasUnfinishedTask),
-            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.onlyPuzzleTask),
-            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.onlyRiskTask),
-            if(game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
               _buttonBuilder(Filtration.onlyPhotoWall),
           ],
         );
@@ -3218,10 +3519,16 @@ class ExportImagesButton extends StatelessWidget {
       menuChildren: [
         /// copy images to clipboard
         MenuItemButton(
-          onPressed: (){
+          onPressed: () {
             AlbumHandler.of(context).copy(context, images);
           },
-          trailingIcon: AppText(getKeyboardCharacter([LogicalKeyboardKey.control, LogicalKeyboardKey.keyC]), isTranslate: false),
+          trailingIcon: AppText(
+            getKeyboardCharacter([
+              LogicalKeyboardKey.control,
+              LogicalKeyboardKey.keyC,
+            ]),
+            isTranslate: false,
+          ),
           child: Text(
             context.tr("exportToClipboard"),
             style: TextStyle(
@@ -3232,10 +3539,16 @@ class ExportImagesButton extends StatelessWidget {
 
         /// export images to native device
         MenuItemButton(
-          onPressed: (){
+          onPressed: () {
             AlbumHandler.of(context).exportToLocal(context, images);
           },
-          trailingIcon: AppText(getKeyboardCharacter([LogicalKeyboardKey.control, LogicalKeyboardKey.keyS]), isTranslate: false),
+          trailingIcon: AppText(
+            getKeyboardCharacter([
+              LogicalKeyboardKey.control,
+              LogicalKeyboardKey.keyS,
+            ]),
+            isTranslate: false,
+          ),
           child: Text(
             context.tr("exportToLocal"),
             style: TextStyle(
@@ -3246,10 +3559,16 @@ class ExportImagesButton extends StatelessWidget {
 
         /// export images to network device
         MenuItemButton(
-          onPressed: (){
+          onPressed: () {
             AlbumHandler.of(context).exportToNetwork(context);
           },
-          trailingIcon: AppText(getKeyboardCharacter([LogicalKeyboardKey.control, LogicalKeyboardKey.keyW]), isTranslate: false),
+          trailingIcon: AppText(
+            getKeyboardCharacter([
+              LogicalKeyboardKey.control,
+              LogicalKeyboardKey.keyW,
+            ]),
+            isTranslate: false,
+          ),
           child: Text(
             context.tr("exportToNetwork"),
             style: TextStyle(
@@ -3259,9 +3578,9 @@ class ExportImagesButton extends StatelessWidget {
         ),
 
         /// export to macOS Photo Library (only for Video album on macOS)
-        if(Platform.isMacOS)
+        if (Platform.isMacOS)
           MenuItemButton(
-            onPressed: (){
+            onPressed: () {
               AlbumHandler.of(context).exportToPhotoLibrary(context, images);
             },
             child: Text(
@@ -3274,7 +3593,7 @@ class ExportImagesButton extends StatelessWidget {
 
         /// encode and export nikkias file to native device
         MenuItemButton(
-          onPressed: (){
+          onPressed: () {
             AlbumHandler.of(context).exportNikkiasToLocal(context, images);
           },
           child: Text(
@@ -3286,19 +3605,19 @@ class ExportImagesButton extends StatelessWidget {
         ),
 
         /// The "Export" option for the "AlbumType.Video" category
-        if(AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
+        if (AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
           AppButton.smallText(
             useConfiguration: false,
             borderRadius: 0,
             height: mediumButtonSize,
-            onClick: (){
+            onClick: () {
               AlbumHandler.of(context).openVideoExportSetting(context);
             },
             child: Row(
               spacing: listSpacing,
               children: [
                 AppIcon("setting", height: 20),
-                AppText("config_of_export")
+                AppText("config_of_export"),
               ],
             ),
           ),

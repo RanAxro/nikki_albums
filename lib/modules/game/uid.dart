@@ -26,8 +26,9 @@ class UidNote {
 
     if (map["note"] is! String ||
         installPath == null ||
-        map["value"] is! String)
+        map["value"] is! String) {
       return null;
+    }
 
     return UidNote(
       note: map["note"],
@@ -221,8 +222,9 @@ extension FindUid on Uid {
         for (FileSystemEntity entity in entities) {
           String uidValue = entity.path.split(Path.symbol).last;
           // 去重并且判断是否为6-12位数字格式
-          if (isUidType(uidValue))
+          if (isUidType(uidValue)) {
             uidList.add(Uid(value: uidValue, installPath: installPath));
+          }
         }
       } catch (e) {
         /// @ 1

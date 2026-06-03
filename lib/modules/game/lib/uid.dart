@@ -1,6 +1,4 @@
-library uid;
-
-
+library;
 
 import "uid_note.dart";
 import "game.dart";

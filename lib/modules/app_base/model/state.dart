@@ -1,11 +1,6 @@
-
-
-import "dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart";
-
 import "package:flutter/material.dart";
 
-
-enum AppStateItem{
+enum AppStateItem {
   isAgreeAgreement,
   sfxPath,
   nikkiasToBeParsed,
@@ -18,7 +13,7 @@ enum AppStateItem{
   isUseMaximizeOrRestoreButton,
 }
 
-class AppStateSnapshot{
+class AppStateSnapshot {
   final bool isAgreeAgreement;
   final String? sfxPath;
   final String? nikkiasToBeParsed;
@@ -52,12 +47,13 @@ class AppStateSnapshot{
   });
 }
 
-
-
-abstract class AppState{
-  static final ValueNotifier<bool> isAgreeAgreement = _buildNotifier<bool>(false);
+abstract class AppState {
+  static final ValueNotifier<bool> isAgreeAgreement = _buildNotifier<bool>(
+    false,
+  );
   static final ValueNotifier<String?> sfxPath = _buildNotifier<String?>(null);
-  static final ValueNotifier<String?> nikkiasToBeParsed = _buildNotifier<String?>(null);
+  static final ValueNotifier<String?> nikkiasToBeParsed =
+      _buildNotifier<String?>(null);
   static final ValueNotifier<String> lang = _buildNotifier<String>("zh-CN");
   static final ValueNotifier<int> theme = _buildNotifier<int>(0xFFEEEEEE);
   static final ValueNotifier<double> animationScale = _buildNotifier<double>(1);
@@ -66,9 +62,13 @@ abstract class AppState{
   // final ValueNotifier<Set<UidNote>> uidNotes;
   // final ValueNotifier<Set<GameShortcut>> gameShortcuts;
   static final ValueNotifier<int> albumColumn = _buildNotifier<int>(4);
-  static final ValueNotifier<bool> isShowImageCustomData = _buildNotifier<bool>(false);
-  static final ValueNotifier<double?> imageCustomDataWidgetSize = _buildNotifier<double?>(null);
-  static final ValueNotifier<bool> isUseMaximizeOrRestoreButton = _buildNotifier<bool>(true);
+  static final ValueNotifier<bool> isShowImageCustomData = _buildNotifier<bool>(
+    false,
+  );
+  static final ValueNotifier<double?> imageCustomDataWidgetSize =
+      _buildNotifier<double?>(null);
+  static final ValueNotifier<bool> isUseMaximizeOrRestoreButton =
+      _buildNotifier<bool>(true);
 
   // const AppState({
   //   // required this.isAgreeAgreement,
@@ -87,11 +87,11 @@ abstract class AppState{
 
   static final List<Function()> _listener = <Function()>[];
 
-  static ValueNotifier<T> _buildNotifier<T>(T value){
+  static ValueNotifier<T> _buildNotifier<T>(T value) {
     final ValueNotifier<T> notifier = ValueNotifier<T>(value);
 
-    notifier.addListener((){
-      for(final Function() listener in _listener){
+    notifier.addListener(() {
+      for (final Function() listener in _listener) {
         listener.call();
       }
     });
@@ -99,15 +99,15 @@ abstract class AppState{
     return notifier;
   }
 
-  static void addListener(Function() listener){
+  static void addListener(Function() listener) {
     return _listener.add(listener);
   }
 
-  static bool removeListener(Function() listener){
+  static bool removeListener(Function() listener) {
     return _listener.remove(listener);
   }
 
-  static AppStateSnapshot getSnapshot(){
+  static AppStateSnapshot getSnapshot() {
     return AppStateSnapshot(
       isAgreeAgreement: isAgreeAgreement.value,
       sfxPath: sfxPath.value,
@@ -122,7 +122,6 @@ abstract class AppState{
     );
   }
 }
-
 
 // abstract class AppState{
 //   /// common

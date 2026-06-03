@@ -1,6 +1,5 @@
 import "dart:typed_data";
 
-import "package:nikki_albums/modules/album/album.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/info.dart";
 import "package:nikki_albums/utils/path.dart";
@@ -332,8 +331,9 @@ class Tag extends ChangeNotifier {
       if (item.containsKey("name") && item["name"] == tag) {
         if (item["tags"] is List) {
           for (final String value in values) {
-            if (!(item["tags"] as List).contains(value))
+            if (!(item["tags"] as List).contains(value)) {
               (item["tags"] as List).addAll(values);
+            }
           }
         } else {
           item["tags"] = values.toList();

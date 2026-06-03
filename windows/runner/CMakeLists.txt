@@ -50,3 +50,27 @@ add_custom_command(TARGET ${BINARY_NAME} POST_BUILD
   $<TARGET_FILE_DIR:${BINARY_NAME}>
   COMMENT "Copying nuan5_decryption.dll to output directory"
 )
+
+# ---------------------------------------------
+# 复制 FFmpeg 和 ExifTool 到输出目录下的 bin 文件夹
+# ---------------------------------------------
+set(TOOLS_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources/bin")
+
+# Create a small cmake script to copy files if they exist
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/copy_tools.cmake" "
+if(EXISTS \"\${SRC}/ffmpeg.exe\")
+  file(COPY \"\${SRC}/ffmpeg.exe\" DESTINATION \"\${DST}\")
+endif()
+if(EXISTS \"\${SRC}/exiftool.exe\")
+  file(COPY \"\${SRC}/exiftool.exe\" DESTINATION \"\${DST}\")
+endif()
+if(EXISTS \"\${SRC}/exiftool_files\")
+  file(COPY \"\${SRC}/exiftool_files\" DESTINATION \"\${DST}\")
+endif()
+")
+
+add_custom_command(TARGET ${BINARY_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:${BINARY_NAME}>/bin
+  COMMAND ${CMAKE_COMMAND} -DSRC="${TOOLS_BIN_DIR}" -DDST="$<TARGET_FILE_DIR:${BINARY_NAME}>/bin" -P "${CMAKE_CURRENT_BINARY_DIR}/copy_tools.cmake"
+  COMMENT "Copying ffmpeg.exe and exiftool.exe to output bin directory if they exist"
+)

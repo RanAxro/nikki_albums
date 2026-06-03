@@ -1,6 +1,4 @@
-library launcher;
-
-
+library;
 
 import "../model/launcher_channel.dart";
 import "package:nikki_albums/modules/app_base/model/platform.dart";

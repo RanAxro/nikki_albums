@@ -53,8 +53,9 @@ class TransmissionInfo {
       final mask = InternetAddress.tryParse(submask);
 
       if (ip?.type != InternetAddressType.IPv4 ||
-          mask?.type != InternetAddressType.IPv4)
+          mask?.type != InternetAddressType.IPv4) {
         return null;
+      }
 
       final ipBytes = ip!.rawAddress;
       final maskBytes = mask!.rawAddress;

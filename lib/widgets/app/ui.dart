@@ -102,8 +102,9 @@ class RFutureBuilder<T> extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 50, maxHeight: 50),
             ),
           );
-          if (waitingBuilder != null)
+          if (waitingBuilder != null) {
             return waitingBuilder!(context, indicator);
+          }
           return indicator;
         }
         if (snapshot.hasError) {
@@ -154,8 +155,9 @@ Future<T?> showProgressBar<T>({
 
               if ((!barrierDismissible && completedBuilder == null) ||
                   autoClose) {
-                if (progress != null && progress >= 1)
+                if (progress != null && progress >= 1) {
                   Navigator.of(context).pop();
+                }
               }
 
               return Column(
@@ -556,15 +558,15 @@ class _AppRawButtonState extends State<AppRawButton> {
     );
 
     if (widget.toolTip != null && widget.usable) {
-      String? message = widget.isTranslate ? context.tr(widget.toolTip.toString()) : widget.toolTip;
-      if(widget.toolTipShortcut != null){
-        message = "${message ?? ""} ${getKeyboardCharacter(widget.toolTipShortcut!)}";
+      String? message = widget.isTranslate
+          ? context.tr(widget.toolTip.toString())
+          : widget.toolTip;
+      if (widget.toolTipShortcut != null) {
+        message =
+            "${message ?? ""} ${getKeyboardCharacter(widget.toolTipShortcut!)}";
       }
 
-      button = Tooltip(
-        message: message,
-        child: button,
-      );
+      button = Tooltip(message: message, child: button);
     }
 
     return GestureDetector(
@@ -2360,7 +2362,9 @@ class AppText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
-        color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onByState(ColorState.of(context)),
+        color: AppColorScheme.of(
+          context,
+        ).byRole(ColorRole.of(context)).onByState(ColorState.of(context)),
         // color: AppTheme.of(context).colorScheme.byRole(AppThemeRole.of(context).colorRole).onByState(AppThemeState.of(context).colorState),
       ),
       overflow: overflow,
@@ -2900,48 +2904,70 @@ class _AppMapViewerState extends State<AppMapViewer> {
   }
 }
 
-class AppRawSwitch extends StatelessWidget{
+class AppRawSwitch extends StatelessWidget {
   final bool value;
   final void Function(bool)? onChanged;
 
-  const AppRawSwitch({
-    super.key,
-    required this.value,
-    this.onChanged,
-  });
+  const AppRawSwitch({super.key, required this.value, this.onChanged});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Transform.scale(
       scale: 0.8,
       child: Switch(
         value: value,
         onChanged: onChanged,
         thumbColor: WidgetStateProperty.fromMap({
-          WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).color,
-          WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-          WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).pressedColor,
-          ~WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
-          ~WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).onHoveredColor,
-          ~WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor,
+          WidgetState.selected: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).color,
+          WidgetState.selected & WidgetState.hovered: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).hoveredColor,
+          WidgetState.selected & WidgetState.pressed: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).pressedColor,
+          ~WidgetState.selected: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onColor,
+          ~WidgetState.selected & WidgetState.hovered: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onHoveredColor,
+          ~WidgetState.selected & WidgetState.pressed: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onPressedColor,
         }),
         trackColor: WidgetStateProperty.fromMap({
-          ~WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).color,
-          ~WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-          ~WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).pressedColor,
-          WidgetState.selected: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
-          WidgetState.selected & WidgetState.hovered: AppColorScheme.of(context).byRole(ColorRole.of(context)).onHoveredColor,
-          WidgetState.selected & WidgetState.pressed: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor,
+          ~WidgetState.selected: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).color,
+          ~WidgetState.selected & WidgetState.hovered: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).hoveredColor,
+          ~WidgetState.selected & WidgetState.pressed: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).pressedColor,
+          WidgetState.selected: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onColor,
+          WidgetState.selected & WidgetState.hovered: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onHoveredColor,
+          WidgetState.selected & WidgetState.pressed: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onPressedColor,
         }),
         trackOutlineColor: WidgetStateProperty.fromMap({
-          WidgetState.any: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
+          WidgetState.any: AppColorScheme.of(
+            context,
+          ).byRole(ColorRole.of(context)).onColor,
         }),
       ),
     );
   }
 }
 
-class AppSwitchButton extends StatefulWidget{
+class AppSwitchButton extends StatefulWidget {
   final Duration duration;
   final Curve curve;
 
@@ -2993,20 +3019,21 @@ class AppSwitchButton extends StatefulWidget{
   @override
   State<AppSwitchButton> createState() => _AppSwitchButtonState();
 }
-class _AppSwitchButtonState extends State<AppSwitchButton>{
+
+class _AppSwitchButtonState extends State<AppSwitchButton> {
   late bool value;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     value = widget.value;
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final Widget switchWidget = AppRawSwitch(
       value: value,
-      onChanged: (bool newValue){
+      onChanged: (bool newValue) {
         value = newValue;
         widget.onChanged?.call(value);
       },
@@ -3030,19 +3057,21 @@ class _AppSwitchButtonState extends State<AppSwitchButton>{
       isTranslate: widget.isTranslate,
       toolTipShortcut: widget.toolTipShortcut,
       usable: widget.usable,
-      onClick: (){
-        setState((){
+      onClick: () {
+        setState(() {
           value = !value;
           widget.onChanged?.call(value);
         });
       },
-      child: widget.child == null ? switchWidget : Row(
-        children: [
-          Expanded(child: widget.child!),
+      child: widget.child == null
+          ? switchWidget
+          : Row(
+              children: [
+                Expanded(child: widget.child!),
 
-          switchWidget,
-        ],
-      ),
+                switchWidget,
+              ],
+            ),
     );
   }
 }

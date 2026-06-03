@@ -1,4 +1,3 @@
-
 import "uid.dart";
 import "image.dart";
 import "infinity_nikki/domain/param_filter.dart";
@@ -58,10 +57,12 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     if (!albumsInfoMap[type]!.supportedPlatforms.canRunPlatform) return;
 
     _images = getImages();
-    if (gameAlbumPath != null)
+    if (gameAlbumPath != null) {
       _gameAlbumWatcher = await _generateWatcher(gameAlbumPath!);
-    if (backupAlbumPath != null)
+    }
+    if (backupAlbumPath != null) {
       _backupAlbumWatcher = await _generateWatcher(backupAlbumPath!);
+    }
   }
 
   Future<void> refresh() async {
@@ -90,93 +91,139 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     ImageSource source,
     Path albumPath, {
     int depth = 1,
-  }) async{
+  }) async {
     final List<ImageItem> res = <ImageItem>[];
 
-    if(depth == 0) return res;
+    if (depth == 0) return res;
 
-    if(await albumPath.typeAsync != FileSystemEntityType.directory) return res;
+    if (await albumPath.typeAsync != FileSystemEntityType.directory) return res;
 
-    final List<FileSystemEntity> entities = await albumPath.directory.list(recursive: false).toList();
+    final List<FileSystemEntity> entities = await albumPath.directory
+        .list(recursive: false)
+        .toList();
 
-    for(FileSystemEntity entity in entities){
+    for (FileSystemEntity entity in entities) {
       final Path entityPath = Path(entity.path);
 
-      if(entity is Directory){
-        res.addAll(await _traverseImageAlbum(source, entityPath, depth: depth - 1));
-      }else if(entity is File){
-        if(!isImageExtension(entityPath)) continue;
+      if (entity is Directory) {
+        res.addAll(
+          await _traverseImageAlbum(source, entityPath, depth: depth - 1),
+        );
+      } else if (entity is File) {
+        if (!isImageExtension(entityPath)) continue;
 
         final DateTime time = (await entityPath.cacheStatAsync).modified;
 
-        res.add(ImageItem(
-          source: source,
-          path: entityPath,
-          time: time,
-          isVideo: false,
-        ));
+        res.add(
+          ImageItem(
+            source: source,
+            path: entityPath,
+            time: time,
+            isVideo: false,
+          ),
+        );
       }
     }
 
     return res;
   }
 
-  Future<List<ImageItem>> _traverseVideoAlbum(Path albumPath, String toVideo, String? toCover) async{
+  Future<List<ImageItem>> _traverseVideoAlbum(
+    Path albumPath,
+    String toVideo,
+    String? toCover,
+  ) async {
     final List<ImageItem> res = <ImageItem>[];
 
-    if(await albumPath.typeAsync != FileSystemEntityType.directory) return res;
+    if (await albumPath.typeAsync != FileSystemEntityType.directory) return res;
 
-    final List<FileSystemEntity> entities = await albumPath.directory.list(recursive: false).toList();
+    final List<FileSystemEntity> entities = await albumPath.directory
+        .list(recursive: false)
+        .toList();
 
-    for(FileSystemEntity entity in entities){
+    for (FileSystemEntity entity in entities) {
       final Path entityPath = Path(entity.path);
 
-      if(entity is Directory){
+      if (entity is Directory) {
         final String videoName = entityPath.subName;
-        final Path videoPath = entityPath + toVideo.replaceAll(r"$filename$", videoName);
-        final Path? coverPath = toCover == null ? null : entityPath + toCover.replaceAll(r"$filename$", videoName);
+        final Path videoPath =
+            entityPath + toVideo.replaceAll(r"$filename$", videoName);
+        final Path? coverPath = toCover == null
+            ? null
+            : entityPath + toCover.replaceAll(r"$filename$", videoName);
 
-        if(FileSystemEntityType.file == await videoPath.typeAsync){
+        if (FileSystemEntityType.file == await videoPath.typeAsync) {
           final DateTime time = (await videoPath.cacheStatAsync).modified;
 
-          if(coverPath != null && FileSystemEntityType.file == await coverPath.typeAsync){
-            res.add(ImageItem(source: ImageSource.game, path: videoPath, time: time, isVideo: true, cover: coverPath.path));
-          }else{
-            res.add(ImageItem(source: ImageSource.game, path: videoPath, time: time, isVideo: true, cover: null));
+          if (coverPath != null &&
+              FileSystemEntityType.file == await coverPath.typeAsync) {
+            res.add(
+              ImageItem(
+                source: ImageSource.game,
+                path: videoPath,
+                time: time,
+                isVideo: true,
+                cover: coverPath.path,
+              ),
+            );
+          } else {
+            res.add(
+              ImageItem(
+                source: ImageSource.game,
+                path: videoPath,
+                time: time,
+                isVideo: true,
+                cover: null,
+              ),
+            );
           }
         }
-
-      }else if(entity is File){
-        if(!isVideoExtension(entityPath)) continue;
+      } else if (entity is File) {
+        if (!isVideoExtension(entityPath)) continue;
 
         final DateTime time = (await entityPath.cacheStatAsync).modified;
 
-        res.add(ImageItem(source: ImageSource.game, path: entityPath, time: time, isVideo: true));
+        res.add(
+          ImageItem(
+            source: ImageSource.game,
+            path: entityPath,
+            time: time,
+            isVideo: true,
+          ),
+        );
       }
     }
 
     return res;
   }
 
-  Future<Set<ImageItem>> getImages() async{
+  Future<Set<ImageItem>> getImages() async {
     final Set<ImageItem> res = <ImageItem>{};
 
-    if(type == AlbumType.Video || type == AlbumType.ExternalVideo){
+    if (type == AlbumType.Video || type == AlbumType.ExternalVideo) {
       final AlbumsInfoItem info = albumsInfoMap[type]!;
 
       final Path? path = gameAlbumPath;
 
-      if(path != null){
-        res.addAll(await _traverseVideoAlbum(path, info.videoInfo!.locateToVideo, info.videoInfo!.locateToCover));
+      if (path != null) {
+        res.addAll(
+          await _traverseVideoAlbum(
+            path,
+            info.videoInfo!.locateToVideo,
+            info.videoInfo!.locateToCover,
+          ),
+        );
       }
-    }else{
+    } else {
       final Path? path = gameAlbumPath;
       final Path? backupPath = backupAlbumPath;
 
-      if(path != null){
-        res.addAll(await _traverseImageAlbum(ImageSource.game, path, depth: 10));
+      if (path != null) {
+        res.addAll(
+          await _traverseImageAlbum(ImageSource.game, path, depth: 10),
+        );
       }
-      if(backupPath != null){
+      if (backupPath != null) {
         res.addAll(
           await _traverseImageAlbum(ImageSource.backup, backupPath, depth: 10),
         );
@@ -294,41 +341,40 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     notifyListeners();
   }
 
-  bool _filterItem(ImageItem item){
+  bool _filterItem(ImageItem item) {
     bool res = false;
-    if(_filtration.contains(Filtration.inGame)){
-      if(item.source == ImageSource.game) res = true;
+    if (_filtration.contains(Filtration.inGame)) {
+      if (item.source == ImageSource.game) res = true;
     }
-    if(_filtration.contains(Filtration.outOfGame)){
-      if(item.source == ImageSource.backup) res = true;
+    if (_filtration.contains(Filtration.outOfGame)) {
+      if (item.source == ImageSource.backup) res = true;
     }
-    if(!res) return false;
+    if (!res) return false;
 
     /// only daily task
-    if(_filtration.contains(Filtration.onlyDailyTask)){
+    if (_filtration.contains(Filtration.onlyDailyTask)) {
       return filterOnlyDailyTask(item, uid, type);
     }
     /// has completed task
-    else if(_filtration.contains(Filtration.hasCompletedTask)){
+    else if (_filtration.contains(Filtration.hasCompletedTask)) {
       return filterHasCompletedTask(item, uid, type);
     }
     /// has unfinished task
-    else if(_filtration.contains(Filtration.hasUnfinishedTask)){
+    else if (_filtration.contains(Filtration.hasUnfinishedTask)) {
       return filterHasUnfinishedTask(item, uid, type);
     }
     /// only puzzle task
-    else if(_filtration.contains(Filtration.onlyPuzzleTask)){
+    else if (_filtration.contains(Filtration.onlyPuzzleTask)) {
       return filterOnlyPuzzleTask(item, uid, type);
     }
     /// only risk task
-    else if(_filtration.contains(Filtration.onlyRiskTask)){
+    else if (_filtration.contains(Filtration.onlyRiskTask)) {
       return filterOnlyRiskTask(item, uid, type);
     }
     /// only risk task
-    else if(_filtration.contains(Filtration.onlyPhotoWall)){
+    else if (_filtration.contains(Filtration.onlyPhotoWall)) {
       return filterOnlyPhotoWall(item, uid, type);
-    }
-    else{
+    } else {
       return true;
     }
 
@@ -403,9 +449,10 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
 
 enum SortOrder { ascending, descending }
 
-enum Filtration{
+enum Filtration {
   inGame,
   outOfGame,
+
   /// 单选
   onlyDailyTask,
   hasCompletedTask,

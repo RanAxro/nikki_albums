@@ -149,19 +149,31 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
       for (final item in game.album.selectedImages) {
         if (item.cover != null && await File(item.cover!).exists()) {
           await exporter.export(
-            format: liveFormat == "apple" ? ExportFormat.appleLivePhoto : ExportFormat.googleMotionPhoto,
+            format: liveFormat == "apple"
+                ? ExportFormat.appleLivePhoto
+                : ExportFormat.googleMotionPhoto,
             coverImage: File(item.cover!),
             sourceVideo: item.path.file,
-            outputPath: livePhotoTempDir!.path,
+            outputPath: livePhotoTempDir.path,
           );
         }
       }
-      final convertedFiles = await livePhotoTempDir!.list().where((e) => e is File).cast<File>().toList();
+      final convertedFiles = await livePhotoTempDir
+          .list()
+          .where((e) => e is File)
+          .cast<File>()
+          .toList();
       filesToZip = convertedFiles;
-      zipNames = convertedFiles.map((f) => Path(f.uri.pathSegments.last)).toList();
+      zipNames = convertedFiles
+          .map((f) => Path(f.uri.pathSegments.last))
+          .toList();
     } else {
-      filesToZip = game.album.selectedImages.map((ImageItem item) => item.path.file).toList();
-      zipNames = game.album.selectedImages.map((ImageItem item) => Path(item.name)).toList();
+      filesToZip = game.album.selectedImages
+          .map((ImageItem item) => item.path.file)
+          .toList();
+      zipNames = game.album.selectedImages
+          .map((ImageItem item) => Path(item.name))
+          .toList();
     }
 
     final ImageTransferNikkiasCodec codec = ImageTransferNikkiasCodec(
@@ -318,8 +330,9 @@ class _SendFileBuilderState extends State<SendFileBuilder> {
     //  /api/list
     // final List<String> segments = request.requestedUri.pathSegments;
     // if(segments.length != 2 || segments[0] != "api" || segments[1] != "downloadButtonTexts") return Response.notFound("");
-    if (request.requestedUri.path != "/api/downloadButtonTexts")
+    if (request.requestedUri.path != "/api/downloadButtonTexts") {
       return Response.notFound("");
+    }
 
     if (widget.downloadArchiveButtonText == null) return Response.forbidden("");
 
@@ -334,8 +347,9 @@ class _SendFileBuilderState extends State<SendFileBuilder> {
     final List<String> segments = request.requestedUri.pathSegments;
     if (segments.length != 2 ||
         segments[0] != "api" ||
-        segments[1] != "download")
+        segments[1] != "download") {
       return Response.notFound("");
+    }
 
     final int index =
         int.tryParse(
@@ -343,8 +357,9 @@ class _SendFileBuilderState extends State<SendFileBuilder> {
         ) ??
         0;
 
-    if (widget.archives == null || widget.archives!.length - 1 < index)
+    if (widget.archives == null || widget.archives!.length - 1 < index) {
       return Response.forbidden("");
+    }
     final File archive = widget.archives![index];
 
     return Response.ok(
