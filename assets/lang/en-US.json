@@ -1,6 +1,6 @@
 {
   "nikkialbums": "Nikki Albums",
-  "info": "This software is still in the testing phase and does not represent the final quality.\n QQ Group: 1062670402\n",
+  "info": "This software is still in the testing phase and does not represent the final quality.\n",
   "----------common----------": "----------common----------",
   "version": "Version",
   "setting": "Settings",
@@ -8979,10 +8979,5 @@
   "game_weapon_custom_state_close": "Off",
   "game_weapon_custom_state_open": "On",
   "game_interaction_type_chair": "Chair",
-  "game_interaction_type_decoration": "Decoration",
-  "extraComponentRequired": "Extra Component Required",
-  "ffmpegDownloadDescription": "Exporting Live Photos in Apple format requires downloading and installing the open-source component FFmpeg. The download process will run in the background (approx. 30MB).",
-  "downloadingFFmpeg": "Downloading FFmpeg...",
-  "extractingFFmpeg": "Extracting FFmpeg...",
-  "ffmpegDownloadFailed": "Download failed. Please check your network connection or try again later."
+  "game_interaction_type_decoration": "Decoration"
 }

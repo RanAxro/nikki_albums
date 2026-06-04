@@ -293,18 +293,26 @@ class ChangeLanguage extends StatelessWidget {
         ),
       ),
       menuChildren: [
-        MenuItemButton(
-          onPressed: () {
-            AppState.lang.value = "zh-CN";
-          },
-          child: AppText("简体中文", isTranslate: false),
-        ),
-        MenuItemButton(
-          onPressed: () {
-            AppState.lang.value = "en-US";
-          },
-          child: AppText("English", isTranslate: false),
-        ),
+        for (final entry in const [
+          ("zh-CN", "简体中文"),
+          ("zh-TW", "繁體中文"),
+          ("en-US", "English"),
+          ("ja-JP", "日本語"),
+          ("ko-KR", "한국어"),
+          ("fr-FR", "Français"),
+          ("de-DE", "Deutsch"),
+          ("es-ES", "Español"),
+          ("pt-BR", "Português"),
+          ("it-IT", "Italiano"),
+          ("id-ID", "Bahasa Indonesia"),
+          ("th-TH", "ภาษาไทย"),
+        ])
+          MenuItemButton(
+            onPressed: () {
+              AppState.lang.value = entry.$1;
+            },
+            child: AppText(entry.$2, isTranslate: false),
+          ),
       ],
       builder:
           builder ??

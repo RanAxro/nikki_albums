@@ -248,6 +248,30 @@ abstract class AppState {
 Future<void> initApp() async {
   await AppState.read();
 
+  // Auto-detect system language on first launch
+  if (AppState.isInitialStartup.value) {
+    final systemLocale = Platform.localeName; // e.g. "en_US", "zh-Hans_CN", "ja_JP"
+    final supported = {
+      'zh': 'zh-CN',
+      'en': 'en-US',
+      'fr': 'fr-FR',
+      'de': 'de-DE',
+      'id': 'id-ID',
+      'it': 'it-IT',
+      'ja': 'ja-JP',
+      'ko': 'ko-KR',
+      'pt': 'pt-BR',
+      'es': 'es-ES',
+      'th': 'th-TH',
+    };
+    final lang = systemLocale.split(RegExp(r'[_\-]')).first.toLowerCase();
+    if (lang == 'zh' && (systemLocale.contains('Hant') || systemLocale.contains('TW') || systemLocale.contains('HK') || systemLocale.contains('MO'))) {
+      AppState.lang.value = 'zh-TW';
+    } else if (supported.containsKey(lang)) {
+      AppState.lang.value = supported[lang]!;
+    }
+  }
+
   // Auto-detect game on first launch if no game is saved
   await autoDetectGame();
 

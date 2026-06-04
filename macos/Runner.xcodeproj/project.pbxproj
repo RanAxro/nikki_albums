@@ -66,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		16E0A226B553626812118D7F /* zh-Hans */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A1B2C3D4E5F60001 /* fr */ = {isa = PBXFileReference; includeInIndex = 1; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1B2C3D4E5F60002 /* ja */ = {isa = PBXFileReference; includeInIndex = 1; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1B2C3D4E5F60003 /* zh-Hant */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		214666173A79FEF0E883AA30 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		331C80D5294CF71000263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		331C80D7294CF71000263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
@@ -308,6 +311,10 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				fr,
+				ja,
+				"zh-Hant",
 			);
 			mainGroup = 33CC10E42044A3C60003C045;
 			productRefGroup = 33CC10EE2044A3C60003C045 /* Products */;
@@ -511,6 +518,9 @@
 			children = (
 				F0AC18754D1EE265FFE4CCAD /* en */,
 				16E0A226B553626812118D7F /* zh-Hans */,
+				A1B2C3D4E5F60001 /* fr */,
+				A1B2C3D4E5F60002 /* ja */,
+				A1B2C3D4E5F60003 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

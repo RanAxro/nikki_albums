@@ -1,0 +1,6 @@
+CFBundleDisplayName = "Nikki Albums";
+CFBundleName = "Nikki Albums";
+NSPhotoLibraryUsageDescription = "写真を書き出すために、フォトライブラリへのアクセスが必要です。";
+NSPhotoLibraryAddUsageDescription = "写真を保存するために、フォトライブラリへのアクセスが必要です。";
+NSRemovableVolumesUsageDescription = "写真を書き出すために、外部ボリュームへのアクセスが必要です。";
+NSNetworkVolumesUsageDescription = "写真を書き出すために、ネットワークボリュームへのアクセスが必要です。";
