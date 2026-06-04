@@ -1,18 +1,21 @@
-import "package:flutter/foundation.dart";
-import 'package:flutter/material.dart';
-import 'package:nikki_albums/src/rust/frb_generated.dart';
 
+import "package:nikki_albums/modules/app_base/domain/lang_asset_loader.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/system/system_service_windows.dart";
 import "package:nikki_albums/utils/system/system_service_macos.dart";
+import "package:nikki_albums/src/rust/frb_generated.dart";
+
+import "package:flutter/material.dart";
+import "package:flutter/foundation.dart";
 import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:window_manager/window_manager.dart";
 import "package:windows_single_instance/windows_single_instance.dart";
 import "package:media_kit/media_kit.dart";
+
 
 void main(List<String> args) async {
   await RustLib.init();
@@ -76,6 +79,7 @@ void main(List<String> args) async {
       // startLocale: Locale("en", "US"),
       fallbackLocale: Locale("en", "US"),
       saveLocale: false,
+      assetLoader: AppLangAssetLoader(),
       child: Frame(ancestor),
     ),
   );

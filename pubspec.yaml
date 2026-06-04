@@ -151,6 +151,7 @@ flutter:
 
   assets:
     - assets/lang/
+    - assets/lang/infinity_nikki/cloth/
     - assets/logo/
     - assets/icon/
     - assets/icon/album/
