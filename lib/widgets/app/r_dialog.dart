@@ -269,24 +269,65 @@ class AppConfirmDialog extends StatelessWidget {
   }
 }
 
-abstract class AppToast {
-  static OverlayEntry? _overlayEntry;
-  static Timer? _timer;
-  static bool isShowing = false;
 
-  static void show({
+class _AppToastModel{
+  final BuildContext context;
+  final dynamic id;
+  final OverlayEntry overlayEntry;
+  final Timer? timer;
+
+  const _AppToastModel({
+    required this.context,
+    this.id,
+    required this.overlayEntry,
+    this.timer,
+  });
+}
+
+abstract class AppToast{
+  static final List<_AppToastModel> _toasts = [];
+
+  static _AppToastModel? _getToast({dynamic id}){
+    for(final _AppToastModel toast in _toasts){
+      if(toast.id == id){
+        return toast;
+      }
+    }
+
+    return null;
+  }
+
+  static void _insertToast(_AppToastModel toast){
+    _removeToast(id: toast.id);
+
+    _toasts.add(toast);
+    Overlay.of(toast.context).insert(toast.overlayEntry);
+  }
+
+  static void _removeToast({dynamic id}){
+    final _AppToastModel? toast = _getToast(id: id);
+
+    if(toast != null){
+      toast.overlayEntry.remove();
+      toast.timer?.cancel();
+    }
+
+    _toasts.remove(toast);
+  }
+
+  static OverlayEntry _buildOverlayEntry({
     required BuildContext context,
-    Duration? duration = toastDuration,
     ColorRole colorRole = ColorRole.background,
+    double width = toastMaxWidth,
+    double height = toastMaxHeight,
     bool state = true,
     String title = "ui_toast_tip",
     bool isTranslate = true,
     required Widget child,
-  }) {
-    hide();
-
-    _overlayEntry = OverlayEntry(
-      builder: (context) {
+    required void Function() onClose,
+  }){
+    return OverlayEntry(
+      builder: (context){
         return Positioned(
           right: 20,
           bottom: 40,
@@ -297,26 +338,16 @@ abstract class AppToast {
               child: FadeIn(
                 offsetBegin: Offset(100, 0),
                 child: Container(
-                  padding: const EdgeInsets.only(
-                    left: topBarPadding,
-                    right: topBarPadding,
-                    bottom: topBarPadding,
-                  ),
+                  padding: const EdgeInsets.only(left: topBarPadding, right: topBarPadding, bottom: topBarPadding),
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(smallBorderRadius),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(smallBorderRadius)),
                     gradient: LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       stops: const [0.0, 0.3],
                       colors: [
-                        state
-                            ? AppThemeColor.littleGreen
-                            : AppThemeColor.littleRed,
-                        AppColorScheme.of(
-                          context,
-                        ).byRole(ColorRole.of(context)).color,
+                        state ? AppThemeColor.littleGreen : AppThemeColor.littleRed,
+                        AppColorScheme.of(context).byRole(ColorRole.of(context)).color,
                       ],
                     ),
                     boxShadow: [
@@ -328,8 +359,8 @@ abstract class AppToast {
                       ),
                     ],
                   ),
-                  width: toastMaxWidth,
-                  height: toastMaxHeight,
+                  width: width,
+                  height: height,
                   child: Column(
                     children: [
                       SizedBox(
@@ -345,7 +376,7 @@ abstract class AppToast {
                               ),
                             ),
                             AppButton.smallIcon(
-                              onClick: hide,
+                              onClick: onClose,
                               child: AppIcon("cross"),
                             ),
                           ],
@@ -361,27 +392,53 @@ abstract class AppToast {
         );
       },
     );
+  }
 
-    Overlay.of(context).insert(_overlayEntry!);
-    isShowing = true;
-    if (duration != null) {
-      _timer = Timer(duration, () {
-        hide();
-      });
-    }
+  static void show({
+    required BuildContext context,
+    dynamic id,
+    Duration? duration = toastDuration,
+    ColorRole colorRole = ColorRole.background,
+    bool state = true,
+    String title = "ui_toast_tip",
+    bool isTranslate = true,
+    required Widget child,
+  }){
+    final OverlayEntry overlayEntry = _buildOverlayEntry(
+      context: context,
+      colorRole: colorRole,
+      state: state,
+      title: title,
+      isTranslate: isTranslate,
+      child: child,
+      onClose: (){
+        hide(id: id);
+      },
+    );
+
+    _insertToast(_AppToastModel(
+      context: context,
+      id: id,
+      overlayEntry: overlayEntry,
+      timer: duration == null ? null : Timer(duration, (){
+        hide(id: id);
+      }),
+    ));
   }
 
   static void showMessage({
     required BuildContext context,
+    dynamic id,
     Duration duration = toastDuration,
     ColorRole colorRole = ColorRole.background,
     bool state = true,
     String title = "ui_toast_tip",
     bool isTranslate = true,
     required String message,
-  }) {
+  }){
     show(
       context: context,
+      id: id,
       duration: duration,
       colorRole: colorRole,
       state: state,
@@ -391,11 +448,179 @@ abstract class AppToast {
     );
   }
 
-  static void hide() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-    _timer?.cancel();
-    _timer = null;
-    isShowing = false;
+  static void hide({dynamic id}){
+    _removeToast(id: id);
   }
 }
+
+
+class AppTask{
+  static final collection = AppTaskCollection();
+
+  static List<AppTask> get tasks => collection.tasks;
+
+
+  final Object id;
+  final String? title;
+  final String? message;
+  final ValueNotifier<double?> progress;
+  final void Function(double?)? onCancel;
+  final bool _shouldAutoDispose;
+
+  AppTask._({
+    required this.id,
+    this.title,
+    this.message,
+    required this.progress,
+    this.onCancel,
+    required bool shouldAutoDispose,
+  }) : _shouldAutoDispose = shouldAutoDispose{
+    progress.addListener(_listener);
+  }
+
+  factory AppTask.create({
+    required Object id,
+    String? title,
+    String? message,
+    ValueNotifier<double?>? progress,
+    void Function(double?)? onCancel,
+    void Function(AppTask)? onOldTask,
+  }){
+    final AppTask task = AppTask._(
+      id: id,
+      title: title,
+      message: message,
+      progress: progress ?? ValueNotifier<double?>(0),
+      onCancel: onCancel,
+      shouldAutoDispose: progress == null,
+    );
+
+    collection._addTask(task, onOldTask: onOldTask);
+
+    return task;
+  }
+
+  void _listener(){
+    if(progress.value == 1){
+      dispose();
+    }
+  }
+
+  bool _isDispose = false;
+
+  bool get isDispose => _isDispose;
+
+  void dispose(){
+    if(_isDispose){
+      return;
+    }
+    _isDispose = true;
+
+    if(progress.value != null && progress.value != 1){
+      onCancel?.call(progress.value);
+    }
+    if(_shouldAutoDispose){
+      progress.dispose();
+    }else{
+      progress.removeListener(_listener);
+    }
+
+    collection._deleteTask(id);
+  }
+}
+
+class AppTaskCollection extends ChangeNotifier{
+  final List<AppTask> _tasks = [];
+
+  AppTaskCollection();
+
+  List<AppTask> get tasks => List.of(_tasks);
+
+  AppTask? getTask(Object id){
+    for(final AppTask task in _tasks){
+      if(task.id == id){
+        return task;
+      }
+    }
+    return null;
+  }
+
+  void _addTask(AppTask task, {void Function(AppTask)? onOldTask}){
+    final AppTask? oldTask = getTask(task.id);
+
+    if(onOldTask != null && oldTask != null){
+      onOldTask.call(oldTask);
+    }else{
+      oldTask?.dispose();
+    }
+
+    _tasks.add(task);
+
+    notifyListeners();
+  }
+
+  void _deleteTask(Object id){
+    final AppTask? oldTask = getTask(id);
+
+    oldTask?.dispose();
+
+    notifyListeners();
+  }
+}
+
+abstract class AppTaskProgress{
+  static final ValueNotifier<bool> _hasTask = ValueNotifier<bool>(false);
+  static final List<AppTask> _tasks = [];
+
+  static Future<void> show({
+    required BuildContext context,
+    required List<Object> id,
+    bool lock = false,
+  }) async{
+    if(lock){
+
+    }else{
+
+    }
+  }
+
+  static AppTask? getTask(Object id){
+    for(final AppTask task in _tasks){
+      if(task.id == id){
+        return task;
+      }
+    }
+
+    return null;
+  }
+
+  static void addTask(AppTask task, {void Function(AppTask)? onOldTask}){
+    final AppTask? oldTask = getTask(task.id);
+
+    if(oldTask != null && onOldTask != null){
+      onOldTask.call(oldTask);
+    }else{
+      deleteTask(task.id);
+    }
+
+    _tasks.add(task);
+    _update();
+  }
+
+  static void deleteTask(Object id){
+    final AppTask? task = getTask(id);
+
+    task?.dispose();
+
+    _tasks.remove(task);
+    _update();
+  }
+
+  static void _update(){
+    _tasks.removeWhere((AppTask task) => task.isDispose);
+
+    _hasTask.value = _tasks.isNotEmpty;
+  }
+}
+
+
