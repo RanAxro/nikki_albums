@@ -21,10 +21,11 @@ class ImageItem {
   final ImageSource source;
   final Path path;
   final DateTime time;
+  final String? thumbnail;
   final bool isVideo;
   final String? cover;
 
-  ImageItem({required this.source, required this.path, DateTime? time, required this.isVideo, this.cover})
+  ImageItem({required this.source, required this.path, DateTime? time, this.thumbnail, required this.isVideo, this.cover})
     : id = path.hashCode,
       time = time ?? path.stat.modified;
 
@@ -61,7 +62,7 @@ class ImageItem {
 
 MediaParamType convertAlbumType(AlbumType albumType){
   switch(albumType){
-    case AlbumType.Collage_HighQuality:
+    case AlbumType.Collage_CollagePhoto:
       return MediaParamType.collage;
     case AlbumType.ClockInPhoto:
       return MediaParamType.clockInPhoto;

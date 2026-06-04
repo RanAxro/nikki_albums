@@ -1693,14 +1693,14 @@ class _ExhibitState extends State<Exhibit> {
         if (widget.imageItem.cover == null) {
           return MediaThumbnail.fromCache(
             id: widget.imageItem.name,
-            imagePath: widget.imageItem.path,
+            imagePath: Path(widget.imageItem.thumbnail ?? widget.imageItem.path.path),
             targetWidth: 720,
             isVideo: widget.imageItem.isVideo,
           );
         } else {
           return MediaThumbnail.fromCache(
             id: widget.imageItem.cover!,
-            imagePath: Path(widget.imageItem.cover!),
+            imagePath: Path(widget.imageItem.thumbnail ?? widget.imageItem.cover!),
             targetWidth: 720,
             isVideo: false,
           );
