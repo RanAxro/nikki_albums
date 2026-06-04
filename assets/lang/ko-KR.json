@@ -484,10 +484,5 @@
     "export_successful": "Export Successful!",
     "export_failed": "Export Failed!"
   },
-  "----------game_map----------": "----------game_map----------",
-  "extraComponentRequired": "추가 구성 요소 필요",
-  "ffmpegDownloadDescription": "Exporting Live Photos in Apple format requires downloading and installing the open-source component FFmpeg. The download process will run in the background (approx. 30MB).",
-  "downloadingFFmpeg": "FFmpeg 다운로드 중...",
-  "extractingFFmpeg": "FFmpeg 추출 중...",
-  "ffmpegDownloadFailed": "다운로드에 실패했습니다. 네트워크 연결을 확인하거나 나중에 다시 시도하세요."
+  "----------game_map----------": "----------game_map----------"
 }

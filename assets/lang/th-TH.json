@@ -482,10 +482,5 @@
     "export_successful": "Export Successful!",
     "export_failed": "Export Failed!"
   },
-  "----------game_map----------": "----------game_map----------",
-  "extraComponentRequired": "ต้องการส่วนประกอบเพิ่มเติม",
-  "ffmpegDownloadDescription": "Exporting Live Photos in Apple format requires downloading and installing the open-source component FFmpeg. The download process will run in the background (approx. 30MB).",
-  "downloadingFFmpeg": "กำลังดาวน์โหลด FFmpeg...",
-  "extractingFFmpeg": "กำลังแตกไฟล์ FFmpeg...",
-  "ffmpegDownloadFailed": "ดาวน์โหลดล้มเหลว กรุณาตรวจสอบการเชื่อมต่อเครือข่ายหรือลองอีกครั้งในภายหลัง"
+  "----------game_map----------": "----------game_map----------"
 }

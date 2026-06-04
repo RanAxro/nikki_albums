@@ -9005,10 +9005,5 @@
   "game_weapon_custom_state_open": "開啟",
   "game_interaction_type_chair": "椅子",
   "game_interaction_type_decoration": "擺飾",
-  "toGitHub": "GitHub",
-  "extraComponentRequired": "需要額外元件",
-  "ffmpegDownloadDescription": "使用 Apple 格式匯出實況照片需要下載並安裝開源元件 FFmpeg。下載過程在後臺進行，大小約為 30MB。",
-  "downloadingFFmpeg": "正在下載 FFmpeg...",
-  "extractingFFmpeg": "正在提取 FFmpeg...",
-  "ffmpegDownloadFailed": "元件下載失敗，請檢查網路連線或稍後重試。"
+  "toGitHub": "GitHub"
 }
