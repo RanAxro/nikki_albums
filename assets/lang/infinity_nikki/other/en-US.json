@@ -1,0 +1,82 @@
+{
+  "infinity_nikki": {
+    "photo_wall": {},
+    "puzzle": {
+      "-1": "None",
+      "30": "Grave site - Yearning to fly - Skarelle with outstretched wings",
+      "31": "Grave site - Nativity observance - Nativity site in the instrument"
+    },
+    "risk": {},
+    "interactive": {
+      "206001": "2.6 The Day at the End of the Tides - Intermission Collection Day 1: Take one photo of any booth from any of the four departments.",
+      "261003": "Task - Farewell, for Reunion - Take a photo of Mirina and Silian together",
+      "42031201": "Shadow Memory 1 - Building Garden",
+      "42031202": "Shadow's Memories 2 - Jointly Constructed Garden",
+      "42031203": "Shadow Memory 3 - The Departed Old Path"
+    },
+    "light": {
+      "None": "None",
+      "DirectionLight_L": "DirectionLight Left",
+      "DirectionLight_R": "DirectionLight Right",
+      "DirectionLight_T": "DirectionLight Top",
+      "DirectionLight_B": "DirectionLight Bottom",
+      "HueEdgeLight_001_L": "HueEdgeLight Soft-yellow Left",
+      "HueEdgeLight_001_R": "HueEdgeLight Soft-yellow Right",
+      "HueEdgeLight_002_L": "HueEdgeLight Moon-Blue Left",
+      "HueEdgeLight_002_R": "HueEdgeLight Moon-Blue Right",
+      "HueEdgeLight_003_L": "HueEdgeLight Ming-Zi Left",
+      "HueEdgeLight_003_R": "HueEdgeLight Ming-Zi Right",
+      "HueEdgeLight_004_L": "HueEdgeLight White-powder Left",
+      "HueEdgeLight_004_R": "HueEdgeLight White-powder Right",
+      "VibeLight_001": "VibeLight Soft white edge light",
+      "VibeLight_002": "VibeLight Dreamy Rainbow",
+      "VibeLight_003": "VibeLight Breathtaking aurora",
+      "VibeLight_004": "VibeLight Softly flowing waves of light"
+    },
+    "filter": {
+      "None": "None",
+      "Fresh_001": "Fresh - Morning Mist",
+      "Fresh_002": "Fresh - Cherry Blossom",
+      "Fresh_003": "Fresh - Soft Cream",
+      "Fresh_004": "Fresh - Warm Sunlight",
+      "Fresh_005": "Fresh - Sunny Day",
+      "Weather_001": "Mood - Dusk Glow",
+      "Weather_002": "Mood - Moonlight",
+      "Weather_003": "Mood - Night Rain",
+      "Weather_004": "Mood - Snow Melt",
+      "Vibe_009": "Vibe - Night River",
+      "Vibe_001": "Style - Vintage Film",
+      "Vibe_002": "Style - Breezy Coast",
+      "Vibe_003": "Style - Summer Afternoon",
+      "Vibe_004": "Style - Pearl Shimmer",
+      "Vibe_005": "Style - Red & Blue Symphony"
+    },
+    "pose": {
+      "null": "None",
+      "0": "None"
+    },
+    "framed_moment": {
+      "0": "None"
+    },
+    "momo_pose": {},
+    "pattern_creation_texture": {},
+    "eureka": {},
+    "eureka_outfit": {},
+    "weapon": {},
+    "slot_type": {},
+    "interactions": {},
+    "mount": {},
+    "carrier": {},
+    "expedition": {
+      "101020301": "Itzaland - Great Ram Settlement",
+      "101020302": "Itzaland - Hall of Return",
+      "101020303": "Itzaland - Spirit Cleansing Pool",
+      "101020304": "Itzaland - Healing Grounds",
+      "101020305": "Itzaland - Soul Observatory",
+      "101020306": "Itzaland - Dragon's Nest",
+      "101020307": "Itzaland - Memorial Grounds",
+      "101020308": "Itzaland - Azure Pool"
+    },
+    "template_id": {}
+  }
+}
