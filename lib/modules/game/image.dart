@@ -62,7 +62,7 @@ class ImageItem {
 
 MediaParamType convertAlbumType(AlbumType albumType){
   switch(albumType){
-    case AlbumType.Collage_CollagePhoto:
+    case AlbumType.Collage_HighQuality:
       return MediaParamType.collage;
     case AlbumType.ClockInPhoto:
       return MediaParamType.clockInPhoto;
