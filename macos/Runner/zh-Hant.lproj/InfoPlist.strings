@@ -1,0 +1,6 @@
+CFBundleDisplayName = "暖暖相冊";
+CFBundleName = "暖暖相冊";
+NSPhotoLibraryUsageDescription = "我們需要存取您的照片圖庫以便為您匯出照片。";
+NSPhotoLibraryAddUsageDescription = "我們需要存取您的照片圖庫以便為您儲存照片。";
+NSRemovableVolumesUsageDescription = "我們需要存取您的外接磁碟以便為您匯出照片。";
+NSNetworkVolumesUsageDescription = "我們需要存取您的網路磁碟以便為您匯出照片。";

@@ -58,7 +58,20 @@ void main(List<String> args) async {
 
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale("zh", "CN"), Locale("en", "US")],
+      supportedLocales: const [
+        Locale("zh", "CN"),
+        Locale("en", "US"),
+        Locale("fr", "FR"),
+        Locale("de", "DE"),
+        Locale("id", "ID"),
+        Locale("it", "IT"),
+        Locale("ja", "JP"),
+        Locale("ko", "KR"),
+        Locale("pt", "BR"),
+        Locale("es", "ES"),
+        Locale("th", "TH"),
+        Locale("zh", "TW"),
+      ],
       path: "assets/lang",
       // startLocale: Locale("en", "US"),
       fallbackLocale: Locale("en", "US"),

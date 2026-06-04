@@ -1,0 +1,6 @@
+CFBundleDisplayName = "Nikki Albums";
+CFBundleName = "Nikki Albums";
+NSPhotoLibraryUsageDescription = "Nikki Albums a besoin d'accéder à votre photothèque pour exporter des photos.";
+NSPhotoLibraryAddUsageDescription = "Nikki Albums a besoin d'accéder à votre photothèque pour enregistrer des photos.";
+NSRemovableVolumesUsageDescription = "Nikki Albums a besoin d'accéder aux volumes externes pour exporter des photos.";
+NSNetworkVolumesUsageDescription = "Nikki Albums a besoin d'accéder aux volumes réseau pour exporter des photos.";
