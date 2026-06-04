@@ -1,5 +1,6 @@
 import "package:nikki_albums/modules/initial_startup/presentation/initial_startup_setting.dart";
 
+import "package:nikki_albums/modules/app_base/app_registry.dart";
 import "package:nikki_albums/utils/system/windows.dart";
 import "package:nikki_albums/modules/setting/version_information/domain/check_app_updates.dart";
 import "ui_android.dart";
@@ -24,14 +25,6 @@ import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
 import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:easy_localization/easy_localization.dart";
-
-import "package:nikki_albums/modules/album/album.dart" as album_page;
-import "package:nikki_albums/modules/start/start.dart" as start_page;
-import "package:nikki_albums/modules/resource/resource.dart" as resource_page;
-import "package:nikki_albums/modules/file_transfer/file_transfer.dart"
-    as file_transfer_page;
-import "package:nikki_albums/modules/recycle_bin/recycle_bin.dart"
-    as recycle_bin;
 
 class Frame extends StatefulWidget {
   const Frame(key) : super(key: key);
@@ -1051,21 +1044,12 @@ class ContentController extends ChangeNotifier {
 }
 
 class ContentBuilder extends StatelessWidget {
-  final List<ContentItem> items = [
-    start_page.item,
-    album_page.item,
-    file_transfer_page.item,
-    resource_page.item,
-    // creation.item,
-    recycle_bin.item,
-  ];
-
   final Axis direction;
   final Widget Function(BuildContext context, List<(String name, AppIcon icon)>)
   navBuilder;
   final Widget Function(BuildContext context, List<Widget>) pageBuilder;
 
-  ContentBuilder({
+  const ContentBuilder({
     super.key,
     required this.direction,
     required this.navBuilder,
@@ -1077,7 +1061,7 @@ class ContentBuilder extends StatelessWidget {
     final List<Widget> children = [
       navBuilder(
         context,
-        items
+        AppRegistry.homeContent
             .map((ContentItem item) => (item.name, item.icon))
             .toList(growable: false),
       ),
@@ -1085,7 +1069,7 @@ class ContentBuilder extends StatelessWidget {
       Expanded(
         child: pageBuilder(
           context,
-          items
+          AppRegistry.homeContent
               .map(
                 (ContentItem item) => KeepAliveWrapper(
                   keepAlive: item.isKeepAlive,
