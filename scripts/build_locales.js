@@ -51,14 +51,28 @@ for (const [lang, dict] of Object.entries(i18n)) {
     // Update meta tags dynamically
     if (seoDesc) {
         content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${seoDesc}">`);
-        content = content.replace(/"description":\s*"[^"]*"/, `"description": "${seoDesc}"`);
     }
     if (dict['app_name']) {
         const escapedAppName = dict['app_name'].replace(/"/g, '&quot;');
         content = content.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapedAppName}">`);
         content = content.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapedAppName}">`);
-        content = content.replace(/"name":\s*"[^"]*"/, `"name": "${escapedAppName}"`);
     }
+    
+    // Robustly update JSON-LD blocks via JSON parsing
+    content = content.replace(/<script type="application\/ld\+json">\s*({[\s\S]*?})\s*<\/script>/g, (match, jsonStr) => {
+        try {
+            const jsonObj = JSON.parse(jsonStr);
+            if (jsonObj.description && seoDesc) jsonObj.description = seoDesc;
+            if (jsonObj.name && dict['app_name']) {
+                if (jsonObj['@type'] === 'WebSite' || jsonObj['@type'] === 'SoftwareApplication') {
+                    jsonObj.name = dict['app_name'];
+                }
+            }
+            return `<script type="application/ld+json">\n${JSON.stringify(jsonObj, null, 2)}\n</script>`;
+        } catch (e) {
+            return match;
+        }
+    });
     if (dict['hero_desc']) {
         content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${dict['hero_desc'].replace(/"/g, '&quot;')}">`);
         content = content.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${dict['hero_desc'].replace(/"/g, '&quot;')}">`);
@@ -117,11 +131,23 @@ for (const [lang, dict] of Object.entries(i18n)) {
         content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${downloadSeoDesc}">`);
         content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${downloadSeoDesc}">`);
         content = content.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${downloadSeoDesc}">`);
-        content = content.replace(/"description":\s*"[^"]*"/, `"description": "${downloadSeoDesc}"`);
     }
-    if (downloadLang['app_name'] && downloadLang['app_name'][lang]) {
-        content = content.replace(/"name":\s*"[^"]*"/, `"name": "${downloadLang['app_name'][lang].replace(/"/g, '&quot;')}"`);
-    }
+    
+    // Robustly update JSON-LD blocks for download page
+    content = content.replace(/<script type="application\/ld\+json">\s*({[\s\S]*?})\s*<\/script>/g, (match, jsonStr) => {
+        try {
+            const jsonObj = JSON.parse(jsonStr);
+            if (jsonObj.description && downloadSeoDesc) jsonObj.description = downloadSeoDesc;
+            if (jsonObj.name && downloadLang['app_name'] && downloadLang['app_name'][lang]) {
+                if (jsonObj['@type'] === 'WebSite' || jsonObj['@type'] === 'SoftwareApplication') {
+                    jsonObj.name = downloadLang['app_name'][lang];
+                }
+            }
+            return `<script type="application/ld+json">\n${JSON.stringify(jsonObj, null, 2)}\n</script>`;
+        } catch (e) {
+            return match;
+        }
+    });
     
     // Update canonical/og:url
     content = content.replace(/<meta property="og:url" content="https:\/\/nikki\.ranaxro\.com">/, `<meta property="og:url" content="https://nikki.ranaxro.com/${lang}/download.html">`);
