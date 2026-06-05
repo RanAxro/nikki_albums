@@ -342,7 +342,7 @@ class Nuan5DecryptionDebug extends StatelessWidget{
           //     ),
           //   ),
           // ),
-        ],
+        ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
       ),
     );
   }

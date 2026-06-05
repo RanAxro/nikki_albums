@@ -238,7 +238,7 @@ class AppStateDebug extends StatelessWidget{
             },
           ),
 
-        ],
+        ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
       ),
     );
   }
