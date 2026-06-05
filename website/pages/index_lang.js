@@ -88,7 +88,7 @@ const i18n = {
 		modal_btn: "Got it"
 	},
 	ja: {
-		page_title: "ニキのアルバム - インフィニティニキの写真アルバム管理ツール",
+		page_title: "Nikki Albums - インフィニティニキの写真アルバム管理ツール",
 		app_name: "Nikki Albums",
 		nav_qq: "QQ Group 1062670402",
 		nav_tutorial: "チュートリアル",
@@ -111,13 +111,13 @@ const i18n = {
 		card_4_desc: "ワンクリックで動画やライブアルバムをGIF画像またはmacOS用のLive Photoに変換可能。",
 		card_5_title: "多様な書き出し共有",
 		card_5_desc: "クリップボードへのコピー、ローカルネットワーク内のデバイスへの無劣化転送で、素早く共有。",
-		footer_disclaimer: "『ニキのアルバム』はオープンソースのツールであり、インフィニティニキ公式やPapergamesとは一切関係ありません。すべての素材の著作権は原権利者に帰属します。",
+		footer_disclaimer: "『Nikki Albums』はオープンソースのツールであり、インフィニティニキ公式やPapergamesとは一切関係ありません。すべての素材の著作権は原権利者に帰属します。",
 		modal_title: "macOS版の初回実行に関する重要なお知らせ",
 		modal_desc: "署名なしのポータブル版であるため、初回起動時にmacOSによってブロックされる場合があります。<br><br>以下の手順に従って正常に開いてください：<br>1. 「Appleは悪質なソフトウェアがないか確認できません」と表示された場合は、<b>OK</b>をクリックします。<br>2. <b>システム設定</b> > <b>プライバシーとセキュリティ</b>を開きます。<br>3. セキュリティ欄にあるNikki Albumsの起動に関するメッセージを確認し、<b>このまま開く</b>をクリックします。<br>4. ログインパスワードを入力し、<b>OK</b>をクリックします。",
 		modal_btn: "了解しました"
 	},
 	ko: {
-		page_title: "니키 앨범 - 인피니티 니키 사진 앨범 관리 도구",
+		page_title: "Nikki Albums - 인피니티 니키 사진 앨범 관리 도구",
 		app_name: "Nikki Albums",
 		nav_qq: "QQ Group 1062670402",
 		nav_tutorial: "튜토리얼",
@@ -140,7 +140,7 @@ const i18n = {
 		card_4_desc: "동영상이나 라이브 앨범을 원클릭으로 GIF 움짤 또는 macOS 라이브 포토(Live Photo)로 변환.",
 		card_5_title: "다채널 내보내기 및 공유",
 		card_5_desc: "클립보드 복사 및 로컬 네트워크(LAN) 내 무손실 전송을 지원하여 한발 빠른 공유 가능.",
-		footer_disclaimer: "니키 앨범은 오픈 소스 도구이며 인피니티 니키 공식 또는 Papergames와 관련이 없습니다. 모든 자료의 저작권은 해당 회사에 있습니다.",
+		footer_disclaimer: "Nikki Albums는 오픈 소스 도구이며 인피니티 니키 공식 또는 Papergames와 관련이 없습니다. 모든 자료의 저작권은 해당 회사에 있습니다.",
 		modal_title: "macOS 버전 최초 실행 시 중요 안내",
 		modal_desc: "본 앱은 서명되지 않은 포터블 버전으로, 최초 실행 시 시스템에 의해 차단될 수 있습니다.<br><br>정상적으로 실행하려면 다음 단계를 따르십시오:<br>1. \"Apple에서 악성 소프트웨어가 있는지 확인할 수 없습니다\"라는 팝업이 뜨면 <b>확인</b>을 클릭합니다.<br>2. 시스템의 <b>설정</b> > <b>개인정보 보호 및 보안</b>을 엽니다.<br>3. 보안 섹션에서 Nikki Albums 관련 안내를 찾아 <b>열기</b>를 클릭합니다.<br>4. <b>계속 열기</b>를 클릭하고 컴퓨터 암호를 입력한 뒤 <b>확인</b>을 클릭합니다.",
 		modal_btn: "확인 완료"
