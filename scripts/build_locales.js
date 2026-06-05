@@ -93,10 +93,13 @@ for (const [lang, dict] of Object.entries(i18n)) {
         content = content.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${downloadLang['page_title'][lang]}">`);
         content = content.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${downloadLang['page_title'][lang]}">`);
     }
-    if (downloadLang['macos_gatekeeper_desc'] && downloadLang['macos_gatekeeper_desc'][lang]) {
-        // Just use a generic description or the first part of the text if needed, but since download page
-        // has a generic description, we could leave it. Actually, app_name + download might be better.
-        // Let's just update the URL.
+    
+    // Translate description using the index page's localized description
+    if (dict['hero_subdesc']) {
+        const desc = dict['hero_subdesc'].replace(/"/g, '&quot;');
+        content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${desc}">`);
+        content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${desc}">`);
+        content = content.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${desc}">`);
     }
     
     // Update canonical/og:url
