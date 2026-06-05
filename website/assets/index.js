@@ -189,17 +189,9 @@
 		const twDesc = document.querySelector('meta[name="twitter:description"]');
 		if (twDesc && dict['hero_desc']) twDesc.setAttribute('content', dict['hero_desc']);
 
-		// Update link paths
-		const pathParts = window.location.pathname.split('/').filter(p => p);
-		const currentPathLang = pathParts.length > 0 ? pathParts[0] : null;
-
-		if (currentPathLang && supported.includes(currentPathLang)) {
-			document.getElementById('nav_download').href = `/${currentPathLang}/download.html`;
-			document.getElementById('nav_download_mobile').href = `/${currentPathLang}/download.html`;
-		} else {
-			document.getElementById('nav_download').href = `website/pages/download.html`;
-			document.getElementById('nav_download_mobile').href = `website/pages/download.html`;
-		}
+		// Always link to the pre-rendered locale download page
+		document.getElementById('nav_download').href = `/${currentLang}/download.html`;
+		document.getElementById('nav_download_mobile').href = `/${currentLang}/download.html`;
 		
 		// Hide QQ Group links for non-Chinese versions
 		document.querySelectorAll('.zh-only').forEach(el => {
