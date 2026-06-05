@@ -79,6 +79,7 @@ class _FloatingIndicatorGroupState extends State<FloatingIndicatorGroup>{
             _last = _current;
             _current = rect;
             _currentInfo = info;
+            timer.cancel();
           });
         });
       }
