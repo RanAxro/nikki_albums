@@ -51,10 +51,13 @@ for (const [lang, dict] of Object.entries(i18n)) {
     // Update meta tags dynamically
     if (seoDesc) {
         content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${seoDesc}">`);
+        content = content.replace(/"description":\s*"[^"]*"/, `"description": "${seoDesc}"`);
     }
     if (dict['app_name']) {
-        content = content.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${dict['app_name'].replace(/"/g, '&quot;')}">`);
-        content = content.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${dict['app_name'].replace(/"/g, '&quot;')}">`);
+        const escapedAppName = dict['app_name'].replace(/"/g, '&quot;');
+        content = content.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapedAppName}">`);
+        content = content.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapedAppName}">`);
+        content = content.replace(/"name":\s*"[^"]*"/, `"name": "${escapedAppName}"`);
     }
     if (dict['hero_desc']) {
         content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${dict['hero_desc'].replace(/"/g, '&quot;')}">`);
@@ -114,6 +117,10 @@ for (const [lang, dict] of Object.entries(i18n)) {
         content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${downloadSeoDesc}">`);
         content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${downloadSeoDesc}">`);
         content = content.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${downloadSeoDesc}">`);
+        content = content.replace(/"description":\s*"[^"]*"/, `"description": "${downloadSeoDesc}"`);
+    }
+    if (downloadLang['app_name'] && downloadLang['app_name'][lang]) {
+        content = content.replace(/"name":\s*"[^"]*"/, `"name": "${downloadLang['app_name'][lang].replace(/"/g, '&quot;')}"`);
     }
     
     // Update canonical/og:url
