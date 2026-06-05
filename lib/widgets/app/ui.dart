@@ -1206,7 +1206,7 @@ class AppFloatingIndicatorButtonGroup extends StatelessWidget{
   const AppFloatingIndicatorButtonGroup({
     super.key,
     this.floatDuration = const Duration(milliseconds: 100),
-    this.delta = const Duration(milliseconds: 100),
+    this.delta = const Duration(milliseconds: 150),
     this.hideWhenNoTarget = true,
     this.borderRadius = smallBorderRadius,
     required this.child,

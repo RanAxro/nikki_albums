@@ -30,50 +30,52 @@ class EditCustomGame extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final Game game = customGame[index];
 
-                    return SmallButton(
-                      padding: const EdgeInsets.all(smallPadding),
-                      width: null,
-                      height: null,
-                      colorRole: ColorRole.background,
-                      transparent: false,
-                      onClick: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return DeleteCustomGameDialog(game);
-                          },
-                        );
-                      },
-                      child: Column(
-                        spacing: smallPadding,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "${context.tr("account")}: ${game.name}",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
+                    return AppFloatingIndicatorButtonTarget(
+                      child: AppButton(
+                        padding: const EdgeInsets.all(smallPadding),
+                        width: null,
+                        height: null,
+                        colorRole: ColorRole.background,
+                        isTransparent: false,
+                        onClick: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return DeleteCustomGameDialog(game);
+                            },
+                          );
+                        },
+                        child: Column(
+                          spacing: smallPadding,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "${context.tr("account")}: ${game.name}",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: AppTheme.of(
+                                  context,
+                                )!.colorScheme.background.onColor,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${context.tr("launcherDir")} ${game.launcherPath.path}",
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
+                            Text(
+                              "${context.tr("launcherDir")} ${game.launcherPath.path}",
+                              style: TextStyle(
+                                color: AppTheme.of(
+                                  context,
+                                )!.colorScheme.background.onColor,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${context.tr("installDir")} ${game.installPath.path}",
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
+                            Text(
+                              "${context.tr("installDir")} ${game.installPath.path}",
+                              style: TextStyle(
+                                color: AppTheme.of(
+                                  context,
+                                )!.colorScheme.background.onColor,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },

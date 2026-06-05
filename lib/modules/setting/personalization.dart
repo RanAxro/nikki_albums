@@ -16,8 +16,13 @@ class Personalization extends StatelessWidget {
       child: Column(
         spacing: listSpacing,
         children: [
-          if(!Platform.isMacOS) const MaximizeOrRestoreButtonSwitch(),
-          const FollowSystemSwitch(),
+          if(!Platform.isMacOS)
+            AppFloatingIndicatorButtonTarget(
+              child: const MaximizeOrRestoreButtonSwitch(),
+            ),
+          AppFloatingIndicatorButtonTarget(
+            child: const FollowSystemSwitch(),
+          ),
           block5H,
           const ChangeTheme(),
         ],

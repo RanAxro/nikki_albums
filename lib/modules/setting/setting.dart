@@ -193,40 +193,46 @@ class SettingDialog extends StatelessWidget {
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          return Container(
-            padding: const EdgeInsets.all(smallPadding),
-            width: constraints.maxWidth - 88,
-            child: Column(
-              spacing: bigListSpacing,
-              children: [
-                SizedBox(
-                  height: topBarHeight,
-                  child: Row(
-                    spacing: bigListSpacing,
-                    children: [
-                      block10W,
-                      Expanded(
-                        child: AppText(
-                          "setting",
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+          return AppFloatingIndicatorButtonGroup(
+            child: Container(
+              padding: const EdgeInsets.all(smallPadding),
+              width: constraints.maxWidth - 88,
+              child: Column(
+                spacing: bigListSpacing,
+                children: [
+                  SizedBox(
+                    height: topBarHeight,
+                    child: Row(
+                      spacing: bigListSpacing,
+                      children: [
+                        block10W,
+                        Expanded(
+                          child: AppText(
+                            "setting",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
 
-                      const ChangeLanguage(),
+                        AppFloatingIndicatorButtonTarget(
+                          child: const ChangeLanguage(),
+                        ),
 
-                      AppButton.smallIcon(
-                        colorRole: ColorRole.background,
-                        onClick: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: AppIcon("cross", height: 20),
-                      ),
-                    ],
+                        AppFloatingIndicatorButtonTarget(
+                          child: AppButton.smallIcon(
+                            colorRole: ColorRole.background,
+                            onClick: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: AppIcon("cross", height: 20),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(child: content),
-              ],
+                  Expanded(child: content),
+                ],
+              ),
             ),
           );
         },

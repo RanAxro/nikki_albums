@@ -52,36 +52,38 @@ class LivePhotoSettings extends StatelessWidget {
 
   Widget _buildRadioOption(BuildContext context, String value, String current) {
     final bool selected = value == current;
-    return IntrinsicWidth(
-      child: AppButton.smallText(
-        onClick: () async {
-          if (Platform.isWindows && value == "apple") {
-            final success = await FFmpegManager.checkAndDownload(context);
-            if (success) {
+    return AppFloatingIndicatorButtonTarget(
+      child: IntrinsicWidth(
+        child: AppButton.smallText(
+          onClick: () async {
+            if (Platform.isWindows && value == "apple") {
+              final success = await FFmpegManager.checkAndDownload(context);
+              if (success) {
+                AppState.livePhotoExportFormat.value = value;
+              }
+            } else {
               AppState.livePhotoExportFormat.value = value;
             }
-          } else {
-            AppState.livePhotoExportFormat.value = value;
-          }
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: listSpacing,
-          children: [
-            Icon(
-              selected
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_unchecked,
-              size: 20,
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-            Text(
-              context.tr("livePhotoExportFormat_$value"),
-              style: TextStyle(
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: listSpacing,
+            children: [
+              Icon(
+                selected
+                    ? Icons.radio_button_checked
+                    : Icons.radio_button_unchecked,
+                size: 20,
                 color: AppTheme.of(context)!.colorScheme.background.onColor,
               ),
-            ),
-          ],
+              Text(
+                context.tr("livePhotoExportFormat_$value"),
+                style: TextStyle(
+                  color: AppTheme.of(context)!.colorScheme.background.onColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
