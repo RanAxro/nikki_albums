@@ -391,7 +391,7 @@ html.light-mode .hero-logo-glow {
 	height: 256px;
 	background: var(--vp-c-bg-soft);
 	border: 1px solid var(--vp-c-border);
-	border-radius: 57px; /* ~44.53% of half width (128px) for 256px icon */
+	border-radius: 77.5px; /* Concentric radius: R_inner (55px) + padding (22.5px) */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -405,9 +405,8 @@ html.light-mode .hero-logo-glow {
 }
 
 .hero-logo-wrapper img {
-	width: 80%;
-	height: 80%;
-	border-radius: 24px;
+	width: 100%;
+	height: 100%;
 	object-fit: contain;
 }
 
