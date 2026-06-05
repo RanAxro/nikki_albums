@@ -1185,61 +1185,59 @@ class _ToolBarState extends State<ToolBar> {
     );
 
     /// TODO 多tab
-    final Widget toolBox = Row(
-      spacing: listSpacing,
-      children: [
-        AlbumButton(),
+    final Widget toolBox = AppFloatingIndicatorButtonGroup(
+      child: Row(
+        spacing: listSpacing,
+        children: [
+          AppFloatingIndicatorButtonTarget(
+            child: AlbumButton(),
+          ),
 
-        /// tag button
-        ValueListenableBuilder(
-          valueListenable: AppState.currentGame,
-          builder: (BuildContext context, Game? game, Widget? child) {
-            if (game == null) return block0;
+          /// tag button
+          ValueListenableBuilder(
+            valueListenable: AppState.currentGame,
+            builder: (BuildContext context, Game? game, Widget? child) {
+              if (game == null) return block0;
 
-            return SmallButton(
-              onClick: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return TagListDialog(game);
+              return AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
+                  onClick: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return TagListDialog(game);
+                      },
+                    );
                   },
-                );
-              },
-              child: Image.asset(
-                "assets/icon/tag.webp",
-                height: 16,
-                color: AppTheme.of(context)!
-                    .colorScheme
-                    .secondary
-                    .onEnabledColor
-                    .withValues(alpha: iconWeakeningRate),
-              ),
-            );
-          },
-        ),
+                  child: AppIcon("tag", height: 16),
+                ),
+              );
+            },
+          ),
 
-        Expanded(
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: SmoothPointerScroll(
-              builder:
-                  (
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: SmoothPointerScroll(
+                builder:
+                    (
                     BuildContext context,
                     ScrollController controller,
                     ScrollPhysics physics,
                     IndependentScrollbarController scrollbarController,
-                  ) {
-                    return SingleChildScrollView(
-                      controller: controller,
-                      physics: physics,
-                      scrollDirection: Axis.horizontal,
-                      child: toolButtons,
-                    );
-                  },
+                    ) {
+                  return SingleChildScrollView(
+                    controller: controller,
+                    physics: physics,
+                    scrollDirection: Axis.horizontal,
+                    child: toolButtons,
+                  );
+                },
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
 
     // back
@@ -2546,39 +2544,44 @@ class ImageViewerDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget toolButtons = AppButtonStack(
-      divider: game == null ? const [1, 4, 2] : const [1, 4, 2, 2],
+    final Widget toolButtons = Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        AppRawButton(
+        AppButton.smallIcon(
           toolTip: "reset",
           onClick: controller.reset,
           child: AppIcon("refresh", height: 20),
         ),
-        AppRawButton(
+
+        AppDivider(direction: Axis.vertical),
+
+        AppButton.smallIcon(
           toolTip: "pa_horizontal_flip",
           onClick: controller.horizontalFlip,
           child: AppIcon("horizontal_flip", height: 18),
         ),
 
-        AppRawButton(
+        AppButton.smallIcon(
           toolTip: "pa_vertical_flip",
           onClick: controller.verticalFlip,
           child: AppIcon("vertical_flip", height: 18),
         ),
 
-        AppRawButton(
+        AppButton.smallIcon(
           toolTip: "pa_rotate_left_90",
           onClick: controller.rotateLeft90,
           child: AppIcon("rotate_left_90", height: 20),
         ),
 
-        AppRawButton(
+        AppButton.smallIcon(
           toolTip: "pa_rotate_right_90",
           onClick: controller.rotateRight90,
           child: AppIcon("rotate_right_90", height: 20),
         ),
 
-        AppRawButton(
+        AppDivider(direction: Axis.vertical),
+
+        AppButton.smallIcon(
           toolTip: "edit",
           onClick: () {
             showAppDialog(
@@ -2602,43 +2605,48 @@ class ImageViewerDialog extends StatelessWidget {
           valueListenable: AppState.isShowImageCustomData,
           builder:
               (
-                BuildContext context,
-                bool isShowImageCustomData,
-                Widget? child,
+              BuildContext context,
+              bool isShowImageCustomData,
+              Widget? child,
               ) {
-                return Tooltip(
-                  message: context.tr("pa_show_image_data"),
-                  child: AppUncontrolledSwitch(
-                    initValue: isShowImageCustomData,
-                    width: smallButtonSize,
-                    height: smallButtonSize,
-                    onChanged: (bool value) {
-                      AppState.isShowImageCustomData.value =
-                          !AppState.isShowImageCustomData.value;
-                    },
-                    child: AppIcon("image_custom_data", height: 22),
-                  ),
-                );
-              },
+            return Tooltip(
+              message: context.tr("pa_show_image_data"),
+              child: AppUncontrolledSwitch(
+                initValue: isShowImageCustomData,
+                width: smallButtonSize,
+                height: smallButtonSize,
+                onChanged: (bool value) {
+                  AppState.isShowImageCustomData.value =
+                  !AppState.isShowImageCustomData.value;
+                },
+                child: AppIcon("image_custom_data", height: 22),
+              ),
+            );
+          },
         ),
 
-        AppRawButton(
+        AppDivider(direction: Axis.vertical),
+
+        AppButton.smallIcon(
           toolTip:
-              context.tr("pa_to_previous_image") +
+          context.tr("pa_to_previous_image") +
               getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
           isTranslate: false,
           onClick: controller.toPreviousImage,
           child: AppIcon("back", height: 20),
         ),
 
-        AppRawButton(
+        AppButton.smallIcon(
           toolTip:
-              context.tr("pa_to_next_image") +
+          context.tr("pa_to_next_image") +
               getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
           isTranslate: false,
           onClick: controller.toNextImage,
           child: AppIcon("forward", height: 20),
         ),
+
+        if(game != null)
+          AppDivider(direction: Axis.vertical),
 
         if (game != null)
           ListenableBuilder(
@@ -2646,36 +2654,36 @@ class ImageViewerDialog extends StatelessWidget {
             builder: (BuildContext context, Widget? child) {
               return controller.isAttach
                   ? TagMenu(
-                      game: game!,
-                      value: images[controller.index].name,
-                      builder:
-                          (
-                            BuildContext context,
-                            Color? color,
-                            Widget? child,
-                            void Function() trigger,
-                          ) {
-                            final String icon = color == null
-                                ? "assets/icon/tag.webp"
-                                : "assets/icon/tag_fill.webp";
+                game: game!,
+                value: images[controller.index].name,
+                builder:
+                    (
+                    BuildContext context,
+                    Color? color,
+                    Widget? child,
+                    void Function() trigger,
+                    ) {
+                  final String icon = color == null
+                      ? "assets/icon/tag.webp"
+                      : "assets/icon/tag_fill.webp";
 
-                            return Tooltip(
-                              message: context.tr("tag"),
-                              child: SmallButton(
-                                onClick: trigger,
-                                child: Image.asset(
-                                  icon,
-                                  height: 18,
-                                  color:
-                                      color ??
-                                      AppTheme.of(
-                                        context,
-                                      )!.colorScheme.background.onColor,
-                                ),
-                              ),
-                            );
-                          },
-                    )
+                  return Tooltip(
+                    message: context.tr("tag"),
+                    child: AppButton.smallIcon(
+                      onClick: trigger,
+                      child: Image.asset(
+                        icon,
+                        height: 18,
+                        color:
+                        color ??
+                            AppTheme.of(
+                              context,
+                            )!.colorScheme.background.onColor,
+                      ),
+                    ),
+                  );
+                },
+              )
                   : AppButton.smallIcon();
             },
           ),
@@ -2686,38 +2694,38 @@ class ImageViewerDialog extends StatelessWidget {
             builder: (BuildContext context, Widget? child) {
               return controller.isAttach
                   ? NotifierBuilder(
-                      listenable: game!.album.whenSelectedImagesChange,
-                      builder: (BuildContext context, Widget? child) {
-                        final ImageItem item = images[controller.index];
-                        final bool isSelected = game!.album.selectedImages
-                            .contains(item);
-                        final String text = isSelected
-                            ? context.tr("deselect")
-                            : context.tr("select");
-                        final String icon = isSelected
-                            ? "assets/icon/select_all.webp"
-                            : "assets/icon/notSelect.webp";
-                        return Tooltip(
-                          message:
-                              text +
-                              getKeyboardCharacter([LogicalKeyboardKey.space]),
-                          child: SmallButton(
-                            onClick: _invertImage,
-                            child: Image.asset(
-                              icon,
-                              height: 22,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
-                            ),
-                          ),
-                        );
-                      },
-                    )
+                listenable: game!.album.whenSelectedImagesChange,
+                builder: (BuildContext context, Widget? child) {
+                  final ImageItem item = images[controller.index];
+                  final bool isSelected = game!.album.selectedImages
+                      .contains(item);
+                  final String text = isSelected
+                      ? context.tr("deselect")
+                      : context.tr("select");
+                  final String icon = isSelected
+                      ? "assets/icon/select_all.webp"
+                      : "assets/icon/notSelect.webp";
+                  return Tooltip(
+                    message:
+                    text +
+                        getKeyboardCharacter([LogicalKeyboardKey.space]),
+                    child: AppButton.smallIcon(
+                      onClick: _invertImage,
+                      child: Image.asset(
+                        icon,
+                        height: 22,
+                        color: AppTheme.of(
+                          context,
+                        )!.colorScheme.background.onColor,
+                      ),
+                    ),
+                  );
+                },
+              )
                   : AppButton.smallIcon();
             },
           ),
-      ],
+      ].map((Widget widget) => widget is AppDivider ? widget : AppFloatingIndicatorButtonTarget(child: widget)).toList(),
     );
 
     return Focus(
@@ -2747,111 +2755,120 @@ class ImageViewerDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(smallBorderRadius),
         ),
         backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-        child: Column(
-          children: [
-            Expanded(
-              child: ValueListenableBuilder(
-                valueListenable: AppState.isShowImageCustomData,
-                builder:
-                    (
+        child: AppFloatingIndicatorButtonGroup(
+          child: Column(
+            children: [
+              Expanded(
+                child: ValueListenableBuilder(
+                  valueListenable: AppState.isShowImageCustomData,
+                  builder:
+                      (
                       BuildContext context,
                       bool isShowImageCustomData,
                       Widget? child,
-                    ) {
-                      if (!isShowImageCustomData) return child ?? block0;
+                      ) {
+                    if (!isShowImageCustomData) return child ?? block0;
 
-                      return MultiSplitViewTheme(
-                        data: MultiSplitViewThemeData(
-                          dividerPainter: DividerPainters.grooved1(
-                            color: AppColorScheme.of(
-                              context,
-                            ).byRole(ColorRole.of(context)).pressedColor,
-                            highlightedColor: AppColorScheme.of(
-                              context,
-                            ).byRole(ColorRole.of(context)).onPressedColor,
+                    return MultiSplitViewTheme(
+                      data: MultiSplitViewThemeData(
+                        dividerPainter: DividerPainters.grooved1(
+                          color: AppColorScheme.of(
+                            context,
+                          ).byRole(ColorRole.of(context)).pressedColor,
+                          highlightedColor: AppColorScheme.of(
+                            context,
+                          ).byRole(ColorRole.of(context)).onPressedColor,
+                        ),
+                      ),
+                      child: MultiSplitView(
+                        initialAreas: [
+                          Area(data: "image"),
+                          AppState.imageCustomDataWidgetSize.value == null
+                              ? Area(data: "data_panel", flex: 1)
+                              : Area(
+                            data: "data_panel",
+                            size: AppState
+                                .imageCustomDataWidgetSize
+                                .value,
                           ),
-                        ),
-                        child: MultiSplitView(
-                          initialAreas: [
-                            Area(data: "image"),
-                            AppState.imageCustomDataWidgetSize.value == null
-                                ? Area(data: "data_panel", flex: 1)
-                                : Area(
-                                    data: "data_panel",
-                                    size: AppState
+                        ],
+                        builder: (BuildContext context, Area area) {
+                          if (area.data == "image") {
+                            return child ?? block0;
+                          } else {
+                            return ListenableBuilder(
+                              listenable: controller,
+                              builder: (BuildContext context, Widget? child) {
+                                return LayoutBuilder(
+                                  builder:
+                                      (
+                                      BuildContext context,
+                                      BoxConstraints constraint,
+                                      ) {
+                                    AppState
                                         .imageCustomDataWidgetSize
-                                        .value,
-                                  ),
-                          ],
-                          builder: (BuildContext context, Area area) {
-                            if (area.data == "image") {
-                              return child ?? block0;
-                            } else {
-                              return ListenableBuilder(
-                                listenable: controller,
-                                builder: (BuildContext context, Widget? child) {
-                                  return LayoutBuilder(
-                                    builder:
-                                        (
-                                          BuildContext context,
-                                          BoxConstraints constraint,
-                                        ) {
-                                          AppState
-                                                  .imageCustomDataWidgetSize
-                                                  .value =
-                                              constraint.maxWidth;
+                                        .value =
+                                        constraint.maxWidth;
 
-                                          late final TreeNode? node;
-                                          if (controller.isAttach) {
-                                            node = images[controller.index]
-                                                .getParamNodeSync(
-                                                  game?.selectedUid?.value,
-                                                  game?.selectedAlbum,
-                                                );
-                                          } else {
-                                            node = initImage.getParamNodeSync(
-                                              game?.selectedUid?.value,
-                                              game?.selectedAlbum,
-                                            );
-                                          }
+                                    late final TreeNode? node;
+                                    if (controller.isAttach) {
+                                      node = images[controller.index]
+                                          .getParamNodeSync(
+                                        game?.selectedUid?.value,
+                                        game?.selectedAlbum,
+                                      );
+                                    } else {
+                                      node = initImage.getParamNodeSync(
+                                        game?.selectedUid?.value,
+                                        game?.selectedAlbum,
+                                      );
+                                    }
 
-                                          return TreeViewPage(root: [?node]);
-                                        },
-                                  );
-                                },
-                              );
-                            }
-                          },
-                        ),
-                      );
-                    },
-                child: Listener(
-                  onPointerDown: (e) {
-                    /// TODO 拖拽图片时不要切换状态
-                    // if(e.kind == PointerDeviceKind.mouse && e.buttons == kPrimaryMouseButton){
-                    //   _invertImage();
-                    // }
-                    if (e.kind == PointerDeviceKind.mouse &&
-                        e.buttons == kSecondaryMouseButton) {
-                      Navigator.of(context).pop();
-                    }
+                                    return TreeViewPage(root: [?node], useFloatingIndicatorGroup: false);
+                                  },
+                                );
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    );
                   },
-                  child: ImageViewer(
-                    controller: controller,
-                    imageCount: images.length,
-                    initIndex: images.indexOf(initImage),
-                    imageBuilder: (BuildContext context, int index) {
-                      return Image.file(
-                        images[index].path.file,
-                        fit: BoxFit.contain,
-                      );
+                  child: Listener(
+                    onPointerDown: (e) {
+                      /// TODO 拖拽图片时不要切换状态
+                      // if(e.kind == PointerDeviceKind.mouse && e.buttons == kPrimaryMouseButton){
+                      //   _invertImage();
+                      // }
+                      if (e.kind == PointerDeviceKind.mouse &&
+                          e.buttons == kSecondaryMouseButton) {
+                        Navigator.of(context).pop();
+                      }
                     },
+                    child: ImageViewer(
+                      controller: controller,
+                      imageCount: images.length,
+                      initIndex: images.indexOf(initImage),
+                      imageBuilder: (BuildContext context, int index) {
+                        return Image.file(
+                          images[index].path.file,
+                          fit: BoxFit.contain,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: topBarHeight, child: toolButtons),
-          ],
+
+              SizedBox(
+                height: topBarHeight,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: toolButtons,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
