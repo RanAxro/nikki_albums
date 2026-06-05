@@ -258,7 +258,7 @@ const i18n = {
 		card_5_desc: "Copia negli appunti, esportazione senza perdita di dati su rete locale o dispositivi di rete.",
 		footer_disclaimer: "Nikki Albums è uno strumento open-source e non è affiliato a Infinity Nikki o Papergames. Tutti i diritti d'autore appartengono ai rispettivi proprietari.",
 		modal_title: "Nota importante per gli utenti macOS",
-		modal_desc: "Trattandosi di un'applicazione portabile non firmata, macOS Gatekeeper potrebbe bloccarla al primo avvio.<br><br>Segui questi passaggi per aprirla normalmente:<br>1. Se compare un avviso che dice \"Apple non può verificare la presenza di malware\", fai clic su <b>OK</b>.<br>2. Apri <b>Impostazioni di Sistema</b> > <b>Privacy e sicurezza</b>.<br>3. Nella sezione "Sicurezza", individua l'avviso su Nikki Albums e fai clic su <b>Apri comunque</b>.<br>4. Inserisci la tua password e conferma.",
+		modal_desc: "Trattandosi di un'applicazione portabile non firmata, macOS Gatekeeper potrebbe bloccarla al primo avvio.<br><br>Segui questi passaggi per aprirla normalmente:<br>1. Se compare un avviso che dice \"Apple non può verificare la presenza di malware\", fai clic su <b>OK</b>.<br>2. Apri <b>Impostazioni di Sistema</b> > <b>Privacy e sicurezza</b>.<br>3. Nella sezione \"Sicurezza\", individua l'avviso su Nikki Albums e fai clic su <b>Apri comunque</b>.<br>4. Inserisci la tua password e conferma.",
 		modal_btn: "Capito"
 	},
 	pt: {
