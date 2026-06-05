@@ -1,0 +1,3 @@
+{
+  "buildCommand": "node scripts/build_locales.js"
+}

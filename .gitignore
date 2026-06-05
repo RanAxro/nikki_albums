@@ -44,3 +44,17 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Generated locale directories for Vercel build
+/zh/
+/zh-tw/
+/en/
+/ja/
+/ko/
+/fr/
+/de/
+/es/
+/it/
+/pt/
+/id/
+/th/
