@@ -391,7 +391,7 @@ html.light-mode .hero-logo-glow {
 	height: 256px;
 	background: var(--vp-c-bg-soft);
 	border: 1px solid var(--vp-c-border);
-	border-radius: 36px;
+	border-radius: 57px; /* ~44.53% of half width (128px) for 256px icon */
 	display: flex;
 	align-items: center;
 	justify-content: center;
