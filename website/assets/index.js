@@ -29,13 +29,36 @@
 	// Language selection
 	function initLang() {
 		const saved = localStorage.getItem('lang');
-		if (saved && (saved === 'zh' || saved === 'en')) {
+		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
+		if (saved && supported.includes(saved)) {
 			currentLang = saved;
 		} else {
 			// Auto detect browser language
 			const navLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
 			if (navLang.startsWith('zh')) {
-				currentLang = 'zh';
+				if (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant')) {
+					currentLang = 'zh-tw';
+				} else {
+					currentLang = 'zh';
+				}
+			} else if (navLang.startsWith('ja')) {
+				currentLang = 'ja';
+			} else if (navLang.startsWith('ko')) {
+				currentLang = 'ko';
+			} else if (navLang.startsWith('fr')) {
+				currentLang = 'fr';
+			} else if (navLang.startsWith('de')) {
+				currentLang = 'de';
+			} else if (navLang.startsWith('es')) {
+				currentLang = 'es';
+			} else if (navLang.startsWith('it')) {
+				currentLang = 'it';
+			} else if (navLang.startsWith('pt')) {
+				currentLang = 'pt';
+			} else if (navLang.startsWith('id')) {
+				currentLang = 'id';
+			} else if (navLang.startsWith('th')) {
+				currentLang = 'th';
 			} else {
 				currentLang = 'en';
 			}
@@ -80,18 +103,34 @@
 
 	function applyLang() {
 		// Update dropdown trigger label and items active class
-		const zhItem = document.getElementById('item-lang-zh');
-		const enItem = document.getElementById('item-lang-en');
 		const currentLangLabel = document.getElementById('current-lang-label');
+		const langNames = {
+			'zh': '简体中文',
+			'zh-tw': '繁體中文',
+			'en': 'English',
+			'ja': '日本語',
+			'ko': '한국어',
+			'fr': 'Français',
+			'de': 'Deutsch',
+			'es': 'Español',
+			'it': 'Italiano',
+			'pt': 'Português',
+			'id': 'Bahasa Indonesia',
+			'th': 'ไทย'
+		};
 		
-		if (zhItem && enItem && currentLangLabel) {
-			zhItem.classList.toggle('active', currentLang === 'zh');
-			enItem.classList.toggle('active', currentLang === 'en');
-			currentLangLabel.textContent = currentLang === 'zh' ? '简体中文' : 'English';
+		if (currentLangLabel && langNames[currentLang]) {
+			currentLangLabel.textContent = langNames[currentLang];
 		}
 		
+		// Set active class on menu items
+		document.querySelectorAll('.lang-dropdown-item').forEach(el => {
+			const itemId = el.getAttribute('id');
+			el.classList.toggle('active', itemId === `item-lang-${currentLang}`);
+		});
+		
 		// Update dynamic text
-		const dict = i18n[currentLang];
+		const dict = i18n[currentLang] || i18n['en'];
 		document.querySelectorAll('[data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (dict[key]) {
@@ -109,7 +148,7 @@
 		
 		// Hide QQ Group links for non-Chinese versions
 		document.querySelectorAll('.zh-only').forEach(el => {
-			el.style.display = currentLang === 'zh' ? '' : 'none';
+			el.style.display = (currentLang === 'zh' || currentLang === 'zh-tw') ? '' : 'none';
 		});
 
 		// Update screenshots based on current language
@@ -133,7 +172,7 @@
 		const wallImg = document.getElementById('img-wall');
 		const decodeImg = document.getElementById('img-decode');
 		
-		if (currentLang === 'zh') {
+		if (currentLang === 'zh' || currentLang === 'zh-tw') {
 			wallImg.src = 'website/assets/p1.zh.png';
 			decodeImg.src = 'website/assets/p2.zh.png';
 		} else {

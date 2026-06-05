@@ -203,7 +203,9 @@ header nav {
 	border: 1px solid var(--vp-c-border);
 	border-radius: 8px;
 	padding: 6px 0;
-	min-width: 120px;
+	min-width: 140px;
+	max-height: 260px;
+	overflow-y: auto;
 	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 	display: none;
 	flex-direction: column;

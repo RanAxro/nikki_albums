@@ -3,136 +3,402 @@ const lang = {
 	// 页面标题
 	"page_title": {
 		"zh": "暖暖相册 - 下载",
-		"en": "Nikki Albums - Download"
+		"zh-tw": "暖暖相冊 - 下載",
+		"en": "Nikki Albums - Download",
+		"ja": "ニキのアルバム - ダウンロード",
+		"ko": "니키 앨범 - 다운로드",
+		"fr": "Nikki Albums - Téléchargement",
+		"de": "Nikki Albums - Herunterladen",
+		"es": "Nikki Albums - Descargar",
+		"it": "Nikki Albums - Download",
+		"pt": "Nikki Albums - Baixar",
+		"id": "Nikki Albums - Unduh",
+		"th": "Nikki Albums - ดาวน์โหลด"
 	},
 	
 	// 应用信息
 	"app_name": {
 		"zh": "暖暖相册",
-		"en": "Nikki Albums"
+		"zh-tw": "暖暖相冊",
+		"en": "Nikki Albums",
+		"ja": "ニキのアルバム",
+		"ko": "니키 앨범",
+		"fr": "Nikki Albums",
+		"de": "Nikki Albums",
+		"es": "Nikki Albums",
+		"it": "Nikki Albums",
+		"pt": "Nikki Albums",
+		"id": "Nikki Albums",
+		"th": "Nikki Albums"
 	},
 	
 	// 下拉框
 	"select_version": {
 		"zh": "选择版本",
-		"en": "Select Version"
+		"zh-tw": "選擇版本",
+		"en": "Select Version",
+		"ja": "バージョン選択",
+		"ko": "버전 선택",
+		"fr": "Sélectionner la version",
+		"de": "Version wählen",
+		"es": "Seleccionar versión",
+		"it": "Seleziona versione",
+		"pt": "Selecionar Versão",
+		"id": "Pilih Versi",
+		"th": "เลือกเวอร์ชัน"
 	},
 	
 	// 版本标签
 	"version_label": {
 		"zh": "版本",
-		"en": "Version"
+		"zh-tw": "版本",
+		"en": "Version",
+		"ja": "バージョン",
+		"ko": "버전",
+		"fr": "Version",
+		"de": "Version",
+		"es": "Versión",
+		"it": "Versione",
+		"pt": "Versão",
+		"id": "Versi",
+		"th": "เวอร์ชัน"
 	},
 	"latest_badge": {
 		"zh": "最新版",
-		"en": "Latest"
+		"zh-tw": "最新版",
+		"en": "Latest",
+		"ja": "最新",
+		"ko": "최신",
+		"fr": "Dernier",
+		"de": "Aktuell",
+		"es": "Último",
+		"it": "Ultimo",
+		"pt": "Mais recente",
+		"id": "Terbaru",
+		"th": "ล่าสุด"
 	},
 	
 	// 系统名称
-	
 	"system_macos": {
 		"zh": "macOS",
-		"en": "macOS"
+		"zh-tw": "macOS",
+		"en": "macOS",
+		"ja": "macOS",
+		"ko": "macOS",
+		"fr": "macOS",
+		"de": "macOS",
+		"es": "macOS",
+		"it": "macOS",
+		"pt": "macOS",
+		"id": "macOS",
+		"th": "macOS"
 	},
 	"alt_macos": {
 		"zh": "macOS",
-		"en": "macOS"
+		"zh-tw": "macOS",
+		"en": "macOS",
+		"ja": "macOS",
+		"ko": "macOS",
+		"fr": "macOS",
+		"de": "macOS",
+		"es": "macOS",
+		"it": "macOS",
+		"pt": "macOS",
+		"id": "macOS",
+		"th": "macOS"
 	},
 	"macos_gatekeeper_title": {
 		"zh": "首次运行 macOS 版的重要提示",
-		"en": "Important Note for macOS"
+		"zh-tw": "首次運行 macOS 版的重要提示",
+		"en": "Important Note for macOS Users",
+		"ja": "macOS版の初回実行に関する重要なお知らせ",
+		"ko": "macOS 버전 최초 실행 시 중요 안내",
+		"fr": "Note importante pour les utilisateurs macOS",
+		"de": "Wichtiger Hinweis für macOS-Benutzer",
+		"es": "Nota importante para usuarios de macOS",
+		"it": "Nota importante per gli utenti macOS",
+		"pt": "Nota importante para usuários do macOS",
+		"id": "Pemberitahuan Penting untuk Pengguna macOS",
+		"th": "คำแนะนำที่สำคัญสำหรับการเรียกใช้งาน macOS เป็นครั้งแรก"
 	},
 	"macos_gatekeeper_desc": {
-		"zh": "由于当前程序是免签名的便携版，首次打开可能会被系统拦截。<br><br>请按照以下步骤正常打开：<br>1. 若弹出“Apple 无法检查 App 是否包含恶意软件”，请点按 <b>好</b>。<br>2. 打开系统的 <b>系统设置</b> > <b>隐私与安全性</b>。（你可能需要向下滚动。）<br>3. 前往“安全性”部分，找到关于 Nikki Albums 的提示，然后点按 <b>打开</b>。<br>4. 点按 <b>仍要打开</b>，输入你的登录密码，然后点按 <b>好</b>。",
-		"en": "Since this is an ad-hoc signed portable app, macOS Gatekeeper might block it on the first run.<br><br>Please follow these steps to open it normally:<br>1. If a dialog says 'Apple can’t check app for malicious software', click <b>OK</b>.<br>2. Open <b>System Settings</b> > <b>Privacy & Security</b>. (You may need to scroll down.)<br>3. Go to Security, find the message about Nikki Albums, then click <b>Open</b>.<br>4. Click <b>Open Anyway</b>, enter your login password, then click <b>OK</b>."
+		"zh": "由于当前程序是免签名的便携版，首次打开可能会被系统拦截。<br><br>请按照以下步骤正常打开：<br>1. 若弹出“Apple 无法检查 App 是否包含恶意软件”，请点按 <b>好</b>。<br>2. 打开系统的 <b>系统设置</b> > <b>隐私与安全性</b>。<br>3. 前往“安全性”部分，找到关于 Nikki Albums 的提示，然后点按 <b>打开</b>。<br>4. 点按 <b>仍要打开</b>，输入你的登录密码，然后点按 <b>好</b>。",
+		"zh-tw": "由於當前程序是免簽名的攜帶版，首次打開可能會被系統攔截。<br><br>請按照以下步驟正常打開：<br>1. 若彈出“Apple 無法檢查 App 是否包含惡意軟件”，請點按 <b>好</b>。<br>2. 打開系統的 <b>系統設置</b> > <b>隱私與安全性</b>。<br>3. 前往“安全性”部分，找到關於 Nikki Albums 的提示，然後點按 <b>打開</b>。<br>4. 點按 <b>仍要打開</b>，輸入你的登錄密碼，然後點按 <b>好</b>。",
+		"en": "Since this is an ad-hoc signed app, macOS Gatekeeper might block it on the first run.<br><br>Please follow these steps to open it normally:<br>1. If a dialog says \"Apple can't check app for malicious software\", click <b>OK</b>.<br>2. Open <b>System Settings</b> > <b>Privacy & Security</b>.<br>3. Under the \"Security\" section, locate Nikki Albums and click <b>Open</b>.<br>4. Click <b>Open Anyway</b>, enter your login password, and click <b>OK</b>.",
+		"ja": "署名なしのポータブル版であるため、初回起動時にmacOSによってブロックされる場合があります。<br><br>以下の手順に従って正常に開いてください：<br>1. 「Appleは悪質なソフトウェアがないか確認できません」と表示された場合は、<b>OK</b>をクリックします。<br>2. <b>システム設定</b> > <b>プライバシーとセキュリティ</b>を開きます。<br>3. セキュリティ欄にあるNikki Albumsの起動に関するメッセージを確認し、<b>このまま開く</b>をクリックします。<br>4. ログインパスワードを入力し、<b>OK</b>をクリックします。",
+		"ko": "본 앱은 서명되지 않은 포터블 버전으로, 최초 실행 시 시스템에 의해 차단될 수 있습니다.<br><br>정상적으로 실행하려면 다음 단계를 따르십시오:<br>1. \"Apple에서 악성 소프트웨어가 있는지 확인할 수 없습니다\"라는 팝업이 뜨면 <b>확인</b>을 클릭합니다.<br>2. 시스템의 <b>설정</b> > <b>개인정보 보호 및 보안</b>을 엽니다.<br>3. 보안 섹션에서 Nikki Albums 관련 안내를 찾아 <b>열기</b>를 클릭합니다.<br>4. <b>계속 열기</b>를 클릭하고 컴퓨터 암호를 입력한 뒤 <b>확인</b>을 클릭합니다.",
+		"fr": "Puisqu'il s'agit d'une application portable signée ad-hoc, macOS Gatekeeper peut la bloquer lors du premier lancement.<br><br>Veuillez suivre ces étapes pour l'ouvrir normalement :<br>1. Si une boîte de dialogue indique \"Apple ne peut pas vérifier si l'application contient des logiciels malveillants\", cliquez sur <b>OK</b>.<br>2. Ouvrez <b>Réglages Système</b> > <b>Confidentialité et sécurité</b>.<br>3. Dans la section \"Sécurité\", localisez l'avis Nikki Albums et cliquez sur <b>Ouvrir quand même</b>.<br>4. Entrez votre mot de passe et validez.",
+		"de": "Da es sich um eine nicht signierte portable Anwendung handelt, blockiert macOS Gatekeeper sie möglicherweise beim ersten Start.<br><br>Bitte befolgen Sie diese Schritte, um sie normal zu öffnen:<br>1. Wenn ein Dialogfeld meldet, dass Apple die App nicht auf Schadsoftware überprüfen kann, klicken Sie auf <b>OK</b>.<br>2. Öffnen Sie die <b>Systemeinstellungen</b> > <b>Datenschutz & Sicherheit</b>.<br>3. Suchen Sie im Bereich „Sicherheit“ nach dem Hinweis zu Nikki Albums und klicken Sie auf <b>Dennoch öffnen</b>.<br>4. Geben Sie Ihr Passwort ein und bestätigen Sie.",
+		"es": "Como es una aplicación portátil sin firmar, macOS Gatekeeper podría bloquearla en el primer inicio.<br><br>Sigue estos pasos para abrirla normalmente:<br>1. Si aparece un diálogo que dice \"Apple no puede comprobar si la aplicación contiene software malicioso\", haz clic en <b>OK</b>.<br>2. Abre <b>Ajustes del Sistema</b> > <b>Privacidad y seguridad</b>.<br>3. En la sección \"Seguridad\", busca el aviso sobre Nikki Albums y haz clic en <b>Abrir de todos modos</b>.<br>4. Introduce tu contraseña y confirma.",
+		"it": "Trattandosi di un'applicazione portabile non firmata, macOS Gatekeeper potrebbe bloccarla al primo avvio.<br><br>Segui questi passaggi per aprirla normalmente:<br>1. Se compare un avviso che dice \"Apple non può verificare la presenza di malware\", fai clic su <b>OK</b>.<br>2. Apri <b>Impostazioni di Sistema</b> > <b>Privacy e sicurezza</b>.<br>3. Nella sezione \"Sicurezza\", individua l'avviso su Nikki Albums e fai clic su <b>Apri comunque</b>.<br>4. Inserisci la tua password e conferma.",
+		"pt": "Como este é um aplicativo portátil sem assinatura oficial, o macOS Gatekeeper pode bloqueá-lo na primeira execução.<br><br>Siga estas etapas para abri-lo normalmente:<br>1. Se um aviso disser que a Apple não pode verificar se há malware, clique em <b>OK</b>.<br>2. Abra <b>Ajustes do Sistema</b> > <b>Privacidade e Segurança</b>.<br>3. Na seção \"Segurança\", localize a mensagem sobre o Nikki Albums e clique em <b>Abrir Mesmo Assim</b>.<br>4. Digite a sua senha e confirme.",
+		"id": "Karena ini adalah aplikasi portabel yang tidak ditandatangani secara resmi, macOS Gatekeeper mungkin memblokirnya pada peluncuran pertama.<br><br>Silakan ikuti langkah-langkah berikut untuk membukanya secara normal:<br>1. Jika muncul dialog \"Apple tidak dapat memeriksa apakah aplikasi mengandung malware\", klik <b>OK</b>.<br>2. Buka <b>Pengaturan Sistem</b> > <b>Privasi & Keamanan</b>.<br>3. Di bawah bagian \"Keamanan\", cari pesan tentang Nikki Albums lalu klik <b>Tetap Buka</b>.<br>4. Masukkan kata sandi komputer Anda lalu konfirmasi.",
+		"th": "เนื่องจากโปรแกรมปัจจุบันเป็นเวอร์ชันพกพาที่ไม่มีการลงนามดิจิทัล ระบบอาจสกัดกั้นการเปิดใช้งานในครั้งแรก<br><br>โปรดปฏิบัติตามขั้นตอนต่อไปนี้เพื่อเปิดตามปกติ:<br>1. หากมีข้อความแจ้งเตือน \"Apple ไม่สามารถตรวจสอบแอปเพื่อหาซอฟต์แวร์ที่เป็นอันตรายได้\" โปรดคลิก <b>ตกลง</b><br>2. เปิด <b>การตั้งค่าระบบ</b> > <b>ความเป็นส่วนตัวและความปลอดภัย</b><br>3. ไปที่ส่วน \"ความปลอดภัย\" ค้นหาข้อความแจ้งเตือนเกี่ยวกับ Nikki Albums แล้วคลิก <b>เปิดต่อไป</b><br>4. ป้อนรหัสผ่านการเข้าสู่ระบบของคุณแล้วคลิก <b>ตกลง</b>"
 	},
 	"macos_gatekeeper_confirm": {
 		"zh": "我已了解",
-		"en": "Understood"
+		"zh-tw": "我已了解",
+		"en": "Got it",
+		"ja": "了解しました",
+		"ko": "확인 완료",
+		"fr": "J'ai compris",
+		"de": "Verstanden",
+		"es": "Entendido",
+		"it": "Capito",
+		"pt": "Entendido",
+		"id": "Saya mengerti",
+		"th": "ฉันเข้าใจแล้ว"
 	},
-
 	"system_windows": {
 		"zh": "Windows",
-		"en": "Windows"
+		"zh-tw": "Windows",
+		"en": "Windows",
+		"ja": "Windows",
+		"ko": "Windows",
+		"fr": "Windows",
+		"de": "Windows",
+		"es": "Windows",
+		"it": "Windows",
+		"pt": "Windows",
+		"id": "Windows",
+		"th": "Windows"
 	},
 	"system_android": {
 		"zh": "Android",
-		"en": "Android"
+		"zh-tw": "Android",
+		"en": "Android",
+		"ja": "Android",
+		"ko": "Android",
+		"fr": "Android",
+		"de": "Android",
+		"es": "Android",
+		"it": "Android",
+		"pt": "Android",
+		"id": "Android",
+		"th": "Android"
 	},
-	
-	// 版本类型
 	"type_1": {
 		"zh": "单文件绿色版",
-		"en": "Single-file Portable"
+		"zh-tw": "單文件綠色版",
+		"en": "Single-file Portable",
+		"ja": "単一ファイルポータブル版",
+		"ko": "단일 파일 포터블",
+		"fr": "Portable à fichier unique",
+		"de": "Einzeldatei-Portable",
+		"es": "Portátil de un solo archivo",
+		"it": "Portabile a file singolo",
+		"pt": "Portátil de arquivo único",
+		"id": "Portabel File Tunggal",
+		"th": "เวอร์ชันพกพาไฟล์เดียว"
 	},
 	"type_2": {
 		"zh": "便携绿色版",
-		"en": "Portable Edition"
+		"zh-tw": "攜帶綠色版",
+		"en": "Portable Edition",
+		"ja": "ポータブル版",
+		"ko": "포터블 에디션",
+		"fr": "Édition Portable",
+		"de": "Portable Edition",
+		"es": "Edición Portátil",
+		"it": "Edizione Portabile",
+		"pt": "Edição Portátil",
+		"id": "Edisi Portabel",
+		"th": "เวอร์ชันพกพา"
 	},
-	
-	// 文件后缀
 	"suffix_zip": {
 		"zh": ".zip",
-		"en": ".zip"
+		"zh-tw": ".zip",
+		"en": ".zip",
+		"ja": ".zip",
+		"ko": ".zip",
+		"fr": ".zip",
+		"de": ".zip",
+		"es": ".zip",
+		"it": ".zip",
+		"pt": ".zip",
+		"id": ".zip",
+		"th": ".zip"
 	},
 	"suffix_exe": {
 		"zh": ".exe",
-		"en": ".exe"
+		"zh-tw": ".exe",
+		"en": ".exe",
+		"ja": ".exe",
+		"ko": ".exe",
+		"fr": ".exe",
+		"de": ".exe",
+		"es": ".exe",
+		"it": ".exe",
+		"pt": ".exe",
+		"id": ".exe",
+		"th": ".exe"
 	},
 	"suffix_apk": {
 		"zh": ".apk",
-		"en": ".apk"
+		"zh-tw": ".apk",
+		"en": ".apk",
+		"ja": ".apk",
+		"ko": ".apk",
+		"fr": ".apk",
+		"de": ".apk",
+		"es": ".apk",
+		"it": ".apk",
+		"pt": ".apk",
+		"id": ".apk",
+		"th": ".apk"
 	},
-	
-	// 变体标签
 	"variant_lite": {
 		"zh": "Lite版",
-		"en": "Lite"
+		"zh-tw": "Lite版",
+		"en": "Lite",
+		"ja": "Lite",
+		"ko": "Lite",
+		"fr": "Lite",
+		"de": "Lite",
+		"es": "Lite",
+		"it": "Lite",
+		"pt": "Lite",
+		"id": "Lite",
+		"th": "Lite"
 	},
-	
-	// 滚动提示
 	"scroll_hint_text": {
 		"zh": "向下滚动查看更多",
-		"en": "Scroll down for more"
+		"zh-tw": "向下滾動查看更多",
+		"en": "Scroll down for more",
+		"ja": "下にスクロールして表示",
+		"ko": "아래로 스크롤하여 더 보기",
+		"fr": "Défiler vers le bas pour en savoir plus",
+		"de": "Nach unten scrollen für mehr",
+		"es": "Desplázate hacia abajo para ver más",
+		"it": "Scorri verso il basso per saperne di più",
+		"pt": "Role para baixo para ver mais",
+		"id": "Gulir ke bawah untuk melihat lebih banyak",
+		"th": "เลื่อนลงเพื่อดูเพิ่มเติม"
 	},
 	"scroll_hint_title": {
 		"zh": "滚动到底部",
-		"en": "Scroll to bottom"
+		"zh-tw": "滾動到底部",
+		"en": "Scroll to bottom",
+		"ja": "一番下までスクロール",
+		"ko": "맨 아래로 스크롤",
+		"fr": "Faire défiler jusqu'en bas",
+		"de": "Nach ganz unten scrollen",
+		"es": "Desplazarse hasta el final",
+		"it": "Scorri fino in fondo",
+		"pt": "Rolar até o fim",
+		"id": "Gulir ke bawah",
+		"th": "เลื่อนลงไปด้านล่างสุด"
 	},
-	
-	// 页脚
 	"footer_tip": {
 		"zh": "选择适合您设备的版本进行下载",
-		"en": "Choose the version suitable for your device"
+		"zh-tw": "選擇適合您設備的版本進行下載",
+		"en": "Choose the version suitable for your device",
+		"ja": "お使いのデバイスに適したバージョンを選択してダウンロードしてください",
+		"ko": "기기에 맞는 버전을 선택하여 다운로드하세요",
+		"fr": "Choisissez la version adaptée à votre appareil",
+		"de": "Wählen Sie die für Ihr Gerät geeignete Version",
+		"es": "Elige la versión adecuada para tu dispositivo",
+		"it": "Scegli la versione adatta al tuo dispositivo",
+		"pt": "Escolha a versão adequada para o seu dispositivo",
+		"id": "Pilih versi yang cocok untuk perangkat Anda",
+		"th": "เลือกเวอร์ชันที่เหมาะสมกับอุปกรณ์ของคุณเพื่อดาวน์โหลด"
 	},
-	
-	// 图标alt文本
 	"alt_logo": {
 		"zh": "暖暖相册",
-		"en": "Nikki Albums"
+		"zh-tw": "暖暖相冊",
+		"en": "Nikki Albums",
+		"ja": "ニキのアルバム",
+		"ko": "니키 앨범",
+		"fr": "Nikki Albums",
+		"de": "Nikki Albums",
+		"es": "Nikki Albums",
+		"it": "Nikki Albums",
+		"pt": "Nikki Albums",
+		"id": "Nikki Albums",
+		"th": "Nikki Albums"
 	},
 	"alt_arrow_down": {
 		"zh": "展开",
-		"en": "Expand"
+		"zh-tw": "展開",
+		"en": "Expand",
+		"ja": "展開",
+		"ko": "펼치기",
+		"fr": "Développer",
+		"de": "Erweitern",
+		"es": "Expandir",
+		"it": "Espandi",
+		"pt": "Expandir",
+		"id": "Perluas",
+		"th": "ขยาย"
 	},
 	"alt_check": {
 		"zh": "选中",
-		"en": "Selected"
+		"zh-tw": "選中",
+		"en": "Selected",
+		"ja": "選択済み",
+		"ko": "선택됨",
+		"fr": "Sélectionné",
+		"de": "Ausgewählt",
+		"es": "Seleccionado",
+		"it": "Selezionato",
+		"pt": "Selecionado",
+		"id": "Terpilih",
+		"th": "เลือกแล้ว"
 	},
 	"alt_chevron_down": {
 		"zh": "向下滚动",
-		"en": "Scroll down"
+		"zh-tw": "向下滾動",
+		"en": "Scroll down",
+		"ja": "下にスクロール",
+		"ko": "아래로 스크롤",
+		"fr": "Défiler vers le bas",
+		"de": "Nach unten scrollen",
+		"es": "Desplazarse hacia abajo",
+		"it": "Scorri verso il basso",
+		"pt": "Rolar para baixo",
+		"id": "Gulir ke bawah",
+		"th": "เลื่อนลง"
 	},
 	"alt_download": {
 		"zh": "下载",
-		"en": "Download"
+		"zh-tw": "下載",
+		"en": "Download",
+		"ja": "ダウンロード",
+		"ko": "다운로드",
+		"fr": "Télécharger",
+		"de": "Herunterladen",
+		"es": "Descargar",
+		"it": "Download",
+		"pt": "Baixar",
+		"id": "Unduh",
+		"th": "ดาวน์โหลด"
 	},
 	"alt_windows": {
 		"zh": "Windows",
-		"en": "Windows"
+		"zh-tw": "Windows",
+		"en": "Windows",
+		"ja": "Windows",
+		"ko": "Windows",
+		"fr": "Windows",
+		"de": "Windows",
+		"es": "Windows",
+		"it": "Windows",
+		"pt": "Windows",
+		"id": "Windows",
+		"th": "Windows"
 	},
 	"alt_android": {
 		"zh": "Android",
-		"en": "Android"
+		"zh-tw": "Android",
+		"en": "Android",
+		"ja": "Android",
+		"ko": "Android",
+		"fr": "Android",
+		"de": "Android",
+		"es": "Android",
+		"it": "Android",
+		"pt": "Android",
+		"id": "Android",
+		"th": "Android"
 	}
 };
