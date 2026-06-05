@@ -11,6 +11,8 @@ on:
 jobs:
   build-macos:
     runs-on: macos-15
+    env:
+      PUB_CACHE: ${{ github.workspace }}/.pub-cache
     steps:
       - uses: actions/checkout@v4
 
@@ -24,12 +26,12 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          cache: true
+          cache: false
 
       - name: Cache pub dependencies
         uses: actions/cache@v4
         with:
-          path: ~/.pub-cache
+          path: ${{ env.PUB_CACHE }}
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-

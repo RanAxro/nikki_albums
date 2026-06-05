@@ -53,6 +53,8 @@ jobs:
   build-windows:
     needs: build-dependencies
     runs-on: windows-latest
+    env:
+      PUB_CACHE: ${{ github.workspace }}/.pub-cache
     steps:
       - uses: actions/checkout@v4
 
@@ -74,12 +76,12 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          cache: true
+          cache: false
 
       - name: Cache pub dependencies
         uses: actions/cache@v4
         with:
-          path: ~\AppData\Local\Pub\Cache
+          path: ${{ env.PUB_CACHE }}
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-
