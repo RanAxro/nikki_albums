@@ -11,6 +11,7 @@ class FloatingIndicatorGroup extends StatefulWidget{
   final Duration floatDuration;
   final Duration delta;
   final bool hideWhenNoTarget;
+  final bool putBottom;
   final Widget Function(BuildContext, BoxConstraints, [Object?]) indicatorBuilder;
   final Widget child;
 
@@ -19,6 +20,7 @@ class FloatingIndicatorGroup extends StatefulWidget{
     this.floatDuration = const Duration(milliseconds: 100),
     this.delta = const Duration(milliseconds: 100),
     this.hideWhenNoTarget = true,
+    this.putBottom = false,
     required this.indicatorBuilder,
     required this.child,
   });
@@ -181,9 +183,13 @@ class _FloatingIndicatorGroupState extends State<FloatingIndicatorGroup>{
   Widget build(BuildContext context){
     return Stack(
       children: [
+        if(widget.putBottom)
+          _buildIndicator(),
+
         Positioned.fill(child: widget.child),
 
-        _buildIndicator(),
+        if(!widget.putBottom)
+          _buildIndicator(),
       ],
     );
   }
