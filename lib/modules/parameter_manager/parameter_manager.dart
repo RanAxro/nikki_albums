@@ -20,6 +20,27 @@ class ParameterManager extends StatefulWidget{
 class _ParameterManagerState extends State<ParameterManager>{
   @override
   Widget build(BuildContext context){
-    return Column(children: []);
+    return Column(
+      children: [
+        SizedBox(
+          height: topBarHeight,
+          child: AppFloatingIndicatorButtonGroup(
+            child: Row(
+              children: [
+                AppButton.smallText(
+                  child: AppText("相机参数"),
+                ),
+                AppButton.smallText(
+                  child: AppText("分享码"),
+                ),
+                AppButton.smallText(
+                  child: AppText("家园码"),
+                ),
+              ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
