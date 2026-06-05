@@ -84,8 +84,8 @@ for (const [lang, dict] of Object.entries(i18n)) {
         content = content.replace('<html>', `<html lang="${htmlLangMap[lang] || lang}">`);
     }
 
-    // Add <base href="/">
-    content = content.replace('<head>', '<head>\n<base href="/">');
+    // Add <base href="/website/pages/"> so relative paths like "../assets/" resolve correctly
+    content = content.replace('<head>', '<head>\n<base href="/website/pages/">');
 
     // Update title and meta for SEO
     if (downloadLang['page_title'] && downloadLang['page_title'][lang]) {
