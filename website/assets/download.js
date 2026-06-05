@@ -1,11 +1,12 @@
 	
-// 获取页面语言（从URL query参数、localStorage、或浏览器locale获取）
+// 获取页面语言（从URL path、localStorage、或浏览器locale获取）
 const supported = ['zh','zh-tw','en','ja','ko','fr','de','es','it','pt','id','th'];
 function getPageLanguage(){
-	const urlParams = new URLSearchParams(window.location.search);
-	const urlLang = urlParams.get('lang');
-	if (urlLang && supported.includes(urlLang)) {
-		return urlLang;
+	const pathParts = window.location.pathname.split('/').filter(p => p);
+	const pathLang = pathParts.length > 0 ? pathParts[0] : null;
+	if (pathLang && supported.includes(pathLang)) {
+		localStorage.setItem('lang', pathLang); // Sync localStorage
+		return pathLang;
 	}
 	const saved = localStorage.getItem('lang');
 	if (saved && supported.includes(saved)) {

@@ -190,8 +190,16 @@
 		if (twDesc && dict['hero_desc']) twDesc.setAttribute('content', dict['hero_desc']);
 
 		// Update link paths
-		document.getElementById('nav_download').href = `website/pages/download.html?lang=${currentLang}`;
-		document.getElementById('nav_download_mobile').href = `website/pages/download.html?lang=${currentLang}`;
+		const pathParts = window.location.pathname.split('/').filter(p => p);
+		const currentPathLang = pathParts.length > 0 ? pathParts[0] : null;
+
+		if (currentPathLang && supported.includes(currentPathLang)) {
+			document.getElementById('nav_download').href = `/${currentPathLang}/download.html`;
+			document.getElementById('nav_download_mobile').href = `/${currentPathLang}/download.html`;
+		} else {
+			document.getElementById('nav_download').href = `website/pages/download.html`;
+			document.getElementById('nav_download_mobile').href = `website/pages/download.html`;
+		}
 		
 		// Hide QQ Group links for non-Chinese versions
 		document.querySelectorAll('.zh-only').forEach(el => {

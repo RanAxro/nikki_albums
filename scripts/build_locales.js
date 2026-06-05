@@ -3,10 +3,13 @@ const path = require('path');
 
 console.log('Starting locale HTML generation...');
 
-// 1. Load i18n data
+// 1. Load index i18n data
 const i18nContent = fs.readFileSync(path.join(__dirname, '../website/pages/index_lang.js'), 'utf8');
-// Evaluate the JS content to extract the i18n object by converting it to an expression
 const i18n = eval(i18nContent.replace('const i18n = ', '(').replace(/;?\s*$/, ')'));
+
+// Load download lang data
+const langJsContent = fs.readFileSync(path.join(__dirname, '../website/pages/lang.js'), 'utf8');
+const downloadLang = eval(langJsContent.replace('const lang = ', '(').replace(/;?\s*$/, ')'));
 
 // 2. Read index.html
 const indexPath = path.join(__dirname, '../index.html');
@@ -53,8 +56,11 @@ for (const [lang, dict] of Object.entries(i18n)) {
     // Update canonical link
     content = content.replace(/<link rel="canonical" href="https:\/\/nikki\.ranaxro\.com\/">/, `<link rel="canonical" href="https://nikki.ranaxro.com/${lang}/">`);
 
-    // Rewrite ?lang=XX to /XX/ in hreflang links inside this generated file
+    // Rewrite hreflang links inside this generated file
     content = content.replace(/https:\/\/nikki\.ranaxro\.com\/\?lang=([a-z-]+)/g, 'https://nikki.ranaxro.com/$1/');
+
+    // Update download page links for crawlers
+    content = content.replace(/href="website\/pages\/download\.html[^"]*"/g, `href="/${lang}/download.html"`);
 
     // Create directory and write file
     const dirPath = path.join(__dirname, `../${lang}`);
@@ -63,6 +69,42 @@ for (const [lang, dict] of Object.entries(i18n)) {
     }
     fs.writeFileSync(path.join(dirPath, 'index.html'), content);
     console.log(`✅ Generated /${lang}/index.html`);
+}
+
+// 4.5 Generate download.html for each locale
+const downloadPath = path.join(__dirname, '../website/pages/download.html');
+let downloadHtmlContent = fs.readFileSync(downloadPath, 'utf8');
+
+for (const [lang, dict] of Object.entries(i18n)) {
+    let content = downloadHtmlContent;
+
+    // Update <html lang="en">
+    content = content.replace(/<html[^>]*>/, `<html lang="${htmlLangMap[lang] || lang}">`);
+    if (!content.includes('<html')) { // if download.html didn't have lang attr
+        content = content.replace('<html>', `<html lang="${htmlLangMap[lang] || lang}">`);
+    }
+
+    // Add <base href="/">
+    content = content.replace('<head>', '<head>\n<base href="/">');
+
+    // Update title and meta for SEO
+    if (downloadLang['page_title'] && downloadLang['page_title'][lang]) {
+        content = content.replace(/<title>.*?<\/title>/, `<title>${downloadLang['page_title'][lang]}</title>`);
+        content = content.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${downloadLang['page_title'][lang]}">`);
+        content = content.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${downloadLang['page_title'][lang]}">`);
+    }
+    if (downloadLang['macos_gatekeeper_desc'] && downloadLang['macos_gatekeeper_desc'][lang]) {
+        // Just use a generic description or the first part of the text if needed, but since download page
+        // has a generic description, we could leave it. Actually, app_name + download might be better.
+        // Let's just update the URL.
+    }
+    
+    // Update canonical/og:url
+    content = content.replace(/<meta property="og:url" content="https:\/\/nikki\.ranaxro\.com">/, `<meta property="og:url" content="https://nikki.ranaxro.com/${lang}/download.html">`);
+
+    const dirPath = path.join(__dirname, `../${lang}`);
+    fs.writeFileSync(path.join(dirPath, 'download.html'), content);
+    console.log(`✅ Generated /${lang}/download.html`);
 }
 
 // 5. Modify root index.html to use /lang/ instead of ?lang= for Vercel deployment
