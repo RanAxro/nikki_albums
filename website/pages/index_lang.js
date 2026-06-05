@@ -56,7 +56,7 @@ const i18n = {
 		footer_disclaimer: "暖暖相冊並非《無限暖暖》官方或疊紙遊戲的官方產品。所有素材版權歸原公司所有。",
 		modal_title: "首次運行 macOS 版的重要提示",
 		modal_desc: "由於當前程序是免簽名的攜帶版，首次打開可能會被系統攔截。<br><br>請按照以下步驟正常打開：<br>1. 若彈出“Apple 無法檢查 App 是否包含惡意軟件”，請點按 <b>好</b>。<br>2. 打開系統的 <b>系統設置</b> > <b>隱私與安全性</b>。<br>3. 前往“安全性”部分，找到關於 Nikki Albums 的提示，然後點按 <b>打開</b>。<br>4. 點按 <b>仍要打開</b>，輸入你的登錄密碼，然後點按 <b>好</b>。",
-		modal_btn: "我已了解"
+		modal_btn: "我已了解",
 	},
 	en: {
 		page_title: "Nikki Albums - A photo album manager for Infinity Nikki",
@@ -89,11 +89,11 @@ const i18n = {
 	},
 	ja: {
 		page_title: "ニキのアルバム - インフィニティニキの写真アルバム管理ツール",
-		app_name: "ニキのアルバム",
+		app_name: "Nikki Albums",
 		nav_qq: "QQ Group 1062670402",
 		nav_tutorial: "チュートリアル",
 		nav_download: "ダウンロード",
-		hero_title: "ニキのアルバム",
+		hero_title: "Nikki Albums",
 		hero_desc: "『インフィニティニキ』プレイヤーのために設計されたアルバム管理ソフト",
 		hero_subdesc: "ゲーム内の写真アルバムを簡単に効率よく管理。完全無料でオープンソース、広告なし。",
 		btn_download: "今すぐダウンロード",
@@ -118,11 +118,11 @@ const i18n = {
 	},
 	ko: {
 		page_title: "니키 앨범 - 인피니티 니키 사진 앨범 관리 도구",
-		app_name: "니키 앨범",
+		app_name: "Nikki Albums",
 		nav_qq: "QQ Group 1062670402",
 		nav_tutorial: "튜토리얼",
 		nav_download: "다운로드",
-		hero_title: "니키 앨범",
+		hero_title: "Nikki Albums",
 		hero_desc: "인피니티 니키 플레이어를 위해 특별히 제작된 앨범 관리 소프트웨어",
 		hero_subdesc: "게임 앨범을 쉽고 효율적으로 관리하여 더욱 쾌적한 게임 경험을 선사합니다. 광고 없는 완전 무료 오픈 소스.",
 		btn_download: "지금 다운로드",
