@@ -226,7 +226,9 @@ class AlbumHandler {
     final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
     bool isError = false;
 
-    AppToast.showMessage(context: context, message: "复制中");
+    if(context.mounted){
+      AppToast.showMessage(context: context, message: context.tr("pa_on_copy"));
+    }
 
     try {
       if (isVideoAlbum && liveFormat != "none") {

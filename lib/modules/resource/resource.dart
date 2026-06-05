@@ -1,6 +1,7 @@
 import "package:nikki_albums/info.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
+import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/utils/path.dart";
@@ -344,26 +345,73 @@ class _ExhibitState extends State<Exhibit> {
       ),
       builder: (context, image) {
         return GestureDetector(
+          onTap: () async{
+            AppToast.showMessage(context: context, message: context.tr("pa_on_copy"));
+
+            String? error;
+            try{
+              final bool result = await copyFilesToClipboard([widget.currentImage]);
+              if(!result){
+                error = "";
+              }
+            }catch(e){
+              error = e.toString();
+            }
+
+            if (context.mounted) {
+              AppToast.showMessage(
+                context: context,
+                message: "${context.tr(error == null ? "pa_copy_successful" : "pa_copy_failed")}\n${error ?? ""}",
+                state: error == null,
+              );
+            }
+          },
           onSecondaryTap: () {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(smallBorderRadius),
-                  ),
-                  backgroundColor: AppTheme.of(
-                    context,
-                  )!.colorScheme.background.color,
-                  child: ImageViewer(
-                    imageCount: widget.images.length,
-                    initIndex: widget.images.indexOf(widget.currentImage),
-                    imageBuilder: (BuildContext context, int index) {
-                      return Image.file(
-                        widget.images[index].file,
-                        fit: BoxFit.contain,
+                return GestureDetector(
+                  onTap: () async{
+                    AppToast.showMessage(context: context, message: context.tr("pa_on_copy"));
+
+                    String? error;
+                    try{
+                      final bool result = await copyFilesToClipboard([widget.currentImage]);
+                      if(!result){
+                        error = "";
+                      }
+                    }catch(e){
+                      error = e.toString();
+                    }
+
+                    if (context.mounted) {
+                      AppToast.showMessage(
+                        context: context,
+                        message: "${context.tr(error == null ? "pa_copy_successful" : "pa_copy_failed")}\n${error ?? ""}",
+                        state: error == null,
                       );
-                    },
+                    }
+                  },
+                  onSecondaryTap: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(smallBorderRadius),
+                    ),
+                    backgroundColor: AppTheme.of(
+                      context,
+                    )!.colorScheme.background.color,
+                    child: ImageViewer(
+                      imageCount: widget.images.length,
+                      initIndex: widget.images.indexOf(widget.currentImage),
+                      imageBuilder: (BuildContext context, int index) {
+                        return Image.file(
+                          widget.images[index].file,
+                          fit: BoxFit.contain,
+                        );
+                      },
+                    ),
                   ),
                 );
               },
