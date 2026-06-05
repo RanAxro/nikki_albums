@@ -34,10 +34,10 @@ html.light-mode {
 	--vp-c-text-2: #475569;
 	--vp-c-text-3: #94a3b8;
 	
-	--vp-c-brand: #3e8df4;
-	--vp-c-brand-light: #60a5fa;
-	--vp-c-brand-dark: #2563eb;
-	--vp-c-brand-gradient: linear-gradient(135deg, #3e8df4 0%, #7c3aed 100%);
+	--vp-c-brand: #ec4899;
+	--vp-c-brand-light: #f472b6;
+	--vp-c-brand-dark: #db2777;
+	--vp-c-brand-gradient: linear-gradient(135deg, #ec4899 0%, #a87ffb 100%);
 	
 	--header-bg: rgba(255, 255, 255, 0.85);
 	--modal-overlay-bg: rgba(15, 23, 42, 0.4);
