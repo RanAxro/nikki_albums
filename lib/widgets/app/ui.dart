@@ -1,4 +1,5 @@
 import "package:nikki_albums/widgets/common/component.dart";
+import "package:nikki_albums/widgets/common/floating_indicator.dart";
 
 import "component.dart";
 
@@ -522,8 +523,8 @@ class _AppRawButtonState extends State<AppRawButton> {
         : null;
 
     final (colorRole, colorState, isTransparent) =
-        widget.shader?.call(widget.usable, isInside, isPressed) ??
         style?.shader?.call(widget.usable, isInside, isPressed) ??
+        widget.shader?.call(widget.usable, isInside, isPressed) ??
         (ColorRole.of(context), ColorState.normal, true);
 
     final Widget? child =
@@ -537,7 +538,7 @@ class _AppRawButtonState extends State<AppRawButton> {
       padding: widget.padding,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
-          Radius.circular(widget.borderRadius ?? style?.borderRadius ?? 0),
+          Radius.circular(style?.borderRadius ?? widget.borderRadius ?? 0),
         ),
         color: isTransparent
             ? AppColorScheme.of(
@@ -545,8 +546,8 @@ class _AppRawButtonState extends State<AppRawButton> {
               ).byRole(colorRole).byState(colorState).withAlpha(0)
             : AppColorScheme.of(context).byRole(colorRole).byState(colorState),
       ),
-      width: widget.width ?? style?.width,
-      height: widget.height ?? style?.height,
+      width: style?.width ?? widget.width,
+      height: style?.height ?? widget.height,
       constraints: widget.constraints,
       margin: widget.margin,
       child: child == null
@@ -1192,6 +1193,90 @@ class _AppButtonStackState extends State<AppButtonStack> {
   void dispose() {
     super.dispose();
     hoverIndex.dispose();
+  }
+}
+
+class AppFloatingIndicatorButtonGroup extends StatelessWidget{
+  final Duration floatDuration;
+  final Duration delta;
+  final bool hideWhenNoTarget;
+  final double borderRadius;
+  final Widget child;
+
+  const AppFloatingIndicatorButtonGroup({
+    super.key,
+    this.floatDuration = const Duration(milliseconds: 100),
+    this.delta = const Duration(milliseconds: 100),
+    this.hideWhenNoTarget = true,
+    this.borderRadius = smallBorderRadius,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context){
+    return FloatingIndicatorGroup(
+      floatDuration: floatDuration,
+      delta: delta,
+      hideWhenNoTarget: hideWhenNoTarget,
+      putBottom: true,
+      indicatorBuilder: (BuildContext context, BoxConstraints constraints, [Object? info]){
+        return Container(
+          width: constraints.maxWidth,
+          height: constraints.maxHeight,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+          ),
+        );
+      },
+      child: child,
+    );
+  }
+}
+
+class AppFloatingIndicatorButtonTarget extends StatelessWidget{
+  final bool defaultTarget;
+  final Object? info;
+  final Widget child;
+
+  const AppFloatingIndicatorButtonTarget({
+    super.key,
+    this.defaultTarget = false,
+    this.info,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context){
+    return AppButtonConfiguration(
+      style: AppButtonStyle(
+        shader: (bool usable, bool isInside, bool isPressed){
+          ColorRole colorRole = ColorRole.of(context);
+          ColorState colorState = ColorState.normal;
+          bool isTransparent = true;
+
+          if(usable){
+            colorState = ColorState.enabled;
+            if(isInside){
+              colorState = ColorState.hovered;
+            }
+            if(isPressed){
+              colorState = ColorState.pressed;
+              isTransparent = false;
+            }
+          }else{
+            colorState = ColorState.disabled;
+          }
+
+          return (colorRole, colorState, isTransparent);
+        },
+      ),
+      child: FloatingIndicatorTarget(
+        defaultTarget: defaultTarget,
+        info: info,
+        child: child,
+      ),
+    );
   }
 }
 
