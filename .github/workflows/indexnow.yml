@@ -11,11 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Place IndexNow key
-        run: |
-          mkdir -p ./public
-          echo "b50c0da8c7cd4d17a70d9847d60a3c4a" > ./public/b50c0da8c7cd4d17a70d9847d60a3c4a.txt
-
       - name: IndexNow Action
         uses: bojieyang/indexnow-action@v2
         with:

@@ -28,40 +28,53 @@
 
 	// Language selection
 	function initLang() {
-		const saved = localStorage.getItem('lang');
 		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
+
+		// Priority 1: URL query param — for crawlers and direct/shared links (?lang=ja etc.)
+		const urlParams = new URLSearchParams(window.location.search);
+		const paramLang = urlParams.get('lang');
+		if (paramLang && supported.includes(paramLang)) {
+			currentLang = paramLang;
+			applyLang();
+			return;
+		}
+
+		// Priority 2: localStorage — user's previously saved preference
+		const saved = localStorage.getItem('lang');
 		if (saved && supported.includes(saved)) {
 			currentLang = saved;
-		} else {
-			// Auto detect browser language
-			const navLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-			if (navLang.startsWith('zh')) {
-				if (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant')) {
-					currentLang = 'zh-tw';
-				} else {
-					currentLang = 'zh';
-				}
-			} else if (navLang.startsWith('ja')) {
-				currentLang = 'ja';
-			} else if (navLang.startsWith('ko')) {
-				currentLang = 'ko';
-			} else if (navLang.startsWith('fr')) {
-				currentLang = 'fr';
-			} else if (navLang.startsWith('de')) {
-				currentLang = 'de';
-			} else if (navLang.startsWith('es')) {
-				currentLang = 'es';
-			} else if (navLang.startsWith('it')) {
-				currentLang = 'it';
-			} else if (navLang.startsWith('pt')) {
-				currentLang = 'pt';
-			} else if (navLang.startsWith('id')) {
-				currentLang = 'id';
-			} else if (navLang.startsWith('th')) {
-				currentLang = 'th';
+			applyLang();
+			return;
+		}
+
+		// Priority 3: Browser language auto-detection
+		const navLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+		if (navLang.startsWith('zh')) {
+			if (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant')) {
+				currentLang = 'zh-tw';
 			} else {
-				currentLang = 'en';
+				currentLang = 'zh';
 			}
+		} else if (navLang.startsWith('ja')) {
+			currentLang = 'ja';
+		} else if (navLang.startsWith('ko')) {
+			currentLang = 'ko';
+		} else if (navLang.startsWith('fr')) {
+			currentLang = 'fr';
+		} else if (navLang.startsWith('de')) {
+			currentLang = 'de';
+		} else if (navLang.startsWith('es')) {
+			currentLang = 'es';
+		} else if (navLang.startsWith('it')) {
+			currentLang = 'it';
+		} else if (navLang.startsWith('pt')) {
+			currentLang = 'pt';
+		} else if (navLang.startsWith('id')) {
+			currentLang = 'id';
+		} else if (navLang.startsWith('th')) {
+			currentLang = 'th';
+		} else {
+			currentLang = 'en';
 		}
 		applyLang();
 	}
@@ -102,6 +115,15 @@
 	}
 
 	function applyLang() {
+		// Map internal lang codes to BCP 47 html lang attribute values
+		const htmlLangMap = {
+			'zh': 'zh-Hans', 'zh-tw': 'zh-Hant', 'en': 'en',
+			'ja': 'ja', 'ko': 'ko', 'fr': 'fr', 'de': 'de',
+			'es': 'es', 'it': 'it', 'pt': 'pt', 'id': 'id', 'th': 'th'
+		};
+		// Update <html lang> so crawlers rendering JS see the correct language signal
+		document.documentElement.lang = htmlLangMap[currentLang] || 'en';
+
 		// Update dropdown trigger label and items active class
 		const currentLangLabel = document.getElementById('current-lang-label');
 		const langNames = {
@@ -141,6 +163,18 @@
 				}
 			}
 		});
+
+		// Update dynamic meta tags so crawlers/social bots see the correct locale
+		const metaDesc = document.querySelector('meta[name="description"]');
+		if (metaDesc && dict['hero_subdesc']) metaDesc.setAttribute('content', dict['hero_subdesc']);
+		const ogTitle = document.querySelector('meta[property="og:title"]');
+		if (ogTitle && dict['app_name']) ogTitle.setAttribute('content', dict['app_name']);
+		const ogDesc = document.querySelector('meta[property="og:description"]');
+		if (ogDesc && dict['hero_desc']) ogDesc.setAttribute('content', dict['hero_desc']);
+		const twTitle = document.querySelector('meta[name="twitter:title"]');
+		if (twTitle && dict['app_name']) twTitle.setAttribute('content', dict['app_name']);
+		const twDesc = document.querySelector('meta[name="twitter:description"]');
+		if (twDesc && dict['hero_desc']) twDesc.setAttribute('content', dict['hero_desc']);
 
 		// Update link paths
 		document.getElementById('nav_download').href = `website/pages/download.html?lang=${currentLang}`;
