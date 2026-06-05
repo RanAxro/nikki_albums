@@ -30,11 +30,18 @@
 	function initLang() {
 		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
 
-		// Priority 1: URL query param — for crawlers and direct/shared links (?lang=ja etc.)
+		// Priority 1: URL path (/ja/) or query param (?lang=ja) - enforces language
+		const pathParts = window.location.pathname.split('/').filter(p => p);
+		const pathLang = pathParts.length > 0 ? pathParts[0] : null;
+		
 		const urlParams = new URLSearchParams(window.location.search);
 		const paramLang = urlParams.get('lang');
-		if (paramLang && supported.includes(paramLang)) {
-			currentLang = paramLang;
+
+		const explicitLang = supported.includes(pathLang) ? pathLang : (supported.includes(paramLang) ? paramLang : null);
+
+		if (explicitLang) {
+			currentLang = explicitLang;
+			localStorage.setItem('lang', explicitLang); // Sync localStorage with URL
 			applyLang();
 			return;
 		}
@@ -109,9 +116,23 @@
 	});
 
 	function switchLang(lang) {
-		currentLang = lang;
 		localStorage.setItem('lang', lang);
-		applyLang();
+		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
+		
+		const pathParts = window.location.pathname.split('/').filter(p => p);
+		const currentPathLang = pathParts.length > 0 ? pathParts[0] : null;
+		
+		if (currentPathLang && supported.includes(currentPathLang)) {
+			// Update the path to the new language (Vercel pages)
+			window.location.href = `/${lang}/`;
+		} else if (new URLSearchParams(window.location.search).has('lang')) {
+			// Update the query param to the new language (GH Pages links)
+			window.location.href = `/?lang=${lang}`;
+		} else {
+			// Neither path nor query param is enforcing a language. Just change it in JS.
+			currentLang = lang;
+			applyLang();
+		}
 	}
 
 	function applyLang() {
