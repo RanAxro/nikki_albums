@@ -60,9 +60,11 @@ class Start extends StatelessWidget {
                   transparent: false,
                   onClick: () {
                     if (AppState.currentGame.value?.launcherPath != null) {
-                      final Path path = AppState.currentGame.value!.launcherPath;
+                      final Path path =
+                          AppState.currentGame.value!.launcherPath;
                       if (Platform.isMacOS) {
-                        if (path.path.endsWith(".app") || path.path.endsWith(".app/")) {
+                        if (path.path.endsWith(".app") ||
+                            path.path.endsWith(".app/")) {
                           path.open();
                         } else {
                           Path("/Applications/Infinity Nikki.app").open();
@@ -149,7 +151,10 @@ class OpenFolderButton extends StatelessWidget {
                 if (p.endsWith(".app") || p.endsWith(".app/")) {
                   Process.run("open", ["-R", p]);
                 } else {
-                  Process.run("open", ["-R", "/Applications/Infinity Nikki.app"]);
+                  Process.run("open", [
+                    "-R",
+                    "/Applications/Infinity Nikki.app",
+                  ]);
                 }
               } else {
                 game.launcherPath.open();
@@ -278,12 +283,12 @@ class MoveFolderDialog extends StatelessWidget {
       return;
     }
 
-    final String folderPath = folder.path;
-    final String temporaryPath =
-        folderPath + DateTime.now().millisecondsSinceEpoch.toString();
-    final Path originDirectory = folder.cut(1);
-    final Path toDestination = Path(destination.value!);
-    final Path to = toDestination + folder.name;
+    // final String folderPath = folder.path;
+    // final String temporaryPath =
+    //     folderPath + DateTime.now().millisecondsSinceEpoch.toString();
+    // final Path originDirectory = folder.cut(1);
+    // final Path toDestination = Path(destination.value!);
+    // final Path to = toDestination + folder.name;
 
     // final r = await Process.run("cmd", ["attrib", "-r", folderPath, "/s", "/d"]);
     // print(r.stdout);
@@ -360,8 +365,10 @@ class MoveFolderDialog extends StatelessWidget {
               Expanded(child: Text(pathStr ?? context.tr("toSelectFolder"))),
               SmallButton(
                 onClick: () async {
-                  destination.value = await NativeFilePicker
-                      .getDirectoryPath(dialogTitle: context.tr("toSelectFolder"), lockParentWindow: true);
+                  destination.value = await NativeFilePicker.getDirectoryPath(
+                    dialogTitle: context.tr("toSelectFolder"),
+                    lockParentWindow: true,
+                  );
                 },
                 child: Image.asset(
                   "assets/icon/folder.webp",

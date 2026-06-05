@@ -1,4 +1,3 @@
-
 import "../model/update_info.dart";
 import "launch_official_website.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
@@ -11,21 +10,26 @@ import "package:dio/dio.dart";
 import "package:archive/archive_io.dart";
 import "package:path/path.dart" as p;
 
-
-abstract class Updater{
+abstract class Updater {
   const Updater();
 
-  Future<void> update(UpdateInfo info, {void Function(double progress)? onProgress, void Function(String message)? onError});
+  Future<void> update(
+    UpdateInfo info, {
+    void Function(double progress)? onProgress,
+    void Function(String message)? onError,
+  });
 }
 
-
-class WindowsUpdater extends Updater{
+class WindowsUpdater extends Updater {
   const WindowsUpdater();
 
   @override
-  Future<void> update(UpdateInfo info, {void Function(double)? onProgress, void Function(String)? onError}) async{
-
-    if(info.platformDownloadLink == ""){
+  Future<void> update(
+    UpdateInfo info, {
+    void Function(double)? onProgress,
+    void Function(String)? onError,
+  }) async {
+    if (info.platformDownloadLink == "") {
       launchOfficialWebsite();
       return;
     }
@@ -33,40 +37,44 @@ class WindowsUpdater extends Updater{
     String errorMessage = "";
 
     // download
-    final String archiveSavePath = p.join((await getTempPath()).path, "${tr("nikkialbums")}.zip");
+    final String archiveSavePath = p.join(
+      (await getTempPath()).path,
+      "${tr("nikkialbums")}.zip",
+    );
     bool isDownload = false;
 
-    try{
+    try {
       final Dio dio = Dio();
 
-      final Response response = await dio.download(
+      await dio.download(
         info.platformDownloadLink,
         archiveSavePath,
-        onReceiveProgress: (int received, int total){
+        onReceiveProgress: (int received, int total) {
           onProgress?.call((received / total - 0.1).clamp(0, 1));
         },
         options: Options(headers: {"Referer": "https://nikki.ranaxro.com"}),
       );
 
       isDownload = true;
-    }catch(e){
+    } catch (e) {
       isDownload = false;
       errorMessage = e.toString();
     }
 
     // decompress
-    final String? decompressPath = AppState.sfxPath.value ?? getWindowsDesktopPath()?.path;
+    final String? decompressPath =
+        AppState.sfxPath.value ?? getWindowsDesktopPath()?.path;
     bool isDecompress = false;
 
     String? exeFilename;
 
-    if(decompressPath != null){
+    if (decompressPath != null) {
       final InputFileStream inputStream = InputFileStream(archiveSavePath);
-      try{
+      try {
         final Archive archive = ZipDecoder().decodeStream(
           inputStream,
-          callback: (ArchiveFile archiveFile){
-            if(archiveFile.isFile && archiveFile.name.endsWith(".exe")){
+          callback: (ArchiveFile archiveFile) {
+            if (archiveFile.isFile && archiveFile.name.endsWith(".exe")) {
               exeFilename = archiveFile.name;
             }
           },
@@ -75,7 +83,7 @@ class WindowsUpdater extends Updater{
         await extractArchiveToDisk(archive, decompressPath);
 
         isDecompress = true;
-      }catch(e){
+      } catch (e) {
         isDecompress = false;
         errorMessage = e.toString();
         await inputStream.close();
@@ -85,37 +93,40 @@ class WindowsUpdater extends Updater{
     onProgress?.call(1);
 
     /// 下载成功
-    if(isDownload){
+    if (isDownload) {
       /// 下载成功 并且 解压成功
-      if(isDecompress && decompressPath != null){
+      if (isDecompress && decompressPath != null) {
         /// 获取到 exe 文件名
-        if(exeFilename != null){
+        if (exeFilename != null) {
           Explorer.openFile(File(p.join(decompressPath, exeFilename)));
         }
         /// 未获取到 exe 文件名
-        else{
+        else {
           Explorer.openDir(Directory(decompressPath));
         }
       }
       /// 下载成功 但 解压失败
-      else{
+      else {
         Explorer.openDir(Directory(archiveSavePath));
       }
 
       await closeApp();
-    }else{
+    } else {
       onError?.call(errorMessage);
     }
   }
 }
 
-
-class MacOSUpdater extends Updater{
+class MacOSUpdater extends Updater {
   const MacOSUpdater();
 
   @override
-  Future<void> update(UpdateInfo info, {void Function(double)? onProgress, void Function(String)? onError}) async{
-    if(info.platformDownloadLink == ""){
+  Future<void> update(
+    UpdateInfo info, {
+    void Function(double)? onProgress,
+    void Function(String)? onError,
+  }) async {
+    if (info.platformDownloadLink == "") {
       launchOfficialWebsite();
       return;
     }
@@ -123,41 +134,46 @@ class MacOSUpdater extends Updater{
     String errorMessage = "";
 
     // download
-    final String archiveSavePath = p.join((await getTempPath()).path, "${tr("nikkialbums")}_Update.zip");
+    final String archiveSavePath = p.join(
+      (await getTempPath()).path,
+      "${tr("nikkialbums")}_Update.zip",
+    );
     bool isDownload = false;
 
-    try{
+    try {
       final Dio dio = Dio();
 
-      final Response response = await dio.download(
+      await dio.download(
         info.platformDownloadLink,
         archiveSavePath,
-        onReceiveProgress: (int received, int total){
+        onReceiveProgress: (int received, int total) {
           onProgress?.call((received / total - 0.1).clamp(0, 1));
         },
         options: Options(headers: {"Referer": "https://nikki.ranaxro.com"}),
       );
 
       isDownload = true;
-    }catch(e){
+    } catch (e) {
       isDownload = false;
       errorMessage = e.toString();
     }
 
     // decompress
     final String? home = Platform.environment['HOME'];
-    final String decompressPath = home != null ? p.join(home, 'Downloads') : (await getTempPath()).path;
+    final String decompressPath = home != null
+        ? p.join(home, 'Downloads')
+        : (await getTempPath()).path;
     bool isDecompress = false;
 
     String? appFilename;
 
     final InputFileStream inputStream = InputFileStream(archiveSavePath);
-    try{
+    try {
       final Archive archive = ZipDecoder().decodeStream(
         inputStream,
-        callback: (ArchiveFile archiveFile){
+        callback: (ArchiveFile archiveFile) {
           final String name = archiveFile.name;
-          if(name.endsWith(".app/") && name.split("/").length == 2){
+          if (name.endsWith(".app/") && name.split("/").length == 2) {
             appFilename = name.substring(0, name.length - 1);
           } else if (name.endsWith(".app") && !name.contains("/")) {
             appFilename = name;
@@ -168,7 +184,7 @@ class MacOSUpdater extends Updater{
       await extractArchiveToDisk(archive, decompressPath);
 
       isDecompress = true;
-    }catch(e){
+    } catch (e) {
       isDecompress = false;
       errorMessage = e.toString();
       await inputStream.close();
@@ -176,19 +192,19 @@ class MacOSUpdater extends Updater{
 
     onProgress?.call(1);
 
-    if(isDownload){
-      if(isDecompress){
-        if(appFilename != null){
+    if (isDownload) {
+      if (isDecompress) {
+        if (appFilename != null) {
           Process.run("open", ["-R", p.join(decompressPath, appFilename!)]);
-        }else{
+        } else {
           Process.run("open", [decompressPath]);
         }
-      }else{
+      } else {
         Process.run("open", ["-R", archiveSavePath]);
       }
 
       await closeApp();
-    }else{
+    } else {
       onError?.call(errorMessage);
     }
   }

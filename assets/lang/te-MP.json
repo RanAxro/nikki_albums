@@ -1,10 +1,7 @@
 {
   "nikkialbums": "",
   "info": "",
-
-
   "----------common----------": "----------common----------",
-
   "version": "",
   "setting": "",
   "name": "",
@@ -32,19 +29,14 @@
   "quantity": "",
   "type": "",
   "restore": "",
-
-
   "----------setting----------": "----------setting----------",
   "theme": "",
   "lang": "",
   "language": "",
-
   "personalization": "",
   "accountManagement": "",
   "versionInformation": "",
-
   "maximizeOrRestoreButton": "",
-
   "checkForUpdates": "",
   "checkFailed": "",
   "alreadyTheLatestVersion": "",
@@ -52,9 +44,6 @@
   "updateMessage": "",
   "downloadFailed": "",
   "toOfficialWebsite": "",
-
-
-
   "----------nikkias----------": "----------nikkias----------",
   "nikkiasFile": "",
   "selectNikkiasFile": "",
@@ -62,11 +51,7 @@
   "importToOther": "",
   "saveDirectly": "",
   "saveDecoded": "",
-
-
-
   "----------frame----------": "----------frame----------",
-
   "account": "",
   "selectAccountButton": "",
   "deleteAccount": "",
@@ -79,24 +64,16 @@
   "installDir": "",
   "gameAlreadyExists": "",
   "toLocateGame": "",
-  "Location failed": "",
   "remarks": "",
   "noteXAs": "{}",
   "fillRemarks": "",
-
-
   "LauncherCacheImagesName": "",
   "MallPicName": "",
   "MoviesName": "",
-
   "LauncherCacheImagesDescription": "",
   "MallPicDescription": "",
   "MoviesDescription": "",
-
-
-
   "----------album----------": "----------album----------",
-
   "currentGameIsNull": "",
   "tag": "",
   "defaultTag": "",
@@ -129,7 +106,6 @@
   "XImageFailedToBeProcessed": {},
   "deleteSameImage": "",
   "deleteXImage": {},
-  "dragArea": "",
   "exportToClipboard": "",
   "exportToLocal": "",
   "exportToNetwork": "",
@@ -141,36 +117,18 @@
   "dragImageHere": "",
   "right-clickToPasteImage": "",
   "importImageTo": "",
-  "importXImageTo": {},
-
   "useSameNetworkDevice": "",
   "downloadLink": "",
   "stopSharing": "",
-  "methodX": "{}",
   "packaging": "",
   "packagingFailed": "",
   "activatingNetwork": "",
   "activatingNetworkFailed": "",
-
-
-
-
   "----------file_transfer----------": "----------file_transfer----------",
-  "receiveFileSavePath": "",
-  "XGiBAvailable": "{}",
-  "savePathIsNull": "",
-  "selectSavePath": "",
-  "changeSavePath": "",
-  "openSavePath": "",
-
   "inputDownloadUrl": "",
   "downloadableContent": "",
   "downloadAll": "",
   "downloadNikkias": "",
-
-
-
-
   "----------start----------": "----------start----------",
   "openDirectory": "",
   "openLauncherDirectory": "",
@@ -194,16 +152,12 @@
   "destinationIsNull": "",
   "insufficientSpace": "",
   "existXInDestination": "{}",
-
   "backupAllAlbum": "",
   "startBackupAllAlbum": "",
   "uidToBeBackup": "",
   "saveBackupFileTo": "",
   "backupFailed": "",
   "sendBackupToNetwork": "",
-
-
-
   "----------recycle_bin----------": "----------recycle_bin----------",
   "recycleBin": "",
   "moveToRecycleBin": "",
@@ -214,67 +168,10 @@
   "permanentlyDelete": "",
   "deletionCompleted": "",
   "deletionFailed": "",
-
-
-
-
-
-
-
-
-
-  "toSelectAccount": "",
   "addCustomAccount": "",
-  "toSelectVersion": "",
-  "toSelectUid": "",
-  "selectNoUid": "",
-  "getZeroUid": "",
-  "find no uid": "",
-  "find no directory": "",
-  "OpenFromFileExplorer": "",
-  "toAlbumType": "",
   "gameAlbum": "",
-  "toGameAlbum": "",
   "backupAlbum": "",
-  "toBackupAlbum": "",
-  "layoutMethod": "",
-  "toSelectLayoutMethod": "",
-  "layout_masonry": "",
-  "layout_grid_1_1": "",
-  "layout_grid_16_9": "",
-  "classificationMethod": "",
-  "toSelectClassificationMethod": "",
-  "classification_none": "",
-  "classification_timeChanged": "",
-  "classification_timeModified": "",
-  "classification_timeFileName": "",
-  "classification_orientation": "",
-  "classification_aspectRatio": "",
-  "sortMethod": "",
-  "toSelectSortMethod": "",
-  "sortKey_timeChanged": "",
-  "sortKey_timeModified": "",
-  "sortKey_timeFileName": "",
-  "sortKey_fileName": "",
-  "sortKey_fileSize": "",
-  "sortKey_imageResolution": "",
-  "toSortForward": "",
-  "toSortReverse": "",
-  "increaseColumns": "",
-  "decreaseColumns": "",
-
-
-
-
-
-
-
-
-
-
-
   "----------ai----------": "----------album_info----------",
-
   "ai_Collage_CollagePhotoName": "",
   "ai_Collage_HighQualityName": "",
   "ai_Collage_LowQualityName": "",
@@ -292,7 +189,6 @@
   "ai_PlantDyeingName": "",
   "ai_ScreenShotName": "",
   "ai_XSdkQrCodeName": "",
-
   "ai_Collage_CollagePhotoDescription": "",
   "ai_Collage_HighQualityDescription": "",
   "ai_Collage_LowQualityDescription": "",

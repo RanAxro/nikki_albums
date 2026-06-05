@@ -5,7 +5,6 @@ import 'system_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 export 'system_service.dart';
-export 'system_service.dart';
 
 Future<Path> getAppDataDirectoryPath() async {
   final Directory directory = await getApplicationDocumentsDirectory();
@@ -35,7 +34,8 @@ Path getBinPath() {
   if (Platform.isMacOS) {
     // macOS: assets are in App.framework inside the .app bundle
     final String execDir = Path(Platform.resolvedExecutable).cut(1).path;
-    return Path(execDir) + "/../Frameworks/App.framework/Versions/A/Resources/flutter_assets/assets/bin";
+    return Path(execDir) +
+        "/../Frameworks/App.framework/Versions/A/Resources/flutter_assets/assets/bin";
   }
   return Path(Platform.resolvedExecutable).cut(1) +
       "/data/flutter_assets/assets/bin";
@@ -45,7 +45,8 @@ Path getWebPath() {
   if (Platform.isMacOS) {
     // macOS: assets are in App.framework inside the .app bundle
     final String execDir = Path(Platform.resolvedExecutable).cut(1).path;
-    return Path(execDir) + "/../Frameworks/App.framework/Versions/A/Resources/flutter_assets/assets/web";
+    return Path(execDir) +
+        "/../Frameworks/App.framework/Versions/A/Resources/flutter_assets/assets/web";
   }
   return Path(Platform.resolvedExecutable).cut(1) +
       "/data/flutter_assets/assets/web";

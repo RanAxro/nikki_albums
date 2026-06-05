@@ -1,6 +1,6 @@
-
 import 'dart:io';
 
+/*
 /// 网络 api 示例
 final _apiExample = {
   "version": 11,
@@ -26,20 +26,20 @@ final _apiExample = {
     },
   }
 };
+*/
 
+class UpdateInfo {
+  static UpdateInfo? fromJson(dynamic json) {
+    if (json is! Map) return null;
 
-class UpdateInfo{
-  static UpdateInfo? fromJson(dynamic json){
-    if(json is! Map) return null;
-
-    if(json case {
+    if (json case {
       "version": int version,
       "versionString": String versionString,
       "downloadLink": String downloadLink,
       "updateMessage": String updateMessage,
       "windows": Map windows,
       "macos": Map macos,
-    }){
+    }) {
       return UpdateInfo(
         version: version,
         versionString: versionString,
@@ -52,7 +52,6 @@ class UpdateInfo{
 
     return null;
   }
-
 
   final int version;
   final String versionString;
@@ -70,63 +69,57 @@ class UpdateInfo{
     required this.macos,
   });
 
-  int get platformVersion{
-    if(Platform.isWindows){
+  int get platformVersion {
+    if (Platform.isWindows) {
       return windows?.version ?? version;
-    }else if(Platform.isMacOS){
+    } else if (Platform.isMacOS) {
       return macos?.version ?? version;
-    }else{
+    } else {
       return 0;
     }
   }
 
-  String get platformVersionString{
-    if(Platform.isWindows){
+  String get platformVersionString {
+    if (Platform.isWindows) {
       return windows?.versionString ?? versionString;
-    }else if(Platform.isMacOS){
+    } else if (Platform.isMacOS) {
       return macos?.versionString ?? versionString;
-    }else{
+    } else {
       return "";
     }
   }
 
-  String get platformDownloadLink{
-    if(Platform.isWindows){
+  String get platformDownloadLink {
+    if (Platform.isWindows) {
       return windows?.downloadLink ?? downloadLink;
-    }else if(Platform.isMacOS){
+    } else if (Platform.isMacOS) {
       return macos?.downloadLink ?? downloadLink;
-    }else{
+    } else {
       return "";
     }
   }
 
-  Map get platformUpdateMessage{
-    if(Platform.isWindows){
-      return windows?.updateMessage ?? {
-        "zh-CN": updateMessage,
-      };
-    }else if(Platform.isMacOS){
-      return macos?.updateMessage ?? {
-        "zh-CN": updateMessage,
-      };
-    }else{
-      return {
-        "zh-CN": "",
-      };
+  Map get platformUpdateMessage {
+    if (Platform.isWindows) {
+      return windows?.updateMessage ?? {"zh-CN": updateMessage};
+    } else if (Platform.isMacOS) {
+      return macos?.updateMessage ?? {"zh-CN": updateMessage};
+    } else {
+      return {"zh-CN": ""};
     }
   }
 }
 
-class PlatformUpdateInfo{
-  static PlatformUpdateInfo? fromJson(dynamic json){
-    if(json is! Map) return null;
+class PlatformUpdateInfo {
+  static PlatformUpdateInfo? fromJson(dynamic json) {
+    if (json is! Map) return null;
 
-    if(json case {
+    if (json case {
       "version": int version,
       "versionString": String versionString,
       "downloadLink": String downloadLink,
       "updateMessage": Map updateMessage,
-    }){
+    }) {
       return PlatformUpdateInfo(
         version: version,
         versionString: versionString,

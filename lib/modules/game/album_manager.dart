@@ -93,45 +93,59 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     ImageSource source,
     Path albumPath, {
     int depth = 1,
-  }) async{
+  }) async {
     final List<ImageItem> res = <ImageItem>[];
 
-    if(depth == 0) return res;
+    if (depth == 0) return res;
 
-    if(await albumPath.typeAsync != FileSystemEntityType.directory) return res;
+    if (await albumPath.typeAsync != FileSystemEntityType.directory) return res;
 
-    final List<FileSystemEntity> entities = await albumPath.directory.list(recursive: false).toList();
+    final List<FileSystemEntity> entities = await albumPath.directory
+        .list(recursive: false)
+        .toList();
 
-    for(FileSystemEntity entity in entities){
+    for (FileSystemEntity entity in entities) {
       final Path entityPath = Path(entity.path);
 
-      if(entity is Directory){
-        res.addAll(await _traverseImageAlbum(source, entityPath, depth: depth - 1));
-      }else if(entity is File){
-        if(!isImageExtension(entityPath)) continue;
+      if (entity is Directory) {
+        res.addAll(
+          await _traverseImageAlbum(source, entityPath, depth: depth - 1),
+        );
+      } else if (entity is File) {
+        if (!isImageExtension(entityPath)) continue;
 
         final DateTime time = (await entityPath.cacheStatAsync).modified;
 
         String? thumbnail;
-        if(type == AlbumType.NikkiPhotos_HighQuality){
-          final Path? lowQuality = getAlbumPath(installPath, AlbumType.NikkiPhotos_LowQuality, uid: uid, source: ImageSource.game);
+        if (type == AlbumType.NikkiPhotos_HighQuality) {
+          final Path? lowQuality = getAlbumPath(
+            installPath,
+            AlbumType.NikkiPhotos_LowQuality,
+            uid: uid,
+            source: ImageSource.game,
+          );
 
-          if(lowQuality != null){
-            final String thumbnailPath = p.join(lowQuality.path, p.basename(entity.path));
+          if (lowQuality != null) {
+            final String thumbnailPath = p.join(
+              lowQuality.path,
+              p.basename(entity.path),
+            );
 
-            if(await File(thumbnailPath).exists()){
+            if (await File(thumbnailPath).exists()) {
               thumbnail = thumbnailPath;
             }
           }
         }
 
-        res.add(ImageItem(
-          source: source,
-          path: entityPath,
-          time: time,
-          thumbnail: thumbnail,
-          isVideo: false,
-        ));
+        res.add(
+          ImageItem(
+            source: source,
+            path: entityPath,
+            time: time,
+            thumbnail: thumbnail,
+            isVideo: false,
+          ),
+        );
       }
     }
 
@@ -387,8 +401,6 @@ class AlbumManager extends ChangeNotifier with AlbumPath {
     } else {
       return true;
     }
-
-    return false;
   }
 
   Future<SplayTreeSet<ImageItem>> flatProcess() async {
