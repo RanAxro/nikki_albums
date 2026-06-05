@@ -6,7 +6,7 @@
 <title data-i18n="page_title">暖暖相册 - 一款用于管理你的无限暖暖相册的工具</title>
 <meta name="description" content="暖暖相册：可分开管理不同账号的相册，可查看无限暖暖 19 类相册，支持一键导出、导入、分享到剪贴板/局域网，支持缩略图预览，支持查看游戏资源文件。操作简单易上手，免费开源无广告。致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧">
 <meta name="keywords" content="无限暖暖, 暖暖, 暖暖相册, nikki_albums, 暖暖5, infinitynikki, InfinityNikki, infinity-nikki">
-<meta name="author" content="RanAxro">
+<meta name="author" content="RanAxro, Mercury2699">
 <link rel="icon" href="website/assets/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="website/assets/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="暖暖相册">
@@ -93,12 +93,19 @@
       "availability": "https://schema.org/InStock",
       "category": "free"
     },
-    "author": {
-      "@type": "Person",
-      "name": "RanAxro",
-      "url": "https://ranaxro.com",
-      "sameAs": "https://github.com/RanAxro"
-    },
+    "author": [
+      {
+        "@type": "Person",
+        "name": "RanAxro",
+        "url": "https://ranaxro.com",
+        "sameAs": "https://github.com/RanAxro"
+      },
+      {
+        "@type": "Person",
+        "name": "Mercury2699",
+        "sameAs": "https://github.com/Mercury2699"
+      }
+    ],
     "sameAs": [
       "https://github.com/RanAxro/nikki_albums",
       "https://github.com/RanAxro/nikki_albums/docs",
@@ -260,7 +267,7 @@
 					<div class="window-dot yellow"></div>
 					<div class="window-dot green"></div>
 				</div>
-				<div class="window-title">Nikki Albums App Preview</div>
+				<div class="window-title"></div>
 				<div class="showcase-tabs">
 					<button class="showcase-tab active" id="tab-wall" onclick="switchShowcaseTab('wall')" data-i18n="tab_wall">相册概览</button>
 					<button class="showcase-tab" id="tab-decode" onclick="switchShowcaseTab('decode')" data-i18n="tab_decode">参数解码</button>

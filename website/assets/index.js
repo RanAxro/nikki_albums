@@ -30,7 +30,7 @@
 	function initLang() {
 		const saved = localStorage.getItem('lang');
 		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
-		if (saved && supported.includes(saved) && saved !== 'zh') {
+		if (saved && supported.includes(saved)) {
 			currentLang = saved;
 		} else {
 			// Auto detect browser language
@@ -236,3 +236,6 @@
 	function closeMacOsModal() {
 		document.getElementById('macOsModal').classList.remove('active');
 	}
+
+	// Initialize language on page load
+	initLang();
