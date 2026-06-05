@@ -20,18 +20,18 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
     <image:image>
       <image:loc>https://nikki.ranaxro.com/website/assets/favicon.ico</image:loc>
       <image:title>Nikki Albums</image:title>
@@ -40,254 +40,254 @@
 
   <!-- zh-Hans: Simplified Chinese -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=zh</loc>
+    <loc>https://nikki.ranaxro.com/zh/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- zh-Hant: Traditional Chinese -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=zh-tw</loc>
+    <loc>https://nikki.ranaxro.com/zh-tw/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- en: English -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=en</loc>
+    <loc>https://nikki.ranaxro.com/en/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- ja: Japanese -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=ja</loc>
+    <loc>https://nikki.ranaxro.com/ja/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- ko: Korean -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=ko</loc>
+    <loc>https://nikki.ranaxro.com/ko/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- fr: French -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=fr</loc>
+    <loc>https://nikki.ranaxro.com/fr/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- de: German -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=de</loc>
+    <loc>https://nikki.ranaxro.com/de/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- es: Spanish -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=es</loc>
+    <loc>https://nikki.ranaxro.com/es/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- it: Italian -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=it</loc>
+    <loc>https://nikki.ranaxro.com/it/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- pt: Portuguese -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=pt</loc>
+    <loc>https://nikki.ranaxro.com/pt/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- id: Indonesian -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=id</loc>
+    <loc>https://nikki.ranaxro.com/id/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
   <!-- th: Thai -->
   <url>
-    <loc>https://nikki.ranaxro.com/?lang=th</loc>
+    <loc>https://nikki.ranaxro.com/th/</loc>
     <lastmod>2026-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/?lang=zh-tw"/>
-    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://nikki.ranaxro.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant"   href="https://nikki.ranaxro.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en"         href="https://nikki.ranaxro.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja"         href="https://nikki.ranaxro.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko"         href="https://nikki.ranaxro.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="fr"         href="https://nikki.ranaxro.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de"         href="https://nikki.ranaxro.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es"         href="https://nikki.ranaxro.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="it"         href="https://nikki.ranaxro.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="pt"         href="https://nikki.ranaxro.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="id"         href="https://nikki.ranaxro.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"         href="https://nikki.ranaxro.com/th/"/>
   </url>
 
 </urlset>

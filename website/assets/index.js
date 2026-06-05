@@ -177,9 +177,17 @@
 			}
 		});
 
+		// Build rich description for dynamic meta tags
+		let seoDesc = '';
+		if (dict['app_name'] && dict['hero_desc'] && dict['hero_subdesc']) {
+			seoDesc = `${dict['app_name']}: ${dict['hero_desc']}. ${dict['hero_subdesc']}`;
+		} else if (dict['hero_subdesc']) {
+			seoDesc = dict['hero_subdesc'];
+		}
+
 		// Update dynamic meta tags so crawlers/social bots see the correct locale
 		const metaDesc = document.querySelector('meta[name="description"]');
-		if (metaDesc && dict['hero_subdesc']) metaDesc.setAttribute('content', dict['hero_subdesc']);
+		if (metaDesc && seoDesc) metaDesc.setAttribute('content', seoDesc);
 		const ogTitle = document.querySelector('meta[property="og:title"]');
 		if (ogTitle && dict['app_name']) ogTitle.setAttribute('content', dict['app_name']);
 		const ogDesc = document.querySelector('meta[property="og:description"]');

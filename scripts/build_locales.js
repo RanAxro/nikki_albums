@@ -40,9 +40,17 @@ for (const [lang, dict] of Object.entries(i18n)) {
         return match;
     });
 
+    // Build a rich SEO description that includes the game name
+    let seoDesc = '';
+    if (dict['app_name'] && dict['hero_desc'] && dict['hero_subdesc']) {
+        seoDesc = `${dict['app_name']}: ${dict['hero_desc']}. ${dict['hero_subdesc']}`.replace(/"/g, '&quot;');
+    } else if (dict['hero_subdesc']) {
+        seoDesc = dict['hero_subdesc'].replace(/"/g, '&quot;');
+    }
+
     // Update meta tags dynamically
-    if (dict['hero_subdesc']) {
-        content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${dict['hero_subdesc'].replace(/"/g, '&quot;')}">`);
+    if (seoDesc) {
+        content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${seoDesc}">`);
     }
     if (dict['app_name']) {
         content = content.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${dict['app_name'].replace(/"/g, '&quot;')}">`);
@@ -94,12 +102,18 @@ for (const [lang, dict] of Object.entries(i18n)) {
         content = content.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${downloadLang['page_title'][lang]}">`);
     }
     
-    // Translate description using the index page's localized description
-    if (dict['hero_subdesc']) {
-        const desc = dict['hero_subdesc'].replace(/"/g, '&quot;');
-        content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${desc}">`);
-        content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${desc}">`);
-        content = content.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${desc}">`);
+    // Translate description using the rich SEO description
+    let downloadSeoDesc = '';
+    if (dict['app_name'] && dict['hero_desc'] && dict['hero_subdesc']) {
+        downloadSeoDesc = `${dict['app_name']}: ${dict['hero_desc']}. ${dict['hero_subdesc']}`.replace(/"/g, '&quot;');
+    } else if (dict['hero_subdesc']) {
+        downloadSeoDesc = dict['hero_subdesc'].replace(/"/g, '&quot;');
+    }
+    
+    if (downloadSeoDesc) {
+        content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${downloadSeoDesc}">`);
+        content = content.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${downloadSeoDesc}">`);
+        content = content.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${downloadSeoDesc}">`);
     }
     
     // Update canonical/og:url
