@@ -1,17 +1,43 @@
 	
 // 获取页面语言（从URL query参数、localStorage、或浏览器locale获取）
+const supported = ['zh','zh-tw','en','ja','ko','fr','de','es','it','pt','id','th'];
 function getPageLanguage(){
 	const urlParams = new URLSearchParams(window.location.search);
 	const urlLang = urlParams.get('lang');
-	if (urlLang && (urlLang === 'zh' || urlLang === 'en')) {
+	if (urlLang && supported.includes(urlLang)) {
 		return urlLang;
 	}
 	const saved = localStorage.getItem('lang');
-	if (saved && (saved === 'zh' || saved === 'en')) {
+	if (saved && supported.includes(saved)) {
 		return saved;
 	}
 	const navLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-	return navLang.startsWith('zh') ? 'zh' : 'en';
+	if (navLang.startsWith('zh')) {
+		if (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant')) {
+			return 'zh-tw';
+		}
+		return 'zh';
+	} else if (navLang.startsWith('ja')) {
+		return 'ja';
+	} else if (navLang.startsWith('ko')) {
+		return 'ko';
+	} else if (navLang.startsWith('fr')) {
+		return 'fr';
+	} else if (navLang.startsWith('de')) {
+		return 'de';
+	} else if (navLang.startsWith('es')) {
+		return 'es';
+	} else if (navLang.startsWith('it')) {
+		return 'it';
+	} else if (navLang.startsWith('pt')) {
+		return 'pt';
+	} else if (navLang.startsWith('id')) {
+		return 'id';
+	} else if (navLang.startsWith('th')) {
+		return 'th';
+	} else {
+		return 'en';
+	}
 }
 
 // 翻译函数 - 自动根据页面语言选择，未找到则使用中文

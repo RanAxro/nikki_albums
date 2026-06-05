@@ -23,14 +23,14 @@
 
 	// Translation Dictionary is loaded externally from website/pages/index_lang.js
 
-	let currentLang = 'zh';
+	let currentLang = 'en';
 	let activeTab = 'wall';
 
 	// Language selection
 	function initLang() {
 		const saved = localStorage.getItem('lang');
 		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
-		if (saved && supported.includes(saved)) {
+		if (saved && supported.includes(saved) && saved !== 'zh') {
 			currentLang = saved;
 		} else {
 			// Auto detect browser language
