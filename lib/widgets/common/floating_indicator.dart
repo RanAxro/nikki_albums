@@ -48,6 +48,10 @@ class _FloatingIndicatorGroupState extends State<FloatingIndicatorGroup>{
 
   void _setDefault(Rect? rect, Object? info){
     WidgetsBinding.instance.addPostFrameCallback((_){
+      if(!mounted){
+        return;
+      }
+
       final Offset? offset = _getOffset(context);
 
       if(offset != null){
@@ -218,6 +222,8 @@ class _FloatingIndicatorTargetState extends State<FloatingIndicatorTarget>{
     }
   }
 
+  late final _FloatingIndicatorGroupState group;
+
   Rect? _getRect(BuildContext context){
     final RenderObject? renderObject = context.findRenderObject();
     if(renderObject == null) return null;
@@ -235,11 +241,12 @@ class _FloatingIndicatorTargetState extends State<FloatingIndicatorTarget>{
   void initState(){
     super.initState();
 
+    group = getGroup(context);
     WidgetsBinding.instance.addPostFrameCallback((_){
       if(widget.defaultTarget){
         final Rect? rect = _getRect(context);
 
-        getGroup(context)._setDefault(rect, widget.info);
+        group._setDefault(rect, widget.info);
       }
     });
   }
@@ -250,11 +257,11 @@ class _FloatingIndicatorTargetState extends State<FloatingIndicatorTarget>{
       onEnter: (PointerEnterEvent event){
         final Rect? rect = _getRect(context);
         if(rect != null){
-          getGroup(context)._set(rect, widget.info);
+          group._set(rect, widget.info);
         }
       },
       onExit: (PointerExitEvent event){
-        getGroup(context)._set(null, null);
+        group._set(null, null);
       },
       opaque: false,
       child: widget.child,
@@ -265,7 +272,7 @@ class _FloatingIndicatorTargetState extends State<FloatingIndicatorTarget>{
   void dispose(){
     super.dispose();
     if(widget.defaultTarget){
-      getGroup(context)._setDefault(null, null);
+      group._setDefault(null, null);
     }
   }
 }
