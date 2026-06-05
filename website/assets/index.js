@@ -30,18 +30,13 @@
 	function initLang() {
 		const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
 
-		// Priority 1: URL path (/ja/) or query param (?lang=ja) - enforces language
+		// Priority 1: URL path (/ja/) - enforces language
 		const pathParts = window.location.pathname.split('/').filter(p => p);
 		const pathLang = pathParts.length > 0 ? pathParts[0] : null;
-		
-		const urlParams = new URLSearchParams(window.location.search);
-		const paramLang = urlParams.get('lang');
 
-		const explicitLang = supported.includes(pathLang) ? pathLang : (supported.includes(paramLang) ? paramLang : null);
-
-		if (explicitLang) {
-			currentLang = explicitLang;
-			localStorage.setItem('lang', explicitLang); // Sync localStorage with URL
+		if (pathLang && supported.includes(pathLang)) {
+			currentLang = pathLang;
+			localStorage.setItem('lang', pathLang); // Sync localStorage with URL
 			applyLang();
 			return;
 		}
@@ -125,11 +120,8 @@
 		if (currentPathLang && supported.includes(currentPathLang)) {
 			// Update the path to the new language (Vercel pages)
 			window.location.href = `/${lang}/`;
-		} else if (new URLSearchParams(window.location.search).has('lang')) {
-			// Update the query param to the new language (GH Pages links)
-			window.location.href = `/?lang=${lang}`;
 		} else {
-			// Neither path nor query param is enforcing a language. Just change it in JS.
+			// Not on a language path. Just change it dynamically in JS.
 			currentLang = lang;
 			applyLang();
 		}
