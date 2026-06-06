@@ -48,13 +48,13 @@ class NikkiasSetting extends StatelessWidget{
                 spacing: listSpacing,
                 children: [
                   Icon(Icons.file_open_outlined, size: 20, color: AppColorScheme.of(context).background.onByState(ColorState.of(context))),
-                  AppText("open_nikkias_file"),
+                  AppText.tr("open_nikkias_file"),
                 ],
               ),
             ),
 
             block20H,
-            AppText("drag_nikkias_file_here"),
+            AppText.tr("drag_nikkias_file_here"),
             block20H,
 
             if(Platform.isWindows)
@@ -78,7 +78,7 @@ class NikkiasSetting extends StatelessWidget{
                   spacing: listSpacing,
                   children: [
                     Icon(Icons.attach_file_outlined, size: 20, color: AppColorScheme.of(context).background.onByState(ColorState.of(context))),
-                    AppText("register_nikkias_file_association"),
+                    AppText.tr("register_nikkias_file_association"),
                   ],
                 ),
               ),
@@ -104,7 +104,7 @@ class NikkiasSetting extends StatelessWidget{
                   spacing: listSpacing,
                   children: [
                     Icon(Icons.clear, size: 20, color: AppColorScheme.of(context).background.onByState(ColorState.of(context))),
-                    AppText("unregister_nikkias_file_association"),
+                    AppText.tr("unregister_nikkias_file_association"),
                   ],
                 ),
               ),

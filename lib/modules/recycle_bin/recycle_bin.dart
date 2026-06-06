@@ -22,17 +22,6 @@ final ContentItem item = ContentItem(
   page: const RecycleBin(),
 );
 
-// final ContentItem item = ContentItem(
-//   expectedPosition: 5,
-//   name: "recycle_bin",
-//   icon: AssetImage("assets/icon/recycle_bin.webp"),
-//   page: const RecycleBin(),
-// );
-//
-// void init(){
-//   routes.addItem(item);
-// }
-
 class RecycleBin extends StatelessWidget {
   const RecycleBin({super.key});
 
@@ -129,24 +118,12 @@ class TopBar extends StatelessWidget {
             color: AppTheme.of(context)!.colorScheme.background.onEnabledColor,
           ),
 
-          Text(
-            context.tr("recycleBin"),
-            style: TextStyle(
-              fontSize: 32,
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          AppText.tr("recycleBin", fontSize: 32),
 
           RFutureBuilder(
             future: recycleBinPath.size(),
             builder: (BuildContext context, int size) {
-              return Text(
-                " ( ${formatBytes(size)} ) ",
-                style: TextStyle(
-                  fontSize: 26,
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              );
+              return AppText(" ( ${formatBytes(size)} ) ", fontSize: 26);
             },
           ),
 
@@ -208,12 +185,7 @@ class DeletionBox extends StatelessWidget {
 
         return Column(
           children: [
-            Text(
-              context.plural("failedToRestoreXImages", errorNum),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.error.pressedColor,
-              ),
-            ),
+            AppText(context.plural("failedToRestoreXImages", errorNum)),
             AppButton.smallText(
               onClick: close,
               child: AppText.tr("close"),
@@ -321,7 +293,6 @@ class DeletionBox extends StatelessWidget {
                                 deletionRecord.deletionTime
                                     .toString()
                                     .substring(0, 19),
-                                isTranslate: false,
                                 fontSize: 32,
                               ),
                             ),
@@ -687,13 +658,7 @@ class _DeleteDirectoryProcessorState extends State<DeleteDirectoryProcessor> {
         spacing: listSpacing,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            widget.message ?? context.tr("delete"),
-            style: TextStyle(
-              fontSize: 18,
-              color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-            ),
-          ),
+          AppText(widget.message ?? context.tr("delete")),
 
           block10H,
 
@@ -745,21 +710,11 @@ class _DeleteDirectoryProcessorState extends State<DeleteDirectoryProcessor> {
           if (isStartDelete == true &&
               isFinishDelete == true &&
               errorMessage == null)
-            Text(
-              context.tr("deletionCompleted"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            AppText.tr("deletionCompleted"),
           if (isStartDelete == true &&
               isFinishDelete == true &&
               errorMessage != null)
-            Text(
-              context.tr("deletionFailed"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.error.pressedColor,
-              ),
-            ),
+            AppText.tr("deletionFailed"),
           if (errorMessage != null)
             Text(
               errorMessage.toString(),

@@ -20,24 +20,10 @@ class LivePhotoSettings extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                context.tr("livePhotoExportFormat"),
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              AppText.tr("livePhotoExportFormat"),
               block10H,
 
-              Text(
-                context.tr("livePhotoExportFormat_description"),
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppTheme.of(
-                    context,
-                  )!.colorScheme.background.onColor.withValues(alpha: 0.6),
-                ),
-              ),
+              AppText.tr("livePhotoExportFormat_description", fontSize: 12),
               block10H,
 
               _buildRadioOption(context, "none", format),
@@ -76,12 +62,7 @@ class LivePhotoSettings extends StatelessWidget {
                 size: 20,
                 color: AppTheme.of(context)!.colorScheme.background.onColor,
               ),
-              Text(
-                context.tr("livePhotoExportFormat_$value"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              AppText.tr("livePhotoExportFormat_$value"),
             ],
           ),
         ),

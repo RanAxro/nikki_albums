@@ -104,12 +104,7 @@ class ResourceButton extends StatelessWidget {
           onPressed: () {
             resourceType.value = type;
           },
-          child: Text(
-            context.tr(info.name),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-            ),
-          ),
+          child: AppText.tr(info.name),
         ),
       );
     }
@@ -126,14 +121,7 @@ class ResourceButton extends StatelessWidget {
               valueListenable: resourceType,
               builder:
                   (BuildContext context, ResourceType type, Widget? child) {
-                    return Text(
-                      context.tr(resourcesInfoMap[type]!.name),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
-                      ),
-                    );
+                    return AppText.tr(resourcesInfoMap[type]!.name);
                   },
             );
 

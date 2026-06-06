@@ -27,7 +27,7 @@ class VersionInformation extends StatelessWidget{
           child: Column(
             spacing: bigListSpacing,
             children: [
-              AppText("${context.tr("version")}: $versionString", isTranslate: false),
+              AppText("${context.tr("version")}: $versionString"),
 
               CheckUpdatesButton(),
 
@@ -91,11 +91,11 @@ class _CheckUpdatesButtonState extends State<CheckUpdatesButton>{
           future: getUpdateInfo(),
           builder: (BuildContext context, UpdateInfo? info){
             if(info == null){
-              return AppText("checkFailed");
+              return AppText.tr("checkFailed");
             }
 
             if(info.platformVersion <= version){
-              return AppText("alreadyTheLatestVersion");
+              return AppText.tr("alreadyTheLatestVersion");
             }
 
             WidgetsBinding.instance.addPostFrameCallback((_){
@@ -107,7 +107,7 @@ class _CheckUpdatesButtonState extends State<CheckUpdatesButton>{
               );
             });
 
-            return AppText("${context.tr("findNewVersion")} ${info.platformVersionString}", isTranslate: false);
+            return AppText("${context.tr("findNewVersion")} ${info.platformVersionString}");
           },
         ),
           ),

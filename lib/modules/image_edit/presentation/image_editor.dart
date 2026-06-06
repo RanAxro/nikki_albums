@@ -205,7 +205,7 @@ class _ImageEditorState extends State<ImageEditor> {
           Row(
             spacing: listSpacing,
             children: [
-              AppText(ImageFragmentParamDef.by(type).key),
+              AppText.tr(ImageFragmentParamDef.by(type).key),
               Expanded(child: block0),
               AnimatedBuilder(
                 animation: controller,
@@ -214,7 +214,6 @@ class _ImageEditorState extends State<ImageEditor> {
                     (100 * controller.current.fragment.by(type))
                         .toInt()
                         .toString(),
-                    isTranslate: false,
                   );
                 },
               ),
@@ -351,9 +350,6 @@ class _ImageEditorState extends State<ImageEditor> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // AppButton.smallText(
-                    //   child: AppText("保存为草稿"),
-                    // ),
                     AppButton.smallText(
                       onClick: () {
                         export(context);
@@ -362,7 +358,7 @@ class _ImageEditorState extends State<ImageEditor> {
                         spacing: listSpacing,
                         children: [
                           AppIcon("save"),
-                          AppText("image_edit.export"),
+                          AppText.tr("image_edit.export"),
                         ],
                       ),
                     ),
@@ -456,7 +452,7 @@ class _ImageEditorState extends State<ImageEditor> {
           AppButton.smallText(
             onClick: croppingController.resetFrame,
             isTransparent: false,
-            child: AppText("image_edit.reset_crop_frame"),
+            child: AppText.tr("image_edit.reset_crop_frame"),
           ),
 
           Container(
@@ -477,7 +473,7 @@ class _ImageEditorState extends State<ImageEditor> {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: AppText("image_edit.ratio"),
+                  child: AppText.tr("image_edit.ratio"),
                 ),
 
                 AppButtonStack(
@@ -493,7 +489,7 @@ class _ImageEditorState extends State<ImageEditor> {
                             onChanged: (bool value) {
                               croppingController.ratio = ratio;
                             },
-                            child: AppText(ratio.key),
+                            child: AppText.tr(ratio.key),
                           );
                         },
                       ),
@@ -540,14 +536,14 @@ class _ImageEditorState extends State<ImageEditor> {
                             onChanged: (bool value) {
                               if (value) change(0);
                             },
-                            child: AppText("image_edit.crop"),
+                            child: AppText.tr("image_edit.crop"),
                           ),
                           AppSwitch.smallText(
                             value: value == 1,
                             onChanged: (bool value) {
                               if (value) change(1);
                             },
-                            child: AppText("image_edit.color_tuning"),
+                            child: AppText.tr("image_edit.color_tuning"),
                           ),
                         ],
                       );

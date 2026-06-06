@@ -49,31 +49,9 @@ class EditCustomGame extends StatelessWidget {
                           spacing: smallPadding,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              "${context.tr("account")}: ${game.name}",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
-                            Text(
-                              "${context.tr("launcherDir")} ${game.launcherPath.path}",
-                              style: TextStyle(
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
-                            Text(
-                              "${context.tr("installDir")} ${game.installPath.path}",
-                              style: TextStyle(
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
+                            AppText("${context.tr("account")}: ${game.name}", fontSize: 20),
+                            AppText("${context.tr("launcherDir")} ${game.launcherPath.path}"),
+                            AppText("${context.tr("installDir")} ${game.installPath.path}"),
                           ],
                         ),
                       ),
@@ -124,12 +102,7 @@ class DeleteCustomGameDialog extends StatelessWidget {
           spacing: listSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              context.tr("deleteAccount"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            AppText.tr("deleteAccount"),
             AppButton.smallText(
               colorRole: ColorRole.background,
               isTransparent: false,

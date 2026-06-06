@@ -920,13 +920,7 @@ class _ToolBarState extends State<ToolBar> {
             ) {
               if (!isExistSelectedImage) return block0;
 
-              return AppText(
-                context.plural(
-                  "pa_select_X_image",
-                  game.album.selectedImages.length,
-                ),
-                isTranslate: false,
-              );
+              return AppText(context.plural("pa_select_X_image", game.album.selectedImages.length,));
             }),
 
             ...[
@@ -1280,7 +1274,7 @@ class AlbumButton extends StatelessWidget {
                     block5W,
                     AppIcon("album/${info.type}", height: 18),
                     block15W,
-                    AppText(info.name),
+                    AppText.tr(info.name),
                   ],
                 ),
               ),
@@ -1298,7 +1292,7 @@ class AlbumButton extends StatelessWidget {
                       spacing: listSpacing,
                       children: [
                         AppIcon("album/${game.selectedAlbum.name}", height: 18),
-                        AppText(albumsInfoMap[game.selectedAlbum]!.name),
+                        AppText.tr(albumsInfoMap[game.selectedAlbum]!.name),
                       ],
                     );
                   },
@@ -1341,12 +1335,7 @@ class AlbumExhibition extends StatelessWidget {
       builder: (BuildContext context, Game? game, Widget? child) {
         if (game == null) {
           return Center(
-            child: Text(
-              context.tr("currentGameIsNull"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            child: AppText.tr("currentGameIsNull"),
           );
         }
 
@@ -1493,15 +1482,7 @@ class _AlbumExhibitionWithHeaderState extends State<AlbumExhibitionWithHeader> {
                           )!.colorScheme.background.color,
                           padding: const EdgeInsets.only(left: listSpacing),
                           height: topBarHeight,
-                          child: Text(
-                            title,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
-                            ),
-                          ),
+                          child: AppText(title),
                         );
                       },
                       itemBuilder: (BuildContext context, ImageItem item) {
@@ -1886,14 +1867,7 @@ class TagMenu extends StatelessWidget {
                         height: smallButtonContentSize,
                         color: game.tag.getColor(tag),
                       ),
-                      Text(
-                        tag ?? context.tr("defaultTag"),
-                        style: TextStyle(
-                          color: AppTheme.of(
-                            context,
-                          )!.colorScheme.background.onColor,
-                        ),
-                      ),
+                      AppText(tag ?? context.tr("defaultTag")),
                     ],
                   ),
                 );
@@ -1913,14 +1887,7 @@ class TagMenu extends StatelessWidget {
                       game.tag.setColor(res.$1, res.$2);
                     }
                   },
-                  child: Text(
-                    context.tr("addCustomTag"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("addCustomTag"),
                 ),
               ),
         );
@@ -2140,12 +2107,7 @@ class TagListDialog extends StatelessWidget {
               spacing: smallPadding,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  context.tr("deleteXTag", args: [tag]),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                AppText(context.tr("deleteXTag", args: [tag])),
 
                 /// cancel
                 AppButton.smallText(
@@ -2236,14 +2198,7 @@ class TagListDialog extends StatelessWidget {
                                   children: [
                                     block10W,
 
-                                    Text(
-                                      tag ?? context.tr("defaultTag"),
-                                      style: TextStyle(
-                                        color: AppTheme.of(
-                                          context,
-                                        )!.colorScheme.background.onColor,
-                                      ),
-                                    ),
+                                    AppText(tag ?? context.tr("defaultTag")),
 
                                     Expanded(child: block0),
 
@@ -2337,14 +2292,7 @@ class TagListDialog extends StatelessWidget {
 
                       /// tag name
                       Expanded(
-                        child: Text(
-                          tag ?? context.tr("defaultTag"),
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.background.onColor,
-                          ),
-                        ),
+                        child: AppText(tag ?? context.tr("defaultTag")),
                       ),
 
                       /// edit tag
@@ -2400,14 +2348,7 @@ class TagListDialog extends StatelessWidget {
                 block5W,
 
                 Expanded(
-                  child: Text(
-                    context.tr("manageTags"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("manageTags"),
                 ),
 
                 AppButton.smallIcon(
@@ -2859,8 +2800,8 @@ class _VideoViewerDialogState extends State<VideoViewerDialog> {
                         if (!await ExifToolManager.ensureInstalled()) {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
+                              SnackBar(
+                                content: AppText.tr(
                                   "ExifTool 缺失！请确保运行过打包脚本。/ ExifTool is missing from bundle.",
                                 ),
                               ),
@@ -2882,7 +2823,7 @@ class _VideoViewerDialogState extends State<VideoViewerDialog> {
                     },
                     child: Row(
                       spacing: listSpacing,
-                      children: [AppIcon("forward"), AppText("exportToGif")],
+                      children: [AppIcon("forward"), AppText.tr("exportToGif")],
                     ),
                   ),
                 ],
@@ -2918,10 +2859,6 @@ class FiltrationButton extends StatelessWidget {
           builder: (BuildContext context, Widget? child) {
             final bool isFilter = game.album.isFilter(filtration);
 
-            final Color color = AppTheme.of(
-              context,
-            )!.colorScheme.background.onColor.withAlpha(isFilter ? 255 : 0);
-
             return AppButton(
               useConfiguration: false,
               borderRadius: 0,
@@ -2954,7 +2891,7 @@ class FiltrationButton extends StatelessWidget {
                               cancel = true;
                               Navigator.of(context).pop();
                             },
-                            child: AppText("cancel"),
+                            child: AppText.tr("cancel"),
                           );
                         },
                       );
@@ -3005,12 +2942,8 @@ class FiltrationButton extends StatelessWidget {
               child: Row(
                 spacing: listSpacing,
                 children: [
-                  Image.asset(
-                    "assets/icon/tick.webp",
-                    height: 16,
-                    color: color,
-                  ),
-                  AppText(filtration.name),
+                  AppIcon("tick", height: 16, opacity: isFilter ? 1 : 0),
+                  AppText.tr(filtration.name),
                 ],
               ),
             );
@@ -3086,15 +3019,7 @@ class SelectionViewerDialog extends StatelessWidget {
             child: NotifierBuilder(
               listenable: game.album.whenSelectedImagesChange,
               builder: (BuildContext context, Widget? child) {
-                return Text(
-                  context.plural(
-                    "xImageSelected",
-                    game.album.selectedImages.length,
-                  ),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                  ),
-                );
+                return AppText(context.plural("xImageSelected", game.album.selectedImages.length));
               },
             ),
           ),
@@ -3308,12 +3233,9 @@ class DeleteImagesDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            AppText(
               context.plural("deleteXImage", game.album.selectedImages.length),
-              style: TextStyle(
-                fontSize: 20,
-                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-              ),
+              fontSize: 20,
             ),
 
             options.isEmpty
@@ -3321,14 +3243,7 @@ class DeleteImagesDialog extends StatelessWidget {
                 : Container(
                     padding: const EdgeInsets.all(smallPadding),
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      context.tr("deleteSameImage"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
-                      ),
-                    ),
+                    child: AppText.tr("deleteSameImage"),
                   ),
 
             ...options,
@@ -3413,12 +3328,7 @@ class ExportImagesButton extends StatelessWidget {
             ]),
             isTranslate: false,
           ),
-          child: Text(
-            context.tr("exportToClipboard"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-            ),
-          ),
+          child: AppText.tr("exportToClipboard"),
         ),
 
         /// export images to native device
@@ -3433,12 +3343,7 @@ class ExportImagesButton extends StatelessWidget {
             ]),
             isTranslate: false,
           ),
-          child: Text(
-            context.tr("exportToLocal"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-            ),
-          ),
+          child: AppText.tr("exportToLocal"),
         ),
 
         /// export images to network device
@@ -3453,12 +3358,7 @@ class ExportImagesButton extends StatelessWidget {
             ]),
             isTranslate: false,
           ),
-          child: Text(
-            context.tr("exportToNetwork"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-            ),
-          ),
+          child: AppText.tr("exportToNetwork"),
         ),
 
         /// export to macOS Photo Library (only for Video album on macOS)
@@ -3467,12 +3367,7 @@ class ExportImagesButton extends StatelessWidget {
             onPressed: () {
               AlbumHandler.of(context).exportToPhotoLibrary(context, images);
             },
-            child: Text(
-              context.tr("exportToPhotoLibrary"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-              ),
-            ),
+            child: AppText.tr("exportToPhotoLibrary"),
           ),
 
         /// encode and export nikkias file to native device
@@ -3480,12 +3375,7 @@ class ExportImagesButton extends StatelessWidget {
           onPressed: () {
             AlbumHandler.of(context).exportNikkiasToLocal(context, images);
           },
-          child: Text(
-            context.tr("exportNikkiasToLocal"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-            ),
-          ),
+          child: AppText.tr("exportNikkiasToLocal"),
         ),
 
         /// The "Export" option for the "AlbumType.Video" category
@@ -3501,7 +3391,7 @@ class ExportImagesButton extends StatelessWidget {
               spacing: listSpacing,
               children: [
                 AppIcon("setting", height: 20),
-                AppText("config_of_export"),
+                AppText.tr("config_of_export"),
               ],
             ),
           ),

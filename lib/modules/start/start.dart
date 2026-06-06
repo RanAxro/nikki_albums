@@ -137,13 +137,13 @@ class OpenFolderButton extends StatelessWidget {
               }
             }
           },
-          child: Text(context.tr("openLauncherDirectory")),
+          child: AppText.tr("openLauncherDirectory"),
         ),
         MenuItemButton(
           onPressed: () {
             AppState.currentGame.value?.installPath.open();
           },
-          child: Text(context.tr("openInstallDirectory")),
+          child: AppText.tr("openInstallDirectory"),
         ),
       ],
     );
@@ -189,7 +189,7 @@ class MoveFolderButton extends StatelessWidget {
               },
             );
           },
-          child: Text(context.tr("moveAlbumResource")),
+          child: AppText.tr("moveAlbumResource"),
         ),
         MenuItemButton(
           onPressed: () {
@@ -205,7 +205,7 @@ class MoveFolderButton extends StatelessWidget {
               },
             );
           },
-          child: Text(context.tr("moveInstallResource")),
+          child: AppText.tr("moveInstallResource"),
         ),
       ],
     );
@@ -282,11 +282,8 @@ class MoveFolderDialog extends StatelessWidget {
           return Row(
             children: [
               indicator,
-              Text(
-                "${context.tr("fileSize")}: ",
-                style: TextStyle(fontSize: 16),
-              ),
-              Text("${context.tr("calculating")}..."),
+              AppText("${context.tr("fileSize")}: ", fontSize: 16),
+              AppText("${context.tr("calculating")}..."),
             ],
           );
         },
@@ -301,14 +298,8 @@ class MoveFolderDialog extends StatelessWidget {
                 height: 20,
                 color: AppTheme.of(context)!.colorScheme.success.pressedColor,
               ),
-              Text(
-                "${context.tr("fileSize")}: ",
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                "${(size / 1073741824).toStringAsFixed(2)} GiB",
-                style: TextStyle(fontSize: 16),
-              ),
+              AppText("${context.tr("fileSize")}: ", fontSize: 16),
+              AppText("${(size / 1073741824).toStringAsFixed(2)} GiB", fontSize: 16),
             ],
           );
           // child: Text("${(size / 1073741824).toStringAsFixed(2)} GiB ( ${(size / 1000000000).toStringAsFixed(2)} GB )", style: TextStyle(fontSize: 16)),
@@ -333,8 +324,8 @@ class MoveFolderDialog extends StatelessWidget {
                   height: 20,
                   color: AppTheme.of(context)!.colorScheme.success.pressedColor,
                 ),
-              Text("${context.tr("moveTo")}: ", style: TextStyle(fontSize: 16)),
-              Expanded(child: Text(pathStr ?? context.tr("toSelectFolder"))),
+              AppText("${context.tr("moveTo")}: ", fontSize: 16),
+              Expanded(child: AppText(pathStr ?? context.tr("toSelectFolder"))),
               AppButton.smallIcon(
                 onClick: () async {
                   destination.value = await NativeFilePicker.getDirectoryPath(
@@ -361,10 +352,7 @@ class MoveFolderDialog extends StatelessWidget {
                   height: 20,
                   color: AppTheme.of(context)!.colorScheme.error.pressedColor,
                 ),
-                Text(
-                  "${context.tr("storageSpace")}: ",
-                  style: TextStyle(fontSize: 16),
-                ),
+                AppText("${context.tr("storageSpace")}: ", fontSize: 16),
               ],
             );
           }
@@ -394,9 +382,9 @@ class MoveFolderDialog extends StatelessWidget {
                   height: 20,
                   color: AppTheme.of(context)!.colorScheme.success.pressedColor,
                 ),
-              Text(
+              AppText(
                 "${context.tr("availableSpaceOnXDrive", args: [to.substring(0, 1)])} ${(free / 1073741824).toStringAsFixed(2)} GiB",
-                style: TextStyle(fontSize: 16),
+                fontSize: 16,
               ),
             ],
           );
@@ -416,11 +404,11 @@ class MoveFolderDialog extends StatelessWidget {
                   return Row(
                     children: [
                       indicator,
-                      Text(
+                      AppText(
                         "${context.tr("permission")}: ",
-                        style: TextStyle(fontSize: 16),
+                        fontSize: 16,
                       ),
-                      Text("${context.tr("underTest")}..."),
+                      AppText("${context.tr("underTest")}..."),
                     ],
                   );
                 },
@@ -437,16 +425,16 @@ class MoveFolderDialog extends StatelessWidget {
                           context,
                         )!.colorScheme.success.pressedColor,
                       ),
-                      Text(
+                      AppText(
                         "${context.tr("permission")}: ",
-                        style: TextStyle(fontSize: 16),
+                        fontSize: 16,
                       ),
                       Expanded(
-                        child: Text(
+                        child: AppText(
                           linkPermission
                               ? context.tr("normal")
                               : context.tr("noPermission"),
-                          style: TextStyle(fontSize: 16),
+                          fontSize: 16,
                         ),
                       ),
                       Tooltip(
@@ -740,27 +728,13 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                   waitingBuilder: (BuildContext context, Widget indicator) {
                     return Column(
                       children: [
-                        Text(
-                          context.tr("activatingNetwork"),
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.background.onColor,
-                          ),
-                        ),
+                        AppText.tr("activatingNetwork"),
                         indicator,
                       ],
                     );
                   },
                   errorBuilder: (BuildContext context) {
-                    return Text(
-                      context.tr("activatingNetworkFailed"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    );
+                    return AppText.tr("activatingNetworkFailed");
                   },
                   builder: (BuildContext context, TransmissionInfo info) {
                     return UdpBroadcastBuilder(
@@ -771,24 +745,8 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              context.tr("useSameNetworkDevice"),
-                              style: TextStyle(
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
-                            Text(
-                              info.code,
-                              style: TextStyle(
-                                fontSize: 48,
-                                fontWeight: FontWeight.w500,
-                                color: AppTheme.of(
-                                  context,
-                                )!.colorScheme.background.onColor,
-                              ),
-                            ),
+                            AppText.tr("useSameNetworkDevice"),
+                            AppText(info.code, fontSize: 48, fontWeight: FontWeight.w500),
                             Container(
                               color: Colors.white,
                               child: QrImageView(
@@ -799,14 +757,7 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  context.tr("downloadLink"),
-                                  style: TextStyle(
-                                    color: AppTheme.of(
-                                      context,
-                                    )!.colorScheme.background.onColor,
-                                  ),
-                                ),
+                                AppText.tr("downloadLink"),
                                 SelectableText(
                                   info.v4AccessLink,
                                   style: TextStyle(
@@ -847,24 +798,13 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
       spacing: listSpacing,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          context.tr("backupAllAlbum"),
-          style: TextStyle(
-            fontSize: 16,
-            color: AppTheme.of(context)!.colorScheme.background.onColor,
-          ),
-        ),
+        AppText.tr("backupAllAlbum", fontSize: 16),
 
         Padding(
           padding: const EdgeInsets.only(left: smallPadding),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              context.tr("uidToBeBackup"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            child: AppText.tr("uidToBeBackup"),
           ),
         ),
 

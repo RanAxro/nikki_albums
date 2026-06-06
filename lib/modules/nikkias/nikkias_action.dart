@@ -62,23 +62,12 @@ class NikkiasAction extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            context.tr("nikkiasFile"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText.tr("nikkiasFile"),
         ),
 
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            nikkiasPath.subName,
-            style: TextStyle(
-              fontSize: 24,
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText.tr(nikkiasPath.subName, fontSize: 24),
         ),
 
         block10H,
@@ -90,80 +79,20 @@ class NikkiasAction extends StatelessWidget {
                 return Row(
                   spacing: listSpacing,
                   children: [
-                    Text(
-                      "-",
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    Text(
-                      manifest.launcherChannel.name,
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
+                    AppText("-"),
+                    AppText(manifest.launcherChannel.name),
                   ],
                 );
               case NikkiasType.imageTransfer:
                 return Row(
                   spacing: listSpacing,
                   children: [
-                    Text(
-                      "-",
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    Text(
-                      manifest.launcherChannel.name,
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    Text(
-                      "-",
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    Text(
-                      (manifest as ImageTransferNikkiasManifest).uid,
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    Text(
-                      "-",
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                    Text(
-                      context.tr(
-                        albumsInfoMap[(manifest as ImageTransferNikkiasManifest)
-                                .albumType]!
-                            .name,
-                      ),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
+                    AppText("-"),
+                    AppText(manifest.launcherChannel.name,),
+                    AppText("-"),
+                    AppText((manifest as ImageTransferNikkiasManifest).uid),
+                    AppText("-",),
+                    AppText.tr(albumsInfoMap[(manifest as ImageTransferNikkiasManifest).albumType]!.name),
                   ],
                 );
               case NikkiasType.other:
@@ -199,86 +128,6 @@ class NikkiasAction extends StatelessWidget {
     );
   }
 }
-
-// class _ImportButton extends StatelessWidget{
-//   final NikkiasManifest manifest;
-//   final File nikkiasFile;
-//
-//   const _ImportButton({
-//     required this.manifest,
-//     required this.nikkiasFile,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context){
-//     return MenuAnchor(
-//       style: MenuStyle(
-//         backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
-//       ),
-//       common: (BuildContext context, MenuController controller, Widget? child){
-//         return SmallButton(
-//           width: null,
-//           colorRole: ColorRole.highlight,
-//           transparent: false,
-//           onClick: () async{
-//             controller.isOpen ? controller.close() : controller.open();
-//           },
-//           child: Text(context.tr("import"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.highlight.onColor)),
-//         );
-//       },
-//       menuChildren: [
-//         Builder(
-//           common: (BuildContext context){
-//             if(manifest.launcherChannel == LauncherChannel.unknown){
-//               return block0;
-//             }
-//
-//             return RFutureBuilder(
-//               future: FindGame.find(),
-//               common: (BuildContext context, List<Game> gameList){
-//                 for(final Game game in gameList){
-//
-//                   /// game.launcherChannel must not = LauncherChannel.unknown
-//                   if(game.launcherChannel == manifest.launcherChannel){
-//                     return MenuItemButton(
-//                       onPressed: (){
-//
-//                         if(manifest.type == NikkiasType.albumBackup){
-//                           // AlbumBackupNikkiasCodec(manifest as AlbumBackupNikkiasManifest, nikkiasFile, Path(r"E:\work\nikki_albums_file\nikkias\c")).decode((f) => print(f));
-//
-//                           AlbumBackupNikkiasCodec(manifest as AlbumBackupNikkiasManifest, nikkiasFile, Path(r"E:\game\InfinityNikki\InfinityNikki Launcher\InfinityNikki")).encode((f) => print(f));
-//                         }
-//
-//                       },
-//                       child: Row(
-//                         spacing: listSpacing,
-//                         children: [
-//                           Text(context.tr("导入到"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-//                           Image(image: game.logoImage, height: smallButtonContentSize),
-//                           Text(game.launcherChannel.name, style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor)),
-//                         ],
-//                       ),
-//                     );
-//                   }
-//                 }
-//
-//                 return block0;
-//               },
-//             );
-//           },
-//         ),
-//
-//
-//         AccountSelector(
-//           isSelectUid: false,
-//         ).submenuButton(
-//           context: context,
-//           child: Text(context.tr("导入到其他渠道"), style: TextStyle(color: AppTheme.of(context)!.colorScheme.background.onColor))
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 class _ImportButton extends StatelessWidget {
   final NikkiasManifest manifest;
@@ -362,26 +211,12 @@ class _ImportButton extends StatelessWidget {
                       child: Row(
                         spacing: listSpacing,
                         children: [
-                          Text(
-                            context.tr("importTo"),
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
-                            ),
-                          ),
+                          AppText.tr("importTo"),
                           Image(
                             image: game.logoImage,
                             height: smallButtonContentSize,
                           ),
-                          Text(
-                            game.launcherChannel.name,
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
-                            ),
-                          ),
+                          AppText(game.launcherChannel.name),
                         ],
                       ),
                     );
@@ -401,12 +236,7 @@ class _ImportButton extends StatelessWidget {
           },
         ).submenuButton(
           context: context,
-          child: Text(
-            context.tr("importToOther"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText.tr("importToOther"),
         ),
       ],
     );
@@ -500,24 +330,14 @@ class _SaveAsButton extends StatelessWidget {
           onPressed: () {
             saveRawFile(context);
           },
-          child: Text(
-            context.tr("saveDirectly"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText.tr("saveDirectly"),
         ),
 
         MenuItemButton(
           onPressed: () {
             saveDecodedFile(context);
           },
-          child: Text(
-            context.tr("saveDecoded"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
-          ),
+          child: AppText.tr("saveDecoded"),
         ),
       ],
     );

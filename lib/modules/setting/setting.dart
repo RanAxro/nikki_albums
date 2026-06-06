@@ -141,8 +141,7 @@ class SettingDialog extends StatelessWidget {
                                     },
                                     child: AppText(
                                       title,
-                                      isTranslate:
-                                          page != SettingPage.debugPanel,
+                                      isTranslate: page != SettingPage.debugPanel,
                                     ),
                                   );
                                 }).toList(),
@@ -226,7 +225,7 @@ class SettingDialog extends StatelessWidget {
                   children: [
                     block10W,
                     Expanded(
-                      child: AppText(
+                      child: AppText.tr(
                         "setting",
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -268,7 +267,7 @@ class ChangeTheme extends StatelessWidget {
       child: Row(
         spacing: bigListSpacing,
         children: [
-          Align(alignment: Alignment.topCenter, child: AppText("theme")),
+          Align(alignment: Alignment.topCenter, child: AppText.tr("theme")),
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -334,7 +333,7 @@ class ChangeLanguage extends StatelessWidget {
             onPressed: () {
               AppState.lang.value = entry.$1;
             },
-            child: AppText(entry.$2, isTranslate: false),
+            child: AppText(entry.$2),
           ),
       ],
       builder:

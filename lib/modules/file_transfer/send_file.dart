@@ -89,12 +89,7 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
           spacing: listSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              context.tr("packagingFailed"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.error.pressedColor,
-              ),
-            ),
+            AppText.tr("packagingFailed"),
             Text(
               errorMessage.toString(),
               style: TextStyle(
@@ -497,23 +492,13 @@ class SendImageBuilder extends StatelessWidget {
       waitingBuilder: (BuildContext context, Widget indicator) {
         return Column(
           children: [
-            Text(
-              context.tr("activatingNetwork"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            AppText.tr("activatingNetwork"),
             indicator,
           ],
         );
       },
       errorBuilder: (BuildContext context) {
-        return Text(
-          context.tr("activatingNetworkFailed"),
-          style: TextStyle(
-            color: AppTheme.of(context)!.colorScheme.background.onColor,
-          ),
-        );
+        return AppText.tr("activatingNetworkFailed");
       },
       builder: (BuildContext context, TransmissionInfo info) {
         return UdpBroadcastBuilder(
@@ -524,20 +509,8 @@ class SendImageBuilder extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  context.tr("useSameNetworkDevice"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
-                Text(
-                  info.code,
-                  style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w500,
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                AppText.tr("useSameNetworkDevice"),
+                AppText(info.code, fontSize: 48, fontWeight: FontWeight.w500),
                 Container(
                   color: Colors.white,
                   child: QrImageView(
@@ -548,14 +521,7 @@ class SendImageBuilder extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Text(
-                      context.tr("downloadLink"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
+                    AppText.tr("downloadLink"),
                     SelectableText(
                       info.v4AccessLink,
                       style: TextStyle(

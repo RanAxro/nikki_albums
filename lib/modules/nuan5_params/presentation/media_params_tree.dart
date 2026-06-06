@@ -158,13 +158,12 @@ class TreeNodeTile extends StatelessWidget{
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      AppText(node.title, isTranslate: false, fontWeight: FontWeight.bold),
+                      AppText(node.title, fontWeight: FontWeight.bold),
                       const SizedBox(width: 12),
                       if(node.message != null)
                         Expanded(
                           child: AppText(
                             node.message!,
-                            isTranslate: false,
                             overflow: TextOverflow.ellipsis,
                             softWrap: false,
                           ),

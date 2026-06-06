@@ -44,7 +44,7 @@ class MaximizeOrRestoreButtonSwitch extends StatelessWidget {
           onChanged: (bool value) {
             AppState.isUseMaximizeOrRestoreButton.value = value;
           },
-          child: AppText("maximizeOrRestoreButton", fontSize: 14),
+          child: AppText.tr("maximizeOrRestoreButton", fontSize: 14),
         );
       },
     );
@@ -64,7 +64,7 @@ class FollowSystemSwitch extends StatelessWidget {
           onChanged: (bool value) {
             AppState.isThemeFollowSystem.value = value;
           },
-          child: AppText("followSystemAppearance", fontSize: 14),
+          child: AppText.tr("followSystemAppearance", fontSize: 14),
         );
       },
     );
@@ -85,13 +85,7 @@ class ChangeTheme extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topCenter,
-              child: Text(
-                context.tr("theme"),
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("theme", fontSize: 14),
             ),
             Expanded(
               child: GridView.builder(

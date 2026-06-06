@@ -37,7 +37,7 @@ class InitialStartupSetting extends StatelessWidget{
                           children: [
                             Image.asset("assets/logo/nikkialbums.webp", height: 100),
 
-                            AppText("welcome", fontSize: 40),
+                            AppText.tr("welcome", fontSize: 40),
                           ],
                         ),
 
@@ -59,8 +59,8 @@ class InitialStartupSetting extends StatelessWidget{
                                   spacing: listSpacing,
                                   children: [
                                     AppIcon("language", height: 24),
-                                    AppText("language", fontSize: 16),
-                                    AppText("lang", fontSize: 16),
+                                    AppText.tr("language", fontSize: 16),
+                                    AppText.tr("lang", fontSize: 16),
                                   ],
                                 ),
                               );
@@ -84,7 +84,7 @@ class InitialStartupSetting extends StatelessWidget{
                               spacing: listSpacing,
                               children: [
                                 Icon(Icons.arrow_right_alt_sharp, color: AppColorScheme.of(context).highlight.onEnabledColor),
-                                AppText("start", fontSize: 16),
+                                AppText.tr("start", fontSize: 16),
                               ],
                             ),
                           ),

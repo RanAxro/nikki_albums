@@ -50,19 +50,6 @@ class _ReceiveFileState extends State<ReceiveFile> {
                 ),
               ),
 
-              // SmallButton(
-              //   width: smallTextFieldHeight,
-              //   height: smallTextFieldHeight,
-              //   colorRole: ColorRole.background,
-              //   transparent: false,
-              //   onClick: () async{
-              //     final File? downloadFile = await downloadFileByUrl(context, controller.text, await getTempPath() + "receive.zip");
-              //     if(downloadFile != null && context.mounted){
-              //       parseNikkiasFile(context, downloadFile);
-              //     }
-              //   },
-              //   child: Image.asset("assets/icon/forward.webp", height: 24, color: AppTheme.of(context)!.colorScheme.background.onColor),
-              // ),
               AppButton(
                 width: smallTextFieldHeight,
                 height: smallTextFieldHeight,
@@ -85,12 +72,7 @@ class _ReceiveFileState extends State<ReceiveFile> {
           Container(
             padding: const EdgeInsets.fromLTRB(smallPadding, bigPadding, 0, 0),
             alignment: Alignment.centerLeft,
-            child: Text(
-              context.tr("downloadableContent"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            child: AppText.tr("downloadableContent"),
           ),
 
           Expanded(
@@ -292,12 +274,7 @@ Future<File?> downloadFileByUrl(
       return Column(
         spacing: listSpacing,
         children: [
-          Text(
-            context.tr("downloadFailed"),
-            style: TextStyle(
-              color: AppTheme.of(context)!.colorScheme.error.pressedColor,
-            ),
-          ),
+          AppText.tr("downloadFailed"),
           SelectableText(
             errorMessage,
             style: TextStyle(

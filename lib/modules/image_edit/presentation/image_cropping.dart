@@ -379,13 +379,13 @@ class _ImageCroppingPanelState extends State<ImageCroppingPanel> {
               onClick: () {
                 controller.contraRotate();
               },
-              child: AppText("逆时针", isTranslate: false),
+              child: AppText("逆时针"),
             ),
             AppButton.smallIcon(
               onClick: () {
                 controller.rotate();
               },
-              child: AppText("顺时针", isTranslate: false),
+              child: AppText("顺时针"),
             ),
             AppButton.smallIcon(
               onClick: () {
@@ -412,7 +412,7 @@ class _ImageCroppingPanelState extends State<ImageCroppingPanel> {
                 onChanged: (bool value) {
                   controller.ratio = ratio;
                 },
-                child: AppText(ratio.toString(), isTranslate: false),
+                child: AppText(ratio.toString()),
               );
             },
           ),

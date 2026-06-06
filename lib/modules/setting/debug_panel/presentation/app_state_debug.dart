@@ -24,7 +24,7 @@ class AppStateDebug extends StatelessWidget{
                 onChanged: (value){
                   AppState.isAgreeAgreement.value = value;
                 },
-                child: AppText("isAgreeAgreement", isTranslate: false),
+                child: AppText("isAgreeAgreement"),
               );
             },
           ),
@@ -37,7 +37,7 @@ class AppStateDebug extends StatelessWidget{
                 onChanged: (value){
                   AppState.isInitialStartup.value = value;
                 },
-                child: AppText("isInitialStartup", isTranslate: false),
+                child: AppText("isInitialStartup"),
               );
             },
           ),
@@ -49,9 +49,9 @@ class AppStateDebug extends StatelessWidget{
                 child: Row(
                   children: [
                     Expanded(
-                      child: AppText("sfxPath", isTranslate: false),
+                      child: AppText("sfxPath"),
                     ),
-                    AppText(sfxPath.toString(), isTranslate: false),
+                    AppText(sfxPath.toString()),
                   ],
                 ),
               );
@@ -65,9 +65,9 @@ class AppStateDebug extends StatelessWidget{
                 child: Row(
                   children: [
                     Expanded(
-                      child: AppText("nikkiasToBeParsed", isTranslate: false),
+                      child: AppText("nikkiasToBeParsed"),
                     ),
-                    AppText(nikkiasToBeParsed.toString(), isTranslate: false),
+                    AppText(nikkiasToBeParsed.toString()),
                   ],
                 ),
               );

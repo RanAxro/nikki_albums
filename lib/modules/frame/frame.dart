@@ -162,12 +162,7 @@ class AccountButton extends StatelessWidget {
         image == null
             ? block0
             : Image(image: image, height: smallButtonSize - 10),
-        Text(
-          text,
-          style: TextStyle(
-            color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-          ),
-        ),
+        AppText(text),
       ],
     );
   }
@@ -268,12 +263,7 @@ class AccountButton extends StatelessWidget {
                   builder: (context) => CustomAccountEditor(),
                 );
               },
-              child: Text(
-                context.tr("addCustomAccountButton"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
-              ),
+              child: AppText.tr("addCustomAccountButton"),
             ),
           );
         }
@@ -327,17 +317,8 @@ class AccountButton extends StatelessWidget {
             return Row(
               spacing: listSpacing,
               children: [
-                Image.asset(
-                  "assets/icon/select.webp",
-                  height: smallButtonSize - 10,
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
-                Text(
-                  context.tr("selectAccountButton"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                  ),
-                ),
+                AppIcon("select", height: smallButtonSize - 10,),
+                AppText.tr("selectAccountButton"),
               ],
             );
           }
@@ -364,15 +345,7 @@ class AccountButton extends StatelessWidget {
                           Set<UidNote> notes,
                           Widget? child,
                         ) {
-                          return Text(
-                            currentGame.selectedUid?.name ??
-                                currentGame.launcherChannel.name,
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.secondary.onColor,
-                            ),
-                          );
+                          return AppText(currentGame.selectedUid?.name ?? currentGame.launcherChannel.name);
                         },
                   ),
 
@@ -540,23 +513,9 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
                 spacing: listSpacing,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    context.tr("locateGame"),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.secondary.onColor,
-                    ),
-                  ),
-                  if (verify())
-                    Image.asset(
-                      "assets/icon/tick.webp",
-                      height: smallButtonContentSize,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.success.pressedColor,
-                    ),
+                  AppText.tr("locateGame"),
+                  if(verify())
+                    AppIcon("tick", height: smallButtonContentSize),
                 ],
               ),
               if (isAlreadyLocate.value && launcher == null)
@@ -564,74 +523,26 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
                   spacing: listSpacing,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      context.tr("launcherDir"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
-                      ),
-                    ),
-                    Image.asset(
-                      "assets/icon/cross.webp",
-                      height: smallButtonContentSize,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.error.pressedColor,
-                    ),
+                    AppText.tr("launcherDir"),
+                    AppIcon("cross", height: smallButtonContentSize),
                   ],
                 ),
               if (isAlreadyLocate.value && launcher == null)
-                Text(
-                  "(${context.tr("locateInfinityNikki")})",
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                  ),
-                ),
+                AppText("(${context.tr("locateInfinityNikki")})"),
               if (launcher != null)
-                Text(
-                  "${context.tr("launcherDir")}: $launcher",
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                  ),
-                ),
+                AppText("${context.tr("launcherDir")}: $launcher"),
               if (launcher != null && install == null)
                 Row(
                   spacing: listSpacing,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      context.tr("installDir"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
-                      ),
-                    ),
-                    Image.asset(
-                      "assets/icon/cross.webp",
-                      height: smallButtonContentSize,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.error.pressedColor,
-                    ),
-                    Text(
-                      "(${context.tr("locateX6GameDir")})",
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
-                      ),
-                    ),
+                    AppText.tr("installDir"),
+                    AppIcon("cross", height: smallButtonContentSize),
+                    AppText("(${context.tr("locateX6GameDir")})"),
                   ],
                 ),
               if (install != null)
-                Text(
-                  "${context.tr("installDir")}: $install",
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                  ),
-                ),
+                AppText("${context.tr("installDir")}: $install"),
             ],
           );
         },
@@ -755,19 +666,8 @@ class GameShortcutBar extends StatelessWidget {
           child: Row(
             spacing: listSpacing,
             children: [
-              Image.asset(
-                "assets/icon/edit.webp",
-                height: 16,
-                color: AppTheme.of(
-                  context,
-                )!.colorScheme.background.onEnabledColor,
-              ),
-              Text(
-                context.tr("remarks"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              AppIcon("edit", height: 16),
+              AppText.tr("remarks"),
             ],
           ),
         ),
@@ -787,12 +687,7 @@ class GameShortcutBar extends StatelessWidget {
                   context,
                 )!.colorScheme.background.onEnabledColor,
               ),
-              Text(
-                context.tr("delete"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              AppText.tr("delete"),
             ],
           ),
         ),
@@ -840,14 +735,7 @@ class GameShortcutBar extends StatelessWidget {
                 valueListenable: AppState.uidNotes,
                 builder:
                     (BuildContext context, Set<UidNote> notes, Widget? child) {
-                      return Text(
-                        shortcut.selectedUid.name,
-                        style: TextStyle(
-                          color: AppTheme.of(
-                            context,
-                          )!.colorScheme.background.onColor,
-                        ),
-                      );
+                      return AppText(shortcut.selectedUid.name);
                     },
               ),
 
@@ -926,12 +814,7 @@ class UidNoteEditor extends StatelessWidget {
           spacing: smallPadding,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              context.tr("noteXAs", args: [uid.value]),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            AppText(context.tr("noteXAs", args: [uid.value])),
 
             AppTextFiled(
               controller: controller,

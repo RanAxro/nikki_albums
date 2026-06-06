@@ -34,14 +34,14 @@ class UpdateDialog extends StatelessWidget{
           spacing: listSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppText("${context.tr("checkForUpdates")}: ${info.platformVersionString} !", isTranslate: false),
+            AppText("${context.tr("checkForUpdates")}: ${info.platformVersionString} !"),
 
             SmoothPointerScroll(
               builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
                 return SingleChildScrollView(
                   controller: controller,
                   physics: physics,
-                  child: AppText("${context.tr("updateMessage")}:\n ${info.platformUpdateMessage[AppState.lang.value]}", isTranslate: false),
+                  child: AppText("${context.tr("updateMessage")}:\n ${info.platformUpdateMessage[AppState.lang.value]}"),
                 );
               },
             ),
@@ -52,7 +52,7 @@ class UpdateDialog extends StatelessWidget{
               builder: (BuildContext context, String? error, Widget? child) {
                 if(error == null) return block0;
 
-                return AppText("downloadFailed");
+                return AppText.tr("downloadFailed");
               },
             ),
             ValueListenableBuilder(
@@ -115,7 +115,7 @@ class UpdateDialog extends StatelessWidget{
                   }
                 );
               },
-              child: AppText("download"),
+              child: AppText.tr("download"),
             ),
 
             /// 关闭按钮
@@ -125,7 +125,7 @@ class UpdateDialog extends StatelessWidget{
               onClick: (){
                 Navigator.of(context).pop();
               },
-              child: AppText("close"),
+              child: AppText.tr("close"),
             ),
           ],
         ),
