@@ -22,24 +22,47 @@ class _ParameterManagerState extends State<ParameterManager>{
   Widget build(BuildContext context){
     return Column(
       children: [
-        SizedBox(
-          height: topBarHeight,
-          child: AppFloatingIndicatorButtonGroup(
-            child: Row(
-              children: [
-                AppButton.smallText(
-                  child: AppText("相机参数"),
-                ),
-                AppButton.smallText(
-                  child: AppText("分享码"),
-                ),
-                AppButton.smallText(
-                  child: AppText("家园码"),
-                ),
-              ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
+        AppBackground(
+          colorRole: ColorRole.secondary,
+          child: SizedBox(
+            height: topBarHeight,
+            child: AppFloatingIndicatorButtonGroup(
+              child: Row(
+                children: [
+                  AppButton.smallText(
+                    child: Row(
+                      spacing: listSpacing,
+                      children: [
+                        AppIcon("camera"),
+                        AppText("相机参数"),
+                      ],
+                    ),
+                  ),
+                  AppButton.smallText(
+                    child: Row(
+                      spacing: listSpacing,
+                      children: [
+                        AppIcon("cloth"),
+                        AppText("分享码"),
+                      ],
+                    ),
+                  ),
+                  AppButton.smallText(
+                    child: Row(
+                      spacing: listSpacing,
+                      children: [
+                        AppIcon("home"),
+                        AppText("家园码"),
+                      ],
+                    ),
+                  ),
+                ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
+              ),
             ),
           ),
         ),
+
+
       ],
     );
   }

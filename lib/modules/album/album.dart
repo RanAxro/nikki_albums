@@ -960,11 +960,10 @@ class _ToolBarState extends State<ToolBar> {
               );
             }),
 
-            AppButtonStack(
-              divider: [3, 2, 4, 3],
-              children: [
-                /// 刷新
-                AppRawButton(
+            ...[
+              /// 刷新
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "refresh",
                   toolTipShortcut: [LogicalKeyboardKey.f5],
                   onClick: () {
@@ -972,65 +971,67 @@ class _ToolBarState extends State<ToolBar> {
                   },
                   child: AppIcon("refresh", height: 18),
                 ),
+              ),
 
-                /// 筛选
-                FiltrationButton(game: game),
+              /// 筛选
+              AppFloatingIndicatorButtonTarget(
+                child: FiltrationButton(game: game),
+              ),
 
-                /// 排序
-                ListenableBuilder(
+              /// 排序
+              AppFloatingIndicatorButtonTarget(
+                child: ListenableBuilder(
                   listenable: game,
-                  builder: (BuildContext context, Widget? child) {
+                  builder: (BuildContext context, Widget? child){
                     return ListenableBuilder(
                       listenable: game.album,
-                      builder: (BuildContext context, Widget? child) {
-                        final String text = context.tr(
-                          (game.album.sortOrder == SortOrder.ascending
-                                  ? SortOrder.descending
-                                  : SortOrder.ascending)
-                              .name,
-                        );
-                        final String icon =
-                            "assets/icon/${game.album.sortOrder.name}.webp";
+                      builder: (BuildContext context, Widget? child){
+                        final String text = context.tr((game.album.sortOrder == SortOrder.ascending ? SortOrder.descending : SortOrder.ascending).name);
+                        final String icon = game.album.sortOrder.name;
 
                         return Tooltip(
                           message: text,
-                          child: SmallButton(
+                          child: AppButton.smallIcon(
                             colorRole: ColorRole.secondary,
                             onClick: () {
                               AlbumHandler.of(context).changeSortOrder(game);
                             },
-                            child: Image.asset(
-                              icon,
-                              height: 20,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.secondary.onEnabledColor,
-                            ),
+                            child: AppIcon(icon, height: 20),
                           ),
                         );
                       },
                     );
                   },
                 ),
+              ),
 
-                /// 减少列数
-                AppRawButton(
+              AppDivider(direction: Axis.vertical),
+
+              /// 减少列数
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "pa_layout_minus",
                   toolTipShortcut: [LogicalKeyboardKey.minus],
                   onClick: AlbumHandler.of(context).layoutMinus,
                   child: AppIcon("layout_minus", height: 20),
                 ),
+              ),
 
-                /// 增加列数
-                AppRawButton(
+              /// 增加列数
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "pa_layout_plus",
                   toolTipShortcut: [LogicalKeyboardKey.add],
                   onClick: AlbumHandler.of(context).layoutPlus,
                   child: AppIcon("layout_plus", height: 20),
                 ),
+              ),
 
-                /// 取消选择
-                AppRawButton(
+              AppDivider(direction: Axis.vertical),
+
+              /// 取消选择
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "deselect",
                   toolTipShortcut: [
                     LogicalKeyboardKey.control,
@@ -1041,9 +1042,11 @@ class _ToolBarState extends State<ToolBar> {
                   },
                   child: AppIcon("deselect", height: 20),
                 ),
+              ),
 
-                /// 全选
-                AppRawButton(
+              /// 全选
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "select_all",
                   toolTipShortcut: [
                     LogicalKeyboardKey.control,
@@ -1054,46 +1057,47 @@ class _ToolBarState extends State<ToolBar> {
                   },
                   child: AppIcon("select_all", height: 20),
                 ),
+              ),
 
-                /// 反选
-                AppRawButton(
+              /// 反选
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "invert_select",
                   onClick: () {
                     AlbumHandler.of(context).invertSelect(game);
                   },
                   child: AppIcon("invert", height: 16),
                 ),
+              ),
 
-                /// 查看选中
-                gameListenerBuilder(game, (
-                  bool isExistSelectedImage,
-                  bool isAllowBackup,
-                ) {
-                  final bool usable = isExistSelectedImage;
+              /// 查看选中
+              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+                final bool usable = isExistSelectedImage;
 
-                  return AppRawButton(
+                return AppFloatingIndicatorButtonTarget(
+                  isTarget: usable,
+                  child: AppButton.smallIcon(
                     toolTip: usable ? "viewSelect" : "",
                     toolTipShortcut: [LogicalKeyboardKey.keyV],
                     onClick: () {
                       AlbumHandler.of(context).viewSelect(context, game);
                     },
                     usable:
-                        (game.selectedAlbum == AlbumType.Video ||
-                            game.selectedAlbum == AlbumType.ExternalVideo)
-                        ? false
-                        : usable,
+                    (game.selectedAlbum == AlbumType.Video || game.selectedAlbum == AlbumType.ExternalVideo) ? false : usable,
                     child: AppIcon("view", height: 18),
-                  );
-                }),
+                  ),
+                );
+              }),
 
-                /// 移出
-                gameListenerBuilder(game, (
-                  bool isExistSelectedImage,
-                  bool isAllowBackup,
-                ) {
-                  final usable = isExistSelectedImage && isAllowBackup;
+              AppDivider(direction: Axis.vertical),
 
-                  return AppRawButton(
+              /// 移出
+              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+                final bool usable = isExistSelectedImage && isAllowBackup;
+
+                return AppFloatingIndicatorButtonTarget(
+                  isTarget: usable,
+                  child: AppButton.smallIcon(
                     toolTip: usable ? "remove" : "",
                     toolTipShortcut: [
                       LogicalKeyboardKey.control,
@@ -1104,17 +1108,17 @@ class _ToolBarState extends State<ToolBar> {
                     },
                     usable: usable,
                     child: AppIcon("remove", height: 20),
-                  );
-                }),
+                  ),
+                );
+              }),
 
-                /// 移入
-                gameListenerBuilder(game, (
-                  bool isExistSelectedImage,
-                  bool isAllowBackup,
-                ) {
-                  final usable = isExistSelectedImage && isAllowBackup;
+              /// 移入
+              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+                final bool usable = isExistSelectedImage && isAllowBackup;
 
-                  return AppRawButton(
+                return AppFloatingIndicatorButtonTarget(
+                  isTarget: usable,
+                  child: AppButton.smallIcon(
                     toolTip: usable ? "insert" : "",
                     toolTipShortcut: [
                       LogicalKeyboardKey.control,
@@ -1125,17 +1129,17 @@ class _ToolBarState extends State<ToolBar> {
                     },
                     usable: usable,
                     child: AppIcon("insert", height: 16),
-                  );
-                }),
+                  ),
+                );
+              }),
 
-                /// 删除
-                gameListenerBuilder(game, (
-                  bool isExistSelectedImage,
-                  bool isAllowBackup,
-                ) {
-                  final usable = isExistSelectedImage;
+              /// 删除
+              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+                final bool usable = isExistSelectedImage;
 
-                  return AppRawButton(
+                return AppFloatingIndicatorButtonTarget(
+                  isTarget: isExistSelectedImage,
+                  child: AppButton.smallIcon(
                     toolTip: usable ? "delete" : "",
                     toolTipShortcut: [LogicalKeyboardKey.delete],
                     onClick: () {
@@ -1143,22 +1147,26 @@ class _ToolBarState extends State<ToolBar> {
                     },
                     usable: usable,
                     child: AppIcon("delete", height: 20),
-                  );
-                }),
+                  ),
+                );
+              }),
 
-                /// 导出
-                gameListenerBuilder(game, (
-                  bool isExistSelectedImage,
-                  bool isAllowBackup,
-                ) {
-                  return ExportImagesButton(
+              AppDivider(direction: Axis.vertical),
+
+              /// 导出
+              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+                return AppFloatingIndicatorButtonTarget(
+                  isTarget: isExistSelectedImage,
+                  child: ExportImagesButton(
                     usable: isExistSelectedImage,
                     images: game.album.selectedImages.toList(growable: false),
-                  );
-                }),
+                  ),
+                );
+              }),
 
-                /// 导入
-                AppRawButton(
+              /// 导入
+              AppFloatingIndicatorButtonTarget(
+                child: AppButton.smallIcon(
                   toolTip: "import",
                   onClick: () {
                     AlbumHandler.of(context).import(context, game);
@@ -1166,19 +1174,19 @@ class _ToolBarState extends State<ToolBar> {
                   usable: game.selectedAlbum != AlbumType.Video,
                   child: AppIcon("import", height: 18),
                 ),
+              ),
 
-                // DragItemWidget(
-                //   dragItemProvider: (_) async => createFilesDragItem(AppState.currentGame.value!.selectedImages.toList().map((ImageItem item) => item.path).toList()),
-                //   allowedOperations: () => [DropOperation.copy],
-                //   child: SmallButton(
-                //     onClick: (){
-                //       print(AppState.currentGame.value!.selectedImages.toList().map((ImageItem item) => item.path).toList().length);
-                //     },
-                //     child: Text("drag"),
-                //   ),
-                // ),
-              ],
-            ),
+              // DragItemWidget(
+              //   dragItemProvider: (_) async => createFilesDragItem(AppState.currentGame.value!.selectedImages.toList().map((ImageItem item) => item.path).toList()),
+              //   allowedOperations: () => [DropOperation.copy],
+              //   child: SmallButton(
+              //     onClick: (){
+              //       print(AppState.currentGame.value!.selectedImages.toList().map((ImageItem item) => item.path).toList().length);
+              //     },
+              //     child: Text("drag"),
+              //   ),
+              // ),
+            ],
           ],
         );
       },
