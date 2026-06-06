@@ -407,7 +407,7 @@ class AppButtonStyle {
   final double? height;
   final double? borderRadius;
   final (ColorRole colorRole, ColorState colorState, bool isTransparent)
-  Function(bool usable, bool isInside, bool isPressed)?
+  Function(bool usable, bool isSelected, bool isInside, bool isPressed)?
   shader;
 
   const AppButtonStyle({
@@ -449,7 +449,7 @@ class AppRawButton extends StatefulWidget {
   final EdgeInsetsGeometry? margin;
   final double? borderRadius;
   final (ColorRole colorRole, ColorState colorState, bool isTransparent)
-  Function(bool usable, bool isInside, bool isPressed)?
+  Function(bool usable, bool isSelected, bool isInside, bool isPressed)?
   shader;
   final bool useConfiguration;
 
@@ -457,6 +457,7 @@ class AppRawButton extends StatefulWidget {
   final bool isTranslate;
   final List<LogicalKeyboardKey>? toolTipShortcut;
   final bool usable;
+  final bool isSelected;
   final void Function()? onClick;
   final Widget? child;
   final Widget? Function(
@@ -484,6 +485,7 @@ class AppRawButton extends StatefulWidget {
     this.isTranslate = true,
     this.toolTipShortcut,
     this.usable = true,
+    this.isSelected = false,
     this.onClick,
     this.child,
     this.builder,
@@ -523,8 +525,8 @@ class _AppRawButtonState extends State<AppRawButton> {
         : null;
 
     final (colorRole, colorState, isTransparent) =
-        style?.shader?.call(widget.usable, isInside, isPressed) ??
-        widget.shader?.call(widget.usable, isInside, isPressed) ??
+        style?.shader?.call(widget.usable, widget.isSelected, isInside, isPressed) ??
+        widget.shader?.call(widget.usable, widget.isSelected, isInside, isPressed) ??
         (ColorRole.of(context), ColorState.normal, true);
 
     final Widget? child =
@@ -855,7 +857,7 @@ class AppButton extends StatelessWidget {
       constraints: constraints,
       margin: margin,
       borderRadius: borderRadius,
-      shader: (bool usable, bool isInside, bool isPressed) {
+      shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
         return shader(context, usable, isInside, isPressed);
       },
       useConfiguration: useConfiguration,
@@ -964,6 +966,7 @@ class AppButton extends StatelessWidget {
   }
 }
 
+@Deprecated("请使用 AppFloatingIndicatorButtonGroup 替代")
 class AppButtonStack extends StatefulWidget {
   final Duration duration;
   final Axis direction;
@@ -1008,13 +1011,17 @@ class _AppButtonStackState extends State<AppButtonStack> {
     style = AppButtonStyle(
       width: widget.buttonWidth,
       height: widget.buttonHeight,
-      shader: (bool usable, bool isInside, bool isPressed) {
+      shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
         ColorRole colorRole = ColorRole.of(context);
         ColorState colorState = ColorState.normal;
         bool isTransparent = true;
 
         if (usable) {
           colorState = ColorState.enabled;
+          if(isSelected){
+            colorState = ColorState.pressed;
+            isTransparent = false;
+          }
           if (isInside) {
             colorState = ColorState.hovered;
           }
@@ -1235,12 +1242,14 @@ class AppFloatingIndicatorButtonGroup extends StatelessWidget{
 }
 
 class AppFloatingIndicatorButtonTarget extends StatelessWidget{
+  final bool isTarget;
   final bool defaultTarget;
   final Object? info;
   final Widget child;
 
   const AppFloatingIndicatorButtonTarget({
     super.key,
+    this.isTarget = true,
     this.defaultTarget = false,
     this.info,
     required this.child,
@@ -1248,15 +1257,23 @@ class AppFloatingIndicatorButtonTarget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    if(!isTarget){
+      return child;
+    }
+
     return AppButtonConfiguration(
       style: AppButtonStyle(
-        shader: (bool usable, bool isInside, bool isPressed){
+        shader: (bool usable, bool isSelected, bool isInside, bool isPressed){
           ColorRole colorRole = ColorRole.of(context);
           ColorState colorState = ColorState.normal;
           bool isTransparent = true;
 
           if(usable){
             colorState = ColorState.enabled;
+            if(isSelected){
+              colorState = ColorState.pressed;
+              isTransparent = false;
+            }
             if(isInside){
               colorState = ColorState.hovered;
             }
@@ -1968,6 +1985,7 @@ class AppSwitch extends StatelessWidget {
   (ColorRole colorRole, ColorState colorState, bool isTransparent) shader(
     BuildContext context,
     bool usable,
+    bool isSelected,
     bool isInside,
     bool isPressed,
   ) {
@@ -1978,7 +1996,7 @@ class AppSwitch extends StatelessWidget {
         : this.isTransparent;
 
     if (usable) {
-      if (value) {
+      if (isSelected) {
         colorState = ColorState.pressed;
         isTransparent = false;
 
@@ -1999,7 +2017,7 @@ class AppSwitch extends StatelessWidget {
         }
       }
     } else {
-      colorState = value ? ColorState.hovered : ColorState.disabled;
+      colorState = isSelected ? ColorState.hovered : ColorState.disabled;
     }
 
     return (colorRole, colorState, isTransparent);
@@ -2017,11 +2035,12 @@ class AppSwitch extends StatelessWidget {
       constraints: constraints,
       margin: margin,
       borderRadius: borderRadius,
-      shader: (bool usable, bool isInside, bool isPressed) {
-        return shader(context, usable, isInside, isPressed);
+      shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
+        return shader(context, usable, isSelected, isInside, isPressed);
       },
       toolTip: toolTip,
       usable: usable,
+      isSelected: value,
       onClick: () {
         onChanged?.call(!value);
       },
@@ -2164,7 +2183,7 @@ class _AppRadioStackState extends State<AppRadioStack> {
       width: widget.buttonWidth,
       height: widget.buttonHeight,
       borderRadius: widget.borderRadius,
-      shader: (bool usable, bool isInside, bool isPressed) {
+      shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
         ColorRole colorRole = ColorRole.of(context);
         ColorState colorState = ColorState.normal;
         bool isTransparent = true;
