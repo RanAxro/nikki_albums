@@ -197,9 +197,33 @@
 		const twDesc = document.querySelector('meta[name="twitter:description"]');
 		if (twDesc && dict['hero_desc']) twDesc.setAttribute('content', dict['hero_desc']);
 
-		// Always link to the pre-rendered locale download page
-		document.getElementById('nav_download').href = `/${currentLang}/download.html`;
-		document.getElementById('nav_download_mobile').href = `/${currentLang}/download.html`;
+		// Link to pre-rendered locale download and guide pages
+		const isFileProtocol = window.location.protocol === 'file:';
+		let downloadUrl = `/${currentLang}/download.html`;
+		let guideUrl = `/${currentLang}/guide.html`;
+
+		if (isFileProtocol) {
+			const supported = ['zh', 'zh-tw', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'pt', 'id', 'th'];
+			const pathSegments = window.location.pathname.split('/').filter(p => p);
+			const parentSeg = pathSegments.length > 1 ? pathSegments[pathSegments.length - 2] : null;
+
+			if (parentSeg && supported.includes(parentSeg)) {
+				// Localized subpage (e.g., /zh/index.html)
+				downloadUrl = './download.html';
+				guideUrl = './guide.html';
+			} else {
+				// Root index.html page (e.g., /index.html)
+				downloadUrl = `./${currentLang}/download.html`;
+				guideUrl = `./${currentLang}/guide.html`;
+			}
+		}
+
+		document.getElementById('nav_download').href = downloadUrl;
+		document.getElementById('nav_download_mobile').href = downloadUrl;
+		
+		document.querySelectorAll('a[href*="guide.html"], a[href*="guide_en.html"]').forEach(el => {
+			el.href = guideUrl;
+		});
 		
 		// Hide QQ Group links for non-Chinese versions
 		document.querySelectorAll('.zh-only').forEach(el => {

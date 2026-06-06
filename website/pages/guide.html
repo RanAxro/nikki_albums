@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="guide_title">暖暖相册 - 使用手册与传送指南</title>
+<meta name="description" content="暖暖相册官方使用指南：包含无限暖暖相册管理、多账号切换、智能去重、相机参数解码以及如何将实况照片(Live Photo)和动态照片(Motion Photo)通过局域网无线传输至手机的详细教程。">
+<link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/index.css">
+<link rel="stylesheet" href="../assets/guide.css">
+
+<!-- Theme initialization script (runs synchronously to prevent flash of dark theme) -->
+<script>
+	const savedTheme = localStorage.getItem('theme');
+	if (savedTheme) {
+		if (savedTheme === 'light') {
+			document.documentElement.classList.add('light-mode');
+		}
+	} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+		document.documentElement.classList.add('light-mode');
+	}
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<header>
+		<div class="container">
+			<a id="web_logo" href="../../index.html">
+				<img src="../assets/favicon.ico" alt="暖暖相册 logo">
+				<h2 data-i18n="app_name">暖暖相册</h2>
+			</a>
+			
+			<nav>
+				<ul class="web_header_nav_list">
+					<li><a href="../../index.html" data-i18n="nav_home">首页</a></li>
+					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+					<li><a href="download.html" data-i18n="nav_download">下载</a></li>
+				</ul>
+
+				<!-- Language Switcher -->
+				<div class="lang-dropdown">
+					<button class="lang-dropdown-btn">
+						<span id="current-lang-label">简体中文</span>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="6 9 12 15 18 9"></polyline>
+						</svg>
+					</button>
+					<div class="lang-dropdown-menu">
+						<a id="lang-zh" class="lang-dropdown-item" href="../zh/guide.html">简体中文</a>
+						<a id="lang-zh-tw" class="lang-dropdown-item" href="../zh-tw/guide.html">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="../en/guide.html">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="../ja/guide.html">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="../ko/guide.html">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="../fr/guide.html">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="../de/guide.html">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="../es/guide.html">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="../it/guide.html">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="../pt/guide.html">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="../id/guide.html">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="../th/guide.html">ไทย</a>
+					</div>
+				</div>
+
+
+				<!-- Theme Toggle -->
+				<button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle theme">
+					<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
+					<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Main Layout -->
+	<div class="doc-layout">
+		<!-- Sidebar (Left) -->
+		<aside class="doc-sidebar">
+			<div class="sidebar-group">
+				<div class="sidebar-title" data-i18n="side_quickstart">快速入门</div>
+				<ul class="sidebar-menu">
+					<li class="sidebar-item"><a class="sidebar-link active" href="#intro" data-i18n="side_intro">软件简介</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#installation" data-i18n="side_installation">安装与路径识别</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#categories" data-i18n="side_categories">相册分类介绍</a></li>
+				</ul>
+			</div>
+
+			<div class="sidebar-group">
+				<div class="sidebar-title" data-i18n="side_core">核心功能</div>
+				<ul class="sidebar-menu">
+					<li class="sidebar-item"><a class="sidebar-link" href="#accounts" data-i18n="side_accounts">多账号管理</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#batch" data-i18n="side_batch">批量操作与去重</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#decoding" data-i18n="side_decoding">相册解码与相机参数</a></li>
+				</ul>
+			</div>
+
+			<div class="sidebar-group">
+				<div class="sidebar-title" data-i18n="side_transfer">传送指南</div>
+				<ul class="sidebar-menu">
+					<li class="sidebar-item"><a class="sidebar-link" href="#conversion" data-i18n="side_conversion">实况与动图转换</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#lan" data-i18n="side_lan">局域网无线传输</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#ios" data-i18n="side_ios">导入 iOS (苹果手机)</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#android" data-i18n="side_android">导入 Android (安卓)</a></li>
+				</ul>
+			</div>
+		</aside>
+
+		<!-- Main Content Area -->
+		<main class="doc-content-container">
+			<article class="doc-content">
+				<!-- 软件简介 / Introduction -->
+				<section>
+					<h1 id="intro" data-i18n="sec_intro_title">软件简介</h1>
+					<p data-i18n="sec_intro_p1">欢迎使用<strong>暖暖相册 (Nikki Albums)</strong>！这是一款专为《无限暖暖》玩家精心打造的开源相册管理工具。</p>
+					<p data-i18n="sec_intro_p2">在游戏中，暖暖拍下的美照、搭配日记、DIY设计图和精美的动态影集往往保存在电脑本地的各个角落。暖暖相册能够<strong>自动扫描并整理</strong>这些游戏截图，将其分类归纳。软件提供多账号隔离管理、批量智能去重备份、相机参数反向解码，以及独家支持将游戏内的动态视频一键合成为手机可用的<strong>实况照片 (Live Photo)</strong> 或 <strong>Google 动态照片 (Motion Photo)</strong> 并进行局域网无线传送，是各位搭配师保存游戏回忆的得力助手。</p>
+
+					<div class="custom-block note">
+						<p class="custom-block-title" data-i18n="sec_intro_tip_title">提示</p>
+						<p data-i18n="sec_intro_tip_desc">暖暖相册完全免费开源、无广告，且不会收集任何玩家个人信息或游戏账号数据。所有的解密与文件转换均在您的本地计算机上完成，确保数据隐私安全。</p>
+					</div>
+				</section>
+
+				<!-- 安装与路径识别 / Auto-Detection -->
+				<section>
+					<h2 id="installation" data-i18n="sec_install_title">自动路径识别与配置</h2>
+					<p data-i18n="sec_install_desc">软件启动时，会尝试自动定位您的《无限暖暖》游戏安装路径并识别相册文件夹：</p>
+					<ul>
+						<li data-i18n="sec_install_li1"><strong>国内官服 / 国际服自动兼容</strong>：软件支持自动扫描国内官服（叠纸端）和国际服（Global Server）的相册目录。</li>
+						<li data-i18n="sec_install_li2"><strong>手动设置</strong>：如果因为安装在非默认磁盘或自定义路径导致自动定位失败，您可以在软件顶部的“设置”中手动定位游戏启动程序目录。</li>
+					</ul>
+				</section>
+
+				<!-- 相册分类介绍 / Album Categories -->
+				<section>
+					<h2 id="categories" data-i18n="sec_cat_title">相册分类介绍</h2>
+					<p data-i18n="sec_cat_desc">软件将扫描出的图像分为以下两大板块，共包含 19 个独立相册与 3 个游戏资源区：</p>
+					<ul>
+						<li data-i18n="sec_cat_li1"><strong>常规相册 (19个)</strong>：包括游戏内截图 (ScreenShot)、搭配日记 (DIY)、骑乘拍照 (PlantDyeing)、时尚杂志 (MagazinePhotos)、以及个性化头像 (CustomAvatar) 等。</li>
+						<li data-i18n="sec_cat_li2"><strong>动态相册</strong>：包含“动态影集” (NikkiPhotos) 和外部视频，用于存放游戏内录制的视频短片。</li>
+						<li data-i18n="sec_cat_li3"><strong>资源相册 (3个)</strong>：支持浏览游戏内置图包、地图资源与特定游戏图标文件。</li>
+					</ul>
+				</section>
+
+				<!-- 多账号管理 / Multi-Account -->
+				<section>
+					<h2 id="accounts" data-i18n="sec_acc_title">多账号管理</h2>
+					<p data-i18n="sec_acc_desc">如果您的电脑上有多个《无限暖暖》账号（不同 UID）切换登录过，暖暖相册会自动读取并识别出所有 UID：</p>
+					<ul>
+						<li data-i18n="sec_acc_li1"><strong>UID 筛选</strong>：在主界面左上角的下拉菜单中，您可以方便地在不同的 UID 账号之间进行切换。</li>
+						<li data-i18n="sec_acc_li2"><strong>数据隔离</strong>：每个账号的图片数据独立归类、分开备份管理，互不干扰，让多开党或者家庭共享电脑的玩家也能轻松梳理。</li>
+					</ul>
+				</section>
+
+				<!-- 批量操作与去重 / Batch Actions & De-duplication -->
+				<section>
+					<h2 id="batch" data-i18n="sec_batch_title">批量操作与智能去重</h2>
+					<p data-i18n="sec_batch_desc">软件支持高效的批量管理工作流：</p>
+					<ul>
+						<li data-i18n="sec_batch_li1"><strong>批量动作</strong>：选中一张或多张图片后，您可以一键进行<strong>批量导出、还原、转移、删除、复制</strong>等操作。</li>
+						<li data-i18n="sec_batch_li2"><strong>智能防重复机制</strong>：在进行图片批量转移、移动或导出时，软件会自动对比 MD5/哈希值并分析文件内容，如果目标相册中已存在相同照片，软件会自动合并或跳过，防止冗余照片占用大量硬盘空间。</li>
+					</ul>
+				</section>
+
+				<!-- 相册解码与相机参数 / Metadata Decoding -->
+				<section>
+					<h2 id="decoding" data-i18n="sec_dec_title">相册解码与相机参数</h2>
+					<p data-i18n="sec_dec_desc">《无限暖暖》在保存游戏截图时，会以加密形式将拍摄时的丰富元数据写入文件。暖暖相册内置了解密与解码模块：</p>
+					<ul>
+						<li data-i18n="sec_dec_li1"><strong>解码拍摄环境</strong>：选中图片后点击“解码参数”，您可以直观地查看到拍摄该照片时的<strong>天气、时间、具体的游戏内拍摄坐标</strong>。</li>
+						<li data-i18n="sec_dec_li2"><strong>相机与滤镜参数</strong>：支持还原拍摄时的焦距、光圈、景深、曝光值、以及所套用的色彩滤镜名称与强度。</li>
+						<li data-i18n="sec_dec_li3"><strong>一键复制</strong>：您可以一键复制这些详细参数，分享给其他玩家，方便大家在游戏中还原或复现同款氛围感大片！</li>
+					</ul>
+				</section>
+
+				<!-- 实况与动图转换 / Conversion -->
+				<section>
+					<h2 id="conversion" data-i18n="sec_conv_title">实况照片 (Live Photo) 与 GIF 转换</h2>
+					<p data-i18n="sec_conv_desc">这是软件的一大特色功能，能够让您的静态回忆在手机上“活起来”：</p>
+					<ul>
+						<li data-i18n="sec_conv_li1"><strong>转换来源</strong>：您可以将“动态影集”中的游戏视频短片，或者从电脑本地导入的“外部视频”，转换为实况格式。</li>
+						<li>
+							<span data-i18n="sec_conv_li2"><strong>实况照片格式 (Live Photo / Motion Photo)</strong>：</span>
+							<ul>
+								<li data-i18n="sec_conv_li2_sub1"><strong>Apple 苹果格式</strong>：生成一个包含匹配 UUID 的 <code>.JPG</code> 封面和 <code>.MOV</code> 短视频的配套文件夹。</li>
+								<li data-i18n="sec_conv_li2_sub2"><strong>Google 安卓格式</strong>：生成一个单一的 <code>.JPG</code> 格式文件，视频以嵌入式数据附加在照片文件尾部。</li>
+							</ul>
+						</li>
+						<li data-i18n="sec_conv_li3"><strong>GIF 动图</strong>：一键提取并渲染出低延迟、小体积的 GIF 格式动图，方便在社交平台分享。</li>
+					</ul>
+
+					<div class="custom-block tip">
+						<p class="custom-block-title" data-i18n="sec_conv_tip_title">转换说明</p>
+						<p data-i18n="sec_conv_tip_desc">您可以在软件的“设置”界面中，将“实况照片导出格式”预先设定为 <code>Apple Live Photo</code> 或 <code>Google Motion Photo</code>，以便在批量导出时自动按照您手机的系统进行格式打包。</p>
+					</div>
+				</section>
+
+				<!-- 局域网无线传输 / Wireless Transfer -->
+				<section>
+					<h2 id="lan" data-i18n="sec_lan_title">局域网无线传输</h2>
+					<p data-i18n="sec_lan_desc">无需连接 USB 数据线，通过软件内置的局域网共享功能即可快速将照片和实况文件传输至手机：</p>
+					<ol>
+						<li data-i18n="sec_lan_li1"><strong>选择文件</strong>：在相册中勾选您需要发送到手机的照片或视频。</li>
+						<li data-i18n="sec_lan_li2"><strong>开启分享</strong>：点击主面板上的“导出到网络”按钮。</li>
+						<li data-i18n="sec_lan_li3"><strong>局域网连接</strong>：软件会自动启动一个本地 HTTP 静态服务器（监听端口 <strong>58533</strong>），并生成一个专用的<strong>二维码</strong>和<strong>局域网下载链接</strong> (如 <code>http://192.168.x.x:58533</code>)。</li>
+						<li data-i18n="sec_lan_li4"><strong>扫码接收</strong>：将您的手机连接到<strong>同一个 Wi-Fi 网络</strong>，打开手机相机扫码，或者在手机浏览器中输入该链接，即可在手机网页中直接预览并打包下载 (ZIP/Nikkias格式)。</li>
+					</ol>
+				</section>
+
+				<!-- 导入 iOS 手机 / iOS Importing -->
+				<section>
+					<h2 id="ios" data-i18n="sec_ios_title">实况照片导入苹果手机 (iOS)</h2>
+					<p data-i18n="sec_ios_desc">要完美导入 Apple 实况照片，iOS 系统要求 <code>.JPG</code> 图片和 <code>.MOV</code> 视频文件内部包含完全一致的关联标识符（Asset ID）。请根据您的电脑系统选择对应的导入方案：</p>
+					
+					<h3 data-i18n="sec_ios_mac_title">macOS 用户导入方案</h3>
+					<p data-i18n="sec_ios_mac_desc">如果您使用的是 Mac 电脑，这是最便捷的官方原生导入路径：</p>
+					<ol>
+						<li data-i18n="sec_ios_mac_li1"><strong>一键导入系统相册</strong>：在电脑端相册中勾选您需要导入的图片或视频，点击底部的 <strong>“导出到系统相册”</strong> 按钮。软件会自动将其转换为实况照片并导入 macOS 的 <strong>“照片” (Photos) App</strong>。</li>
+						<li data-i18n="sec_ios_mac_li2"><strong>通过 iCloud 同步</strong>：如果您开启了“iCloud 照片”功能，实况照片将自动无缝同步至您的 iPhone。</li>
+						<li data-i18n="sec_ios_mac_li3"><strong>通过隔空投送 (AirDrop)</strong>：若未开启 iCloud 同步，可在 Mac 的“照片” App 中选中该照片，右键选择分享 → <strong>“隔空投送” (AirDrop)</strong> 直接发送到 iPhone。</li>
+					</ol>
+
+					<h3 data-i18n="sec_ios_win_title">Windows 用户导入方案</h3>
+					<p data-i18n="sec_ios_win_desc">如果您使用的是 Windows 电脑，可以根据是否使用 iCloud 选择以下三种方法：</p>
+					
+					<h4 data-i18n="sec_ios_win_m1_title">方法一：通过 iCloud 网页端上传 (推荐：已启用 iCloud 照片的用户)</h4>
+					<p data-i18n="sec_ios_win_m1_desc">如果您在 iPhone 上启用了“iCloud 照片”，这是最省时省力的无线导入方法：</p>
+					<ol>
+						<li data-i18n="sec_ios_win_m1_li1">在 Windows 浏览器中访问并登录 <a href="https://www.icloud.com/" target="_blank" rel="noopener noreferrer">iCloud 网页端</a>，进入“照片”应用。</li>
+						<li data-i18n="sec_ios_win_m1_li2">将相册导出的 <code>.JPG</code> 和 <code>.MOV</code> 同名文件对<strong>同时拖入</strong>浏览器窗口中。</li>
+						<li data-i18n="sec_ios_win_m1_li3">iCloud 会自动识别并将其作为一张完整的“实况照片”上传，片刻后即可在 iPhone 的相册中无缝查看并播放！</li>
+					</ol>
+
+					<h4 data-i18n="sec_ios_win_m2_title">方法二：使用移动存储设备 (推荐：未启用 iCloud / 习惯有线导入的用户)</h4>
+					<ol>
+						<li data-i18n="sec_ios_win_m2_li1">准备一个可连接 iPhone 的 U 盘或移动硬盘。</li>
+						<li data-i18n="sec_ios_win_m2_li2">在 U 盘/移动硬盘的根目录下创建嵌套文件夹：先建一个名为 <code>DCIM</code> 的文件夹，再在 <code>DCIM</code> 内部建一个名为 <code>100APPLE</code> 的子文件夹（注意：是两层嵌套 of 文件夹 <code>DCIM/100APPLE/</code>，而不是名为 “DCIM/100APPLE” 的单个文件夹）。</li>
+						<li data-i18n="sec_ios_win_m2_li3">将相册导出的 <code>.JPG</code> 和 <code>.MOV</code> 实况文件对复制进该 <code>100APPLE</code> 文件夹中。</li>
+						<li data-i18n="sec_ios_win_m2_li4">将 U 盘/移动硬盘插入 iPhone，在手机上打开 <strong>“照片” (Photos) App</strong>，此时相册中会激活 <strong>“导入” (Import)</strong> 流程，直接导入即可完美识别并激活 Live Photo！</li>
+					</ol>
+
+					<h4 data-i18n="sec_ios_win_m3_title">方法三：通过局域网 ZIP 下载 + 第三方 App 转换 (无线备用方案)</h4>
+					<ol>
+						<li data-i18n="sec_ios_win_m3_li1">在手机浏览器中访问电脑端相册生成的局域网传输页面，下载整包的 <strong>ZIP 压缩包</strong> 并解压。</li>
+						<li data-i18n="sec_ios_win_m3_li2">在 App Store 下载免费的 <code>intoLive</code> 或 <code>Live Photo Converter</code> 等工具，选择解压出的视频 <code>.MOV</code> 转换回 Live Photo 保存至系统相册。</li>
+					</ol>
+				</section>
+
+				<!-- 导入 Android 手机 / Android Importing -->
+				<section>
+					<h2 id="android" data-i18n="sec_and_title">动态照片导入安卓手机 (Android)</h2>
+					<p data-i18n="sec_and_desc">安卓手机使用 <code>Google Motion Photo</code> 格式，与苹果的拆分格式不同，它是一种单文件形式，传输和管理起来非常简单：</p>
+					<ol>
+						<li data-i18n="sec_and_li1"><strong>获取文件</strong>：在电脑端导出时，确保设置中的实况格式为 <code>Google Motion Photo</code>。导出的文件将是单一的 <code>.jpg</code> 文件（其实是一个将视频合入底部的复合文件）。</li>
+						<li data-i18n="sec_and_li2"><strong>直接传输</strong>：您可以使用局域网分享二维码下载、USB 拷贝、或直接通过社交软件等原图发送到您的安卓手机上。</li>
+						<li data-i18n="sec_and_li3"><strong>相册播放</strong>：使用手机内置系统相册（华为、小米、OPPO、VIVO等最新系统均已原生支持动态照片）或 <strong>Google Photos</strong> 打开该照片，点击顶部的“动态/实况”按钮或长按即可直接播放。</li>
+					</ol>
+				</section>
+			</article>
+		</main>
+	</div>
+
+	<!-- Mobile Sidebar Toggle Button -->
+	<button class="mobile-sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+		<svg viewBox="0 0 24 24">
+			<path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+		</svg>
+	</button>
+
+	<script src="../assets/guide.js"></script>
+</body>
+</html>

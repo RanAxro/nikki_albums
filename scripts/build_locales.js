@@ -11,6 +11,9 @@ const i18n = eval(i18nContent.replace('const i18n = ', '(').replace(/;?\s*$/, ')
 const langJsContent = fs.readFileSync(path.join(__dirname, '../website/pages/lang.js'), 'utf8');
 const downloadLang = eval(langJsContent.replace('const lang = ', '(').replace(/;?\s*$/, ')'));
 
+// Load guide lang data
+const guideLangs = require('../website/pages/guide_langs.js');
+
 // 2. Read index.html
 const indexPath = path.join(__dirname, '../index.html');
 let indexHtmlContent = fs.readFileSync(indexPath, 'utf8');
@@ -29,8 +32,9 @@ for (const [lang, dict] of Object.entries(i18n)) {
     // Update <html lang="en">
     content = content.replace(/<html lang="[^"]+">/, `<html lang="${htmlLangMap[lang] || lang}">`);
 
-    // Add <base href="/"> after <head> so relative paths like "website/assets/..." resolve correctly
-    content = content.replace('<head>', '<head>\n<base href="/">');
+    // Update relative asset and page paths to go up one directory level (so they resolve correctly without <base> tag)
+    content = content.replace(/href="website\//g, 'href="../website/');
+    content = content.replace(/src="website\//g, 'src="../website/');
 
     // Update <title> and data-i18n elements
     content = content.replace(/(<([a-zA-Z1-6]+)\s+[^>]*data-i18n="([^"]+)"[^>]*>)([\s\S]*?)(<\/\2>)/gi, (match, openTag, tagName, key, inner, closeTag) => {
@@ -87,6 +91,9 @@ for (const [lang, dict] of Object.entries(i18n)) {
     // Update download page links for crawlers
     content = content.replace(/href="website\/pages\/download\.html[^"]*"/g, `href="/${lang}/download.html"`);
 
+    // Update tutorial guide page links based on language
+    content = content.replace(/href="website\/pages\/guide\.html[^"]*"/g, `href="/${lang}/guide.html"`);
+
     // Create directory and write file
     const dirPath = path.join(__dirname, `../${lang}`);
     if (!fs.existsSync(dirPath)) {
@@ -109,8 +116,12 @@ for (const [lang, dict] of Object.entries(i18n)) {
         content = content.replace('<html>', `<html lang="${htmlLangMap[lang] || lang}">`);
     }
 
-    // Add <base href="/website/pages/"> so relative paths like "../assets/" resolve correctly
-    content = content.replace('<head>', '<head>\n<base href="/website/pages/">');
+    // Update relative asset and script paths to resolve correctly without <base> tag
+    content = content.replace(/href="\.\.\/assets\//g, 'href="../website/assets/');
+    content = content.replace(/src="\.\.\/assets\//g, 'src="../website/assets/');
+    content = content.replace(/src="icon\.js"/g, 'src="../website/pages/icon.js"');
+    content = content.replace(/src="version_info\.js"/g, 'src="../website/pages/version_info.js"');
+    content = content.replace(/src="lang\.js"/g, 'src="../website/pages/lang.js"');
 
     // Update title and meta for SEO
     if (downloadLang['page_title'] && downloadLang['page_title'][lang]) {
@@ -156,6 +167,70 @@ for (const [lang, dict] of Object.entries(i18n)) {
     fs.writeFileSync(path.join(dirPath, 'download.html'), content);
     console.log(`✅ Generated /${lang}/download.html`);
 }
+
+// 4.6 Generate guide.html for each locale
+const guideTemplatePath = path.join(__dirname, '../website/pages/guide.html');
+let guideTemplateContent = fs.readFileSync(guideTemplatePath, 'utf8');
+
+const langNames = {
+    'zh': '简体中文',
+    'zh-tw': '繁體中文',
+    'en': 'English',
+    'ja': '日本語',
+    'ko': '한국어',
+    'fr': 'Français',
+    'de': 'Deutsch',
+    'es': 'Español',
+    'it': 'Italiano',
+    'pt': 'Português',
+    'id': 'Bahasa Indonesia',
+    'th': 'ไทย'
+};
+
+for (const [lang, dict] of Object.entries(i18n)) {
+    let content = guideTemplateContent;
+    const guideDict = guideLangs[lang] || guideLangs['en'];
+
+    // Update <html lang="en"> or similar
+    content = content.replace(/<html[^>]*>/, `<html lang="${htmlLangMap[lang] || lang}">`);
+
+    // Update relative asset paths to resolve correctly without <base> tag
+    content = content.replace(/href="\.\.\/assets\//g, 'href="../website/assets/');
+    content = content.replace(/src="\.\.\/assets\//g, 'src="../website/assets/');
+
+    // Update logo and navigation links to go to localized pages relatively (so they work locally and online)
+    content = content.replace(/href="\.\.\/\.\.\/index\.html"/g, `href="./index.html"`);
+    content = content.replace(/href="download\.html"/g, `href="./download.html"`);
+
+    // Translate guide.html elements using data-i18n attributes
+    content = content.replace(/(<([a-zA-Z1-6]+)\s+[^>]*data-i18n="([^"]+)"[^>]*>)([\s\S]*?)(<\/\2>)/gi, (match, openTag, tagName, key, inner, closeTag) => {
+        if (guideDict[key]) {
+            return openTag + guideDict[key] + closeTag;
+        }
+        // Fallback to general index i18n dict
+        if (dict[key]) {
+            return openTag + dict[key] + closeTag;
+        }
+        return match;
+    });
+
+    // Update title and description meta tag for SEO
+    if (guideDict['guide_title']) {
+        content = content.replace(/<title>.*?<\/title>/, `<title>${guideDict['guide_title']}</title>`);
+    }
+    if (guideDict['guide_desc']) {
+        content = content.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${guideDict['guide_desc']}">`);
+    }
+
+    // Update language dropdown items to set the active one
+    content = content.replace(`id="lang-${lang}" class="lang-dropdown-item"`, `id="lang-${lang}" class="lang-dropdown-item active"`);
+    content = content.replace('<span id="current-lang-label">简体中文</span>', `<span id="current-lang-label">${langNames[lang]}</span>`);
+
+    const dirPath = path.join(__dirname, `../${lang}`);
+    fs.writeFileSync(path.join(dirPath, 'guide.html'), content);
+    console.log(`✅ Generated /${lang}/guide.html`);
+}
+
 
 // 5. Modify root index.html to use /lang/ instead of ?lang= for Vercel deployment
 indexHtmlContent = indexHtmlContent.replace(/https:\/\/nikki\.ranaxro\.com\/\?lang=([a-z-]+)/g, 'https://nikki.ranaxro.com/$1/');
