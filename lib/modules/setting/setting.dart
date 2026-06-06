@@ -26,27 +26,20 @@ enum SettingPage {
 class SettingDialog extends StatelessWidget {
   static bool _isOpen = false;
 
-  static Future<void> show(
-    BuildContext context, {
-    SettingPage initialPage = SettingPage.personalization,
-  }) async {
-    if (_isOpen) return;
+  static Future<void> show(BuildContext context, {SettingPage initialPage = SettingPage.personalization}) async{
+    if(_isOpen) return;
     _isOpen = true;
-    try {
+    try{
       await showDialog(
         context: context,
         builder: (BuildContext context) {
           return SettingDialog(initialPage: initialPage);
         },
       );
-    } finally {
+    }finally{
       _isOpen = false;
     }
   }
-
-  final SettingPage initialPage;
-  final PageController controller;
-  final List<SettingPage> activePages;
 
   static List<SettingPage> _getActivePages() {
     return [
@@ -64,9 +57,28 @@ class SettingDialog extends StatelessWidget {
     return index == -1 ? 0 : index;
   }
 
+
+  final SettingPage initialPage;
+  final PageController controller;
+  final List<SettingPage> activePages;
+
   SettingDialog({super.key, this.initialPage = SettingPage.personalization})
     : activePages = _getActivePages(),
       controller = PageController(initialPage: _getInitialIndex(initialPage));
+
+  SettingPage? _getCurrentPages() {
+    if(!controller.hasClients){
+      return null;
+    }
+
+    final int? index = controller.page?.toInt();
+
+    if(index == null){
+      return null;
+    }
+
+    return _getActivePages()[index];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,51 +203,58 @@ class SettingDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(smallBorderRadius),
       ),
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return AppFloatingIndicatorButtonGroup(
-            child: Container(
-              padding: const EdgeInsets.all(smallPadding),
-              width: constraints.maxWidth - 88,
-              child: Column(
-                spacing: bigListSpacing,
-                children: [
-                  SizedBox(
-                    height: topBarHeight,
-                    child: Row(
-                      spacing: bigListSpacing,
-                      children: [
-                        block10W,
-                        Expanded(
-                          child: AppText(
-                            "setting",
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        AppFloatingIndicatorButtonTarget(
-                          child: const ChangeLanguage(),
-                        ),
-
-                        AppFloatingIndicatorButtonTarget(
-                          child: AppButton.smallIcon(
-                            colorRole: ColorRole.background,
-                            onClick: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: AppIcon("cross", height: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(child: content),
-                ],
-              ),
-            ),
+      child: ListenableBuilder(
+        listenable: controller,
+        builder: (BuildContext context, Widget? child){
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints){
+              return AnimatedContainer(
+                duration: animationTime,
+                padding: const EdgeInsets.all(smallPadding),
+                width: (_getCurrentPages() ?? initialPage) == SettingPage.debugPanel ? constraints.maxWidth - 88 : 700,
+                child: child,
+              );
+            },
           );
         },
+        child: AppFloatingIndicatorButtonGroup(
+          child: Column(
+            spacing: bigListSpacing,
+            children: [
+              SizedBox(
+                height: topBarHeight,
+                child: Row(
+                  spacing: bigListSpacing,
+                  children: [
+                    block10W,
+                    Expanded(
+                      child: AppText(
+                        "setting",
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    AppFloatingIndicatorButtonTarget(
+                      child: const ChangeLanguage(),
+                    ),
+
+                    AppFloatingIndicatorButtonTarget(
+                      child: AppButton.smallIcon(
+                        colorRole: ColorRole.background,
+                        onClick: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: AppIcon("cross", height: 20),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(child: content),
+            ],
+          ),
+        ),
       ),
     );
   }
