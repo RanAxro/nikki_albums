@@ -99,12 +99,11 @@ class _ReceiveFileState extends State<ReceiveFile> {
                 return ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return SmallButton(
+                    return AppButton.smallText(
                       padding: const EdgeInsets.only(left: bigPadding),
-                      width: null,
                       height: bigButtonSize,
                       colorRole: ColorRole.background,
-                      transparent: false,
+                      isTransparent: false,
                       onClick: () async {
                         final File? downloadFile = await downloadFileByUrl(
                           context,
@@ -117,13 +116,8 @@ class _ReceiveFileState extends State<ReceiveFile> {
                       },
                       child: Column(
                         children: [
-                          Align(
-                            child: Text(
-                              items[index].code,
-                              style: TextStyle(fontSize: 36),
-                            ),
-                          ),
-                          Align(child: Text(items[index].v4AccessLink)),
+                          Align(child: AppText(items[index].code, fontSize: 36)),
+                          Align(child: AppText(items[index].v4AccessLink)),
                         ],
                       ),
                     );
@@ -310,20 +304,14 @@ Future<File?> downloadFileByUrl(
               color: AppTheme.of(context)!.colorScheme.error.pressedColor,
             ),
           ),
-          SmallButton(
-            width: null,
+          AppButton.smallText(
             colorRole: ColorRole.background,
-            transparent: false,
+            isTransparent: false,
             onClick: () {
               close();
               completer.complete();
             },
-            child: Text(
-              context.tr("close"),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.background.onColor,
-              ),
-            ),
+            child: AppText.tr("close"),
           ),
         ],
       );

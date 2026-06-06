@@ -155,9 +155,7 @@ class SettingDialog extends StatelessWidget {
           ),
         ),
 
-        SmallVerticalDivider(
-          color: AppTheme.of(context)!.colorScheme.background.hoveredColor,
-        ),
+        AppDivider(direction: Axis.vertical),
 
         Expanded(
           child: PageView(
@@ -342,7 +340,7 @@ class ChangeLanguage extends StatelessWidget {
       builder:
           builder ??
           (BuildContext context, MenuController controller, Widget? child) {
-            return SmallButton(
+            return AppButton.smallText(
               padding: const EdgeInsets.symmetric(horizontal: smallPadding),
               width: null,
               colorRole: ColorRole.background,
@@ -353,8 +351,8 @@ class ChangeLanguage extends StatelessWidget {
                 spacing: listSpacing,
                 children: [
                   AppIcon("language", height: 16),
-                  AppText("language"),
-                  AppText("lang"),
+                  AppText.tr("language"),
+                  AppText.tr("lang"),
                 ],
               ),
             );

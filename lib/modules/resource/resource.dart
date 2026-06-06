@@ -141,9 +141,8 @@ class ResourceButton extends StatelessWidget {
               onSecondaryTap: () {
                 _openResourceFolder(resourceType.value);
               },
-              child: SmallButton(
+              child: AppButton.smallText(
                 padding: const EdgeInsets.all(6),
-                width: null,
                 colorRole: ColorRole.secondary,
                 onClick: () {
                   controller.isOpen ? controller.close() : controller.open();
@@ -292,28 +291,15 @@ class ListViewer extends StatelessWidget {
               physics: physics,
               itemBuilder: (context, index) {
                 return KeepAliveWrapper(
-                  child: SmallButton(
+                  child: AppButton.smallText(
                     colorRole: ColorRole.background,
                     onClick: () {
                       SystemFactory.instance.playBk2Video(movies[index]);
                     },
                     child: Row(
                       children: [
-                        Image.asset(
-                          "assets/icon/run.webp",
-                          height: 30,
-                          color: AppTheme.of(
-                            context,
-                          )!.colorScheme.background.onColor,
-                        ),
-                        Text(
-                          movies[index].name,
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.secondary.onColor,
-                          ),
-                        ),
+                        AppIcon("run", height: 30),
+                        AppText(movies[index].name),
                       ],
                     ),
                   ),

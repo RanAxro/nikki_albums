@@ -31,27 +31,26 @@ class VersionInformation extends StatelessWidget{
 
               CheckUpdatesButton(),
 
-              SmallButton(
-                width: null,
+              AppButton.smallText(
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTransparent: false,
                 onClick: (){
                   launchOfficialWebsite(context: context);
                 },
-                child: AppText("toOfficialWebsite"),
+                child: AppText.tr("toOfficialWebsite"),
               ),
 
-              SmallButton(
+              AppButton.smallText(
                 width: null,
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTransparent: false,
                 onClick: () async{
                   final uri = Uri.parse("https://$githubWebsite");
                   if(await canLaunchUrl(uri)){
                     await launchUrl(uri, mode: LaunchMode.externalApplication);
                   }
                 },
-                child: AppText("toGitHub"),
+                child: AppText.tr("toGitHub"),
               ),
 
               block10H,
@@ -113,15 +112,14 @@ class _CheckUpdatesButtonState extends State<CheckUpdatesButton>{
         ),
           ),
         ),
-        SmallButton(
+        AppButton.smallText(
           padding: const EdgeInsets.symmetric(horizontal: smallPadding),
           colorRole: ColorRole.background,
-          transparent: false,
-          width: null,
+          isTransparent: false,
           onClick: (){
             setState((){ _checkCount++; });
           },
-          child: AppText("checkForUpdates"),
+          child: AppText.tr("checkForUpdates"),
         ),
       ],
     );

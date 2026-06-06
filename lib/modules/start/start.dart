@@ -24,17 +24,6 @@ final ContentItem item = ContentItem(
   page: const Start(),
 );
 
-// final ContentItem item = ContentItem(
-//   expectedPosition: 1,
-//   name: "start",
-//   icon: AssetImage("assets/icon/run.webp"),
-//   page: const Start(),
-// );
-//
-// void init(){
-//   routes.addItem(item);
-// }
-
 class Start extends StatelessWidget {
   const Start({super.key});
 
@@ -54,10 +43,10 @@ class Start extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 120),
                   child: Image.asset("assets/logo/InfinityNikki_2.png"),
                 ),
-                SmallButton(
+                AppButton.smallText(
                   width: largeButtonSize,
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     if (AppState.currentGame.value?.launcherPath != null) {
                       final Path path =
@@ -74,14 +63,7 @@ class Start extends StatelessWidget {
                       }
                     }
                   },
-                  child: Text(
-                    context.tr("play"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("play"),
                 ),
               ],
             ),
@@ -126,19 +108,13 @@ class OpenFolderButton extends StatelessWidget {
       ),
       builder:
           (BuildContext context, MenuController controller, Widget? child) {
-            return Tooltip(
-              message: context.tr("openDirectory"),
-              child: SmallButton(
-                colorRole: ColorRole.background,
-                onClick: () {
-                  controller.isOpen ? controller.close() : controller.open();
-                },
-                child: Image.asset(
-                  "assets/icon/folder.webp",
-                  height: 20,
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+            return AppButton.smallIcon(
+              toolTip: "openDirectory",
+              colorRole: ColorRole.background,
+              onClick: () {
+                controller.isOpen ? controller.close() : controller.open();
+              },
+              child: AppIcon("folder", height: 20),
             );
           },
       menuChildren: [
@@ -189,16 +165,12 @@ class MoveFolderButton extends StatelessWidget {
           (BuildContext context, MenuController controller, Widget? child) {
             return Tooltip(
               message: context.tr("moveResource"),
-              child: SmallButton(
+              child: AppButton.smallIcon(
                 colorRole: ColorRole.background,
                 onClick: () {
                   controller.isOpen ? controller.close() : controller.open();
                 },
-                child: Image.asset(
-                  "assets/icon/move.webp",
-                  height: 24,
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
+                child: AppIcon("move", height: 24),
               ),
             );
           },
@@ -363,18 +335,14 @@ class MoveFolderDialog extends StatelessWidget {
                 ),
               Text("${context.tr("moveTo")}: ", style: TextStyle(fontSize: 16)),
               Expanded(child: Text(pathStr ?? context.tr("toSelectFolder"))),
-              SmallButton(
+              AppButton.smallIcon(
                 onClick: () async {
                   destination.value = await NativeFilePicker.getDirectoryPath(
                     dialogTitle: context.tr("toSelectFolder"),
                     lockParentWindow: true,
                   );
                 },
-                child: Image.asset(
-                  "assets/icon/folder.webp",
-                  height: 20,
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
+                child: AppIcon("folder", height: 20),
               ),
             ],
           );
@@ -483,17 +451,11 @@ class MoveFolderDialog extends StatelessWidget {
                       ),
                       Tooltip(
                         message: context.tr("retry"),
-                        child: SmallButton(
+                        child: AppButton.smallIcon(
                           onClick: () {
                             reTestPermission(() {});
                           },
-                          child: Image.asset(
-                            "assets/icon/refresh.webp",
-                            height: 20,
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.primary.onColor,
-                          ),
+                          child: AppIcon("refresh", height: 20),
                         ),
                       ),
                     ],
@@ -524,12 +486,12 @@ class MoveFolderDialog extends StatelessWidget {
       MultiValueListenableBuilder(
         listenables: [directorySize, freeSize, destination, permission],
         builder: (BuildContext context, Widget? child) {
-          final Widget cancelButton = SmallButton(
+          final Widget cancelButton = AppButton.smallText(
             width: null,
             onClick: () {
               Navigator.of(context).pop();
             },
-            child: Text(context.tr("cancel")),
+            child: AppText.tr("cancel"),
           );
 
           bool isReady =
@@ -549,7 +511,7 @@ class MoveFolderDialog extends StatelessWidget {
           return Row(
             children: [
               Expanded(
-                child: SmallButton(
+                child: AppButton.smallText(
                   width: null,
                   onClick: () {
                     showDialog(
@@ -565,7 +527,7 @@ class MoveFolderDialog extends StatelessWidget {
                     );
                     _startToMove();
                   },
-                  child: Text(context.tr("startToMove")),
+                  child: AppText.tr("startToMove"),
                 ),
               ),
               Expanded(child: cancelButton),
@@ -602,7 +564,7 @@ class BackupAlbumButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: context.tr("backupAllAlbum"),
-      child: SmallButton(
+      child: AppButton.smallIcon(
         colorRole: ColorRole.background,
         onClick: () {
           showDialog(
@@ -626,11 +588,7 @@ class BackupAlbumButton extends StatelessWidget {
             },
           );
         },
-        child: Image.asset(
-          "assets/icon/export.webp",
-          height: 20,
-          color: AppTheme.of(context)!.colorScheme.background.onColor,
-        ),
+        child: AppIcon("export", height: 20),
       ),
     );
   }
@@ -703,50 +661,28 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                 ),
 
               if (errorMessage == null)
-                SmallButton(
-                  width: null,
+                AppButton.smallText(
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     Explorer.openFile(savePath.file);
                   },
-                  child: Text(
-                    context.tr("openDirectory"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("openDirectory"),
                 ),
               if (errorMessage == null)
-                SmallButton(
-                  width: null,
+                AppButton.smallText(
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     sendToNetwork(context, savePath);
                   },
-                  child: Text(
-                    context.tr("sendBackupToNetwork"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("sendBackupToNetwork"),
                 ),
-              SmallButton(
-                width: null,
+              AppButton.smallText(
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTransparent: false,
                 onClick: close,
-                child: Text(
-                  context.tr("close"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                child: AppText.tr("close"),
               ),
             ],
           );
@@ -889,21 +825,13 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                 ),
                 Expanded(child: block0),
 
-                SmallButton(
-                  width: null,
+                AppButton.smallText(
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(
-                    context.tr("stopSharing"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("stopSharing"),
                 ),
               ],
             ),
@@ -1004,11 +932,10 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                               );
                             }
 
-                            return SmallButton(
+                            return AppButton.smallText(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: smallPadding,
                               ),
-                              width: null,
                               height: mediumButtonSize,
                               colorRole: ColorRole.background,
                               onClick: () {
@@ -1034,14 +961,7 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
                                       child: tickBox,
                                     ),
                                   ),
-                                  Text(
-                                    "${uid.value} ( ${uid.name} )",
-                                    style: TextStyle(
-                                      color: AppTheme.of(
-                                        context,
-                                      )!.colorScheme.background.onColor,
-                                    ),
-                                  ),
+                                  AppText("${uid.value} ( ${uid.name} )"),
                                 ],
                               ),
                             );
@@ -1062,35 +982,23 @@ class _BackupAlbumProcessorState extends State<BackupAlbumProcessor> {
           children: [
             /// cancel button
             Expanded(
-              child: SmallButton(
-                width: null,
+              child: AppButton.smallText(
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTransparent: false,
                 onClick: () => Navigator.of(context).pop(),
-                child: Text(
-                  context.tr("cancel"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                child: AppText.tr("cancel"),
               ),
             ),
 
             /// save button
             Expanded(
-              child: SmallButton(
-                width: null,
+              child: AppButton.smallText(
                 colorRole: ColorRole.highlight,
-                transparent: false,
+                isTransparent: false,
                 onClick: () {
                   startExport(context);
                 },
-                child: Text(
-                  context.tr("startBackupAllAlbum"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.highlight.onColor,
-                  ),
-                ),
+                child: AppText.tr("startBackupAllAlbum"),
               ),
             ),
           ],

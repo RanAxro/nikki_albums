@@ -66,21 +66,13 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
                         ),
                         Expanded(child: block0),
 
-                        SmallButton(
-                          width: null,
+                        AppButton.smallText(
                           colorRole: ColorRole.background,
-                          transparent: false,
+                          isTransparent: false,
                           onClick: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text(
-                            context.tr("stopSharing"),
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
-                            ),
-                          ),
+                          child: AppText.tr("stopSharing"),
                         ),
                       ],
                     ),
@@ -109,17 +101,11 @@ Future<void> exportImageToNetwork(BuildContext context, Game game) async {
                 color: AppTheme.of(context)!.colorScheme.error.pressedColor,
               ),
             ),
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: close,
-              child: Text(
-                context.tr("close"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("close"),
             ),
           ],
         );

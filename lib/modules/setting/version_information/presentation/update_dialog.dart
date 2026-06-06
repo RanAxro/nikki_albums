@@ -73,12 +73,12 @@ class UpdateDialog extends StatelessWidget{
               builder: (BuildContext context, String? error, Widget? child){
                 if(error == null) return block0;
 
-                return SmallButton(
+                return AppButton.smallText(
                   width: null,
                   onClick: () {
                     launchOfficialWebsite(context: context);
                   },
-                  child: AppText("toOfficialWebsite"),
+                  child: AppText.tr("toOfficialWebsite"),
                 );
               },
             ),

@@ -152,46 +152,26 @@ class TopBar extends StatelessWidget {
 
           Expanded(child: block0),
 
-          Tooltip(
-            message: context.tr("refresh"),
-            child: SmallButton(
-              colorRole: ColorRole.background,
-              transparent: false,
-              onClick: refresh,
-              child: Image.asset(
-                "assets/icon/refresh.webp",
-                height: 20,
-                color: AppTheme.of(
-                  context,
-                )!.colorScheme.background.onEnabledColor,
-              ),
-            ),
+          AppButton.smallIcon(
+            colorRole: ColorRole.background,
+            toolTip: "refresh",
+            isTransparent: false,
+            onClick: refresh,
+            child: AppIcon("refresh", height: 20),
           ),
 
-          SmallButton(
+          AppButton.smallText(
             padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-            width: null,
             colorRole: ColorRole.background,
-            transparent: false,
+            isTransparent: false,
             onClick: () {
               _clearRecycleBin(context);
             },
             child: Row(
               spacing: listSpacing,
               children: [
-                Image.asset(
-                  "assets/icon/clear.webp",
-                  height: 20,
-                  color: AppTheme.of(
-                    context,
-                  )!.colorScheme.background.onEnabledColor,
-                ),
-                Text(
-                  context.tr("clearRecycleBin"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                AppIcon("clear", height: 20),
+                AppText.tr("clearRecycleBin"),
               ],
             ),
           ),
@@ -234,14 +214,9 @@ class DeletionBox extends StatelessWidget {
                 color: AppTheme.of(context)!.colorScheme.error.pressedColor,
               ),
             ),
-            SmallButton(
+            AppButton.smallText(
               onClick: close,
-              child: Text(
-                context.tr("close"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("close"),
             ),
           ],
         );
@@ -312,16 +287,16 @@ class DeletionBox extends StatelessWidget {
                     )
                     .join(" | ");
 
-                return SmallButton(
+                return AppButton(
                   margin: const EdgeInsets.only(bottom: smallPadding),
                   padding: const EdgeInsets.symmetric(
                     horizontal: bigPadding,
                     vertical: smallPadding,
                   ),
-                  width: null,
+                  borderRadius: smallBorderRadius,
                   height: smallCardMaxHeight,
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     final AlbumType? type = deletionRecord.suggestedAlbumType;
 
@@ -371,32 +346,20 @@ class DeletionBox extends StatelessWidget {
 
                       Tooltip(
                         message: context.tr("restore"),
-                        child: SmallButton(
+                        child: AppButton.smallIcon(
                           onClick: () {
                             _restore(context, deletionRecord);
                           },
-                          child: Image.asset(
-                            "assets/icon/undelete.webp",
-                            height: 20,
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.secondary.onEnabledColor,
-                          ),
+                          child: AppIcon("undelete", height: 20),
                         ),
                       ),
                       Tooltip(
                         message: context.tr("permanentlyDelete"),
-                        child: SmallButton(
+                        child: AppButton.smallIcon(
                           onClick: () {
                             _delete(context, deletionRecord);
                           },
-                          child: Image.asset(
-                            "assets/icon/delete.webp",
-                            height: 20,
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.secondary.onEnabledColor,
-                          ),
+                          child: AppIcon("delete", height: 20),
                         ),
                       ),
                     ],
@@ -746,40 +709,24 @@ class _DeleteDirectoryProcessorState extends State<DeleteDirectoryProcessor> {
                           ? context.tr("delete")
                           : "${context.tr("delete")} ($time s)";
 
-                      return SmallButton(
+                      return AppButton.smallText(
                         usable: time == 0,
-                        width: null,
                         colorRole: ColorRole.background,
-                        transparent: false,
+                        isTransparent: false,
                         onClick: () {
                           startDelete();
                         },
-                        child: Text(
-                          text,
-                          style: TextStyle(
-                            color: AppTheme.of(
-                              context,
-                            )!.colorScheme.secondary.onColor,
-                          ),
-                        ),
+                        child: AppText(text),
                       );
                     },
                   ),
                 ),
                 Expanded(
-                  child: SmallButton(
-                    width: null,
+                  child: AppButton.smallText(
                     colorRole: ColorRole.highlight,
-                    transparent: false,
+                    isTransparent: false,
                     onClick: widget.onCancel,
-                    child: Text(
-                      context.tr("cancel"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.highlight.onColor,
-                      ),
-                    ),
+                    child: AppText.tr("cancel"),
                   ),
                 ),
               ],
@@ -821,17 +768,11 @@ class _DeleteDirectoryProcessorState extends State<DeleteDirectoryProcessor> {
               ),
             ),
           if (isStartDelete == true && isFinishDelete == true)
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: widget.onFinish,
-              child: Text(
-                context.tr("close"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("close"),
             ),
         ],
       ),

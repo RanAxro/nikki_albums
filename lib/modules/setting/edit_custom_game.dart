@@ -130,34 +130,22 @@ class DeleteCustomGameDialog extends StatelessWidget {
                 color: AppTheme.of(context)!.colorScheme.background.onColor,
               ),
             ),
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 _delete();
                 Navigator.of(context).pop();
               },
-              child: Text(
-                context.tr("delete"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("delete"),
             ),
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
-                context.tr("cancel"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("cancel"),
             ),
           ],
         ),

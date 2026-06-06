@@ -394,21 +394,15 @@ class AccountButton extends StatelessWidget {
                           final GameShortcut shortcut = game.shortcut!;
                           final bool isNailed = shortcut.isNailed;
                           final String icon = isNailed
-                              ? "assets/icon/nail_fill.webp"
-                              : "assets/icon/nail.webp";
+                              ? "nail_fill"
+                              : "nail";
 
-                          return SmallButton(
+                          return AppButton.smallIcon(
                             colorRole: ColorRole.secondary,
                             onClick: () {
                               isNailed ? shortcut.remove() : shortcut.add();
                             },
-                            child: Image.asset(
-                              icon,
-                              height: 20,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.secondary.onEnabledColor,
-                            ),
+                            child: AppIcon(icon, height: 20),
                           );
                         },
                   ),
@@ -487,15 +481,14 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget locateButton = SmallButton(
+    final Widget locateButton = AppButton(
+      borderRadius: smallBorderRadius,
       padding: const EdgeInsets.symmetric(
         horizontal: smallPadding,
         vertical: 2 * smallPadding,
       ),
-      width: null,
-      height: null,
       colorRole: ColorRole.background,
-      transparent: false,
+      isTransparent: false,
       onClick: () async {
         try {
           final FilePickerResult? location = await FilePicker.platform
@@ -657,10 +650,9 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
           spacing: listSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
-            RTextFiled(
+            AppTextFiled(
               controller: controller,
-              labelText: context.tr("name"),
-              colorRole: ColorRole.background,
+              labelText: "name",
             ),
 
             locateButton,
@@ -673,36 +665,20 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
               children: [
                 /// cancel button
                 Expanded(
-                  child: SmallButton(
-                    width: null,
+                  child: AppButton.smallText(
                     colorRole: ColorRole.background,
                     onClick: () => Navigator.of(context).pop(),
-                    child: Text(
-                      context.tr("cancel"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
+                    child: AppText.tr("cancel"),
                   ),
                 ),
 
                 /// save button
                 Expanded(
-                  child: SmallButton(
-                    width: null,
+                  child: AppButton.smallText(
                     colorRole: ColorRole.highlight,
-                    transparent: false,
+                    isTransparent: false,
                     onClick: onSave,
-                    child: Text(
-                      context.tr("save"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.highlight.onColor,
-                      ),
-                    ),
+                    child: AppText.tr("save"),
                   ),
                 ),
               ],
@@ -752,20 +728,14 @@ class GameShortcutBar extends StatelessWidget {
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 100),
                   width: isHover ? smallButtonSize : 0,
-                  child: SmallButton(
+                  child: AppButton.smallIcon(
                     colorRole: ColorRole.secondary,
                     onClick: () {
                       controller.isOpen
                           ? controller.close()
                           : controller.open();
                     },
-                    child: Image.asset(
-                      "assets/icon/more.webp",
-                      height: 16,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.secondary.onEnabledColor,
-                    ),
+                    child: AppIcon("more", height: 16),
                   ),
                 );
               },
@@ -845,14 +815,13 @@ class GameShortcutBar extends StatelessWidget {
         onExit: (_) {
           hover.value = false;
         },
-        child: SmallButton(
+        child: AppButton.smallText(
           padding: const EdgeInsets.fromLTRB(
             smallPadding,
             smallPadding,
             0,
             smallPadding,
           ),
-          width: null,
           colorRole: ColorRole.secondary,
           onClick: () {
             AppState.currentGame.value = game;
@@ -964,40 +933,27 @@ class UidNoteEditor extends StatelessWidget {
               ),
             ),
 
-            RTextFiled(
+            AppTextFiled(
               controller: controller,
-              labelText: context.tr("fillRemarks"),
-              colorRole: ColorRole.background,
+              labelText: "fillRemarks",
             ),
 
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
-                context.tr("cancel"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("cancel"),
             ),
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 uid.note = controller.text == "" ? null : controller.text;
                 Navigator.of(context).pop();
               },
-              child: Text(
-                context.tr("save"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("save"),
             ),
           ],
         ),
@@ -1295,7 +1251,7 @@ class ContentBuildInWindow extends StatelessWidget {
                       }
                     }
                   },
-                  child: SmallButton(
+                  child: AppButton.smallIcon(
                     margin: const EdgeInsets.only(bottom: listSpacing),
                     onClick: () {
                       SettingDialog.show(
@@ -1303,12 +1259,8 @@ class ContentBuildInWindow extends StatelessWidget {
                         initialPage: SettingPage.personalization,
                       );
                     },
-                    child: Image.asset(
-                      "assets/icon/setting.webp",
-                      height: 26,
-                      color: AppTheme.of(context)!.colorScheme.primary.onColor,
-                    ),
-                  ),
+                    child: AppIcon("setting", height: 26),
+                  )
                 ),
               ],
             ),

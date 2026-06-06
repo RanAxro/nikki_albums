@@ -178,18 +178,12 @@ class NikkiasAction extends StatelessWidget {
           spacing: listSpacing,
           children: [
             Expanded(
-              child: SmallButton(
-                width: null,
+              child: AppButton.smallText(
                 colorRole: ColorRole.background,
                 onClick: () {
                   Navigator.of(context).pop();
                 },
-                child: Text(
-                  context.tr("cancel"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                child: AppText.tr("cancel"),
               ),
             ),
 
@@ -339,19 +333,13 @@ class _ImportButton extends StatelessWidget {
       ),
       builder:
           (BuildContext context, MenuController controller, Widget? child) {
-            return SmallButton(
-              width: null,
+            return AppButton.smallText(
               colorRole: ColorRole.highlight,
-              transparent: false,
+              isTransparent: false,
               onClick: () async {
                 controller.isOpen ? controller.close() : controller.open();
               },
-              child: Text(
-                context.tr("import"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.highlight.onColor,
-                ),
-              ),
+              child: AppText.tr("import"),
             );
           },
       menuChildren: [
@@ -498,19 +486,13 @@ class _SaveAsButton extends StatelessWidget {
       ),
       builder:
           (BuildContext context, MenuController controller, Widget? child) {
-            return SmallButton(
-              width: null,
+            return AppButton.smallText(
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () async {
                 controller.isOpen ? controller.close() : controller.open();
               },
-              child: Text(
-                context.tr("saveAs"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("saveAs"),
             );
           },
       menuChildren: [

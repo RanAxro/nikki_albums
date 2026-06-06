@@ -56,7 +56,7 @@ class DebugPanel extends StatelessWidget{
           ),
         ),
 
-        SmallVerticalDivider(color: AppTheme.of(context)!.colorScheme.background.hoveredColor),
+        AppDivider(direction: Axis.vertical),
 
         Expanded(
           child: PageView(

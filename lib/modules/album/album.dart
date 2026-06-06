@@ -47,17 +47,6 @@ final ContentItem item = ContentItem(
   page: const Album(key: ValueKey("album")),
 );
 
-// final ContentItem item = ContentItem(
-//   expectedPosition: 2,
-//   name: "album",
-//   icon: AssetImage("assets/icon/album.webp"),
-//   page: const Album(),
-// );
-//
-// void init(){
-//   routes.addItem(item);
-// }
-
 class AlbumValuePool extends InheritedWidget {
   final AlbumHandler handler = AlbumHandler();
   final ValueNotifier<bool> isPrimaryMouseDown = ValueNotifier<bool>(false);
@@ -136,12 +125,12 @@ class AlbumHandler {
         return Column(
           spacing: listSpacing,
           children: [
-            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
+            AppText(context.plural("XImageFailedToBeProcessed", errorNum)),
             const FailToCopyFileSystemEntry(),
-            SmallButton(
+            AppButton.smallText(
               width: null,
               onClick: close,
-              child: Text(context.tr("ok")),
+              child: AppText.tr("ok"),
             ),
           ],
         );
@@ -175,12 +164,12 @@ class AlbumHandler {
         return Column(
           spacing: listSpacing,
           children: [
-            Text(context.plural("XImageFailedToBeProcessed", errorNum)),
+            AppText(context.plural("XImageFailedToBeProcessed", errorNum)),
             const FailToCopyFileSystemEntry(),
-            SmallButton(
+            AppButton.smallText(
               width: null,
               onClick: close,
-              child: Text(context.tr("ok")),
+              child: AppText.tr("ok"),
             ),
           ],
         );
@@ -327,12 +316,7 @@ class AlbumHandler {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (errorNum != 0) ...[
-                Text(
-                  context.plural("XImageFailedToBeProcessed", errorNum),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.error.pressedColor,
-                  ),
-                ),
+                AppText(context.plural("XImageFailedToBeProcessed", errorNum)),
                 Text(
                   errors.take(3).join('\n'),
                   style: TextStyle(
@@ -343,17 +327,12 @@ class AlbumHandler {
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
-              SmallButton(
+              AppButton.smallText(
                 width: null,
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTranslate: false,
                 onClick: close,
-                child: Text(
-                  context.tr("close"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                child: AppText.tr("close"),
               ),
             ],
           );
@@ -441,17 +420,12 @@ class AlbumHandler {
                     color: AppTheme.of(context)!.colorScheme.error.pressedColor,
                   ),
                 ),
-              SmallButton(
+              AppButton.smallText(
                 width: null,
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTransparent: false,
                 onClick: close,
-                child: Text(
-                  context.tr("close"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                child: AppText.tr("close"),
               ),
             ],
           );
@@ -567,17 +541,12 @@ class AlbumHandler {
                         color: AppTheme.of(context)!.colorScheme.error.onColor,
                       ),
                     ),
-              SmallButton(
+              AppButton.smallText(
                 width: null,
                 colorRole: ColorRole.background,
-                transparent: false,
+                isTransparent: false,
                 onClick: close,
-                child: Text(
-                  context.tr("close"),
-                  style: TextStyle(
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
-                ),
+                child: AppText.tr("close"),
               ),
             ],
           );
@@ -2044,10 +2013,9 @@ class EditTagDialog extends StatelessWidget {
                       },
                 ),
                 Expanded(
-                  child: RTextFiled(
-                    controller: TextEditingController()..text = tag.value,
-                    labelText: context.tr("tagName"),
-                    colorRole: ColorRole.background,
+                  child: AppTextFiled(
+                    controller: TextEditingController(text: tag.value),
+                    labelText: "tagName",
                     onChanged: (String input) {
                       tag.value = input;
                       verify();
@@ -2098,28 +2066,21 @@ class EditTagDialog extends StatelessWidget {
             ),
 
             /// cancel
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               height: mediumButtonSize,
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
-                context.tr("cancel"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("cancel"),
             ),
 
             /// save
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               height: mediumButtonSize,
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 verify();
 
@@ -2127,12 +2088,7 @@ class EditTagDialog extends StatelessWidget {
                   Navigator.of(context).pop((tag.value, color.value));
                 }
               },
-              child: Text(
-                context.tr("save"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("save"),
             ),
           ],
         ),
@@ -2192,44 +2148,28 @@ class TagListDialog extends StatelessWidget {
                 ),
 
                 /// cancel
-                SmallButton(
+                AppButton.smallText(
                   padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                  width: null,
                   height: mediumButtonSize,
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(
-                    context.tr("cancel"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("cancel"),
                 ),
 
                 /// delete
-                SmallButton(
+                AppButton.smallText(
                   padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                  width: null,
                   height: mediumButtonSize,
                   colorRole: ColorRole.background,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     game.tag.delete(tag);
                     Navigator.of(context).pop();
                   },
-                  child: Text(
-                    context.tr("delete"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("delete"),
                 ),
               ],
             ),
@@ -2264,9 +2204,8 @@ class TagListDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: game.tag.tagList
               .map((String? tag) {
-                return SmallButton(
+                return AppButton.smallText(
                   padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                  width: null,
                   height: mediumButtonSize,
                   colorRole: ColorRole.background,
                   onClick: () {
@@ -2308,17 +2247,11 @@ class TagListDialog extends StatelessWidget {
 
                                     Expanded(child: block0),
 
-                                    SmallButton(
+                                    AppButton.smallText(
                                       onClick: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Image.asset(
-                                        "assets/icon/cross.webp",
-                                        height: 20,
-                                        color: AppTheme.of(
-                                          context,
-                                        )!.colorScheme.background.onColor,
-                                      ),
+                                      child: AppIcon("cross", height: 20),
                                     ),
                                   ],
                                 ),
@@ -2418,18 +2351,12 @@ class TagListDialog extends StatelessWidget {
                       if (tag != null)
                         Tooltip(
                           message: context.tr("edit"),
-                          child: SmallButton(
+                          child: AppButton.smallIcon(
                             colorRole: ColorRole.primary,
                             onClick: () {
                               _editTag(context, tag);
                             },
-                            child: Image.asset(
-                              "assets/icon/edit.webp",
-                              height: 20,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.primary.onColor,
-                            ),
+                            child: AppIcon("edit", height: 20),
                           ),
                         ),
 
@@ -2437,18 +2364,12 @@ class TagListDialog extends StatelessWidget {
                       if (tag != null)
                         Tooltip(
                           message: context.tr("delete"),
-                          child: SmallButton(
+                          child: AppButton.smallIcon(
                             colorRole: ColorRole.primary,
                             onClick: () {
                               _deleteTag(context, tag);
                             },
-                            child: Image.asset(
-                              "assets/icon/delete.webp",
-                              height: 20,
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.primary.onColor,
-                            ),
+                            child: AppIcon("delete", height: 20),
                           ),
                         ),
                     ],
@@ -2489,16 +2410,12 @@ class TagListDialog extends StatelessWidget {
                   ),
                 ),
 
-                SmallButton(
+                AppButton.smallIcon(
                   colorRole: ColorRole.background,
                   onClick: () {
                     Navigator.of(context).pop();
                   },
-                  child: Image.asset(
-                    "assets/icon/cross.webp",
-                    height: 20,
-                    color: AppTheme.of(context)!.colorScheme.background.onColor,
-                  ),
+                  child: AppIcon("cross", height: 20),
                 ),
               ],
             ),
@@ -2506,21 +2423,16 @@ class TagListDialog extends StatelessWidget {
             tagButtons,
 
             /// add tag
-            SmallButton(
+            AppButton.smallText(
               padding: const EdgeInsets.symmetric(horizontal: smallPadding),
               width: null,
               height: mediumButtonSize,
               colorRole: ColorRole.background,
-              transparent: false,
+              isTransparent: false,
               onClick: () {
                 _addTag(context);
               },
-              child: Text(
-                context.tr("addCustomTag"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.background.onColor,
-                ),
-              ),
+              child: AppText.tr("addCustomTag"),
             ),
           ],
         ),
@@ -3121,23 +3033,15 @@ class FiltrationButton extends StatelessWidget {
           ),
           builder:
               (BuildContext context, MenuController controller, Widget? child) {
-                return Tooltip(
-                  message: context.tr("filter"),
-                  child: SmallButton(
-                    colorRole: ColorRole.secondary,
-                    onClick: () {
-                      controller.isOpen
-                          ? controller.close()
-                          : controller.open();
-                    },
-                    child: Image.asset(
-                      "assets/icon/filtration.webp",
-                      height: 20,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.secondary.onEnabledColor,
-                    ),
-                  ),
+                return AppButton.smallIcon(
+                  toolTip: "filter",
+                  colorRole: ColorRole.secondary,
+                  onClick: () {
+                    controller.isOpen
+                        ? controller.close()
+                        : controller.open();
+                  },
+                  child: AppIcon("filtration", height: 20),
                 );
               },
           // menuChildren: Filtration.values.map((Filtration filtration) => _buttonBuilder(filtration)).toList(growable: false),
@@ -3194,15 +3098,11 @@ class SelectionViewerDialog extends StatelessWidget {
               },
             ),
           ),
-          SmallButton(
+          AppButton.smallIcon(
             onClick: () {
               Navigator.of(context).pop();
             },
-            child: Image.asset(
-              "assets/icon/cross.webp",
-              height: 20,
-              color: AppTheme.of(context)!.colorScheme.background.onColor,
-            ),
+            child: AppIcon("cross", height: 20),
           ),
         ],
       ),
@@ -3292,22 +3192,11 @@ class DeleteImagesDialog extends StatelessWidget {
         return Column(
           spacing: listSpacing,
           children: [
-            Text(
-              context.plural("XImageFailedToBeProcessed", errorNum),
-              style: TextStyle(
-                color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-              ),
-            ),
+            AppText(context.plural("XImageFailedToBeProcessed", errorNum)),
             const FailToCopyFileSystemEntry(),
-            SmallButton(
-              width: null,
+            AppButton.smallText(
               onClick: close,
-              child: Text(
-                context.tr("ok"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
-              ),
+              child: AppText.tr("ok"),
             ),
           ],
         );
@@ -3378,9 +3267,8 @@ class DeleteImagesDialog extends StatelessWidget {
                   );
                 }
 
-                return SmallButton(
+                return AppButton.smallText(
                   padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                  width: null,
                   height: mediumButtonSize,
                   colorRole: ColorRole.background,
                   onClick: () {
@@ -3400,14 +3288,7 @@ class DeleteImagesDialog extends StatelessWidget {
                           child: tickBox,
                         ),
                       ),
-                      Text(
-                        "${context.tr(albumsInfoMap[type]!.name)} ( ${albumsInfoMap[type]!.type} )",
-                        style: TextStyle(
-                          color: AppTheme.of(
-                            context,
-                          )!.colorScheme.background.onColor,
-                        ),
-                      ),
+                      AppText("${context.tr(albumsInfoMap[type]!.name)} ( ${albumsInfoMap[type]!.type} )"),
                     ],
                   ),
                 );
@@ -3455,39 +3336,23 @@ class DeleteImagesDialog extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: SmallButton(
-                    width: null,
+                  child: AppButton.smallText(
                     colorRole: ColorRole.background,
-                    transparent: false,
+                    isTransparent: false,
                     onClick: () {
                       _delete(context);
                     },
-                    child: Text(
-                      context.tr("moveToRecycleBin"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
-                      ),
-                    ),
+                    child: AppText.tr("moveToRecycleBin"),
                   ),
                 ),
                 Expanded(
-                  child: SmallButton(
-                    width: null,
+                  child: AppButton.smallText(
                     colorRole: ColorRole.highlight,
-                    transparent: false,
+                    isTransparent: false,
                     onClick: () {
                       _cancel(context);
                     },
-                    child: Text(
-                      context.tr("cancel"),
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.highlight.onColor,
-                      ),
-                    ),
+                    child: AppText.tr("cancel"),
                   ),
                 ),
               ],
@@ -3525,17 +3390,13 @@ class ExportImagesButton extends StatelessWidget {
           (BuildContext context, MenuController controller, Widget? child) {
             return Tooltip(
               message: usable ? context.tr("export") : "",
-              child: SmallButton(
+              child: AppButton.smallIcon(
                 colorRole: ColorRole.secondary,
                 onClick: () {
                   controller.isOpen ? controller.close() : controller.open();
                 },
                 usable: usable,
-                child: Image.asset(
-                  "assets/icon/export.webp",
-                  height: 18,
-                  color: color,
-                ),
+                child: AppIcon("export", height: 18),
               ),
             );
           },
@@ -3747,13 +3608,13 @@ class ImportImagesDialog extends StatelessWidget {
           return Column(
             spacing: listSpacing,
             children: [
-              Text(context.plural("XImageFailedToBeProcessed", errorNum)),
+              AppText(context.plural("XImageFailedToBeProcessed", errorNum)),
               const FailToCopyFileSystemEntry(),
-              SmallButton(
+              AppButton.smallText(
                 width: null,
                 colorRole: ColorRole.background,
                 onClick: close,
-                child: Text(context.tr("ok")),
+                child: AppText.tr("ok"),
               ),
             ],
           );
@@ -3782,38 +3643,22 @@ class ImportImagesDialog extends StatelessWidget {
           final Widget buttons = Row(
             children: [
               Expanded(
-                child: SmallButton(
-                  width: null,
+                child: AppButton.smallText(
                   colorRole: ColorRole.background,
                   onClick: () {
                     _cancel(context);
                   },
-                  child: Text(
-                    context.tr("cancel"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("cancel"),
                 ),
               ),
               Expanded(
-                child: SmallButton(
-                  width: null,
+                child: AppButton.smallText(
                   colorRole: ColorRole.highlight,
-                  transparent: false,
+                  isTransparent: false,
                   onClick: () {
                     _import(context);
                   },
-                  child: Text(
-                    context.tr("import"),
-                    style: TextStyle(
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.highlight.onColor,
-                    ),
-                  ),
+                  child: AppText.tr("import"),
                 ),
               ),
             ],
@@ -3837,14 +3682,7 @@ class ImportImagesDialog extends StatelessWidget {
                           List<ImageItem> value,
                           Widget? child,
                         ) {
-                          return Text(
-                            "${context.plural("importXImage", images.value.length)} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}",
-                            style: TextStyle(
-                              color: AppTheme.of(
-                                context,
-                              )!.colorScheme.background.onColor,
-                            ),
-                          );
+                          return AppText("${context.plural("importXImage", images.value.length)} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}");
                         },
                   ),
                   Expanded(
@@ -3925,25 +3763,9 @@ class ImportImagesDialog extends StatelessWidget {
             spacing: bigPadding,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                context.tr("left-clickToSelectImage"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
-              ),
-              Text(
-                context.tr("dragImageHere"),
-                style: TextStyle(
-                  fontSize: 24,
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
-              ),
-              Text(
-                context.tr("right-clickToPasteImage"),
-                style: TextStyle(
-                  color: AppTheme.of(context)!.colorScheme.secondary.onColor,
-                ),
-              ),
+              AppText.tr("left-clickToSelectImage"),
+              AppText.tr("dragImageHere"),
+              AppText.tr("right-clickToPasteImage"),
             ],
           ),
         );
@@ -3991,27 +3813,14 @@ class ImportImagesDialog extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      "${context.tr("importImageTo")} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}",
-                      style: TextStyle(
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
+                    child: AppText("${context.tr("importImageTo")} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}"),
                   ),
-                  SmallButton(
+                  AppButton.smallIcon(
                     colorRole: ColorRole.background,
                     onClick: () {
                       Navigator.of(context).pop();
                     },
-                    child: Image.asset(
-                      "assets/icon/cross.webp",
-                      height: 20,
-                      color: AppTheme.of(
-                        context,
-                      )!.colorScheme.background.onColor,
-                    ),
+                    child: AppIcon("cross", height: 20),
                   ),
                 ],
               ),
