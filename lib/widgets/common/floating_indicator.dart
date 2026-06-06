@@ -71,41 +71,43 @@ class _FloatingIndicatorGroupState extends State<FloatingIndicatorGroup>{
   }
 
   void _set(Rect? rect, Object? info){
-    _timer?.cancel();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _timer?.cancel();
 
-    if(rect == null){
-      /// If there is no new target after the delay of delta, then the process ends
-      if(_default == null){
-        _timer = Timer.periodic(widget.delta, (Timer timer){
+      if(rect == null){
+        /// If there is no new target after the delay of delta, then the process ends
+        if(_default == null){
+          _timer = Timer.periodic(widget.delta, (Timer timer){
+            setState((){
+              _last = _current;
+              _current = rect;
+              _currentInfo = info;
+              timer.cancel();
+            });
+          });
+        }
+        /// move indicator to default
+        else{
           setState((){
             _last = _current;
-            _current = rect;
-            _currentInfo = info;
-            timer.cancel();
+            _current = _default;
+            _currentInfo = _defaultInfo;
           });
-        });
+        }
       }
-      /// move indicator to default
+      /// move indicator
       else{
-        setState((){
-          _last = _current;
-          _current = _default;
-          _currentInfo = _defaultInfo;
-        });
-      }
-    }
-    /// move indicator
-    else{
-      final Offset? offset = _getOffset(context);
+        final Offset? offset = _getOffset(context);
 
-      if(offset != null){
-        setState((){
-          _last = _current;
-          _current = rect.translate(-offset.dx, -offset.dy);
-          _currentInfo = info;
-        });
+        if(offset != null){
+          setState((){
+            _last = _current;
+            _current = rect.translate(-offset.dx, -offset.dy);
+            _currentInfo = info;
+          });
+        }
       }
-    }
+    });
   }
 
   Widget _buildIndicator(){
@@ -186,7 +188,7 @@ class _FloatingIndicatorGroupState extends State<FloatingIndicatorGroup>{
         if(widget.putBottom)
           _buildIndicator(),
 
-        Positioned.fill(child: widget.child),
+        widget.child,
 
         if(!widget.putBottom)
           _buildIndicator(),

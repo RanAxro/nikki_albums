@@ -1258,65 +1258,66 @@ class AlbumButton extends StatelessWidget {
       builder: (BuildContext context, Game? game, Widget? child) {
         if (game == null) return block0;
 
-        final List<AppRawButton> children = <AppRawButton>[];
-
-        for (AlbumType type in game.accessibleAlbumType) {
-          final AlbumsInfoItem info = albumsInfoMap[type]!;
-          if (info.visible) {
-            children.add(
-              AppRawButton(
-                padding: const EdgeInsets.all(smallPadding),
-                onClick: () {
-                  game.selectedAlbum = type;
-                },
-                child: Row(
-                  children: [
-                    block5W,
-                    AppIcon("album/${info.type}", height: 18),
-                    block15W,
-                    AppText.tr(info.name),
-                  ],
-                ),
-              ),
-            );
-          }
-        }
-
         return AppDropdown(
-          builder:
-              (BuildContext context, MenuController controller, Widget? child) {
-                final Widget buttonContent = ListenableBuilder(
-                  listenable: game,
-                  builder: (BuildContext context, Widget? child) {
-                    return Row(
-                      spacing: listSpacing,
-                      children: [
-                        AppIcon("album/${game.selectedAlbum.name}", height: 18),
-                        AppText.tr(albumsInfoMap[game.selectedAlbum]!.name),
-                      ],
-                    );
-                  },
-                );
-
-                return GestureDetector(
-                  onSecondaryTap: () {
-                    _openAlbumFolder();
-                  },
-                  child: AppButton.smallIcon(
-                    padding: const EdgeInsets.all(6),
-                    width: null,
-                    constraints: const BoxConstraints(minWidth: bigButtonSize),
-                    colorRole: ColorRole.secondary,
-                    onClick: () {
-                      controller.isOpen
-                          ? controller.close()
-                          : controller.open();
-                    },
-                    child: buttonContent,
-                  ),
+          builder: (BuildContext context, MenuController controller, Widget? child){
+            final Widget buttonContent = ListenableBuilder(
+              listenable: game,
+              builder: (BuildContext context, Widget? child) {
+                return Row(
+                  spacing: listSpacing,
+                  children: [
+                    AppIcon("album/${game.selectedAlbum.name}", height: 18),
+                    AppText.tr(albumsInfoMap[game.selectedAlbum]!.name),
+                  ],
                 );
               },
-          children: children,
+            );
+
+            return GestureDetector(
+              onSecondaryTap: () {
+                _openAlbumFolder();
+              },
+              child: AppButton.smallIcon(
+                padding: const EdgeInsets.all(6),
+                width: null,
+                constraints: const BoxConstraints(minWidth: bigButtonSize),
+                colorRole: ColorRole.secondary,
+                onClick: () {
+                  controller.isOpen ? controller.close() : controller.open();
+                },
+                child: buttonContent,
+              ),
+            );
+          },
+          childrenBuilder: (BuildContext context, MenuController controller){
+            final List<Widget> children = <Widget>[];
+
+            for (AlbumType type in game.accessibleAlbumType) {
+              final AlbumsInfoItem info = albumsInfoMap[type]!;
+              if (info.visible) {
+                children.add(AppFloatingIndicatorButtonTarget(
+                  child: AppButton.smallText(
+                    padding: const EdgeInsets.all(smallPadding),
+                    height: mediumButtonSize,
+                    onClick: () {
+                      game.selectedAlbum = type;
+                      controller.close();
+                    },
+                    child: Row(
+                      children: [
+                        block5W,
+                        AppIcon("album/${info.type}", height: 18),
+                        block15W,
+                        AppText.tr(info.name),
+                      ],
+                    ),
+                  ),
+                ));
+              }
+            }
+
+            return children;
+          },
         );
       },
     );

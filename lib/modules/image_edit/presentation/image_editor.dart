@@ -476,24 +476,26 @@ class _ImageEditorState extends State<ImageEditor> {
                   child: AppText.tr("image_edit.ratio"),
                 ),
 
-                AppButtonStack(
-                  direction: Axis.vertical,
-                  buttonWidth: null,
-                  children: [
-                    for (final CropFrameRatio ratio in CropFrameRatio.values)
-                      ListenableBuilder(
-                        listenable: croppingController,
-                        builder: (BuildContext context, Widget? child) {
-                          return AppSwitch.smallText(
-                            value: croppingController.ratio == ratio,
-                            onChanged: (bool value) {
-                              croppingController.ratio = ratio;
-                            },
-                            child: AppText.tr(ratio.key),
-                          );
-                        },
-                      ),
-                  ],
+                AppFloatingIndicatorButtonGroup(
+                  child: Column(
+                    children: [
+                      for (final CropFrameRatio ratio in CropFrameRatio.values)
+                        ListenableBuilder(
+                          listenable: croppingController,
+                          builder: (BuildContext context, Widget? child) {
+                            return AppFloatingIndicatorButtonTarget(
+                              child: AppSwitch.smallText(
+                                value: croppingController.ratio == ratio,
+                                onChanged: (bool value) {
+                                  croppingController.ratio = ratio;
+                                },
+                                child: AppText.tr(ratio.key),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  ),
                 ),
               ],
             ),

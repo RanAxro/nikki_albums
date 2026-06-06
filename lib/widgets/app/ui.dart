@@ -602,243 +602,6 @@ class AppButton extends StatelessWidget {
   }
 }
 
-@Deprecated("请使用 AppFloatingIndicatorButtonGroup 替代")
-class AppButtonStack extends StatefulWidget {
-  final Duration duration;
-  final Axis direction;
-  final double spacing;
-  final double? buttonWidth;
-  final double? buttonHeight;
-  final double borderRadius;
-  final List<int>? divider;
-  final List<Widget> children;
-  // final List<AppRawButton> children;
-
-  const AppButtonStack({
-    super.key,
-    this.duration = animationTime,
-    this.direction = Axis.horizontal,
-    this.spacing = 0.0,
-    this.buttonWidth = smallButtonSize,
-    this.buttonHeight = smallButtonSize,
-    this.borderRadius = smallBorderRadius,
-    this.divider,
-    required this.children,
-  }) : assert(
-         direction == Axis.horizontal && buttonWidth != null ||
-             direction == Axis.vertical && buttonHeight != null,
-         direction == Axis.horizontal
-             ? "AppButtonStack: if direction == Axis.horizontal, buttonWidth != null"
-             : "AppButtonStack: if direction == Axis.vertical, buttonHeight != null",
-       );
-
-  @override
-  State<AppButtonStack> createState() => _AppButtonStackState();
-}
-
-class _AppButtonStackState extends State<AppButtonStack> {
-  int? lastIndex;
-  final ValueNotifier<int?> hoverIndex = ValueNotifier(null);
-  late final AppButtonStyle style;
-
-  @override
-  void initState() {
-    super.initState();
-    style = AppButtonStyle(
-      width: widget.buttonWidth,
-      height: widget.buttonHeight,
-      shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
-        ColorRole colorRole = ColorRole.of(context);
-        ColorState colorState = ColorState.normal;
-        bool isTransparent = true;
-
-        if (usable) {
-          colorState = ColorState.enabled;
-          if(isSelected){
-            colorState = ColorState.pressed;
-            isTransparent = false;
-          }
-          if (isInside) {
-            colorState = ColorState.hovered;
-          }
-          if (isPressed) {
-            colorState = ColorState.pressed;
-            isTransparent = false;
-          }
-        } else {
-          colorState = ColorState.disabled;
-        }
-
-        return (colorRole, colorState, isTransparent);
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Widget> children = <Widget>[];
-    for (int index = 0; index < widget.children.length; index++) {
-      children.add(
-        MouseRegion(
-          onEnter: (_) {
-            lastIndex = hoverIndex.value;
-            hoverIndex.value = index;
-          },
-          child: widget.children[index],
-        ),
-      );
-    }
-
-    /// [widget.direction == Axis.horizontal ? widget.buttonWidth : widget.buttonHeight] can not be [null] because of assert.
-    final double wholeSpacing =
-        widget.spacing +
-        ((widget.direction == Axis.horizontal
-                ? widget.buttonWidth
-                : widget.buttonHeight) ??
-            0);
-
-    final List<double> dividerOffset = [];
-    if (widget.divider != null) {
-      int counter = 0;
-      for (final int interval in widget.divider!) {
-        counter += interval;
-        dividerOffset.add(counter * wholeSpacing);
-      }
-    }
-
-    final Stack stack = Stack(
-      children: [
-        /// Indicator
-        ValueListenableBuilder(
-          valueListenable: hoverIndex,
-          builder: (BuildContext context, int? index, Widget? child) {
-            late final double offset;
-            late final bool transparent;
-            late final Duration moveDuration;
-
-            /// Start hovering
-            if (lastIndex == null && index != null) {
-              offset = index * wholeSpacing;
-              transparent = false;
-              moveDuration = Duration.zero;
-            }
-            /// Stop hovering
-            else if (lastIndex != null && index == null) {
-              offset = lastIndex! * wholeSpacing;
-              transparent = true;
-              moveDuration = widget.duration;
-            }
-            /// Is hovering
-            else if (lastIndex != null && index != null) {
-              offset = index * wholeSpacing;
-              transparent = false;
-              moveDuration = widget.duration;
-            }
-            /// No hovering
-            else {
-              // It will never come to this code block.
-              offset = 0;
-              transparent = true;
-              moveDuration = Duration.zero;
-            }
-
-            return AnimatedPositioned(
-              duration: moveDuration,
-              left: widget.direction == Axis.horizontal ? offset : 0,
-              top: widget.direction == Axis.vertical ? offset : 0,
-              right: widget.direction == Axis.horizontal ? null : 0,
-              bottom: widget.direction == Axis.vertical ? null : 0,
-              width: widget.direction == Axis.horizontal
-                  ? widget.buttonWidth
-                  : null,
-              height: widget.direction == Axis.vertical
-                  ? widget.buttonHeight
-                  : null,
-              child: Center(
-                child: AnimatedContainer(
-                  duration: widget.duration,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(widget.borderRadius),
-                    ),
-                    color: transparent
-                        ? AppColorScheme.of(context)
-                              .byRole(ColorRole.of(context))
-                              .hoveredColor
-                              .withAlpha(0)
-                        : AppColorScheme.of(
-                            context,
-                          ).byRole(ColorRole.of(context)).hoveredColor,
-                  ),
-                  width: widget.buttonWidth,
-                  height: widget.buttonHeight,
-                ),
-              ),
-            );
-          },
-        ),
-
-        /// TODO 滚动时不要触发exit
-        MouseRegion(
-          onExit: (_) {
-            lastIndex = hoverIndex.value;
-            hoverIndex.value = null;
-          },
-          child: AppButtonConfiguration(
-            style: style,
-            child: widget.direction == Axis.horizontal
-                ? Row(
-                    spacing: widget.spacing,
-                    mainAxisSize: MainAxisSize.min,
-                    children: children,
-                  )
-                : Column(
-                    spacing: widget.spacing,
-                    mainAxisSize: MainAxisSize.min,
-                    children: children,
-                  ),
-          ),
-        ),
-
-        /// Divider
-        for (final double offset in dividerOffset)
-          Positioned(
-            left: widget.direction == Axis.horizontal
-                ? offset - 0.5 * smallDividerThickness
-                : 0,
-            top: widget.direction == Axis.vertical
-                ? offset - 0.5 * smallDividerThickness
-                : 0,
-            right: 0,
-            bottom: 0,
-            child: IgnorePointer(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: AppDivider(direction: widget.direction == Axis.horizontal ? Axis.vertical : Axis.horizontal, thickness: 1),
-              ),
-            ),
-          ),
-      ],
-    );
-
-    return Center(
-      child: SizedBox(
-        width: widget.direction == Axis.vertical ? widget.buttonWidth : null,
-        height: widget.direction == Axis.horizontal
-            ? widget.buttonHeight
-            : null,
-        child: stack,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    hoverIndex.dispose();
-  }
-}
-
 class AppFloatingIndicatorButtonGroup extends StatelessWidget{
   final Duration floatDuration;
   final Duration delta;
@@ -1901,13 +1664,11 @@ class AppSlider extends StatelessWidget {
   }
 }
 
-class AppDropdown extends StatefulWidget {
+class AppDropdown extends StatefulWidget{
   final MenuController? controller;
   final AlignmentGeometry? alignment;
   final double borderRadius;
-  final double? buttonWidth;
-  final double buttonHeight;
-  final List<AppRawButton> children;
+  final List<Widget> Function(BuildContext, MenuController) childrenBuilder;
   final Widget Function(BuildContext, MenuController, Widget?)? builder;
   final Widget? child;
 
@@ -1916,9 +1677,7 @@ class AppDropdown extends StatefulWidget {
     this.controller,
     this.alignment,
     this.borderRadius = smallPadding,
-    this.buttonWidth,
-    this.buttonHeight = mediumButtonSize,
-    required this.children,
+    required this.childrenBuilder,
     this.builder,
     this.child,
   });
@@ -1931,7 +1690,7 @@ class _AppDropdownState extends State<AppDropdown> {
   late final MenuController controller;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     controller = widget.controller ?? MenuController();
   }
@@ -1941,9 +1700,7 @@ class _AppDropdownState extends State<AppDropdown> {
     return MenuAnchor(
       style: MenuStyle(
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-          ),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.borderRadius)),
         ),
         padding: WidgetStateProperty.all(const EdgeInsets.all(0)),
         backgroundColor: WidgetStateProperty.all(
@@ -1956,37 +1713,19 @@ class _AppDropdownState extends State<AppDropdown> {
         FadeIn(
           offsetBegin: Offset(0, -20),
           opacityBegin: 0.7,
-          child: Stack(
-            children: [
-              Listener(
-                behavior: HitTestBehavior.translucent,
-                onPointerUp: (_) {
-                  controller.close();
-                },
-                child: SmoothPointerScroll(
-                  builder:
-                      (
-                        BuildContext context,
-                        ScrollController controller,
-                        ScrollPhysics physics,
-                        IndependentScrollbarController scrollbarController,
-                      ) {
-                        return SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          controller: controller,
-                          physics: physics,
-                          child: AppButtonStack(
-                            direction: Axis.vertical,
-                            buttonWidth: widget.buttonWidth,
-                            buttonHeight: widget.buttonHeight,
-                            borderRadius: 0,
-                            children: widget.children,
-                          ),
-                        );
-                      },
+          child: SmoothPointerScroll(
+            builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController) {
+              return SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                controller: scrollController,
+                physics: physics,
+                child: AppFloatingIndicatorButtonGroup(
+                  child: Column(
+                    children: widget.childrenBuilder(context, controller),
+                  ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ],
