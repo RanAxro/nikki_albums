@@ -153,7 +153,7 @@
 					<h2 id="categories" data-i18n="sec_cat_title">相册分类介绍</h2>
 					<p data-i18n="sec_cat_desc">软件将扫描出的图像分为以下两大板块，共包含 19 个独立相册与 3 个游戏资源区：</p>
 					<ul>
-						<li data-i18n="sec_cat_li1"><strong>常规相册 (19个)</strong>：包括游戏内截图 (ScreenShot)、搭配日记 (DIY)、骑乘拍照 (PlantDyeing)、时尚杂志 (MagazinePhotos)、以及个性化头像 (CustomAvatar) 等。</li>
+						<li data-i18n="sec_cat_li1"><strong>常规相册 (19个)</strong>：包括游戏内截图 (ScreenShot)、搭配日记 (DIY)、花草拓印 (PlantDyeing)、时尚杂志 (MagazinePhotos)、以及个性化头像 (CustomAvatar) 等。</li>
 						<li data-i18n="sec_cat_li2"><strong>动态相册</strong>：包含“动态影集” (NikkiPhotos) 和外部视频，用于存放游戏内录制的视频短片。</li>
 						<li data-i18n="sec_cat_li3"><strong>资源相册 (3个)</strong>：支持浏览游戏内置图包、地图资源与特定游戏图标文件。</li>
 					</ul>
@@ -227,39 +227,31 @@
 				<!-- 导入 iOS 手机 / iOS Importing -->
 				<section>
 					<h2 id="ios" data-i18n="sec_ios_title">实况照片导入苹果手机 (iOS)</h2>
-					<p data-i18n="sec_ios_desc">要完美导入 Apple 实况照片，iOS 系统要求 <code>.JPG</code> 图片和 <code>.MOV</code> 视频文件内部包含完全一致的关联标识符（Asset ID）。请根据您的电脑系统选择对应的导入方案：</p>
+					<p data-i18n="sec_ios_desc">要完美导入 Apple 实况照片，iOS 系统要求 <code>.JPG</code> 图片 and <code>.MOV</code> 视频文件内部包含完全一致的关联标识符（Asset ID）。请根据您的电脑系统选择对应的导入方案：</p>
 					
 					<h3 data-i18n="sec_ios_mac_title">macOS 用户导入方案</h3>
 					<p data-i18n="sec_ios_mac_desc">如果您使用的是 Mac 电脑，这是最便捷的官方原生导入路径：</p>
 					<ol>
-						<li data-i18n="sec_ios_mac_li1"><strong>一键导入系统相册</strong>：在电脑端相册中勾选您需要导入的图片或视频，点击底部的 <strong>“导出到系统相册”</strong> 按钮。软件会自动将其转换为实况照片并导入 macOS 的 <strong>“照片” (Photos) App</strong>。</li>
+						<li data-i18n="sec_ios_mac_li1"><strong>一键导入系统相册</strong>：在电脑端相册中勾选您需要导入的图片或视频，点击底部的 <strong>“导出到系统相册”</strong> 按钮。软件会自动将其转换为实况照片并导入 macOS 的 <strong>“照片” App</strong>。</li>
 						<li data-i18n="sec_ios_mac_li2"><strong>通过 iCloud 同步</strong>：如果您开启了“iCloud 照片”功能，实况照片将自动无缝同步至您的 iPhone。</li>
 						<li data-i18n="sec_ios_mac_li3"><strong>通过隔空投送 (AirDrop)</strong>：若未开启 iCloud 同步，可在 Mac 的“照片” App 中选中该照片，右键选择分享 → <strong>“隔空投送” (AirDrop)</strong> 直接发送到 iPhone。</li>
 					</ol>
 
 					<h3 data-i18n="sec_ios_win_title">Windows 用户导入方案</h3>
-					<p data-i18n="sec_ios_win_desc">如果您使用的是 Windows 电脑，可以根据是否使用 iCloud 选择以下三种方法：</p>
+					<p data-i18n="sec_ios_win_desc">如果您使用的是 Windows 电脑，可以根据是否使用 iCloud 选择以下两种方法：</p>
 					
-					<h4 data-i18n="sec_ios_win_m1_title">方法一：通过 iCloud 网页端上传 (推荐：已启用 iCloud 照片的用户)</h4>
-					<p data-i18n="sec_ios_win_m1_desc">如果您在 iPhone 上启用了“iCloud 照片”，这是最省时省力的无线导入方法：</p>
+					<h4 data-i18n="sec_ios_win_m1_title">方法一：使用移动存储设备 (推荐)</h4>
 					<ol>
-						<li data-i18n="sec_ios_win_m1_li1">在 Windows 浏览器中访问并登录 <a href="https://www.icloud.com/" target="_blank" rel="noopener noreferrer">iCloud 网页端</a>，进入“照片”应用。</li>
-						<li data-i18n="sec_ios_win_m1_li2">将相册导出的 <code>.JPG</code> 和 <code>.MOV</code> 同名文件对<strong>同时拖入</strong>浏览器窗口中。</li>
-						<li data-i18n="sec_ios_win_m1_li3">iCloud 会自动识别并将其作为一张完整的“实况照片”上传，片刻后即可在 iPhone 的相册中无缝查看并播放！</li>
+						<li data-i18n="sec_ios_win_m1_li1">准备一个可连接 iPhone 的 U 盘或移动硬盘。</li>
+						<li data-i18n="sec_ios_win_m1_li2">在 U 盘/移动硬盘的根目录下创建嵌套文件夹：先建一个名为 <code>DCIM</code> 的文件夹，再在 <code>DCIM</code> 内部建一个名为 <code>100APPLE</code> 的子文件夹（注意：是两层嵌套的文件夹 <code>DCIM/100APPLE/</code>，而不是名为 “DCIM/100APPLE” 的单个文件夹）。</li>
+						<li data-i18n="sec_ios_win_m1_li3">将相册导出的 <code>.JPG</code> 和 <code>.MOV</code> 实况文件对复制进该 <code>100APPLE</code> 文件夹中。</li>
+						<li data-i18n="sec_ios_win_m1_li4">将 U 盘/移动硬盘插入 iPhone，在手机上打开 <strong>“照片” App</strong>，此时相册中会激活 <strong>“导入”</strong> 流程，直接导入即可完美识别并激活 Live Photo！</li>
 					</ol>
 
-					<h4 data-i18n="sec_ios_win_m2_title">方法二：使用移动存储设备 (推荐：未启用 iCloud / 习惯有线导入的用户)</h4>
+					<h4 data-i18n="sec_ios_win_m2_title">方法二：通过局域网 ZIP 下载 + 第三方 App 转换 (无线备用方案)</h4>
 					<ol>
-						<li data-i18n="sec_ios_win_m2_li1">准备一个可连接 iPhone 的 U 盘或移动硬盘。</li>
-						<li data-i18n="sec_ios_win_m2_li2">在 U 盘/移动硬盘的根目录下创建嵌套文件夹：先建一个名为 <code>DCIM</code> 的文件夹，再在 <code>DCIM</code> 内部建一个名为 <code>100APPLE</code> 的子文件夹（注意：是两层嵌套 of 文件夹 <code>DCIM/100APPLE/</code>，而不是名为 “DCIM/100APPLE” 的单个文件夹）。</li>
-						<li data-i18n="sec_ios_win_m2_li3">将相册导出的 <code>.JPG</code> 和 <code>.MOV</code> 实况文件对复制进该 <code>100APPLE</code> 文件夹中。</li>
-						<li data-i18n="sec_ios_win_m2_li4">将 U 盘/移动硬盘插入 iPhone，在手机上打开 <strong>“照片” (Photos) App</strong>，此时相册中会激活 <strong>“导入” (Import)</strong> 流程，直接导入即可完美识别并激活 Live Photo！</li>
-					</ol>
-
-					<h4 data-i18n="sec_ios_win_m3_title">方法三：通过局域网 ZIP 下载 + 第三方 App 转换 (无线备用方案)</h4>
-					<ol>
-						<li data-i18n="sec_ios_win_m3_li1">在手机浏览器中访问电脑端相册生成的局域网传输页面，下载整包的 <strong>ZIP 压缩包</strong> 并解压。</li>
-						<li data-i18n="sec_ios_win_m3_li2">在 App Store 下载免费的 <code>intoLive</code> 或 <code>Live Photo Converter</code> 等工具，选择解压出的视频 <code>.MOV</code> 转换回 Live Photo 保存至系统相册。</li>
+						<li data-i18n="sec_ios_win_m2_li1">在手机浏览器中访问电脑端相册生成的局域网传输页面，下载整包的 <strong>ZIP 压缩包</strong> 并解压。</li>
+						<li data-i18n="sec_ios_win_m2_li2">在 App Store 下载免费的 <code>intoLive</code> 或 <code>Live Photo Converter</code> 等工具，选择解压出的视频 <code>.MOV</code> 转换回 Live Photo 保存至系统相册。</li>
 					</ol>
 				</section>
 
@@ -270,7 +262,7 @@
 					<ol>
 						<li data-i18n="sec_and_li1"><strong>获取文件</strong>：在电脑端导出时，确保设置中的实况格式为 <code>Google Motion Photo</code>。导出的文件将是单一的 <code>.jpg</code> 文件（其实是一个将视频合入底部的复合文件）。</li>
 						<li data-i18n="sec_and_li2"><strong>直接传输</strong>：您可以使用局域网分享二维码下载、USB 拷贝、或直接通过社交软件等原图发送到您的安卓手机上。</li>
-						<li data-i18n="sec_and_li3"><strong>相册播放</strong>：使用手机内置系统相册（华为、小米、OPPO、VIVO等最新系统均已原生支持动态照片）或 <strong>Google Photos</strong> 打开该照片，点击顶部的“动态/实况”按钮或长按即可直接播放。</li>
+						<li data-i18n="sec_and_li3"><strong>相册播放</strong>：使用手机内置系统相册（华为、小米、OPPO、VIVO等最新系统均已原生支持动态照片） or <strong>Google Photos</strong> 打开该照片，点击顶部的“动态/实况”按钮或长按即可直接播放。</li>
 					</ol>
 				</section>
 			</article>
@@ -284,6 +276,6 @@
 		</svg>
 	</button>
 
-	<script src="../assets/guide.js"></script>
+	<script src="../website/assets/guide.js"></script>
 </body>
 </html>
