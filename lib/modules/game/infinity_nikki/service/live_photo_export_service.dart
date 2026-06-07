@@ -3,10 +3,7 @@ import 'strategies/export_strategy_base.dart';
 import 'strategies/apple_live_photo_strategy.dart';
 import 'strategies/google_motion_photo_strategy.dart';
 
-enum ExportFormat {
-  appleLivePhoto,
-  googleMotionPhoto,
-}
+enum ExportFormat { appleLivePhoto, googleMotionPhoto }
 
 /// 导出服务入口 (统一调用器)
 class LivePhotoExportService {
@@ -26,6 +23,7 @@ class LivePhotoExportService {
     required File coverImage,
     required File sourceVideo,
     required String outputPath,
+    String? customBaseName,
   }) async {
     final strategy = _strategies[format];
     if (strategy == null) {
@@ -35,6 +33,7 @@ class LivePhotoExportService {
       coverImage: coverImage,
       sourceVideo: sourceVideo,
       outputPath: outputPath,
+      customBaseName: customBaseName,
     );
   }
 }

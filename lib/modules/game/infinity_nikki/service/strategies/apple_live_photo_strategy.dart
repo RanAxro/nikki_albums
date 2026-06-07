@@ -17,9 +17,11 @@ class AppleLivePhotoStrategy implements LivePhotoExportStrategy {
     required File coverImage,
     required File sourceVideo,
     required String outputPath,
+    String? customBaseName,
   }) async {
     final String assetIdentifier = const Uuid().v4().toUpperCase();
-    final String baseName = p.basenameWithoutExtension(sourceVideo.path);
+    final String baseName =
+        customBaseName ?? p.basenameWithoutExtension(sourceVideo.path);
     final String outVideoPath = p.join(outputPath, '$baseName.mov');
     final String outImagePath = p.join(outputPath, '$baseName.jpg');
 

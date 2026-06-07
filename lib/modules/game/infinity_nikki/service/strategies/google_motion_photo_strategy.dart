@@ -16,17 +16,22 @@ class _Size {
 /// 使用 Motion Photo v2 格式 (Container:Directory XMP + 视频直接追加)
 class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
   static final _xmpNsBytes = utf8.encode("http://ns.adobe.com/xap/1.0/\x00");
-  static const MethodChannel _channel = MethodChannel('com.ranaxro.nikki.nikkiAlbums/live_photo');
+  static const MethodChannel _channel = MethodChannel(
+    'com.ranaxro.nikki.nikkiAlbums/live_photo',
+  );
 
   @override
   Future<void> export({
     required File coverImage,
     required File sourceVideo,
     required String outputPath,
+    String? customBaseName,
   }) async {
     final imageBytes = await coverImage.readAsBytes();
 
-    if (imageBytes.length < 2 || imageBytes[0] != 0xFF || imageBytes[1] != 0xD8) {
+    if (imageBytes.length < 2 ||
+        imageBytes[0] != 0xFF ||
+        imageBytes[1] != 0xD8) {
       throw FormatException('Cover image is not a valid JPEG.');
     }
 
@@ -36,14 +41,17 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
       final imgSize = _getJpegSize(imageBytes);
       if (imgSize.width > 3840 || imgSize.height > 2160) {
         // Create a temporary path for the normalized video
-        final tempNormVideoPath = p.join(outputPath, '.temp_norm_video_${DateTime.now().millisecondsSinceEpoch}.mp4');
-        
+        final tempNormVideoPath = p.join(
+          outputPath,
+          '.temp_norm_video_${DateTime.now().millisecondsSinceEpoch}.mp4',
+        );
+
         try {
           await _channel.invokeMethod('normalizeVideo', {
             'inputPath': sourceVideo.path,
             'outputPath': tempNormVideoPath,
           });
-          
+
           final normVideo = File(tempNormVideoPath);
           if (await normVideo.exists()) {
             videoBytes = await normVideo.readAsBytes();
@@ -68,7 +76,8 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
 
     final videoSize = videoBytes.length;
 
-    final xmp = '<?xpacket begin="\u{FEFF}" id="W5M0MpCehiHzreSzNTczkc9d"?>'
+    final xmp =
+        '<?xpacket begin="\u{FEFF}" id="W5M0MpCehiHzreSzNTczkc9d"?>'
         '<x:xmpmeta xmlns:x="adobe:ns:meta/">'
         '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
         '<rdf:Description rdf:about=""'
@@ -127,8 +136,20 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
       0x92, 0x86, 0x00, 0x07, 0x00, 0x00, 0x00, 0x15, 0x00, 0x00, 0x00, 0x2C,
       0x00, 0x00, 0x00, 0x00, // Next IFD: none
       0x41, 0x53, 0x43, 0x49, 0x49, 0x00, 0x00, 0x00, // "ASCII\0\0\0"
-      0x6F, 0x70, 0x6C, 0x75, 0x73, 0x5F, 0x38, 0x33, 0x38, 0x38, 0x36, 0x30, 0x38, // "oplus_8388608"
-      0x00 // Padding for even TIFF alignment
+      0x6F,
+      0x70,
+      0x6C,
+      0x75,
+      0x73,
+      0x5F,
+      0x38,
+      0x33,
+      0x38,
+      0x38,
+      0x36,
+      0x30,
+      0x38, // "oplus_8388608"
+      0x00, // Padding for even TIFF alignment
     ]);
 
     // Assemble: SOI + EXIF APP1 + XMP APP1 + original segments + video
@@ -140,7 +161,9 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     out.add(strippedImage);
     out.add(videoBytes);
 
-    final outFilePath = p.join(outputPath, '${p.basenameWithoutExtension(sourceVideo.path)}.jpg');
+    final String baseName =
+        customBaseName ?? p.basenameWithoutExtension(sourceVideo.path);
+    final outFilePath = p.join(outputPath, '$baseName.jpg');
     await File(outFilePath).writeAsBytes(out.takeBytes());
   }
 
@@ -157,7 +180,10 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
         result.add(jpeg.sublist(pos));
         break;
       }
-      if (marker == 0xD8 || marker == 0xD9 || (marker >= 0xD0 && marker <= 0xD7) || marker == 0x01) {
+      if (marker == 0xD8 ||
+          marker == 0xD9 ||
+          (marker >= 0xD0 && marker <= 0xD7) ||
+          marker == 0x01) {
         result.add([0xFF, marker]);
         pos += 2;
         continue;
@@ -181,7 +207,8 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
   bool _isXmpSegment(Uint8List data, int start, int end) {
     if (end - start < _xmpNsBytes.length) return false;
     for (int i = 0; i < _xmpNsBytes.length; i++) {
-      if (start + i >= data.length || data[start + i] != _xmpNsBytes[i]) return false;
+      if (start + i >= data.length || data[start + i] != _xmpNsBytes[i])
+        return false;
     }
     return true;
   }
@@ -191,13 +218,18 @@ class GoogleMotionPhotoStrategy implements LivePhotoExportStrategy {
     while (i < bytes.length - 1) {
       if (bytes[i] == 0xFF) {
         final marker = bytes[i + 1];
-        if (marker == 0xC0 || marker == 0xC2) { // SOF0 or SOF2
+        if (marker == 0xC0 || marker == 0xC2) {
+          // SOF0 or SOF2
           if (i + 8 < bytes.length) {
             int height = (bytes[i + 5] << 8) | bytes[i + 6];
             int width = (bytes[i + 7] << 8) | bytes[i + 8];
             return _Size(width, height);
           }
-        } else if (marker == 0xD8 || marker == 0xD9 || marker == 0xFF || (marker >= 0xD0 && marker <= 0xD7) || marker == 0x01) {
+        } else if (marker == 0xD8 ||
+            marker == 0xD9 ||
+            marker == 0xFF ||
+            (marker >= 0xD0 && marker <= 0xD7) ||
+            marker == 0x01) {
           i += 2;
         } else {
           int length = (bytes[i + 2] << 8) | bytes[i + 3];

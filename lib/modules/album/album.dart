@@ -215,7 +215,7 @@ class AlbumHandler {
     final ValueNotifier<double?> progress = ValueNotifier<double?>(null);
     bool isError = false;
 
-    if(context.mounted){
+    if (context.mounted) {
       AppToast.showMessage(context: context, message: context.tr("pa_on_copy"));
     }
 
@@ -340,11 +340,72 @@ class AlbumHandler {
       );
     }
 
-    for (final ImageItem item in images) {
+    final String liveFormat = AppState.livePhotoExportFormat.value;
+    final bool isVideoAlbum =
+        AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+    final bool useIosNaming =
+        Platform.isWindows && isVideoAlbum && liveFormat == "apple";
+
+    final List<ImageItem> sortedImages = List<ImageItem>.from(images)
+      ..sort((a, b) {
+        final int timeComp = a.time.compareTo(b.time);
+        if (timeComp != 0) return timeComp;
+        return a.name.compareTo(b.name);
+      });
+
+    final Set<int> occupiedNumbers = {};
+    if (useIosNaming) {
       try {
-        final String liveFormat = AppState.livePhotoExportFormat.value;
-        final bool isVideoAlbum =
-            AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
+        final Directory dir = Directory(root.path);
+        if (await dir.exists()) {
+          final RegExp imgPattern = RegExp(
+            r'^IMG_(\d{4})\.',
+            caseSensitive: false,
+          );
+          await for (final FileSystemEntity entity in dir.list()) {
+            if (entity is File) {
+              final String name = p.basename(entity.path);
+              final Match? match = imgPattern.firstMatch(name);
+              if (match != null) {
+                final int? val = int.tryParse(match.group(1)!);
+                if (val != null) {
+                  occupiedNumbers.add(val);
+                }
+              }
+            }
+          }
+        }
+      } catch (_) {}
+    }
+
+    for (final ImageItem item in sortedImages) {
+      try {
+        String? customBaseName;
+        if (useIosNaming) {
+          final RegExp microsecondPattern = RegExp(r'_(\d{6})$');
+          final String originalBaseName = p.basenameWithoutExtension(
+            item.path.path,
+          );
+          final Match? match = microsecondPattern.firstMatch(originalBaseName);
+          int microseconds;
+          if (match != null) {
+            microseconds =
+                int.tryParse(match.group(1)!) ??
+                item.time.microsecondsSinceEpoch;
+          } else {
+            microseconds = item.time.microsecondsSinceEpoch;
+          }
+          int baseNumber = microseconds % 10000;
+          if (baseNumber < 0) baseNumber = -baseNumber;
+          if (baseNumber == 0) baseNumber = 1;
+
+          int seqNum = baseNumber;
+          while (occupiedNumbers.contains(seqNum)) {
+            seqNum = (seqNum % 9999) + 1;
+          }
+          occupiedNumbers.add(seqNum);
+          customBaseName = 'IMG_${seqNum.toString().padLeft(4, '0')}';
+        }
 
         if (isVideoAlbum && liveFormat != "none" && item.cover != null) {
           final File coverFile = File(item.cover!);
@@ -357,13 +418,22 @@ class AlbumHandler {
               coverImage: coverFile,
               sourceVideo: item.path.file,
               outputPath: root.path,
+              customBaseName: customBaseName,
             );
           } else {
-            final Path destination = root + item.path.name;
+            final String ext = item.path.extension;
+            final String outName = customBaseName != null
+                ? '$customBaseName.${ext.toLowerCase()}'
+                : item.path.name;
+            final Path destination = root + outName;
             await item.path.file.copy(destination.path);
           }
         } else {
-          final Path destination = root + item.path.name;
+          final String ext = item.path.extension;
+          final String outName = customBaseName != null
+              ? '$customBaseName.${ext.toLowerCase()}'
+              : item.path.name;
+          final Path destination = root + outName;
           await item.path.file.copy(destination.path);
         }
       } catch (e) {
@@ -920,7 +990,12 @@ class _ToolBarState extends State<ToolBar> {
             ) {
               if (!isExistSelectedImage) return block0;
 
-              return AppText(context.plural("pa_select_X_image", game.album.selectedImages.length,));
+              return AppText(
+                context.plural(
+                  "pa_select_X_image",
+                  game.album.selectedImages.length,
+                ),
+              );
             }),
 
             ...[
@@ -945,11 +1020,16 @@ class _ToolBarState extends State<ToolBar> {
               AppFloatingIndicatorButtonTarget(
                 child: ListenableBuilder(
                   listenable: game,
-                  builder: (BuildContext context, Widget? child){
+                  builder: (BuildContext context, Widget? child) {
                     return ListenableBuilder(
                       listenable: game.album,
-                      builder: (BuildContext context, Widget? child){
-                        final String text = context.tr((game.album.sortOrder == SortOrder.ascending ? SortOrder.descending : SortOrder.ascending).name);
+                      builder: (BuildContext context, Widget? child) {
+                        final String text = context.tr(
+                          (game.album.sortOrder == SortOrder.ascending
+                                  ? SortOrder.descending
+                                  : SortOrder.ascending)
+                              .name,
+                        );
                         final String icon = game.album.sortOrder.name;
 
                         return Tooltip(
@@ -1034,7 +1114,10 @@ class _ToolBarState extends State<ToolBar> {
               ),
 
               /// 查看选中
-              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+              gameListenerBuilder(game, (
+                bool isExistSelectedImage,
+                bool isAllowBackup,
+              ) {
                 final bool usable = isExistSelectedImage;
 
                 return AppFloatingIndicatorButtonTarget(
@@ -1046,7 +1129,10 @@ class _ToolBarState extends State<ToolBar> {
                       AlbumHandler.of(context).viewSelect(context, game);
                     },
                     usable:
-                    (game.selectedAlbum == AlbumType.Video || game.selectedAlbum == AlbumType.ExternalVideo) ? false : usable,
+                        (game.selectedAlbum == AlbumType.Video ||
+                            game.selectedAlbum == AlbumType.ExternalVideo)
+                        ? false
+                        : usable,
                     child: AppIcon("view", height: 18),
                   ),
                 );
@@ -1055,7 +1141,10 @@ class _ToolBarState extends State<ToolBar> {
               AppDivider(direction: Axis.vertical),
 
               /// 移出
-              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+              gameListenerBuilder(game, (
+                bool isExistSelectedImage,
+                bool isAllowBackup,
+              ) {
                 final bool usable = isExistSelectedImage && isAllowBackup;
 
                 return AppFloatingIndicatorButtonTarget(
@@ -1076,7 +1165,10 @@ class _ToolBarState extends State<ToolBar> {
               }),
 
               /// 移入
-              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+              gameListenerBuilder(game, (
+                bool isExistSelectedImage,
+                bool isAllowBackup,
+              ) {
                 final bool usable = isExistSelectedImage && isAllowBackup;
 
                 return AppFloatingIndicatorButtonTarget(
@@ -1097,7 +1189,10 @@ class _ToolBarState extends State<ToolBar> {
               }),
 
               /// 删除
-              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+              gameListenerBuilder(game, (
+                bool isExistSelectedImage,
+                bool isAllowBackup,
+              ) {
                 final bool usable = isExistSelectedImage;
 
                 return AppFloatingIndicatorButtonTarget(
@@ -1117,7 +1212,10 @@ class _ToolBarState extends State<ToolBar> {
               AppDivider(direction: Axis.vertical),
 
               /// 导出
-              gameListenerBuilder(game, (bool isExistSelectedImage, bool isAllowBackup){
+              gameListenerBuilder(game, (
+                bool isExistSelectedImage,
+                bool isAllowBackup,
+              ) {
                 return AppFloatingIndicatorButtonTarget(
                   isTarget: isExistSelectedImage,
                   child: ExportImagesButton(
@@ -1160,9 +1258,7 @@ class _ToolBarState extends State<ToolBar> {
       child: Row(
         spacing: listSpacing,
         children: [
-          AppFloatingIndicatorButtonTarget(
-            child: AlbumButton(),
-          ),
+          AppFloatingIndicatorButtonTarget(child: AlbumButton()),
 
           /// tag button
           ValueListenableBuilder(
@@ -1192,18 +1288,18 @@ class _ToolBarState extends State<ToolBar> {
               child: SmoothPointerScroll(
                 builder:
                     (
-                    BuildContext context,
-                    ScrollController controller,
-                    ScrollPhysics physics,
-                    IndependentScrollbarController scrollbarController,
+                      BuildContext context,
+                      ScrollController controller,
+                      ScrollPhysics physics,
+                      IndependentScrollbarController scrollbarController,
                     ) {
-                  return SingleChildScrollView(
-                    controller: controller,
-                    physics: physics,
-                    scrollDirection: Axis.horizontal,
-                    child: toolButtons,
-                  );
-                },
+                      return SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        scrollDirection: Axis.horizontal,
+                        child: toolButtons,
+                      );
+                    },
               ),
             ),
           ),
@@ -1259,60 +1355,65 @@ class AlbumButton extends StatelessWidget {
         if (game == null) return block0;
 
         return AppDropdown(
-          builder: (BuildContext context, MenuController controller, Widget? child){
-            final Widget buttonContent = ListenableBuilder(
-              listenable: game,
-              builder: (BuildContext context, Widget? child) {
-                return Row(
-                  spacing: listSpacing,
-                  children: [
-                    AppIcon("album/${game.selectedAlbum.name}", height: 18),
-                    AppText.tr(albumsInfoMap[game.selectedAlbum]!.name),
-                  ],
+          builder:
+              (BuildContext context, MenuController controller, Widget? child) {
+                final Widget buttonContent = ListenableBuilder(
+                  listenable: game,
+                  builder: (BuildContext context, Widget? child) {
+                    return Row(
+                      spacing: listSpacing,
+                      children: [
+                        AppIcon("album/${game.selectedAlbum.name}", height: 18),
+                        AppText.tr(albumsInfoMap[game.selectedAlbum]!.name),
+                      ],
+                    );
+                  },
+                );
+
+                return GestureDetector(
+                  onSecondaryTap: () {
+                    _openAlbumFolder();
+                  },
+                  child: AppButton.smallIcon(
+                    padding: const EdgeInsets.all(6),
+                    width: null,
+                    constraints: const BoxConstraints(minWidth: bigButtonSize),
+                    colorRole: ColorRole.secondary,
+                    onClick: () {
+                      controller.isOpen
+                          ? controller.close()
+                          : controller.open();
+                    },
+                    child: buttonContent,
+                  ),
                 );
               },
-            );
-
-            return GestureDetector(
-              onSecondaryTap: () {
-                _openAlbumFolder();
-              },
-              child: AppButton.smallIcon(
-                padding: const EdgeInsets.all(6),
-                width: null,
-                constraints: const BoxConstraints(minWidth: bigButtonSize),
-                colorRole: ColorRole.secondary,
-                onClick: () {
-                  controller.isOpen ? controller.close() : controller.open();
-                },
-                child: buttonContent,
-              ),
-            );
-          },
-          childrenBuilder: (BuildContext context, MenuController controller){
+          childrenBuilder: (BuildContext context, MenuController controller) {
             final List<Widget> children = <Widget>[];
 
             for (AlbumType type in game.accessibleAlbumType) {
               final AlbumsInfoItem info = albumsInfoMap[type]!;
               if (info.visible) {
-                children.add(AppFloatingIndicatorButtonTarget(
-                  child: AppButton.smallText(
-                    padding: const EdgeInsets.all(smallPadding),
-                    height: mediumButtonSize,
-                    onClick: () {
-                      game.selectedAlbum = type;
-                      controller.close();
-                    },
-                    child: Row(
-                      children: [
-                        block5W,
-                        AppIcon("album/${info.type}", height: 18),
-                        block15W,
-                        AppText.tr(info.name),
-                      ],
+                children.add(
+                  AppFloatingIndicatorButtonTarget(
+                    child: AppButton.smallText(
+                      padding: const EdgeInsets.all(smallPadding),
+                      height: mediumButtonSize,
+                      onClick: () {
+                        game.selectedAlbum = type;
+                        controller.close();
+                      },
+                      child: Row(
+                        children: [
+                          block5W,
+                          AppIcon("album/${info.type}", height: 18),
+                          block15W,
+                          AppText.tr(info.name),
+                        ],
+                      ),
                     ),
                   ),
-                ));
+                );
               }
             }
 
@@ -1335,9 +1436,7 @@ class AlbumExhibition extends StatelessWidget {
       valueListenable: AppState.currentGame,
       builder: (BuildContext context, Game? game, Widget? child) {
         if (game == null) {
-          return Center(
-            child: AppText.tr("currentGameIsNull"),
-          );
+          return Center(child: AppText.tr("currentGameIsNull"));
         }
 
         return ListenableBuilder(
@@ -1652,14 +1751,18 @@ class _ExhibitState extends State<Exhibit> {
         if (widget.imageItem.cover == null) {
           return MediaThumbnail.fromCache(
             id: widget.imageItem.name,
-            imagePath: Path(widget.imageItem.thumbnail ?? widget.imageItem.path.path),
+            imagePath: Path(
+              widget.imageItem.thumbnail ?? widget.imageItem.path.path,
+            ),
             targetWidth: 720,
             isVideo: widget.imageItem.isVideo,
           );
         } else {
           return MediaThumbnail.fromCache(
             id: widget.imageItem.cover!,
-            imagePath: Path(widget.imageItem.thumbnail ?? widget.imageItem.cover!),
+            imagePath: Path(
+              widget.imageItem.thumbnail ?? widget.imageItem.cover!,
+            ),
             targetWidth: 720,
             isVideo: false,
           );
@@ -2292,9 +2395,7 @@ class TagListDialog extends StatelessWidget {
                       block5W,
 
                       /// tag name
-                      Expanded(
-                        child: AppText(tag ?? context.tr("defaultTag")),
-                      ),
+                      Expanded(child: AppText(tag ?? context.tr("defaultTag"))),
 
                       /// edit tag
                       if (tag != null)
@@ -2348,9 +2449,7 @@ class TagListDialog extends StatelessWidget {
               children: [
                 block5W,
 
-                Expanded(
-                  child: AppText.tr("manageTags"),
-                ),
+                Expanded(child: AppText.tr("manageTags")),
 
                 AppButton.smallIcon(
                   colorRole: ColorRole.background,
@@ -2408,186 +2507,196 @@ class ImageViewerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget toolButtons = Row(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        AppButton.smallIcon(
-          toolTip: "reset",
-          onClick: controller.reset,
-          child: AppIcon("refresh", height: 20),
-        ),
+      children:
+          [
+                AppButton.smallIcon(
+                  toolTip: "reset",
+                  onClick: controller.reset,
+                  child: AppIcon("refresh", height: 20),
+                ),
 
-        AppDivider(direction: Axis.vertical),
+                AppDivider(direction: Axis.vertical),
 
-        AppButton.smallIcon(
-          toolTip: "pa_horizontal_flip",
-          onClick: controller.horizontalFlip,
-          child: AppIcon("horizontal_flip", height: 18),
-        ),
+                AppButton.smallIcon(
+                  toolTip: "pa_horizontal_flip",
+                  onClick: controller.horizontalFlip,
+                  child: AppIcon("horizontal_flip", height: 18),
+                ),
 
-        AppButton.smallIcon(
-          toolTip: "pa_vertical_flip",
-          onClick: controller.verticalFlip,
-          child: AppIcon("vertical_flip", height: 18),
-        ),
+                AppButton.smallIcon(
+                  toolTip: "pa_vertical_flip",
+                  onClick: controller.verticalFlip,
+                  child: AppIcon("vertical_flip", height: 18),
+                ),
 
-        AppButton.smallIcon(
-          toolTip: "pa_rotate_left_90",
-          onClick: controller.rotateLeft90,
-          child: AppIcon("rotate_left_90", height: 20),
-        ),
+                AppButton.smallIcon(
+                  toolTip: "pa_rotate_left_90",
+                  onClick: controller.rotateLeft90,
+                  child: AppIcon("rotate_left_90", height: 20),
+                ),
 
-        AppButton.smallIcon(
-          toolTip: "pa_rotate_right_90",
-          onClick: controller.rotateRight90,
-          child: AppIcon("rotate_right_90", height: 20),
-        ),
+                AppButton.smallIcon(
+                  toolTip: "pa_rotate_right_90",
+                  onClick: controller.rotateRight90,
+                  child: AppIcon("rotate_right_90", height: 20),
+                ),
 
-        AppDivider(direction: Axis.vertical),
+                AppDivider(direction: Axis.vertical),
 
-        AppButton.smallIcon(
-          toolTip: "edit",
-          onClick: () {
-            showAppDialog(
-              context: context,
-              isBarrier: true,
-              builder: (context) {
-                return AppDialog(
-                  padding: const EdgeInsets.all(0),
-                  useIntrinsicHeight: false,
-                  child: ImageEditor(
-                    imagePath: images[controller.index].path.path,
+                AppButton.smallIcon(
+                  toolTip: "edit",
+                  onClick: () {
+                    showAppDialog(
+                      context: context,
+                      isBarrier: true,
+                      builder: (context) {
+                        return AppDialog(
+                          padding: const EdgeInsets.all(0),
+                          useIntrinsicHeight: false,
+                          child: ImageEditor(
+                            imagePath: images[controller.index].path.path,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: AppIcon("edit", height: 20),
+                ),
+
+                ValueListenableBuilder(
+                  valueListenable: AppState.isShowImageCustomData,
+                  builder:
+                      (
+                        BuildContext context,
+                        bool isShowImageCustomData,
+                        Widget? child,
+                      ) {
+                        return Tooltip(
+                          message: context.tr("pa_show_image_data"),
+                          child: AppUncontrolledSwitch(
+                            initValue: isShowImageCustomData,
+                            width: smallButtonSize,
+                            height: smallButtonSize,
+                            onChanged: (bool value) {
+                              AppState.isShowImageCustomData.value =
+                                  !AppState.isShowImageCustomData.value;
+                            },
+                            child: AppIcon("image_custom_data", height: 22),
+                          ),
+                        );
+                      },
+                ),
+
+                AppDivider(direction: Axis.vertical),
+
+                AppButton.smallIcon(
+                  toolTip:
+                      context.tr("pa_to_previous_image") +
+                      getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
+                  isTranslate: false,
+                  onClick: controller.toPreviousImage,
+                  child: AppIcon("back", height: 20),
+                ),
+
+                AppButton.smallIcon(
+                  toolTip:
+                      context.tr("pa_to_next_image") +
+                      getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
+                  isTranslate: false,
+                  onClick: controller.toNextImage,
+                  child: AppIcon("forward", height: 20),
+                ),
+
+                if (game != null) AppDivider(direction: Axis.vertical),
+
+                if (game != null)
+                  ListenableBuilder(
+                    listenable: controller,
+                    builder: (BuildContext context, Widget? child) {
+                      return controller.isAttach
+                          ? TagMenu(
+                              game: game!,
+                              value: images[controller.index].name,
+                              builder:
+                                  (
+                                    BuildContext context,
+                                    Color? color,
+                                    Widget? child,
+                                    void Function() trigger,
+                                  ) {
+                                    final String icon = color == null
+                                        ? "assets/icon/tag.webp"
+                                        : "assets/icon/tag_fill.webp";
+
+                                    return Tooltip(
+                                      message: context.tr("tag"),
+                                      child: AppButton.smallIcon(
+                                        onClick: trigger,
+                                        child: Image.asset(
+                                          icon,
+                                          height: 18,
+                                          color:
+                                              color ??
+                                              AppTheme.of(
+                                                context,
+                                              )!.colorScheme.background.onColor,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                            )
+                          : AppButton.smallIcon();
+                    },
                   ),
-                );
-              },
-            );
-          },
-          child: AppIcon("edit", height: 20),
-        ),
 
-        ValueListenableBuilder(
-          valueListenable: AppState.isShowImageCustomData,
-          builder:
-              (
-              BuildContext context,
-              bool isShowImageCustomData,
-              Widget? child,
-              ) {
-            return Tooltip(
-              message: context.tr("pa_show_image_data"),
-              child: AppUncontrolledSwitch(
-                initValue: isShowImageCustomData,
-                width: smallButtonSize,
-                height: smallButtonSize,
-                onChanged: (bool value) {
-                  AppState.isShowImageCustomData.value =
-                  !AppState.isShowImageCustomData.value;
-                },
-                child: AppIcon("image_custom_data", height: 22),
-              ),
-            );
-          },
-        ),
-
-        AppDivider(direction: Axis.vertical),
-
-        AppButton.smallIcon(
-          toolTip:
-          context.tr("pa_to_previous_image") +
-              getKeyboardCharacter([LogicalKeyboardKey.arrowLeft]),
-          isTranslate: false,
-          onClick: controller.toPreviousImage,
-          child: AppIcon("back", height: 20),
-        ),
-
-        AppButton.smallIcon(
-          toolTip:
-          context.tr("pa_to_next_image") +
-              getKeyboardCharacter([LogicalKeyboardKey.arrowRight]),
-          isTranslate: false,
-          onClick: controller.toNextImage,
-          child: AppIcon("forward", height: 20),
-        ),
-
-        if(game != null)
-          AppDivider(direction: Axis.vertical),
-
-        if (game != null)
-          ListenableBuilder(
-            listenable: controller,
-            builder: (BuildContext context, Widget? child) {
-              return controller.isAttach
-                  ? TagMenu(
-                game: game!,
-                value: images[controller.index].name,
-                builder:
-                    (
-                    BuildContext context,
-                    Color? color,
-                    Widget? child,
-                    void Function() trigger,
-                    ) {
-                  final String icon = color == null
-                      ? "assets/icon/tag.webp"
-                      : "assets/icon/tag_fill.webp";
-
-                  return Tooltip(
-                    message: context.tr("tag"),
-                    child: AppButton.smallIcon(
-                      onClick: trigger,
-                      child: Image.asset(
-                        icon,
-                        height: 18,
-                        color:
-                        color ??
-                            AppTheme.of(
-                              context,
-                            )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                  );
-                },
+                if (game != null)
+                  ListenableBuilder(
+                    listenable: controller,
+                    builder: (BuildContext context, Widget? child) {
+                      return controller.isAttach
+                          ? NotifierBuilder(
+                              listenable: game!.album.whenSelectedImagesChange,
+                              builder: (BuildContext context, Widget? child) {
+                                final ImageItem item = images[controller.index];
+                                final bool isSelected = game!
+                                    .album
+                                    .selectedImages
+                                    .contains(item);
+                                final String text = isSelected
+                                    ? context.tr("deselect")
+                                    : context.tr("select");
+                                final String icon = isSelected
+                                    ? "assets/icon/select_all.webp"
+                                    : "assets/icon/notSelect.webp";
+                                return Tooltip(
+                                  message:
+                                      text +
+                                      getKeyboardCharacter([
+                                        LogicalKeyboardKey.space,
+                                      ]),
+                                  child: AppButton.smallIcon(
+                                    onClick: _invertImage,
+                                    child: Image.asset(
+                                      icon,
+                                      height: 22,
+                                      color: AppTheme.of(
+                                        context,
+                                      )!.colorScheme.background.onColor,
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
+                          : AppButton.smallIcon();
+                    },
+                  ),
+              ]
+              .map(
+                (Widget widget) => widget is AppDivider
+                    ? widget
+                    : AppFloatingIndicatorButtonTarget(child: widget),
               )
-                  : AppButton.smallIcon();
-            },
-          ),
-
-        if (game != null)
-          ListenableBuilder(
-            listenable: controller,
-            builder: (BuildContext context, Widget? child) {
-              return controller.isAttach
-                  ? NotifierBuilder(
-                listenable: game!.album.whenSelectedImagesChange,
-                builder: (BuildContext context, Widget? child) {
-                  final ImageItem item = images[controller.index];
-                  final bool isSelected = game!.album.selectedImages
-                      .contains(item);
-                  final String text = isSelected
-                      ? context.tr("deselect")
-                      : context.tr("select");
-                  final String icon = isSelected
-                      ? "assets/icon/select_all.webp"
-                      : "assets/icon/notSelect.webp";
-                  return Tooltip(
-                    message:
-                    text +
-                        getKeyboardCharacter([LogicalKeyboardKey.space]),
-                    child: AppButton.smallIcon(
-                      onClick: _invertImage,
-                      child: Image.asset(
-                        icon,
-                        height: 22,
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.background.onColor,
-                      ),
-                    ),
-                  );
-                },
-              )
-                  : AppButton.smallIcon();
-            },
-          ),
-      ].map((Widget widget) => widget is AppDivider ? widget : AppFloatingIndicatorButtonTarget(child: widget)).toList(),
+              .toList(),
     );
 
     return Focus(
@@ -2625,77 +2734,88 @@ class ImageViewerDialog extends StatelessWidget {
                   valueListenable: AppState.isShowImageCustomData,
                   builder:
                       (
-                      BuildContext context,
-                      bool isShowImageCustomData,
-                      Widget? child,
+                        BuildContext context,
+                        bool isShowImageCustomData,
+                        Widget? child,
                       ) {
-                    if (!isShowImageCustomData) return child ?? block0;
+                        if (!isShowImageCustomData) return child ?? block0;
 
-                    return MultiSplitViewTheme(
-                      data: MultiSplitViewThemeData(
-                        dividerPainter: DividerPainters.grooved1(
-                          color: AppColorScheme.of(
-                            context,
-                          ).byRole(ColorRole.of(context)).pressedColor,
-                          highlightedColor: AppColorScheme.of(
-                            context,
-                          ).byRole(ColorRole.of(context)).onPressedColor,
-                        ),
-                      ),
-                      child: MultiSplitView(
-                        initialAreas: [
-                          Area(data: "image"),
-                          AppState.imageCustomDataWidgetSize.value == null
-                              ? Area(data: "data_panel", flex: 1)
-                              : Area(
-                            data: "data_panel",
-                            size: AppState
-                                .imageCustomDataWidgetSize
-                                .value,
+                        return MultiSplitViewTheme(
+                          data: MultiSplitViewThemeData(
+                            dividerPainter: DividerPainters.grooved1(
+                              color: AppColorScheme.of(
+                                context,
+                              ).byRole(ColorRole.of(context)).pressedColor,
+                              highlightedColor: AppColorScheme.of(
+                                context,
+                              ).byRole(ColorRole.of(context)).onPressedColor,
+                            ),
                           ),
-                        ],
-                        builder: (BuildContext context, Area area) {
-                          if (area.data == "image") {
-                            return child ?? block0;
-                          } else {
-                            return ListenableBuilder(
-                              listenable: controller,
-                              builder: (BuildContext context, Widget? child) {
-                                return LayoutBuilder(
+                          child: MultiSplitView(
+                            initialAreas: [
+                              Area(data: "image"),
+                              AppState.imageCustomDataWidgetSize.value == null
+                                  ? Area(data: "data_panel", flex: 1)
+                                  : Area(
+                                      data: "data_panel",
+                                      size: AppState
+                                          .imageCustomDataWidgetSize
+                                          .value,
+                                    ),
+                            ],
+                            builder: (BuildContext context, Area area) {
+                              if (area.data == "image") {
+                                return child ?? block0;
+                              } else {
+                                return ListenableBuilder(
+                                  listenable: controller,
                                   builder:
-                                      (
-                                      BuildContext context,
-                                      BoxConstraints constraint,
-                                      ) {
-                                    AppState
-                                        .imageCustomDataWidgetSize
-                                        .value =
-                                        constraint.maxWidth;
+                                      (BuildContext context, Widget? child) {
+                                        return LayoutBuilder(
+                                          builder:
+                                              (
+                                                BuildContext context,
+                                                BoxConstraints constraint,
+                                              ) {
+                                                AppState
+                                                    .imageCustomDataWidgetSize
+                                                    .value = constraint
+                                                    .maxWidth;
 
-                                    late final TreeNode? node;
-                                    if (controller.isAttach) {
-                                      node = images[controller.index]
-                                          .getParamNodeSync(
-                                        game?.selectedUid?.value,
-                                        game?.selectedAlbum,
-                                      );
-                                    } else {
-                                      node = initImage.getParamNodeSync(
-                                        game?.selectedUid?.value,
-                                        game?.selectedAlbum,
-                                      );
-                                    }
+                                                late final TreeNode? node;
+                                                if (controller.isAttach) {
+                                                  node =
+                                                      images[controller.index]
+                                                          .getParamNodeSync(
+                                                            game
+                                                                ?.selectedUid
+                                                                ?.value,
+                                                            game?.selectedAlbum,
+                                                          );
+                                                } else {
+                                                  node = initImage
+                                                      .getParamNodeSync(
+                                                        game
+                                                            ?.selectedUid
+                                                            ?.value,
+                                                        game?.selectedAlbum,
+                                                      );
+                                                }
 
-                                    return TreeViewPage(root: [?node], useFloatingIndicatorGroup: false);
-                                  },
+                                                return TreeViewPage(
+                                                  root: [?node],
+                                                  useFloatingIndicatorGroup:
+                                                      false,
+                                                );
+                                              },
+                                        );
+                                      },
                                 );
-                              },
-                            );
-                          }
-                        },
-                      ),
-                    );
-                  },
+                              }
+                            },
+                          ),
+                        );
+                      },
                   child: Listener(
                     onPointerDown: (e) {
                       /// TODO 拖拽图片时不要切换状态
@@ -2724,10 +2844,7 @@ class ImageViewerDialog extends StatelessWidget {
 
               SizedBox(
                 height: topBarHeight,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: toolButtons,
-                ),
+                child: Align(alignment: Alignment.center, child: toolButtons),
               ),
             ],
           ),
@@ -2971,9 +3088,7 @@ class FiltrationButton extends StatelessWidget {
                   toolTip: "filter",
                   colorRole: ColorRole.secondary,
                   onClick: () {
-                    controller.isOpen
-                        ? controller.close()
-                        : controller.open();
+                    controller.isOpen ? controller.close() : controller.open();
                   },
                   child: AppIcon("filtration", height: 20),
                 );
@@ -3020,7 +3135,12 @@ class SelectionViewerDialog extends StatelessWidget {
             child: NotifierBuilder(
               listenable: game.album.whenSelectedImagesChange,
               builder: (BuildContext context, Widget? child) {
-                return AppText(context.plural("xImageSelected", game.album.selectedImages.length));
+                return AppText(
+                  context.plural(
+                    "xImageSelected",
+                    game.album.selectedImages.length,
+                  ),
+                );
               },
             ),
           ),
@@ -3120,10 +3240,7 @@ class DeleteImagesDialog extends StatelessWidget {
           children: [
             AppText(context.plural("XImageFailedToBeProcessed", errorNum)),
             const FailToCopyFileSystemEntry(),
-            AppButton.smallText(
-              onClick: close,
-              child: AppText.tr("ok"),
-            ),
+            AppButton.smallText(onClick: close, child: AppText.tr("ok")),
           ],
         );
       },
@@ -3214,7 +3331,9 @@ class DeleteImagesDialog extends StatelessWidget {
                           child: tickBox,
                         ),
                       ),
-                      AppText("${context.tr(albumsInfoMap[type]!.name)} ( ${albumsInfoMap[type]!.type} )"),
+                      AppText(
+                        "${context.tr(albumsInfoMap[type]!.name)} ( ${albumsInfoMap[type]!.type} )",
+                      ),
                     ],
                   ),
                 );
@@ -3573,7 +3692,9 @@ class ImportImagesDialog extends StatelessWidget {
                           List<ImageItem> value,
                           Widget? child,
                         ) {
-                          return AppText("${context.plural("importXImage", images.value.length)} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}");
+                          return AppText(
+                            "${context.plural("importXImage", images.value.length)} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}",
+                          );
                         },
                   ),
                   Expanded(
@@ -3704,7 +3825,9 @@ class ImportImagesDialog extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: AppText("${context.tr("importImageTo")} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}"),
+                    child: AppText(
+                      "${context.tr("importImageTo")} ${context.tr(albumsInfoMap[AppState.currentGame.value?.selectedAlbum]!.name)}",
+                    ),
                   ),
                   AppButton.smallIcon(
                     colorRole: ColorRole.background,

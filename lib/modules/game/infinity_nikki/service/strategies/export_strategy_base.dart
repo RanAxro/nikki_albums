@@ -10,5 +10,6 @@ abstract class LivePhotoExportStrategy {
     required File coverImage,
     required File sourceVideo,
     required String outputPath,
+    String? customBaseName,
   });
 }
