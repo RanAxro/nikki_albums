@@ -340,9 +340,6 @@ class AlbumHandler {
       );
     }
 
-    final String liveFormat = AppState.livePhotoExportFormat.value;
-    final bool isVideoAlbum =
-        AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
     final bool useIosNaming =
         Platform.isWindows && isVideoAlbum && liveFormat == "apple";
 
