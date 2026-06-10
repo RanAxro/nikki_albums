@@ -1,9 +1,9 @@
 
-
+use std::env;
 use rust_embed::Embed;
 use std::fs::{self, File};
 use std::io::Write;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::process::{exit, Command};
 
 
@@ -56,20 +56,18 @@ fn extract_one(rel_path: &str, target_dir: impl AsRef<Path>) -> std::io::Result<
   Ok(())
 }
 
-fn run_exe(exe: impl AsRef<Path>) -> std::io::Result<u32>{
-  Command::new(exe.as_ref()).spawn().map(|child| child.id())
+fn get_exe_path() -> std::io::Result<PathBuf>{
+  let path = env::current_exe()?;
 
-  // match Command::new(exe.as_ref()).spawn(){
-  //   Ok(child) => {
-  //     println!("进程已创建，PID: {:?}", child.id());
-  //     // 此时进程存在，但可能立刻崩溃
-  //     true
-  //   }
-  //   Err(e) => {
-  //     eprintln!("启动失败: {}", e);
-  //     false
-  //   }
-  // }
+  // 解析符号链接，获取真实绝对路径
+  fs::canonicalize(&path)
+}
+
+fn run_exe(exe: impl AsRef<Path>) -> std::io::Result<u32>{
+  Command::new(exe.as_ref())
+    .arg(format!("-sfx={}", &get_exe_path()?.display()))
+    .args(env::args().skip(1))
+    .spawn().map(|child| child.id())
 }
 
 fn verify_version(target_dir: impl AsRef<Path>) -> bool{
@@ -103,11 +101,12 @@ enum State{
   Exit,
 }
 
-fn main() {
-  let tmp = std::env::temp_dir().join("myapp_extracted");
+fn main(){
+  let tmp = env::temp_dir().join("myapp_extracted");
   let exe = tmp.join("nikki_albums.exe");
 
   let mut state = State::Init;
+  let mut error: Option<String> = None;
 
   loop{
     match state{
@@ -123,7 +122,8 @@ fn main() {
           Ok(_) => {
             state = State::SaveVersionInfo;
           },
-          Err(_) => {
+          Err(e) => {
+            error = Some(e.to_string());
             state = State::Error;
           },
         }
@@ -150,12 +150,15 @@ fn main() {
           Ok(_) => {
             state = State::Exit;
           },
-          Err(_) => {
+          Err(e) => {
+            error = Some(e.to_string());
             state = State::Error;
           },
         }
       },
       State::Error => {
+        // TODO show message box
+        let _ = error;
         exit(1);
       },
       State::Exit => {
