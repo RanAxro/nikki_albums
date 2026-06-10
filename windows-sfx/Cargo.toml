@@ -1,0 +1,6 @@
+[package]
+name = "nikki_albums_windows_sfx"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
