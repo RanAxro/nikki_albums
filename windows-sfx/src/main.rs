@@ -1,11 +1,15 @@
+
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
+mod utils;
 
 use std::env;
 use rust_embed::Embed;
 use std::fs::{self, File};
 use std::io::Write;
-use std::path::{Path, PathBuf};
-use std::process::{exit, Command};
+use std::path::Path;
+use std::process::exit;
+use crate::utils::*;
 
 
 const VERSION: usize = 1;
@@ -43,6 +47,7 @@ fn extract_all(target_dir: impl AsRef<Path>) -> std::io::Result<()>{
 }
 
 /// 按需解压单个文件
+#[warn(dead_code)]
 fn extract_one(rel_path: &str, target_dir: impl AsRef<Path>) -> std::io::Result<()>{
   let file = Release::get(rel_path).ok_or_else(||{
     std::io::Error::new(std::io::ErrorKind::NotFound, rel_path)
@@ -55,20 +60,6 @@ fn extract_one(rel_path: &str, target_dir: impl AsRef<Path>) -> std::io::Result<
 
   File::create(&dest)?.write_all(&file.data)?;
   Ok(())
-}
-
-fn get_exe_path() -> std::io::Result<PathBuf>{
-  let path = env::current_exe()?;
-
-  // 解析符号链接，获取真实绝对路径
-  fs::canonicalize(&path)
-}
-
-fn run_exe(exe: impl AsRef<Path>) -> std::io::Result<u32>{
-  Command::new(exe.as_ref())
-    .arg(format!("-sfx={}", &get_exe_path()?.display()))
-    .args(env::args().skip(1))
-    .spawn().map(|child| child.id())
 }
 
 fn verify_version(target_dir: impl AsRef<Path>) -> bool{
@@ -94,8 +85,10 @@ fn create_version_file(target_dir: impl AsRef<Path>) -> std::io::Result<()>{
 
 enum State{
   Init,
+  Verification,
   Extract,
   SaveVersionInfo,
+  ForceRun,
   TryRun,
   Run,
   Error,
@@ -112,14 +105,37 @@ fn main(){
   loop{
     match state{
       State::Init => {
+        // 强制启动
+        // 会结束已有的进程后启动
+        if env::args().any(|arg| arg == "-force") {
+          state = State::ForceRun;
+        }
+        // 正常启动流程
+        else{
+          // 不存在已启动的程序
+          if find_pids_by_path(&exe).is_empty() {
+            state = State::Verification;
+          }
+          // 已存在已启动的程序
+          // 这会将已存在的程序窗口提前
+          else{
+            state = State::Run;
+          }
+        }
+      },
+      State::Verification => {
+        // 版本号正确, 尝试启动程序
         if verify_version(&tmp) {
           state = State::TryRun;
-        }else{
+        }
+        // 版本号不正确, 解压当前版本并运行
+        else{
           state = State::Extract;
         }
       },
       State::Extract => {
         match extract_all(&tmp){
+          // 解压成功, 保存当前版本号, 下次可无需解压直接启动
           Ok(_) => {
             state = State::SaveVersionInfo;
           },
@@ -136,18 +152,28 @@ fn main(){
           }
         }
       },
+      State::ForceRun => {
+        let pids = find_pids_by_path(&exe);
+
+        for pid in pids{
+          kill_process(pid);
+        }
+
+        state = State::Run;
+      },
       State::TryRun => {
-        match run_exe(&exe){
+        match run_target_exe(&exe){
           Ok(_) => {
             state = State::Exit;
           },
+          // 尝试启动失败, 解压当前版本并运行
           Err(_) => {
             state = State::Extract;
           },
         }
       },
       State::Run => {
-        match run_exe(&exe){
+        match run_target_exe(&exe){
           Ok(_) => {
             state = State::Exit;
           },

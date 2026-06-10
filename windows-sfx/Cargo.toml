@@ -13,6 +13,11 @@ codegen-units = 1     # 单 codegen unit，允许更激进的跨模块优化
 
 [dependencies]
 rust-embed = { version = "8.11.0", features = ["compression", "interpolate-folder-path"] }
+windows = { version = "0.62.2", features = [
+  "Win32_Foundation",
+  "Win32_System_ProcessStatus",
+  "Win32_System_Threading",
+] }
 
 [build-dependencies]
 winres = "0.1.12"
