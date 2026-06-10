@@ -87,13 +87,15 @@ void main(List<String> args) async {
 
 class StartupParam {
   final String? sfx;
+  final bool force;
   final bool wait;
   final List<String> normal;
 
-  const StartupParam._(this.sfx, this.wait, this.normal);
+  const StartupParam._(this.sfx, this.force, this.wait, this.normal);
 
   factory StartupParam(List<String> args) {
     String? sfx;
+    bool force = false;
     bool wait = false;
     List<String> normal = [];
 
@@ -101,6 +103,10 @@ class StartupParam {
       /// -sfx=
       if (arg.toLowerCase().startsWith("-sfx=")) {
         sfx = arg.substring("-sfx=".length);
+      }
+      /// -force
+      else if (arg.toLowerCase().startsWith("-force")) {
+        force = true;
       }
       /// -wait=
       else if (arg.toLowerCase().startsWith("-wait=")) {
@@ -112,7 +118,7 @@ class StartupParam {
       }
     }
 
-    return StartupParam._(sfx, wait, normal);
+    return StartupParam._(sfx, force, wait, normal);
   }
 }
 
