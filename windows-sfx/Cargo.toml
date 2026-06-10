@@ -4,6 +4,13 @@ version = "0.1.0"
 edition = "2024"
 build = "build.rs"
 
+[profile.release]
+strip = true          # 剥离所有符号（debug symbols）
+opt-level = 3         # 最高优化，打乱代码结构
+lto = true            # 链接时优化，跨 crate 内联
+panic = "abort"       # 移除 panic unwinding 的额外元数据
+codegen-units = 1     # 单 codegen unit，允许更激进的跨模块优化
+
 [dependencies]
 rust-embed = { version = "8.11.0", features = ["compression", "interpolate-folder-path"] }
 
