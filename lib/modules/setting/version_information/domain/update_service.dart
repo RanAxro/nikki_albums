@@ -110,6 +110,11 @@ class WindowsUpdater extends Updater {
         Explorer.openDir(Directory(archiveSavePath));
       }
 
+      onCloseApp(() async{
+        if(decompressPath != null){
+          await Process.run(decompressPath, ["-force"], runInShell: false);
+        }
+      });
       await closeApp();
     } else {
       onError?.call(errorMessage);
