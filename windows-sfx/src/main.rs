@@ -102,7 +102,7 @@ enum State{
 }
 
 fn main(){
-  let tmp = env::temp_dir().join("myapp_extracted");
+  let tmp = env::temp_dir().join("Nikki Albums");
   let exe = tmp.join("nikki_albums.exe");
 
   let mut state = State::Init;

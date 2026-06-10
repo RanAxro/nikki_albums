@@ -2,6 +2,10 @@
 name = "nikki_albums_windows_sfx"
 version = "0.1.0"
 edition = "2024"
+build = "build.rs"
 
 [dependencies]
 rust-embed = { version = "8.11.0", features = ["compression", "interpolate-folder-path"] }
+
+[build-dependencies]
+winres = "0.1.12"
