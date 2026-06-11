@@ -13,6 +13,23 @@ const double largeButtonContentSize = 140;
 const double windowTitleBarHeight = smallButtonSize + 10;
 const double androidTitleBarHeight = smallButtonSize + 15;
 const double topBarHeight = smallButtonSize + 8;
+
+/// Parses the runtime macOS major version from [Platform.operatingSystemVersion].
+/// Returns 0 on non-macOS platforms or if parsing fails.
+final int macOSMajorVersion = () {
+  if (!Platform.isMacOS) return 0;
+  // e.g. "Version 26.0 (Build 25A5279m)"
+  final match = RegExp(
+    r'Version (\d+)',
+  ).firstMatch(Platform.operatingSystemVersion);
+  return int.tryParse(match?.group(1) ?? '') ?? 0;
+}();
+
+/// Reserved width for native macOS traffic light buttons.
+/// macOS 26+ (Tahoe): 28px buttons with 8px HIG gaps need more space.
+/// macOS 14–15: smaller buttons with tighter default spacing.
+final double macOSTrafficLightWidth = macOSMajorVersion >= 26 ? 120 : 88;
+
 const double sideBarWidth = mediumButtonSize + 10;
 const double sideBarExpandWidth = 200;
 
