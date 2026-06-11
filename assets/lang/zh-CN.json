@@ -34,6 +34,8 @@
   "cannotIsNegativeNumber": "不能为负数",
   "cannotIsZero": "不能为0",
   "valueIsTooHigh": "值太大",
+  "hot_update_successful": "热更新成功!",
+  "hot_update_failed": "热更新失败!",
   "----------initial_startup----------": "----------initial_startup----------",
   "welcome": "欢迎使用暖暖相册",
   "start": "开始使用",

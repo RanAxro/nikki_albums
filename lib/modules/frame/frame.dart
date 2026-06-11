@@ -1,3 +1,4 @@
+import "package:nikki_albums/modules/hot_update/domain/check_app_hot_updates.dart";
 import "package:nikki_albums/modules/initial_startup/presentation/initial_startup_setting.dart";
 
 import "package:nikki_albums/modules/app_base/app_registry.dart";
@@ -43,6 +44,27 @@ class _FrameState extends State<Frame> {
 
   void whenThemeChanged() {
     setState(() {});
+  }
+  
+  Future<void> checkHotUpdate(BuildContext context) async{
+    try{
+      final bool needNotice = await checkAppHotUpdates();
+      if(!needNotice) return;
+
+      setState((){
+        WidgetsBinding.instance.addPostFrameCallback((_){
+          AppToast.showMessage(context: context, message: context.tr("hot_update_successful"));
+        });
+      });
+    }catch(e){
+      if(context.mounted){
+        AppToast.showMessage(
+          context: context,
+          message: context.tr("hot_update_failed!\n$e"),
+          state: false,
+        );
+      }
+    }
   }
 
   bool _handleKeyEvent(KeyEvent event) {
@@ -118,6 +140,8 @@ class _FrameState extends State<Frame> {
                     if (!kDebugMode) {
                       checkAppUpdates(context);
                     }
+                    /// 热更新
+                    checkHotUpdate(context);
 
                     if (Platform.isWindows) {
                       return WindowsFrame(key: frameKey);

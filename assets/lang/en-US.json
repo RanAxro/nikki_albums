@@ -26,6 +26,8 @@
   "quantity": "Quantity",
   "type": "Type",
   "restore": "Restore",
+  "hot_update_successful": "Hot Update Successful!",
+  "hot_update_failed": "Hot Update Failed!",
   "----------initial_startup----------": "----------initial_startup----------",
   "welcome": "Welcome to Nikki Albums",
   "start": "Get Started",
