@@ -51,12 +51,13 @@ class _FrameState extends State<Frame> {
       final bool needNotice = await checkAppHotUpdates();
       if(!needNotice) return;
 
-      setState((){
-        WidgetsBinding.instance.addPostFrameCallback((_){
-          EasyLocalization.of(context)?.resetLocale();
+      if(context.mounted){
+        await EasyLocalization.of(context)?.resetLocale();
+
+        setState((){
           AppToast.showMessage(context: context, message: context.tr("hot_update_successful"));
         });
-      });
+      }
     }catch(e){
       if(context.mounted){
         AppToast.showMessage(
