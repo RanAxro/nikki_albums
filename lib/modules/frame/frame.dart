@@ -317,7 +317,7 @@ class AccountButton extends StatelessWidget {
             return Row(
               spacing: listSpacing,
               children: [
-                AppIcon("select", height: smallButtonSize - 10,),
+                AppIcon("select", height: smallButtonSize - 10),
                 AppText.tr("selectAccountButton"),
               ],
             );
@@ -345,7 +345,10 @@ class AccountButton extends StatelessWidget {
                           Set<UidNote> notes,
                           Widget? child,
                         ) {
-                          return AppText(currentGame.selectedUid?.name ?? currentGame.launcherChannel.name);
+                          return AppText(
+                            currentGame.selectedUid?.name ??
+                                currentGame.launcherChannel.name,
+                          );
                         },
                   ),
 
@@ -366,9 +369,7 @@ class AccountButton extends StatelessWidget {
                           final Game game = AppState.currentGame.value!;
                           final GameShortcut shortcut = game.shortcut!;
                           final bool isNailed = shortcut.isNailed;
-                          final String icon = isNailed
-                              ? "nail_fill"
-                              : "nail";
+                          final String icon = isNailed ? "nail_fill" : "nail";
 
                           return AppButton.smallIcon(
                             colorRole: ColorRole.secondary,
@@ -483,11 +484,10 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
             installPath.value = paths["installPath"]?.path;
 
             if (launcherPath.value != null && installPath.value == null) {
-              final installLocation = await NativeFilePicker
-                  .getDirectoryPath(
-                    dialogTitle: context.tr("locateX6GameDir"),
-                    lockParentWindow: true,
-                  );
+              final installLocation = await NativeFilePicker.getDirectoryPath(
+                dialogTitle: context.tr("locateX6GameDir"),
+                lockParentWindow: true,
+              );
 
               if (installLocation != null &&
                   installLocation.contains("X6Game")) {
@@ -514,8 +514,7 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppText.tr("locateGame"),
-                  if(verify())
-                    AppIcon("tick", height: smallButtonContentSize),
+                  if (verify()) AppIcon("tick", height: smallButtonContentSize),
                 ],
               ),
               if (isAlreadyLocate.value && launcher == null)
@@ -561,10 +560,7 @@ class _CustomAccountEditorState extends State<CustomAccountEditor> {
           spacing: listSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppTextFiled(
-              controller: controller,
-              labelText: "name",
-            ),
+            AppTextFiled(controller: controller, labelText: "name"),
 
             locateButton,
 
@@ -665,10 +661,7 @@ class GameShortcutBar extends StatelessWidget {
           },
           child: Row(
             spacing: listSpacing,
-            children: [
-              AppIcon("edit", height: 16),
-              AppText.tr("remarks"),
-            ],
+            children: [AppIcon("edit", height: 16), AppText.tr("remarks")],
           ),
         ),
 
@@ -816,10 +809,7 @@ class UidNoteEditor extends StatelessWidget {
           children: [
             AppText(context.tr("noteXAs", args: [uid.value])),
 
-            AppTextFiled(
-              controller: controller,
-              labelText: "fillRemarks",
-            ),
+            AppTextFiled(controller: controller, labelText: "fillRemarks"),
 
             AppButton.smallText(
               colorRole: ColorRole.background,
@@ -1143,7 +1133,7 @@ class ContentBuildInWindow extends StatelessWidget {
                       );
                     },
                     child: AppIcon("setting", height: 26),
-                  )
+                  ),
                 ),
               ],
             ),
@@ -1218,7 +1208,7 @@ class MacOSTitleBar extends StatelessWidget {
             Row(
               children: [
                 // Leave space for native traffic light buttons
-                const SizedBox(width: 88),
+                SizedBox(width: macOSTrafficLightWidth),
 
                 Expanded(
                   child: Row(

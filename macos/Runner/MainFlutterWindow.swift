@@ -45,14 +45,27 @@ class MainFlutterWindow: NSWindow {
     containerFrame.origin.y = frame.height - titleBarHeight
     titleBarContainer.frame = containerFrame
 
-    // Vertically center buttons within the container, equal x padding
     let yOffset = (titleBarHeight - buttonHeight) / 2
     let xOffset = yOffset
-    let spacing = miniaturizeButton.frame.origin.x - closeButton.frame.origin.x
 
-    closeButton.setFrameOrigin(NSPoint(x: xOffset, y: yOffset))
-    miniaturizeButton.setFrameOrigin(NSPoint(x: xOffset + spacing, y: yOffset))
-    zoomButton.setFrameOrigin(NSPoint(x: xOffset + spacing * 2, y: yOffset))
+    let buttonWidth = closeButton.frame.width
+
+    if buttonWidth >= 25 {
+      // Large buttons (macOS 26+ Tahoe, 28px): use explicit HIG-standard 8px gaps
+      let buttonGap: CGFloat = 8
+      let step = buttonWidth + buttonGap
+
+      closeButton.setFrameOrigin(NSPoint(x: xOffset, y: yOffset))
+      miniaturizeButton.setFrameOrigin(NSPoint(x: xOffset + step, y: yOffset))
+      zoomButton.setFrameOrigin(NSPoint(x: xOffset + step * 2, y: yOffset))
+    } else {
+      // Smaller buttons (macOS 14–15, ~23px): vertically center with default system spacing
+      let spacing = miniaturizeButton.frame.origin.x - closeButton.frame.origin.x
+
+      closeButton.setFrameOrigin(NSPoint(x: xOffset, y: yOffset))
+      miniaturizeButton.setFrameOrigin(NSPoint(x: xOffset + spacing, y: yOffset))
+      zoomButton.setFrameOrigin(NSPoint(x: xOffset + spacing * 2, y: yOffset))
+    }
   }
 
   override public func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
