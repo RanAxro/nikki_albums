@@ -1,4 +1,5 @@
 
+import "hot_update_debug.dart";
 import "app_state_debug.dart";
 import "nuan5_decryption_debug.dart";
 import "package:nikki_albums/widgets/app/component.dart";
@@ -38,13 +39,21 @@ class DebugPanel extends StatelessWidget{
                         onClick: () {
                           controller.jumpToPage(0);
                         },
-                        child: AppText("AppState", isTranslate: false),
+                        child: AppText("HotUpdate"),
                       ),
                       AppRawButton(
                         width: constraints.maxWidth,
                         height: smallButtonSize,
                         onClick: () {
                           controller.jumpToPage(1);
+                        },
+                        child: AppText("AppState", isTranslate: false),
+                      ),
+                      AppRawButton(
+                        width: constraints.maxWidth,
+                        height: smallButtonSize,
+                        onClick: () {
+                          controller.jumpToPage(2);
                         },
                         child: AppText("nuan5_decryption", isTranslate: false),
                       ),
@@ -64,6 +73,7 @@ class DebugPanel extends StatelessWidget{
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             children: [
+              HotUpdateDebug(),
               AppStateDebug(),
               Nuan5DecryptionDebug(),
             ],
