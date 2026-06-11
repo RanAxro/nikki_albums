@@ -53,6 +53,7 @@ class _FrameState extends State<Frame> {
 
       setState((){
         WidgetsBinding.instance.addPostFrameCallback((_){
+          EasyLocalization.of(context)?.resetLocale();
           AppToast.showMessage(context: context, message: context.tr("hot_update_successful"));
         });
       });

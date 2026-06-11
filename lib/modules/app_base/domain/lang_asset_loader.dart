@@ -81,6 +81,9 @@ class AppLangAssetLoader extends AssetLoader{
 
       return langJson;
     }catch(e){
+      if(kDebugMode){
+        print(e);
+      }
       return {};
     }
   }

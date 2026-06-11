@@ -4,8 +4,82 @@
     "versionId": "f26cab19-151b-4ee4-98a1-4332eb0bd04a",
     "files": [
       {
+        "path": "en-US.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/en-US.json"
+      },
+      {
         "path": "zh-CN.json",
         "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/zh-CN.json"
+      },
+      {
+        "path": "zh-TW.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/zh-TW.json"
+      },
+      {
+        "path": "ko-KR.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/ko-KR.json"
+      },
+      {
+        "path": "ja-JP.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/ja-JP.json"
+      },
+      {
+        "path": "pt-BR.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/pt-BR.json"
+      },
+      {
+        "path": "it-IT.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/it-IT.json"
+      },
+      {
+        "path": "fr-FR.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/fr-FR.json"
+      },
+      {
+        "path": "es-ES.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/es-ES.json"
+      }
+    ]
+  },
+  {
+    "id": "infinity-nikki-cloth-outfit-lang",
+    "versionId": "81be8af5-45f7-4488-af3c-ca95823ce740",
+    "files": [
+      {
+        "path": "en-US.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/en-US.json"
+      },
+      {
+        "path": "zh-CN.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/zh-CN.json"
+      },
+      {
+        "path": "zh-TW.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/zh-TW.json"
+      },
+      {
+        "path": "ko-KR.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/ko-KR.json"
+      },
+      {
+        "path": "ja-JP.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/ja-JP.json"
+      },
+      {
+        "path": "pt-BR.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/pt-BR.json"
+      },
+      {
+        "path": "it-IT.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/it-IT.json"
+      },
+      {
+        "path": "fr-FR.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/fr-FR.json"
+      },
+      {
+        "path": "es-ES.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/es-ES.json"
       }
     ]
   }
