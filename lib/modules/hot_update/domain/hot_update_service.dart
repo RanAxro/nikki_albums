@@ -9,8 +9,8 @@ import "package:path/path.dart" as p;
 import "package:dio/dio.dart";
 
 
-Future<String> getHotUpdateAssetsPath() async{
-  return p.join((await getAppDataDirectoryPath()).path, "HotUpdate");
+Future<String> getHotUpdateAssetsPath(String id) async{
+  return p.join((await getAppDataDirectoryPath()).path, "HotUpdate", id);
 }
 
 class HotUpdater{
@@ -18,7 +18,7 @@ class HotUpdater{
 
   Future<void> update(List<HotUpdateInfo> infos, {void Function(double progress)? onProgress, bool check = true}) async{
     for(final HotUpdateInfo info in infos){
-      final String rootPath = p.join(await getHotUpdateAssetsPath(), info.id);
+      final String rootPath = await getHotUpdateAssetsPath(info.id);
       final Directory rootDir = Directory(rootPath);
 
       final String versionFilePath = p.join(rootPath, info.versionId);
@@ -27,7 +27,9 @@ class HotUpdater{
       if(check && await File(versionFilePath).exists()){
         continue;
       }
-      await rootDir.delete(recursive: true);
+      if(await rootDir.exists()){
+        await rootDir.delete(recursive: true);
+      }
       await rootDir.create(recursive: true);
 
       final List<Future<Response>> downloadable = [];
