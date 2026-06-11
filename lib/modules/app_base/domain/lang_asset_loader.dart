@@ -1,4 +1,6 @@
 
+import "package:flutter/foundation.dart";
+
 import "../app_registry.dart";
 import "package:nikki_albums/utils/json.dart";
 import "package:nikki_albums/modules/hot_update/domain/hot_update_service.dart";
@@ -13,6 +15,8 @@ import "package:path/path.dart" as p;
 import 'package:encrypt/encrypt.dart' as encrypt;
 
 
+const String _green = '\x1B[32m';
+const String _reset = '\x1B[0m';
 
 class LangFileAesUtil{
   static final _key = encrypt.Key.fromUtf8("D122401AEA30AFE6DE23566BABAF2569");
@@ -69,7 +73,13 @@ class AppLangAssetLoader extends AssetLoader{
       final String localePath = getLocalePath(await getHotUpdateAssetsPath(id), "", locale);
       final List<int> decrypted = await LangFileAesUtil.decryptFile(localePath);
       final String jsonString = utf8.decode(decrypted);
-      return json.decode(jsonString);
+      final Map<String, dynamic> langJson = json.decode(jsonString);
+
+      if(kDebugMode){
+        print("$_green HotUpdate Lang Loading Completed: $localePath $_reset");
+      }
+
+      return langJson;
     }catch(e){
       return {};
     }

@@ -16,7 +16,9 @@ Future<String> getHotUpdateAssetsPath(String id) async{
 class HotUpdater{
   const HotUpdater();
 
-  Future<void> update(List<HotUpdateInfo> infos, {void Function(double progress)? onProgress, bool check = true}) async{
+  Future<bool> update(List<HotUpdateInfo> infos, {void Function(double progress)? onProgress, bool check = true}) async{
+    bool needNotice = false;
+
     for(final HotUpdateInfo info in infos){
       final String rootPath = await getHotUpdateAssetsPath(info.id);
       final Directory rootDir = Directory(rootPath);
@@ -27,6 +29,8 @@ class HotUpdater{
       if(check && await File(versionFilePath).exists()){
         continue;
       }
+      needNotice = true;
+
       if(await rootDir.exists()){
         await rootDir.delete(recursive: true);
       }
@@ -45,5 +49,7 @@ class HotUpdater{
 
       await Future.wait(downloadable);
     }
+
+    return needNotice;
   }
 }
