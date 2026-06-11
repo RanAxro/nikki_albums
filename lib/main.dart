@@ -78,6 +78,8 @@ void main(List<String> args) async {
       path: "assets/lang",
       // startLocale: Locale("en", "US"),
       fallbackLocale: Locale("en", "US"),
+      useFallbackTranslations: true,
+      useFallbackTranslationsForEmptyResources: true,
       saveLocale: false,
       assetLoader: AppLangAssetLoader(),
       child: Frame(ancestor),

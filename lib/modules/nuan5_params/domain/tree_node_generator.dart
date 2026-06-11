@@ -14,12 +14,18 @@ import "package:easy_localization/easy_localization.dart";
 
 String trText(String key, {String category = "media_params"}){
   final String complete = "infinity_nikki.$category.$key";
-  return trExists(complete) ? tr(complete) : key;
+  
+  /// 使用trExit 后，无法使用回退语言
+  // return trExists(complete) ? tr(complete) : key;
+  return tr(complete) == complete ? key : tr(complete);
 }
 
 String trBool(bool key, {int index = 1, String category = "media_params"}){
   final String complete = "infinity_nikki.$category.${key}_$index";
-  return trExists(complete) ? tr(complete) : key.toString();
+
+  /// 使用trExit 后，无法使用回退语言
+  // return trExists(complete) ? tr(complete) : key.toString();
+  return tr(complete) == complete ? key.toString() : tr(complete);
 }
 
 Color convertColor((double, double, double, double) color){
