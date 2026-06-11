@@ -159,7 +159,7 @@ flutter:
     - assets/icon/
     - assets/icon/album/
     - assets/icon/big/
-    - assets/map/
+#    - assets/map/
     - assets/web/send_file/
     - assets/bin/
 
