@@ -16,6 +16,7 @@ const Duration udpBroadcastFrequency = Duration(milliseconds: 200);
 
 const String officialWebsite = r"nikki.ranaxro.com";
 const String apiUrl = "https://nikki.ranaxro.com/api.json";
+const String hotUpdateApi = "https://nikki.ranaxro.com/app_api/hot_update.json";
 const String githubWebsite = r"github.com/RanAxro/nikki_albums";
 const String qqGroup = r"1062670402";
 
