@@ -2974,92 +2974,91 @@ class FiltrationButton extends StatelessWidget {
           builder: (BuildContext context, Widget? child) {
             final bool isFilter = game.album.isFilter(filtration);
 
-            return AppButton(
-              useConfiguration: false,
-              borderRadius: 0,
-              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-              width: null,
-              height: mediumButtonSize,
-              onClick: () async {
-                if (isFilter) {
-                  game.album.unfilter(filtration);
-                } else {
-                  /// Only single-choice option
-                  if (filtration == Filtration.onlyDailyTask ||
-                      filtration == Filtration.hasCompletedTask ||
-                      filtration == Filtration.hasUnfinishedTask ||
-                      filtration == Filtration.onlyPuzzleTask ||
-                      filtration == Filtration.onlyRiskTask ||
-                      filtration == Filtration.onlyPhotoWall) {
-                    final ValueNotifier<double?> progress =
-                        ValueNotifier<double?>(null);
-                    bool cancel = false;
-
-                    if (context.mounted) {
-                      showProgressBar(
-                        context: context,
-                        valueListenable: progress,
-                        builder: (BuildContext context) {
-                          return AppButton.smallText(
-                            isTransparent: false,
-                            onClick: () {
-                              cancel = true;
-                              Navigator.of(context).pop();
-                            },
-                            child: AppText.tr("cancel"),
-                          );
-                        },
-                      );
-                    }
-
-                    final Set<ImageItem> images = await game.album.images;
-
-                    if (game.selectedUid?.value != null && images.isNotEmpty) {
-                      int count = 0;
-                      final int total = images.length;
-
-                      await InfinityNikkiParamCodec.decodeFilesUncheckedStream(
-                        MediaParamType.nikkiPhoto,
-                        images.map((ImageItem item) => item.path.path).toList(),
-                        uid: game.selectedUid?.value,
-                        callback: (String path, MediaCustomData? data) {
-                          progress.value = (count++ / total).clamp(0, 1);
-                        },
-                      );
-
-                      progress.value = 1;
-                    }
-
-                    if (game.album.isFilter(Filtration.onlyDailyTask)) {
-                      game.album.unfilter(Filtration.onlyDailyTask);
-                    }
-                    if (game.album.isFilter(Filtration.hasCompletedTask)) {
-                      game.album.unfilter(Filtration.hasCompletedTask);
-                    }
-                    if (game.album.isFilter(Filtration.hasUnfinishedTask)) {
-                      game.album.unfilter(Filtration.hasUnfinishedTask);
-                    }
-                    if (game.album.isFilter(Filtration.onlyPuzzleTask)) {
-                      game.album.unfilter(Filtration.onlyPuzzleTask);
-                    }
-                    if (game.album.isFilter(Filtration.onlyRiskTask)) {
-                      game.album.unfilter(Filtration.onlyRiskTask);
-                    }
-                    if (game.album.isFilter(Filtration.onlyPhotoWall)) {
-                      game.album.unfilter(Filtration.onlyPhotoWall);
-                    }
-                    game.album.filter(filtration);
+            return AppFloatingIndicatorButtonTarget(
+              child: AppButton.smallText(
+                padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                height: mediumButtonSize,
+                onClick: () async {
+                  if (isFilter) {
+                    game.album.unfilter(filtration);
                   } else {
-                    game.album.filter(filtration);
+                    /// Only single-choice option
+                    if (filtration == Filtration.onlyDailyTask ||
+                        filtration == Filtration.hasCompletedTask ||
+                        filtration == Filtration.hasUnfinishedTask ||
+                        filtration == Filtration.onlyPuzzleTask ||
+                        filtration == Filtration.onlyRiskTask ||
+                        filtration == Filtration.onlyPhotoWall) {
+                      final ValueNotifier<double?> progress =
+                      ValueNotifier<double?>(null);
+                      bool cancel = false;
+
+                      if (context.mounted) {
+                        showProgressBar(
+                          context: context,
+                          valueListenable: progress,
+                          builder: (BuildContext context) {
+                            return AppButton.smallText(
+                              isTransparent: false,
+                              onClick: () {
+                                cancel = true;
+                                Navigator.of(context).pop();
+                              },
+                              child: AppText.tr("cancel"),
+                            );
+                          },
+                        );
+                      }
+
+                      final Set<ImageItem> images = await game.album.images;
+
+                      if (game.selectedUid?.value != null && images.isNotEmpty) {
+                        int count = 0;
+                        final int total = images.length;
+
+                        await InfinityNikkiParamCodec.decodeFilesUncheckedStream(
+                          MediaParamType.nikkiPhoto,
+                          images.map((ImageItem item) => item.path.path).toList(),
+                          uid: game.selectedUid?.value,
+                          callback: (String path, MediaCustomData? data) {
+                            progress.value = (count++ / total).clamp(0, 1);
+                          },
+                        );
+
+                        progress.value = 1;
+                      }
+
+                      if (game.album.isFilter(Filtration.onlyDailyTask)) {
+                        game.album.unfilter(Filtration.onlyDailyTask);
+                      }
+                      if (game.album.isFilter(Filtration.hasCompletedTask)) {
+                        game.album.unfilter(Filtration.hasCompletedTask);
+                      }
+                      if (game.album.isFilter(Filtration.hasUnfinishedTask)) {
+                        game.album.unfilter(Filtration.hasUnfinishedTask);
+                      }
+                      if (game.album.isFilter(Filtration.onlyPuzzleTask)) {
+                        game.album.unfilter(Filtration.onlyPuzzleTask);
+                      }
+                      if (game.album.isFilter(Filtration.onlyRiskTask)) {
+                        game.album.unfilter(Filtration.onlyRiskTask);
+                      }
+                      if (game.album.isFilter(Filtration.onlyPhotoWall)) {
+                        game.album.unfilter(Filtration.onlyPhotoWall);
+                      }
+                      game.album.filter(filtration);
+                    } else {
+                      game.album.filter(filtration);
+                    }
                   }
-                }
-              },
-              child: Row(
-                spacing: listSpacing,
-                children: [
-                  AppIcon("tick", height: 16, opacity: isFilter ? 1 : 0),
-                  AppText.tr(filtration.name),
-                ],
+                },
+                child: Row(
+                  spacing: listSpacing,
+                  children: [
+                    AppIcon("tick", height: 16, opacity: isFilter ? 1 : 0),
+                    AppText.tr(filtration.name),
+                  ],
+                ),
               ),
             );
           },
@@ -3073,40 +3072,41 @@ class FiltrationButton extends StatelessWidget {
     return ListenableBuilder(
       listenable: game,
       builder: (BuildContext context, Widget? child) {
-        return MenuAnchor(
-          style: MenuStyle(
-            backgroundColor: WidgetStateProperty.all(
-              AppTheme.of(context)!.colorScheme.background.color,
-            ),
-          ),
-          builder:
-              (BuildContext context, MenuController controller, Widget? child) {
-                return AppButton.smallIcon(
-                  toolTip: "filter",
-                  colorRole: ColorRole.secondary,
-                  onClick: () {
-                    controller.isOpen ? controller.close() : controller.open();
-                  },
-                  child: AppIcon("filtration", height: 20),
-                );
+        return AppDropdown(
+          builder: (BuildContext context, MenuController controller, Widget? child){
+            return AppButton.smallIcon(
+              toolTip: "filter",
+              colorRole: ColorRole.secondary,
+              onClick: (){
+                controller.isOpen ? controller.close() : controller.open();
               },
-          // menuChildren: Filtration.values.map((Filtration filtration) => _buttonBuilder(filtration)).toList(growable: false),
-          menuChildren: [
-            _buttonBuilder(Filtration.inGame),
-            _buttonBuilder(Filtration.outOfGame),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
-              _buttonBuilder(Filtration.onlyDailyTask),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
-              _buttonBuilder(Filtration.hasCompletedTask),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
-              _buttonBuilder(Filtration.hasUnfinishedTask),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
-              _buttonBuilder(Filtration.onlyPuzzleTask),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
-              _buttonBuilder(Filtration.onlyRiskTask),
-            if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
-              _buttonBuilder(Filtration.onlyPhotoWall),
-          ],
+              child: AppIcon("filtration", height: 20),
+            );
+          },
+          childrenBuilder: (BuildContext context, MenuController controller){
+            return [
+              AppFloatingIndicatorButtonGroup(
+                child: Column(
+                  children: [
+                    _buttonBuilder(Filtration.inGame),
+                    _buttonBuilder(Filtration.outOfGame),
+                    if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+                      _buttonBuilder(Filtration.onlyDailyTask),
+                    if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+                      _buttonBuilder(Filtration.hasCompletedTask),
+                    if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+                      _buttonBuilder(Filtration.hasUnfinishedTask),
+                    if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+                      _buttonBuilder(Filtration.onlyPuzzleTask),
+                    if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+                      _buttonBuilder(Filtration.onlyRiskTask),
+                    if (game.selectedAlbum == AlbumType.NikkiPhotos_HighQuality)
+                      _buttonBuilder(Filtration.onlyPhotoWall),
+                  ],
+                ),
+              ),
+            ];
+          },
         );
       },
     );
@@ -3408,10 +3408,6 @@ class ExportImagesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = usable
-        ? AppTheme.of(context)!.colorScheme.secondary.onEnabledColor
-        : AppTheme.of(context)!.colorScheme.secondary.onDisabledColor;
-
     return MenuAnchor(
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(
