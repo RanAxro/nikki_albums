@@ -32,6 +32,8 @@ class HotUpdater{
       }
       await rootDir.create(recursive: true);
 
+      await File(versionFilePath).create(recursive: true);
+
       final List<Future<Response>> downloadable = [];
       for(final FileHotUpdateInfo fileInfo in info.files){
         final String fileSavePath = p.join(rootPath, fileInfo.path);

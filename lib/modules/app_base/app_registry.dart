@@ -16,6 +16,10 @@ abstract class AppRegistry{
     "infinity_nikki/other",
   ];
 
+  static const List<String> hotUpdateLangId = [
+    "infinity-nikki-cloth-lang",
+    "infinity-nikki-cloth-outfit-lang",
+  ];
 
   static final List<ContentItem> homeContent = [
     start_page.item,
