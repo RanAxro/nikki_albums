@@ -38,6 +38,10 @@
       {
         "path": "es-ES.json",
         "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/es-ES.json"
+      },
+      {
+        "path": "de-DE.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-lang/de-DE.json"
       }
     ]
   },
@@ -80,6 +84,10 @@
       {
         "path": "es-ES.json",
         "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/es-ES.json"
+      },
+      {
+        "path": "de-DE.json",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/de-DE.json"
       }
     ]
   }
