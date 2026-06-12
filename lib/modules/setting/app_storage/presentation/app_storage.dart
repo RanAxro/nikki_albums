@@ -1,6 +1,6 @@
 
 import "../domain/fix_app_assets.dart";
-import "package:nikki_albums/modules/app_base/model/state.dart";
+import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
