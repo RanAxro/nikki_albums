@@ -36,16 +36,16 @@ class HotUpdater{
       }
       await rootDir.create(recursive: true);
 
-      await File(versionFilePath).create(recursive: true);
-
+      final Dio dio = Dio();
       final List<Future<Response>> downloadable = [];
       for(final FileHotUpdateInfo fileInfo in info.files){
         final String fileSavePath = p.join(rootPath, fileInfo.path);
 
-        final Dio dio = Dio();
-
         downloadable.add(dio.download(fileInfo.downloadLink, fileSavePath));
       }
+
+      // 更新完成后写入 version_id 信息, 避免下次重复下载
+      await File(versionFilePath).create(recursive: true);
 
       await Future.wait(downloadable);
     }

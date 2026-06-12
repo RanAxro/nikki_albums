@@ -52,6 +52,8 @@ class _FrameState extends State<Frame> {
       if(!needNotice) return;
 
       if(context.mounted){
+        final List lang = AppState.lang.value.split("-");
+        await EasyLocalization.of(context)?.delegate.load(Locale(lang[0], lang[1]));
         await EasyLocalization.of(context)?.resetLocale();
 
         setState((){
