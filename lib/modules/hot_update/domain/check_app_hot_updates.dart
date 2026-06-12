@@ -8,5 +8,5 @@ Future<bool> checkAppHotUpdates() async{
   final List<HotUpdateInfo> infos = await getUpdateInfo();
 
   final HotUpdater updater = HotUpdater();
-  return updater.update(infos);
+  return await updater.update(infos);
 }

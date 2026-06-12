@@ -37,6 +37,7 @@ class Frame extends StatefulWidget {
 }
 
 class _FrameState extends State<Frame> {
+  int _appRebuildKey = 0;
   void whenLangChanged() {
     final List lang = AppState.lang.value.split("-");
     widget.globalKey.currentContext?.setLocale(Locale(lang[0], lang[1]));
@@ -45,23 +46,34 @@ class _FrameState extends State<Frame> {
   void whenThemeChanged() {
     setState(() {});
   }
-  
-  Future<void> checkHotUpdate(BuildContext context) async{
-    try{
+
+  Future<void> checkHotUpdate(BuildContext context) async {
+    try {
       final bool needNotice = await checkAppHotUpdates();
-      if(!needNotice) return;
+      if (!needNotice) return;
 
-      if(context.mounted){
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (context.mounted) {
+        AppToast.showMessage(
+          context: context,
+          message: context.tr("hot_update_successful"),
+        );
+
         final List lang = AppState.lang.value.split("-");
-        await EasyLocalization.of(context)?.delegate.load(Locale(lang[0], lang[1]));
-        await EasyLocalization.of(context)?.resetLocale();
+        await EasyLocalization.of(
+          context,
+        )?.delegate.localizationController?.setLocale(Locale(lang[0], lang[1]));
+        // await context.setLocale(Locale(lang[0], lang[1]));
 
-        setState((){
-          AppToast.showMessage(context: context, message: context.tr("hot_update_successful"));
+        await Future.delayed(const Duration(seconds: 1));
+
+        setState(() {
+          _appRebuildKey++;
         });
       }
-    }catch(e){
-      if(context.mounted){
+    } catch (e) {
+      if (context.mounted) {
         AppToast.showMessage(
           context: context,
           duration: const Duration(hours: 1),
@@ -128,6 +140,7 @@ class _FrameState extends State<Frame> {
           return AppTheme(
             theme: currentTheme,
             child: MaterialApp(
+              key: ValueKey(_appRebuildKey),
               debugShowCheckedModeBanner: false,
               locale: context.locale,
               supportedLocales: context.supportedLocales,
@@ -145,6 +158,7 @@ class _FrameState extends State<Frame> {
                     if (!kDebugMode) {
                       checkAppUpdates(context);
                     }
+
                     /// 热更新
                     checkHotUpdate(context);
 
