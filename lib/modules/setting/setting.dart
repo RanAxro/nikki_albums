@@ -3,7 +3,6 @@ import "package:flutter/foundation.dart";
 import "personalization.dart";
 import "edit_custom_game.dart";
 import "exporting_image/presentation/exporting_image_setting.dart";
-import "live_photo_settings.dart";
 import "nikkias_setting/presentation/nikkias_setting.dart";
 import "version_information/presentation/version_information.dart";
 import "app_storage/presentation/app_storage.dart";

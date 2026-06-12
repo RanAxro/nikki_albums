@@ -276,10 +276,7 @@ class AlbumHandler {
   }
 
   /// export images to native device
-  Future<void> exportToLocal(
-    BuildContext context,
-    List<ImageItem> images,
-  ) async {
+  Future<void> exportToLocal(BuildContext context, List<ImageItem> images, {String? savePath}) async{
     final String liveFormat = AppState.livePhotoExportFormat.value;
     final bool isVideoAlbum =
         AppState.currentGame.value?.selectedAlbum == AlbumType.Video;
@@ -290,10 +287,19 @@ class AlbumHandler {
       }
     }
 
-    final String? location = await NativeFilePicker.getDirectoryPath(
-      dialogTitle: context.plural("exportXImage", images.length),
-      lockParentWindow: true,
-    );
+    late final String? location;
+    if(savePath != null){
+      location = savePath;
+    }else{
+      if(context.mounted){
+        location = await NativeFilePicker.getDirectoryPath(
+          dialogTitle: context.plural("exportXImage", images.length),
+          lockParentWindow: true,
+        );
+      }else{
+        location = null;
+      }
+    }
     if (location == null) return;
 
     final Path root = Path(location);
@@ -646,8 +652,8 @@ class AlbumHandler {
     }
   }
 
-  /// The "Export" option for the "AlbumType.Video" category
-  void openVideoExportSetting(BuildContext context) {
+  /// export option
+  void openExportSetting(BuildContext context){
     SettingDialog.show(context, initialPage: SettingPage.exportingImageSetting);
   }
 
@@ -3491,23 +3497,38 @@ class ExportImagesButton extends StatelessWidget {
           child: AppText.tr("exportNikkiasToLocal"),
         ),
 
-        /// The "Export" option for the "AlbumType.Video" category
-        if (AppState.currentGame.value?.selectedAlbum == AlbumType.Video)
-          AppButton.smallText(
-            useConfiguration: false,
-            borderRadius: 0,
-            height: mediumButtonSize,
-            onClick: () {
-              AlbumHandler.of(context).openVideoExportSetting(context);
-            },
-            child: Row(
-              spacing: listSpacing,
-              children: [
-                AppIcon("setting", height: 20),
-                AppText.tr("config_of_export"),
-              ],
-            ),
+        ValueListenableBuilder(
+          valueListenable: AppState.exportingImageDirs,
+          builder: (BuildContext _, Map dirs, Widget? child){
+            return Column(
+              children: dirs.keys.whereType<String>().map((String key){
+                return MenuItemButton(
+                  onPressed: (){
+                    AlbumHandler.of(context).exportToLocal(context, images, savePath: dirs[key]);
+                  },
+                  child: AppText(context.tr("export_toX", args: [key])),
+                );
+              }).toList(),
+            );
+          },
+        ),
+
+        /// export option
+        AppButton.smallText(
+          useConfiguration: false,
+          borderRadius: 0,
+          height: mediumButtonSize,
+          onClick: () {
+            AlbumHandler.of(context).openExportSetting(context);
+          },
+          child: Row(
+            spacing: listSpacing,
+            children: [
+              AppIcon("setting", height: 20),
+              AppText.tr("config_of_export"),
+            ],
           ),
+        ),
       ],
     );
   }
