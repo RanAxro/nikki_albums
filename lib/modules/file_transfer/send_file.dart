@@ -410,7 +410,7 @@ class _SendFileBuilderState extends State<SendFileBuilder> {
         .add(
           createStaticHandler(
             (getWebPath() + r"send_file").path,
-            defaultDocument: "index_${AppState.lang.value}.html",
+            defaultDocument: "index_${AppState.lang.value == "zh-CN" || AppState.lang.value == "zh-TW" ? "zh-CN" : "en-US"}.html",
           ),
         );
 
