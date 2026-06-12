@@ -454,7 +454,7 @@ abstract class Nikkias {
   }
 
   static Future<void> registerFileAssociationWindows() async {
-    final exePath = Platform.resolvedExecutable;
+    final String exePath = AppState.sfxPath.value ?? Platform.resolvedExecutable;
 
     // 打开 HKCU\Software\Classes
     final hkcu = Registry.openPath(RegistryHive.currentUser);

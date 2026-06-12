@@ -64,7 +64,8 @@ class _FrameState extends State<Frame> {
       if(context.mounted){
         AppToast.showMessage(
           context: context,
-          message: context.tr("hot_update_failed!\n$e"),
+          duration: const Duration(hours: 1),
+          message: "${context.tr("hot_update_failed")}\n$e",
           state: false,
         );
       }
