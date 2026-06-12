@@ -31,7 +31,7 @@
 
 Nikki Albums is a meticulously crafted album management software designed specifically for *Infinity Nikki* players. It is committed to helping you easily and efficiently manage your game albums, making your gaming experience smoother and more enjoyable.
 
-🚀 **Current Version**: 3.07
+🚀 **Current Version**: 3.08
 
 - **GitHub Download**: [Click here](https://github.com/RanAxro/nikki_albums)  
 - **Official Website Download**: [Click here](https://nikki.ranaxro.com)  
@@ -61,21 +61,23 @@ Join us to exchange usage tips with other players, report issues encountered dur
 
 # Changelog
 
-## v3.07
-* macOS support
-* Global server support, automatically detects global server albums
-* Live Photo conversion, convert "Dynamic Albums" into Motion Photo or Live Photo (macOS only)
-* Performance optimization, 92% improvement in filtering performance
-* More filter options, added filters for "Completed Photo Missions", "Incomplete Photo Missions", "Perspective Photography", "Thrilling Photography", and "Photo Wall"
-* Full parameter decoding
-* Mount parameter decoding
-* Optimized parameter display position, moving less important parameters to the end
-* Added keyboard shortcuts for common functions
-* Album position cache, preventing the page from jumping back to the top after refresh, move, delete, or import operations
-* Fixed Windows white screen bug on application startup
-* Added nikkias configuration item in settings
-* Added system theme following feature
-* Fixed bug where language was always Chinese on application startup
+## v3.08
+**Features**
+1. Added support for exporting images to a preset folder — no need to select the destination every time.
+2. Added support for exporting Live Photos on Windows.
+3. Added multilingual support (12 languages).
+4. Added hot update support: partial resource updates no longer require a full reinstallation.
+5. Added auto-restart after software updates.
+
+**Performance & Optimization**
+1. Improved video-to-GIF conversion performance for Dynamic Albums — speed increased by 95%.
+2. Prioritized low-quality images when loading thumbnails to accelerate decoding.
+3. Optimized application startup speed.
+
+**Bug Fixes**
+1. Fixed an issue where collages failed to decode.
+2. Fixed an issue causing the app to be unresponsive on launch in Windows.
+3. Fixed an issue preventing export to network drives on macOS.
 
 ***
 
