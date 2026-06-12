@@ -12,7 +12,7 @@ use std::process::exit;
 use crate::utils::*;
 
 
-const VERSION: usize = 1;
+const VERSION: usize = 13;
 
 
 #[derive(Embed)]
@@ -159,7 +159,9 @@ fn main(){
           kill_process(pid);
         }
 
-        state = State::Run;
+        std::thread::sleep(std::time::Duration::from_millis(500));
+
+        state = State::Verification;
       },
       State::TryRun => {
         match run_target_exe(&exe){

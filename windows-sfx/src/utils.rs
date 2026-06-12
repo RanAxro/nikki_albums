@@ -16,10 +16,11 @@ use windows::{
 
 
 pub(crate) fn get_current_exe_path() -> std::io::Result<PathBuf>{
-  let path = env::current_exe()?;
+  // let path = env::current_exe()?;
 
   // 解析符号链接，获取真实绝对路径
-  fs::canonicalize(&path)
+  // fs::canonicalize(&path)
+  env::current_exe()
 }
 
 pub(crate) fn run_target_exe(exe: impl AsRef<Path>) -> std::io::Result<u32>{

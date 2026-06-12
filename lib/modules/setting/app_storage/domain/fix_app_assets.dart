@@ -24,6 +24,11 @@ Future<void> fixAppAssets() async{
       await versionFile.delete();
     }
 
-    await Process.run(AppState.sfxPath.value!, ["-force"], runInShell: false);
+    await Process.start(
+      AppState.sfxPath.value!,
+      ["-force"],
+      runInShell: false,
+      mode: ProcessStartMode.detached,
+    );
   }
 }

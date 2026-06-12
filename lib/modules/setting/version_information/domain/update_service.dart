@@ -112,7 +112,12 @@ class WindowsUpdater extends Updater {
 
       onCloseApp(() async{
         if(decompressPath != null){
-          await Process.run(decompressPath, ["-force"], runInShell: false);
+          await Process.start(
+            decompressPath,
+            ["-force"],
+            runInShell: false,
+            mode: ProcessStartMode.detached,
+          );
         }
       });
       await closeApp();
