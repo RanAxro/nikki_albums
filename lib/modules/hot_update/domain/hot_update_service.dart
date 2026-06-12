@@ -9,6 +9,10 @@ import "package:path/path.dart" as p;
 import "package:dio/dio.dart";
 
 
+Future<String> getHotUpdatePath() async{
+  return p.join((await getAppDataDirectoryPath()).path, "HotUpdate");
+}
+
 Future<String> getHotUpdateAssetsPath(String id) async{
   return p.join((await getAppDataDirectoryPath()).path, "HotUpdate", id);
 }

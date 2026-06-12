@@ -5,6 +5,7 @@ import "edit_custom_game.dart";
 import "live_photo_settings.dart";
 import "nikkias_setting/presentation/nikkias_setting.dart";
 import "version_information/presentation/version_information.dart";
+import "app_storage/presentation/app_storage.dart";
 import "debug_panel/presentation/debug_panel.dart";
 
 import "package:nikki_albums/modules/app_base/state.dart";
@@ -20,6 +21,7 @@ enum SettingPage {
   livePhotoSettings,
   nikkiasSetting,
   versionInformation,
+  appStorage,
   debugPanel,
 }
 
@@ -48,6 +50,7 @@ class SettingDialog extends StatelessWidget {
       SettingPage.livePhotoSettings,
       SettingPage.nikkiasSetting,
       SettingPage.versionInformation,
+      SettingPage.appStorage,
       if (kDebugMode) SettingPage.debugPanel,
     ];
   }
@@ -127,6 +130,9 @@ class SettingDialog extends StatelessWidget {
                                     case SettingPage.versionInformation:
                                       title = "version_information";
                                       break;
+                                    case SettingPage.appStorage:
+                                      title = "app_storage";
+                                      break;
                                     case SettingPage.debugPanel:
                                       title = "Debug Panel";
                                       break;
@@ -178,6 +184,9 @@ class SettingDialog extends StatelessWidget {
                   break;
                 case SettingPage.versionInformation:
                   pageWidget = const VersionInformation();
+                  break;
+                case SettingPage.appStorage:
+                  pageWidget = const AppStorage();
                   break;
                 case SettingPage.debugPanel:
                   pageWidget = const DebugPanel();

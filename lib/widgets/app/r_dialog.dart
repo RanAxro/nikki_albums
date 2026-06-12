@@ -199,6 +199,9 @@ class AppConfirmDialog extends StatelessWidget {
         spacing: listSpacing,
         mainAxisSize: MainAxisSize.min,
         children: [
+
+          block5H,
+
           SmoothPointerScroll(
             builder:
                 (
@@ -213,6 +216,8 @@ class AppConfirmDialog extends StatelessWidget {
                 },
           ),
 
+          block5H,
+
           Row(
             spacing: listSpacing,
             children: isRisk
@@ -224,7 +229,7 @@ class AppConfirmDialog extends StatelessWidget {
                         onClick: () {
                           Navigator.of(context).pop(true);
                         },
-                        child: AppText(yMessage),
+                        child: AppText(yMessage, isTranslate: isTranslateYMessage),
                       ),
                     ),
                     Expanded(
@@ -235,7 +240,7 @@ class AppConfirmDialog extends StatelessWidget {
                         onClick: () {
                           Navigator.of(context).pop(false);
                         },
-                        child: AppText(nMessage),
+                        child: AppText(nMessage, isTranslate: isTranslateNMessage),
                       ),
                     ),
                   ]
@@ -247,7 +252,7 @@ class AppConfirmDialog extends StatelessWidget {
                         onClick: () {
                           Navigator.of(context).pop(false);
                         },
-                        child: AppText(nMessage),
+                        child: AppText(nMessage, isTranslate: isTranslateNMessage),
                       ),
                     ),
                     Expanded(
@@ -258,7 +263,7 @@ class AppConfirmDialog extends StatelessWidget {
                         onClick: () {
                           Navigator.of(context).pop(true);
                         },
-                        child: AppText(yMessage),
+                        child: AppText(yMessage, isTranslate: isTranslateYMessage),
                       ),
                     ),
                   ],
