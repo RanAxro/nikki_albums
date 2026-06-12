@@ -2,6 +2,7 @@ import "package:flutter/foundation.dart";
 
 import "personalization.dart";
 import "edit_custom_game.dart";
+import "exporting_image/presentation/exporting_image_setting.dart";
 import "live_photo_settings.dart";
 import "nikkias_setting/presentation/nikkias_setting.dart";
 import "version_information/presentation/version_information.dart";
@@ -18,7 +19,7 @@ import "package:flutter/material.dart";
 enum SettingPage {
   personalization,
   accountManagement,
-  livePhotoSettings,
+  exportingImageSetting,
   nikkiasSetting,
   versionInformation,
   appStorage,
@@ -32,7 +33,7 @@ class SettingDialog extends StatelessWidget {
     if(_isOpen) return;
     _isOpen = true;
     try{
-      await showDialog(
+      await showAppDialog(
         context: context,
         builder: (BuildContext context) {
           return SettingDialog(initialPage: initialPage);
@@ -47,7 +48,7 @@ class SettingDialog extends StatelessWidget {
     return [
       SettingPage.personalization,
       if (Platform.isWindows) SettingPage.accountManagement,
-      SettingPage.livePhotoSettings,
+      SettingPage.exportingImageSetting,
       SettingPage.nikkiasSetting,
       SettingPage.versionInformation,
       SettingPage.appStorage,
@@ -121,8 +122,8 @@ class SettingDialog extends StatelessWidget {
                                     case SettingPage.accountManagement:
                                       title = "accountManagement";
                                       break;
-                                    case SettingPage.livePhotoSettings:
-                                      title = "livePhotoSettings";
+                                    case SettingPage.exportingImageSetting:
+                                      title = "exporting_image_setting.setting_name";
                                       break;
                                     case SettingPage.nikkiasSetting:
                                       title = "nikkias_setting";
@@ -176,8 +177,8 @@ class SettingDialog extends StatelessWidget {
                 case SettingPage.accountManagement:
                   pageWidget = const EditCustomGame();
                   break;
-                case SettingPage.livePhotoSettings:
-                  pageWidget = const LivePhotoSettings();
+                case SettingPage.exportingImageSetting:
+                  pageWidget = const ExportingImageSetting();
                   break;
                 case SettingPage.nikkiasSetting:
                   pageWidget = const NikkiasSetting();

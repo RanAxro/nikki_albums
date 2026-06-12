@@ -38,6 +38,16 @@
   "lang": "English",
   "language": "Language",
   "personalization": "Personalization",
+  "exporting_image_setting": {
+    "setting_name": "Photo Export Settings",
+    "export_to_a_fixed_dir": "Export to a Fixed Folder",
+    "add": "Add",
+    "deleteX": "Are you sure you want to delete \"{}\"?",
+    "name": "Name",
+    "select_dir": "Please select a folder",
+    "name_is_empty": "Name cannot be empty",
+    "name_already_exists": "This name already exists"
+  },
   "livePhotoSettings": "Live Photo",
   "accountManagement": "Account Management",
   "nikkias_setting": "Nikkias File",

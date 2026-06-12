@@ -51,6 +51,7 @@ abstract class AppState {
 
   /// live photo export format: "none", "apple", "google"
   static final ValueNotifier<String> livePhotoExportFormat = _createStateValue<String>(Platform.isMacOS ? "apple" : "none");
+  static final ValueNotifier<Map> exportingImageDirs = _createStateValue<Map>({});
 
   /// debug
   static final ValueNotifier<String?> debugNuan5DecryptionOutput = _createStateValue<String?>(null);
@@ -158,6 +159,10 @@ abstract class AppState {
       "livePhotoExportFormat",
       (String value) => livePhotoExportFormat.value = value,
     );
+    assign<Map>(
+      "exportingImageDirs",
+      (Map value) => exportingImageDirs.value = value,
+    );
 
     assign<String?>("debugNuan5DecryptionOutput", (String? value) => debugNuan5DecryptionOutput.value = value);
     assign<String?>("debugNuan5DecryptionInput", (String? value) => debugNuan5DecryptionInput.value = value);
@@ -197,6 +202,7 @@ abstract class AppState {
       "isUseMaximizeOrRestoreButton": isUseMaximizeOrRestoreButton.value,
       "needFileAssociationHelper": needFileAssociationHelper.value,
       "livePhotoExportFormat": livePhotoExportFormat.value,
+      "exportingImageDirs": exportingImageDirs.value,
 
       "debugNuan5DecryptionOutput": debugNuan5DecryptionOutput.value,
       "debugNuan5DecryptionInput": debugNuan5DecryptionInput.value,

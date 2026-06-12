@@ -45,6 +45,16 @@
   "lang": "简体中文",
   "language": "语言",
   "personalization": "个性化",
+  "exporting_image_setting": {
+    "setting_name": "照片导出配置",
+    "export_to_a_fixed_dir": "导出到固定文件夹",
+    "add": "添加",
+    "deleteX": "你确定要删除 \"{}\" 吗",
+    "name": "名称",
+    "select_dir": "请选择一个文件夹",
+    "name_is_empty": "名称不能为空",
+    "name_already_exists": "该名称已存在"
+  },
   "livePhotoSettings": "实况照片",
   "accountManagement": "账号管理",
   "nikkias_setting": "Nikkias文件",
