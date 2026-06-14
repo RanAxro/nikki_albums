@@ -81,6 +81,14 @@ Join us to exchange usage tips with other players, report issues encountered dur
 
 ***
 
+<br/>
+<div align="center" style="font-size: 20px">
+  <a href="docs/declarations.en.md">Declarations</a>
+  &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="docs/build.en.md">Build</a>
+</div>
+<br/>
+
 # Declarations
 
 ## I. About This Tool
