@@ -1,4 +1,4 @@
-<a href="README.zh.md">阅读中文版本</a>
+<a href="README.md">阅读中文版本</a>
 
 <div align="center">
   <img src="assets/logo/nikkialbums.webp" alt="Nikki Albums", width="100", height="100">
@@ -23,8 +23,8 @@
 </p>
 
 <p>
-  <img src="website/assets/p1.en.png" width="48%" />
-  <img src="website/assets/p2.en.png" width="48%" />
+  <img src="https://file-nikki.ranaxro.com/images/web/p1.en.webp" width="48%" />
+  <img src="https://file-nikki.ranaxro.com/images/web/p2.en.webp" width="48%" />
 </p>
 
 <h2>🌟 A Powerful Assistant for Game Album Management</h2>

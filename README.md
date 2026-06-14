@@ -23,8 +23,8 @@
 </p>
 
 <p>
-  <img src="website/assets/p1.zh.png" width="48%" />
-  <img src="website/assets/p2.zh.png" width="48%" />
+  <img src="https://file-nikki.ranaxro.com/images/web/p1.zh.webp" width="48%" />
+  <img src="https://file-nikki.ranaxro.com/images/web/p2.zh.webp" width="48%" />
 </p>
 
 
