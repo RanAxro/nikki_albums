@@ -252,11 +252,11 @@
 		const decodeImg = document.getElementById('img-decode');
 		
 		if (currentLang === 'zh' || currentLang === 'zh-tw') {
-			wallImg.src = 'website/assets/p1.zh.png';
-			decodeImg.src = 'website/assets/p2.zh.png';
+			wallImg.src = 'https://file-nikki.ranaxro.com/images/web/p1.zh.webp';
+			decodeImg.src = 'https://file-nikki.ranaxro.com/images/web/p2.zh.webp';
 		} else {
-			wallImg.src = 'website/assets/p1.en.png';
-			decodeImg.src = 'website/assets/p2.en.png';
+			wallImg.src = 'https://file-nikki.ranaxro.com/images/web/p1.en.webp';
+			decodeImg.src = 'https://file-nikki.ranaxro.com/images/web/p2.en.webp';
 		}
 	}
 
