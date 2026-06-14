@@ -18,5 +18,5 @@ jobs:
           since: 1
           since-unit: day
           endpoint: "www.bing.com"
-          key: "b50c0da8c7cd4d17a70d9847d60a3c4a"
-          key-location: "https://nikki.ranaxro.com/b50c0da8c7cd4d17a70d9847d60a3c4a.txt"
+          key: "0d383df4f2444c4eaf00f5d2931df6ef"
+          key-location: "https://nikki.ranaxro.com/0d383df4f2444c4eaf00f5d2931df6ef.txt"
