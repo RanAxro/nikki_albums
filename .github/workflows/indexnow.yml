@@ -15,8 +15,9 @@ jobs:
         uses: bojieyang/indexnow-action@v2
         with:
           sitemap-location: "https://nikki.ranaxro.com/sitemap.xml"
-          since: 1
-          since-unit: day
           endpoint: "www.bing.com"
           key: "0d383df4f2444c4eaf00f5d2931df6ef"
           key-location: "https://nikki.ranaxro.com/0d383df4f2444c4eaf00f5d2931df6ef.txt"
+          since: 7
+          since-unit: day
+          lastmod-required: false
