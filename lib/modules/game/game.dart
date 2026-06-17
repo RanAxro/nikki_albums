@@ -295,10 +295,15 @@ class Game extends ChangeNotifier with AlbumPath {
   AssetImage get logoImage => AssetImage(logoAssetName);
 
   String get name {
-    if (launcherChannel == LauncherChannel.unknown) {
-      return launcherName ?? "";
+    final String channelName = launcherChannel == LauncherChannel.unknown
+        ? ""
+        : tr("infinity_nikki.launcher_channel.${launcherChannel.name}");
+    if (launcherName != null && launcherName!.isNotEmpty) {
+      return channelName.isEmpty
+          ? launcherName!
+          : "$channelName ($launcherName)";
     }
-    return tr("infinity_nikki.launcher_channel.${launcherChannel.name}");
+    return channelName;
   }
 
   GameShortcut? get shortcut => selectedUid == null

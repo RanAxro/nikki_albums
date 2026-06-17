@@ -18,32 +18,50 @@ class MacOsSearchStrategy implements GameSearchStrategy {
     final containerDir = io.Directory(containerPath);
     if (!await containerDir.exists()) return gameList;
 
-    final List<io.FileSystemEntity> entities = await containerDir.list().toList();
+    final List<io.FileSystemEntity> entities = await containerDir
+        .list()
+        .toList();
 
     for (final io.FileSystemEntity entity in entities) {
       if (entity is! io.Directory) continue;
       final dirName = p.basename(entity.path);
-      // Match com.infoldgames.infinitynikki with optional language suffix (e.g. "en", "jp", etc.)
-      if (!dirName.startsWith('com.infoldgames.infinitynikki')) continue;
 
-      final installPath = p.join(entity.path, 'Data', 'Library', 'Application Support', 'Epic');
+      LauncherChannel channel;
+      String? gameName;
+
+      if (dirName.startsWith('com.infoldgames.infinitynikki')) {
+        channel = LauncherChannel.paperGlobal;
+        final suffix = dirName.substring(
+          'com.infoldgames.infinitynikki'.length,
+        );
+        gameName = suffix.isEmpty ? null : suffix.toUpperCase();
+      } else if (dirName.startsWith('com.papegames.infinitynikki')) {
+        channel = LauncherChannel.paper;
+        final suffix = dirName.substring('com.papegames.infinitynikki'.length);
+        gameName = suffix.isEmpty ? null : suffix.toUpperCase();
+      } else {
+        continue;
+      }
+
+      final installPath = p.join(
+        entity.path,
+        'Data',
+        'Library',
+        'Application Support',
+        'Epic',
+      );
       final x6GameDir = io.Directory(p.join(installPath, 'X6Game'));
       if (!await x6GameDir.exists()) continue;
 
-      // On macOS, use 'paper' channel for all variants since the module's
-      // LauncherChannel enum doesn't distinguish global vs CN
-      final channel = LauncherChannel.paper;
-
-      if (finished.contains(channel)) continue;
       finished.add(channel);
 
-      gameList.add(Game(
-        launcher: MacOsGameLauncher(
-          channel: channel,
-          path: entity.path,
+      gameList.add(
+        Game(
+          name: gameName,
+          launcher: MacOsGameLauncher(channel: channel, path: entity.path),
+          installPath: installPath,
         ),
-        installPath: installPath,
-      ));
+      );
     }
 
     return gameList;
@@ -54,10 +72,7 @@ class MacOsGameLauncher extends GameLauncher {
   @override
   final String path;
 
-  const MacOsGameLauncher({
-    required super.channel,
-    required this.path,
-  });
+  const MacOsGameLauncher({required super.channel, required this.path});
 
   @override
   app_platform.Platform get platform => app_platform.Platform.macOs;
