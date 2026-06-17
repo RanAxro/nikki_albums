@@ -20,9 +20,7 @@ pub fn parse_cloth(id: &i64) -> Cloth{
   let species = (op_id % SPECIES_SIZE) as u16;
   op_id /= SPECIES_SIZE;
 
-  if state != 0 {
-    outfit = outfit * 100 + (state as i64);
-  }
+  outfit = get_complete_outfit(outfit, state);
 
   Cloth{
     id: id.clone(),
@@ -30,5 +28,15 @@ pub fn parse_cloth(id: &i64) -> Cloth{
     species,
     cloth_type,
     state,
+  }
+}
+
+fn get_complete_outfit(outfit: i64, state: u8) -> i64{
+  match state{
+    2 => outfit * 100 + 1,
+    3 => outfit * 100 + 2,
+    4 => outfit * 100 + 3,
+    5 => outfit * 100 + 4,
+    _ => outfit,
   }
 }
