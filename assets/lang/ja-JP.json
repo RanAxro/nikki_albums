@@ -26,6 +26,15 @@
   "quantity": "数量",
   "type": "種類",
   "restore": "復元",
+  "width": "幅",
+  "height": "高さ",
+  "fps": "FPS",
+  "mustIsNumber": "数字でなければなりません",
+  "cannotIsNegativeNumber": "負の数は指定できません",
+  "cannotIsZero": "ゼロにはできません",
+  "valueIsTooHigh": "値が高すぎます",
+  "hot_update_successful": "ホットアップデートが成功しました!",
+  "hot_update_failed": "ホットアップデートに失敗しました!",
   "----------initial_startup----------": "----------initial_startup----------",
   "welcome": "ようこそ Nikki Albums へ",
   "start": "開始",
@@ -36,6 +45,16 @@
   "lang": "日本語",
   "language": "言語",
   "personalization": "個人設定",
+  "exporting_image_setting": {
+    "setting_name": "写真のエクスポート設定",
+    "export_to_a_fixed_dir": "固定フォルダーにエクスポート",
+    "add": "追加",
+    "deleteX": "「{}」を削除してもよろしいですか?",
+    "name": "名前",
+    "select_dir": "フォルダを選択してください",
+    "name_is_empty": "名前を空にすることはできません",
+    "name_already_exists": "この名前はすでに存在します"
+  },
   "livePhotoSettings": "実況写真",
   "accountManagement": "登録情報の管理",
   "nikkias_setting": "Nikkias書類",
@@ -60,6 +79,10 @@
   "downloadFailed": "取得失敗",
   "toOfficialWebsite": "公式の頁へ",
   "toGitHub": "GitHub",
+  "app_storage": "アプリストレージ",
+  "fix_app_assets": "修理リソース",
+  "fix_app_assets_message": "リソース修復後に再起動が必要",
+  "fix_app_assets_failed": "リソース修復に失敗しました",
   "----------nikkias----------": "----------nikkias----------",
   "nikkiasFile": "nikkias書類",
   "selectNikkiasFile": "nikkias書類を選択",
@@ -125,10 +148,12 @@
   "toPreviousImage": "前の画像へ",
   "toNextImage": "次の画像へ",
   "XImageFailedToBeProcessed": {
+    "one": "1 枚の画像の処理に失敗しました",
     "other": "{}枚の画像処理に失敗しました"
   },
   "deleteSameImage": "以下の写真帳内の同一画像も削除",
   "deleteXImage": {
+    "one": "1枚の画像を削除",
     "other": "{}枚の画像を削除"
   },
   "exportToClipboard": "一時記憶へ複写",
@@ -137,13 +162,16 @@
   "exportToNetwork": "通信網機器へ書き出し",
   "exportToPhotoLibrary": "写真庫へ書き出し",
   "exportNikkiasToLocal": "nikkias書類の書き出し",
+  "export_toX": "{} にエクスポート",
   "config_of_export": "設定項目",
   "exportXImage": {
+    "one": "1 つの画像をエクスポートする",
     "other": "{}枚の画像を書き出す先："
   },
   "exportNikkiasFile": "nikkias書類の書き出し先",
   "xImageSelected": {
     "zero": "画像が選択されていません",
+    "one": "1 枚の画像が選択されました",
     "other": "{}枚の画像を選択中"
   },
   "left-clickToSelectImage": "左押しで画像選択",
@@ -151,6 +179,7 @@
   "right-clickToPasteImage": "右押しで一時記憶から画像を読み込み",
   "importImageTo": "画像の読み込み先",
   "importXImage": {
+    "one": "1 つの画像をインポートする",
     "other": "{}枚の画像を取り込む先："
   },
   "useSameNetworkDevice": "同一通信網上の機器を使用してください",
@@ -201,6 +230,7 @@
   "deleteMessage": "これらの画像を削除しますか？削除した画像は復元できません。慎重に行ってください！",
   "clearRecycleBinMessage": "ごみ箱を空にしますか？削除した画像は復元できません。慎重に行ってください！",
   "failedToRestoreXImages": {
+    "one": "1 つのイメージを復元できませんでした",
     "other": "{}枚の画像復元に失敗しました"
   },
   "permanentlyDelete": "永久に削除",
@@ -209,7 +239,7 @@
   "addCustomAccount": "他の起動器の版を追加",
   "gameAlbum": "写真帳",
   "backupAlbum": "控えの写真帳",
-  "----------_----------": "----------common----------",
+  "----------_----------": "----------_----------",
   "": "",
   "close": "閉じる",
   "reset": "初期化",
@@ -219,7 +249,7 @@
   "invert_select": "選択反転",
   "----------ui----------": "----------ui----------",
   "ui_toast_tip": "通知",
-  "----------pa----------": "----------page_album----------",
+  "----------pa----------": "----------pa----------",
   "pa_select_X_image": {
     "other": "{}枚の画像を選択中"
   },
@@ -232,9 +262,10 @@
   "pa_to_previous_image": "前の画像",
   "pa_to_next_image": "次の画像",
   "pa_show_image_data": "画像情報",
+  "pa_on_copy": "コピーする",
   "pa_copy_successful": "複写に成功しました",
   "pa_copy_failed": "複写に失敗しました",
-  "----------ai----------": "----------album_info----------",
+  "----------ai----------": "----------ai----------",
   "ai_Collage_CollagePhotoName": "趣拼海報原圖",
   "ai_Collage_HighQualityName": "趣拼海報",
   "ai_Collage_LowQualityName": "縮圖",
@@ -273,7 +304,7 @@
   "ai_ScreenShotDescription": "拍過的圖片都儲存在這。遊戲不會管理該相簿",
   "ai_VideoDescription": "外部影片",
   "ai_XSdkQrCodeDescription": "分享碼二維碼",
-  "----------ia----------": "----------image_addition----------",
+  "----------ia----------": "----------ia----------",
   "ia_state_false_1": "無",
   "ia_state_true_1": "有",
   "ia_state_false_2": "否",

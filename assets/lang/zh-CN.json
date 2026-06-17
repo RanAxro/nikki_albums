@@ -29,7 +29,6 @@
   "width": "宽度",
   "height": "高度",
   "fps": "帧率",
-  "exportToGif": "导出GIF动图",
   "mustIsNumber": "必须为数字",
   "cannotIsNegativeNumber": "不能为负数",
   "cannotIsZero": "不能为0",
@@ -40,6 +39,7 @@
   "welcome": "欢迎使用暖暖相册",
   "start": "开始使用",
   "----------setting----------": "----------setting----------",
+  "imageCustomDataWidgetSize": "自定义信息徽章缩放因子",
   "theme": "主题",
   "followSystemAppearance": "跟随系统外观",
   "lang": "简体中文",
@@ -78,6 +78,7 @@
   "updateMessage": "更新内容",
   "downloadFailed": "下载失败",
   "toOfficialWebsite": "前往官网",
+  "toGitHub": "GitHub",
   "app_storage": "应用储存",
   "fix_app_assets": "资源修复",
   "fix_app_assets_message": "资源修复后需重启程序",
@@ -155,6 +156,7 @@
   },
   "exportToClipboard": "导出到剪贴板",
   "exportToLocal": "导出到本地",
+  "exportToGif": "导出GIF动图",
   "exportToNetwork": "导出到网络设备",
   "exportToPhotoLibrary": "导出到系统相册",
   "exportNikkiasToLocal": "导出nikkias文件",
@@ -619,6 +621,5 @@
   "game_weapon_custom_state_close": "关闭",
   "game_weapon_custom_state_open": "开启",
   "game_interaction_type_chair": "椅子",
-  "game_interaction_type_decoration": "摆饰",
-  "toGitHub": "GitHub"
+  "game_interaction_type_decoration": "摆饰"
 }
