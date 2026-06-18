@@ -1,4 +1,60 @@
 const config = {
+	"v3.08.01": {
+		"releaseDate": "2026-6-18",
+		"description": {
+			"de": "1. Fehler behoben, bei dem das Spiel auf macOS nicht gefunden werden konnte\n2. Einige falsche Übersetzungen korrigiert",
+			"en": "1. Fixed the bug where the game could not be located on macOS\n2. Fixed some incorrect translations",
+			"es": "1. Se corrigió el error por el que el juego no se podía localizar en macOS\n2. Se corrigieron algunas traducciones incorrectas",
+			"fr": "1. Correction du bug empêchant de localiser le jeu sur macOS\n2. Correction de certaines traductions erronées",
+			"id": "1. Memperbaiki bug di mana game tidak dapat ditemukan di macOS\n2. Memperbaiki beberapa terjemahan yang salah",
+			"it": "1. Corretto il bug per cui il gioco non poteva essere localizzato su macOS\n2. Corrette alcune traduzioni errate",
+			"ja": "1. macOSでゲームが見つからないバグを修正しました\n2. 一部の誤訳を修正しました",
+			"ko": "1. macOS에서 게임을 찾을 수 없는 버그를 수정했습니다\n2. 일부 잘못된 번역을 수정했습니다",
+			"pt": "1. Corrigido o bug em que o jogo não podia ser localizado no macOS\n2. Corrigidas algumas traduções incorretas",
+			"th": "1. แก้ไขบั๊กที่ไม่สามารถค้นหาเกมบน macOS ได้\n2. แก้ไขคำแปลที่ไม่ถูกต้องบางส่วน",
+			"zh": "1. 修复了在MacOS上定位不到游戏的bug\n2. 修复部分错误翻译",
+			"tw": "1. 修復了在MacOS上定位不到遊戲的bug\n2. 修復部分錯誤翻譯"
+			// "de": "",
+			// "en": "",
+			// "es": "",
+			// "fr": "",
+			// "id": "",
+			// "it": "",
+			// "ja": "",
+			// "ko": "",
+			// "pt": "",
+			// "th": "",
+			// "zh": "",
+			// "tw": ""
+			
+      // "de-DE": "",
+      // "en-US": "",
+      // "es-ES": "",
+      // "fr-FR": "",
+      // "id-ID": "",
+      // "it-IT": "",
+      // "ja-JP": "",
+      // "ko-KR": "",
+      // "pt-BR": "",
+      // "th-TH": "",
+      // "zh-CN": "",
+      // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.08.01/Nikki%20Albums-v3.08.01-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.08.01/Nikki%20Albums-v3.08.01-Windows-x64.zip"
+			}
+		]
+	},
 	"v3.08": {
 		"releaseDate": "2026-6-13",
 		"description": {
