@@ -546,6 +546,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
       // PatternCreationData 由 image_custom_data::CoreData::PatternCreation 与 image_custom_data::CoreData::PatternCreationExt 的数据组成
       // 将 image_custom_data::CoreData::PatternCreationExt (tiling_data字段) 单独收集
       // items 遍历完毕后, 再把 tiling_data 插回到 对应的 image_custom_data::CoreData::PatternCreation
+      // {cloth_id * 100 + target_group_id: tiling}
       let mut pattern_creation_tiling: HashMap<i64, f64> = HashMap::new();
 
       for item in items {
@@ -565,13 +566,13 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
                 params.diy.as_mut().unwrap().pattern_creation.push(convert_pattern_creation(item, pattern_creation));
               }
               image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) => {
-                pattern_creation_tiling.insert(item.target_cloth_id, pattern_creation_ext.tiling_data);
+                pattern_creation_tiling.insert(item.target_cloth_id * 100 + item.target_group_id, pattern_creation_ext.tiling_data);
               }
             };
           },
           None => {
             if let image_custom_data::CoreData::PatternCreationExt(pattern_creation_ext) = &item.core_data {
-              pattern_creation_tiling.insert(item.target_cloth_id, pattern_creation_ext.tiling_data);
+              pattern_creation_tiling.insert(item.target_cloth_id * 100 + item.target_group_id, pattern_creation_ext.tiling_data);
             }else{
               clothes.insert(item.target_cloth_id, resolve_item(item));
             }
@@ -579,10 +580,13 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
         }
       }
 
-      for (id, params) in clothes.iter_mut(){
-        if let Some(tiling) = pattern_creation_tiling.get(id) {
-          for pattern_creation in &mut params.diy.as_mut().unwrap().pattern_creation {
-            pattern_creation.tiling = tiling.clone();
+      for (id, params) in clothes.iter_mut() {
+        if let Some(diy_data) = params.diy.as_mut() {
+          for pattern_creation in &mut diy_data.pattern_creation {
+            pattern_creation.tiling = match pattern_creation_tiling.get(&(id * 100 + pattern_creation.target_group_id)){
+              Some(tiling) => tiling.clone(),
+              None => 1.0,
+            }
           }
         }
       }
