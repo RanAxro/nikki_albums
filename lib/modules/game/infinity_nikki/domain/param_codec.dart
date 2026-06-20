@@ -1,6 +1,14 @@
 
+import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
+
+import "package:flutter/foundation.dart";
+import "dart:convert";
+import "dart:io";
+
+import "package:path/path.dart" as p;
+
 
 abstract class InfinityNikkiParamCodec{
   static final Map<String, MediaCustomData?> _cache = {};
@@ -11,8 +19,37 @@ abstract class InfinityNikkiParamCodec{
 
   static void setCache(String path, MediaCustomData? data) => _cache[path] = data;
 
+  static Future<void> _debugOutputData(String path, String? uid) async{
+    if(kDebugMode && AppState.debugNuan5DecryptionOutput.value != null){
+      try{
+        if(uid == null){
+          return;
+        }
+
+        final MediaKey key = MediaKey.fromStr(uid);
+        final flag = base64Decode(AppState.debugNuan5DecryptionFlag.value!);
+        final CustomData? d = await mediaDecodeFileUnchecked(flag: flag, path: path, key: key);
+        if(d == null){
+          return;
+        }
+
+        d.whenOrNull(
+          valid: (Uint8List valid) async{
+            final String output = p.join(AppState.debugNuan5DecryptionOutput.value!, "decrypted.json");
+            await File(output).writeAsBytes(valid);
+          },
+        );
+
+        key.dispose();
+      }catch(e, s){
+        debugPrintStack(stackTrace: s);
+      }
+    }
+  }
 
   static Future<MediaCustomData?> decodeFileUnchecked(MediaParamType paramType, String path, {String? uid, bool cache = true}) async{
+    _debugOutputData(path, uid);
+
     if(cache && hasCache(path)){
       return fromCache(path);
     }
@@ -35,6 +72,8 @@ abstract class InfinityNikkiParamCodec{
   }
 
   static MediaCustomData? decodeFileUncheckedSync(MediaParamType paramType, String path, {String? uid, bool cache = true}){
+    _debugOutputData(path, uid);
+
     if(cache && hasCache(path)){
       return fromCache(path);
     }
