@@ -113,13 +113,13 @@ enum ClothType{
 }
 
 enum NikkiClothState{
-  evolution_0(0),
-  value_1(1),
+  evolution_0_1(0),
+  none(1),
   glowUp(2),
   evolution_1(3),
   evolution_2(4),
   evolution_3(5),
-  value_9(9);
+  evolution_0_2(9);
 
   final int flag;
 
@@ -128,14 +128,14 @@ enum NikkiClothState{
   static NikkiClothState fromName(dynamic name){
     return NikkiClothState.values.firstWhere(
       (e) => e.name == name,
-      orElse: () => NikkiClothState.evolution_0,
+      orElse: () => NikkiClothState.evolution_0_1,
     );
   }
 
   static NikkiClothState fromFlag(dynamic flag){
     return NikkiClothState.values.firstWhere(
       (e) => e.flag == flag,
-      orElse: () => NikkiClothState.evolution_0,
+      orElse: () => NikkiClothState.evolution_0_1,
     );
   }
 }

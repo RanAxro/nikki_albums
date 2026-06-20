@@ -595,10 +595,11 @@ TreeNode genClothParams(ClothParams params){
     title: trText("cloth_type.${ClothType.fromFlag(params.cloth.clothType).name}"),
     message: trText(params.cloth.id.toString(), category: "cloth"),
     children: [
-      TreeNode(
-        title: trText("outfit"),
-        message: trText(params.cloth.outfit.toString(), category: "cloth_outfit"),
-      ),
+      if(params.cloth.outfit != null)
+        TreeNode(
+          title: trText("outfit"),
+          message: trText(params.cloth.outfit.toString(), category: "cloth_outfit"),
+        ),
       TreeNode(
         title: trText("nikki_cloth_state.name"),
         message: trText("nikki_cloth_state.${NikkiClothState.fromFlag(params.cloth.state).name}"),

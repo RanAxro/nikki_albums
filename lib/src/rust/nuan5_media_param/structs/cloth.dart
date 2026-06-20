@@ -10,14 +10,14 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 class Cloth {
   final PlatformInt64 id;
-  final PlatformInt64 outfit;
+  final PlatformInt64? outfit;
   final int species;
   final int clothType;
   final int state;
 
   const Cloth({
     required this.id,
-    required this.outfit,
+    this.outfit,
     required this.species,
     required this.clothType,
     required this.state,

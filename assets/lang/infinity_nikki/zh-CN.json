@@ -172,13 +172,13 @@
       "outfit": "套装",
       "nikki_cloth_state": {
         "name": "进化/焕新",
-        "evolution_0": "无",
-        "value_1": "无(1)",
+        "evolution_0_1": "无",
+        "none": "无",
         "glowUp": "焕新",
         "evolution_1": "1进",
         "evolution_2": "2进",
         "evolution_3": "3进",
-        "value_9": "无(9)"
+        "evolution_0_2": "无"
       },
       "diy": "染色",
       "outfit_dye": "服装虹染",

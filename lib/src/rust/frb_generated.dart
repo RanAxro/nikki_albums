@@ -1957,7 +1957,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return Cloth(
       id: dco_decode_i_64(arr[0]),
-      outfit: dco_decode_i_64(arr[1]),
+      outfit: dco_decode_opt_box_autoadd_i_64(arr[1]),
       species: dco_decode_u_16(arr[2]),
       clothType: dco_decode_u_8(arr[3]),
       state: dco_decode_u_8(arr[4]),
@@ -4094,7 +4094,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Cloth sse_decode_cloth(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_id = sse_decode_i_64(deserializer);
-    var var_outfit = sse_decode_i_64(deserializer);
+    var var_outfit = sse_decode_opt_box_autoadd_i_64(deserializer);
     var var_species = sse_decode_u_16(deserializer);
     var var_clothType = sse_decode_u_8(deserializer);
     var var_state = sse_decode_u_8(deserializer);
@@ -6748,7 +6748,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_cloth(Cloth self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.id, serializer);
-    sse_encode_i_64(self.outfit, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.outfit, serializer);
     sse_encode_u_16(self.species, serializer);
     sse_encode_u_8(self.clothType, serializer);
     sse_encode_u_8(self.state, serializer);

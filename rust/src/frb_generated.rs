@@ -1800,7 +1800,7 @@ impl SseDecode for crate::nuan5_media_param::structs::cloth::Cloth {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <i64>::sse_decode(deserializer);
-        let mut var_outfit = <i64>::sse_decode(deserializer);
+        let mut var_outfit = <Option<i64>>::sse_decode(deserializer);
         let mut var_species = <u16>::sse_decode(deserializer);
         let mut var_clothType = <u8>::sse_decode(deserializer);
         let mut var_state = <u8>::sse_decode(deserializer);
@@ -7029,7 +7029,7 @@ impl SseEncode for crate::nuan5_media_param::structs::cloth::Cloth {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.id, serializer);
-        <i64>::sse_encode(self.outfit, serializer);
+        <Option<i64>>::sse_encode(self.outfit, serializer);
         <u16>::sse_encode(self.species, serializer);
         <u8>::sse_encode(self.cloth_type, serializer);
         <u8>::sse_encode(self.state, serializer);

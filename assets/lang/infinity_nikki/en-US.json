@@ -145,13 +145,13 @@
       "outfit": "Outfits",
       "nikki_cloth_state": {
         "name": "Evolution/Glow up",
-        "evolution_0": "None",
-        "value_1": "None(1)",
+        "evolution_0_1": "None",
+        "none": "None",
         "glowUp": "Glow Up",
         "evolution_1": "Evolution Level 1",
         "evolution_2": "Evolution Level 2",
         "evolution_3": "Evolution Level 3",
-        "value_9": "None(9)"
+        "evolution_0_2": "None"
       },
       "diy": "DIY",
       "outfit_dye": "Outfit Dye",
