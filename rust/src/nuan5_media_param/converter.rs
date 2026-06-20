@@ -490,7 +490,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
       target_group_id: item.target_group_id,
       feature_tag: item.feature_tag,
       texture_id: pattern_creation.replace_texture_id,
-      override_pattern_a: pattern_creation.override_pattern_a,
+      override_pattern_a: pattern_creation.override_pattern_a.unwrap_or(false),
       tiling: 0.0,
     }
   }

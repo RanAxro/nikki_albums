@@ -428,7 +428,8 @@ pub struct PatternCreationCoreData{
   pub replace_texture_id: i64,
 
   #[serde(rename = "OverridePatternA")]
-  pub override_pattern_a: bool,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub override_pattern_a: Option<bool>,
 }
 
 #[derive(Clone)]
