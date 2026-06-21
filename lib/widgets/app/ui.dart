@@ -1004,264 +1004,11 @@ class _AppUncontrolledSwitchState extends State<AppUncontrolledSwitch> {
   }
 }
 
-// class AppRadioStack extends StatefulWidget {
-//   final Duration duration;
-//   final Axis direction;
-//   final double spacing;
-//   final double buttonWidth;
-//   final double buttonHeight;
-//   final double borderRadius;
-//   final List<int>? divider;
-//   final int? selectedIndex;
-//   final List<Widget> children;
-//
-//   const AppRadioStack({
-//     super.key,
-//     this.duration = animationTime,
-//     this.direction = Axis.horizontal,
-//     this.spacing = .0,
-//     this.buttonWidth = smallButtonSize,
-//     this.buttonHeight = smallButtonSize,
-//     this.borderRadius = smallBorderRadius,
-//     this.divider,
-//     this.selectedIndex,
-//     required this.children,
-//   });
-//
-//   @override
-//   State<AppRadioStack> createState() => _AppRadioStackState();
-// }
-//
-// class _AppRadioStackState extends State<AppRadioStack> {
-//   int? lastIndex;
-//   final ValueNotifier<int?> hoverIndex = ValueNotifier(null);
-//   late final AppButtonStyle style;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     style = AppButtonStyle(
-//       width: widget.buttonWidth,
-//       height: widget.buttonHeight,
-//       borderRadius: widget.borderRadius,
-//       shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
-//         ColorRole colorRole = ColorRole.of(context);
-//         ColorState colorState = ColorState.normal;
-//         bool isTransparent = true;
-//
-//         if (usable) {
-//           colorState = ColorState.enabled;
-//           if (isInside) {
-//             colorState = ColorState.hovered;
-//           }
-//           if (isPressed) {
-//             colorState = ColorState.pressed;
-//             isTransparent = false;
-//           }
-//         } else {
-//           colorState = ColorState.disabled;
-//         }
-//
-//         return (colorRole, colorState, isTransparent);
-//       },
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final List<Widget> children = <Widget>[];
-//     for (int index = 0; index < widget.children.length; index++) {
-//       children.add(
-//         MouseRegion(
-//           onEnter: (_) {
-//             lastIndex = hoverIndex.value;
-//             hoverIndex.value = index;
-//           },
-//           child: widget.children[index],
-//         ),
-//       );
-//     }
-//
-//     final double wholeSpacing =
-//         widget.spacing +
-//         (widget.direction == Axis.horizontal
-//             ? widget.buttonWidth
-//             : widget.buttonHeight);
-//
-//     final List<double> dividerOffset = [];
-//     if (widget.divider != null) {
-//       int counter = 0;
-//       for (final int interval in widget.divider!) {
-//         counter += interval;
-//         dividerOffset.add(counter * wholeSpacing);
-//       }
-//     }
-//
-//     return Stack(
-//       children: [
-//         /// Block Indicator
-//         ValueListenableBuilder(
-//           valueListenable: hoverIndex,
-//           builder: (BuildContext context, int? index, Widget? child) {
-//             double offset = 0;
-//             bool transparent = true;
-//
-//             if (widget.selectedIndex == null) {
-//               if (lastIndex == null && index != null) {
-//                 offset = index * wholeSpacing;
-//                 transparent = false;
-//               } else if (lastIndex != null && index == null) {
-//                 offset = lastIndex! * wholeSpacing;
-//                 transparent = true;
-//               } else if (lastIndex != null && index != null) {
-//                 offset = index * wholeSpacing;
-//                 transparent = false;
-//               } else {
-//                 transparent = true;
-//               }
-//             } else {
-//               if (index == null) {
-//                 offset = widget.selectedIndex! * wholeSpacing;
-//               } else {
-//                 offset = index * wholeSpacing;
-//               }
-//               transparent = false;
-//             }
-//
-//             return AnimatedPositioned(
-//               duration: lastIndex == null && widget.selectedIndex == null
-//                   ? Duration.zero
-//                   : widget.duration,
-//               left: widget.direction == Axis.horizontal ? offset : 0,
-//               top: widget.direction == Axis.vertical ? offset : 0,
-//               right: widget.direction == Axis.horizontal ? null : 0,
-//               bottom: widget.direction == Axis.vertical ? null : 0,
-//               child: Center(
-//                 child: AnimatedContainer(
-//                   duration: widget.duration,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.all(
-//                       Radius.circular(widget.borderRadius),
-//                     ),
-//                     color: transparent
-//                         ? AppColorScheme.of(context)
-//                               .byRole(ColorRole.of(context))
-//                               .hoveredColor
-//                               .withAlpha(0)
-//                         : AppColorScheme.of(
-//                             context,
-//                           ).byRole(ColorRole.of(context)).hoveredColor,
-//                   ),
-//                   width: widget.buttonWidth,
-//                   height: widget.buttonHeight,
-//                 ),
-//               ),
-//             );
-//           },
-//         ),
-//
-//         /// TODO 滚动时不要触发exit
-//         MouseRegion(
-//           onExit: (_) {
-//             lastIndex = hoverIndex.value;
-//             hoverIndex.value = null;
-//           },
-//           child: AppButtonConfiguration(
-//             style: style,
-//             child: widget.direction == Axis.horizontal
-//                 ? Row(
-//                     spacing: widget.spacing,
-//                     mainAxisSize: MainAxisSize.min,
-//                     children: children,
-//                   )
-//                 : Column(
-//                     spacing: widget.spacing,
-//                     mainAxisSize: MainAxisSize.min,
-//                     children: children,
-//                   ),
-//           ),
-//         ),
-//
-//         for (final double offset in dividerOffset)
-//           Positioned(
-//             left: widget.direction == Axis.horizontal
-//                 ? offset - 0.5 * smallDividerThickness
-//                 : 0,
-//             top: widget.direction == Axis.vertical
-//                 ? offset - 0.5 * smallDividerThickness
-//                 : 0,
-//             right: 0,
-//             bottom: 0,
-//             child: IgnorePointer(
-//               child: Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: AppDivider(direction: widget.direction, thickness: 1),
-//               ),
-//             ),
-//           ),
-//
-//         /// Indicator
-//         ValueListenableBuilder(
-//           valueListenable: hoverIndex,
-//           builder: (BuildContext context, int? index, Widget? child) {
-//             double offset = 0;
-//             bool transparent = true;
-//
-//             if (widget.selectedIndex == null) {
-//               transparent = true;
-//             } else {
-//               offset = widget.selectedIndex! * wholeSpacing;
-//               transparent = false;
-//             }
-//
-//             return AnimatedPositioned(
-//               duration: lastIndex == null && widget.selectedIndex == null
-//                   ? Duration.zero
-//                   : widget.duration,
-//               left: widget.direction == Axis.horizontal ? offset : 1,
-//               top: widget.direction == Axis.vertical ? offset : 1,
-//               width: widget.buttonWidth,
-//               height: widget.buttonHeight,
-//               child: Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: AnimatedContainer(
-//                   duration: widget.duration,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.all(
-//                       Radius.circular(widget.borderRadius),
-//                     ),
-//                     color: transparent
-//                         ? AppColorScheme.of(context)
-//                               .byRole(ColorRole.of(context))
-//                               .onHoveredColor
-//                               .withAlpha(0)
-//                         : AppColorScheme.of(
-//                             context,
-//                           ).byRole(ColorRole.of(context)).onHoveredColor,
-//                   ),
-//                   width: 2,
-//                   height: 0.5 * widget.buttonHeight,
-//                 ),
-//               ),
-//             );
-//           },
-//         ),
-//       ],
-//     );
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     hoverIndex.dispose();
-//   }
-// }
-
 class AppRadioStack extends StatefulWidget{
   final Duration duration;
   final Axis direction;
   final double spacing;
-  final int? selectedIndex;
+  final int selectedIndex;
   final List<Widget> children;
 
   const AppRadioStack({
@@ -1269,7 +1016,7 @@ class AppRadioStack extends StatefulWidget{
     this.duration = animationTime,
     this.direction = Axis.horizontal,
     this.spacing = 0.0,
-    this.selectedIndex,
+    this.selectedIndex = 0,
     required this.children,
   });
 
@@ -1337,8 +1084,8 @@ class _AppRadioStackState extends State<AppRadioStack>{
         AppFloatingIndicatorButtonGroup(
           hideWhenNoTarget: false,
           child: widget.direction == Axis.horizontal ?
-            Row(children: children) :
-            Column(children: children),
+            Row(spacing: widget.spacing, children: children) :
+            Column(spacing: widget.spacing, children: children),
         ),
 
         /// Indicator
@@ -1346,7 +1093,7 @@ class _AppRadioStackState extends State<AppRadioStack>{
           valueListenable: indicator,
           builder: (BuildContext context, Rect rect, Widget? child){
             return AnimatedPositioned(
-              duration: widget.selectedIndex == null ? Duration.zero : widget.duration,
+              duration: widget.duration,
               left: widget.direction == Axis.vertical ? rect.left + 1 : rect.left,
               top: widget.direction == Axis.horizontal ? rect.top - 1 : rect.top,
               width: rect.width,
