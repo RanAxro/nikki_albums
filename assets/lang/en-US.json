@@ -189,6 +189,12 @@
   "packagingFailed": "File packaging failed",
   "activatingNetwork": "Starting network service",
   "activatingNetworkFailed": "Failed to start network service",
+  "----------parameter_manager----------": "----------parameter_manager----------",
+  "parameter_manager": {
+    "camera": "Camera Parameters",
+    "cloth": "Lookbook",
+    "home": "Home Scheme"
+  },
   "----------file_transfer----------": "----------file_transfer----------",
   "inputDownloadUrl": "Input download link",
   "downloadableContent": "Downloadable content",

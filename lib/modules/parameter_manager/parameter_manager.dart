@@ -4,6 +4,7 @@ import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
 
+
 final ContentItem item = ContentItem(
   name: "parameter_manager",
   icon: AppIcon("parameter_manager", height: mediumButtonContentSize),
@@ -11,53 +12,82 @@ final ContentItem item = ContentItem(
 );
 
 class ParameterManager extends StatefulWidget{
-  const ParameterManager({super.key});
+  final int initPage;
+
+  const ParameterManager({
+    super.key,
+    this.initPage = 0,
+  });
 
   @override
   State<ParameterManager> createState() => _ParameterManagerState();
 }
 
 class _ParameterManagerState extends State<ParameterManager>{
+  final ValueNotifier<int> page = ValueNotifier<int>(0);
+
+  @override
+  void initState(){
+    super.initState();
+    page.value = widget.initPage;
+  }
+
   @override
   Widget build(BuildContext context){
     return Column(
       children: [
         AppBackground(
           colorRole: ColorRole.secondary,
-          child: SizedBox(
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: smallPadding),
             height: topBarHeight,
-            child: AppFloatingIndicatorButtonGroup(
-              child: Row(
-                children: [
-                  AppButton.smallText(
-                    child: Row(
-                      spacing: listSpacing,
-                      children: [
-                        AppIcon("camera"),
-                        AppText("相机参数"),
-                      ],
+            child: ValueListenableBuilder(
+              valueListenable: page,
+              builder: (BuildContext context, int currentPage, Widget? child){
+                return AppRadioStack(
+                  direction: Axis.horizontal,
+                  selectedIndex: currentPage,
+                  children: [
+                    AppButton.smallText(
+                      onClick: (){
+                        page.value = 0;
+                      },
+                      child: Row(
+                        spacing: listSpacing,
+                        children: [
+                          AppIcon("camera"),
+                          AppText.tr("parameter_manager.camera"),
+                        ],
+                      ),
                     ),
-                  ),
-                  AppButton.smallText(
-                    child: Row(
-                      spacing: listSpacing,
-                      children: [
-                        AppIcon("cloth"),
-                        AppText("分享码"),
-                      ],
+                    AppButton.smallText(
+                      onClick: (){
+                        page.value = 1;
+                      },
+                      child: Row(
+                        spacing: listSpacing,
+                        children: [
+                          AppIcon("cloth"),
+                          AppText.tr("parameter_manager.cloth"),
+                        ],
+                      ),
                     ),
-                  ),
-                  AppButton.smallText(
-                    child: Row(
-                      spacing: listSpacing,
-                      children: [
-                        AppIcon("home"),
-                        AppText("家园码"),
-                      ],
+                    AppButton.smallText(
+                      onClick: (){
+                        page.value = 2;
+                      },
+                      child: Row(
+                        spacing: listSpacing,
+                        children: [
+                          AppIcon("home"),
+                          AppText.tr("parameter_manager.home"),
+                        ],
+                      ),
                     ),
-                  ),
-                ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
-              ),
+                  ],
+                );
+              },
             ),
           ),
         ),
