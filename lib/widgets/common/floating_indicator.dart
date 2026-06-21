@@ -251,6 +251,10 @@ class _FloatingIndicatorTargetState extends State<FloatingIndicatorTarget>{
     super.initState();
 
     group = getGroup(context);
+  }
+
+  @override
+  Widget build(BuildContext context){
     WidgetsBinding.instance.addPostFrameCallback((_){
       if(widget.defaultTarget){
         final Rect? rect = _getRect(context);
@@ -258,10 +262,7 @@ class _FloatingIndicatorTargetState extends State<FloatingIndicatorTarget>{
         group._setDefault(rect, widget.info);
       }
     });
-  }
 
-  @override
-  Widget build(BuildContext context){
     return MouseRegion(
       onEnter: (PointerEnterEvent event){
         final Rect? rect = _getRect(context);
