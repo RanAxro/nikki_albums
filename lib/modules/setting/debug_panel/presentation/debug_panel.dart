@@ -29,11 +29,9 @@ class DebugPanel extends StatelessWidget{
                 builder: (BuildContext context, Widget? child){
                   return AppRadioStack(
                     direction: Axis.vertical,
-                    buttonWidth: constraints.maxWidth,
-                    buttonHeight: smallButtonSize,
                     selectedIndex: controller.page?.toInt() ?? 0,
                     children: [
-                      AppRawButton(
+                      AppButton.smallText(
                         width: constraints.maxWidth,
                         height: smallButtonSize,
                         onClick: () {
@@ -41,7 +39,7 @@ class DebugPanel extends StatelessWidget{
                         },
                         child: AppText("HotUpdate"),
                       ),
-                      AppRawButton(
+                      AppButton.smallText(
                         width: constraints.maxWidth,
                         height: smallButtonSize,
                         onClick: () {
@@ -49,7 +47,7 @@ class DebugPanel extends StatelessWidget{
                         },
                         child: AppText("AppState", isTranslate: false),
                       ),
-                      AppRawButton(
+                      AppButton.smallText(
                         width: constraints.maxWidth,
                         height: smallButtonSize,
                         onClick: () {

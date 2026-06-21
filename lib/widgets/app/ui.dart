@@ -1,6 +1,5 @@
-import "package:nikki_albums/widgets/common/component.dart";
-import "package:nikki_albums/widgets/common/floating_indicator.dart";
 
+import "package:nikki_albums/widgets/common/component.dart";
 import "component.dart";
 
 import "package:flutter/gestures.dart";
@@ -1005,14 +1004,263 @@ class _AppUncontrolledSwitchState extends State<AppUncontrolledSwitch> {
   }
 }
 
-class AppRadioStack extends StatefulWidget {
+// class AppRadioStack extends StatefulWidget {
+//   final Duration duration;
+//   final Axis direction;
+//   final double spacing;
+//   final double buttonWidth;
+//   final double buttonHeight;
+//   final double borderRadius;
+//   final List<int>? divider;
+//   final int? selectedIndex;
+//   final List<Widget> children;
+//
+//   const AppRadioStack({
+//     super.key,
+//     this.duration = animationTime,
+//     this.direction = Axis.horizontal,
+//     this.spacing = .0,
+//     this.buttonWidth = smallButtonSize,
+//     this.buttonHeight = smallButtonSize,
+//     this.borderRadius = smallBorderRadius,
+//     this.divider,
+//     this.selectedIndex,
+//     required this.children,
+//   });
+//
+//   @override
+//   State<AppRadioStack> createState() => _AppRadioStackState();
+// }
+//
+// class _AppRadioStackState extends State<AppRadioStack> {
+//   int? lastIndex;
+//   final ValueNotifier<int?> hoverIndex = ValueNotifier(null);
+//   late final AppButtonStyle style;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     style = AppButtonStyle(
+//       width: widget.buttonWidth,
+//       height: widget.buttonHeight,
+//       borderRadius: widget.borderRadius,
+//       shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
+//         ColorRole colorRole = ColorRole.of(context);
+//         ColorState colorState = ColorState.normal;
+//         bool isTransparent = true;
+//
+//         if (usable) {
+//           colorState = ColorState.enabled;
+//           if (isInside) {
+//             colorState = ColorState.hovered;
+//           }
+//           if (isPressed) {
+//             colorState = ColorState.pressed;
+//             isTransparent = false;
+//           }
+//         } else {
+//           colorState = ColorState.disabled;
+//         }
+//
+//         return (colorRole, colorState, isTransparent);
+//       },
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final List<Widget> children = <Widget>[];
+//     for (int index = 0; index < widget.children.length; index++) {
+//       children.add(
+//         MouseRegion(
+//           onEnter: (_) {
+//             lastIndex = hoverIndex.value;
+//             hoverIndex.value = index;
+//           },
+//           child: widget.children[index],
+//         ),
+//       );
+//     }
+//
+//     final double wholeSpacing =
+//         widget.spacing +
+//         (widget.direction == Axis.horizontal
+//             ? widget.buttonWidth
+//             : widget.buttonHeight);
+//
+//     final List<double> dividerOffset = [];
+//     if (widget.divider != null) {
+//       int counter = 0;
+//       for (final int interval in widget.divider!) {
+//         counter += interval;
+//         dividerOffset.add(counter * wholeSpacing);
+//       }
+//     }
+//
+//     return Stack(
+//       children: [
+//         /// Block Indicator
+//         ValueListenableBuilder(
+//           valueListenable: hoverIndex,
+//           builder: (BuildContext context, int? index, Widget? child) {
+//             double offset = 0;
+//             bool transparent = true;
+//
+//             if (widget.selectedIndex == null) {
+//               if (lastIndex == null && index != null) {
+//                 offset = index * wholeSpacing;
+//                 transparent = false;
+//               } else if (lastIndex != null && index == null) {
+//                 offset = lastIndex! * wholeSpacing;
+//                 transparent = true;
+//               } else if (lastIndex != null && index != null) {
+//                 offset = index * wholeSpacing;
+//                 transparent = false;
+//               } else {
+//                 transparent = true;
+//               }
+//             } else {
+//               if (index == null) {
+//                 offset = widget.selectedIndex! * wholeSpacing;
+//               } else {
+//                 offset = index * wholeSpacing;
+//               }
+//               transparent = false;
+//             }
+//
+//             return AnimatedPositioned(
+//               duration: lastIndex == null && widget.selectedIndex == null
+//                   ? Duration.zero
+//                   : widget.duration,
+//               left: widget.direction == Axis.horizontal ? offset : 0,
+//               top: widget.direction == Axis.vertical ? offset : 0,
+//               right: widget.direction == Axis.horizontal ? null : 0,
+//               bottom: widget.direction == Axis.vertical ? null : 0,
+//               child: Center(
+//                 child: AnimatedContainer(
+//                   duration: widget.duration,
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.all(
+//                       Radius.circular(widget.borderRadius),
+//                     ),
+//                     color: transparent
+//                         ? AppColorScheme.of(context)
+//                               .byRole(ColorRole.of(context))
+//                               .hoveredColor
+//                               .withAlpha(0)
+//                         : AppColorScheme.of(
+//                             context,
+//                           ).byRole(ColorRole.of(context)).hoveredColor,
+//                   ),
+//                   width: widget.buttonWidth,
+//                   height: widget.buttonHeight,
+//                 ),
+//               ),
+//             );
+//           },
+//         ),
+//
+//         /// TODO 滚动时不要触发exit
+//         MouseRegion(
+//           onExit: (_) {
+//             lastIndex = hoverIndex.value;
+//             hoverIndex.value = null;
+//           },
+//           child: AppButtonConfiguration(
+//             style: style,
+//             child: widget.direction == Axis.horizontal
+//                 ? Row(
+//                     spacing: widget.spacing,
+//                     mainAxisSize: MainAxisSize.min,
+//                     children: children,
+//                   )
+//                 : Column(
+//                     spacing: widget.spacing,
+//                     mainAxisSize: MainAxisSize.min,
+//                     children: children,
+//                   ),
+//           ),
+//         ),
+//
+//         for (final double offset in dividerOffset)
+//           Positioned(
+//             left: widget.direction == Axis.horizontal
+//                 ? offset - 0.5 * smallDividerThickness
+//                 : 0,
+//             top: widget.direction == Axis.vertical
+//                 ? offset - 0.5 * smallDividerThickness
+//                 : 0,
+//             right: 0,
+//             bottom: 0,
+//             child: IgnorePointer(
+//               child: Align(
+//                 alignment: Alignment.centerLeft,
+//                 child: AppDivider(direction: widget.direction, thickness: 1),
+//               ),
+//             ),
+//           ),
+//
+//         /// Indicator
+//         ValueListenableBuilder(
+//           valueListenable: hoverIndex,
+//           builder: (BuildContext context, int? index, Widget? child) {
+//             double offset = 0;
+//             bool transparent = true;
+//
+//             if (widget.selectedIndex == null) {
+//               transparent = true;
+//             } else {
+//               offset = widget.selectedIndex! * wholeSpacing;
+//               transparent = false;
+//             }
+//
+//             return AnimatedPositioned(
+//               duration: lastIndex == null && widget.selectedIndex == null
+//                   ? Duration.zero
+//                   : widget.duration,
+//               left: widget.direction == Axis.horizontal ? offset : 1,
+//               top: widget.direction == Axis.vertical ? offset : 1,
+//               width: widget.buttonWidth,
+//               height: widget.buttonHeight,
+//               child: Align(
+//                 alignment: Alignment.centerLeft,
+//                 child: AnimatedContainer(
+//                   duration: widget.duration,
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.all(
+//                       Radius.circular(widget.borderRadius),
+//                     ),
+//                     color: transparent
+//                         ? AppColorScheme.of(context)
+//                               .byRole(ColorRole.of(context))
+//                               .onHoveredColor
+//                               .withAlpha(0)
+//                         : AppColorScheme.of(
+//                             context,
+//                           ).byRole(ColorRole.of(context)).onHoveredColor,
+//                   ),
+//                   width: 2,
+//                   height: 0.5 * widget.buttonHeight,
+//                 ),
+//               ),
+//             );
+//           },
+//         ),
+//       ],
+//     );
+//   }
+//
+//   @override
+//   void dispose() {
+//     super.dispose();
+//     hoverIndex.dispose();
+//   }
+// }
+
+class AppRadioStack extends StatefulWidget{
   final Duration duration;
   final Axis direction;
   final double spacing;
-  final double buttonWidth;
-  final double buttonHeight;
-  final double borderRadius;
-  final List<int>? divider;
   final int? selectedIndex;
   final List<Widget> children;
 
@@ -1020,11 +1268,7 @@ class AppRadioStack extends StatefulWidget {
     super.key,
     this.duration = animationTime,
     this.direction = Axis.horizontal,
-    this.spacing = .0,
-    this.buttonWidth = smallButtonSize,
-    this.buttonHeight = smallButtonSize,
-    this.borderRadius = smallBorderRadius,
-    this.divider,
+    this.spacing = 0.0,
     this.selectedIndex,
     required this.children,
   });
@@ -1033,215 +1277,90 @@ class AppRadioStack extends StatefulWidget {
   State<AppRadioStack> createState() => _AppRadioStackState();
 }
 
-class _AppRadioStackState extends State<AppRadioStack> {
-  int? lastIndex;
-  final ValueNotifier<int?> hoverIndex = ValueNotifier(null);
-  late final AppButtonStyle style;
+class _AppRadioStackState extends State<AppRadioStack>{
+  Offset _offset = Offset.zero;
+  final ValueNotifier<Rect> indicator = ValueNotifier(Rect.zero);
 
-  @override
-  void initState() {
-    super.initState();
-    style = AppButtonStyle(
-      width: widget.buttonWidth,
-      height: widget.buttonHeight,
-      borderRadius: widget.borderRadius,
-      shader: (bool usable, bool isSelected, bool isInside, bool isPressed) {
-        ColorRole colorRole = ColorRole.of(context);
-        ColorState colorState = ColorState.normal;
-        bool isTransparent = true;
+  Rect? _getRect(BuildContext context){
+    final RenderObject? renderObject = context.findRenderObject();
+    if(renderObject == null) return null;
 
-        if (usable) {
-          colorState = ColorState.enabled;
-          if (isInside) {
-            colorState = ColorState.hovered;
-          }
-          if (isPressed) {
-            colorState = ColorState.pressed;
-            isTransparent = false;
-          }
-        } else {
-          colorState = ColorState.disabled;
-        }
+    if(renderObject is RenderBox && renderObject.hasSize){
+      final Offset offset = renderObject.localToGlobal(Offset.zero);
+      final Size size = renderObject.size;
+      return Rect.fromLTWH(offset.dx, offset.dy, size.width, size.height);
+    }
 
-        return (colorRole, colorState, isTransparent);
-      },
-    );
+    return null;
+  }
+
+  Offset get offset => _offset;
+
+  set offset(Offset newOffset){
+    if(newOffset != _offset){
+      setState((){
+        _offset = newOffset;
+      });
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState(){
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context){
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      offset = _getRect(context)?.topLeft ?? Offset.zero;
+    });
+
     final List<Widget> children = <Widget>[];
-    for (int index = 0; index < widget.children.length; index++) {
+    for(int index = 0; index < widget.children.length; index++){
       children.add(
-        MouseRegion(
-          onEnter: (_) {
-            lastIndex = hoverIndex.value;
-            hoverIndex.value = index;
+        RenderListener(
+          onRender: (Rect rect){
+            if(index == widget.selectedIndex){
+              indicator.value = rect.shift(-offset);
+            }
           },
-          child: widget.children[index],
+          child: AppFloatingIndicatorButtonTarget(
+            defaultTarget: index == widget.selectedIndex,
+            child: widget.children[index],
+          ),
         ),
       );
     }
 
-    final double wholeSpacing =
-        widget.spacing +
-        (widget.direction == Axis.horizontal
-            ? widget.buttonWidth
-            : widget.buttonHeight);
-
-    final List<double> dividerOffset = [];
-    if (widget.divider != null) {
-      int counter = 0;
-      for (final int interval in widget.divider!) {
-        counter += interval;
-        dividerOffset.add(counter * wholeSpacing);
-      }
-    }
-
     return Stack(
       children: [
-        /// Block Indicator
-        ValueListenableBuilder(
-          valueListenable: hoverIndex,
-          builder: (BuildContext context, int? index, Widget? child) {
-            double offset = 0;
-            bool transparent = true;
-
-            if (widget.selectedIndex == null) {
-              if (lastIndex == null && index != null) {
-                offset = index * wholeSpacing;
-                transparent = false;
-              } else if (lastIndex != null && index == null) {
-                offset = lastIndex! * wholeSpacing;
-                transparent = true;
-              } else if (lastIndex != null && index != null) {
-                offset = index * wholeSpacing;
-                transparent = false;
-              } else {
-                transparent = true;
-              }
-            } else {
-              if (index == null) {
-                offset = widget.selectedIndex! * wholeSpacing;
-              } else {
-                offset = index * wholeSpacing;
-              }
-              transparent = false;
-            }
-
-            return AnimatedPositioned(
-              duration: lastIndex == null && widget.selectedIndex == null
-                  ? Duration.zero
-                  : widget.duration,
-              left: widget.direction == Axis.horizontal ? offset : 0,
-              top: widget.direction == Axis.vertical ? offset : 0,
-              right: widget.direction == Axis.horizontal ? null : 0,
-              bottom: widget.direction == Axis.vertical ? null : 0,
-              child: Center(
-                child: AnimatedContainer(
-                  duration: widget.duration,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(widget.borderRadius),
-                    ),
-                    color: transparent
-                        ? AppColorScheme.of(context)
-                              .byRole(ColorRole.of(context))
-                              .hoveredColor
-                              .withAlpha(0)
-                        : AppColorScheme.of(
-                            context,
-                          ).byRole(ColorRole.of(context)).hoveredColor,
-                  ),
-                  width: widget.buttonWidth,
-                  height: widget.buttonHeight,
-                ),
-              ),
-            );
-          },
+        AppFloatingIndicatorButtonGroup(
+          hideWhenNoTarget: false,
+          child: widget.direction == Axis.horizontal ?
+            Row(children: children) :
+            Column(children: children),
         ),
-
-        /// TODO 滚动时不要触发exit
-        MouseRegion(
-          onExit: (_) {
-            lastIndex = hoverIndex.value;
-            hoverIndex.value = null;
-          },
-          child: AppButtonConfiguration(
-            style: style,
-            child: widget.direction == Axis.horizontal
-                ? Row(
-                    spacing: widget.spacing,
-                    mainAxisSize: MainAxisSize.min,
-                    children: children,
-                  )
-                : Column(
-                    spacing: widget.spacing,
-                    mainAxisSize: MainAxisSize.min,
-                    children: children,
-                  ),
-          ),
-        ),
-
-        for (final double offset in dividerOffset)
-          Positioned(
-            left: widget.direction == Axis.horizontal
-                ? offset - 0.5 * smallDividerThickness
-                : 0,
-            top: widget.direction == Axis.vertical
-                ? offset - 0.5 * smallDividerThickness
-                : 0,
-            right: 0,
-            bottom: 0,
-            child: IgnorePointer(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: AppDivider(direction: widget.direction, thickness: 1),
-              ),
-            ),
-          ),
 
         /// Indicator
         ValueListenableBuilder(
-          valueListenable: hoverIndex,
-          builder: (BuildContext context, int? index, Widget? child) {
-            double offset = 0;
-            bool transparent = true;
-
-            if (widget.selectedIndex == null) {
-              transparent = true;
-            } else {
-              offset = widget.selectedIndex! * wholeSpacing;
-              transparent = false;
-            }
-
+          valueListenable: indicator,
+          builder: (BuildContext context, Rect rect, Widget? child){
             return AnimatedPositioned(
-              duration: lastIndex == null && widget.selectedIndex == null
-                  ? Duration.zero
-                  : widget.duration,
-              left: widget.direction == Axis.horizontal ? offset : 1,
-              top: widget.direction == Axis.vertical ? offset : 1,
-              width: widget.buttonWidth,
-              height: widget.buttonHeight,
+              duration: widget.selectedIndex == null ? Duration.zero : widget.duration,
+              left: widget.direction == Axis.vertical ? rect.left + 1 : rect.left,
+              top: widget.direction == Axis.horizontal ? rect.top - 1 : rect.top,
+              width: rect.width,
+              height: rect.height,
               child: Align(
-                alignment: Alignment.centerLeft,
+                alignment: widget.direction == Axis.vertical ? Alignment.centerLeft : Alignment.bottomCenter,
                 child: AnimatedContainer(
                   duration: widget.duration,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(widget.borderRadius),
-                    ),
-                    color: transparent
-                        ? AppColorScheme.of(context)
-                              .byRole(ColorRole.of(context))
-                              .onHoveredColor
-                              .withAlpha(0)
-                        : AppColorScheme.of(
-                            context,
-                          ).byRole(ColorRole.of(context)).onHoveredColor,
+                    borderRadius: BorderRadius.all(Radius.circular(1)),
+                    color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onHoveredColor
                   ),
-                  width: 2,
-                  height: 0.5 * widget.buttonHeight,
+                  width: widget.direction == Axis.vertical ? 2 : 0.5 * rect.width,
+                  height: widget.direction == Axis.horizontal ? 2 : 0.5 * rect.height,
                 ),
               ),
             );
@@ -1252,9 +1371,8 @@ class _AppRadioStackState extends State<AppRadioStack> {
   }
 
   @override
-  void dispose() {
+  void dispose(){
     super.dispose();
-    hoverIndex.dispose();
   }
 }
 

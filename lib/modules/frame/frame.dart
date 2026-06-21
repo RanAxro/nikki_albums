@@ -1120,12 +1120,12 @@ class ContentBuildInWindow extends StatelessWidget {
             builder: (BuildContext context, Widget? child) {
               return AppRadioStack(
                 direction: Axis.vertical,
-                buttonWidth: mediumButtonSize,
-                buttonHeight: mediumButtonSize,
                 selectedIndex: contentController.index,
                 children: [
                   for (final (index, info) in navInfo.indexed)
-                    AppRawButton(
+                    AppButton.smallIcon(
+                      width: mediumButtonSize,
+                      height: mediumButtonSize,
                       onClick: () {
                         contentController.index = index;
                       },

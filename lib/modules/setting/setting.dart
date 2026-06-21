@@ -107,8 +107,6 @@ class SettingDialog extends StatelessWidget {
                             builder: (BuildContext context, Widget? child) {
                               return AppRadioStack(
                                 direction: Axis.vertical,
-                                buttonWidth: constraints.maxWidth,
-                                buttonHeight: smallButtonSize,
                                 selectedIndex:
                                     controller.page?.toInt() ??
                                     _getInitialIndex(initialPage),
@@ -137,7 +135,7 @@ class SettingDialog extends StatelessWidget {
                                       title = "Debug Panel";
                                       break;
                                   }
-                                  return AppRawButton(
+                                  return AppButton.smallText(
                                     width: constraints.maxWidth,
                                     height: smallButtonSize,
                                     onClick: () {
