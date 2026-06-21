@@ -5,3 +5,5 @@ export "KeepAliveWrapper.dart";
 export "MultiValueListenableBuilder.dart";
 export "SmoothPointerScroll.dart";
 export "notifier.dart";
+export "floating_indicator.dart";
+export "render_listener.dart";
