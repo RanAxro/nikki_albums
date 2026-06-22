@@ -3416,24 +3416,20 @@ class ExportImagesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MenuAnchor(
       style: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(
-          AppTheme.of(context)!.colorScheme.background.color,
-        ),
+        backgroundColor: WidgetStateProperty.all(AppTheme.of(context)!.colorScheme.background.color),
       ),
-      builder:
-          (BuildContext context, MenuController controller, Widget? child) {
-            return Tooltip(
-              message: usable ? context.tr("export") : "",
-              child: AppButton.smallIcon(
-                colorRole: ColorRole.secondary,
-                onClick: () {
-                  controller.isOpen ? controller.close() : controller.open();
-                },
-                usable: usable,
-                child: AppIcon("export", height: 18),
-              ),
-            );
+      builder: (BuildContext context, MenuController controller, Widget? child){
+        return AppButton.smallIcon(
+          toolTip: usable ? context.tr("export") : "",
+          isTranslate: false,
+          colorRole: ColorRole.secondary,
+          onClick: (){
+            controller.isOpen ? controller.close() : controller.open();
           },
+          usable: usable,
+          child: AppIcon("export", height: 18),
+        );
+      },
       menuChildren: [
         /// copy images to clipboard
         MenuItemButton(
