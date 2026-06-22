@@ -6,7 +6,7 @@ use super::eureka::Eureka;
 
 #[derive(Clone)]
 pub struct NikkiPhotoMainParams{
-  pub camera: Option<CameraParams>,
+  pub camera: Option<RichCameraParams>,
   pub dressing: DressingParams,
   pub time: Option<ShootingTime>,
   pub weather: Option<i64>,
@@ -16,7 +16,7 @@ pub struct NikkiPhotoMainParams{
 #[derive(Clone)]
 pub struct NikkiPhotoParams{
   pub photography: PhotographyParams,
-  pub camera: Option<CameraParams>,
+  pub camera: Option<RichCameraParams>,
   pub nikki: Option<NikkiParams>,
   pub momo: Option<MomoHiddenState>,
 }
@@ -33,7 +33,7 @@ pub struct PhotographyParams{
 }
 
 #[derive(Clone)]
-pub struct CameraParams{
+pub struct RichCameraParams{
   pub params: String,
   pub portrait_mode: bool,
   pub zoom: f64,
@@ -54,11 +54,11 @@ pub struct CameraParams{
   pub filter: FilterParams,
   pub pose: i64,
   pub framed_moment: i64,
-  pub momo: Option<CameraParamsMomoHidden>,
+  pub momo: Option<RichCameraParamsMomoHidden>,
 }
 
 #[derive(Clone)]
-pub enum CameraParamsMomoHidden{
+pub enum RichCameraParamsMomoHidden{
   Enable,
   Disable{
     momo_pose: i64,

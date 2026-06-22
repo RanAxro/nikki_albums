@@ -11,7 +11,7 @@ part 'momo_camera_params.freezed.dart';
 
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`
 
-class MomoCameraParams {
+class CameraParams {
   final (double, double, double) cameraActorLoc;
   final (double, double, double) cameraActorRot;
   final (double, double, double) cameraComponentLoc;
@@ -31,9 +31,9 @@ class MomoCameraParams {
   final double shadows;
   final LightParams light;
   final FilterParams filter;
-  final MomoCameraParamsMomoHidden? momo;
+  final CameraParamsMomoHidden? momo;
 
-  const MomoCameraParams({
+  const CameraParams({
     required this.cameraActorLoc,
     required this.cameraActorRot,
     required this.cameraComponentLoc,
@@ -82,7 +82,7 @@ class MomoCameraParams {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MomoCameraParams &&
+      other is CameraParams &&
           runtimeType == other.runtimeType &&
           cameraActorLoc == other.cameraActorLoc &&
           cameraActorRot == other.cameraActorRot &&
@@ -107,12 +107,11 @@ class MomoCameraParams {
 }
 
 @freezed
-sealed class MomoCameraParamsMomoHidden with _$MomoCameraParamsMomoHidden {
-  const MomoCameraParamsMomoHidden._();
+sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
+  const CameraParamsMomoHidden._();
 
-  const factory MomoCameraParamsMomoHidden.enable() =
-      MomoCameraParamsMomoHidden_Enable;
-  const factory MomoCameraParamsMomoHidden.disable({
+  const factory CameraParamsMomoHidden.enable() = CameraParamsMomoHidden_Enable;
+  const factory CameraParamsMomoHidden.disable({
     required PlatformInt64 momoPose,
     required double horizontal,
     required double distance,
@@ -121,5 +120,5 @@ sealed class MomoCameraParamsMomoHidden with _$MomoCameraParamsMomoHidden {
     required bool autoGroundSnap,
     required bool floatingEffect,
     required bool poseWithNikki,
-  }) = MomoCameraParamsMomoHidden_Disable;
+  }) = CameraParamsMomoHidden_Disable;
 }

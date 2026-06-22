@@ -1725,19 +1725,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MomoCameraParams dco_decode_box_autoadd_momo_camera_params(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_momo_camera_params(raw);
-  }
-
-  @protected
-  MomoCameraParamsMomoHidden
-  dco_decode_box_autoadd_momo_camera_params_momo_hidden(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_momo_camera_params_momo_hidden(raw);
-  }
-
-  @protected
   MomoHiddenState dco_decode_box_autoadd_momo_hidden_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_momo_hidden_state(raw);
@@ -1803,6 +1790,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Region dco_decode_box_autoadd_region(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_region(raw);
+  }
+
+  @protected
+  RichCameraParams dco_decode_box_autoadd_rich_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_rich_camera_params(raw);
+  }
+
+  @protected
+  RichCameraParamsMomoHidden
+  dco_decode_box_autoadd_rich_camera_params_momo_hidden(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_rich_camera_params_momo_hidden(raw);
   }
 
   @protected
@@ -1885,30 +1885,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   CameraParams dco_decode_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 21)
-      throw Exception('unexpected arr length: expect 21 but see ${arr.length}');
+    if (arr.length != 20)
+      throw Exception('unexpected arr length: expect 20 but see ${arr.length}');
     return CameraParams(
-      params: dco_decode_String(arr[0]),
-      portraitMode: dco_decode_bool(arr[1]),
-      zoom: dco_decode_f_64(arr[2]),
-      focalLength: dco_decode_f_64(arr[3]),
-      rotation: dco_decode_f_64(arr[4]),
-      apertureSection: dco_decode_u_8(arr[5]),
-      vignetteIntensity: dco_decode_f_64(arr[6]),
-      bloomIntensity: dco_decode_f_64(arr[7]),
-      bloomThreshold: dco_decode_f_64(arr[8]),
-      brightness: dco_decode_f_64(arr[9]),
-      exposure: dco_decode_f_64(arr[10]),
-      contrast: dco_decode_f_64(arr[11]),
-      saturation: dco_decode_f_64(arr[12]),
-      vibrance: dco_decode_f_64(arr[13]),
-      highlights: dco_decode_f_64(arr[14]),
-      shadows: dco_decode_f_64(arr[15]),
-      light: dco_decode_light_params(arr[16]),
-      filter: dco_decode_filter_params(arr[17]),
-      pose: dco_decode_i_64(arr[18]),
-      framedMoment: dco_decode_i_64(arr[19]),
-      momo: dco_decode_opt_box_autoadd_camera_params_momo_hidden(arr[20]),
+      cameraActorLoc: dco_decode_record_f_64_f_64_f_64(arr[0]),
+      cameraActorRot: dco_decode_record_f_64_f_64_f_64(arr[1]),
+      cameraComponentLoc: dco_decode_record_f_64_f_64_f_64(arr[2]),
+      cameraComponentRot: dco_decode_record_f_64_f_64_f_64(arr[3]),
+      portraitMode: dco_decode_i_64(arr[4]),
+      cameraFocalLength: dco_decode_f_64(arr[5]),
+      apertureSection: dco_decode_u_8(arr[6]),
+      vignetteIntensity: dco_decode_f_64(arr[7]),
+      bloomIntensity: dco_decode_f_64(arr[8]),
+      bloomThreshold: dco_decode_f_64(arr[9]),
+      brightness: dco_decode_f_64(arr[10]),
+      exposure: dco_decode_f_64(arr[11]),
+      contrast: dco_decode_f_64(arr[12]),
+      saturation: dco_decode_f_64(arr[13]),
+      vibrance: dco_decode_f_64(arr[14]),
+      highlights: dco_decode_f_64(arr[15]),
+      shadows: dco_decode_f_64(arr[16]),
+      light: dco_decode_light_params(arr[17]),
+      filter: dco_decode_filter_params(arr[18]),
+      momo: dco_decode_opt_box_autoadd_camera_params_momo_hidden(arr[19]),
     );
   }
 
@@ -1943,7 +1942,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return ClockInPhotoParams(
       tag: dco_decode_i_64(arr[0]),
       photography: dco_decode_photography_params(arr[1]),
-      camera: dco_decode_opt_box_autoadd_camera_params(arr[2]),
+      camera: dco_decode_opt_box_autoadd_rich_camera_params(arr[2]),
       nikki: dco_decode_opt_box_autoadd_nikki_params(arr[3]),
       momo: dco_decode_opt_box_autoadd_momo_hidden_state(arr[4]),
     );
@@ -2601,8 +2600,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
       case 0:
-        return MediaParam_MomoCameraParams(
-          dco_decode_box_autoadd_momo_camera_params(raw[1]),
+        return MediaParam_CameraParams(
+          dco_decode_box_autoadd_camera_params(raw[1]),
         );
       case 1:
         return MediaParam_NikkiPhoto(
@@ -2639,60 +2638,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       index: dco_decode_usize(arr[0]),
       data: dco_decode_opt_box_autoadd_custom_data(arr[1]),
     );
-  }
-
-  @protected
-  MomoCameraParams dco_decode_momo_camera_params(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 20)
-      throw Exception('unexpected arr length: expect 20 but see ${arr.length}');
-    return MomoCameraParams(
-      cameraActorLoc: dco_decode_record_f_64_f_64_f_64(arr[0]),
-      cameraActorRot: dco_decode_record_f_64_f_64_f_64(arr[1]),
-      cameraComponentLoc: dco_decode_record_f_64_f_64_f_64(arr[2]),
-      cameraComponentRot: dco_decode_record_f_64_f_64_f_64(arr[3]),
-      portraitMode: dco_decode_i_64(arr[4]),
-      cameraFocalLength: dco_decode_f_64(arr[5]),
-      apertureSection: dco_decode_u_8(arr[6]),
-      vignetteIntensity: dco_decode_f_64(arr[7]),
-      bloomIntensity: dco_decode_f_64(arr[8]),
-      bloomThreshold: dco_decode_f_64(arr[9]),
-      brightness: dco_decode_f_64(arr[10]),
-      exposure: dco_decode_f_64(arr[11]),
-      contrast: dco_decode_f_64(arr[12]),
-      saturation: dco_decode_f_64(arr[13]),
-      vibrance: dco_decode_f_64(arr[14]),
-      highlights: dco_decode_f_64(arr[15]),
-      shadows: dco_decode_f_64(arr[16]),
-      light: dco_decode_light_params(arr[17]),
-      filter: dco_decode_filter_params(arr[18]),
-      momo: dco_decode_opt_box_autoadd_momo_camera_params_momo_hidden(arr[19]),
-    );
-  }
-
-  @protected
-  MomoCameraParamsMomoHidden dco_decode_momo_camera_params_momo_hidden(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return MomoCameraParamsMomoHidden_Enable();
-      case 1:
-        return MomoCameraParamsMomoHidden_Disable(
-          momoPose: dco_decode_i_64(raw[1]),
-          horizontal: dco_decode_f_64(raw[2]),
-          distance: dco_decode_f_64(raw[3]),
-          height: dco_decode_f_64(raw[4]),
-          rotateMomo: dco_decode_f_64(raw[5]),
-          autoGroundSnap: dco_decode_bool(raw[6]),
-          floatingEffect: dco_decode_bool(raw[7]),
-          poseWithNikki: dco_decode_bool(raw[8]),
-        );
-      default:
-        throw Exception("unreachable");
-    }
   }
 
   @protected
@@ -2758,7 +2703,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return NikkiPhotoParams(
       photography: dco_decode_photography_params(arr[0]),
-      camera: dco_decode_opt_box_autoadd_camera_params(arr[1]),
+      camera: dco_decode_opt_box_autoadd_rich_camera_params(arr[1]),
       nikki: dco_decode_opt_box_autoadd_nikki_params(arr[2]),
       momo: dco_decode_opt_box_autoadd_momo_hidden_state(arr[3]),
     );
@@ -2805,12 +2750,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_area(raw);
-  }
-
-  @protected
-  CameraParams? dco_decode_opt_box_autoadd_camera_params(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_camera_params(raw);
   }
 
   @protected
@@ -2882,15 +2821,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MomoCameraParamsMomoHidden?
-  dco_decode_opt_box_autoadd_momo_camera_params_momo_hidden(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null
-        ? null
-        : dco_decode_box_autoadd_momo_camera_params_momo_hidden(raw);
-  }
-
-  @protected
   MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_momo_hidden_state(raw);
@@ -2918,6 +2848,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Region? dco_decode_opt_box_autoadd_region(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_region(raw);
+  }
+
+  @protected
+  RichCameraParams? dco_decode_opt_box_autoadd_rich_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_rich_camera_params(raw);
+  }
+
+  @protected
+  RichCameraParamsMomoHidden?
+  dco_decode_opt_box_autoadd_rich_camera_params_momo_hidden(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_rich_camera_params_momo_hidden(raw);
   }
 
   @protected
@@ -3217,6 +3162,61 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       imageId: dco_decode_String(arr[3]),
       oriCustomData: dco_decode_nikki_photo_params(arr[4]),
     );
+  }
+
+  @protected
+  RichCameraParams dco_decode_rich_camera_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 21)
+      throw Exception('unexpected arr length: expect 21 but see ${arr.length}');
+    return RichCameraParams(
+      params: dco_decode_String(arr[0]),
+      portraitMode: dco_decode_bool(arr[1]),
+      zoom: dco_decode_f_64(arr[2]),
+      focalLength: dco_decode_f_64(arr[3]),
+      rotation: dco_decode_f_64(arr[4]),
+      apertureSection: dco_decode_u_8(arr[5]),
+      vignetteIntensity: dco_decode_f_64(arr[6]),
+      bloomIntensity: dco_decode_f_64(arr[7]),
+      bloomThreshold: dco_decode_f_64(arr[8]),
+      brightness: dco_decode_f_64(arr[9]),
+      exposure: dco_decode_f_64(arr[10]),
+      contrast: dco_decode_f_64(arr[11]),
+      saturation: dco_decode_f_64(arr[12]),
+      vibrance: dco_decode_f_64(arr[13]),
+      highlights: dco_decode_f_64(arr[14]),
+      shadows: dco_decode_f_64(arr[15]),
+      light: dco_decode_light_params(arr[16]),
+      filter: dco_decode_filter_params(arr[17]),
+      pose: dco_decode_i_64(arr[18]),
+      framedMoment: dco_decode_i_64(arr[19]),
+      momo: dco_decode_opt_box_autoadd_rich_camera_params_momo_hidden(arr[20]),
+    );
+  }
+
+  @protected
+  RichCameraParamsMomoHidden dco_decode_rich_camera_params_momo_hidden(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return RichCameraParamsMomoHidden_Enable();
+      case 1:
+        return RichCameraParamsMomoHidden_Disable(
+          momoPose: dco_decode_i_64(raw[1]),
+          horizontal: dco_decode_f_64(raw[2]),
+          distance: dco_decode_f_64(raw[3]),
+          height: dco_decode_f_64(raw[4]),
+          rotateMomo: dco_decode_f_64(raw[5]),
+          autoGroundSnap: dco_decode_bool(raw[6]),
+          floatingEffect: dco_decode_bool(raw[7]),
+          poseWithNikki: dco_decode_bool(raw[8]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
   }
 
   @protected
@@ -3800,23 +3800,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MomoCameraParams sse_decode_box_autoadd_momo_camera_params(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_momo_camera_params(deserializer));
-  }
-
-  @protected
-  MomoCameraParamsMomoHidden
-  sse_decode_box_autoadd_momo_camera_params_momo_hidden(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_momo_camera_params_momo_hidden(deserializer));
-  }
-
-  @protected
   MomoHiddenState sse_decode_box_autoadd_momo_hidden_state(
     SseDeserializer deserializer,
   ) {
@@ -3894,6 +3877,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Region sse_decode_box_autoadd_region(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_region(deserializer));
+  }
+
+  @protected
+  RichCameraParams sse_decode_box_autoadd_rich_camera_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_rich_camera_params(deserializer));
+  }
+
+  @protected
+  RichCameraParamsMomoHidden
+  sse_decode_box_autoadd_rich_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_rich_camera_params_momo_hidden(deserializer));
   }
 
   @protected
@@ -3989,11 +3989,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   CameraParams sse_decode_camera_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_params = sse_decode_String(deserializer);
-    var var_portraitMode = sse_decode_bool(deserializer);
-    var var_zoom = sse_decode_f_64(deserializer);
-    var var_focalLength = sse_decode_f_64(deserializer);
-    var var_rotation = sse_decode_f_64(deserializer);
+    var var_cameraActorLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_cameraActorRot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_cameraComponentLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_cameraComponentRot = sse_decode_record_f_64_f_64_f_64(deserializer);
+    var var_portraitMode = sse_decode_i_64(deserializer);
+    var var_cameraFocalLength = sse_decode_f_64(deserializer);
     var var_apertureSection = sse_decode_u_8(deserializer);
     var var_vignetteIntensity = sse_decode_f_64(deserializer);
     var var_bloomIntensity = sse_decode_f_64(deserializer);
@@ -4007,17 +4008,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_shadows = sse_decode_f_64(deserializer);
     var var_light = sse_decode_light_params(deserializer);
     var var_filter = sse_decode_filter_params(deserializer);
-    var var_pose = sse_decode_i_64(deserializer);
-    var var_framedMoment = sse_decode_i_64(deserializer);
     var var_momo = sse_decode_opt_box_autoadd_camera_params_momo_hidden(
       deserializer,
     );
     return CameraParams(
-      params: var_params,
+      cameraActorLoc: var_cameraActorLoc,
+      cameraActorRot: var_cameraActorRot,
+      cameraComponentLoc: var_cameraComponentLoc,
+      cameraComponentRot: var_cameraComponentRot,
       portraitMode: var_portraitMode,
-      zoom: var_zoom,
-      focalLength: var_focalLength,
-      rotation: var_rotation,
+      cameraFocalLength: var_cameraFocalLength,
       apertureSection: var_apertureSection,
       vignetteIntensity: var_vignetteIntensity,
       bloomIntensity: var_bloomIntensity,
@@ -4031,8 +4031,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       shadows: var_shadows,
       light: var_light,
       filter: var_filter,
-      pose: var_pose,
-      framedMoment: var_framedMoment,
       momo: var_momo,
     );
   }
@@ -4078,7 +4076,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_tag = sse_decode_i_64(deserializer);
     var var_photography = sse_decode_photography_params(deserializer);
-    var var_camera = sse_decode_opt_box_autoadd_camera_params(deserializer);
+    var var_camera = sse_decode_opt_box_autoadd_rich_camera_params(
+      deserializer,
+    );
     var var_nikki = sse_decode_opt_box_autoadd_nikki_params(deserializer);
     var var_momo = sse_decode_opt_box_autoadd_momo_hidden_state(deserializer);
     return ClockInPhotoParams(
@@ -4928,10 +4928,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var tag_ = sse_decode_i_32(deserializer);
     switch (tag_) {
       case 0:
-        var var_field0 = sse_decode_box_autoadd_momo_camera_params(
-          deserializer,
-        );
-        return MediaParam_MomoCameraParams(var_field0);
+        var var_field0 = sse_decode_box_autoadd_camera_params(deserializer);
+        return MediaParam_CameraParams(var_field0);
       case 1:
         var var_field0 = sse_decode_box_autoadd_nikki_photo_params(
           deserializer,
@@ -4968,89 +4966,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_index = sse_decode_usize(deserializer);
     var var_data = sse_decode_opt_box_autoadd_custom_data(deserializer);
     return MediaStreamResult(index: var_index, data: var_data);
-  }
-
-  @protected
-  MomoCameraParams sse_decode_momo_camera_params(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_cameraActorLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
-    var var_cameraActorRot = sse_decode_record_f_64_f_64_f_64(deserializer);
-    var var_cameraComponentLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
-    var var_cameraComponentRot = sse_decode_record_f_64_f_64_f_64(deserializer);
-    var var_portraitMode = sse_decode_i_64(deserializer);
-    var var_cameraFocalLength = sse_decode_f_64(deserializer);
-    var var_apertureSection = sse_decode_u_8(deserializer);
-    var var_vignetteIntensity = sse_decode_f_64(deserializer);
-    var var_bloomIntensity = sse_decode_f_64(deserializer);
-    var var_bloomThreshold = sse_decode_f_64(deserializer);
-    var var_brightness = sse_decode_f_64(deserializer);
-    var var_exposure = sse_decode_f_64(deserializer);
-    var var_contrast = sse_decode_f_64(deserializer);
-    var var_saturation = sse_decode_f_64(deserializer);
-    var var_vibrance = sse_decode_f_64(deserializer);
-    var var_highlights = sse_decode_f_64(deserializer);
-    var var_shadows = sse_decode_f_64(deserializer);
-    var var_light = sse_decode_light_params(deserializer);
-    var var_filter = sse_decode_filter_params(deserializer);
-    var var_momo = sse_decode_opt_box_autoadd_momo_camera_params_momo_hidden(
-      deserializer,
-    );
-    return MomoCameraParams(
-      cameraActorLoc: var_cameraActorLoc,
-      cameraActorRot: var_cameraActorRot,
-      cameraComponentLoc: var_cameraComponentLoc,
-      cameraComponentRot: var_cameraComponentRot,
-      portraitMode: var_portraitMode,
-      cameraFocalLength: var_cameraFocalLength,
-      apertureSection: var_apertureSection,
-      vignetteIntensity: var_vignetteIntensity,
-      bloomIntensity: var_bloomIntensity,
-      bloomThreshold: var_bloomThreshold,
-      brightness: var_brightness,
-      exposure: var_exposure,
-      contrast: var_contrast,
-      saturation: var_saturation,
-      vibrance: var_vibrance,
-      highlights: var_highlights,
-      shadows: var_shadows,
-      light: var_light,
-      filter: var_filter,
-      momo: var_momo,
-    );
-  }
-
-  @protected
-  MomoCameraParamsMomoHidden sse_decode_momo_camera_params_momo_hidden(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        return MomoCameraParamsMomoHidden_Enable();
-      case 1:
-        var var_momoPose = sse_decode_i_64(deserializer);
-        var var_horizontal = sse_decode_f_64(deserializer);
-        var var_distance = sse_decode_f_64(deserializer);
-        var var_height = sse_decode_f_64(deserializer);
-        var var_rotateMomo = sse_decode_f_64(deserializer);
-        var var_autoGroundSnap = sse_decode_bool(deserializer);
-        var var_floatingEffect = sse_decode_bool(deserializer);
-        var var_poseWithNikki = sse_decode_bool(deserializer);
-        return MomoCameraParamsMomoHidden_Disable(
-          momoPose: var_momoPose,
-          horizontal: var_horizontal,
-          distance: var_distance,
-          height: var_height,
-          rotateMomo: var_rotateMomo,
-          autoGroundSnap: var_autoGroundSnap,
-          floatingEffect: var_floatingEffect,
-          poseWithNikki: var_poseWithNikki,
-        );
-      default:
-        throw UnimplementedError('');
-    }
   }
 
   @protected
@@ -5122,7 +5037,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   NikkiPhotoParams sse_decode_nikki_photo_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_photography = sse_decode_photography_params(deserializer);
-    var var_camera = sse_decode_opt_box_autoadd_camera_params(deserializer);
+    var var_camera = sse_decode_opt_box_autoadd_rich_camera_params(
+      deserializer,
+    );
     var var_nikki = sse_decode_opt_box_autoadd_nikki_params(deserializer);
     var var_momo = sse_decode_opt_box_autoadd_momo_hidden_state(deserializer);
     return NikkiPhotoParams(
@@ -5192,19 +5109,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_area(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  CameraParams? sse_decode_opt_box_autoadd_camera_params(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_camera_params(deserializer));
     } else {
       return null;
     }
@@ -5337,22 +5241,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MomoCameraParamsMomoHidden?
-  sse_decode_opt_box_autoadd_momo_camera_params_momo_hidden(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_momo_camera_params_momo_hidden(
-        deserializer,
-      ));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   MomoHiddenState? sse_decode_opt_box_autoadd_momo_hidden_state(
     SseDeserializer deserializer,
   ) {
@@ -5408,6 +5296,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_region(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  RichCameraParams? sse_decode_opt_box_autoadd_rich_camera_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_rich_camera_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  RichCameraParamsMomoHidden?
+  sse_decode_opt_box_autoadd_rich_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_rich_camera_params_momo_hidden(
+        deserializer,
+      ));
     } else {
       return null;
     }
@@ -5784,6 +5701,91 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       imageId: var_imageId,
       oriCustomData: var_oriCustomData,
     );
+  }
+
+  @protected
+  RichCameraParams sse_decode_rich_camera_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_params = sse_decode_String(deserializer);
+    var var_portraitMode = sse_decode_bool(deserializer);
+    var var_zoom = sse_decode_f_64(deserializer);
+    var var_focalLength = sse_decode_f_64(deserializer);
+    var var_rotation = sse_decode_f_64(deserializer);
+    var var_apertureSection = sse_decode_u_8(deserializer);
+    var var_vignetteIntensity = sse_decode_f_64(deserializer);
+    var var_bloomIntensity = sse_decode_f_64(deserializer);
+    var var_bloomThreshold = sse_decode_f_64(deserializer);
+    var var_brightness = sse_decode_f_64(deserializer);
+    var var_exposure = sse_decode_f_64(deserializer);
+    var var_contrast = sse_decode_f_64(deserializer);
+    var var_saturation = sse_decode_f_64(deserializer);
+    var var_vibrance = sse_decode_f_64(deserializer);
+    var var_highlights = sse_decode_f_64(deserializer);
+    var var_shadows = sse_decode_f_64(deserializer);
+    var var_light = sse_decode_light_params(deserializer);
+    var var_filter = sse_decode_filter_params(deserializer);
+    var var_pose = sse_decode_i_64(deserializer);
+    var var_framedMoment = sse_decode_i_64(deserializer);
+    var var_momo = sse_decode_opt_box_autoadd_rich_camera_params_momo_hidden(
+      deserializer,
+    );
+    return RichCameraParams(
+      params: var_params,
+      portraitMode: var_portraitMode,
+      zoom: var_zoom,
+      focalLength: var_focalLength,
+      rotation: var_rotation,
+      apertureSection: var_apertureSection,
+      vignetteIntensity: var_vignetteIntensity,
+      bloomIntensity: var_bloomIntensity,
+      bloomThreshold: var_bloomThreshold,
+      brightness: var_brightness,
+      exposure: var_exposure,
+      contrast: var_contrast,
+      saturation: var_saturation,
+      vibrance: var_vibrance,
+      highlights: var_highlights,
+      shadows: var_shadows,
+      light: var_light,
+      filter: var_filter,
+      pose: var_pose,
+      framedMoment: var_framedMoment,
+      momo: var_momo,
+    );
+  }
+
+  @protected
+  RichCameraParamsMomoHidden sse_decode_rich_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return RichCameraParamsMomoHidden_Enable();
+      case 1:
+        var var_momoPose = sse_decode_i_64(deserializer);
+        var var_horizontal = sse_decode_f_64(deserializer);
+        var var_distance = sse_decode_f_64(deserializer);
+        var var_height = sse_decode_f_64(deserializer);
+        var var_rotateMomo = sse_decode_f_64(deserializer);
+        var var_autoGroundSnap = sse_decode_bool(deserializer);
+        var var_floatingEffect = sse_decode_bool(deserializer);
+        var var_poseWithNikki = sse_decode_bool(deserializer);
+        return RichCameraParamsMomoHidden_Disable(
+          momoPose: var_momoPose,
+          horizontal: var_horizontal,
+          distance: var_distance,
+          height: var_height,
+          rotateMomo: var_rotateMomo,
+          autoGroundSnap: var_autoGroundSnap,
+          floatingEffect: var_floatingEffect,
+          poseWithNikki: var_poseWithNikki,
+        );
+      default:
+        throw UnimplementedError('');
+    }
   }
 
   @protected
@@ -6465,24 +6467,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_momo_camera_params(
-    MomoCameraParams self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_momo_camera_params(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_momo_camera_params_momo_hidden(
-    MomoCameraParamsMomoHidden self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_momo_camera_params_momo_hidden(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_momo_hidden_state(
     MomoHiddenState self,
     SseSerializer serializer,
@@ -6573,6 +6557,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_box_autoadd_region(Region self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_region(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_rich_camera_params(
+    RichCameraParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_rich_camera_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_rich_camera_params_momo_hidden(
+    RichCameraParamsMomoHidden self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_rich_camera_params_momo_hidden(self, serializer);
   }
 
   @protected
@@ -6677,11 +6679,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_camera_params(CameraParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.params, serializer);
-    sse_encode_bool(self.portraitMode, serializer);
-    sse_encode_f_64(self.zoom, serializer);
-    sse_encode_f_64(self.focalLength, serializer);
-    sse_encode_f_64(self.rotation, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraActorLoc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraActorRot, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraComponentLoc, serializer);
+    sse_encode_record_f_64_f_64_f_64(self.cameraComponentRot, serializer);
+    sse_encode_i_64(self.portraitMode, serializer);
+    sse_encode_f_64(self.cameraFocalLength, serializer);
     sse_encode_u_8(self.apertureSection, serializer);
     sse_encode_f_64(self.vignetteIntensity, serializer);
     sse_encode_f_64(self.bloomIntensity, serializer);
@@ -6695,8 +6698,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_f_64(self.shadows, serializer);
     sse_encode_light_params(self.light, serializer);
     sse_encode_filter_params(self.filter, serializer);
-    sse_encode_i_64(self.pose, serializer);
-    sse_encode_i_64(self.framedMoment, serializer);
     sse_encode_opt_box_autoadd_camera_params_momo_hidden(self.momo, serializer);
   }
 
@@ -6739,7 +6740,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.tag, serializer);
     sse_encode_photography_params(self.photography, serializer);
-    sse_encode_opt_box_autoadd_camera_params(self.camera, serializer);
+    sse_encode_opt_box_autoadd_rich_camera_params(self.camera, serializer);
     sse_encode_opt_box_autoadd_nikki_params(self.nikki, serializer);
     sse_encode_opt_box_autoadd_momo_hidden_state(self.momo, serializer);
   }
@@ -7434,9 +7435,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_media_param(MediaParam self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
-      case MediaParam_MomoCameraParams(field0: final field0):
+      case MediaParam_CameraParams(field0: final field0):
         sse_encode_i_32(0, serializer);
-        sse_encode_box_autoadd_momo_camera_params(field0, serializer);
+        sse_encode_box_autoadd_camera_params(field0, serializer);
       case MediaParam_NikkiPhoto(field0: final field0):
         sse_encode_i_32(1, serializer);
         sse_encode_box_autoadd_nikki_photo_params(field0, serializer);
@@ -7469,68 +7470,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.index, serializer);
     sse_encode_opt_box_autoadd_custom_data(self.data, serializer);
-  }
-
-  @protected
-  void sse_encode_momo_camera_params(
-    MomoCameraParams self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_record_f_64_f_64_f_64(self.cameraActorLoc, serializer);
-    sse_encode_record_f_64_f_64_f_64(self.cameraActorRot, serializer);
-    sse_encode_record_f_64_f_64_f_64(self.cameraComponentLoc, serializer);
-    sse_encode_record_f_64_f_64_f_64(self.cameraComponentRot, serializer);
-    sse_encode_i_64(self.portraitMode, serializer);
-    sse_encode_f_64(self.cameraFocalLength, serializer);
-    sse_encode_u_8(self.apertureSection, serializer);
-    sse_encode_f_64(self.vignetteIntensity, serializer);
-    sse_encode_f_64(self.bloomIntensity, serializer);
-    sse_encode_f_64(self.bloomThreshold, serializer);
-    sse_encode_f_64(self.brightness, serializer);
-    sse_encode_f_64(self.exposure, serializer);
-    sse_encode_f_64(self.contrast, serializer);
-    sse_encode_f_64(self.saturation, serializer);
-    sse_encode_f_64(self.vibrance, serializer);
-    sse_encode_f_64(self.highlights, serializer);
-    sse_encode_f_64(self.shadows, serializer);
-    sse_encode_light_params(self.light, serializer);
-    sse_encode_filter_params(self.filter, serializer);
-    sse_encode_opt_box_autoadd_momo_camera_params_momo_hidden(
-      self.momo,
-      serializer,
-    );
-  }
-
-  @protected
-  void sse_encode_momo_camera_params_momo_hidden(
-    MomoCameraParamsMomoHidden self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case MomoCameraParamsMomoHidden_Enable():
-        sse_encode_i_32(0, serializer);
-      case MomoCameraParamsMomoHidden_Disable(
-        momoPose: final momoPose,
-        horizontal: final horizontal,
-        distance: final distance,
-        height: final height,
-        rotateMomo: final rotateMomo,
-        autoGroundSnap: final autoGroundSnap,
-        floatingEffect: final floatingEffect,
-        poseWithNikki: final poseWithNikki,
-      ):
-        sse_encode_i_32(1, serializer);
-        sse_encode_i_64(momoPose, serializer);
-        sse_encode_f_64(horizontal, serializer);
-        sse_encode_f_64(distance, serializer);
-        sse_encode_f_64(height, serializer);
-        sse_encode_f_64(rotateMomo, serializer);
-        sse_encode_bool(autoGroundSnap, serializer);
-        sse_encode_bool(floatingEffect, serializer);
-        sse_encode_bool(poseWithNikki, serializer);
-    }
   }
 
   @protected
@@ -7585,7 +7524,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_photography_params(self.photography, serializer);
-    sse_encode_opt_box_autoadd_camera_params(self.camera, serializer);
+    sse_encode_opt_box_autoadd_rich_camera_params(self.camera, serializer);
     sse_encode_opt_box_autoadd_nikki_params(self.nikki, serializer);
     sse_encode_opt_box_autoadd_momo_hidden_state(self.momo, serializer);
   }
@@ -7642,19 +7581,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_area(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_camera_params(
-    CameraParams? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_camera_params(self, serializer);
     }
   }
 
@@ -7789,19 +7715,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_momo_camera_params_momo_hidden(
-    MomoCameraParamsMomoHidden? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_momo_camera_params_momo_hidden(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_momo_hidden_state(
     MomoHiddenState? self,
     SseSerializer serializer,
@@ -7863,6 +7776,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_region(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_rich_camera_params(
+    RichCameraParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_rich_camera_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_rich_camera_params_momo_hidden(
+    RichCameraParamsMomoHidden? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_rich_camera_params_momo_hidden(self, serializer);
     }
   }
 
@@ -8189,6 +8128,69 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_f_64(self.scale, serializer);
     sse_encode_String(self.imageId, serializer);
     sse_encode_nikki_photo_params(self.oriCustomData, serializer);
+  }
+
+  @protected
+  void sse_encode_rich_camera_params(
+    RichCameraParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.params, serializer);
+    sse_encode_bool(self.portraitMode, serializer);
+    sse_encode_f_64(self.zoom, serializer);
+    sse_encode_f_64(self.focalLength, serializer);
+    sse_encode_f_64(self.rotation, serializer);
+    sse_encode_u_8(self.apertureSection, serializer);
+    sse_encode_f_64(self.vignetteIntensity, serializer);
+    sse_encode_f_64(self.bloomIntensity, serializer);
+    sse_encode_f_64(self.bloomThreshold, serializer);
+    sse_encode_f_64(self.brightness, serializer);
+    sse_encode_f_64(self.exposure, serializer);
+    sse_encode_f_64(self.contrast, serializer);
+    sse_encode_f_64(self.saturation, serializer);
+    sse_encode_f_64(self.vibrance, serializer);
+    sse_encode_f_64(self.highlights, serializer);
+    sse_encode_f_64(self.shadows, serializer);
+    sse_encode_light_params(self.light, serializer);
+    sse_encode_filter_params(self.filter, serializer);
+    sse_encode_i_64(self.pose, serializer);
+    sse_encode_i_64(self.framedMoment, serializer);
+    sse_encode_opt_box_autoadd_rich_camera_params_momo_hidden(
+      self.momo,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_rich_camera_params_momo_hidden(
+    RichCameraParamsMomoHidden self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case RichCameraParamsMomoHidden_Enable():
+        sse_encode_i_32(0, serializer);
+      case RichCameraParamsMomoHidden_Disable(
+        momoPose: final momoPose,
+        horizontal: final horizontal,
+        distance: final distance,
+        height: final height,
+        rotateMomo: final rotateMomo,
+        autoGroundSnap: final autoGroundSnap,
+        floatingEffect: final floatingEffect,
+        poseWithNikki: final poseWithNikki,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_i_64(momoPose, serializer);
+        sse_encode_f_64(horizontal, serializer);
+        sse_encode_f_64(distance, serializer);
+        sse_encode_f_64(height, serializer);
+        sse_encode_f_64(rotateMomo, serializer);
+        sse_encode_bool(autoGroundSnap, serializer);
+        sse_encode_bool(floatingEffect, serializer);
+        sse_encode_bool(poseWithNikki, serializer);
+    }
   }
 
   @protected

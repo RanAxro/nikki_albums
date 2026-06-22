@@ -110,8 +110,8 @@ class MediaCustomDataResult {
 sealed class MediaParam with _$MediaParam {
   const MediaParam._();
 
-  const factory MediaParam.momoCameraParams(MomoCameraParams field0) =
-      MediaParam_MomoCameraParams;
+  const factory MediaParam.cameraParams(CameraParams field0) =
+      MediaParam_CameraParams;
   const factory MediaParam.nikkiPhoto(NikkiPhotoParams field0) =
       MediaParam_NikkiPhoto;
   const factory MediaParam.clockInPhoto(ClockInPhotoParams field0) =
@@ -120,4 +120,4 @@ sealed class MediaParam with _$MediaParam {
   const factory MediaParam.diy(DiyParams field0) = MediaParam_DIY;
 }
 
-enum MediaParamType { momoCameraParams, nikkiPhoto, clockInPhoto, collage, diy }
+enum MediaParamType { cameraParams, nikkiPhoto, clockInPhoto, collage, diy }

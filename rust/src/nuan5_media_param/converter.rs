@@ -7,9 +7,9 @@ use crate::nuan5_media_param::parser::cloth_parser::parse_cloth;
 use crate::nuan5_media_param::parser::eureka_parser::parse_eureka;
 use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*, share_code_params::*};
 
-pub(crate) fn convert_momo_camera_params(data: &camera_params::CameraParams) -> MomoCameraParams{
+pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> CameraParams{
   match data{
-    camera_params::CameraParams::V1(v1) => MomoCameraParams{
+    camera_params::CameraParams::V1(v1) => CameraParams{
       camera_actor_loc: (v1.dx_camera_actor, v1.dy_camera_actor, v1.dz_camera_actor),
       camera_actor_rot: (v1.d_yaw_camera_actor, v1.d_pitch_camera_actor, v1.d_roll_camera_actor),
       camera_component_loc: (v1.dx_camera_component, v1.dy_camera_component, v1.dz_camera_component),
@@ -45,7 +45,7 @@ pub(crate) fn convert_momo_camera_params(data: &camera_params::CameraParams) -> 
       },
       momo: None,
     },
-    camera_params::CameraParams::V2(v2) => MomoCameraParams{
+    camera_params::CameraParams::V2(v2) => CameraParams{
       camera_actor_loc: (v2.dx_camera_actor, v2.dy_camera_actor, v2.dz_camera_actor),
       camera_actor_rot: (v2.d_yaw_camera_actor, v2.d_pitch_camera_actor, v2.d_roll_camera_actor),
       camera_component_loc: (v2.dx_camera_component, v2.dy_camera_component, v2.dz_camera_component),
@@ -80,7 +80,7 @@ pub(crate) fn convert_momo_camera_params(data: &camera_params::CameraParams) -> 
         }
       },
       momo: Some(match v2.momo{
-        camera_params::CameraParamsV2MomoHidden::Enable => MomoCameraParamsMomoHidden::Enable,
+        camera_params::CameraParamsV2MomoHidden::Enable => CameraParamsMomoHidden::Enable,
         camera_params::CameraParamsV2MomoHidden::Disable{
           momo_pose,
           horizontal,
@@ -90,7 +90,7 @@ pub(crate) fn convert_momo_camera_params(data: &camera_params::CameraParams) -> 
           auto_ground_snap,
           floating_effect,
           pose_with_nikki,
-        } => MomoCameraParamsMomoHidden::Disable{
+        } => CameraParamsMomoHidden::Disable{
           momo_pose,
           horizontal: parse_horizontal(horizontal),
           distance: parse_distance(distance),
@@ -109,7 +109,7 @@ pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCus
   NikkiPhotoParams{
     photography: convert_nikki_photo_photography_params(data),
     camera: data.social_photo.as_ref().map(|social_photo|{
-      convert_camera_params(social_photo, &data.portrait_mode_handler)
+      convert_rich_camera_params(social_photo, &data.portrait_mode_handler)
     }),
     nikki: data.social_photo.as_ref().map(convert_nikki_params),
     momo: data.social_photo.as_ref()
@@ -118,22 +118,12 @@ pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCus
   }
 }
 
-// pub(crate) fn convert_nikki_photo_main_params(data: &NikkiPhotoParams) -> NikkiPhotoMainParams{
-//   NikkiPhotoMainParams{
-//     camera: data.camera,
-//     dressing: data.nikki.unwrap().dressing,
-//     time: data.photography.time,
-//     weather: data.photography.weather,
-//     location: data.photography.location,
-//   }
-// }
-
 pub(crate) fn convert_clock_in_photo_params(data: &image_custom_data::ClockInPhotoCustomData) -> ClockInPhotoParams{
   ClockInPhotoParams{
     tag: data.clock_game_plugin.tag,
     photography: convert_clock_in_photo_photography_params(&data),
     camera: data.social_photo.as_ref().map(|social_photo|{
-      convert_camera_params(social_photo, &data.portrait_mode_handler)
+      convert_rich_camera_params(social_photo, &data.portrait_mode_handler)
     }),
     nikki: data.social_photo.as_ref().map(convert_nikki_params),
     momo: data.social_photo.as_ref()
@@ -224,8 +214,8 @@ pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data
   }
 }
 
-pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &Option<image_custom_data::PortraitModeHandler>) -> CameraParams{
-  const DEFAULT_MOMO_CAMERA_PARAMS: MomoCameraParams = MomoCameraParams{
+pub(crate) fn convert_rich_camera_params(data: &image_custom_data::SocialPhoto, portrait_data: &Option<image_custom_data::PortraitModeHandler>) -> RichCameraParams{
+  const DEFAULT_CAMERA_PARAMS: CameraParams = CameraParams{
     camera_actor_loc: (0.0, 0.0, 0.0),
     camera_actor_rot: (0.0, 0.0, 0.0),
     camera_component_loc: (0.0, 0.0, 0.0),
@@ -248,9 +238,9 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
     momo: None,
   };
   
-  let params = parse_momo_camera_params(&data.camera_params).as_ref().map(convert_momo_camera_params);
+  let params = parse_camera_params(&data.camera_params).as_ref().map(convert_camera_params);
 
-  CameraParams{
+  RichCameraParams{
     params: data.camera_params.clone(),
     portrait_mode: match portrait_data{
       Some(portrait_mode_handler) => {
@@ -270,15 +260,15 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
     rotation: data.photo_info.camera_actor_rot_roll,
     aperture_section: data.photo_info.aperture_section,
     vignette_intensity: data.photo_info.vignette_intensity,
-    bloom_intensity: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).bloom_intensity,
-    bloom_threshold: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).bloom_threshold,
-    brightness: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).brightness,
-    exposure: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).exposure,
-    contrast: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).contrast,
-    saturation: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).saturation,
-    vibrance: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).vibrance,
-    highlights: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).highlights,
-    shadows: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).shadows,
+    bloom_intensity: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).bloom_intensity,
+    bloom_threshold: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).bloom_threshold,
+    brightness: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).brightness,
+    exposure: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).exposure,
+    contrast: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).contrast,
+    saturation: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).saturation,
+    vibrance: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).vibrance,
+    highlights: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).highlights,
+    shadows: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).shadows,
     light: if data.photo_info.light_id == "None" {
       LightParams::None
     }else{
@@ -297,10 +287,10 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
     },
     pose: data.photo_info.pose_id,
     framed_moment: 0,
-    momo: params.as_ref().unwrap_or(&DEFAULT_MOMO_CAMERA_PARAMS).momo.clone().map(|momo_hidden|{
+    momo: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).momo.clone().map(|momo_hidden|{
       match momo_hidden{
-        MomoCameraParamsMomoHidden::Enable => CameraParamsMomoHidden::Enable,
-        MomoCameraParamsMomoHidden::Disable{
+        CameraParamsMomoHidden::Enable => RichCameraParamsMomoHidden::Enable,
+        CameraParamsMomoHidden::Disable{
           momo_pose,
           horizontal,
           distance,
@@ -309,7 +299,7 @@ pub(crate) fn convert_camera_params(data: &image_custom_data::SocialPhoto, portr
           auto_ground_snap,
           floating_effect,
           pose_with_nikki,
-        } => CameraParamsMomoHidden::Disable{
+        } => RichCameraParamsMomoHidden::Disable{
           momo_pose,
           horizontal,
           distance,

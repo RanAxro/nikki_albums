@@ -14,122 +14,6 @@ part 'nikki_photo_params.freezed.dart';
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `NikkiPhotoMainParams`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
-class CameraParams {
-  final String params;
-  final bool portraitMode;
-  final double zoom;
-  final double focalLength;
-  final double rotation;
-  final int apertureSection;
-  final double vignetteIntensity;
-  final double bloomIntensity;
-  final double bloomThreshold;
-  final double brightness;
-  final double exposure;
-  final double contrast;
-  final double saturation;
-  final double vibrance;
-  final double highlights;
-  final double shadows;
-  final LightParams light;
-  final FilterParams filter;
-  final PlatformInt64 pose;
-  final PlatformInt64 framedMoment;
-  final CameraParamsMomoHidden? momo;
-
-  const CameraParams({
-    required this.params,
-    required this.portraitMode,
-    required this.zoom,
-    required this.focalLength,
-    required this.rotation,
-    required this.apertureSection,
-    required this.vignetteIntensity,
-    required this.bloomIntensity,
-    required this.bloomThreshold,
-    required this.brightness,
-    required this.exposure,
-    required this.contrast,
-    required this.saturation,
-    required this.vibrance,
-    required this.highlights,
-    required this.shadows,
-    required this.light,
-    required this.filter,
-    required this.pose,
-    required this.framedMoment,
-    this.momo,
-  });
-
-  @override
-  int get hashCode =>
-      params.hashCode ^
-      portraitMode.hashCode ^
-      zoom.hashCode ^
-      focalLength.hashCode ^
-      rotation.hashCode ^
-      apertureSection.hashCode ^
-      vignetteIntensity.hashCode ^
-      bloomIntensity.hashCode ^
-      bloomThreshold.hashCode ^
-      brightness.hashCode ^
-      exposure.hashCode ^
-      contrast.hashCode ^
-      saturation.hashCode ^
-      vibrance.hashCode ^
-      highlights.hashCode ^
-      shadows.hashCode ^
-      light.hashCode ^
-      filter.hashCode ^
-      pose.hashCode ^
-      framedMoment.hashCode ^
-      momo.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CameraParams &&
-          runtimeType == other.runtimeType &&
-          params == other.params &&
-          portraitMode == other.portraitMode &&
-          zoom == other.zoom &&
-          focalLength == other.focalLength &&
-          rotation == other.rotation &&
-          apertureSection == other.apertureSection &&
-          vignetteIntensity == other.vignetteIntensity &&
-          bloomIntensity == other.bloomIntensity &&
-          bloomThreshold == other.bloomThreshold &&
-          brightness == other.brightness &&
-          exposure == other.exposure &&
-          contrast == other.contrast &&
-          saturation == other.saturation &&
-          vibrance == other.vibrance &&
-          highlights == other.highlights &&
-          shadows == other.shadows &&
-          light == other.light &&
-          filter == other.filter &&
-          pose == other.pose &&
-          framedMoment == other.framedMoment &&
-          momo == other.momo;
-}
-
-@freezed
-sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
-  const CameraParamsMomoHidden._();
-
-  const factory CameraParamsMomoHidden.enable() = CameraParamsMomoHidden_Enable;
-  const factory CameraParamsMomoHidden.disable({
-    required PlatformInt64 momoPose,
-    required double horizontal,
-    required double distance,
-    required double height,
-    required double rotateMomo,
-    required bool autoGroundSnap,
-    required bool floatingEffect,
-    required bool poseWithNikki,
-  }) = CameraParamsMomoHidden_Disable;
-}
-
 class ClothParams {
   final Cloth cloth;
   final DiyData? diy;
@@ -380,7 +264,7 @@ class NikkiParams {
 
 class NikkiPhotoParams {
   final PhotographyParams photography;
-  final CameraParams? camera;
+  final RichCameraParams? camera;
   final NikkiParams? nikki;
   final MomoHiddenState? momo;
 
@@ -584,6 +468,123 @@ class PhotographyParams {
           weather == other.weather &&
           photoWall == other.photoWall &&
           task == other.task;
+}
+
+class RichCameraParams {
+  final String params;
+  final bool portraitMode;
+  final double zoom;
+  final double focalLength;
+  final double rotation;
+  final int apertureSection;
+  final double vignetteIntensity;
+  final double bloomIntensity;
+  final double bloomThreshold;
+  final double brightness;
+  final double exposure;
+  final double contrast;
+  final double saturation;
+  final double vibrance;
+  final double highlights;
+  final double shadows;
+  final LightParams light;
+  final FilterParams filter;
+  final PlatformInt64 pose;
+  final PlatformInt64 framedMoment;
+  final RichCameraParamsMomoHidden? momo;
+
+  const RichCameraParams({
+    required this.params,
+    required this.portraitMode,
+    required this.zoom,
+    required this.focalLength,
+    required this.rotation,
+    required this.apertureSection,
+    required this.vignetteIntensity,
+    required this.bloomIntensity,
+    required this.bloomThreshold,
+    required this.brightness,
+    required this.exposure,
+    required this.contrast,
+    required this.saturation,
+    required this.vibrance,
+    required this.highlights,
+    required this.shadows,
+    required this.light,
+    required this.filter,
+    required this.pose,
+    required this.framedMoment,
+    this.momo,
+  });
+
+  @override
+  int get hashCode =>
+      params.hashCode ^
+      portraitMode.hashCode ^
+      zoom.hashCode ^
+      focalLength.hashCode ^
+      rotation.hashCode ^
+      apertureSection.hashCode ^
+      vignetteIntensity.hashCode ^
+      bloomIntensity.hashCode ^
+      bloomThreshold.hashCode ^
+      brightness.hashCode ^
+      exposure.hashCode ^
+      contrast.hashCode ^
+      saturation.hashCode ^
+      vibrance.hashCode ^
+      highlights.hashCode ^
+      shadows.hashCode ^
+      light.hashCode ^
+      filter.hashCode ^
+      pose.hashCode ^
+      framedMoment.hashCode ^
+      momo.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RichCameraParams &&
+          runtimeType == other.runtimeType &&
+          params == other.params &&
+          portraitMode == other.portraitMode &&
+          zoom == other.zoom &&
+          focalLength == other.focalLength &&
+          rotation == other.rotation &&
+          apertureSection == other.apertureSection &&
+          vignetteIntensity == other.vignetteIntensity &&
+          bloomIntensity == other.bloomIntensity &&
+          bloomThreshold == other.bloomThreshold &&
+          brightness == other.brightness &&
+          exposure == other.exposure &&
+          contrast == other.contrast &&
+          saturation == other.saturation &&
+          vibrance == other.vibrance &&
+          highlights == other.highlights &&
+          shadows == other.shadows &&
+          light == other.light &&
+          filter == other.filter &&
+          pose == other.pose &&
+          framedMoment == other.framedMoment &&
+          momo == other.momo;
+}
+
+@freezed
+sealed class RichCameraParamsMomoHidden with _$RichCameraParamsMomoHidden {
+  const RichCameraParamsMomoHidden._();
+
+  const factory RichCameraParamsMomoHidden.enable() =
+      RichCameraParamsMomoHidden_Enable;
+  const factory RichCameraParamsMomoHidden.disable({
+    required PlatformInt64 momoPose,
+    required double horizontal,
+    required double distance,
+    required double height,
+    required double rotateMomo,
+    required bool autoGroundSnap,
+    required bool floatingEffect,
+    required bool poseWithNikki,
+  }) = RichCameraParamsMomoHidden_Disable;
 }
 
 class ShootingDate {

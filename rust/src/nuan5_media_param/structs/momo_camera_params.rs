@@ -1,7 +1,7 @@
 use super::super::structs::nikki_photo_params::{LightParams, FilterParams};
 
 #[derive(Clone)]
-pub struct MomoCameraParams{
+pub struct CameraParams{
   pub camera_actor_loc: (f64, f64, f64),
   pub camera_actor_rot: (f64, f64, f64),
   pub camera_component_loc: (f64, f64, f64),
@@ -24,11 +24,11 @@ pub struct MomoCameraParams{
   pub light: LightParams,
   pub filter: FilterParams,
   
-  pub momo: Option<MomoCameraParamsMomoHidden>,
+  pub momo: Option<CameraParamsMomoHidden>,
 }
 
 #[derive(Clone)]
-pub enum MomoCameraParamsMomoHidden{
+pub enum CameraParamsMomoHidden{
   Enable,
   Disable{
     momo_pose: i64,

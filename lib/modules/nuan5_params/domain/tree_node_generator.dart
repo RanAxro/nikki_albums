@@ -39,7 +39,7 @@ TreeNode genNikkiPhotoParams(NikkiPhotoParams params){
     children: [
       genPhotographyParams(params.photography),
       if(params.camera != null)
-        genCameraParams(params.camera!),
+        genRichCameraParams(params.camera!),
       if(params.nikki != null)
         genNikkiParams(params.nikki!),
       if(params.momo != null)
@@ -59,7 +59,7 @@ TreeNode genClockInPhotoParams(ClockInPhotoParams params){
       ),
       genPhotographyParams(params.photography),
       if(params.camera != null)
-        genCameraParams(params.camera!),
+        genRichCameraParams(params.camera!),
       if(params.nikki != null)
         genNikkiParams(params.nikki!),
       if(params.momo != null)
@@ -245,7 +245,7 @@ TreeNode genPhotographyParams(PhotographyParams params){
   );
 }
 
-TreeNode genCameraParams(CameraParams params){
+TreeNode genRichCameraParams(RichCameraParams params){
   return TreeNode(
     title: trText("camera_params"),
     initiallyExpanded: true,

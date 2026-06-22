@@ -16,7 +16,7 @@ import 'world.dart';
 class ClockInPhotoParams {
   final PlatformInt64 tag;
   final PhotographyParams photography;
-  final CameraParams? camera;
+  final RichCameraParams? camera;
   final NikkiParams? nikki;
   final MomoHiddenState? momo;
 

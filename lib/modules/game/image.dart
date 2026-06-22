@@ -79,7 +79,7 @@ TreeNode? convertMediaData(MediaCustomData? data){
   return data?.whenOrNull(
     valid: (MediaParam param){
       return param.when(
-        momoCameraParams: (momoCameraParams){
+        cameraParams: (cameraParams){
           return null;
         },
         nikkiPhoto: (nikkiPhoto){

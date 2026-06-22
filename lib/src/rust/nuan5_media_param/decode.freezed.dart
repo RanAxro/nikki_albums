@@ -322,11 +322,11 @@ extension MediaParamPatterns on MediaParam {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MediaParam_MomoCameraParams value)?  momoCameraParams,TResult Function( MediaParam_NikkiPhoto value)?  nikkiPhoto,TResult Function( MediaParam_ClockInPhoto value)?  clockInPhoto,TResult Function( MediaParam_Collage value)?  collage,TResult Function( MediaParam_DIY value)?  diy,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MediaParam_CameraParams value)?  cameraParams,TResult Function( MediaParam_NikkiPhoto value)?  nikkiPhoto,TResult Function( MediaParam_ClockInPhoto value)?  clockInPhoto,TResult Function( MediaParam_Collage value)?  collage,TResult Function( MediaParam_DIY value)?  diy,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case MediaParam_MomoCameraParams() when momoCameraParams != null:
-return momoCameraParams(_that);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
+case MediaParam_CameraParams() when cameraParams != null:
+return cameraParams(_that);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
 return nikkiPhoto(_that);case MediaParam_ClockInPhoto() when clockInPhoto != null:
 return clockInPhoto(_that);case MediaParam_Collage() when collage != null:
 return collage(_that);case MediaParam_DIY() when diy != null:
@@ -348,11 +348,11 @@ return diy(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MediaParam_MomoCameraParams value)  momoCameraParams,required TResult Function( MediaParam_NikkiPhoto value)  nikkiPhoto,required TResult Function( MediaParam_ClockInPhoto value)  clockInPhoto,required TResult Function( MediaParam_Collage value)  collage,required TResult Function( MediaParam_DIY value)  diy,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MediaParam_CameraParams value)  cameraParams,required TResult Function( MediaParam_NikkiPhoto value)  nikkiPhoto,required TResult Function( MediaParam_ClockInPhoto value)  clockInPhoto,required TResult Function( MediaParam_Collage value)  collage,required TResult Function( MediaParam_DIY value)  diy,}){
 final _that = this;
 switch (_that) {
-case MediaParam_MomoCameraParams():
-return momoCameraParams(_that);case MediaParam_NikkiPhoto():
+case MediaParam_CameraParams():
+return cameraParams(_that);case MediaParam_NikkiPhoto():
 return nikkiPhoto(_that);case MediaParam_ClockInPhoto():
 return clockInPhoto(_that);case MediaParam_Collage():
 return collage(_that);case MediaParam_DIY():
@@ -370,11 +370,11 @@ return diy(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MediaParam_MomoCameraParams value)?  momoCameraParams,TResult? Function( MediaParam_NikkiPhoto value)?  nikkiPhoto,TResult? Function( MediaParam_ClockInPhoto value)?  clockInPhoto,TResult? Function( MediaParam_Collage value)?  collage,TResult? Function( MediaParam_DIY value)?  diy,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MediaParam_CameraParams value)?  cameraParams,TResult? Function( MediaParam_NikkiPhoto value)?  nikkiPhoto,TResult? Function( MediaParam_ClockInPhoto value)?  clockInPhoto,TResult? Function( MediaParam_Collage value)?  collage,TResult? Function( MediaParam_DIY value)?  diy,}){
 final _that = this;
 switch (_that) {
-case MediaParam_MomoCameraParams() when momoCameraParams != null:
-return momoCameraParams(_that);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
+case MediaParam_CameraParams() when cameraParams != null:
+return cameraParams(_that);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
 return nikkiPhoto(_that);case MediaParam_ClockInPhoto() when clockInPhoto != null:
 return clockInPhoto(_that);case MediaParam_Collage() when collage != null:
 return collage(_that);case MediaParam_DIY() when diy != null:
@@ -395,10 +395,10 @@ return diy(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( MomoCameraParams field0)?  momoCameraParams,TResult Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult Function( ClockInPhotoParams field0)?  clockInPhoto,TResult Function( CollageParams field0)?  collage,TResult Function( DiyParams field0)?  diy,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( CameraParams field0)?  cameraParams,TResult Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult Function( ClockInPhotoParams field0)?  clockInPhoto,TResult Function( CollageParams field0)?  collage,TResult Function( DiyParams field0)?  diy,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case MediaParam_MomoCameraParams() when momoCameraParams != null:
-return momoCameraParams(_that.field0);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
+case MediaParam_CameraParams() when cameraParams != null:
+return cameraParams(_that.field0);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
 return nikkiPhoto(_that.field0);case MediaParam_ClockInPhoto() when clockInPhoto != null:
 return clockInPhoto(_that.field0);case MediaParam_Collage() when collage != null:
 return collage(_that.field0);case MediaParam_DIY() when diy != null:
@@ -420,10 +420,10 @@ return diy(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( MomoCameraParams field0)  momoCameraParams,required TResult Function( NikkiPhotoParams field0)  nikkiPhoto,required TResult Function( ClockInPhotoParams field0)  clockInPhoto,required TResult Function( CollageParams field0)  collage,required TResult Function( DiyParams field0)  diy,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( CameraParams field0)  cameraParams,required TResult Function( NikkiPhotoParams field0)  nikkiPhoto,required TResult Function( ClockInPhotoParams field0)  clockInPhoto,required TResult Function( CollageParams field0)  collage,required TResult Function( DiyParams field0)  diy,}) {final _that = this;
 switch (_that) {
-case MediaParam_MomoCameraParams():
-return momoCameraParams(_that.field0);case MediaParam_NikkiPhoto():
+case MediaParam_CameraParams():
+return cameraParams(_that.field0);case MediaParam_NikkiPhoto():
 return nikkiPhoto(_that.field0);case MediaParam_ClockInPhoto():
 return clockInPhoto(_that.field0);case MediaParam_Collage():
 return collage(_that.field0);case MediaParam_DIY():
@@ -441,10 +441,10 @@ return diy(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( MomoCameraParams field0)?  momoCameraParams,TResult? Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult? Function( ClockInPhotoParams field0)?  clockInPhoto,TResult? Function( CollageParams field0)?  collage,TResult? Function( DiyParams field0)?  diy,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( CameraParams field0)?  cameraParams,TResult? Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult? Function( ClockInPhotoParams field0)?  clockInPhoto,TResult? Function( CollageParams field0)?  collage,TResult? Function( DiyParams field0)?  diy,}) {final _that = this;
 switch (_that) {
-case MediaParam_MomoCameraParams() when momoCameraParams != null:
-return momoCameraParams(_that.field0);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
+case MediaParam_CameraParams() when cameraParams != null:
+return cameraParams(_that.field0);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
 return nikkiPhoto(_that.field0);case MediaParam_ClockInPhoto() when clockInPhoto != null:
 return clockInPhoto(_that.field0);case MediaParam_Collage() when collage != null:
 return collage(_that.field0);case MediaParam_DIY() when diy != null:
@@ -459,23 +459,23 @@ return diy(_that.field0);case _:
 /// @nodoc
 
 
-class MediaParam_MomoCameraParams extends MediaParam {
-  const MediaParam_MomoCameraParams(this.field0): super._();
+class MediaParam_CameraParams extends MediaParam {
+  const MediaParam_CameraParams(this.field0): super._();
   
 
-@override final  MomoCameraParams field0;
+@override final  CameraParams field0;
 
 /// Create a copy of MediaParam
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MediaParam_MomoCameraParamsCopyWith<MediaParam_MomoCameraParams> get copyWith => _$MediaParam_MomoCameraParamsCopyWithImpl<MediaParam_MomoCameraParams>(this, _$identity);
+$MediaParam_CameraParamsCopyWith<MediaParam_CameraParams> get copyWith => _$MediaParam_CameraParamsCopyWithImpl<MediaParam_CameraParams>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_MomoCameraParams&&(identical(other.field0, field0) || other.field0 == field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_CameraParams&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
@@ -484,18 +484,18 @@ int get hashCode => Object.hash(runtimeType,field0);
 
 @override
 String toString() {
-  return 'MediaParam.momoCameraParams(field0: $field0)';
+  return 'MediaParam.cameraParams(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $MediaParam_MomoCameraParamsCopyWith<$Res> implements $MediaParamCopyWith<$Res> {
-  factory $MediaParam_MomoCameraParamsCopyWith(MediaParam_MomoCameraParams value, $Res Function(MediaParam_MomoCameraParams) _then) = _$MediaParam_MomoCameraParamsCopyWithImpl;
+abstract mixin class $MediaParam_CameraParamsCopyWith<$Res> implements $MediaParamCopyWith<$Res> {
+  factory $MediaParam_CameraParamsCopyWith(MediaParam_CameraParams value, $Res Function(MediaParam_CameraParams) _then) = _$MediaParam_CameraParamsCopyWithImpl;
 @useResult
 $Res call({
- MomoCameraParams field0
+ CameraParams field0
 });
 
 
@@ -503,19 +503,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$MediaParam_MomoCameraParamsCopyWithImpl<$Res>
-    implements $MediaParam_MomoCameraParamsCopyWith<$Res> {
-  _$MediaParam_MomoCameraParamsCopyWithImpl(this._self, this._then);
+class _$MediaParam_CameraParamsCopyWithImpl<$Res>
+    implements $MediaParam_CameraParamsCopyWith<$Res> {
+  _$MediaParam_CameraParamsCopyWithImpl(this._self, this._then);
 
-  final MediaParam_MomoCameraParams _self;
-  final $Res Function(MediaParam_MomoCameraParams) _then;
+  final MediaParam_CameraParams _self;
+  final $Res Function(MediaParam_CameraParams) _then;
 
 /// Create a copy of MediaParam
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(MediaParam_MomoCameraParams(
+  return _then(MediaParam_CameraParams(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as MomoCameraParams,
+as CameraParams,
   ));
 }
 

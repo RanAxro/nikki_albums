@@ -2,7 +2,7 @@ use super::super::serde_nuan5_json::structs::camera_params;
 use super::super::serde_nuan5_json::de;
 use super::super::decrypt;
 
-pub fn parse_momo_camera_params(params: &str) -> Option<camera_params::CameraParams>{
+pub fn parse_camera_params(params: &str) -> Option<camera_params::CameraParams>{
   let key = decrypt::MediaKey::camera_param().ok()?;
   let decrypt::CustomData::Valid(data) = decrypt::media_decrypt(params.as_ref(), &key)? else {
     return None;
