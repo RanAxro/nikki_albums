@@ -3,7 +3,7 @@ use super::image_custom_data;
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
-pub struct ShareCode{
+pub struct NetDIYCustomData{
   #[serde(rename = "Content")]
   pub content: image_custom_data::DIYCustomData,
 }

@@ -1,11 +1,11 @@
 use std::collections::{HashMap, HashSet};
 use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
-use crate::nuan5_media_param::serde_nuan5_json::structs::{image_custom_data, camera_params, share_code};
+use crate::nuan5_media_param::serde_nuan5_json::structs::{image_custom_data, camera_params, diy_custom_data};
 use crate::nuan5_media_param::parser::momo_camera_params_parser::*;
 use crate::nuan5_media_param::parser::location_parser::parse_location;
 use crate::nuan5_media_param::parser::cloth_parser::parse_cloth;
 use crate::nuan5_media_param::parser::eureka_parser::parse_eureka;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*, share_code_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
 
 pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> CameraParams{
   match data{
@@ -592,8 +592,8 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
   clothes.into_values().collect()
 }
 
-pub(crate) fn convert_share_code(data: &share_code::ShareCode) -> ShareCode{
-  ShareCode{
+pub(crate) fn convert_net_diy_params(data: &diy_custom_data::NetDIYCustomData) -> DiyParams{
+  DiyParams{
     pose_id: data.content.content.pose_id,
     pattern_data: data.content.content.pattern_data.as_map(),
     clothes: convert_cloth(&data.content.content.wearing_clothes, Some(&data.content.content.wearing_diy_infos)),
