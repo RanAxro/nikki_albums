@@ -12,24 +12,23 @@ part 'decrypt.freezed.dart';
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
 
 CustomData? mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptMediaDecrypt(data: data, key: key);
+    .crateNuan5ParamsDecryptMediaDecrypt(data: data, key: key);
 
 CustomData? mediaDecodeFileBytesUnchecked({
   required List<int> flag,
   required List<int> bytes,
   required MediaKey key,
-}) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked(
-      flag: flag,
-      bytes: bytes,
-      key: key,
-    );
+}) => RustLib.instance.api.crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked(
+  flag: flag,
+  bytes: bytes,
+  key: key,
+);
 
 Future<CustomData?> mediaDecodeFileUnchecked({
   required List<int> flag,
   required String path,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptMediaDecodeFileUnchecked(
+}) => RustLib.instance.api.crateNuan5ParamsDecryptMediaDecodeFileUnchecked(
   flag: flag,
   path: path,
   key: key,
@@ -39,18 +38,17 @@ CustomData? mediaDecodeFileUncheckedSync({
   required List<int> flag,
   required String path,
   required MediaKey key,
-}) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptMediaDecodeFileUncheckedSync(
-      flag: flag,
-      path: path,
-      key: key,
-    );
+}) => RustLib.instance.api.crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync(
+  flag: flag,
+  path: path,
+  key: key,
+);
 
 Stream<MediaDecodeEvent> mediaDecodeFilesUnchecked({
   required List<int> flag,
   required List<String> paths,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptMediaDecodeFilesUnchecked(
+}) => RustLib.instance.api.crateNuan5ParamsDecryptMediaDecodeFilesUnchecked(
   flag: flag,
   paths: paths,
   key: key,
@@ -62,7 +60,7 @@ Future<List<CustomData?>> mediaDecodeFilesUncheckedNoProgress({
   required List<String> paths,
   required MediaKey key,
 }) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress(
+    .crateNuan5ParamsDecryptMediaDecodeFilesUncheckedNoProgress(
       flag: flag,
       paths: paths,
       key: key,
@@ -73,8 +71,8 @@ Stream<MediaStreamResult> mediaDecodeFilesUncheckedStream({
   required List<int> flag,
   required List<String> paths,
   required MediaKey key,
-}) => RustLib.instance.api
-    .crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStream(
+}) =>
+    RustLib.instance.api.crateNuan5ParamsDecryptMediaDecodeFilesUncheckedStream(
       flag: flag,
       paths: paths,
       key: key,
@@ -82,7 +80,7 @@ Stream<MediaStreamResult> mediaDecodeFilesUncheckedStream({
 
 Future<Uint8List?> clothDiyDecodeNetwork({
   required ClothDiyShareCode shareCode,
-}) => RustLib.instance.api.crateNuan5MediaParamDecryptClothDiyDecodeNetwork(
+}) => RustLib.instance.api.crateNuan5ParamsDecryptClothDiyDecodeNetwork(
   shareCode: shareCode,
 );
 
@@ -92,7 +90,7 @@ abstract class ClothDiyShareCode implements RustOpaqueInterface {
   Future<void> dispose();
 
   static ClothDiyShareCode fromCodeStr(String code) => RustLib.instance.api
-      .crateNuan5MediaParamDecryptClothDiyShareCodeFromCodeStr(code: code);
+      .crateNuan5ParamsDecryptClothDiyShareCodeFromCodeStr(code: code);
 
   PlatformInt64 timestamp();
 
@@ -102,16 +100,16 @@ abstract class ClothDiyShareCode implements RustOpaqueInterface {
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
 abstract class MediaKey implements RustOpaqueInterface {
   static MediaKey cameraParam() =>
-      RustLib.instance.api.crateNuan5MediaParamDecryptMediaKeyCameraParam();
+      RustLib.instance.api.crateNuan5ParamsDecryptMediaKeyCameraParam();
 
   @override
   Future<void> dispose();
 
   static MediaKey fromStr(String s) =>
-      RustLib.instance.api.crateNuan5MediaParamDecryptMediaKeyFromStr(s: s);
+      RustLib.instance.api.crateNuan5ParamsDecryptMediaKeyFromStr(s: s);
 
   static MediaKey fromStrBytes(List<int> bytes) => RustLib.instance.api
-      .crateNuan5MediaParamDecryptMediaKeyFromStrBytes(bytes: bytes);
+      .crateNuan5ParamsDecryptMediaKeyFromStrBytes(bytes: bytes);
 }
 
 @freezed

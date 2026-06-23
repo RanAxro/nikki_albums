@@ -3,10 +3,10 @@ use std::ptr;
 use std::sync::Arc;
 use flutter_rust_bridge::frb;
 use crate::frb_generated::StreamSink;
-use crate::nuan5_media_param::decrypt::{MediaKey, MediaStreamResult};
+use crate::nuan5_params::decrypt::{MediaKey, MediaStreamResult};
 use super::converter::*;
 use super::decrypt;
-use super::serde_nuan5_json::de::from_slice;
+use crate::serde_nuan5_json::de::from_slice;
 use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
 
 #[frb]
@@ -134,7 +134,7 @@ pub fn media_de_files_unchecked(
 
   #[cfg(target_os = "windows")]
   {
-    use crate::nuan5_media_param::decrypt::convert_media_result;
+    use crate::nuan5_params::decrypt::convert_media_result;
     let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
     let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
@@ -143,7 +143,7 @@ pub fn media_de_files_unchecked(
 
     extern "C" fn stream_trampoline(
       index: usize,
-      result: *mut crate::nuan5_media_param::decrypt::ffi::MediaDecryptionResult,
+      result: *mut crate::nuan5_params::decrypt::ffi::MediaDecryptionResult,
       userdata: *mut c_void,
     ){
       if userdata.is_null() {

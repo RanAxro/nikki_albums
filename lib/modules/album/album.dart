@@ -23,7 +23,7 @@ import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/utils/Image.dart";
 import "package:nikki_albums/utils/clipboard.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
+import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";

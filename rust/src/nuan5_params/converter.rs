@@ -1,10 +1,10 @@
 use std::collections::{HashMap, HashSet};
-use crate::nuan5_media_param::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
-use crate::nuan5_media_param::serde_nuan5_json::structs::{image_custom_data, camera_params, diy_custom_data};
-use crate::nuan5_media_param::parser::momo_camera_params_parser::*;
-use crate::nuan5_media_param::parser::location_parser::parse_location;
-use crate::nuan5_media_param::parser::cloth_parser::parse_cloth;
-use crate::nuan5_media_param::parser::eureka_parser::parse_eureka;
+use crate::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
+use crate::nuan5_params::nuan5_structs::{image_custom_data, camera_params, diy_custom_data};
+use crate::nuan5_params::parser::momo_camera_params_parser::*;
+use crate::nuan5_params::parser::location_parser::parse_location;
+use crate::nuan5_params::parser::cloth_parser::parse_cloth;
+use crate::nuan5_params::parser::eureka_parser::parse_eureka;
 use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
 
 pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> CameraParams{

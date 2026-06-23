@@ -1,5 +1,5 @@
-use super::super::serde_nuan5_json::structs::camera_params;
-use super::super::serde_nuan5_json::de;
+use crate::nuan5_params::nuan5_structs::camera_params;
+use crate::serde_nuan5_json::de;
 use super::super::decrypt;
 
 pub fn parse_camera_params(params: &str) -> Option<camera_params::CameraParams>{

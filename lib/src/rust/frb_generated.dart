@@ -9,16 +9,16 @@ import 'dart:convert';
 import 'frb_generated.dart';
 import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
-import 'nuan5_media_param/decode.dart';
-import 'nuan5_media_param/decrypt.dart';
-import 'nuan5_media_param/structs/clock_in_photo_params.dart';
-import 'nuan5_media_param/structs/cloth.dart';
-import 'nuan5_media_param/structs/collage_params.dart';
-import 'nuan5_media_param/structs/diy_params.dart';
-import 'nuan5_media_param/structs/eureka.dart';
-import 'nuan5_media_param/structs/momo_camera_params.dart';
-import 'nuan5_media_param/structs/nikki_photo_params.dart';
-import 'nuan5_media_param/structs/world.dart';
+import 'nuan5_params/decode.dart';
+import 'nuan5_params/decrypt.dart';
+import 'nuan5_params/structs/clock_in_photo_params.dart';
+import 'nuan5_params/structs/cloth.dart';
+import 'nuan5_params/structs/collage_params.dart';
+import 'nuan5_params/structs/diy_params.dart';
+import 'nuan5_params/structs/eureka.dart';
+import 'nuan5_params/structs/momo_camera_params.dart';
+import 'nuan5_params/structs/nikki_photo_params.dart';
+import 'nuan5_params/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'serde_config/de.dart';
 import 'serde_config/se.dart';
@@ -86,7 +86,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1051689324;
+  int get rustContentHash => -1813085126;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -98,35 +98,33 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  Future<void> crateNuan5MediaParamDecryptClothDiyShareCodeDispose({
+  Future<void> crateNuan5ParamsDecryptClothDiyShareCodeDispose({
     required ClothDiyShareCode that,
   });
 
-  ClothDiyShareCode crateNuan5MediaParamDecryptClothDiyShareCodeFromCodeStr({
+  ClothDiyShareCode crateNuan5ParamsDecryptClothDiyShareCodeFromCodeStr({
     required String code,
   });
 
-  PlatformInt64 crateNuan5MediaParamDecryptClothDiyShareCodeTimestamp({
+  PlatformInt64 crateNuan5ParamsDecryptClothDiyShareCodeTimestamp({
     required ClothDiyShareCode that,
   });
 
-  String crateNuan5MediaParamDecryptClothDiyShareCodeUid({
+  String crateNuan5ParamsDecryptClothDiyShareCodeUid({
     required ClothDiyShareCode that,
   });
 
-  MediaKey crateNuan5MediaParamDecryptMediaKeyCameraParam();
+  MediaKey crateNuan5ParamsDecryptMediaKeyCameraParam();
 
-  Future<void> crateNuan5MediaParamDecryptMediaKeyDispose({
-    required MediaKey that,
-  });
+  Future<void> crateNuan5ParamsDecryptMediaKeyDispose({required MediaKey that});
 
-  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStr({required String s});
+  MediaKey crateNuan5ParamsDecryptMediaKeyFromStr({required String s});
 
-  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStrBytes({
+  MediaKey crateNuan5ParamsDecryptMediaKeyFromStrBytes({
     required List<int> bytes,
   });
 
-  Future<Uint8List?> crateNuan5MediaParamDecryptClothDiyDecodeNetwork({
+  Future<Uint8List?> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
     required ClothDiyShareCode shareCode,
   });
 
@@ -134,7 +132,7 @@ abstract class RustLibApi extends BaseApi {
     required String path,
   });
 
-  Future<MediaCustomData> crateNuan5MediaParamDecodeDecodeMediaParam({
+  Future<MediaCustomData> crateNuan5ParamsDecodeDecodeMediaParam({
     required MediaParamType paramType,
     required CustomData data,
   });
@@ -181,77 +179,75 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiSimpleInitApp();
 
-  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDe({
+  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDe({
     required MediaParamType paramType,
     required List<int> data,
     required MediaKey key,
   });
 
-  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileBytesUnchecked({
+  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileBytesUnchecked({
     required MediaParamType paramType,
     required List<int> bytes,
     required MediaKey key,
   });
 
-  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileUnchecked({
+  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileUnchecked({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
   });
 
-  MediaCustomData? crateNuan5MediaParamDecodeMediaDeFileUncheckedSync({
+  MediaCustomData? crateNuan5ParamsDecodeMediaDeFileUncheckedSync({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
   });
 
-  Stream<MediaCustomDataResult>
-  crateNuan5MediaParamDecodeMediaDeFilesUnchecked({
+  Stream<MediaCustomDataResult> crateNuan5ParamsDecodeMediaDeFilesUnchecked({
     required MediaParamType paramType,
     required List<String> paths,
     required MediaKey key,
   });
 
-  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked({
+  CustomData? crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked({
     required List<int> flag,
     required List<int> bytes,
     required MediaKey key,
   });
 
-  Future<CustomData?> crateNuan5MediaParamDecryptMediaDecodeFileUnchecked({
+  Future<CustomData?> crateNuan5ParamsDecryptMediaDecodeFileUnchecked({
     required List<int> flag,
     required String path,
     required MediaKey key,
   });
 
-  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileUncheckedSync({
+  CustomData? crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync({
     required List<int> flag,
     required String path,
     required MediaKey key,
   });
 
-  Stream<MediaDecodeEvent>
-  crateNuan5MediaParamDecryptMediaDecodeFilesUnchecked({
+  Stream<MediaDecodeEvent> crateNuan5ParamsDecryptMediaDecodeFilesUnchecked({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
   });
 
   Future<List<CustomData?>>
-  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress({
+  crateNuan5ParamsDecryptMediaDecodeFilesUncheckedNoProgress({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
   });
 
   Stream<MediaStreamResult>
-  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStream({
+  crateNuan5ParamsDecryptMediaDecodeFilesUncheckedStream({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
   });
 
-  CustomData? crateNuan5MediaParamDecryptMediaDecrypt({
+  CustomData? crateNuan5ParamsDecryptMediaDecrypt({
     required List<int> data,
     required MediaKey key,
   });
@@ -304,7 +300,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Future<void> crateNuan5MediaParamDecryptClothDiyShareCodeDispose({
+  Future<void> crateNuan5ParamsDecryptClothDiyShareCodeDispose({
     required ClothDiyShareCode that,
   }) {
     return handler.executeNormal(
@@ -326,23 +322,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_unit,
           decodeErrorData: null,
         ),
-        constMeta:
-            kCrateNuan5MediaParamDecryptClothDiyShareCodeDisposeConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptClothDiyShareCodeDisposeConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecryptClothDiyShareCodeDisposeConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptClothDiyShareCodeDisposeConstMeta =>
       const TaskConstMeta(
         debugName: "ClothDiyShareCode_dispose",
         argNames: ["that"],
       );
 
   @override
-  ClothDiyShareCode crateNuan5MediaParamDecryptClothDiyShareCodeFromCodeStr({
+  ClothDiyShareCode crateNuan5ParamsDecryptClothDiyShareCodeFromCodeStr({
     required String code,
   }) {
     return handler.executeSync(
@@ -358,7 +352,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta:
-            kCrateNuan5MediaParamDecryptClothDiyShareCodeFromCodeStrConstMeta,
+            kCrateNuan5ParamsDecryptClothDiyShareCodeFromCodeStrConstMeta,
         argValues: [code],
         apiImpl: this,
       ),
@@ -366,14 +360,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptClothDiyShareCodeFromCodeStrConstMeta =>
+  get kCrateNuan5ParamsDecryptClothDiyShareCodeFromCodeStrConstMeta =>
       const TaskConstMeta(
         debugName: "ClothDiyShareCode_from_code_str",
         argNames: ["code"],
       );
 
   @override
-  PlatformInt64 crateNuan5MediaParamDecryptClothDiyShareCodeTimestamp({
+  PlatformInt64 crateNuan5ParamsDecryptClothDiyShareCodeTimestamp({
     required ClothDiyShareCode that,
   }) {
     return handler.executeSync(
@@ -390,8 +384,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_i_64,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta:
-            kCrateNuan5MediaParamDecryptClothDiyShareCodeTimestampConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptClothDiyShareCodeTimestampConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
@@ -399,14 +392,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptClothDiyShareCodeTimestampConstMeta =>
+  get kCrateNuan5ParamsDecryptClothDiyShareCodeTimestampConstMeta =>
       const TaskConstMeta(
         debugName: "ClothDiyShareCode_timestamp",
         argNames: ["that"],
       );
 
   @override
-  String crateNuan5MediaParamDecryptClothDiyShareCodeUid({
+  String crateNuan5ParamsDecryptClothDiyShareCodeUid({
     required ClothDiyShareCode that,
   }) {
     return handler.executeSync(
@@ -423,21 +416,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_String,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptClothDiyShareCodeUidConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptClothDiyShareCodeUidConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptClothDiyShareCodeUidConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptClothDiyShareCodeUidConstMeta =>
       const TaskConstMeta(
         debugName: "ClothDiyShareCode_uid",
         argNames: ["that"],
       );
 
   @override
-  MediaKey crateNuan5MediaParamDecryptMediaKeyCameraParam() {
+  MediaKey crateNuan5ParamsDecryptMediaKeyCameraParam() {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -449,18 +442,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptMediaKeyCameraParamConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptMediaKeyCameraParamConstMeta,
         argValues: [],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyCameraParamConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptMediaKeyCameraParamConstMeta =>
       const TaskConstMeta(debugName: "MediaKey_camera_param", argNames: []);
 
   @override
-  Future<void> crateNuan5MediaParamDecryptMediaKeyDispose({
+  Future<void> crateNuan5ParamsDecryptMediaKeyDispose({
     required MediaKey that,
   }) {
     return handler.executeNormal(
@@ -482,18 +475,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_unit,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptMediaKeyDisposeConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptMediaKeyDisposeConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyDisposeConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptMediaKeyDisposeConstMeta =>
       const TaskConstMeta(debugName: "MediaKey_dispose", argNames: ["that"]);
 
   @override
-  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStr({required String s}) {
+  MediaKey crateNuan5ParamsDecryptMediaKeyFromStr({required String s}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -506,18 +499,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptMediaKeyFromStrConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptMediaKeyFromStrConstMeta,
         argValues: [s],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyFromStrConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptMediaKeyFromStrConstMeta =>
       const TaskConstMeta(debugName: "MediaKey_from_str", argNames: ["s"]);
 
   @override
-  MediaKey crateNuan5MediaParamDecryptMediaKeyFromStrBytes({
+  MediaKey crateNuan5ParamsDecryptMediaKeyFromStrBytes({
     required List<int> bytes,
   }) {
     return handler.executeSync(
@@ -532,21 +525,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptMediaKeyFromStrBytesConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptMediaKeyFromStrBytesConstMeta,
         argValues: [bytes],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaKeyFromStrBytesConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptMediaKeyFromStrBytesConstMeta =>
       const TaskConstMeta(
         debugName: "MediaKey_from_str_bytes",
         argNames: ["bytes"],
       );
 
   @override
-  Future<Uint8List?> crateNuan5MediaParamDecryptClothDiyDecodeNetwork({
+  Future<Uint8List?> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
     required ClothDiyShareCode shareCode,
   }) {
     return handler.executeNormal(
@@ -568,15 +561,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_list_prim_u_8_strict,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptClothDiyDecodeNetworkConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptClothDiyDecodeNetworkConstMeta,
         argValues: [shareCode],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecryptClothDiyDecodeNetworkConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptClothDiyDecodeNetworkConstMeta =>
       const TaskConstMeta(
         debugName: "cloth_diy_decode_network",
         argNames: ["shareCode"],
@@ -616,7 +608,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<MediaCustomData> crateNuan5MediaParamDecodeDecodeMediaParam({
+  Future<MediaCustomData> crateNuan5ParamsDecodeDecodeMediaParam({
     required MediaParamType paramType,
     required CustomData data,
   }) {
@@ -637,14 +629,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_media_custom_data,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecodeDecodeMediaParamConstMeta,
+        constMeta: kCrateNuan5ParamsDecodeDecodeMediaParamConstMeta,
         argValues: [paramType, data],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecodeDecodeMediaParamConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecodeDecodeMediaParamConstMeta =>
       const TaskConstMeta(
         debugName: "decode_media_param",
         argNames: ["paramType", "data"],
@@ -977,7 +969,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
-  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDe({
+  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDe({
     required MediaParamType paramType,
     required List<int> data,
     required MediaKey key,
@@ -1003,21 +995,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecodeMediaDeConstMeta,
+        constMeta: kCrateNuan5ParamsDecodeMediaDeConstMeta,
         argValues: [paramType, data, key],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecodeMediaDeConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecodeMediaDeConstMeta =>
       const TaskConstMeta(
         debugName: "media_de",
         argNames: ["paramType", "data", "key"],
       );
 
   @override
-  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileBytesUnchecked({
+  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileBytesUnchecked({
     required MediaParamType paramType,
     required List<int> bytes,
     required MediaKey key,
@@ -1043,23 +1035,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
           decodeErrorData: null,
         ),
-        constMeta:
-            kCrateNuan5MediaParamDecodeMediaDeFileBytesUncheckedConstMeta,
+        constMeta: kCrateNuan5ParamsDecodeMediaDeFileBytesUncheckedConstMeta,
         argValues: [paramType, bytes, key],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecodeMediaDeFileBytesUncheckedConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecodeMediaDeFileBytesUncheckedConstMeta =>
       const TaskConstMeta(
         debugName: "media_de_file_bytes_unchecked",
         argNames: ["paramType", "bytes", "key"],
       );
 
   @override
-  Future<MediaCustomData?> crateNuan5MediaParamDecodeMediaDeFileUnchecked({
+  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileUnchecked({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
@@ -1085,21 +1075,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecodeMediaDeFileUncheckedConstMeta,
+        constMeta: kCrateNuan5ParamsDecodeMediaDeFileUncheckedConstMeta,
         argValues: [paramType, path, key],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecodeMediaDeFileUncheckedConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecodeMediaDeFileUncheckedConstMeta =>
       const TaskConstMeta(
         debugName: "media_de_file_unchecked",
         argNames: ["paramType", "path", "key"],
       );
 
   @override
-  MediaCustomData? crateNuan5MediaParamDecodeMediaDeFileUncheckedSync({
+  MediaCustomData? crateNuan5ParamsDecodeMediaDeFileUncheckedSync({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
@@ -1120,23 +1110,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecodeMediaDeFileUncheckedSyncConstMeta,
+        constMeta: kCrateNuan5ParamsDecodeMediaDeFileUncheckedSyncConstMeta,
         argValues: [paramType, path, key],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecodeMediaDeFileUncheckedSyncConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecodeMediaDeFileUncheckedSyncConstMeta =>
       const TaskConstMeta(
         debugName: "media_de_file_unchecked_sync",
         argNames: ["paramType", "path", "key"],
       );
 
   @override
-  Stream<MediaCustomDataResult>
-  crateNuan5MediaParamDecodeMediaDeFilesUnchecked({
+  Stream<MediaCustomDataResult> crateNuan5ParamsDecodeMediaDeFilesUnchecked({
     required MediaParamType paramType,
     required List<String> paths,
     required MediaKey key,
@@ -1168,7 +1156,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             decodeSuccessData: sse_decode_unit,
             decodeErrorData: sse_decode_AnyhowException,
           ),
-          constMeta: kCrateNuan5MediaParamDecodeMediaDeFilesUncheckedConstMeta,
+          constMeta: kCrateNuan5ParamsDecodeMediaDeFilesUncheckedConstMeta,
           argValues: [paramType, paths, key, sink],
           apiImpl: this,
         ),
@@ -1177,14 +1165,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return sink.stream;
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecodeMediaDeFilesUncheckedConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecodeMediaDeFilesUncheckedConstMeta =>
       const TaskConstMeta(
         debugName: "media_de_files_unchecked",
         argNames: ["paramType", "paths", "key", "sink"],
       );
 
   @override
-  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileBytesUnchecked({
+  CustomData? crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked({
     required List<int> flag,
     required List<int> bytes,
     required MediaKey key,
@@ -1206,7 +1194,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateNuan5MediaParamDecryptMediaDecodeFileBytesUncheckedConstMeta,
+            kCrateNuan5ParamsDecryptMediaDecodeFileBytesUncheckedConstMeta,
         argValues: [flag, bytes, key],
         apiImpl: this,
       ),
@@ -1214,14 +1202,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptMediaDecodeFileBytesUncheckedConstMeta =>
+  get kCrateNuan5ParamsDecryptMediaDecodeFileBytesUncheckedConstMeta =>
       const TaskConstMeta(
         debugName: "media_decode_file_bytes_unchecked",
         argNames: ["flag", "bytes", "key"],
       );
 
   @override
-  Future<CustomData?> crateNuan5MediaParamDecryptMediaDecodeFileUnchecked({
+  Future<CustomData?> crateNuan5ParamsDecryptMediaDecodeFileUnchecked({
     required List<int> flag,
     required String path,
     required MediaKey key,
@@ -1247,23 +1235,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
           decodeErrorData: null,
         ),
-        constMeta:
-            kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptMediaDecodeFileUncheckedConstMeta,
         argValues: [flag, path, key],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptMediaDecodeFileUncheckedConstMeta =>
       const TaskConstMeta(
         debugName: "media_decode_file_unchecked",
         argNames: ["flag", "path", "key"],
       );
 
   @override
-  CustomData? crateNuan5MediaParamDecryptMediaDecodeFileUncheckedSync({
+  CustomData? crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync({
     required List<int> flag,
     required String path,
     required MediaKey key,
@@ -1285,7 +1271,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedSyncConstMeta,
+            kCrateNuan5ParamsDecryptMediaDecodeFileUncheckedSyncConstMeta,
         argValues: [flag, path, key],
         apiImpl: this,
       ),
@@ -1293,15 +1279,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptMediaDecodeFileUncheckedSyncConstMeta =>
+  get kCrateNuan5ParamsDecryptMediaDecodeFileUncheckedSyncConstMeta =>
       const TaskConstMeta(
         debugName: "media_decode_file_unchecked_sync",
         argNames: ["flag", "path", "key"],
       );
 
   @override
-  Stream<MediaDecodeEvent>
-  crateNuan5MediaParamDecryptMediaDecodeFilesUnchecked({
+  Stream<MediaDecodeEvent> crateNuan5ParamsDecryptMediaDecodeFilesUnchecked({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
@@ -1333,8 +1318,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             decodeSuccessData: sse_decode_unit,
             decodeErrorData: sse_decode_AnyhowException,
           ),
-          constMeta:
-              kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedConstMeta,
+          constMeta: kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedConstMeta,
           argValues: [flag, paths, key, progressSink],
           apiImpl: this,
         ),
@@ -1344,7 +1328,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedConstMeta =>
+  get kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedConstMeta =>
       const TaskConstMeta(
         debugName: "media_decode_files_unchecked",
         argNames: ["flag", "paths", "key", "progressSink"],
@@ -1352,7 +1336,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @override
   Future<List<CustomData?>>
-  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgress({
+  crateNuan5ParamsDecryptMediaDecodeFilesUncheckedNoProgress({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
@@ -1379,7 +1363,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgressConstMeta,
+            kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedNoProgressConstMeta,
         argValues: [flag, paths, key],
         apiImpl: this,
       ),
@@ -1387,7 +1371,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedNoProgressConstMeta =>
+  get kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedNoProgressConstMeta =>
       const TaskConstMeta(
         debugName: "media_decode_files_unchecked_no_progress",
         argNames: ["flag", "paths", "key"],
@@ -1395,7 +1379,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @override
   Stream<MediaStreamResult>
-  crateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStream({
+  crateNuan5ParamsDecryptMediaDecodeFilesUncheckedStream({
     required List<int> flag,
     required List<String> paths,
     required MediaKey key,
@@ -1425,7 +1409,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             decodeErrorData: sse_decode_AnyhowException,
           ),
           constMeta:
-              kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStreamConstMeta,
+              kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedStreamConstMeta,
           argValues: [flag, paths, key, sink],
           apiImpl: this,
         ),
@@ -1435,14 +1419,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateNuan5MediaParamDecryptMediaDecodeFilesUncheckedStreamConstMeta =>
+  get kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedStreamConstMeta =>
       const TaskConstMeta(
         debugName: "media_decode_files_unchecked_stream",
         argNames: ["flag", "paths", "key", "sink"],
       );
 
   @override
-  CustomData? crateNuan5MediaParamDecryptMediaDecrypt({
+  CustomData? crateNuan5ParamsDecryptMediaDecrypt({
     required List<int> data,
     required MediaKey key,
   }) {
@@ -1461,14 +1445,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5MediaParamDecryptMediaDecryptConstMeta,
+        constMeta: kCrateNuan5ParamsDecryptMediaDecryptConstMeta,
         argValues: [data, key],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5MediaParamDecryptMediaDecryptConstMeta =>
+  TaskConstMeta get kCrateNuan5ParamsDecryptMediaDecryptConstMeta =>
       const TaskConstMeta(
         debugName: "media_decrypt",
         argNames: ["data", "key"],
@@ -8799,13 +8783,13 @@ class ClothDiyShareCodeImpl extends RustOpaque implements ClothDiyShareCode {
   );
 
   Future<void> dispose() => RustLib.instance.api
-      .crateNuan5MediaParamDecryptClothDiyShareCodeDispose(that: this);
+      .crateNuan5ParamsDecryptClothDiyShareCodeDispose(that: this);
 
   PlatformInt64 timestamp() => RustLib.instance.api
-      .crateNuan5MediaParamDecryptClothDiyShareCodeTimestamp(that: this);
+      .crateNuan5ParamsDecryptClothDiyShareCodeTimestamp(that: this);
 
   String uid() => RustLib.instance.api
-      .crateNuan5MediaParamDecryptClothDiyShareCodeUid(that: this);
+      .crateNuan5ParamsDecryptClothDiyShareCodeUid(that: this);
 }
 
 @sealed
@@ -8827,6 +8811,6 @@ class MediaKeyImpl extends RustOpaque implements MediaKey {
         RustLib.instance.api.rust_arc_decrement_strong_count_MediaKeyPtr,
   );
 
-  Future<void> dispose() => RustLib.instance.api
-      .crateNuan5MediaParamDecryptMediaKeyDispose(that: this);
+  Future<void> dispose() =>
+      RustLib.instance.api.crateNuan5ParamsDecryptMediaKeyDispose(that: this);
 }

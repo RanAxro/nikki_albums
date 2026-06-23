@@ -24,7 +24,7 @@ part 'decode.freezed.dart';
 Future<MediaCustomData> decodeMediaParam({
   required MediaParamType paramType,
   required CustomData data,
-}) => RustLib.instance.api.crateNuan5MediaParamDecodeDecodeMediaParam(
+}) => RustLib.instance.api.crateNuan5ParamsDecodeDecodeMediaParam(
   paramType: paramType,
   data: data,
 );
@@ -33,7 +33,7 @@ Future<MediaCustomData?> mediaDe({
   required MediaParamType paramType,
   required List<int> data,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDe(
+}) => RustLib.instance.api.crateNuan5ParamsDecodeMediaDe(
   paramType: paramType,
   data: data,
   key: key,
@@ -43,7 +43,7 @@ Future<MediaCustomData?> mediaDeFileBytesUnchecked({
   required MediaParamType paramType,
   required List<int> bytes,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFileBytesUnchecked(
+}) => RustLib.instance.api.crateNuan5ParamsDecodeMediaDeFileBytesUnchecked(
   paramType: paramType,
   bytes: bytes,
   key: key,
@@ -53,7 +53,7 @@ Future<MediaCustomData?> mediaDeFileUnchecked({
   required MediaParamType paramType,
   required String path,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFileUnchecked(
+}) => RustLib.instance.api.crateNuan5ParamsDecodeMediaDeFileUnchecked(
   paramType: paramType,
   path: path,
   key: key,
@@ -63,7 +63,7 @@ MediaCustomData? mediaDeFileUncheckedSync({
   required MediaParamType paramType,
   required String path,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFileUncheckedSync(
+}) => RustLib.instance.api.crateNuan5ParamsDecodeMediaDeFileUncheckedSync(
   paramType: paramType,
   path: path,
   key: key,
@@ -73,7 +73,7 @@ Stream<MediaCustomDataResult> mediaDeFilesUnchecked({
   required MediaParamType paramType,
   required List<String> paths,
   required MediaKey key,
-}) => RustLib.instance.api.crateNuan5MediaParamDecodeMediaDeFilesUnchecked(
+}) => RustLib.instance.api.crateNuan5ParamsDecodeMediaDeFilesUnchecked(
   paramType: paramType,
   paths: paths,
   key: key,

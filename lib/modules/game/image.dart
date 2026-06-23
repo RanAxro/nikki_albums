@@ -4,7 +4,7 @@ import "package:nikki_albums/info.dart";
 import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/decode.dart";
+import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "infinity_nikki/domain/param_codec.dart";
 
 import "dart:io" show Platform;

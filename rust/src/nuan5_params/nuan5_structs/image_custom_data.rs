@@ -1,6 +1,6 @@
 use serde::{Serialize, Deserialize};
 use rust_lib_nikki_albums_macro::with_transform_fields;
-use super::super::ext_type::*;
+use crate::serde_nuan5_json::ext_type::*;
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]

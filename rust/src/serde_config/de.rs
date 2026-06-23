@@ -1,6 +1,6 @@
 use std::fs;
-use crate::nuan5_media_param::serde_nuan5_json::error::{Error, ErrorCode};
-use crate::nuan5_media_param::serde_nuan5_json::de;
+use crate::serde_nuan5_json::error::{Error, ErrorCode};
+use crate::serde_nuan5_json::de;
 use crate::serde_config::structs::game_config::GameConfig;
 use super::structs::theme;
 use super::structs::game_config;

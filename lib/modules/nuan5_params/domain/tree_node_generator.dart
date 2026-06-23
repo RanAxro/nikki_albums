@@ -1,9 +1,9 @@
 import "../model/tree_node.dart";
 import "../model/enumeration.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/structs/nikki_photo_params.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/structs/clock_in_photo_params.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/structs/collage_params.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/structs/diy_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/clock_in_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/collage_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/diy_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/utils/clipboard.dart";

@@ -244,7 +244,7 @@ pub fn with_transform_fields(args: TokenStream, input: TokenStream) -> TokenStre
     _ => {
       return syn::Error::new(
         input.span(),
-        "`with_transform_fields` can only be applied to structs",
+        "`with_transform_fields` can only be applied to nuan5_structs",
       )
         .to_compile_error()
         .into();
@@ -304,7 +304,7 @@ pub fn with_transform_fields(args: TokenStream, input: TokenStream) -> TokenStre
     }
     syn::Fields::Unit => quote! {},
     syn::Fields::Unnamed(_) => {
-      return syn::Error::new(data_struct.fields.span(), "tuple structs are not supported")
+      return syn::Error::new(data_struct.fields.span(), "tuple nuan5_structs are not supported")
         .to_compile_error()
         .into();
     }

@@ -1,5 +1,5 @@
-use crate::nuan5_media_param::serde_nuan5_json::error::Error;
-use crate::nuan5_media_param::serde_nuan5_json::ser;
+use crate::serde_nuan5_json::error::Error;
+use crate::serde_nuan5_json::ser;
 use super::structs::theme;
 use super::structs::game_config;
 use super::structs::plugin_info;

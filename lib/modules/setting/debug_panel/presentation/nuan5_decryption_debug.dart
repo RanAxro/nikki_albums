@@ -6,7 +6,7 @@ import "dart:typed_data";
 import "package:file_picker/file_picker.dart";
 import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
-import "package:nikki_albums/src/rust/nuan5_media_param/decrypt.dart";
+import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 
 import "package:nikki_albums/widgets/app/component.dart";
