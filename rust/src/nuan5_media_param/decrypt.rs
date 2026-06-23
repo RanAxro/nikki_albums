@@ -1,6 +1,6 @@
 use crate::frb_generated::StreamSink;
 use flutter_rust_bridge::frb;
-use std::ffi::{c_char, c_void, CString};
+use std::ffi::{c_char, c_void, CStr, CString};
 use std::ptr;
 use std::sync::Arc;
 
@@ -24,8 +24,12 @@ pub(super) mod ffi{
     FindNoEndFlag = 5,
     Io = 6,
     IllegalUTF8 = 7,
+    InvalidClothDiyShareCode = 8,
+    NotNumberString = 9,
+    NetworkError = 10,
   }
 
+  /// ========== Media ==========
   #[frb(ignore)]
   #[repr(C)]
   pub struct MediaDecryptionResult{
@@ -40,11 +44,36 @@ pub(super) mod ffi{
     _private: [u8; 0],
   }
 
+  /// ========== ClothDiy ==========
+  #[frb(ignore)]
+  #[repr(C)]
+  pub struct ClothDiyDecryptionResult{
+    pub status: u32,
+    pub data: *mut u8,
+    pub len: usize,
+  }
+
+  #[frb(ignore)]
+  #[repr(C)]
+  pub struct ClothDiyShareCodeResult{
+    pub status: u32,
+    pub key: *mut ClothDiyShareCode,
+  }
+
+  #[frb(ignore)]
+  #[repr(C)]
+  pub struct ClothDiyShareCode{
+    _private: [u8; 0],
+  }
+
+
   pub type MediaProgressCallback = Option<extern "C" fn(current: usize, total: usize, userdata: *mut c_void)>;
   pub type MediaStreamCallback = extern "C" fn(index: usize, result: *mut MediaDecryptionResult, userdata: *mut c_void);
 
   extern "C" {
     pub fn abi_version() -> u32;
+
+    /// ========== Media ==========
     pub fn free_media_decryption_result(result: MediaDecryptionResult);
     pub fn free_media_results_array(arr: *mut MediaDecryptionResult, count: usize);
     pub fn free_media_results_array_and_data(arr: *mut MediaDecryptionResult, count: usize);
@@ -84,8 +113,21 @@ pub(super) mod ffi{
       callback: MediaStreamCallback,
       userdata: *mut c_void,
     );
+
+    /// ========== ClothDiy ==========
+    pub fn cloth_diy_share_code_from_code_str(s: *const std::os::raw::c_char) -> ClothDiyShareCodeResult;
+    pub fn cloth_diy_share_code_timestamp(key: *mut ClothDiyShareCode) -> i64;
+    pub fn cloth_diy_share_code_uid(key: *mut ClothDiyShareCode) -> *mut std::os::raw::c_char;
+    pub fn free_cloth_diy_share_code(key: *mut ClothDiyShareCode);
+    pub fn free_cloth_diy_decryption_result(result: ClothDiyDecryptionResult);
+    pub fn cloth_diy_decode_network(key: *const ClothDiyShareCode) -> ClothDiyDecryptionResult;
   }
 }
+
+
+/// ============================================================
+/// Media
+/// ============================================================
 
 // ============================================================
 // CustomData
@@ -458,5 +500,73 @@ pub fn media_decode_files_unchecked_stream(
       let _ = sink.add(MediaStreamResult { index: i, data: None });
     }
     Ok(())
+  }
+}
+
+
+/// ============================================================
+/// ShareCode
+/// ============================================================
+#[frb(opaque)]
+pub struct ClothDiyShareCode{
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
+  pub(super) ptr: *mut ffi::ClothDiyShareCode,
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+  _dummy: u8,
+}
+
+impl ClothDiyShareCode{
+  #[frb(sync, positional)]
+  pub fn from_code_str(code: &str) -> anyhow::Result<Self>{
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      let c_str = CString::new(code).expect("");
+      let ptr = unsafe{ ffi::cloth_diy_share_code_from_code_str(c_str.as_ptr()) };
+
+      Ok(ClothDiyShareCode{ ptr: ptr.key })
+    }
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    {
+      Ok(MediaKey{ _dummy: 0 })
+    }
+  }
+
+  #[frb(sync)]
+  pub fn timestamp(self) -> anyhow::Result<i64>{
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      let timestamp = unsafe{ ffi::cloth_diy_share_code_timestamp(self.ptr) };
+      Ok(timestamp)
+    }
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    {
+      Ok(-1)
+    }
+  }
+
+  #[frb(sync)]
+  pub fn uid(self) -> anyhow::Result<String>{
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      let ptr = unsafe{ ffi::cloth_diy_share_code_uid(self.ptr) };
+      if ptr.is_null() {
+        anyhow::bail!("failed to create camera param key");
+      }
+      let cstr = unsafe{ CStr::from_ptr(ptr) };
+      Ok(cstr.to_string_lossy().into_owned())
+    }
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    {
+      Ok(String::from())
+    }
+  }
+
+  pub fn dispose(self){
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      if !self.ptr.is_null() {
+        unsafe{ ffi::free_cloth_diy_share_code(self.ptr) };
+      }
+    }
   }
 }
