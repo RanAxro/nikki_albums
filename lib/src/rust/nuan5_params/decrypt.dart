@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'decrypt.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `convert_media_result`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `drop`, `drop`, `fmt`
 
 CustomData? mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
     .crateNuan5ParamsDecryptMediaDecrypt(data: data, key: key);
@@ -86,9 +86,6 @@ Future<Uint8List?> clothDiyDecodeNetwork({
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ClothDiyShareCode>>
 abstract class ClothDiyShareCode implements RustOpaqueInterface {
-  @override
-  Future<void> dispose();
-
   static ClothDiyShareCode fromCodeStr(String code) => RustLib.instance.api
       .crateNuan5ParamsDecryptClothDiyShareCodeFromCodeStr(code: code);
 
@@ -101,9 +98,6 @@ abstract class ClothDiyShareCode implements RustOpaqueInterface {
 abstract class MediaKey implements RustOpaqueInterface {
   static MediaKey cameraParam() =>
       RustLib.instance.api.crateNuan5ParamsDecryptMediaKeyCameraParam();
-
-  @override
-  Future<void> dispose();
 
   static MediaKey fromStr(String s) =>
       RustLib.instance.api.crateNuan5ParamsDecryptMediaKeyFromStr(s: s);

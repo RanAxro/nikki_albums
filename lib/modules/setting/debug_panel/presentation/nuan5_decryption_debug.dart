@@ -175,7 +175,6 @@ class Nuan5DecryptionDebug extends StatelessWidget{
                   },
                 );
               }
-              key.dispose();
             },
             child: AppText("开始解码", isTranslate: false),
           ),
@@ -228,7 +227,6 @@ class Nuan5DecryptionDebug extends StatelessWidget{
                   },
                 );
               }
-              key.dispose();
             },
             child: AppText("解码相机参数", isTranslate: false),
           ),
@@ -286,7 +284,6 @@ class Nuan5DecryptionDebug extends StatelessWidget{
                   );
                 }
               }
-              shareCode.dispose();
             },
             child: AppText("解码搭配码", isTranslate: false),
           ),
@@ -326,7 +323,6 @@ class Nuan5DecryptionDebug extends StatelessWidget{
           //           }
           //       );
           //     }
-          //     key.dispose();
           //
           //     // showAppDialog(context: context, builder: (c){
           //     //   return TreeViewPage();
@@ -366,7 +362,6 @@ class Nuan5DecryptionDebug extends StatelessWidget{
           //     //     );
           //     //   }
           //     // }
-          //     // key.dispose();
           //     // stopwatch.stop();
           //     // print('函数运行时长: ${stopwatch.elapsedMilliseconds} ms');
           //

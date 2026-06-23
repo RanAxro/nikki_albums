@@ -39,8 +39,6 @@ abstract class InfinityNikkiParamCodec{
             await File(output).writeAsBytes(valid);
           },
         );
-
-        key.dispose();
       }catch(e, s){
         debugPrintStack(stackTrace: s);
       }
@@ -61,8 +59,6 @@ abstract class InfinityNikkiParamCodec{
       path: path,
       key: key,
     );
-
-    key.dispose();
 
     if(cache){
       setCache(path, result);
@@ -85,8 +81,6 @@ abstract class InfinityNikkiParamCodec{
       path: path,
       key: key,
     );
-
-    key.dispose();
 
     if(cache){
       setCache(path, result);
@@ -122,7 +116,5 @@ abstract class InfinityNikkiParamCodec{
         setCache(path, data);
       }
     }
-
-    key.dispose();
   }
 }

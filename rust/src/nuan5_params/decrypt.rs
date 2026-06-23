@@ -194,8 +194,10 @@ impl MediaKey{
       Ok(MediaKey{ _dummy: 0 })
     }
   }
+}
 
-  pub fn dispose(self){
+impl Drop for MediaKey{
+  fn drop(&mut self){
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       if !self.ptr.is_null() {
@@ -563,8 +565,10 @@ impl ClothDiyShareCode{
       Ok(String::from(""))
     }
   }
+}
 
-  pub fn dispose(self){
+impl Drop for ClothDiyShareCode{
+  fn drop(&mut self){
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       if !self.ptr.is_null() {
