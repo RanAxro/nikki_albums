@@ -80,6 +80,25 @@ Stream<MediaStreamResult> mediaDecodeFilesUncheckedStream({
       key: key,
     );
 
+Future<Uint8List?> clothDiyDecodeNetwork({
+  required ClothDiyShareCode shareCode,
+}) => RustLib.instance.api.crateNuan5MediaParamDecryptClothDiyDecodeNetwork(
+  shareCode: shareCode,
+);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ClothDiyShareCode>>
+abstract class ClothDiyShareCode implements RustOpaqueInterface {
+  @override
+  Future<void> dispose();
+
+  static ClothDiyShareCode fromCodeStr(String code) => RustLib.instance.api
+      .crateNuan5MediaParamDecryptClothDiyShareCodeFromCodeStr(code: code);
+
+  PlatformInt64 timestamp();
+
+  String uid();
+}
+
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
 abstract class MediaKey implements RustOpaqueInterface {
   static MediaKey cameraParam() =>

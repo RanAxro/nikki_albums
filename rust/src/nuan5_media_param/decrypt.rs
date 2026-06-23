@@ -1,6 +1,6 @@
 use crate::frb_generated::StreamSink;
 use flutter_rust_bridge::frb;
-use std::ffi::{c_char, c_void, CStr, CString};
+use std::ffi::{c_char, c_void, CString};
 use std::ptr;
 use std::sync::Arc;
 
@@ -51,13 +51,6 @@ pub(super) mod ffi{
     pub status: u32,
     pub data: *mut u8,
     pub len: usize,
-  }
-
-  #[frb(ignore)]
-  #[repr(C)]
-  pub struct ClothDiyShareCodeResult{
-    pub status: u32,
-    pub key: *mut ClothDiyShareCode,
   }
 
   #[frb(ignore)]
@@ -115,9 +108,9 @@ pub(super) mod ffi{
     );
 
     /// ========== ClothDiy ==========
-    pub fn cloth_diy_share_code_from_code_str(s: *const std::os::raw::c_char) -> ClothDiyShareCodeResult;
+    pub fn cloth_diy_share_code_from_code_str(s: *const c_char) -> *mut ClothDiyShareCode;
     pub fn cloth_diy_share_code_timestamp(key: *mut ClothDiyShareCode) -> i64;
-    pub fn cloth_diy_share_code_uid(key: *mut ClothDiyShareCode) -> *mut std::os::raw::c_char;
+    pub fn cloth_diy_share_code_uid_bytes(key: *mut ClothDiyShareCode) -> ClothDiyDecryptionResult;
     pub fn free_cloth_diy_share_code(key: *mut ClothDiyShareCode);
     pub fn free_cloth_diy_decryption_result(result: ClothDiyDecryptionResult);
     pub fn cloth_diy_decode_network(key: *const ClothDiyShareCode) -> ClothDiyDecryptionResult;
@@ -515,6 +508,9 @@ pub struct ClothDiyShareCode{
   _dummy: u8,
 }
 
+unsafe impl Send for ClothDiyShareCode{}
+unsafe impl Sync for ClothDiyShareCode{}
+
 impl ClothDiyShareCode{
   #[frb(sync, positional)]
   pub fn from_code_str(code: &str) -> anyhow::Result<Self>{
@@ -523,16 +519,16 @@ impl ClothDiyShareCode{
       let c_str = CString::new(code).expect("");
       let ptr = unsafe{ ffi::cloth_diy_share_code_from_code_str(c_str.as_ptr()) };
 
-      Ok(ClothDiyShareCode{ ptr: ptr.key })
+      Ok(ClothDiyShareCode{ ptr })
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
-      Ok(MediaKey{ _dummy: 0 })
+      Ok(ClothDiyShareCode{ _dummy: 0 })
     }
   }
 
   #[frb(sync)]
-  pub fn timestamp(self) -> anyhow::Result<i64>{
+  pub fn timestamp(&self) -> anyhow::Result<i64>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let timestamp = unsafe{ ffi::cloth_diy_share_code_timestamp(self.ptr) };
@@ -545,19 +541,26 @@ impl ClothDiyShareCode{
   }
 
   #[frb(sync)]
-  pub fn uid(self) -> anyhow::Result<String>{
+  pub fn uid(&self) -> anyhow::Result<String>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
-      let ptr = unsafe{ ffi::cloth_diy_share_code_uid(self.ptr) };
-      if ptr.is_null() {
-        anyhow::bail!("failed to create camera param key");
+      let result = unsafe{ ffi::cloth_diy_share_code_uid_bytes(self.ptr) };
+
+      if result.status != 0 || result.data.is_null() || result.len == 0 {
+        unsafe{ ffi::free_cloth_diy_decryption_result(result) };
+        return Err(anyhow::anyhow!("failed to decode share code"));
+      }else{
+        unsafe{
+          let slice = std::slice::from_raw_parts(result.data, result.len);
+          let uid = String::from_utf8_lossy(slice).to_string();
+          ffi::free_cloth_diy_decryption_result(result);
+          return Ok(uid);
+        };
       }
-      let cstr = unsafe{ CStr::from_ptr(ptr) };
-      Ok(cstr.to_string_lossy().into_owned())
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
-      Ok(String::from())
+      Ok(String::from(""))
     }
   }
 
@@ -570,3 +573,27 @@ impl ClothDiyShareCode{
     }
   }
 }
+
+#[frb]
+pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Option<Vec<u8>>{
+  let result = unsafe{ ffi::cloth_diy_decode_network(share_code.ptr) };
+
+  if result.status != 0 {
+    unsafe{ ffi::free_cloth_diy_decryption_result(result) };
+    return None;
+  }
+
+  if result.data.is_null() || result.len == 0 {
+    unsafe{ ffi::free_cloth_diy_decryption_result(result) };
+    None
+  }else{
+    let data = unsafe{
+      let slice = std::slice::from_raw_parts(result.data, result.len);
+      let vec = slice.to_vec();
+      ffi::free_cloth_diy_decryption_result(result);
+      vec
+    };
+    Some(data)
+  }
+}
+
