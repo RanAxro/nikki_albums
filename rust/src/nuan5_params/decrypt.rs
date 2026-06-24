@@ -13,6 +13,31 @@ pub(super) mod ffi{
   use std::ffi::{c_char, c_void};
   use flutter_rust_bridge::frb;
 
+  #[frb(ignore)]
+  #[repr(C)]
+  pub struct CBytes{
+    pub data: *mut u8,
+    pub len: usize,
+    pub cap: usize,
+  }
+
+  impl CBytes{
+    pub fn into_vec(self) -> Vec<u8>{
+      if self.data.is_null() {
+        return Vec::new();
+      }
+      let vec = unsafe{ Vec::from_raw_parts(self.data, self.len, self.cap) };
+      std::mem::forget(self);
+      vec
+    }
+  }
+
+  impl Drop for CBytes{
+    fn drop(&mut self){
+      unsafe{ free_c_bytes_ptr(self); }
+    }
+  }
+
   #[repr(u32)]
   #[derive(Clone, Copy, Debug, PartialEq, Eq)]
   pub enum DecryptionStatus{
@@ -34,8 +59,7 @@ pub(super) mod ffi{
   #[repr(C)]
   pub struct MediaDecryptionResult{
     pub status: u32,
-    pub data: *mut u8,
-    pub len: usize,
+    pub bytes: CBytes,
   }
 
   #[frb(ignore)]
@@ -49,8 +73,7 @@ pub(super) mod ffi{
   #[repr(C)]
   pub struct ClothDiyDecryptionResult{
     pub status: u32,
-    pub data: *mut u8,
-    pub len: usize,
+    pub bytes: CBytes,
   }
 
   #[frb(ignore)]
@@ -66,10 +89,9 @@ pub(super) mod ffi{
   extern "C" {
     pub fn abi_version() -> u32;
 
+    pub fn free_c_bytes(c_bytes: CBytes);
+    pub fn free_c_bytes_ptr(c_bytes_ptr: *mut CBytes);
     /// ========== Media ==========
-    pub fn free_media_decryption_result(result: MediaDecryptionResult);
-    pub fn free_media_results_array(arr: *mut MediaDecryptionResult, count: usize);
-    pub fn free_media_results_array_and_data(arr: *mut MediaDecryptionResult, count: usize);
     pub fn media_key_from_str_bytes(bytes: *const u8, len: usize) -> *mut MediaKey;
     pub fn media_key_from_str(s: *const c_char) -> *mut MediaKey;
     pub fn media_key_camera_param() -> *mut MediaKey;
@@ -112,7 +134,6 @@ pub(super) mod ffi{
     pub fn cloth_diy_share_code_timestamp(key: *mut ClothDiyShareCode) -> i64;
     pub fn cloth_diy_share_code_uid_bytes(key: *mut ClothDiyShareCode) -> ClothDiyDecryptionResult;
     pub fn free_cloth_diy_share_code(key: *mut ClothDiyShareCode);
-    pub fn free_cloth_diy_decryption_result(result: ClothDiyDecryptionResult);
     pub fn cloth_diy_decode_network(key: *const ClothDiyShareCode) -> ClothDiyDecryptionResult;
   }
 }
@@ -213,21 +234,21 @@ impl Drop for MediaKey{
 #[cfg(any(target_os = "windows", target_os = "macos"))]
 pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
   if result.status != 0 {
-    unsafe{ ffi::free_media_decryption_result(result) };
+    // unsafe{ ffi::free_media_decryption_result(result) };
     return None;
   }
 
-  if result.data.is_null() || result.len == 0 {
-    unsafe{ ffi::free_media_decryption_result(result) };
+  if result.bytes.data.is_null() {
+    // unsafe{ ffi::free_c_bytes(result.bytes) };
     Some(CustomData::Invalid)
   }else{
-    let data = unsafe{
-      let slice = std::slice::from_raw_parts(result.data, result.len);
-      let vec = slice.to_vec();
-      ffi::free_media_decryption_result(result);
-      vec
-    };
-    Some(CustomData::Valid(data))
+    // let data = unsafe{
+    //   let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
+    //   let vec = slice.to_vec();
+    //   // ffi::free_c_bytes(result.bytes);
+    //   vec
+    // };
+    Some(CustomData::Valid(result.bytes.into_vec()))
   }
 }
 
@@ -362,7 +383,6 @@ pub fn media_decode_files_unchecked(
         decoded.push(convert_media_result(result));
       }
 
-      ffi::free_media_results_array(results_ptr, path_ptrs.len());
       sink.add(MediaDecodeEvent::Result(decoded));
 
       Ok(())
@@ -411,8 +431,6 @@ pub fn media_decode_files_unchecked_no_progress(
       let item = unsafe{ ptr::read(results_ptr.add(i)) };
       results.push(convert_media_result(item));
     }
-
-    unsafe{ ffi::free_media_results_array(results_ptr, path_count) };
 
     results
   }
@@ -548,14 +566,12 @@ impl ClothDiyShareCode{
     {
       let result = unsafe{ ffi::cloth_diy_share_code_uid_bytes(self.ptr) };
 
-      if result.status != 0 || result.data.is_null() || result.len == 0 {
-        unsafe{ ffi::free_cloth_diy_decryption_result(result) };
+      if result.status != 0 || result.bytes.data.is_null() {
         return Err(anyhow::anyhow!("failed to decode share code"));
       }else{
         unsafe{
-          let slice = std::slice::from_raw_parts(result.data, result.len);
+          let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
           let uid = String::from_utf8_lossy(slice).to_string();
-          ffi::free_cloth_diy_decryption_result(result);
           return Ok(uid);
         };
       }
@@ -583,21 +599,13 @@ pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Option<Vec<u8
   let result = unsafe{ ffi::cloth_diy_decode_network(share_code.ptr) };
 
   if result.status != 0 {
-    unsafe{ ffi::free_cloth_diy_decryption_result(result) };
     return None;
   }
 
-  if result.data.is_null() || result.len == 0 {
-    unsafe{ ffi::free_cloth_diy_decryption_result(result) };
+  if result.bytes.data.is_null() || result.bytes.len == 0 {
     None
   }else{
-    let data = unsafe{
-      let slice = std::slice::from_raw_parts(result.data, result.len);
-      let vec = slice.to_vec();
-      ffi::free_cloth_diy_decryption_result(result);
-      vec
-    };
-    Some(data)
+    Some(result.bytes.into_vec())
   }
 }
 
