@@ -152,9 +152,6 @@ pub enum CustomData{
   Valid(Vec<u8>),
 }
 
-// ============================================================
-// Key 封装
-// ============================================================
 #[frb(opaque)]
 pub struct MediaKey{
   #[cfg(any(target_os = "windows", target_os = "macos"))]
@@ -234,27 +231,16 @@ impl Drop for MediaKey{
 #[cfg(any(target_os = "windows", target_os = "macos"))]
 pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
   if result.status != 0 {
-    // unsafe{ ffi::free_media_decryption_result(result) };
     return None;
   }
 
   if result.bytes.data.is_null() {
-    // unsafe{ ffi::free_c_bytes(result.bytes) };
     Some(CustomData::Invalid)
   }else{
-    // let data = unsafe{
-    //   let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
-    //   let vec = slice.to_vec();
-    //   // ffi::free_c_bytes(result.bytes);
-    //   vec
-    // };
     Some(CustomData::Valid(result.bytes.into_vec()))
   }
 }
 
-// ============================================================
-// 单文件/内存解密
-// ============================================================
 #[frb(sync, positional)]
 pub fn media_decrypt(data: &[u8], key: &MediaKey) -> Option<CustomData>{
   #[cfg(any(target_os = "windows", target_os = "macos"))]
@@ -602,7 +588,7 @@ pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Option<Vec<u8
     return None;
   }
 
-  if result.bytes.data.is_null() || result.bytes.len == 0 {
+  if result.bytes.data.is_null() {
     None
   }else{
     Some(result.bytes.into_vec())
