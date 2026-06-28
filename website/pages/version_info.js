@@ -1,19 +1,19 @@
 const config = {
-	"v3.08.02": {
+	"v3.08.03": {
 		"releaseDate": "2026-6-28",
-		"description": {
-			"de": "1. Problem mit fehlenden Dateien beim Öffnen der App unter Windows behoben",
-			"en": "1. Fixed missing file issue when opening the app on Windows",
-			"es": "1. Corregido el problema de archivos faltantes al abrir la aplicación en Windows",
-			"fr": "1. Correction du problème de fichiers manquants lors de l'ouverture de l'application sous Windows",
-			"id": "1. Memperbaiki masalah file yang hilang saat membuka aplikasi di Windows",
-			"it": "1. Corretto il problema dei file mancanti all'apertura dell'app su Windows",
-			"ja": "1. Windowsでアプリを開いたときにファイルが欠落する問題を修正",
-			"ko": "1. Windows에서 앱을 열 때 파일이 누락되는 문제 수정",
-			"pt": "1. Corrigido o problema de arquivos ausentes ao abrir o aplicativo no Windows",
-			"th": "1. แก้ไขปัญหาไฟล์หายไปเมื่อเปิดแอปใน Windows",
-			"zh": "1. 修复Windows上打开应用时文件缺失的问题",
-			"tw": "1. 修復Windows上開啟應用程式時檔案缺失的問題"
+		"description": {	
+			"de": "1. Fehler behoben, bei dem die App nach einem Windows-Update nicht neu gestartet werden konnte",
+			"en": "1. Fixed bug where app failed to restart after Windows update",
+			"es": "1. Corregido el error por el que la aplicación no se reiniciaba después de una actualización de Windows",
+			"fr": "1. Correction du bug empêchant l'application de redémarrer après une mise à jour de Windows",
+			"id": "1. Memperbaiki bug gagal memulai ulang aplikasi setelah pembaruan Windows",
+			"it": "1. Corretto il bug che impediva il riavvio dell'app dopo un aggiornamento di Windows",
+			"ja": "1. Windows更新後にアプリの再起動に失敗するバグを修正",
+			"ko": "1. Windows 업데이트 후 앱 재시작 실패 버그 수정",
+			"pt": "1. Corrigido o bug de falha ao reiniciar o aplicativo após atualização do Windows",
+			"th": "1. แก้ไขบั๊กที่แอปล้มเหลวในการรีสตาร์ทหลังจากอัปเดต Windows",
+			"zh": "1. 修复windows更新后重启应用失败的bug",
+			"tw": "1. 修復Windows更新後重啟應用程式失敗的bug"
 			// "de": "",
 			// "en": "",
 			// "es": "",
@@ -39,6 +39,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.08.03/Nikki%20Albums-v3.08.03-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.08.03/Nikki%20Albums-v3.08.03-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.08.02": {
+		"releaseDate": "2026-6-28",
+		"description": {
+			"de": "1. Problem mit fehlenden Dateien beim Öffnen der App unter Windows behoben",
+			"en": "1. Fixed missing file issue when opening the app on Windows",
+			"es": "1. Corregido el problema de archivos faltantes al abrir la aplicación en Windows",
+			"fr": "1. Correction du problème de fichiers manquants lors de l'ouverture de l'application sous Windows",
+			"id": "1. Memperbaiki masalah file yang hilang saat membuka aplikasi di Windows",
+			"it": "1. Corretto il problema dei file mancanti all'apertura dell'app su Windows",
+			"ja": "1. Windowsでアプリを開いたときにファイルが欠落する問題を修正",
+			"ko": "1. Windows에서 앱을 열 때 파일이 누락되는 문제 수정",
+			"pt": "1. Corrigido o problema de arquivos ausentes ao abrir o aplicativo no Windows",
+			"th": "1. แก้ไขปัญหาไฟล์หายไปเมื่อเปิดแอปใน Windows",
+			"zh": "1. 修复Windows上打开应用时文件缺失的问题",
+			"tw": "1. 修復Windows上開啟應用程式時檔案缺失的問題"
 		},
 		"downloads": [
 			{
