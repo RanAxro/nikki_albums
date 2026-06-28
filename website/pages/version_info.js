@@ -1,19 +1,19 @@
 const config = {
-	"v3.08.01": {
-		"releaseDate": "2026-6-18",
+	"v3.08.02": {
+		"releaseDate": "2026-6-28",
 		"description": {
-			"de": "1. Fehler behoben, bei dem das Spiel auf macOS nicht gefunden werden konnte\n2. Einige falsche Übersetzungen korrigiert",
-			"en": "1. Fixed the bug where the game could not be located on macOS\n2. Fixed some incorrect translations",
-			"es": "1. Se corrigió el error por el que el juego no se podía localizar en macOS\n2. Se corrigieron algunas traducciones incorrectas",
-			"fr": "1. Correction du bug empêchant de localiser le jeu sur macOS\n2. Correction de certaines traductions erronées",
-			"id": "1. Memperbaiki bug di mana game tidak dapat ditemukan di macOS\n2. Memperbaiki beberapa terjemahan yang salah",
-			"it": "1. Corretto il bug per cui il gioco non poteva essere localizzato su macOS\n2. Corrette alcune traduzioni errate",
-			"ja": "1. macOSでゲームが見つからないバグを修正しました\n2. 一部の誤訳を修正しました",
-			"ko": "1. macOS에서 게임을 찾을 수 없는 버그를 수정했습니다\n2. 일부 잘못된 번역을 수정했습니다",
-			"pt": "1. Corrigido o bug em que o jogo não podia ser localizado no macOS\n2. Corrigidas algumas traduções incorretas",
-			"th": "1. แก้ไขบั๊กที่ไม่สามารถค้นหาเกมบน macOS ได้\n2. แก้ไขคำแปลที่ไม่ถูกต้องบางส่วน",
-			"zh": "1. 修复了在MacOS上定位不到游戏的bug\n2. 修复部分错误翻译",
-			"tw": "1. 修復了在MacOS上定位不到遊戲的bug\n2. 修復部分錯誤翻譯"
+			"de": "1. Problem mit fehlenden Dateien beim Öffnen der App unter Windows behoben",
+			"en": "1. Fixed missing file issue when opening the app on Windows",
+			"es": "1. Corregido el problema de archivos faltantes al abrir la aplicación en Windows",
+			"fr": "1. Correction du problème de fichiers manquants lors de l'ouverture de l'application sous Windows",
+			"id": "1. Memperbaiki masalah file yang hilang saat membuka aplikasi di Windows",
+			"it": "1. Corretto il problema dei file mancanti all'apertura dell'app su Windows",
+			"ja": "1. Windowsでアプリを開いたときにファイルが欠落する問題を修正",
+			"ko": "1. Windows에서 앱을 열 때 파일이 누락되는 문제 수정",
+			"pt": "1. Corrigido o problema de arquivos ausentes ao abrir o aplicativo no Windows",
+			"th": "1. แก้ไขปัญหาไฟล์หายไปเมื่อเปิดแอปใน Windows",
+			"zh": "1. 修复Windows上打开应用时文件缺失的问题",
+			"tw": "1. 修復Windows上開啟應用程式時檔案缺失的問題"
 			// "de": "",
 			// "en": "",
 			// "es": "",
@@ -39,6 +39,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.08.02/Nikki%20Albums-v3.08.02-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.08.02/Nikki%20Albums-v3.08.02-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.08.01": {
+		"releaseDate": "2026-6-18",
+		"description": {
+			"de": "1. Fehler behoben, bei dem das Spiel auf macOS nicht gefunden werden konnte\n2. Einige falsche Übersetzungen korrigiert",
+			"en": "1. Fixed the bug where the game could not be located on macOS\n2. Fixed some incorrect translations",
+			"es": "1. Se corrigió el error por el que el juego no se podía localizar en macOS\n2. Se corrigieron algunas traducciones incorrectas",
+			"fr": "1. Correction du bug empêchant de localiser le jeu sur macOS\n2. Correction de certaines traductions erronées",
+			"id": "1. Memperbaiki bug di mana game tidak dapat ditemukan di macOS\n2. Memperbaiki beberapa terjemahan yang salah",
+			"it": "1. Corretto il bug per cui il gioco non poteva essere localizzato su macOS\n2. Corrette alcune traduzioni errate",
+			"ja": "1. macOSでゲームが見つからないバグを修正しました\n2. 一部の誤訳を修正しました",
+			"ko": "1. macOS에서 게임을 찾을 수 없는 버그를 수정했습니다\n2. 일부 잘못된 번역을 수정했습니다",
+			"pt": "1. Corrigido o bug em que o jogo não podia ser localizado no macOS\n2. Corrigidas algumas traduções incorretas",
+			"th": "1. แก้ไขบั๊กที่ไม่สามารถค้นหาเกมบน macOS ได้\n2. แก้ไขคำแปลที่ไม่ถูกต้องบางส่วน",
+			"zh": "1. 修复了在MacOS上定位不到游戏的bug\n2. 修复部分错误翻译",
+			"tw": "1. 修復了在MacOS上定位不到遊戲的bug\n2. 修復部分錯誤翻譯"
 		},
 		"downloads": [
 			{
