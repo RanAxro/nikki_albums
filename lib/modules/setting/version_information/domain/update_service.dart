@@ -62,8 +62,7 @@ class WindowsUpdater extends Updater {
     }
 
     // decompress
-    final String? decompressPath =
-        AppState.sfxPath.value ?? getWindowsDesktopPath()?.path;
+    final String? decompressPath = AppState.sfxPath.value == null ? getWindowsDesktopPath()?.path : p.dirname(AppState.sfxPath.value!);
     bool isDecompress = false;
 
     String? exeFilename;
@@ -113,7 +112,7 @@ class WindowsUpdater extends Updater {
       onCloseApp(() async{
         if(decompressPath != null){
           await Process.start(
-            decompressPath,
+            p.join(decompressPath, exeFilename),
             ["-force"],
             runInShell: false,
             mode: ProcessStartMode.detached,
