@@ -12,7 +12,7 @@ use std::process::exit;
 use crate::utils::*;
 
 
-const VERSION: usize = 14;
+const VERSION: usize = 15;
 
 
 #[derive(Embed)]
@@ -43,6 +43,47 @@ fn extract_all(target_dir: impl AsRef<Path>) -> std::io::Result<()>{
     println!("extracted: {} ({} bytes)", dest.display(), file.data.len());
   }
 
+  Ok(())
+}
+
+fn extract_lack(target_dir: impl AsRef<Path>) -> std::io::Result<()>{
+  let target = target_dir.as_ref();
+  fs::create_dir_all(target)?;
+
+  let mut extracted = 0usize;
+  let mut skipped = 0usize;
+
+  for path in Release::iter() {
+    let rel_path = path.as_ref();
+
+    // 构建目标路径，保持深层目录结构
+    let dest = target.join(rel_path);
+
+    // 文件已存在则跳过
+    if dest.exists() {
+      skipped += 1;
+      continue;
+    }
+
+    // 获取嵌入资源
+    let file = Release::get(rel_path).ok_or_else(|| {
+      std::io::Error::new(std::io::ErrorKind::NotFound, rel_path)
+    })?;
+
+    // 确保父目录存在
+    if let Some(parent) = dest.parent() {
+      fs::create_dir_all(parent)?;
+    }
+
+    // 写入文件
+    let mut f = File::create(&dest)?;
+    f.write_all(&file.data)?;
+
+    extracted += 1;
+    println!("extracted: {} ({} bytes)", dest.display(), file.data.len());
+  }
+
+  println!("done: {} extracted, {} skipped", extracted, skipped);
   Ok(())
 }
 
@@ -82,6 +123,10 @@ fn create_version_file(target_dir: impl AsRef<Path>) -> std::io::Result<()>{
   fs::write(version_file, VERSION.to_string())
 }
 
+fn run_release_exe(target_dir: impl AsRef<Path>, exe: impl AsRef<Path>) -> std::io::Result<u32>{
+  extract_lack(target_dir)?;
+  run_target_exe(exe)
+}
 
 enum State{
   Init,
@@ -164,7 +209,7 @@ fn main(){
         state = State::Verification;
       },
       State::TryRun => {
-        match run_target_exe(&exe){
+        match run_release_exe(&tmp, &exe){
           Ok(_) => {
             state = State::Exit;
           },
@@ -175,7 +220,7 @@ fn main(){
         }
       },
       State::Run => {
-        match run_target_exe(&exe){
+        match run_release_exe(&tmp, &exe){
           Ok(_) => {
             state = State::Exit;
           },
