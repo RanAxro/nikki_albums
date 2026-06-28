@@ -1,5 +1,5 @@
 
-use std::{env, fs};
+use std::env;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use windows::{
