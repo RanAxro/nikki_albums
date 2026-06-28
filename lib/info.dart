@@ -3,8 +3,8 @@ import "dart:io";
 import "package:flutter/foundation.dart";
 import "package:win32_registry/win32_registry.dart";
 
-const int version = 15;
-const String versionString = "3.08.02";
+const int version = 16;
+const String versionString = "3.08.03";
 const String appName = "nikkialbums";
 const String appDefaultClassName = "FLUTTER_RUNNER_WIN32_WINDOW";
 const String appClassName = "RANAXRO_NIKKI_ALBUMS_WIN32_WINDOW";
