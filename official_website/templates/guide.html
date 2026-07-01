@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="{{html-lang}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{guide.title}}</title>
+<meta name="description" content="{{guide.description}}">
+<link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{root}}/official_website/css/index.css">
+<link rel="stylesheet" href="{{root}}/official_website/css/guide.css">
+
+<!-- Theme initialization script (runs synchronously to prevent flash of dark theme) -->
+<script>
+	const savedTheme = localStorage.getItem('theme');
+	if (savedTheme) {
+		if (savedTheme === 'light') {
+			document.documentElement.classList.add('light-mode');
+		}
+	} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+		document.documentElement.classList.add('light-mode');
+	}
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<header>
+		<div class="container">
+			<a id="web_logo" href="index.html">
+				<img src="{{root}}/official_website/assets/icon/favicon.ico">
+				<h2>{{app_name}}</h2>
+			</a>
+			
+			<nav>
+				<ul class="web_header_nav_list">
+					<li><a href="index.html">{{guide.nav.home}}</a></li>
+					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+					<li><a href="download.html">{{guide.nav.download}}</a></li>
+				</ul>
+
+				<!-- Language Switcher -->
+				<div class="lang-dropdown">
+					<button class="lang-dropdown-btn">
+						<span id="current-lang-label">{{lang-name}}</span>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="6 9 12 15 18 9"></polyline>
+						</svg>
+					</button>
+					<div class="lang-dropdown-menu">
+						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/guide.html">简体中文</a>
+						<a id="lang-zh-tw" class="lang-dropdown-item" href="{{to_tw}}/guide.html">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/guide.html">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/guide.html">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/guide.html">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/guide.html">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/guide.html">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/guide.html">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/guide.html">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/guide.html">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/guide.html">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/guide.html">ไทย</a>
+					</div>
+				</div>
+
+
+				<!-- Theme Toggle -->
+				<button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle theme">
+					<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
+					<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Main Layout -->
+	<div class="doc-layout">
+		<!-- Sidebar (Left) -->
+		<aside class="doc-sidebar">
+			<div class="sidebar-group">
+				<div class="sidebar-title">{{guide.side.quickstart}}</div>
+				<ul class="sidebar-menu">
+					<li class="sidebar-item"><a class="sidebar-link active" href="#intro">{{guide.side.intro}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#installation">{{guide.side.installation}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#categories">{{guide.side.categories}}</a></li>
+				</ul>
+			</div>
+
+			<div class="sidebar-group">
+				<div class="sidebar-title">{{guide.side.core}}</div>
+				<ul class="sidebar-menu">
+					<li class="sidebar-item"><a class="sidebar-link" href="#accounts">{{guide.side.accounts}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#batch">{{guide.side.batch}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#decoding">{{guide.side.decoding}}</a></li>
+				</ul>
+			</div>
+
+			<div class="sidebar-group">
+				<div class="sidebar-title">{{guide.side.transfer}}</div>
+				<ul class="sidebar-menu">
+					<li class="sidebar-item"><a class="sidebar-link" href="#conversion">{{guide.side.conversion}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#lan">{{guide.side.lan}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#ios">{{guide.side.ios}}</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="#android">{{guide.side.android}}</a></li>
+				</ul>
+			</div>
+		</aside>
+
+		<!-- Main Content Area -->
+		<main class="doc-content-container">
+			<article class="doc-content">
+				<!-- 软件简介 / Introduction -->
+				<section>
+					<h1 id="intro">{{guide.sec.intro_title}}</h1>
+					<p>{{guide.sec.intro_p1}}</p>
+					<p>{{guide.sec.intro_p2}}</p>
+
+					<div class="custom-block note">
+						<p class="custom-block-title">{{guide.sec.intro_tip_title}}</p>
+						<p>{{guide.sec.intro_tip_desc}}</p>
+					</div>
+				</section>
+
+				<!-- 安装与路径识别 / Auto-Detection -->
+				<section>
+					<h2 id="installation">{{guide.sec.install_title}}</h2>
+					<p>{{guide.sec.install_desc}}</p>
+					<ul>
+						<li>{{guide.sec.install_li1}}</li>
+						<li>{{guide.sec.install_li2}}</li>
+					</ul>
+				</section>
+
+				<!-- 相册分类介绍 / Album Categories -->
+				<section>
+					<h2 id="categories">{{guide.sec.cat_title}}</h2>
+					<p>{{guide.sec.cat_desc}}</p>
+					<ul>
+						<li>{{guide.sec.cat_li1}}</li>
+						<li>{{guide.sec.cat_li2}}</li>
+						<li>{{guide.sec.cat_li3}}</li>
+					</ul>
+				</section>
+
+				<!-- 多账号管理 / Multi-Account -->
+				<section>
+					<h2 id="accounts">{{guide.sec.acc_title}}</h2>
+					<p>{{guide.sec.acc_desc}}</p>
+					<ul>
+						<li>{{guide.sec.acc_li1}}</li>
+						<li>{{guide.sec.acc_li2}}</li>
+					</ul>
+				</section>
+
+				<!-- 批量操作与去重 / Batch Actions & De-duplication -->
+				<section>
+					<h2 id="batch">{{guide.sec.batch_title}}</h2>
+					<p>{{guide.sec.batch_desc}}</p>
+					<ul>
+						<li>{{guide.sec.batch_li1}}</li>
+						<li>{{guide.sec.batch_li2}}</li>
+					</ul>
+				</section>
+
+				<!-- 相册解码与相机参数 / Metadata Decoding -->
+				<section>
+					<h2 id="decoding">{{guide.sec.dec_title}}</h2>
+					<p>{{guide.sec.dec_desc}}</p>
+					<ul>
+						<li>{{guide.sec.dec_li1}}</li>
+						<li>{{guide.sec.dec_li2}}</li>
+						<li>{{guide.sec.dec_li3}}</li>
+					</ul>
+				</section>
+
+				<!-- 实况与动图转换 / Conversion -->
+				<section>
+					<h2 id="conversion">{{guide.sec.conv_title}}</h2>
+					<p>{{guide.sec.conv_desc}}</p>
+					<ul>
+						<li>{{guide.sec.conv_li1}}</li>
+						<li>
+							<span>{{guide.sec.conv_li2}}</span>
+							<ul>
+								<li>{{guide.sec.conv_li2_sub1}}</li>
+								<li>{{guide.sec.conv_li2_sub2}}</li>
+							</ul>
+						</li>
+						<li>{{guide.sec.conv_li3}}</li>
+					</ul>
+
+					<div class="custom-block tip">
+						<p class="custom-block-title">{{guide.sec.conv_tip_title}}</p>
+						<p>{{guide.sec.conv_tip_desc}}</p>
+					</div>
+				</section>
+
+				<!-- 局域网无线传输 / Wireless Transfer -->
+				<section>
+					<h2 id="lan">{{guide.sec.lan_title}}</h2>
+					<p>{{guide.sec.lan_desc}}</p>
+					<ol>
+						<li>{{guide.sec.lan_li1}}</li>
+						<li>{{guide.sec.lan_li2}}</li>
+						<li>{{guide.sec.lan_li3}}</li>
+						<li>{{guide.sec.lan_li4}}</li>
+					</ol>
+				</section>
+
+				<!-- 导入 iOS 手机 / iOS Importing -->
+				<section>
+					<h2 id="ios">{{guide.sec.ios_title}}</h2>
+					<p>{{guide.sec.ios_desc}}</p>
+					
+					<h3>{{guide.sec.ios_mac_title}}</h3>
+					<p>{{guide.sec.ios_mac_desc}}</p>
+					<ol>
+						<li>{{guide.sec.ios_mac_li1}}</li>
+						<li>{{guide.sec.ios_mac_li2}}</li>
+						<li>{{guide.sec.ios_mac_li3}}</li>
+					</ol>
+
+					<h3>{{guide.sec.ios_win_title}}</h3>
+					<p>{{guide.sec.ios_win_desc}}</p>
+					
+					<h4>{{guide.sec.ios_win_m1_title}}</h4>
+					<ol>
+						<li>{{guide.sec.ios_win_m1_li1}}</li>
+						<li>{{guide.sec.ios_win_m1_li2}}</li>
+						<li>{{guide.sec.ios_win_m1_li3}}</li>
+						<li>{{guide.sec.ios_win_m1_li4}}</li>
+					</ol>
+
+					<h4>{{guide.sec.ios_win_m2_title}}</h4>
+					<ol>
+						<li>{{guide.sec.ios_win_m2_li1}}</li>
+						<li>{{guide.sec.ios_win_m2_li2}}</li>
+					</ol>
+				</section>
+
+				<!-- 导入 Android 手机 / Android Importing -->
+				<section>
+					<h2 id="android">{{guide.sec.and_title}}</h2>
+					<p>{{guide.sec.and_desc}}</p>
+					<ol>
+						<li>{{guide.sec.and_li1}}</li>
+						<li>{{guide.sec.and_li2}}</li>
+						<li>{{guide.sec.and_li3}}</li>
+					</ol>
+				</section>
+			</article>
+		</main>
+	</div>
+
+	<!-- Mobile Sidebar Toggle Button -->
+	<button class="mobile-sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+		<svg viewBox="0 0 24 24">
+			<path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+		</svg>
+	</button>
+
+	<script src="../website/assets/guide.js"></script>
+</body>
+</html>
