@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="{{html-lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{download.title}}</title>
+<meta name="description" content="{{download.description}}">
+<meta name="author" content="RanAxro">
+<link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<meta property="og:title" content="暖暖相册">
+<meta property="og:description" content="{{app_description}}">
+<meta property="og:image" content="https://{{domain}}/official_website/assets/icon/favicon.webp">
+<meta property="og:url" content="{{domain_current}}/download.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{app_name}}">
+<meta name="twitter:description" content="{{app_description}}">
+<meta name="twitter:image" content="https://{{domain}}/official_website/assets/icon/favicon.webp">
+<link rel="stylesheet" href="{{root}}/official_website/css/download.css">
+</head>
+<body>
+	<div class="orb-container">
+		<div class="orb orb-1"></div>
+		<div class="orb orb-2"></div>
+	</div>
+	<div class="glow-overlay"></div>
+	
+	<!-- 下载卡片 -->
+	<div class="download-container" id="downloadCard">
+		<!-- 标题区域 -->
+		<div class="header">
+			<div class="logo">
+				<img src="{{root}}/official_website/assets/icon/favicon.ico" alt="{{app_name}}">
+			</div>
+			<h1 class="title" id="appTitle"></h1>
+		</div>
+		
+		<!-- 下拉框选择版本 -->
+		<div class="dropdown-container">
+			<div class="dropdown-trigger" id="dropdownTrigger">
+				<span class="dropdown-label" id="selectVersionLabel"></span>
+				<div class="dropdown-value">
+					<span id="currentVersion"></span>
+					<div class="dropdown-arrow">
+						<img src="{{root}}/official_website/assets/icon/arrow-down.svg" alt="" id="arrowDownIcon">
+					</div>
+				</div>
+			</div>
+			
+			<!-- 下拉菜单 -->
+			<div class="dropdown-menu" id="dropdownMenu"></div>
+		</div>
+		
+		<!-- 可滚动内容区域 -->
+		<div class="scrollable-wrapper">
+			<div class="scrollable-content" id="scrollableContent">
+				<div id="downloadContents"></div>
+			</div>
+			
+			<!-- 滚动提示 -->
+			<div class="scroll-hint" id="scrollHint">
+				<span class="scroll-hint-text" id="scrollHintText"></span>
+				<div class="scroll-hint-btn" id="scrollHintBtn" title="">
+					<img src="{{root}}/official_website/assets/icon/arrow-down.svg" alt="" id="chevronDownIcon">
+				</div>
+			</div>
+		</div>
+		
+		<!-- 页脚 -->
+		<div class="footer" id="footerText"></div>
+	</div>
+	
+<script src="icon.js"></script>
+<script src="version_info.js"></script>
+<script src="lang.js"></script>
+
+<!-- macOS 拦截提示模态框 -->
+<div id="macOsModal" class="modal-overlay">
+	<div class="modal-content">
+		<h3 id="macOsModalTitle"></h3>
+		<p id="macOsModalDesc"></p>
+		<div class="modal-actions">
+			<button id="macOsModalConfirm" class="modal-btn"></button>
+		</div>
+	</div>
+</div>
+
+<script src="../assets/download.js"></script>
+	
+</body>
+</html>
