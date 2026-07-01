@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="{{html-lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="o1Ro8Sr27uUJjPvARrJRz0cWOYWUl-HEF31WgAcAwz0" />
+<title>{{homepage.title}}</title>
+<meta name="description" content="{{homepage.description}}">
+<meta name="author" content="RanAxro, Mercury2699">
+<link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://nikki.ranaxro.com/">
+
+<!-- Multilingual alternates: x-default (auto-detect) + per-locale ?lang= URLs for crawlers -->
+<link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en">
+<link rel="alternate" hreflang="zh-Hans" href="https://nikki.ranaxro.com">
+<link rel="alternate" hreflang="zh-Hant" href="https://nikki.ranaxro.com/zh-tw/">
+<link rel="alternate" hreflang="en"      href="https://nikki.ranaxro.com/en/">
+<link rel="alternate" hreflang="ja"      href="https://nikki.ranaxro.com/ja/">
+<link rel="alternate" hreflang="ko"      href="https://nikki.ranaxro.com/ko/">
+<link rel="alternate" hreflang="fr"      href="https://nikki.ranaxro.com/fr/">
+<link rel="alternate" hreflang="de"      href="https://nikki.ranaxro.com/de/">
+<link rel="alternate" hreflang="es"      href="https://nikki.ranaxro.com/es/">
+<link rel="alternate" hreflang="it"      href="https://nikki.ranaxro.com/it/">
+<link rel="alternate" hreflang="pt"      href="https://nikki.ranaxro.com/pt/">
+<link rel="alternate" hreflang="id"      href="https://nikki.ranaxro.com/id/">
+<link rel="alternate" hreflang="th"      href="https://nikki.ranaxro.com/th/">
+<meta property="og:title" content="{{app_name}}">
+<meta property="og:description" content="{{app_description}}">
+<meta property="og:image" content="https://nikki.ranaxro.com/official_website/assets/icon/favicon.webp">
+<meta property="og:url" content="https://nikki.ranaxro.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{app_name}}">
+<meta name="twitter:description" content="{{app_description}}">
+<meta name="twitter:image" content="https://nikki.ranaxro.com/official_website/assets/icon/favicon.webp">
+
+<!-- Theme initialization script (runs synchronously to prevent flash of dark theme) -->
+<script>
+(function() {
+	const savedTheme = localStorage.getItem('theme');
+	if (savedTheme) {
+		if (savedTheme === 'light') {
+			document.documentElement.classList.add('light-mode');
+		} else {
+			document.documentElement.classList.remove('light-mode');
+		}
+	} else {
+		const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+		if (systemLight) {
+			document.documentElement.classList.add('light-mode');
+		} else {
+			document.documentElement.classList.remove('light-mode');
+		}
+	}
+})();
+</script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "暖暖相册官网",
+  "alternateName": "Nikki Albums Official",
+  "url": "https://nikki.ranaxro.com",
+  "description": "一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://ranaxro.com",
+    "name": "RanAxro",
+    "url": "https://ranaxro.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nikki.ranaxro.com/website/assets/favicon.ico"
+    },
+    "sameAs": [
+      "https://github.com/RanAxro"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "url": "https://github.com/RanAxro/nikki_albums/discussion",
+      "availableLanguage": ["zh","en"]
+    }
+  },
+  "mainEntity": {
+    "@type": "SoftwareApplication",
+    "@id": "https://nikki.ranaxro.com",
+    "name": "暖暖相册 Nikki Albums",
+    "alternateName": "Nikki Albums",
+    "description": "一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。",
+    "url": "https://nikki.ranaxro.com",
+    "downloadUrl": "https://nikki.ranaxro.com/website/pages/download",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": ["Windows","macOS","Android"],
+    "releaseNotes": "https://github.com/RanAxro/nikki_albums/releases",
+    "softwareVersion": "v3.08.01",
+    "datePublished": "2026-06-18",
+    "license": "https://github.com/RanAxro/nikki_albums/blob/main/LICENSE",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY",
+      "availability": "https://schema.org/InStock",
+      "category": "free"
+    },
+    "author": [
+      {
+        "@type": "Person",
+        "name": "RanAxro",
+        "url": "https://ranaxro.com",
+        "sameAs": "https://github.com/RanAxro"
+      },
+      {
+        "@type": "Person",
+        "name": "Mercury2699",
+        "sameAs": "https://github.com/Mercury2699"
+      }
+    ],
+    "sameAs": [
+      "https://github.com/RanAxro/nikki_albums",
+      "https://github.com/RanAxro/nikki_albums/docs",
+      "https://github.com/RanAxro/nikki_albums/discussion"
+    ],
+    "keywords": ["无限暖暖","相册管理","相册工具"],
+    "image": "https://nikki.ranaxro.com/website/assets/favicon.ico"
+  }
+}
+</script>
+
+<link rel="stylesheet" href="{{root}}/official_website/css/index.css">
+</head>
+<body>
+	<!-- Background Floating Orbs (adapted from original glassmorphism but styled modern VitePress) -->
+	<div class="glow-wrapper">
+		<div class="orb orb-1"></div>
+		<div class="orb orb-2"></div>
+		<div class="orb orb-3"></div>
+	</div>
+
+	<!-- Header -->
+	<header>
+		<div class="container">
+			<a id="web_logo" href="index.html">
+				<img src="{{root}}/official_website/assets/icon/favicon.ico" alt="{{app_name}}">
+				<h2>{{app_name}}</h2>
+			</a>
+			
+			<nav>
+				<ul class="web_header_nav_list">
+					<li class="zh-only">
+						<a href="https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy" target="_blank" rel="noopener noreferrer">
+							<span>{{homepage.nav.qq}}</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
+							<span>GitHub</span>
+						</a>
+					</li>
+					<li>
+						<a href="guide.html">
+							<span>{{homepage.nav.tutorial}}</span>
+						</a>
+					</li>
+					<li>
+						<a id="nav_download" href="download.html">
+							<span>{{homepage.nav.download}}</span>
+						</a>
+					</li>
+				</ul>
+
+				<!-- Language Switcher Dropdown -->
+				<div class="lang-dropdown">
+					<button class="lang-dropdown-btn" id="lang-dropdown-trigger" onclick="toggleLangDropdown(event)">
+						<span id="current-lang-label">简体中文</span>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="6 9 12 15 18 9"></polyline>
+						</svg>
+					</button>
+					<div class="lang-dropdown-menu" id="lang-dropdown-menu">
+						<button class="lang-dropdown-item" id="item-lang-zh" onclick="selectLang('zh')">简体中文</button>
+						<button class="lang-dropdown-item" id="item-lang-zh-tw" onclick="selectLang('zh-tw')">繁體中文</button>
+						<button class="lang-dropdown-item" id="item-lang-en" onclick="selectLang('en')">English</button>
+						<button class="lang-dropdown-item" id="item-lang-ja" onclick="selectLang('ja')">日本語</button>
+						<button class="lang-dropdown-item" id="item-lang-ko" onclick="selectLang('ko')">한국어</button>
+						<button class="lang-dropdown-item" id="item-lang-fr" onclick="selectLang('fr')">Français</button>
+						<button class="lang-dropdown-item" id="item-lang-de" onclick="selectLang('de')">Deutsch</button>
+						<button class="lang-dropdown-item" id="item-lang-es" onclick="selectLang('es')">Español</button>
+						<button class="lang-dropdown-item" id="item-lang-it" onclick="selectLang('it')">Italiano</button>
+						<button class="lang-dropdown-item" id="item-lang-pt" onclick="selectLang('pt')">Português</button>
+						<button class="lang-dropdown-item" id="item-lang-id" onclick="selectLang('id')">Bahasa Indonesia</button>
+						<button class="lang-dropdown-item" id="item-lang-th" onclick="selectLang('th')">ไทย</button>
+					</div>
+				</div>
+
+				<!-- Theme Toggle -->
+				<button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+					<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
+					<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				</button>
+
+				<!-- Mobile Toggle -->
+				<button class="mobile-menu-toggle" id="mobile-toggle" onclick="toggleMobileNav()">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M4 6H20M4 12H20M4 18H20" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Mobile Nav Drawer -->
+	<div class="mobile-nav-drawer" id="mobile-drawer">
+		<a class="zh-only" href="https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy" target="_blank" rel="noopener noreferrer">
+			<span>{{homepage.nav.qq}}</span>
+		</a>
+		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
+			<span>GitHub</span>
+		</a>
+		<a href="guide.html">
+			<span>{{homepage.nav.tutorial}}</span>
+		</a>
+		<a id="nav_download_mobile" href="download.html">
+			<span>{{homepage.nav.download}}</span>
+		</a>
+	</div>
+
+	<!-- Main Content -->
+	<main class="container">
+		<!-- Hero Section in modern VitePress/SpinningMomo style -->
+		<section class="hero-container">
+			<div class="hero-text-col">
+				<h1 class="hero-title">{{homepage.hero_title}}</h1>
+				<p class="hero-description">{{homepage.hero_description}}</p>
+				<p class="hero-subtitle">{{homepage.hero_sub_description}}</p>
+				
+				<div class="hero-actions">
+					<a id="download_app_box" class="btn btn-primary" href="download.html" onclick="handleMainDownload(event)">
+						<img src="{{root}}/official_website/assets/icon/windows.svg" alt="Windows" style="height: 14px; filter: brightness(0) invert(1);">
+						<img src="{{root}}/official_website/assets/icon/macos.svg" alt="macOS" style="height: 14px; filter: brightness(0) invert(1);">
+						<span>{{homepage.btn_download}}</span>
+					</a>
+					<a id="go_to_github_box" class="btn btn-secondary" href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
+						<img src="{{root}}/official_website/assets/icon/github.svg" alt="GitHub Logo" class="btn-icon-github">
+						<span>{{homepage.btn_github}}</span>
+					</a>
+				</div>
+				<span class="compat-hint">{{homepage.compat_hint}}</span>
+			</div>
+			
+			<div class="hero-logo-col">
+				<div class="hero-logo-glow"></div>
+				<!-- Icon resized to exact 256x256 client preference -->
+				<div class="hero-logo-wrapper">
+					<img src="{{root}}/official_website/assets/icon/favicon.webp" alt="{{app_name}}">
+				</div>
+			</div>
+		</section>
+
+		<!-- Screenshot Showcase Mockup -->
+		<section class="showcase-container">
+			<div class="showcase-header">
+				<div class="window-dots">
+					<div class="window-dot red"></div>
+					<div class="window-dot yellow"></div>
+					<div class="window-dot green"></div>
+				</div>
+				<div class="window-title"></div>
+				<div class="showcase-tabs">
+					<button class="showcase-tab active" id="tab-wall" onclick="switchShowcaseTab('wall')">{{homepage.tab.wall}}</button>
+					<button class="showcase-tab" id="tab-decode" onclick="switchShowcaseTab('decode')">{{homepage.tab.decode}}</button>
+				</div>
+			</div>
+			<div class="showcase-body">
+				<img id="img-wall" class="showcase-img active" src="https://file-nikki.ranaxro.com/images/web/p1.zh.webp" alt="Photo Wall Screen">
+				<img id="img-decode" class="showcase-img" src="https://file-nikki.ranaxro.com/images/web/p2.zh.webp" alt="Metadata Decoder Screen">
+			</div>
+		</section>
+
+		<!-- Feature Cards Grid (VitePress minimalistic card styling) -->
+		<section class="features-grid">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<img src="{{root}}/official_website/assets/icon/album.svg">
+				</div>
+				<h3>{{homepage.card.1.title}}</h3>
+				<span>{{homepage.card.1.description}}</span>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon">
+					<img src="{{root}}/official_website/assets/icon/decode.svg">
+				</div>
+				<h3>{{homepage.card.2.title}}</h3>
+				<span>{{homepage.card.2.description}}</span>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon">
+					<img src="{{root}}/official_website/assets/icon/batch.svg">
+				</div>
+				<h3>{{homepage.card.3.title}}</h3>
+				<span>{{homepage.card.3.description}}</span>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon">
+					<img src="{{root}}/official_website/assets/icon/livep.svg">
+				</div>
+				<h3>{{homepage.card.4.title}}</h3>
+				<span>{{homepage.card.4.description}}</span>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon">
+					<img src="{{root}}/official_website/assets/icon/box.svg">
+				</div>
+				<h3>{{homepage.card.5.title}}</h3>
+				<span>{{homepage.card.5.description}}</span>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container footer-content">
+			<div class="footer-logo">
+				<img src="{{root}}/official_website/assets/icon/favicon.ico" alt="{{app_name}}">
+				<span>{{app_name}}</span>
+			</div>
+			<div class="footer-disclaimer">{{homepage.footer.disclaimer}}</div>
+			<div class="footer-friendship-link">
+				<div>{{homepage.footer.friendship_link}}</div>
+				<a href="https://infinitymomo.com/" target="_blank">{{homepage.footer.friendship_link_buildingmomo}}</a>
+				<a href="https://gongeo.us/" target="_blank">{{homepage.footer.friendship_link_gongeous}}</a>
+			</div>
+		</div>
+	</footer>
+
+	<!-- macOS Warning Modal -->
+	<div id="macOsModal" class="modal-overlay">
+		<div class="modal-content">
+			<h3 id="macOsModalTitle">{{homepage.macos_modal.title}}</h3>
+			<p id="macOsModalDesc">{{homepage.macos_modal.description}}</p>
+			<div class="modal-actions">
+				<button class="modal-btn" onclick="closeMacOsModal()">{{homepage.macos_modal.ok}}</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="website/pages/version_info.js"></script>
+	<script src="website/pages/index_lang.js"></script>
+	<script src="website/assets/index.js"></script>
+</body>
+</html>
