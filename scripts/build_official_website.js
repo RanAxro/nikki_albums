@@ -1,15 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
+const supportedLang = ["zh", "tw", "en", "ja", "ko", "fr", "de", "es", "it", "pt", "id", "th"]
+const fallbackLang = ["en", "zh"]
+
 // ============ 1. 读取配置并计算根目录 ============
-  const rootDir = "../";
-  const CONFIG = {
-    templateDir: path.join(rootDir, 'official_website', 'templates'),
-    i18nFile: path.join(rootDir, 'official_website', 'i18n.json'),
-    outputDir: path.join(rootDir, "build_web"),
-    rootLang: "zh",
-    domain: "nikki.ranaxro.com"
-  };
+const rootDir = "../";
+const CONFIG = {
+  templateDir: path.join(rootDir, 'official_website', 'templates'),
+  i18nFile: path.join(rootDir, 'official_website', 'i18n.json'),
+  outputDir: path.join(rootDir, "build_web"),
+  rootLang: "zh",
+  domain: "nikki.ranaxro.com"
+};
 
 // ============ 2. 工具函数 ============
 
@@ -26,14 +29,44 @@ function getValue(obj, keyPath) {
   return current;
 }
 
-/** 替换模板中的 {{key}} 变量 */
-function renderTemplate(template, data) {
-  return template.replace(/\{\{\s*([^{}\s]+)\s*\}\}/g, (match, key) => {
-    const value = getValue(data, key);
-    if (value !== undefined && value !== null) {
-      return String(value);
+/**
+ * 按 fallbackLang 顺序在 i18n 中查找变量值
+ */
+function getValueWithFallback(i18n, currentLang, keyPath) {
+  const currentValue = getValue(i18n[currentLang], keyPath);
+  if (currentValue !== undefined && currentValue !== null) {
+    return currentValue;
+  }
+
+  for (const fbLang of fallbackLang) {
+    if (fbLang === currentLang) continue;
+    const fbValue = getValue(i18n[fbLang], keyPath);
+    if (fbValue !== undefined && fbValue !== null) {
+      console.warn(`    🔄 [${currentLang}] 变量 "${keyPath}" 缺失，回退到 [${fbLang}]`);
+      return fbValue;
     }
-    console.warn(`    ⚠️  变量未定义: {{${key}}}`);
+  }
+
+  return undefined;
+}
+
+/** 
+ * 替换模板中的 {{key}} 变量
+ * 查找顺序：1) renderData  2) i18n fallback
+ */
+function renderTemplate(template, renderData, i18n, currentLang) {
+  return template.replace(/\{\{\s*([^{}\s]+)\s*\}\}/g, (match, key) => {
+    const localValue = getValue(renderData, key);
+    if (localValue !== undefined && localValue !== null) {
+      return String(localValue);
+    }
+
+    const i18nValue = getValueWithFallback(i18n, currentLang, key);
+    if (i18nValue !== undefined && i18nValue !== null) {
+      return String(i18nValue);
+    }
+
+    console.warn(`    ⚠️  变量未定义: {{${key}}}（回退语言也缺失）`);
     return match;
   });
 }
@@ -61,7 +94,6 @@ function ensureDir(dir) {
 function computeRootPath(outputPath) {
   const relative = path.relative(rootDir, outputPath);
   const segments = relative.split(path.sep).filter(Boolean);
-  // 目录层级数 = 段数 - 1（最后一段是文件名）
   const depth = segments.length - 1;
   if (depth <= 0) return '.';
   return Array(depth).fill('..').join('/');
@@ -75,13 +107,48 @@ function mapOutputName(templateName) {
   return templateName;
 }
 
+/** 生成域名相关变量对象 */
+function buildDomainVars(currentLang) {
+  const domain = CONFIG.domain;
+  const vars = {
+    domain: domain,
+    domain_current: currentLang === CONFIG.rootLang ? domain : `${domain}/${currentLang}`
+  };
+
+  for (const lang of supportedLang) {
+    vars[`domain_${lang}`] = lang === CONFIG.rootLang ? domain : `${domain}/${lang}`;
+  }
+
+  return vars;
+}
+
+/** 
+ * 生成 to_xx 变量：从当前文件所在目录到其他语言目录的相对路径
+ * @param {string} currentOutputDir - 当前输出文件相对于 outputDir 的目录（如 "."、"en"、"en/subdir"）
+ */
+function buildToLangVars(currentOutputDir) {
+  const vars = {};
+  for (const lang of supportedLang) {
+    const targetDir = lang === CONFIG.rootLang ? '.' : lang;
+    let rel = path.relative(currentOutputDir, targetDir);
+    
+    if (!rel || rel === '.') {
+      rel = '.';
+    } else {
+      rel = rel.replace(/\\/g, '/');
+    }
+    
+    vars[`to_${lang}`] = rel;
+  }
+  return vars;
+}
+
 // ============ 3. 主构建流程 ============
 
 function build() {
   console.log('🚀 开始构建多语言网站...\n');
   console.log(`📋 配置: root_lang=${CONFIG.rootLang}, output=${CONFIG.outputDir}`);
 
-  // 读取 i18n
   let i18n;
   try {
     i18n = JSON.parse(fs.readFileSync(CONFIG.i18nFile, 'utf-8'));
@@ -93,13 +160,11 @@ function build() {
   const languages = Object.keys(i18n);
   console.log(`🌐 发现 ${languages.length} 种语言: ${languages.join(', ')}\n`);
 
-  // 清空输出目录
   if (fs.existsSync(CONFIG.outputDir)) {
     fs.rmSync(CONFIG.outputDir, { recursive: true });
   }
   ensureDir(CONFIG.outputDir);
 
-  // 收集所有模板文件
   const templateFiles = [];
   function collectTemplates(dir, prefix = '') {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -132,20 +197,16 @@ function build() {
 
   let totalFiles = 0;
 
-  // 遍历每种语言
   for (const lang of languages) {
     const localeData = i18n[lang];
     console.log(`🔧 [${lang}] 开始构建...`);
 
-    // 遍历每个模板文件
     for (const templateRelPath of templateFiles) {
       const templatePath = path.join(CONFIG.templateDir, templateRelPath);
       const template = fs.readFileSync(templatePath, 'utf-8');
 
-      // 映射输出文件名
       const outputFileName = mapOutputName(templateRelPath);
 
-      // 确定输出路径
       let outputRelPath;
       if (lang === CONFIG.rootLang) {
         outputRelPath = outputFileName;
@@ -155,21 +216,24 @@ function build() {
       const outputPath = path.join(CONFIG.outputDir, outputRelPath);
       ensureDir(path.dirname(outputPath));
 
-      // 计算 {{root}} — 相对于网站根目录
       const root = computeRootPath(outputPath);
+      const domainVars = buildDomainVars(lang);
+      
+      // 计算当前文件所在目录（相对于 outputDir）
+      const currentOutputDir = path.dirname(outputRelPath);
+      const toLangVars = buildToLangVars(currentOutputDir);
 
-      // 构建渲染数据
       const renderData = {
         ...localeData,
+        ...domainVars,
+        ...toLangVars,
         root,
         current_lang: lang,
         is_root_lang: lang === CONFIG.rootLang
       };
 
-      // 渲染
-      let html = renderTemplate(template, renderData);
+      let html = renderTemplate(template, renderData, i18n, lang);
 
-      // 非 rootLang 移除 zh-only 元素
       if (lang !== CONFIG.rootLang) {
         html = removeZhOnlyElements(html);
         html = cleanEmptyLines(html);
