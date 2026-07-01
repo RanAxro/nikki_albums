@@ -131,13 +131,13 @@ function buildToLangVars(currentOutputDir) {
   for (const lang of supportedLang) {
     const targetDir = lang === CONFIG.rootLang ? '.' : lang;
     let rel = path.relative(currentOutputDir, targetDir);
-    
+
     if (!rel || rel === '.') {
       rel = '.';
     } else {
       rel = rel.replace(/\\/g, '/');
     }
-    
+
     vars[`to_${lang}`] = rel;
   }
   return vars;
@@ -157,8 +157,8 @@ function build() {
     process.exit(1);
   }
 
-  const languages = Object.keys(i18n);
-  console.log(`🌐 发现 ${languages.length} 种语言: ${languages.join(', ')}\n`);
+  console.log(`🌐 支持 ${supportedLang.length} 种语言: ${supportedLang.join(', ')}\n`);
+  console.log(`🌐 i18n 中已定义: ${Object.keys(i18n).join(', ')}\n`);
 
   if (fs.existsSync(CONFIG.outputDir)) {
     fs.rmSync(CONFIG.outputDir, { recursive: true });
@@ -197,9 +197,14 @@ function build() {
 
   let totalFiles = 0;
 
-  for (const lang of languages) {
-    const localeData = i18n[lang];
-    console.log(`🔧 [${lang}] 开始构建...`);
+  // 遍历所有 supportedLang，确保每种语言都生成页面
+  for (const lang of supportedLang) {
+    const localeData = i18n[lang] || {};
+    if (!i18n[lang]) {
+      console.log(`🔧 [${lang}] 开始构建（i18n 中未定义，将使用 fallback）...`);
+    } else {
+      console.log(`🔧 [${lang}] 开始构建...`);
+    }
 
     for (const templateRelPath of templateFiles) {
       const templatePath = path.join(CONFIG.templateDir, templateRelPath);
@@ -218,7 +223,7 @@ function build() {
 
       const root = computeRootPath(outputPath);
       const domainVars = buildDomainVars(lang);
-      
+
       // 计算当前文件所在目录（相对于 outputDir）
       const currentOutputDir = path.dirname(outputRelPath);
       const toLangVars = buildToLangVars(currentOutputDir);
@@ -234,6 +239,7 @@ function build() {
 
       let html = renderTemplate(template, renderData, i18n, lang);
 
+      // 非 rootLang 移除 zh-only 元素
       if (lang !== CONFIG.rootLang) {
         html = removeZhOnlyElements(html);
         html = cleanEmptyLines(html);
