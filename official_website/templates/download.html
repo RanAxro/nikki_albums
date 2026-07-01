@@ -8,7 +8,7 @@
 <meta name="author" content="RanAxro">
 <link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
-<meta property="og:title" content="暖暖相册">
+<meta property="og:title" content="{{app_name}}">
 <meta property="og:description" content="{{app_description}}">
 <meta property="og:image" content="https://{{domain}}/official_website/assets/icon/favicon.webp">
 <meta property="og:url" content="{{domain_current}}/download.html">
@@ -17,76 +17,152 @@
 <meta name="twitter:title" content="{{app_name}}">
 <meta name="twitter:description" content="{{app_description}}">
 <meta name="twitter:image" content="https://{{domain}}/official_website/assets/icon/favicon.webp">
+
+<!-- Theme initialization script (runs synchronously to prevent flash of dark theme) -->
+<script>
+	const savedTheme = localStorage.getItem('theme');
+	if (savedTheme) {
+		if (savedTheme === 'light') {
+			document.documentElement.classList.add('light-mode');
+		}
+	} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+		document.documentElement.classList.add('light-mode');
+	}
+</script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{root}}/official_website/css/index.css">
+<link rel="stylesheet" href="{{root}}/official_website/css/guide.css">
 <link rel="stylesheet" href="{{root}}/official_website/css/download.css">
 </head>
 <body>
-	<div class="orb-container">
-		<div class="orb orb-1"></div>
-		<div class="orb orb-2"></div>
-	</div>
-	<div class="glow-overlay"></div>
-	
-	<!-- 下载卡片 -->
-	<div class="download-container" id="downloadCard">
-		<!-- 标题区域 -->
-		<div class="header">
-			<div class="logo">
+	<header>
+		<div class="container">
+			<a id="web_logo" href="index.html">
 				<img src="{{root}}/official_website/assets/icon/favicon.ico" alt="{{app_name}}">
-			</div>
-			<h1 class="title" id="appTitle"></h1>
-		</div>
-		
-		<!-- 下拉框选择版本 -->
-		<div class="dropdown-container">
-			<div class="dropdown-trigger" id="dropdownTrigger">
-				<span class="dropdown-label" id="selectVersionLabel"></span>
-				<div class="dropdown-value">
-					<span id="currentVersion"></span>
-					<div class="dropdown-arrow">
-						<img src="{{root}}/official_website/assets/icon/arrow-down.svg" alt="" id="arrowDownIcon">
+				<h2>{{app_name}}</h2>
+			</a>
+			
+			<nav>
+				<ul class="web_header_nav_list">
+					<li><a href="index.html">{{guide.nav.home}}</a></li>
+					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+					<li><a class="active" href="download.html">{{guide.nav.download}}</a></li>
+				</ul>
+
+				<div class="lang-dropdown">
+					<button class="lang-dropdown-btn" id="lang-dropdown-trigger">
+						<span id="current-lang-label">{{lang-name}}</span>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="6 9 12 15 18 9"></polyline>
+						</svg>
+					</button>
+					<div class="lang-dropdown-menu">
+						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/download.html">简体中文</a>
+						<a id="lang-zh-tw" class="lang-dropdown-item" href="{{to_tw}}/download.html">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/download.html">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/download.html">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/download.html">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/download.html">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/download.html">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/download.html">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/download.html">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/download.html">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/download.html">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/download.html">ไทย</a>
 					</div>
 				</div>
-			</div>
-			
-			<!-- 下拉菜单 -->
-			<div class="dropdown-menu" id="dropdownMenu"></div>
-		</div>
-		
-		<!-- 可滚动内容区域 -->
-		<div class="scrollable-wrapper">
-			<div class="scrollable-content" id="scrollableContent">
-				<div id="downloadContents"></div>
-			</div>
-			
-			<!-- 滚动提示 -->
-			<div class="scroll-hint" id="scrollHint">
-				<span class="scroll-hint-text" id="scrollHintText"></span>
-				<div class="scroll-hint-btn" id="scrollHintBtn" title="">
-					<img src="{{root}}/official_website/assets/icon/arrow-down.svg" alt="" id="chevronDownIcon">
-				</div>
-			</div>
-		</div>
-		
-		<!-- 页脚 -->
-		<div class="footer" id="footerText"></div>
-	</div>
-	
-<script src="icon.js"></script>
-<script src="version_info.js"></script>
-<script src="lang.js"></script>
 
-<!-- macOS 拦截提示模态框 -->
-<div id="macOsModal" class="modal-overlay">
-	<div class="modal-content">
-		<h3 id="macOsModalTitle"></h3>
-		<p id="macOsModalDesc"></p>
-		<div class="modal-actions">
-			<button id="macOsModalConfirm" class="modal-btn"></button>
+				<button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle theme">
+					<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
+					<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				</button>
+
+				<button class="mobile-menu-toggle" id="mobile-toggle" onclick="toggleMobileNav()">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M4 6H20M4 12H20M4 18H20" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<div class="mobile-nav-drawer" id="mobile-drawer">
+		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a>
+		<a href="guide.html">{{guide.nav.home}}</a>
+		<a href="download.html">{{guide.nav.download}}</a>
+	</div>
+
+	<div class="doc-layout">
+		<aside class="doc-sidebar">
+			<div class="sidebar-group">
+				<div class="sidebar-title">{{download.side.versions}}</div>
+				<ul class="sidebar-menu" id="versionMenu"></ul>
+			</div>
+		</aside>
+
+		<main class="doc-content-container">
+			<article class="doc-content">
+				<section>
+					<h1>{{download.heading}}</h1>
+					<p>{{download.description}}</p>
+				</section>
+
+				<section>
+					<h2>{{download.section.update_title}}</h2>
+					<div class="version-panel">
+						<div class="version-summary">
+							<div class="version-heading">
+								<span class="version-label" id="versionTitle"></span>
+								<span class="version-latest-badge" id="activeVersionBadge"></span>
+							</div>
+							<div id="versionMeta" class="version-meta"></div>
+						</div>
+						<div id="releaseNotes" class="release-notes"></div>
+					</div>
+				</section>
+
+				<section>
+					<h2>{{download.section.links_title}}</h2>
+					<div id="downloadLinks" class="download-list"></div>
+				</section>
+			</article>
+		</main>
+	</div>
+
+	<div class="modal-overlay" id="macOsModal" role="dialog" aria-modal="true" aria-labelledby="macOsModalTitle">
+		<div class="modal-content">
+			<h3 id="macOsModalTitle"></h3>
+			<p id="macOsModalDesc"></p>
+			<div class="modal-actions">
+				<button class="modal-btn" id="macOsModalConfirm" type="button"></button>
+			</div>
 		</div>
 	</div>
-</div>
 
-<script src="../assets/download.js"></script>
-	
+	<button class="mobile-sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+		<svg viewBox="0 0 24 24">
+			<path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+		</svg>
+	</button>
+
+	<script src="{{root}}/official_website/version_info.js"></script>
+	<script src="{{root}}/official_website/js/download.js"></script>
 </body>
 </html>

@@ -65,7 +65,15 @@
     },
     "download": {
       "title": "暖暖相册 - 下载",
-      "description": "下载不同版本的『暖暖相册』软件"
+      "description": "下载不同版本的『暖暖相册』软件",
+      "side": {
+        "versions": "版本列表"
+      },
+      "heading": "下载",
+      "section": {
+        "update_title": "更新内容",
+        "links_title": "下载链接"
+      }
     },
     "guide": {
       "title": "暖暖相册 - 使用手册与传送指南",
