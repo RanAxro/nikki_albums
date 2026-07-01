@@ -180,24 +180,24 @@
 				<!-- Language Switcher Dropdown -->
 				<div class="lang-dropdown">
 					<button class="lang-dropdown-btn" id="lang-dropdown-trigger" onclick="toggleLangDropdown(event)">
-						<span id="current-lang-label">简体中文</span>
+						<span id="current-lang-label">{{lang-name}}</span>
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="6 9 12 15 18 9"></polyline>
 						</svg>
 					</button>
 					<div class="lang-dropdown-menu" id="lang-dropdown-menu">
-						<button class="lang-dropdown-item" id="item-lang-zh" onclick="selectLang('zh')">简体中文</button>
-						<button class="lang-dropdown-item" id="item-lang-zh-tw" onclick="selectLang('zh-tw')">繁體中文</button>
-						<button class="lang-dropdown-item" id="item-lang-en" onclick="selectLang('en')">English</button>
-						<button class="lang-dropdown-item" id="item-lang-ja" onclick="selectLang('ja')">日本語</button>
-						<button class="lang-dropdown-item" id="item-lang-ko" onclick="selectLang('ko')">한국어</button>
-						<button class="lang-dropdown-item" id="item-lang-fr" onclick="selectLang('fr')">Français</button>
-						<button class="lang-dropdown-item" id="item-lang-de" onclick="selectLang('de')">Deutsch</button>
-						<button class="lang-dropdown-item" id="item-lang-es" onclick="selectLang('es')">Español</button>
-						<button class="lang-dropdown-item" id="item-lang-it" onclick="selectLang('it')">Italiano</button>
-						<button class="lang-dropdown-item" id="item-lang-pt" onclick="selectLang('pt')">Português</button>
-						<button class="lang-dropdown-item" id="item-lang-id" onclick="selectLang('id')">Bahasa Indonesia</button>
-						<button class="lang-dropdown-item" id="item-lang-th" onclick="selectLang('th')">ไทย</button>
+						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/index.html">简体中文</a>
+						<a id="lang-zh-tw" class="lang-dropdown-item" href="{{to_tw}}/index.html">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/index.html">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/index.html">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/index.html">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/index.html">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/index.html">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/index.html">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/index.html">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/index.html">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/index.html">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/index.html">ไทย</a>
 					</div>
 				</div>
 
