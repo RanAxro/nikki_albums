@@ -247,7 +247,7 @@ function buildToLangVars(currentOutputDir) {
 
 function build() {
   console.log('🚀 开始构建多语言网站...\n');
-  console.log(`📋 配置: root_lang=${CONFIG.rootLang}, output=${CONFIG.outputDir}`);
+  console.log(`📋 配置: root_lang=${CONFIG.rootLang}, output=${CONFIG.outputDir || '.'}`);
 
   let i18n;
   try {
@@ -260,11 +260,7 @@ function build() {
   console.log(`🌐 支持 ${supportedLang.length} 种语言: ${supportedLang.join(', ')}\n`);
   console.log(`🌐 i18n 中已定义: ${Object.keys(i18n).join(', ')}\n`);
 
-  if (fs.existsSync(CONFIG.outputDir)) {
-    fs.rmSync(CONFIG.outputDir, { recursive: true });
-  }
-  ensureDir(CONFIG.outputDir);
-
+  // ========== 先收集模板，以便精确清理 ==========
   const templateFiles = [];
   function collectTemplates(dir, prefix = '') {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -294,6 +290,33 @@ function build() {
     }
   }
   console.log('');
+
+  // ========== 安全清理：只删构建产物，不删整个目录 ==========
+  console.log('🧹 清理旧构建产物...');
+  
+  // 1. 删除根目录下由模板生成的 HTML 文件
+  for (const templateRelPath of templateFiles) {
+    const outputFileName = mapOutputName(templateRelPath);
+    const filePath = path.join(CONFIG.outputDir, outputFileName);
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      fs.rmSync(filePath);
+      console.log(`   🗑️  ${filePath}`);
+    }
+  }
+  
+  // 2. 删除非 rootLang 的语言子目录（如 en/, ja/ 等）
+  for (const lang of supportedLang) {
+    if (lang === CONFIG.rootLang) continue;
+    const langDir = path.join(CONFIG.outputDir, lang);
+    if (fs.existsSync(langDir) && fs.statSync(langDir).isDirectory()) {
+      fs.rmSync(langDir, { recursive: true, force: true });
+      console.log(`   🗑️  ${langDir}/`);
+    }
+  }
+  console.log('');
+
+  // 确保输出目录存在（根目录时无实际作用）
+  ensureDir(CONFIG.outputDir);
 
   let totalFiles = 0;
 
