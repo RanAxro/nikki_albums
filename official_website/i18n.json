@@ -241,6 +241,7 @@
     },
     "common": {
       "nav": {
+        "home": "首頁",
         "qq": "交流群組 1062670402",
         "tutorial": "教學",
         "download": "下載"
@@ -444,6 +445,7 @@
     },
     "common": {
       "nav": {
+        "home": "Home",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutorial",
         "download": "Download"
@@ -644,6 +646,7 @@
     },
     "common": {
       "nav": {
+        "home": "ホーム",
         "qq": "QQ Group 1062670402",
         "tutorial": "チュートリアル",
         "download": "ダウンロード"
@@ -844,6 +847,7 @@
     },
     "common": {
       "nav": {
+        "home": "홈",
         "qq": "QQ Group 1062670402",
         "tutorial": "튜토리얼",
         "download": "다운로드"
@@ -1020,6 +1024,7 @@
     },
     "common": {
       "nav": {
+        "home": "Accueil",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutoriel",
         "download": "Télécharger"
@@ -1196,6 +1201,7 @@
     },
     "common": {
       "nav": {
+        "home": "Startseite",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutorial",
         "download": "Herunterladen"
@@ -1372,6 +1378,7 @@
     },
     "common": {
       "nav": {
+        "home": "Inicio",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutorial",
         "download": "Descargar"
@@ -1548,6 +1555,7 @@
     },
     "common": {
       "nav": {
+        "home": "Home",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutorial",
         "download": "Scarica"
@@ -1724,6 +1732,7 @@
     },
     "common": {
       "nav": {
+        "home": "Início",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutorial",
         "download": "Baixar"
@@ -1900,6 +1909,7 @@
     },
     "common": {
       "nav": {
+        "home": "Beranda",
         "qq": "QQ Group 1062670402",
         "tutorial": "Tutorial",
         "download": "Unduh"
@@ -2076,6 +2086,7 @@
     },
     "common": {
       "nav": {
+        "home": "หน้าแรก",
         "qq": "QQ Group 1062670402",
         "tutorial": "บทช่วยสอน",
         "download": "ดาวน์โหลด"
