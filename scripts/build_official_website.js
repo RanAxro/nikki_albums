@@ -5,7 +5,7 @@ const supportedLang = ["zh", "tw", "en", "ja", "ko", "fr", "de", "es", "it", "pt
 const fallbackLang = ["en", "zh"]
 
 // ============ 1. 读取配置并计算根目录 ============
-const rootDir = "../";
+const rootDir = "";
 const CONFIG = {
   templateDir: path.join(rootDir, 'official_website', 'templates'),
   i18nFile: path.join(rootDir, 'official_website', 'i18n.json'),
