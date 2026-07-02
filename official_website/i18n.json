@@ -3,25 +3,64 @@
     "lang-name": "简体中文",
     "html-lang": "zh-Hans",
     "app_name": "暖暖相册",
-    "app_description": "一款用于管理你的无限暖暖相册的工具",
-    "homepage": {
-      "title": "暖暖相册 - 一款用于管理你的无限暖暖相册的工具",
-      "description": "可分开管理不同账号的相册，可查看无限暖暖 19 类相册，支持一键导出、导入、分享到剪贴板/局域网，支持缩略图预览，支持查看游戏资源文件。操作简单易上手，免费开源无广告。致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧",
-      "json_ld": {
-        "name": "暖暖相册官网",
-        "description": "一款专为无限暖暖玩家精心打造的相册管理软件，致力于帮助你轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。",
-        "keyword_1": "暖暖相册",
-        "keyword_2": "无限暖暖",
-        "keyword_3": "相册管理"
+    "app_description": "轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。免费开源，无广告。",
+    "proper_nouns": {
+      "paper_game": "叠纸游戏",
+      "infinity_nikki": "无限暖暖",
+      "chinese_server": "国服",
+      "international_server": "国际服",
+      "player": "搭配师",
+      "nikki": "暖暖",
+      "momo": "大喵",
+      "album": {
+        "nikki_photo": "暖暖相册",
+        "momo_photo": "大喵相册",
+        "clock_in_photo": "世界巡游",
+        "magazine_photos": "旅行手账",
+        "collage": "趣拼海报",
+        "diy": "星绘图册",
+        "plant_dyeing": "花草拓拓拓",
+        "custom_avatar": "自定义头像",
+        "video": "动态影集",
+        "external_video": "外部视频"
       },
+      "camear_param": {
+        "focal_length": "焦距",
+        "aperture_section": "光圈",
+        "vignette_intensity": "晕影",
+        "light": "灯光",
+        "exposure": "曝光",
+        "filter": "滤镜"
+      },
+      "buildingmomo": "搬砖吧大喵",
+      "gongeous": "暖暖共鸣录"
+    },
+    "common": {
       "nav": {
+        "home": "首页",
         "qq": "交流群1062670402",
         "tutorial": "教程",
         "download": "下载"
       },
-      "hero_title": "暖暖相册",
-      "hero_description": "一款专为《无限暖暖》玩家精心打造的相册管理软件",
-      "hero_sub_description": "轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。免费开源，无广告",
+      "macos_modal": {
+        "title": "首次运行 macOS 版的重要提示",
+        "description": "由于当前程序是免签名的便携版，首次打开可能会被系统拦截。<br><br>请按照以下步骤正常打开：<br>1. 若弹出“Apple 无法检查 App 是否包含恶意软件”，请点按 <b>好</b>。<br>2. 打开系统的 <b>系统设置</b> > <b>隐私与安全性</b>。<br>3. 前往“安全性”部分，找到关于 Nikki Albums 的提示，然后点按 <b>打开</b>。<br>4. 点按 <b>仍要打开</b>，输入你的登录密码，然后点按 <b>好</b>。",
+        "ok": "我已了解"
+      }
+    },
+    "homepage": {
+      "title": "{{app_name}} - 一款用于管理你的{{proper_nouns.infinity_nikki}}相册的工具",
+      "description": "轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。免费开源，无广告。",
+      "json_ld": {
+        "name": "{{app_name}}官网",
+        "description": "一款专为《{{proper_nouns.infinity_nikki}}》玩家精心打造的相册管理软件",
+        "keyword_1": "{{app_name}}",
+        "keyword_2": "{{proper_nouns.infinity_nikki}}",
+        "keyword_3": "相册管理"
+      },
+      "hero_title": "{{app_name}}",
+      "hero_description": "一款专为《{{proper_nouns.infinity_nikki}}》玩家精心打造的相册管理软件",
+      "hero_sub_description": "轻松、高效地管理游戏相册，让游戏体验更加畅快无忧。免费开源，无广告。",
       "btn_download": "立即下载",
       "btn_github": "GitHub 仓库",
       "compat_hint": "支持 Windows 10/11 和 macOS (M系列芯片)",
@@ -32,40 +71,35 @@
       "card": {
         "1": {
           "title": "全方位相册管理",
-          "description": "支持查看 19 类相册与 3 类内部资源，大喵相册、趣拼海报、动态影集等多种相册"
+          "description": "支持查看 19 类相册与 3 类内部资源，{{proper_nouns.album.momo_photo}}、{{proper_nouns.album.clock_in_photo}}、{{proper_nouns.album.collage}}、{{proper_nouns.album.video}}等多种相册"
         },
         "2": {
           "title": "相机参数解析",
-          "description": "自动解析相机精景深、焦距、滤镜参数及拍摄坐标，助你轻松复现精美构图"
+          "description": "自动解析相机{{proper_nouns.camear_param.aperture_section}}、{{proper_nouns.camear_param.vignette_intensity}}、{{proper_nouns.camear_param.filter}}参数及拍摄坐标，助你轻松复现精美构图。"
         },
         "3": {
           "title": "高效批量处理",
-          "description": "支持批量导出、还原、转移、删除，内置智能去重功能，让相册管理更省心"
+          "description": "支持批量导出、还原、转移、删除，内置智能去重功能，让相册管理更省心。"
         },
         "4": {
           "title": "动图与实况转换",
-          "description": "一键将视频或动态影集转换为苹果或安卓兼容的实况照片 (Live Photo) 或 GIF 动图"
+          "description": "一键将视频或动态影集转换为苹果或安卓兼容的实况照片 (Live Photo) 或 GIF 动图。"
         },
         "5": {
           "title": "多渠道无损分享",
-          "description": "支持一键复制到剪贴板，通过本地硬盘或局域网无损导出，分享快人一步"
+          "description": "支持一键复制到剪贴板，通过本地硬盘或局域网无损导出，分享快人一步。"
         }
       },
       "footer": {
-        "disclaimer": "暖暖相册并非《无限暖暖》官方或叠纸游戏的官方产品。所有素材版权归原公司所有",
+        "disclaimer": "{{app_name}}并非《{{proper_nouns.infinity_nikki}}》官方或{{proper_nouns.paper_game}}的官方产品。所有素材版权归原公司所有。",
         "friendship_link": "友情链接",
-        "friendship_link_buildingmomo": "搬砖吧大喵",
-        "friendship_link_gongeous": "暖暖共鸣录"
-      },
-      "macos_modal": {
-        "title": "首次运行 macOS 版的重要提示",
-        "description": "由于当前程序是免签名的便携版，首次打开可能会被系统拦截。<br><br>请按照以下步骤正常打开：<br>1. 若弹出“Apple 无法检查 App 是否包含恶意软件”，请点按 <b>好</b>。<br>2. 打开系统的 <b>系统设置</b> > <b>隐私与安全性</b>。<br>3. 前往“安全性”部分，找到关于 Nikki Albums 的提示，然后点按 <b>打开</b>。<br>4. 点按 <b>仍要打开</b>，输入你的登录密码，然后点按 <b>好</b>。",
-        "ok": "我已了解"
+        "friendship_link_buildingmomo": "{{proper_nouns.buildingmomo}}",
+        "friendship_link_gongeous": "{{proper_nouns.gongeous}}"
       }
     },
     "download": {
-      "title": "暖暖相册 - 下载",
-      "description": "下载不同版本的『暖暖相册』软件",
+      "title": "{{app_name}} - 下载",
+      "description": "下载不同版本的『{{app_name}}』",
       "side": {
         "versions": "版本列表"
       },
@@ -73,15 +107,20 @@
       "section": {
         "update_title": "更新内容",
         "links_title": "下载链接"
-      }
+      },
+      "latest_badge": "最新版",
+      "version_label": "版本",
+      "system_windows": "Windows",
+      "system_macos": "macOS",
+      "system_android": "Android",
+      "suffix_zip": ".zip",
+      "suffix_exe": ".exe",
+      "type_1": "单文件绿色版",
+      "type_2": "便携绿色版"
     },
     "guide": {
-      "title": "暖暖相册 - 使用手册与传送指南",
-      "description": "暖暖相册官方使用指南：包含无限暖暖相册管理、多账号切换、智能去重、相机参数解码以及如何将实况照片(Live Photo)和动态照片(Motion Photo)通过局域网无线传输至手机的详细教程。",
-      "nav": {
-        "home": "首页",
-        "download": "下载"
-      },
+      "title": "{{app_name}} - 使用手册与传送指南",
+      "description": "{{app_name}}官方使用指南：包含{{proper_nouns.infinity_nikki}}相册管理、多账号切换、智能去重、相机参数解码以及如何将实况照片(Live Photo)和动态照片(Motion Photo)通过局域网无线传输至手机的详细教程。",
       "side": {
         "quickstart": "快速入门",
         "intro": "软件简介",
@@ -99,35 +138,35 @@
       },
       "sec": {
         "intro_title": "软件简介",
-        "intro_p1": "欢迎使用<strong>暖暖相册 (Nikki Albums)</strong>！这是一款专为《无限暖暖》玩家精心打造的开源相册管理工具。",
-        "intro_p2": "在游戏中，暖暖拍下的美照、搭配日记、DIY设计图和精美的动态影集往往保存在电脑本地的各个角落。暖暖相册能够<strong>自动扫描并整理</strong>这些游戏截图，将其分类归纳。软件提供多账号隔离管理、批量智能去重备份、相机参数反向解码，以及独家支持将游戏内的动态视频一键合成为手机可用的<strong>实况照片 (Live Photo)</strong> 或 <strong>Google 动态照片 (Motion Photo)</strong> 并进行局域网无线传送，是各位搭配师保存游戏回忆的得力助手。",
+        "intro_p1": "欢迎使用<strong>{{app_name}}</strong>！这是一款专为《{{proper_nouns.infinity_nikki}}》玩家精心打造的开源相册管理工具。",
+        "intro_p2": "在游戏中，暖暖拍下的美照、{{proper_nouns.album.momo_photo}}、{{proper_nouns.album.magazine_photos}}和精美的{{proper_nouns.album.video}}影片往往保存在电脑本地的各个角落。暖暖相册能够<strong>自动扫描并整理</strong>这些游戏截图，将其分类归纳。软件提供多账号隔离管理、批量智能去重备份、相机参数反向解码，以及独家支持将游戏内的动态视频一键合成为手机可用的<strong>实况照片 (Live Photo)</strong> 或 <strong>Google 动态照片 (Motion Photo)</strong> 并进行局域网无线传送，是各位搭配师保存游戏回忆的得力助手。",
         "intro_tip_title": "提示",
-        "intro_tip_desc": "暖暖相册完全免费开源、无广告，且不会收集任何玩家个人信息或游戏账号数据。所有的解密与文件转换均在您的本地计算机上完成，确保数据隐私安全。",
+        "intro_tip_desc": "{{app_name}}完全免费开源、无广告，且不会收集任何玩家个人信息或游戏账号数据。所有的操作均在您的本地计算机上完成，确保数据隐私安全。",
         "install_title": "自动路径识别与配置",
-        "install_desc": "软件启动时，会尝试自动定位您的《无限暖暖》游戏安装路径并识别相册文件夹：",
-        "install_li1": "<strong>国内官服 / 国际服自动兼容</strong>：软件支持自动扫描国内官服（叠纸端）和国际服（Global Server）的相册目录。",
-        "install_li2": "<strong>手动设置</strong>：如果因为安装在非默认磁盘或自定义路径导致自动定位失败，您可以在软件顶部的“设置”中手动定位游戏启动程序目录。",
+        "install_desc": "软件启动时，会尝试自动定位您的《{{proper_nouns.infinity_nikki}}》游戏安装路径并识别相册文件夹：",
+        "install_li1": "<strong>{{proper_nouns.chinese_server}} / {{proper_nouns.international_server}}自动兼容</strong>：软件支持自动扫描{{proper_nouns.chinese_server}}官服（nuanpaper）, TapTap, Steam, bilibili和{{proper_nouns.international_server}}（infoldgames）的相册目录。",
+        "install_li2": "<strong>手动设置</strong>：如果自动定位失败或因为重装游戏导致未定位到需要的文件夹，您可以在软件顶部的“添加”中手动定位游戏启动程序目录。",
         "cat_title": "相册分类介绍",
         "cat_desc": "软件将扫描出的图像分为以下两大板块，共包含 19 个独立相册与 3 个游戏资源区：",
-        "cat_li1": "<strong>常规相册 (19个)</strong>：包括游戏内截图 (ScreenShot)、搭配日记 (DIY)、花草拓印 (PlantDyeing)、时尚杂志 (MagazinePhotos)、以及个性化头像 (CustomAvatar) 等。",
-        "cat_li2": "<strong>动态相册</strong>：包含“动态影集” (NikkiPhotos) 和外部视频，用于存放游戏内录制的视频短片。",
-        "cat_li3": "<strong>资源相册 (3个)</strong>：支持浏览游戏内置图包、地图资源与特定游戏图标文件。",
+        "cat_li1": "<strong>常规相册 (19个)</strong>：包括游戏内{{proper_nouns.album.momo_photo}} (NikkiPotos_HighQuality)、{{proper_nouns.album.diy}} (DIY){{proper_nouns.album.plant_dyeing}} (PlantDyeing)、{{proper_nouns.album.magazine_photos}} (MagazinePhotos)、以及{{proper_nouns.album.custom_avatar}} (CustomAvatar) 等。",
+        "cat_li2": "<strong>动态相册</strong>：包含“{{proper_nouns.album.video}}” (Video) 和{{proper_nouns.album.external_video}}，用于存放游戏内录制的视频短片。",
+        "cat_li3": "<strong>资源相册 (3个)</strong>：支持浏览{{proper_nouns.infinity_nikki}}启动器缓存图，游戏图标文件。",
         "acc_title": "多账号管理",
-        "acc_desc": "如果您的电脑上有多个《无限暖暖》账号（不同 UID）切换登录过，暖暖相册会自动读取并识别出所有 UID：",
+        "acc_desc": "如果您的电脑上有多个《{{proper_nouns.infinity_nikki}}》账号（不同 UID）切换登录过，{{app_name}}会自动读取并识别出所有 UID：",
         "acc_li1": "<strong>UID 筛选</strong>：在主界面左上角的下拉菜单中，您可以方便地在不同的 UID 账号之间进行切换。",
         "acc_li2": "<strong>数据隔离</strong>：每个账号的图片数据独立归类、分开备份管理，互不干扰，让多开党或者家庭共享电脑的玩家也能轻松梳理。",
         "batch_title": "批量操作与智能去重",
         "batch_desc": "软件支持高效的批量管理工作流：",
         "batch_li1": "<strong>批量动作</strong>：选中一张或多张图片后，您可以一键进行<strong>批量导出、还原、转移、删除、复制</strong>等操作。",
-        "batch_li2": "<strong>智能防重复机制</strong>：在进行图片批量转移、移动或导出时，软件会自动对比 MD5/哈希值并分析文件内容，如果目标相册中已存在相同照片，软件会自动合并或跳过，防止冗余照片占用大量硬盘空间。",
+        "batch_li2": "<strong>智能防重复机制</strong>：在进行图片批量转移、移动或删除时，软件会自动寻找已存在相同照片，软件会自动合并或跳过，防止冗余照片占用大量硬盘空间。",
         "dec_title": "相册解码与相机参数",
-        "dec_desc": "《无限暖暖》在保存游戏截图时，会以加密形式将拍摄时的丰富元数据写入文件。暖暖相册内置了解密与解码模块：",
+        "dec_desc": "《{{proper_nouns.infinity_nikki}}》在保存游戏截图时，会以加密形式将拍摄时的丰富元数据写入文件。暖暖相册内置了解密与解码模块：",
         "dec_li1": "<strong>解码拍摄环境</strong>：选中图片后点击“解码参数”，您可以直观地查看到拍摄该照片时的<strong>天气、时间、具体的游戏内拍摄坐标</strong>。",
-        "dec_li2": "<strong>相机与滤镜参数</strong>：支持还原拍摄时的焦距、光圈、景深、曝光值、以及所套用的色彩滤镜名称与强度。",
-        "dec_li3": "<strong>一键复制</strong>：您可以一键复制这些详细参数，分享给其他玩家，方便大家在游戏中还原或复现同款氛围感大片！",
+        "dec_li2": "<strong>相机与滤镜参数</strong>：支持还原拍摄时的{{proper_nouns.camear_param.focal_length}}、{{proper_nouns.camear_param.aperture_section}}、{{proper_nouns.camear_param.vignette_intensity}}、{{proper_nouns.camear_param.exposure}}、以及所套用的{{proper_nouns.camear_param.light}}/{{proper_nouns.camear_param.filter}}名称与强度。",
+        "dec_li3": "<strong>一键复制</strong>：您可以一键复制这些详细参数，复制到游戏里使用，或分享给其他玩家，方便大家在游戏中还原或复现同款氛围感大片！",
         "conv_title": "实况照片 (Live Photo) 与 GIF 转换",
         "conv_desc": "这是软件的一大特色功能，能够让您的静态回忆在手机上“活起来”：",
-        "conv_li1": "<strong>转换来源</strong>：您可以将“动态影集”中的游戏视频短片，或者从电脑本地导入的“外部视频”，转换为实况格式。",
+        "conv_li1": "<strong>转换来源</strong>：您可以将“{{proper_nouns.camear_param.video}}”中的游戏视频短片，转换为实况格式。",
         "conv_li2": "<strong>实况照片格式 (Live Photo / Motion Photo)</strong>：",
         "conv_li2_sub1": "<strong>Apple 苹果格式</strong>：生成一个包含匹配 UUID 的 <code>.JPG</code> 封面和 <code>.MOV</code> 短视频的配套文件夹。",
         "conv_li2_sub2": "<strong>Google 安卓格式</strong>：生成一个单一的 <code>.JPG</code> 格式文件，视频以嵌入式数据附加在照片文件尾部。",
@@ -141,7 +180,7 @@
         "lan_li3": "<strong>局域网连接</strong>：软件会自动启动一个本地 HTTP 静态服务器（监听端口 <strong>58533</strong>），并生成一个专用的<strong>二维码</strong>和<strong>局域网下载链接</strong> (如 <code>http://192.168.x.x:58533</code>)。",
         "lan_li4": "<strong>扫码接收</strong>：将您的手机连接到<strong>同一个 Wi-Fi 网络</strong>，打开手机相机扫码，或者在手机浏览器中输入该链接，即可在手机网页中直接预览并打包下载 (ZIP/Nikkias格式)。",
         "ios_title": "实况照片导入苹果手机 (iOS)",
-        "ios_desc": "要完美导入 Apple 实况照片，iOS 系统要求 <code>.JPG</code> 图片 and <code>.MOV</code> 视频文件内部包含完全一致的关联标识符（Asset ID）。请根据您的电脑系统选择对应的导入方案：",
+        "ios_desc": "要完美导入 Apple 实况照片，iOS 系统要求 <code>.JPG</code> 图片和 <code>.MOV</code> 视频文件内部包含完全一致的关联标识符（Asset ID）。请根据您的电脑系统选择对应的导入方案：",
         "ios_mac_title": "macOS 用户导入方案",
         "ios_mac_desc": "如果您使用的是 Mac 电脑，这是最便捷的官方原生导入路径：",
         "ios_mac_li1": "<strong>一键导入系统相册</strong>：在电脑端相册中勾选您需要导入的图片或视频，点击底部的 <strong>“导出到系统相册”</strong> 按钮。软件会自动将其转换为实况照片并导入 macOS 的 <strong>“照片” App</strong>。",
@@ -151,9 +190,8 @@
         "ios_win_desc": "如果您使用的是 Windows 电脑，可以根据是否使用 iCloud 选择以下两种方法：",
         "ios_win_m1_title": "方法一：使用移动存储设备 (推荐)",
         "ios_win_m1_li1": "准备一个可连接 iPhone 的 U 盘或移动硬盘。",
-        "ios_win_m1_li2": "在 U 盘/移动硬盘的根目录下创建嵌套文件夹：先建一个名为 <code>DCIM</code> 的文件夹，再在 <code>DCIM</code> 内部建一个名为 <code>100APPLE</code> 的子文件夹（注意：是两层嵌套的文件夹 <code>DCIM/100APPLE/</code>，而不是名为 “DCIM/100APPLE” 的单个文件夹）。",
+        "ios_win_m1_li2": "在 U 盘/移动硬盘 the 根目录下创建嵌套文件夹：先建一个名为 <code>DCIM</code> 的文件夹，再在 <code>DCIM</code> 内部建一个名为 <code>100APPLE</code> 的子文件夹（注意：是两层嵌套的文件夹 <code>DCIM/100APPLE/</code>，而不是名为 “DCIM/100APPLE” 的单个文件夹）。",
         "ios_win_m1_li3": "将相册导出的 <code>.JPG</code> 和 <code>.MOV</code> 实况文件对复制进该 <code>100APPLE</code> 文件夹中。",
-        "ios_win_m1_li4": "将 U 盘/移动硬盘插入 iPhone，在手机上打开 <strong>“照片” App</strong>，此时相册中会激活 <strong>“导入”</strong> 流程，直接导入即可完美识别并激活 Live Photo！",
         "ios_win_m2_title": "方法二：通过局域网 ZIP 下载 + 第三方 App 转换 (无线备用方案)",
         "ios_win_m2_li1": "在手机浏览器中访问电脑端相册生成的局域网传输页面，下载整包的 <strong>ZIP 压缩包</strong> 并解压。",
         "ios_win_m2_li2": "在 App Store 下载免费的 <code>intoLive</code> 或 <code>Live Photo Converter</code> 等工具，选择解压出的视频 <code>.MOV</code> 转换回 Live Photo 保存至系统相册。",
@@ -161,7 +199,1660 @@
         "and_desc": "安卓手机使用 <code>Google Motion Photo</code> 格式，与苹果的拆分格式不同，它是一种单文件形式，传输和管理起来非常简单：",
         "and_li1": "<strong>获取文件</strong>：在电脑端导出时，确保设置中的实况格式为 <code>Google Motion Photo</code>。导出的文件将是单一的 <code>.jpg</code> 文件（其实是一个将视频合入底部的复合文件）。",
         "and_li2": "<strong>直接传输</strong>：您可以使用局域网分享二维码下载、USB 拷贝、或直接通过社交软件等原图发送到您的安卓手机上。",
-        "and_li3": "<strong>相册播放</strong>：使用手机内置系统相册（华为、小米、OPPO、VIVO等最新系统均已原生支持动态照片） or <strong>Google Photos</strong> 打开该照片，点击顶部的“动态/实况”按钮或长按即可直接播放。"
+        "and_li3": "<strong>相册播放</strong>：使用手机内置系统相册（华为、小米、OPPO、VIVO等最新系统均已原生支持动态照片）或 <strong>Google Photos</strong> 打开该照片，点击顶部的“动态/实况”按钮或长按即可直接播放。",
+        "ios_win_m1_li4": "将 U 盘/移动硬盘插入 iPhone，在手机上打开 <strong>“照片” App</strong>，此时相册中会激活 <strong>“导入”</strong> 流程，直接导入即可完美识别并激活 Live Photo！"
+      }
+    }
+  },
+  "tw": {
+    "lang-name": "繁體中文",
+    "html-lang": "zh-Hant",
+    "app_name": "暖暖相簿",
+    "app_description": "輕鬆、高效地管理遊戲相簿，讓遊戲體驗更加暢快無憂。免費開源，無廣告。",
+    "homepage": {
+      "title": "暖暖相簿 - 一款用於管理您的《無限暖暖》相簿的工具",
+      "description": "輕鬆、高效地管理遊戲相簿，讓遊戲體驗更加暢快無憂。免費開源，無廣告。",
+      "json_ld": {
+        "name": "暖暖相簿官网",
+        "description": "一款專為《無限暖暖》玩家精心打造的相簿管理軟體",
+        "keyword_1": "暖暖相簿",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "暖暖相簿"
+      },
+      "nav": {
+        "qq": "交流群組 1062670402",
+        "tutorial": "教學",
+        "download": "下載"
+      },
+      "hero_title": "暖暖相簿",
+      "hero_description": "一款專為《無限暖暖》玩家精心打造的相簿管理軟體",
+      "hero_sub_description": "輕鬆、高效地管理遊戲相簿，讓遊戲體驗更加暢快無憂。免費開源，無廣告。",
+      "btn_download": "立即下載",
+      "btn_github": "GitHub 儲存庫",
+      "compat_hint": "支援 Windows 10/11 和 macOS (M系列晶片)",
+      "tab": {
+        "wall": "相簿概覽",
+        "decode": "參數解碼"
+      },
+      "card": {
+        "1": {
+          "title": "全方位相簿管理",
+          "description": "支援查看 19 類相簿與 3 類內部資源，完美支援日常、趣拼、動態相簿等多種分類。"
+        },
+        "2": {
+          "title": "相機參數解析",
+          "description": "自動解析相機光圈、焦距、濾鏡參數及拍攝座標，助您輕鬆復現精美構圖。"
+        },
+        "3": {
+          "title": "高效批次處理",
+          "description": "支援批次匯出、還原、轉移、刪除，內建智慧排除重複功能，讓相簿管理更省心。"
+        },
+        "4": {
+          "title": "動圖與原況照片轉換",
+          "description": "一鍵將影片或動態相簿轉換為 Apple 或 Android 相容的原況照片 (Live Photo) 或 GIF 動圖。"
+        },
+        "5": {
+          "title": "多管道無損分享",
+          "description": "支援一鍵複製到剪貼簿，透過本地硬碟或區域網路無損匯出，分享更加即時。"
+        }
+      },
+      "footer": {
+        "disclaimer": "暖暖相簿並非《無限暖暖》官方或疊紙遊戲的官方產品。所有素材版權歸原公司所有。",
+        "friendship_link": "友友誼連結"
+      },
+      "macos_modal": {
+        "title": "首次執行 macOS 版的重要提示",
+        "description": "由於當前程式是免簽名的免安裝版，首次打開可能會被系統攔截。<br><br>請按照以下步驟正常打開：<br>1. 若彈出「Apple 無法檢查 App 是否含有惡意軟件/軟體」，請按一下 <b>好</b>。<br>2. 選擇「蘋果」選單 > <b>系統設定</b>，在側邊欄按一下 <b>私隱與保安（或隱私權與安全性）</b>。（您可能需要向下捲動。）<br>3. 前往「保安（或安全性）」部分，找到關於 Nikki Albums 的提示，按一下 <b>開啟（或打開）</b>。<br>4. 按一下 <b>強制開啟（或強制打開）</b>，輸入您的登入密碼，然後按一下 <b>好</b>。",
+        "ok": "我已了解"
+      }
+    },
+    "guide": {
+      "title": "暖暖相冊 - 使用手冊與傳送指南",
+      "description": "暖暖相冊官方使用指南：包含無限暖暖相冊管理、多帳號切換、智慧排除重複、相機參數解碼以及如何將原況照片(Live Photo)和動態照片(Motion Photo)透過區域網路無線傳輸至手機的詳細教學。",
+      "nav": {
+        "home": "首頁",
+        "download": "下載"
+      },
+      "side": {
+        "quickstart": "快速入門",
+        "intro": "軟體簡介",
+        "installation": "安裝與路徑識別",
+        "categories": "相簿分類介紹",
+        "core": "核心功能",
+        "accounts": "多帳號管理",
+        "batch": "批次操作與排除重複",
+        "decoding": "相簿解碼與相機參數",
+        "transfer": "傳送指南",
+        "conversion": "原況照片與動圖轉換",
+        "lan": "區域網路無線傳輸",
+        "ios": "匯入 iOS (Apple手機)",
+        "android": "匯入 Android (安卓)"
+      },
+      "sec": {
+        "intro_title": "軟體簡介",
+        "intro_p1": "歡迎使用<strong>暖暖相冊 (Nikki Albums)</strong>！這是一款專為《無限暖暖》玩家精心打造的開源相簿管理工具。",
+        "intro_p2": "在遊戲中，暖暖拍下的美照、搭配日記、DIY設計圖和精美的動態相簿影片往往保存在電腦本地的各個角落。暖暖相冊能夠<strong>自動掃描並整理</strong>這些遊戲螢幕截圖，將其分類歸納。軟體提供多帳號隔離管理、批次智慧排除重複備份、相機參數反向解碼，以及獨家支援將遊戲內的動態影片一鍵合成為手機可用的<strong>原況照片 (Live Photo)</strong> 或 <strong>Google 動態照片 (Motion Photo)</strong> 並進行區域網路無線傳送，是各位搭配師保存遊戲回憶的得力助手。",
+        "intro_tip_title": "提示",
+        "intro_tip_desc": "暖暖相冊完全免費開源、無廣告，且不會收集任何玩家個人資訊或遊戲帳號資料。所有的解密與檔案轉換均在您的本地電腦上完成，確保數據隱私安全。",
+        "install_title": "自動路徑識別與設定",
+        "install_desc": "軟體啟動時，會嘗試自動定位您的《無限暖暖》遊戲安裝路徑並識別相簿資料夾：",
+        "install_li1": "<strong>國內官服 / 國際服自動相容</strong>：軟體支援自動掃描國內官服（疊紙端）和國際服（Global Server）的相簿目錄。",
+        "install_li2": "<strong>手動設定</strong>：如果因為安裝在非預設磁碟或自訂路徑導致自動定位失敗，您可以在軟體頂部的「設定」中手動定位遊戲啟動程式目錄。",
+        "cat_title": "相簿分類介紹",
+        "cat_desc": "軟體將掃描出的圖像分為以下兩大板塊，共包含 19 個獨立相簿與 3 個遊戲資源區：",
+        "cat_li1": "<strong>常規相簿 (19個)</strong>：包括遊戲內截圖 (ScreenShot)、搭配日記 (DIY)、花草拓印 (PlantDyeing)、時尚雜誌 (MagazinePhotos)、以及個性化頭像 (CustomAvatar) 等。",
+        "cat_li2": "<strong>動態相簿</strong>：包含“動態相簿” (NikkiPhotos) 和外部影片，用於存放遊戲內錄製的影片短片。",
+        "cat_li3": "<strong>資源相簿 (3個)</strong>：支援瀏覽遊戲內建圖包、地圖資源與特定遊戲圖示檔案。",
+        "acc_title": "多帳號管理",
+        "acc_desc": "如果您的電腦上有複數個《無限暖暖》帳號（不同 UID）切換登入過，暖暖相冊会自动讀取並識別出所有 UID：",
+        "acc_li1": "<strong>UID 篩選</strong>：在主介面左上角的下拉選單中，您可以方便地在不同的 UID 帳號之間進行切換。",
+        "acc_li2": "<strong>數據隔離</strong>：每個帳號的圖片數據獨立歸類、分開備份管理，互不干擾，讓多開黨或者家庭共享電腦的玩家也能輕鬆梳理。",
+        "batch_title": "批次操作與智慧排除重複",
+        "batch_desc": "軟體支援高效的批次管理工作流：",
+        "batch_li1": "<strong>批次動作</strong>：選取一張或多張圖片後，您可以一鍵進行<strong>批次匯出、還原、轉移、刪除、複製</strong>等操作。",
+        "batch_li2": "<strong>智慧排除重複機制</strong>：在進行圖片批次轉移、移動或匯出時，軟體會自動對比 MD5/哈希值並分析檔案內容，如果目標相簿中已存在相同照片，軟體會自動合併或跳過，防止冗餘照片佔用大量硬碟空間。",
+        "dec_title": "相簿解碼與相機參數",
+        "dec_desc": "《無限暖暖》在保存遊戲截圖時，會以加密形式將拍攝時的豐富元數據寫入檔案。暖暖相冊內建了解密與解碼模組：",
+        "dec_li1": "<strong>解碼拍攝環境</strong>：選取圖片後點擊「解碼參數」，您可以直觀地查看到拍攝該照片時的<strong>天氣、時間、具體的遊戲內拍攝座標</strong>。",
+        "dec_li2": "<strong>相機與濾鏡參數</strong>：支援還原拍攝時的焦距、光圈、景深、曝光值、以及所套用的色彩濾鏡名稱與強度。",
+        "dec_li3": "<strong>一鍵複製</strong>：您可以一鍵複製這些詳細參數，分享給其他玩家，方便大家在遊戲中還原或複現同款氛圍感大片！",
+        "conv_title": "原況照片 (Live Photo) 與 GIF 轉換",
+        "conv_desc": "這是軟體的一大特色功能，能夠讓您的靜態回憶在手機上「活起來」：",
+        "conv_li1": "<strong>轉換來源</strong>：您可以將“動態相簿”中的遊戲影片短片，或者從電腦本地匯入的“外部影片”，轉換為原況照片格式。",
+        "conv_li2": "<strong>原況照片格式 (Live Photo / Motion Photo)</strong>：",
+        "conv_li3": "<strong>GIF 動圖</strong>：一鍵提取並渲染出低延遲、小體積的 GIF 格式動圖，方便在社群平台分享。",
+        "conv_tip_title": "轉換說明",
+        "conv_tip_desc": "您可以在軟體的「設定」介面中，將「原況照片匯出格式」預先設定為 <code>Apple Live Photo</code> 或 <code>Google Motion Photo</code>，以便在批次匯出時自動按照您手機的系統進行格式打包。",
+        "lan_title": "區域網路無線傳輸",
+        "lan_desc": "無需連接 USB 傳輸線，透過軟體內建的區域網路共享功能即可快速將照片和原況檔案傳輸至手機：",
+        "lan_li1": "<strong>選擇檔案</strong>：在相簿中勾選您需要發送到手機的照片或影片。",
+        "lan_li2": "<strong>開啟分享</strong>：點擊主面板上的「匯出到網路」按鈕。",
+        "lan_li3": "<strong>區域網路連接</strong>：軟體會自動啟動一個本地 HTTP 靜態伺服器（監聽連接埠 <strong>58533</strong>），並生成一個專用的<strong>QR Code</strong>和<strong>區域網路下載連結</strong> (如 <code>http://192.168.x.x:58533</code>)。",
+        "lan_li4": "<strong>掃描接收</strong>：將您的手機連接到<strong>同一個 Wi-Fi 網路</strong>，打開手機相機掃描 QR Code，或者在手機瀏覽器中輸入該連結，即可在手機網頁中直接預覽並打包下載 (ZIP/Nikkias格式)。",
+        "ios_title": "原況照片匯入蘋果手機 (iOS)",
+        "ios_desc": "要完美匯入 Apple 原況照片，iOS 系統要求 <code>.JPG</code> 圖片和 <code>.MOV</code> 影片檔案內部包含完全一致的關聯識別符（Asset ID）。請根據您的電腦系統選擇對應的匯入方案：",
+        "ios_mac_title": "macOS 使用者匯入方案",
+        "ios_mac_desc": "如果您使用的是 Mac 電腦，這是最便捷的官方原生匯入路徑：",
+        "ios_mac_li1": "<strong>一鍵匯入系統相簿</strong>：在電腦端相簿中勾選您需要匯入的圖片或影片，點擊底部的 <strong>“匯出到系統相簿”</strong> 按鈕。軟體會自動將其轉換為原況照片並匯入 macOS 的 <strong>“照片” App</strong>。",
+        "ios_mac_li2": "<strong>透過 iCloud 同步</strong>：如果您啟動了「iCloud 照片」功能，原況照片將自動無縫同步至您的 iPhone。",
+        "ios_mac_li3": "<strong>透過隔空投送 (AirDrop)</strong>：若未啟動 iCloud 同步，可在 Mac 的「照片」 App 中選取該照片，右鍵選擇分享 → <strong>“隔空投送” (AirDrop)</strong> 直接發送到 iPhone。",
+        "ios_win_title": "Windows 使用者匯入方案",
+        "ios_win_desc": "如果您使用的是 Windows 電腦，可以根據是否使用 iCloud 選擇以下兩種方法：",
+        "ios_win_m1_title": "方法一：使用行動儲存裝置 (推薦)",
+        "ios_win_m1_li1": "準備一個可連接 iPhone 的隨身碟或行動硬碟。",
+        "ios_win_m1_li2": "在隨身碟/行動硬碟的根目錄下建立嵌套資料夾：先建一個名為 <code>DCIM</code> 的資料夾，再在 <code>DCIM</code> 內部建一個名为 <code>100APPLE</code> 的子資料夾（注意：是兩層嵌套的資料夾 <code>DCIM/100APPLE/</code>，而不是名為 “DCIM/100APPLE” 的單個資料夾）。",
+        "ios_win_m1_li3": "將相簿匯出的 <code>.JPG</code> 和 <code>.MOV</code> 原況檔案對複製進該 <code>100APPLE</code> 資料夾中。",
+        "ios_win_m2_title": "方法二：透過區域網路 ZIP 下載 + 第三方 App 轉換 (無線備用方案)",
+        "ios_win_m2_li1": "在手機瀏覽器中訪問電腦端相簿生成的區域網路傳送頁面，下載整包的 <strong>ZIP 壓縮檔案</strong> 並解壓縮。",
+        "ios_win_m2_li2": "在 App Store 下載免費的 <code>intoLive</code> 或 <code>Live Photo Converter</code> 等工具，選擇解壓縮出的影片 <code>.MOV</code> 轉換回 Live Photo 保存至系統相簿。",
+        "and_title": "動態照片匯入 Android 手機",
+        "and_desc": "Android 手機使用 <code>Google Motion Photo</code> 格式，與 Apple 的拆分格式不同，它是一種單一檔案形式，傳輸和管理起來非常簡單：",
+        "and_li1": "<strong>獲取檔案</strong>：在電腦端匯出時，確保設定中的原況格式為 <code>Google Motion Photo</code>。匯出的檔案將是單一的 <code>.jpg</code> 檔案（其實是一個將影片合入底部的複合檔案）。",
+        "and_li2": "<strong>直接傳輸</strong>：您可以使用區域網路分享 QR Code 下載、USB 複製、或直接透過通訊軟體等原圖發送到您的 Android 手機上。",
+        "and_li3": "<strong>相簿播放</strong>：使用手機內建系統相簿（華為、小米、OPPO、VIVO等最新系統均已原生支援動態照片）或 <strong>Google Photos</strong> 打開該照片，點擊頂部的「動態/原況」按鈕或長按即可直接播放。",
+        "ios_win_m1_li4": "將隨身碟/行動硬碟插入 iPhone，在手機上打開 <strong>“照片” App</strong>，此時相簿中會啟動 <strong>“匯入”</strong> 流程，直接匯入即可完美識別並啟用 Live Photo！"
+      }
+    }
+  },
+  "en": {
+    "lang-name": "English",
+    "html-lang": "en",
+    "app_name": "Nikki Albums",
+    "app_description": "Easily manage your in-game photo albums across multiple accounts. Fully open-source and completely free.",
+    "common": {
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutorial",
+        "download": "Download"
+      }
+    },
+    "homepage": {
+      "title": "Nikki Albums - A photo album manager for Infinity Nikki",
+      "description": "Easily manage your in-game photo albums across multiple accounts. Fully open-source and completely free.",
+      "json_ld": {
+        "name": "Nikki Albums官网",
+        "description": "An elegant and efficient photo album manager built for Infinity Nikki players",
+        "keyword_1": "Nikki Albums",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Nikki Albums"
+      },
+      "hero_title": "Nikki Albums",
+      "hero_description": "An elegant and efficient photo album manager built for Infinity Nikki players",
+      "hero_sub_description": "Easily manage your in-game photo albums across multiple accounts. Fully open-source and completely free.",
+      "btn_download": "Download Now",
+      "btn_github": "GitHub Repo",
+      "compat_hint": "Supports Windows 10/11 & macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Album Showcase",
+        "decode": "Metadata Decoder"
+      },
+      "card": {
+        "1": {
+          "title": "All-in-one Album Management",
+          "description": "View 19 album categories and 3 internal resource types, fully optimized for daily, collage, and video albums."
+        },
+        "2": {
+          "title": "Metadata Analysis",
+          "description": "Automatically analyze aperture, focal length, filters, and coordinates to help you recreate perfect shots."
+        },
+        "3": {
+          "title": "Efficient Batch Processing",
+          "description": "Batch export, restore, transfer, and delete with built-in smart duplicate detection."
+        },
+        "4": {
+          "title": "Live Photo & GIF Converter",
+          "description": "Convert video albums to Apple or Android compatible Live Photos or animated GIFs in one click."
+        },
+        "5": {
+          "title": "Lossless Sharing",
+          "description": "Copy to clipboard or export losslessly via local drive or LAN for lightning-fast sharing."
+        }
+      },
+      "footer": {
+        "disclaimer": "Nikki Albums is an open-source tool and is not affiliated with Infinity Nikki or Papergames. All copyrights belong to their respective owners.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Important Note for macOS Users",
+        "description": "Since this is an ad-hoc signed app, macOS Gatekeeper might block it on the first run.<br><br>Please follow these steps to open it normally:<br>1. If a dialog says \"Apple can't check app for malicious software\", click <b>OK</b>.<br>2. Open <b>System Settings</b> > <b>Privacy & Security</b>.<br>3. Under the \"Security\" section, locate Nikki Albums and click <b>Open</b>.<br>4. Click <b>Open Anyway</b>, enter your login password, and click <b>OK</b>.",
+        "ok": "Got it"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - User Manual & Transfer Guide",
+      "description": "Official user manual for Nikki Albums: manage game albums, switch multi-accounts, de-duplicate stage files, decode camera settings, and wirelessly transfer Live Photos (iOS) or Motion Photos (Android) via LAN Wi-Fi.",
+      "nav": {
+        "home": "Home",
+        "download": "Download"
+      },
+      "side": {
+        "quickstart": "Getting Started",
+        "intro": "Introduction",
+        "installation": "Path Detection",
+        "categories": "Album Categories",
+        "core": "Core Features",
+        "accounts": "Multi-Account",
+        "batch": "Batch Actions & De-duplication",
+        "decoding": "Metadata Decoding",
+        "transfer": "Transfer Guides",
+        "conversion": "Live Photo & GIF Conversion",
+        "lan": "Local Wireless Transfer",
+        "ios": "iOS (iPhone) Importing",
+        "android": "Android Importing"
+      },
+      "sec": {
+        "intro_title": "Introduction",
+        "intro_p1": "Welcome to <strong>Nikki Albums</strong>! This is an open-source photo and video management utility custom-built for <em>Infinity Nikki</em> players.",
+        "intro_p2": "When playing, Nikki's beautiful photos, styling diaries, DIY sketchings, and cinematic motion albums are saved across various local directories. Nikki Albums <strong>automatically scans and gathers</strong> these screenshots into clean, structured categories. It features multi-account isolation, smart batch duplicate cleaning, raw camera parameters decoding, and exclusive support for transforming video clips into iOS <strong>Live Photos</strong> or Android <strong>Google Motion Photos</strong> and sharing them wirelessly via local Wi-Fi.",
+        "intro_tip_title": "Notice",
+        "intro_tip_desc": "Nikki Albums is completely free, open-source, and ad-free. It does not collect any user account credentials or personal telemetry. Decryption, processing, and file conversions occur entirely offline on your local computer, ensuring complete privacy.",
+        "install_title": "Path Detection & Configuration",
+        "install_desc": "Upon launch, the application attempts to automatically locate your <em>Infinity Nikki</em> installation directory and identify screenshot folders:",
+        "install_li1": "<strong>Server Compatibility</strong>: Supports auto-detection for both China Mainland servers (Papergames) and Global servers.",
+        "install_li2": "<strong>Manual Path Setup</strong>: If the path is not found automatically (e.g., custom drive installation), you can head to the \"Settings\" tab and select your game launcher directory manually.",
+        "cat_title": "Album Categories",
+        "cat_desc": "The scanned images are grouped into the following major blocks, containing 19 individual albums and 3 resource sections:",
+        "cat_li1": "<strong>Standard Albums (19)</strong>: Screenshots, DIY styling designs (DIY), Plant Dyeing (PlantDyeing), Fashion magazines (MagazinePhotos), and avatars (CustomAvatar).",
+        "cat_li2": "<strong>Dynamic Albums</strong>: Nikki's motion recordings (NikkiPhotos) and externally imported video files.",
+        "cat_li3": "<strong>Resource Zones (3)</strong>: Visual illustrations, map assets, and game UI icons.",
+        "acc_title": "Multi-Account Management",
+        "acc_desc": "If multiple accounts (different UIDs) have logged into the game on your computer, Nikki Albums detects them all:",
+        "acc_li1": "<strong>UID Dropdown</strong>: Filter and switch between UIDs via the menu at the top-left.",
+        "acc_li2": "<strong>Data Isolation</strong>: Photos from each account are backed up and organized into separate directory stores, preventing conflicts and overlap.",
+        "batch_title": "Batch Actions & De-duplication",
+        "batch_desc": "Nikki Albums speeds up manual photo management via unified automation:",
+        "batch_li1": "<strong>Bulk Control</strong>: Select files to export, restore, transfer, delete, or copy them all in one click.",
+        "batch_li2": "<strong>Smart Duplicate Filter</strong>: When executing transfers, Nikki Albums hashes file data (MD5). If an identical file exists at the target path, it is skipped automatically to conserve storage.",
+        "dec_title": "Metadata Decoding",
+        "dec_desc": "<em>Infinity Nikki</em> encodes active scene telemetry and capture metadata directly inside screenshot files. Nikki Albums extracts these parameters natively:",
+        "dec_li1": "<strong>Decode Telemetry</strong>: Click \"Decode\" to view the <strong>weather, time-of-day, and specific in-game coordinate vectors</strong> when the picture was captured.",
+        "dec_li2": "<strong>Camera & Color filters</strong>: Shows focal length, aperture size, depth-of-field, exposure values, and the exact styling filter name/intensity.",
+        "dec_li3": "<strong>Copy Parameters</strong>: Copy these settings with one click to share with other styling guides or replicate the same cinematic shots in-game!",
+        "conv_title": "Live Photo & GIF Conversion",
+        "conv_desc": "Bring your static game screenshots back to life by packaging movement natively:",
+        "conv_li1": "<strong>Inputs</strong>: Convert video clips from either in-game recordings or local files into moving images.",
+        "conv_li2": "<strong>Formats (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF Export</strong>: Renders low-latency, compact GIF files perfect for posting on forums and messaging platforms.",
+        "conv_tip_title": "Export Tip",
+        "conv_tip_desc": "In Settings, set your default export target to <code>Apple Live Photo</code> or <code>Google Motion Photo</code> so that files are automatically compiled to fit your mobile device.",
+        "lan_title": "Local Wireless Transfer",
+        "lan_desc": "Wirelessly transfer photos and live photos without plugging in a USB cable:",
+        "lan_li1": "<strong>Select Photos</strong>: Highlight the images or converted live photos in the gallery.",
+        "lan_li2": "<strong>Start Sharing</strong>: Click the \"Export to Network\" button.",
+        "lan_li3": "<strong>Start Server</strong>: The desktop client starts a local HTTP server on port <strong>58533</strong> and generates a <strong>QR Code</strong> and a <strong>LAN Link</strong> (e.g., <code>http://192.168.x.x:58533</code>).",
+        "lan_li4": "<strong>Receive on Mobile</strong>: Ensure your mobile device is connected to the <strong>same Wi-Fi/local network</strong>. Scan the QR code or type the link into your mobile browser (Safari/Chrome) to preview and download files (ZIP or custom Nikkias backups).",
+        "ios_title": "Importing Live Photos to iPhone (iOS)",
+        "ios_desc": "To import Apple Live Photos, iOS requires a matching Asset ID inside both the <code>.JPG</code> image and <code>.MOV</code> video. Please choose the appropriate import scheme based on your computer's operating system:",
+        "ios_mac_title": "For macOS Users",
+        "ios_mac_desc": "If you are using a Mac, this is the most direct and seamless importing path:",
+        "ios_mac_li1": "<strong>Export to Photo Library</strong>: Select the files in the album, and click the <strong>\"Export to Photo Library\"</strong> button at the bottom. The software will automatically convert them to Live Photo format and import them directly into the macOS <strong>Photos App</strong>.",
+        "ios_mac_li2": "<strong>Using iCloud Sync</strong>: If you have \"iCloud Photos\" enabled on both your Mac and iPhone, the Live Photo will automatically and seamlessly sync to your iOS device.",
+        "ios_mac_li3": "<strong>Using AirDrop</strong>: If you do not use iCloud Photos, you can select the Live Photo inside the macOS Photos App, right-click, and share via <strong>AirDrop</strong> to send it directly to your iPhone.",
+        "ios_win_title": "For Windows Users",
+        "ios_win_desc": "If you are on Windows, choose one of the following two methods depending on your iCloud status:",
+        "ios_win_m1_title": "Method 1: Use External Storage / USB Flash Drive (Recommended)",
+        "ios_win_m1_li1": "Prepare a USB flash drive or external hard drive that can connect to your iPhone.",
+        "ios_win_m1_li2": "Create nested folders in the root directory of the external storage drive: first create a folder named <code>DCIM</code>, and then create a folder named <code>100APPLE</code> inside it (i.e. <code>DCIM/100APPLE/</code> nested folders, not a single folder named \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Copy the exported <code>.JPG</code> and <code>.MOV</code> file pairs into this <code>100APPLE</code> folder.",
+        "ios_win_m2_title": "Method 2: LAN ZIP Download & Conversion Apps (Wireless Alternative)",
+        "ios_win_m2_li1": "Open the local server URL on your iPhone's browser, and click \"Download All\" to download the <strong>ZIP package</strong>, then extract it in the Files app.",
+        "ios_win_m2_li2": "Since iOS does not support linking separate JPG/MOV pairs directly from the Files app, download a utility like <code>intoLive</code> (free in the App Store), import the extracted <code>.MOV</code>, and save it back to your gallery as a Live Photo.",
+        "and_title": "Importing Motion Photos to Android",
+        "and_desc": "Android uses the <code>Google Motion Photo</code> standard. Unlike Apple's multi-file container, Android motion photos are packaged into a single file, making them very easy to share:",
+        "and_li1": "<strong>Export</strong>: Make sure the export format under Settings in the desktop client is set to <code>Google Motion Photo</code>. This produces a single <code>.jpg</code> file (with embedded MP4 video binary at the end).",
+        "and_li2": "<strong>Transfer</strong>: Send this <code>.jpg</code> directly to your Android device via LAN browser download, USB cable, or any file manager.",
+        "and_li3": "<strong>Play</strong>: Open the photo in <strong>Google Photos</strong> or the Android system Gallery (Huawei, Xiaomi, etc.). Tap the \"Motion\" play icon or long-press to enjoy the animated photo.",
+        "ios_win_m1_li4": "Plug the drive into your iPhone, open the iOS <strong>Photos App</strong>, and navigate to the <strong>\"Import\"</strong> tab to import them cleanly as native Live Photos!"
+      }
+    }
+  },
+  "ja": {
+    "lang-name": "日本語",
+    "html-lang": "ja",
+    "app_name": "ニキアルバム",
+    "app_description": "ゲーム内の写真アルバムを簡単に効率よく管理。完全無料でオープンソース、広告なし。",
+    "homepage": {
+      "title": "ニキアルバム - インフィニティニキの写真アルバム管理ツール",
+      "description": "ゲーム内の写真アルバムを簡単に効率よく管理。完全無料でオープンソース、広告なし。",
+      "json_ld": {
+        "name": "ニキアルバム官网",
+        "description": "『インフィニティニキ』プレイヤーのために設計されたアルバム管理ソフト",
+        "keyword_1": "ニキアルバム",
+        "keyword_2": "インフィニティニキ",
+        "keyword_3": "ニキアルバム"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "チュートリアル",
+        "download": "ダウンロード"
+      },
+      "hero_title": "ニキアルバム",
+      "hero_description": "『インフィニティニキ』プレイヤーのために設計されたアルバム管理ソフト",
+      "hero_sub_description": "ゲーム内の写真アルバムを簡単に効率よく管理。完全無料でオープンソース、広告なし。",
+      "btn_download": "今すぐダウンロード",
+      "btn_github": "GitHub リポジトリ",
+      "compat_hint": "Windows 10/11 および macOS (Apple Silicon) に対応",
+      "tab": {
+        "wall": "アルバム一覧",
+        "decode": "パラメータ解析"
+      },
+      "card": {
+        "1": {
+          "title": "総合的なアルバム管理",
+          "description": "19種類のアルバムと3種類の内部リソースに対応。日常、コラージュ、動画アルバムなどを完璧にサポート。"
+        },
+        "2": {
+          "title": "撮影パラメータ解析",
+          "description": "絞り、焦点距離、フィルター、撮影座標を自動解析し、美しい構図の再現をサポート。"
+        },
+        "3": {
+          "title": "効率的な一括処理",
+          "description": "一括書き出し、復元、転送、削除に対応。重複検出機能でアルバム管理をよりスマートに。"
+        },
+        "4": {
+          "title": "Live Photo・GIF変換",
+          "description": "動画アルバムをワンクリックでAppleまたはAndroid互換のLive PhotoやGIFに変換。"
+        },
+        "5": {
+          "title": "多彩な無劣化共有",
+          "description": "クリップボードへのコピー、ローカルディスクやLAN経由の無劣化転送で、素早く共有。"
+        }
+      },
+      "footer": {
+        "disclaimer": "『ニキアルバム』はオープンソースのツールであり、インフィニティニキ公式やPapergamesとは一切関係ありません。すべての素材の著作権は原権利者に帰属します。",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "macOS版の初回実行に関する重要なお知らせ",
+        "description": "署名なしのポータブル版であるため、初回起動時にmacOSによってブロックされる場合があります。<br><br>以下の手順に従って正常に開いてください：<br>1. 「Appleは悪質なソフトウェアがないか確認できません」と表示された場合は、<b>OK</b>をクリックします。<br>2. <b>システム設定</b> > <b>プライバシーとセキュリティ</b>を開きます。<br>3. セキュリティ欄にあるNikki Albumsの起動に関するメッセージを確認し、<b>このまま開く</b>をクリックします。<br>4. ログインパスワードを入力し、<b>OK</b>をクリックします。",
+        "ok": "了解しました"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - ユーザーマニュアル＆転送ガイド",
+      "description": "Nikki Albums公式ユーザーガイド：インフィニティニキのアルバム管理、マルチアカウント切り替え、重複写真の自動クリーンアップ、撮影パラメータのデコード、Live Photo（iOS）やMotion Photo（Android）のWi-Fi無線転送手順など。",
+      "nav": {
+        "home": "ホーム",
+        "download": "ダウンロード"
+      },
+      "side": {
+        "quickstart": "クイックスタート",
+        "intro": "ソフトウェア紹介",
+        "installation": "インストールとパス認識",
+        "categories": "アルバムカテゴリ紹介",
+        "core": "コア機能",
+        "accounts": "マルチアカウント管理",
+        "batch": "一括操作と重複排除",
+        "decoding": "アルバムデコードと撮影パラメータ",
+        "transfer": "転送ガイド",
+        "conversion": "Live Photo・GIF変換",
+        "lan": "ローカルネットワーク転送",
+        "ios": "iOS（iPhone）への取り込み",
+        "android": "Androidへの取り込み"
+      },
+      "sec": {
+        "intro_title": "ソフトウェア紹介",
+        "intro_p1": "<strong>Nikki Albums</strong>へようこそ！これは『インフィニティニキ』プレイヤーのために特別に設計された、オープンソースのアルバム管理ツールです。",
+        "intro_p2": "ゲームをプレイしていると、ニキの美しい写真、着せ替え日記、DIYデザインスケッチ、シネマティックな動画アルバムが、PC内の別々のディレクトリに保存されます。Nikki Albumsは、これらのゲームスクリーンショットを<strong>自動的にスキャンして収集</strong>し、きれいに分類・整理します。さらに、マルチアカウント分離、スマート重複削除クリーンアップ、撮影パラメータのデコード機能、さらにはゲーム内動画をワンクリックでiOS <strong>Live Photos</strong>またはAndroid <strong>Google Motion Photos</strong>に変換し、ローカルWi-Fiでワイヤレス転送できる専用機能も備えており、大切な思い出を保護する最適なアシスタントです。",
+        "intro_tip_title": "お知らせ",
+        "intro_tip_desc": "Nikki Albumsは完全に無料でオープンソース、広告も一切ありません。アカウント情報や個人情報を収集することはなく、デコードやファイルの変換処理はすべてPCローカルでオフライン実行されるため、プライバシーとデータセキュリティが保証されます。",
+        "install_title": "自動パス認識と設定",
+        "install_desc": "ソフトウェア起動時に、自動的に『インフィニティニキ』のゲームインストールディレクトリを検出し、アルバムフォルダを識別します：",
+        "install_li1": "<strong>各サーバーへの対応</strong>：中国本土サーバー（Papergames）およびグローバルサーバー（Global Server）の両方のアルバムディレクトリの自動スキャンをサポートしています。",
+        "install_li2": "<strong>手動設定</strong>：インストール先がデフォルトと異なるディスクやカスタムパスであるために自動検出できない場合は、設定タブからゲーム起動プログラムのパスを手動で指定できます。",
+        "cat_title": "アルバムカテゴリ紹介",
+        "cat_desc": "ソフトウェアは検出した画像を以下の2つのセクションに分け、合計19個の独立したアルバムと3つのゲームリソース領域を管理します：",
+        "cat_li1": "<strong>通常アルバム (19個)</strong>：ゲーム内スクリーンショット（ScreenShot）、DIY衣装（DIY）、花草染め（PlantDyeing）、ファッション雑誌（MagazinePhotos）、カスタムアイコン（CustomAvatar）など。",
+        "cat_li2": "<strong>動画アルバム</strong>：「動画アルバム」（NikkiPhotos）および外部から取り込んだビデオファイルを含み、ゲーム内で録画したクリップを保存します。",
+        "cat_li3": "<strong>リソースアルバム (3個)</strong>：ゲーム内ビルトイン画像集、マップグラフィックス、特定のゲームアイコンファイルの閲覧をサポート。",
+        "acc_title": "マルチアカウント管理",
+        "acc_desc": "PCで複数の『インフィニティニキ』アカウント（異なるUID）を切り替えてプレイしたことがある場合、Nikki Albumsは自動的にすべてのUIDを認識します：",
+        "acc_li1": "<strong>UIDフィルター</strong>：メイン画面の左上にあるドロップダウンメニューから、異なるUIDアカウントを簡単に切り替えることができます。",
+        "acc_li2": "<strong>データ分離</strong>：アカウントごとに画像データが個別に分類され、独立して管理・バックアップされるため、複数アカウントを使用するプレイヤーや共有PCでも整理が容易です。",
+        "batch_title": "一括操作とスマート重複排除",
+        "batch_desc": "効率的な一括管理ワークフローをサポートします：",
+        "batch_li1": "<strong>一括操作</strong>：画像を選択し、ワンクリックで<strong>一括書き出し、復元、移動、削除、コピー</strong>などのアクションを実行できます。",
+        "batch_li2": "<strong>重複排除メカニズム</strong>：画像の移動や書き出し時、ソフトウェアはMD5ハッシュ値を自動で比較・分析し、転送先にすでに同じ写真が存在する場合は自動的に統合またはスキップして、重複ファイルによるディスク容量の浪費を防ぎます。",
+        "dec_title": "アルバムデコードと撮影パラメータ",
+        "dec_desc": "『インフィニティニキ』はゲームスクリーンショット保存時、撮影環境の各種メタデータを暗号化してファイルに書き込みます。Nikki Albumsは独自のデコードモジュールを搭載しています：",
+        "dec_li1": "<strong>撮影環境の解析</strong>：画像を選択して「パラメータ解析」をクリックすると、その写真を撮影したゲーム内の<strong>天気、時間帯、具体的な撮影座標データ</strong>を直接確認できます。",
+        "dec_li2": "<strong>相機とフィルター設定</strong>：撮影時の焦点距離、絞り値、景深、露出値、および適用されたカラーフィルターの名前と強度を復元します。",
+        "dec_li3": "<strong>ワンクリックコピー</strong>：これらの詳細な撮影設定パラメータを簡単にコピーして他のプレイヤーと共有し、ゲーム内で全く同じ雰囲気の写真を再現できます。",
+        "conv_title": "Live Photo（ライブフォト）とGIF変換",
+        "conv_desc": "このツールの最も特徴的な機能の1つで、静的な思い出をスマホ上で生き生きと再生できます：",
+        "conv_li1": "<strong>変換ソース</strong>：「動画アルバム」内のゲーム録画動画や、PC内から読み込んだ「外部ビデオ」をLive Photo形式に変換できます。",
+        "conv_li2": "<strong>Live Photo形式 (Live Photo / Motion Photo)</strong>：",
+        "conv_li3": "<strong>GIFアニメーション</strong>：低遅延でファイルサイズが小さいGIF形式の動画像をワンクリックで生成し、SNSで簡単に共有できます。",
+        "conv_tip_title": "変換に関するヒント",
+        "conv_tip_desc": "設定画面で「実況写真エクスポート形式」をあらかじめ <code>Apple Live Photo</code> または <code>Google Motion Photo</code> に指定しておけば、一括エクスポート時にお使いのスマホのOSに適した形式で自動的にパッケージングされます。",
+        "lan_title": "ローカルネットワーク転送",
+        "lan_desc": "USBケーブルを使わずに、内蔵されたローカルシェア機能を利用して写真やLive Photoファイルをすばやくスマホに転送できます：",
+        "lan_li1": "<strong>ファイル選択</strong>：アルバムからスマホに送信したい写真や動画を選択します。",
+        "lan_li2": "<strong>共有開始</strong>：メインパネルの「ネットワークへ出力」ボタンをクリックします。",
+        "lan_li3": "<strong>ネットワーク接続</strong>：自動的にPC内にローカルHTTP静的サーバー（ポート <strong>58533</strong>）を起動し、専用の<strong>QRコード</strong>と<strong>転送用URL</strong>（例: <code>http://192.168.x.x:58533</code>）を生成します。",
+        "lan_li4": "<strong>スマホで受信</strong>：スマホをPCと<strong>同じWi-Fiネットワーク</strong>に接続し、カメラでQRコードをスキャンするか、ブラウザに直接URLを入力して、プレビューおよび一括ダウンロード（ZIP形式またはNikkiasバックアップファイル）を行います。",
+        "ios_title": "iOS（iPhone）へのLive Photoの取り込み",
+        "ios_desc": "AppleのLive Photoとして認識させるには、iOSシステムが <code>.JPG</code> 画像と <code>.MOV</code> ビデオ内のAsset ID（メタデータ識別子）の一致を検出する必要があります。お使い of PCシステムに応じて以下の取り込み手順を実行してください：",
+        "ios_mac_title": "macOSユーザーの取り込み方法",
+        "ios_mac_desc": "Macをお使いの場合、直接のシステム書き出しをサポートしているため最もスムーズです：",
+        "ios_mac_li1": "<strong>写真アプリへの直接取り込み</strong>：PCアルバム内で画像/動画を選択し、下部にある<strong>「写真ライブラリに書き出す」</strong>ボタンをクリックします。自動的にLive Photoに変換され、macOSの<strong>写真アプリ</strong>に直接保存されます。",
+        "ios_mac_li2": "<strong>iCloudでの同期</strong>：MacとiPhoneの両方で「iCloud写真」が有効な場合、Live Photoは自動的にiPhoneにワイヤレス同期されます。",
+        "ios_mac_li3": "<strong>AirDropの使用</strong>：iCloud写真を使用していない場合は、Macの写真アプリ内で該当写真を選択し、右クリックして共有から<strong>「AirDrop」</strong>を選択しiPhoneへ送信します。",
+        "ios_win_title": "Windowsユーザーの取り込み方法",
+        "ios_win_desc": "Windowsをお使いの場合は、iCloudの使用状況に応じて以下の2つのいずれかの方法を選択してください：",
+        "ios_win_m1_title": "方法1：外部ストレージデバイスの使用 (推奨)",
+        "ios_win_m1_li1": "iPhoneに接続可能なUSB随身磁気ディスク（USBメモリなど）またはポータブルHDDを用意します。",
+        "ios_win_m1_li2": "USBメモリのルートディレクトリに、まず <code>DCIM</code> フォルダを作成し、その中に <code>100APPLE</code> フォルダを作成します（注意：必ず <code>DCIM/100APPLE/</code> というネストされたフォルダ構造にしてください。「DCIM/100APPLE」という1つのフォルダ名ではありません）。",
+        "ios_win_m1_li3": "エクスポートした <code>.JPG</code> と <code>.MOV</code> ファイルペアをこの <code>100APPLE</code> フォルダ内にコピーします。",
+        "ios_win_m2_title": "方法3：ローカルZIPダウンロード＋サードパーティアプリによる変換 (無線代替策)",
+        "ios_win_m2_li1": "スマホのブラウザでPCから提供された共有ページにアクセスし、<strong>ZIP圧縮ファイル</strong>をダウンロードしてファイルアプリで展開します。",
+        "ios_win_m2_li2": "iOSのファイルアプリからはJPG/MOVを直接リンクして取り込めないため、App Storeから無料の <code>intoLive</code> や <code>Live Photo Converter</code> などのアプリをダウンロードし、展開した <code>.MOV</code> を読み込んでLive Photoとしてカメラロールに保存します。",
+        "and_title": "Androidへの取り込み",
+        "and_desc": "Androidでは <code>Google Motion Photo</code> 規格を使用します。Appleの分割ファイルとは異なり、単一の画像ファイル形式のため、転送と管理が非常に簡単です：",
+        "and_li1": "<strong>ファイル出力</strong>：エクスポート前に、設定画面で出力形式を <code>Google Motion Photo</code> に設定します。出力されるのは単一の <code>.jpg</code> ファイルです（実際には動画データが末尾に含まれる複合ファイルです）。",
+        "and_li2": "<strong>直接転送</strong>：ローカル共有QRコード、USB転送、または通常のファイル共有機能を使用して、<code>.jpg</code> ファイルをAndroid端末へ送信します。",
+        "and_li3": "<strong>フォトで再生</strong>：端末の内蔵システムギャラリー（主要メーカーの最新OSは動的写真をサポートしています）または <strong>Google フォト</strong> アプリで写真を開き、上部の「モーション」アイコンをタップするか画面を長押しして再生します。",
+        "ios_win_m1_li4": "USBメモリをiPhoneに接続し、スマホの写真アプリを開いて<strong>「読み込み」</strong>タブを選択し、ファイルをインポートすると、完全にLive Photoとして認識されます。"
+      }
+    }
+  },
+  "ko": {
+    "lang-name": "한국어",
+    "html-lang": "ko",
+    "app_name": "니키 앨범",
+    "app_description": "게임 앨범을 쉽고 효율적으로 관리하여 더욱 쾌적한 게임 경험을 선사합니다. 광고 없는 완전 무료 오픈 소스.",
+    "homepage": {
+      "title": "니키 앨범 - 인피니티 니키 사진 앨범 관리 도구",
+      "description": "게임 앨범을 쉽고 효율적으로 관리하여 더욱 쾌적한 게임 경험을 선사합니다. 광고 없는 완전 무료 오픈 소스.",
+      "json_ld": {
+        "name": "니키 앨범官网",
+        "description": "인피니티 니키 플레이어를 위해 특별히 제작된 앨범 관리 소프트웨어",
+        "keyword_1": "니키 앨범",
+        "keyword_2": "인피니티 니키",
+        "keyword_3": "니키 앨범"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "튜토리얼",
+        "download": "다운로드"
+      },
+      "hero_title": "니키 앨범",
+      "hero_description": "인피니티 니키 플레이어를 위해 특별히 제작된 앨범 관리 소프트웨어",
+      "hero_sub_description": "게임 앨범을 쉽고 효율적으로 관리하여 더욱 쾌적한 게임 경험을 선사합니다. 광고 없는 완전 무료 오픈 소스.",
+      "btn_download": "지금 다운로드",
+      "btn_github": "GitHub 저장소",
+      "compat_hint": "Windows 10/11 및 macOS (Apple Silicon) 지원",
+      "tab": {
+        "wall": "앨범 개요",
+        "decode": "파라미터 디코더"
+      },
+      "card": {
+        "1": {
+          "title": "올인원 앨범 관리",
+          "description": "19개 앨범 카테고리와 3개 내부 리소스 지원. 일상, 퍼즐, 동영상 앨범 등 완벽 대응."
+        },
+        "2": {
+          "title": "카메라 파라미터 분석",
+          "description": "조리개, 초점 거리, 필터 및 촬영 좌표를 자동 분석하여 완벽한 구도 재현 지원."
+        },
+        "3": {
+          "title": "효율적인 일괄 처리",
+          "description": "일괄 내보내기, 복원, 전송, 삭제 지원. 스마트 중복 제거로 간편한 관리."
+        },
+        "4": {
+          "title": "라이브 포토 & GIF 변환",
+          "description": "동영상 앨범을 원클릭으로 Apple 또는 Android 호환 라이브 포토나 GIF로 변환."
+        },
+        "5": {
+          "title": "다채널 무손실 공유",
+          "description": "클립보드 복사, 로컬 드라이브 또는 LAN을 통한 무손실 내보내기로 빠른 공유 가능."
+        }
+      },
+      "footer": {
+        "disclaimer": "니키 앨범 는 오픈 소스 도구이며 인피니티 니키 공식 또는 Papergames와 관련이 없습니다. 모든 자료의 저작권은 해당 회사에 있습니다.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "macOS 버전 최초 실행 시 중요 안내",
+        "description": "본 앱은 서명되지 않은 포터블 버전으로, 최초 실행 시 시스템에 의해 차단될 수 있습니다.<br><br>정상적으로 실행하려면 다음 단계를 따르십시오:<br>1. \"Apple에서 악성 소프트웨어가 있는지 확인할 수 없습니다\"라는 팝업이 뜨면 <b>확인</b>을 클릭합니다.<br>2. 시스템의 <b>설정</b> > <b>개인정보 보호 및 보안</b>을 엽니다.<br>3. 보안 섹션에서 Nikki Albums 관련 안내를 찾아 <b>열기</b>를 클릭합니다.<br>4. <b>계속 열기</b>를 클릭하고 컴퓨터 암호를 입력한 뒤 <b>확인</b>을 클릭합니다.",
+        "ok": "확인 완료"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - 사용자 설명서 및 전송 가이드",
+      "description": "Nikki Albums 공식 사용자 가이드: 인피니티 니키 앨범 관리, 다중 계정 전환, 중복 사진 스마트 클리닝, 촬영 파라미터 디코딩, Live Photo(iOS) 및 Motion Photo(Android)의 로컬 Wi-Fi 무선 전송 방법 안내.",
+      "nav": {
+        "home": "홈",
+        "download": "다운로드"
+      },
+      "side": {
+        "quickstart": "빠른 시작",
+        "intro": "소프트웨어 소개",
+        "installation": "설치 및 경로 인식",
+        "categories": "앨범 카테고리 소개",
+        "core": "핵심 기능",
+        "accounts": "다중 계정 관리",
+        "batch": "일괄 작업 및 중복 제거",
+        "decoding": "앨범 디코딩 및 촬영 파라미터",
+        "transfer": "전송 가이드",
+        "conversion": "라이브 포토 & GIF 변환",
+        "lan": "로컬 네트워크 전송",
+        "ios": "iOS(iPhone)로 가져오기",
+        "android": "Android로 가져오기"
+      },
+      "sec": {
+        "intro_title": "소프트웨어 소개",
+        "intro_p1": "<strong>Nikki Albums</strong>에 오신 것을 환영합니다! 이 프로그램은 《인피니티 니키》 플레이어분들을 위해 특별히 개발된 오픈 소스 앨범 관리 도구입니다.",
+        "intro_p2": "게임을 진행하면서 니키의 아름다운 사진, 스타일링 일기, DIY 스케치, 그리고 다이내믹 시네마틱 동영상 앨범이 컴퓨터 내의 여러 경로에 흩어져 저장됩니다. Nikki Albums는 이러한 게임 스크린샷 폴더를 <strong>자동으로 스캔하여 수집</strong>하고 카테고리별로 깔끔하게 정리해 줍니다. 다중 계정 분리 관리, 일괄 스마트 중복 청소, 카메라 원본 촬영 파라미터 디코딩은 물론, 게임 내의 비디오 클립을 한 번의 클릭으로 iOS <strong>Live Photos</strong>나 Android <strong>Google Motion Photos</strong>로 변환하여 로컬 Wi-Fi를 통해 무선으로 스마트폰에 전송하는 전용 기능까지 탑재하고 있어 니키와의 추억을 보관해 줄 든든한 조력자입니다.",
+        "intro_tip_title": "안내",
+        "intro_tip_desc": "Nikki Albums는 광고가 전혀 없는 완전 무료 오픈 소스 소프트웨어입니다. 사용자 계정 정보나 개인 정보 데이터를 수집하지 않으며, 모든 디코딩 및 파일 변환 과정이 외부 네트워크가 필요 없는 로컬 컴퓨터 오프라인 환경에서 처리되므로 데이터 프라이버시가 안전하게 보호됩니다.",
+        "install_title": "자동 경로 인식 및 설정",
+        "install_desc": "프로그램 실행 시, 자동으로 《인피니티 니키》 게임 설치 경로를 탐색하여 앨범 폴더를 식별합니다:",
+        "install_li1": "<strong>다양한 서버 호환</strong>: 중국 본토 서버(Papergames) 및 글로벌 서버(Global Server)의 앨범 경로를 모두 자동으로 스캔할 수 있습니다.",
+        "install_li2": "<strong>수동 설정</strong>: 게임이 기본 경로가 아닌 다른 하드 드라이브나 사용자 지정 폴더에 설치되어 자동 탐색에 실패한 경우, 설정 탭에서 직접 게임 실행기(Launcher) 경로를 지정하여 수동 설정할 수 있습니다.",
+        "cat_title": "앨범 카테고리 소개",
+        "cat_desc": "프로그램은 탐색된 이미지 파일들을 다음 두 가지 영역으로 나누며, 총 19개의 개별 앨범과 3개의 게임 리소스 영역으로 구분합니다:",
+        "cat_li1": "<strong>일반 앨범 (19개)</strong>: 게임 내 스크린샷(ScreenShot), DIY 의상(DIY), 식물 염색(PlantDyeing), 패션 매거진(MagazinePhotos), 맞춤형 프로필 이미지(CustomAvatar) 등.",
+        "cat_li2": "<strong>동영상 앨범</strong>: 게임 내에서 녹화한 클립 비디오가 들어있는 “동영상 앨범”(NikkiPhotos) 및 외부 비디오 가져오기 영역을 포함합니다.",
+        "cat_li3": "<strong>리소스 영역 (3개)</strong>: 게임 내 기본 제공 일러스트 패키지, 지도 그래픽, 특정 인게임 아이콘 데이터 브라우징 지원.",
+        "acc_title": "다중 계정 관리",
+        "acc_desc": "컴퓨터에 여러 개의 《인피니티 니키》 계정(서로 다른 UID)으로 전환하며 로그인한 이력이 있는 경우, Nikki Albums가 자동으로 모든 UID를 읽어옵니다:",
+        "acc_li1": "<strong>UID 필터링</strong>: 메인 화면 왼쪽 상단의 드롭다운 메뉴에서 간편하게 각각 다른 UID 계정으로 화면을 전환할 수 있습니다.",
+        "acc_li2": "<strong>데이터 격리</strong>: 각 계정별 사진 데이터가 개별적으로 분류되고 백업/관리되어 서로 섞이지 않으므로, 부캐를 키우거나 가족과 PC를 공유하는 플레이어도 편리하게 앨범을 관리할 수 있습니다.",
+        "batch_title": "일괄 작업 및 스마트 중복 제거",
+        "batch_desc": "효율적인 파일 일괄 관리를 위한 워크플로를 제공합니다:",
+        "batch_li1": "<strong>일괄 작업</strong>: 이미지들을 선택하고 한 번의 클릭으로 <strong>일괄 내보내기, 복원, 이동, 삭제, 복사</strong> 등의 작업을 실행할 수 있습니다.",
+        "batch_li2": "<strong>스마트 중복 제거</strong>: 이미지를 일괄 이동하거나 내보낼 때, 프로그램이 MD5 해시값을 자동 비교 분석하여 내보낼 경로에 이미 같은 사진이 존재할 경우 자동으로 병합하거나 건너뜁니다. 중복 파일로 인한 드라이브 용량 낭비를 미연에 방지합니다.",
+        "dec_title": "앨범 디코딩 및 촬영 파라미터",
+        "dec_desc": "《인피니티 니키》는 게임 스크린샷을 저장할 때, 촬영 당시의 다양한 메타데이터 정보를 파일 내부에 암호화하여 기록합니다. Nikki Albums는 디코딩 및 분석 모듈을 내장하고 있습니다:",
+        "dec_li1": "<strong>촬영 환경 분석</strong>: 사진을 선택하고 “촬영 정보 분석”을 클릭하면 당시 게임 내의 <strong>날씨, 시간대, 구체적인 인게임 촬영 좌표 정보</strong>를 한눈에 확인할 수 있습니다.",
+        "dec_li2": "<strong>카메라 및 필터 설정</strong>: 촬영 시 사용된 초점 거리, 조리개 값, 피사체 심도(아웃포커싱), 노출값 및 적용된 색감 필터 이름과 강도를 복원합니다.",
+        "dec_li3": "<strong>원클릭 복사</strong>: 상세한 촬영 파라미터 설정을 손쉽게 복사하여 다른 플레이어들과 공유할 수 있고, 인게임에서 동일한 연출의 분위기 있는 사진을 그대로 재현할 수 있습니다!",
+        "conv_title": "라이브 포토 (Live Photo) 및 GIF 변환",
+        "conv_desc": "정적인 사진을 스마트폰 화면에서 생생하게 움직이도록 만들어 주는 이 소프트웨어만의 대표적인 특화 기능입니다:",
+        "conv_li1": "<strong>변환 소스</strong>: “동영상 앨범”의 게임 녹화 영상 클립이나 PC 저장 공간에서 불러온 외부 비디오를 라이브 포토 형식으로 변환할 수 있습니다.",
+        "conv_li2": "<strong>라이브 포토 포맷 (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF 애니메이션</strong>: 소셜 플랫폼에 쉽게 공유할 수 있도록 파일 용량이 작고 프레임 지연이 적은 GIF 형식 움직이는 이미지를 한 번에 생성합니다.",
+        "conv_tip_title": "변환 팁",
+        "conv_tip_desc": "설정 메뉴에서 '라이브 포토 내보내기 형식'을 <code>Apple Live Photo</code> 또는 <code>Google Motion Photo</code>로 미리 지정해 두시면, 일괄 내보내기 시 사용하는 스마트폰 운영체제에 알맞은 형태로 자동 패키징됩니다.",
+        "lan_title": "로컬 네트워크 무선 전송",
+        "lan_desc": "USB 케이블 연결 없이도 내장된 로컬 공유 기능을 이용하여 사진과 라이브 포토 파일을 빠르게 모바일 기기로 전송할 수 있습니다:",
+        "lan_li1": "<strong>파일 선택</strong>: 앨범에서 스마트폰으로 전송하려는 사진이나 비디오를 선택합니다.",
+        "lan_li2": "<strong>공유 시작</strong>: 메인 패널의 '네트워크로 내보내기' 버튼을 클릭합니다.",
+        "lan_li3": "<strong>네트워크 연결</strong>: 컴퓨터 로컬에 HTTP 정적 서버(포트 <strong>58533</strong>)가 자동으로 활성화되고, 화면에 전용 <strong>QR 코드</strong>와 <strong>전송용 링크</strong>(예: <code>http://192.168.x.x:58533</code>)가 생성됩니다.",
+        "lan_li4": "<strong>기기에서 받기</strong>: 스마트폰을 컴퓨터와 <strong>동일한 Wi-Fi 네트워크</strong>에 연결하고, 카메라로 QR 코드를 스캔하거나 웹 브라우저 주소창에 직접 링크를 입력하면 브라우저에서 미디어를 확인하고 ZIP 파일 또는 Nikkias 백업 파일로 내려받을 수 있습니다.",
+        "ios_title": "아이폰(iOS)으로 라이브 포토 가져오기",
+        "ios_desc": "아이폰 라이브 포토로 올바르게 작동하려면, iOS 시스템이 <code>.JPG</code> 이미지와 <code>.MOV</code> 비디오 내부에 매칭되어 기록된 동일한 Asset ID(메타데이터 식별자)를 인식해야 합니다. 사용 중인 PC의 운영체제에 따라 알맞은 방식을 선택해 진행해 주세요:",
+        "ios_mac_title": "macOS 사용자 가져오기 방안",
+        "ios_mac_desc": "Mac 컴퓨터를 사용 중인 경우, 자체 라이브러리 연동을 지원하므로 가장 쉽고 편리하게 처리할 수 있습니다:",
+        "ios_mac_li1": "<strong>사진 앱으로 직접 가져오기</strong>: PC용 프로그램에서 대상 미디어를 선택하고 아래쪽의 <strong>“사진 앱 보관함으로 내보내기”</strong> 버튼을 클릭합니다. 자동으로 라이브 포토로 조립되어 macOS의 <strong>사진 앱</strong>에 저장됩니다.",
+        "ios_mac_li2": "<strong>iCloud 사진 동기화</strong>: Mac과 iPhone 모두 동일한 계정으로 'iCloud 사진' 기능이 활성화되어 있으면, 라이브 포토가 자동으로 무선 동기화되어 iPhone 앨범에 나타납니다.",
+        "ios_mac_li3": "<strong>AirDrop 사용</strong>: iCloud 사진 동기화를 사용하지 않는 경우, Mac의 사진 앱에서 해당 사진을 선택하고 마우스 우클릭하여 공유 메뉴에서 <strong>AirDrop</strong>을 선택해 iPhone으로 즉시 전송합니다.",
+        "ios_win_title": "Windows 사용자 가져오기 방안",
+        "ios_win_desc": "Windows PC를 사용하는 경우, iPhone의 iCloud 기능 활성화 여부에 따라 아래 2가지 방법 중 하나를 선택하여 진행합니다:",
+        "ios_win_m1_title": "방법 1: 외장 장치(USB 메모리 등) 사용 (권장)",
+        "ios_win_m1_li1": "iPhone에 연결할 수 있는 USB 메모리(OTG 젠더 활용 등)나 외장 하드 드라이브를 준비합니다.",
+        "ios_win_m1_li2": "USB 메모리의 최상위 루트 디렉터리에 먼저 <code>DCIM</code> 폴더를 만들고, 그 안에 <code>100APPLE</code> 폴더를 만듭니다(주의: 반드시 <code>DCIM/100APPLE/</code> 형태로 중첩된 폴더 구조여야 합니다. 'DCIM/100APPLE'이라는 하나의 단일 폴더 이름이 아닙니다).",
+        "ios_win_m1_li3": "내보낸 <code>.JPG</code>와 <code>.MOV</code> 파일 쌍을 이 <code>100APPLE</code> 폴더 안에 복사해 넣습니다.",
+        "ios_win_m2_title": "방법 2: 로컬 ZIP 다운로드 + 서드파티 앱 변환 (무선 대체 방안)",
+        "ios_win_m2_li1": "스마트폰 브라우저에서 PC 프로그램이 제공한 로컬 전송 페이지에 접속하여 <strong>ZIP 압축 파일</strong>을 내려받고, 파일 앱에서 압축을 해제합니다.",
+        "ios_win_m2_li2": "iOS 파일 앱에서는 JPG/MOV 파일 쌍을 갤러리에 자동으로 조립해 가져올 수 없으므로, App Store에서 무료 앱인 <code>intoLive</code> 또는 <code>Live Photo Converter</code> 등을 설치하여 압축을 푼 비디오 <code>.MOV</code>를 불러온 후 카메라롤에 라이브 포토로 변환 저장합니다.",
+        "and_title": "동적 사진 Android(안드로이드)로 가져오기",
+        "and_desc": "Android 기기는 <code>Google Motion Photo</code> 규격을 따릅니다. Apple의 여러 파일 분할 방식과 달리 단일 이미지 파일 포맷이므로 복사 및 관리가 훨씬 심플합니다:",
+        "and_li1": "<strong>파일 생성</strong>: 컴퓨터용 프로그램 설정에서 내보내기 형식을 <code>Google Motion Photo</code>로 맞춰준 뒤 내보냅니다. 이렇게 만들어진 파일은 하나의 <code>.jpg</code> 단독 파일입니다(비디오 바이나리가 사진 후반부에 내장되어 있습니다).",
+        "and_li2": "<strong>다이렉트 전송</strong>: 로컬 무선 공유 QR 코드 링크를 통해 받거나, USB 케이블 전송, 또는 SNS 메신저 파일 원본 보내기 등으로 <code>.jpg</code> 사진을 Android 기기로 바로 복사합니다.",
+        "and_li3": "<strong>갤러리 재생</strong>: 기기 내부의 기본 갤러리 앱(최근 출시된 주요 브랜드 스마트폰 제조사 시스템 갤러리에서 모션 포토를 지원합니다) 또는 <strong>Google 포토</strong> 앱에서 해당 사진을 열고 화면을 길게 누르거나 상단 재생 버튼을 눌러 재생합니다.",
+        "ios_win_m1_li4": "USB 메모리를 iPhone에 연결하고 스마트폰 사진 앱을 연 뒤 하단 메뉴에서 <strong>'가져오기'</strong> 탭을 클릭하여 인포트하면 라이브 포토 형식으로 깔끔하게 저장됩니다."
+      }
+    }
+  },
+  "fr": {
+    "lang-name": "Français",
+    "html-lang": "fr",
+    "app_name": "Albums de Nikki",
+    "app_description": "Gerez facilement et efficacement vos albums photo de jeu. Entièrement gratuit, open-source et sans publicité.",
+    "homepage": {
+      "title": "Albums de Nikki - Un gestionnaire d'albums photo pour Infinity Nikki",
+      "description": "Gerez facilement et efficacement vos albums photo de jeu. Entièrement gratuit, open-source et sans publicité.",
+      "json_ld": {
+        "name": "Albums de Nikki官网",
+        "description": "Un gestionnaire d'albums photo élégant et efficace conçu pour les joueurs d'Infinity Nikki",
+        "keyword_1": "Albums de Nikki",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Albums de Nikki"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutoriel",
+        "download": "Télécharger"
+      },
+      "hero_title": "Albums de Nikki",
+      "hero_description": "Un gestionnaire d'albums photo élégant et efficace conçu pour les joueurs d'Infinity Nikki",
+      "hero_sub_description": "Gerez facilement et efficacement vos albums photo de jeu. Entièrement gratuit, open-source et sans publicité.",
+      "btn_download": "Télécharger maintenant",
+      "btn_github": "Dépôt GitHub",
+      "compat_hint": "Prend en charge Windows 10/11 et macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Galerie d'Albums",
+        "decode": "Décodeur de métadonnées"
+      },
+      "card": {
+        "1": {
+          "title": "Gestion d'Albums Complète",
+          "description": "Gerez 19 catégories d'albums et 3 types de ressources internes, optimisés pour tous vos souvenirs."
+        },
+        "2": {
+          "title": "Analyse des Métadonnées",
+          "description": "Analyse l'ouverture, la focale, les filtres et les coordonnées pour recréer vos meilleures prises."
+        },
+        "3": {
+          "title": "Traitement par Lots Efficace",
+          "description": "Exportation, restauration, transfert et suppression par lots avec détection intelligente des doublons."
+        },
+        "4": {
+          "title": "Convertisseur Live Photo & GIF",
+          "description": "Convertissez vos vidéos en Live Photos (compatible Apple/Android) ou GIFs animés en un clic."
+        },
+        "5": {
+          "title": "Partage Sans Perte",
+          "description": "Copie dans le presse-papiers ou export sans perte via disque local ou LAN pour un partage rapide."
+        }
+      },
+      "footer": {
+        "disclaimer": "Albums de Nikki est un outil open-source non affilié à Infinity Nikki ou Papergames. Tous les droits d'auteur appartiennent à leurs propriétaires respectifs.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Note importante pour les utilisateurs macOS",
+        "description": "Puisqu'il s'agit d'une application portable signée ad-hoc, macOS Gatekeeper peut la bloquer lors du premier lancement.<br><br>Veuillez suivre ces étapes pour l'ouvrir normalement :<br>1. Si une boîte de dialogue indique \"Apple ne peut pas vérifier si l'application contient des logiciels malveillants\", cliquez sur <b>OK</b>.<br>2. Ouvrez <b>Réglages Système</b> > <b>Confidentialité et sécurité</b>.<br>3. Dans la section \"Sécurité\", localisez l'avis Nikki Albums et cliquez sur <b>Ouvrir quand même</b>.<br>4. Entrez votre mot de passe et validez.",
+        "ok": "J'ai compris"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - Manuel d'utilisation & Guide de transfert",
+      "description": "Guide d'utilisation officiel de Nikki Albums : gestion d'albums, multi-comptes, détection des doublons, décodage des métadonnées photo et transfert sans fil de Live Photos (iOS) ou Motion Photos (Android).",
+      "nav": {
+        "home": "Accueil",
+        "download": "Télécharger"
+      },
+      "side": {
+        "quickstart": "Prise en main",
+        "intro": "Présentation",
+        "installation": "Installation & Détection",
+        "categories": "Catégories d'albums",
+        "core": "Fonctions principales",
+        "accounts": "Multi-comptes",
+        "batch": "Actions par lots & Doublons",
+        "decoding": "Décodage de métadonnées",
+        "transfer": "Guides de transfert",
+        "conversion": "Conversion Live Photo & GIF",
+        "lan": "Partage sans fil local",
+        "ios": "Importation iOS (iPhone)",
+        "android": "Importation Android"
+      },
+      "sec": {
+        "intro_title": "Présentation",
+        "intro_p1": "Bienvenue dans <strong>Nikki Albums</strong> ! Cet outil open-source a été spécialement conçu pour aider les joueurs d'<em>Infinity Nikki</em> à gérer leurs captures.",
+        "intro_p2": "En jeu, vos plus belles photos, carnets de tenues, dessins DIY et cinématiques animées sont éparpillés à plusieurs endroits de votre disque dur. Nikki Albums <strong>scanne et centralise automatiquement</strong> toutes ces captures d'écran en catégories bien ordonnées. Il propose une séparation multi-comptes, un nettoyage intelligent des fichiers doublons, l'extraction des paramètres de caméra d'origine, et la possibilité exclusive d'assembler des clips vidéo sous forme de <strong>Live Photos (iOS)</strong> ou de <strong>Google Motion Photos (Android)</strong> pour les transférer facilement sur mobile via Wi-Fi local.",
+        "intro_tip_title": "Notice",
+        "intro_tip_desc": "Nikki Albums est entièrement gratuit, open-source et exempt de toute publicité. Il ne collecte aucune donnée personnelle ou information sur votre compte de jeu. Tous les processus de décodage et de conversion ont lieu hors ligne sur votre ordinateur local.",
+        "install_title": "Installation & Détection de chemin",
+        "install_desc": "Au lancement, l'application tente de localiser le répertoire d'installation d'<em>Infinity Nikki</em> et de détecter les dossiers de captures :",
+        "install_li1": "<strong>Compatibilité serveurs</strong> : Gère automatiquement le scan des répertoires pour les serveurs de Chine Continentale (Papergames) et les serveurs Globaux (Global Server).",
+        "install_li2": "<strong>Configuration manuelle</strong> : Si l'emplacement automatique échoue (par exemple en cas d'installation personnalisée), vous pouvez configurer manuellement le chemin de l'exécuteur de jeu dans l'onglet \"Paramètres\".",
+        "cat_title": "Catégories d'albums",
+        "cat_desc": "L'application trie vos images en deux sections distinctes, réparties sur 19 albums indépendants et 3 zones de ressources de jeu :",
+        "cat_li1": "<strong>Albums standards (19)</strong> : Captures de jeu (ScreenShot), tenues DIY (DIY), teinture végétale (PlantDyeing), magazines de mode (MagazinePhotos), et avatars (CustomAvatar).",
+        "cat_li2": "<strong>Albums dynamiques</strong> : Vos enregistrements animés (NikkiPhotos) et fichiers vidéo externes importés.",
+        "cat_li3": "<strong>Ressources (3)</strong> : Illustrations de jeu intégrées, cartes globales et icônes d'interface.",
+        "acc_title": "Gestion multi-comptes",
+        "acc_desc": "Si plusieurs comptes de jeu (UID différents) ont été connectés sur votre ordinateur, Nikki Albums les liste tous :",
+        "acc_li1": "<strong>Filtre UID</strong> : Basculez facilement d'un compte à l'autre via le menu déroulant en haut à gauche.",
+        "acc_li2": "<strong>Isolation des données</strong> : Les photos de chaque compte sont enregistrées séparément, prévenant les mélanges indésirables pour les joueurs multi-comptes.",
+        "batch_title": "Actions par lots & Doublons",
+        "batch_desc": "Gérez efficacement vos captures grâce à notre workflow automatisé :",
+        "batch_li1": "<strong>Contrôle de masse</strong> : Sélectionnez vos captures pour les exporter, les restaurer, les déplacer ou les supprimer en un clic.",
+        "batch_li2": "<strong>Filtre intelligent anti-doublons</strong> : Lors des transferts par lots, l'application compare les signatures numériques (MD5). Si une photo identique est détectée à la destination, elle est ignorée pour économiser l'espace disque.",
+        "dec_title": "Décodage de métadonnées",
+        "dec_desc": "<em>Infinity Nikki</em> stocke des métadonnées de scène chiffrées dans vos captures d'écran. Nikki Albums les extrait à la volée :",
+        "dec_li1": "<strong>Environnement de jeu</strong> : Affiche le <strong>temps qu'il faisait, l'heure en jeu et les coordonnées géographiques exactes</strong> de la prise de vue.",
+        "dec_li2": "<strong>Caméra & Filtres</strong> : Affiche la focale, l'ouverture de diaphragme, la profondeur de champ, l'exposition et le filtre de couleur appliqué.",
+        "dec_li3": "<strong>Copier les paramètres</strong> : Copiez ces configurations en un clic pour les reproduire en jeu ou les partager avec la communauté !",
+        "conv_title": "Convertisseur Live Photo & GIF",
+        "conv_desc": "Rendez vos captures statiques vivantes en reconstituant le mouvement d'origine :",
+        "conv_li1": "<strong>Source</strong> : Convertissez vos clips vidéos issus du jeu ou de fichiers externes en formats animés.",
+        "conv_li2": "<strong>Formats d'images animées (Live Photo / Motion Photo)</strong> :",
+        "conv_li3": "<strong>GIF Animés</strong> : Génère des images GIF légères et fluides, parfaites pour le partage sur les réseaux sociaux.",
+        "conv_tip_title": "Astuce d'export",
+        "conv_tip_desc": "Dans les paramètres, définissez votre format cible par défaut (<code>Apple Live Photo</code> ou <code>Google Motion Photo</code>) pour que le traitement s'adapte automatiquement à votre système mobile.",
+        "lan_title": "Partage sans fil local",
+        "lan_desc": "Transférez vos photos et Live Photos sans câble USB via le Wi-Fi local :",
+        "lan_li1": "<strong>Sélectionner</strong> : Cochez les photos ou Live Photos à transférer dans la galerie.",
+        "lan_li2": "<strong>Partager</strong> : Cliquez sur le bouton \"Exporter vers le réseau\".",
+        "lan_li3": "<strong>Lancer le serveur</strong> : L'application démarre un serveur web local sur le port <strong>58533</strong> et affiche un <strong>code QR</strong> et un <strong>lien réseau local</strong> (ex : <code>http://192.168.x.x:58533</code>).",
+        "lan_li4": "<strong>Recevoir sur mobile</strong> : Connectez votre mobile au <strong>même réseau Wi-Fi</strong>. Scannez le QR code ou entrez l'adresse dans votre navigateur pour télécharger vos fichiers (ZIP ou sauvegardes Nikkias).",
+        "ios_title": "Importation Live Photos sur iPhone (iOS)",
+        "ios_desc": "Pour qu'iOS reconnaisse une Live Photo, l'image <code>.JPG</code> et la vidéo <code>.MOV</code> doivent contenir le même identifiant de ressource (Asset ID). Choisissez la méthode adaptée à votre ordinateur :",
+        "ios_mac_title": "Pour les utilisateurs de macOS",
+        "ios_mac_desc": "Sur Mac, l'intégration est directe et entièrement prise en charge par l'application :",
+        "ios_mac_li1": "<strong>Export vers la bibliothèque</strong> : Cochez vos fichiers et cliquez sur <strong>\"Exporter vers la bibliothèque\"</strong>. Les Live Photos sont importées directement dans l'application <strong>Photos</strong> de macOS.",
+        "ios_mac_li2": "<strong>Synchronisation iCloud</strong> : Si \"Photos iCloud\" est activé sur vos appareils, la Live Photo sera synchronisée sans fil sur votre iPhone.",
+        "ios_mac_li3": "<strong>Via AirDrop</strong> : Si vous n'utilisez pas iCloud, faites un clic droit sur la Live Photo dans Photos macOS, puis partagez-la via <strong>AirDrop</strong> vers votre iPhone.",
+        "ios_win_title": "Pour les utilisateurs de Windows",
+        "ios_win_desc": "Sur Windows, deux méthodes s'offrent à vous selon l'état de votre compte iCloud :",
+        "ios_win_m1_title": "Méthode 1: Utilisation d'une clé USB ou d'un disque externe (Recommandé)",
+        "ios_win_m1_li1": "Préparez un disque externe ou une clé USB compatible avec votre iPhone.",
+        "ios_win_m1_li2": "Créez l'arborescence à la racine de la clé : un dossier nommé <code>DCIM</code>, puis à l'intérieur de celui-ci, un sous-dossier nommé <code>100APPLE</code> (Attention : il s'agit bien de deux dossiers imbriqués <code>DCIM/100APPLE/</code>, pas d'un seul dossier nommé \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Copiez les paires de fichiers <code>.JPG</code> et <code>.MOV</code> exportées dans ce dossier <code>100APPLE</code>.",
+        "ios_win_m2_title": "Méthode 2 : Téléchargement ZIP local & Application de conversion (Alternative)",
+        "ios_win_m2_li1": "Téléchargez l'archive <strong>ZIP</strong> depuis le serveur local de l'application sur le navigateur de votre mobile et extrayez-la dans l'application Fichiers.",
+        "ios_win_m2_li2": "iOS ne pouvant pas lier de simples fichiers JPG/MOV depuis Fichiers, téléchargez une application de conversion gratuite comme <code>intoLive</code>, chargez le fichier <code>.MOV</code> extrait et sauvegardez-le dans votre galerie comme Live Photo.",
+        "and_title": "Importation de Motion Photos sur Android",
+        "and_desc": "Android utilise la norme <code>Google Motion Photo</code> sous la forme d'un fichier unique, ce qui rend le transfert et la gestion extrêmement simples :",
+        "and_li1": "<strong>Exportation</strong> : Dans les paramètres de l'application PC, vérifiez que le format d'export est bien réglé sur <code>Google Motion Photo</code>. Cela génère un seul fichier <code>.jpg</code> contenant la vidéo.",
+        "and_li2": "<strong>Transfert</strong> : Envoyez le fichier <code>.jpg</code> directement sur votre mobile par Wi-Fi, câble USB ou via n'importe quel gestionnaire de fichiers.",
+        "and_li3": "<strong>Lecture</strong> : Ouvrez l'image dans <strong>Google Photos</strong> ou dans la Galerie de votre système Android. Appuyez sur l'icône de lecture ou restez appuyé sur l'image pour démarrer l'animation.",
+        "ios_win_m1_li4": "Branchez le périphérique à votre iPhone, ouvrez l'application <strong>Photos</strong> et allez dans l'onglet **\"Importer\"** pour les importer comme de vraies Live Photos."
+      }
+    }
+  },
+  "de": {
+    "lang-name": "Deutsch",
+    "html-lang": "de",
+    "app_name": "Nikki Alben",
+    "app_description": "Verwalten Sie Ihre Fotoalben im Spiel einfach und effizient. Völlig kostenlos, Open-Source und werbefrei.",
+    "homepage": {
+      "title": "Nikki Alben - Ein Fotoalbum-Manager für Infinity Nikki",
+      "description": "Verwalten Sie Ihre Fotoalben im Spiel einfach und effizient. Völlig kostenlos, Open-Source und werbefrei.",
+      "json_ld": {
+        "name": "Nikki Alben官网",
+        "description": "Ein eleganter und effizienter Fotoalbum-Manager für Spieler von Infinity Nikki",
+        "keyword_1": "Nikki Alben",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Nikki Alben"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutorial",
+        "download": "Herunterladen"
+      },
+      "hero_title": "Nikki Alben",
+      "hero_description": "Ein eleganter und effizienter Fotoalbum-Manager für Spieler von Infinity Nikki",
+      "hero_sub_description": "Verwalten Sie Ihre Fotoalben im Spiel einfach und effizient. Völlig kostenlos, Open-Source und werbefrei.",
+      "btn_download": "Jetzt herunterladen",
+      "btn_github": "GitHub-Repository",
+      "compat_hint": "Unterstützt Windows 10/11 & macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Album-Galerie",
+        "decode": "Metadaten-Decoder"
+      },
+      "card": {
+        "1": {
+          "title": "Umfassende Alben-Verwaltung",
+          "description": "Unterstützt 19 Albenkategorien und 3 interne Ressourcentypen, optimiert für alle Bildformate."
+        },
+        "2": {
+          "title": "Metadaten-Analyse",
+          "description": "Analysiert Blende, Brennweite, Filter und Koordinaten, um perfekte Kompositionen zu reproduzieren."
+        },
+        "3": {
+          "title": "Effiziente Stapelverarbeitung",
+          "description": "Massenexport, Wiederherstellung, Übertragung und Löschung mit intelligenter Duplikaterkennung."
+        },
+        "4": {
+          "title": "Live Photo & GIF Konverter",
+          "description": "Konvertieren Sie Videoalben in Apple- oder Android-kompatible Live Photos oder animierte GIFs."
+        },
+        "5": {
+          "title": "Verlustfreies Teilen",
+          "description": "In die Zwischenablage kopieren oder verlustfrei über lokale Festplatte oder LAN exportieren."
+        }
+      },
+      "footer": {
+        "disclaimer": "Nikki Alben ist ein Open-Source-Tool und steht in keiner Verbindung zu Infinity Nikki oder Papergames. Alle Urheberrechte liegen bei ihren jeweiligen Eigentümern.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Wichtiger Hinweis für macOS-Benutzer",
+        "description": "Da es sich um eine nicht signierte portable Anwendung handelt, blockiert macOS Gatekeeper sie möglicherweise beim ersten Start.<br><br>Bitte befolgen Sie diese Schritte, um sie normal zu öffnen:<br>1. Wenn ein Dialogfeld meldet, dass Apple die App nicht auf Schadsoftware überprüfen kann, klicken Sie auf <b>OK</b>.<br>2. Öffnen Sie die <b>Systemeinstellungen</b> > <b>Datenschutz & Sicherheit</b>.<br>3. Suchen Sie im Bereich „Sicherheit“ nach dem Hinweis zu Nikki Albums und klicken Sie auf <b>Dennoch öffnen</b>.<br>4. Geben Sie Ihr Passwort ein und bestätigen Sie.",
+        "ok": "Verstanden"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - Benutzerhandbuch & Transfer-Leitfaden",
+      "description": "Offizielles Benutzerhandbuch für Nikki Albums: Albenverwaltung, Multi-Account-Nutzung, Duplikatbereinigung, Dekodierung von Kameradaten und drahtloser Transfer von Live Photos (iOS) oder Motion Photos (Android) über lokales WLAN.",
+      "nav": {
+        "home": "Startseite",
+        "download": "Herunterladen"
+      },
+      "side": {
+        "quickstart": "Erste Schritte",
+        "intro": "Präsentation",
+        "installation": "Installation & Pfaderkennung",
+        "categories": "Albumkategorien",
+        "core": "Kernfunktionen",
+        "accounts": "Multi-Account",
+        "batch": "Stapelverarbeitung & Duplikate",
+        "decoding": "Metadaten-Decoder",
+        "transfer": "Transfer-Leitfaden",
+        "conversion": "Live Photo & GIF Konverter",
+        "lan": "Lokales WLAN-Teilen",
+        "ios": "iOS (iPhone) Import",
+        "android": "Android Import"
+      },
+      "sec": {
+        "intro_title": "Präsentation",
+        "intro_p1": "Willkommen bei <strong>Nikki Albums</strong>! Dieses Open-Source-Tool wurde speziell entwickelt, um Spielern von <em>Infinity Nikki</em> die Verwaltung ihrer Screenshots zu erleichtern.",
+        "intro_p2": "Im Spiel werden Nikkis schöne Fotos, Outfit-Tagebücher, DIY-Skizzen und animierte Videoalben an verschiedenen Orten auf der Festplatte gespeichert. Nikki Albums <strong>scannt und zentralisiert automatisch</strong> alle diese Screenshots in ordentlichen Kategorien. Es bietet Multi-Account-Trennung, intelligente Duplikatbereinigung, Dekodierung von Kamera-Originalparametern und die exklusive Funktion, Video-Clips als <strong>Live Photos (iOS)</strong> oder <strong>Google Motion Photos (Android)</strong> zusammenzufügen und über lokales WLAN drahtlos zu übertragen.",
+        "intro_tip_title": "Hinweis",
+        "intro_tip_desc": "Nikki Albums ist absolut kostenlos, Open-Source und völlig werbefrei. Es sammelt keine persönlichen Daten oder Spielkonto-Informationen. Alle Dekodierungs- und Konvertierungsprozesse finden offline auf Ihrem lokalen Computer statt.",
+        "install_title": "Installation & Pfaderkennung",
+        "install_desc": "Beim Start versucht die Anwendung, das Installationsverzeichnis von <em>Infinity Nikki</em> und die Screenshot-Ordner automatisch zu finden:",
+        "install_li1": "<strong>Server-Kompatibilität</strong>: Unterstützt die automatische Pfaderkennung sowohl für chinesische Festlandserver (Papergames) als auch für globale Server (Global Server).",
+        "install_li2": "<strong>Manuelle Konfiguration</strong>: Wenn der automatische Pfad fehlschlägt (z. B. bei einer benutzerdefinierten Installation), können Sie den Pfad des Spiel-Launchers in der Registerkarte \"Einstellungen\" manuell festlegen.",
+        "cat_title": "Albumkategorien",
+        "cat_desc": "Die Anwendung sortiert Ihre Bilder in zwei Bereiche, aufgeteilt auf 19 unabhängige Alben und 3 Spielressourcen-Bereiche:",
+        "cat_li1": "<strong>Standard-Alben (19)</strong>: Screenshots, DIY-Design-Skizzen (DIY), Pflanzenfärbung (PlantDyeing), Modemagazine (MagazinePhotos) und Avatare (CustomAvatar).",
+        "cat_li2": "<strong>Video-Alben</strong>: Nikkis animierte Aufnahmen (NikkiPhotos) und extern importierte Videodateien.",
+        "cat_li3": "<strong>Ressourcen (3)</strong>: Integrierte Grafiken, Umgebungskarten und Spiel-UI-Symbole.",
+        "acc_title": "Multi-Account-Verwaltung",
+        "acc_desc": "Wenn sich mehrere Spielkonten (verschiedene UIDs) auf Ihrem Computer angemeldet haben, listet Nikki Albums alle auf:",
+        "acc_li1": "<strong>UID-Filter</strong>: Wechseln Sie einfach zwischen den Konten über das Dropdown-Menü oben links.",
+        "acc_li2": "<strong>Datentrennung</strong>: Fotos jedes Kontos werden in separaten Ordnern gespeichert, um Vermischungen bei mehreren Accounts zu vermeiden.",
+        "batch_title": "Stapelverarbeitung & Duplikate",
+        "batch_desc": "Verwalten Sie Ihre Aufnahmen effizient durch unseren automatisierten Workflow:",
+        "batch_li1": "<strong>Massenkontrolle</strong>: Wählen Sie Dateien aus, um sie mit einem Klick zu exportieren, wiederherzustellen, zu verschieben oder zu löschen.",
+        "batch_li2": "<strong>Intelligenter Duplikatfilter</strong>: Beim Stapeltransfer vergleicht die App digitale Dateisignaturen (MD5). Existiert eine identische Datei am Zielort, wird sie übersprungen, um Festplattenspeicher zu sparen.",
+        "dec_title": "Metadaten-Decoder",
+        "dec_desc": "<em>Infinity Nikki</em> speichert verschlüsselte Szenenmetadaten in Ihren Screenshots. Nikki Albums extrahiert diese direkt:",
+        "dec_li1": "<strong>Spielumgebung</strong>: Zeigt das <strong>Wetter, die In-Game-Uhrzeit und die genauen geografischen Koordinaten</strong> des Aufnahmezeitpunkts an.",
+        "dec_li2": "<strong>Kamera & Filter</strong>: Zeigt Brennweite, Blendenöffnung, Schärfentiefe, Belichtungswerte und den Namen/die Intensität des angewendeten Farbfilters.",
+        "dec_li3": "<strong>Parameter kopieren</strong>: Kopieren Sie diese Einstellungen mit einem Klick, um sie im Spiel zu reproduzieren oder mit der Community zu teilen!",
+        "conv_title": "Live Photo & GIF Konverter",
+        "conv_desc": "Hauchen Sie Ihren statischen Aufnahmen Leben ein, indem Sie die ursprüngliche Bewegung wiederherstellen:",
+        "conv_li1": "<strong>Quelle</strong>: Konvertieren Sie Video-Clips aus dem Spiel oder lokale Dateien in animierte Formate.",
+        "conv_li2": "<strong>Animierte Bildformate (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF-Animation</strong>: Erzeugt kleine und flüssige GIF-Dateien, ideal zum Teilen in sozialen Netzwerken.",
+        "conv_tip_title": "Export-Tipp",
+        "conv_tip_desc": "Legen Sie in den Einstellungen Ihr Standardformat fest (<code>Apple Live Photo</code> oder <code>Google Motion Photo</code>), damit sich der Export automatisch an Ihr Mobilgerät anpasst.",
+        "lan_title": "Lokales WLAN-Teilen",
+        "lan_desc": "Übertragen Sie Ihre Fotos und Live Photos kabellos über lokales WLAN ohne USB-Kabel:",
+        "lan_li1": "<strong>Auswählen</strong>: Wählen Sie die Fotos oder Live Photos in der Galerie aus.",
+        "lan_li2": "<strong>Teilen</strong>: Klicken Sie auf den Button \"Exportieren ins Netzwerk\".",
+        "lan_li3": "<strong>Server starten</strong>: Die App startet einen lokalen Webserver auf Port <strong>58533</strong> und zeigt einen <strong>QR-Code</strong> sowie einen <strong>Netzwerklink</strong> (z. B. <code>http://192.168.x.x:58533</code>) an.",
+        "lan_li4": "<strong>Empfangen</strong>: Verbinden Sie Ihr Mobilgerät mit dem <strong>gleichen WLAN-Netzwerk</strong>. Scannen Sie den QR-Code oder geben Sie die Adresse im Browser ein, um Dateien herunterzuladen (ZIP oder Nikkias-Dateien).",
+        "ios_title": "Import von Live Photos auf das iPhone (iOS)",
+        "ios_desc": "Damit iOS ein Live Photo erkennt, müssen das <code>.JPG</code>-Bild und das <code>.MOV</code>-Video dieselbe Ressourcenkennung (Asset ID) enthalten. Wählen Sie die passende Methode für Ihren Computer:",
+        "ios_mac_title": "Für macOS-Benutzer",
+        "ios_mac_desc": "Auf dem Mac wird der direkte Import vollständig von der App unterstützt und ist am einfachsten:",
+        "ios_mac_li1": "<strong>Direktimport in die Mediathek</strong>: Wählen Sie Dateien aus und klicken Sie auf <strong>\"In Fotomediathek exportieren\"</strong>. Die Live Photos werden direkt in die macOS-<strong>Fotos-App</strong> importiert.",
+        "ios_mac_li2": "<strong>iCloud-Synchronisierung</strong>: Wenn \"iCloud-Fotos\" auf Ihren Geräten aktiviert ist, wird das Live Photo automatisch drahtlos auf Ihr iPhone synchronisiert.",
+        "ios_mac_li3": "<strong>Über AirDrop</strong>: Wenn Sie iCloud nicht nutzen, machen Sie in der Fotos-App auf dem Mac einen Rechtsklick auf das Live Photo und teilen es über <strong>AirDrop</strong> mit Ihrem iPhone.",
+        "ios_win_title": "Für Windows-Benutzer",
+        "ios_win_desc": "Unter Windows gibt es zwei Methoden, je nach Zustand Ihres iCloud-Kontos:",
+        "ios_win_m1_title": "Methode 1: Verwendung eines USB-Sticks oder einer externen Festplatte (Empfohlen)",
+        "ios_win_m1_li1": "Bereiten Sie einen USB-Stick oder eine externe Festplatte vor, die mit Ihrem iPhone kompatibel ist.",
+        "ios_win_m1_li2": "Erstellen Sie die Ordnerstruktur im Hauptverzeichnis des Sticks: einen Ordner namens <code>DCIM</code> und darin einen Ordner namens <code>100APPLE</code> (Achtung: Es müssen zwei verschachtelte Ordner sein <code>DCIM/100APPLE/</code>, nicht ein einzelner Ordner namens \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Kopieren Sie die exportierten <code>.JPG</code>- und <code>.MOV</code>-Dateipaare in diesen Ordner <code>100APPLE</code>.",
+        "ios_win_m2_title": "Methode 2: Lokaler ZIP-Download & Konvertierungs-App (Alternative)",
+        "ios_win_m2_li1": "Laden Sie das <strong>ZIP-Archiv</strong> vom lokalen App-Server auf den Browser Ihres Mobilgeräts herunter und entpacken Sie es in der Dateien-App.",
+        "ios_win_m2_li2": "Da iOS einzelne JPG/MOV-Dateien nicht direkt aus der Dateien-App zusammenfügen kann, laden Sie eine kostenlose Konvertierungs-App wie <code>intoLive</code> herunter, laden das entpackte <code>.MOV</code>-Video und speichern es als Live Photo in Ihrer Galerie.",
+        "and_title": "Import von Motion Photos auf Android",
+        "and_desc": "Android nutzt den Standard <code>Google Motion Photo</code> in Form einer einzelnen Datei, was Übertragung und Verwaltung extrem vereinfacht:",
+        "and_li1": "<strong>Export</strong>: Stellen Sie in den PC-App-Einstellungen sicher, dass das Exportformat auf <code>Google Motion Photo</code> eingestellt ist. Dies erzeugt eine einzelne <code>.jpg</code>-Datei mit eingebettetem Video.",
+        "and_li2": "<strong>Übertragung</strong>: Senden Sie die <code>.jpg</code>-Datei direkt über WLAN, USB-Kabel oder einen Dateimanager an Ihr Mobiltelefon.",
+        "and_li3": "<strong>Wiedergabe</strong>: Öffnen Sie das Bild in <strong>Google Fotos</strong> oder der Galerie Ihres Android-Systems. Tippen Sie auf das Wiedergabesymbol oder halten Sie das Bild gedrückt, um die Animation zu starten.",
+        "ios_win_m1_li4": "Schließen Sie das Laufwerk an Ihr iPhone an, öffnen Sie die <strong>Fotos-App</strong> und navigieren Sie zum Reiter **\"Importieren\"**, um sie als echte Live Photos zu importieren."
+      }
+    }
+  },
+  "es": {
+    "lang-name": "Español",
+    "html-lang": "es",
+    "app_name": "Álbumes de Nikki",
+    "app_description": "Gestiona tus álbumes de fotos del juego de forma fácil y eficaz. Totalmente gratuito, de código abierto y sin anuncios.",
+    "homepage": {
+      "title": "Álbumes de Nikki - Un gestor de álbumes de fotos para Infinity Nikki",
+      "description": "Gestiona tus álbumes de fotos del juego de forma fácil y eficaz. Totalmente gratuito, de código abierto y sin anuncios.",
+      "json_ld": {
+        "name": "Álbumes de Nikki官网",
+        "description": "Un gestor de álbumes de fotos elegante y eficiente diseñado para jugadores de Infinity Nikki",
+        "keyword_1": "Álbumes de Nikki",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Álbumes de Nikki"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutorial",
+        "download": "Descargar"
+      },
+      "hero_title": "Álbumes de Nikki",
+      "hero_description": "Un gestor de álbumes de fotos elegante y eficiente diseñado para jugadores de Infinity Nikki",
+      "hero_sub_description": "Gestiona tus álbumes de fotos del juego de forma fácil y eficaz. Totalmente gratuito, de código abierto y sin anuncios.",
+      "btn_download": "Descargar ahora",
+      "btn_github": "Repositorio GitHub",
+      "compat_hint": "Soporta Windows 10/11 y macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Galería de Álbumes",
+        "decode": "Decodificador de metadatos"
+      },
+      "card": {
+        "1": {
+          "title": "Gestión Integral de Álbumes",
+          "description": "Soporta 19 categorías de álbumes y 3 tipos de recursos internos, optimizado para fotos y vídeos."
+        },
+        "2": {
+          "title": "Análisis de Metadatos",
+          "description": "Analiza automáticamente apertura, distancia focal, filtros y coordenadas para recrear tomas perfectas."
+        },
+        "3": {
+          "title": "Procesamiento por Lotes Eficaz",
+          "description": "Exportación, restauración, transferencia y eliminación por lotes con detección inteligente de duplicados."
+        },
+        "4": {
+          "title": "Conversor de Live Photo y GIF",
+          "description": "Convierte vídeos en Live Photos (compatibles con Apple/Android) o GIFs animados con un clic."
+        },
+        "5": {
+          "title": "Compartir Sin Pérdidas",
+          "description": "Copia al portapapeles o exporta sin pérdidas vía disco local o red para compartir rápidamente."
+        }
+      },
+      "footer": {
+        "disclaimer": "Álbumes de Nikki es una herramienta de código abierto y no está afiliada a Infinity Nikki ni a Papergames. Todos los derechos de autor pertenecen a sus respectivos propietarios.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Nota importante para usuarios de macOS",
+        "description": "Como es una aplicación portátil sin firmar, macOS Gatekeeper podría bloquearla en el primer inicio.<br><br>Sigue estos pasos para abrirla normalmente:<br>1. Si aparece un diálogo que dice \"Apple no puede comprobar si la aplicación contiene software malicioso\", haz clic en <b>OK</b>.<br>2. Abre <b>Ajustes del Sistema</b> > <b>Privacidad y seguridad</b>.<br>3. En la sección \"Seguridad\", busca el aviso sobre Nikki Albums y haz clic en <b>Abrir de todos modos</b>.<br>4. Introduce tu contraseña y confirma.",
+        "ok": "Entendido"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - Manual de usuario y guía de transferencia",
+      "description": "Manual de usuario oficial de Nikki Albums: gestión de álbumes, cambio de cuentas múltiples, eliminación de duplicados, decodificación de parámetros de cámara y transferencia inalámbrica de Live Photos (iOS) o Motion Photos (Android) vía Wi-Fi.",
+      "nav": {
+        "home": "Inicio",
+        "download": "Descargar"
+      },
+      "side": {
+        "quickstart": "Primeros pasos",
+        "intro": "Presentación",
+        "installation": "Instalación y detección",
+        "categories": "Categorías de álbumes",
+        "core": "Funciones principales",
+        "accounts": "Multi-cuenta",
+        "batch": "Acciones por lotes y duplicados",
+        "decoding": "Decodificador de metadatos",
+        "transfer": "Guías de transferencia",
+        "conversion": "Conversor de Live Photo y GIF",
+        "lan": "Compartir por red local",
+        "ios": "Importación a iOS (iPhone)",
+        "android": "Importación a Android"
+      },
+      "sec": {
+        "intro_title": "Presentación",
+        "intro_p1": "¡Bienvenido a <strong>Nikki Albums</strong>! Esta herramienta de código abierto está diseñada especialmente para ayudar a los jugadores de <em>Infinity Nikki</em> a organizar sus capturas.",
+        "intro_p2": "En el juego, tus fotos más bellas, diarios de moda, diseños DIY y videos de álbumes dinámicos se guardan en carpetas locales dispersas. Nikki Albums <strong>escanea y agrupa automáticamente</strong> todas estas capturas en categorías organizadas. Cuenta con aislamiento de múltiples cuentas, eliminación inteligente de duplicados, decodificación de parámetros de la cámara original y la posibilidad exclusiva de convertir videoclips en <strong>Live Photos (iOS)</strong> o <strong>Google Motion Photos (Android)</strong> para transferirlos fácilmente mediante Wi-Fi local.",
+        "intro_tip_title": "Aviso",
+        "intro_tip_desc": "Nikki Albums es completamente gratuito, de código abierto y libre de anuncios. No recopila datos personales ni información de tu cuenta del juego. Todos los procesos de decodificación y conversión se realizan sin conexión en tu ordenador local.",
+        "install_title": "Instalación y detección de ruta",
+        "install_desc": "Al iniciar, la aplicación intenta localizar de forma automática el directorio de instalación de <em>Infinity Nikki</em> y detectar las carpetas de capturas de pantalla:",
+        "install_li1": "<strong>Compatibilidad de servidores</strong>: Escanea de forma automática los directorios de los servidores de China Continental (Papergames) y Globales (Global Server).",
+        "install_li2": "<strong>Configuración manual</strong>: Si la detección automática falla (por ejemplo, en instalaciones en discos no predeterminados), puedes configurar de forma manual la ruta del launcher en la pestaña \"Ajustes\".",
+        "cat_title": "Categorías de álbumes",
+        "cat_desc": "La aplicación clasifica tus imágenes en dos secciones que abarcan 19 álbumes independientes y 3 áreas de recursos de juego:",
+        "cat_li1": "<strong>Álbumes estándar (19)</strong>: Capturas en el juego (ScreenShot), diseños DIY (DIY), teñido vegetal (PlantDyeing), revistas de moda (MagazinePhotos) y avatares personalizados (CustomAvatar).",
+        "cat_li2": "<strong>Álbumes dinámicos</strong>: Grabaciones de video del juego (NikkiPhotos) y archivos de video externos importados.",
+        "cat_li3": "<strong>Ressources (3)</strong>: Ilustraciones de juego integradas, mapas del mundo y logos/iconos del sistema.",
+        "acc_title": "Gestión de cuentas múltiples",
+        "acc_desc": "Si en tu ordenador se han conectado diferentes cuentas del juego (con distintos UID), Nikki Albums las reconoce todas:",
+        "acc_li1": "<strong>Filtro UID</strong>: Cambia con facilidad entre diferentes UID mediante el menú desplegable en la parte superior izquierda.",
+        "acc_li2": "<strong>Aislamiento de datos</strong>: Las fotos de cada cuenta se guardan de forma independiente para evitar mezclas no deseadas entre múltiples usuarios.",
+        "batch_title": "Acciones por lotes y duplicados",
+        "batch_desc": "Gestiona tus capturas de forma rápida gracias a nuestro flujo de trabajo optimizado:",
+        "batch_li1": "<strong>Control de masa</strong>: Selecciona capturas para exportar, restaurar, mover o eliminar todo en un solo clic.",
+        "batch_li2": "<strong>Filtro de duplicados inteligente</strong>: Al transferir archivos por lotes, la aplicación compara las firmas digitales (MD5). Si se detecta un archivo idéntico en el destino, se omite de forma automática para ahorrar espacio.",
+        "dec_title": "Decodificador de metadatos",
+        "dec_desc": "<em>Infinity Nikki</em> guarda metadonnées chiffrados en tus capturas de pantalla. Nikki Albums los extrae directamente:",
+        "dec_li1": "<strong>Entorno de juego</strong>: Muestra el <strong>clima, la hora del juego y las coordenadas geográficas exactas</strong> de la toma.",
+        "dec_li2": "<strong>Cámara y filtros</strong>: Muestra la distancia focal, apertura de diafragma, profundidad de campo, exposición y el nombre/intensidad del filtro aplicado.",
+        "dec_li3": "<strong>Copiar parámetros</strong>: Copia estos ajustes con un clic para compartirlos o reproducir las mismas tomas en tu juego.",
+        "conv_title": "Conversor de Live Photo y GIF",
+        "conv_desc": "Da vida a tus imágenes estáticas al reconstruir el movimiento original del juego:",
+        "conv_li1": "<strong>Entradas</strong>: Convierte videoclips grabados en el juego o archivos locales en formatos dinámicos.",
+        "conv_li2": "<strong>Formatos dinámicos (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF Animados</strong>: Genera imágenes GIF ligeras y fluidas, ideales para compartir en redes sociales.",
+        "conv_tip_title": "Consejo de exportación",
+        "conv_tip_desc": "En los ajustes, define el formato de exportación por defecto (<code>Apple Live Photo</code> o <code>Google Motion Photo</code>) para adaptarlo a tu dispositivo móvil de forma automática.",
+        "lan_title": "Transferencia inalámbrica LAN",
+        "lan_desc": "Transfiere tus fotos y Live Photos sin cables mediante la red Wi-Fi local:",
+        "lan_li1": "<strong>Seleccionar</strong>: Elige las fotos o Live Photos que quieras enviar desde la galería.",
+        "lan_li2": "<strong>Compartir</strong>: Haz clic en el botón \"Exportar a la red\".",
+        "lan_li3": "<strong>Lanzar servidor</strong>: La app inicia un servidor local en el puerto <strong>58533</strong> y genera un <strong>código QR</strong> y un <strong>enlace local</strong> (ej. <code>http://192.168.x.x:58533</code>).",
+        "lan_li4": "<strong>Recibir en móvil</strong>: Conecta tu móvil al <strong>mismo Wi-Fi de la red</strong>. Escanea el QR o entra en la dirección para descargar tus archivos (ZIP o copias Nikkias).",
+        "ios_title": "Importación de Live Photos a iPhone (iOS)",
+        "ios_desc": "Para que iOS reconozca una Live Photo, el archivo <code>.JPG</code> y el video <code>.MOV</code> deben incluir el mismo identificador (Asset ID). Elige el método adecuado para tu equipo:",
+        "ios_mac_title": "Para usuarios de macOS",
+        "ios_mac_desc": "En Mac, la integración es nativa y se realiza directamente a través de la aplicación:",
+        "ios_mac_li1": "<strong>Exportación a la fototeca</strong>: Selecciona los archivos y haz clic en <strong>\"Exportar a la fototeca\"</strong>. Las fotos se importarán en la aplicación <strong>Fotos</strong> de macOS de forma automática.",
+        "ios_mac_li2": "<strong>Fotos en iCloud</strong>: Si tienes \"Fotos en iCloud\" activado en tus dispositivos, la Live Photo se sincronizará de forma inalámbrica en tu iPhone.",
+        "ios_mac_li3": "<strong>Vía AirDrop</strong>: Si no usas iCloud, haz clic derecho sobre la Live Photo en Fotos macOS y envíala a través de <strong>AirDrop</strong> a tu iPhone.",
+        "ios_win_title": "Para usuarios de Windows",
+        "ios_win_desc": "En Windows, dispones de dos métodos según uses o no el servicio de iCloud:",
+        "ios_win_m1_title": "Método 1: Uso de memoria USB o disco externo (Recomendado)",
+        "ios_win_m1_li1": "Prepara una memoria USB o disco externo compatible con tu iPhone.",
+        "ios_win_m1_li2": "Crea las carpetas en la raíz de la unidad USB: una carpeta llamada <code>DCIM</code> y dentro una carpeta llamada <code>100APPLE</code> (Atención: deben ser dos carpetas anidadas <code>DCIM/100APPLE/</code>, no una carpeta de un solo nivel llamada \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Copia las parejas de archivos <code>.JPG</code> y <code>.MOV</code> exportadas en la carpeta <code>100APPLE</code>.",
+        "ios_win_m2_title": "Método 2: Descarga local de ZIP y App de conversión (Alternativa inalámbrica)",
+        "ios_win_m2_li1": "Descarga el archivo <strong>ZIP</strong> de la red local desde el navegador móvil y extráelo con la app Archivos de tu dispositivo iOS.",
+        "ios_win_m2_li2": "Como iOS no puede enlazar archivos JPG/MOV sueltos en Archivos, descarga una app gratuita como <code>intoLive</code>, importa el video <code>.MOV</code> extraído y guárdalo en tu galería como Live Photo.",
+        "and_title": "Importación de Motion Photos a Android",
+        "and_desc": "Android utiliza el formato único de <code>Google Motion Photo</code>, lo que hace que la transferencia y la organización sean sumamente fáciles:",
+        "and_li1": "<strong>Exportar</strong>: Asegúrate de que el formato de exportación en los ajustes del programa de PC esté en <code>Google Motion Photo</code>. Esto genera un archivo individual <code>.jpg</code> que integra el video.",
+        "and_li2": "<strong>Transferencia</strong>: Envía el archivo <code>.jpg</code> directo al dispositivo Android mediante red Wi-Fi, cable USB o cualquier app de archivos.",
+        "and_li3": "<strong>Reproducción</strong>: Abre la foto en <strong>Google Fotos</strong> o en la Galería del sistema Android. Presiona el botón de reproducción o mantén presionada la foto para ver la animación.",
+        "ios_win_m1_li4": "Conecta la memoria a tu iPhone, abre la app <strong>Fotos</strong> y navega a la pestaña **\"Importar\"** para añadirlas directamente como Live Photos."
+      }
+    }
+  },
+  "it": {
+    "lang-name": "Italiano",
+    "html-lang": "it",
+    "app_name": "Album di Nikki",
+    "app_description": "Gestisci i tuoi album fotografici di gioco in modo facile ed efficiente. Completamente gratuito, open-source e senza pubblicità.",
+    "homepage": {
+      "title": "Album di Nikki - Un gestore di album fotografici per Infinity Nikki",
+      "description": "Gestisci i tuoi album fotografici di gioco in modo facile ed efficiente. Completamente gratuito, open-source e senza pubblicità.",
+      "json_ld": {
+        "name": "Album di Nikki官网",
+        "description": "Un gestore di album fotografici elegante ed efficiente pensato per i giocatori di Infinity Nikki",
+        "keyword_1": "Album di Nikki",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Album di Nikki"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutorial",
+        "download": "Scarica"
+      },
+      "hero_title": "Album di Nikki",
+      "hero_description": "Un gestore di album fotografici elegante ed efficiente pensato per i giocatori di Infinity Nikki",
+      "hero_sub_description": "Gestisci i tuoi album fotografici di gioco in modo facile ed efficiente. Completamente gratuito, open-source e senza pubblicità.",
+      "btn_download": "Scarica ora",
+      "btn_github": "Repository GitHub",
+      "compat_hint": "Supporta Windows 10/11 e macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Galleria Album",
+        "decode": "Decodificatore metadati"
+      },
+      "card": {
+        "1": {
+          "title": "Gestione Album Completa",
+          "description": "Supporta 19 categorie di album e 3 tipi di risorse interne, ottimizzato per ogni tipo di contenuto."
+        },
+        "2": {
+          "title": "Analisi dei Metadati",
+          "description": "Analizza apertura, focale, filtri e coordinate per aiutarti a ricreare i tuoi scatti migliori."
+        },
+        "3": {
+          "title": "Elaborazione Batch Efficiente",
+          "description": "Esportazione, ripristino, trasferimento e rimozione batch con rilevamento intelligente dei duplicati."
+        },
+        "4": {
+          "title": "Convertitore Live Photo e GIF",
+          "description": "Converti video in Live Photo (compatibili Apple/Android) o GIF animate in un solo clic."
+        },
+        "5": {
+          "title": "Condivisione Senza Perdita",
+          "description": "Copia negli appunti o esporta senza perdita via disco locale o LAN per una condivisione veloce."
+        }
+      },
+      "footer": {
+        "disclaimer": "Album di Nikki è uno strumento open-source e non è affiliato a Infinity Nikki o Papergames. Tutti i diritti d'autore appartengono ai rispettivi proprietari.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Nota importante per gli utenti macOS",
+        "description": "Trattandosi di un'applicazione portabile non firmata, macOS Gatekeeper potrebbe bloccarla al primo avvio.<br><br>Segui questi passaggi per aprirla normalmente:<br>1. Se compare un avviso che dice \"Apple non può verificare la presenza di malware\", fai clic su <b>OK</b>.<br>2. Apri <b>Impostazioni di Sistema</b> > <b>Privacy e sicurezza</b>.<br>3. Nella sezione \"Sicurezza\", individua l'avviso su Nikki Albums e fai clic su <b>Apri comunque</b>.<br>4. Inserisci la tua password e conferma.",
+        "ok": "Capito"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - Manuale utente e guida al trasferimento",
+      "description": "Manuale utente ufficiale di Nikki Albums: gestione degli album di Infinity Nikki, passaggio multi-account, pulizia dei duplicati, decodifica dei parametri della fotocamera e trasferimento wireless di Live Photos (iOS) o Motion Photos (Android) tramite rete locale.",
+      "nav": {
+        "home": "Home",
+        "download": "Scarica"
+      },
+      "side": {
+        "quickstart": "Guida rapida",
+        "intro": "Presentazione",
+        "installation": "Installazione e rilevamento",
+        "categories": "Categorie album",
+        "core": "Funzioni principali",
+        "accounts": "Multi-account",
+        "batch": "Azioni batch e duplicati",
+        "decoding": "Decodificatore metadati",
+        "transfer": "Guide al trasferimento",
+        "conversion": "Convertitore Live Photo e GIF",
+        "lan": "Condivisione LAN wireless",
+        "ios": "Importazione iOS (iPhone)",
+        "android": "Importazione Android"
+      },
+      "sec": {
+        "intro_title": "Presentazione",
+        "intro_p1": "Benvenuto su <strong>Nikki Albums</strong>! Questo strumento open-source è stato progettato per aiutare i giocatori di <em>Infinity Nikki</em> a gestire al meglio i loro scatti.",
+        "intro_p2": "In gioco, le tue foto più belle, i diari di moda, i design DIY e i video degli album dinamici vengono salvati in cartelle locali sparse. Nikki Albums <strong>scansiona e raggruppa automaticamente</strong> tutte queste catture di schermata in categorie ben ordinate. Offre l'isolamento dei dati multi-account, l'eliminazione intelligente dei file duplicati, la decodifica dei parametri originali della fotocamera e la possibilità esclusiva di convertire video in <strong>Live Photos (iOS)</strong> o <strong>Google Motion Photos (Android)</strong> per trasferirli su cellulare tramite Wi-Fi locale.",
+        "intro_tip_title": "Avviso",
+        "intro_tip_desc": "Nikki Albums è completamente gratuito, open-source e privo di annunci. Non raccoglie dati personali o informazioni sul tuo account di gioco. Tutti i processi di decodifica e conversione si svolgono offline sul tuo computer locale.",
+        "install_title": "Installazione e rilevamento del percorso",
+        "install_desc": "All'avvio, l'applicazione tenta di localizzare automaticamente la cartella d'installazione di <em>Infinity Nikki</em> e di identificare le cartelle degli screenshot:",
+        "install_li1": "<strong>Compatibilità server</strong>: Supporta la scansione automatica per i server della Cina continentale (Papergames) e globali (Global Server).",
+        "install_li2": "<strong>Configurazione manuale</strong>: Se il rilevamento automatico fallisce (ad esempio in caso di installazioni personalizzate), puoi impostare manualmente il percorso del launcher nella scheda \"Impostazioni\".",
+        "cat_title": "Categorie album",
+        "cat_desc": "L'applicazione organizza le immagini in due sezioni distinte, suddivise in 19 album indipendenti e 3 aree di risorse di gioco:",
+        "cat_li1": "<strong>Album standard (19)</strong>: Catture di gioco (ScreenShot), design DIY (DIY), tintura vegetale (PlantDyeing), riviste di moda (MagazinePhotos) e avatar personalizzati (CustomAvatar).",
+        "cat_li2": "<strong>Album dinamici</strong>: Registrazioni video del gioco (NikkiPhotos) e file video esterni importati.",
+        "cat_li3": "<strong>Risorse (3)</strong>: Illustrazioni di gioco integrate, mappe globali e icone dell'interfaccia di gioco.",
+        "acc_title": "Gestione multi-account",
+        "acc_desc": "Se sul computer sono stati utilizzati più account di gioco (con UID diversi), Nikki Albums li rileva tutti:",
+        "acc_li1": "<strong>Filtro UID</strong>: Passa facilmente da un account all'altro usando il menu a discesa in alto a sinistra.",
+        "acc_li2": "<strong>Isolamento dei dati</strong>: Le foto di ogni account vengono salvate in cartelle indipendenti, evitando confusioni per chi usa più account.",
+        "batch_title": "Azioni batch e duplicati",
+        "batch_desc": "Gestisci i tuoi screenshot in modo rapido grazie al nostro flusso di lavoro automatizzato:",
+        "batch_li1": "<strong>Controllo di massa</strong>: Seleziona più file per esportarli, ripristinarli, spostarli o eliminarli con un solo clic.",
+        "batch_li2": "<strong>Filtro duplicati intelligente</strong>: Durante il trasferimento, l'app confronta le firme digitali (MD5). Se un file identico è già presente nel percorso di destinazione, viene saltato automaticamente per risparmiare spazio.",
+        "dec_title": "Decodificatore metadati",
+        "dec_desc": "<em>Infinity Nikki</em> memorizza metadati cifrati all'interno dei tuoi screenshot. Nikki Albums li estrae direttamente:",
+        "dec_li1": "<strong>Ambiente di gioco</strong>: Visualizza il <strong>meteo, l'ora del gioco e le coordinate geografiche esatte</strong> del momento dello scatto.",
+        "dec_li2": "<strong>Fotocamera e filtri</strong>: Mostra la lunghezza focale, l'apertura del diaframma, la profondità di campo, i valori di esposizione e il nome/intensità del filtro applicato.",
+        "dec_li3": "<strong>Copia parametri</strong>: Copia queste impostazioni con un clic per condividerle o replicare lo stesso scatto all'interno del gioco!",
+        "conv_title": "Convertitore Live Photo e GIF",
+        "conv_desc": "Dai vita ai tuoi scatti statici ricostruendo il movimento originale del gioco:",
+        "conv_li1": "<strong>Origine</strong>: Converti i videoclip registrati in gioco o file locali in formati dinamici.",
+        "conv_li2": "<strong>Formati dinamici (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF animate</strong>: Genera file GIF leggeri e fluidi, perfetti per la condivisione sui social.",
+        "conv_tip_title": "Consiglio per l'esportazione",
+        "conv_tip_desc": "Nelle impostazioni, imposta il tuo formato preferito (<code>Apple Live Photo</code> o <code>Google Motion Photo</code>) affinché l'esportazione si adatti automaticamente al tuo cellulare.",
+        "lan_title": "Condivisione LAN wireless",
+        "lan_desc": "Trasferisci foto e Live Photos senza fili tramite la rete Wi-Fi locale:",
+        "lan_li1": "<strong>Seleziona</strong>: Scegli le foto o le Live Photos da inviare dalla galleria.",
+        "lan_li2": "<strong>Condividi</strong>: Fai clic sul pulsante \"Esporta sulla rete\".",
+        "lan_li3": "<strong>Avvia server</strong>: L'app avvia un server locale sulla porta <strong>58533</strong> e genera un <strong>codice QR</strong> e un <strong>link locale</strong> (es. <code>http://192.168.x.x:58533</code>).",
+        "lan_li4": "<strong>Ricevi su mobile</strong>: Connetti il cellulare alla <strong>stessa rete Wi-Fi</strong>. Scansiona il QR o inserisci l'indirizzo per scaricare i file (ZIP o file Nikkias).",
+        "ios_title": "Importazione delle Live Photos su iPhone (iOS)",
+        "ios_desc": "Perché iOS riconosca una Live Photo, l'immagine <code>.JPG</code> e il video <code>.MOV</code> devono includere lo stesso identificatore di risorsa (Asset ID). Scegli il metodo adatto al tuo computer:",
+        "ios_mac_title": "Per gli utenti di macOS",
+        "ios_mac_desc": "Su Mac, l'integrazione è nativa e viene eseguita direttamente dall'applicazione:",
+        "ios_mac_li1": "<strong>Esporta nella libreria</strong>: Seleziona i file e fai clic su <strong>\"Esporta nella libreria di foto\"</strong>. Le foto verranno importate automaticamente nell'applicazione <strong>Foto</strong> di macOS.",
+        "ios_mac_li2": "<strong>Foto di iCloud</strong>: Se la funzione \"Foto di iCloud\" è attiva sui tuoi dispositivi, la Live Photo verrà sincronizzata in modalità wireless sul tuo iPhone.",
+        "ios_mac_li3": "<strong>Tramite AirDrop</strong>: Se non utilizzi iCloud, fai clic destro sulla Live Photo in Foto macOS e inviala tramite <strong>AirDrop</strong> al tuo iPhone.",
+        "ios_win_title": "Per gli utenti di Windows",
+        "ios_win_desc": "Su Windows, puoi scegliere tra due metodi a seconda dello stato del tuo account iCloud:",
+        "ios_win_m1_title": "Metodo 1: Uso di chiavetta USB o disco esterno (Consigliato)",
+        "ios_win_m1_li1": "Prepara una chiavetta USB o un disco esterno compatibile con il tuo iPhone.",
+        "ios_win_m1_li2": "Crea la struttura delle cartelle nella directory radice della chiavetta: una cartella chiamata <code>DCIM</code> e al suo interno una cartella chiamata <code>100APPLE</code> (Attenzione: devono essere due cartelle annidate <code>DCIM/100APPLE/</code>, non una singola cartella di un solo livello chiamata \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Copia le coppie di file <code>.JPG</code> e <code>.MOV</code> esportate in questo cartella <code>100APPLE</code>.",
+        "ios_win_m2_title": "Metodo 2: Download locale di ZIP e App di conversione (Alternativa wireless)",
+        "ios_win_m2_li1": "Scarica l'archivio <strong>ZIP</strong> dalla rete locale sul browser del tuo cellulare ed estrailo con l'app File del tuo dispositivo iOS.",
+        "ios_win_m2_li2": "Poiché iOS non può collegare file JPG/MOV sfusi dall'app File, scarica un'app di conversione gratuita come <code>intoLive</code>, carica il file <code>.MOV</code> estratto e salvalo nella tua galleria come Live Photo.",
+        "and_title": "Importazione di Motion Photos su Android",
+        "and_desc": "Android utilizza lo standard <code>Google Motion Photo</code> sotto forma di un singolo file, rendendo il trasferimento e la gestione estremamente semplici:",
+        "and_li1": "<strong>Esportazione</strong> : Nelle impostazioni dell'app PC, verifica che il formato di esportazione sia impostato su <code>Google Motion Photo</code>. Questo genererà un singolo file <code>.jpg</code> contenente il video.",
+        "and_li2": "<strong>Trasferimento</strong>: Invia il file <code>.jpg</code> direttamente sul tuo cellulare tramite Wi-Fi, cavo USB o tramite qualsiasi gestore di file.",
+        "and_li3": "<strong>Riproduzione</strong>: Apri l'immagine in <strong>Google Foto</strong> o nella Galleria del tuo sistema Android. Premi l'icona di riproduzione o tieni premuto sull'immagine per avviare l'animazione.",
+        "ios_win_m1_li4": "Collega l'unità al tuo iPhone, apri l'app <strong>Foto</strong> e vai alla scheda **\"Importa\"** per aggiungerle direttamente come Live Photos."
+      }
+    }
+  },
+  "pt": {
+    "lang-name": "Português",
+    "html-lang": "pt",
+    "app_name": "Álbuns da Nikki",
+    "app_description": "Gerencie seus álbuns de fotos do jogo de forma fácil e eficiente. Totalmente gratuito, de código aberto e sem anúncios.",
+    "homepage": {
+      "title": "Álbuns da Nikki - Um gerenciador de álbuns de fotos para Infinity Nikki",
+      "description": "Gerencie seus álbuns de fotos do jogo de forma fácil e eficiente. Totalmente gratuito, de código aberto e sem anúncios.",
+      "json_ld": {
+        "name": "Álbuns da Nikki官网",
+        "description": "Um gerenciador de álbuns de fotos elegante e eficiente criado para jogadores de Infinity Nikki",
+        "keyword_1": "Álbuns da Nikki",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Álbuns da Nikki"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutorial",
+        "download": "Baixar"
+      },
+      "hero_title": "Álbuns da Nikki",
+      "hero_description": "Um gerenciador de álbuns de fotos elegante e eficiente criado para jogadores de Infinity Nikki",
+      "hero_sub_description": "Gerencie seus álbuns de fotos do jogo de forma fácil e eficiente. Totalmente gratuito, de código aberto e sem anúncios.",
+      "btn_download": "Baixar agora",
+      "btn_github": "Repositório GitHub",
+      "compat_hint": "Suporta Windows 10/11 e macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Galeria de Álbuns",
+        "decode": "Decodificador de metadados"
+      },
+      "card": {
+        "1": {
+          "title": "Gestão Abrangente de Álbuns",
+          "description": "Suporta 19 categorias de álbuns e 3 tipos de recursos internos, otimizado para todos os formatos."
+        },
+        "2": {
+          "title": "Análise de Metadados",
+          "description": "Analisa abertura, distância focal, filtros e coordenadas para ajudar a recriar fotos perfeitas."
+        },
+        "3": {
+          "title": "Processamento em Lote Eficiente",
+          "description": "Exportação, restauração, transferência e eliminação em lote com deteção inteligente de duplicados."
+        },
+        "4": {
+          "title": "Conversor de Live Photo e GIF",
+          "description": "Converta vídeos em Live Photos (compatíveis com Apple/Android) o GIFs animados num clique."
+        },
+        "5": {
+          "title": "Partilha Sem Perdas",
+          "description": "Copie para a área de transferência o exporte sem perdas via disco local ou rede local."
+        }
+      },
+      "footer": {
+        "disclaimer": "Álbuns da Nikki é uma ferramenta de código aberto e não é afiliada à Infinity Nikki ou Papergames. Todos os direitos autorais pertencem aos seus respectivos proprietários.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Nota importante para usuários do macOS",
+        "description": "Como este é um aplicativo portátil sem assinatura oficial, o macOS Gatekeeper pode bloqueá-lo na primeira execução.<br><br>Siga estas etapas para abri-lo normalmente:<br>1. Se um aviso disser que a Apple não pode verificar se há malware, clique em <b>OK</b>.<br>2. Abra <b>Ajustes do Sistema</b> > <b>Privacidade e Segurança</b>.<br>3. Na seção \"Segurança\", localize a mensagem sobre o Nikki Albums e clique em <b>Abrir Mesmo Assim</b>.<br>4. Digite a sua senha e confirme.",
+        "ok": "Entendido"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - Manual do usuário e guia de transferência",
+      "description": "Manual do usuário oficial do Nikki Albums: gerenciamento de álbuns, alternância de contas múltiplas, remoção de duplicatas, decodificação de metadados de câmera e transferência sem fio de Live Photos (iOS) ou Motion Photos (Android) via Wi-Fi local.",
+      "nav": {
+        "home": "Início",
+        "download": "Baixar"
+      },
+      "side": {
+        "quickstart": "Primeiros passos",
+        "intro": "Apresentação",
+        "installation": "Instalação e detecção",
+        "categories": "Categorias de álbuns",
+        "core": "Recursos principais",
+        "accounts": "Multi-contas",
+        "batch": "Ações em lote e duplicados",
+        "decoding": "Decodificação de metadados",
+        "transfer": "Guias de transferência",
+        "conversion": "Conversor de Live Photo e GIF",
+        "lan": "Compartilhamento de rede local",
+        "ios": "Importação iOS (iPhone)",
+        "android": "Importação Android"
+      },
+      "sec": {
+        "intro_title": "Apresentação",
+        "intro_p1": "Bem-vindo ao <strong>Nikki Albums</strong>! Esta ferramenta de código aberto foi criada especialmente para ajudar os jogadores do <em>Infinity Nikki</em> a organizar suas capturas.",
+        "intro_p2": "No jogo, suas fotos mais belas, diários de moda, designs DIY e vídeos de álbuns dinâmicos são salvos em pastas locais espalhadas. Nikki Albums <strong>verifica e agrupa automaticamente</strong> todas essas capturas em categorias organizadas. Ele apresenta isolamento de dados de contas múltiplas, limpeza inteligente de arquivos duplicados, decodificação dos parâmetros originais da câmera e a capacidade exclusiva de converter videoclipes em <strong>Live Photos (iOS)</strong> ou <strong>Google Motion Photos (Android)</strong> para transferi-los via rede local sem fio.",
+        "intro_tip_title": "Aviso",
+        "intro_tip_desc": "Nikki Albums é totalmente gratuito, de código aberto e sem anúncios. Não coleta dados pessoais ou informações sobre sua conta do jogo. Todos os processos de decodificação e conversão ocorrem offline no seu computador local.",
+        "install_title": "Instalação e detecção de caminho",
+        "install_desc": "Ao iniciar, o aplicativo tenta localizar automaticamente a pasta de instalação do <em>Infinity Nikki</em> e detectar as pastas de capturas de tela:",
+        "install_li1": "<strong>Compatibilidade de servidores</strong>: Suporta a verificação automática das pastas dos servidores da China Continental (Papergames) e globais (Global Server).",
+        "install_li2": "<strong>Configuração manual</strong>: Se o caminho não for encontrado automaticamente (por exemplo, em caso de instalações personalizadas), você pode configurar manualmente o caminho do launcher na aba \"Configurações\".",
+        "cat_title": "Categorias de álbuns",
+        "cat_desc": "O aplicativo classifica as imagens em duas seções que abrangem 19 álbuns independentes e 3 áreas de recursos de jogo:",
+        "cat_li1": "<strong>Álbuns padrão (19)</strong>: Capturas de jogo (ScreenShot), designs DIY (DIY), tingimento vegetal (PlantDyeing), revistas de moda (MagazinePhotos) e avatares personalizados (CustomAvatar).",
+        "cat_li2": "<strong>Álbuns dinâmicos</strong>: Gravações de vídeo do jogo (NikkiPhotos) e arquivos de vídeo externos importados.",
+        "cat_li3": "<strong>Recursos (3)</strong>: Ilustrações de jogo integradas, mapas do mundo e ícones da interface de jogo.",
+        "acc_title": "Gestão multi-contas",
+        "acc_desc": "Se múltiplos perfis de jogo (UIDs diferentes) se conectaram no seu computador, o Nikki Albums detecta todos:",
+        "acc_li1": "<strong>Filtro UID</strong>: Alterne com facilidade entre diferentes UIDs usando o menu suspenso no canto superior esquerdo.",
+        "acc_li2": "<strong>Isolamento de dados</strong>: As fotos de cada conta são salvas em pastas independentes, prevenindo misturas para quem usa mais de uma conta.",
+        "batch_title": "Ações em lote e duplicados",
+        "batch_desc": "Gerencie seus arquivos de forma rápida graças ao nosso fluxo de trabalho automatizado:",
+        "batch_li1": "<strong>Controle em lote</strong>: Selecione capturas para exportar, restaurar, mover ou excluir em um clique.",
+        "batch_li2": "<strong>Filtro de duplicados inteligente</strong>: Ao transferir arquivos em lote, o aplicativo compara assinaturas digitais (MD5). Se um arquivo idêntico for detectado no destino, ele é ignorado automaticamente para economizar espaço de armazenamento.",
+        "dec_title": "Decodificação de metadados",
+        "dec_desc": "<em>Infinity Nikki</em> grava metadados criptografados dentro de suas capturas de tela. Nikki Albums os extrai diretamente:",
+        "dec_li1": "<strong>Ambiente de jogo</strong>: Exibe o <strong>clima, a hora do jogo e as coordenadas geográficas exatas</strong> do momento do clique.",
+        "dec_li2": "<strong>Câmera e filtros</strong>: Mostra a distância focal, abertura do diafragma, profundidade de campo, exposição e o nome/intensidade do filtro aplicado.",
+        "dec_li3": "<strong>Copiar parâmetros</strong>: Copie essas configurações com um clique para compartilhá-las ou reproduzir a mesma foto no jogo!",
+        "conv_title": "Conversor de Live Photo e GIF",
+        "conv_desc": "Dê vida às suas imagens estáticas ao reconstruir o movimento original do jogo:",
+        "conv_li1": "<strong>Fontes</strong>: Converta videoclipes gravados no jogo ou arquivos locais em formatos dinâmicos.",
+        "conv_li2": "<strong>Formatos dinâmicos (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF Animados</strong>: Gera arquivos GIF leves e fluidos, perfeitos para compartilhar em redes sociais.",
+        "conv_tip_title": "Dica de exportação",
+        "conv_tip_desc": "Nas configurações, defina o formato de exportação padrão (<code>Apple Live Photo</code> ou <code>Google Motion Photo</code>) para que o processamento se adapte automaticamente ao seu celular.",
+        "lan_title": "Compartilhamento de rede local",
+        "lan_desc": "Transfira fotos e Live Photos sem cabos USB através da rede Wi-Fi local:",
+        "lan_li1": "<strong>Selecionar</strong>: Escolha as fotos ou as Live Photos que quer enviar da galeria.",
+        "lan_li2": "<strong>Compartilhar</strong>: Clique no botão \"Exportar para a rede\".",
+        "lan_li3": "<strong>Iniciar servidor</strong>: O app inicia um servidor local na porta <strong>58533</strong> e gera um <strong>código QR</strong> e um <strong>link local</strong> (ex. <code>http://192.168.x.x:58533</code>).",
+        "lan_li4": "<strong>Receber no celular</strong>: Conecte o celular ao <strong>mesmo Wi-Fi local</strong>. Escaneie o QR ou digite o link para baixar os arquivos (ZIP ou cópias Nikkias).",
+        "ios_title": "Importação de Live Photos para iPhone (iOS)",
+        "ios_desc": "Para que o iOS reconheça uma Live Photo, o arquivo <code>.JPG</code> e o vídeo <code>.MOV</code> devem incluir o mesmo identificador (Asset ID). Escolha o método adequado para o seu computador:",
+        "ios_mac_title": "Para usuários do macOS",
+        "ios_mac_desc": "No Mac, a integração é nativa e executada diretamente pelo aplicativo:",
+        "ios_mac_li1": "<strong>Exportar para a fototeca</strong>: Selecione os arquivos e clique em <strong>\"Exportar para a Fototeca\"</strong>. As fotos serão importadas automaticamente no aplicativo <strong>Fotos</strong> do macOS.",
+        "ios_mac_li2": "<strong>Fotos do iCloud</strong>: Se as \"Fotos do iCloud\" estiverem ativas no seu celular, a Live Photo será sincronizada sem fios no seu iPhone.",
+        "ios_mac_li3": "<strong>Via AirDrop</strong>: Se não usa o iCloud, clique com o botão direito na Live Photo no Fotos macOS e envie-a via <strong>AirDrop</strong> ao seu iPhone.",
+        "ios_win_title": "Para usuários do Windows",
+        "ios_win_desc": "No Windows, existem dois métodos dependendo do status do seu plano iCloud:",
+        "ios_win_m1_title": "Método 1: Uso de pendrive ou disco externo (Recomendado)",
+        "ios_win_m1_li1": "Prepare um pendrive ou disco externo compatível com o seu iPhone.",
+        "ios_win_m1_li2": "Crie a estrutura de pastas no diretório raiz da unidade USB: uma pasta chamada <code>DCIM</code> e dentro dela uma pasta chamada <code>100APPLE</code> (Atenção: devem ser duas pastas aninhadas <code>DCIM/100APPLE/</code>, não uma única pasta com barra no nome \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Copie as parejas de arquivos <code>.JPG</code> e <code>.MOV</code> exportadas na pasta <code>100APPLE</code>.",
+        "ios_win_m2_title": "Método 2: Download local de ZIP e App de conversão (Alternativa sem fios)",
+        "ios_win_m2_li1": "Baixe o arquivo <strong>ZIP</strong> da rede local pelo navegador móvel e extraia-o com o aplicativo Arquivos do dispositivo iOS.",
+        "ios_win_m2_li2": "Como o iOS não consegue associar arquivos JPG/MOV soltos no app Arquivos, baixe um app gratuito como o <code>intoLive</code>, carregue o vídeo <code>.MOV</code> extraído e salve-o na galeria como Live Photo.",
+        "and_title": "Importação de Motion Photos para Android",
+        "and_desc": "O Android utiliza o formato único de <code>Google Motion Photo</code>, o que torna a transferência e o gerenciamento extremamente simples:",
+        "and_li1": "<strong>Exportar</strong>: Certifique-se de que o formato de exportação nas configurações do programa de PC esteja configurado como <code>Google Motion Photo</code>. Isso gera um único arquivo <code>.jpg</code> contendo o vídeo.",
+        "and_li2": "<strong>Transferência</strong>: Envie o arquivo <code>.jpg</code> diretamente ao seu celular através de Wi-Fi, cabo USB ou qualquer gerenciador de arquivos.",
+        "and_li3": "<strong>Reprodução</strong>: Abra a imagem no <strong>Google Fotos</strong> ou na Galeria do sistema Android. Pressione o botão de reprodução ou mantenha a foto pressionada para iniciar a animação.",
+        "ios_win_m1_li4": "Conecte a unidade ao seu iPhone, abra o app <strong>Fotos</strong> e navegue até a aba **\"Importar\"** para adicioná-las diretamente como Live Photos."
+      }
+    }
+  },
+  "id": {
+    "lang-name": "Bahasa Indonesia",
+    "html-lang": "id",
+    "app_name": "Album Nikki",
+    "app_description": "Kelola album foto game Anda dengan mudah dan efisien. Sepenuhnya gratis, open-source, dan tanpa iklan.",
+    "homepage": {
+      "title": "Album Nikki - Pengelola album foto untuk Infinity Nikki",
+      "description": "Kelola album foto game Anda dengan mudah dan efisien. Sepenuhnya gratis, open-source, dan tanpa iklan.",
+      "json_ld": {
+        "name": "Album Nikki官网",
+        "description": "Pengelola album foto yang elegan dan efisien untuk pemain Infinity Nikki",
+        "keyword_1": "Album Nikki",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "Album Nikki"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "Tutorial",
+        "download": "Unduh"
+      },
+      "hero_title": "Album Nikki",
+      "hero_description": "Pengelola album foto yang elegan dan efisien untuk pemain Infinity Nikki",
+      "hero_sub_description": "Kelola album foto game Anda dengan mudah dan efisien. Sepenuhnya gratis, open-source, dan tanpa iklan.",
+      "btn_download": "Unduh Sekarang",
+      "btn_github": "Repositori GitHub",
+      "compat_hint": "Mendukung Windows 10/11 & macOS (Apple Silicon)",
+      "tab": {
+        "wall": "Galeri Album",
+        "decode": "Dekoder Metadata"
+      },
+      "card": {
+        "1": {
+          "title": "Manajemen Album Menyeluruh",
+          "description": "Mendukung 19 kategori album dan 3 jenis sumber daya internal, dioptimalkan untuk semua format."
+        },
+        "2": {
+          "title": "Analisis Metadata Kamera",
+          "description": "Menganalisis bukaan, panjang fokus, filter, dan koordinat untuk mempermudah reproduksi komposisi."
+        },
+        "3": {
+          "title": "Pemrosesan Massal Efisien",
+          "description": "Ekspor, pulihkan, transfer, dan hapus massal dengan fitur deteksi duplikasi cerdas."
+        },
+        "4": {
+          "title": "Konverter Live Photo & GIF",
+          "description": "Konversi album video menjadi Live Photo (kompatibel Apple/Android) atau GIF dalam satu klik."
+        },
+        "5": {
+          "title": "Berbagi Tanpa Penurunan Kualitas",
+          "description": "Salin ke papan klip atau ekspor tanpa kehilangan kualitas via drive lokal atau LAN."
+        }
+      },
+      "footer": {
+        "disclaimer": "Album Nikki adalah alat sumber terbuka dan tidak berafiliasi dengan Infinity Nikki atau Papergames. Hak cipta materi milik pemilik aslinya.",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "Pemberitahuan Penting untuk Pengguna macOS",
+        "description": "Karena ini adalah aplikasi portabel yang tidak ditandatangani secara resmi, macOS Gatekeeper mungkin memblokirnya pada peluncuran pertama.<br><br>Silakan ikuti langkah-langkah berikut untuk membukanya secara normal:<br>1. Jika muncul dialog \"Apple tidak dapat memeriksa apakah aplikasi mengandung malware\", klik <b>OK</b>.<br>2. Buka <b>Pengaturan Sistem</b> > <b>Privasi & Keamanan</b>.<br>3. Di bawah bagian \"Keamanan\", cari pesan tentang Nikki Albums lalu klik <b>Tetap Buka</b>.<br>4. Masukkan kata sandi komputer Anda lalu konfirmasi.",
+        "ok": "Saya mengerti"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - Panduan Pengguna & Panduan Transfer",
+      "description": "Panduan pengguna resmi Nikki Albums: pengelolaan album Infinity Nikki, pemindahan multi-akun, pembersihan file duplikat, dekode parameter kamera, dan transfer wireless Live Photos (iOS) atau Motion Photos (Android) via Wi-Fi lokal.",
+      "nav": {
+        "home": "Beranda",
+        "download": "Unduh"
+      },
+      "side": {
+        "quickstart": "Memulai",
+        "intro": "Pengenalan",
+        "installation": "Instalasi & Deteksi",
+        "categories": "Kategori Album",
+        "core": "Fitur Utama",
+        "accounts": "Multi-Akun",
+        "batch": "Tindakan Massal & Duplikasi",
+        "decoding": "Dekoder Metadata",
+        "transfer": "Panduan Transfer",
+        "conversion": "Konverter Live Photo & GIF",
+        "lan": "Transfer Nirkabel LAN",
+        "ios": "iOS (iPhone) Importing",
+        "android": "Android Importing"
+      },
+      "sec": {
+        "intro_title": "Pengenalan",
+        "intro_p1": "Selamat datang di <strong>Nikki Albums</strong>! Ini adalah aplikasi pengelola album foto open-source yang dirancang khusus untuk para pemain <em>Infinity Nikki</em>.",
+        "intro_p2": "Saat bermain, foto-foto indah, buku harian gaya, desain DIY, dan video album dinamis Nikki disimpan di berbagai folder lokal komputer Anda. Nikki Albums <strong>memindai dan mengumpulkan secara otomatis</strong> semua tangkapan layar ini ke dalam kategori yang rapi dan teratur. Aplikasi ini memiliki fitur isolasi multi-akun, pembersihan duplikat cerdas, dekode parameter kamera asli, serta dukungan eksklusif untuk mengubah klip video menjadi <strong>Live Photos (iOS)</strong> atau <strong>Google Motion Photos (Android)</strong> dan membagikannya secara nirkabel melalui jaringan Wi-Fi lokal.",
+        "intro_tip_title": "Petunjuk",
+        "intro_tip_desc": "Nikki Albums sepenuhnya gratis, open-source, dan bebas dari iklan. Kami tidak mengumpulkan data pribadi atau informasi akun game Anda. Semua proses dekode dan konversi dilakukan secara offline di komputer lokal Anda.",
+        "install_title": "Deteksi Jalur & Konfigurasi",
+        "install_desc": "Saat diluncurkan, aplikasi akan mendeteksi jalur instalasi game <em>Infinity Nikki</em> dan mendeteksi folder album secara otomatis:",
+        "install_li1": "<strong>Kompatibilitas Server</strong>: Mendukung pemindaian otomatis untuk server Tiongkok Daratan (Papergames) maupun server Global (Global Server).",
+        "install_li2": "<strong>Konfigurasi Manual</strong>: Jika jalur tidak ditemukan secara otomatis (misalnya karena instalasi di drive kustom), Anda dapat menentukan jalur launcher secara manual di tab \"Pengaturan\".",
+        "cat_title": "Kategori Album",
+        "cat_desc": "Aplikasi mengelompokkan gambar yang dipindai ke dalam dua bagian besar, mencakup 19 album independen dan 3 area sumber daya game:",
+        "cat_li1": "<strong>Album Standar (19)</strong>: Tangkapan layar dalam game (ScreenShot), desain pakaian DIY (DIY), pewarnaan tanaman (PlantDyeing), majalah mode (MagazinePhotos), dan avatar kustom (CustomAvatar).",
+        "cat_li2": "<strong>Album Dinamis</strong>: Rekaman video game (NikkiPhotos) dan file video eksternal yang diimpor.",
+        "cat_li3": "<strong>Sumber Daya (3)</strong>: Ilustrasi internal, grafis peta, dan file ikon antarmuka game.",
+        "acc_title": "Manajemen Multi-Akun",
+        "acc_desc": "Jika beberapa akun game (UID berbeda) telah masuk di komputer Anda, Nikki Albums akan mendeteksi semuanya:",
+        "acc_li1": "<strong>Filter UID</strong>: Beralih antar UID dengan mudah menggunakan menu drop-down di sebelah kiri atas.",
+        "acc_li2": "<strong>Isolasi Data</strong>: Foto dari setiap akun disimpan secara independen untuk mencegah percampuran data di komputer yang digunakan bersama.",
+        "batch_title": "Tindakan Massal & Duplikasi",
+        "batch_desc": "Kelola screenshot Anda secara efisien dengan alur kerja otomatis kami:",
+        "batch_li1": "<strong>Tindakan Massal</strong>: Pilih file untuk mengekspor, memulihkan, memindahkan, atau menghapus semuanya hanya dengan satu klik.",
+        "batch_li2": "<strong>Filter Duplikasi Cerdas</strong>: Saat mentransfer file secara massal, aplikasi membandingkan sidik jari digital (MD5). Jika file identik terdeteksi di folder tujuan, file tersebut akan dilewati untuk menghemat ruang penyimpanan.",
+        "dec_title": "Dekoder Metadata",
+        "dec_desc": "<em>Infinity Nikki</em> menyimpan metadata adegan terenkripsi dalam tangkapan layar Anda. Nikki Albums mengekstraknya secara langsung:",
+        "dec_li1": "<strong>Kondisi Lingkungan</strong>: Menampilkan <strong>cuaca, waktu dalam game, dan koordinat geografis yang tepat</strong> saat foto diambil.",
+        "dec_li2": "<strong>Kamera & Filter</strong>: Menampilkan panjang fokus, ukuran bukaan, kedalaman bidang, nilai paparan, dan filter warna yang diterapkan.",
+        "dec_li3": "<strong>Salin Parameter</strong>: Salin pengaturan ini dengan satu klik untuk membagikannya atau mereproduksi tangkapan gambar yang sama di dalam game!",
+        "conv_title": "Konverter Live Photo & GIF",
+        "conv_desc": "Hidupkan kembali momen-momen indah Anda dengan merekonstruksi gerakan asli dari game:",
+        "conv_li1": "<strong>Sumber</strong>: Ubah klip video game atau file lokal menjadi format dinamis.",
+        "conv_li2": "<strong>Format Gambar Dinamis (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>GIF Animasi</strong>: Menghasilkan file GIF yang ringan dan lancar, sangat cocok untuk dibagikan di media sosial.",
+        "conv_tip_title": "Tips Ekspor",
+        "conv_tip_desc": "Di pengaturan, tentukan format ekspor default (<code>Apple Live Photo</code> atau <code>Google Motion Photo</code>) agar proses pengemasan menyesuaikan sistem ponsel Anda secara otomatis.",
+        "lan_title": "Transfer Nirkabel LAN",
+        "lan_desc": "Kirim foto dan Live Photos Anda secara nirkabel melalui jaringan Wi-Fi lokal tanpa kabel USB:",
+        "lan_li1": "<strong>Pilih File</strong>: Tandai foto atau Live Photos yang ingin dikirim dari galeri.",
+        "lan_li2": "<strong>Mulai Berbagi</strong>: Klik tombol \"Ekspor ke Jaringan\".",
+        "lan_li3": "<strong>Mulai Server</strong>: Aplikasi memulai server lokal di port <strong>58533</strong> dan menampilkan <strong>kode QR</strong> dan <strong>tautan lokal</strong> (mis. <code>http://192.168.x.x:58533</code>).",
+        "lan_li4": "<strong>Terima di Ponsel</strong>: Hubungkan ponsel Anda ke <strong>Wi-Fi lokal yang sama</strong>. Pindai kode QR atau ketik alamat di browser untuk mengunduh file (ZIP atau file cadangan Nikkias).",
+        "ios_title": "Mengimpor Live Photos ke iPhone (iOS)",
+        "ios_desc": "Agar iOS mendeteksi Live Photo, file <code>.JPG</code> dan video <code>.MOV</code> harus menyertakan pengidentifikasi sumber daya (Asset ID) yang cocok. Pilih metode yang sesuai untuk komputer Anda:",
+        "ios_mac_title": "Untuk Pengguna macOS",
+        "ios_mac_desc": "Di Mac, integrasi dilakukan secara langsung dan didukung penuh oleh aplikasi:",
+        "ios_mac_li1": "<strong>Impor ke Perpustakaan Foto</strong>: Pilih file dan klik <strong>\"Ekspor ke Perpustakaan Foto\"</strong>. Foto akan diimpor secara otomatis ke dalam aplikasi <strong>Photos</strong> macOS.",
+        "ios_mac_li2": "<strong>iCloud Photos</strong>: Jika fitur \"iCloud Photos\" aktif di perangkat Anda, Live Photo akan disinkronkan secara nirkabel ke iPhone.",
+        "ios_mac_li3": "<strong>Lewat AirDrop</strong>: Jika Anda tidak menggunakan iCloud, klik kanan pada Live Photo di Photos macOS dan kirimkan melalui <strong>AirDrop</strong> ke iPhone Anda.",
+        "ios_win_title": "Untuk Pengguna Windows",
+        "ios_win_desc": "Di Windows, Anda dapat memilih salah satu dari dua metode berikut tergantung status iCloud Anda:",
+        "ios_win_m1_title": "Metode 1: Menggunakan Flash Drive USB atau Drive Eksternal (Direkomendasikan)",
+        "ios_win_m1_li1": "Siapkan flash drive USB atau drive eksternal yang kompatibel dengan iPhone Anda.",
+        "ios_win_m1_li2": "Buat struktur folder di direktori utama flash drive: folder bernama <code>DCIM</code> dan di dalamnya folder bernama <code>100APPLE</code> (Perhatian: harus berupa dua folder bertingkat <code>DCIM/100APPLE/</code>, bukan satu folder bernama \"DCIM/100APPLE\").",
+        "ios_win_m1_li3": "Salin file <code>.JPG</code> dan <code>.MOV</code> yang diekspor ke dalam folder <code>100APPLE</code> ini.",
+        "ios_win_m2_title": "Metode 3: Unduh ZIP Lokal & Aplikasi Konversi (Alternatif nirkabel)",
+        "ios_win_m2_li1": "Unduh file <strong>ZIP</strong> dari jaringan lokal melalui browser seluler dan ekstrak menggunakan aplikasi File pada perangkat iOS Anda.",
+        "ios_win_m2_li2": "Karena iOS tidak dapat menghubungkan file JPG/MOV terpisah dari aplikasi File, unduh aplikasi konversi gratis seperti <code>intoLive</code>, muat video <code>.MOV</code> yang diekstrak, dan simpan kembali ke galeri Anda sebagai Live Photo.",
+        "and_title": "Mengimpor Motion Photos ke Android",
+        "and_desc": "Android menggunakan standar <code>Google Motion Photo</code> berupa file tunggal, membuat transfer dan pengelolaan sangat sederhana:",
+        "and_li1": "<strong>Ekspor</strong>: Pastikan format ekspor di pengaturan aplikasi PC diatur ke <code>Google Motion Photo</code>. Ini menghasilkan file <code>.jpg</code> tunggal yang berisi video.",
+        "and_li2": "<strong>Transfer</strong>: Kirim file <code>.jpg</code> langsung ke ponsel Anda melalui jaringan Wi-Fi, kabel USB, atau aplikasi pengelola file apa pun.",
+        "and_li3": "<strong>Putar</strong>: Buka gambar di <strong>Google Photos</strong> atau Galeri bawaan sistem Android Anda. Ketuk ikon putar atau tahan gambar untuk memulai animasi.",
+        "ios_win_m1_li4": "Hubungkan drive ke iPhone Anda, buka app <strong>Photos</strong> dan buka tab **\"Impor\"** untuk menyimpannya sebagai Live Photos."
+      }
+    }
+  },
+  "th": {
+    "lang-name": "ภาษาไทย",
+    "html-lang": "th",
+    "app_name": "อัลบั้มนิกกี้",
+    "app_description": "จัดการอัลบั้มรูปภาพในเกมได้อย่างง่ายดายและมีประสิทธิภาพ ฟรี เปิดเผยซอร์สโค้ด และไม่มีโฆษณา",
+    "homepage": {
+      "title": "อัลบั้มนิกกี้ - เครื่องมือจัดการอัลบั้มรูปภาพสำหรับ Infinity Nikki",
+      "description": "จัดการอัลบั้มรูปภาพในเกมได้อย่างง่ายดายและมีประสิทธิภาพ ฟรี เปิดเผยซอร์สโค้ด และไม่มีโฆษณา",
+      "json_ld": {
+        "name": "อัลบั้มนิกกี้官网",
+        "description": "ซอฟต์แวร์จัดการอัลบั้มรูปภาพที่หรูหราและมีประสิทธิภาพสำหรับผู้เล่น Infinity Nikki",
+        "keyword_1": "อัลบั้มนิกกี้",
+        "keyword_2": "Infinity Nikki",
+        "keyword_3": "อัลบั้มนิกกี้"
+      },
+      "nav": {
+        "qq": "QQ Group 1062670402",
+        "tutorial": "บทช่วยสอน",
+        "download": "ดาวน์โหลด"
+      },
+      "hero_title": "อัลบั้มนิกกี้",
+      "hero_description": "ซอฟต์แวร์จัดการอัลบั้มรูปภาพที่หรูหราและมีประสิทธิภาพสำหรับผู้เล่น Infinity Nikki",
+      "hero_sub_description": "จัดการอัลบั้มรูปภาพในเกมได้อย่างง่ายดายและมีประสิทธิภาพ ฟรี เปิดเผยซอร์สโค้ด และไม่มีโฆษณา",
+      "btn_download": "ดาวน์โหลดทันที",
+      "btn_github": "พื้นที่จัดเก็บ GitHub",
+      "compat_hint": "รองรับ Windows 10/11 และ macOS (Apple Silicon)",
+      "tab": {
+        "wall": "ภาพรวมอัลบั้ม",
+        "decode": "ตัวถอดรหัสพารามิเตอร์"
+      },
+      "card": {
+        "1": {
+          "title": "การจัดการอัลบั้มแบบครบวงจร",
+          "description": "รองรับอัลบั้ม 19 ประเภทและทรัพยากรภายใน 3 ประเภท ปรับแต่งมาเพื่ออัลบั้มรูปและวิดีโอทุกรูปแบบ"
+        },
+        "2": {
+          "title": "การวิเคราะห์พารามิเตอร์กล้อง",
+          "description": "วิเคราะห์รูรับแสง ความยาวโฟกัส ฟิลเตอร์ และพิกัดโดยอัตโนมัติ ช่วยให้คุณถ่ายภาพซ้ำได้อย่างแม่นยำ"
+        },
+        "3": {
+          "title": "การประมวลผลแบบกลุ่มที่มีประสิทธิภาพ",
+          "description": "ส่งออก กู้คืน โอน และลบแบบกลุ่ม พร้อมระบบตรวจจับไฟล์ซ้ำอัจฉริยะ"
+        },
+        "4": {
+          "title": "ตัวแปลง Live Photo และ GIF",
+          "description": "แปลงวิดีโอเป็น Live Photo (รองรับ Apple/Android) หรือไฟล์ GIF ได้ในคลิกเดียว"
+        },
+        "5": {
+          "title": "การแชร์แบบไม่สูญเสียความละเอียด",
+          "description": "คัดลอกไปยังคลิปบอร์ดหรือส่งออกผ่านไดรฟ์โลคอลหรือ LAN โดยไม่ลดทอนคุณภาพ"
+        }
+      },
+      "footer": {
+        "disclaimer": "อัลบั้มนิกกี้ เป็นเครื่องมือเปิดเผยซอร์สโค้ดและไม่ได้เกี่ยวข้องกับ Infinity Nikki หรือ Papergames ลิขสิทธิ์ของเนื้อหาทั้งหมดเป็นของบริษัทผู้พัฒนาดั้งเดิม",
+        "friendship_link": "Friendship Link"
+      },
+      "macos_modal": {
+        "title": "คำแนะนำที่สำคัญสำหรับการเรียกใช้งาน macOS เป็นครั้งแรก",
+        "description": "เนื่องจากโปรแกรมปัจจุบันเป็นเวอร์ชันพกพาที่ไม่มีการลงนามดิจิทัล ระบบอาจสกัดกั้นการเปิดใช้งานในครั้งแรก<br><br>โปรดปฏิบัติตามขั้นตอนต่อไปนี้เพื่อเปิดตามปกติ:<br>1. หากมีข้อความแจ้งเตือน \"Apple ไม่สามารถตรวจสอบแอปเพื่อหาซอฟต์แวร์ที่เป็นอันตรายได้\" โปรดคลิก <b>ตกลง</b><br>2. เปิด <b>การตั้งค่าระบบ</b> > <b>ความเป็นส่วนตัวและความปลอดภัย</b><br>3. ไปที่ส่วน \"ความปลอดภัย\" ค้นหาข้อความแจ้งเตือนเกี่ยวกับ Nikki Albums แล้วคลิก <b>เปิดต่อไป</b><br>4. ป้อนรหัสผ่านการเข้าสู่ระบบของคุณแล้วคลิก <b>ตกลง</b>",
+        "ok": "ฉันเข้าใจแล้ว"
+      }
+    },
+    "guide": {
+      "title": "Nikki Albums - คู่มือผู้ใช้ & คำแนะนำการโอนย้าย",
+      "description": "คู่มือผู้ใช้อย่างเป็นทางการของ Nikki Albums: จัดการอัลบั้ม, สลับหลายบัญชี, ลบไฟล์ซ้ำอัจฉริยะ, ถอดรหัสพารามิเตอร์กล้อง และแชร์ Live Photos (iOS) หรือ Motion Photos (Android) ผ่านเครือข่ายท้องถิ่นแบบไร้สาย (Wi-Fi)",
+      "nav": {
+        "home": "หน้าแรก",
+        "download": "ดาวน์โหลด"
+      },
+      "side": {
+        "quickstart": "เริ่มต้นใช้งาน",
+        "intro": "คำแนะนำ",
+        "installation": "การติดตั้งและการตรวจหา",
+        "categories": "แนะนำประเภทอัลบั้ม",
+        "core": "ฟังก์ชันหลัก",
+        "accounts": "การจัดการหลายบัญชี",
+        "batch": "การประมวลผลแบบกลุ่มและไฟล์ซ้ำ",
+        "decoding": "การถอดรหัสพารามิเตอร์กล้อง",
+        "transfer": "คำแนะนำการโอนย้าย",
+        "conversion": "ตัวแปลง Live Photo และ GIF",
+        "lan": "การแชร์ผ่านเครือข่ายท้องถิ่น",
+        "ios": "การโอนย้ายไปยัง iOS (iPhone)",
+        "android": "การโอนย้ายไปยัง Android"
+      },
+      "sec": {
+        "intro_title": "แนะนำซอฟต์แวร์",
+        "intro_p1": "ยินดีต้อนรับสู่ <strong>Nikki Albums</strong>! นี่คือซอฟต์แวร์โอเพนซอร์สสำหรับจัดการอัลบั้มรูปภาพที่สร้างขึ้นสำหรับผู้เล่น *Infinity Nikki* โดยเฉพาะ",
+        "intro_p2": "เมื่อคุณเล่นเกม รูปภาพแสนสวย บันทึกการแต่งตัว ภาพสเก็ตช์ DIY และวิดีโออัลบั้มความเคลื่อนไหวต่างๆ ของนิกิจะถูกบันทึกไว้ในโฟลเดอร์ส่วนต่างๆ บนคอมพิวเตอร์ของคุณ Nikki Albums จะ <strong>สแกนและจัดเรียงโดยอัตโนมัติ</strong> เพื่อรวบรวมสกรีนช็อตเหล่านี้เข้าด้วยกันเป็นหมวดหมู่ ซอฟต์แวร์นี้มีระบบแยกข้อมูลหลายบัญชี (UID), ตรวจหาและลบไฟล์ซ้ำอัจฉริยะ, ถอดรหัสพารามิเตอร์กล้องดั้งเดิม และฟังก์ชันพิเศษเฉพาะตัวในการแปลงไฟล์วิดีโอในเกมให้กลายเป็น <strong>Live Photos (iOS)</strong> หรือ <strong>Google Motion Photos (Android)</strong> และแชร์ไปยังโทรศัพท์มือถือผ่าน Wi-Fi ท้องถิ่นได้อย่างรวดเร็ว",
+        "intro_tip_title": "ข้อแนะนำ",
+        "intro_tip_desc": "Nikki Albums เปิดเผยซอร์สโค้ดและให้บริการฟรีโดยไม่มีโฆษณา และไม่มีการรวบรวมข้อมูลส่วนบุคคลของบัญชีเกมของคุณ ขั้นตอนการถอดรหัสและแปลงไฟล์ทั้งหมดทำบนคอมพิวเตอร์ของคุณแบบออฟไลน์ มั่นใจได้ในความปลอดภัยของความเป็นส่วนตัว",
+        "install_title": "การตรวจหาเส้นทางและการกำหนดค่าอัตโนมัติ",
+        "install_desc": "เมื่อเปิดโปรแกรม ซอฟต์แวร์จะพยายามค้นหาเส้นทางการติดตั้งเกม *Infinity Nikki* และโฟลเดอร์สกรีนช็อตโดยอัตโนมัติ:",
+        "install_li1": "<strong>รองรับการตรวจหาสำหรับทุกเซิร์ฟเวอร์</strong>: ซอฟต์แวร์สแกนเส้นทางอัตโนมัติได้ทั้งเซิร์ฟเวอร์จีนแผ่นดินใหญ่ (Papergames) และเซิร์ฟเวอร์โกลบอล (Global Server)",
+        "install_li2": "<strong>การตั้งค่าด้วยตนเอง</strong>: หากโปรแกรมไม่พบเส้นทางโดยอัตโนมัติ (เช่น ติดตั้งไว้ในไดรฟ์อื่นที่ไม่ใช่ค่าเริ่มต้น) คุณสามารถกำหนดเส้นทางตัวเรียกใช้เกม (Launcher) ได้ด้วยตนเองที่แท็บ \"ตั้งค่า\"",
+        "cat_title": "แนะนำประเภทอัลบั้ม",
+        "cat_desc": "ซอฟต์แวร์จะแบ่งรูปภาพที่สแกนออกเป็นสองส่วนหลัก ครอบคลุม 19 อัลบั้มทั่วไปและ 3 ส่วนรีสอร์สเกม:",
+        "cat_li1": "<strong>อัลบั้มทั่วไป (19 ประเภท)</strong>: สกรีนช็อตในเกม (ScreenShot), ภาพชุด DIY (DIY), การย้อมสีพืช (PlantDyeing), นิตยสารแฟชั่น (MagazinePhotos) และรูปประจำตัวคัสตอม (CustomAvatar) เป็นต้น",
+        "cat_li2": "<strong>อัลบั้มความเคลื่อนไหว</strong>: รวมถึงวิดีโอการเคลื่อนไหว (NikkiPhotos) และไฟล์วิดีโอจากภายนอกที่บันทึกไว้",
+        "cat_li3": "<strong>รีสอร์สเกม (3 ประเภท)</strong>: สนับสนุนการเรียกดูรูปภาพประกอบในเกม แผนที่กราฟิก และไอคอนต่างๆ ในระบบ",
+        "acc_title": "การจัดการหลายบัญชี",
+        "acc_desc": "หากคอมพิวเตอร์ของคุณมีประวัติการเข้าใช้งานหลายบัญชีเกม (UID ต่างกัน) Nikki Albums จะแสดงข้อมูล UID ทั้งหมดแยกกัน:",
+        "acc_li1": "<strong>การกรอง UID</strong>: สามารถสลับเปลี่ยนข้อมูลของแต่ละบัญชีได้อย่างรวดเร็วผ่านเมนูดรอปดาวน์ที่มุมซ้ายบน",
+        "acc_li2": "<strong>การแยกข้อมูลส่วนตัว</strong>: ข้อมูลรูปภาพของแต่ละบัญชีจะถูกแยกเก็บและสำรองข้อมูลเป็นอิสระต่อกัน เพื่อป้องกันความสับสนสำหรับผู้ที่มีหลายบัญชี",
+        "batch_title": "การประมวลผลแบบกลุ่มและระบบลบไฟล์ซ้ำ",
+        "batch_desc": "เพิ่มประสิทธิภาพการทำงานด้วยเวิร์กโฟลว์จัดการแบบกลุ่ม:",
+        "batch_li1": "<strong>ควบคุมแบบกลุ่ม</strong>: เลือกรูปภาพที่คุณต้องการและจัดการ <strong>ส่งออก, กู้คืน, ย้าย, ลบ หรือคัดลอก</strong> ได้พร้อมกันในคลิกเดียว",
+        "batch_li2": "<strong>ลบรูปภาพซ้ำอัจฉริยะ</strong>: เมื่อโอนย้ายไฟล์แบบกลุ่ม โปรแกรมจะเปรียบเทียบค่าแฮช (MD5) ของรูปภาพ หากตรวจพบไฟล์เดียวกันที่ปลายทาง จะทำการข้ามโดยอัตโนมัติเพื่อประหยัดพื้นที่จัดเก็บข้อมูล",
+        "dec_title": "การถอดรหัสพารามิเตอร์กล้อง",
+        "dec_desc": "เกม *Infinity Nikki* จะบันทึกข้อมูลและพารามิเตอร์สภาพแวดล้อมตอนถ่ายภาพในรูปแบบการเข้ารหัส Nikki Albums มีโมดูลสำหรับแกะและถอดรหัสข้อมูลนี้โดยเฉพาะ:",
+        "dec_li1": "<strong>ถอดรหัสสภาพแวดล้อม</strong>: เลือกรูปภาพแล้วคลิก \"ถอดรหัสพารามิเตอร์\" เพื่อดูข้อมูล <strong>สภาพอากาศ เวลาในเกม และพิกัดตำแหน่งถ่ายภาพในเกม</strong> ได้โดยตรง",
+        "dec_li2": "<strong>ข้อมูลกล้องและฟิลเตอร์</strong>: แสดงความยาวโฟกัส, รูรับแสง, ระยะชัดลึก, ค่าชดเชยแสง และชื่อรวมถึงความเข้มของฟิลเตอร์สีที่ใช้ในเกม",
+        "dec_li3": "<strong>คัดลอกในคลิกเดียว</strong>: คัดลอกพารามิเตอร์เหล่านี้เพื่อนำไปแชร์หรือสร้างฉากรูปภาพเดียวกันกับผู้เล่นคนอื่นๆ ในเกมได้ทันที!",
+        "conv_title": "ตัวแปลง Live Photo และ GIF",
+        "conv_desc": "เปลี่ยนสกรีนช็อตภาพนิ่งของคุณให้กลับมามีชีวิตบนหน้าจอโทรศัพท์มือถือ:",
+        "conv_li1": "<strong>แหล่งข้อมูล</strong>: แปลงคลิปวิดีโอจากอัลบั้มเคลื่อนไหวในเกมหรือไฟล์วิดีโอส่วนตัวของคุณให้เป็นภาพเคลื่อนไหวได้ทันที",
+        "conv_li2": "<strong>ฟอร์แมตภาพเคลื่อนไหว (Live Photo / Motion Photo)</strong>:",
+        "conv_li3": "<strong>ส่งออก GIF</strong>: แปลงเป็นไฟล์ GIF ขนาดเล็กที่เล่นได้อย่างราบรื่น เหมาะสำหรับการแชร์ลงโซเชียลมีเดีย",
+        "conv_tip_title": "ข้อแนะนำการแปลง",
+        "conv_tip_desc": "ในหน้าตั้งค่า คุณสามารถเลือกประเภทฟอร์แมตที่ต้องการ (<code>Apple Live Photo</code> หรือ <code>Google Motion Photo</code>) เพื่อให้ระบบส่งออกเป็นไฟล์สำหรับระบบมือถือของคุณโดยอัตโนมัติ",
+        "lan_title": "การแชร์ผ่านเครือข่ายท้องถิ่นแบบไร้สาย (Wi-Fi)",
+        "lan_desc": "ส่งข้อมูลรูปภาพและ Live Photos โดยไม่ต้องใช้สายเคเบิล USB ผ่าน Wi-Fi ท้องถิ่นของคุณ:",
+        "lan_li1": "<strong>เลือกไฟล์</strong>: เลือกรูปภาพหรือวิดีโอที่ต้องการโอนย้ายในหน้าต่างแสดงผล",
+        "lan_li2": "<strong>เริ่มแบ่งปัน</strong>: คลิกปุ่ม \"ส่งออกไปยังเครือข่าย\" บนอินเทอร์เฟซหลัก",
+        "lan_li3": "<strong>เปิดบริการเซิร์ฟเวอร์</strong>: ซอฟต์แวร์จะจำลองเครือข่ายท้องถิ่นที่พอร์ต <strong>58533</strong> และสร้าง <strong>QR Code</strong> พร้อม <strong>ลิงก์ดาวน์โหลด</strong> (เช่น <code>http://192.168.x.x:58533</code>) ขึ้นมา",
+        "lan_li4": "<strong>สแกนรับข้อมูล</strong>: ตรวจสอบให้แน่ใจว่าโทรศัพท์มือถือของคุณเชื่อมต่อ <strong>Wi-Fi ท้องถิ่นเดียวกัน</strong> สแกน QR Code หรือป้อนลิงก์ในเบราว์เซอร์เพื่อดาวน์โหลดไฟล์ (ZIP หรือ ไฟล์สำรองข้อมูล Nikkias)",
+        "ios_title": "การนำเข้าไฟล์ Live Photo ไปยัง iOS (iPhone)",
+        "ios_desc": "เพื่อให้ระบบ iOS รู้จัก Live Photo ไฟล์รูปภาพ <code>.JPG</code> และวิดีโอ <code>.MOV</code> จะต้องมีรหัสระบุ (Asset ID) ตรงกัน โปรดเลือกขั้นตอนการทำงานตามระบบคอมพิวเตอร์ของคุณ:",
+        "ios_mac_title": "สำหรับผู้ใช้ macOS",
+        "ios_mac_desc": "หากคุณใช้ Mac โปรแกรมจะรองรับการนำเข้าโดยตรง ซึ่งทำงานได้อย่างราบรื่นและง่ายที่สุด:",
+        "ios_mac_li1": "<strong>นำเข้าคลังรูปภาพโดยตรง</strong>: เลือกไฟล์ที่ต้องการแล้วคลิก <strong>\"ส่งออกไปยังคลังรูปภาพ\"</strong> ระบบจะรวบรวมเป็น Live Photo และบันทึกเข้าไปยังแอป <strong>รูปภาพ (Photos)</strong> ของ Mac โดยอัตโนมัติ",
+        "ios_mac_li2": "<strong>ผ่านทาง iCloud Photos</strong>: หากเปิดใช้งานการซิงค์ iCloud รูปภาพภาพจะถูกเชื่อมต่อและแสดงขึ้นบน iPhone ของคุณแบบไร้สาย",
+        "ios_mac_li3": "<strong>ส่งผ่านทาง AirDrop</strong>: หากไม่ได้ใช้ iCloud ให้คลิกขวาที่ Live Photo ในแอปรูปภาพของ Mac แล้วแชร์ผ่าน <strong>AirDrop</strong> ไปยัง iPhone ของคุณ",
+        "ios_win_title": "สำหรับผู้ใช้ Windows",
+        "ios_win_desc": "บน Windows คุณสามารถเลือกรูปแบบการทำงาน 2 วิธี ตามสถานะการใช้งาน iCloud ของคุณ:",
+        "ios_win_m1_title": "วิธีที่ 1: ใช้แฟลชไดรฟ์ USB หรือไดรฟ์ภายนอก (แนะนำ)",
+        "ios_win_m1_li1": "เตรียมแฟลชไดรฟ์ USB หรือไดรฟ์ภายนอกที่เชื่อมต่อกับ iPhone ของคุณได้",
+        "ios_win_m1_li2": "สร้างโครงสร้างโฟลเดอร์ในไดเรกทอรีหลักของไดรฟ์: โฟลเดอร์ชื่อ <code>DCIM</code> และสร้างโฟลเดอร์ชื่อ <code>100APPLE</code> ไว้ภายในโฟลเดอร์ดังกล่าว (คำเตือน: ต้องเป็นสองโฟลเดอร์ซ้อนกัน <code>DCIM/100APPLE/</code> เท่านั้น ไม่ใช่โฟลเดอร์เดียวที่ตั้งชื่อว่า \"DCIM/100APPLE\")",
+        "ios_win_m1_li3": "คัดลอกไฟล์คู่ <code>.JPG</code> และ <code>.MOV</code> ที่ส่งออกมาวางในโฟลเดอร์ <code>100APPLE</code>",
+        "ios_win_m2_title": "วิธีที่ 2: ดาวน์โหลด ZIP ท้องถิ่น & แอปพลิเคชันแปลงไฟล์ (ทางเลือกแบบไร้สาย)",
+        "ios_win_m2_li1": "ดาวน์โหลดไฟล์ <strong>ZIP</strong> จากเครือข่ายท้องถิ่นผ่านเบราว์เซอร์มือถือ แตกไฟล์เก็บไว้ในแอปไฟล์บน iOS",
+        "ios_win_m2_li2": "เนื่องจาก iOS ไม่รองรับการจับคู่ไฟล์ JPG/MOV จากแอปไฟล์โดยตรง ให้คุณดาวน์โหลดแอปฟรี เช่น <code>intoLive</code> นำเข้าไฟล์วิดีโอ <code>.MOV</code> และแปลงเพื่อบันทึกลงในอัลบั้มรูปภาพของคุณเป็น Live Photo",
+        "and_title": "การนำเข้าไฟล์ภาพเคลื่อนไหวไปยัง Android",
+        "and_desc": "Android ใช้มาตรฐาน <code>Google Motion Photo</code> ซึ่งบันทึกข้อมูลในไฟล์เดียว ทำให้การส่งถ่ายและพกพาง่ายดายอย่างยิ่ง:",
+        "and_li1": "<strong>ส่งออกไฟล์</strong>: ในการส่งออกไฟล์ ตรวจสอบให้แน่ใจว่าตั้งค่ารูปแบบเป็น <code>Google Motion Photo</code> ซึ่งจะทำให้ระบบสร้างไฟล์ภาพ <code>.jpg</code> เพียงไฟล์เดียวที่มีส่วนของวิดีโอด้านใน",
+        "and_li2": "<strong>ส่งข้อมูลโดยตรง</strong>: คุณสามารถดาวน์โหลดผ่านคิวอาร์โค้ดไร้สาย, คัดลอกผ่านพอร์ต USB หรือส่งไฟล์ภาพ <code>.jpg</code> ต้นฉบับผ่านทางแอปพลิเคชันสนทนา",
+        "and_li3": "<strong>เล่นภาพเคลื่อนไหว</strong>: เปิดดูรูปภาพด้วยแอปแกลเลอรีในระบบเครื่อง (ระบบแกลเลอรีของผู้ผลิตหลักๆ รองรับภาพเคลื่อนไหวแล้ว) หรือใช้งานผ่านแอป <strong>Google Photos</strong> แล้วกดค้างที่รูปภาพเพื่อชมความเคลื่อนไหว",
+        "ios_win_m1_li4": "เชื่อมต่อไดรฟ์กับ iPhone ของคุณ เปิดแอป <strong>รูปภาพ (Photos)</strong> และไปที่แท็บ **\"นำเข้า\"** เพื่อนำเข้ารูปภาพเข้าคลังเป็น Live Photos"
       }
     }
   }
