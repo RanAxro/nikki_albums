@@ -20,14 +20,36 @@
 
 <!-- Theme initialization script (runs synchronously to prevent flash of dark theme) -->
 <script>
-	const savedTheme = localStorage.getItem('theme');
-	if (savedTheme) {
-		if (savedTheme === 'light') {
-			document.documentElement.classList.add('light-mode');
-		}
-	} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+	if (savedTheme === 'light') {
 		document.documentElement.classList.add('light-mode');
 	}
+} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+	document.documentElement.classList.add('light-mode');
+}
+
+const currentLang = "{{current_lang}}"
+
+const i18n = {
+	"latest_badge": "{{download.latest_badge}}",
+	"version_label": "{{download.version_label}}",
+	"system_windows": "{{download.system_windows}}",
+	"system_macos": "{{download.system_macos}}",
+	"system_android": "{{download.system_android}}",
+	"suffix_zip": "{{download.suffix_zip}}",
+	"suffix_exe": "{{download.suffix_exe}}",
+	"type_1": "{{download.type_1}}",
+	"type_2": "{{download.type_2}}"
+}
+
+const icons = {
+	windows: "{{root}}/official_website/assets/icon/windows.svg",
+	macos: "{{root}}/official_website/assets/icon/macos.svg",
+	android: "{{root}}/official_website/assets/icon/android.svg",
+	download: "{{root}}/official_website/assets/icon/download.svg",
+};
+
 </script>
 
 <!-- Google Fonts -->
@@ -49,9 +71,9 @@
 			
 			<nav>
 				<ul class="web_header_nav_list">
-					<li><a href="index.html">{{guide.nav.home}}</a></li>
+					<li><a href="index.html">{{common.nav.home}}</a></li>
 					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-					<li><a class="active" href="download.html">{{guide.nav.download}}</a></li>
+					<li><a class="active" href="guide.html">{{common.nav.tutorial}}</a></li>
 				</ul>
 
 				<div class="lang-dropdown">
@@ -63,7 +85,7 @@
 					</button>
 					<div class="lang-dropdown-menu">
 						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/download.html">简体中文</a>
-						<a id="lang-zh-tw" class="lang-dropdown-item" href="{{to_tw}}/download.html">繁體中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/download.html">繁體中文</a>
 						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/download.html">English</a>
 						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/download.html">日本語</a>
 						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/download.html">한국어</a>
@@ -104,9 +126,9 @@
 	</header>
 
 	<div class="mobile-nav-drawer" id="mobile-drawer">
+		<a href="home.html">{{common.nav.home}}</a>
 		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a>
-		<a href="guide.html">{{guide.nav.home}}</a>
-		<a href="download.html">{{guide.nav.download}}</a>
+		<a href="guide.html">{{common.nav.tutorial}}</a>
 	</div>
 
 	<div class="doc-layout">
@@ -148,10 +170,10 @@
 
 	<div class="modal-overlay" id="macOsModal" role="dialog" aria-modal="true" aria-labelledby="macOsModalTitle">
 		<div class="modal-content">
-			<h3 id="macOsModalTitle"></h3>
-			<p id="macOsModalDesc"></p>
+			<h3 id="macOsModalTitle">{{common.macos_modal.title}}</h3>
+			<p id="macOsModalDesc">{{common.macos_modal.description}}</p>
 			<div class="modal-actions">
-				<button class="modal-btn" id="macOsModalConfirm" type="button"></button>
+				<button class="modal-btn" id="macOsModalConfirm" type="button">{{common.macos_modal.ok}}</button>
 			</div>
 		</div>
 	</div>
