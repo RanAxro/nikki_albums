@@ -28,8 +28,8 @@
         "focal_length": "焦距",
         "aperture_section": "光圈",
         "vignette_intensity": "晕影",
-        "light": "灯光",
         "exposure": "曝光",
+        "light": "灯光",
         "filter": "滤镜"
       },
       "buildingmomo": "搬砖吧大喵",
@@ -208,6 +208,37 @@
     "html-lang": "zh-Hant",
     "app_name": "暖暖相簿",
     "app_description": "輕鬆、高效地管理遊戲相簿，讓遊戲體驗更加暢快無憂。免費開源，無廣告。",
+    "proper_nouns": {
+      "paper_game": "叠纸游戏",
+      "infinity_nikki": "無限暖暖",
+      "chinese_server": "国服",
+      "international_server": "国际服",
+      "player": "搭配師",
+      "nikki": "暖暖",
+      "momo": "大喵",
+      "album": {
+        "nikki_photo": "暖暖相簿",
+        "momo_photo": "大喵相簿",
+        "clock_in_photo": "世界巡游",
+        "magazine_photos": "旅行手帳",
+        "collage": "趣拼海報",
+        "diy": "星繪圖冊",
+        "plant_dyeing": "花草拓拓拓",
+        "custom_avatar": "頭像",
+        "video": "動態影集",
+        "external_video": "外部视频"
+      },
+      "camear_param": {
+        "focal_length": "對焦距離",
+        "aperture_section": "光圈",
+        "vignette_intensity": "暈影",
+        "exposure": "曝光",
+        "light": "燈光",
+        "filter": "濾鏡"
+      },
+      "buildingmomo": "搬砖吧大喵",
+      "gongeous": "暖暖共鳴錄"
+    },
     "homepage": {
       "title": "暖暖相簿 - 一款用於管理您的《無限暖暖》相簿的工具",
       "description": "輕鬆、高效地管理遊戲相簿，讓遊戲體驗更加暢快無憂。免費開源，無廣告。",
@@ -358,6 +389,37 @@
     "html-lang": "en",
     "app_name": "Nikki Albums",
     "app_description": "Easily manage your in-game photo albums across multiple accounts. Fully open-source and completely free.",
+    "proper_nouns": {
+      "paper_game": "Paper Game",
+      "infinity_nikki": "Infinity Nikki",
+      "chinese_server": "Chinese Server",
+      "international_server": "International Server",
+      "player": "Stylist",
+      "nikki": "Nikki",
+      "momo": "Momo",
+      "album": {
+        "nikki_photo": "Nikki's Album",
+        "momo_photo": "Momo's Album",
+        "clock_in_photo": "Expeditions",
+        "magazine_photos": "Scrapbook",
+        "collage": "Collage Poster",
+        "diy": "Color Lookbook",
+        "plant_dyeing": "Flower & Leaf Rubbing",
+        "custom_avatar": "Avatar",
+        "video": "Video Album",
+        "external_video": "External Video"
+      },
+      "camear_param": {
+        "focal_length": "Focus Distance",
+        "aperture_section": "Aperture",
+        "vignette_intensity": "Vignette",
+        "exposure": "Exposure",
+        "light": "Lighting",
+        "filter": "Filter"
+      },
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Resonance Tracker"
+    },
     "common": {
       "nav": {
         "qq": "QQ Group 1062670402",
@@ -510,6 +572,34 @@
     "html-lang": "ja",
     "app_name": "ニキアルバム",
     "app_description": "ゲーム内の写真アルバムを簡単に効率よく管理。完全無料でオープンソース、広告なし。",
+    "proper_nouns": {
+      "infinity_nikki": "インフィニティニキ",
+      "player": "スタイリスト",
+      "nikki": "ニキ",
+      "momo": "モモ",
+      "album": {
+        "nikki_photo": "ニキアルバム",
+        "momo_photo": "アルバム",
+        "clock_in_photo": "世界巡游",
+        "magazine_photos": "旅行手帳",
+        "collage": "コラージュフォト",
+        "diy": "星彩の画集",
+        "plant_dyeing": "草木の拓印",
+        "custom_avatar": "アイコン",
+        "video": "ムービー",
+        "external_video": "External Video"
+      },
+      "camear_param": {
+        "focal_length": "焦点距離",
+        "aperture_section": "絞り(ぼかし)",
+        "vignette_intensity": "口径食",
+        "exposure": "露出",
+        "light": "照明",
+        "filter": "フィルター"
+      },
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "ィニキ 共鳴録"
+    },
     "homepage": {
       "title": "ニキアルバム - インフィニティニキの写真アルバム管理ツール",
       "description": "ゲーム内の写真アルバムを簡単に効率よく管理。完全無料でオープンソース、広告なし。",
@@ -660,6 +750,34 @@
     "html-lang": "ko",
     "app_name": "니키 앨범",
     "app_description": "게임 앨범을 쉽고 효율적으로 관리하여 더욱 쾌적한 게임 경험을 선사합니다. 광고 없는 완전 무료 오픈 소스.",
+    "proper_nouns": {
+      "infinity_nikki": "인피니티니키",
+      "player": "스타일리스트",
+      "nikki": "니키",
+      "momo": "모모",
+      "album": {
+        "nikki_photo": "니키 앨범",
+        "momo_photo": "모모 앨범",
+        "clock_in_photo": "월드 투어",
+        "magazine_photos": "여행 수첩",
+        "collage": "포스터 맞추기",
+        "diy": "별그림 앨범",
+        "plant_dyeing": "화초 탁탁탁",
+        "custom_avatar": "프로필",
+        "video": "명함",
+        "external_video": "External Video"
+      },
+      "camear_param": {
+        "focal_length": "초점거리 조절",
+        "aperture_section": "조리개 조절",
+        "vignette_intensity": "헐레이션 조절",
+        "exposure": "노출",
+        "light": "조명",
+        "filter": "필터"
+      },
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "공명 기록 및 스타일링 도우미"
+    },
     "homepage": {
       "title": "니키 앨범 - 인피니티 니키 사진 앨범 관리 도구",
       "description": "게임 앨범을 쉽고 효율적으로 관리하여 더욱 쾌적한 게임 경험을 선사합니다. 광고 없는 완전 무료 오픈 소스.",
@@ -810,6 +928,10 @@
     "html-lang": "fr",
     "app_name": "Albums de Nikki",
     "app_description": "Gerez facilement et efficacement vos albums photo de jeu. Entièrement gratuit, open-source et sans publicité.",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Suivi de Résonance et compagnon de style"
+    },
     "homepage": {
       "title": "Albums de Nikki - Un gestionnaire d'albums photo pour Infinity Nikki",
       "description": "Gerez facilement et efficacement vos albums photo de jeu. Entièrement gratuit, open-source et sans publicité.",
@@ -960,6 +1082,10 @@
     "html-lang": "de",
     "app_name": "Nikki Alben",
     "app_description": "Verwalten Sie Ihre Fotoalben im Spiel einfach und effizient. Völlig kostenlos, Open-Source und werbefrei.",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Resonanz-Tracker & Styling-Begleiter"
+    },
     "homepage": {
       "title": "Nikki Alben - Ein Fotoalbum-Manager für Infinity Nikki",
       "description": "Verwalten Sie Ihre Fotoalben im Spiel einfach und effizient. Völlig kostenlos, Open-Source und werbefrei.",
@@ -1110,6 +1236,10 @@
     "html-lang": "es",
     "app_name": "Álbumes de Nikki",
     "app_description": "Gestiona tus álbumes de fotos del juego de forma fácil y eficaz. Totalmente gratuito, de código abierto y sin anuncios.",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Rastreador de resonancia y compañero de estilismo"
+    },
     "homepage": {
       "title": "Álbumes de Nikki - Un gestor de álbumes de fotos para Infinity Nikki",
       "description": "Gestiona tus álbumes de fotos del juego de forma fácil y eficaz. Totalmente gratuito, de código abierto y sin anuncios.",
@@ -1260,6 +1390,10 @@
     "html-lang": "it",
     "app_name": "Album di Nikki",
     "app_description": "Gestisci i tuoi album fotografici di gioco in modo facile ed efficiente. Completamente gratuito, open-source e senza pubblicità.",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Tracker di risonanza e compagno di styling"
+    },
     "homepage": {
       "title": "Album di Nikki - Un gestore di album fotografici per Infinity Nikki",
       "description": "Gestisci i tuoi album fotografici di gioco in modo facile ed efficiente. Completamente gratuito, open-source e senza pubblicità.",
@@ -1410,6 +1544,10 @@
     "html-lang": "pt",
     "app_name": "Álbuns da Nikki",
     "app_description": "Gerencie seus álbuns de fotos do jogo de forma fácil e eficiente. Totalmente gratuito, de código aberto e sem anúncios.",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Rastreador de Ressonância e companheiro de estilo"
+    },
     "homepage": {
       "title": "Álbuns da Nikki - Um gerenciador de álbuns de fotos para Infinity Nikki",
       "description": "Gerencie seus álbuns de fotos do jogo de forma fácil e eficiente. Totalmente gratuito, de código aberto e sem anúncios.",
@@ -1560,6 +1698,10 @@
     "html-lang": "id",
     "app_name": "Album Nikki",
     "app_description": "Kelola album foto game Anda dengan mudah dan efisien. Sepenuhnya gratis, open-source, dan tanpa iklan.",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Resonance Tracker"
+    },
     "homepage": {
       "title": "Album Nikki - Pengelola album foto untuk Infinity Nikki",
       "description": "Kelola album foto game Anda dengan mudah dan efisien. Sepenuhnya gratis, open-source, dan tanpa iklan.",
@@ -1710,6 +1852,10 @@
     "html-lang": "th",
     "app_name": "อัลบั้มนิกกี้",
     "app_description": "จัดการอัลบั้มรูปภาพในเกมได้อย่างง่ายดายและมีประสิทธิภาพ ฟรี เปิดเผยซอร์สโค้ด และไม่มีโฆษณา",
+    "proper_nouns": {
+      "buildingmomo": "BuildingMomo",
+      "gongeous": "Resonance Tracker"
+    },
     "homepage": {
       "title": "อัลบั้มนิกกี้ - เครื่องมือจัดการอัลบั้มรูปภาพสำหรับ Infinity Nikki",
       "description": "จัดการอัลบั้มรูปภาพในเกมได้อย่างง่ายดายและมีประสิทธิภาพ ฟรี เปิดเผยซอร์สโค้ด และไม่มีโฆษณา",
