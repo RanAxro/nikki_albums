@@ -1,4 +1,4 @@
 {
-  "buildCommand": "node scripts/build_locales.js",
+  "buildCommand": "node scripts/build_official_website.js",
   "outputDirectory": "."
 }

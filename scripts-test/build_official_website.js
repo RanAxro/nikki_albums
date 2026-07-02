@@ -9,7 +9,7 @@ const rootDir = "../";
 const CONFIG = {
   templateDir: path.join(rootDir, 'official_website', 'templates'),
   i18nFile: path.join(rootDir, 'official_website', 'i18n.json'),
-  outputDir: path.join(rootDir, ""),
+  outputDir: path.join(rootDir, "build_web"),
   rootLang: "zh",
   domain: "nikki.ranaxro.com"
 };
