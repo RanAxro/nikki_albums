@@ -105,7 +105,7 @@ function selectVersion(version) {
 		linkEl.innerHTML = `
 			<div class="download-info">
 				<div class="platform-icon">
-					<img src="${platformIcon}">
+					<img src="${platformIcon}" alt="${item.system}">
 				</div>
 				<div class="platform-details">
 					<span class="platform-name">${translate(item.system)} ${variantLabel}</span>
@@ -116,7 +116,7 @@ function selectVersion(version) {
 				</div>
 		</div>
 		<div class="download-btn">
-			<img src="${icons.download}">
+			<img src="${icons.download}" alt="downlaod">
 		</div>`;
 		links.appendChild(linkEl);
 	});
