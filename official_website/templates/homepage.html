@@ -16,7 +16,7 @@
 <!-- Multilingual alternates: x-default (auto-detect) + per-locale ?lang= URLs for crawlers -->
 <link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en">
 <link rel="alternate" hreflang="zh-Hans" href="https://nikki.ranaxro.com">
-<link rel="alternate" hreflang="zh-Hant" href="https://nikki.ranaxro.com/zh-tw">
+<link rel="alternate" hreflang="zh-Hant" href="https://nikki.ranaxro.com/tw">
 <link rel="alternate" hreflang="en"      href="https://nikki.ranaxro.com/en">
 <link rel="alternate" hreflang="ja"      href="https://nikki.ranaxro.com/ja">
 <link rel="alternate" hreflang="ko"      href="https://nikki.ranaxro.com/ko">
@@ -157,7 +157,7 @@
 				<ul class="web_header_nav_list">
 					<li class="zh-only">
 						<a href="https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy" target="_blank" rel="noopener noreferrer">
-							<span>{{homepage.nav.qq}}</span>
+							<span>{{common.nav.qq}}</span>
 						</a>
 					</li>
 					<li>
@@ -167,12 +167,12 @@
 					</li>
 					<li>
 						<a href="guide.html">
-							<span>{{homepage.nav.tutorial}}</span>
+							<span>{{common.nav.tutorial}}</span>
 						</a>
 					</li>
 					<li>
 						<a id="nav_download" href="download.html">
-							<span>{{homepage.nav.download}}</span>
+							<span>{{common.nav.download}}</span>
 						</a>
 					</li>
 				</ul>
@@ -187,7 +187,7 @@
 					</button>
 					<div class="lang-dropdown-menu" id="lang-dropdown-menu">
 						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/index.html">简体中文</a>
-						<a id="lang-zh-tw" class="lang-dropdown-item" href="{{to_tw}}/index.html">繁體中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/index.html">繁體中文</a>
 						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/index.html">English</a>
 						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/index.html">日本語</a>
 						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/index.html">한국어</a>
@@ -232,16 +232,16 @@
 	<!-- Mobile Nav Drawer -->
 	<div class="mobile-nav-drawer" id="mobile-drawer">
 		<a class="zh-only" href="https://qm.qq.com/cgi-bin/qm/qr?k=XUVCQ5ehpUMgHEaZhB0G7XPDuADElsCp&jump_from=webapi&authKey=EuNvX5PdXcyn4uBk24BiAjGdZAGjJfsl5yc01DEcLEZOob0LQ9VK30TExXK4MvRy" target="_blank" rel="noopener noreferrer">
-			<span>{{homepage.nav.qq}}</span>
+			<span>{{common.nav.qq}}</span>
 		</a>
 		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
 			<span>GitHub</span>
 		</a>
 		<a href="guide.html">
-			<span>{{homepage.nav.tutorial}}</span>
+			<span>{{common.nav.tutorial}}</span>
 		</a>
 		<a id="nav_download_mobile" href="download.html">
-			<span>{{homepage.nav.download}}</span>
+			<span>{{common.nav.download}}</span>
 		</a>
 	</div>
 
@@ -360,16 +360,16 @@
 	<!-- macOS Warning Modal -->
 	<div id="macOsModal" class="modal-overlay">
 		<div class="modal-content">
-			<h3 id="macOsModalTitle">{{homepage.macos_modal.title}}</h3>
-			<p id="macOsModalDesc">{{homepage.macos_modal.description}}</p>
+			<h3 id="macOsModalTitle">{{common.macos_modal.title}}</h3>
+			<p id="macOsModalDesc">{{common.macos_modal.description}}</p>
 			<div class="modal-actions">
-				<button class="modal-btn" onclick="closeMacOsModal()">{{homepage.macos_modal.ok}}</button>
+				<button class="modal-btn" onclick="closeMacOsModal()">{{common.macos_modal.ok}}</button>
 			</div>
 		</div>
 	</div>
 
 	<!-- Scripts -->
-	<script src="website/pages/version_info.js"></script>
+	<script src="{{root}}/official_website/version_info.js"></script>
 	<script src="{{root}}/official_website/js/index.js"></script>
 </body>
 </html>

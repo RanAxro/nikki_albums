@@ -116,7 +116,7 @@ function selectVersion(version) {
 				</div>
 		</div>
 		<div class="download-btn">
-			<img src="${icons.download}" alt="${translate('alt_download')}">
+			<img src="${icons.download}">
 		</div>`;
 		links.appendChild(linkEl);
 	});
