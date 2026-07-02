@@ -232,6 +232,7 @@ header nav {
 	cursor: pointer;
 	width: 100%;
 	transition: color 0.2s, background-color 0.2s;
+	text-decoration: none;
 }
 
 .lang-dropdown-item:hover {
