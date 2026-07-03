@@ -51,6 +51,7 @@ dependencies:
   url_launcher: ^6.3.2
   ini: ^2.1.0
   uuid: ^4.5.3
+  msgpack_dart: ^1.0.1
 
   # algorithm
   archive: ^4.0.7
