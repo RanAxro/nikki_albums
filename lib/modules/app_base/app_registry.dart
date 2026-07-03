@@ -25,7 +25,7 @@ abstract class AppRegistry{
     start_page.item,
     album_page.item,
     file_transfer_page.item,
-    // parameter_manager_page.item,
+    parameter_manager_page.item,
     resource_page.item,
     // creation.item,
     recycle_bin.item,
