@@ -82,6 +82,20 @@ pub(super) mod ffi{
     _private: [u8; 0],
   }
 
+  /// ========== HomeBuild ==========
+  #[frb(ignore)]
+  #[repr(C)]
+  pub struct HomeBuildDecryptionResult{
+    pub status: u32,
+    pub bytes: CBytes,
+  }
+
+  #[frb(ignore)]
+  #[repr(C)]
+  pub struct HomeBuildShareCode{
+    _private: [u8; 0],
+  }
+
 
   pub type MediaProgressCallback = Option<extern "C" fn(current: usize, total: usize, userdata: *mut c_void)>;
   pub type MediaStreamCallback = extern "C" fn(index: usize, result: *mut MediaDecryptionResult, userdata: *mut c_void);
@@ -135,6 +149,12 @@ pub(super) mod ffi{
     pub fn cloth_diy_share_code_uid_bytes(key: *mut ClothDiyShareCode) -> ClothDiyDecryptionResult;
     pub fn free_cloth_diy_share_code(key: *mut ClothDiyShareCode);
     pub fn cloth_diy_decode_network(key: *const ClothDiyShareCode) -> ClothDiyDecryptionResult;
+
+    /// ========== HomeBuild ==========
+    pub fn home_build_share_code_from_code_str(s: *const c_char) -> *mut HomeBuildShareCode;
+    pub fn home_build_share_code_server(key: *mut HomeBuildShareCode) -> i64;
+    pub fn free_home_build_share_code(key: *mut HomeBuildShareCode);
+    pub fn home_build_decode_network(key: *const HomeBuildShareCode) -> HomeBuildDecryptionResult;
   }
 }
 
@@ -595,3 +615,74 @@ pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Option<Vec<u8
   }
 }
 
+
+
+/// ============================================================
+/// HomeBuild
+/// ============================================================
+#[frb(opaque)]
+pub struct HomeBuildShareCode{
+  #[cfg(any(target_os = "windows", target_os = "macos"))]
+  pub(super) ptr: *mut ffi::HomeBuildShareCode,
+  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+  _dummy: u8,
+}
+
+unsafe impl Send for HomeBuildShareCode{}
+unsafe impl Sync for HomeBuildShareCode{}
+
+impl HomeBuildShareCode{
+  #[frb(sync, positional)]
+  pub fn from_code_str(code: &str) -> anyhow::Result<Self>{
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      let c_str = CString::new(code).expect("");
+      let ptr = unsafe{ ffi::home_build_share_code_from_code_str(c_str.as_ptr()) };
+
+      Ok(HomeBuildShareCode{ ptr })
+    }
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    {
+      Ok(ClothDiyShareCode{ _dummy: 0 })
+    }
+  }
+
+  #[frb(sync)]
+  pub fn server(&self) -> anyhow::Result<i64>{
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      let timestamp = unsafe{ ffi::home_build_share_code_server(self.ptr) };
+      Ok(timestamp)
+    }
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    {
+      Ok(-1)
+    }
+  }
+}
+
+impl Drop for HomeBuildShareCode{
+  fn drop(&mut self){
+    #[cfg(any(target_os = "windows", target_os = "macos"))]
+    {
+      if !self.ptr.is_null() {
+        unsafe{ ffi::free_home_build_share_code(self.ptr) };
+      }
+    }
+  }
+}
+
+#[frb]
+pub fn home_build_decode_network(share_code: &HomeBuildShareCode) -> Option<Vec<u8>>{
+  let result = unsafe{ ffi::home_build_decode_network(share_code.ptr) };
+
+  if result.status != 0 {
+    return None;
+  }
+
+  if result.bytes.data.is_null() {
+    None
+  }else{
+    Some(result.bytes.into_vec())
+  }
+}
