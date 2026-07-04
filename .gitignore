@@ -7,7 +7,8 @@
 .DS_Store
 .atom/
 .build/
-.build_web/
+/build_web/
+/website/
 .buildlog/
 .history
 .svn/
@@ -48,7 +49,7 @@ app.*.map.json
 
 # Generated locale directories for Vercel build
 /zh/
-/zh-tw/
+/tw/
 /en/
 /ja/
 /ko/

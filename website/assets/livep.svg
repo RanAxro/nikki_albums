@@ -1,8 +1,0 @@
-<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-  <!-- Outer Dotted Circle (24 dots) -->
-  <circle cx="512" cy="512" r="445" fill="none" stroke="#ffffff" stroke-width="72" stroke-linecap="round" stroke-dasharray="0 116.5" />
-  <!-- Middle Solid Circle -->
-  <circle cx="512" cy="512" r="310" fill="none" stroke="#ffffff" stroke-width="72" />
-  <!-- Inner Hollow Circle -->
-  <circle cx="512" cy="512" r="115" fill="none" stroke="#ffffff" stroke-width="72" />
-</svg>
