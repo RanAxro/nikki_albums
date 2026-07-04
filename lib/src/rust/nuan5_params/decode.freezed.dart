@@ -14,23 +14,18 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ClothDiyParam {
 
- ClothDiyParams get field0;
-/// Create a copy of ClothDiyParam
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ClothDiyParamCopyWith<ClothDiyParam> get copyWith => _$ClothDiyParamCopyWithImpl<ClothDiyParam>(this as ClothDiyParam, _$identity);
+ Object get field0;
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam&&(identical(other.field0, field0) || other.field0 == field0));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam&&const DeepCollectionEquality().equals(other.field0, field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
 
 @override
 String toString() {
@@ -41,34 +36,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $ClothDiyParamCopyWith<$Res>  {
-  factory $ClothDiyParamCopyWith(ClothDiyParam value, $Res Function(ClothDiyParam) _then) = _$ClothDiyParamCopyWithImpl;
-@useResult
-$Res call({
- ClothDiyParams field0
-});
-
-
-
-
-}
-/// @nodoc
-class _$ClothDiyParamCopyWithImpl<$Res>
-    implements $ClothDiyParamCopyWith<$Res> {
-  _$ClothDiyParamCopyWithImpl(this._self, this._then);
-
-  final ClothDiyParam _self;
-  final $Res Function(ClothDiyParam) _then;
-
-/// Create a copy of ClothDiyParam
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? field0 = null,}) {
-  return _then(_self.copyWith(
-field0: null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as ClothDiyParams,
-  ));
-}
-
+class $ClothDiyParamCopyWith<$Res>  {
+$ClothDiyParamCopyWith(ClothDiyParam _, $Res Function(ClothDiyParam) __);
 }
 
 
@@ -86,11 +55,12 @@ extension ClothDiyParamPatterns on ClothDiyParam {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ClothDiyParam_ClothDiy value)?  clothDiy,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ClothDiyParam_ClothDiy value)?  clothDiy,TResult Function( ClothDiyParam_DiyHistoryShareCode value)?  diyHistoryShareCode,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
-return clothDiy(_that);case _:
+return clothDiy(_that);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
+return diyHistoryShareCode(_that);case _:
   return orElse();
 
 }
@@ -108,11 +78,12 @@ return clothDiy(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ClothDiyParam_ClothDiy value)  clothDiy,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ClothDiyParam_ClothDiy value)  clothDiy,required TResult Function( ClothDiyParam_DiyHistoryShareCode value)  diyHistoryShareCode,}){
 final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy():
-return clothDiy(_that);}
+return clothDiy(_that);case ClothDiyParam_DiyHistoryShareCode():
+return diyHistoryShareCode(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -126,11 +97,12 @@ return clothDiy(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ClothDiyParam_ClothDiy value)?  clothDiy,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ClothDiyParam_ClothDiy value)?  clothDiy,TResult? Function( ClothDiyParam_DiyHistoryShareCode value)?  diyHistoryShareCode,}){
 final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
-return clothDiy(_that);case _:
+return clothDiy(_that);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
+return diyHistoryShareCode(_that);case _:
   return null;
 
 }
@@ -147,10 +119,11 @@ return clothDiy(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ClothDiyParams field0)?  clothDiy,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ClothDiyParams field0)?  clothDiy,TResult Function( List<DiyHistoryShareCodeParams> field0)?  diyHistoryShareCode,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
-return clothDiy(_that.field0);case _:
+return clothDiy(_that.field0);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
+return diyHistoryShareCode(_that.field0);case _:
   return orElse();
 
 }
@@ -168,10 +141,11 @@ return clothDiy(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ClothDiyParams field0)  clothDiy,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ClothDiyParams field0)  clothDiy,required TResult Function( List<DiyHistoryShareCodeParams> field0)  diyHistoryShareCode,}) {final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy():
-return clothDiy(_that.field0);}
+return clothDiy(_that.field0);case ClothDiyParam_DiyHistoryShareCode():
+return diyHistoryShareCode(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -185,10 +159,11 @@ return clothDiy(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ClothDiyParams field0)?  clothDiy,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ClothDiyParams field0)?  clothDiy,TResult? Function( List<DiyHistoryShareCodeParams> field0)?  diyHistoryShareCode,}) {final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
-return clothDiy(_that.field0);case _:
+return clothDiy(_that.field0);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
+return diyHistoryShareCode(_that.field0);case _:
   return null;
 
 }
@@ -207,7 +182,7 @@ class ClothDiyParam_ClothDiy extends ClothDiyParam {
 
 /// Create a copy of ClothDiyParam
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $ClothDiyParam_ClothDiyCopyWith<ClothDiyParam_ClothDiy> get copyWith => _$ClothDiyParam_ClothDiyCopyWithImpl<ClothDiyParam_ClothDiy>(this, _$identity);
 
@@ -233,7 +208,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $ClothDiyParam_ClothDiyCopyWith<$Res> implements $ClothDiyParamCopyWith<$Res> {
   factory $ClothDiyParam_ClothDiyCopyWith(ClothDiyParam_ClothDiy value, $Res Function(ClothDiyParam_ClothDiy) _then) = _$ClothDiyParam_ClothDiyCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  ClothDiyParams field0
 });
@@ -252,10 +227,82 @@ class _$ClothDiyParam_ClothDiyCopyWithImpl<$Res>
 
 /// Create a copy of ClothDiyParam
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
   return _then(ClothDiyParam_ClothDiy(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
 as ClothDiyParams,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ClothDiyParam_DiyHistoryShareCode extends ClothDiyParam {
+  const ClothDiyParam_DiyHistoryShareCode(final  List<DiyHistoryShareCodeParams> field0): _field0 = field0,super._();
+  
+
+ final  List<DiyHistoryShareCodeParams> _field0;
+@override List<DiyHistoryShareCodeParams> get field0 {
+  if (_field0 is EqualUnmodifiableListView) return _field0;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_field0);
+}
+
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ClothDiyParam_DiyHistoryShareCodeCopyWith<ClothDiyParam_DiyHistoryShareCode> get copyWith => _$ClothDiyParam_DiyHistoryShareCodeCopyWithImpl<ClothDiyParam_DiyHistoryShareCode>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_DiyHistoryShareCode&&const DeepCollectionEquality().equals(other._field0, _field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+
+@override
+String toString() {
+  return 'ClothDiyParam.diyHistoryShareCode(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ClothDiyParam_DiyHistoryShareCodeCopyWith<$Res> implements $ClothDiyParamCopyWith<$Res> {
+  factory $ClothDiyParam_DiyHistoryShareCodeCopyWith(ClothDiyParam_DiyHistoryShareCode value, $Res Function(ClothDiyParam_DiyHistoryShareCode) _then) = _$ClothDiyParam_DiyHistoryShareCodeCopyWithImpl;
+@useResult
+$Res call({
+ List<DiyHistoryShareCodeParams> field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$ClothDiyParam_DiyHistoryShareCodeCopyWithImpl<$Res>
+    implements $ClothDiyParam_DiyHistoryShareCodeCopyWith<$Res> {
+  _$ClothDiyParam_DiyHistoryShareCodeCopyWithImpl(this._self, this._then);
+
+  final ClothDiyParam_DiyHistoryShareCode _self;
+  final $Res Function(ClothDiyParam_DiyHistoryShareCode) _then;
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(ClothDiyParam_DiyHistoryShareCode(
+null == field0 ? _self._field0 : field0 // ignore: cast_nullable_to_non_nullable
+as List<DiyHistoryShareCodeParams>,
   ));
 }
 

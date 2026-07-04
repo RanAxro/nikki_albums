@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -2133354433;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -230509714;
 
 // Section: executor
 
@@ -344,6 +344,46 @@ fn wire__crate__nuan5_params__decrypt__MediaKey_from_str_bytes_impl(
                 Ok(output_ok)
             })(
             ))
+        },
+    )
+}
+fn wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "cloth_diy_de_file",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_params::decode::ClothDiyParamType>::sse_decode(&mut deserializer);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let output_ok = crate::nuan5_params::decode::cloth_diy_de_file(
+                            &api_param_type,
+                            &api_path,
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
+            }
         },
     )
 }
@@ -2242,6 +2282,12 @@ impl SseDecode for crate::nuan5_params::decode::ClothDiyParam {
                     );
                 return crate::nuan5_params::decode::ClothDiyParam::ClothDiy(var_field0);
             }
+            1 => {
+                let mut var_field0 = <Vec<
+                    crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams,
+                >>::sse_decode(deserializer);
+                return crate::nuan5_params::decode::ClothDiyParam::DiyHistoryShareCode(var_field0);
+            }
             _ => {
                 unimplemented!("");
             }
@@ -2255,6 +2301,7 @@ impl SseDecode for crate::nuan5_params::decode::ClothDiyParamType {
         let mut inner = <i32>::sse_decode(deserializer);
         return match inner {
             0 => crate::nuan5_params::decode::ClothDiyParamType::ClothDiy,
+            1 => crate::nuan5_params::decode::ClothDiyParamType::DiyHistoryShareCode,
             _ => unreachable!("Invalid variant for ClothDiyParamType: {}", inner),
         };
     }
@@ -2446,6 +2493,20 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::DiyData {
             outfit_dye: var_outfitDye,
             special_effect: var_specialEffect,
             pattern_creation: var_patternCreation,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_roleId = <String>::sse_decode(deserializer);
+        let mut var_timeStamp = <f64>::sse_decode(deserializer);
+        let mut var_shareCode = <String>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams {
+            role_id: var_roleId,
+            time_stamp: var_timeStamp,
+            share_code: var_shareCode,
         };
     }
 }
@@ -2784,6 +2845,18 @@ impl SseDecode for Vec<crate::nuan5_params::structs::nikki_photo_params::ClothPa
                     deserializer,
                 ),
             );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -4772,141 +4845,147 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        9 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
+        9 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        10 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
+        10 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        11 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
+        11 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        12 => wire__crate__serde_config__de__decode_game_config_file_impl(
+        12 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__nuan5_params__decode__decode_media_param_impl(
+        13 => wire__crate__serde_config__de__decode_game_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        14 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
+        14 => wire__crate__nuan5_params__decode__decode_media_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => wire__crate__serde_config__de__decode_theme_config_file_impl(
+        15 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        16 => wire__crate__serde_config__de__deserialize_game_config_impl(
+        16 => wire__crate__serde_config__de__decode_theme_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        17 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
+        17 => wire__crate__serde_config__de__deserialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        18 => wire__crate__serde_config__de__deserialize_theme_config_impl(
+        18 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        19 => {
+        19 => wire__crate__serde_config__de__deserialize_theme_config_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        20 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        20 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        21 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        21 => {
+        22 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        23 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
+        24 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        24 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        25 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        26 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
+        25 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        26 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+        27 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
+        28 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
+        30 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
+        32 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
+        34 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        34 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
+        35 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        35 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
+        36 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => wire__crate__serde_config__se__serialize_game_config_impl(
+        38 => wire__crate__serde_config__se__serialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        38 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+        39 => wire__crate__serde_config__se__serialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => wire__crate__serde_config__se__serialize_theme_config_impl(
+        40 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -4962,25 +5041,25 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        22 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        28 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+        23 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        29 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+        31 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+        33 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        40 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        41 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+        37 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        41 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        42 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -5334,6 +5413,9 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::ClothDiyPara
             crate::nuan5_params::decode::ClothDiyParam::ClothDiy(field0) => {
                 [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
+            crate::nuan5_params::decode::ClothDiyParam::DiyHistoryShareCode(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
             _ => {
                 unimplemented!("");
             }
@@ -5356,6 +5438,7 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::ClothDiyPara
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
             Self::ClothDiy => 0.into_dart(),
+            Self::DiyHistoryShareCode => 1.into_dart(),
             _ => unreachable!(),
         }
     }
@@ -5616,6 +5699,34 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::nikki_photo
     for crate::nuan5_params::structs::nikki_photo_params::DiyData
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::DiyData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.role_id.into_into_dart().into_dart(),
+            self.time_stamp.into_into_dart().into_dart(),
+            self.share_code.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams,
+    > for crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams {
         self
     }
 }
@@ -7726,6 +7837,10 @@ impl SseEncode for crate::nuan5_params::decode::ClothDiyParam {
                     field0, serializer,
                 );
             }
+            crate::nuan5_params::decode::ClothDiyParam::DiyHistoryShareCode(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <Vec<crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams>>::sse_encode(field0, serializer);
+            }
             _ => {
                 unimplemented!("");
             }
@@ -7739,6 +7854,7 @@ impl SseEncode for crate::nuan5_params::decode::ClothDiyParamType {
         <i32>::sse_encode(
             match self {
                 crate::nuan5_params::decode::ClothDiyParamType::ClothDiy => 0,
+                crate::nuan5_params::decode::ClothDiyParamType::DiyHistoryShareCode => 1,
                 _ => {
                     unimplemented!("");
                 }
@@ -7921,6 +8037,15 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::DiyData {
             self.pattern_creation,
             serializer,
         );
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.role_id, serializer);
+        <f64>::sse_encode(self.time_stamp, serializer);
+        <String>::sse_encode(self.share_code, serializer);
     }
 }
 
@@ -8184,6 +8309,18 @@ impl SseEncode for Vec<crate::nuan5_params::structs::nikki_photo_params::ClothPa
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <crate::nuan5_params::structs::nikki_photo_params::ClothParams>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams>::sse_encode(
                 item, serializer,
             );
         }

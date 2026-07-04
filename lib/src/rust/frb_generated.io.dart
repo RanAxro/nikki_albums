@@ -357,6 +357,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DiyData dco_decode_diy_data(dynamic raw);
 
   @protected
+  DiyHistoryShareCodeParams dco_decode_diy_history_share_code_params(
+    dynamic raw,
+  );
+
+  @protected
   DressingParams dco_decode_dressing_params(dynamic raw);
 
   @protected
@@ -414,6 +419,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw);
+
+  @protected
+  List<DiyHistoryShareCodeParams> dco_decode_list_diy_history_share_code_params(
+    dynamic raw,
+  );
 
   @protected
   List<Eureka> dco_decode_list_eureka(dynamic raw);
@@ -1164,6 +1174,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DiyData sse_decode_diy_data(SseDeserializer deserializer);
 
   @protected
+  DiyHistoryShareCodeParams sse_decode_diy_history_share_code_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   DressingParams sse_decode_dressing_params(SseDeserializer deserializer);
 
   @protected
@@ -1225,6 +1240,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer);
+
+  @protected
+  List<DiyHistoryShareCodeParams> sse_decode_list_diy_history_share_code_params(
+    SseDeserializer deserializer,
+  );
 
   @protected
   List<Eureka> sse_decode_list_eureka(SseDeserializer deserializer);
@@ -2150,6 +2170,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_diy_data(DiyData self, SseSerializer serializer);
 
   @protected
+  void sse_encode_diy_history_share_code_params(
+    DiyHistoryShareCodeParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_dressing_params(
     DressingParams self,
     SseSerializer serializer,
@@ -2233,6 +2259,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_cloth_params(
     List<ClothParams> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_diy_history_share_code_params(
+    List<DiyHistoryShareCodeParams> self,
     SseSerializer serializer,
   );
 

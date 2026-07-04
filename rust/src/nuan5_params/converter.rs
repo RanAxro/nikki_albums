@@ -599,3 +599,15 @@ pub(crate) fn convert_net_cloth_diy_params(data: &diy_custom_data::NetDIYCustomD
     clothes: convert_cloth(&data.content.content.wearing_clothes, Some(&data.content.content.wearing_diy_infos)),
   }
 }
+
+pub(crate) fn convert_diy_history_share_code_params(data: &diy_custom_data::DiyHistoryShareCode) -> DiyHistoryShareCodeParams{
+  DiyHistoryShareCodeParams{
+    role_id: data.role_id.clone(),
+    time_stamp: data.time_stamp,
+    share_code: data.share_code.clone(),
+  }
+}
+
+pub(crate) fn convert_diy_history_share_code_box(data: &diy_custom_data::DiyHistoryShareCodeBox) -> DiyHistoryShareCodeParamsBox{
+  data.iter().map(convert_diy_history_share_code_params).collect()
+}

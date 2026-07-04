@@ -199,14 +199,14 @@ pub fn media_de_files_unchecked(
 #[frb]
 pub enum ClothDiyParamType{
   ClothDiy,
-  // DiyHistoryShareCode,
+  DiyHistoryShareCode,
 }
 
 #[frb]
 #[derive(Clone)]
 pub enum ClothDiyParam{
   ClothDiy(ClothDiyParams),
-  // DiyHistoryShareCode(DiyHistoryShareCodeParams),
+  DiyHistoryShareCode(DiyHistoryShareCodeParamsBox),
 }
 
 #[frb]
@@ -215,9 +215,9 @@ pub fn de_cloth_diy_param(param_type: &ClothDiyParamType, bytes: &[u8]) -> Optio
 
   let decoded = match param_type{
     ClothDiy => from_slice(&bytes).ok().as_ref().map(convert_net_cloth_diy_params).map(ClothDiyParam::ClothDiy),
-    // DiyHistoryShareCode => from_slice(&bytes).ok().as_ref().map(convert_nikki_photo_params).map(MediaParam::NikkiPhoto),
+    DiyHistoryShareCode => from_slice(&bytes).ok().as_ref().map(convert_diy_history_share_code_box).map(ClothDiyParam::DiyHistoryShareCode),
   };
-  
+
   decoded
 }
 
@@ -226,6 +226,13 @@ pub fn cloth_diy_de_network(key: &ClothDiyShareCode) -> Result<Option<ClothDiyPa
   decrypt::cloth_diy_decode_network(key).map(|decrypted|{
     de_cloth_diy_param(&ClothDiyParamType::ClothDiy, &decrypted)
   })
+}
+
+#[frb]
+pub fn cloth_diy_de_file(param_type: &ClothDiyParamType, path: &str) -> Result<Option<ClothDiyParam>, DecryptionError>{
+  let bytes = std::fs::read(path).map_err(|_| DecryptionError::Io)?;
+
+  Ok(de_cloth_diy_param(param_type, &bytes))
 }
 
 

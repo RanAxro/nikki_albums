@@ -90,18 +90,29 @@ Future<ClothDiyParam?> deClothDiyParam({
 Future<ClothDiyParam?> clothDiyDeNetwork({required ClothDiyShareCode key}) =>
     RustLib.instance.api.crateNuan5ParamsDecodeClothDiyDeNetwork(key: key);
 
+Future<ClothDiyParam?> clothDiyDeFile({
+  required ClothDiyParamType paramType,
+  required String path,
+}) => RustLib.instance.api.crateNuan5ParamsDecodeClothDiyDeFile(
+  paramType: paramType,
+  path: path,
+);
+
 @freezed
 sealed class ClothDiyParam with _$ClothDiyParam {
   const ClothDiyParam._();
 
   const factory ClothDiyParam.clothDiy(ClothDiyParams field0) =
       ClothDiyParam_ClothDiy;
+  const factory ClothDiyParam.diyHistoryShareCode(
+    List<DiyHistoryShareCodeParams> field0,
+  ) = ClothDiyParam_DiyHistoryShareCode;
 }
 
 /// ============================================================
 /// ClothDiy
 /// ============================================================
-enum ClothDiyParamType { clothDiy }
+enum ClothDiyParamType { clothDiy, diyHistoryShareCode }
 
 @freezed
 sealed class MediaCustomData with _$MediaCustomData {
