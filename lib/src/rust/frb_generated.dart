@@ -328,7 +328,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         codec: SseCodec(
           decodeSuccessData:
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta:
             kCrateNuan5ParamsDecryptClothDiyShareCodeFromCodeStrConstMeta,
@@ -361,7 +361,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_64,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptClothDiyShareCodeTimestampConstMeta,
         argValues: [that],
@@ -393,7 +393,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptClothDiyShareCodeUidConstMeta,
         argValues: [that],
@@ -422,7 +422,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         codec: SseCodec(
           decodeSuccessData:
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHomeBuildShareCode,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta:
             kCrateNuan5ParamsDecryptHomeBuildShareCodeFromCodeStrConstMeta,
@@ -455,7 +455,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_64,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptHomeBuildShareCodeServerConstMeta,
         argValues: [that],
@@ -481,7 +481,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         codec: SseCodec(
           decodeSuccessData:
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptMediaKeyCameraParamConstMeta,
         argValues: [],
@@ -505,7 +505,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         codec: SseCodec(
           decodeSuccessData:
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptMediaKeyFromStrConstMeta,
         argValues: [s],
@@ -531,7 +531,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         codec: SseCodec(
           decodeSuccessData:
               sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey,
-          decodeErrorData: sse_decode_AnyhowException,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptMediaKeyFromStrBytesConstMeta,
         argValues: [bytes],
@@ -1360,7 +1360,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           },
           codec: SseCodec(
             decodeSuccessData: sse_decode_unit,
-            decodeErrorData: sse_decode_AnyhowException,
+            decodeErrorData: sse_decode_decryption_error,
           ),
           constMeta: kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedConstMeta,
           argValues: [flag, paths, key, progressSink],
@@ -1450,7 +1450,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           },
           codec: SseCodec(
             decodeSuccessData: sse_decode_unit,
-            decodeErrorData: sse_decode_AnyhowException,
+            decodeErrorData: sse_decode_decryption_error,
           ),
           constMeta:
               kCrateNuan5ParamsDecryptMediaDecodeFilesUncheckedStreamConstMeta,
@@ -2338,6 +2338,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  DecryptionError dco_decode_decryption_error(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DecryptionError.values[raw as int];
   }
 
   @protected
@@ -4570,6 +4576,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  DecryptionError sse_decode_decryption_error(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return DecryptionError.values[inner];
   }
 
   @protected
@@ -7282,6 +7295,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_i_32(1, serializer);
         sse_encode_list_prim_u_8_strict(field0, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_decryption_error(
+    DecryptionError self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
   }
 
   @protected

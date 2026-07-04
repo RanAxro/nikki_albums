@@ -70,13 +70,12 @@ fn wire__crate__nuan5_params__decrypt__ClothDiyShareCode_from_code_str_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_code = <String>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let output_ok =
-                        crate::nuan5_params::decrypt::ClothDiyShareCode::from_code_str(&api_code)?;
-                    Ok(output_ok)
-                })(),
-            )
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let output_ok =
+                    crate::nuan5_params::decrypt::ClothDiyShareCode::from_code_str(&api_code)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -105,28 +104,26 @@ fn wire__crate__nuan5_params__decrypt__ClothDiyShareCode_timestamp_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ClothDiyShareCode>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
                     }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok = crate::nuan5_params::decrypt::ClothDiyShareCode::timestamp(
-                        &*api_that_guard,
-                    )?;
-                    Ok(output_ok)
-                })(),
-            )
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok =
+                    crate::nuan5_params::decrypt::ClothDiyShareCode::timestamp(&*api_that_guard)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -155,27 +152,26 @@ fn wire__crate__nuan5_params__decrypt__ClothDiyShareCode_uid_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ClothDiyShareCode>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
                     }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok =
-                        crate::nuan5_params::decrypt::ClothDiyShareCode::uid(&*api_that_guard)?;
-                    Ok(output_ok)
-                })(),
-            )
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok =
+                    crate::nuan5_params::decrypt::ClothDiyShareCode::uid(&*api_that_guard)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -202,13 +198,12 @@ fn wire__crate__nuan5_params__decrypt__HomeBuildShareCode_from_code_str_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_code = <String>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let output_ok =
-                        crate::nuan5_params::decrypt::HomeBuildShareCode::from_code_str(&api_code)?;
-                    Ok(output_ok)
-                })(),
-            )
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let output_ok =
+                    crate::nuan5_params::decrypt::HomeBuildShareCode::from_code_str(&api_code)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -237,27 +232,26 @@ fn wire__crate__nuan5_params__decrypt__HomeBuildShareCode_server_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<HomeBuildShareCode>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
                     }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok =
-                        crate::nuan5_params::decrypt::HomeBuildShareCode::server(&*api_that_guard)?;
-                    Ok(output_ok)
-                })(),
-            )
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok =
+                    crate::nuan5_params::decrypt::HomeBuildShareCode::server(&*api_that_guard)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -283,12 +277,11 @@ fn wire__crate__nuan5_params__decrypt__MediaKey_camera_param_impl(
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let output_ok = crate::nuan5_params::decrypt::MediaKey::camera_param()?;
-                    Ok(output_ok)
-                })(),
-            )
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let output_ok = crate::nuan5_params::decrypt::MediaKey::camera_param()?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -315,12 +308,11 @@ fn wire__crate__nuan5_params__decrypt__MediaKey_from_str_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_s = <String>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let output_ok = crate::nuan5_params::decrypt::MediaKey::from_str(api_s)?;
-                    Ok(output_ok)
-                })(),
-            )
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let output_ok = crate::nuan5_params::decrypt::MediaKey::from_str(api_s)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -347,13 +339,11 @@ fn wire__crate__nuan5_params__decrypt__MediaKey_from_str_bytes_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_bytes = <Vec<u8>>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                (move || {
-                    let output_ok =
-                        crate::nuan5_params::decrypt::MediaKey::from_str_bytes(&api_bytes)?;
-                    Ok(output_ok)
-                })(),
-            )
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
+                let output_ok = crate::nuan5_params::decrypt::MediaKey::from_str_bytes(&api_bytes)?;
+                Ok(output_ok)
+            })(
+            ))
         },
     )
 }
@@ -1395,7 +1385,7 @@ fn wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
                     (move || {
                         let mut api_key_guard = None;
                         let decode_indices_ =
@@ -1514,7 +1504,7 @@ fn wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
                     (move || {
                         let mut api_key_guard = None;
                         let decode_indices_ =
@@ -2264,6 +2254,29 @@ impl SseDecode for crate::nuan5_params::decrypt::CustomData {
                 unimplemented!("");
             }
         }
+    }
+}
+
+impl SseDecode for crate::nuan5_params::decrypt::DecryptionError {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_params::decrypt::DecryptionError::Unknown,
+            1 => crate::nuan5_params::decrypt::DecryptionError::NullPointer,
+            2 => crate::nuan5_params::decrypt::DecryptionError::DataLenIsNotAMultipleOf16,
+            3 => crate::nuan5_params::decrypt::DecryptionError::DecodingBase64Failed,
+            4 => crate::nuan5_params::decrypt::DecryptionError::FindNoStartFlag,
+            5 => crate::nuan5_params::decrypt::DecryptionError::FindNoEndFlag,
+            6 => crate::nuan5_params::decrypt::DecryptionError::Io,
+            7 => crate::nuan5_params::decrypt::DecryptionError::IllegalUTF8,
+            8 => crate::nuan5_params::decrypt::DecryptionError::InvalidClothDiyShareCode,
+            9 => crate::nuan5_params::decrypt::DecryptionError::NotNumberString,
+            10 => crate::nuan5_params::decrypt::DecryptionError::NetworkError,
+            11 => crate::nuan5_params::decrypt::DecryptionError::InvalidHomeBuildShareCode,
+            12 => crate::nuan5_params::decrypt::DecryptionError::DeserializationFailed,
+            _ => unreachable!("Invalid variant for DecryptionError: {}", inner),
+        };
     }
 }
 
@@ -5325,6 +5338,38 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::decrypt::CustomData>
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decrypt::DecryptionError {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Unknown => 0.into_dart(),
+            Self::NullPointer => 1.into_dart(),
+            Self::DataLenIsNotAMultipleOf16 => 2.into_dart(),
+            Self::DecodingBase64Failed => 3.into_dart(),
+            Self::FindNoStartFlag => 4.into_dart(),
+            Self::FindNoEndFlag => 5.into_dart(),
+            Self::Io => 6.into_dart(),
+            Self::IllegalUTF8 => 7.into_dart(),
+            Self::InvalidClothDiyShareCode => 8.into_dart(),
+            Self::NotNumberString => 9.into_dart(),
+            Self::NetworkError => 10.into_dart(),
+            Self::InvalidHomeBuildShareCode => 11.into_dart(),
+            Self::DeserializationFailed => 12.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::decrypt::DecryptionError
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::decrypt::DecryptionError>
+    for crate::nuan5_params::decrypt::DecryptionError
+{
+    fn into_into_dart(self) -> crate::nuan5_params::decrypt::DecryptionError {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Dimension {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
@@ -7586,6 +7631,33 @@ impl SseEncode for crate::nuan5_params::decrypt::CustomData {
                 unimplemented!("");
             }
         }
+    }
+}
+
+impl SseEncode for crate::nuan5_params::decrypt::DecryptionError {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_params::decrypt::DecryptionError::Unknown => 0,
+                crate::nuan5_params::decrypt::DecryptionError::NullPointer => 1,
+                crate::nuan5_params::decrypt::DecryptionError::DataLenIsNotAMultipleOf16 => 2,
+                crate::nuan5_params::decrypt::DecryptionError::DecodingBase64Failed => 3,
+                crate::nuan5_params::decrypt::DecryptionError::FindNoStartFlag => 4,
+                crate::nuan5_params::decrypt::DecryptionError::FindNoEndFlag => 5,
+                crate::nuan5_params::decrypt::DecryptionError::Io => 6,
+                crate::nuan5_params::decrypt::DecryptionError::IllegalUTF8 => 7,
+                crate::nuan5_params::decrypt::DecryptionError::InvalidClothDiyShareCode => 8,
+                crate::nuan5_params::decrypt::DecryptionError::NotNumberString => 9,
+                crate::nuan5_params::decrypt::DecryptionError::NetworkError => 10,
+                crate::nuan5_params::decrypt::DecryptionError::InvalidHomeBuildShareCode => 11,
+                crate::nuan5_params::decrypt::DecryptionError::DeserializationFailed => 12,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
     }
 }
 

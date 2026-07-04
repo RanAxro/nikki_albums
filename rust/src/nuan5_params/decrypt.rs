@@ -180,7 +180,6 @@ pub enum DecryptionError{
 }
 
 impl DecryptionError{
-  /// 核心转换逻辑，所有类型最终都走到这里
   const fn from_u32(value: u32) -> Self{
     match value{
       1 => Self::NullPointer,
@@ -240,14 +239,14 @@ unsafe impl Sync for MediaKey{}
 
 impl MediaKey{
   #[frb(sync, positional)]
-  pub fn from_str_bytes(bytes: &[u8]) -> anyhow::Result<MediaKey>{
+  pub fn from_str_bytes(bytes: &[u8]) -> Result<MediaKey, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let ptr = unsafe{ ffi::media_key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
       if ptr.is_null() {
-        anyhow::bail!("failed to create key from str bytes");
+        return Err(DecryptionError::NullPointer);
       }
-      Ok(MediaKey{ ptr })
+      return Ok(MediaKey{ ptr });
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
@@ -256,15 +255,15 @@ impl MediaKey{
   }
 
   #[frb(sync, positional)]
-  pub fn from_str(s: String) -> anyhow::Result<MediaKey>{
+  pub fn from_str(s: String) -> Result<MediaKey, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
-      let c_str = CString::new(s).map_err(|e| anyhow::anyhow!("invalid string: {e}"))?;
+      let c_str = CString::new(s).map_err(|e| DecryptionError::Unknown)?;
       let ptr = unsafe{ ffi::media_key_from_str(c_str.as_ptr()) };
       if ptr.is_null() {
-        anyhow::bail!("failed to create key from string");
+        return Err(DecryptionError::NullPointer);
       }
-      Ok(MediaKey{ ptr })
+      return Ok(MediaKey{ ptr });
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
@@ -273,14 +272,14 @@ impl MediaKey{
   }
 
   #[frb(sync)]
-  pub fn camera_param() -> anyhow::Result<MediaKey>{
+  pub fn camera_param() -> Result<MediaKey, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let ptr = unsafe{ ffi::media_key_camera_param() };
       if ptr.is_null() {
-        anyhow::bail!("failed to create camera param key");
+        return Err(DecryptionError::NullPointer);
       }
-      Ok(MediaKey{ ptr })
+      return Ok(MediaKey{ ptr });
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
@@ -391,9 +390,9 @@ pub fn media_decode_files_unchecked(
   paths: Vec<String>,
   key: &MediaKey,
   progress_sink: StreamSink<MediaDecodeEvent>,
-) -> anyhow::Result<()>{
+) -> Result<(), DecryptionError>{
   if paths.is_empty() {
-    progress_sink.add(MediaDecodeEvent::Result(vec![]));
+    progress_sink.add(MediaDecodeEvent::Result(vec![])).map_err(|_| DecryptionError::Unknown)?;
     return Ok(());
   }
 
@@ -402,7 +401,7 @@ pub fn media_decode_files_unchecked(
     unsafe{
       let c_paths: Vec<CString> = paths
         .into_iter()
-        .map(|p| CString::new(p).map_err(|e| anyhow::anyhow!("路径包含非法空字符: {}", e)))
+        .map(|p| CString::new(p).map_err(|_| DecryptionError::Unknown))
         .collect::<Result<_, _>>()?;
       let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
@@ -435,7 +434,7 @@ pub fn media_decode_files_unchecked(
       let _ = Arc::from_raw(userdata as *const StreamSink<MediaDecodeEvent>);
 
       if results_ptr.is_null() {
-        return Err(anyhow::anyhow!("decode_files_unchecked 返回了空指针"));
+        return Err(DecryptionError::NullPointer);
       }
 
       let mut decoded = Vec::with_capacity(path_ptrs.len());
@@ -519,7 +518,7 @@ pub fn media_decode_files_unchecked_stream(
   paths: Vec<String>,
   key: &MediaKey,
   sink: StreamSink<MediaStreamResult>,
-) -> anyhow::Result<()>{
+) -> Result<(), DecryptionError>{
   if paths.is_empty() {
     return Ok(());
   }
@@ -594,13 +593,13 @@ unsafe impl Sync for ClothDiyShareCode{}
 
 impl ClothDiyShareCode{
   #[frb(sync, positional)]
-  pub fn from_code_str(code: &str) -> anyhow::Result<Self>{
+  pub fn from_code_str(code: &str) -> Result<Self, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
-      let c_str = CString::new(code).expect("");
+      let c_str = CString::new(code).map_err(|_| DecryptionError::Unknown)?;
       let ptr = unsafe{ ffi::cloth_diy_share_code_from_code_str(c_str.as_ptr()) };
 
-      Ok(ClothDiyShareCode{ ptr })
+      return Ok(ClothDiyShareCode{ ptr });
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos")))]
     {
@@ -609,7 +608,7 @@ impl ClothDiyShareCode{
   }
 
   #[frb(sync)]
-  pub fn timestamp(&self) -> anyhow::Result<i64>{
+  pub fn timestamp(&self) -> Result<i64, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let timestamp = unsafe{ ffi::cloth_diy_share_code_timestamp(self.ptr) };
@@ -622,13 +621,13 @@ impl ClothDiyShareCode{
   }
 
   #[frb(sync)]
-  pub fn uid(&self) -> anyhow::Result<String>{
+  pub fn uid(&self) -> Result<String, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let result = unsafe{ ffi::cloth_diy_share_code_uid_bytes(self.ptr) };
 
       if result.status != 0 || result.bytes.data.is_null() {
-        return Err(anyhow::anyhow!("failed to decode share code"));
+        return Err(DecryptionError::NullPointer);
       }else{
         unsafe{
           let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
@@ -688,10 +687,10 @@ unsafe impl Sync for HomeBuildShareCode{}
 
 impl HomeBuildShareCode{
   #[frb(sync, positional)]
-  pub fn from_code_str(code: &str) -> anyhow::Result<Self>{
+  pub fn from_code_str(code: &str) -> Result<Self, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
-      let c_str = CString::new(code).expect("");
+      let c_str = CString::new(code).map_err(|_| DecryptionError::Unknown)?;
       let ptr = unsafe{ ffi::home_build_share_code_from_code_str(c_str.as_ptr()) };
 
       Ok(HomeBuildShareCode{ ptr })
@@ -703,7 +702,7 @@ impl HomeBuildShareCode{
   }
 
   #[frb(sync)]
-  pub fn server(&self) -> anyhow::Result<i64>{
+  pub fn server(&self) -> Result<i64, DecryptionError>{
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     {
       let timestamp = unsafe{ ffi::home_build_share_code_server(self.ptr) };

@@ -8,8 +8,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'decrypt.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `convert_media_result`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `drop`, `drop`, `drop`, `fmt`
+// These functions are ignored because they are not marked as `pub`: `convert_media_result`, `from_u32`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_receiver_is_total_eq`, `clone`, `clone`, `drop`, `drop`, `drop`, `eq`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 CustomData? mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
     .crateNuan5ParamsDecryptMediaDecrypt(data: data, key: key);
@@ -126,6 +126,22 @@ sealed class CustomData with _$CustomData {
 
   const factory CustomData.invalid() = CustomData_Invalid;
   const factory CustomData.valid(Uint8List field0) = CustomData_Valid;
+}
+
+enum DecryptionError {
+  unknown,
+  nullPointer,
+  dataLenIsNotAMultipleOf16,
+  decodingBase64Failed,
+  findNoStartFlag,
+  findNoEndFlag,
+  io,
+  illegalUtf8,
+  invalidClothDiyShareCode,
+  notNumberString,
+  networkError,
+  invalidHomeBuildShareCode,
+  deserializationFailed,
 }
 
 @freezed

@@ -336,6 +336,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CustomData dco_decode_custom_data(dynamic raw);
 
   @protected
+  DecryptionError dco_decode_decryption_error(dynamic raw);
+
+  @protected
   Dimension dco_decode_dimension(dynamic raw);
 
   @protected
@@ -1123,6 +1126,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
+
+  @protected
+  DecryptionError sse_decode_decryption_error(SseDeserializer deserializer);
 
   @protected
   Dimension sse_decode_dimension(SseDeserializer deserializer);
@@ -2083,6 +2089,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_decryption_error(
+    DecryptionError self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_dimension(Dimension self, SseSerializer serializer);
