@@ -29,7 +29,7 @@ Future<MediaCustomData> decodeMediaParam({
   data: data,
 );
 
-Future<MediaCustomData?> mediaDe({
+Future<MediaCustomData> mediaDe({
   required MediaParamType paramType,
   required List<int> data,
   required MediaKey key,
@@ -39,7 +39,7 @@ Future<MediaCustomData?> mediaDe({
   key: key,
 );
 
-Future<MediaCustomData?> mediaDeFileBytesUnchecked({
+Future<MediaCustomData> mediaDeFileBytesUnchecked({
   required MediaParamType paramType,
   required List<int> bytes,
   required MediaKey key,
@@ -49,7 +49,7 @@ Future<MediaCustomData?> mediaDeFileBytesUnchecked({
   key: key,
 );
 
-Future<MediaCustomData?> mediaDeFileUnchecked({
+Future<MediaCustomData> mediaDeFileUnchecked({
   required MediaParamType paramType,
   required String path,
   required MediaKey key,
@@ -59,7 +59,7 @@ Future<MediaCustomData?> mediaDeFileUnchecked({
   key: key,
 );
 
-MediaCustomData? mediaDeFileUncheckedSync({
+MediaCustomData mediaDeFileUncheckedSync({
   required MediaParamType paramType,
   required String path,
   required MediaKey key,

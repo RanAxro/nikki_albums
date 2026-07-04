@@ -11,10 +11,10 @@ part 'decrypt.freezed.dart';
 // These functions are ignored because they are not marked as `pub`: `convert_media_result`, `from_u32`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_receiver_is_total_eq`, `clone`, `clone`, `drop`, `drop`, `drop`, `eq`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
-CustomData? mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
+CustomData mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
     .crateNuan5ParamsDecryptMediaDecrypt(data: data, key: key);
 
-CustomData? mediaDecodeFileBytesUnchecked({
+CustomData mediaDecodeFileBytesUnchecked({
   required List<int> flag,
   required List<int> bytes,
   required MediaKey key,
@@ -24,7 +24,7 @@ CustomData? mediaDecodeFileBytesUnchecked({
   key: key,
 );
 
-Future<CustomData?> mediaDecodeFileUnchecked({
+Future<CustomData> mediaDecodeFileUnchecked({
   required List<int> flag,
   required String path,
   required MediaKey key,
@@ -34,7 +34,7 @@ Future<CustomData?> mediaDecodeFileUnchecked({
   key: key,
 );
 
-CustomData? mediaDecodeFileUncheckedSync({
+CustomData mediaDecodeFileUncheckedSync({
   required List<int> flag,
   required String path,
   required MediaKey key,
@@ -78,13 +78,13 @@ Stream<MediaStreamResult> mediaDecodeFilesUncheckedStream({
       key: key,
     );
 
-Future<Uint8List?> clothDiyDecodeNetwork({
+Future<Uint8List> clothDiyDecodeNetwork({
   required ClothDiyShareCode shareCode,
 }) => RustLib.instance.api.crateNuan5ParamsDecryptClothDiyDecodeNetwork(
   shareCode: shareCode,
 );
 
-Future<Uint8List?> homeBuildDecodeNetwork({
+Future<Uint8List> homeBuildDecodeNetwork({
   required HomeBuildShareCode shareCode,
 }) => RustLib.instance.api.crateNuan5ParamsDecryptHomeBuildDecodeNetwork(
   shareCode: shareCode,

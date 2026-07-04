@@ -4,7 +4,7 @@ use super::super::decrypt;
 
 pub fn parse_camera_params(params: &str) -> Option<camera_params::CameraParams>{
   let key = decrypt::MediaKey::camera_param().ok()?;
-  let decrypt::CustomData::Valid(data) = decrypt::media_decrypt(params.as_ref(), &key)? else {
+  let Ok(decrypt::CustomData::Valid(data)) = decrypt::media_decrypt(params.as_ref(), &key) else {
     return None;
   };
   de::from_slice(&data).ok()

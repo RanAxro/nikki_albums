@@ -126,7 +126,7 @@ abstract class RustLibApi extends BaseApi {
     required List<int> bytes,
   });
 
-  Future<Uint8List?> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
+  Future<Uint8List> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
     required ClothDiyShareCode shareCode,
   });
 
@@ -179,31 +179,31 @@ abstract class RustLibApi extends BaseApi {
 
   String crateApiSimpleGreet({required String name});
 
-  Future<Uint8List?> crateNuan5ParamsDecryptHomeBuildDecodeNetwork({
+  Future<Uint8List> crateNuan5ParamsDecryptHomeBuildDecodeNetwork({
     required HomeBuildShareCode shareCode,
   });
 
   Future<void> crateApiSimpleInitApp();
 
-  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDe({
+  Future<MediaCustomData> crateNuan5ParamsDecodeMediaDe({
     required MediaParamType paramType,
     required List<int> data,
     required MediaKey key,
   });
 
-  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileBytesUnchecked({
+  Future<MediaCustomData> crateNuan5ParamsDecodeMediaDeFileBytesUnchecked({
     required MediaParamType paramType,
     required List<int> bytes,
     required MediaKey key,
   });
 
-  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileUnchecked({
+  Future<MediaCustomData> crateNuan5ParamsDecodeMediaDeFileUnchecked({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
   });
 
-  MediaCustomData? crateNuan5ParamsDecodeMediaDeFileUncheckedSync({
+  MediaCustomData crateNuan5ParamsDecodeMediaDeFileUncheckedSync({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
@@ -215,19 +215,19 @@ abstract class RustLibApi extends BaseApi {
     required MediaKey key,
   });
 
-  CustomData? crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked({
+  CustomData crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked({
     required List<int> flag,
     required List<int> bytes,
     required MediaKey key,
   });
 
-  Future<CustomData?> crateNuan5ParamsDecryptMediaDecodeFileUnchecked({
+  Future<CustomData> crateNuan5ParamsDecryptMediaDecodeFileUnchecked({
     required List<int> flag,
     required String path,
     required MediaKey key,
   });
 
-  CustomData? crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync({
+  CustomData crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync({
     required List<int> flag,
     required String path,
     required MediaKey key,
@@ -253,7 +253,7 @@ abstract class RustLibApi extends BaseApi {
     required MediaKey key,
   });
 
-  CustomData? crateNuan5ParamsDecryptMediaDecrypt({
+  CustomData crateNuan5ParamsDecryptMediaDecrypt({
     required List<int> data,
     required MediaKey key,
   });
@@ -547,7 +547,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<Uint8List?> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
+  Future<Uint8List> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
     required ClothDiyShareCode shareCode,
   }) {
     return handler.executeNormal(
@@ -566,8 +566,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_list_prim_u_8_strict,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptClothDiyDecodeNetworkConstMeta,
         argValues: [shareCode],
@@ -950,7 +950,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "greet", argNames: ["name"]);
 
   @override
-  Future<Uint8List?> crateNuan5ParamsDecryptHomeBuildDecodeNetwork({
+  Future<Uint8List> crateNuan5ParamsDecryptHomeBuildDecodeNetwork({
     required HomeBuildShareCode shareCode,
   }) {
     return handler.executeNormal(
@@ -969,8 +969,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_list_prim_u_8_strict,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptHomeBuildDecodeNetworkConstMeta,
         argValues: [shareCode],
@@ -1013,7 +1013,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
-  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDe({
+  Future<MediaCustomData> crateNuan5ParamsDecodeMediaDe({
     required MediaParamType paramType,
     required List<int> data,
     required MediaKey key,
@@ -1036,8 +1036,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_media_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecodeMediaDeConstMeta,
         argValues: [paramType, data, key],
@@ -1053,7 +1053,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileBytesUnchecked({
+  Future<MediaCustomData> crateNuan5ParamsDecodeMediaDeFileBytesUnchecked({
     required MediaParamType paramType,
     required List<int> bytes,
     required MediaKey key,
@@ -1076,8 +1076,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_media_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecodeMediaDeFileBytesUncheckedConstMeta,
         argValues: [paramType, bytes, key],
@@ -1093,7 +1093,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<MediaCustomData?> crateNuan5ParamsDecodeMediaDeFileUnchecked({
+  Future<MediaCustomData> crateNuan5ParamsDecodeMediaDeFileUnchecked({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
@@ -1116,8 +1116,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_media_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecodeMediaDeFileUncheckedConstMeta,
         argValues: [paramType, path, key],
@@ -1133,7 +1133,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  MediaCustomData? crateNuan5ParamsDecodeMediaDeFileUncheckedSync({
+  MediaCustomData crateNuan5ParamsDecodeMediaDeFileUncheckedSync({
     required MediaParamType paramType,
     required String path,
     required MediaKey key,
@@ -1151,8 +1151,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 26)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_media_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_media_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecodeMediaDeFileUncheckedSyncConstMeta,
         argValues: [paramType, path, key],
@@ -1198,7 +1198,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           },
           codec: SseCodec(
             decodeSuccessData: sse_decode_unit,
-            decodeErrorData: sse_decode_AnyhowException,
+            decodeErrorData: sse_decode_decryption_error,
           ),
           constMeta: kCrateNuan5ParamsDecodeMediaDeFilesUncheckedConstMeta,
           argValues: [paramType, paths, key, sink],
@@ -1216,7 +1216,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  CustomData? crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked({
+  CustomData crateNuan5ParamsDecryptMediaDecodeFileBytesUnchecked({
     required List<int> flag,
     required List<int> bytes,
     required MediaKey key,
@@ -1234,8 +1234,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 28)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta:
             kCrateNuan5ParamsDecryptMediaDecodeFileBytesUncheckedConstMeta,
@@ -1253,7 +1253,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<CustomData?> crateNuan5ParamsDecryptMediaDecodeFileUnchecked({
+  Future<CustomData> crateNuan5ParamsDecryptMediaDecodeFileUnchecked({
     required List<int> flag,
     required String path,
     required MediaKey key,
@@ -1276,8 +1276,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptMediaDecodeFileUncheckedConstMeta,
         argValues: [flag, path, key],
@@ -1293,7 +1293,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  CustomData? crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync({
+  CustomData crateNuan5ParamsDecryptMediaDecodeFileUncheckedSync({
     required List<int> flag,
     required String path,
     required MediaKey key,
@@ -1311,8 +1311,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 30)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta:
             kCrateNuan5ParamsDecryptMediaDecodeFileUncheckedSyncConstMeta,
@@ -1470,7 +1470,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  CustomData? crateNuan5ParamsDecryptMediaDecrypt({
+  CustomData crateNuan5ParamsDecryptMediaDecrypt({
     required List<int> data,
     required MediaKey key,
   }) {
@@ -1486,8 +1486,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 34)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_custom_data,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_custom_data,
+          decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecryptMediaDecryptConstMeta,
         argValues: [data, key],
@@ -3244,12 +3244,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return raw == null
         ? null
         : dco_decode_list_file_entity_location_config(raw);
-  }
-
-  @protected
-  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_list_prim_u_8_strict(raw);
   }
 
   @protected
@@ -5856,17 +5850,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_list_prim_u_8_strict(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   OrdinaryText sse_decode_ordinary_text(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_text = sse_decode_String(deserializer);
@@ -8425,19 +8408,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_list_file_entity_location_config(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_list_prim_u_8_strict(
-    Uint8List? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_list_prim_u_8_strict(self, serializer);
     }
   }
 

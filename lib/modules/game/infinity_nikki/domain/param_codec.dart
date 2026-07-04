@@ -28,10 +28,7 @@ abstract class InfinityNikkiParamCodec{
 
         final MediaKey key = MediaKey.fromStr(uid);
         final flag = base64Decode(AppState.debugNuan5DecryptionFlag.value!);
-        final CustomData? d = await mediaDecodeFileUnchecked(flag: flag, path: path, key: key);
-        if(d == null){
-          return;
-        }
+        final CustomData d = await mediaDecodeFileUnchecked(flag: flag, path: path, key: key);
 
         d.whenOrNull(
           valid: (Uint8List valid) async{
@@ -54,7 +51,7 @@ abstract class InfinityNikkiParamCodec{
 
     final MediaKey key = uid == null ? MediaKey.cameraParam() : MediaKey.fromStr(uid);
 
-    final MediaCustomData? result = await mediaDeFileUnchecked(
+    final MediaCustomData result = await mediaDeFileUnchecked(
       paramType: paramType,
       path: path,
       key: key,
@@ -76,7 +73,7 @@ abstract class InfinityNikkiParamCodec{
 
     final MediaKey key = uid == null ? MediaKey.cameraParam() : MediaKey.fromStr(uid);
 
-    final MediaCustomData? result = mediaDeFileUncheckedSync(
+    final MediaCustomData result = mediaDeFileUncheckedSync(
       paramType: paramType,
       path: path,
       key: key,

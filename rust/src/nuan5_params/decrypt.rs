@@ -275,20 +275,20 @@ impl Drop for MediaKey{
 // ============================================================
 // 内部辅助：转换 DecryptionResult
 // ============================================================
-pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
+pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Result<CustomData, DecryptionError>{
   if result.status != 0 {
-    return None;
+    return Err(DecryptionError::from(result.status));
   }
 
   if result.bytes.data.is_null() {
-    Some(CustomData::Invalid)
+    Ok(CustomData::Invalid)
   }else{
-    Some(CustomData::Valid(result.bytes.into_vec()))
+    Ok(CustomData::Valid(result.bytes.into_vec()))
   }
 }
 
 #[frb(sync, positional)]
-pub fn media_decrypt(data: &[u8], key: &MediaKey) -> Option<CustomData>{
+pub fn media_decrypt(data: &[u8], key: &MediaKey) -> Result<CustomData, DecryptionError>{
   let result = unsafe{ ffi::media_decrypt(data.as_ptr(), data.len(), key.ptr) };
   convert_media_result(result)
 }
@@ -298,7 +298,7 @@ pub fn media_decode_file_bytes_unchecked(
   flag: &[u8],
   bytes: &[u8],
   key: &MediaKey,
-) -> Option<CustomData>{
+) -> Result<CustomData, DecryptionError>{
   let result = unsafe{
     ffi::media_decode_file_bytes_unchecked(
       flag.as_ptr(),
@@ -312,8 +312,8 @@ pub fn media_decode_file_bytes_unchecked(
 }
 
 #[frb]
-pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) -> Option<CustomData>{
-  let c_path = CString::new(path).ok()?;
+pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) -> Result<CustomData, DecryptionError>{
+  let c_path = CString::new(path).map_err(|_| DecryptionError::Unknown)?;
   let result = unsafe{
     ffi::media_decode_file_unchecked(flag.as_ptr(), flag.len(), c_path.as_ptr(), key.ptr)
   };
@@ -321,7 +321,7 @@ pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) ->
 }
 
 #[frb(sync)]
-pub fn media_decode_file_unchecked_sync(flag: &[u8], path: String, key: &MediaKey) -> Option<CustomData>{
+pub fn media_decode_file_unchecked_sync(flag: &[u8], path: String, key: &MediaKey) -> Result<CustomData, DecryptionError>{
   media_decode_file_unchecked(flag, path, key)
 }
 
@@ -388,7 +388,7 @@ pub fn media_decode_files_unchecked(
     let mut decoded = Vec::with_capacity(path_ptrs.len());
     for i in 0..path_ptrs.len() {
       let result = ptr::read(results_ptr.add(i));
-      decoded.push(convert_media_result(result));
+      decoded.push(convert_media_result(result).ok());
     }
 
     sink.add(MediaDecodeEvent::Result(decoded)).map_err(|_| DecryptionError::Unknown)?;
@@ -427,7 +427,7 @@ pub fn media_decode_files_unchecked_no_progress(
   let mut results = Vec::with_capacity(path_count);
   for i in 0..path_count {
     let item = unsafe{ ptr::read(results_ptr.add(i)) };
-    results.push(convert_media_result(item));
+    results.push(convert_media_result(item).ok());
   }
 
   results
@@ -477,7 +477,7 @@ pub fn media_decode_files_unchecked_stream(
       return;
     }
 
-    let data = unsafe{ convert_media_result(ptr::read(result)) };
+    let data = unsafe{ convert_media_result(ptr::read(result)).ok() };
 
     let _ = sink.add(MediaStreamResult{ index, data });
   }
@@ -530,8 +530,10 @@ impl ClothDiyShareCode{
   pub fn uid(&self) -> Result<String, DecryptionError>{
     let result = unsafe{ ffi::cloth_diy_share_code_uid_bytes(self.ptr) };
 
-    if result.status != 0 || result.bytes.data.is_null() {
+    if result.bytes.data.is_null() {
       Err(DecryptionError::NullPointer)
+    }else if result.status != 0 {
+      Err(DecryptionError::from(result.status))
     }else{
       unsafe{
         let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
@@ -551,17 +553,17 @@ impl Drop for ClothDiyShareCode{
 }
 
 #[frb]
-pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Option<Vec<u8>>{
+pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Result<Vec<u8>, DecryptionError>{
   let result = unsafe{ ffi::cloth_diy_decode_network(share_code.ptr) };
 
   if result.status != 0 {
-    return None;
+    return Err(DecryptionError::from(result.status));
   }
 
   if result.bytes.data.is_null() {
-    None
+    Err(DecryptionError::NullPointer)
   }else{
-    Some(result.bytes.into_vec())
+    Ok(result.bytes.into_vec())
   }
 }
 
@@ -603,16 +605,16 @@ impl Drop for HomeBuildShareCode{
 }
 
 #[frb]
-pub fn home_build_decode_network(share_code: &HomeBuildShareCode) -> Option<Vec<u8>>{
+pub fn home_build_decode_network(share_code: &HomeBuildShareCode) -> Result<Vec<u8>, DecryptionError>{
   let result = unsafe{ ffi::home_build_decode_network(share_code.ptr) };
 
   if result.status != 0 {
-    return None;
+    return Err(DecryptionError::from(result.status));
   }
 
   if result.bytes.data.is_null() {
-    None
+    Err(DecryptionError::NullPointer)
   }else{
-    Some(result.bytes.into_vec())
+    Ok(result.bytes.into_vec())
   }
 }

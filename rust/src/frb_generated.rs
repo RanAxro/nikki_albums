@@ -374,33 +374,33 @@ fn wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_share_code_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_share_code,
-                                0,
-                                false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => {
-                                api_share_code_guard =
-                                    Some(api_share_code.lockable_decode_sync_ref())
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_share_code_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_share_code,
+                                    0,
+                                    false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_share_code_guard =
+                                        Some(api_share_code.lockable_decode_sync_ref())
+                                }
+                                _ => unreachable!(),
                             }
-                            _ => unreachable!(),
                         }
-                    }
-                    let api_share_code_guard = api_share_code_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_params::decrypt::cloth_diy_decode_network(
+                        let api_share_code_guard = api_share_code_guard.unwrap();
+                        let output_ok = crate::nuan5_params::decrypt::cloth_diy_decode_network(
                             &*api_share_code_guard,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -833,33 +833,33 @@ fn wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_share_code_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_share_code,
-                                0,
-                                false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => {
-                                api_share_code_guard =
-                                    Some(api_share_code.lockable_decode_sync_ref())
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_share_code_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_share_code,
+                                    0,
+                                    false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_share_code_guard =
+                                        Some(api_share_code.lockable_decode_sync_ref())
+                                }
+                                _ => unreachable!(),
                             }
-                            _ => unreachable!(),
                         }
-                    }
-                    let api_share_code_guard = api_share_code_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_params::decrypt::home_build_decode_network(
+                        let api_share_code_guard = api_share_code_guard.unwrap();
+                        let output_ok = crate::nuan5_params::decrypt::home_build_decode_network(
                             &*api_share_code_guard,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -928,28 +928,30 @@ fn wire__crate__nuan5_params__decode__media_de_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_key_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_key, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
                         }
-                    }
-                    let api_key_guard = api_key_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(crate::nuan5_params::decode::media_de(
-                        &api_param_type,
-                        &api_data,
-                        &*api_key_guard,
-                    ))?;
-                    Ok(output_ok)
-                })())
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok = crate::nuan5_params::decode::media_de(
+                            &api_param_type,
+                            &api_data,
+                            &*api_key_guard,
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -984,30 +986,30 @@ fn wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_key_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_key, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
                         }
-                    }
-                    let api_key_guard = api_key_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_params::decode::media_de_file_bytes_unchecked(
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok = crate::nuan5_params::decode::media_de_file_bytes_unchecked(
                             &api_param_type,
                             &api_bytes,
                             &*api_key_guard,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -1042,29 +1044,30 @@ fn wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_key_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_key, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
                         }
-                    }
-                    let api_key_guard = api_key_guard.unwrap();
-                    let output_ok =
-                        Result::<_, ()>::Ok(crate::nuan5_params::decode::media_de_file_unchecked(
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok = crate::nuan5_params::decode::media_de_file_unchecked(
                             &api_param_type,
                             api_path,
                             &*api_key_guard,
-                        ))?;
-                    Ok(output_ok)
-                })())
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -1097,7 +1100,7 @@ fn wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, ()>((move || {
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
                 let mut api_key_guard = None;
                 let decode_indices_ =
                     flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
@@ -1112,15 +1115,14 @@ fn wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
                     }
                 }
                 let api_key_guard = api_key_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_params::decode::media_de_file_unchecked_sync(
-                        &api_param_type,
-                        api_path,
-                        &*api_key_guard,
-                    ),
+                let output_ok = crate::nuan5_params::decode::media_de_file_unchecked_sync(
+                    &api_param_type,
+                    api_path,
+                    &*api_key_guard,
                 )?;
                 Ok(output_ok)
-            })())
+            })(
+            ))
         },
     )
 }
@@ -1158,7 +1160,7 @@ fn wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
                     (move || {
                         let mut api_key_guard = None;
                         let decode_indices_ =
@@ -1214,7 +1216,7 @@ fn wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, ()>((move || {
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
                 let mut api_key_guard = None;
                 let decode_indices_ =
                     flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
@@ -1229,15 +1231,14 @@ fn wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
                     }
                 }
                 let api_key_guard = api_key_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_params::decrypt::media_decode_file_bytes_unchecked(
-                        &api_flag,
-                        &api_bytes,
-                        &*api_key_guard,
-                    ),
+                let output_ok = crate::nuan5_params::decrypt::media_decode_file_bytes_unchecked(
+                    &api_flag,
+                    &api_bytes,
+                    &*api_key_guard,
                 )?;
                 Ok(output_ok)
-            })())
+            })(
+            ))
         },
     )
 }
@@ -1270,30 +1271,30 @@ fn wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             >>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_key_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_key, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
                         }
-                    }
-                    let api_key_guard = api_key_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_params::decrypt::media_decode_file_unchecked(
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok = crate::nuan5_params::decrypt::media_decode_file_unchecked(
                             &api_flag,
                             api_path,
                             &*api_key_guard,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
+                        )?;
+                        Ok(output_ok)
+                    })(),
+                )
             }
         },
     )
@@ -1325,7 +1326,7 @@ fn wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, ()>((move || {
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
                 let mut api_key_guard = None;
                 let decode_indices_ =
                     flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
@@ -1340,15 +1341,14 @@ fn wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
                     }
                 }
                 let api_key_guard = api_key_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_params::decrypt::media_decode_file_unchecked_sync(
-                        &api_flag,
-                        api_path,
-                        &*api_key_guard,
-                    ),
+                let output_ok = crate::nuan5_params::decrypt::media_decode_file_unchecked_sync(
+                    &api_flag,
+                    api_path,
+                    &*api_key_guard,
                 )?;
                 Ok(output_ok)
-            })())
+            })(
+            ))
         },
     )
 }
@@ -1560,7 +1560,7 @@ fn wire__crate__nuan5_params__decrypt__media_decrypt_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, ()>((move || {
+            transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>((move || {
                 let mut api_key_guard = None;
                 let decode_indices_ =
                     flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
@@ -1575,12 +1575,11 @@ fn wire__crate__nuan5_params__decrypt__media_decrypt_impl(
                     }
                 }
                 let api_key_guard = api_key_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(crate::nuan5_params::decrypt::media_decrypt(
-                    &api_data,
-                    &*api_key_guard,
-                ))?;
+                let output_ok =
+                    crate::nuan5_params::decrypt::media_decrypt(&api_data, &*api_key_guard)?;
                 Ok(output_ok)
-            })())
+            })(
+            ))
         },
     )
 }
@@ -3813,17 +3812,6 @@ impl SseDecode for Option<Vec<crate::serde_config::structs::common::FileEntityLo
             return Some(<Vec<
                 crate::serde_config::structs::common::FileEntityLocationConfig,
             >>::sse_decode(deserializer));
-        } else {
-            return None;
-        }
-    }
-}
-
-impl SseDecode for Option<Vec<u8>> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<Vec<u8>>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -8904,16 +8892,6 @@ impl SseEncode for Option<Vec<crate::serde_config::structs::common::FileEntityLo
             <Vec<crate::serde_config::structs::common::FileEntityLocationConfig>>::sse_encode(
                 value, serializer,
             );
-        }
-    }
-}
-
-impl SseEncode for Option<Vec<u8>> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <Vec<u8>>::sse_encode(value, serializer);
         }
     }
 }
