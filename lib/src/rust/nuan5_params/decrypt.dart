@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'decrypt.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `convert_media_result`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `drop`, `drop`, `fmt`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `drop`, `drop`, `drop`, `fmt`
 
 CustomData? mediaDecrypt(List<int> data, MediaKey key) => RustLib.instance.api
     .crateNuan5ParamsDecryptMediaDecrypt(data: data, key: key);
@@ -84,6 +84,12 @@ Future<Uint8List?> clothDiyDecodeNetwork({
   shareCode: shareCode,
 );
 
+Future<Uint8List?> homeBuildDecodeNetwork({
+  required HomeBuildShareCode shareCode,
+}) => RustLib.instance.api.crateNuan5ParamsDecryptHomeBuildDecodeNetwork(
+  shareCode: shareCode,
+);
+
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ClothDiyShareCode>>
 abstract class ClothDiyShareCode implements RustOpaqueInterface {
   static ClothDiyShareCode fromCodeStr(String code) => RustLib.instance.api
@@ -92,6 +98,14 @@ abstract class ClothDiyShareCode implements RustOpaqueInterface {
   PlatformInt64 timestamp();
 
   String uid();
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<HomeBuildShareCode>>
+abstract class HomeBuildShareCode implements RustOpaqueInterface {
+  static HomeBuildShareCode fromCodeStr(String code) => RustLib.instance.api
+      .crateNuan5ParamsDecryptHomeBuildShareCodeFromCodeStr(code: code);
+
+  PlatformInt64 server();
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>

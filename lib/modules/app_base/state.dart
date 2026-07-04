@@ -16,7 +16,7 @@ import "dart:io";
 final GlobalKey ancestor = GlobalKey();
 final GlobalKey frameKey = GlobalKey();
 
-final ContentController contentController = ContentController(1);
+final ContentController contentController = ContentController(3);
 
 abstract class AppState {
   /// common
@@ -59,7 +59,8 @@ abstract class AppState {
   static final ValueNotifier<String?> debugNuan5DecryptionKey = _createStateValue<String?>(null);
   static final ValueNotifier<String?> debugNuan5DecryptionFlag = _createStateValue<String?>(null);
   static final ValueNotifier<String?> debugNuan5DecryptionCameraParams = _createStateValue<String?>(null);
-  static final ValueNotifier<String?> debugNuan5DecryptionShareCode = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionClothDiyShareCode = _createStateValue<String?>(null);
+  static final ValueNotifier<String?> debugNuan5DecryptionHomeBuildShareCode = _createStateValue<String?>(null);
 
   static ValueNotifier<T> _createStateValue<T>(T initValue) {
     final ValueNotifier<T> vn = ValueNotifier<T>(initValue);
@@ -169,7 +170,8 @@ abstract class AppState {
     assign<String?>("debugNuan5DecryptionKey", (String? value) => debugNuan5DecryptionKey.value = value);
     assign<String?>("debugNuan5DecryptionFlag", (String? value) => debugNuan5DecryptionFlag.value = value);
     assign<String?>("debugNuan5DecryptionCameraParams", (String? value) => debugNuan5DecryptionCameraParams.value = value);
-    assign<String?>("debugNuan5DecryptionShareCode", (String? value) => debugNuan5DecryptionShareCode.value = value);
+    assign<String?>("debugNuan5DecryptionClothDiyShareCode", (String? value) => debugNuan5DecryptionClothDiyShareCode.value = value);
+    assign<String?>("debugNuan5DecryptionHomeBuildShareCode", (String? value) => debugNuan5DecryptionHomeBuildShareCode.value = value);
   }
 
   static Future<void> save() async {
@@ -209,7 +211,8 @@ abstract class AppState {
       "debugNuan5DecryptionKey": debugNuan5DecryptionKey.value,
       "debugNuan5DecryptionFlag": debugNuan5DecryptionFlag.value,
       "debugNuan5DecryptionCameraParams": debugNuan5DecryptionCameraParams.value,
-      "debugNuan5DecryptionShareCode": debugNuan5DecryptionShareCode.value,
+      "debugNuan5DecryptionClothDiyShareCode": debugNuan5DecryptionClothDiyShareCode.value,
+      "debugNuan5DecryptionHomeBuildShareCode": debugNuan5DecryptionHomeBuildShareCode.value,
     };
 
     try {

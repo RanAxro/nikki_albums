@@ -236,14 +236,14 @@ class Nuan5DecryptionDebug extends StatelessWidget{
 
 
           ValueListenableBuilder(
-            valueListenable: AppState.debugNuan5DecryptionShareCode,
+            valueListenable: AppState.debugNuan5DecryptionClothDiyShareCode,
             builder: (BuildContext context, String? debugNuan5DecryptionShareCode, Widget? child){
               return AppTextFiled(
                 labelText: "搭配码",
                 isTranslateLabel: false,
                 controller: TextEditingController(text: debugNuan5DecryptionShareCode ?? ""),
                 onChanged: (String value){
-                  AppState.debugNuan5DecryptionShareCode.value = value;
+                  AppState.debugNuan5DecryptionClothDiyShareCode.value = value;
                 },
               );
             },
@@ -255,12 +255,12 @@ class Nuan5DecryptionDebug extends StatelessWidget{
                 AppToast.showMessage(context: context, message: "解码文件保存文件夹不能为空", state: false);
                 return;
               }
-              if(AppState.debugNuan5DecryptionShareCode.value == null){
+              if(AppState.debugNuan5DecryptionClothDiyShareCode.value == null){
                 AppToast.showMessage(context: context, message: "搭配码不能为空", state: false);
                 return;
               }
 
-              final ClothDiyShareCode shareCode = ClothDiyShareCode.fromCodeStr(AppState.debugNuan5DecryptionShareCode.value!);
+              final ClothDiyShareCode shareCode = ClothDiyShareCode.fromCodeStr(AppState.debugNuan5DecryptionClothDiyShareCode.value!);
               final DateTime time = DateTime.fromMillisecondsSinceEpoch(shareCode.timestamp());
               final String uid = shareCode.uid();
               final Uint8List? bytes = await clothDiyDecodeNetwork(shareCode: shareCode);
@@ -291,12 +291,55 @@ class Nuan5DecryptionDebug extends StatelessWidget{
 
           AppDivider(),
 
-          AppTextFiled(
-            labelText: "家园码",
-            isTranslateLabel: false,
+          ValueListenableBuilder(
+            valueListenable: AppState.debugNuan5DecryptionHomeBuildShareCode,
+            builder: (BuildContext context, String? debugNuan5DecryptionShareCode, Widget? child){
+              return AppTextFiled(
+                labelText: "家园码",
+                isTranslateLabel: false,
+                controller: TextEditingController(text: debugNuan5DecryptionShareCode ?? ""),
+                onChanged: (String value){
+                  AppState.debugNuan5DecryptionHomeBuildShareCode.value = value;
+                },
+              );
+            },
           ),
 
           AppButton.smallText(
+            onClick: () async{
+              if(AppState.debugNuan5DecryptionOutput.value == null){
+                AppToast.showMessage(context: context, message: "解码文件保存文件夹不能为空", state: false);
+                return;
+              }
+              if(AppState.debugNuan5DecryptionHomeBuildShareCode .value == null){
+                AppToast.showMessage(context: context, message: "搭配码不能为空", state: false);
+                return;
+              }
+
+              final HomeBuildShareCode shareCode = HomeBuildShareCode.fromCodeStr(AppState.debugNuan5DecryptionHomeBuildShareCode.value!);
+              final int server = shareCode.server();
+              final Uint8List? bytes = await homeBuildDecodeNetwork(shareCode: shareCode);
+
+              if(bytes == null){
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: "解码失败", state: false);
+                }
+              }else{
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: "解码中");
+                }
+                final String output = p.join(AppState.debugNuan5DecryptionOutput.value!, "decrypted.json");
+                await File(output).writeAsBytes(bytes);
+
+                if(context.mounted){
+                  AppToast.showMessage(
+                    context: context,
+                    duration: const Duration(hours: 1),
+                    message: "解码成功: 已保存到 $output\ntime: $server",
+                  );
+                }
+              }
+            },
             child: AppText("解码家园码", isTranslate: false),
           ),
 
