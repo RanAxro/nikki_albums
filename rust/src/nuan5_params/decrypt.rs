@@ -246,7 +246,7 @@ impl MediaKey{
 
   #[frb(sync, positional)]
   pub fn from_str(s: String) -> Result<MediaKey, DecryptionError>{
-    let c_str = CString::new(s).map_err(|e| DecryptionError::Unknown)?;
+    let c_str = CString::new(s).map_err(|_| DecryptionError::Unknown)?;
     let ptr = unsafe{ ffi::media_key_from_str(c_str.as_ptr()) };
     if ptr.is_null() {
       return Err(DecryptionError::NullPointer);
@@ -391,7 +391,7 @@ pub fn media_decode_files_unchecked(
       decoded.push(convert_media_result(result));
     }
 
-    sink.add(MediaDecodeEvent::Result(decoded));
+    sink.add(MediaDecodeEvent::Result(decoded)).map_err(|_| DecryptionError::Unknown)?;
 
     Ok(())
   }
@@ -589,8 +589,8 @@ impl HomeBuildShareCode{
 
   #[frb(sync)]
   pub fn server(&self) -> Result<i64, DecryptionError>{
-    let timestamp = unsafe{ ffi::home_build_share_code_server(self.ptr) };
-    Ok(timestamp)
+    let server = unsafe{ ffi::home_build_share_code_server(self.ptr) };
+    Ok(server)
   }
 }
 
