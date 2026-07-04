@@ -9,6 +9,11 @@ use super::decrypt;
 use crate::serde_nuan5_json::de::from_slice;
 use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
 
+
+/// ============================================================
+/// Media
+/// ============================================================
+
 #[frb]
 pub enum MediaParamType{
   CameraParams,
@@ -132,65 +137,56 @@ pub fn media_de_files_unchecked(
     return Ok(());
   }
 
-  #[cfg(target_os = "windows")]
-  {
-    use crate::nuan5_params::decrypt::convert_media_result;
-    let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
-    let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
+  use crate::nuan5_params::decrypt::convert_media_result;
+  let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
+  let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
-    let context = Arc::new(MediaStreamCallbackContext{ sink, param_type });
-    let userdata = Arc::into_raw(Arc::clone(&context)) as *mut c_void;
+  let context = Arc::new(MediaStreamCallbackContext{ sink, param_type });
+  let userdata = Arc::into_raw(Arc::clone(&context)) as *mut c_void;
 
-    extern "C" fn stream_trampoline(
-      index: usize,
-      result: *mut crate::nuan5_params::decrypt::ffi::MediaDecryptionResult,
-      userdata: *mut c_void,
-    ){
-      if userdata.is_null() {
-        return;
-      }
-
-      let ctx = unsafe{ &*(userdata as *const MediaStreamCallbackContext) };
-      let sink = &ctx.sink;
-      let param_type = &ctx.param_type;
-
-      if result.is_null() {
-        let _ = sink.add(MediaCustomDataResult { index, data: None });
-        return;
-      }
-
-      let data = unsafe{ convert_media_result(ptr::read(result)) };
-
-      let _ = sink.add(MediaCustomDataResult{
-        index,
-        data: data.map(|decrypted|{
-          decode_media_param(param_type.clone(), &decrypted)
-        }).ok(),
-      });
+  extern "C" fn stream_trampoline(
+    index: usize,
+    result: *mut decrypt::ffi::MediaDecryptionResult,
+    userdata: *mut c_void,
+  ){
+    if userdata.is_null() {
+      return;
     }
 
-    let flag = get_flag(&param_type);
+    let ctx = unsafe{ &*(userdata as *const MediaStreamCallbackContext) };
+    let sink = &ctx.sink;
+    let param_type = &ctx.param_type;
 
-    unsafe{
-      decrypt::ffi::media_decode_files_unchecked_stream(
-        flag.as_ptr(),
-        flag.len(),
-        path_ptrs.as_ptr(),
-        path_ptrs.len(),
-        key.ptr,
-        stream_trampoline,
-        userdata,
-      );
+    if result.is_null() {
+      let _ = sink.add(MediaCustomDataResult { index, data: None });
+      return;
     }
 
-    let _ = unsafe{ Arc::from_raw(userdata as *const MediaStreamCallbackContext) };
+    let data = unsafe{ convert_media_result(ptr::read(result)) };
+
+    let _ = sink.add(MediaCustomDataResult{
+      index,
+      data: data.map(|decrypted|{
+        decode_media_param(param_type.clone(), &decrypted)
+      }).ok(),
+    });
   }
-  #[cfg(not(target_os = "windows"))]
-  {
-    for (i, _) in paths.iter().enumerate() {
-      let _ = sink.add(MediaCustomDataResult { index: i, data: None });
-    }
+
+  let flag = get_flag(&param_type);
+
+  unsafe{
+    decrypt::ffi::media_decode_files_unchecked_stream(
+      flag.as_ptr(),
+      flag.len(),
+      path_ptrs.as_ptr(),
+      path_ptrs.len(),
+      key.ptr,
+      stream_trampoline,
+      userdata,
+    );
   }
+
+  let _ = unsafe{ Arc::from_raw(userdata as *const MediaStreamCallbackContext) };
 
   Ok(())
 }
