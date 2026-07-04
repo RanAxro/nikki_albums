@@ -7,8 +7,14 @@
 <title>{{homepage.title}}</title>
 <meta name="description" content="{{homepage.description}}">
 <meta name="author" content="RanAxro, Mercury2699">
+{{#if server}}
+<link rel="icon" href="https://{{domain}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://{{domain}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+{{/if}}
+{{#unless server}}
 <link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+{{/unless}}
 
 <!-- Canonical URL -->
 <link rel="canonical" href="https://nikki.ranaxro.com/">
@@ -148,7 +154,8 @@
 	<!-- Header -->
 	<header>
 		<div class="container">
-			<a id="web_logo" href="index.html">
+			{{#if server}}<a id="web_logo" href="https://{{domain_current}}">{{/if}}
+			{{#unless server}}<a id="web_logo" href="index.html">{{/unless}}
 				<img src="{{root}}/official_website/assets/icon/favicon.ico" alt="{{app_name}}">
 				<h2>{{app_name}}</h2>
 			</a>
@@ -166,12 +173,14 @@
 						</a>
 					</li>
 					<li>
-						<a href="guide.html">
+						{{#if server}}<a href="https://{{domain_current}}/guide">{{/if}}
+						{{#unless server}}<a href="guide.html">{{/unless}}
 							<span>{{common.nav.tutorial}}</span>
 						</a>
 					</li>
 					<li>
-						<a id="nav_download" href="download.html">
+						{{#if server}}<a id="nav_download" href="https://{{domain_current}}/download">{{/if}}
+						{{#unless server}}<a id="nav_download" href="download.html">{{/unless}}
 							<span>{{common.nav.download}}</span>
 						</a>
 					</li>
@@ -186,6 +195,21 @@
 						</svg>
 					</button>
 					<div class="lang-dropdown-menu" id="lang-dropdown-menu">
+						{{#if server}}
+						<a id="lang-zh" class="lang-dropdown-item" href="https://{{domain_zh}}">简体中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="https://{{domain_tw}}">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="https://{{domain_en}}">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="https://{{domain_ja}}">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="https://{{domain_ko}}">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="https://{{domain_fr}}">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="https://{{domain_de}}">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="https://{{domain_es}}">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="https://{{domain_it}}">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="https://{{domain_pt}}">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="https://{{domain_id}}">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="https://{{domain_th}}">ไทย</a>
+						{{/if}}
+						{{#unless server}}
 						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/index.html">简体中文</a>
 						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/index.html">繁體中文</a>
 						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/index.html">English</a>
@@ -198,6 +222,7 @@
 						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/index.html">Português</a>
 						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/index.html">Bahasa Indonesia</a>
 						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/index.html">ไทย</a>
+						{{/unless}}
 					</div>
 				</div>
 
@@ -237,10 +262,12 @@
 		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">
 			<span>GitHub</span>
 		</a>
-		<a href="guide.html">
+		{{#if server}}<a href="https://{{domain_current}}/guide">{{/if}}
+		{{#unless server}}<a href="guide.html">{{/unless}}
 			<span>{{common.nav.tutorial}}</span>
 		</a>
-		<a id="nav_download_mobile" href="download.html">
+		{{#if server}}<a id="nav_download_mobile" href="https://{{domain_current}}/download">{{/if}}
+		{{#unless server}}<a id="nav_download_mobile" href="download.html">{{/unless}}
 			<span>{{common.nav.download}}</span>
 		</a>
 	</div>
@@ -255,7 +282,8 @@
 				<p class="hero-subtitle">{{homepage.hero_sub_description}}</p>
 				
 				<div class="hero-actions">
-					<a id="download_app_box" class="btn btn-primary" href="download.html" onclick="handleMainDownload(event)">
+					{{#if server}}<a id="download_app_box" class="btn btn-primary" href="https://{{domain_current}}/download" onclick="handleMainDownload(event)">{{/if}}
+					{{#unless server}}<a id="download_app_box" class="btn btn-primary" href="download.html" onclick="handleMainDownload(event)">{{/unless}}
 						<img src="{{root}}/official_website/assets/icon/windows.svg" alt="Windows" style="height: 14px; filter: brightness(0) invert(1);">
 						<img src="{{root}}/official_website/assets/icon/macos.svg" alt="macOS" style="height: 14px; filter: brightness(0) invert(1);">
 						<span>{{homepage.btn_download}}</span>
