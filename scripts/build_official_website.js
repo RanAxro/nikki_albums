@@ -1,25 +1,26 @@
 const fs = require('fs');
 const path = require('path');
 
-const supportedLang = ["zh", "tw", "en", "ja", "ko", "fr", "de", "es", "it", "pt", "id", "th"]
-const fallbackLang = ["en", "zh"]
+const supportedLang = ["zh", "tw", "en", "ja", "ko", "fr", "de", "es", "it", "pt", "id", "th"];
+const fallbackLang = ["en", "zh"];
 
-// ============ 1. 读取配置并计算根目录 ============
+// ============ 1. 配置 ============
 const rootDir = "";
 const CONFIG = {
   templateDir: path.join(rootDir, 'official_website', 'templates'),
   i18nFile: path.join(rootDir, 'official_website', 'i18n.json'),
   outputDir: path.join(rootDir, ""),
   rootLang: "zh",
-  domain: "nikki.ranaxro.com"
+  domain: "nikki.ranaxro.com",
+  
+  // ✅ 条件变量白名单：只有这里声明的变量才允许用于 {{#if}} / {{#unless}}
+  conditionalVars: ["server"]
 };
 
-// 最大递归深度，防止循环引用导致栈溢出
 const MAX_NEST_DEPTH = 10;
 
 // ============ 2. 工具函数 ============
 
-/** 按点号路径深层取值 */
 function getValue(obj, keyPath) {
   const keys = keyPath.split('.');
   let current = obj;
@@ -32,56 +33,62 @@ function getValue(obj, keyPath) {
   return current;
 }
 
-/**
- * 解析字符串中的 {{key}} 占位符
- * @param {string} str - 要解析的字符串
- * @param {object} data - 当前 renderData（含 domain、toLang 等变量）
- * @param {object} i18n - 完整的 i18n 对象
- * @param {string} currentLang - 当前语言
- * @param {Set} visited - 已访问的 key 路径，用于检测循环引用
- * @param {number} depth - 当前递归深度
- * @returns {string} 解析后的字符串
- */
+/** 判断值是否为“真” */
+function isTruthy(value) {
+  if (value === undefined || value === null) return false;
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'number') return value !== 0;
+  if (typeof value === 'string') return value.trim() !== '';
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === 'object') return Object.keys(value).length > 0;
+  return true;
+}
+
+/** 获取变量原始值（支持 renderData → i18n fallback） */
+function getVarRaw(keyPath, data, i18n, currentLang) {
+  const local = getValue(data, keyPath);
+  if (local !== undefined && local !== null) return local;
+  
+  for (const lang of [currentLang, ...fallbackLang.filter(l => l !== currentLang)]) {
+    const val = getValue(i18n[lang], keyPath);
+    if (val !== undefined && val !== null) return val;
+  }
+  return undefined;
+}
+
 function resolveNestedValue(str, data, i18n, currentLang, visited = new Set(), depth = 0) {
   if (typeof str !== 'string') return str;
   if (depth > MAX_NEST_DEPTH) {
     console.warn(`    ⛔ 超过最大嵌套深度 (${MAX_NEST_DEPTH})，停止解析`);
     return str;
   }
-
-  // 检查是否还有 {{key}} 需要替换
-  const hasPlaceholders = /\{\{\s*([^{}\s]+)\s*\}\}/.test(str);
-  if (!hasPlaceholders) return str;
+  if (!/\{\{\s*([^{}\s]+)\s*\}\}/.test(str)) return str;
 
   return str.replace(/\{\{\s*([^{}\s]+)\s*\}\}/g, (match, key) => {
-    // 检测循环引用
     if (visited.has(key)) {
       console.warn(`    🔄 检测到循环引用: ${key}，保留原样`);
       return match;
     }
-
     const newVisited = new Set(visited);
     newVisited.add(key);
 
-    // 1) 优先从 renderData 查找
     const localValue = getValue(data, key);
     if (localValue !== undefined && localValue !== null) {
-      // 如果值是字符串且包含 {{xxx}}，继续递归解析
       if (typeof localValue === 'string' && /\{\{\s*([^{}\s]+)\s*\}\}/.test(localValue)) {
         return resolveNestedValue(localValue, data, i18n, currentLang, newVisited, depth + 1);
       }
       return String(localValue);
     }
 
-    // 2) 从 i18n fallback 查找
-    const i18nValue = getValueWithFallbackRaw(i18n, currentLang, key);
-    if (i18nValue !== undefined && i18nValue !== null) {
-      const strValue = String(i18nValue);
-      // 如果 i18n 值包含 {{xxx}}，递归解析（传入新的 visited 集合）
-      if (/\{\{\s*([^{}\s]+)\s*\}\}/.test(strValue)) {
-        return resolveNestedValue(strValue, data, i18n, currentLang, newVisited, depth + 1);
+    for (const lang of [currentLang, ...fallbackLang.filter(l => l !== currentLang)]) {
+      const i18nVal = getValue(i18n[lang], key);
+      if (i18nVal !== undefined && i18nVal !== null) {
+        const strValue = String(i18nVal);
+        if (/\{\{\s*([^{}\s]+)\s*\}\}/.test(strValue)) {
+          return resolveNestedValue(strValue, data, i18n, currentLang, newVisited, depth + 1);
+        }
+        return strValue;
       }
-      return strValue;
     }
 
     console.warn(`    ⚠️  变量未定义: {{${key}}}（回退语言也缺失）`);
@@ -89,73 +96,80 @@ function resolveNestedValue(str, data, i18n, currentLang, visited = new Set(), d
   });
 }
 
-/**
- * 按 fallbackLang 顺序在 i18n 中查找变量值（原始值，不做嵌套解析）
- */
-function getValueWithFallbackRaw(i18n, currentLang, keyPath) {
-  const currentValue = getValue(i18n[currentLang], keyPath);
-  if (currentValue !== undefined && currentValue !== null) {
-    return currentValue;
-  }
-
-  for (const fbLang of fallbackLang) {
-    if (fbLang === currentLang) continue;
-    const fbValue = getValue(i18n[fbLang], keyPath);
-    if (fbValue !== undefined && fbValue !== null) {
-      console.warn(`    🔄 [${currentLang}] 变量 "${keyPath}" 缺失，回退到 [${fbLang}]`);
-      return fbValue;
-    }
-  }
-
-  return undefined;
-}
-
-/**
- * 按 fallbackLang 顺序在 i18n 中查找变量值（解析嵌套）
- * 用于 renderTemplate 中直接获取 i18n 值时做嵌套解析
- */
-function getValueWithFallback(i18n, currentLang, keyPath, data) {
-  const rawValue = getValueWithFallbackRaw(i18n, currentLang, keyPath);
-  if (rawValue === undefined || rawValue === null) return undefined;
+// ✅ 处理块级条件 {{#if var}}...{{/if}} 和 {{#unless var}}...{{/unless}}
+function resolveConditionBlocks(template, data, i18n, currentLang) {
+  let html = template;
   
-  const strValue = String(rawValue);
-  // 如果值包含 {{xxx}}，递归解析
-  if (/\{\{\s*([^{}\s]+)\s*\}\}/.test(strValue)) {
-    return resolveNestedValue(strValue, data, i18n, currentLang);
-  }
-  return strValue;
+  // {{#if var}} ... {{/if}}
+  const ifRegex = /\{\{\s*#if\s+([a-zA-Z_][a-zA-Z0-9_.]*)\s*\}\}([\s\S]*?)\{\{\s*\/if\s*\}\}/g;
+  html = html.replace(ifRegex, (match, varName, content) => {
+    if (!CONFIG.conditionalVars.includes(varName)) {
+      console.warn(`    ⚠️  条件变量 "${varName}" 不在 conditionalVars 白名单中，保留原样`);
+      return match;
+    }
+    const rawVal = getVarRaw(varName, data, i18n, currentLang);
+    if (isTruthy(rawVal)) {
+      // 条件为真：保留内容，并继续解析内容里的变量
+      return renderTemplate(content, data, i18n, currentLang);
+    } else {
+      // 条件为假：整块删除
+      return '';
+    }
+  });
+  
+  // {{#unless var}} ... {{/unless}}（与 if 相反）
+  const unlessRegex = /\{\{\s*#unless\s+([a-zA-Z_][a-zA-Z0-9_.]*)\s*\}\}([\s\S]*?)\{\{\s*\/unless\s*\}\}/g;
+  html = html.replace(unlessRegex, (match, varName, content) => {
+    if (!CONFIG.conditionalVars.includes(varName)) {
+      console.warn(`    ⚠️  条件变量 "${varName}" 不在 conditionalVars 白名单中，保留原样`);
+      return match;
+    }
+    const rawVal = getVarRaw(varName, data, i18n, currentLang);
+    if (!isTruthy(rawVal)) {
+      return renderTemplate(content, data, i18n, currentLang);
+    } else {
+      return '';
+    }
+  });
+  
+  return html;
 }
 
-/** 
- * 替换模板中的 {{key}} 变量
- * 查找顺序：1) renderData  2) i18n fallback
- * 支持嵌套解析和多次遍历
- */
 function renderTemplate(template, renderData, i18n, currentLang) {
   let html = template;
+  
+  // ✅ 步骤1：先处理块级条件（if/unless）
+  html = resolveConditionBlocks(html, renderData, i18n, currentLang);
+  
+  // 步骤2：常规 {{key}} 替换
   let prevHtml;
   let iteration = 0;
   const maxIterations = MAX_NEST_DEPTH;
 
-  // 多次遍历，直到没有变化或达到最大迭代次数
   do {
     prevHtml = html;
     html = html.replace(/\{\{\s*([^{}\s]+)\s*\}\}/g, (match, key) => {
-      // 1) 优先从 renderData 查找
+      // 跳过条件标签残留
+      if (key.startsWith('#') || key.startsWith('/')) return match;
+      
       const localValue = getValue(renderData, key);
       if (localValue !== undefined && localValue !== null) {
         const strValue = String(localValue);
-        // 如果 renderData 中的值包含 {{xxx}}，递归解析
         if (/\{\{\s*([^{}\s]+)\s*\}\}/.test(strValue)) {
           return resolveNestedValue(strValue, renderData, i18n, currentLang);
         }
         return strValue;
       }
 
-      // 2) 从 i18n fallback 查找（会自动解析嵌套）
-      const i18nValue = getValueWithFallback(i18n, currentLang, key, renderData);
-      if (i18nValue !== undefined && i18nValue !== null) {
-        return String(i18nValue);
+      for (const lang of [currentLang, ...fallbackLang.filter(l => l !== currentLang)]) {
+        const i18nVal = getValue(i18n[lang], key);
+        if (i18nVal !== undefined && i18nVal !== null) {
+          const strValue = String(i18nVal);
+          if (/\{\{\s*([^{}\s]+)\s*\}\}/.test(strValue)) {
+            return resolveNestedValue(strValue, renderData, i18n, currentLang);
+          }
+          return strValue;
+        }
       }
 
       console.warn(`    ⚠️  变量未定义: {{${key}}}（回退语言也缺失）`);
@@ -171,7 +185,6 @@ function renderTemplate(template, renderData, i18n, currentLang) {
   return html;
 }
 
-/** 移除带有 zh-only class 的 HTML 元素 */
 function removeZhOnlyElements(html) {
   return html.replace(
     /<([a-zA-Z][a-zA-Z0-9]*)[^>]*\bclass="[^"]*\bzh-only\b[^"]*"[^>]*>[\s\S]*?<\/\1>/g,
@@ -179,12 +192,10 @@ function removeZhOnlyElements(html) {
   );
 }
 
-/** 清理多余空行 */
 function cleanEmptyLines(html) {
   return html.replace(/\n\s*\n\s*\n/g, '\n\n');
 }
 
-/** 确保目录存在 */
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -199,7 +210,6 @@ function computeRootPath(outputPath) {
   return Array(depth).fill('..').join('/');
 }
 
-/** 映射输出文件名：homepage.html → index.html */
 function mapOutputName(templateName) {
   if (templateName === 'homepage.html') {
     return 'index.html';
@@ -207,37 +217,28 @@ function mapOutputName(templateName) {
   return templateName;
 }
 
-/** 生成域名相关变量对象 */
 function buildDomainVars(currentLang) {
   const domain = CONFIG.domain;
   const vars = {
     domain: domain,
     domain_current: currentLang === CONFIG.rootLang ? domain : `${domain}/${currentLang}`
   };
-
   for (const lang of supportedLang) {
     vars[`domain_${lang}`] = lang === CONFIG.rootLang ? domain : `${domain}/${lang}`;
   }
-
   return vars;
 }
 
-/** 
- * 生成 to_xx 变量：从当前文件所在目录到其他语言目录的相对路径
- * @param {string} currentOutputDir - 当前输出文件相对于 outputDir 的目录（如 "."、"en"、"en/subdir"）
- */
 function buildToLangVars(currentOutputDir) {
   const vars = {};
   for (const lang of supportedLang) {
     const targetDir = lang === CONFIG.rootLang ? '.' : lang;
     let rel = path.relative(currentOutputDir, targetDir);
-
     if (!rel || rel === '.') {
       rel = '.';
     } else {
       rel = rel.replace(/\\/g, '/');
     }
-
     vars[`to_${lang}`] = rel;
   }
   return vars;
@@ -260,7 +261,6 @@ function build() {
   console.log(`🌐 支持 ${supportedLang.length} 种语言: ${supportedLang.join(', ')}\n`);
   console.log(`🌐 i18n 中已定义: ${Object.keys(i18n).join(', ')}\n`);
 
-  // ========== 先收集模板，以便精确清理 ==========
   const templateFiles = [];
   function collectTemplates(dir, prefix = '') {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -291,10 +291,7 @@ function build() {
   }
   console.log('');
 
-  // ========== 安全清理：只删构建产物，不删整个目录 ==========
   console.log('🧹 清理旧构建产物...');
-  
-  // 1. 删除根目录下由模板生成的 HTML 文件
   for (const templateRelPath of templateFiles) {
     const outputFileName = mapOutputName(templateRelPath);
     const filePath = path.join(CONFIG.outputDir, outputFileName);
@@ -303,8 +300,6 @@ function build() {
       console.log(`   🗑️  ${filePath}`);
     }
   }
-  
-  // 2. 删除非 rootLang 的语言子目录（如 en/, ja/ 等）
   for (const lang of supportedLang) {
     if (lang === CONFIG.rootLang) continue;
     const langDir = path.join(CONFIG.outputDir, lang);
@@ -315,12 +310,10 @@ function build() {
   }
   console.log('');
 
-  // 确保输出目录存在（根目录时无实际作用）
   ensureDir(CONFIG.outputDir);
 
   let totalFiles = 0;
 
-  // 遍历所有 supportedLang，确保每种语言都生成页面
   for (const lang of supportedLang) {
     const localeData = i18n[lang] || {};
     if (!i18n[lang]) {
@@ -334,7 +327,6 @@ function build() {
       const template = fs.readFileSync(templatePath, 'utf-8');
 
       const outputFileName = mapOutputName(templateRelPath);
-
       let outputRelPath;
       if (lang === CONFIG.rootLang) {
         outputRelPath = outputFileName;
@@ -346,8 +338,6 @@ function build() {
 
       const root = computeRootPath(outputPath);
       const domainVars = buildDomainVars(lang);
-
-      // 计算当前文件所在目录（相对于 outputDir）
       const currentOutputDir = path.dirname(outputRelPath);
       const toLangVars = buildToLangVars(currentOutputDir);
 
@@ -357,12 +347,17 @@ function build() {
         ...toLangVars,
         root,
         current_lang: lang,
-        is_root_lang: lang === CONFIG.rootLang
+        is_root_lang: lang === CONFIG.rootLang,
+        
+        // ✅ 在这里注入条件变量的实际值
+        isLoggedIn: false,
+        isPremium: true,
+        showBanner: lang === 'zh',
+        hasNewVersion: false
       };
 
       let html = renderTemplate(template, renderData, i18n, lang);
 
-      // 非 rootLang 移除 zh-only 元素
       if (lang !== CONFIG.rootLang) {
         html = removeZhOnlyElements(html);
         html = cleanEmptyLines(html);
@@ -372,7 +367,6 @@ function build() {
       console.log(`   ✓ ${outputRelPath}  (root="${root}")`);
       totalFiles++;
     }
-
     console.log('');
   }
 
