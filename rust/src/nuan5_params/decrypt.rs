@@ -38,6 +38,7 @@ pub(super) mod ffi{
     }
   }
 
+  #[frb(ignore)]
   #[repr(u32)]
   #[derive(Clone, Copy, Debug, PartialEq, Eq)]
   pub enum DecryptionStatus{
@@ -52,6 +53,8 @@ pub(super) mod ffi{
     InvalidClothDiyShareCode = 8,
     NotNumberString = 9,
     NetworkError = 10,
+    InvalidHomeBuildShareCode = 11,
+    DeserializationFailed = 12,
   }
 
   /// ========== Media ==========
@@ -158,6 +161,58 @@ pub(super) mod ffi{
   }
 }
 
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DecryptionError{
+  Unknown = 0,
+  NullPointer = 1,
+  DataLenIsNotAMultipleOf16 = 2,
+  DecodingBase64Failed = 3,
+  FindNoStartFlag = 4,
+  FindNoEndFlag = 5,
+  Io = 6,
+  IllegalUTF8 = 7,
+  InvalidClothDiyShareCode = 8,
+  NotNumberString = 9,
+  NetworkError = 10,
+  InvalidHomeBuildShareCode = 11,
+  DeserializationFailed = 12,
+}
+
+impl DecryptionError{
+  /// 核心转换逻辑，所有类型最终都走到这里
+  const fn from_u32(value: u32) -> Self{
+    match value{
+      1 => Self::NullPointer,
+      2 => Self::DataLenIsNotAMultipleOf16,
+      3 => Self::DecodingBase64Failed,
+      4 => Self::FindNoStartFlag,
+      5 => Self::FindNoEndFlag,
+      6 => Self::Io,
+      7 => Self::IllegalUTF8,
+      8 => Self::InvalidClothDiyShareCode,
+      9 => Self::NotNumberString,
+      10 => Self::NetworkError,
+      11 => Self::InvalidHomeBuildShareCode,
+      12 => Self::DeserializationFailed,
+      _ => Self::Unknown,
+    }
+  }
+}
+
+macro_rules! impl_from_int{
+  ($($t:ty),*) => {
+    $(
+      impl From<$t> for DecryptionError{
+        fn from(value: $t) -> Self{
+          Self::from_u32(value as u32)
+        }
+      }
+    )*
+  };
+}
+
+impl_from_int!(u8, u16, u32, u64, usize, i8, i16, i32, i64, isize);
 
 /// ============================================================
 /// Media
