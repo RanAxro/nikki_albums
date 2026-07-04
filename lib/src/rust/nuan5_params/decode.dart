@@ -9,8 +9,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 import 'structs/clock_in_photo_params.dart';
 import 'structs/cloth.dart';
+import 'structs/cloth_diy_params.dart';
 import 'structs/collage_params.dart';
-import 'structs/diy_params.dart';
 import 'structs/eureka.dart';
 import 'structs/momo_camera_params.dart';
 import 'structs/nikki_photo_params.dart';
@@ -19,7 +19,7 @@ part 'decode.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `get_flag`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `MediaStreamCallbackContext`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`
 
 Future<MediaCustomData> decodeMediaParam({
   required MediaParamType paramType,
@@ -79,6 +79,30 @@ Stream<MediaCustomDataResult> mediaDeFilesUnchecked({
   key: key,
 );
 
+Future<ClothDiyParam?> deClothDiyParam({
+  required ClothDiyParamType paramType,
+  required List<int> bytes,
+}) => RustLib.instance.api.crateNuan5ParamsDecodeDeClothDiyParam(
+  paramType: paramType,
+  bytes: bytes,
+);
+
+Future<ClothDiyParam?> clothDiyDeNetwork({required ClothDiyShareCode key}) =>
+    RustLib.instance.api.crateNuan5ParamsDecodeClothDiyDeNetwork(key: key);
+
+@freezed
+sealed class ClothDiyParam with _$ClothDiyParam {
+  const ClothDiyParam._();
+
+  const factory ClothDiyParam.clothDiy(ClothDiyParams field0) =
+      ClothDiyParam_ClothDiy;
+}
+
+/// ============================================================
+/// ClothDiy
+/// ============================================================
+enum ClothDiyParamType { clothDiy }
+
 @freezed
 sealed class MediaCustomData with _$MediaCustomData {
   const MediaCustomData._();
@@ -117,7 +141,10 @@ sealed class MediaParam with _$MediaParam {
   const factory MediaParam.clockInPhoto(ClockInPhotoParams field0) =
       MediaParam_ClockInPhoto;
   const factory MediaParam.collage(CollageParams field0) = MediaParam_Collage;
-  const factory MediaParam.diy(DiyParams field0) = MediaParam_DIY;
+  const factory MediaParam.diy(ClothDiyParams field0) = MediaParam_DIY;
 }
 
+/// ============================================================
+/// Media
+/// ============================================================
 enum MediaParamType { cameraParams, nikkiPhoto, clockInPhoto, collage, diy }

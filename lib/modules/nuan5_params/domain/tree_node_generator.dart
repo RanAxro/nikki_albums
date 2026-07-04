@@ -3,7 +3,7 @@ import "../model/enumeration.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/clock_in_photo_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/collage_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/diy_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/utils/clipboard.dart";
@@ -106,7 +106,7 @@ TreeNode genCollageParams(CollageParams params){
   );
 }
 
-TreeNode genDiyParams(DiyParams params){
+TreeNode genDiyParams(ClothDiyParams params){
   return TreeNode(
     title: trText("diy_params"),
     initiallyExpanded: true,

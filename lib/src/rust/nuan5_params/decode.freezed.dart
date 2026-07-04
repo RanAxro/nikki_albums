@@ -12,6 +12,257 @@ part of 'decode.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
+mixin _$ClothDiyParam {
+
+ ClothDiyParams get field0;
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ClothDiyParamCopyWith<ClothDiyParam> get copyWith => _$ClothDiyParamCopyWithImpl<ClothDiyParam>(this as ClothDiyParam, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'ClothDiyParam(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ClothDiyParamCopyWith<$Res>  {
+  factory $ClothDiyParamCopyWith(ClothDiyParam value, $Res Function(ClothDiyParam) _then) = _$ClothDiyParamCopyWithImpl;
+@useResult
+$Res call({
+ ClothDiyParams field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$ClothDiyParamCopyWithImpl<$Res>
+    implements $ClothDiyParamCopyWith<$Res> {
+  _$ClothDiyParamCopyWithImpl(this._self, this._then);
+
+  final ClothDiyParam _self;
+  final $Res Function(ClothDiyParam) _then;
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? field0 = null,}) {
+  return _then(_self.copyWith(
+field0: null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as ClothDiyParams,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ClothDiyParam].
+extension ClothDiyParamPatterns on ClothDiyParam {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ClothDiyParam_ClothDiy value)?  clothDiy,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case ClothDiyParam_ClothDiy() when clothDiy != null:
+return clothDiy(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ClothDiyParam_ClothDiy value)  clothDiy,}){
+final _that = this;
+switch (_that) {
+case ClothDiyParam_ClothDiy():
+return clothDiy(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ClothDiyParam_ClothDiy value)?  clothDiy,}){
+final _that = this;
+switch (_that) {
+case ClothDiyParam_ClothDiy() when clothDiy != null:
+return clothDiy(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ClothDiyParams field0)?  clothDiy,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ClothDiyParam_ClothDiy() when clothDiy != null:
+return clothDiy(_that.field0);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ClothDiyParams field0)  clothDiy,}) {final _that = this;
+switch (_that) {
+case ClothDiyParam_ClothDiy():
+return clothDiy(_that.field0);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ClothDiyParams field0)?  clothDiy,}) {final _that = this;
+switch (_that) {
+case ClothDiyParam_ClothDiy() when clothDiy != null:
+return clothDiy(_that.field0);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class ClothDiyParam_ClothDiy extends ClothDiyParam {
+  const ClothDiyParam_ClothDiy(this.field0): super._();
+  
+
+@override final  ClothDiyParams field0;
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ClothDiyParam_ClothDiyCopyWith<ClothDiyParam_ClothDiy> get copyWith => _$ClothDiyParam_ClothDiyCopyWithImpl<ClothDiyParam_ClothDiy>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_ClothDiy&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'ClothDiyParam.clothDiy(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ClothDiyParam_ClothDiyCopyWith<$Res> implements $ClothDiyParamCopyWith<$Res> {
+  factory $ClothDiyParam_ClothDiyCopyWith(ClothDiyParam_ClothDiy value, $Res Function(ClothDiyParam_ClothDiy) _then) = _$ClothDiyParam_ClothDiyCopyWithImpl;
+@override @useResult
+$Res call({
+ ClothDiyParams field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$ClothDiyParam_ClothDiyCopyWithImpl<$Res>
+    implements $ClothDiyParam_ClothDiyCopyWith<$Res> {
+  _$ClothDiyParam_ClothDiyCopyWithImpl(this._self, this._then);
+
+  final ClothDiyParam_ClothDiy _self;
+  final $Res Function(ClothDiyParam_ClothDiy) _then;
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(ClothDiyParam_ClothDiy(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as ClothDiyParams,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$MediaCustomData {
 
 
@@ -395,7 +646,7 @@ return diy(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( CameraParams field0)?  cameraParams,TResult Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult Function( ClockInPhotoParams field0)?  clockInPhoto,TResult Function( CollageParams field0)?  collage,TResult Function( DiyParams field0)?  diy,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( CameraParams field0)?  cameraParams,TResult Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult Function( ClockInPhotoParams field0)?  clockInPhoto,TResult Function( CollageParams field0)?  collage,TResult Function( ClothDiyParams field0)?  diy,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case MediaParam_CameraParams() when cameraParams != null:
 return cameraParams(_that.field0);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
@@ -420,7 +671,7 @@ return diy(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( CameraParams field0)  cameraParams,required TResult Function( NikkiPhotoParams field0)  nikkiPhoto,required TResult Function( ClockInPhotoParams field0)  clockInPhoto,required TResult Function( CollageParams field0)  collage,required TResult Function( DiyParams field0)  diy,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( CameraParams field0)  cameraParams,required TResult Function( NikkiPhotoParams field0)  nikkiPhoto,required TResult Function( ClockInPhotoParams field0)  clockInPhoto,required TResult Function( CollageParams field0)  collage,required TResult Function( ClothDiyParams field0)  diy,}) {final _that = this;
 switch (_that) {
 case MediaParam_CameraParams():
 return cameraParams(_that.field0);case MediaParam_NikkiPhoto():
@@ -441,7 +692,7 @@ return diy(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( CameraParams field0)?  cameraParams,TResult? Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult? Function( ClockInPhotoParams field0)?  clockInPhoto,TResult? Function( CollageParams field0)?  collage,TResult? Function( DiyParams field0)?  diy,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( CameraParams field0)?  cameraParams,TResult? Function( NikkiPhotoParams field0)?  nikkiPhoto,TResult? Function( ClockInPhotoParams field0)?  clockInPhoto,TResult? Function( CollageParams field0)?  collage,TResult? Function( ClothDiyParams field0)?  diy,}) {final _that = this;
 switch (_that) {
 case MediaParam_CameraParams() when cameraParams != null:
 return cameraParams(_that.field0);case MediaParam_NikkiPhoto() when nikkiPhoto != null:
@@ -727,7 +978,7 @@ class MediaParam_DIY extends MediaParam {
   const MediaParam_DIY(this.field0): super._();
   
 
-@override final  DiyParams field0;
+@override final  ClothDiyParams field0;
 
 /// Create a copy of MediaParam
 /// with the given fields replaced by the non-null parameter values.
@@ -759,7 +1010,7 @@ abstract mixin class $MediaParam_DIYCopyWith<$Res> implements $MediaParamCopyWit
   factory $MediaParam_DIYCopyWith(MediaParam_DIY value, $Res Function(MediaParam_DIY) _then) = _$MediaParam_DIYCopyWithImpl;
 @useResult
 $Res call({
- DiyParams field0
+ ClothDiyParams field0
 });
 
 
@@ -779,7 +1030,7 @@ class _$MediaParam_DIYCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
   return _then(MediaParam_DIY(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as DiyParams,
+as ClothDiyParams,
   ));
 }
 

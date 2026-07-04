@@ -3,11 +3,11 @@ use std::ptr;
 use std::sync::Arc;
 use flutter_rust_bridge::frb;
 use crate::frb_generated::StreamSink;
-use crate::nuan5_params::decrypt::{DecryptionError, MediaKey};
+use crate::nuan5_params::decrypt::{DecryptionError, MediaKey, ClothDiyShareCode};
 use super::converter::*;
 use super::decrypt;
 use crate::serde_nuan5_json::de::from_slice;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, momo_camera_params::*};
 
 
 /// ============================================================
@@ -36,7 +36,7 @@ pub enum MediaParam{
   // MagazinePhoto(MagazinePhotoParams),
   ClockInPhoto(ClockInPhotoParams),
   Collage(CollageParams),
-  DIY(DiyParams),
+  DIY(ClothDiyParams),
   // Video(VideoParams),
   // VideoCover(VideoCoverParams),
   // ShareCode(ShareCode),
@@ -190,6 +190,46 @@ pub fn media_de_files_unchecked(
 
   Ok(())
 }
+
+
+/// ============================================================
+/// ClothDiy
+/// ============================================================
+
+#[frb]
+pub enum ClothDiyParamType{
+  ClothDiy,
+  // DiyHistoryShareCode,
+}
+
+#[frb]
+#[derive(Clone)]
+pub enum ClothDiyParam{
+  ClothDiy(ClothDiyParams),
+  // DiyHistoryShareCode(DiyHistoryShareCodeParams),
+}
+
+#[frb]
+pub fn de_cloth_diy_param(param_type: &ClothDiyParamType, bytes: &[u8]) -> Option<ClothDiyParam>{
+  use ClothDiyParamType::*;
+
+  let decoded = match param_type{
+    ClothDiy => from_slice(&bytes).ok().as_ref().map(convert_net_cloth_diy_params).map(ClothDiyParam::ClothDiy),
+    // DiyHistoryShareCode => from_slice(&bytes).ok().as_ref().map(convert_nikki_photo_params).map(MediaParam::NikkiPhoto),
+  };
+  
+  decoded
+}
+
+#[frb]
+pub fn cloth_diy_de_network(key: &ClothDiyShareCode) -> Result<Option<ClothDiyParam>, DecryptionError>{
+  decrypt::cloth_diy_decode_network(key).map(|decrypted|{
+    de_cloth_diy_param(&ClothDiyParamType::ClothDiy, &decrypted)
+  })
+}
+
+
+
 
 
 #[test]

@@ -12,8 +12,8 @@ import 'nuan5_params/decode.dart';
 import 'nuan5_params/decrypt.dart';
 import 'nuan5_params/structs/clock_in_photo_params.dart';
 import 'nuan5_params/structs/cloth.dart';
+import 'nuan5_params/structs/cloth_diy_params.dart';
 import 'nuan5_params/structs/collage_params.dart';
-import 'nuan5_params/structs/diy_params.dart';
 import 'nuan5_params/structs/eureka.dart';
 import 'nuan5_params/structs/momo_camera_params.dart';
 import 'nuan5_params/structs/nikki_photo_params.dart';
@@ -177,6 +177,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ClockInPhotoParams dco_decode_box_autoadd_clock_in_photo_params(dynamic raw);
 
   @protected
+  ClothDiyParam dco_decode_box_autoadd_cloth_diy_param(dynamic raw);
+
+  @protected
+  ClothDiyParams dco_decode_box_autoadd_cloth_diy_params(dynamic raw);
+
+  @protected
   CollageParams dco_decode_box_autoadd_collage_params(dynamic raw);
 
   @protected
@@ -187,9 +193,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DiyData dco_decode_box_autoadd_diy_data(dynamic raw);
-
-  @protected
-  DiyParams dco_decode_box_autoadd_diy_params(dynamic raw);
 
   @protected
   DyeColorParams dco_decode_box_autoadd_dye_color_params(dynamic raw);
@@ -318,6 +321,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Cloth dco_decode_cloth(dynamic raw);
 
   @protected
+  ClothDiyParam dco_decode_cloth_diy_param(dynamic raw);
+
+  @protected
+  ClothDiyParamType dco_decode_cloth_diy_param_type(dynamic raw);
+
+  @protected
+  ClothDiyParams dco_decode_cloth_diy_params(dynamic raw);
+
+  @protected
   ClothParams dco_decode_cloth_params(dynamic raw);
 
   @protected
@@ -343,9 +355,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DiyData dco_decode_diy_data(dynamic raw);
-
-  @protected
-  DiyParams dco_decode_diy_params(dynamic raw);
 
   @protected
   DressingParams dco_decode_dressing_params(dynamic raw);
@@ -555,6 +564,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CameraParamsMomoHidden? dco_decode_opt_box_autoadd_camera_params_momo_hidden(
     dynamic raw,
   );
+
+  @protected
+  ClothDiyParam? dco_decode_opt_box_autoadd_cloth_diy_param(dynamic raw);
 
   @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
@@ -922,6 +934,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ClothDiyParam sse_decode_box_autoadd_cloth_diy_param(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ClothDiyParams sse_decode_box_autoadd_cloth_diy_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CollageParams sse_decode_box_autoadd_collage_params(
     SseDeserializer deserializer,
   );
@@ -934,9 +956,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DiyData sse_decode_box_autoadd_diy_data(SseDeserializer deserializer);
-
-  @protected
-  DiyParams sse_decode_box_autoadd_diy_params(SseDeserializer deserializer);
 
   @protected
   DyeColorParams sse_decode_box_autoadd_dye_color_params(
@@ -1107,6 +1126,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Cloth sse_decode_cloth(SseDeserializer deserializer);
 
   @protected
+  ClothDiyParam sse_decode_cloth_diy_param(SseDeserializer deserializer);
+
+  @protected
+  ClothDiyParamType sse_decode_cloth_diy_param_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ClothDiyParams sse_decode_cloth_diy_params(SseDeserializer deserializer);
+
+  @protected
   ClothParams sse_decode_cloth_params(SseDeserializer deserializer);
 
   @protected
@@ -1132,9 +1162,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DiyData sse_decode_diy_data(SseDeserializer deserializer);
-
-  @protected
-  DiyParams sse_decode_diy_params(SseDeserializer deserializer);
 
   @protected
   DressingParams sse_decode_dressing_params(SseDeserializer deserializer);
@@ -1376,6 +1403,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParamsMomoHidden? sse_decode_opt_box_autoadd_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ClothDiyParam? sse_decode_opt_box_autoadd_cloth_diy_param(
     SseDeserializer deserializer,
   );
 
@@ -1824,6 +1856,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_cloth_diy_param(
+    ClothDiyParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_cloth_diy_params(
+    ClothDiyParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_collage_params(
     CollageParams self,
     SseSerializer serializer,
@@ -1843,12 +1887,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_box_autoadd_diy_data(DiyData self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_diy_params(
-    DiyParams self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_box_autoadd_dye_color_params(
@@ -2061,6 +2099,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_cloth(Cloth self, SseSerializer serializer);
 
   @protected
+  void sse_encode_cloth_diy_param(ClothDiyParam self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_cloth_diy_param_type(
+    ClothDiyParamType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_cloth_diy_params(
+    ClothDiyParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_cloth_params(ClothParams self, SseSerializer serializer);
 
   @protected
@@ -2095,9 +2148,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_diy_data(DiyData self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_diy_params(DiyParams self, SseSerializer serializer);
 
   @protected
   void sse_encode_dressing_params(
@@ -2414,6 +2464,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_camera_params_momo_hidden(
     CameraParamsMomoHidden? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_cloth_diy_param(
+    ClothDiyParam? self,
     SseSerializer serializer,
   );
 

@@ -5,7 +5,7 @@ use crate::nuan5_params::parser::momo_camera_params_parser::*;
 use crate::nuan5_params::parser::location_parser::parse_location;
 use crate::nuan5_params::parser::cloth_parser::parse_cloth;
 use crate::nuan5_params::parser::eureka_parser::parse_eureka;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, diy_params::*, momo_camera_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, momo_camera_params::*};
 
 pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> CameraParams{
   match data{
@@ -147,8 +147,8 @@ pub(crate) fn convert_collage_params(data: &image_custom_data::CollageCustomData
   }
 }
 
-pub(crate) fn convert_diy_params(data: &image_custom_data::DIYCustomData) -> DiyParams{
-  DiyParams{
+pub(crate) fn convert_diy_params(data: &image_custom_data::DIYCustomData) -> ClothDiyParams{
+  ClothDiyParams{
     pose_id: data.content.pose_id,
     pattern_data: data.content.pattern_data.as_map(),
     clothes: convert_cloth(&data.content.wearing_clothes, Some(&data.content.wearing_diy_infos)),
@@ -592,8 +592,8 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
   clothes.into_values().collect()
 }
 
-pub(crate) fn convert_net_diy_params(data: &diy_custom_data::NetDIYCustomData) -> DiyParams{
-  DiyParams{
+pub(crate) fn convert_net_cloth_diy_params(data: &diy_custom_data::NetDIYCustomData) -> ClothDiyParams{
+  ClothDiyParams{
     pose_id: data.content.content.pose_id,
     pattern_data: data.content.content.pattern_data.as_map(),
     clothes: convert_cloth(&data.content.content.wearing_clothes, Some(&data.content.content.wearing_diy_infos)),
