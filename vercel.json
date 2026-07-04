@@ -1,4 +1,8 @@
 {
   "buildCommand": "node scripts/build_official_website.js",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/guide", "destination": "/guide.html" },
+    { "source": "/download", "destination": "/download.html" }
+  ]
 }
