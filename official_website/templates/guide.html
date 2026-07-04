@@ -5,8 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{guide.title}}</title>
 <meta name="description" content="{{guide.description}}">
+{{#if server}}
+<link rel="icon" href="https://{{domain}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://{{domain}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+{{/if}}
+{{#if unless}}
 <link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+{{/unless}}
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,16 +38,24 @@
 	<!-- Header -->
 	<header>
 		<div class="container">
-			<a id="web_logo" href="index.html">
+			{{#if server}}<a id="web_logo" href="https://{{domain_current}}">{{/if}}
+			{{#unless server}}<a id="web_logo" href="index.html">{{/unless}}
 				<img src="{{root}}/official_website/assets/icon/favicon.ico">
 				<h2>{{app_name}}</h2>
 			</a>
 			
 			<nav>
 				<ul class="web_header_nav_list">
+					{{#if server}}
+					<li><a href="https://{{domain_current}}">{{common.nav.home}}</a></li>
+					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+					<li><a href="https://{{domain_current}}/download">{{common.nav.download}}</a></li>
+					{{/if}}
+					{{#unless server}}
 					<li><a href="index.html">{{common.nav.home}}</a></li>
 					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
 					<li><a href="download.html">{{common.nav.download}}</a></li>
+					{{/unless}}
 				</ul>
 
 				<!-- Language Switcher -->
@@ -53,18 +67,34 @@
 						</svg>
 					</button>
 					<div class="lang-dropdown-menu">
-						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/guide.html">简体中文</a>
-						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/guide.html">繁體中文</a>
-						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/guide.html">English</a>
-						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/guide.html">日本語</a>
-						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/guide.html">한국어</a>
-						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/guide.html">Français</a>
-						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/guide.html">Deutsch</a>
-						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/guide.html">Español</a>
-						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/guide.html">Italiano</a>
-						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/guide.html">Português</a>
-						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/guide.html">Bahasa Indonesia</a>
-						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/guide.html">ไทย</a>
+						{{#if server}}
+						<a id="lang-zh" class="lang-dropdown-item" href="https://{{domain_zh}}">简体中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="https://{{domain_tw}}">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="https://{{domain_en}}">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="https://{{domain_ja}}">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="https://{{domain_ko}}">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="https://{{domain_fr}}">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="https://{{domain_de}}">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="https://{{domain_es}}">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="https://{{domain_it}}">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="https://{{domain_pt}}">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="https://{{domain_id}}">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="https://{{domain_th}}">ไทย</a>
+						{{/if}}
+						{{#unless server}}
+						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/index.html">简体中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/index.html">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/index.html">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/index.html">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/index.html">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/index.html">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/index.html">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/index.html">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/index.html">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/index.html">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/index.html">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/index.html">ไทย</a>
+						{{/unless}}
 					</div>
 				</div>
 

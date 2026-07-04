@@ -6,12 +6,18 @@
 <title>{{download.title}}</title>
 <meta name="description" content="{{download.description}}">
 <meta name="author" content="RanAxro">
+{{#if server}}
+<link rel="icon" href="https://{{domain}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://{{domain}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+{{/if}}
+{{#unless server}}
 <link rel="icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="{{root}}/official_website/assets/icon/favicon.ico" type="image/x-icon">
+{{/unless}}
 <meta property="og:title" content="{{app_name}}">
 <meta property="og:description" content="{{app_description}}">
 <meta property="og:image" content="https://{{domain}}/official_website/assets/icon/favicon.webp">
-<meta property="og:url" content="{{domain_current}}/download.html">
+<meta property="og:url" content="https://{{domain_current}}/download">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{app_name}}">
@@ -64,16 +70,24 @@ const icons = {
 <body>
 	<header>
 		<div class="container">
-			<a id="web_logo" href="index.html">
+			{{#if server}}<a id="web_logo" href="https://{{domain_current}}">{{/if}}
+			{{#unless server}}<a id="web_logo" href="index.html">{{/unless}}
 				<img src="{{root}}/official_website/assets/icon/favicon.ico" alt="{{app_name}}">
 				<h2>{{app_name}}</h2>
 			</a>
 			
 			<nav>
 				<ul class="web_header_nav_list">
+					{{#if server}}
+					<li><a href="https://{{domain_current}}">{{common.nav.home}}</a></li>
+					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+					<li><a class="active" href="https://{{domain_current}}/guide">{{common.nav.tutorial}}</a></li>
+					{{/if}}
+					{{#unless server}}
 					<li><a href="index.html">{{common.nav.home}}</a></li>
 					<li><a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a></li>
 					<li><a class="active" href="guide.html">{{common.nav.tutorial}}</a></li>
+					{{/unless}}
 				</ul>
 
 				<div class="lang-dropdown">
@@ -84,18 +98,34 @@ const icons = {
 						</svg>
 					</button>
 					<div class="lang-dropdown-menu">
-						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/download.html">简体中文</a>
-						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/download.html">繁體中文</a>
-						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/download.html">English</a>
-						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/download.html">日本語</a>
-						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/download.html">한국어</a>
-						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/download.html">Français</a>
-						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/download.html">Deutsch</a>
-						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/download.html">Español</a>
-						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/download.html">Italiano</a>
-						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/download.html">Português</a>
-						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/download.html">Bahasa Indonesia</a>
-						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/download.html">ไทย</a>
+						{{#if server}}
+						<a id="lang-zh" class="lang-dropdown-item" href="https://{{domain_zh}}">简体中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="https://{{domain_tw}}">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="https://{{domain_en}}">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="https://{{domain_ja}}">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="https://{{domain_ko}}">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="https://{{domain_fr}}">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="https://{{domain_de}}">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="https://{{domain_es}}">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="https://{{domain_it}}">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="https://{{domain_pt}}">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="https://{{domain_id}}">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="https://{{domain_th}}">ไทย</a>
+						{{/if}}
+						{{#unless server}}
+						<a id="lang-zh" class="lang-dropdown-item" href="{{to_zh}}/index.html">简体中文</a>
+						<a id="lang-tw" class="lang-dropdown-item" href="{{to_tw}}/index.html">繁體中文</a>
+						<a id="lang-en" class="lang-dropdown-item" href="{{to_en}}/index.html">English</a>
+						<a id="lang-ja" class="lang-dropdown-item" href="{{to_ja}}/index.html">日本語</a>
+						<a id="lang-ko" class="lang-dropdown-item" href="{{to_ko}}/index.html">한국어</a>
+						<a id="lang-fr" class="lang-dropdown-item" href="{{to_fr}}/index.html">Français</a>
+						<a id="lang-de" class="lang-dropdown-item" href="{{to_de}}/index.html">Deutsch</a>
+						<a id="lang-es" class="lang-dropdown-item" href="{{to_es}}/index.html">Español</a>
+						<a id="lang-it" class="lang-dropdown-item" href="{{to_it}}/index.html">Italiano</a>
+						<a id="lang-pt" class="lang-dropdown-item" href="{{to_pt}}/index.html">Português</a>
+						<a id="lang-id" class="lang-dropdown-item" href="{{to_id}}/index.html">Bahasa Indonesia</a>
+						<a id="lang-th" class="lang-dropdown-item" href="{{to_th}}/index.html">ไทย</a>
+						{{/unless}}
 					</div>
 				</div>
 
@@ -126,9 +156,16 @@ const icons = {
 	</header>
 
 	<div class="mobile-nav-drawer" id="mobile-drawer">
+		{{#if server}}
+		<a href="https://{{domain_current}}">{{common.nav.home}}</a>
+		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a>
+		<a href="https://{{domain_current}}/guide">{{common.nav.tutorial}}</a>
+		{{/if}}
+		{{#unless server}}
 		<a href="index.html">{{common.nav.home}}</a>
 		<a href="https://github.com/RanAxro/nikki_albums" target="_blank" rel="noopener noreferrer">GitHub</a>
 		<a href="guide.html">{{common.nav.tutorial}}</a>
+		{{/unless}}
 	</div>
 
 	<div class="doc-layout">
