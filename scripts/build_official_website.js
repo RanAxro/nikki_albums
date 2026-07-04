@@ -12,8 +12,10 @@ const CONFIG = {
   outputDir: path.join(rootDir, ""),
   rootLang: "zh",
   domain: "nikki.ranaxro.com",
-  
-  // ✅ 条件变量白名单：只有这里声明的变量才允许用于 {{#if}} / {{#unless}}
+  /**
+   * ✅ 条件变量开关列表
+   * 作用：{{#if X}} / {{#unless X}} 时，若 X 在此数组中则为真，不在则为假
+   */
   conditionalVars: ["server"]
 };
 
@@ -31,29 +33,6 @@ function getValue(obj, keyPath) {
     current = current[key];
   }
   return current;
-}
-
-/** 判断值是否为“真” */
-function isTruthy(value) {
-  if (value === undefined || value === null) return false;
-  if (typeof value === 'boolean') return value;
-  if (typeof value === 'number') return value !== 0;
-  if (typeof value === 'string') return value.trim() !== '';
-  if (Array.isArray(value)) return value.length > 0;
-  if (typeof value === 'object') return Object.keys(value).length > 0;
-  return true;
-}
-
-/** 获取变量原始值（支持 renderData → i18n fallback） */
-function getVarRaw(keyPath, data, i18n, currentLang) {
-  const local = getValue(data, keyPath);
-  if (local !== undefined && local !== null) return local;
-  
-  for (const lang of [currentLang, ...fallbackLang.filter(l => l !== currentLang)]) {
-    const val = getValue(i18n[lang], keyPath);
-    if (val !== undefined && val !== null) return val;
-  }
-  return undefined;
 }
 
 function resolveNestedValue(str, data, i18n, currentLang, visited = new Set(), depth = 0) {
@@ -97,37 +76,30 @@ function resolveNestedValue(str, data, i18n, currentLang, visited = new Set(), d
 }
 
 // ✅ 处理块级条件 {{#if var}}...{{/if}} 和 {{#unless var}}...{{/unless}}
+// 逻辑：var 在 CONFIG.conditionalVars 中 → 真；不在 → 假
 function resolveConditionBlocks(template, data, i18n, currentLang) {
   let html = template;
   
   // {{#if var}} ... {{/if}}
   const ifRegex = /\{\{\s*#if\s+([a-zA-Z_][a-zA-Z0-9_.]*)\s*\}\}([\s\S]*?)\{\{\s*\/if\s*\}\}/g;
   html = html.replace(ifRegex, (match, varName, content) => {
-    if (!CONFIG.conditionalVars.includes(varName)) {
-      console.warn(`    ⚠️  条件变量 "${varName}" 不在 conditionalVars 白名单中，保留原样`);
-      return match;
-    }
-    const rawVal = getVarRaw(varName, data, i18n, currentLang);
-    if (isTruthy(rawVal)) {
-      // 条件为真：保留内容，并继续解析内容里的变量
+    if (CONFIG.conditionalVars.includes(varName)) {
+      // 变量在白名单中 → 条件为真，保留内容并递归解析内部变量
       return renderTemplate(content, data, i18n, currentLang);
     } else {
-      // 条件为假：整块删除
+      // 变量不在白名单中 → 条件为假，整块删除
       return '';
     }
   });
   
-  // {{#unless var}} ... {{/unless}}（与 if 相反）
+  // {{#unless var}} ... {{/unless}}（与 if 逻辑相反）
   const unlessRegex = /\{\{\s*#unless\s+([a-zA-Z_][a-zA-Z0-9_.]*)\s*\}\}([\s\S]*?)\{\{\s*\/unless\s*\}\}/g;
   html = html.replace(unlessRegex, (match, varName, content) => {
     if (!CONFIG.conditionalVars.includes(varName)) {
-      console.warn(`    ⚠️  条件变量 "${varName}" 不在 conditionalVars 白名单中，保留原样`);
-      return match;
-    }
-    const rawVal = getVarRaw(varName, data, i18n, currentLang);
-    if (!isTruthy(rawVal)) {
+      // 变量不在白名单中 → 条件为真（unless），保留内容
       return renderTemplate(content, data, i18n, currentLang);
     } else {
+      // 变量在白名单中 → 条件为假，整块删除
       return '';
     }
   });
@@ -138,7 +110,7 @@ function resolveConditionBlocks(template, data, i18n, currentLang) {
 function renderTemplate(template, renderData, i18n, currentLang) {
   let html = template;
   
-  // ✅ 步骤1：先处理块级条件（if/unless）
+  // 步骤1：先处理块级条件（if/unless）
   html = resolveConditionBlocks(html, renderData, i18n, currentLang);
   
   // 步骤2：常规 {{key}} 替换
@@ -341,19 +313,14 @@ function build() {
       const currentOutputDir = path.dirname(outputRelPath);
       const toLangVars = buildToLangVars(currentOutputDir);
 
+      // ✅ 不再手动注入条件变量，conditionalVars 本身就是开关
       const renderData = {
         ...localeData,
         ...domainVars,
         ...toLangVars,
         root,
         current_lang: lang,
-        is_root_lang: lang === CONFIG.rootLang,
-        
-        // ✅ 在这里注入条件变量的实际值
-        isLoggedIn: false,
-        isPremium: true,
-        showBanner: lang === 'zh',
-        hasNewVersion: false
+        is_root_lang: lang === CONFIG.rootLang
       };
 
       let html = renderTemplate(template, renderData, i18n, lang);
