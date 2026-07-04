@@ -1,8 +1,15 @@
 {
   "buildCommand": "node scripts/build_official_website.js",
   "outputDirectory": ".",
+  "trailingSlash": false,
   "rewrites": [
-    { "source": "/guide", "destination": "/guide.html" },
-    { "source": "/download", "destination": "/download.html" }
+    {
+      "source": "/:prefix*/guide",
+      "destination": "/:prefix*/guide.html"
+    },
+    {
+      "source": "/:prefix*/download",
+      "destination": "/:prefix*/download.html"
+    }
   ]
 }
