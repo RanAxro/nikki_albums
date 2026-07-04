@@ -228,10 +228,7 @@ pub enum CustomData{
 
 #[frb(opaque)]
 pub struct MediaKey{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
   pub(super) ptr: *mut ffi::MediaKey,
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  _dummy: u8,
 }
 
 unsafe impl Send for MediaKey{}
@@ -240,61 +237,37 @@ unsafe impl Sync for MediaKey{}
 impl MediaKey{
   #[frb(sync, positional)]
   pub fn from_str_bytes(bytes: &[u8]) -> Result<MediaKey, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let ptr = unsafe{ ffi::media_key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
-      if ptr.is_null() {
-        return Err(DecryptionError::NullPointer);
-      }
-      return Ok(MediaKey{ ptr });
+    let ptr = unsafe{ ffi::media_key_from_str_bytes(bytes.as_ptr(), bytes.len()) };
+    if ptr.is_null() {
+      return Err(DecryptionError::NullPointer);
     }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(MediaKey{ _dummy: 0 })
-    }
+    Ok(MediaKey{ ptr })
   }
 
   #[frb(sync, positional)]
   pub fn from_str(s: String) -> Result<MediaKey, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let c_str = CString::new(s).map_err(|e| DecryptionError::Unknown)?;
-      let ptr = unsafe{ ffi::media_key_from_str(c_str.as_ptr()) };
-      if ptr.is_null() {
-        return Err(DecryptionError::NullPointer);
-      }
-      return Ok(MediaKey{ ptr });
+    let c_str = CString::new(s).map_err(|e| DecryptionError::Unknown)?;
+    let ptr = unsafe{ ffi::media_key_from_str(c_str.as_ptr()) };
+    if ptr.is_null() {
+      return Err(DecryptionError::NullPointer);
     }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(MediaKey{ _dummy: 0 })
-    }
+    Ok(MediaKey{ ptr })
   }
 
   #[frb(sync)]
   pub fn camera_param() -> Result<MediaKey, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let ptr = unsafe{ ffi::media_key_camera_param() };
-      if ptr.is_null() {
-        return Err(DecryptionError::NullPointer);
-      }
-      return Ok(MediaKey{ ptr });
+    let ptr = unsafe{ ffi::media_key_camera_param() };
+    if ptr.is_null() {
+      return Err(DecryptionError::NullPointer);
     }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(MediaKey{ _dummy: 0 })
-    }
+    Ok(MediaKey{ ptr })
   }
 }
 
 impl Drop for MediaKey{
   fn drop(&mut self){
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      if !self.ptr.is_null() {
-        unsafe{ ffi::free_media_key(self.ptr) };
-      }
+    if !self.ptr.is_null() {
+      unsafe{ ffi::free_media_key(self.ptr) };
     }
   }
 }
@@ -302,7 +275,6 @@ impl Drop for MediaKey{
 // ============================================================
 // 内部辅助：转换 DecryptionResult
 // ============================================================
-#[cfg(any(target_os = "windows", target_os = "macos"))]
 pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option<CustomData>{
   if result.status != 0 {
     return None;
@@ -317,15 +289,8 @@ pub(super) fn convert_media_result(result: ffi::MediaDecryptionResult) -> Option
 
 #[frb(sync, positional)]
 pub fn media_decrypt(data: &[u8], key: &MediaKey) -> Option<CustomData>{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
-  {
-    let result = unsafe{ ffi::media_decrypt(data.as_ptr(), data.len(), key.ptr) };
-    convert_media_result(result)
-  }
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  {
-    None
-  }
+  let result = unsafe{ ffi::media_decrypt(data.as_ptr(), data.len(), key.ptr) };
+  convert_media_result(result)
 }
 
 #[frb(sync)]
@@ -334,39 +299,25 @@ pub fn media_decode_file_bytes_unchecked(
   bytes: &[u8],
   key: &MediaKey,
 ) -> Option<CustomData>{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
-  {
-    let result = unsafe{
-      ffi::media_decode_file_bytes_unchecked(
-        flag.as_ptr(),
-        flag.len(),
-        bytes.as_ptr(),
-        bytes.len(),
-        key.ptr,
-      )
-    };
-    convert_media_result(result)
-  }
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  {
-    None
-  }
+  let result = unsafe{
+    ffi::media_decode_file_bytes_unchecked(
+      flag.as_ptr(),
+      flag.len(),
+      bytes.as_ptr(),
+      bytes.len(),
+      key.ptr,
+    )
+  };
+  convert_media_result(result)
 }
 
 #[frb]
 pub fn media_decode_file_unchecked(flag: &[u8], path: String, key: &MediaKey) -> Option<CustomData>{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
-  {
-    let c_path = CString::new(path).ok()?;
-    let result = unsafe{
-      ffi::media_decode_file_unchecked(flag.as_ptr(), flag.len(), c_path.as_ptr(), key.ptr)
-    };
-    convert_media_result(result)
-  }
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  {
-    None
-  }
+  let c_path = CString::new(path).ok()?;
+  let result = unsafe{
+    ffi::media_decode_file_unchecked(flag.as_ptr(), flag.len(), c_path.as_ptr(), key.ptr)
+  };
+  convert_media_result(result)
 }
 
 #[frb(sync)]
@@ -395,64 +346,53 @@ pub fn media_decode_files_unchecked(
     progress_sink.add(MediaDecodeEvent::Result(vec![])).map_err(|_| DecryptionError::Unknown)?;
     return Ok(());
   }
+  unsafe{
+    let c_paths: Vec<CString> = paths
+      .into_iter()
+      .map(|p| CString::new(p).map_err(|_| DecryptionError::Unknown))
+      .collect::<Result<_, _>>()?;
+    let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
-  {
-    unsafe{
-      let c_paths: Vec<CString> = paths
-        .into_iter()
-        .map(|p| CString::new(p).map_err(|_| DecryptionError::Unknown))
-        .collect::<Result<_, _>>()?;
-      let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
+    let sink = Arc::new(progress_sink);
+    let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
 
-      let sink = Arc::new(progress_sink);
-      let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
-
-      extern "C" fn trampoline(
-        current: usize,
-        total: usize,
-        userdata: *mut c_void,
-      ){
-        if userdata.is_null() || total == 0 {
-          return;
-        }
-        let sink = unsafe{ &*(userdata as *const StreamSink<MediaDecodeEvent>) };
-        let percent = current as f64 / total as f64;
-        let _ = sink.add(MediaDecodeEvent::Progress(percent));
+    extern "C" fn trampoline(
+      current: usize,
+      total: usize,
+      userdata: *mut c_void,
+    ){
+      if userdata.is_null() || total == 0 {
+        return;
       }
-
-      let results_ptr = ffi::media_decode_files_unchecked(
-        flag.as_ptr(),
-        flag.len(),
-        path_ptrs.as_ptr(),
-        path_ptrs.len(),
-        key.ptr,
-        Some(trampoline),
-        userdata,
-      );
-
-      let _ = Arc::from_raw(userdata as *const StreamSink<MediaDecodeEvent>);
-
-      if results_ptr.is_null() {
-        return Err(DecryptionError::NullPointer);
-      }
-
-      let mut decoded = Vec::with_capacity(path_ptrs.len());
-      for i in 0..path_ptrs.len() {
-        let result = ptr::read(results_ptr.add(i));
-        decoded.push(convert_media_result(result));
-      }
-
-      sink.add(MediaDecodeEvent::Result(decoded));
-
-      Ok(())
+      let sink = unsafe{ &*(userdata as *const StreamSink<MediaDecodeEvent>) };
+      let percent = current as f64 / total as f64;
+      let _ = sink.add(MediaDecodeEvent::Progress(percent));
     }
-  }
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  {
-    let count = paths.len();
-    progress_sink.add(MediaDecodeEvent::Progress(1.0));
-    progress_sink.add(MediaDecodeEvent::Result(vec![None; count]));
+
+    let results_ptr = ffi::media_decode_files_unchecked(
+      flag.as_ptr(),
+      flag.len(),
+      path_ptrs.as_ptr(),
+      path_ptrs.len(),
+      key.ptr,
+      Some(trampoline),
+      userdata,
+    );
+
+    let _ = Arc::from_raw(userdata as *const StreamSink<MediaDecodeEvent>);
+
+    if results_ptr.is_null() {
+      return Err(DecryptionError::NullPointer);
+    }
+
+    let mut decoded = Vec::with_capacity(path_ptrs.len());
+    for i in 0..path_ptrs.len() {
+      let result = ptr::read(results_ptr.add(i));
+      decoded.push(convert_media_result(result));
+    }
+
+    sink.add(MediaDecodeEvent::Result(decoded));
+
     Ok(())
   }
 }
@@ -464,40 +404,33 @@ pub fn media_decode_files_unchecked_no_progress(
   paths: Vec<String>,
   key: &MediaKey,
 ) -> Vec<Option<CustomData>>{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
-  {
-    let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
-    let path_count = c_paths.len();
-    let ptrs: Vec<*const c_char> = c_paths.iter().map(|c| c.as_ptr()).collect();
+  let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
+  let path_count = c_paths.len();
+  let ptrs: Vec<*const c_char> = c_paths.iter().map(|c| c.as_ptr()).collect();
 
-    let results_ptr = unsafe{
-      ffi::media_decode_files_unchecked(
-        flag.as_ptr(),
-        flag.len(),
-        ptrs.as_ptr(),
-        path_count,
-        key.ptr,
-        None,
-        ptr::null_mut(),
-      )
-    };
+  let results_ptr = unsafe{
+    ffi::media_decode_files_unchecked(
+      flag.as_ptr(),
+      flag.len(),
+      ptrs.as_ptr(),
+      path_count,
+      key.ptr,
+      None,
+      ptr::null_mut(),
+    )
+  };
 
-    if results_ptr.is_null() {
-      return vec![];
-    }
-
-    let mut results = Vec::with_capacity(path_count);
-    for i in 0..path_count {
-      let item = unsafe{ ptr::read(results_ptr.add(i)) };
-      results.push(convert_media_result(item));
-    }
-
-    results
+  if results_ptr.is_null() {
+    return vec![];
   }
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  {
-    vec![None; paths.len()]
+
+  let mut results = Vec::with_capacity(path_count);
+  for i in 0..path_count {
+    let item = unsafe{ ptr::read(results_ptr.add(i)) };
+    results.push(convert_media_result(item));
   }
+
+  results
 }
 
 // ============================================================
@@ -523,57 +456,47 @@ pub fn media_decode_files_unchecked_stream(
     return Ok(());
   }
 
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
-  {
-    let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
-    let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
+  let c_paths: Vec<CString> = paths.into_iter().filter_map(|p| CString::new(p).ok()).collect();
+  let path_ptrs: Vec<*const c_char> = c_paths.iter().map(|p| p.as_ptr()).collect();
 
-    let sink = Arc::new(sink);
-    let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
+  let sink = Arc::new(sink);
+  let userdata = Arc::into_raw(Arc::clone(&sink)) as *mut c_void;
 
-    extern "C" fn stream_trampoline(
-      index: usize,
-      result: *mut ffi::MediaDecryptionResult,
-      userdata: *mut c_void,
-    ){
-      if userdata.is_null() {
-        return;
-      }
-      let sink = unsafe{ &*(userdata as *const StreamSink<MediaStreamResult>) };
+  extern "C" fn stream_trampoline(
+    index: usize,
+    result: *mut ffi::MediaDecryptionResult,
+    userdata: *mut c_void,
+  ){
+    if userdata.is_null() {
+      return;
+    }
+    let sink = unsafe{ &*(userdata as *const StreamSink<MediaStreamResult>) };
 
-      if result.is_null() {
-        let _ = sink.add(MediaStreamResult{ index, data: None });
-        return;
-      }
-
-      let data = unsafe{ convert_media_result(ptr::read(result)) };
-
-      let _ = sink.add(MediaStreamResult{ index, data });
+    if result.is_null() {
+      let _ = sink.add(MediaStreamResult{ index, data: None });
+      return;
     }
 
-    unsafe{
-      ffi::media_decode_files_unchecked_stream(
-        flag.as_ptr(),
-        flag.len(),
-        path_ptrs.as_ptr(),
-        path_ptrs.len(),
-        key.ptr,
-        stream_trampoline,
-        userdata,
-      );
-    }
+    let data = unsafe{ convert_media_result(ptr::read(result)) };
 
-    let _ = unsafe{ Arc::from_raw(userdata as *const StreamSink<MediaStreamResult>) };
-
-    Ok(())
+    let _ = sink.add(MediaStreamResult{ index, data });
   }
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  {
-    for (i, _) in paths.iter().enumerate() {
-      let _ = sink.add(MediaStreamResult { index: i, data: None });
-    }
-    Ok(())
+
+  unsafe{
+    ffi::media_decode_files_unchecked_stream(
+      flag.as_ptr(),
+      flag.len(),
+      path_ptrs.as_ptr(),
+      path_ptrs.len(),
+      key.ptr,
+      stream_trampoline,
+      userdata,
+    );
   }
+
+  let _ = unsafe{ Arc::from_raw(userdata as *const StreamSink<MediaStreamResult>) };
+
+  Ok(())
 }
 
 
@@ -582,10 +505,7 @@ pub fn media_decode_files_unchecked_stream(
 /// ============================================================
 #[frb(opaque)]
 pub struct ClothDiyShareCode{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
   pub(super) ptr: *mut ffi::ClothDiyShareCode,
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  _dummy: u8,
 }
 
 unsafe impl Send for ClothDiyShareCode{}
@@ -594,62 +514,38 @@ unsafe impl Sync for ClothDiyShareCode{}
 impl ClothDiyShareCode{
   #[frb(sync, positional)]
   pub fn from_code_str(code: &str) -> Result<Self, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let c_str = CString::new(code).map_err(|_| DecryptionError::Unknown)?;
-      let ptr = unsafe{ ffi::cloth_diy_share_code_from_code_str(c_str.as_ptr()) };
+    let c_str = CString::new(code).map_err(|_| DecryptionError::Unknown)?;
+    let ptr = unsafe{ ffi::cloth_diy_share_code_from_code_str(c_str.as_ptr()) };
 
-      return Ok(ClothDiyShareCode{ ptr });
-    }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(ClothDiyShareCode{ _dummy: 0 })
-    }
+    Ok(ClothDiyShareCode{ ptr })
   }
 
   #[frb(sync)]
   pub fn timestamp(&self) -> Result<i64, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let timestamp = unsafe{ ffi::cloth_diy_share_code_timestamp(self.ptr) };
-      Ok(timestamp)
-    }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(-1)
-    }
+    let timestamp = unsafe{ ffi::cloth_diy_share_code_timestamp(self.ptr) };
+    Ok(timestamp)
   }
 
   #[frb(sync)]
   pub fn uid(&self) -> Result<String, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let result = unsafe{ ffi::cloth_diy_share_code_uid_bytes(self.ptr) };
+    let result = unsafe{ ffi::cloth_diy_share_code_uid_bytes(self.ptr) };
 
-      if result.status != 0 || result.bytes.data.is_null() {
-        return Err(DecryptionError::NullPointer);
-      }else{
-        unsafe{
-          let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
-          let uid = String::from_utf8_lossy(slice).to_string();
-          return Ok(uid);
-        };
+    if result.status != 0 || result.bytes.data.is_null() {
+      Err(DecryptionError::NullPointer)
+    }else{
+      unsafe{
+        let slice = std::slice::from_raw_parts(result.bytes.data, result.bytes.len);
+        let uid = String::from_utf8_lossy(slice).to_string();
+        Ok(uid)
       }
-    }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(String::from(""))
     }
   }
 }
 
 impl Drop for ClothDiyShareCode{
   fn drop(&mut self){
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      if !self.ptr.is_null() {
-        unsafe{ ffi::free_cloth_diy_share_code(self.ptr) };
-      }
+    if !self.ptr.is_null() {
+      unsafe{ ffi::free_cloth_diy_share_code(self.ptr) };
     }
   }
 }
@@ -676,10 +572,7 @@ pub fn cloth_diy_decode_network(share_code: &ClothDiyShareCode) -> Option<Vec<u8
 /// ============================================================
 #[frb(opaque)]
 pub struct HomeBuildShareCode{
-  #[cfg(any(target_os = "windows", target_os = "macos"))]
   pub(super) ptr: *mut ffi::HomeBuildShareCode,
-  #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-  _dummy: u8,
 }
 
 unsafe impl Send for HomeBuildShareCode{}
@@ -688,40 +581,23 @@ unsafe impl Sync for HomeBuildShareCode{}
 impl HomeBuildShareCode{
   #[frb(sync, positional)]
   pub fn from_code_str(code: &str) -> Result<Self, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let c_str = CString::new(code).map_err(|_| DecryptionError::Unknown)?;
-      let ptr = unsafe{ ffi::home_build_share_code_from_code_str(c_str.as_ptr()) };
+    let c_str = CString::new(code).map_err(|_| DecryptionError::Unknown)?;
+    let ptr = unsafe{ ffi::home_build_share_code_from_code_str(c_str.as_ptr()) };
 
-      Ok(HomeBuildShareCode{ ptr })
-    }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(ClothDiyShareCode{ _dummy: 0 })
-    }
+    Ok(HomeBuildShareCode{ ptr })
   }
 
   #[frb(sync)]
   pub fn server(&self) -> Result<i64, DecryptionError>{
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      let timestamp = unsafe{ ffi::home_build_share_code_server(self.ptr) };
-      Ok(timestamp)
-    }
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-    {
-      Ok(-1)
-    }
+    let timestamp = unsafe{ ffi::home_build_share_code_server(self.ptr) };
+    Ok(timestamp)
   }
 }
 
 impl Drop for HomeBuildShareCode{
   fn drop(&mut self){
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    {
-      if !self.ptr.is_null() {
-        unsafe{ ffi::free_home_build_share_code(self.ptr) };
-      }
+    if !self.ptr.is_null() {
+      unsafe{ ffi::free_home_build_share_code(self.ptr) };
     }
   }
 }
