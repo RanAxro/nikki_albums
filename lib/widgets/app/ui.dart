@@ -1767,7 +1767,7 @@ class AppRawSwitch extends StatelessWidget {
   }
 }
 
-class AppSwitchButton extends StatefulWidget {
+class AppSwitchButton extends StatefulWidget{
   final Duration duration;
   final Curve curve;
 
@@ -1820,24 +1820,18 @@ class AppSwitchButton extends StatefulWidget {
   State<AppSwitchButton> createState() => _AppSwitchButtonState();
 }
 
-class _AppSwitchButtonState extends State<AppSwitchButton> {
+class _AppSwitchButtonState extends State<AppSwitchButton>{
   late bool value;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     value = widget.value;
   }
 
   @override
-  Widget build(BuildContext context) {
-    final Widget switchWidget = AppRawSwitch(
-      value: value,
-      onChanged: (bool newValue) {
-        value = newValue;
-        widget.onChanged?.call(value);
-      },
-    );
+  Widget build(BuildContext context){
+    final Widget switchWidget = AppRawSwitch(value: value);
 
     return AppButton(
       key: widget.key,
@@ -1857,21 +1851,19 @@ class _AppSwitchButtonState extends State<AppSwitchButton> {
       isTranslate: widget.isTranslate,
       toolTipShortcut: widget.toolTipShortcut,
       usable: widget.usable,
-      onClick: () {
-        setState(() {
+      onClick: (){
+        setState((){
           value = !value;
           widget.onChanged?.call(value);
         });
       },
-      child: widget.child == null
-          ? switchWidget
-          : Row(
-              children: [
-                Expanded(child: widget.child!),
+      child: widget.child == null ? switchWidget : Row(
+        children: [
+          Expanded(child: widget.child!),
 
-                switchWidget,
-              ],
-            ),
+          switchWidget,
+        ],
+      ),
     );
   }
 }
