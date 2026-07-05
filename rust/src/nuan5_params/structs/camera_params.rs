@@ -7,7 +7,7 @@ pub struct CameraParams{
   pub camera_component_loc: (f64, f64, f64),
   pub camera_component_rot: (f64, f64, f64),
 
-  pub portrait_mode: i64,
+  pub portrait_mode: bool,
   pub camera_focal_length: f64,
   pub aperture_section: u8,
   pub vignette_intensity: f64,

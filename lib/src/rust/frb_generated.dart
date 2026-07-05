@@ -2398,7 +2398,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       cameraActorRot: dco_decode_record_f_64_f_64_f_64(arr[1]),
       cameraComponentLoc: dco_decode_record_f_64_f_64_f_64(arr[2]),
       cameraComponentRot: dco_decode_record_f_64_f_64_f_64(arr[3]),
-      portraitMode: dco_decode_i_64(arr[4]),
+      portraitMode: dco_decode_bool(arr[4]),
       cameraFocalLength: dco_decode_f_64(arr[5]),
       apertureSection: dco_decode_u_8(arr[6]),
       vignetteIntensity: dco_decode_f_64(arr[7]),
@@ -4678,7 +4678,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_cameraActorRot = sse_decode_record_f_64_f_64_f_64(deserializer);
     var var_cameraComponentLoc = sse_decode_record_f_64_f_64_f_64(deserializer);
     var var_cameraComponentRot = sse_decode_record_f_64_f_64_f_64(deserializer);
-    var var_portraitMode = sse_decode_i_64(deserializer);
+    var var_portraitMode = sse_decode_bool(deserializer);
     var var_cameraFocalLength = sse_decode_f_64(deserializer);
     var var_apertureSection = sse_decode_u_8(deserializer);
     var var_vignetteIntensity = sse_decode_f_64(deserializer);
@@ -7582,7 +7582,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_record_f_64_f_64_f_64(self.cameraActorRot, serializer);
     sse_encode_record_f_64_f_64_f_64(self.cameraComponentLoc, serializer);
     sse_encode_record_f_64_f_64_f_64(self.cameraComponentRot, serializer);
-    sse_encode_i_64(self.portraitMode, serializer);
+    sse_encode_bool(self.portraitMode, serializer);
     sse_encode_f_64(self.cameraFocalLength, serializer);
     sse_encode_u_8(self.apertureSection, serializer);
     sse_encode_f_64(self.vignetteIntensity, serializer);

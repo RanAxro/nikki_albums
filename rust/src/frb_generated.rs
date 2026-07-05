@@ -2240,7 +2240,7 @@ impl SseDecode for crate::nuan5_params::structs::camera_params::CameraParams {
         let mut var_cameraActorRot = <(f64, f64, f64)>::sse_decode(deserializer);
         let mut var_cameraComponentLoc = <(f64, f64, f64)>::sse_decode(deserializer);
         let mut var_cameraComponentRot = <(f64, f64, f64)>::sse_decode(deserializer);
-        let mut var_portraitMode = <i64>::sse_decode(deserializer);
+        let mut var_portraitMode = <bool>::sse_decode(deserializer);
         let mut var_cameraFocalLength = <f64>::sse_decode(deserializer);
         let mut var_apertureSection = <u8>::sse_decode(deserializer);
         let mut var_vignetteIntensity = <f64>::sse_decode(deserializer);
@@ -7934,7 +7934,7 @@ impl SseEncode for crate::nuan5_params::structs::camera_params::CameraParams {
         <(f64, f64, f64)>::sse_encode(self.camera_actor_rot, serializer);
         <(f64, f64, f64)>::sse_encode(self.camera_component_loc, serializer);
         <(f64, f64, f64)>::sse_encode(self.camera_component_rot, serializer);
-        <i64>::sse_encode(self.portrait_mode, serializer);
+        <bool>::sse_encode(self.portrait_mode, serializer);
         <f64>::sse_encode(self.camera_focal_length, serializer);
         <u8>::sse_encode(self.aperture_section, serializer);
         <f64>::sse_encode(self.vignette_intensity, serializer);

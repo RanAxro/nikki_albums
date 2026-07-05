@@ -16,7 +16,7 @@ class CameraParams {
   final (double, double, double) cameraActorRot;
   final (double, double, double) cameraComponentLoc;
   final (double, double, double) cameraComponentRot;
-  final PlatformInt64 portraitMode;
+  final bool portraitMode;
   final double cameraFocalLength;
   final int apertureSection;
   final double vignetteIntensity;
