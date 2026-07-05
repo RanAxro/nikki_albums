@@ -10,12 +10,12 @@ import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
 import 'nuan5_params/decode.dart';
 import 'nuan5_params/decrypt.dart';
+import 'nuan5_params/structs/camera_params.dart';
 import 'nuan5_params/structs/clock_in_photo_params.dart';
 import 'nuan5_params/structs/cloth.dart';
 import 'nuan5_params/structs/cloth_diy_params.dart';
 import 'nuan5_params/structs/collage_params.dart';
 import 'nuan5_params/structs/eureka.dart';
-import 'nuan5_params/structs/momo_camera_params.dart';
 import 'nuan5_params/structs/nikki_photo_params.dart';
 import 'nuan5_params/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
@@ -202,6 +202,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   GameConfig dco_decode_box_autoadd_game_config(dynamic raw);
+
+  @protected
+  HomeBuildParam dco_decode_box_autoadd_home_build_param(dynamic raw);
 
   @protected
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
@@ -401,6 +404,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameUidConfig dco_decode_game_uid_config(dynamic raw);
 
   @protected
+  HomeBuildParam dco_decode_home_build_param(dynamic raw);
+
+  @protected
+  HomeBuildParamType dco_decode_home_build_param_type(dynamic raw);
+
+  @protected
   int dco_decode_i_32(dynamic raw);
 
   @protected
@@ -589,6 +598,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
+
+  @protected
+  HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
 
   @protected
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
@@ -981,6 +993,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer);
 
   @protected
+  HomeBuildParam sse_decode_box_autoadd_home_build_param(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
@@ -1222,6 +1239,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameUidConfig sse_decode_game_uid_config(SseDeserializer deserializer);
 
   @protected
+  HomeBuildParam sse_decode_home_build_param(SseDeserializer deserializer);
+
+  @protected
+  HomeBuildParamType sse_decode_home_build_param_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
@@ -1444,6 +1469,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? sse_decode_opt_box_autoadd_dye_color_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  HomeBuildParam? sse_decode_opt_box_autoadd_home_build_param(
     SseDeserializer deserializer,
   );
 
@@ -1927,6 +1957,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_home_build_param(
+    HomeBuildParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_i_64(
     PlatformInt64 self,
     SseSerializer serializer,
@@ -2239,6 +2275,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_game_uid_config(GameUidConfig self, SseSerializer serializer);
 
   @protected
+  void sse_encode_home_build_param(
+    HomeBuildParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_home_build_param_type(
+    HomeBuildParamType self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
@@ -2526,6 +2574,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_dye_color_params(
     DyeColorParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_home_build_param(
+    HomeBuildParam? self,
     SseSerializer serializer,
   );
 

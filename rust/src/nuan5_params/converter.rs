@@ -5,7 +5,7 @@ use crate::nuan5_params::parser::momo_camera_params_parser::*;
 use crate::nuan5_params::parser::location_parser::parse_location;
 use crate::nuan5_params::parser::cloth_parser::parse_cloth;
 use crate::nuan5_params::parser::eureka_parser::parse_eureka;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, momo_camera_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, camera_params::*};
 
 pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> CameraParams{
   match data{
