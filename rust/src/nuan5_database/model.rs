@@ -7,6 +7,14 @@ pub enum Nuan5DatabaseCategory{
   ClothDiySwatchColor = 5,
 }
 
+pub enum Nuan5DatabaseItem{
+  Light(Nuan5Light),
+  Filter(Nuan5Filter),
+  ClothDyeArea(Nuan5ClothDyeArea),
+  ClothDyePalette(Nuan5ClothDyePalette),
+  ClothDiySwatchColor(Nuan5ClothDiySwatchColor),
+}
+
 pub struct Nuan5Light{
   pub string_id: String,
 }
@@ -14,6 +22,7 @@ pub struct Nuan5Light{
 pub struct Nuan5Filter{
   pub string_id: String,
 }
+
 pub struct Nuan5ClothDyeArea{
   pub max_color_area_num: i32,
   pub max_pattern_area_num: i32,
