@@ -1,4 +1,3 @@
 pub mod model;
-mod nuan5_database;
-mod serde_model;
-mod reader_v1;
+pub mod nuan5_database;
+pub mod reader_v1;
