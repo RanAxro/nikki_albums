@@ -18,6 +18,6 @@ jobs:
           endpoint: "www.bing.com"
           key: "0d383df4f2444c4eaf00f5d2931df6ef"
           key-location: "https://nikki.ranaxro.com/0d383df4f2444c4eaf00f5d2931df6ef.txt"
-          since: 7
+          since: 1
           since-unit: day
           lastmod-required: false
