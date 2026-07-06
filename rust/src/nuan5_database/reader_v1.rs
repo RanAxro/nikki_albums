@@ -1,3 +1,4 @@
+use flutter_rust_bridge::frb;
 use std::collections::HashMap;
 use serde::Deserialize;
 use super::model::{Nuan5DatabaseCategory, Nuan5DatabaseItem};
@@ -5,8 +6,9 @@ use super::nuan5_database::Nuan5DatabaseReader;
 use super::model::*;
 
 
+#[frb(opaque)]
 pub struct Nuan5DatabaseReaderV1{
-  pub data: Option<Nuan5DatabaseV1>,
+  data: Option<Nuan5DatabaseV1>,
 }
 
 impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
@@ -100,7 +102,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
         let map = &self.data.as_ref().unwrap().light;
         for &id in ids {
           if let Some(item) = map.get(&id) {
-            result.insert(id, Nuan5DatabaseItem::Light(item));
+            result.insert(id, Nuan5DatabaseItem::Light(item.clone()));
           }
         }
       }
@@ -108,7 +110,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
         let map = &self.data.as_ref().unwrap().filter;
         for &id in ids {
           if let Some(item) = map.get(&id) {
-            result.insert(id, Nuan5DatabaseItem::Filter(item));
+            result.insert(id, Nuan5DatabaseItem::Filter(item.clone()));
           }
         }
       }
@@ -116,7 +118,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
         let map = &self.data.as_ref().unwrap().cloth_dye_area;
         for &id in ids {
           if let Some(item) = map.get(&id) {
-            result.insert(id, Nuan5DatabaseItem::ClothDyeArea(item));
+            result.insert(id, Nuan5DatabaseItem::ClothDyeArea(item.clone()));
           }
         }
       }
@@ -124,7 +126,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
         let map = &self.data.as_ref().unwrap().cloth_dye_palette;
         for &id in ids {
           if let Some(item) = map.get(&id) {
-            result.insert(id, Nuan5DatabaseItem::ClothDyePalette(item));
+            result.insert(id, Nuan5DatabaseItem::ClothDyePalette(item.clone()));
           }
         }
       }
@@ -132,7 +134,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
         let map = &self.data.as_ref().unwrap().cloth_diy_swatch_color;
         for &id in ids {
           if let Some(item) = map.get(&id) {
-            result.insert(id, Nuan5DatabaseItem::ClothDiySwatchColor(item));
+            result.insert(id, Nuan5DatabaseItem::ClothDiySwatchColor(item.clone()));
           }
         }
       }
@@ -143,7 +145,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
 }
 
 #[derive(Deserialize)]
-pub struct Nuan5DatabaseV1{
+struct Nuan5DatabaseV1{
   pub light: HashMap<i64, Nuan5Light>,
   pub filter: HashMap<i64, Nuan5Filter>,
   pub cloth_dye_area: HashMap<i64, Nuan5ClothDyeArea>,

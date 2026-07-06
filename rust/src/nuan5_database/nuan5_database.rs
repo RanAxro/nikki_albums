@@ -9,7 +9,7 @@ pub struct Nuan5Database<R: Nuan5DatabaseReader>{
 }
 
 impl<R: Nuan5DatabaseReader> Nuan5Database<R>{
-  fn is_open(&self) -> bool{
+  pub fn is_open(&self) -> bool{
     self.reader.is_open()
   }
 

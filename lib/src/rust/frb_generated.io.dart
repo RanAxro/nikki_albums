@@ -8,6 +8,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
+import 'nuan5_database/model.dart';
+import 'nuan5_database/nuan5_database.dart';
+import 'nuan5_database/reader_v1.dart';
 import 'nuan5_params/decode.dart';
 import 'nuan5_params/decrypt.dart';
 import 'nuan5_params/encode.dart';
@@ -52,6 +55,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   get rust_arc_decrement_strong_count_MediaKeyPtr => wire
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr;
 
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_Nuan5DatabaseReaderV1Ptr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1Ptr;
+
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw);
 
@@ -74,6 +81,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Nuan5DatabaseReaderV1
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    dynamic raw,
+  );
+
+  @protected
+  Nuan5DatabaseReaderV1
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    dynamic raw,
+  );
+
+  @protected
   ClothDiyShareCode
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     dynamic raw,
@@ -92,6 +111,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Nuan5DatabaseReaderV1
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    dynamic raw,
+  );
+
+  @protected
   Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw);
 
   @protected
@@ -99,6 +124,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<PlatformInt64, PlatformInt64> dco_decode_Map_i_64_i_64_None(dynamic raw);
+
+  @protected
+  Map<PlatformInt64, Nuan5DatabaseItem>
+  dco_decode_Map_i_64_nuan_5_database_item_None(dynamic raw);
 
   @protected
   ClothDiyShareCode
@@ -119,6 +148,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Nuan5DatabaseReaderV1
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    dynamic raw,
+  );
+
+  @protected
   RustStreamSink<MediaCustomDataResult>
   dco_decode_StreamSink_media_custom_data_result_Sse(dynamic raw);
 
@@ -133,6 +168,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   String dco_decode_String(dynamic raw);
+
+  @protected
+  Nuan5DatabaseReader dco_decode_TraitDef_Nuan5DatabaseReader(dynamic raw);
 
   @protected
   AndroidCustomGameConfig dco_decode_android_custom_game_config(dynamic raw);
@@ -242,6 +280,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   NikkiPhotoParams dco_decode_box_autoadd_nikki_photo_params(dynamic raw);
+
+  @protected
+  Nuan5ClothDiySwatchColor dco_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(
+    dynamic raw,
+  );
+
+  @protected
+  Nuan5ClothDyeArea dco_decode_box_autoadd_nuan_5_cloth_dye_area(dynamic raw);
+
+  @protected
+  Nuan5ClothDyePalette dco_decode_box_autoadd_nuan_5_cloth_dye_palette(
+    dynamic raw,
+  );
+
+  @protected
+  Nuan5Filter dco_decode_box_autoadd_nuan_5_filter(dynamic raw);
+
+  @protected
+  Nuan5Light dco_decode_box_autoadd_nuan_5_light(dynamic raw);
 
   @protected
   ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
@@ -412,6 +469,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 dco_decode_i_64(dynamic raw);
 
   @protected
+  PlatformInt64 dco_decode_isize(dynamic raw);
+
+  @protected
   LightParams dco_decode_light_params(dynamic raw);
 
   @protected
@@ -465,6 +525,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<Platform> dco_decode_list_platform(dynamic raw);
 
   @protected
+  Int32List dco_decode_list_prim_i_32_strict(dynamic raw);
+
+  @protected
   Int64List dco_decode_list_prim_i_64_strict(dynamic raw);
 
   @protected
@@ -480,6 +543,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
     dynamic raw,
   );
+
+  @protected
+  List<(PlatformInt64, Nuan5DatabaseItem)>
+  dco_decode_list_record_i_64_nuan_5_database_item(dynamic raw);
 
   @protected
   List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
@@ -556,6 +623,29 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   NikkiPhotoParams dco_decode_nikki_photo_params(dynamic raw);
+
+  @protected
+  Nuan5ClothDiySwatchColor dco_decode_nuan_5_cloth_diy_swatch_color(
+    dynamic raw,
+  );
+
+  @protected
+  Nuan5ClothDyeArea dco_decode_nuan_5_cloth_dye_area(dynamic raw);
+
+  @protected
+  Nuan5ClothDyePalette dco_decode_nuan_5_cloth_dye_palette(dynamic raw);
+
+  @protected
+  Nuan5DatabaseCategory dco_decode_nuan_5_database_category(dynamic raw);
+
+  @protected
+  Nuan5DatabaseItem dco_decode_nuan_5_database_item(dynamic raw);
+
+  @protected
+  Nuan5Filter dco_decode_nuan_5_filter(dynamic raw);
+
+  @protected
+  Nuan5Light dco_decode_nuan_5_light(dynamic raw);
 
   @protected
   ObjectParams dco_decode_object_params(dynamic raw);
@@ -715,6 +805,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
 
   @protected
+  (PlatformInt64, Nuan5DatabaseItem)
+  dco_decode_record_i_64_nuan_5_database_item(dynamic raw);
+
+  @protected
   (String, bool) dco_decode_record_string_bool(dynamic raw);
 
   @protected
@@ -826,6 +920,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Nuan5DatabaseReaderV1
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5DatabaseReaderV1
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClothDiyShareCode
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     SseDeserializer deserializer,
@@ -840,6 +946,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   MediaKey
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5DatabaseReaderV1
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
     SseDeserializer deserializer,
   );
 
@@ -859,6 +971,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<PlatformInt64, Nuan5DatabaseItem>
+  sse_decode_Map_i_64_nuan_5_database_item_None(SseDeserializer deserializer);
+
+  @protected
   ClothDiyShareCode
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     SseDeserializer deserializer,
@@ -873,6 +989,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   MediaKey
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5DatabaseReaderV1
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
     SseDeserializer deserializer,
   );
 
@@ -1032,6 +1154,29 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   NikkiPhotoParams sse_decode_box_autoadd_nikki_photo_params(
     SseDeserializer deserializer,
   );
+
+  @protected
+  Nuan5ClothDiySwatchColor sse_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5ClothDyeArea sse_decode_box_autoadd_nuan_5_cloth_dye_area(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5ClothDyePalette sse_decode_box_autoadd_nuan_5_cloth_dye_palette(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5Filter sse_decode_box_autoadd_nuan_5_filter(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5Light sse_decode_box_autoadd_nuan_5_light(SseDeserializer deserializer);
 
   @protected
   ObjectParams sse_decode_box_autoadd_object_params(
@@ -1236,6 +1381,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
 
   @protected
+  PlatformInt64 sse_decode_isize(SseDeserializer deserializer);
+
+  @protected
   LightParams sse_decode_light_params(SseDeserializer deserializer);
 
   @protected
@@ -1299,6 +1447,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<Platform> sse_decode_list_platform(SseDeserializer deserializer);
 
   @protected
+  Int32List sse_decode_list_prim_i_32_strict(SseDeserializer deserializer);
+
+  @protected
   Int64List sse_decode_list_prim_i_64_strict(SseDeserializer deserializer);
 
   @protected
@@ -1314,6 +1465,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(PlatformInt64, Nuan5DatabaseItem)>
+  sse_decode_list_record_i_64_nuan_5_database_item(
     SseDeserializer deserializer,
   );
 
@@ -1408,6 +1565,37 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   NikkiPhotoParams sse_decode_nikki_photo_params(SseDeserializer deserializer);
+
+  @protected
+  Nuan5ClothDiySwatchColor sse_decode_nuan_5_cloth_diy_swatch_color(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5ClothDyeArea sse_decode_nuan_5_cloth_dye_area(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5ClothDyePalette sse_decode_nuan_5_cloth_dye_palette(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5DatabaseCategory sse_decode_nuan_5_database_category(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5DatabaseItem sse_decode_nuan_5_database_item(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5Filter sse_decode_nuan_5_filter(SseDeserializer deserializer);
+
+  @protected
+  Nuan5Light sse_decode_nuan_5_light(SseDeserializer deserializer);
 
   @protected
   ObjectParams sse_decode_object_params(SseDeserializer deserializer);
@@ -1611,6 +1799,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (PlatformInt64, Nuan5DatabaseItem)
+  sse_decode_record_i_64_nuan_5_database_item(SseDeserializer deserializer);
+
+  @protected
   (String, bool) sse_decode_record_string_bool(SseDeserializer deserializer);
 
   @protected
@@ -1741,6 +1933,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    Nuan5DatabaseReaderV1 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    Nuan5DatabaseReaderV1 self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     ClothDiyShareCode self,
     SseSerializer serializer,
@@ -1757,6 +1963,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     MediaKey self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    Nuan5DatabaseReaderV1 self,
     SseSerializer serializer,
   );
 
@@ -1779,6 +1992,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_i_64_nuan_5_database_item_None(
+    Map<PlatformInt64, Nuan5DatabaseItem> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     ClothDiyShareCode self,
@@ -1796,6 +2015,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     MediaKey self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    Nuan5DatabaseReaderV1 self,
     SseSerializer serializer,
   );
 
@@ -1997,6 +2223,36 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_nikki_photo_params(
     NikkiPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_cloth_diy_swatch_color(
+    Nuan5ClothDiySwatchColor self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_cloth_dye_area(
+    Nuan5ClothDyeArea self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_cloth_dye_palette(
+    Nuan5ClothDyePalette self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_filter(
+    Nuan5Filter self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_light(
+    Nuan5Light self,
     SseSerializer serializer,
   );
 
@@ -2259,6 +2515,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_isize(PlatformInt64 self, SseSerializer serializer);
+
+  @protected
   void sse_encode_light_params(LightParams self, SseSerializer serializer);
 
   @protected
@@ -2334,6 +2593,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_platform(List<Platform> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_prim_i_32_strict(
+    Int32List self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_prim_i_64_strict(
     Int64List self,
     SseSerializer serializer,
@@ -2357,6 +2622,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_record_i_64_i_64(
     List<(PlatformInt64, PlatformInt64)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_i_64_nuan_5_database_item(
+    List<(PlatformInt64, Nuan5DatabaseItem)> self,
     SseSerializer serializer,
   );
 
@@ -2485,6 +2756,42 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     NikkiPhotoParams self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_nuan_5_cloth_diy_swatch_color(
+    Nuan5ClothDiySwatchColor self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_cloth_dye_area(
+    Nuan5ClothDyeArea self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_cloth_dye_palette(
+    Nuan5ClothDyePalette self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_database_category(
+    Nuan5DatabaseCategory self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_database_item(
+    Nuan5DatabaseItem self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_filter(Nuan5Filter self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_nuan_5_light(Nuan5Light self, SseSerializer serializer);
 
   @protected
   void sse_encode_object_params(ObjectParams self, SseSerializer serializer);
@@ -2739,6 +3046,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_i_64_nuan_5_database_item(
+    (PlatformInt64, Nuan5DatabaseItem) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_record_string_bool(
     (String, bool) self,
     SseSerializer serializer,
@@ -2976,5 +3289,39 @@ class RustLibWire implements BaseWire {
       );
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1 =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1Ptr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1 =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1Ptr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 }
