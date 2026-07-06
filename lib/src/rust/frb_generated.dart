@@ -2622,9 +2622,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5FilterType dco_decode_box_autoadd_nuan_5_filter_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nuan_5_filter_type(raw);
+  }
+
+  @protected
   Nuan5Light dco_decode_box_autoadd_nuan_5_light(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_nuan_5_light(raw);
+  }
+
+  @protected
+  Nuan5LightType dco_decode_box_autoadd_nuan_5_light_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nuan_5_light_type(raw);
   }
 
   @protected
@@ -3722,18 +3734,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           dco_decode_box_autoadd_nuan_5_light(raw[1]),
         );
       case 1:
+        return Nuan5DatabaseItem_LightType(
+          dco_decode_box_autoadd_nuan_5_light_type(raw[1]),
+        );
+      case 2:
         return Nuan5DatabaseItem_Filter(
           dco_decode_box_autoadd_nuan_5_filter(raw[1]),
         );
-      case 2:
+      case 3:
+        return Nuan5DatabaseItem_FilterType(
+          dco_decode_box_autoadd_nuan_5_filter_type(raw[1]),
+        );
+      case 4:
         return Nuan5DatabaseItem_ClothDyeArea(
           dco_decode_box_autoadd_nuan_5_cloth_dye_area(raw[1]),
         );
-      case 3:
+      case 5:
         return Nuan5DatabaseItem_ClothDyePalette(
           dco_decode_box_autoadd_nuan_5_cloth_dye_palette(raw[1]),
         );
-      case 4:
+      case 6:
         return Nuan5DatabaseItem_ClothDiySwatchColor(
           dco_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(raw[1]),
         );
@@ -3752,12 +3772,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5FilterType dco_decode_nuan_5_filter_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return Nuan5FilterType(filter: dco_decode_list_prim_i_64_strict(arr[0]));
+  }
+
+  @protected
   Nuan5Light dco_decode_nuan_5_light(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return Nuan5Light(stringId: dco_decode_String(arr[0]));
+  }
+
+  @protected
+  Nuan5LightType dco_decode_nuan_5_light_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return Nuan5LightType(light: dco_decode_list_prim_i_64_strict(arr[0]));
   }
 
   @protected
@@ -5074,9 +5112,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5FilterType sse_decode_box_autoadd_nuan_5_filter_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_nuan_5_filter_type(deserializer));
+  }
+
+  @protected
   Nuan5Light sse_decode_box_autoadd_nuan_5_light(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_nuan_5_light(deserializer));
+  }
+
+  @protected
+  Nuan5LightType sse_decode_box_autoadd_nuan_5_light_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_nuan_5_light_type(deserializer));
   }
 
   @protected
@@ -6460,19 +6514,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_field0 = sse_decode_box_autoadd_nuan_5_light(deserializer);
         return Nuan5DatabaseItem_Light(var_field0);
       case 1:
+        var var_field0 = sse_decode_box_autoadd_nuan_5_light_type(deserializer);
+        return Nuan5DatabaseItem_LightType(var_field0);
+      case 2:
         var var_field0 = sse_decode_box_autoadd_nuan_5_filter(deserializer);
         return Nuan5DatabaseItem_Filter(var_field0);
-      case 2:
+      case 3:
+        var var_field0 = sse_decode_box_autoadd_nuan_5_filter_type(
+          deserializer,
+        );
+        return Nuan5DatabaseItem_FilterType(var_field0);
+      case 4:
         var var_field0 = sse_decode_box_autoadd_nuan_5_cloth_dye_area(
           deserializer,
         );
         return Nuan5DatabaseItem_ClothDyeArea(var_field0);
-      case 3:
+      case 5:
         var var_field0 = sse_decode_box_autoadd_nuan_5_cloth_dye_palette(
           deserializer,
         );
         return Nuan5DatabaseItem_ClothDyePalette(var_field0);
-      case 4:
+      case 6:
         var var_field0 = sse_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(
           deserializer,
         );
@@ -6490,10 +6552,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5FilterType sse_decode_nuan_5_filter_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_filter = sse_decode_list_prim_i_64_strict(deserializer);
+    return Nuan5FilterType(filter: var_filter);
+  }
+
+  @protected
   Nuan5Light sse_decode_nuan_5_light(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_stringId = sse_decode_String(deserializer);
     return Nuan5Light(stringId: var_stringId);
+  }
+
+  @protected
+  Nuan5LightType sse_decode_nuan_5_light_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_light = sse_decode_list_prim_i_64_strict(deserializer);
+    return Nuan5LightType(light: var_light);
   }
 
   @protected
@@ -8164,12 +8240,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_nuan_5_filter_type(
+    Nuan5FilterType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_nuan_5_filter_type(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_nuan_5_light(
     Nuan5Light self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_nuan_5_light(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_light_type(
+    Nuan5LightType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_nuan_5_light_type(self, serializer);
   }
 
   @protected
@@ -9345,17 +9439,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case Nuan5DatabaseItem_Light(field0: final field0):
         sse_encode_i_32(0, serializer);
         sse_encode_box_autoadd_nuan_5_light(field0, serializer);
-      case Nuan5DatabaseItem_Filter(field0: final field0):
+      case Nuan5DatabaseItem_LightType(field0: final field0):
         sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_nuan_5_filter(field0, serializer);
-      case Nuan5DatabaseItem_ClothDyeArea(field0: final field0):
+        sse_encode_box_autoadd_nuan_5_light_type(field0, serializer);
+      case Nuan5DatabaseItem_Filter(field0: final field0):
         sse_encode_i_32(2, serializer);
+        sse_encode_box_autoadd_nuan_5_filter(field0, serializer);
+      case Nuan5DatabaseItem_FilterType(field0: final field0):
+        sse_encode_i_32(3, serializer);
+        sse_encode_box_autoadd_nuan_5_filter_type(field0, serializer);
+      case Nuan5DatabaseItem_ClothDyeArea(field0: final field0):
+        sse_encode_i_32(4, serializer);
         sse_encode_box_autoadd_nuan_5_cloth_dye_area(field0, serializer);
       case Nuan5DatabaseItem_ClothDyePalette(field0: final field0):
-        sse_encode_i_32(3, serializer);
+        sse_encode_i_32(5, serializer);
         sse_encode_box_autoadd_nuan_5_cloth_dye_palette(field0, serializer);
       case Nuan5DatabaseItem_ClothDiySwatchColor(field0: final field0):
-        sse_encode_i_32(4, serializer);
+        sse_encode_i_32(6, serializer);
         sse_encode_box_autoadd_nuan_5_cloth_diy_swatch_color(
           field0,
           serializer,
@@ -9370,9 +9470,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_nuan_5_filter_type(
+    Nuan5FilterType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_i_64_strict(self.filter, serializer);
+  }
+
+  @protected
   void sse_encode_nuan_5_light(Nuan5Light self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.stringId, serializer);
+  }
+
+  @protected
+  void sse_encode_nuan_5_light_type(
+    Nuan5LightType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_i_64_strict(self.light, serializer);
   }
 
   @protected

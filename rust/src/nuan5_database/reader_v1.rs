@@ -53,7 +53,9 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
 
     !match category{
       Light => self.data.as_ref().unwrap().light.is_empty(),
+      LightType => self.data.as_ref().unwrap().light_type.is_empty(),
       Filter => self.data.as_ref().unwrap().filter.is_empty(),
+      FilterType => self.data.as_ref().unwrap().filter_type.is_empty(),
       ClothDyeArea => self.data.as_ref().unwrap().cloth_dye_area.is_empty(),
       ClothDyePalette => self.data.as_ref().unwrap().cloth_dye_palette.is_empty(),
       ClothDiySwatchColor => self.data.as_ref().unwrap().cloth_diy_swatch_color.is_empty(),
@@ -69,7 +71,9 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
 
     let keys: Vec<i64> = match category{
       Light => self.data.as_ref().unwrap().light.keys().copied().collect(),
+      LightType => self.data.as_ref().unwrap().light_type.keys().copied().collect(),
       Filter => self.data.as_ref().unwrap().filter.keys().copied().collect(),
+      FilterType => self.data.as_ref().unwrap().filter_type.keys().copied().collect(),
       ClothDyeArea => self.data.as_ref().unwrap().cloth_dye_area.keys().copied().collect(),
       ClothDyePalette => self.data.as_ref().unwrap().cloth_dye_palette.keys().copied().collect(),
       ClothDiySwatchColor => self.data.as_ref().unwrap().cloth_diy_swatch_color.keys().copied().collect(),
@@ -105,7 +109,15 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
             result.insert(id, Nuan5DatabaseItem::Light(item.clone()));
           }
         }
-      }
+      },
+      LightType => {
+        let map = &self.data.as_ref().unwrap().light_type;
+        for &id in ids {
+          if let Some(item) = map.get(&id) {
+            result.insert(id, Nuan5DatabaseItem::LightType(item.clone()));
+          }
+        }
+      },
       Filter => {
         let map = &self.data.as_ref().unwrap().filter;
         for &id in ids {
@@ -113,7 +125,15 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
             result.insert(id, Nuan5DatabaseItem::Filter(item.clone()));
           }
         }
-      }
+      },
+      FilterType => {
+        let map = &self.data.as_ref().unwrap().filter_type;
+        for &id in ids {
+          if let Some(item) = map.get(&id) {
+            result.insert(id, Nuan5DatabaseItem::FilterType(item.clone()));
+          }
+        }
+      },
       ClothDyeArea => {
         let map = &self.data.as_ref().unwrap().cloth_dye_area;
         for &id in ids {
@@ -121,7 +141,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
             result.insert(id, Nuan5DatabaseItem::ClothDyeArea(item.clone()));
           }
         }
-      }
+      },
       ClothDyePalette => {
         let map = &self.data.as_ref().unwrap().cloth_dye_palette;
         for &id in ids {
@@ -129,7 +149,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
             result.insert(id, Nuan5DatabaseItem::ClothDyePalette(item.clone()));
           }
         }
-      }
+      },
       ClothDiySwatchColor => {
         let map = &self.data.as_ref().unwrap().cloth_diy_swatch_color;
         for &id in ids {
@@ -137,7 +157,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
             result.insert(id, Nuan5DatabaseItem::ClothDiySwatchColor(item.clone()));
           }
         }
-      }
+      },
     }
 
     result
@@ -147,7 +167,9 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
 #[derive(Deserialize)]
 struct Nuan5DatabaseV1{
   pub light: HashMap<i64, Nuan5Light>,
+  pub light_type: HashMap<i64, Nuan5LightType>,
   pub filter: HashMap<i64, Nuan5Filter>,
+  pub filter_type: HashMap<i64, Nuan5FilterType>,
   pub cloth_dye_area: HashMap<i64, Nuan5ClothDyeArea>,
   pub cloth_dye_palette: HashMap<i64, Nuan5ClothDyePalette>,
   pub cloth_diy_swatch_color: HashMap<i64, Nuan5ClothDiySwatchColor>,

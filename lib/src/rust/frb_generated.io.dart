@@ -298,7 +298,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5Filter dco_decode_box_autoadd_nuan_5_filter(dynamic raw);
 
   @protected
+  Nuan5FilterType dco_decode_box_autoadd_nuan_5_filter_type(dynamic raw);
+
+  @protected
   Nuan5Light dco_decode_box_autoadd_nuan_5_light(dynamic raw);
+
+  @protected
+  Nuan5LightType dco_decode_box_autoadd_nuan_5_light_type(dynamic raw);
 
   @protected
   ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
@@ -645,7 +651,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5Filter dco_decode_nuan_5_filter(dynamic raw);
 
   @protected
+  Nuan5FilterType dco_decode_nuan_5_filter_type(dynamic raw);
+
+  @protected
   Nuan5Light dco_decode_nuan_5_light(dynamic raw);
+
+  @protected
+  Nuan5LightType dco_decode_nuan_5_light_type(dynamic raw);
 
   @protected
   ObjectParams dco_decode_object_params(dynamic raw);
@@ -1176,7 +1188,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Nuan5FilterType sse_decode_box_autoadd_nuan_5_filter_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Nuan5Light sse_decode_box_autoadd_nuan_5_light(SseDeserializer deserializer);
+
+  @protected
+  Nuan5LightType sse_decode_box_autoadd_nuan_5_light_type(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ObjectParams sse_decode_box_autoadd_object_params(
@@ -1595,7 +1617,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5Filter sse_decode_nuan_5_filter(SseDeserializer deserializer);
 
   @protected
+  Nuan5FilterType sse_decode_nuan_5_filter_type(SseDeserializer deserializer);
+
+  @protected
   Nuan5Light sse_decode_nuan_5_light(SseDeserializer deserializer);
+
+  @protected
+  Nuan5LightType sse_decode_nuan_5_light_type(SseDeserializer deserializer);
 
   @protected
   ObjectParams sse_decode_object_params(SseDeserializer deserializer);
@@ -2251,8 +2279,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_nuan_5_filter_type(
+    Nuan5FilterType self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_nuan_5_light(
     Nuan5Light self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_light_type(
+    Nuan5LightType self,
     SseSerializer serializer,
   );
 
@@ -2791,7 +2831,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_nuan_5_filter(Nuan5Filter self, SseSerializer serializer);
 
   @protected
+  void sse_encode_nuan_5_filter_type(
+    Nuan5FilterType self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_nuan_5_light(Nuan5Light self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_nuan_5_light_type(
+    Nuan5LightType self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_object_params(ObjectParams self, SseSerializer serializer);

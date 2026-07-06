@@ -4099,10 +4099,12 @@ impl SseDecode for crate::nuan5_database::model::Nuan5DatabaseCategory {
         let mut inner = <i32>::sse_decode(deserializer);
         return match inner {
             0 => crate::nuan5_database::model::Nuan5DatabaseCategory::Light,
-            1 => crate::nuan5_database::model::Nuan5DatabaseCategory::Filter,
-            2 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyeArea,
-            3 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyePalette,
-            4 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDiySwatchColor,
+            1 => crate::nuan5_database::model::Nuan5DatabaseCategory::LightType,
+            2 => crate::nuan5_database::model::Nuan5DatabaseCategory::Filter,
+            3 => crate::nuan5_database::model::Nuan5DatabaseCategory::FilterType,
+            4 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyeArea,
+            5 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyePalette,
+            6 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDiySwatchColor,
             _ => unreachable!("Invalid variant for Nuan5DatabaseCategory: {}", inner),
         };
     }
@@ -4120,22 +4122,32 @@ impl SseDecode for crate::nuan5_database::model::Nuan5DatabaseItem {
             }
             1 => {
                 let mut var_field0 =
+                    <crate::nuan5_database::model::Nuan5LightType>::sse_decode(deserializer);
+                return crate::nuan5_database::model::Nuan5DatabaseItem::LightType(var_field0);
+            }
+            2 => {
+                let mut var_field0 =
                     <crate::nuan5_database::model::Nuan5Filter>::sse_decode(deserializer);
                 return crate::nuan5_database::model::Nuan5DatabaseItem::Filter(var_field0);
             }
-            2 => {
+            3 => {
+                let mut var_field0 =
+                    <crate::nuan5_database::model::Nuan5FilterType>::sse_decode(deserializer);
+                return crate::nuan5_database::model::Nuan5DatabaseItem::FilterType(var_field0);
+            }
+            4 => {
                 let mut var_field0 =
                     <crate::nuan5_database::model::Nuan5ClothDyeArea>::sse_decode(deserializer);
                 return crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(var_field0);
             }
-            3 => {
+            5 => {
                 let mut var_field0 =
                     <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_decode(deserializer);
                 return crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(
                     var_field0,
                 );
             }
-            4 => {
+            6 => {
                 let mut var_field0 =
                     <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_decode(
                         deserializer,
@@ -4161,6 +4173,14 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Filter {
     }
 }
 
+impl SseDecode for crate::nuan5_database::model::Nuan5FilterType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_filter = <Vec<i64>>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5FilterType { filter: var_filter };
+    }
+}
+
 impl SseDecode for crate::nuan5_database::model::Nuan5Light {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4168,6 +4188,14 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Light {
         return crate::nuan5_database::model::Nuan5Light {
             string_id: var_stringId,
         };
+    }
+}
+
+impl SseDecode for crate::nuan5_database::model::Nuan5LightType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_light = <Vec<i64>>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5LightType { light: var_light };
     }
 }
 
@@ -7373,10 +7401,12 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Databa
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
             Self::Light => 0.into_dart(),
-            Self::Filter => 1.into_dart(),
-            Self::ClothDyeArea => 2.into_dart(),
-            Self::ClothDyePalette => 3.into_dart(),
-            Self::ClothDiySwatchColor => 4.into_dart(),
+            Self::LightType => 1.into_dart(),
+            Self::Filter => 2.into_dart(),
+            Self::FilterType => 3.into_dart(),
+            Self::ClothDyeArea => 4.into_dart(),
+            Self::ClothDyePalette => 5.into_dart(),
+            Self::ClothDiySwatchColor => 6.into_dart(),
             _ => unreachable!(),
         }
     }
@@ -7399,17 +7429,23 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Databa
             crate::nuan5_database::model::Nuan5DatabaseItem::Light(field0) => {
                 [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
-            crate::nuan5_database::model::Nuan5DatabaseItem::Filter(field0) => {
+            crate::nuan5_database::model::Nuan5DatabaseItem::LightType(field0) => {
                 [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(field0) => {
+            crate::nuan5_database::model::Nuan5DatabaseItem::Filter(field0) => {
                 [2.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(field0) => {
+            crate::nuan5_database::model::Nuan5DatabaseItem::FilterType(field0) => {
                 [3.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDiySwatchColor(field0) => {
+            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(field0) => {
                 [4.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(field0) => {
+                [5.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDiySwatchColor(field0) => {
+                [6.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
             _ => {
                 unimplemented!("");
@@ -7446,6 +7482,23 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Filter
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5FilterType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.filter.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5FilterType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5FilterType>
+    for crate::nuan5_database::model::Nuan5FilterType
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5FilterType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Light {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [self.string_id.into_into_dart().into_dart()].into_dart()
@@ -7459,6 +7512,23 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Light>
     for crate::nuan5_database::model::Nuan5Light
 {
     fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5Light {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5LightType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.light.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5LightType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5LightType>
+    for crate::nuan5_database::model::Nuan5LightType
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5LightType {
         self
     }
 }
@@ -9880,10 +9950,12 @@ impl SseEncode for crate::nuan5_database::model::Nuan5DatabaseCategory {
         <i32>::sse_encode(
             match self {
                 crate::nuan5_database::model::Nuan5DatabaseCategory::Light => 0,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::Filter => 1,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyeArea => 2,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyePalette => 3,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDiySwatchColor => 4,
+                crate::nuan5_database::model::Nuan5DatabaseCategory::LightType => 1,
+                crate::nuan5_database::model::Nuan5DatabaseCategory::Filter => 2,
+                crate::nuan5_database::model::Nuan5DatabaseCategory::FilterType => 3,
+                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyeArea => 4,
+                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyePalette => 5,
+                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDiySwatchColor => 6,
                 _ => {
                     unimplemented!("");
                 }
@@ -9901,22 +9973,30 @@ impl SseEncode for crate::nuan5_database::model::Nuan5DatabaseItem {
                 <i32>::sse_encode(0, serializer);
                 <crate::nuan5_database::model::Nuan5Light>::sse_encode(field0, serializer);
             }
-            crate::nuan5_database::model::Nuan5DatabaseItem::Filter(field0) => {
+            crate::nuan5_database::model::Nuan5DatabaseItem::LightType(field0) => {
                 <i32>::sse_encode(1, serializer);
+                <crate::nuan5_database::model::Nuan5LightType>::sse_encode(field0, serializer);
+            }
+            crate::nuan5_database::model::Nuan5DatabaseItem::Filter(field0) => {
+                <i32>::sse_encode(2, serializer);
                 <crate::nuan5_database::model::Nuan5Filter>::sse_encode(field0, serializer);
             }
+            crate::nuan5_database::model::Nuan5DatabaseItem::FilterType(field0) => {
+                <i32>::sse_encode(3, serializer);
+                <crate::nuan5_database::model::Nuan5FilterType>::sse_encode(field0, serializer);
+            }
             crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(field0) => {
-                <i32>::sse_encode(2, serializer);
+                <i32>::sse_encode(4, serializer);
                 <crate::nuan5_database::model::Nuan5ClothDyeArea>::sse_encode(field0, serializer);
             }
             crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(field0) => {
-                <i32>::sse_encode(3, serializer);
+                <i32>::sse_encode(5, serializer);
                 <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_encode(
                     field0, serializer,
                 );
             }
             crate::nuan5_database::model::Nuan5DatabaseItem::ClothDiySwatchColor(field0) => {
-                <i32>::sse_encode(4, serializer);
+                <i32>::sse_encode(6, serializer);
                 <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_encode(
                     field0, serializer,
                 );
@@ -9935,10 +10015,24 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Filter {
     }
 }
 
+impl SseEncode for crate::nuan5_database::model::Nuan5FilterType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<i64>>::sse_encode(self.filter, serializer);
+    }
+}
+
 impl SseEncode for crate::nuan5_database::model::Nuan5Light {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.string_id, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_database::model::Nuan5LightType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<i64>>::sse_encode(self.light, serializer);
     }
 }
 

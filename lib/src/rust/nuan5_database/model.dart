@@ -8,7 +8,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'model.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class Nuan5ClothDiySwatchColor {
   final double r;
@@ -101,7 +101,9 @@ class Nuan5ClothDyePalette {
 
 enum Nuan5DatabaseCategory {
   light,
+  lightType,
   filter,
+  filterType,
   clothDyeArea,
   clothDyePalette,
   clothDiySwatchColor,
@@ -113,8 +115,12 @@ sealed class Nuan5DatabaseItem with _$Nuan5DatabaseItem {
 
   const factory Nuan5DatabaseItem.light(Nuan5Light field0) =
       Nuan5DatabaseItem_Light;
+  const factory Nuan5DatabaseItem.lightType(Nuan5LightType field0) =
+      Nuan5DatabaseItem_LightType;
   const factory Nuan5DatabaseItem.filter(Nuan5Filter field0) =
       Nuan5DatabaseItem_Filter;
+  const factory Nuan5DatabaseItem.filterType(Nuan5FilterType field0) =
+      Nuan5DatabaseItem_FilterType;
   const factory Nuan5DatabaseItem.clothDyeArea(Nuan5ClothDyeArea field0) =
       Nuan5DatabaseItem_ClothDyeArea;
   const factory Nuan5DatabaseItem.clothDyePalette(Nuan5ClothDyePalette field0) =
@@ -140,6 +146,22 @@ class Nuan5Filter {
           stringId == other.stringId;
 }
 
+class Nuan5FilterType {
+  final Int64List filter;
+
+  const Nuan5FilterType({required this.filter});
+
+  @override
+  int get hashCode => filter.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5FilterType &&
+          runtimeType == other.runtimeType &&
+          filter == other.filter;
+}
+
 class Nuan5Light {
   final String stringId;
 
@@ -154,4 +176,20 @@ class Nuan5Light {
       other is Nuan5Light &&
           runtimeType == other.runtimeType &&
           stringId == other.stringId;
+}
+
+class Nuan5LightType {
+  final Int64List light;
+
+  const Nuan5LightType({required this.light});
+
+  @override
+  int get hashCode => light.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5LightType &&
+          runtimeType == other.runtimeType &&
+          light == other.light;
 }

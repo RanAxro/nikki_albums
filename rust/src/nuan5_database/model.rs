@@ -2,15 +2,19 @@ use serde::Deserialize;
 
 pub enum Nuan5DatabaseCategory{
   Light = 1,
-  Filter = 2,
-  ClothDyeArea = 3,
-  ClothDyePalette = 4,
-  ClothDiySwatchColor = 5,
+  LightType = 2,
+  Filter = 3,
+  FilterType = 4,
+  ClothDyeArea = 5,
+  ClothDyePalette = 6,
+  ClothDiySwatchColor = 7,
 }
 
 pub enum Nuan5DatabaseItem{
   Light(Nuan5Light),
+  LightType(Nuan5LightType),
   Filter(Nuan5Filter),
+  FilterType(Nuan5FilterType),
   ClothDyeArea(Nuan5ClothDyeArea),
   ClothDyePalette(Nuan5ClothDyePalette),
   ClothDiySwatchColor(Nuan5ClothDiySwatchColor),
@@ -24,8 +28,20 @@ pub struct Nuan5Light{
 
 #[derive(Clone)]
 #[derive(Deserialize)]
+pub struct Nuan5LightType{
+  pub light: Vec<i64>,
+}
+
+#[derive(Clone)]
+#[derive(Deserialize)]
 pub struct Nuan5Filter{
   pub string_id: String,
+}
+
+#[derive(Clone)]
+#[derive(Deserialize)]
+pub struct Nuan5FilterType{
+  pub filter: Vec<i64>,
 }
 
 #[derive(Clone)]
