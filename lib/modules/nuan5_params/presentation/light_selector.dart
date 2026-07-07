@@ -13,7 +13,7 @@ import "package:cached_network_image/cached_network_image.dart";
 
 
 class LightSelector extends StatefulWidget{
-  final int? initId;
+  final Object? initId;
   final void Function(int?)? onChanged;
 
   const LightSelector({
@@ -32,6 +32,7 @@ class _LightSelectorState extends State<LightSelector>{
   // lightTypeData的key 是无序的, 需要使用 lightType 来储存顺序
   late final List<int> lightType;
   late final Map<int, Nuan5LightType?> lightTypeData;
+  late final Map<int, Nuan5Light?> lightData;
   final ValueNotifier<int?> selectedId = ValueNotifier(null);
 
   late final PageController pageController;
@@ -57,10 +58,40 @@ class _LightSelectorState extends State<LightSelector>{
       return MapEntry(id, lightTypeData);
     });
 
+    final Int32List light = await reader.list(category: Nuan5DatabaseCategory.light, from: BigInt.zero, max: -1);
+    final Map<int, Nuan5DatabaseItem> rawLightData = await reader.get_(category: Nuan5DatabaseCategory.light, ids: light);
+
+    lightData = rawLightData.map<int, Nuan5Light?>((int id, Nuan5DatabaseItem item){
+      return MapEntry(id, item.whenOrNull(
+        light: (Nuan5Light d) => d,
+      ));
+    });
+
     setState((){
+      initSelectedId();
       initPageController();
       isInit = true;
     });
+  }
+
+  void initSelectedId(){
+    if(widget.initId == null){
+      selectedId.value = null;
+      return;
+    }
+
+    if(widget.initId is int){
+      selectedId.value = widget.initId as int;
+    }else if(widget.initId is String){
+      for(final MapEntry<int, Nuan5Light?> entry in lightData.entries){
+        if(widget.initId == entry.value?.stringId || widget.initId == entry.value?.paramId){
+          selectedId.value = entry.key;
+          return;
+        }
+      }
+    }else{
+      selectedId.value = null;
+    }
   }
 
   void initPageController(){
@@ -84,7 +115,6 @@ class _LightSelectorState extends State<LightSelector>{
   @override
   void initState(){
     super.initState();
-    selectedId.value = widget.initId;
     initData();
   }
 
