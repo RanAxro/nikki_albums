@@ -13,16 +13,16 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 abstract class Nuan5DatabaseReader {
   Future<void> close();
 
-  Future<Map<PlatformInt64, Nuan5DatabaseItem>> get_({
+  Future<Map<int, Nuan5DatabaseItem>> get_({
     required Nuan5DatabaseCategory category,
-    required Int64List ids,
+    required List<int> ids,
   });
 
   Future<bool> has({required Nuan5DatabaseCategory category});
 
   bool isOpen();
 
-  Future<Int64List> list({
+  Future<Int32List> list({
     required Nuan5DatabaseCategory category,
     required BigInt from,
     required PlatformInt64 max,

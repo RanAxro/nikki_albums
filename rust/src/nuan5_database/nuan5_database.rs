@@ -25,11 +25,11 @@ impl<R: Nuan5DatabaseReader> Nuan5Database<R>{
     self.reader.has(category)
   }
 
-  pub fn list(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i64>{
+  pub fn list(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i32>{
     self.reader.list(category, from, max)
   }
 
-  pub fn get(&self, category: &Nuan5DatabaseCategory, ids: &[i64]) -> HashMap<i64, Nuan5DatabaseItem>{
+  pub fn get(&self, category: &Nuan5DatabaseCategory, ids: &[i32]) -> HashMap<i32, Nuan5DatabaseItem>{
     self.reader.get(category, ids)
   }
 }
@@ -40,7 +40,7 @@ pub trait Nuan5DatabaseReader{
   fn open(&mut self, path: &str) -> bool;
   fn close(&mut self);
   fn has(&self, category: &Nuan5DatabaseCategory) -> bool;
-  fn list(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i64>;
-  fn get(&self, category: &Nuan5DatabaseCategory, ids: &[i64]) -> HashMap<i64, Nuan5DatabaseItem>;
+  fn list(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i32>;
+  fn get(&self, category: &Nuan5DatabaseCategory, ids: &[i32]) -> HashMap<i32, Nuan5DatabaseItem>;
 }
 

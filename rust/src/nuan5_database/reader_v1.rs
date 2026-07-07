@@ -70,14 +70,14 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
     }
   }
 
-  fn list(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i64>{
+  fn list(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i32>{
     if !self.is_open() {
       return Vec::new();
     }
 
     use Nuan5DatabaseCategory::*;
 
-    let keys: Vec<i64> = match category{
+    let keys: Vec<i32> = match category{
       Light => self.data.as_ref().unwrap().light.keys().copied().collect(),
       LightType => self.data.as_ref().unwrap().light_type.keys().copied().collect(),
       Filter => self.data.as_ref().unwrap().filter.keys().copied().collect(),
@@ -100,7 +100,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
     keys[from..end].to_vec()
   }
 
-  fn get(&self, category: &Nuan5DatabaseCategory, ids: &[i64]) -> HashMap<i64, Nuan5DatabaseItem>{
+  fn get(&self, category: &Nuan5DatabaseCategory, ids: &[i32]) -> HashMap<i32, Nuan5DatabaseItem>{
     if !self.is_open() || ids.is_empty() {
       return HashMap::new();
     }
@@ -179,25 +179,25 @@ impl Nuan5DatabaseReaderV1{
   }
 
   #[frb(sync)]
-  pub fn list_sync(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i64>{
+  pub fn list_sync(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i32>{
     self.list(category, from, max)
   }
 
   #[frb(sync)]
-  pub fn get_sync(&self, category: &Nuan5DatabaseCategory, ids: &[i64]) -> HashMap<i64, Nuan5DatabaseItem>{
+  pub fn get_sync(&self, category: &Nuan5DatabaseCategory, ids: &[i32]) -> HashMap<i32, Nuan5DatabaseItem>{
     self.get(category, ids)
   }
 }
 
 #[derive(Deserialize)]
 struct Nuan5DatabaseV1{
-  pub light: HashMap<i64, Nuan5Light>,
-  pub light_type: HashMap<i64, Nuan5LightType>,
-  pub filter: HashMap<i64, Nuan5Filter>,
-  pub filter_type: HashMap<i64, Nuan5FilterType>,
-  pub cloth_dye_area: HashMap<i64, Nuan5ClothDyeArea>,
-  pub cloth_dye_palette: HashMap<i64, Nuan5ClothDyePalette>,
-  pub cloth_diy_swatch_color: HashMap<i64, Nuan5ClothDiySwatchColor>,
+  pub light: HashMap<i32, Nuan5Light>,
+  pub light_type: HashMap<i32, Nuan5LightType>,
+  pub filter: HashMap<i32, Nuan5Filter>,
+  pub filter_type: HashMap<i32, Nuan5FilterType>,
+  pub cloth_dye_area: HashMap<i32, Nuan5ClothDyeArea>,
+  pub cloth_dye_palette: HashMap<i32, Nuan5ClothDyePalette>,
+  pub cloth_diy_swatch_color: HashMap<i32, Nuan5ClothDiySwatchColor>,
 }
 
 

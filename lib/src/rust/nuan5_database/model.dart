@@ -149,7 +149,7 @@ class Nuan5Filter {
 }
 
 class Nuan5FilterType {
-  final Int64List filter;
+  final Int32List filter;
 
   const Nuan5FilterType({required this.filter});
 
@@ -183,7 +183,7 @@ class Nuan5Light {
 }
 
 class Nuan5LightType {
-  final Int64List light;
+  final Int32List light;
 
   const Nuan5LightType({required this.light});
 

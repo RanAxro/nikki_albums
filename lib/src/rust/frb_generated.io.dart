@@ -120,14 +120,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw);
 
   @protected
+  Map<int, Nuan5DatabaseItem> dco_decode_Map_i_32_nuan_5_database_item_None(
+    dynamic raw,
+  );
+
+  @protected
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
 
   @protected
   Map<PlatformInt64, PlatformInt64> dco_decode_Map_i_64_i_64_None(dynamic raw);
-
-  @protected
-  Map<PlatformInt64, Nuan5DatabaseItem>
-  dco_decode_Map_i_64_nuan_5_database_item_None(dynamic raw);
 
   @protected
   ClothDiyShareCode
@@ -531,6 +532,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<Platform> dco_decode_list_platform(dynamic raw);
 
   @protected
+  List<int> dco_decode_list_prim_i_32_loose(dynamic raw);
+
+  @protected
   Int32List dco_decode_list_prim_i_32_strict(dynamic raw);
 
   @protected
@@ -543,16 +547,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
+  List<(int, Nuan5DatabaseItem)>
+  dco_decode_list_record_i_32_nuan_5_database_item(dynamic raw);
+
+  @protected
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
 
   @protected
   List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
     dynamic raw,
   );
-
-  @protected
-  List<(PlatformInt64, Nuan5DatabaseItem)>
-  dco_decode_list_record_i_64_nuan_5_database_item(dynamic raw);
 
   @protected
   List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
@@ -811,14 +815,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5DatabaseItem) dco_decode_record_i_32_nuan_5_database_item(
+    dynamic raw,
+  );
+
+  @protected
   (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
 
   @protected
   (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
-
-  @protected
-  (PlatformInt64, Nuan5DatabaseItem)
-  dco_decode_record_i_64_nuan_5_database_item(dynamic raw);
 
   @protected
   (String, bool) dco_decode_record_string_bool(dynamic raw);
@@ -973,6 +978,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<int, Nuan5DatabaseItem> sse_decode_Map_i_32_nuan_5_database_item_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
     SseDeserializer deserializer,
   );
@@ -981,10 +991,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Map<PlatformInt64, PlatformInt64> sse_decode_Map_i_64_i_64_None(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Map<PlatformInt64, Nuan5DatabaseItem>
-  sse_decode_Map_i_64_nuan_5_database_item_None(SseDeserializer deserializer);
 
   @protected
   ClothDiyShareCode
@@ -1469,6 +1475,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<Platform> sse_decode_list_platform(SseDeserializer deserializer);
 
   @protected
+  List<int> sse_decode_list_prim_i_32_loose(SseDeserializer deserializer);
+
+  @protected
   Int32List sse_decode_list_prim_i_32_strict(SseDeserializer deserializer);
 
   @protected
@@ -1481,18 +1490,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
+  List<(int, Nuan5DatabaseItem)>
+  sse_decode_list_record_i_32_nuan_5_database_item(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
     SseDeserializer deserializer,
   );
 
   @protected
   List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  List<(PlatformInt64, Nuan5DatabaseItem)>
-  sse_decode_list_record_i_64_nuan_5_database_item(
     SseDeserializer deserializer,
   );
 
@@ -1817,6 +1826,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5DatabaseItem) sse_decode_record_i_32_nuan_5_database_item(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (PlatformInt64, bool) sse_decode_record_i_64_bool(
     SseDeserializer deserializer,
   );
@@ -1825,10 +1839,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (PlatformInt64, PlatformInt64) sse_decode_record_i_64_i_64(
     SseDeserializer deserializer,
   );
-
-  @protected
-  (PlatformInt64, Nuan5DatabaseItem)
-  sse_decode_record_i_64_nuan_5_database_item(SseDeserializer deserializer);
 
   @protected
   (String, bool) sse_decode_record_string_bool(SseDeserializer deserializer);
@@ -2008,6 +2018,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_i_32_nuan_5_database_item_None(
+    Map<int, Nuan5DatabaseItem> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_Map_i_64_bool_None(
     Map<PlatformInt64, bool> self,
     SseSerializer serializer,
@@ -2016,12 +2032,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_i_64_i_64_None(
     Map<PlatformInt64, PlatformInt64> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_Map_i_64_nuan_5_database_item_None(
-    Map<PlatformInt64, Nuan5DatabaseItem> self,
     SseSerializer serializer,
   );
 
@@ -2633,6 +2643,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_platform(List<Platform> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_prim_i_32_loose(
+    List<int> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_prim_i_32_strict(
     Int32List self,
     SseSerializer serializer,
@@ -2654,6 +2670,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_database_item(
+    List<(int, Nuan5DatabaseItem)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_64_bool(
     List<(PlatformInt64, bool)> self,
     SseSerializer serializer,
@@ -2662,12 +2684,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_record_i_64_i_64(
     List<(PlatformInt64, PlatformInt64)> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_list_record_i_64_nuan_5_database_item(
-    List<(PlatformInt64, Nuan5DatabaseItem)> self,
     SseSerializer serializer,
   );
 
@@ -3086,6 +3102,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_i_32_nuan_5_database_item(
+    (int, Nuan5DatabaseItem) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_record_i_64_bool(
     (PlatformInt64, bool) self,
     SseSerializer serializer,
@@ -3094,12 +3116,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_64_i_64(
     (PlatformInt64, PlatformInt64) self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_record_i_64_nuan_5_database_item(
-    (PlatformInt64, Nuan5DatabaseItem) self,
     SseSerializer serializer,
   );
 

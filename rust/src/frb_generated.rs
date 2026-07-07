@@ -430,7 +430,7 @@ fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_impl(
             let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
                 &mut deserializer,
             );
-            let api_ids = <Vec<i64>>::sse_decode(&mut deserializer);
+            let api_ids = <Vec<i32>>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
                 transform_result_sse::<_, ()>((move || {
@@ -488,7 +488,7 @@ fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_sync_impl(
             let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
                 &mut deserializer,
             );
-            let api_ids = <Vec<i64>>::sse_decode(&mut deserializer);
+            let api_ids = <Vec<i32>>::sse_decode(&mut deserializer);
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
                 let mut api_that_guard = None;
@@ -2576,6 +2576,15 @@ impl SseDecode for std::collections::HashMap<String, bool> {
     }
 }
 
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DatabaseItem> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
 impl SseDecode for std::collections::HashMap<i64, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2588,15 +2597,6 @@ impl SseDecode for std::collections::HashMap<i64, i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<(i64, i64)>>::sse_decode(deserializer);
-        return inner.into_iter().collect();
-    }
-}
-
-impl SseDecode for std::collections::HashMap<i64, crate::nuan5_database::model::Nuan5DatabaseItem> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner =
-            <Vec<(i64, crate::nuan5_database::model::Nuan5DatabaseItem)>>::sse_decode(deserializer);
         return inner.into_iter().collect();
     }
 }
@@ -3705,6 +3705,20 @@ impl SseDecode for Vec<u8> {
     }
 }
 
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<(i64, bool)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3724,20 +3738,6 @@ impl SseDecode for Vec<(i64, i64)> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<(i64, i64)>::sse_decode(deserializer));
-        }
-        return ans_;
-    }
-}
-
-impl SseDecode for Vec<(i64, crate::nuan5_database::model::Nuan5DatabaseItem)> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut len_ = <i32>::sse_decode(deserializer);
-        let mut ans_ = Vec::with_capacity(len_ as usize);
-        for idx_ in 0..len_ {
-            ans_.push(
-                <(i64, crate::nuan5_database::model::Nuan5DatabaseItem)>::sse_decode(deserializer),
-            );
         }
         return ans_;
     }
@@ -4374,7 +4374,7 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Filter {
 impl SseDecode for crate::nuan5_database::model::Nuan5FilterType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_filter = <Vec<i64>>::sse_decode(deserializer);
+        let mut var_filter = <Vec<i32>>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5FilterType { filter: var_filter };
     }
 }
@@ -4394,7 +4394,7 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Light {
 impl SseDecode for crate::nuan5_database::model::Nuan5LightType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_light = <Vec<i64>>::sse_decode(deserializer);
+        let mut var_light = <Vec<i32>>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5LightType { light: var_light };
     }
 }
@@ -5077,6 +5077,16 @@ impl SseDecode for (f64, f64, f64, f64) {
     }
 }
 
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5DatabaseItem) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5DatabaseItem>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
 impl SseDecode for (i64, bool) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5091,16 +5101,6 @@ impl SseDecode for (i64, i64) {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <i64>::sse_decode(deserializer);
         let mut var_field1 = <i64>::sse_decode(deserializer);
-        return (var_field0, var_field1);
-    }
-}
-
-impl SseDecode for (i64, crate::nuan5_database::model::Nuan5DatabaseItem) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_field0 = <i64>::sse_decode(deserializer);
-        let mut var_field1 =
-            <crate::nuan5_database::model::Nuan5DatabaseItem>::sse_decode(deserializer);
         return (var_field0, var_field1);
     }
 }
@@ -8739,6 +8739,16 @@ impl SseEncode for std::collections::HashMap<String, bool> {
     }
 }
 
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DatabaseItem> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for std::collections::HashMap<i64, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -8750,16 +8760,6 @@ impl SseEncode for std::collections::HashMap<i64, i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<(i64, i64)>>::sse_encode(self.into_iter().collect(), serializer);
-    }
-}
-
-impl SseEncode for std::collections::HashMap<i64, crate::nuan5_database::model::Nuan5DatabaseItem> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<(i64, crate::nuan5_database::model::Nuan5DatabaseItem)>>::sse_encode(
-            self.into_iter().collect(),
-            serializer,
-        );
     }
 }
 
@@ -9701,6 +9701,16 @@ impl SseEncode for Vec<u8> {
     }
 }
 
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<(i64, bool)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -9717,16 +9727,6 @@ impl SseEncode for Vec<(i64, i64)> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <(i64, i64)>::sse_encode(item, serializer);
-        }
-    }
-}
-
-impl SseEncode for Vec<(i64, crate::nuan5_database::model::Nuan5DatabaseItem)> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.len() as _, serializer);
-        for item in self {
-            <(i64, crate::nuan5_database::model::Nuan5DatabaseItem)>::sse_encode(item, serializer);
         }
     }
 }
@@ -10246,7 +10246,7 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Filter {
 impl SseEncode for crate::nuan5_database::model::Nuan5FilterType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<i64>>::sse_encode(self.filter, serializer);
+        <Vec<i32>>::sse_encode(self.filter, serializer);
     }
 }
 
@@ -10261,7 +10261,7 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Light {
 impl SseEncode for crate::nuan5_database::model::Nuan5LightType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<i64>>::sse_encode(self.light, serializer);
+        <Vec<i32>>::sse_encode(self.light, serializer);
     }
 }
 
@@ -10802,6 +10802,14 @@ impl SseEncode for (f64, f64, f64, f64) {
     }
 }
 
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5DatabaseItem) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5DatabaseItem>::sse_encode(self.1, serializer);
+    }
+}
+
 impl SseEncode for (i64, bool) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10815,14 +10823,6 @@ impl SseEncode for (i64, i64) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.0, serializer);
         <i64>::sse_encode(self.1, serializer);
-    }
-}
-
-impl SseEncode for (i64, crate::nuan5_database::model::Nuan5DatabaseItem) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i64>::sse_encode(self.0, serializer);
-        <crate::nuan5_database::model::Nuan5DatabaseItem>::sse_encode(self.1, serializer);
     }
 }
 

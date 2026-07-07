@@ -30,7 +30,7 @@ pub struct Nuan5Light{
 #[derive(Clone)]
 #[derive(Deserialize)]
 pub struct Nuan5LightType{
-  pub light: Vec<i64>,
+  pub light: Vec<i32>,
 }
 
 #[derive(Clone)]
@@ -43,7 +43,7 @@ pub struct Nuan5Filter{
 #[derive(Clone)]
 #[derive(Deserialize)]
 pub struct Nuan5FilterType{
-  pub filter: Vec<i64>,
+  pub filter: Vec<i32>,
 }
 
 #[derive(Clone)]
