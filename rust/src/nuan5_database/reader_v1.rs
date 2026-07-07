@@ -11,6 +11,13 @@ pub struct Nuan5DatabaseReaderV1{
   data: Option<Nuan5DatabaseV1>,
 }
 
+impl Nuan5DatabaseReaderV1{
+  #[frb(sync)]
+  pub fn new() -> Self{
+    Self{ data: None }
+  }
+}
+
 impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
   fn is_open(&self) -> bool{
     self.data.is_some()

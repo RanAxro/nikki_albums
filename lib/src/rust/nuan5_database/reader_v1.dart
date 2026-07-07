@@ -36,6 +36,9 @@ abstract class Nuan5DatabaseReaderV1
     required PlatformInt64 max,
   });
 
+  factory Nuan5DatabaseReaderV1() =>
+      RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1New();
+
   @override
   Future<bool> open({required String path});
 }
