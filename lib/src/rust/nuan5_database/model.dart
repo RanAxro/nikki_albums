@@ -132,18 +132,20 @@ sealed class Nuan5DatabaseItem with _$Nuan5DatabaseItem {
 
 class Nuan5Filter {
   final String stringId;
+  final String paramId;
 
-  const Nuan5Filter({required this.stringId});
+  const Nuan5Filter({required this.stringId, required this.paramId});
 
   @override
-  int get hashCode => stringId.hashCode;
+  int get hashCode => stringId.hashCode ^ paramId.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Nuan5Filter &&
           runtimeType == other.runtimeType &&
-          stringId == other.stringId;
+          stringId == other.stringId &&
+          paramId == other.paramId;
 }
 
 class Nuan5FilterType {
@@ -164,18 +166,20 @@ class Nuan5FilterType {
 
 class Nuan5Light {
   final String stringId;
+  final String paramId;
 
-  const Nuan5Light({required this.stringId});
+  const Nuan5Light({required this.stringId, required this.paramId});
 
   @override
-  int get hashCode => stringId.hashCode;
+  int get hashCode => stringId.hashCode ^ paramId.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Nuan5Light &&
           runtimeType == other.runtimeType &&
-          stringId == other.stringId;
+          stringId == other.stringId &&
+          paramId == other.paramId;
 }
 
 class Nuan5LightType {

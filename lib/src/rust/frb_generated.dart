@@ -3766,9 +3766,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Filter dco_decode_nuan_5_filter(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return Nuan5Filter(stringId: dco_decode_String(arr[0]));
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Nuan5Filter(
+      stringId: dco_decode_String(arr[0]),
+      paramId: dco_decode_String(arr[1]),
+    );
   }
 
   @protected
@@ -3784,9 +3787,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Light dco_decode_nuan_5_light(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return Nuan5Light(stringId: dco_decode_String(arr[0]));
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Nuan5Light(
+      stringId: dco_decode_String(arr[0]),
+      paramId: dco_decode_String(arr[1]),
+    );
   }
 
   @protected
@@ -6548,7 +6554,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Filter sse_decode_nuan_5_filter(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_stringId = sse_decode_String(deserializer);
-    return Nuan5Filter(stringId: var_stringId);
+    var var_paramId = sse_decode_String(deserializer);
+    return Nuan5Filter(stringId: var_stringId, paramId: var_paramId);
   }
 
   @protected
@@ -6562,7 +6569,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Light sse_decode_nuan_5_light(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_stringId = sse_decode_String(deserializer);
-    return Nuan5Light(stringId: var_stringId);
+    var var_paramId = sse_decode_String(deserializer);
+    return Nuan5Light(stringId: var_stringId, paramId: var_paramId);
   }
 
   @protected
@@ -9467,6 +9475,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_nuan_5_filter(Nuan5Filter self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.stringId, serializer);
+    sse_encode_String(self.paramId, serializer);
   }
 
   @protected
@@ -9482,6 +9491,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_nuan_5_light(Nuan5Light self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.stringId, serializer);
+    sse_encode_String(self.paramId, serializer);
   }
 
   @protected

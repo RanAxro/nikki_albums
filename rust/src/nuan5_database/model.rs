@@ -24,6 +24,7 @@ pub enum Nuan5DatabaseItem{
 #[derive(Deserialize)]
 pub struct Nuan5Light{
   pub string_id: String,
+  pub param_id: String,
 }
 
 #[derive(Clone)]
@@ -36,6 +37,7 @@ pub struct Nuan5LightType{
 #[derive(Deserialize)]
 pub struct Nuan5Filter{
   pub string_id: String,
+  pub param_id: String,
 }
 
 #[derive(Clone)]

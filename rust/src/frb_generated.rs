@@ -4167,8 +4167,10 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Filter {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_stringId = <String>::sse_decode(deserializer);
+        let mut var_paramId = <String>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5Filter {
             string_id: var_stringId,
+            param_id: var_paramId,
         };
     }
 }
@@ -4185,8 +4187,10 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Light {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_stringId = <String>::sse_decode(deserializer);
+        let mut var_paramId = <String>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5Light {
             string_id: var_stringId,
+            param_id: var_paramId,
         };
     }
 }
@@ -7467,7 +7471,11 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Databa
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Filter {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [self.string_id.into_into_dart().into_dart()].into_dart()
+        [
+            self.string_id.into_into_dart().into_dart(),
+            self.param_id.into_into_dart().into_dart(),
+        ]
+        .into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
@@ -7501,7 +7509,11 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Filter
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Light {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [self.string_id.into_into_dart().into_dart()].into_dart()
+        [
+            self.string_id.into_into_dart().into_dart(),
+            self.param_id.into_into_dart().into_dart(),
+        ]
+        .into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
@@ -10012,6 +10024,7 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Filter {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.string_id, serializer);
+        <String>::sse_encode(self.param_id, serializer);
     }
 }
 
@@ -10026,6 +10039,7 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Light {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.string_id, serializer);
+        <String>::sse_encode(self.param_id, serializer);
     }
 }
 
