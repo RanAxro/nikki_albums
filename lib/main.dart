@@ -12,6 +12,7 @@ import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
 import "dart:io";
 import "dart:isolate";
+import "dart:async";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:window_manager/window_manager.dart";

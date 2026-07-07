@@ -1,7 +1,8 @@
-import "dart:io";
 
 import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/modules/app_base/domain/work_path_provider.dart";
+
+import "dart:io";
 
 
 /// 日志级别
@@ -72,12 +73,12 @@ class LogFileManager {
   LogFileManager(this.filename);
 
   Future<Path> _filePath() async {
-    return (await getAppDataDirectoryPath(create: true)) + "logs" + filename;
+    return (Path(await getAppDataDirectoryPath(true)) + "logs") + filename;
   }
 
   /// 日志所在目录，用于「打开日志目录」功能
   Future<Path> directoryPath() async {
-    return (await getAppDataDirectoryPath(create: true)) + "logs";
+    return Path(await getAppDataDirectoryPath(true)) + "logs";
   }
 
   /// 追加一条日志。失败时 print 提示，不向上抛（避免日志故障影响业务）。
