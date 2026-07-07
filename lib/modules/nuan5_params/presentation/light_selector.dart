@@ -130,7 +130,7 @@ class _LightSelectorState extends State<LightSelector>{
         SizedBox(
           width: 160,
           child: AppNavBuilder<int>(
-            initValue: 0,
+            initValue: pageController.initialPage,
             builder: (BuildContext context, int value, void Function(int) change){
               return AppRadioStack(
                 selectedIndex: value,
