@@ -192,7 +192,7 @@ class _LightSelectorState extends State<LightSelector>{
                                   }else{
                                     selectedId.value = id;
                                   }
-                                  widget.onChanged?.call(id);
+                                  widget.onChanged?.call(selectedId.value);
                                   print(lightData?.paramId);
                                 },
                                 child: Column(
