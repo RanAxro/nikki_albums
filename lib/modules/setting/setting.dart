@@ -6,6 +6,7 @@ import "exporting_image/presentation/exporting_image_setting.dart";
 import "nikkias_setting/presentation/nikkias_setting.dart";
 import "version_information/presentation/version_information.dart";
 import "app_storage/presentation/app_storage.dart";
+import "error_log/presentation/error_log.dart";
 import "debug_panel/presentation/debug_panel.dart";
 
 import "package:nikki_albums/modules/app_base/state.dart";
@@ -22,6 +23,7 @@ enum SettingPage {
   nikkiasSetting,
   versionInformation,
   appStorage,
+  errorLog,
   debugPanel,
 }
 
@@ -51,6 +53,7 @@ class SettingDialog extends StatelessWidget {
       SettingPage.nikkiasSetting,
       SettingPage.versionInformation,
       SettingPage.appStorage,
+      SettingPage.errorLog,
       if (kDebugMode) SettingPage.debugPanel,
     ];
   }
@@ -131,6 +134,9 @@ class SettingDialog extends StatelessWidget {
                                     case SettingPage.appStorage:
                                       title = "app_storage";
                                       break;
+                                    case SettingPage.errorLog:
+                                      title = "error_log";
+                                      break;
                                     case SettingPage.debugPanel:
                                       title = "Debug Panel";
                                       break;
@@ -186,6 +192,9 @@ class SettingDialog extends StatelessWidget {
                 case SettingPage.appStorage:
                   pageWidget = const AppStorage();
                   break;
+                case SettingPage.errorLog:
+                  pageWidget = const ErrorLog();
+                  break;
                 case SettingPage.debugPanel:
                   pageWidget = const DebugPanel();
                   break;
@@ -215,7 +224,10 @@ class SettingDialog extends StatelessWidget {
               return AnimatedContainer(
                 duration: animationTime,
                 padding: const EdgeInsets.all(smallPadding),
-                width: (_getCurrentPages() ?? initialPage) == SettingPage.debugPanel ? constraints.maxWidth - 88 : 700,
+                width: (_getCurrentPages() ?? initialPage) == SettingPage.debugPanel
+                        || (_getCurrentPages() ?? initialPage) == SettingPage.errorLog
+                    ? constraints.maxWidth - 88
+                    : 700,
                 child: child,
               );
             },
