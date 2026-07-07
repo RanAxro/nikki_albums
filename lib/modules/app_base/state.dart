@@ -2,6 +2,7 @@ import "dart:async";
 
 import "package:window_manager/window_manager.dart";
 import "package:nikki_albums/modules/nikkias/nikkias.dart";
+import "package:nikki_albums/modules/setting/error_log/domain/log_manager.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/modules/game/uid.dart";
@@ -225,32 +226,8 @@ abstract class AppState {
   }
 
   static Future<void> writeError(String form, String error) async {
-    try {
-      final Path log = (await getAppDataDirectoryPath()) + "log.txt";
-      if (!await log.file.exists()) {
-        log.file.create(recursive: true);
-      }
-      log.file.writeAsString(
-        "\n$form : $error",
-        mode: FileMode.append,
-        flush: true,
-      );
-    } on FileSystemException catch (e) {
-      final errno = e.osError?.errorCode;
-      switch (errno) {
-        case 13:
-          print("权限被拒（Android 6+ 没动态申请存储权限，或 iOS 沙盒外路径）");
-          break;
-        case 28:
-          print("磁盘已满");
-          break;
-        case 16 || 32:
-          print("进程被占用");
-          break;
-      }
-    } catch (e) {
-      print("写入失败: $e");
-    }
+    // 委托到统一日志接口；保留原签名以兼容现有调用
+    await AppLogger.error(form, error);
   }
 }
 
