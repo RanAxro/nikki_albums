@@ -3,11 +3,11 @@ use std::ptr;
 use std::sync::Arc;
 use flutter_rust_bridge::frb;
 use crate::frb_generated::StreamSink;
-use crate::nuan5_params::decrypt::{DecryptionError, MediaKey, ClothDiyShareCode};
+use crate::nuan5_params::decrypt::{DecryptionError, MediaKey, ClothDiyShareCode, HomeBuildShareCode};
 use super::converter::*;
 use super::decrypt;
 use crate::serde_nuan5_json::de::from_slice;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, momo_camera_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, camera_params::*};
 
 
 /// ============================================================
@@ -236,6 +236,41 @@ pub fn cloth_diy_de_file(param_type: &ClothDiyParamType, path: &str) -> Result<O
 }
 
 
+/// ============================================================
+/// HomeBuild
+/// ============================================================
+
+// #[frb]
+// pub enum HomeBuildParamType{
+//   NetHomeBuild,
+//   BuildData,
+// }
+//
+// #[frb]
+// #[derive(Clone)]
+// pub enum HomeBuildParam{
+//   NetHomeBuild(ClothDiyParams),
+//   BuildData(DiyHistoryShareCodeParamsBox),
+// }
+//
+// #[frb]
+// pub fn de_home_build_param(param_type: &HomeBuildParamType, bytes: &[u8]) -> Option<HomeBuildParam>{
+//   use HomeBuildParamType::*;
+//
+//   let decoded = match param_type{
+//     NetHomeBuild => from_slice(&bytes).ok().as_ref().map(convert_net_cloth_diy_params).map(HomeBuildParam::NetHomeBuild),
+//     BuildData => from_slice(&bytes).ok().as_ref().map(convert_diy_history_share_code_box).map(HomeBuildParam::BuildData),
+//   };
+//
+//   decoded
+// }
+//
+// #[frb]
+// pub fn home_build_de_network(key: &HomeBuildShareCode) -> Result<Option<HomeBuildParam>, DecryptionError>{
+//   decrypt::home_build_decode_network(key).map(|decrypted|{
+//     de_home_build_param(&HomeBuildParamType::NetHomeBuild, &decrypted)
+//   })
+// }
 
 
 
