@@ -77,7 +77,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
 
     use Nuan5DatabaseCategory::*;
 
-    let keys: Vec<i32> = match category{
+    let mut keys: Vec<i32> = match category{
       Light => self.data.as_ref().unwrap().light.keys().copied().collect(),
       LightType => self.data.as_ref().unwrap().light_type.keys().copied().collect(),
       Filter => self.data.as_ref().unwrap().filter.keys().copied().collect(),
@@ -86,6 +86,9 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
       ClothDyePalette => self.data.as_ref().unwrap().cloth_dye_palette.keys().copied().collect(),
       ClothDiySwatchColor => self.data.as_ref().unwrap().cloth_diy_swatch_color.keys().copied().collect(),
     };
+
+    // 排序! HashMap的key不保证顺序
+    keys.sort_unstable();
 
     if from >= keys.len() {
       return Vec::new();
