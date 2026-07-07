@@ -35,6 +35,7 @@ impl<R: Nuan5DatabaseReader> Nuan5Database<R>{
 }
 
 pub trait Nuan5DatabaseReader{
+  #[frb(sync)]
   fn is_open(&self) -> bool;
   fn open(&mut self, path: &str) -> bool;
   fn close(&mut self);

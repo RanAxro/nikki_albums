@@ -20,7 +20,7 @@ abstract class Nuan5DatabaseReader {
 
   Future<bool> has({required Nuan5DatabaseCategory category});
 
-  Future<bool> isOpen();
+  bool isOpen();
 
   Future<Int64List> list({
     required Nuan5DatabaseCategory category,

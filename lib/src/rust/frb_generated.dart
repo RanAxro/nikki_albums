@@ -91,7 +91,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -120417951;
+  int get rustContentHash => 823695473;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -142,16 +142,35 @@ abstract class RustLibApi extends BaseApi {
     required Int64List ids,
   });
 
+  Map<PlatformInt64, Nuan5DatabaseItem>
+  crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSync({
+    required Nuan5DatabaseReaderV1 that,
+    required Nuan5DatabaseCategory category,
+    required Int64List ids,
+  });
+
   Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Has({
     required Nuan5DatabaseReaderV1 that,
     required Nuan5DatabaseCategory category,
   });
 
-  Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen({
+  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSync({
+    required Nuan5DatabaseReaderV1 that,
+    required Nuan5DatabaseCategory category,
+  });
+
+  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen({
     required Nuan5DatabaseReaderV1 that,
   });
 
   Future<Int64List> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1List({
+    required Nuan5DatabaseReaderV1 that,
+    required Nuan5DatabaseCategory category,
+    required BigInt from,
+    required PlatformInt64 max,
+  });
+
+  Int64List crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSync({
     required Nuan5DatabaseReaderV1 that,
     required Nuan5DatabaseCategory category,
     required BigInt from,
@@ -697,6 +716,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Map<PlatformInt64, Nuan5DatabaseItem>
+  crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSync({
+    required Nuan5DatabaseReaderV1 that,
+    required Nuan5DatabaseCategory category,
+    required Int64List ids,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+            that,
+            serializer,
+          );
+          sse_encode_nuan_5_database_category(category, serializer);
+          sse_encode_list_prim_i_64_strict(ids, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_Map_i_64_nuan_5_database_item_None,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSyncConstMeta,
+        argValues: [that, category, ids],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSyncConstMeta =>
+      const TaskConstMeta(
+        debugName: "Nuan5DatabaseReaderV1_get_sync",
+        argNames: ["that", "category", "ids"],
+      );
+
+  @override
   Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Has({
     required Nuan5DatabaseReaderV1 that,
     required Nuan5DatabaseCategory category,
@@ -713,7 +770,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 11,
+            funcId: 12,
             port: port_,
           );
         },
@@ -736,23 +793,53 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen({
+  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSync({
     required Nuan5DatabaseReaderV1 that,
+    required Nuan5DatabaseCategory category,
   }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
             that,
             serializer,
           );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
+          sse_encode_nuan_5_database_category(category, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSyncConstMeta,
+        argValues: [that, category],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSyncConstMeta =>
+      const TaskConstMeta(
+        debugName: "Nuan5DatabaseReaderV1_has_sync",
+        argNames: ["that", "category"],
+      );
+
+  @override
+  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen({
+    required Nuan5DatabaseReaderV1 that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+            that,
             serializer,
-            funcId: 12,
-            port: port_,
           );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_bool,
@@ -794,7 +881,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 13,
+            funcId: 15,
             port: port_,
           );
         },
@@ -818,12 +905,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Int64List crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSync({
+    required Nuan5DatabaseReaderV1 that,
+    required Nuan5DatabaseCategory category,
+    required BigInt from,
+    required PlatformInt64 max,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
+            that,
+            serializer,
+          );
+          sse_encode_nuan_5_database_category(category, serializer);
+          sse_encode_usize(from, serializer);
+          sse_encode_isize(max, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_i_64_strict,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSyncConstMeta,
+        argValues: [that, category, from, max],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSyncConstMeta =>
+      const TaskConstMeta(
+        debugName: "Nuan5DatabaseReaderV1_list_sync",
+        argNames: ["that", "category", "from", "max"],
+      );
+
+  @override
   Nuan5DatabaseReaderV1 crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1New() {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -858,7 +984,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 15,
+            funcId: 18,
             port: port_,
           );
         },
@@ -895,7 +1021,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 22,
+            funcId: 25,
             port: port_,
           );
         },
@@ -931,7 +1057,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 23,
+            funcId: 26,
             port: port_,
           );
         },
@@ -964,7 +1090,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 24,
+            funcId: 27,
             port: port_,
           );
         },
@@ -999,7 +1125,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 28,
             port: port_,
           );
         },
@@ -1032,7 +1158,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 26,
+            funcId: 29,
             port: port_,
           );
         },
@@ -1067,7 +1193,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 27,
+            funcId: 30,
             port: port_,
           );
         },
@@ -1100,7 +1226,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 28,
+            funcId: 31,
             port: port_,
           );
         },
@@ -1133,7 +1259,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 29,
+            funcId: 32,
             port: port_,
           );
         },
@@ -1166,7 +1292,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 30,
+            funcId: 33,
             port: port_,
           );
         },
@@ -1199,7 +1325,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 31,
+            funcId: 34,
             port: port_,
           );
         },
@@ -1232,7 +1358,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 32,
+            funcId: 35,
             port: port_,
           );
         },
@@ -1265,7 +1391,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 33,
+            funcId: 36,
             port: port_,
           );
         },
@@ -1302,7 +1428,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 34,
+            funcId: 37,
             port: port_,
           );
         },
@@ -1339,7 +1465,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 35,
+            funcId: 38,
             port: port_,
           );
         },
@@ -1376,7 +1502,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 36,
+            funcId: 39,
             port: port_,
           );
         },
@@ -1404,7 +1530,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 37)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 40)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1435,7 +1561,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 38,
+            funcId: 41,
             port: port_,
           );
         },
@@ -1465,7 +1591,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 39,
+            funcId: 42,
             port: port_,
           );
         },
@@ -1502,7 +1628,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 40,
+            funcId: 43,
             port: port_,
           );
         },
@@ -1542,7 +1668,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 41,
+            funcId: 44,
             port: port_,
           );
         },
@@ -1582,7 +1708,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 42,
+            funcId: 45,
             port: port_,
           );
         },
@@ -1619,7 +1745,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 43)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 46)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_media_custom_data,
@@ -1663,7 +1789,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 44,
+              funcId: 47,
               port: port_,
             );
           },
@@ -1702,7 +1828,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 45)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 48)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1742,7 +1868,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 46,
+            funcId: 49,
             port: port_,
           );
         },
@@ -1779,7 +1905,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 47)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 50)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1825,7 +1951,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 48,
+              funcId: 51,
               port: port_,
             );
           },
@@ -1869,7 +1995,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 49,
+            funcId: 52,
             port: port_,
           );
         },
@@ -1915,7 +2041,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 50,
+              funcId: 53,
               port: port_,
             );
           },
@@ -1954,7 +2080,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 51)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 54)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1982,7 +2108,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_list_prim_u_8_loose(bytes, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 52)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 55)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -2017,7 +2143,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 53,
+            funcId: 56,
             port: port_,
           );
         },
@@ -2052,7 +2178,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 54,
+            funcId: 57,
             port: port_,
           );
         },
@@ -2087,7 +2213,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 55,
+            funcId: 58,
             port: port_,
           );
         },
@@ -2116,7 +2242,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 56)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 59)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -2141,7 +2267,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(key, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 57)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 60)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_translate_text,
@@ -10576,13 +10702,31 @@ class Nuan5DatabaseReaderV1Impl extends RustOpaque
     ids: ids,
   );
 
+  Map<PlatformInt64, Nuan5DatabaseItem> getSync({
+    required Nuan5DatabaseCategory category,
+    required Int64List ids,
+  }) => RustLib.instance.api
+      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSync(
+        that: this,
+        category: category,
+        ids: ids,
+      );
+
   Future<bool> has({required Nuan5DatabaseCategory category}) =>
       RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Has(
         that: this,
         category: category,
       );
 
-  Future<bool> isOpen() => RustLib.instance.api
+  bool hasSync({required Nuan5DatabaseCategory category}) => RustLib
+      .instance
+      .api
+      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSync(
+        that: this,
+        category: category,
+      );
+
+  bool isOpen() => RustLib.instance.api
       .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen(that: this);
 
   Future<Int64List> list({
@@ -10591,6 +10735,18 @@ class Nuan5DatabaseReaderV1Impl extends RustOpaque
     required PlatformInt64 max,
   }) =>
       RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1List(
+        that: this,
+        category: category,
+        from: from,
+        max: max,
+      );
+
+  Int64List listSync({
+    required Nuan5DatabaseCategory category,
+    required BigInt from,
+    required PlatformInt64 max,
+  }) => RustLib.instance.api
+      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSync(
         that: this,
         category: category,
         from: from,

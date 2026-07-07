@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -120417951;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 823695473;
 
 // Section: executor
 
@@ -461,6 +461,62 @@ fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_impl(
         },
     )
 }
+fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_sync_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Nuan5DatabaseReaderV1_get_sync",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
+            >>::sse_decode(&mut deserializer);
+            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
+                &mut deserializer,
+            );
+            let api_ids = <Vec<i64>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::get_sync(
+                        &*api_that_guard,
+                        &api_category,
+                        &api_ids,
+                    ),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
 fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -518,17 +574,70 @@ fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_impl(
         },
     )
 }
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
+fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_sync_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Nuan5DatabaseReaderV1_has_sync",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
+            >>::sse_decode(&mut deserializer);
+            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
+                &mut deserializer,
+            );
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::has_sync(
+                        &*api_that_guard,
+                        &api_category,
+                    ),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "Nuan5DatabaseReaderV1_is_open",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let message = unsafe {
@@ -544,30 +653,28 @@ fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
             >>::sse_decode(&mut deserializer);
             deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
-                    }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::is_open(
-                            &*api_that_guard,
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
                         ),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::is_open(
+                        &*api_that_guard,
+                    ),
+                )?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -629,6 +736,64 @@ fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_impl(
                     Ok(output_ok)
                 })())
             }
+        },
+    )
+}
+fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_sync_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "Nuan5DatabaseReaderV1_list_sync",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
+            >>::sse_decode(&mut deserializer);
+            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
+                &mut deserializer,
+            );
+            let api_from = <usize>::sse_decode(&mut deserializer);
+            let api_max = <isize>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let mut api_that_guard = None;
+                let decode_indices_ =
+                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                            &api_that, 0, false,
+                        ),
+                    ]);
+                for i in decode_indices_ {
+                    match i {
+                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                        _ => unreachable!(),
+                    }
+                }
+                let api_that_guard = api_that_guard.unwrap();
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::list_sync(
+                        &*api_that_guard,
+                        &api_category,
+                        api_from,
+                        api_max,
+                    ),
+                )?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -5547,177 +5712,171 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        11 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_impl(
+        12 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        12 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
+        15 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_impl(
+        18 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_open_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_open_impl(
+        25 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        22 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
+        26 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        23 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
+        27 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        24 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
+        28 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
+        29 => wire__crate__serde_config__de__decode_game_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        26 => wire__crate__serde_config__de__decode_game_config_file_impl(
+        30 => wire__crate__nuan5_params__decode__decode_media_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => wire__crate__nuan5_params__decode__decode_media_param_impl(
+        31 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        28 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
+        32 => wire__crate__serde_config__de__decode_theme_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__serde_config__de__decode_theme_config_file_impl(
+        33 => wire__crate__serde_config__de__deserialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__serde_config__de__deserialize_game_config_impl(
+        34 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
+        35 => wire__crate__serde_config__de__deserialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__serde_config__de__deserialize_theme_config_impl(
+        36 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        34 => {
+        37 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        35 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        38 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => {
+        39 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        38 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
+        41 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        40 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        41 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
+        42 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        43 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+        44 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
+        45 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        44 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
+        47 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        46 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
+        49 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        48 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
+        51 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        49 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
+        52 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        50 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
+        53 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        53 => wire__crate__serde_config__se__serialize_game_config_impl(
+        56 => wire__crate__serde_config__se__serialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        54 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+        57 => wire__crate__serde_config__se__serialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        55 => wire__crate__serde_config__se__serialize_theme_config_impl(
+        58 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -5773,35 +5932,55 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        14 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_new_impl(
+        11 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        43 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+        13 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+        14 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+        16 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        51 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        52 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+        17 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_new_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        56 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        57 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+        40 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        46 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        48 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        50 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        54 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        55 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        59 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        60 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
             ptr,
             rust_vec_len,
             data_len,

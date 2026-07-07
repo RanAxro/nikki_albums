@@ -23,14 +23,27 @@ abstract class Nuan5DatabaseReaderV1
     required Int64List ids,
   });
 
+  Map<PlatformInt64, Nuan5DatabaseItem> getSync({
+    required Nuan5DatabaseCategory category,
+    required Int64List ids,
+  });
+
   @override
   Future<bool> has({required Nuan5DatabaseCategory category});
 
+  bool hasSync({required Nuan5DatabaseCategory category});
+
   @override
-  Future<bool> isOpen();
+  bool isOpen();
 
   @override
   Future<Int64List> list({
+    required Nuan5DatabaseCategory category,
+    required BigInt from,
+    required PlatformInt64 max,
+  });
+
+  Int64List listSync({
     required Nuan5DatabaseCategory category,
     required BigInt from,
     required PlatformInt64 max,

@@ -19,6 +19,7 @@ impl Nuan5DatabaseReaderV1{
 }
 
 impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
+  #[frb(sync)]
   fn is_open(&self) -> bool{
     self.data.is_some()
   }
@@ -168,6 +169,23 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
     }
 
     result
+  }
+}
+
+impl Nuan5DatabaseReaderV1{
+  #[frb(sync)]
+  pub fn has_sync(&self, category: &Nuan5DatabaseCategory) -> bool{
+    self.has(category)
+  }
+
+  #[frb(sync)]
+  pub fn list_sync(&self, category: &Nuan5DatabaseCategory, from: usize, max: isize) -> Vec<i64>{
+    self.list(category, from, max)
+  }
+
+  #[frb(sync)]
+  pub fn get_sync(&self, category: &Nuan5DatabaseCategory, ids: &[i64]) -> HashMap<i64, Nuan5DatabaseItem>{
+    self.get(category, ids)
   }
 }
 
