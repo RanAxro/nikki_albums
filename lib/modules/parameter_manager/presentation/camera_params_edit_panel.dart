@@ -1,14 +1,13 @@
 
-
+import "../domain/camera_params_edit_controller.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/selector.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
-import "package:nikki_albums/modules/nuan5_params/presentation/light_selector.dart";
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/widgets/common/component.dart";
-import "../domain/camera_params_edit_controller.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -272,8 +271,10 @@ class CameraParamsEditPanel extends StatelessWidget{
                       context: context,
                       builder: (BuildContext context){
                         return AppDialog(
-                          child: LightSelector(
-                            initId: controller.cameraParams.light.whenOrNull(some: (id, _) => id),
+                          child: Selector(
+                            title: AppText.tr("infinity_nikki.media_params.light.name"),
+                            handler: LightSelectorHandler(),
+                            initValue: controller.cameraParams.light.whenOrNull(some: (id, _) => id),
                             onChanged: (int? id) async{
                               await Nuan5Data.init();
 

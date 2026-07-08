@@ -1,38 +1,37 @@
 
+import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
-import "package:nikki_albums/modules/nuan5_params/model/image.dart";
-import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
-import "dart:typed_data";
 
 import "package:cached_network_image/cached_network_image.dart";
 
 
-class LightSelector extends StatefulWidget{
-  final Object? initId;
+class Selector extends StatefulWidget{
+  final SelectorHandler handler;
+  final Object? initValue;
   final void Function(int?)? onChanged;
+  final Widget? title;
 
-  const LightSelector({
+  const Selector({
     super.key,
-    this.initId,
+    required this.handler,
+    this.initValue,
     this.onChanged,
+    this.title,
   });
 
   @override
-  State<LightSelector> createState() => _LightSelectorState();
+  State<Selector> createState() => _SelectorState();
 }
 
-class _LightSelectorState extends State<LightSelector>{
+class _SelectorState extends State<Selector>{
   bool? isInit;
   late final Nuan5DatabaseReaderV1 reader;
-  // lightTypeData的key 是无序的, 需要使用 lightType 来储存顺序
-  late final List<int> lightType;
-  late final Map<int, Nuan5LightType?> lightTypeData;
-  late final Map<int, Nuan5Light?> lightData;
+  late final List<int> allType;
   final ValueNotifier<int?> selectedId = ValueNotifier(null);
 
   late final PageController pageController;
@@ -47,69 +46,28 @@ class _LightSelectorState extends State<LightSelector>{
 
     reader = readerV1;
 
-    lightType = await reader.list(category: Nuan5DatabaseCategory.lightType, from: BigInt.zero, max: -1);
-    final Map<int, Nuan5DatabaseItem> rawLightTypeData = await reader.get_(category: Nuan5DatabaseCategory.lightType, ids: lightType);
-
-    lightTypeData = rawLightTypeData.map<int, Nuan5LightType?>((int id, Nuan5DatabaseItem item){
-      final Nuan5LightType? lightTypeData = item.whenOrNull(
-        lightType: (Nuan5LightType d) => d,
-      );
-
-      return MapEntry(id, lightTypeData);
-    });
-
-    final Int32List light = await reader.list(category: Nuan5DatabaseCategory.light, from: BigInt.zero, max: -1);
-    final Map<int, Nuan5DatabaseItem> rawLightData = await reader.get_(category: Nuan5DatabaseCategory.light, ids: light);
-
-    lightData = rawLightData.map<int, Nuan5Light?>((int id, Nuan5DatabaseItem item){
-      return MapEntry(id, item.whenOrNull(
-        light: (Nuan5Light d) => d,
-      ));
-    });
+    allType = widget.handler.getType(reader);
+    selectedId.value = widget.handler.getInitValue(reader, widget.initValue);
 
     setState((){
-      initSelectedId();
       initPageController();
       isInit = true;
     });
   }
 
-  void initSelectedId(){
-    if(widget.initId == null){
-      selectedId.value = null;
-      return;
-    }
-
-    if(widget.initId is int){
-      selectedId.value = widget.initId as int;
-    }else if(widget.initId is String){
-      for(final MapEntry<int, Nuan5Light?> entry in lightData.entries){
-        if(widget.initId == entry.value?.stringId || widget.initId == entry.value?.paramId){
-          selectedId.value = entry.key;
-          return;
-        }
-      }
-    }else{
-      selectedId.value = null;
-    }
-  }
-
   void initPageController(){
     if(selectedId.value == null){
       pageController = PageController(initialPage: 0);
-      return;
-    }
+    }else{
+      final int? initType = widget.handler.getValueType(reader, selectedId.value!);
 
-    for(final MapEntry<int, Nuan5LightType?> entry in lightTypeData.entries){
-      if(entry.value?.light.contains(selectedId.value) == true){
-        final int page = lightType.indexOf(entry.key);
-        pageController = PageController(initialPage: page.clamp(0, lightType.length));
-
-        return;
+      if(initType == null){
+        pageController = PageController(initialPage: 0);
+      }else{
+        final int page = allType.indexOf(initType);
+        pageController = PageController(initialPage: page.clamp(0, allType.length));
       }
     }
-
-    pageController = PageController(initialPage: 0);
   }
 
   @override
@@ -136,7 +94,7 @@ class _LightSelectorState extends State<LightSelector>{
                 selectedIndex: value,
                 direction: Axis.vertical,
                 children: [
-                  for(final (int index, int typeId) in lightType.indexed)
+                  for(final (int index, int typeId) in allType.indexed)
                     AppButton.smallText(
                       onClick: (){
                         change(index);
@@ -157,8 +115,7 @@ class _LightSelectorState extends State<LightSelector>{
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int page){
-                final Int32List lights = lightTypeData[lightType.elementAt(page)]?.light ?? Int32List(0);
-                final Map<int, Nuan5DatabaseItem> rawLightData = reader.getSync(category: Nuan5DatabaseCategory.light, ids: lights);
+                final List<int> allValue = widget.handler.getValue(reader, allType.elementAt(page));
 
                 return SmoothPointerScroll(
                   builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
@@ -171,12 +128,9 @@ class _LightSelectorState extends State<LightSelector>{
                         mainAxisSpacing: 4,
                         childAspectRatio: 128 / (128 + 36),
                       ),
-                      itemCount: lights.length,
+                      itemCount: allValue.length,
                       itemBuilder: (BuildContext context, int index){
-                        final int id = lights[index];
-                        final Nuan5Light? lightData = rawLightData[id]?.whenOrNull(
-                          light: (Nuan5Light d) => d,
-                        );
+                        final int id = allValue[index];
 
                         return AppFloatingIndicatorButtonTarget(
                           child: ValueListenableBuilder(
@@ -193,23 +147,19 @@ class _LightSelectorState extends State<LightSelector>{
                                     selectedId.value = id;
                                   }
                                   widget.onChanged?.call(selectedId.value);
-                                  print(lightData?.paramId);
+                                  // print(lightData?.paramId);
                                 },
                                 child: Column(
                                   spacing: listSpacing,
                                   children: [
                                     AspectRatio(
                                       aspectRatio: 1,
-                                      child: lightData == null ?
-                                        Center(
-                                          child: AppText("?"),
-                                        ) :
-                                        CachedNetworkImage(
-                                          imageUrl: Nuan5Image.light(id),
-                                          fadeInDuration: animationTime,
-                                          fadeOutDuration: animationTime,
-                                          cacheKey: id.toString(),
-                                        ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: widget.handler.getValueImageUrl(reader, id),
+                                        fadeInDuration: animationTime,
+                                        fadeOutDuration: animationTime,
+                                        cacheKey: id.toString(),
+                                      ),
                                     ),
 
                                     AppText(id.toString(), softWrap: false),
@@ -240,7 +190,7 @@ class _LightSelectorState extends State<LightSelector>{
             children: [
               block5W,
 
-              AppText.tr("infinity_nikki.media_params.light.name"),
+              ?widget.title,
 
               Expanded(child: block0),
 
