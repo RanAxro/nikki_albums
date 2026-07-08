@@ -1,4 +1,7 @@
 
+import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
+
 import "../domain/camera_params_edit_controller.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
@@ -6,7 +9,6 @@ import "package:nikki_albums/modules/nuan5_params/presentation/selector.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
-import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
@@ -389,9 +391,111 @@ class CameraParamsEditPanel extends StatelessWidget{
                 ),
               ),
 
-              // print(t.light);
-              // print(t.filter);
-              // print(t.momo);
+              _buildSwitchCard(
+                context: context,
+                text: AppText.tr("infinity_nikki.media_params.momo_hidden"),
+                getValue: () => controller.cameraParams.momo?.whenOrNull(enable: () => true) ?? true,
+                onChanged: (bool value){
+                  if(value){
+                    controller.cameraParams = controller.cameraParams.copyWithMomo(
+                      momo: CameraParamsMomoHidden.enable(),
+                    );
+                  }else{
+                    controller.cameraParams = controller.cameraParams.copyWithMomo(
+                      momo: defaultCameraParamsMomo,
+                    );
+                  }
+                },
+              ),
+
+              ListenableBuilder(
+                listenable: controller,
+                builder: (BuildContext context, Widget? child){
+                  if(controller.cameraParams.momo == null){
+                    return block0;
+                  }
+
+                  return controller.cameraParams.momo!.when(
+                    enable: (){
+                      return block0;
+                    },
+                    disable: (
+                      momoPose,
+                      horizontal,
+                      distance,
+                      height,
+                      rotateMomo,
+                      autoGroundSnap,
+                      floatingEffect,
+                      poseWithNikki,
+                    ){
+                      return Column(
+                        spacing: listSpacing,
+                        children: [
+                          _buildSliderCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.horizontal"),
+                            min: -400,
+                            max: 400,
+                            getValue: () => horizontal,
+                            getDisplay: (double highlights) => horizontal.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(horizontal: horizontal)),
+                          ),
+                          _buildSliderCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.distance"),
+                            min: -400,
+                            max: 400,
+                            getValue: () => distance,
+                            getDisplay: (double highlights) => distance.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(distance: distance)),
+                          ),
+                          _buildSliderCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.height"),
+                            min: -400,
+                            max: 400,
+                            getValue: () => height,
+                            getDisplay: (double highlights) => height.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(height: height)),
+                          ),
+                          _buildSliderCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.rotate_momo"),
+                            min: -180,
+                            max: 180,
+                            getValue: () => rotateMomo,
+                            getDisplay: (double highlights) => rotateMomo.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(rotateMomo: rotateMomo)),
+                          ),
+                          _buildSwitchCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.auto_ground_snap"),
+                            getValue: () => autoGroundSnap,
+                            onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(autoGroundSnap: value)),
+                          ),
+                          _buildSwitchCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.floating_effect"),
+                            getValue: () => floatingEffect,
+                            onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(floatingEffect: value)),
+                          ),
+                          _buildSwitchCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.pose_with_nikki"),
+                            getValue: () => poseWithNikki,
+                            onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(poseWithNikki: value)),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+
+              const SizedBox(
+                height: 100,
+              ),
             ],
           ),
         );

@@ -29,6 +29,17 @@ const CameraParams defaultCameraParams = CameraParams(
   momo: null,
 );
 
+const CameraParamsMomoHidden defaultCameraParamsMomo = CameraParamsMomoHidden.disable(
+  momoPose: 0,
+  horizontal: 100,
+  distance: 100,
+  height: 0,
+  rotateMomo: 0,
+  autoGroundSnap: true,
+  floatingEffect: true,
+  poseWithNikki: true,
+);
+
 
 extension CameraParamsCopyWith on CameraParams{
   CameraParams copyWith({
@@ -100,6 +111,44 @@ extension CameraParamsCopyWith on CameraParams{
       light: light,
       filter: filter,
       momo: momo,
+    );
+  }
+}
+
+extension CameraParamsMomoHiddenCopyWith on CameraParamsMomoHidden{
+  CameraParamsMomoHidden copyWithDisable({
+    int? momoPose,
+    double? horizontal,
+    double? distance,
+    double? height,
+    double? rotateMomo,
+    bool? autoGroundSnap,
+    bool? floatingEffect,
+    bool? poseWithNikki,
+  }){
+    return when(
+      enable: () => CameraParamsMomoHidden.enable(),
+      disable: (
+        thisMomoPose,
+        thisHorizontal,
+        thisDistance,
+        thisHeight,
+        thisRotateMomo,
+        thisAutoGroundSnap,
+        thisFloatingEffect,
+        thisPoseWithNikki,
+      ){
+        return CameraParamsMomoHidden.disable(
+          momoPose: momoPose ?? thisMomoPose,
+          horizontal: horizontal ?? thisHorizontal,
+          distance: distance ?? thisDistance,
+          height: height ?? thisHeight,
+          rotateMomo: rotateMomo ?? thisRotateMomo,
+          autoGroundSnap: autoGroundSnap ?? thisAutoGroundSnap,
+          floatingEffect: floatingEffect ?? thisFloatingEffect,
+          poseWithNikki: poseWithNikki ?? thisPoseWithNikki,
+        );
+      },
     );
   }
 }
