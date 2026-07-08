@@ -90,3 +90,62 @@ class LightSelectorHandler extends SelectorHandler{
     return value.toString();
   }
 }
+
+
+class FilterSelectorHandler extends SelectorHandler{
+  @override
+  int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
+    if(raw == null){
+      return null;
+    }
+
+    if(raw is int){
+      return raw;
+    }
+
+    if(raw is String){
+      final List<int> filter = reader.listSync(category: Nuan5DatabaseCategory.filter, from: BigInt.zero, max: -1);
+      final Map<int, Nuan5DatabaseItem> filterData = reader.getSync(category: Nuan5DatabaseCategory.filter, ids: filter);
+
+      for(final MapEntry<int, Nuan5DatabaseItem> entry in filterData.entries){
+        final Nuan5Filter? data = entry.value.whenOrNull(filter: (d) => d);
+
+        if(data != null && (raw == data.paramId || raw == data.stringId)){
+          return entry.key;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  @override
+  List<int> getType(Nuan5DatabaseReaderV1 reader){
+    return reader.listSync(category: Nuan5DatabaseCategory.filterType, from: BigInt.zero, max: -1);
+  }
+
+  @override
+  String getTypeText(Nuan5DatabaseReaderV1 reader, int type){
+    return type.toString();
+  }
+
+  @override
+  List<int> getValue(Nuan5DatabaseReaderV1 reader, int type){
+    final Map<int, Nuan5DatabaseItem> data = reader.getSync(category: Nuan5DatabaseCategory.filterType, ids: [type]);
+
+    return data[type]?.whenOrNull(
+      filterType: (d) => d.filter,
+    ) ?? [];
+  }
+
+  @override
+  String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
+    return Nuan5Image.filter(value);
+  }
+
+  @override
+  String getValueText(Nuan5DatabaseReaderV1 reader, int value){
+    return value.toString();
+  }
+}
+

@@ -147,7 +147,6 @@ class _SelectorState extends State<Selector>{
                                     selectedId.value = id;
                                   }
                                   widget.onChanged?.call(selectedId.value);
-                                  // print(lightData?.paramId);
                                 },
                                 child: Column(
                                   spacing: listSpacing,
@@ -156,9 +155,14 @@ class _SelectorState extends State<Selector>{
                                       aspectRatio: 1,
                                       child: CachedNetworkImage(
                                         imageUrl: widget.handler.getValueImageUrl(reader, id),
+                                        cacheKey: id.toString(),
                                         fadeInDuration: animationTime,
                                         fadeOutDuration: animationTime,
-                                        cacheKey: id.toString(),
+                                        errorWidget: (BuildContext context, String url, Object error){
+                                          return Center(
+                                            child: AppText("?"),
+                                          );
+                                        },
                                       ),
                                     ),
 

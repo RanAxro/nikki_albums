@@ -324,7 +324,6 @@ class CameraParamsEditPanel extends StatelessWidget{
                 ),
               ),
 
-
               Container(
                 padding: const EdgeInsets.all(smallPadding),
                 decoration: BoxDecoration(
@@ -332,6 +331,44 @@ class CameraParamsEditPanel extends StatelessWidget{
                   color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
                 ),
                 child: AppButton.smallText(
+                  onClick: (){
+                    showAppDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AppDialog(
+                          child: Selector(
+                            title: AppText.tr("infinity_nikki.media_params.filter.name"),
+                            handler: FilterSelectorHandler(),
+                            initValue: controller.cameraParams.filter.whenOrNull(some: (id, _) => id),
+                            onChanged: (int? id) async{
+                              await Nuan5Data.init();
+
+                              if(id == null){
+                                controller.cameraParams = controller.cameraParams.copyWith(
+                                  filter: FilterParams.none(),
+                                );
+                              }else{
+                                final res = await Nuan5Data.reader?.get_(category: Nuan5DatabaseCategory.filter, ids: [id]);
+                                final String? paramId = res?[id]?.whenOrNull(
+                                  filter: (filterData) => filterData.paramId,
+                                );
+
+                                if(paramId == null){
+                                  controller.cameraParams = controller.cameraParams.copyWith(
+                                    filter: FilterParams.none(),
+                                  );
+                                }else{
+                                  controller.cameraParams = controller.cameraParams.copyWith(
+                                    filter: FilterParams.some(id: paramId, strength: 1),
+                                  );
+                                }
+                              }
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
                   child: Row(
                     children: [
                       Expanded(
@@ -340,20 +377,11 @@ class CameraParamsEditPanel extends StatelessWidget{
                       ListenableBuilder(
                         listenable: controller,
                         builder: (BuildContext context, Widget? child){
-                          return GestureDetector(
-                            onTap: (){
-                              controller.cameraParams.filter.whenOrNull(
-                                some: (id, strength){
-                                  copyTextToClipboard(id);
-                                },
-                              );
+                          return AppText(controller.cameraParams.filter.whenOrNull(
+                            some: (id, strength){
+                              return id.toString();
                             },
-                            child: AppText(controller.cameraParams.filter.whenOrNull(
-                              some: (id, strength){
-                                return id.toString();
-                              },
-                            ) ?? "无"),
-                          );
+                          ) ?? "无");
                         },
                       ),
                     ],
