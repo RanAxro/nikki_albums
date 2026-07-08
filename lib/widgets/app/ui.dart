@@ -1821,17 +1821,9 @@ class AppSwitchButton extends StatefulWidget{
 }
 
 class _AppSwitchButtonState extends State<AppSwitchButton>{
-  late bool value;
-
-  @override
-  void initState(){
-    super.initState();
-    value = widget.value;
-  }
-
   @override
   Widget build(BuildContext context){
-    final Widget switchWidget = AppRawSwitch(value: value);
+    final Widget switchWidget = AppRawSwitch(value: widget.value);
 
     return AppButton(
       key: widget.key,
@@ -1853,8 +1845,7 @@ class _AppSwitchButtonState extends State<AppSwitchButton>{
       usable: widget.usable,
       onClick: (){
         setState((){
-          value = !value;
-          widget.onChanged?.call(value);
+          widget.onChanged?.call(!widget.value);
         });
       },
       child: widget.child == null ? switchWidget : Row(
