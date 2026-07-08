@@ -394,7 +394,7 @@ class CameraParamsEditPanel extends StatelessWidget{
               _buildSwitchCard(
                 context: context,
                 text: AppText.tr("infinity_nikki.media_params.momo_hidden"),
-                getValue: () => controller.cameraParams.momo?.whenOrNull(enable: () => true) ?? true,
+                getValue: () => controller.cameraParams.momo?.when(enable: () => true, disable: (_, _, _, _, _, _, _, _) => false) ?? true,
                 onChanged: (bool value){
                   if(value){
                     controller.cameraParams = controller.cameraParams.copyWithMomo(
@@ -438,8 +438,8 @@ class CameraParamsEditPanel extends StatelessWidget{
                             min: -400,
                             max: 400,
                             getValue: () => horizontal,
-                            getDisplay: (double highlights) => horizontal.toStringAsFixed(0),
-                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(horizontal: horizontal)),
+                            getDisplay: (double horizontal) => horizontal.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(horizontal: newValue)),
                           ),
                           _buildSliderCard(
                             context: context,
@@ -447,8 +447,8 @@ class CameraParamsEditPanel extends StatelessWidget{
                             min: -400,
                             max: 400,
                             getValue: () => distance,
-                            getDisplay: (double highlights) => distance.toStringAsFixed(0),
-                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(distance: distance)),
+                            getDisplay: (double distance) => distance.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(distance: newValue)),
                           ),
                           _buildSliderCard(
                             context: context,
@@ -456,8 +456,8 @@ class CameraParamsEditPanel extends StatelessWidget{
                             min: -400,
                             max: 400,
                             getValue: () => height,
-                            getDisplay: (double highlights) => height.toStringAsFixed(0),
-                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(height: height)),
+                            getDisplay: (double height) => height.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(height: newValue)),
                           ),
                           _buildSliderCard(
                             context: context,
@@ -465,8 +465,8 @@ class CameraParamsEditPanel extends StatelessWidget{
                             min: -180,
                             max: 180,
                             getValue: () => rotateMomo,
-                            getDisplay: (double highlights) => rotateMomo.toStringAsFixed(0),
-                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(rotateMomo: rotateMomo)),
+                            getDisplay: (double rotateMomo) => rotateMomo.toStringAsFixed(0),
+                            onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(rotateMomo: newValue)),
                           ),
                           _buildSwitchCard(
                             context: context,
