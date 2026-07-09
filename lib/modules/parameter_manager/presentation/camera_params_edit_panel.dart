@@ -188,76 +188,69 @@ class CameraParamsEditPanel extends StatelessWidget{
         borderRadius: BorderRadius.circular(smallBorderRadius),
         color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
       ),
-      child: Column(
-        spacing: listSpacing,
-        children: [
-          AppButton.smallText(
-            onClick: buildSelector,
-            child: Row(
-              children: [
-                Expanded(
-                  child: text,
-                ),
-                ListenableBuilder(
-                  listenable: controller,
-                  builder: (BuildContext context, Widget? child){
-                    return AppText(getDisplay());
-                  },
-                ),
-              ],
-            ),
-          ),
+      child: ListenableBuilder(
+        listenable: controller,
+        builder: (BuildContext context, Widget? child){
+          final T? buildArgs = isBuildZone();
 
-          ListenableBuilder(
-            listenable: controller,
-            builder: (BuildContext context, Widget? child){
-              final T? buildArgs = isBuildZone();
-
-              if(buildArgs == null){
-                return block0;
-              }
-
-              final String? imageUrl = getImageUrl?.call(buildArgs);
-
-              return SizedBox(
-                height: 80,
+          return Column(
+            spacing: listSpacing,
+            children: [
+              AppButton.smallText(
+                onClick: buildSelector,
                 child: Row(
                   children: [
-                    block10W,
-
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(child: block0),
-
-                          ?zoneBuilder?.call(buildArgs),
-                        ],
-                      ),
-                    ),
-
-                    imageUrl == null ? block0 : AppButton(
-                      onClick: buildSelector,
-                      child: CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        cacheKey: getCacheKey?.call(buildArgs),
-                        fadeInDuration: animationTime,
-                        fadeOutDuration: animationTime,
-                        errorWidget: (BuildContext context, String url, Object error){
-                          return Center(
-                            child: AppText("?"),
-                          );
-                        },
-                      ),
-                    ),
-
+                    Expanded(child: text),
+                    AppText(getDisplay()),
                   ],
                 ),
-              );
+              ),
 
-            },
-          ),
+              if(buildArgs != null)
+                Builder(
+                  builder: (BuildContext context){
+                    final String? imageUrl = getImageUrl?.call(buildArgs);
 
-        ],
+                    return SizedBox(
+                      height: 80,
+                      child: Row(
+                        children: [
+                          block10W,
+
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Expanded(child: block0),
+
+                                ?zoneBuilder?.call(buildArgs),
+                              ],
+                            ),
+                          ),
+
+                          imageUrl == null ? block0 : AppButton(
+                            onClick: buildSelector,
+                            child: CachedNetworkImage(
+                              imageUrl: imageUrl,
+                              cacheKey: getCacheKey?.call(buildArgs),
+                              fadeInDuration: animationTime,
+                              fadeOutDuration: animationTime,
+                              errorWidget: (BuildContext context, String url, Object error){
+                                return Center(
+                                  child: AppText("?"),
+                                );
+                              },
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    );
+                  },
+                ),
+
+            ],
+          );
+        },
       ),
     );
   }
