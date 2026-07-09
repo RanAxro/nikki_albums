@@ -394,69 +394,59 @@ class CameraParamsEditPanel extends StatelessWidget{
                 },
               ),
 
-              Container(
-                padding: const EdgeInsets.all(smallPadding),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(smallBorderRadius),
-                  color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
-                ),
-                child: AppButton.smallText(
-                  onClick: (){
-                    showAppDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AppDialog(
-                          child: Selector(
-                            title: AppText.tr("infinity_nikki.media_params.filter.name"),
-                            handler: filterSelectorHandler,
-                            initValue: controller.cameraParams.filter.whenOrNull(some: (id, _) => id),
-                            onChanged: (int? id) async{
-                              await Nuan5Data.init();
-
-                              if(id == null){
-                                controller.cameraParams = controller.cameraParams.copyWith(
-                                  filter: FilterParams.none(),
-                                );
-                              }else{
-                                final res = await Nuan5Data.reader?.get_(category: Nuan5DatabaseCategory.filter, ids: [id]);
-                                final String? paramId = res?[id]?.whenOrNull(
-                                  filter: (filterData) => filterData.paramId,
-                                );
-
-                                if(paramId == null){
-                                  controller.cameraParams = controller.cameraParams.copyWith(
-                                    filter: FilterParams.none(),
-                                  );
-                                }else{
-                                  controller.cameraParams = controller.cameraParams.copyWith(
-                                    filter: FilterParams.some(id: paramId, strength: 1),
-                                  );
-                                }
-                              }
-                            },
-                          ),
-                        );
-                      },
+              _buildSelectorCard<FilterParams_Some>(
+                context: context,
+                text: AppText.tr("infinity_nikki.media_params.filter.name"),
+                getValue: () => controller.cameraParams.filter.whenOrNull(some: (id, _) => id),
+                getDisplay: (){
+                  return controller.cameraParams.filter.whenOrNull(
+                    some: (id, strength){
+                      return id.toString();
+                    },
+                  ) ?? "无";
+                },
+                selectorHandler: filterSelectorHandler,
+                onChanged: (int? id) async{
+                  if(id == null){
+                    controller.cameraParams = controller.cameraParams.copyWith(
+                      filter: FilterParams.none(),
                     );
-                  },
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: AppText.tr("infinity_nikki.media_params.filter.name"),
-                      ),
-                      ListenableBuilder(
-                        listenable: controller,
-                        builder: (BuildContext context, Widget? child){
-                          return AppText(controller.cameraParams.filter.whenOrNull(
-                            some: (id, strength){
-                              return id.toString();
-                            },
-                          ) ?? "无");
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                  }else{
+                    final res = await reader?.get_(category: Nuan5DatabaseCategory.filter, ids: [id]);
+                    final String? paramId = res?[id]?.whenOrNull(
+                      filter: (filterData) => filterData.paramId,
+                    );
+
+                    if(paramId == null){
+                      controller.cameraParams = controller.cameraParams.copyWith(
+                        filter: FilterParams.none(),
+                      );
+                    }else{
+                      controller.cameraParams = controller.cameraParams.copyWith(
+                        filter: FilterParams.some(id: paramId, strength: 1),
+                      );
+                    }
+                  }
+                },
+                isBuildZone: () => controller.cameraParams.filter.mapOrNull(some: (FilterParams_Some some) => some),
+                zoneBuilder: (FilterParams_Some filterSome){
+                  return _buildSliderCard(
+                    context: context,
+                    text: AppText.tr("infinity_nikki.media_params.filter_strength"),
+                    getValue: () => filterSome.strength,
+                    getDisplay: (double contrast) => "${(contrast * 100).toInt()}%",
+                    onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWith(filter: FilterParams.some(id: filterSome.id, strength: newValue)),
+                  );
+                },
+                getImageUrl: (FilterParams_Some filterSome){
+                  if(reader == null) return null;
+                  final int? id = filterSelectorHandler.getInitValue(reader!, filterSome.id);
+                  return id == null ? null : filterSelectorHandler.getValueImageUrl(reader!, id);
+                },
+                getCacheKey: (FilterParams_Some filterSome){
+                  if(reader == null) return null;
+                  return filterSelectorHandler.getInitValue(reader!, filterSome.id)?.toString();
+                },
               ),
 
               _buildSwitchCard(
