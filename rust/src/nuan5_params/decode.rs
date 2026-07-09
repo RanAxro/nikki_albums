@@ -222,10 +222,35 @@ pub fn de_cloth_diy_param(param_type: &ClothDiyParamType, bytes: &[u8]) -> Optio
 }
 
 #[frb]
-pub fn cloth_diy_de_network(key: &ClothDiyShareCode) -> Result<Option<ClothDiyParam>, DecryptionError>{
-  decrypt::cloth_diy_decode_network(key).map(|decrypted|{
-    de_cloth_diy_param(&ClothDiyParamType::ClothDiy, &decrypted)
-  })
+pub fn cloth_diy_de_network(key: &ClothDiyShareCode, cache_path: Option<String>) -> Result<Option<ClothDiyParam>, DecryptionError>{
+  match cache_path{
+    Some(cache_path) => {
+      let path = std::path::Path::new(&cache_path);
+
+      // 优先读取缓存
+      if let Ok(cached) = std::fs::read(path) {
+        if let Some(value) = de_cloth_diy_param(&ClothDiyParamType::ClothDiy, &cached){
+          return Ok(Some(value));
+        }
+      }
+
+      // 缓存未命中，从网络获取并写入缓存
+      decrypt::cloth_diy_decode_network(key).map(|decrypted|{
+        if let Some(parent) = path.parent() {
+          let _ = std::fs::create_dir_all(parent);
+        }
+        let _ = std::fs::write(path, &decrypted);
+
+        de_cloth_diy_param(&ClothDiyParamType::ClothDiy, &decrypted)
+      })
+
+    },
+    None => {
+      decrypt::cloth_diy_decode_network(key).map(|decrypted|{
+        de_cloth_diy_param(&ClothDiyParamType::ClothDiy, &decrypted)
+      })
+    },
+  }
 }
 
 #[frb]

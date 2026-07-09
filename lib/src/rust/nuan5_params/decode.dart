@@ -87,8 +87,13 @@ Future<ClothDiyParam?> deClothDiyParam({
   bytes: bytes,
 );
 
-Future<ClothDiyParam?> clothDiyDeNetwork({required ClothDiyShareCode key}) =>
-    RustLib.instance.api.crateNuan5ParamsDecodeClothDiyDeNetwork(key: key);
+Future<ClothDiyParam?> clothDiyDeNetwork({
+  required ClothDiyShareCode key,
+  String? cachePath,
+}) => RustLib.instance.api.crateNuan5ParamsDecodeClothDiyDeNetwork(
+  key: key,
+  cachePath: cachePath,
+);
 
 Future<ClothDiyParam?> clothDiyDeFile({
   required ClothDiyParamType paramType,

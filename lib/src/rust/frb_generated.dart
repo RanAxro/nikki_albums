@@ -191,6 +191,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<ClothDiyParam?> crateNuan5ParamsDecodeClothDiyDeNetwork({
     required ClothDiyShareCode key,
+    String? cachePath,
   });
 
   Future<Uint8List> crateNuan5ParamsDecryptClothDiyDecodeNetwork({
@@ -1045,6 +1046,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<ClothDiyParam?> crateNuan5ParamsDecodeClothDiyDeNetwork({
     required ClothDiyShareCode key,
+    String? cachePath,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1054,6 +1056,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
+          sse_encode_opt_String(cachePath, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1066,14 +1069,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecodeClothDiyDeNetworkConstMeta,
-        argValues: [key],
+        argValues: [key, cachePath],
         apiImpl: this,
       ),
     );
   }
 
   TaskConstMeta get kCrateNuan5ParamsDecodeClothDiyDeNetworkConstMeta =>
-      const TaskConstMeta(debugName: "cloth_diy_de_network", argNames: ["key"]);
+      const TaskConstMeta(
+        debugName: "cloth_diy_de_network",
+        argNames: ["key", "cachePath"],
+      );
 
   @override
   Future<Uint8List> crateNuan5ParamsDecryptClothDiyDecodeNetwork({

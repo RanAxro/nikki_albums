@@ -1,6 +1,6 @@
 
-
 import "../model/param_type.dart";
+import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
@@ -8,6 +8,8 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart
 
 import "package:flutter/foundation.dart";
 import "dart:convert";
+
+import "package:path/path.dart" as p;
 
 
 class ParamItemCreator{
@@ -66,9 +68,11 @@ Future<CameraParams?> tryDeCameraParam(String param) async{
 
 Future<ClothDiyParams?> tryDeClothDiyShareCode(String code) async{
   try{
+    final String cachePath = await getClothDiyShareCodeTemp(code);
+
     final ClothDiyShareCode key = ClothDiyShareCode.fromCodeStr(code);
 
-    final ClothDiyParam? clothDiyParam = await clothDiyDeNetwork(key: key);
+    final ClothDiyParam? clothDiyParam = await clothDiyDeNetwork(key: key, cachePath: cachePath);
 
     return clothDiyParam?.whenOrNull(
       clothDiy: (ClothDiyParams clothDiyParams){
@@ -95,4 +99,9 @@ Future<ClothDiyParams?> tryDeHomeBuildShareCode(String code) async{
 
     return null;
   }
+}
+
+
+Future<String> getClothDiyShareCodeTemp(String code) async{
+  return p.join((await getAppDataDirectoryPath()).path, "temp", "ClothDiyShareCode", code);
 }
