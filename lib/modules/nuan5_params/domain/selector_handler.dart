@@ -172,7 +172,7 @@ class MomoPoseSelectorHandler extends SelectorHandler{
     }
 
     if(raw is int){
-      return raw;
+      return raw == 0 ? null : raw;
     }
 
     return null;
