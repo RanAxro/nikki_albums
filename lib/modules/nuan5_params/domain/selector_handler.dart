@@ -13,7 +13,7 @@ abstract class SelectorHandler{
 
   String getTypeText(Nuan5DatabaseReaderV1 reader, int type);
 
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int type);
+  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type);
 
   String getValueText(Nuan5DatabaseReaderV1 reader, int value);
 
@@ -74,7 +74,11 @@ class LightSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int type){
+  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type){
+    if(type == null){
+      return [];
+    }
+
     final Map<int, Nuan5DatabaseItem> data = reader.getSync(category: Nuan5DatabaseCategory.lightType, ids: [type]);
 
     return data[type]?.whenOrNull(
@@ -134,7 +138,11 @@ class FilterSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int type){
+  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type){
+    if(type == null){
+      return [];
+    }
+
     final Map<int, Nuan5DatabaseItem> data = reader.getSync(category: Nuan5DatabaseCategory.filterType, ids: [type]);
 
     return data[type]?.whenOrNull(
@@ -145,6 +153,49 @@ class FilterSelectorHandler extends SelectorHandler{
   @override
   String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
     return Nuan5Image.filter(value);
+  }
+
+  @override
+  String getValueText(Nuan5DatabaseReaderV1 reader, int value){
+    return value.toString();
+  }
+}
+
+
+class MomoPoseSelectorHandler extends SelectorHandler{
+  const MomoPoseSelectorHandler();
+
+  @override
+  int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
+    if(raw == null){
+      return null;
+    }
+
+    if(raw is int){
+      return raw;
+    }
+
+    return null;
+  }
+
+  @override
+  List<int> getType(Nuan5DatabaseReaderV1 reader){
+    return [];
+  }
+
+  @override
+  String getTypeText(Nuan5DatabaseReaderV1 reader, int type){
+    return type.toString();
+  }
+
+  @override
+  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type){
+    return reader.listSync(category: Nuan5DatabaseCategory.momoPose, from: BigInt.zero, max: -1);
+  }
+
+  @override
+  String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
+    return Nuan5Image.momoPose(value);
   }
 
   @override

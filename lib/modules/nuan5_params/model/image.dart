@@ -7,4 +7,8 @@ abstract class Nuan5Image{
   static String filter(dynamic id){
     return "https://file-nikki.ranaxro.com/images/nuan5/filter/$id.webp";
   }
+
+  static String momoPose(dynamic id){
+    return "https://file-nikki.ranaxro.com/images/nuan5/momo_pose/$id.webp";
+  }
 }
