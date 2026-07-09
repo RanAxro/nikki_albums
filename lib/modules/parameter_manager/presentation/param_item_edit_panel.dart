@@ -21,7 +21,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   final ValueNotifier<dynamic> currentParam = ValueNotifier(null);
 
   Future<void> initReader() async{
-    await Nuan5Data.init();
+    reader = await Nuan5Data.init();
     setState((){
 
     });
