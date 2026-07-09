@@ -1,5 +1,4 @@
 
-import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 
 import "../domain/camera_params_edit_controller.dart";
@@ -15,6 +14,7 @@ import "package:nikki_albums/widgets/app/component.dart";
 import "package:flutter/material.dart";
 
 import "package:easy_localization/easy_localization.dart";
+import "package:cached_network_image/cached_network_image.dart";
 
 
 class CameraParamsEditPanel extends StatelessWidget{
@@ -122,40 +122,113 @@ class CameraParamsEditPanel extends StatelessWidget{
     );
   }
 
-  // Widget _buildDropdownCard({
-  //   required BuildContext context,
-  //   required Widget text,
-  //   required bool Function() getValue,
-  //   void Function(bool)? onChanged,
-  // }){
-  //   return Container(
-  //     padding: const EdgeInsets.all(smallPadding),
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(smallBorderRadius),
-  //       color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
-  //     ),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           child: text,
-  //         ),
-  //         ListenableBuilder(
-  //           listenable: controller,
-  //           builder: (BuildContext context, Widget? child){
-  //             return AppDropdown(
-  //               childrenBuilder: (BuildContext context, MenuController menuController){
-  //
-  //               },
-  //               // value: getValue(),
-  //               // onChanged: onChanged,
-  //               // usable: controller.allowEdit,
-  //             );
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _buildSelectorCard<T>({
+    required BuildContext context,
+    required Widget text,
+    Object? Function()? getValue,
+    required String Function() getDisplay,
+    required SelectorHandler selectorHandler,
+    void Function(int?)? onChanged,
+    required T? Function() isBuildZone,
+    Widget Function(T)? zoneBuilder,
+    String? Function(T)? getImageUrl,
+    String? Function(T)? getCacheKey,
+  }){
+    void buildSelector(){
+      showAppDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AppDialog(
+            child: Selector(
+              title: AppText.tr("infinity_nikki.media_params.light.name"),
+              handler: selectorHandler,
+              initValue: getValue?.call(),
+              onChanged: onChanged,
+            ),
+          );
+        },
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(smallPadding),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(smallBorderRadius),
+        color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
+      ),
+      child: Column(
+        spacing: listSpacing,
+        children: [
+          AppButton.smallText(
+            onClick: buildSelector,
+            child: Row(
+              children: [
+                Expanded(
+                  child: text,
+                ),
+                ListenableBuilder(
+                  listenable: controller,
+                  builder: (BuildContext context, Widget? child){
+                    return AppText(getDisplay());
+                  },
+                ),
+              ],
+            ),
+          ),
+
+          ListenableBuilder(
+            listenable: controller,
+            builder: (BuildContext context, Widget? child){
+              final T? buildArgs = isBuildZone();
+
+              if(buildArgs == null){
+                return block0;
+              }
+
+              final String? imageUrl = getImageUrl?.call(buildArgs);
+
+              return SizedBox(
+                height: 80,
+                child: Row(
+                  children: [
+                    block10W,
+
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(child: block0),
+
+                          ?zoneBuilder?.call(buildArgs),
+                        ],
+                      ),
+                    ),
+
+                    imageUrl == null ? block0 : AppButton(
+                      onClick: buildSelector,
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        cacheKey: getCacheKey?.call(buildArgs),
+                        fadeInDuration: animationTime,
+                        fadeOutDuration: animationTime,
+                        errorWidget: (BuildContext context, String url, Object error){
+                          return Center(
+                            child: AppText("?"),
+                          );
+                        },
+                      ),
+                    ),
+
+                  ],
+                ),
+              );
+
+            },
+          ),
+
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context){
@@ -266,69 +339,59 @@ class CameraParamsEditPanel extends StatelessWidget{
                 onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWith(shadows: newValue),
               ),
 
-              Container(
-                padding: const EdgeInsets.all(smallPadding),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(smallBorderRadius),
-                  color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
-                ),
-                child: AppButton.smallText(
-                  onClick: (){
-                    showAppDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AppDialog(
-                          child: Selector(
-                            title: AppText.tr("infinity_nikki.media_params.light.name"),
-                            handler: lightSelectorHandler,
-                            initValue: controller.cameraParams.light.whenOrNull(some: (id, _) => id),
-                            onChanged: (int? id) async{
-                              await Nuan5Data.init();
-
-                              if(id == null){
-                                controller.cameraParams = controller.cameraParams.copyWith(
-                                  light: LightParams.none(),
-                                );
-                              }else{
-                                final res = await Nuan5Data.reader?.get_(category: Nuan5DatabaseCategory.light, ids: [id]);
-                                final String? paramId = res?[id]?.whenOrNull(
-                                  light: (lightData) => lightData.paramId,
-                                );
-
-                                if(paramId == null){
-                                  controller.cameraParams = controller.cameraParams.copyWith(
-                                    light: LightParams.none(),
-                                  );
-                                }else{
-                                  controller.cameraParams = controller.cameraParams.copyWith(
-                                    light: LightParams.some(id: paramId, strength: 0.5),
-                                  );
-                                }
-                              }
-                            },
-                          ),
-                        );
-                      },
+              _buildSelectorCard<LightParams_Some>(
+                context: context,
+                text: AppText.tr("infinity_nikki.media_params.light.name"),
+                getValue: () => controller.cameraParams.light.whenOrNull(some: (id, _) => id),
+                getDisplay: (){
+                  return controller.cameraParams.light.whenOrNull(
+                    some: (id, strength){
+                      return id.toString();
+                    },
+                  ) ?? "无";
+                },
+                selectorHandler: lightSelectorHandler,
+                onChanged: (int? id) async{
+                  if(id == null){
+                    controller.cameraParams = controller.cameraParams.copyWith(
+                      light: LightParams.none(),
                     );
-                  },
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: AppText.tr("infinity_nikki.media_params.light.name"),
-                      ),
-                      ListenableBuilder(
-                        listenable: controller,
-                        builder: (BuildContext context, Widget? child){
-                          return AppText(controller.cameraParams.light.whenOrNull(
-                            some: (id, strength){
-                              return id.toString();
-                            },
-                          ) ?? "无");
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                  }else{
+                    final res = await reader?.get_(category: Nuan5DatabaseCategory.light, ids: [id]);
+                    final String? paramId = res?[id]?.whenOrNull(
+                      light: (lightData) => lightData.paramId,
+                    );
+
+                    if(paramId == null){
+                      controller.cameraParams = controller.cameraParams.copyWith(
+                        light: LightParams.none(),
+                      );
+                    }else{
+                      controller.cameraParams = controller.cameraParams.copyWith(
+                        light: LightParams.some(id: paramId, strength: 0.5),
+                      );
+                    }
+                  }
+                },
+                isBuildZone: () => controller.cameraParams.light.mapOrNull(some: (LightParams_Some some) => some),
+                zoneBuilder: (LightParams_Some lightSome){
+                  return _buildSliderCard(
+                    context: context,
+                    text: AppText.tr("infinity_nikki.media_params.light_strength"),
+                    getValue: () => lightSome.strength,
+                    getDisplay: (double contrast) => "${(contrast * 100).toInt()}%",
+                    onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWith(light: LightParams.some(id: lightSome.id, strength: newValue)),
+                  );
+                },
+                getImageUrl: (LightParams_Some lightSome){
+                  if(reader == null) return null;
+                  final int? id = lightSelectorHandler.getInitValue(reader!, lightSome.id);
+                  return id == null ? null : lightSelectorHandler.getValueImageUrl(reader!, id);
+                },
+                getCacheKey: (LightParams_Some lightSome){
+                  if(reader == null) return null;
+                  return lightSelectorHandler.getInitValue(reader!, lightSome.id)?.toString();
+                },
               ),
 
               Container(
