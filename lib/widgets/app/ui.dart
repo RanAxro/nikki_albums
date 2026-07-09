@@ -1864,11 +1864,21 @@ class _AppSwitchButtonState extends State<AppSwitchButton>{
 class AppCachedNetworkImage extends StatelessWidget{
   final String imageUrl;
   final String? cacheKey;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
+  final Alignment alignment;
+  final ImageRepeat repeat;
 
   const AppCachedNetworkImage({
     super.key,
     required this.imageUrl,
     this.cacheKey,
+    this.width,
+    this.height,
+    this.fit,
+    this.alignment = Alignment.center,
+    this.repeat = ImageRepeat.noRepeat,
   });
 
   @override
@@ -1883,6 +1893,11 @@ class AppCachedNetworkImage extends StatelessWidget{
           child: AppText("?"),
         );
       },
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
     );
   }
 }
