@@ -28,6 +28,7 @@ class CameraParamsEditPanel extends StatelessWidget{
 
   final LightSelectorHandler lightSelectorHandler = const LightSelectorHandler();
   final FilterSelectorHandler filterSelectorHandler = const FilterSelectorHandler();
+  final MomoPoseSelectorHandler momoPoseSelectorHandler = const MomoPoseSelectorHandler();
 
   Widget _buildSwitchCard({
     required BuildContext context,
@@ -61,6 +62,7 @@ class CameraParamsEditPanel extends StatelessWidget{
     double min = 0,
     double max = 1,
     int? divisions,
+    bool usable = true,
     required double Function() getValue,
     String Function(double)? getDisplay,
     void Function(double)? onChanged,
@@ -97,12 +99,12 @@ class CameraParamsEditPanel extends StatelessWidget{
                         max: max,
                         divisions: divisions,
                         value: value,
-                        onChanged: (newValue){
+                        onChanged: usable ? (newValue){
                           setState((){
                             value = newValue;
                           });
-                        },
-                        onChangeEnd: controller.allowEdit ? onChanged?.call : null,
+                        } : null,
+                        onChangeEnd: usable && controller.allowEdit ? onChanged?.call : null,
                       ),
                     ),
                   ),
@@ -474,12 +476,34 @@ class CameraParamsEditPanel extends StatelessWidget{
                       return Column(
                         spacing: listSpacing,
                         children: [
-                          AppText(momoHiddenDisable.momoPose.toString()),
-                          AppButton(
-                            onClick: (){
-                              controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(momoPose: 1090050007));
+                          _buildSelectorCard<int>(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.momo_pose"),
+                            getValue: () => momoHiddenDisable.momoPose,
+                            getDisplay: (){
+                              return momoHiddenDisable.momoPose.toString();
                             },
-                            child: AppText("momo pose 1090050007"),
+                            selectorHandler: momoPoseSelectorHandler,
+                            onChanged: (int? id) async{
+                              controller.cameraParams = controller.cameraParams.copyWithMomo(
+                                momo: momoHiddenDisable.copyWithDisable(momoPose: id ?? 0),
+                              );
+                            },
+                            isBuildZone: () => momoHiddenDisable.momoPose == 0 ? null : momoHiddenDisable.momoPose,
+                            zoneBuilder: (int momoPose){
+                              return _buildSliderCard(
+                                context: context,
+                                text: AppText(""),
+                                getValue: () => 0,
+                                getDisplay: (double time) => "$time s",
+                                usable: false,
+                              );
+                            },
+                            getImageUrl: (int momoPose){
+                              if(reader == null) return null;
+                              return momoPoseSelectorHandler.getValueImageUrl(reader!, momoPose);
+                            },
+                            getCacheKey: (int momoPose) => momoPose.toString(),
                           ),
 
                           _buildSliderCard(
