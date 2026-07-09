@@ -5,9 +5,10 @@ pub enum Nuan5DatabaseCategory{
   LightType = 2,
   Filter = 3,
   FilterType = 4,
-  ClothDyeArea = 5,
-  ClothDyePalette = 6,
-  ClothDiySwatchColor = 7,
+  MomoPose = 5,
+  ClothDyeArea = 6,
+  ClothDyePalette = 7,
+  ClothDiySwatchColor = 8,
 }
 
 pub enum Nuan5DatabaseItem{
@@ -15,6 +16,7 @@ pub enum Nuan5DatabaseItem{
   LightType(Nuan5LightType),
   Filter(Nuan5Filter),
   FilterType(Nuan5FilterType),
+  MomoPose(Nuan5MomoPose),
   ClothDyeArea(Nuan5ClothDyeArea),
   ClothDyePalette(Nuan5ClothDyePalette),
   ClothDiySwatchColor(Nuan5ClothDiySwatchColor),
@@ -44,6 +46,12 @@ pub struct Nuan5Filter{
 #[derive(Deserialize)]
 pub struct Nuan5FilterType{
   pub filter: Vec<i32>,
+}
+
+#[derive(Clone)]
+#[derive(Deserialize)]
+pub struct Nuan5MomoPose{
+  pub string_id: String,
 }
 
 #[derive(Clone)]

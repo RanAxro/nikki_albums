@@ -64,6 +64,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
       LightType => self.data.as_ref().unwrap().light_type.is_empty(),
       Filter => self.data.as_ref().unwrap().filter.is_empty(),
       FilterType => self.data.as_ref().unwrap().filter_type.is_empty(),
+      MomoPose => self.data.as_ref().unwrap().momo_pose.is_empty(),
       ClothDyeArea => self.data.as_ref().unwrap().cloth_dye_area.is_empty(),
       ClothDyePalette => self.data.as_ref().unwrap().cloth_dye_palette.is_empty(),
       ClothDiySwatchColor => self.data.as_ref().unwrap().cloth_diy_swatch_color.is_empty(),
@@ -82,6 +83,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
       LightType => self.data.as_ref().unwrap().light_type.keys().copied().collect(),
       Filter => self.data.as_ref().unwrap().filter.keys().copied().collect(),
       FilterType => self.data.as_ref().unwrap().filter_type.keys().copied().collect(),
+      MomoPose => self.data.as_ref().unwrap().momo_pose.keys().copied().collect(),
       ClothDyeArea => self.data.as_ref().unwrap().cloth_dye_area.keys().copied().collect(),
       ClothDyePalette => self.data.as_ref().unwrap().cloth_dye_palette.keys().copied().collect(),
       ClothDiySwatchColor => self.data.as_ref().unwrap().cloth_diy_swatch_color.keys().copied().collect(),
@@ -145,6 +147,14 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
           }
         }
       },
+      MomoPose => {
+        let map = &self.data.as_ref().unwrap().momo_pose;
+        for &id in ids {
+          if let Some(item) = map.get(&id) {
+            result.insert(id, Nuan5DatabaseItem::MomoPose(item.clone()));
+          }
+        }
+      },
       ClothDyeArea => {
         let map = &self.data.as_ref().unwrap().cloth_dye_area;
         for &id in ids {
@@ -198,6 +208,7 @@ struct Nuan5DatabaseV1{
   pub light_type: HashMap<i32, Nuan5LightType>,
   pub filter: HashMap<i32, Nuan5Filter>,
   pub filter_type: HashMap<i32, Nuan5FilterType>,
+  pub momo_pose: HashMap<i32, Nuan5MomoPose>,
   pub cloth_dye_area: HashMap<i32, Nuan5ClothDyeArea>,
   pub cloth_dye_palette: HashMap<i32, Nuan5ClothDyePalette>,
   pub cloth_diy_swatch_color: HashMap<i32, Nuan5ClothDiySwatchColor>,
@@ -211,6 +222,7 @@ use aes_gcm::{
 use hkdf::Hkdf;
 use sha2::Sha256;
 use std::fs;
+use crate::nuan5_database::model::Nuan5DatabaseCategory::FilterType;
 
 const KEY: &[u8; 32] = b"9C46C6BF431F5AFFF97A2002AEDFA8B7";
 const SALT_LEN: usize = 16;

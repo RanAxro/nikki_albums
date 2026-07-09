@@ -308,6 +308,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5LightType dco_decode_box_autoadd_nuan_5_light_type(dynamic raw);
 
   @protected
+  Nuan5MomoPose dco_decode_box_autoadd_nuan_5_momo_pose(dynamic raw);
+
+  @protected
   ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
 
   @protected
@@ -662,6 +665,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5LightType dco_decode_nuan_5_light_type(dynamic raw);
+
+  @protected
+  Nuan5MomoPose dco_decode_nuan_5_momo_pose(dynamic raw);
 
   @protected
   ObjectParams dco_decode_object_params(dynamic raw);
@@ -1207,6 +1213,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Nuan5MomoPose sse_decode_box_autoadd_nuan_5_momo_pose(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ObjectParams sse_decode_box_autoadd_object_params(
     SseDeserializer deserializer,
   );
@@ -1633,6 +1644,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5LightType sse_decode_nuan_5_light_type(SseDeserializer deserializer);
+
+  @protected
+  Nuan5MomoPose sse_decode_nuan_5_momo_pose(SseDeserializer deserializer);
 
   @protected
   ObjectParams sse_decode_object_params(SseDeserializer deserializer);
@@ -2307,6 +2321,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_nuan_5_momo_pose(
+    Nuan5MomoPose self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_object_params(
     ObjectParams self,
     SseSerializer serializer,
@@ -2858,6 +2878,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_nuan_5_light_type(
     Nuan5LightType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_momo_pose(
+    Nuan5MomoPose self,
     SseSerializer serializer,
   );
 

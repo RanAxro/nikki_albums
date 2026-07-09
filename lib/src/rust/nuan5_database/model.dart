@@ -8,7 +8,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'model.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class Nuan5ClothDiySwatchColor {
   final double r;
@@ -104,6 +104,7 @@ enum Nuan5DatabaseCategory {
   lightType,
   filter,
   filterType,
+  momoPose,
   clothDyeArea,
   clothDyePalette,
   clothDiySwatchColor,
@@ -121,6 +122,8 @@ sealed class Nuan5DatabaseItem with _$Nuan5DatabaseItem {
       Nuan5DatabaseItem_Filter;
   const factory Nuan5DatabaseItem.filterType(Nuan5FilterType field0) =
       Nuan5DatabaseItem_FilterType;
+  const factory Nuan5DatabaseItem.momoPose(Nuan5MomoPose field0) =
+      Nuan5DatabaseItem_MomoPose;
   const factory Nuan5DatabaseItem.clothDyeArea(Nuan5ClothDyeArea field0) =
       Nuan5DatabaseItem_ClothDyeArea;
   const factory Nuan5DatabaseItem.clothDyePalette(Nuan5ClothDyePalette field0) =
@@ -196,4 +199,20 @@ class Nuan5LightType {
       other is Nuan5LightType &&
           runtimeType == other.runtimeType &&
           light == other.light;
+}
+
+class Nuan5MomoPose {
+  final String stringId;
+
+  const Nuan5MomoPose({required this.stringId});
+
+  @override
+  int get hashCode => stringId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5MomoPose &&
+          runtimeType == other.runtimeType &&
+          stringId == other.stringId;
 }

@@ -55,14 +55,15 @@ extension Nuan5DatabaseItemPatterns on Nuan5DatabaseItem {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Nuan5DatabaseItem_Light value)?  light,TResult Function( Nuan5DatabaseItem_LightType value)?  lightType,TResult Function( Nuan5DatabaseItem_Filter value)?  filter,TResult Function( Nuan5DatabaseItem_FilterType value)?  filterType,TResult Function( Nuan5DatabaseItem_ClothDyeArea value)?  clothDyeArea,TResult Function( Nuan5DatabaseItem_ClothDyePalette value)?  clothDyePalette,TResult Function( Nuan5DatabaseItem_ClothDiySwatchColor value)?  clothDiySwatchColor,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Nuan5DatabaseItem_Light value)?  light,TResult Function( Nuan5DatabaseItem_LightType value)?  lightType,TResult Function( Nuan5DatabaseItem_Filter value)?  filter,TResult Function( Nuan5DatabaseItem_FilterType value)?  filterType,TResult Function( Nuan5DatabaseItem_MomoPose value)?  momoPose,TResult Function( Nuan5DatabaseItem_ClothDyeArea value)?  clothDyeArea,TResult Function( Nuan5DatabaseItem_ClothDyePalette value)?  clothDyePalette,TResult Function( Nuan5DatabaseItem_ClothDiySwatchColor value)?  clothDiySwatchColor,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Nuan5DatabaseItem_Light() when light != null:
 return light(_that);case Nuan5DatabaseItem_LightType() when lightType != null:
 return lightType(_that);case Nuan5DatabaseItem_Filter() when filter != null:
 return filter(_that);case Nuan5DatabaseItem_FilterType() when filterType != null:
-return filterType(_that);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
+return filterType(_that);case Nuan5DatabaseItem_MomoPose() when momoPose != null:
+return momoPose(_that);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
 return clothDyeArea(_that);case Nuan5DatabaseItem_ClothDyePalette() when clothDyePalette != null:
 return clothDyePalette(_that);case Nuan5DatabaseItem_ClothDiySwatchColor() when clothDiySwatchColor != null:
 return clothDiySwatchColor(_that);case _:
@@ -83,14 +84,15 @@ return clothDiySwatchColor(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Nuan5DatabaseItem_Light value)  light,required TResult Function( Nuan5DatabaseItem_LightType value)  lightType,required TResult Function( Nuan5DatabaseItem_Filter value)  filter,required TResult Function( Nuan5DatabaseItem_FilterType value)  filterType,required TResult Function( Nuan5DatabaseItem_ClothDyeArea value)  clothDyeArea,required TResult Function( Nuan5DatabaseItem_ClothDyePalette value)  clothDyePalette,required TResult Function( Nuan5DatabaseItem_ClothDiySwatchColor value)  clothDiySwatchColor,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Nuan5DatabaseItem_Light value)  light,required TResult Function( Nuan5DatabaseItem_LightType value)  lightType,required TResult Function( Nuan5DatabaseItem_Filter value)  filter,required TResult Function( Nuan5DatabaseItem_FilterType value)  filterType,required TResult Function( Nuan5DatabaseItem_MomoPose value)  momoPose,required TResult Function( Nuan5DatabaseItem_ClothDyeArea value)  clothDyeArea,required TResult Function( Nuan5DatabaseItem_ClothDyePalette value)  clothDyePalette,required TResult Function( Nuan5DatabaseItem_ClothDiySwatchColor value)  clothDiySwatchColor,}){
 final _that = this;
 switch (_that) {
 case Nuan5DatabaseItem_Light():
 return light(_that);case Nuan5DatabaseItem_LightType():
 return lightType(_that);case Nuan5DatabaseItem_Filter():
 return filter(_that);case Nuan5DatabaseItem_FilterType():
-return filterType(_that);case Nuan5DatabaseItem_ClothDyeArea():
+return filterType(_that);case Nuan5DatabaseItem_MomoPose():
+return momoPose(_that);case Nuan5DatabaseItem_ClothDyeArea():
 return clothDyeArea(_that);case Nuan5DatabaseItem_ClothDyePalette():
 return clothDyePalette(_that);case Nuan5DatabaseItem_ClothDiySwatchColor():
 return clothDiySwatchColor(_that);}
@@ -107,14 +109,15 @@ return clothDiySwatchColor(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Nuan5DatabaseItem_Light value)?  light,TResult? Function( Nuan5DatabaseItem_LightType value)?  lightType,TResult? Function( Nuan5DatabaseItem_Filter value)?  filter,TResult? Function( Nuan5DatabaseItem_FilterType value)?  filterType,TResult? Function( Nuan5DatabaseItem_ClothDyeArea value)?  clothDyeArea,TResult? Function( Nuan5DatabaseItem_ClothDyePalette value)?  clothDyePalette,TResult? Function( Nuan5DatabaseItem_ClothDiySwatchColor value)?  clothDiySwatchColor,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Nuan5DatabaseItem_Light value)?  light,TResult? Function( Nuan5DatabaseItem_LightType value)?  lightType,TResult? Function( Nuan5DatabaseItem_Filter value)?  filter,TResult? Function( Nuan5DatabaseItem_FilterType value)?  filterType,TResult? Function( Nuan5DatabaseItem_MomoPose value)?  momoPose,TResult? Function( Nuan5DatabaseItem_ClothDyeArea value)?  clothDyeArea,TResult? Function( Nuan5DatabaseItem_ClothDyePalette value)?  clothDyePalette,TResult? Function( Nuan5DatabaseItem_ClothDiySwatchColor value)?  clothDiySwatchColor,}){
 final _that = this;
 switch (_that) {
 case Nuan5DatabaseItem_Light() when light != null:
 return light(_that);case Nuan5DatabaseItem_LightType() when lightType != null:
 return lightType(_that);case Nuan5DatabaseItem_Filter() when filter != null:
 return filter(_that);case Nuan5DatabaseItem_FilterType() when filterType != null:
-return filterType(_that);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
+return filterType(_that);case Nuan5DatabaseItem_MomoPose() when momoPose != null:
+return momoPose(_that);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
 return clothDyeArea(_that);case Nuan5DatabaseItem_ClothDyePalette() when clothDyePalette != null:
 return clothDyePalette(_that);case Nuan5DatabaseItem_ClothDiySwatchColor() when clothDiySwatchColor != null:
 return clothDiySwatchColor(_that);case _:
@@ -134,13 +137,14 @@ return clothDiySwatchColor(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Nuan5Light field0)?  light,TResult Function( Nuan5LightType field0)?  lightType,TResult Function( Nuan5Filter field0)?  filter,TResult Function( Nuan5FilterType field0)?  filterType,TResult Function( Nuan5ClothDyeArea field0)?  clothDyeArea,TResult Function( Nuan5ClothDyePalette field0)?  clothDyePalette,TResult Function( Nuan5ClothDiySwatchColor field0)?  clothDiySwatchColor,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Nuan5Light field0)?  light,TResult Function( Nuan5LightType field0)?  lightType,TResult Function( Nuan5Filter field0)?  filter,TResult Function( Nuan5FilterType field0)?  filterType,TResult Function( Nuan5MomoPose field0)?  momoPose,TResult Function( Nuan5ClothDyeArea field0)?  clothDyeArea,TResult Function( Nuan5ClothDyePalette field0)?  clothDyePalette,TResult Function( Nuan5ClothDiySwatchColor field0)?  clothDiySwatchColor,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Nuan5DatabaseItem_Light() when light != null:
 return light(_that.field0);case Nuan5DatabaseItem_LightType() when lightType != null:
 return lightType(_that.field0);case Nuan5DatabaseItem_Filter() when filter != null:
 return filter(_that.field0);case Nuan5DatabaseItem_FilterType() when filterType != null:
-return filterType(_that.field0);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
+return filterType(_that.field0);case Nuan5DatabaseItem_MomoPose() when momoPose != null:
+return momoPose(_that.field0);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
 return clothDyeArea(_that.field0);case Nuan5DatabaseItem_ClothDyePalette() when clothDyePalette != null:
 return clothDyePalette(_that.field0);case Nuan5DatabaseItem_ClothDiySwatchColor() when clothDiySwatchColor != null:
 return clothDiySwatchColor(_that.field0);case _:
@@ -161,13 +165,14 @@ return clothDiySwatchColor(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Nuan5Light field0)  light,required TResult Function( Nuan5LightType field0)  lightType,required TResult Function( Nuan5Filter field0)  filter,required TResult Function( Nuan5FilterType field0)  filterType,required TResult Function( Nuan5ClothDyeArea field0)  clothDyeArea,required TResult Function( Nuan5ClothDyePalette field0)  clothDyePalette,required TResult Function( Nuan5ClothDiySwatchColor field0)  clothDiySwatchColor,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Nuan5Light field0)  light,required TResult Function( Nuan5LightType field0)  lightType,required TResult Function( Nuan5Filter field0)  filter,required TResult Function( Nuan5FilterType field0)  filterType,required TResult Function( Nuan5MomoPose field0)  momoPose,required TResult Function( Nuan5ClothDyeArea field0)  clothDyeArea,required TResult Function( Nuan5ClothDyePalette field0)  clothDyePalette,required TResult Function( Nuan5ClothDiySwatchColor field0)  clothDiySwatchColor,}) {final _that = this;
 switch (_that) {
 case Nuan5DatabaseItem_Light():
 return light(_that.field0);case Nuan5DatabaseItem_LightType():
 return lightType(_that.field0);case Nuan5DatabaseItem_Filter():
 return filter(_that.field0);case Nuan5DatabaseItem_FilterType():
-return filterType(_that.field0);case Nuan5DatabaseItem_ClothDyeArea():
+return filterType(_that.field0);case Nuan5DatabaseItem_MomoPose():
+return momoPose(_that.field0);case Nuan5DatabaseItem_ClothDyeArea():
 return clothDyeArea(_that.field0);case Nuan5DatabaseItem_ClothDyePalette():
 return clothDyePalette(_that.field0);case Nuan5DatabaseItem_ClothDiySwatchColor():
 return clothDiySwatchColor(_that.field0);}
@@ -184,13 +189,14 @@ return clothDiySwatchColor(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Nuan5Light field0)?  light,TResult? Function( Nuan5LightType field0)?  lightType,TResult? Function( Nuan5Filter field0)?  filter,TResult? Function( Nuan5FilterType field0)?  filterType,TResult? Function( Nuan5ClothDyeArea field0)?  clothDyeArea,TResult? Function( Nuan5ClothDyePalette field0)?  clothDyePalette,TResult? Function( Nuan5ClothDiySwatchColor field0)?  clothDiySwatchColor,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Nuan5Light field0)?  light,TResult? Function( Nuan5LightType field0)?  lightType,TResult? Function( Nuan5Filter field0)?  filter,TResult? Function( Nuan5FilterType field0)?  filterType,TResult? Function( Nuan5MomoPose field0)?  momoPose,TResult? Function( Nuan5ClothDyeArea field0)?  clothDyeArea,TResult? Function( Nuan5ClothDyePalette field0)?  clothDyePalette,TResult? Function( Nuan5ClothDiySwatchColor field0)?  clothDiySwatchColor,}) {final _that = this;
 switch (_that) {
 case Nuan5DatabaseItem_Light() when light != null:
 return light(_that.field0);case Nuan5DatabaseItem_LightType() when lightType != null:
 return lightType(_that.field0);case Nuan5DatabaseItem_Filter() when filter != null:
 return filter(_that.field0);case Nuan5DatabaseItem_FilterType() when filterType != null:
-return filterType(_that.field0);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
+return filterType(_that.field0);case Nuan5DatabaseItem_MomoPose() when momoPose != null:
+return momoPose(_that.field0);case Nuan5DatabaseItem_ClothDyeArea() when clothDyeArea != null:
 return clothDyeArea(_that.field0);case Nuan5DatabaseItem_ClothDyePalette() when clothDyePalette != null:
 return clothDyePalette(_that.field0);case Nuan5DatabaseItem_ClothDiySwatchColor() when clothDiySwatchColor != null:
 return clothDiySwatchColor(_that.field0);case _:
@@ -459,6 +465,72 @@ class _$Nuan5DatabaseItem_FilterTypeCopyWithImpl<$Res>
   return _then(Nuan5DatabaseItem_FilterType(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
 as Nuan5FilterType,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class Nuan5DatabaseItem_MomoPose extends Nuan5DatabaseItem {
+  const Nuan5DatabaseItem_MomoPose(this.field0): super._();
+  
+
+@override final  Nuan5MomoPose field0;
+
+/// Create a copy of Nuan5DatabaseItem
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$Nuan5DatabaseItem_MomoPoseCopyWith<Nuan5DatabaseItem_MomoPose> get copyWith => _$Nuan5DatabaseItem_MomoPoseCopyWithImpl<Nuan5DatabaseItem_MomoPose>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Nuan5DatabaseItem_MomoPose&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'Nuan5DatabaseItem.momoPose(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $Nuan5DatabaseItem_MomoPoseCopyWith<$Res> implements $Nuan5DatabaseItemCopyWith<$Res> {
+  factory $Nuan5DatabaseItem_MomoPoseCopyWith(Nuan5DatabaseItem_MomoPose value, $Res Function(Nuan5DatabaseItem_MomoPose) _then) = _$Nuan5DatabaseItem_MomoPoseCopyWithImpl;
+@useResult
+$Res call({
+ Nuan5MomoPose field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$Nuan5DatabaseItem_MomoPoseCopyWithImpl<$Res>
+    implements $Nuan5DatabaseItem_MomoPoseCopyWith<$Res> {
+  _$Nuan5DatabaseItem_MomoPoseCopyWithImpl(this._self, this._then);
+
+  final Nuan5DatabaseItem_MomoPose _self;
+  final $Res Function(Nuan5DatabaseItem_MomoPose) _then;
+
+/// Create a copy of Nuan5DatabaseItem
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(Nuan5DatabaseItem_MomoPose(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as Nuan5MomoPose,
   ));
 }
 
