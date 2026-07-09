@@ -7,6 +7,8 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
 import "package:easy_localization/easy_localization.dart";
+import "package:cached_network_image/cached_network_image.dart";
+
 
 class AppDivider extends StatelessWidget {
   final Axis direction;
@@ -1858,3 +1860,30 @@ class _AppSwitchButtonState extends State<AppSwitchButton>{
     );
   }
 }
+
+class AppCachedNetworkImage extends StatelessWidget{
+  final String imageUrl;
+  final String? cacheKey;
+
+  const AppCachedNetworkImage({
+    super.key,
+    required this.imageUrl,
+    this.cacheKey,
+  });
+
+  @override
+  Widget build(BuildContext context){
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      cacheKey: cacheKey,
+      fadeInDuration: animationTime,
+      fadeOutDuration: animationTime,
+      errorWidget: (BuildContext context, String url, Object error){
+        return Center(
+          child: AppText("?"),
+        );
+      },
+    );
+  }
+}
+

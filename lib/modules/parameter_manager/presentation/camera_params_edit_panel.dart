@@ -15,7 +15,6 @@ import "package:nikki_albums/widgets/app/component.dart";
 import "package:flutter/material.dart";
 
 import "package:easy_localization/easy_localization.dart";
-import "package:cached_network_image/cached_network_image.dart";
 
 
 class CameraParamsEditPanel extends StatelessWidget{
@@ -231,16 +230,9 @@ class CameraParamsEditPanel extends StatelessWidget{
 
                           imageUrl == null ? block0 : AppButton(
                             onClick: buildSelector,
-                            child: CachedNetworkImage(
+                            child: AppCachedNetworkImage(
                               imageUrl: imageUrl,
                               cacheKey: getCacheKey?.call(buildArgs),
-                              fadeInDuration: animationTime,
-                              fadeOutDuration: animationTime,
-                              errorWidget: (BuildContext context, String url, Object error){
-                                return Center(
-                                  child: AppText("?"),
-                                );
-                              },
                             ),
                           ),
 

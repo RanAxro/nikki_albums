@@ -6,8 +6,6 @@ import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
 
-import "package:cached_network_image/cached_network_image.dart";
-
 
 class Selector extends StatefulWidget{
   final SelectorHandler handler;
@@ -152,16 +150,9 @@ class _SelectorState extends State<Selector>{
                                   children: [
                                     AspectRatio(
                                       aspectRatio: 1,
-                                      child: CachedNetworkImage(
+                                      child: AppCachedNetworkImage(
                                         imageUrl: widget.handler.getValueImageUrl(reader, id),
                                         cacheKey: id.toString(),
-                                        fadeInDuration: animationTime,
-                                        fadeOutDuration: animationTime,
-                                        errorWidget: (BuildContext context, String url, Object error){
-                                          return Center(
-                                            child: AppText("?"),
-                                          );
-                                        },
                                       ),
                                     ),
 
