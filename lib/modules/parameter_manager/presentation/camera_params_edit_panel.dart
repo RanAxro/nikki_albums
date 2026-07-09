@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
+
 import "../domain/camera_params_edit_controller.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
@@ -370,10 +372,11 @@ class CameraParamsEditPanel extends StatelessWidget{
                 getValue: () => controller.cameraParams.light.whenOrNull(some: (id, _) => id),
                 getDisplay: (){
                   return controller.cameraParams.light.whenOrNull(
-                    some: (id, strength){
-                      return id.toString();
+                    some: (paramId, strength){
+                      final int? id = reader == null ? null : lightSelectorHandler.getInitValue(reader!, paramId);
+                      return id == null ? null : trText(id.toString(), category: "light");
                     },
-                  ) ?? "无";
+                  ) ?? trBool(false, index: 2);
                 },
                 selectorHandler: lightSelectorHandler,
                 onChanged: (int? id) async{
@@ -425,10 +428,11 @@ class CameraParamsEditPanel extends StatelessWidget{
                 getValue: () => controller.cameraParams.filter.whenOrNull(some: (id, _) => id),
                 getDisplay: (){
                   return controller.cameraParams.filter.whenOrNull(
-                    some: (id, strength){
-                      return id.toString();
+                    some: (paramId, strength){
+                      final int? id = reader == null ? null : filterSelectorHandler.getInitValue(reader!, paramId);
+                      return id == null ? null : trText(id.toString(), category: "filter");
                     },
-                  ) ?? "无";
+                  ) ?? trBool(false, index: 2);
                 },
                 selectorHandler: filterSelectorHandler,
                 onChanged: (int? id) async{
@@ -511,7 +515,9 @@ class CameraParamsEditPanel extends StatelessWidget{
                             text: AppText.tr("infinity_nikki.media_params.momo_pose"),
                             getValue: () => momoHiddenDisable.momoPose,
                             getDisplay: (){
-                              return momoHiddenDisable.momoPose.toString();
+                              return momoHiddenDisable.momoPose == 0 ?
+                                trBool(false, index: 2) :
+                                trText(momoHiddenDisable.momoPose.toString(), category: "momo_pose");
                             },
                             selectorHandler: momoPoseSelectorHandler,
                             onChanged: (int? id) async{
