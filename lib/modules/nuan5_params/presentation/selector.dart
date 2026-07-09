@@ -2,7 +2,6 @@
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
-import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -100,7 +99,7 @@ class _SelectorState extends State<Selector>{
                         change(index);
                         pageController.animateToPage(index, duration: animationTime, curve: animationCurve);
                       },
-                      child: AppText(typeId.toString()),
+                      child: AppText(widget.handler.getTypeText(typeId)),
                     ),
                 ],
               );
@@ -166,7 +165,7 @@ class _SelectorState extends State<Selector>{
                                       ),
                                     ),
 
-                                    AppText(id.toString(), softWrap: false),
+                                    AppText(widget.handler.getValueText(id), softWrap: false),
                                   ],
                                 ),
                               );

@@ -374,7 +374,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                   return controller.cameraParams.light.whenOrNull(
                     some: (paramId, strength){
                       final int? id = reader == null ? null : lightSelectorHandler.getInitValue(reader!, paramId);
-                      return id == null ? null : trText(id.toString(), category: "light");
+                      return id == null ? null : lightSelectorHandler.getValueText(id);
                     },
                   ) ?? trBool(false, index: 2);
                 },
@@ -430,7 +430,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                   return controller.cameraParams.filter.whenOrNull(
                     some: (paramId, strength){
                       final int? id = reader == null ? null : filterSelectorHandler.getInitValue(reader!, paramId);
-                      return id == null ? null : trText(id.toString(), category: "filter");
+                      return id == null ? null : filterSelectorHandler.getValueText(id);
                     },
                   ) ?? trBool(false, index: 2);
                 },
@@ -514,11 +514,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                             context: context,
                             text: AppText.tr("infinity_nikki.media_params.momo_pose"),
                             getValue: () => momoHiddenDisable.momoPose,
-                            getDisplay: (){
-                              return momoHiddenDisable.momoPose == 0 ?
-                                trBool(false, index: 2) :
-                                trText(momoHiddenDisable.momoPose.toString(), category: "momo_pose");
-                            },
+                            getDisplay: () => momoPoseSelectorHandler.getValueText(momoHiddenDisable.momoPose),
                             selectorHandler: momoPoseSelectorHandler,
                             onChanged: (int? id) async{
                               controller.cameraParams = controller.cameraParams.copyWithMomo(

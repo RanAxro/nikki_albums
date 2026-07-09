@@ -1,4 +1,5 @@
 
+import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
 import "package:nikki_albums/modules/nuan5_params/model/image.dart";
@@ -11,11 +12,11 @@ abstract class SelectorHandler{
 
   List<int> getType(Nuan5DatabaseReaderV1 reader);
 
-  String getTypeText(Nuan5DatabaseReaderV1 reader, int type);
+  String getTypeText(int type);
 
   List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type);
 
-  String getValueText(Nuan5DatabaseReaderV1 reader, int value);
+  String getValueText(int value);
 
   String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value);
 
@@ -69,8 +70,8 @@ class LightSelectorHandler extends SelectorHandler{
   }
 
   @override
-  String getTypeText(Nuan5DatabaseReaderV1 reader, int type){
-    return type.toString();
+  String getTypeText(int type){
+    return trText(type.toString(), category: "light_type");
   }
 
   @override
@@ -92,8 +93,8 @@ class LightSelectorHandler extends SelectorHandler{
   }
 
   @override
-  String getValueText(Nuan5DatabaseReaderV1 reader, int value){
-    return value.toString();
+  String getValueText(int value){
+    return trText(value.toString(), category: "light");
   }
 }
 
@@ -133,8 +134,8 @@ class FilterSelectorHandler extends SelectorHandler{
   }
 
   @override
-  String getTypeText(Nuan5DatabaseReaderV1 reader, int type){
-    return type.toString();
+  String getTypeText(int type){
+    return trText(type.toString(), category: "filter_type");
   }
 
   @override
@@ -156,8 +157,8 @@ class FilterSelectorHandler extends SelectorHandler{
   }
 
   @override
-  String getValueText(Nuan5DatabaseReaderV1 reader, int value){
-    return value.toString();
+  String getValueText(int value){
+    return trText(value.toString(), category: "filter");
   }
 }
 
@@ -184,7 +185,7 @@ class MomoPoseSelectorHandler extends SelectorHandler{
   }
 
   @override
-  String getTypeText(Nuan5DatabaseReaderV1 reader, int type){
+  String getTypeText(int type){
     return type.toString();
   }
 
@@ -199,8 +200,10 @@ class MomoPoseSelectorHandler extends SelectorHandler{
   }
 
   @override
-  String getValueText(Nuan5DatabaseReaderV1 reader, int value){
-    return value.toString();
+  String getValueText(int value){
+    return value == 0 ?
+      trBool(false, index: 2) :
+      trText(value.toString(), category: "momo_pose");
   }
 }
 
