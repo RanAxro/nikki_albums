@@ -37,27 +37,21 @@ class CameraParamsEditPanel extends StatelessWidget{
     void Function(bool)? onChanged,
   }){
     return Container(
-      padding: const EdgeInsets.all(smallPadding),
+      padding: const EdgeInsets.symmetric(vertical: smallPadding),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(smallBorderRadius),
         color: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
       ),
-      child: Row(
-        children: [
-          Expanded(
+      child: ListenableBuilder(
+        listenable: controller,
+        builder: (BuildContext context, Widget? child){
+          return AppSwitchButton(
+            value: getValue(),
+            onChanged: onChanged,
+            usable: controller.allowEdit,
             child: text,
-          ),
-          ListenableBuilder(
-            listenable: controller,
-            builder: (BuildContext context, Widget? child){
-              return AppSwitchButton(
-                value: getValue(),
-                onChanged: onChanged,
-                usable: controller.allowEdit,
-              );
-            },
-          ),
-        ],
+          );
+        },
       ),
     );
   }
