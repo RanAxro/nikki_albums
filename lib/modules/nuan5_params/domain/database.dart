@@ -1,3 +1,4 @@
+export "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
 
 import "package:nikki_albums/modules/hot_update/domain/hot_update_service.dart";
 import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";

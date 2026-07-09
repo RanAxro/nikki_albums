@@ -2,6 +2,7 @@
 import "package:nikki_albums/modules/parameter_manager/domain/camera_params_edit_controller.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_item_creator.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/camera_params_edit_panel.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
@@ -16,7 +17,21 @@ class ParamItemEditPanel extends StatefulWidget{
 }
 
 class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
+  Nuan5DatabaseReaderV1? reader;
   final ValueNotifier<dynamic> currentParam = ValueNotifier(null);
+
+  Future<void> initReader() async{
+    await Nuan5Data.init();
+    setState((){
+
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    initReader();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -50,6 +65,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
               if(param is CameraParams){
                 return CameraParamsEditPanel(
                   controller: CameraParamsEditController(cameraParams: param),
+                  reader: reader,
                 );
               }
 

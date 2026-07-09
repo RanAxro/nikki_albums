@@ -35,6 +35,8 @@ abstract class SelectorHandler{
 
 
 class LightSelectorHandler extends SelectorHandler{
+  const LightSelectorHandler();
+
   @override
   int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
     if(raw == null){
@@ -93,6 +95,8 @@ class LightSelectorHandler extends SelectorHandler{
 
 
 class FilterSelectorHandler extends SelectorHandler{
+  const FilterSelectorHandler();
+
   @override
   int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
     if(raw == null){

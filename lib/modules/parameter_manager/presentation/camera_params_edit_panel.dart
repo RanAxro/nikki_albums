@@ -19,11 +19,16 @@ import "package:easy_localization/easy_localization.dart";
 
 class CameraParamsEditPanel extends StatelessWidget{
   final CameraParamsEditController controller;
+  final Nuan5DatabaseReaderV1? reader;
 
   const CameraParamsEditPanel({
     super.key,
     required this.controller,
+    this.reader,
   });
+
+  final LightSelectorHandler lightSelectorHandler = const LightSelectorHandler();
+  final FilterSelectorHandler filterSelectorHandler = const FilterSelectorHandler();
 
   Widget _buildSwitchCard({
     required BuildContext context,
@@ -275,7 +280,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                         return AppDialog(
                           child: Selector(
                             title: AppText.tr("infinity_nikki.media_params.light.name"),
-                            handler: LightSelectorHandler(),
+                            handler: lightSelectorHandler,
                             initValue: controller.cameraParams.light.whenOrNull(some: (id, _) => id),
                             onChanged: (int? id) async{
                               await Nuan5Data.init();
@@ -340,7 +345,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                         return AppDialog(
                           child: Selector(
                             title: AppText.tr("infinity_nikki.media_params.filter.name"),
-                            handler: FilterSelectorHandler(),
+                            handler: filterSelectorHandler,
                             initValue: controller.cameraParams.filter.whenOrNull(some: (id, _) => id),
                             onChanged: (int? id) async{
                               await Nuan5Data.init();
@@ -432,6 +437,14 @@ class CameraParamsEditPanel extends StatelessWidget{
                       return Column(
                         spacing: listSpacing,
                         children: [
+                          AppText(momoPose.toString()),
+                          AppButton(
+                            onClick: (){
+                              controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(momoPose: 1090050007));
+                            },
+                            child: AppText("momo pose 1090050007"),
+                          ),
+
                           _buildSliderCard(
                             context: context,
                             text: AppText.tr("infinity_nikki.media_params.horizontal"),
