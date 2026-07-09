@@ -82,7 +82,7 @@ class _SelectorState extends State<Selector>{
       return AppText("error");
     }
 
-    Widget child = Row(
+    return Row(
       spacing: listSpacing,
       children: [
         SizedBox(
@@ -182,31 +182,6 @@ class _SelectorState extends State<Selector>{
           ),
         ),
       ],
-    );
-
-    return SizedBox(
-      width: 700,
-      height: 400,
-      child: Column(
-        spacing: listSpacing,
-        children: [
-          Row(
-            children: [
-              block5W,
-
-              ?widget.title,
-
-              Expanded(child: block0),
-
-              AppButton.smallIcon(
-                child: AppIcon("cross", height: 20,),
-              ),
-            ],
-          ),
-
-          Expanded(child: child),
-        ],
-      ),
     );
   }
 }

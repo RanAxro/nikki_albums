@@ -134,11 +134,48 @@ class CameraParamsEditPanel extends StatelessWidget{
         context: context,
         builder: (BuildContext context){
           return AppDialog(
-            child: Selector(
-              title: AppText.tr("infinity_nikki.media_params.light.name"),
-              handler: selectorHandler,
-              initValue: getValue?.call(),
-              onChanged: onChanged,
+            child: SizedBox(
+              width: 700,
+              height: 400,
+              child: Column(
+                spacing: listSpacing,
+                children: [
+                  Row(
+                    children: [
+                      block5W,
+
+                      text,
+
+                      Expanded(
+                        child: Center(
+                          child: ListenableBuilder(
+                            listenable: controller,
+                            builder: (BuildContext context, Widget? child){
+                              return AppText(getDisplay());
+                            },
+                          ),
+                        ),
+                      ),
+
+                      AppButton.smallIcon(
+                        onClick: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: AppIcon("cross", height: 20),
+                      ),
+                    ],
+                  ),
+
+                  Expanded(
+                    child: Selector(
+                      title: AppText.tr("infinity_nikki.media_params.light.name"),
+                      handler: selectorHandler,
+                      initValue: getValue?.call(),
+                      onChanged: onChanged,
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
