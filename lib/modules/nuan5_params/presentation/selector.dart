@@ -86,8 +86,8 @@ class _SelectorState extends State<Selector>{
       spacing: listSpacing,
       children: [
         SizedBox(
-          width: 160,
-          child: AppNavBuilder<int>(
+          width: allType.isEmpty ? 0 : 160,
+          child: allType.isEmpty ? block0 : AppNavBuilder<int>(
             initValue: pageController.initialPage,
             builder: (BuildContext context, int value, void Function(int) change){
               return AppRadioStack(
@@ -115,7 +115,7 @@ class _SelectorState extends State<Selector>{
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int page){
-                final List<int> allValue = widget.handler.getValue(reader, allType.elementAt(page));
+                final List<int> allValue = widget.handler.getValue(reader, allType.isEmpty ? null : allType.elementAt(page));
 
                 return SmoothPointerScroll(
                   builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
