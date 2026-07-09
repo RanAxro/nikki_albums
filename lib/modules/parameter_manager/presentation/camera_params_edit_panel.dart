@@ -1,6 +1,4 @@
 
-import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
-
 import "../domain/camera_params_edit_controller.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
@@ -8,6 +6,7 @@ import "package:nikki_albums/modules/nuan5_params/presentation/selector.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
@@ -446,7 +445,7 @@ class CameraParamsEditPanel extends StatelessWidget{
               _buildSwitchCard(
                 context: context,
                 text: AppText.tr("infinity_nikki.media_params.momo_hidden"),
-                getValue: () => controller.cameraParams.momo?.when(enable: () => true, disable: (_, _, _, _, _, _, _, _) => false) ?? true,
+                getValue: () => controller.cameraParams.momo?.map(enable: (_) => true, disable: (_) => false) ?? true,
                 onChanged: (bool value){
                   if(value){
                     controller.cameraParams = controller.cameraParams.copyWithMomo(
@@ -467,24 +466,15 @@ class CameraParamsEditPanel extends StatelessWidget{
                     return block0;
                   }
 
-                  return controller.cameraParams.momo!.when(
-                    enable: (){
+                  return controller.cameraParams.momo!.map(
+                    enable: (_){
                       return block0;
                     },
-                    disable: (
-                      momoPose,
-                      horizontal,
-                      distance,
-                      height,
-                      rotateMomo,
-                      autoGroundSnap,
-                      floatingEffect,
-                      poseWithNikki,
-                    ){
+                    disable: (CameraParamsMomoHidden_Disable momoHiddenDisable){
                       return Column(
                         spacing: listSpacing,
                         children: [
-                          AppText(momoPose.toString()),
+                          AppText(momoHiddenDisable.momoPose.toString()),
                           AppButton(
                             onClick: (){
                               controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(momoPose: 1090050007));
@@ -497,7 +487,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                             text: AppText.tr("infinity_nikki.media_params.horizontal"),
                             min: -400,
                             max: 400,
-                            getValue: () => horizontal,
+                            getValue: () => momoHiddenDisable.horizontal,
                             getDisplay: (double horizontal) => horizontal.toStringAsFixed(0),
                             onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(horizontal: newValue)),
                           ),
@@ -506,7 +496,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                             text: AppText.tr("infinity_nikki.media_params.distance"),
                             min: -400,
                             max: 400,
-                            getValue: () => distance,
+                            getValue: () => momoHiddenDisable.distance,
                             getDisplay: (double distance) => distance.toStringAsFixed(0),
                             onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(distance: newValue)),
                           ),
@@ -515,7 +505,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                             text: AppText.tr("infinity_nikki.media_params.height"),
                             min: -400,
                             max: 400,
-                            getValue: () => height,
+                            getValue: () => momoHiddenDisable.height,
                             getDisplay: (double height) => height.toStringAsFixed(0),
                             onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(height: newValue)),
                           ),
@@ -524,26 +514,26 @@ class CameraParamsEditPanel extends StatelessWidget{
                             text: AppText.tr("infinity_nikki.media_params.rotate_momo"),
                             min: -180,
                             max: 180,
-                            getValue: () => rotateMomo,
+                            getValue: () => momoHiddenDisable.rotateMomo,
                             getDisplay: (double rotateMomo) => rotateMomo.toStringAsFixed(0),
                             onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(rotateMomo: newValue)),
                           ),
                           _buildSwitchCard(
                             context: context,
                             text: AppText.tr("infinity_nikki.media_params.auto_ground_snap"),
-                            getValue: () => autoGroundSnap,
+                            getValue: () => momoHiddenDisable.autoGroundSnap,
                             onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(autoGroundSnap: value)),
                           ),
                           _buildSwitchCard(
                             context: context,
                             text: AppText.tr("infinity_nikki.media_params.floating_effect"),
-                            getValue: () => floatingEffect,
+                            getValue: () => momoHiddenDisable.floatingEffect,
                             onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(floatingEffect: value)),
                           ),
                           _buildSwitchCard(
                             context: context,
                             text: AppText.tr("infinity_nikki.media_params.pose_with_nikki"),
-                            getValue: () => poseWithNikki,
+                            getValue: () => momoHiddenDisable.poseWithNikki,
                             onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(poseWithNikki: value)),
                           ),
                         ],
