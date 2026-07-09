@@ -537,7 +537,12 @@ class CameraParamsEditPanel extends StatelessWidget{
                             },
                             getCacheKey: (int momoPose) => momoPose.toString(),
                           ),
-
+                          _buildSwitchCard(
+                            context: context,
+                            text: AppText.tr("infinity_nikki.media_params.pose_with_nikki"),
+                            getValue: () => momoHiddenDisable.poseWithNikki,
+                            onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(poseWithNikki: value)),
+                          ),
                           _buildSliderCard(
                             context: context,
                             text: AppText.tr("infinity_nikki.media_params.horizontal"),
@@ -585,12 +590,6 @@ class CameraParamsEditPanel extends StatelessWidget{
                             text: AppText.tr("infinity_nikki.media_params.floating_effect"),
                             getValue: () => momoHiddenDisable.floatingEffect,
                             onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(floatingEffect: value)),
-                          ),
-                          _buildSwitchCard(
-                            context: context,
-                            text: AppText.tr("infinity_nikki.media_params.pose_with_nikki"),
-                            getValue: () => momoHiddenDisable.poseWithNikki,
-                            onChanged: (bool value) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: (controller.cameraParams.momo ?? defaultCameraParamsMomo).copyWithDisable(poseWithNikki: value)),
                           ),
                         ],
                       );
