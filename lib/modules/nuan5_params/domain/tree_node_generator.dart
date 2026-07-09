@@ -29,7 +29,12 @@ String trBool(bool key, {int index = 1, String category = "media_params"}){
 }
 
 Color convertColor((double, double, double, double) color){
-  return Color.fromARGB(color.$4.toInt(), color.$1.toInt(), color.$2.toInt(), color.$3.toInt());
+  return Color.fromARGB(
+    (255 * color.$4).toInt(),
+    (255 * color.$1).toInt(),
+    (255 * color.$2).toInt(),
+    (255 * color.$3).toInt(),
+  );
 }
 
 TreeNode genNikkiPhotoParams(NikkiPhotoParams params){
