@@ -8,6 +8,7 @@ import "package:flutter/services.dart";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:cached_network_image/cached_network_image.dart";
+import "package:super_tooltip/super_tooltip.dart";
 
 
 class AppDivider extends StatelessWidget {
@@ -1898,6 +1899,54 @@ class AppCachedNetworkImage extends StatelessWidget{
       fit: fit,
       alignment: alignment,
       repeat: repeat,
+    );
+  }
+}
+
+class AppSuperTooltip extends StatelessWidget{
+  final double? width;
+  final double? height;
+  final ColorRole colorRole;
+  final TooltipDirection direction;
+  final Widget content;
+  final Widget child;
+
+  const AppSuperTooltip({
+    super.key,
+    this.width,
+    this.height,
+    this.colorRole = ColorRole.background,
+    this.direction = TooltipDirection.auto,
+    required this.content,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context){
+    return SuperTooltip(
+      style: TooltipStyle(
+        backgroundColor: AppColorScheme.of(context).byRole(colorRole).color,
+        borderRadius: smallBorderRadius,
+        borderColor: Colors.transparent,
+        shadowColor: Colors.black12,
+        bubbleDimensions: const EdgeInsets.all(0),
+      ),
+      positionConfig: PositionConfiguration(
+        preferredDirection: direction,
+      ),
+      barrierConfig: BarrierConfiguration(
+        color: Colors.transparent,
+      ),
+      animationConfig: AnimationConfiguration(
+        fadeInDuration: animationTime,
+        fadeOutDuration: animationTime,
+      ),
+      content: SizedBox(
+        width: width,
+        height: height,
+        child: content,
+      ),
+      child: child,
     );
   }
 }

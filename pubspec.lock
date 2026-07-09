@@ -1136,6 +1136,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.1"
+  super_tooltip:
+    dependency: "direct main"
+    description:
+      name: super_tooltip
+      sha256: "1fa2855cf7fdd493aea7f8b1e456e76767a1b68d38f1137ba7fb751f7772cade"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.1"
   sync_http:
     dependency: transitive
     description:
