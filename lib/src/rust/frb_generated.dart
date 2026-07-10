@@ -3869,12 +3869,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5ClothDyeArea dco_decode_nuan_5_cloth_dye_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return Nuan5ClothDyeArea(
       maxColorAreaNum: dco_decode_opt_box_autoadd_i_32(arr[0]),
       maxPatternAreaNum: dco_decode_opt_box_autoadd_i_32(arr[1]),
       maxPatternMaskNum: dco_decode_opt_box_autoadd_i_32(arr[2]),
+      customAreaOrder: dco_decode_list_prim_i_32_strict(arr[3]),
     );
   }
 
@@ -6686,10 +6687,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_maxColorAreaNum = sse_decode_opt_box_autoadd_i_32(deserializer);
     var var_maxPatternAreaNum = sse_decode_opt_box_autoadd_i_32(deserializer);
     var var_maxPatternMaskNum = sse_decode_opt_box_autoadd_i_32(deserializer);
+    var var_customAreaOrder = sse_decode_list_prim_i_32_strict(deserializer);
     return Nuan5ClothDyeArea(
       maxColorAreaNum: var_maxColorAreaNum,
       maxPatternAreaNum: var_maxPatternAreaNum,
       maxPatternMaskNum: var_maxPatternMaskNum,
+      customAreaOrder: var_customAreaOrder,
     );
   }
 
@@ -9672,6 +9675,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_opt_box_autoadd_i_32(self.maxColorAreaNum, serializer);
     sse_encode_opt_box_autoadd_i_32(self.maxPatternAreaNum, serializer);
     sse_encode_opt_box_autoadd_i_32(self.maxPatternMaskNum, serializer);
+    sse_encode_list_prim_i_32_strict(self.customAreaOrder, serializer);
   }
 
   @protected

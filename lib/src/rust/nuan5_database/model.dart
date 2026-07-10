@@ -30,18 +30,21 @@ class Nuan5ClothDyeArea {
   final int? maxColorAreaNum;
   final int? maxPatternAreaNum;
   final int? maxPatternMaskNum;
+  final Int32List customAreaOrder;
 
   const Nuan5ClothDyeArea({
     this.maxColorAreaNum,
     this.maxPatternAreaNum,
     this.maxPatternMaskNum,
+    required this.customAreaOrder,
   });
 
   @override
   int get hashCode =>
       maxColorAreaNum.hashCode ^
       maxPatternAreaNum.hashCode ^
-      maxPatternMaskNum.hashCode;
+      maxPatternMaskNum.hashCode ^
+      customAreaOrder.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -50,7 +53,8 @@ class Nuan5ClothDyeArea {
           runtimeType == other.runtimeType &&
           maxColorAreaNum == other.maxColorAreaNum &&
           maxPatternAreaNum == other.maxPatternAreaNum &&
-          maxPatternMaskNum == other.maxPatternMaskNum;
+          maxPatternMaskNum == other.maxPatternMaskNum &&
+          customAreaOrder == other.customAreaOrder;
 }
 
 class Nuan5ClothDyePalette {

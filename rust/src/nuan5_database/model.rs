@@ -60,6 +60,7 @@ pub struct Nuan5ClothDyeArea{
   pub max_color_area_num: Option<i32>,
   pub max_pattern_area_num: Option<i32>,
   pub max_pattern_mask_num: Option<i32>,
+  pub custom_area_order: Vec<i32>,
 }
 
 #[derive(Clone)]

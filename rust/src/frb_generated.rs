@@ -4258,10 +4258,12 @@ impl SseDecode for crate::nuan5_database::model::Nuan5ClothDyeArea {
         let mut var_maxColorAreaNum = <Option<i32>>::sse_decode(deserializer);
         let mut var_maxPatternAreaNum = <Option<i32>>::sse_decode(deserializer);
         let mut var_maxPatternMaskNum = <Option<i32>>::sse_decode(deserializer);
+        let mut var_customAreaOrder = <Vec<i32>>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5ClothDyeArea {
             max_color_area_num: var_maxColorAreaNum,
             max_pattern_area_num: var_maxPatternAreaNum,
             max_pattern_mask_num: var_maxPatternMaskNum,
+            custom_area_order: var_customAreaOrder,
         };
     }
 }
@@ -7592,6 +7594,7 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5ClothD
             self.max_color_area_num.into_into_dart().into_dart(),
             self.max_pattern_area_num.into_into_dart().into_dart(),
             self.max_pattern_mask_num.into_into_dart().into_dart(),
+            self.custom_area_order.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -10191,6 +10194,7 @@ impl SseEncode for crate::nuan5_database::model::Nuan5ClothDyeArea {
         <Option<i32>>::sse_encode(self.max_color_area_num, serializer);
         <Option<i32>>::sse_encode(self.max_pattern_area_num, serializer);
         <Option<i32>>::sse_encode(self.max_pattern_mask_num, serializer);
+        <Vec<i32>>::sse_encode(self.custom_area_order, serializer);
     }
 }
 
