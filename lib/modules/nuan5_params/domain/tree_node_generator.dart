@@ -5,14 +5,14 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.da
 import "package:nikki_albums/src/rust/nuan5_params/structs/clock_in_photo_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/collage_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
-import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
+import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 
 import "package:flutter/material.dart" hide ColorSwatch;
+import "dart:math";
 
 import "package:easy_localization/easy_localization.dart";
-
 
 String trText(String key, {String category = "media_params"}){
   final String complete = "infinity_nikki.$category.$key";
@@ -31,12 +31,19 @@ String trBool(bool key, {int index = 1, String category = "media_params"}){
 }
 
 Color convertColor((double, double, double, double) color){
-  return Color.fromARGB(
-    (255 * color.$4).toInt(),
-    (255 * color.$1).toInt(),
-    (255 * color.$2).toInt(),
-    (255 * color.$3).toInt(),
-  );
+  double gamma(double c){
+    c = c.clamp(0.0, 1.0);
+    return c <= 0.0031308 ? 12.92 * c : 1.055 * pow(c, 1.0 / 2.4) - 0.055;
+  }
+
+  final (r, g, b, a) = color;
+
+  final R = (gamma(r) * 255).round().clamp(0, 255);
+  final G = (gamma(g) * 255).round().clamp(0, 255);
+  final B = (gamma(b) * 255).round().clamp(0, 255);
+  final A = (a.clamp(0.0, 1.0) * 255).round().clamp(0, 255);
+
+  return Color.fromARGB(A, R, G, B);
 }
 
 TreeNode genNikkiPhotoParams(NikkiPhotoParams params){
