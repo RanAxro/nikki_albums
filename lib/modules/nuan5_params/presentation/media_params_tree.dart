@@ -115,7 +115,7 @@ class TreeNodeTile extends StatelessWidget{
       child: AppButton.smallText(
         toolTip: node.tooltip,
         isTranslate: false,
-        onClick: entry.hasChildren ? onToggle : node.onClick,
+        onClick: entry.hasChildren ? onToggle : () => node.onClick?.call(context),
         child: TreeIndentation(
           entry: entry,
           guide: IndentGuide.scopingLines(

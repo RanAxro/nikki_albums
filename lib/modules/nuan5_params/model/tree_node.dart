@@ -5,7 +5,7 @@ class TreeNode{
   final Widget? icon;
   final String title;
   final String? message;
-  final VoidCallback? onClick;
+  final void Function(BuildContext)? onClick;
   final Iterable<TreeNode> children;
   final bool initiallyExpanded;
 

@@ -1,3 +1,4 @@
+
 import "../model/tree_node.dart";
 import "../model/enumeration.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
@@ -11,6 +12,7 @@ import "package:nikki_albums/utils/clipboard.dart";
 import "package:flutter/material.dart" hide ColorSwatch;
 
 import "package:easy_localization/easy_localization.dart";
+
 
 String trText(String key, {String category = "media_params"}){
   final String complete = "infinity_nikki.$category.$key";
@@ -180,7 +182,7 @@ TreeNode genPhotographyParams(PhotographyParams params){
           /// TODO
           tooltip: trText("click_to_view_map", category: "common"),
           message: trText("location_m"),
-          onClick: (){
+          onClick: (BuildContext context){
             AppToast.showMessage(
               context: frameKey.currentContext!,
               message: trText("lack_data", category: "common"),
@@ -266,7 +268,7 @@ TreeNode genCameraParams(RichCameraParams params){
           },
         ),
         message: params.params,
-        onClick: () async{
+        onClick: (BuildContext context) async{
           try{
             await copyTextToClipboard(params.params);
             AppToast.showMessage(
@@ -470,7 +472,7 @@ TreeNode genNikkiParams(NikkiParams params){
       ),
       TreeNode(
         title: trText("hidden"),
-          message: trBool(params.giantState, index: 4)
+        message: trBool(params.giantState, index: 4)
       ),
       TreeNode(
         title: trText("dressing"),
