@@ -40,6 +40,7 @@
     "common": {
       "click_to_view_map": "点击定位到地图",
       "lack_data": "数据缺失",
+      "click_to_copy": "点击复制",
       "click_to_copy_param": "点击复制参数"
     },
     "media_params": {
