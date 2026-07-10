@@ -1904,6 +1904,7 @@ class AppCachedNetworkImage extends StatelessWidget{
 }
 
 class AppSuperTooltip extends StatelessWidget{
+  final EdgeInsetsGeometry padding;
   final double? width;
   final double? height;
   final ColorRole colorRole;
@@ -1913,6 +1914,7 @@ class AppSuperTooltip extends StatelessWidget{
 
   const AppSuperTooltip({
     super.key,
+    this.padding = const EdgeInsets.all(smallPadding),
     this.width,
     this.height,
     this.colorRole = ColorRole.background,
@@ -1941,10 +1943,13 @@ class AppSuperTooltip extends StatelessWidget{
         fadeInDuration: animationTime,
         fadeOutDuration: animationTime,
       ),
-      content: SizedBox(
-        width: width,
-        height: height,
-        child: content,
+      content: Padding(
+        padding: padding,
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: content,
+        ),
       ),
       child: child,
     );
