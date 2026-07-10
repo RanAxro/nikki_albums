@@ -186,14 +186,14 @@
       "color_swatch": {
         "name": "Color Swatch",
         "unknown": "Unknown",
-        "palette_1": "palette 1",
-        "palette_2": "palette 2",
-        "palette_3": "palette 3",
-        "palette_4": "palette 4",
-        "palette_5": "palette 5",
-        "palette_6": "palette 6",
-        "palette_7": "palette 7",
-        "palette_8": "palette 8"
+        "swatch_1": "palette 1",
+        "swatch_2": "palette 2",
+        "swatch_3": "palette 3",
+        "swatch_4": "palette 4",
+        "swatch_5": "palette 5",
+        "swatch_6": "palette 6",
+        "swatch_7": "palette 7",
+        "swatch_8": "palette 8"
       },
       "glossiness": "Glossiness",
       "roughness": "Roughness",

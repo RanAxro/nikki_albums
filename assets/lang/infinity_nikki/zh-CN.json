@@ -213,14 +213,14 @@
       "color_swatch": {
         "name": "色格",
         "unknown": "未知",
-        "palette_1": "第1格",
-        "palette_2": "第2格",
-        "palette_3": "第3格",
-        "palette_4": "第4格",
-        "palette_5": "第5格",
-        "palette_6": "第6格",
-        "palette_7": "第7格",
-        "palette_8": "第8格"
+        "swatch_1": "第1格",
+        "swatch_2": "第2格",
+        "swatch_3": "第3格",
+        "swatch_4": "第4格",
+        "swatch_5": "第5格",
+        "swatch_6": "第6格",
+        "swatch_7": "第7格",
+        "swatch_8": "第8格"
       },
       "glossiness": "光泽度",
       "roughness": "粗糙度",
