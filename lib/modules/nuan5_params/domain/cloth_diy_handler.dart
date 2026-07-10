@@ -153,8 +153,7 @@ class ClothDiyHandler{
       return null;
     }
 
-    String str = serialNumber.toString();
-    return str.length == 1 ? "0$str" : str;
+    return serialNumber.toString().padLeft(2, "0");
   }
 
   DyeCondition? getClothDyeCondition(Nuan5DatabaseReaderV1 reader, ClothParams clothParams){
