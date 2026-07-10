@@ -3858,13 +3858,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return Nuan5ClothDiySwatchColor(
-      r: dco_decode_f_64(arr[0]),
-      g: dco_decode_f_64(arr[1]),
-      b: dco_decode_f_64(arr[2]),
-      a: dco_decode_f_64(arr[3]),
+      rgba: dco_decode_record_f_64_f_64_f_64_f_64(arr[0]),
     );
   }
 
@@ -6677,11 +6674,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_r = sse_decode_f_64(deserializer);
-    var var_g = sse_decode_f_64(deserializer);
-    var var_b = sse_decode_f_64(deserializer);
-    var var_a = sse_decode_f_64(deserializer);
-    return Nuan5ClothDiySwatchColor(r: var_r, g: var_g, b: var_b, a: var_a);
+    var var_rgba = sse_decode_record_f_64_f_64_f_64_f_64(deserializer);
+    return Nuan5ClothDiySwatchColor(rgba: var_rgba);
   }
 
   @protected
@@ -9666,10 +9660,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_f_64(self.r, serializer);
-    sse_encode_f_64(self.g, serializer);
-    sse_encode_f_64(self.b, serializer);
-    sse_encode_f_64(self.a, serializer);
+    sse_encode_record_f_64_f_64_f_64_f_64(self.rgba, serializer);
   }
 
   @protected

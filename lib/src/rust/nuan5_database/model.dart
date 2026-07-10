@@ -11,30 +11,19 @@ part 'model.freezed.dart';
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class Nuan5ClothDiySwatchColor {
-  final double r;
-  final double g;
-  final double b;
-  final double a;
+  final (double, double, double, double) rgba;
 
-  const Nuan5ClothDiySwatchColor({
-    required this.r,
-    required this.g,
-    required this.b,
-    required this.a,
-  });
+  const Nuan5ClothDiySwatchColor({required this.rgba});
 
   @override
-  int get hashCode => r.hashCode ^ g.hashCode ^ b.hashCode ^ a.hashCode;
+  int get hashCode => rgba.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Nuan5ClothDiySwatchColor &&
           runtimeType == other.runtimeType &&
-          r == other.r &&
-          g == other.g &&
-          b == other.b &&
-          a == other.a;
+          rgba == other.rgba;
 }
 
 class Nuan5ClothDyeArea {

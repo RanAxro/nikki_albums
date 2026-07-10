@@ -4247,16 +4247,8 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoP
 impl SseDecode for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_r = <f64>::sse_decode(deserializer);
-        let mut var_g = <f64>::sse_decode(deserializer);
-        let mut var_b = <f64>::sse_decode(deserializer);
-        let mut var_a = <f64>::sse_decode(deserializer);
-        return crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
-            r: var_r,
-            g: var_g,
-            b: var_b,
-            a: var_a,
-        };
+        let mut var_rgba = <(f64, f64, f64, f64)>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5ClothDiySwatchColor { rgba: var_rgba };
     }
 }
 
@@ -7579,13 +7571,7 @@ impl
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.r.into_into_dart().into_dart(),
-            self.g.into_into_dart().into_dart(),
-            self.b.into_into_dart().into_dart(),
-            self.a.into_into_dart().into_dart(),
-        ]
-        .into_dart()
+        [self.rgba.into_into_dart().into_dart()].into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
@@ -10195,10 +10181,7 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoP
 impl SseEncode for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <f64>::sse_encode(self.r, serializer);
-        <f64>::sse_encode(self.g, serializer);
-        <f64>::sse_encode(self.b, serializer);
-        <f64>::sse_encode(self.a, serializer);
+        <(f64, f64, f64, f64)>::sse_encode(self.rgba, serializer);
     }
 }
 

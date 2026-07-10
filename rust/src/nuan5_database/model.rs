@@ -75,8 +75,5 @@ pub struct Nuan5ClothDyePalette{
 #[derive(Clone)]
 #[derive(Deserialize)]
 pub struct Nuan5ClothDiySwatchColor{
-  pub r: f64,
-  pub g: f64,
-  pub b: f64,
-  pub a: f64,
+  pub rgba: (f64, f64, f64, f64),
 }
