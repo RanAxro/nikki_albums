@@ -58,10 +58,12 @@ class ClothDiyHandler{
       zone = targetGroupId;
     }
 
-    if(data.customAreaOrder.contains(zone)){
-      zone = 1 + data.customAreaOrder.indexOf(zone);
-    }else{
-      zone += data.customAreaOrder.length;
+    if(featureTag == 1 || featureTag == 3){
+      if(data.customAreaOrder.contains(zone)){
+        zone = 1 + data.customAreaOrder.indexOf(zone);
+      }else{
+        zone += data.customAreaOrder.where((int t) => t > zone).length;
+      }
     }
 
     return zone;
