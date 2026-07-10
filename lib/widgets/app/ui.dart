@@ -1956,3 +1956,83 @@ class AppSuperTooltip extends StatelessWidget{
   }
 }
 
+class AppTab extends StatefulWidget{
+  final Axis direction;
+  final double spacing;
+  final int initIndex;
+  final Duration duration;
+  final Curve curve;
+  final List<({Widget nav, Widget page})> children;
+
+  const AppTab({
+    super.key,
+    this.direction = Axis.horizontal,
+    this.spacing = listSpacing,
+    this.initIndex = 0,
+    this.duration = animationTime,
+    this.curve = animationCurve,
+    required this.children,
+  });
+
+  @override
+  State<AppTab> createState() => _AppTabState();
+}
+
+class _AppTabState extends State<AppTab>{
+  final List<Widget> navList = [];
+  final List<Widget> pageList = [];
+  late int currentPage;
+  late final PageController controller;
+
+  @override
+  void initState(){
+    super.initState();
+
+    currentPage = widget.initIndex;
+    controller = PageController(initialPage: widget.initIndex);
+
+    for(final (index, child) in widget.children.indexed){
+      navList.add(GestureDetector(
+        onTap: (){
+          currentPage = index;
+          controller.animateToPage(index, duration: widget.duration, curve: widget.curve);
+        },
+        child: child.nav,
+      ));
+      pageList.add(child.page);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context){
+    final List<Widget> children = [
+      ListenableBuilder(
+        listenable: controller,
+        builder: (BuildContext context, Widget? child){
+          return AppRadioStack(
+            direction: widget.direction,
+            selectedIndex: currentPage,
+            children: navList,
+          );
+        },
+      ),
+
+      Expanded(
+        child: PageView.builder(
+          scrollDirection: widget.direction,
+          controller: controller,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: pageList.length,
+          itemBuilder: (BuildContext context, int index) => pageList[index],
+        ),
+      ),
+    ];
+
+    return Flex(
+      direction: widget.direction == Axis.horizontal ? Axis.vertical : Axis.horizontal,
+      spacing: widget.spacing,
+      children: children,
+    );
+  }
+}
+
