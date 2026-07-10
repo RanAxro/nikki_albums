@@ -4263,9 +4263,9 @@ impl SseDecode for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
 impl SseDecode for crate::nuan5_database::model::Nuan5ClothDyeArea {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_maxColorAreaNum = <i32>::sse_decode(deserializer);
-        let mut var_maxPatternAreaNum = <i32>::sse_decode(deserializer);
-        let mut var_maxPatternMaskNum = <i32>::sse_decode(deserializer);
+        let mut var_maxColorAreaNum = <Option<i32>>::sse_decode(deserializer);
+        let mut var_maxPatternAreaNum = <Option<i32>>::sse_decode(deserializer);
+        let mut var_maxPatternMaskNum = <Option<i32>>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5ClothDyeArea {
             max_color_area_num: var_maxColorAreaNum,
             max_pattern_area_num: var_maxPatternAreaNum,
@@ -4566,6 +4566,17 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
                     deserializer,
                 ),
             );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<i32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<i32>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -10194,9 +10205,9 @@ impl SseEncode for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
 impl SseEncode for crate::nuan5_database::model::Nuan5ClothDyeArea {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.max_color_area_num, serializer);
-        <i32>::sse_encode(self.max_pattern_area_num, serializer);
-        <i32>::sse_encode(self.max_pattern_mask_num, serializer);
+        <Option<i32>>::sse_encode(self.max_color_area_num, serializer);
+        <Option<i32>>::sse_encode(self.max_pattern_area_num, serializer);
+        <Option<i32>>::sse_encode(self.max_pattern_mask_num, serializer);
     }
 }
 
@@ -10433,6 +10444,16 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
             <crate::nuan5_params::structs::nikki_photo_params::DyeColorParams>::sse_encode(
                 value, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Option<i32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <i32>::sse_encode(value, serializer);
         }
     }
 }

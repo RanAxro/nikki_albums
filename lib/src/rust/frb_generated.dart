@@ -2679,6 +2679,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_box_autoadd_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_i_64(raw);
@@ -3869,9 +3875,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 3)
       throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
     return Nuan5ClothDyeArea(
-      maxColorAreaNum: dco_decode_i_32(arr[0]),
-      maxPatternAreaNum: dco_decode_i_32(arr[1]),
-      maxPatternMaskNum: dco_decode_i_32(arr[2]),
+      maxColorAreaNum: dco_decode_opt_box_autoadd_i_32(arr[0]),
+      maxPatternAreaNum: dco_decode_opt_box_autoadd_i_32(arr[1]),
+      maxPatternMaskNum: dco_decode_opt_box_autoadd_i_32(arr[2]),
     );
   }
 
@@ -4069,6 +4075,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_dye_color_params(raw);
+  }
+
+  @protected
+  int? dco_decode_opt_box_autoadd_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_i_32(raw);
   }
 
   @protected
@@ -5183,6 +5195,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_game_config(deserializer));
+  }
+
+  @protected
+  int sse_decode_box_autoadd_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_i_32(deserializer));
   }
 
   @protected
@@ -6671,9 +6689,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_maxColorAreaNum = sse_decode_i_32(deserializer);
-    var var_maxPatternAreaNum = sse_decode_i_32(deserializer);
-    var var_maxPatternMaskNum = sse_decode_i_32(deserializer);
+    var var_maxColorAreaNum = sse_decode_opt_box_autoadd_i_32(deserializer);
+    var var_maxPatternAreaNum = sse_decode_opt_box_autoadd_i_32(deserializer);
+    var var_maxPatternMaskNum = sse_decode_opt_box_autoadd_i_32(deserializer);
     return Nuan5ClothDyeArea(
       maxColorAreaNum: var_maxColorAreaNum,
       maxPatternAreaNum: var_maxPatternAreaNum,
@@ -6926,6 +6944,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_dye_color_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  int? sse_decode_opt_box_autoadd_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_i_32(deserializer));
     } else {
       return null;
     }
@@ -8319,6 +8348,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_i_64(
     PlatformInt64 self,
     SseSerializer serializer,
@@ -9643,9 +9678,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.maxColorAreaNum, serializer);
-    sse_encode_i_32(self.maxPatternAreaNum, serializer);
-    sse_encode_i_32(self.maxPatternMaskNum, serializer);
+    sse_encode_opt_box_autoadd_i_32(self.maxColorAreaNum, serializer);
+    sse_encode_opt_box_autoadd_i_32(self.maxPatternAreaNum, serializer);
+    sse_encode_opt_box_autoadd_i_32(self.maxPatternMaskNum, serializer);
   }
 
   @protected
@@ -9878,6 +9913,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_dye_color_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_i_32(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_i_32(self, serializer);
     }
   }
 

@@ -38,14 +38,14 @@ class Nuan5ClothDiySwatchColor {
 }
 
 class Nuan5ClothDyeArea {
-  final int maxColorAreaNum;
-  final int maxPatternAreaNum;
-  final int maxPatternMaskNum;
+  final int? maxColorAreaNum;
+  final int? maxPatternAreaNum;
+  final int? maxPatternMaskNum;
 
   const Nuan5ClothDyeArea({
-    required this.maxColorAreaNum,
-    required this.maxPatternAreaNum,
-    required this.maxPatternMaskNum,
+    this.maxColorAreaNum,
+    this.maxPatternAreaNum,
+    this.maxPatternMaskNum,
   });
 
   @override
