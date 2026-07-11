@@ -1,9 +1,13 @@
 
+import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/camera_params_edit_controller.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_item_creator.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/camera_params_edit_panel.dart";
+import "package:nikki_albums/modules/parameter_manager/presentation/cloth_diy_params_panel.dart";
+import "package:nikki_albums/modules/parameter_manager/presentation/rich_building_params_panel.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -18,6 +22,7 @@ class ParamItemEditPanel extends StatefulWidget{
 
 class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   Nuan5DatabaseReaderV1? reader;
+  String currentParamString = "";
   final ValueNotifier<dynamic> currentParam = ValueNotifier(null);
 
   Future<void> initReader() async{
@@ -35,8 +40,10 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
   @override
   Widget build(BuildContext context){
-    tryDeParam("lGoSGGot2pbfRozyhnAnEUQ89OMsIaB4ekxCAO1Y8WKQULnVJlz3hI+qW46E40+sU+B1kx+IgtBEq8wBxOM5kXxOTamKCz60zCykyQ1+/ZGo+anNzqQ7Hr6maME5FuV4GPJfQd5HUDO+thoax5xcZVFGxo86fUW5yPQy2Rk065XA/r6UjbmeVdNkHcH63ROU")
-      .then((onValue) => currentParam.value = onValue);
+    // tryDeParam("lGoSGGot2pbfRozyhnAnEUQ89OMsIaB4ekxCAO1Y8WKQULnVJlz3hI+qW46E40+sU+B1kx+IgtBEq8wBxOM5kXxOTamKCz60zCykyQ1+/ZGo+anNzqQ7Hr6maME5FuV4GPJfQd5HUDO+thoax5xcZVFGxo86fUW5yPQy2Rk065XA/r6UjbmeVdNkHcH63ROU")
+    //   .then((onValue) => currentParam.value = onValue);
+    tryDeParam("10aQpNlPjZ2#")
+        .then((onValue) => currentParam.value = onValue);
 
     return Row(
       children: [
@@ -46,6 +53,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
             children: [
               AppTextFiled(
                 onChanged: (String value) async{
+                  currentParamString = value;
                   final t = await tryDeParam(value);
                   currentParam.value = t;
                   print(t);
@@ -65,6 +73,22 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
               if(param is CameraParams){
                 return CameraParamsEditPanel(
                   controller: CameraParamsEditController(cameraParams: param),
+                  reader: reader,
+                );
+              }
+
+              if(param is ClothDiyParams){
+                return ClothDiyParamsPanel(
+                  shareCode: currentParamString,
+                  clothDiyParams: param,
+                  reader: reader,
+                );
+              }
+
+              if(param is RichBuildingParams){
+                return RichBuildingParamsPanel(
+                  shareCode: currentParamString,
+                  richBuildingParams: param,
                   reader: reader,
                 );
               }

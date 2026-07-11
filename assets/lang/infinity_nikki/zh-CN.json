@@ -248,6 +248,11 @@
       "template_id": "模板",
       "zone": "区域",
       "image_id": "原图id",
+      "cloth_diy_data": {
+        "time": "染色码生成时间",
+        "condition": "染色条件",
+        "unknown": "未知"
+      },
       "home_build_data": {
         "cover_image": "方案封面",
         "name": "方案名",
@@ -270,6 +275,15 @@
       "65": "欧服",
       "66": "欧服(测试服)",
       "67": "欧服(体验服)"
+    },
+    "dye_condition": {
+      "null": "未知",
+      "directly": "直接可染",
+      "complete": "集齐整套可染",
+      "growUp": "焕新可染",
+      "evolution_1": "一进可染",
+      "evolution_2": "二进可染",
+      "evolution_3": "满进可染"
     }
   }
 }

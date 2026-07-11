@@ -5,6 +5,7 @@ import "package:nikki_albums/modules/nuan5_params/model/image.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/cloth_diy_handler.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
 import "package:nikki_albums/utils/clipboard.dart";
@@ -29,11 +30,13 @@ class _TableRowBox{
 }
 
 class ClothDiyParamsPanel extends StatelessWidget{
+  final String shareCode;
   final ClothDiyParams clothDiyParams;
   final Nuan5DatabaseReaderV1? reader;
 
   const ClothDiyParamsPanel({
     super.key,
+    required this.shareCode,
     required this.clothDiyParams,
     required this.reader,
   });
@@ -296,7 +299,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
     return AppFloatingIndicatorButtonGroup(
       child: SmoothPointerScroll(
         builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-          return GridView.builder(
+          final GridView gridView = GridView.builder(
             controller: scrollController,
             physics: physics,
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -348,8 +351,8 @@ class ClothDiyParamsPanel extends StatelessWidget{
                         spacing: listSpacing,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          AppText("染色条件", fontWeight: FontWeight.bold),
-                          AppText(condition.toString(), softWrap: false),
+                          AppText(trText("cloth_diy_data.condition"), fontWeight: FontWeight.bold),
+                          AppText(trText((condition?.name).toString(), category: "dye_condition"), softWrap: false),
                         ],
                       ),
 
@@ -452,6 +455,45 @@ class ClothDiyParamsPanel extends StatelessWidget{
                 ),
               );
             },
+          );
+
+          final DyeCondition? condition = reader == null ? null : handler.getDyeCondition(reader!, clothDiyParams.clothes);
+          return Column(
+            spacing: listSpacing,
+            children: [
+              Table(
+                columnWidths: const {
+                  0: IntrinsicColumnWidth(),
+                  1: FlexColumnWidth(),
+                },
+                border: TableBorder.all(
+                  color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+                ),
+                children: [
+                  TableRow(
+                    children: [
+                      AppText(trText("cloth_diy_data.time")),
+                      AppText(DateTime.fromMillisecondsSinceEpoch(ClothDiyShareCode.fromCodeStr(shareCode).timestamp()).toString()),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      AppText(trText("cloth_diy_data.condition")),
+                      AppText(trText((condition?.name).toString(), category: "dye_condition")),
+                    ],
+                  ),
+                ].map((TableRow tableRow) => TableRow(
+                  children: tableRow.children.map((child) => Padding(
+                    padding: const EdgeInsets.all(smallPadding),
+                    child: child,
+                  )).toList(),
+                )).toList(),
+              ),
+
+              Expanded(
+                child: gridView,
+              ),
+            ],
           );
         },
       ),
