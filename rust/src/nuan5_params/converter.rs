@@ -1,11 +1,11 @@
 use std::collections::{HashMap, HashSet};
 use crate::serde_nuan5_json::ext_type::{AdaptiveArray, OptionMap};
-use crate::nuan5_params::nuan5_structs::{image_custom_data, camera_params, diy_custom_data};
+use crate::nuan5_params::nuan5_structs::{image_custom_data, camera_params, diy_custom_data, build_data};
 use crate::nuan5_params::parser::momo_camera_params_parser::*;
 use crate::nuan5_params::parser::location_parser::parse_location;
 use crate::nuan5_params::parser::cloth_parser::parse_cloth;
 use crate::nuan5_params::parser::eureka_parser::parse_eureka;
-use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, camera_params::*};
+use super::structs::{nikki_photo_params::*, clock_in_photo_params::*, collage_params::*, cloth_diy_params::*, camera_params::*, building_params::*};
 
 pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> CameraParams{
   match data{
@@ -610,4 +610,18 @@ pub(crate) fn convert_diy_history_share_code_params(data: &diy_custom_data::DiyH
 
 pub(crate) fn convert_diy_history_share_code_box(data: &diy_custom_data::DiyHistoryShareCodeBox) -> DiyHistoryShareCodeParamsBox{
   data.iter().map(convert_diy_history_share_code_params).collect()
+}
+
+pub(crate) fn convert_rich_build_data(data: &build_data::RichBuildData) -> RichBuildingParams{
+  RichBuildingParams{
+    name: data.name.clone(),
+    cover_image: data.cover_image.clone(),
+    map_id: data.map_id,
+    last_modify_time: data.last_modify_time,
+    uid: data.uid,
+    game_area: data.game_area.clone(),
+    template_type: data.template_type,
+    furniture_count: data.place_info.len() as i32,
+    version: data.extra_info.content.version.clone(),
+  }
 }

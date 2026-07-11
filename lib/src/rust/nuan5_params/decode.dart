@@ -7,6 +7,7 @@ import '../frb_generated.dart';
 import 'decrypt.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+import 'structs/building_params.dart';
 import 'structs/camera_params.dart';
 import 'structs/clock_in_photo_params.dart';
 import 'structs/cloth.dart';
@@ -19,7 +20,7 @@ part 'decode.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `get_flag`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `MediaStreamCallbackContext`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`
 
 Future<MediaCustomData> decodeMediaParam({
   required MediaParamType paramType,
@@ -103,6 +104,17 @@ Future<ClothDiyParam?> clothDiyDeFile({
   path: path,
 );
 
+Future<HomeBuildParam?> deHomeBuildParam({
+  required HomeBuildParamType paramType,
+  required List<int> bytes,
+}) => RustLib.instance.api.crateNuan5ParamsDecodeDeHomeBuildParam(
+  paramType: paramType,
+  bytes: bytes,
+);
+
+Future<HomeBuildParam?> homeBuildDeNetwork({required HomeBuildShareCode key}) =>
+    RustLib.instance.api.crateNuan5ParamsDecodeHomeBuildDeNetwork(key: key);
+
 @freezed
 sealed class ClothDiyParam with _$ClothDiyParam {
   const ClothDiyParam._();
@@ -118,6 +130,19 @@ sealed class ClothDiyParam with _$ClothDiyParam {
 /// ClothDiy
 /// ============================================================
 enum ClothDiyParamType { clothDiy, diyHistoryShareCode }
+
+@freezed
+sealed class HomeBuildParam with _$HomeBuildParam {
+  const HomeBuildParam._();
+
+  const factory HomeBuildParam.netHomeBuild(RichBuildingParams field0) =
+      HomeBuildParam_NetHomeBuild;
+}
+
+/// ============================================================
+/// HomeBuild
+/// ============================================================
+enum HomeBuildParamType { netHomeBuild }
 
 @freezed
 sealed class MediaCustomData with _$MediaCustomData {

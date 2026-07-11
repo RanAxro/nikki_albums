@@ -15,6 +15,7 @@ import 'nuan5_params/decode.dart';
 import 'nuan5_params/decrypt.dart';
 import 'nuan5_params/encode.dart';
 import 'nuan5_params/encrypt.dart';
+import 'nuan5_params/structs/building_params.dart';
 import 'nuan5_params/structs/camera_params.dart';
 import 'nuan5_params/structs/clock_in_photo_params.dart';
 import 'nuan5_params/structs/cloth.dart';
@@ -245,6 +246,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameConfig dco_decode_box_autoadd_game_config(dynamic raw);
 
   @protected
+  HomeBuildParam dco_decode_box_autoadd_home_build_param(dynamic raw);
+
+  @protected
   int dco_decode_box_autoadd_i_32(dynamic raw);
 
   @protected
@@ -332,6 +336,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Region dco_decode_box_autoadd_region(dynamic raw);
+
+  @protected
+  RichBuildingParams dco_decode_box_autoadd_rich_building_params(dynamic raw);
 
   @protected
   RichCameraParams dco_decode_box_autoadd_rich_camera_params(dynamic raw);
@@ -474,6 +481,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   GameUidConfig dco_decode_game_uid_config(dynamic raw);
+
+  @protected
+  HomeBuildParam dco_decode_home_build_param(dynamic raw);
+
+  @protected
+  HomeBuildParamType dco_decode_home_build_param_type(dynamic raw);
 
   @protected
   int dco_decode_i_32(dynamic raw);
@@ -711,6 +724,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
 
   @protected
+  HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_i_32(dynamic raw);
 
   @protected
@@ -848,6 +864,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RegionPicture dco_decode_region_picture(dynamic raw);
+
+  @protected
+  RichBuildingParams dco_decode_rich_building_params(dynamic raw);
 
   @protected
   RichCameraParams dco_decode_rich_camera_params(dynamic raw);
@@ -1138,6 +1157,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer);
 
   @protected
+  HomeBuildParam sse_decode_box_autoadd_home_build_param(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   int sse_decode_box_autoadd_i_32(SseDeserializer deserializer);
 
   @protected
@@ -1251,6 +1275,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Region sse_decode_box_autoadd_region(SseDeserializer deserializer);
+
+  @protected
+  RichBuildingParams sse_decode_box_autoadd_rich_building_params(
+    SseDeserializer deserializer,
+  );
 
   @protected
   RichCameraParams sse_decode_box_autoadd_rich_camera_params(
@@ -1421,6 +1450,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   GameUidConfig sse_decode_game_uid_config(SseDeserializer deserializer);
+
+  @protected
+  HomeBuildParam sse_decode_home_build_param(SseDeserializer deserializer);
+
+  @protected
+  HomeBuildParamType sse_decode_home_build_param_type(
+    SseDeserializer deserializer,
+  );
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -1704,6 +1741,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  HomeBuildParam? sse_decode_opt_box_autoadd_home_build_param(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   int? sse_decode_opt_box_autoadd_i_32(SseDeserializer deserializer);
 
   @protected
@@ -1877,6 +1919,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RegionPicture sse_decode_region_picture(SseDeserializer deserializer);
+
+  @protected
+  RichBuildingParams sse_decode_rich_building_params(
+    SseDeserializer deserializer,
+  );
 
   @protected
   RichCameraParams sse_decode_rich_camera_params(SseDeserializer deserializer);
@@ -2225,6 +2272,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_home_build_param(
+    HomeBuildParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_i_32(int self, SseSerializer serializer);
 
   @protected
@@ -2373,6 +2426,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_box_autoadd_region(Region self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_rich_building_params(
+    RichBuildingParams self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_rich_camera_params(
@@ -2592,6 +2651,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_game_uid_config(GameUidConfig self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_home_build_param(
+    HomeBuildParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_home_build_param_type(
+    HomeBuildParamType self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -2960,6 +3031,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_home_build_param(
+    HomeBuildParam? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_i_32(int? self, SseSerializer serializer);
 
   @protected
@@ -3180,6 +3257,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_region_picture(RegionPicture self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_rich_building_params(
+    RichBuildingParams self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_rich_camera_params(

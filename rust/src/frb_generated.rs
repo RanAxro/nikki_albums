@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 823695473;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -174392300;
 
 // Section: executor
 
@@ -1075,6 +1075,45 @@ fn wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
         },
     )
 }
+fn wire__crate__nuan5_params__decode__de_home_build_param_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "de_home_build_param",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_param_type =
+                <crate::nuan5_params::decode::HomeBuildParamType>::sse_decode(&mut deserializer);
+            let api_bytes = <Vec<u8>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::nuan5_params::decode::de_home_build_param(
+                            &api_param_type,
+                            &api_bytes,
+                        ))?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__serde_config__de__decode_game_config_file_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1511,6 +1550,58 @@ fn wire__crate__api__simple__greet_impl(
                 let output_ok = Result::<_, ()>::Ok(crate::api::simple::greet(api_name))?;
                 Ok(output_ok)
             })())
+        },
+    )
+}
+fn wire__crate__nuan5_params__decode__home_build_de_network_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "home_build_de_network",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_key = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<HomeBuildShareCode>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
+                    (move || {
+                        let mut api_key_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_key, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => api_key_guard = Some(api_key.lockable_decode_sync_ref()),
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_key_guard = api_key_guard.unwrap();
+                        let output_ok =
+                            crate::nuan5_params::decode::home_build_de_network(&*api_key_guard)?;
+                        Ok(output_ok)
+                    })(),
+                )
+            }
         },
     )
 }
@@ -3424,6 +3515,36 @@ impl SseDecode for crate::serde_config::structs::game_config::GameUidConfig {
     }
 }
 
+impl SseDecode for crate::nuan5_params::decode::HomeBuildParam {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 =
+                    <crate::nuan5_params::structs::building_params::RichBuildingParams>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_params::decode::HomeBuildParam::NetHomeBuild(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::nuan5_params::decode::HomeBuildParamType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::nuan5_params::decode::HomeBuildParamType::NetHomeBuild,
+            _ => unreachable!("Invalid variant for HomeBuildParamType: {}", inner),
+        };
+    }
+}
+
 impl SseDecode for i32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4566,6 +4687,19 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
     }
 }
 
+impl SseDecode for Option<crate::nuan5_params::decode::HomeBuildParam> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::nuan5_params::decode::HomeBuildParam>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<i32> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5181,6 +5315,32 @@ impl SseDecode for crate::nuan5_params::structs::collage_params::RegionPicture {
     }
 }
 
+impl SseDecode for crate::nuan5_params::structs::building_params::RichBuildingParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_name = <String>::sse_decode(deserializer);
+        let mut var_coverImage = <Option<String>>::sse_decode(deserializer);
+        let mut var_mapId = <i32>::sse_decode(deserializer);
+        let mut var_lastModifyTime = <i64>::sse_decode(deserializer);
+        let mut var_uid = <i64>::sse_decode(deserializer);
+        let mut var_gameArea = <String>::sse_decode(deserializer);
+        let mut var_templateType = <i32>::sse_decode(deserializer);
+        let mut var_furnitureCount = <i32>::sse_decode(deserializer);
+        let mut var_version = <String>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::building_params::RichBuildingParams {
+            name: var_name,
+            cover_image: var_coverImage,
+            map_id: var_mapId,
+            last_modify_time: var_lastModifyTime,
+            uid: var_uid,
+            game_area: var_gameArea,
+            template_type: var_templateType,
+            furniture_count: var_furnitureCount,
+            version: var_version,
+        };
+    }
+}
+
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::RichCameraParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5778,129 +5938,141 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__serde_config__de__decode_game_config_file_impl(
+        29 => wire__crate__nuan5_params__decode__de_home_build_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__nuan5_params__decode__decode_media_param_impl(
+        30 => wire__crate__serde_config__de__decode_game_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
+        31 => wire__crate__nuan5_params__decode__decode_media_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__serde_config__de__decode_theme_config_file_impl(
+        32 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__serde_config__de__deserialize_game_config_impl(
+        33 => wire__crate__serde_config__de__decode_theme_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        34 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
+        34 => wire__crate__serde_config__de__deserialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        35 => wire__crate__serde_config__de__deserialize_theme_config_impl(
+        35 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
+        36 => wire__crate__serde_config__de__deserialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => {
+        37 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        38 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        38 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        39 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => {
+        40 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        41 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
+        42 => wire__crate__nuan5_params__decode__home_build_de_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        43 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        44 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
+        43 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
+        44 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        45 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+        46 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
+        47 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        49 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
+        49 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        51 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
+        51 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        52 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
+        53 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        53 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
+        54 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        56 => wire__crate__serde_config__se__serialize_game_config_impl(
+        55 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        57 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+        58 => wire__crate__serde_config__se__serialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__serde_config__se__serialize_theme_config_impl(
+        59 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        60 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -5981,30 +6153,30 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        40 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        46 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+        41 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        48 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        48 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+        50 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        50 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+        52 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        54 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        55 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+        56 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        57 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        59 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        60 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+        61 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        62 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -7034,6 +7206,50 @@ impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::game_config
     for crate::serde_config::structs::game_config::GameUidConfig
 {
     fn into_into_dart(self) -> crate::serde_config::structs::game_config::GameUidConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::HomeBuildParam {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::nuan5_params::decode::HomeBuildParam::NetHomeBuild(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::decode::HomeBuildParam
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::decode::HomeBuildParam>
+    for crate::nuan5_params::decode::HomeBuildParam
+{
+    fn into_into_dart(self) -> crate::nuan5_params::decode::HomeBuildParam {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::HomeBuildParamType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::NetHomeBuild => 0.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::decode::HomeBuildParamType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::decode::HomeBuildParamType>
+    for crate::nuan5_params::decode::HomeBuildParamType
+{
+    fn into_into_dart(self) -> crate::nuan5_params::decode::HomeBuildParamType {
         self
     }
 }
@@ -8086,6 +8302,38 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::collage_par
     for crate::nuan5_params::structs::collage_params::RegionPicture
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::collage_params::RegionPicture {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::building_params::RichBuildingParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.name.into_into_dart().into_dart(),
+            self.cover_image.into_into_dart().into_dart(),
+            self.map_id.into_into_dart().into_dart(),
+            self.last_modify_time.into_into_dart().into_dart(),
+            self.uid.into_into_dart().into_dart(),
+            self.game_area.into_into_dart().into_dart(),
+            self.template_type.into_into_dart().into_dart(),
+            self.furniture_count.into_into_dart().into_dart(),
+            self.version.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::building_params::RichBuildingParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::building_params::RichBuildingParams,
+    > for crate::nuan5_params::structs::building_params::RichBuildingParams
+{
+    fn into_into_dart(self) -> crate::nuan5_params::structs::building_params::RichBuildingParams {
         self
     }
 }
@@ -9507,6 +9755,38 @@ impl SseEncode for crate::serde_config::structs::game_config::GameUidConfig {
     }
 }
 
+impl SseEncode for crate::nuan5_params::decode::HomeBuildParam {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::nuan5_params::decode::HomeBuildParam::NetHomeBuild(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::nuan5_params::structs::building_params::RichBuildingParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::nuan5_params::decode::HomeBuildParamType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::nuan5_params::decode::HomeBuildParamType::NetHomeBuild => 0,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for i32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10435,6 +10715,16 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
     }
 }
 
+impl SseEncode for Option<crate::nuan5_params::decode::HomeBuildParam> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_params::decode::HomeBuildParam>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<i32> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10930,6 +11220,21 @@ impl SseEncode for crate::nuan5_params::structs::collage_params::RegionPicture {
             self.ori_custom_data,
             serializer,
         );
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::building_params::RichBuildingParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.name, serializer);
+        <Option<String>>::sse_encode(self.cover_image, serializer);
+        <i32>::sse_encode(self.map_id, serializer);
+        <i64>::sse_encode(self.last_modify_time, serializer);
+        <i64>::sse_encode(self.uid, serializer);
+        <String>::sse_encode(self.game_area, serializer);
+        <i32>::sse_encode(self.template_type, serializer);
+        <i32>::sse_encode(self.furniture_count, serializer);
+        <String>::sse_encode(self.version, serializer);
     }
 }
 

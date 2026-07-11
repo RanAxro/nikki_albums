@@ -310,6 +310,257 @@ as List<DiyHistoryShareCodeParams>,
 }
 
 /// @nodoc
+mixin _$HomeBuildParam {
+
+ RichBuildingParams get field0;
+/// Create a copy of HomeBuildParam
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HomeBuildParamCopyWith<HomeBuildParam> get copyWith => _$HomeBuildParamCopyWithImpl<HomeBuildParam>(this as HomeBuildParam, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'HomeBuildParam(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HomeBuildParamCopyWith<$Res>  {
+  factory $HomeBuildParamCopyWith(HomeBuildParam value, $Res Function(HomeBuildParam) _then) = _$HomeBuildParamCopyWithImpl;
+@useResult
+$Res call({
+ RichBuildingParams field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$HomeBuildParamCopyWithImpl<$Res>
+    implements $HomeBuildParamCopyWith<$Res> {
+  _$HomeBuildParamCopyWithImpl(this._self, this._then);
+
+  final HomeBuildParam _self;
+  final $Res Function(HomeBuildParam) _then;
+
+/// Create a copy of HomeBuildParam
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? field0 = null,}) {
+  return _then(_self.copyWith(
+field0: null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as RichBuildingParams,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [HomeBuildParam].
+extension HomeBuildParamPatterns on HomeBuildParam {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( HomeBuildParam_NetHomeBuild value)?  netHomeBuild,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
+return netHomeBuild(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( HomeBuildParam_NetHomeBuild value)  netHomeBuild,}){
+final _that = this;
+switch (_that) {
+case HomeBuildParam_NetHomeBuild():
+return netHomeBuild(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( HomeBuildParam_NetHomeBuild value)?  netHomeBuild,}){
+final _that = this;
+switch (_that) {
+case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
+return netHomeBuild(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( RichBuildingParams field0)?  netHomeBuild,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
+return netHomeBuild(_that.field0);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( RichBuildingParams field0)  netHomeBuild,}) {final _that = this;
+switch (_that) {
+case HomeBuildParam_NetHomeBuild():
+return netHomeBuild(_that.field0);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( RichBuildingParams field0)?  netHomeBuild,}) {final _that = this;
+switch (_that) {
+case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
+return netHomeBuild(_that.field0);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class HomeBuildParam_NetHomeBuild extends HomeBuildParam {
+  const HomeBuildParam_NetHomeBuild(this.field0): super._();
+  
+
+@override final  RichBuildingParams field0;
+
+/// Create a copy of HomeBuildParam
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HomeBuildParam_NetHomeBuildCopyWith<HomeBuildParam_NetHomeBuild> get copyWith => _$HomeBuildParam_NetHomeBuildCopyWithImpl<HomeBuildParam_NetHomeBuild>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam_NetHomeBuild&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'HomeBuildParam.netHomeBuild(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HomeBuildParam_NetHomeBuildCopyWith<$Res> implements $HomeBuildParamCopyWith<$Res> {
+  factory $HomeBuildParam_NetHomeBuildCopyWith(HomeBuildParam_NetHomeBuild value, $Res Function(HomeBuildParam_NetHomeBuild) _then) = _$HomeBuildParam_NetHomeBuildCopyWithImpl;
+@override @useResult
+$Res call({
+ RichBuildingParams field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$HomeBuildParam_NetHomeBuildCopyWithImpl<$Res>
+    implements $HomeBuildParam_NetHomeBuildCopyWith<$Res> {
+  _$HomeBuildParam_NetHomeBuildCopyWithImpl(this._self, this._then);
+
+  final HomeBuildParam_NetHomeBuild _self;
+  final $Res Function(HomeBuildParam_NetHomeBuild) _then;
+
+/// Create a copy of HomeBuildParam
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(HomeBuildParam_NetHomeBuild(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as RichBuildingParams,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$MediaCustomData {
 
 

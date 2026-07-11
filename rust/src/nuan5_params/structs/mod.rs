@@ -6,3 +6,4 @@ pub mod cloth_diy_params;
 pub mod camera_params;
 pub mod cloth;
 pub mod eureka;
+pub mod building_params;
