@@ -55,16 +55,16 @@ class ClothDiyParamsPanel extends StatelessWidget{
     0: IntrinsicColumnWidth(),
     1: IntrinsicColumnWidth(),
     2: FlexColumnWidth(),
-    3: IntrinsicColumnWidth(),
-    4: IntrinsicColumnWidth(),
+    3: FlexColumnWidth(),
+    4: FlexColumnWidth(),
   };
 
-  static const Map<int, TableColumnWidth> _specialPatternCreationColumnWidth = {
+  static const Map<int, TableColumnWidth> _patternCreationColumnWidth = {
     0: IntrinsicColumnWidth(),
     1: IntrinsicColumnWidth(),
     2: FlexColumnWidth(),
     3: IntrinsicColumnWidth(),
-    4: IntrinsicColumnWidth(),
+    4: FlexColumnWidth(),
   };
 
   Widget _buildColorCopyText(Color? color){
@@ -125,7 +125,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText(trText("diy_zone") + (zone?.toString() ?? "$featureTag - $targetGroupId")),
 
-          AppText((serialNumberStr ?? "  ") + trText("color_palette.${ColorPalette.fromFlag(palette).name}")),
+          AppText("${serialNumberStr ?? "  "} ${trText("color_palette.${ColorPalette.fromFlag(palette).name}")}"),
 
           swatch == null ?
             _buildColorCopyText(color) :
@@ -166,7 +166,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText(trText("diy_zone") + (zone?.toString() ?? "${specialEffectData.featureTag} - ${specialEffectData.targetGroupId}")),
 
-          AppText((serialNumberStr ?? "  ") + trText("color_palette.${ColorPalette.fromFlag(palette).name}")),
+          AppText("${serialNumberStr ?? "  "} ${trText("color_palette.${ColorPalette.fromFlag(palette).name}")}"),
 
           swatch == null ?
             _buildColorCopyText(color) :
@@ -420,7 +420,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
                                           border: TableBorder.all(
                                             color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
                                           ),
-                                          columnWidths: _specialPatternCreationColumnWidth,
+                                          columnWidths: _patternCreationColumnWidth,
                                           children: _buildPatternCreation(clothParams.cloth.id, clothParams.diy!.patternCreation),
                                         ),
                                       );

@@ -250,8 +250,7 @@
       "image_id": "原图id",
       "cloth_diy_data": {
         "time": "染色码生成时间",
-        "condition": "染色条件",
-        "unknown": "未知"
+        "condition": "染色条件"
       },
       "home_build_data": {
         "cover_image": "方案封面",
