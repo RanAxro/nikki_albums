@@ -245,6 +245,15 @@
       "65": "Europe",
       "66": "Europe(Test)",
       "67": "Europe(Pre)"
+    },
+    "dye_condition": {
+      "null": "Unknown",
+      "directly": "Direct dyeable",
+      "complete": "Complete Set",
+      "growUp": "Grow Up",
+      "evolution_1": "Evolution 1",
+      "evolution_2": "Evolution 2",
+      "evolution_3": "Full Evolution"
     }
   }
 }

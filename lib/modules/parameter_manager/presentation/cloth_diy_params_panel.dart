@@ -133,11 +133,11 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           if(roughness != null)
             colorMode == null ?
-            AppText("") :
-            Tooltip(
-              message: trText("glossiness"),
-              child: AppText((1 - roughness).toStringAsFixed(1)),
-            ),
+              AppText("") :
+              Tooltip(
+                message: trText("glossiness"),
+                child: AppText((1 - roughness).toStringAsFixed(1)),
+              ),
 
         ].map((Widget widget) => Padding(
           padding: const EdgeInsets.all(tinyPadding),
@@ -355,8 +355,6 @@ class ClothDiyParamsPanel extends StatelessWidget{
                           AppText(trText((condition?.name).toString(), category: "dye_condition"), softWrap: false),
                         ],
                       ),
-
-                      SelectableText(clothParams.cloth.id.toString()),
 
                       AppDivider(),
 
