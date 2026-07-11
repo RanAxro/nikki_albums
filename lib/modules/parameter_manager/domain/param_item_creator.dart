@@ -5,6 +5,7 @@ import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 
 import "package:flutter/foundation.dart";
 import "dart:convert";
@@ -88,10 +89,19 @@ Future<ClothDiyParams?> tryDeClothDiyShareCode(String code) async{
   }
 }
 
-/// TODO
-Future<ClothDiyParams?> tryDeHomeBuildShareCode(String code) async{
+Future<RichBuildingParams?> tryDeHomeBuildShareCode(String code) async{
   try{
-    return null;
+    final String cachePath = await getHomeBuildShareCodeTemp(code);
+
+    final HomeBuildShareCode key = HomeBuildShareCode.fromCodeStr(code);
+
+    final HomeBuildParam? homeBuildParam = await homeBuildDeNetwork(key: key, cachePath: cachePath);
+
+    return homeBuildParam?.whenOrNull(
+      netHomeBuild: (RichBuildingParams richBuildingParams){
+        return richBuildingParams;
+      },
+    );
   }catch(e){
     if(kDebugMode){
       rethrow;
@@ -104,4 +114,8 @@ Future<ClothDiyParams?> tryDeHomeBuildShareCode(String code) async{
 
 Future<String> getClothDiyShareCodeTemp(String code) async{
   return p.join((await getAppDataDirectoryPath()).path, "temp", "ClothDiyShareCode", code);
+}
+
+Future<String> getHomeBuildShareCodeTemp(String code) async{
+  return p.join((await getAppDataDirectoryPath()).path, "temp", "HomeBuildShareCode", code);
 }
