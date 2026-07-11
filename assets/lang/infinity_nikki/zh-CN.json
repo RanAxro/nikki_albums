@@ -257,7 +257,9 @@
         "name": "方案名",
         "version": "版本",
         "furniture_count": "家具数量",
-        "server": "可用服务器"
+        "server": "可用服务器",
+        "visualization": "可视化",
+        "open_building_momo": "打开 搬砖吧大喵"
       }
     },
     "share_code_server": {

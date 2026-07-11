@@ -229,7 +229,9 @@
         "name": "Scheme Name",
         "version": "Version",
         "furniture_count": "Total number of furniture",
-        "server": "Available Server"
+        "server": "Available Server",
+        "visualization": "Visualization",
+        "open_building_momo": "Go To BuildingMomo"
       }
     },
     "share_code_server": {
