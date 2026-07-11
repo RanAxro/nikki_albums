@@ -219,7 +219,29 @@
       "expedition": "Expedition",
       "template_id": "Template",
       "zone": "Zone",
-      "image_id": "Image Id"
+      "image_id": "Image Id",
+      "home_build_data": {
+        "cover_image": "Scheme Cover",
+        "name": "Scheme Name",
+        "version": "Version",
+        "furniture_count": "Total number of furniture",
+        "server": "Available Server"
+      }
+    },
+    "share_code_server": {
+      "-1": "Unknown",
+      "49": "China",
+      "50": "China(Test)",
+      "51": "China(Pre)",
+      "52": "Asia",
+      "53": "Asia(Test)",
+      "54": "Asia(Pre)",
+      "55": "America",
+      "56": "America(Test)",
+      "57": "America(Pre)",
+      "65": "Europe",
+      "66": "Europe(Test)",
+      "67": "Europe(Pre)"
     }
   }
 }
