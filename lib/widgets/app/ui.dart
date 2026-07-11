@@ -1226,40 +1226,36 @@ class AppText extends StatelessWidget {
   }
 }
 
-class AppIcon extends StatelessWidget {
+class AppIcon extends StatelessWidget{
   final String name;
   final bool isDye;
-  final double? opacity;
+  final double opacity;
   final double? scale;
   final double? width;
   final double? height;
+  final Color? color;
 
   const AppIcon(
     this.name, {
     super.key,
     this.isDye = true,
-    this.opacity,
+    this.opacity = 1,
     this.scale,
     this.width,
     this.height = smallButtonContentSize,
+    this.color,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final Color color = AppColorScheme.of(
-      context,
-    ).byRole(ColorRole.of(context)).onByState(ColorState.of(context));
+  Widget build(BuildContext context){
+    final Color drawColor = color ?? AppColorScheme.of(context).byRole(ColorRole.of(context)).onByState(ColorState.of(context));
 
     return Image.asset(
       "assets/icon/$name.webp",
       scale: scale,
       width: width,
       height: height,
-      color: isDye
-          ? opacity == null
-                ? color
-                : color.withAlpha((opacity! * 255).toInt())
-          : null,
+      color: isDye ? drawColor.withAlpha((opacity * 255).toInt()) : null,
     );
   }
 }
