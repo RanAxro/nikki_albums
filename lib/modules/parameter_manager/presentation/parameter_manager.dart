@@ -101,6 +101,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                       context: context,
                       builder: (BuildContext context){
                         return AppDialog(
+                          useIntrinsicHeight: false,
                           child: ParamItemEditPanel(),
                         );
                       },
