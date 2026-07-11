@@ -291,10 +291,35 @@ pub fn de_home_build_param(param_type: &HomeBuildParamType, bytes: &[u8]) -> Opt
 }
 
 #[frb]
-pub fn home_build_de_network(key: &HomeBuildShareCode) -> Result<Option<HomeBuildParam>, DecryptionError>{
-  decrypt::home_build_decode_network(key).map(|decrypted|{
-    de_home_build_param(&HomeBuildParamType::NetHomeBuild, &decrypted)
-  })
+pub fn home_build_de_network(key: &HomeBuildShareCode, cache_path: Option<String>) -> Result<Option<HomeBuildParam>, DecryptionError>{
+  match cache_path{
+    Some(cache_path) => {
+      let path = std::path::Path::new(&cache_path);
+
+      // 优先读取缓存
+      if let Ok(cached) = std::fs::read(path) {
+        if let Some(value) = de_home_build_param(&HomeBuildParamType::NetHomeBuild, &cached){
+          return Ok(Some(value));
+        }
+      }
+
+      // 缓存未命中，从网络获取并写入缓存
+      decrypt::home_build_decode_network(key).map(|decrypted|{
+        if let Some(parent) = path.parent() {
+          let _ = std::fs::create_dir_all(parent);
+        }
+        let _ = std::fs::write(path, &decrypted);
+
+        de_home_build_param(&HomeBuildParamType::NetHomeBuild, &decrypted)
+      })
+
+    },
+    None => {
+      decrypt::home_build_decode_network(key).map(|decrypted|{
+        de_home_build_param(&HomeBuildParamType::NetHomeBuild, &decrypted)
+      })
+    },
+  }
 }
 
 

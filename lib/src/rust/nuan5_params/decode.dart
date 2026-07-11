@@ -112,8 +112,13 @@ Future<HomeBuildParam?> deHomeBuildParam({
   bytes: bytes,
 );
 
-Future<HomeBuildParam?> homeBuildDeNetwork({required HomeBuildShareCode key}) =>
-    RustLib.instance.api.crateNuan5ParamsDecodeHomeBuildDeNetwork(key: key);
+Future<HomeBuildParam?> homeBuildDeNetwork({
+  required HomeBuildShareCode key,
+  String? cachePath,
+}) => RustLib.instance.api.crateNuan5ParamsDecodeHomeBuildDeNetwork(
+  key: key,
+  cachePath: cachePath,
+);
 
 @freezed
 sealed class ClothDiyParam with _$ClothDiyParam {

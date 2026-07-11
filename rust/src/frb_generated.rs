@@ -1578,6 +1578,7 @@ fn wire__crate__nuan5_params__decode__home_build_de_network_impl(
             let api_key = <RustOpaqueMoi<
                 flutter_rust_bridge::for_generated::RustAutoOpaqueInner<HomeBuildShareCode>,
             >>::sse_decode(&mut deserializer);
+            let api_cache_path = <Option<String>>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
                 transform_result_sse::<_, crate::nuan5_params::decrypt::DecryptionError>(
@@ -1596,8 +1597,10 @@ fn wire__crate__nuan5_params__decode__home_build_de_network_impl(
                             }
                         }
                         let api_key_guard = api_key_guard.unwrap();
-                        let output_ok =
-                            crate::nuan5_params::decode::home_build_de_network(&*api_key_guard)?;
+                        let output_ok = crate::nuan5_params::decode::home_build_de_network(
+                            &*api_key_guard,
+                            api_cache_path,
+                        )?;
                         Ok(output_ok)
                     })(),
                 )

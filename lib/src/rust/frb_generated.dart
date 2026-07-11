@@ -264,6 +264,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<HomeBuildParam?> crateNuan5ParamsDecodeHomeBuildDeNetwork({
     required HomeBuildShareCode key,
+    String? cachePath,
   });
 
   Future<Uint8List> crateNuan5ParamsDecryptHomeBuildDecodeNetwork({
@@ -1600,6 +1601,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<HomeBuildParam?> crateNuan5ParamsDecodeHomeBuildDeNetwork({
     required HomeBuildShareCode key,
+    String? cachePath,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1609,6 +1611,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
+          sse_encode_opt_String(cachePath, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1621,7 +1624,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_decryption_error,
         ),
         constMeta: kCrateNuan5ParamsDecodeHomeBuildDeNetworkConstMeta,
-        argValues: [key],
+        argValues: [key, cachePath],
         apiImpl: this,
       ),
     );
@@ -1630,7 +1633,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateNuan5ParamsDecodeHomeBuildDeNetworkConstMeta =>
       const TaskConstMeta(
         debugName: "home_build_de_network",
-        argNames: ["key"],
+        argNames: ["key", "cachePath"],
       );
 
   @override
