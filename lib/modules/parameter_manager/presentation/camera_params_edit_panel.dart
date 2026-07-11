@@ -267,6 +267,17 @@ class CameraParamsEditPanel extends StatelessWidget{
               ),
               _buildSliderCard(
                 context: context,
+                text: AppText.tr("infinity_nikki.media_params.zoom"),
+                min: 0.5,
+                max: 4.0,
+                getValue: () => 3.2,
+                getDisplay: (double zoom) => "${zoom.toStringAsFixed(1)}x",
+                onChanged: (double newValue){
+                  
+                },
+              ),
+              _buildSliderCard(
+                context: context,
                 text: AppText.tr("infinity_nikki.media_params.focal_length"),
                 getValue: () => controller.cameraParams.cameraFocalLength,
                 getDisplay: (double focalLength) => (10 + focalLength * 45).toStringAsFixed(0),
