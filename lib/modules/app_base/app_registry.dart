@@ -11,14 +11,10 @@ import "package:nikki_albums/modules/recycle_bin/recycle_bin.dart" as recycle_bi
 abstract class AppRegistry{
   static const List<String> langFile = [
     "infinity_nikki",
-    "infinity_nikki/cloth",
-    "infinity_nikki/cloth_outfit",
     "infinity_nikki/other",
   ];
 
   static const List<String> hotUpdateLangId = [
-    // "infinity-nikki-cloth-lang",
-    // "infinity-nikki-cloth-outfit-lang",
     "infinity_nikki",
   ];
 

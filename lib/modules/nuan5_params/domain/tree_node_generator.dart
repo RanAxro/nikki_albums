@@ -768,7 +768,7 @@ TreeNode genMomoHiddenState(MomoHiddenState params){
 Iterable<TreeNode> genColorGrid(int grid){
   return [
     TreeNode(
-      title: trText("color_palette.name"),
+      title: trText("color_palette"),
       message: trText((grid == -1 ? 0 : 1 + grid ~/ 8).toString(), category: "diy_color_palette"),
     ),
     if(grid != -1)
