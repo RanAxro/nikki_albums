@@ -211,6 +211,8 @@
     "group_scheme": "组合方案",
     "name": "名称",
     "tag": "标签",
+    "cover": "封面",
+    "select_cover": "请选择一张图片作为封面",
     "paste": "粘贴",
     "copy": "复制",
     "clear": "清空",

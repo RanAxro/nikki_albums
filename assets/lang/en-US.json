@@ -216,6 +216,8 @@
     "group_scheme": "Group Scheme",
     "name": "Name",
     "tag": "Tag",
+    "cover": "Cover",
+    "select_cover": "Please select an image as the cover.",
     "paste": "Paste",
     "copy": "Copy",
     "clear": "Clear",
