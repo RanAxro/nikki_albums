@@ -4933,7 +4933,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       gameArea: dco_decode_String(arr[5]),
       templateType: dco_decode_i_32(arr[6]),
       furnitureCount: dco_decode_i_32(arr[7]),
-      version: dco_decode_String(arr[8]),
+      version: dco_decode_opt_String(arr[8]),
     );
   }
 
@@ -8034,7 +8034,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_gameArea = sse_decode_String(deserializer);
     var var_templateType = sse_decode_i_32(deserializer);
     var var_furnitureCount = sse_decode_i_32(deserializer);
-    var var_version = sse_decode_String(deserializer);
+    var var_version = sse_decode_opt_String(deserializer);
     return RichBuildingParams(
       name: var_name,
       coverImage: var_coverImage,
@@ -11050,7 +11050,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_String(self.gameArea, serializer);
     sse_encode_i_32(self.templateType, serializer);
     sse_encode_i_32(self.furnitureCount, serializer);
-    sse_encode_String(self.version, serializer);
+    sse_encode_opt_String(self.version, serializer);
   }
 
   @protected

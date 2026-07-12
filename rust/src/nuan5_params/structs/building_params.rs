@@ -9,7 +9,7 @@ pub struct RichBuildingParams{
   pub game_area: String,
   pub template_type: i32,
   pub furniture_count: i32,
-  pub version: String,
+  pub version: Option<String>,
 }
 
 #[derive(Clone)]

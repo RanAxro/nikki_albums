@@ -58,12 +58,13 @@ class RichBuildingParamsPanel extends StatelessWidget{
                     ],
                   ),
 
-                  TableRow(
-                    children: [
-                      AppText(trText("home_build_data.version")),
-                      AppText(richBuildingParams.version),
-                    ],
-                  ),
+                  if(richBuildingParams.version != null)
+                    TableRow(
+                      children: [
+                        AppText(trText("home_build_data.version")),
+                        AppText(richBuildingParams.version.toString()),
+                      ],
+                    ),
 
                   TableRow(
                     children: [
@@ -104,7 +105,8 @@ class RichBuildingParamsPanel extends StatelessWidget{
                       }else{
                         AppToast.showMessage(
                           context: context,
-                          message: "",
+                          message: "Failed",
+                          state: false,
                         );
                       }
                     },

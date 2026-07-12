@@ -18,7 +18,7 @@ class RichBuildingParams {
   final String gameArea;
   final int templateType;
   final int furnitureCount;
-  final String version;
+  final String? version;
 
   const RichBuildingParams({
     required this.name,
@@ -29,7 +29,7 @@ class RichBuildingParams {
     required this.gameArea,
     required this.templateType,
     required this.furnitureCount,
-    required this.version,
+    this.version,
   });
 
   @override

@@ -5690,7 +5690,7 @@ impl SseDecode for crate::nuan5_params::structs::building_params::RichBuildingPa
         let mut var_gameArea = <String>::sse_decode(deserializer);
         let mut var_templateType = <i32>::sse_decode(deserializer);
         let mut var_furnitureCount = <i32>::sse_decode(deserializer);
-        let mut var_version = <String>::sse_decode(deserializer);
+        let mut var_version = <Option<String>>::sse_decode(deserializer);
         return crate::nuan5_params::structs::building_params::RichBuildingParams {
             name: var_name,
             cover_image: var_coverImage,
@@ -11692,7 +11692,7 @@ impl SseEncode for crate::nuan5_params::structs::building_params::RichBuildingPa
         <String>::sse_encode(self.game_area, serializer);
         <i32>::sse_encode(self.template_type, serializer);
         <i32>::sse_encode(self.furniture_count, serializer);
-        <String>::sse_encode(self.version, serializer);
+        <Option<String>>::sse_encode(self.version, serializer);
     }
 }
 

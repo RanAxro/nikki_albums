@@ -131,7 +131,8 @@ pub struct ExtraInfo{
 
 #[derive(Serialize, Deserialize)]
 pub struct ExtraInfoContent{
-  pub version: String,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub version: Option<String>,
 
   #[serde(skip_serializing_if = "Option::is_none")]
   pub temp_infos: Option<IdMap<TempInfo>>,
