@@ -25,7 +25,10 @@ void deepMergeMapsInPlace(
       // 两边都是 Map，递归进子节点继续合并
       deepMergeMapsInPlace(
         base[key] as Map<String, dynamic>,
-        deepStringifyKeys(value),
+        value.map((k, v) => MapEntry(
+          k.toString(),
+          v,  // 无需deepStringifyKeys，由deepMergeMapsInPlace递归处理
+        )),
       );
     }else{
       // 直接覆盖（包括 List、基本类型、null 等）
