@@ -27,6 +27,16 @@ Future<bool> copyFilesToClipboard(List<Path> paths) async {
   return true;
 }
 
+Future<String?> readTextFromClipboard() async{
+  final ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
+
+  if(data != null && data.text != null){
+    return data.text;
+  }else{
+    return null;
+  }
+}
+
 Future<List<Path>> readFilesFromClipboard() async {
   final List<Path> res = [];
 
