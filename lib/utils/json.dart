@@ -5,15 +5,19 @@ void deepMergeMapsInPlace(
   Map<String, dynamic> overlay,
 ){
   overlay.forEach((key, value){
-    if(value is Map<String, dynamic> && base[key] is Map<String, dynamic>){
+    if(value is Map && base[key] is Map<String, dynamic>){
       // 两边都是 Map，递归进子节点继续合并
       deepMergeMapsInPlace(
         base[key] as Map<String, dynamic>,
-        value,
+        value is Map<String ,dynamic> ? value : value.map((k, v) => MapEntry(k.toString(), v)),
       );
     }else{
       // 直接覆盖（包括 List、基本类型、null 等）
-      base[key] = value;
+      if(value is Map && value is! Map<String, dynamic>){
+        base[key] = value.map((k, v) => MapEntry(k.toString(), v));
+      }else{
+        base[key] = value;
+      }
     }
   });
 }
