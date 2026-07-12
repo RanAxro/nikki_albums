@@ -22,7 +22,7 @@ class ClothDiyHandler{
     final List<ClothParams?> res = List.filled(basis.length, null);
 
     for(final ClothParams clothParams in cloth){
-      if(clothParams.cloth.outfit == 10042){
+      if(clothParams.cloth.id % 100 == 42){
         continue;
       }
 
