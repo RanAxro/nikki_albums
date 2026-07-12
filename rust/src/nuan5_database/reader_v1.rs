@@ -1,6 +1,6 @@
 use flutter_rust_bridge::frb;
 use std::collections::HashMap;
-use serde::Deserialize;
+use prost::Message;
 use super::model::{Nuan5DatabaseCategory, Nuan5DatabaseItem};
 use super::nuan5_database::Nuan5DatabaseReader;
 use super::model::*;
@@ -32,13 +32,9 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
       },
     };
 
-    match rmp_serde::from_slice(&bytes){
-      Ok(option_d) => {
-        if let Some(d) = option_d {
-          self.data = Some(d);
-        }else{
-          return false;
-        }
+    match Nuan5DatabaseV1::decode(&*bytes){
+      Ok(data) => {
+        self.data = Some(data);
       },
       Err(_) => {
         return false;
@@ -202,15 +198,31 @@ impl Nuan5DatabaseReaderV1{
   }
 }
 
-#[derive(Deserialize)]
+#[frb(ignore)]
+#[derive(Message)]
 struct Nuan5DatabaseV1{
+  #[prost(map = "int32, message", tag = "1")]
   pub light: HashMap<i32, Nuan5Light>,
+
+  #[prost(map = "int32, message", tag = "2")]
   pub light_type: HashMap<i32, Nuan5LightType>,
+
+  #[prost(map = "int32, message", tag = "3")]
   pub filter: HashMap<i32, Nuan5Filter>,
+
+  #[prost(map = "int32, message", tag = "4")]
   pub filter_type: HashMap<i32, Nuan5FilterType>,
+
+  #[prost(map = "int32, message", tag = "5")]
   pub momo_pose: HashMap<i32, Nuan5MomoPose>,
+
+  #[prost(map = "int32, message", tag = "6")]
   pub cloth_dye_area: HashMap<i32, Nuan5ClothDyeArea>,
+
+  #[prost(map = "int32, message", tag = "7")]
   pub cloth_dye_palette: HashMap<i32, Nuan5ClothDyePalette>,
+
+  #[prost(map = "int32, message", tag = "8")]
   pub cloth_diy_swatch_color: HashMap<i32, Nuan5ClothDiySwatchColor>,
 }
 

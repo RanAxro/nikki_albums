@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use prost::Message;
 
 pub enum Nuan5DatabaseCategory{
   Light = 1,
@@ -22,59 +22,92 @@ pub enum Nuan5DatabaseItem{
   ClothDiySwatchColor(Nuan5ClothDiySwatchColor),
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5Light{
+  #[prost(string, tag = "1")]
   pub string_id: String,
+
+  #[prost(string, tag = "2")]
   pub param_id: String,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5LightType{
+  #[prost(int32, repeated, tag = "1")]
   pub light: Vec<i32>,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5Filter{
+  #[prost(string, tag = "1")]
   pub string_id: String,
+
+  #[prost(string, tag = "2")]
   pub param_id: String,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5FilterType{
+  #[prost(int32, repeated, tag = "1")]
   pub filter: Vec<i32>,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5MomoPose{
+  #[prost(string, tag = "1")]
   pub string_id: String,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5ClothDyeArea{
-  pub max_color_area_num: Option<i32>,
-  pub max_pattern_area_num: Option<i32>,
-  pub max_pattern_mask_num: Option<i32>,
+  #[prost(int32, tag = "1")]
+  pub max_color_area_num: i32,
+
+  #[prost(int32, tag = "2")]
+  pub max_pattern_area_num: i32,
+
+  #[prost(int32, tag = "3")]
+  pub max_pattern_mask_num: i32,
+
+  #[prost(int32, repeated, tag = "4")]
   pub custom_area_order: Vec<i32>,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5ClothDyePalette{
+  #[prost(int32, repeated, tag = "1")]
   pub directly: Vec<i32>,
+
+  #[prost(int32, repeated, tag = "2")]
   pub complete: Vec<i32>,
+
+  #[prost(int32, repeated, tag = "3")]
   pub grow_up: Vec<i32>,
+
+  #[prost(int32, repeated, tag = "4")]
   pub evolution_1: Vec<i32>,
+
+  #[prost(int32, repeated, tag = "5")]
   pub evolution_2: Vec<i32>,
 }
 
-#[derive(Clone)]
-#[derive(Deserialize)]
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5ClothDiySwatchColor{
-  pub rgba: (f64, f64, f64, f64),
+  #[prost(double, repeated, tag = "1")]
+  pub rgba: Vec<f64>,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5DiyPattern{
+  #[prost(string, tag = "1")]
+  pub string_id: String,
 }

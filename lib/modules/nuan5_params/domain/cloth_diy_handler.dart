@@ -49,11 +49,7 @@ class ClothDiyHandler{
 
     int zone;
     if(featureTag == 3){
-      if(data.maxColorAreaNum == null){
-        return null;
-      }else{
-        zone = data.maxColorAreaNum! + targetGroupId;
-      }
+      zone = data.maxColorAreaNum + targetGroupId;
     }else{
       zone = targetGroupId;
     }
@@ -83,8 +79,11 @@ class ClothDiyHandler{
     final Nuan5ClothDiySwatchColor? data = read[grid]?.whenOrNull(
       clothDiySwatchColor: (Nuan5ClothDiySwatchColor d) => d,
     );
+    if(data == null){
+      return null;
+    }
 
-    return data?.rgba;
+    return (data.rgba[0], data.rgba[1], data.rgba[2], data.rgba[3]);
   }
 
   int _generateAvailableId(int id){

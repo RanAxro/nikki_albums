@@ -8,12 +8,15 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'model.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
 class Nuan5ClothDiySwatchColor {
-  final (double, double, double, double) rgba;
+  final Float64List rgba;
 
   const Nuan5ClothDiySwatchColor({required this.rgba});
+
+  static Future<Nuan5ClothDiySwatchColor> default_() => RustLib.instance.api
+      .crateNuan5DatabaseModelNuan5ClothDiySwatchColorDefault();
 
   @override
   int get hashCode => rgba.hashCode;
@@ -27,17 +30,20 @@ class Nuan5ClothDiySwatchColor {
 }
 
 class Nuan5ClothDyeArea {
-  final int? maxColorAreaNum;
-  final int? maxPatternAreaNum;
-  final int? maxPatternMaskNum;
+  final int maxColorAreaNum;
+  final int maxPatternAreaNum;
+  final int maxPatternMaskNum;
   final Int32List customAreaOrder;
 
   const Nuan5ClothDyeArea({
-    this.maxColorAreaNum,
-    this.maxPatternAreaNum,
-    this.maxPatternMaskNum,
+    required this.maxColorAreaNum,
+    required this.maxPatternAreaNum,
+    required this.maxPatternMaskNum,
     required this.customAreaOrder,
   });
+
+  static Future<Nuan5ClothDyeArea> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5ClothDyeAreaDefault();
 
   @override
   int get hashCode =>
@@ -71,6 +77,9 @@ class Nuan5ClothDyePalette {
     required this.evolution1,
     required this.evolution2,
   });
+
+  static Future<Nuan5ClothDyePalette> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5ClothDyePaletteDefault();
 
   @override
   int get hashCode =>
@@ -126,11 +135,33 @@ sealed class Nuan5DatabaseItem with _$Nuan5DatabaseItem {
   ) = Nuan5DatabaseItem_ClothDiySwatchColor;
 }
 
+class Nuan5DiyPattern {
+  final String stringId;
+
+  const Nuan5DiyPattern({required this.stringId});
+
+  static Future<Nuan5DiyPattern> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5DiyPatternDefault();
+
+  @override
+  int get hashCode => stringId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5DiyPattern &&
+          runtimeType == other.runtimeType &&
+          stringId == other.stringId;
+}
+
 class Nuan5Filter {
   final String stringId;
   final String paramId;
 
   const Nuan5Filter({required this.stringId, required this.paramId});
+
+  static Future<Nuan5Filter> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5FilterDefault();
 
   @override
   int get hashCode => stringId.hashCode ^ paramId.hashCode;
@@ -149,6 +180,9 @@ class Nuan5FilterType {
 
   const Nuan5FilterType({required this.filter});
 
+  static Future<Nuan5FilterType> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5FilterTypeDefault();
+
   @override
   int get hashCode => filter.hashCode;
 
@@ -165,6 +199,9 @@ class Nuan5Light {
   final String paramId;
 
   const Nuan5Light({required this.stringId, required this.paramId});
+
+  static Future<Nuan5Light> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5LightDefault();
 
   @override
   int get hashCode => stringId.hashCode ^ paramId.hashCode;
@@ -183,6 +220,9 @@ class Nuan5LightType {
 
   const Nuan5LightType({required this.light});
 
+  static Future<Nuan5LightType> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5LightTypeDefault();
+
   @override
   int get hashCode => light.hashCode;
 
@@ -198,6 +238,9 @@ class Nuan5MomoPose {
   final String stringId;
 
   const Nuan5MomoPose({required this.stringId});
+
+  static Future<Nuan5MomoPose> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5MomoPoseDefault();
 
   @override
   int get hashCode => stringId.hashCode;
