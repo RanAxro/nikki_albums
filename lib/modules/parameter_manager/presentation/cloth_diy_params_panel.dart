@@ -125,7 +125,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText(trText("diy_zone") + (zone?.toString() ?? "$featureTag - $targetGroupId")),
 
-          AppText("${serialNumberStr ?? "  "} ${trText("color_palette.${ColorPalette.fromFlag(palette).name}")}"),
+          AppText("${serialNumberStr ?? "  "} ${trText(palette.toString(), category: "diy_color_palette")}"),
 
           swatch == null ?
             _buildColorCopyText(color) :
@@ -166,7 +166,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText(trText("diy_zone") + (zone?.toString() ?? "${specialEffectData.featureTag} - ${specialEffectData.targetGroupId}")),
 
-          AppText("${serialNumberStr ?? "  "} ${trText("color_palette.${ColorPalette.fromFlag(palette).name}")}"),
+          AppText("${serialNumberStr ?? "  "} ${trText(palette.toString(), category: "diy_color_palette")}"),
 
           swatch == null ?
             _buildColorCopyText(color) :

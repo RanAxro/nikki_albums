@@ -165,46 +165,6 @@ enum EurekaAttachmentPoint{
   }
 }
 
-enum ColorPalette{
-  custom(0),
-  flightFruitFlutter(1),
-  springStarlitBreath(2),
-  stellarFruitDream(3),
-  palettetailShimmer(4),
-  bibcoonFurballHug(5),
-  starlitChronosTree(6),
-  lanternByTheCliff(7),
-  chimecadaMurmur(8),
-  windbloomWhirl(9),
-  lampbloomMist(10),
-  sleeplessGlimmerdrop(11),
-  silkenLakeEmerald(12),
-  glimmergrassLetter(13),
-  scarfmothPhantom(14),
-  wisteriasolRain(15),
-  buddingHareEars(16),
-  bustleflySong(17),
-  celebcrowFeast(18);
-
-  final int flag;
-
-  const ColorPalette(this.flag);
-
-  static ColorPalette fromName(dynamic name){
-    return ColorPalette.values.firstWhere(
-      (e) => e.name == name,
-      orElse: () => ColorPalette.custom,
-    );
-  }
-
-  static ColorPalette fromFlag(dynamic flag){
-    return ColorPalette.values.firstWhere(
-      (e) => e.flag == flag,
-      orElse: () => ColorPalette.custom,
-    );
-  }
-}
-
 enum ColorSwatch{
   unknown(0),
   swatch_1(1),

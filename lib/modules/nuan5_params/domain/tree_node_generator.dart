@@ -769,7 +769,7 @@ Iterable<TreeNode> genColorGrid(int grid){
   return [
     TreeNode(
       title: trText("color_palette.name"),
-      message: trText("color_palette.${ColorPalette.fromFlag(grid == -1 ? 0 : 1 + grid ~/ 8)}"),
+      message: trText((grid == -1 ? 0 : 1 + grid ~/ 8).toString(), category: "diy_color_palette"),
     ),
     if(grid != -1)
       TreeNode(
