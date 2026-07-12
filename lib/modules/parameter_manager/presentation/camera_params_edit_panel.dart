@@ -17,15 +17,41 @@ import "package:flutter/material.dart";
 import "package:easy_localization/easy_localization.dart";
 
 
-class CameraParamsEditPanel extends StatelessWidget{
+class CameraParamsEditPanel extends StatefulWidget {
   final CameraParamsEditController controller;
+  final void Function(CameraParamsEditController)? onChanged;
   final Nuan5DatabaseReaderV1? reader;
 
   const CameraParamsEditPanel({
     super.key,
     required this.controller,
+    this.onChanged,
     this.reader,
   });
+
+  @override
+  State<CameraParamsEditPanel> createState() => _CameraParamsEditPanelState();
+}
+class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
+  late CameraParamsEditController controller;
+
+  void listener(){
+    widget.onChanged?.call(controller);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    controller = widget.controller;
+    controller.addListener(listener);
+  }
+
+  @override
+  void dispose(){
+    controller.removeListener(listener);
+    super.dispose();
+  }
+
 
   final LightSelectorHandler lightSelectorHandler = const LightSelectorHandler();
   final FilterSelectorHandler filterSelectorHandler = const FilterSelectorHandler();
@@ -251,6 +277,8 @@ class CameraParamsEditPanel extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    final Nuan5DatabaseReaderV1? reader = widget.reader;
+
     return SmoothPointerScroll(
       builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
         return SingleChildScrollView(
@@ -376,7 +404,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                 getDisplay: (){
                   return controller.cameraParams.light.whenOrNull(
                     some: (paramId, strength){
-                      final int? id = reader == null ? null : lightSelectorHandler.getInitValue(reader!, paramId);
+                      final int? id = reader == null ? null : lightSelectorHandler.getInitValue(reader, paramId);
                       return id == null ? null : lightSelectorHandler.getValueText(id);
                     },
                   ) ?? trBool(false, index: 2);
@@ -416,12 +444,12 @@ class CameraParamsEditPanel extends StatelessWidget{
                 },
                 getImageUrl: (LightParams_Some lightSome){
                   if(reader == null) return null;
-                  final int? id = lightSelectorHandler.getInitValue(reader!, lightSome.id);
-                  return id == null ? null : lightSelectorHandler.getValueImageUrl(reader!, id);
+                  final int? id = lightSelectorHandler.getInitValue(reader, lightSome.id);
+                  return id == null ? null : lightSelectorHandler.getValueImageUrl(reader, id);
                 },
                 getCacheKey: (LightParams_Some lightSome){
                   if(reader == null) return null;
-                  return lightSelectorHandler.getInitValue(reader!, lightSome.id)?.toString();
+                  return lightSelectorHandler.getInitValue(reader, lightSome.id)?.toString();
                 },
               ),
 
@@ -432,7 +460,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                 getDisplay: (){
                   return controller.cameraParams.filter.whenOrNull(
                     some: (paramId, strength){
-                      final int? id = reader == null ? null : filterSelectorHandler.getInitValue(reader!, paramId);
+                      final int? id = reader == null ? null : filterSelectorHandler.getInitValue(reader, paramId);
                       return id == null ? null : filterSelectorHandler.getValueText(id);
                     },
                   ) ?? trBool(false, index: 2);
@@ -472,12 +500,12 @@ class CameraParamsEditPanel extends StatelessWidget{
                 },
                 getImageUrl: (FilterParams_Some filterSome){
                   if(reader == null) return null;
-                  final int? id = filterSelectorHandler.getInitValue(reader!, filterSome.id);
-                  return id == null ? null : filterSelectorHandler.getValueImageUrl(reader!, id);
+                  final int? id = filterSelectorHandler.getInitValue(reader, filterSome.id);
+                  return id == null ? null : filterSelectorHandler.getValueImageUrl(reader, id);
                 },
                 getCacheKey: (FilterParams_Some filterSome){
                   if(reader == null) return null;
-                  return filterSelectorHandler.getInitValue(reader!, filterSome.id)?.toString();
+                  return filterSelectorHandler.getInitValue(reader, filterSome.id)?.toString();
                 },
               ),
 
@@ -536,7 +564,7 @@ class CameraParamsEditPanel extends StatelessWidget{
                             },
                             getImageUrl: (int momoPose){
                               if(reader == null) return null;
-                              return momoPoseSelectorHandler.getValueImageUrl(reader!, momoPose);
+                              return momoPoseSelectorHandler.getValueImageUrl(reader, momoPose);
                             },
                             getCacheKey: (int momoPose) => momoPose.toString(),
                           ),
