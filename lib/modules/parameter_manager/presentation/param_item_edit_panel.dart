@@ -92,56 +92,64 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 ],
               ),
 
-              Row(
-                children: [
-                  Expanded(
-                    child: AppTextFiled(
-                      controller: paramTextController,
-                      onChanged: creator.changeParamString,
-                      labelText: "parameter_manager.param_or_code",
+              AppFloatingIndicatorButtonGroup(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: AppTextFiled(
+                        controller: paramTextController,
+                        onChanged: creator.changeParamString,
+                        labelText: "parameter_manager.param_or_code",
+                      ),
                     ),
-                  ),
-                  AppButton.smallIcon(
-                    toolTip: "parameter_manager.copy",
-                    onClick: () async{
-                      final String text = paramTextController.text;
+                    AppFloatingIndicatorButtonTarget(
+                      child: AppButton.smallIcon(
+                        toolTip: "parameter_manager.copy",
+                        onClick: () async{
+                          final String text = paramTextController.text;
 
-                      try{
-                        await copyTextToClipboard(text);
-                        if(context.mounted){
-                          AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
-                        }
-                      }catch(e){
-                        if(context.mounted){
-                          AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
-                        }
-                      }
-                    },
-                    child: Icon(Icons.copy),
-                  ),
-                  AppButton.smallIcon(
-                    toolTip: "parameter_manager.paste",
-                    onClick: () async{
-                      final String? text = await readTextFromClipboard();
-                      if(text != null){
-                        paramTextController.text = text;
-                        creator.changeParamString(text);
-                      }
-                    },
-                    child: Icon(Icons.paste),
-                  ),
-                  AppButton.smallIcon(
-                    toolTip: "parameter_manager.clear",
-                    onClick: () async{
-                      final String? text = await readTextFromClipboard();
-                      if(text != null){
-                        paramTextController.text = "";
-                        creator.setParamString("");
-                      }
-                    },
-                    child: AppIcon("cross"),
-                  ),
-                ],
+                          try{
+                            await copyTextToClipboard(text);
+                            if(context.mounted){
+                              AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
+                            }
+                          }catch(e){
+                            if(context.mounted){
+                              AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
+                            }
+                          }
+                        },
+                        child: Icon(Icons.copy),
+                      ),
+                    ),
+                    AppFloatingIndicatorButtonTarget(
+                      child: AppButton.smallIcon(
+                        toolTip: "parameter_manager.paste",
+                        onClick: () async{
+                          final String? text = await readTextFromClipboard();
+                          if(text != null){
+                            paramTextController.text = text;
+                            creator.changeParamString(text);
+                          }
+                        },
+                        child: Icon(Icons.paste),
+                      ),
+                    ),
+                    AppFloatingIndicatorButtonTarget(
+                      child: AppButton.smallIcon(
+                        toolTip: "parameter_manager.clear",
+                        onClick: () async{
+                          final String? text = await readTextFromClipboard();
+                          if(text != null){
+                            paramTextController.text = "";
+                            creator.setParamString("");
+                          }
+                        },
+                        child: AppIcon("cross"),
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
               ListenableBuilder(
