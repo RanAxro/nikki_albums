@@ -34,6 +34,8 @@ class ParamItemCreator extends ChangeNotifier{
       return;
     }
 
+    _paramString = newParamString;
+
     tryDeParamDebounce(newParamString, onFinished: (dynamic param){
       _param = param;
 
