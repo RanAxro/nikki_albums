@@ -8,8 +8,13 @@ import 'model.dart';
 import 'nuan5_database.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `decrypt`, `derive_key`
+// These functions are ignored because they are not marked as `pub`: `derive_key`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `Nuan5DatabaseV1`
+
+Future<Uint8List?> nuan5DataDecrypt({required String input}) => RustLib
+    .instance
+    .api
+    .crateNuan5DatabaseReaderV1Nuan5DataDecrypt(input: input);
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>>
 abstract class Nuan5DatabaseReaderV1

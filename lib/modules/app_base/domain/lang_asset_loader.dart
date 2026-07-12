@@ -1,62 +1,29 @@
 
-import "package:flutter/foundation.dart";
-
 import "../app_registry.dart";
 import "package:nikki_albums/utils/json.dart";
 import "package:nikki_albums/modules/hot_update/domain/hot_update_service.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 
 import "package:flutter/services.dart";
+import "package:flutter/foundation.dart";
 import "dart:convert";
 import "dart:ui";
-import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:path/path.dart" as p;
-import 'package:encrypt/encrypt.dart' as encrypt;
+import "package:msgpack_dart/msgpack_dart.dart" as msgpack;
 
 
 const String _green = '\x1B[32m';
 const String _reset = '\x1B[0m';
-
-class LangFileAesUtil{
-  static final _key = encrypt.Key.fromUtf8("D122401AEA30AFE6DE23566BABAF2569");
-  static final _encrypter = encrypt.Encrypter(encrypt.AES(_key, mode: encrypt.AESMode.cbc));
-
-  static Future<void> encryptFile(String inputPath, String outputPath) async{
-    final File file = File(inputPath);
-    final Uint8List bytes = await file.readAsBytes();
-
-    // 生成随机 IV
-    final encrypt.IV iv = encrypt.IV.fromSecureRandom(16);
-
-    // 加密
-    final encrypt.Encrypted encrypted = _encrypter.encryptBytes(bytes, iv: iv);
-
-    // 写入文件：IV(16字节) + 密文
-    final File output = File(outputPath);
-    await output.writeAsBytes([...iv.bytes, ...encrypted.bytes]);
-  }
-
-  static Future<List<int>> decryptFile(String inputPath) async{
-    final File file = File(inputPath);
-    final Uint8List bytes = await file.readAsBytes();
-
-    final encrypt.IV iv = encrypt.IV(Uint8List.fromList(bytes.sublist(0, 16)));
-    final encrypt.Encrypted encrypted = encrypt.Encrypted(Uint8List.fromList(bytes.sublist(16)));
-
-    final List<int> decrypted = _encrypter.decryptBytes(encrypted, iv: iv);
-
-    return decrypted;
-  }
-}
 
 
 
 class AppLangAssetLoader extends AssetLoader{
   const AppLangAssetLoader();
 
-  String getLocalePath(String basePath, String path, Locale locale){
-    return p.posix.join(basePath, path, "${locale.toStringWithSeparator(separator: "-")}.json");
+  String getLocalePath(String basePath, String path, Locale locale, [String suffix = ".json"]){
+    return p.posix.join(basePath, path, "${locale.toStringWithSeparator(separator: "-")}$suffix");
   }
 
   Future<Map<String, dynamic>> getLangJson(String basePath, String path, Locale locale) async{
@@ -68,18 +35,21 @@ class AppLangAssetLoader extends AssetLoader{
     }
   }
 
-  Future<Map<String, dynamic>> getHotUpdateLangJson(String id, Locale locale) async{
+  Future<Map<String, dynamic>> getHotUpdateLang(String id, Locale locale) async{
     try{
-      final String localePath = getLocalePath(await getHotUpdateAssetsPath(id), "", locale);
-      final List<int> decrypted = await LangFileAesUtil.decryptFile(localePath);
-      final String jsonString = utf8.decode(decrypted);
-      final Map<String, dynamic> langJson = json.decode(jsonString);
+      final String localePath = getLocalePath(await getHotUpdateAssetsPath(id), "", locale, ".bin");
+      
+      final Uint8List? decrypted = await nuan5DataDecrypt(input: localePath);
+      if(decrypted == null){
+        return {};
+      }
 
+      final Map<String, dynamic> lang = Map<String, dynamic>.from(msgpack.deserialize(decrypted));
       if(kDebugMode){
         print("$_green HotUpdate Lang Loading Completed: $localePath $_reset");
       }
 
-      return langJson;
+      return lang;
     }catch(e){
       if(kDebugMode){
         print(e);
@@ -98,7 +68,7 @@ class AppLangAssetLoader extends AssetLoader{
     }
 
     for(final String id in AppRegistry.hotUpdateLangId){
-      overlaysLang.add(await getHotUpdateLangJson(id, locale));
+      overlaysLang.add(await getHotUpdateLang(id, locale));
     }
 
     mergeMultipleMapsInPlace(baseLang, overlaysLang);

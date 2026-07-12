@@ -25,7 +25,7 @@ impl Nuan5DatabaseReader for Nuan5DatabaseReaderV1{
   }
 
   fn open(&mut self, path: &str) -> bool{
-    let bytes = match decrypt(path){
+    let bytes = match nuan5_data_decrypt(path){
       Some(b) => b,
       None => {
         return false;
@@ -222,7 +222,6 @@ use aes_gcm::{
 use hkdf::Hkdf;
 use sha2::Sha256;
 use std::fs;
-use crate::nuan5_database::model::Nuan5DatabaseCategory::FilterType;
 
 const KEY: &[u8; 32] = b"9C46C6BF431F5AFFF97A2002AEDFA8B7";
 const SALT_LEN: usize = 16;
@@ -235,7 +234,7 @@ fn derive_key(salt: &[u8; SALT_LEN]) -> Key<Aes256Gcm>{
   okm.into()
 }
 
-fn decrypt(input: &str) -> Option<Vec<u8>>{
+pub fn nuan5_data_decrypt(input: &str) -> Option<Vec<u8>>{
   let data = fs::read(input).ok()?;
 
   if data.len() < SALT_LEN + NONCE_LEN + 16 {

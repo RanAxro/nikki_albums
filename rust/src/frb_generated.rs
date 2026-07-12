@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -174392300;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -398727714;
 
 // Section: executor
 
@@ -2414,6 +2414,41 @@ fn wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
                 Ok(output_ok)
             })(
             ))
+        },
+    )
+}
+fn wire__crate__nuan5_database__reader_v1__nuan5_data_decrypt_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan5_data_decrypt",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_input = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_database::reader_v1::nuan5_data_decrypt(&api_input),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
         },
     )
 }
@@ -5033,6 +5068,17 @@ impl SseDecode for Option<Vec<crate::serde_config::structs::common::FileEntityLo
     }
 }
 
+impl SseDecode for Option<Vec<u8>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<u8>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for crate::serde_config::structs::common::OrdinaryText {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6063,19 +6109,25 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__serde_config__se__serialize_game_config_impl(
+        58 => wire__crate__nuan5_database__reader_v1__nuan5_data_decrypt_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        59 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+        59 => wire__crate__serde_config__se__serialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        60 => wire__crate__serde_config__se__serialize_theme_config_impl(
+        60 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        61 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -6178,8 +6230,8 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        61 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        62 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+        62 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        63 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -10994,6 +11046,16 @@ impl SseEncode for Option<Vec<crate::serde_config::structs::common::FileEntityLo
             <Vec<crate::serde_config::structs::common::FileEntityLocationConfig>>::sse_encode(
                 value, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<u8>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<u8>>::sse_encode(value, serializer);
         }
     }
 }

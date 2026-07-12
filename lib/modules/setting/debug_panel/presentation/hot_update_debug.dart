@@ -30,21 +30,21 @@ class HotUpdateDebug extends StatelessWidget{
             child: AppText("check hot update"),
           ),
 
-          AppButton.smallText(
-            onClick: () async{
-              final FilePickerResult? result = await FilePicker.platform.pickFiles();
-              if(result == null) return;
-
-              final String? path = result.paths.firstOrNull;
-              if(path == null) return;
-
-              LangFileAesUtil.encryptFile(path, "$path.enc");
-              Explorer.openFile(File("$path.enc"));
-              print("encrypted in $path.enc");
-            },
-            isTranslate: false,
-            child: AppText("encrypt a file"),
-          ),
+          // AppButton.smallText(
+          //   onClick: () async{
+          //     final FilePickerResult? result = await FilePicker.platform.pickFiles();
+          //     if(result == null) return;
+          //
+          //     final String? path = result.paths.firstOrNull;
+          //     if(path == null) return;
+          //
+          //     LangFileAesUtil.encryptFile(path, "$path.enc");
+          //     Explorer.openFile(File("$path.enc"));
+          //     print("encrypted in $path.enc");
+          //   },
+          //   isTranslate: false,
+          //   child: AppText("encrypt a file"),
+          // ),
 
         ].map((Widget widget) => AppFloatingIndicatorButtonTarget(child: widget)).toList(),
       ),
