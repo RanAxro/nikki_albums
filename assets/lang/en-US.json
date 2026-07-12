@@ -211,7 +211,20 @@
   "parameter_manager": {
     "camera": "Camera Parameters",
     "cloth": "Lookbook",
-    "home": "Home Scheme"
+    "home": "Home Scheme",
+    "island_scheme": "Island Scheme",
+    "group_scheme": "Group Scheme",
+    "name": "Name",
+    "tag": "Tag",
+    "paste": "Paste",
+    "copy": "Copy",
+    "clear": "Clear",
+    "copy_successful": "Copy Successful",
+    "copy_failed": "Copy Failed",
+    "param_or_code": "Parameter / ShareCode",
+    "invalid_param": "Invalid Parameter",
+    "cancel": "Cancel",
+    "save": "Save"
   },
   "----------file_transfer----------": "----------file_transfer----------",
   "inputDownloadUrl": "Input download link",

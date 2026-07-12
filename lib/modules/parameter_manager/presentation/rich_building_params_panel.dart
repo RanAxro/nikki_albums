@@ -30,6 +30,22 @@ class RichBuildingParamsPanel extends StatelessWidget{
           child: Column(
             spacing: listSpacing,
             children: [
+              IgnorePointer(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppRadioStack(
+                    children: [
+                      AppButton.smallText(
+                        child: AppText.tr("parameter_manager.island_scheme"),
+                      ),
+                      AppButton.smallText(
+                        child: AppText.tr("parameter_manager.group_scheme"),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
               Table(
                 columnWidths: const {
                   0: IntrinsicColumnWidth(),
