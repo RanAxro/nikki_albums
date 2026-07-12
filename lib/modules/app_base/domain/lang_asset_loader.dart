@@ -73,6 +73,10 @@ class AppLangAssetLoader extends AssetLoader{
 
     mergeMultipleMapsInPlace(baseLang, overlaysLang);
 
+    // if(kDebugMode){
+    //   File(p.join(r"debug", "$locale.json")).writeAsString(jsonEncode(baseLang));
+    // }
+
     EasyLocalization.logger.debug("Load asset from $basePath");
     return baseLang;
   }

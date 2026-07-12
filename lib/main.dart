@@ -43,83 +43,88 @@ void main(List<String> args) {
         );
       }).sendPort,
     );
+
+    // 用 zone 包裹整个启动流程与 runApp，捕获未处理的异步错误
+    runZonedGuarded(() => appMain(args), (Object error, StackTrace stack){
+      AppLogger.crash("Zone", error.toString(), stack.toString());
+    });
   }
 
-  // 用 zone 包裹整个启动流程与 runApp，捕获未处理的异步错误
-  runZonedGuarded(() async {
-    await RustLib.init();
+  if(kDebugMode){
+    appMain(args);
+  }
+}
 
-    WidgetsFlutterBinding.ensureInitialized();
+void appMain(List<String> args) async{
+  await RustLib.init();
 
-    if (Platform.isWindows) {
-      SystemFactory.register(WindowsSystemServices());
-    } else if (Platform.isMacOS) {
-      SystemFactory.register(MacOsSystemServices());
-    }
+  WidgetsFlutterBinding.ensureInitialized();
 
-    MediaKit.ensureInitialized();
+  if(Platform.isWindows){
+    SystemFactory.register(WindowsSystemServices());
+  }else if (Platform.isMacOS){
+    SystemFactory.register(MacOsSystemServices());
+  }
 
-    if (!kDebugMode) {
-      if (Platform.isWindows) {
-        await WindowsSingleInstance.ensureSingleInstance(
-          args,
-          "com_ranaxro_nikki_nikkialbums",
-          onSecondWindow: parseArgs,
-        );
-      }
-    }
-    parseArgs(args);
+  MediaKit.ensureInitialized();
 
-    await EasyLocalization.ensureInitialized();
-
-    await initApp();
-
-    if (Platform.isWindows || Platform.isMacOS) {
-      await windowManager.ensureInitialized();
-      WindowOptions windowOptions = const WindowOptions(
-        size: Size(1280, 720),
-        center: true,
-        title: "Nikki Albums",
-        titleBarStyle: TitleBarStyle.hidden,
+  if(!kDebugMode){
+    if(Platform.isWindows){
+      await WindowsSingleInstance.ensureSingleInstance(
+        args,
+        "com_ranaxro_nikki_nikkialbums",
+        onSecondWindow: parseArgs,
       );
-      windowManager.waitUntilReadyToShow(windowOptions, () async {
-        await windowManager.show();
-        await windowManager.focus();
-      });
     }
+  }
+  parseArgs(args);
 
-    runApp(
-      EasyLocalization(
-        supportedLocales: const [
-          Locale("zh", "CN"),
-          Locale("en", "US"),
-          Locale("fr", "FR"),
-          Locale("de", "DE"),
-          Locale("id", "ID"),
-          Locale("it", "IT"),
-          Locale("ja", "JP"),
-          Locale("ko", "KR"),
-          Locale("pt", "BR"),
-          Locale("es", "ES"),
-          Locale("th", "TH"),
-          Locale("zh", "TW"),
-        ],
-        path: "assets/lang",
-        // startLocale: Locale("en", "US"),
-        fallbackLocale: Locale("en", "US"),
-        useFallbackTranslations: true,
-        useFallbackTranslationsForEmptyResources: true,
-        saveLocale: false,
-        assetLoader: AppLangAssetLoader(),
-        child: Frame(ancestor),
-      ),
+  await EasyLocalization.ensureInitialized();
+
+  await initApp();
+
+  if(Platform.isWindows || Platform.isMacOS){
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(1280, 720),
+      center: true,
+      title: "Nikki Albums",
+      titleBarStyle: TitleBarStyle.hidden,
     );
-  }, (Object error, StackTrace stack) {
-    if(kDebugMode){
-      throw error;
-    }
-    AppLogger.crash("Zone", error.toString(), stack.toString());
-  });
+    windowManager.waitUntilReadyToShow(windowOptions, () async{
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
+  await AppLangAssetLoader().load("assets/lang", Locale("zh", "TW"));
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale("zh", "CN"),
+        Locale("en", "US"),
+        Locale("fr", "FR"),
+        Locale("de", "DE"),
+        Locale("id", "ID"),
+        Locale("it", "IT"),
+        Locale("ja", "JP"),
+        Locale("ko", "KR"),
+        Locale("pt", "BR"),
+        Locale("es", "ES"),
+        Locale("th", "TH"),
+        Locale("zh", "TW"),
+      ],
+      path: "assets/lang",
+      // startLocale: Locale("en", "US"),
+      fallbackLocale: Locale("en", "US"),
+      useFallbackTranslations: true,
+      useFallbackTranslationsForEmptyResources: true,
+      saveLocale: false,
+      assetLoader: AppLangAssetLoader(),
+      child: Frame(ancestor),
+    ),
+  );
 }
 
 class StartupParam {
