@@ -21,27 +21,29 @@ import "package:media_kit/media_kit.dart";
 
 
 void main(List<String> args) {
-  // 最早挂载框架错误捕获，确保后续 init 阶段异常也能被记录
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-    AppLogger.crash(
-      "FlutterError",
-      details.exceptionAsString(),
-      details.stack.toString(),
-    );
-  };
-
-  // Isolate 错误捕获（独立线程异常）
-  Isolate.current.addErrorListener(
-    RawReceivePort((dynamic pair) {
-      final List<dynamic> data = pair as List<dynamic>;
+  if(!kDebugMode){
+    // 最早挂载框架错误捕获，确保后续 init 阶段异常也能被记录
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.presentError(details);
       AppLogger.crash(
-        "Isolate",
-        data[0].toString(),
-        data[1] is String ? data[1] as String : null,
+        "FlutterError",
+        details.exceptionAsString(),
+        details.stack.toString(),
       );
-    }).sendPort,
-  );
+    };
+
+    // Isolate 错误捕获（独立线程异常）
+    Isolate.current.addErrorListener(
+      RawReceivePort((dynamic pair) {
+        final List<dynamic> data = pair as List<dynamic>;
+        AppLogger.crash(
+          "Isolate",
+          data[0].toString(),
+          data[1] is String ? data[1] as String : null,
+        );
+      }).sendPort,
+    );
+  }
 
   // 用 zone 包裹整个启动流程与 runApp，捕获未处理的异步错误
   runZonedGuarded(() async {
@@ -113,6 +115,9 @@ void main(List<String> args) {
       ),
     );
   }, (Object error, StackTrace stack) {
+    if(kDebugMode){
+      throw error;
+    }
     AppLogger.crash("Zone", error.toString(), stack.toString());
   });
 }
