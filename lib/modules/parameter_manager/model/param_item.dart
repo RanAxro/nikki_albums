@@ -5,31 +5,31 @@ class ParamItem{
   final String uuid;
   bool delete;
   final ParamType type;
-  final ParamSubType? subType;
   final String value;
-  final int time;
+  final int createdTime;
+  int modifiedTime;
+  bool top;
   String? title;
   String? description;
   List<String> tag;
   String? set;
   String? originImagePath;
   String? image;
-  String? cacheParams;
 
   ParamItem({
     required this.uuid,
     this.delete = false,
     required this.type,
-    required this.subType,
     required this.value,
-    required this.time,
+    required this.createdTime,
+    required this.modifiedTime,
+    this.top = false,
     this.title,
     this.description,
     required this.tag,
     this.set,
     this.originImagePath,
     this.image,
-    this.cacheParams,
   });
 
 
@@ -37,16 +37,16 @@ class ParamItem{
     "uuid": uuid,
     "delete": delete,
     "type": type.toValue(),
-    "sub_type": subType?.toValue(),
     "value": value,
-    "time": time,
+    "created_time": createdTime,
+    "modified_time": modifiedTime,
+    "top": top,
     "title": title,
     "description": description,
     "tag": tag,
     "set": set,
     "origin_image_path": originImagePath,
     "image": image,
-    "cache_params": cacheParams,
   };
 
   static ParamItem? fromMap(Map<dynamic, dynamic> map){
@@ -55,16 +55,16 @@ class ParamItem{
         uuid: map["uuid"] as String,
         delete: map["delete"] is bool ? map["delete"] : false,
         type: ParamType.fromValue(map["type"]) as ParamType,
-        subType: ParamSubType.fromValue(map["sub_type"]),
         value: map["value"] as String,
-        time: map["time"] as int,
+        createdTime: map["created_time"] as int,
+        modifiedTime: map["modified_time"] as int,
+        top: map["top"] is bool ? map["top"] : false,
         title: map["title"] is String? ? map["title"] : null,
         description: map["description"] is String? ? map["description"] : null,
         tag: map["tag"] is List ? (map["tag"] as List).whereType<String>().toList() : [],
         set: map["set"] is String? ? map["set"] : null,
         originImagePath: map["origin_image_path"] is String? ? map["origin_image_path"] : null,
         image: map["image"] is String? ? map["image"] : null,
-        cacheParams: map["cache_params"] is String? ? map["cache_params"] : null,
       );
     }catch(e){
       return null;
@@ -75,16 +75,16 @@ class ParamItem{
     1: uuid,
     2: delete,
     3: type.toValue(),
-    4: subType?.toValue(),
-    5: value,
-    6: time,
-    if(title != null) 7: title,
-    if(description != null) 8: description,
-    9: tag,
-    if(set != null) 10: set,
-    if(originImagePath != null) 11: originImagePath,
-    if(image != null) 12: image,
-    if(cacheParams != null) 13: cacheParams,
+    4: value,
+    5: createdTime,
+    6: modifiedTime,
+    7: top,
+    if(title != null) 8: title,
+    if(description != null) 9: description,
+    10: tag,
+    if(set != null) 11: set,
+    if(originImagePath != null) 12: originImagePath,
+    if(image != null) 13: image,
   };
 
   static ParamItem? fromMsgpackMap(Map<dynamic, dynamic> map){
@@ -93,16 +93,16 @@ class ParamItem{
         uuid: map[1] as String,
         delete: map[2] is bool ? map[2] : false,
         type: ParamType.fromValue(map[3]) as ParamType,
-        subType: ParamSubType.fromValue(map[4]),
-        value: map[5] as String,
-        time: map[6] as int,
-        title: map[7] is String? ? map[7] : null,
-        description: map[8] is String? ? map[8] : null,
-        tag: map[9] is List ? (map[9] as List).whereType<String>().toList() : [],
-        set: map[10] is String? ? map[10] : null,
-        originImagePath: map[11] is String? ? map[11] : null,
-        image: map[12] is String? ? map[12] : null,
-        cacheParams: map[13] is String? ? map[13] : null,
+        value: map[4] as String,
+        createdTime: map[5] as int,
+        modifiedTime: map[6] as int,
+        top: map[7] is bool ? map[7] : false,
+        title: map[8] is String? ? map[8] : null,
+        description: map[9] is String? ? map[9] : null,
+        tag: map[10] is List ? (map[10] as List).whereType<String>().toList() : [],
+        set: map[11] is String? ? map[11] : null,
+        originImagePath: map[12] is String? ? map[12] : null,
+        image: map[13] is String? ? map[13] : null,
       );
     }catch(e){
       return null;

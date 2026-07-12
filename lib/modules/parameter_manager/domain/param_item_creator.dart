@@ -18,7 +18,6 @@ class ParamItemCreator{
 
   String? _param;
   ParamType? _type;
-  ParamSubType? _subType;
 
 
 }
