@@ -1,4 +1,5 @@
 
+import "../model/param_item.dart";
 import "../model/param_type.dart";
 import "../domain/camera_params_edit_controller.dart";
 import "../domain/param_item_creator.dart";
@@ -21,10 +22,22 @@ import "package:easy_localization/easy_localization.dart";
 import "package:path/path.dart" as p;
 import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
+import "package:dio/dio.dart";
 
 
 class ParamItemEditPanel extends StatefulWidget{
-  const ParamItemEditPanel({super.key});
+  final String? initParamString;
+  final String? initCover;
+  final void Function()? onCancel;
+  final void Function(ParamItemCreation)? onFinished;
+
+  const ParamItemEditPanel({
+    super.key,
+    this.initParamString,
+    this.initCover,
+    this.onCancel,
+    this.onFinished,
+  });
 
   @override
   State<ParamItemEditPanel> createState() => _ParamItemEditPanelState();
@@ -43,16 +56,53 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   final ValueNotifier<String?> cover = ValueNotifier(null);
 
   Future<void> initReader() async{
+    paramTextController.text = widget.initParamString ?? "";
+    cover.value = widget.initCover;
+    creator.changeParamString(widget.initParamString ?? "");
+
     reader = await Nuan5Data.init();
     setState((){
 
     });
   }
 
+  Future<String?> downloadImage(String url) async{
+    try{
+      final String savePath = p.join((await getTempPath()).path, "NetworkImage");
+      final Dio dio = Dio();
+      final Response response = await dio.download(url, savePath);
+      if(response.statusCode == 200){
+        return savePath;
+      }else{
+        return null;
+      }
+    }catch(e){
+      return null;
+    }
+  }
+
   @override
   void initState(){
     super.initState();
     initReader();
+    creator.addListener(() async{
+      if(creator.param is RichBuildingParams){
+        nameTextController.text = (creator.param as RichBuildingParams).name;
+        final String? coverUrl = (creator.param as RichBuildingParams).coverImage;
+        if(coverUrl == null){
+          cover.value = null;
+        }else{
+          cover.value = await downloadImage(coverUrl);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose(){
+    creator.dispose();
+    cover.dispose();
+    super.dispose();
   }
 
   @override
@@ -249,7 +299,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                     child: AppButton.smallText(
                       isTransparent: false,
                       onClick: (){
-
+                        widget.onCancel?.call();
                       },
                       child: AppText.tr("parameter_manager.cancel"),
                     ),
@@ -258,6 +308,27 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                     child: AppButton.smallText(
                       colorRole: ColorRole.highlight,
                       isTransparent: false,
+                      onClick: () async{
+                        final ParamType type = creator.type;
+                        final String paramString = paramTextController.text;
+                        final dynamic param = switch(type){
+                          ParamType.camera => await tryDeCameraParam(paramString),
+                          ParamType.cloth => await tryDeClothDiyShareCode(paramString),
+                          ParamType.home => await tryDeHomeBuildShareCode(paramString),
+                        };
+
+                        if(param == null){
+                          AppToast.showMessage(context: context, message: "parameter_manager.invalid_param", state: false);
+                          return;
+                        }
+
+                        widget.onFinished?.call(ParamItemCreation(
+                          type: type,
+                          value: paramString,
+                          title: nameTextController.text == "" ? null : nameTextController.text,
+                          originImagePath: cover.value,
+                        ));
+                      },
                       child: AppText.tr("parameter_manager.save"),
                     ),
                   ),
@@ -276,6 +347,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
               if(param is CameraParams){
                 return CameraParamsEditPanel(
+                  key: Key("CameraParamsEditPanel1"),
                   controller: CameraParamsEditController(cameraParams: param),
                   reader: reader,
                 );
@@ -299,6 +371,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
               if(creator.type == ParamType.camera){
                 return CameraParamsEditPanel(
+                  key: Key("CameraParamsEditPanel2"),
                   controller: CameraParamsEditController(),
                   onChanged: (CameraParamsEditController controller){
                     creator.setParamString(controller.cameraParamString ?? "");
