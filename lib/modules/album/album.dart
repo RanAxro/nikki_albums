@@ -1,4 +1,5 @@
-import "package:nikki_albums/modules/nuan5_params/presentation/media_params_tree.dart";
+
+
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/info.dart";
@@ -24,6 +25,12 @@ import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/utils/Image.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/media_params_tree.dart";
+import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
+import "package:nikki_albums/modules/parameter_manager/model/param_item.dart";
+import "package:nikki_albums/modules/parameter_manager/presentation/param_item_edit_panel.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/clock_in_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -1747,6 +1754,105 @@ class _ExhibitState extends State<Exhibit> {
     );
   }
 
+  Widget _generateParamSaverButton(BuildContext context, bool isHover){
+    if(!isHover){
+      return block0;
+    }
+
+    final AlbumType albumType = widget.game.selectedAlbum;
+    if(albumType != AlbumType.NikkiPhotos_HighQuality && albumType != AlbumType.ClockInPhoto){
+      return block0;
+    }
+
+    if(widget.game.selectedUid?.value == null){
+      return block0;
+    }
+
+    return Positioned(
+      top: smallButtonSize + smallPadding,
+      right: smallPadding,
+      width: smallButtonContentSize + 2 * smallBorder,
+      height: smallButtonContentSize + 2 * smallBorder,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () async{
+            final MediaCustomData? customData = await widget.imageItem.getParam(widget.game.selectedUid!.value, widget.game.selectedAlbum);
+
+            customData?.whenOrNull(
+              valid: (MediaParam mediaParam){
+                mediaParam.whenOrNull(
+                  nikkiPhoto: (NikkiPhotoParams nikkiPhotoParams){
+                    final String? param = nikkiPhotoParams.camera?.params;
+
+                    if(param == null){
+                      return;
+                    }
+
+                    showAppDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AppDialog(
+                          useIntrinsicHeight: false,
+                          child: ParamItemEditPanel(
+                            initParamString: param,
+                            initCover: widget.imageItem.path.path,
+                            onCancel: (){
+                              Navigator.of(context).pop();
+                            },
+                            onFinished: (ParamItemCreation creation) async{
+                              final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
+                              if(!manager.isInit){
+                                await manager.init();
+                              }
+                              if(manager.isInit){
+                                AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
+                                try{
+                                  await manager.createItem(creation);
+                                  await manager.save();
+                                  AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
+                                }catch(e){
+                                  AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
+                                }finally{
+                                  Navigator.of(context).pop();
+                                }
+                              }
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  clockInPhoto: (ClockInPhotoParams clockInPhotoParams){
+                    final String? param = clockInPhotoParams.camera?.params;
+
+                    if(param == null){
+                      return;
+                    }
+
+                    showAppDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AppDialog(
+                          useIntrinsicHeight: false,
+                          child: ParamItemEditPanel(
+                            initParamString: param,
+                            initCover: widget.imageItem.path.path,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            );
+          },
+          child: AppIcon("parameter_manager", color: AppColorScheme.of(context).highlight.onColor),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RFutureBuilder(
@@ -1895,9 +2001,10 @@ class _ExhibitState extends State<Exhibit> {
                     children: [
                       groundLayout,
 
-                      if (widget.game.selectedAlbum != AlbumType.Video &&
-                          widget.game.selectedAlbum != AlbumType.ExternalVideo)
+                      if(widget.game.selectedAlbum != AlbumType.Video && widget.game.selectedAlbum != AlbumType.ExternalVideo)
                         _generateTagButton(context, isHover),
+
+                      _generateParamSaverButton(context, isHover),
                     ],
                   ),
                 );
