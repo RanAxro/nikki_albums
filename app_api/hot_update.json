@@ -90,5 +90,61 @@
         "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity-nikki-cloth-outfit-lang/de-DE.json"
       }
     ]
+  },
+  {
+    "id": "infinity_nikki",
+    "versionId": "6c654341-866a-416a-9222-c5792653cf46",
+    "files": [
+      {
+        "path": "en-US.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/en-US.bin"
+      },
+      {
+        "path": "zh-CN.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/zh-CN.bin"
+      },
+      {
+        "path": "zh-TW.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/zh-TW.bin"
+      },
+      {
+        "path": "ko-KR.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/ko-KR.bin"
+      },
+      {
+        "path": "ja-JP.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/ja-JP.bin"
+      },
+      {
+        "path": "pt-BR.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/pt-BR.bin"
+      },
+      {
+        "path": "it-IT.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/it-IT.bin"
+      },
+      {
+        "path": "fr-FR.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/fr-FR.bin"
+      },
+      {
+        "path": "es-ES.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/es-ES.bin"
+      },
+      {
+        "path": "de-DE.bin",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/infinity_nikki/de-DE.bin"
+      }
+    ]
+  },
+  {
+    "id": "nuan5_database",
+    "versionId": "6c654341-866a-416a-9222-c5792653cf46",
+    "files": [
+      {
+        "path": "v1.db",
+        "downloadLink": "https://file-nikki.ranaxro.com/hot_update/nuan5_database/v1.db"
+      }
+    ]
   }
 ]

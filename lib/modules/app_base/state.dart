@@ -17,7 +17,7 @@ import "dart:io";
 final GlobalKey ancestor = GlobalKey();
 final GlobalKey frameKey = GlobalKey();
 
-final ContentController contentController = ContentController(3);
+final ContentController contentController = ContentController(1);
 
 abstract class AppState {
   /// common
