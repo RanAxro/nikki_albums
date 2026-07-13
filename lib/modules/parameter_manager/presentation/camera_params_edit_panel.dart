@@ -72,11 +72,13 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
       child: ListenableBuilder(
         listenable: controller,
         builder: (BuildContext context, Widget? child){
-          return AppSwitchButton(
-            value: getValue(),
-            onChanged: onChanged,
-            usable: controller.allowEdit,
-            child: text,
+          return IgnorePointer(
+            ignoring: !controller.allowEdit,
+            child: AppSwitchButton(
+              value: getValue(),
+              onChanged: onChanged,
+              child: text,
+            ),
           );
         },
       ),
@@ -120,18 +122,21 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                   SizedBox(
                     height: smallButtonSize,
                     child: Center(
-                      child: AppSlider(
-                        padding: const EdgeInsets.all(0),
-                        min: min,
-                        max: max,
-                        divisions: divisions,
-                        value: value,
-                        onChanged: usable ? (newValue){
-                          setState((){
-                            value = newValue;
-                          });
-                        } : null,
-                        onChangeEnd: usable && controller.allowEdit ? onChanged?.call : null,
+                      child: IgnorePointer(
+                        ignoring: !usable || !controller.allowEdit,
+                        child: AppSlider(
+                          padding: const EdgeInsets.all(0),
+                          min: min,
+                          max: max,
+                          divisions: divisions,
+                          value: value,
+                          onChanged: (newValue){
+                            setState((){
+                              value = newValue;
+                            });
+                          },
+                          onChangeEnd: onChanged?.call,
+                        ),
                       ),
                     ),
                   ),
@@ -220,55 +225,58 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
         builder: (BuildContext context, Widget? child){
           final T? buildArgs = isBuildZone();
 
-          return Column(
-            spacing: listSpacing,
-            children: [
-              AppButton.smallText(
-                onClick: buildSelector,
-                child: Row(
-                  children: [
-                    Expanded(child: text),
-                    AppText(getDisplay()),
-                  ],
-                ),
-              ),
-
-              if(buildArgs != null)
-                Builder(
-                  builder: (BuildContext context){
-                    final String? imageUrl = getImageUrl?.call(buildArgs);
-
-                    return SizedBox(
-                      height: 80,
-                      child: Row(
-                        children: [
-                          block10W,
-
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(child: block0),
-
-                                ?zoneBuilder?.call(buildArgs),
-                              ],
-                            ),
-                          ),
-
-                          imageUrl == null ? block0 : AppButton(
-                            onClick: buildSelector,
-                            child: AppCachedNetworkImage(
-                              imageUrl: imageUrl,
-                              cacheKey: getCacheKey?.call(buildArgs),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    );
-                  },
+          return IgnorePointer(
+            ignoring: !controller.allowEdit,
+            child: Column(
+              spacing: listSpacing,
+              children: [
+                AppButton.smallText(
+                  onClick: buildSelector,
+                  child: Row(
+                    children: [
+                      Expanded(child: text),
+                      AppText(getDisplay()),
+                    ],
+                  ),
                 ),
 
-            ],
+                if(buildArgs != null)
+                  Builder(
+                    builder: (BuildContext context){
+                      final String? imageUrl = getImageUrl?.call(buildArgs);
+
+                      return SizedBox(
+                        height: 80,
+                        child: Row(
+                          children: [
+                            block10W,
+
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(child: block0),
+
+                                  ?zoneBuilder?.call(buildArgs),
+                                ],
+                              ),
+                            ),
+
+                            imageUrl == null ? block0 : AppButton(
+                              onClick: buildSelector,
+                              child: AppCachedNetworkImage(
+                                imageUrl: imageUrl,
+                                cacheKey: getCacheKey?.call(buildArgs),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+
+              ],
+            ),
           );
         },
       ),
