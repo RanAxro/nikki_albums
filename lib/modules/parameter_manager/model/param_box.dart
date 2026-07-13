@@ -2,6 +2,8 @@
 import "param_type.dart";
 import "param_item.dart";
 
+import "package:flutter/foundation.dart";
+
 
 class ParamBox{
   final List<ParamSet> set;
@@ -24,9 +26,9 @@ class ParamBox{
   static ParamBox? fromMap(Map<dynamic, dynamic> map){
     try{
       return ParamBox(
-        set: (map["set"] as List<Map>).map(ParamSet.fromMap).toList() as List<ParamSet>,
-        tag: (map["tag"] as List<Map>).map(ParamTag.fromMap).toList() as List<ParamTag>,
-        item: (map["item"] as List<Map>).map(ParamItem.fromMap).toList() as List<ParamItem>,
+        set: (map["set"] as List).map(ParamSet.fromMap).nonNulls.toList(),
+        tag: (map["tag"] as List).map(ParamTag.fromMap).nonNulls.toList(),
+        item: (map["item"] as List).map(ParamItem.fromMap).nonNulls.toList() ,
       );
     }catch(e){
       return null;
@@ -42,11 +44,15 @@ class ParamBox{
   static ParamBox? fromMsgpackMap(Map<dynamic, dynamic> map){
     try{
       return ParamBox(
-        set: (map[1] as List<Map>).map(ParamSet.fromMsgpackMap).toList() as List<ParamSet>,
-        tag: (map[2] as List<Map>).map(ParamTag.fromMsgpackMap).toList() as List<ParamTag>,
-        item: (map[3] as List<Map>).map(ParamItem.fromMsgpackMap).toList() as List<ParamItem>,
+        set: (map[1] as List).map(ParamSet.fromMsgpackMap).nonNulls.toList(),
+        tag: (map[2] as List).map(ParamTag.fromMsgpackMap).nonNulls.toList(),
+        item: (map[3] as List).map(ParamItem.fromMsgpackMap).nonNulls.toList(),
       );
-    }catch(e){
+    }catch(e, s){
+      if(kDebugMode){
+        print(e);
+        debugPrintStack(stackTrace: s);
+      }
       return null;
     }
   }
@@ -73,7 +79,11 @@ class ParamSet{
     "children": children.map((ParamSet set) => set.toMap()).toList(),
   };
 
-  static ParamSet? fromMap(Map<dynamic, dynamic> map){
+  static ParamSet? fromMap(dynamic map){
+    if(map is! Map){
+      return null;
+    }
+
     try{
       return ParamSet(
         uuid: map["uuid"] as String,
@@ -93,7 +103,11 @@ class ParamSet{
     if(children.isNotEmpty) 4: children.map((ParamSet set) => set.toMsgpackMap()).toList(),
   };
 
-  static ParamSet? fromMsgpackMap(Map<dynamic, dynamic> map){
+  static ParamSet? fromMsgpackMap(dynamic map){
+    if(map is! Map){
+      return null;
+    }
+
     try{
       return ParamSet(
         uuid: map[1] as String,
@@ -101,7 +115,11 @@ class ParamSet{
         allowType: (map[3] as List).map(ParamType.fromValue).toList() as List<ParamType>,
         children: map[4] is List ? (map[4] as List<Map>).map(ParamSet.fromMsgpackMap).toList() as List<ParamSet> : [],
       );
-    }catch(e){
+    }catch(e, s){
+      if(kDebugMode){
+        print(e);
+        debugPrintStack(stackTrace: s);
+      }
       return null;
     }
   }
@@ -122,7 +140,11 @@ class ParamTag{
     "name": name,
   };
 
-  static ParamTag? fromMap(Map<dynamic, dynamic> map){
+  static ParamTag? fromMap(dynamic map){
+    if(map is! Map){
+      return null;
+    }
+
     try{
       return ParamTag(
         uuid: map["uuid"] as String,
@@ -138,13 +160,21 @@ class ParamTag{
     2: name,
   };
 
-  static ParamTag? fromMsgpackMap(Map<dynamic, dynamic> map){
+  static ParamTag? fromMsgpackMap(dynamic map){
+    if(map is! Map){
+      return null;
+    }
+
     try{
       return ParamTag(
         uuid: map[1] as String,
         name: map[2] as String,
       );
-    }catch(e){
+    }catch(e, s){
+      if(kDebugMode){
+        print(e);
+        debugPrintStack(stackTrace: s);
+      }
       return null;
     }
   }

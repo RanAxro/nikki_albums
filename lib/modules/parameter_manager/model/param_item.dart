@@ -1,6 +1,31 @@
 
 import "param_type.dart";
 
+import "package:flutter/foundation.dart";
+
+
+class ParamItemCreation{
+  final ParamType type;
+  final String value;
+  final bool top;
+  final String? title;
+  final String? description;
+  final List<String> tag;
+  final String? set;
+  final String? originImagePath;
+
+  const ParamItemCreation({
+    required this.type,
+    required this.value,
+    this.top = false,
+    this.title,
+    this.description,
+    this.tag = const [],
+    this.set,
+    this.originImagePath,
+  });
+}
+
 class ParamItem{
   final String uuid;
   bool delete;
@@ -49,7 +74,11 @@ class ParamItem{
     "image": image,
   };
 
-  static ParamItem? fromMap(Map<dynamic, dynamic> map){
+  static ParamItem? fromMap(dynamic map){
+    if(map is! Map){
+      return null;
+    }
+
     try{
       return ParamItem(
         uuid: map["uuid"] as String,
@@ -87,7 +116,11 @@ class ParamItem{
     if(image != null) 13: image,
   };
 
-  static ParamItem? fromMsgpackMap(Map<dynamic, dynamic> map){
+  static ParamItem? fromMsgpackMap(dynamic map){
+    if(map is! Map){
+      return null;
+    }
+
     try{
       return ParamItem(
         uuid: map[1] as String,
@@ -104,7 +137,11 @@ class ParamItem{
         originImagePath: map[12] is String? ? map[12] : null,
         image: map[13] is String? ? map[13] : null,
       );
-    }catch(e){
+    }catch(e, s){
+      if(kDebugMode){
+        print(e);
+        debugPrintStack(stackTrace: s);
+      }
       return null;
     }
   }
