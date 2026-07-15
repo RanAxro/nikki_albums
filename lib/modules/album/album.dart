@@ -1,5 +1,7 @@
 
 
+import "package:nikki_albums/modules/parameter_manager/domain/param_item_edit_controller.dart";
+
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/info.dart";
@@ -1795,8 +1797,13 @@ class _ExhibitState extends State<Exhibit> {
                         return AppDialog(
                           useIntrinsicHeight: false,
                           child: ParamItemEditPanel(
-                            initParamString: param,
-                            initCover: widget.imageItem.path.path,
+                            controller: ParamItemEditController(
+                              initCode: param,
+                              initCover: NativeParamItemCover(
+                                path: widget.imageItem.path.path,
+                                isCache: false,
+                              ),
+                            ),
                             onCancel: (){
                               Navigator.of(context).pop();
                             },
@@ -1836,8 +1843,13 @@ class _ExhibitState extends State<Exhibit> {
                         return AppDialog(
                           useIntrinsicHeight: false,
                           child: ParamItemEditPanel(
-                            initParamString: param,
-                            initCover: widget.imageItem.path.path,
+                            controller: ParamItemEditController(
+                              initCode: param,
+                              initCover: NativeParamItemCover(
+                                path: widget.imageItem.path.path,
+                                isCache: false,
+                              ),
+                            ),
                           ),
                         );
                       },

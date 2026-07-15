@@ -1,4 +1,7 @@
 
+import "package:nikki_albums/modules/setting/debug_panel/presentation/debug_panel.dart";
+
+import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
 import "../domain/camera_params_edit_controller.dart";
@@ -26,15 +29,13 @@ import "package:dio/dio.dart";
 
 
 class ParamItemEditPanel extends StatefulWidget{
-  final String? initParamString;
-  final String? initCover;
+  final ParamItemEditController controller;
   final void Function()? onCancel;
   final void Function(ParamItemCreation)? onFinished;
 
   const ParamItemEditPanel({
     super.key,
-    this.initParamString,
-    this.initCover,
+    required this.controller,
     this.onCancel,
     this.onFinished,
   });
@@ -44,22 +45,11 @@ class ParamItemEditPanel extends StatefulWidget{
 }
 
 class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
-  /// 默认为相机参数面板, 打开时不要写入默认相机参数
-  bool isFirst = true;
-
+  late final ParamItemEditController controller;
   Nuan5DatabaseReaderV1? reader;
 
-  final ParamItemCreator creator = ParamItemCreator();
-
-  final TextEditingController nameTextController = TextEditingController();
-  final TextEditingController paramTextController = TextEditingController();
-  final ValueNotifier<String?> cover = ValueNotifier(null);
-
   Future<void> initReader() async{
-    paramTextController.text = widget.initParamString ?? "";
-    cover.value = widget.initCover;
-    creator.changeParamString(widget.initParamString ?? "");
-
+    controller = widget.controller;
     reader = await Nuan5Data.init();
     setState((){
 
@@ -85,33 +75,16 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   void initState(){
     super.initState();
     initReader();
-    creator.addListener(() async{
-      if(creator.param is RichBuildingParams){
-        nameTextController.text = (creator.param as RichBuildingParams).name;
-        final String? coverUrl = (creator.param as RichBuildingParams).coverImage;
-        if(coverUrl == null){
-          cover.value = null;
-        }else{
-          cover.value = await downloadImage(coverUrl);
-        }
-      }
-    });
   }
 
   @override
   void dispose(){
-    creator.dispose();
-    cover.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context){
-    // tryDeParam("lGoSGGot2pbfRozyhnAnEUQ89OMsIaB4ekxCAO1Y8WKQULnVJlz3hI+qW46E40+sU+B1kx+IgtBEq8wBxOM5kXxOTamKCz60zCykyQ1+/ZGo+anNzqQ7Hr6maME5FuV4GPJfQd5HUDO+thoax5xcZVFGxo86fUW5yPQy2Rk065XA/r6UjbmeVdNkHcH63ROU")
-    //   .then((onValue) => currentParam.value = onValue);
-    // tryDeParam("10aQpNlPjZ2#")
-    //     .then((onValue) => currentParam.value = onValue);
-
     return Row(
       spacing: listSpacing,
       children: [
@@ -125,7 +98,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 children: [
                   Expanded(
                     child: AppTextFiled(
-                      controller: nameTextController,
+                      controller: controller.nameTextController,
                       labelText: "parameter_manager.name",
                     ),
                   ),
@@ -134,7 +107,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                     onClick: () async{
                       final String? text = await readTextFromClipboard();
                       if(text != null){
-                        nameTextController.text = text;
+                        controller.nameTextController.text = text;
                       }
                     },
                     child: Icon(Icons.paste),
@@ -147,8 +120,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                   children: [
                     Expanded(
                       child: AppTextFiled(
-                        controller: paramTextController,
-                        onChanged: creator.changeParamString,
+                        controller: controller.codeTextController,
                         labelText: "parameter_manager.param_or_code",
                       ),
                     ),
@@ -156,7 +128,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                       child: AppButton.smallIcon(
                         toolTip: "parameter_manager.copy",
                         onClick: () async{
-                          final String text = paramTextController.text;
+                          final String text = controller.codeTextController.text;
 
                           try{
                             await copyTextToClipboard(text);
@@ -178,8 +150,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         onClick: () async{
                           final String? text = await readTextFromClipboard();
                           if(text != null){
-                            paramTextController.text = text;
-                            creator.changeParamString(text);
+                            controller.codeTextController.text = text;
                           }
                         },
                         child: Icon(Icons.paste),
@@ -189,11 +160,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                       child: AppButton.smallIcon(
                         toolTip: "parameter_manager.clear",
                         onClick: () async{
-                          final String? text = await readTextFromClipboard();
-                          if(text != null){
-                            paramTextController.text = "";
-                            creator.setParamString("");
-                          }
+                          controller.codeTextController.text = "";
                         },
                         child: AppIcon("cross"),
                       ),
@@ -203,30 +170,30 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
               ),
 
               ListenableBuilder(
-                listenable: creator,
+                listenable: controller,
                 builder: (BuildContext context, Widget? child){
                   return AppRadioStack(
                     selectedIndex: [
                       ParamType.camera,
                       ParamType.cloth,
                       ParamType.home,
-                    ].indexOf(creator.type),
+                    ].indexOf(controller.paramType),
                     children: [
                       AppButton.smallText(
                         onClick: (){
-                          creator.changeType(ParamType.camera);
+                          controller.setParamType(ParamType.camera);
                         },
                         child: AppText.tr("parameter_manager.camera"),
                       ),
                       AppButton.smallText(
                         onClick: (){
-                          creator.changeType(ParamType.cloth);
+                          controller.setParamType(ParamType.cloth);
                         },
                         child: AppText.tr("parameter_manager.cloth"),
                       ),
                       AppButton.smallText(
                         onClick: (){
-                          creator.changeType(ParamType.home);
+                          controller.setParamType(ParamType.home);
                         },
                         child: AppText.tr("parameter_manager.home"),
                       ),
@@ -250,12 +217,12 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         height: 300,
                         child: ValueListenableBuilder(
-                          valueListenable: cover,
-                          builder: (BuildContext context, String? coverPath, Widget? child){
-                            if(coverPath == null){
+                          valueListenable: controller.cover,
+                          builder: (BuildContext context, ParamItemCover? cover, Widget? child){
+                            if(cover == null){
                               return ImageImportListener(
-                                onSelected: (String path){
-                                  cover.value = path;
+                                onSelected: (ParamItemCover newCover){
+                                  controller.cover.value = newCover;
                                 },
                               );
                             }
@@ -264,7 +231,17 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                               child: Stack(
                                 children: [
                                   Positioned.fill(
-                                    child: Image.file(File(coverPath)),
+                                    child: Builder(
+                                      builder: (BuildContext context){
+                                        if(cover is NativeParamItemCover){
+                                          return Image.file(File(cover.path));
+                                        }
+                                        if(cover is NetworkParamItemCover){
+                                          return Image.network(cover.path);
+                                        }
+                                        return block0;
+                                      },
+                                    ),
                                   ),
 
                                   Positioned(
@@ -277,7 +254,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                                       isTransparent: false,
                                       colorRole: ColorRole.highlight,
                                       onClick: (){
-                                        cover.value = null;
+                                        controller.cover.value = null;
                                       },
                                       child: AppIcon("cross"),
                                     ),
@@ -309,24 +286,11 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                       colorRole: ColorRole.highlight,
                       isTransparent: false,
                       onClick: () async{
-                        final ParamType type = creator.type;
-                        final String paramString = paramTextController.text;
-                        final dynamic param = switch(type){
-                          ParamType.camera => await tryDeCameraParam(paramString),
-                          ParamType.cloth => await tryDeClothDiyShareCode(paramString),
-                          ParamType.home => await tryDeHomeBuildShareCode(paramString),
-                        };
-
-                        if(param == null){
-                          AppToast.showMessage(context: context, message: "parameter_manager.invalid_param", state: false);
-                          return;
-                        }
-
                         widget.onFinished?.call(ParamItemCreation(
-                          type: type,
-                          value: paramString,
-                          title: nameTextController.text == "" ? null : nameTextController.text,
-                          originImagePath: cover.value,
+                          type: controller.paramType,
+                          value: controller.codeTextController.text,
+                          title: controller.nameTextController.text == "" ? null : controller.nameTextController.text,
+                          cover: controller.cover.value,
                         ));
                       },
                       child: AppText.tr("parameter_manager.save"),
@@ -341,21 +305,23 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
         Expanded(
           child: ListenableBuilder(
-            listenable: creator,
+            listenable: controller,
             builder: (BuildContext context, Widget? child){
-              final dynamic param = creator.param;
+              final dynamic param = controller.param;
 
               if(param is CameraParams){
                 return CameraParamsEditPanel(
-                  key: Key("CameraParamsEditPanel1"),
-                  controller: CameraParamsEditController(cameraParams: param),
+                  controller: CameraParamsEditController(
+                    cameraParams: param,
+                    allowEdit: false,
+                  ),
                   reader: reader,
                 );
               }
 
               if(param is ClothDiyParams){
                 return ClothDiyParamsPanel(
-                  shareCode: creator.paramString,
+                  shareCode: controller.code,
                   clothDiyParams: param,
                   reader: reader,
                 );
@@ -363,31 +329,15 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
               if(param is RichBuildingParams){
                 return RichBuildingParamsPanel(
-                  shareCode: creator.paramString,
+                  shareCode: controller.code,
                   richBuildingParams: param,
                   reader: reader,
                 );
               }
 
-              if(creator.type == ParamType.camera){
-                return CameraParamsEditPanel(
-                  key: Key("CameraParamsEditPanel2"),
-                  controller: CameraParamsEditController(),
-                  onChanged: (CameraParamsEditController controller){
-                    creator.setParamString(controller.cameraParamString ?? "");
-                    if(isFirst){
-                      isFirst = false;
-                    }else{
-                      paramTextController.text = controller.cameraParamString ?? "";
-                    }
-                  },
-                  reader: reader,
-                );
-              }else{
-                return Center(
-                  child: AppText.tr("parameter_manager.invalid_param"),
-                );
-              }
+              return Center(
+                child: AppText.tr("parameter_manager.invalid_param"),
+              );
 
             },
           ),
@@ -400,7 +350,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
 
 class ImageImportListener extends StatelessWidget{
-  final void Function(String path) onSelected;
+  final void Function(ParamItemCover cover) onSelected;
 
   ImageImportListener({
     super.key,
@@ -422,7 +372,7 @@ class ImageImportListener extends StatelessWidget{
     if(location != null){
       final String? path = location.paths.firstOrNull;
       if(path != null && allowExtension.contains(p.extension(path))){
-        onSelected.call(path);
+        onSelected.call(NativeParamItemCover(path: path, isCache: false));
       }
     }
   }
@@ -431,7 +381,7 @@ class ImageImportListener extends StatelessWidget{
     final String? path = details.files.firstOrNull?.path;
 
     if(path != null && allowExtension.contains(p.extension(path))){
-      onSelected.call(path);
+      onSelected.call(NativeParamItemCover(path: path, isCache: false));
     }
   }
 
@@ -443,10 +393,10 @@ class ImageImportListener extends StatelessWidget{
       final String? path = (await readFilesFromClipboard()).firstOrNull?.path;
 
       if(path != null && allowExtension.contains(p.extension(path))){
-        onSelected.call(path);
+        onSelected.call(NativeParamItemCover(path: path, isCache: false));
       }
     }else{
-      onSelected.call(tempPath);
+      onSelected.call(NativeParamItemCover(path: tempPath, isCache: true));
     }
   }
 
@@ -518,3 +468,6 @@ class ImageImportListener extends StatelessWidget{
     );
   }
 }
+
+
+

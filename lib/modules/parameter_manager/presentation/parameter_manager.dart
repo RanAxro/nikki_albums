@@ -9,6 +9,7 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart
 import "package:nikki_albums/utils/clipboard.dart";
 
 import "../domain/camera_params_edit_controller.dart";
+import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
@@ -160,6 +161,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                         return AppDialog(
                           useIntrinsicHeight: false,
                           child: ParamItemEditPanel(
+                            controller: ParamItemEditController(),
                             onCancel: (){
                               Navigator.of(context).pop();
                             },
