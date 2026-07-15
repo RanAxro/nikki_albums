@@ -22,17 +22,16 @@ import "package:easy_localization/easy_localization.dart";
 import "package:path/path.dart" as p;
 import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
-import "package:dio/dio.dart";
 
 
 class ParamItemEditPanel extends StatefulWidget{
-  final ParamItemEditController controller;
+  final ParamItemEditController? controller;
   final void Function()? onCancel;
   final void Function(ParamItemCreation)? onFinished;
 
   const ParamItemEditPanel({
     super.key,
-    required this.controller,
+    this.controller,
     this.onCancel,
     this.onFinished,
   });
@@ -46,37 +45,24 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   Nuan5DatabaseReaderV1? reader;
 
   Future<void> initReader() async{
-    controller = widget.controller;
     reader = await Nuan5Data.init();
     setState((){
 
     });
   }
 
-  Future<String?> downloadImage(String url) async{
-    try{
-      final String savePath = p.join((await getTempPath()).path, "NetworkImage");
-      final Dio dio = Dio();
-      final Response response = await dio.download(url, savePath);
-      if(response.statusCode == 200){
-        return savePath;
-      }else{
-        return null;
-      }
-    }catch(e){
-      return null;
-    }
-  }
-
   @override
   void initState(){
     super.initState();
+    controller = widget.controller ?? ParamItemEditController();
     initReader();
   }
 
   @override
   void dispose(){
-
+    if(widget.controller == null){
+      controller.dispose();
+    }
     super.dispose();
   }
 

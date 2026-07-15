@@ -160,7 +160,6 @@ class _ParameterManagerState extends State<ParameterManager>{
                         return AppDialog(
                           useIntrinsicHeight: false,
                           child: ParamItemEditPanel(
-                            controller: ParamItemEditController(),
                             onCancel: (){
                               Navigator.of(context).pop();
                             },
