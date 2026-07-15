@@ -1,4 +1,5 @@
 
+import "package:nikki_albums/modules/parameter_manager/model/param_type.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
@@ -112,6 +113,28 @@ Future<RichBuildingParams?> tryDeHomeBuildShareCode(String code) async{
   }catch(e){
     return null;
   }
+}
+
+
+Future<dynamic> tryDeByType(ParamType type, String code) async{
+  return switch(type){
+    ParamType.camera => tryDeCameraParameter(code),
+    ParamType.cloth => tryDeClothDiyShareCode(code),
+    ParamType.home => tryDeHomeBuildShareCode(code),
+  };
+}
+
+ParamType? getTypeByParam(dynamic param){
+  if(param is CameraParams){
+    return ParamType.camera;
+  }
+  if(param is ClothDiyParams){
+    return ParamType.cloth;
+  }
+  if(param is RichBuildingParams){
+    return ParamType.home;
+  }
+  return null;
 }
 
 
