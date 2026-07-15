@@ -215,6 +215,7 @@
     "island_scheme": "Island Scheme",
     "group_scheme": "Group Scheme",
     "add": "Add",
+    "camera_params_import_input": "Manually adjust the parameters",
     "name": "Name",
     "tag": "Tag",
     "cover": "Cover",

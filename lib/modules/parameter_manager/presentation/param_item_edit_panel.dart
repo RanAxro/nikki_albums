@@ -1,4 +1,5 @@
 
+import "param_import_panel.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
@@ -319,7 +320,43 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
               }
 
               return Center(
-                child: AppText.tr("parameter_manager.invalid_param"),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: bigPadding,
+                  children: [
+                    AppText.tr("parameter_manager.invalid_param"),
+
+                    if(controller.paramType == ParamType.camera)
+                      IntrinsicWidth(
+                        child: AppButton.smallText(
+                          colorRole: ColorRole.highlight,
+                          isTransparent: false,
+                          onClick: (){
+                            showAppDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AppDialog(
+                                  maxWidth: 700,
+                                  useIntrinsicHeight: false,
+                                  child: CameraParamsImportInputPanel(
+                                    onCancel: Navigator.of(context).pop,
+                                    onFinish: (String? code, _){
+                                      if(code != null){
+                                        controller.codeTextController.text = code;
+                                      }
+                                      Navigator.of(context).pop();
+                                    },
+                                    reader: reader,
+                                  ),
+                                );
+                              }
+                            );
+                          },
+                          child: AppText.tr("parameter_manager.camera_params_import_input"),
+                        ),
+                      ),
+                  ],
+                ),
               );
 
             },
