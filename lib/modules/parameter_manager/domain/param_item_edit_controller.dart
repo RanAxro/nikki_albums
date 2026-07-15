@@ -69,6 +69,8 @@ class ParamItemEditController extends ChangeNotifier{
       return;
     }
 
+    _paramType = newParamType;
+
     final dynamic newParam = await tryDeByType(_paramType, codeTextController.text);
     _setParam(newParam);
   }
