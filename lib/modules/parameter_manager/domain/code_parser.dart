@@ -59,6 +59,10 @@ void tryDeCodeDebounce(String code, {Duration duration = const Duration(millisec
 }
 
 Future<CameraParams?> tryDeCameraParameter(String code) async{
+  if(code.length < 64){
+    return null;
+  }
+
   try{
     final MediaKey key = MediaKey.cameraParam();
 
@@ -80,6 +84,10 @@ Future<CameraParams?> tryDeCameraParameter(String code) async{
 }
 
 Future<ClothDiyParams?> tryDeClothDiyShareCode(String code) async{
+  if(code.length < 2 || code.length > 30){
+    return null;
+  }
+
   try{
     final String cachePath = await getClothDiyShareCodeTemp(code);
 
@@ -98,6 +106,10 @@ Future<ClothDiyParams?> tryDeClothDiyShareCode(String code) async{
 }
 
 Future<RichBuildingParams?> tryDeHomeBuildShareCode(String code) async{
+  if(code.length < 2 || code.length > 30){
+    return null;
+  }
+
   try{
     final String cachePath = await getHomeBuildShareCodeTemp(code);
 
