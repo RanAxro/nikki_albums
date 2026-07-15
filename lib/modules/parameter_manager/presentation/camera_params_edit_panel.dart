@@ -17,7 +17,7 @@ import "package:flutter/material.dart";
 import "package:easy_localization/easy_localization.dart";
 
 
-class CameraParamsEditPanel extends StatefulWidget {
+class CameraParamsEditPanel extends StatefulWidget{
   final CameraParamsEditController controller;
   final void Function(CameraParamsEditController)? onChanged;
   final Nuan5DatabaseReaderV1? reader;
