@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/modules/app_base/state.dart";
+
 import "param_import_panel.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
@@ -353,6 +355,19 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                             );
                           },
                           child: AppText.tr("parameter_manager.camera_params_import_input"),
+                        ),
+                      ),
+
+                    if(controller.paramType == ParamType.camera)
+                      IntrinsicWidth(
+                        child: AppButton.smallText(
+                          colorRole: ColorRole.highlight,
+                          isTransparent: false,
+                          onClick: (){
+                            Navigator.of(context).pop();
+                            contentController.pageController.animateToPage(1, duration: animationTime, curve: animationCurve);
+                          },
+                          child: AppText.tr("parameter_manager.camera_params_import_album"),
                         ),
                       ),
                   ],

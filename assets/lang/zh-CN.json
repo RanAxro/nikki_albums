@@ -211,6 +211,7 @@
     "group_scheme": "组合方案",
     "add": "添加",
     "camera_params_import_input": "手动调节参数",
+    "camera_params_import_album": "从大喵相册导入",
     "name": "名称",
     "tag": "标签",
     "cover": "封面",

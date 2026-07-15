@@ -216,6 +216,7 @@
     "group_scheme": "Group Scheme",
     "add": "Add",
     "camera_params_import_input": "Manually adjust the parameters",
+    "camera_params_import_album": "Import from the Momo's Album",
     "name": "Name",
     "tag": "Tag",
     "cover": "Cover",
