@@ -1,11 +1,8 @@
 
-import "package:nikki_albums/modules/setting/debug_panel/presentation/debug_panel.dart";
-
 import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
 import "../domain/camera_params_edit_controller.dart";
-import "../domain/param_item_creator.dart";
 import "../presentation/camera_params_edit_panel.dart";
 import "../presentation/cloth_diy_params_panel.dart";
 import "../presentation/rich_building_params_panel.dart";

@@ -1,8 +1,7 @@
 
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
-import "package:nikki_albums/modules/parameter_manager/domain/param_item_creator.dart";
-import "package:nikki_albums/modules/parameter_manager/model/param_type.dart";
+import "package:nikki_albums/modules/parameter_manager/domain/code_parser.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/rich_building_params_panel.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
@@ -259,11 +258,7 @@ class WaterfallGallery extends StatelessWidget{
               colorRole: ColorRole.primary,
               isTransparent: false,
               onClick: () async{
-                final dynamic param = switch(item.type){
-                  ParamType.camera => await tryDeCameraParam(item.value),
-                  ParamType.cloth => await tryDeClothDiyShareCode(item.value),
-                  ParamType.home => await tryDeHomeBuildShareCode(item.value),
-                };
+                final dynamic param = tryDeByType(item.type, item.value);
 
                 final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
 
