@@ -1,19 +1,19 @@
 
-import "package:nikki_albums/modules/parameter_manager/domain/code_parser.dart";
-import "package:nikki_albums/modules/parameter_manager/presentation/rich_building_params_panel.dart";
+import "rich_building_params_panel.dart";
+import "param_item_edit_panel.dart";
+import "../model/param_item.dart";
+import "../domain/camera_params_edit_controller.dart";
+import "../domain/param_input.dart";
+import "../domain/param_item_edit_controller.dart";
+import "../domain/code_parser.dart";
+import "../domain/param_box_manager.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
-import "package:nikki_albums/utils/clipboard.dart";
-
-import "../domain/camera_params_edit_controller.dart";
-import "../domain/param_item_edit_controller.dart";
-import "../model/param_item.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
-import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
-import "package:nikki_albums/modules/parameter_manager/presentation/param_item_edit_panel.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/utils/clipboard.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
@@ -73,6 +73,45 @@ class _ParameterManagerState extends State<ParameterManager>{
     page.value = widget.initPage;
     controller = PageController(initialPage: widget.initPage);
     init();
+  }
+
+  void add(BuildContext context, [String? code]){
+    final ParamItemEditController controller = ParamItemEditController(initCode: code);
+
+    showAppDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AppDialog(
+          useIntrinsicHeight: false,
+          child: ParamItemEditPanel(
+            controller: controller,
+            onCancel: (){
+              Navigator.of(context).pop();
+              controller.dispose();
+            },
+            onFinish: (ParamItemCreation creation) async{
+              AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
+              try{
+                await manager.createItem(creation);
+                await manager.save();
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
+                }
+              }catch(e){
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
+                }
+              }finally{
+                if(context.mounted){
+                  Navigator.of(context).pop();
+                }
+                controller.dispose();
+              }
+            },
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -154,33 +193,45 @@ class _ParameterManagerState extends State<ParameterManager>{
 
                 AppButton.smallText(
                   onClick: (){
-                    showAppDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AppDialog(
-                          useIntrinsicHeight: false,
-                          child: ParamItemEditPanel(
-                            onCancel: (){
-                              Navigator.of(context).pop();
-                            },
-                            onFinished: (ParamItemCreation creation) async{
-                              AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
-                              try{
-                                await manager.createItem(creation);
-                                await manager.save();
-                                AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
-                              }catch(e){
-                                AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
-                              }finally{
-                                Navigator.of(context).pop();
-                              }
-                            },
-                          ),
-                        );
-                      },
-                    );
+                    add(context);
                   },
                   child: AppText.tr("parameter_manager.add"),
+                ),
+
+                AppDropdown(
+                  childrenBuilder: (BuildContext context, MenuController controller){
+                    return [
+                      if(page.value == 0)
+                        AppButton.smallText(
+                          onClick: () async{
+                            final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
+
+                            if(context.mounted && result?.$1 != null){
+                              add(context, result?.$1);
+                            }
+
+                            controller.close();
+                          },
+                          child: AppText.tr("parameter_manager.camera_params_import_input"),
+                        ),
+                      if(page.value == 0)
+                        AppButton.smallText(
+                          onClick: (){
+                            controller.close();
+                            goToCameraParamsImportAlbum();
+                          },
+                          child: AppText.tr("parameter_manager.camera_params_import_album"),
+                        ),
+                    ];
+                  },
+                  builder: (BuildContext context, MenuController controller, Widget? child){
+                    return AppButton.smallIcon(
+                      onClick: (){
+                        controller.isOpen ? controller.close() : controller.open();
+                      },
+                      child: Icon(Icons.arrow_drop_down_rounded),
+                    );
+                  },
                 ),
               ],
             ),
@@ -257,7 +308,7 @@ class WaterfallGallery extends StatelessWidget{
               colorRole: ColorRole.primary,
               isTransparent: false,
               onClick: () async{
-                final dynamic param = tryDeByType(item.type, item.value);
+                final dynamic param = await tryDeByType(item.type, item.value);
 
                 final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
 
@@ -275,7 +326,6 @@ class WaterfallGallery extends StatelessWidget{
                               builder: (BuildContext context){
                                 if(param is CameraParams){
                                   return CameraParamsEditPanel(
-                                    key: Key("CameraParamsEditPanel1"),
                                     controller: CameraParamsEditController(cameraParams: param, allowEdit: false),
                                     reader: reader,
                                   );

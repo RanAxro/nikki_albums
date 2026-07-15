@@ -1807,7 +1807,7 @@ class _ExhibitState extends State<Exhibit> {
                             onCancel: (){
                               Navigator.of(context).pop();
                             },
-                            onFinished: (ParamItemCreation creation) async{
+                            onFinish: (ParamItemCreation creation) async{
                               final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
                               if(!manager.isInit){
                                 await manager.init();

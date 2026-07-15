@@ -1,7 +1,5 @@
 
-import "package:nikki_albums/modules/app_base/state.dart";
-
-import "param_import_panel.dart";
+import "../domain/param_input.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
@@ -30,13 +28,13 @@ import "package:file_picker/file_picker.dart";
 class ParamItemEditPanel extends StatefulWidget{
   final ParamItemEditController? controller;
   final void Function()? onCancel;
-  final void Function(ParamItemCreation)? onFinished;
+  final void Function(ParamItemCreation)? onFinish;
 
   const ParamItemEditPanel({
     super.key,
     this.controller,
     this.onCancel,
-    this.onFinished,
+    this.onFinish,
   });
 
   @override
@@ -272,7 +270,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                       colorRole: ColorRole.highlight,
                       isTransparent: false,
                       onClick: () async{
-                        widget.onFinished?.call(ParamItemCreation(
+                        widget.onFinish?.call(ParamItemCreation(
                           type: controller.paramType,
                           value: controller.codeTextController.text,
                           title: controller.nameTextController.text == "" ? null : controller.nameTextController.text,
@@ -333,26 +331,12 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         child: AppButton.smallText(
                           colorRole: ColorRole.highlight,
                           isTransparent: false,
-                          onClick: (){
-                            showAppDialog(
-                              context: context,
-                              builder: (BuildContext context){
-                                return AppDialog(
-                                  maxWidth: 700,
-                                  useIntrinsicHeight: false,
-                                  child: CameraParamsImportInputPanel(
-                                    onCancel: Navigator.of(context).pop,
-                                    onFinish: (String? code, _){
-                                      if(code != null){
-                                        controller.codeTextController.text = code;
-                                      }
-                                      Navigator.of(context).pop();
-                                    },
-                                    reader: reader,
-                                  ),
-                                );
-                              }
-                            );
+                          onClick: () async{
+                            final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
+
+                            if(result?.$1 != null){
+                              controller.codeTextController.text = result!.$1!;
+                            }
                           },
                           child: AppText.tr("parameter_manager.camera_params_import_input"),
                         ),
@@ -365,7 +349,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                           isTransparent: false,
                           onClick: (){
                             Navigator.of(context).pop();
-                            contentController.pageController.animateToPage(1, duration: animationTime, curve: animationCurve);
+                            goToCameraParamsImportAlbum();
                           },
                           child: AppText.tr("parameter_manager.camera_params_import_album"),
                         ),
