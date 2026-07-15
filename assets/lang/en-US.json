@@ -229,6 +229,7 @@
     "invalid_param": "Invalid Parameter",
     "cancel": "Cancel",
     "close": "Close",
+    "finish": "Finish",
     "save": "Save",
     "on_save": "Saving...",
     "save_successful": "Save Successful",
