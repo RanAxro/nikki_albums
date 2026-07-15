@@ -11,8 +11,23 @@ import "package:flutter/foundation.dart";
 import "package:path/path.dart" as p;
 import "package:uuid/v4.dart";
 import "package:msgpack_dart/msgpack_dart.dart" as msgpack;
+import "package:dio/dio.dart";
 
 
+Future<String?> downloadImage(String url) async{
+  try{
+    final String savePath = p.join((await getTempPath()).path, "NetworkImage");
+    final Dio dio = Dio();
+    final Response response = await dio.download(url, savePath);
+    if(response.statusCode == 200){
+      return savePath;
+    }else{
+      return null;
+    }
+  }catch(e){
+    return null;
+  }
+}
 
 class ParamBoxManager extends ChangeNotifier{
   static ParamBoxManager? _defaultParamBox;
@@ -85,7 +100,17 @@ class ParamBoxManager extends ChangeNotifier{
     final String targetPath = getImagePath(uuid);
     final File targetFile = File(targetPath);
 
-    final File sourceFile = File(source);
+    late final File sourceFile;
+
+    if(source.startsWith("http://") || source.startsWith("https://")){
+      final String? sourcePath = await downloadImage(source);
+      if(sourcePath == null){
+        return false;
+      }
+      sourceFile = File(sourcePath);
+    }else{
+      sourceFile = File(source);
+    }
     try{
       if(!await targetFile.exists()){
         await targetFile.create(recursive: true);
@@ -110,8 +135,8 @@ class ParamBoxManager extends ChangeNotifier{
     final int time = DateTime.timestamp().millisecondsSinceEpoch;
 
     bool hasImage = false;
-    if(creation.originImagePath != null){
-      hasImage = await addImage(uuid, creation.originImagePath!);
+    if(creation.cover != null){
+      hasImage = await addImage(uuid, creation.cover!.path);
     }
 
     _box.item.add(ParamItem(
@@ -126,7 +151,7 @@ class ParamBoxManager extends ChangeNotifier{
       description: creation.description,
       tag: creation.tag,
       set: creation.set,
-      originImagePath: creation.originImagePath,
+      originImagePath: creation.cover?.path,
       image: hasImage ? uuid : null,
     ));
 

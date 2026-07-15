@@ -4,6 +4,22 @@ import "param_type.dart";
 import "package:flutter/foundation.dart";
 
 
+abstract class ParamItemCover{
+  final String path;
+
+  const ParamItemCover({required this.path});
+}
+
+class NativeParamItemCover extends ParamItemCover{
+  final bool isCache;
+
+  const NativeParamItemCover({required super.path, required this.isCache});
+}
+
+class NetworkParamItemCover extends ParamItemCover{
+  const NetworkParamItemCover({required super.path});
+}
+
 class ParamItemCreation{
   final ParamType type;
   final String value;
@@ -12,7 +28,7 @@ class ParamItemCreation{
   final String? description;
   final List<String> tag;
   final String? set;
-  final String? originImagePath;
+  final ParamItemCover? cover;
 
   const ParamItemCreation({
     required this.type,
@@ -22,7 +38,7 @@ class ParamItemCreation{
     this.description,
     this.tag = const [],
     this.set,
-    this.originImagePath,
+    this.cover,
   });
 }
 

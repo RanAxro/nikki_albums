@@ -1,28 +1,10 @@
 
-import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
-
+import "../model/param_item.dart";
 import "../model/param_type.dart";
 import "code_parser.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 
 import "package:flutter/material.dart";
-
-
-abstract class ParamItemCover{
-  const ParamItemCover();
-}
-
-class NativeParamItemCover extends ParamItemCover{
-  final String path;
-  final bool isCache;
-
-  const NativeParamItemCover({required this.path, required this.isCache});
-}
-
-class NetworkParamItemCover extends ParamItemCover{
-  final String url;
-
-  const NetworkParamItemCover({required this.url});
-}
 
 
 class ParamItemEditController extends ChangeNotifier{
@@ -78,6 +60,7 @@ class ParamItemEditController extends ChangeNotifier{
     codeTextController.addListener(onCodeTextChanged);
   }
 
+  String get code => codeTextController.text;
   dynamic get param => _param;
   ParamType get paramType => _paramType;
 
@@ -103,7 +86,7 @@ class ParamItemEditController extends ChangeNotifier{
 
       nameTextController.text = homeBuildingParams.name;
       if(homeBuildingParams.coverImage != null){
-        cover.value = NetworkParamItemCover(url: homeBuildingParams.coverImage!);
+        cover.value = NetworkParamItemCover(path: homeBuildingParams.coverImage!);
       }
     }
 
