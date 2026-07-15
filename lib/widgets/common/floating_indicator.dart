@@ -61,10 +61,12 @@ class _FloatingIndicatorGroupState extends State<FloatingIndicatorGroup>{
           _default = rect?.translate(-offset.dx, -offset.dy);
           _defaultInfo = info;
 
-          if(_current == null){
-            _current = _default;
-            _currentInfo = _defaultInfo;
-          }
+          _current = _default;
+          _currentInfo = _defaultInfo;
+          // if(_current == null){
+          //   _current = _default;
+          //   _currentInfo = _defaultInfo;
+          // }
         });
       }
     });
