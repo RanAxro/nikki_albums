@@ -61,7 +61,7 @@ class _CameraParamsImportInputPanelState extends State<CameraParamsImportInputPa
             ),
             Expanded(
               child: AppButton.smallText(
-                colorRole: ColorRole.background,
+                colorRole: ColorRole.highlight,
                 isTransparent: false,
                 onClick: (){
                   widget.onFinish?.call(controller.cameraParamString, controller.cameraParams);

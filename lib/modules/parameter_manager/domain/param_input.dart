@@ -18,7 +18,7 @@ Future<(String?, CameraParams)?> showCameraParamsImportInputPanel({required Buil
       context: context,
       builder: (BuildContext context){
         return AppDialog(
-          maxWidth: 700,
+          maxWidth: 600,
           useIntrinsicHeight: false,
           child: CameraParamsImportInputPanel(
             onCancel: Navigator.of(context).pop,
