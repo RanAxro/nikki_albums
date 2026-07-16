@@ -1,4 +1,5 @@
 
+import "../domain/code_parser.dart";
 import "../domain/param_import.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
@@ -270,12 +271,16 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                       colorRole: ColorRole.highlight,
                       isTransparent: false,
                       onClick: () async{
-                        widget.onFinish?.call(ParamItemCreation(
-                          type: controller.paramType,
-                          value: controller.codeTextController.text,
-                          title: controller.nameTextController.text == "" ? null : controller.nameTextController.text,
-                          cover: controller.cover.value,
-                        ));
+                        if(isValidParam(controller.param)){
+                          widget.onFinish?.call(ParamItemCreation(
+                            type: controller.paramType,
+                            value: controller.codeTextController.text,
+                            title: controller.nameTextController.text == "" ? null : controller.nameTextController.text,
+                            cover: controller.cover.value,
+                          ));
+                        }else{
+                          AppToast.showMessage(context: context, message: context.tr("parameter_manager.invalid_param"), state: false);
+                        }
                       },
                       child: AppText.tr("parameter_manager.save"),
                     ),

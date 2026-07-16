@@ -136,6 +136,13 @@ Future<dynamic> tryDeByType(ParamType type, String code) async{
   };
 }
 
+bool isValidParam(dynamic param){
+  if(param is CameraParams || param is ClothDiyParams || param is RichBuildingParams){
+    return true;
+  }
+  return false;
+}
+
 ParamType? getTypeByParam(dynamic param){
   if(param is CameraParams){
     return ParamType.camera;
