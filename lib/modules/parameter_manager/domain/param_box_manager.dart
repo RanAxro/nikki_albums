@@ -200,6 +200,10 @@ class ParamBoxManager extends ChangeNotifier{
     final ParamTag? tag = getTag(uuid);
     final bool result = _box.tag.remove(tag);
 
+    for(final ParamItem item in _box.item){
+      item.tag.remove(uuid);
+    }
+
     notifyListeners();
     return tag != null && result;
   }
