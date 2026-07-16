@@ -129,12 +129,14 @@ sealed class ClothDiyParam with _$ClothDiyParam {
   const factory ClothDiyParam.diyHistoryShareCode(
     List<DiyHistoryShareCodeParams> field0,
   ) = ClothDiyParam_DiyHistoryShareCode;
+  const factory ClothDiyParam.qrCode(ClothDiyQrCodeParams field0) =
+      ClothDiyParam_QrCode;
 }
 
 /// ============================================================
 /// ClothDiy
 /// ============================================================
-enum ClothDiyParamType { clothDiy, diyHistoryShareCode }
+enum ClothDiyParamType { clothDiy, diyHistoryShareCode, qrCode }
 
 @freezed
 sealed class HomeBuildParam with _$HomeBuildParam {

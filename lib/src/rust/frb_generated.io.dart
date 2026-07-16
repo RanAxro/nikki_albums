@@ -225,6 +225,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ClothDiyParams dco_decode_box_autoadd_cloth_diy_params(dynamic raw);
 
   @protected
+  ClothDiyQrCodeParams dco_decode_box_autoadd_cloth_diy_qr_code_params(
+    dynamic raw,
+  );
+
+  @protected
   CollageParams dco_decode_box_autoadd_collage_params(dynamic raw);
 
   @protected
@@ -404,6 +409,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ClothDiyParams dco_decode_cloth_diy_params(dynamic raw);
+
+  @protected
+  ClothDiyQrCodeParams dco_decode_cloth_diy_qr_code_params(dynamic raw);
 
   @protected
   ClothParams dco_decode_cloth_params(dynamic raw);
@@ -1133,6 +1141,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ClothDiyQrCodeParams sse_decode_box_autoadd_cloth_diy_qr_code_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CollageParams sse_decode_box_autoadd_collage_params(
     SseDeserializer deserializer,
   );
@@ -1372,6 +1385,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ClothDiyParams sse_decode_cloth_diy_params(SseDeserializer deserializer);
+
+  @protected
+  ClothDiyQrCodeParams sse_decode_cloth_diy_qr_code_params(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ClothParams sse_decode_cloth_params(SseDeserializer deserializer);
@@ -2239,6 +2257,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_cloth_diy_qr_code_params(
+    ClothDiyQrCodeParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_collage_params(
     CollageParams self,
     SseSerializer serializer,
@@ -2541,6 +2565,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_cloth_diy_params(
     ClothDiyParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_cloth_diy_qr_code_params(
+    ClothDiyQrCodeParams self,
     SseSerializer serializer,
   );
 

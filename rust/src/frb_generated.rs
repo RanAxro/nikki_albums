@@ -3364,6 +3364,10 @@ impl SseDecode for crate::nuan5_params::decode::ClothDiyParam {
                 >>::sse_decode(deserializer);
                 return crate::nuan5_params::decode::ClothDiyParam::DiyHistoryShareCode(var_field0);
             }
+            2 => {
+                let mut var_field0 = <crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams>::sse_decode(deserializer);
+                return crate::nuan5_params::decode::ClothDiyParam::QrCode(var_field0);
+            }
             _ => {
                 unimplemented!("");
             }
@@ -3378,6 +3382,7 @@ impl SseDecode for crate::nuan5_params::decode::ClothDiyParamType {
         return match inner {
             0 => crate::nuan5_params::decode::ClothDiyParamType::ClothDiy,
             1 => crate::nuan5_params::decode::ClothDiyParamType::DiyHistoryShareCode,
+            2 => crate::nuan5_params::decode::ClothDiyParamType::QrCode,
             _ => unreachable!("Invalid variant for ClothDiyParamType: {}", inner),
         };
     }
@@ -3396,6 +3401,16 @@ impl SseDecode for crate::nuan5_params::structs::cloth_diy_params::ClothDiyParam
             pose_id: var_poseId,
             pattern_data: var_patternData,
             clothes: var_clothes,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_shareCode = <String>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams {
+            share_code: var_shareCode,
         };
     }
 }
@@ -6971,6 +6986,9 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::ClothDiyPara
             crate::nuan5_params::decode::ClothDiyParam::DiyHistoryShareCode(field0) => {
                 [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
+            crate::nuan5_params::decode::ClothDiyParam::QrCode(field0) => {
+                [2.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
             _ => {
                 unimplemented!("");
             }
@@ -6994,6 +7012,7 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::ClothDiyPara
         match self {
             Self::ClothDiy => 0.into_dart(),
             Self::DiyHistoryShareCode => 1.into_dart(),
+            Self::QrCode => 2.into_dart(),
             _ => unreachable!(),
         }
     }
@@ -7032,6 +7051,29 @@ impl
     > for crate::nuan5_params::structs::cloth_diy_params::ClothDiyParams
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::cloth_diy_params::ClothDiyParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.share_code.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams,
+    > for crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams {
         self
     }
 }
@@ -9776,6 +9818,12 @@ impl SseEncode for crate::nuan5_params::decode::ClothDiyParam {
                 <i32>::sse_encode(1, serializer);
                 <Vec<crate::nuan5_params::structs::cloth_diy_params::DiyHistoryShareCodeParams>>::sse_encode(field0, serializer);
             }
+            crate::nuan5_params::decode::ClothDiyParam::QrCode(field0) => {
+                <i32>::sse_encode(2, serializer);
+                <crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
             _ => {
                 unimplemented!("");
             }
@@ -9790,6 +9838,7 @@ impl SseEncode for crate::nuan5_params::decode::ClothDiyParamType {
             match self {
                 crate::nuan5_params::decode::ClothDiyParamType::ClothDiy => 0,
                 crate::nuan5_params::decode::ClothDiyParamType::DiyHistoryShareCode => 1,
+                crate::nuan5_params::decode::ClothDiyParamType::QrCode => 2,
                 _ => {
                     unimplemented!("");
                 }
@@ -9808,6 +9857,13 @@ impl SseEncode for crate::nuan5_params::structs::cloth_diy_params::ClothDiyParam
             self.clothes,
             serializer,
         );
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::cloth_diy_params::ClothDiyQrCodeParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.share_code, serializer);
     }
 }
 

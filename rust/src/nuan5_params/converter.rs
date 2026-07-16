@@ -612,6 +612,13 @@ pub(crate) fn convert_diy_history_share_code_box(data: &diy_custom_data::DiyHist
   data.iter().map(convert_diy_history_share_code_params).collect()
 }
 
+pub(crate) fn convert_cloth_diy_qr_code(data: &diy_custom_data::ClothDiyQrCodeCustomData) -> ClothDiyQrCodeParams{
+  ClothDiyQrCodeParams{
+    share_code: data.content.share_code.clone(),
+  }
+}
+
+
 pub(crate) fn convert_rich_build_data(data: &build_data::RichBuildData) -> RichBuildingParams{
   RichBuildingParams{
     name: data.name.clone(),

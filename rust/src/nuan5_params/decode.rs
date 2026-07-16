@@ -3,6 +3,7 @@ use std::ptr;
 use std::sync::Arc;
 use flutter_rust_bridge::frb;
 use crate::frb_generated::StreamSink;
+use crate::nuan5_params::decode::ClothDiyParamType::DiyHistoryShareCode;
 use crate::nuan5_params::decrypt::{DecryptionError, MediaKey, ClothDiyShareCode, HomeBuildShareCode};
 use super::converter::*;
 use super::decrypt;
@@ -200,6 +201,7 @@ pub fn media_de_files_unchecked(
 pub enum ClothDiyParamType{
   ClothDiy,
   DiyHistoryShareCode,
+  QrCode,
 }
 
 #[frb]
@@ -207,6 +209,7 @@ pub enum ClothDiyParamType{
 pub enum ClothDiyParam{
   ClothDiy(ClothDiyParams),
   DiyHistoryShareCode(DiyHistoryShareCodeParamsBox),
+  QrCode(ClothDiyQrCodeParams),
 }
 
 #[frb]
@@ -216,6 +219,7 @@ pub fn de_cloth_diy_param(param_type: &ClothDiyParamType, bytes: &[u8]) -> Optio
   let decoded = match param_type{
     ClothDiy => from_slice(&bytes).ok().as_ref().map(convert_net_cloth_diy_params).map(ClothDiyParam::ClothDiy),
     DiyHistoryShareCode => from_slice(&bytes).ok().as_ref().map(convert_diy_history_share_code_box).map(ClothDiyParam::DiyHistoryShareCode),
+    QrCode => from_slice(&bytes).ok().as_ref().map(convert_cloth_diy_qr_code).map(ClothDiyParam::QrCode),
   };
 
   decoded

@@ -3038,6 +3038,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ClothDiyQrCodeParams dco_decode_box_autoadd_cloth_diy_qr_code_params(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_cloth_diy_qr_code_params(raw);
+  }
+
+  @protected
   CollageParams dco_decode_box_autoadd_collage_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_collage_params(raw);
@@ -3438,6 +3446,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         return ClothDiyParam_DiyHistoryShareCode(
           dco_decode_list_diy_history_share_code_params(raw[1]),
         );
+      case 2:
+        return ClothDiyParam_QrCode(
+          dco_decode_box_autoadd_cloth_diy_qr_code_params(raw[1]),
+        );
       default:
         throw Exception("unreachable");
     }
@@ -3460,6 +3472,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       patternData: dco_decode_Map_i_64_i_64_None(arr[1]),
       clothes: dco_decode_list_cloth_params(arr[2]),
     );
+  }
+
+  @protected
+  ClothDiyQrCodeParams dco_decode_cloth_diy_qr_code_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return ClothDiyQrCodeParams(shareCode: dco_decode_String(arr[0]));
   }
 
   @protected
@@ -5614,6 +5635,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ClothDiyQrCodeParams sse_decode_box_autoadd_cloth_diy_qr_code_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_cloth_diy_qr_code_params(deserializer));
+  }
+
+  @protected
   CollageParams sse_decode_box_autoadd_collage_params(
     SseDeserializer deserializer,
   ) {
@@ -6111,6 +6140,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           deserializer,
         );
         return ClothDiyParam_DiyHistoryShareCode(var_field0);
+      case 2:
+        var var_field0 = sse_decode_box_autoadd_cloth_diy_qr_code_params(
+          deserializer,
+        );
+        return ClothDiyParam_QrCode(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -6136,6 +6170,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       patternData: var_patternData,
       clothes: var_clothes,
     );
+  }
+
+  @protected
+  ClothDiyQrCodeParams sse_decode_cloth_diy_qr_code_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_shareCode = sse_decode_String(deserializer);
+    return ClothDiyQrCodeParams(shareCode: var_shareCode);
   }
 
   @protected
@@ -8840,6 +8883,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_cloth_diy_qr_code_params(
+    ClothDiyQrCodeParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_cloth_diy_qr_code_params(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_collage_params(
     CollageParams self,
     SseSerializer serializer,
@@ -9354,6 +9406,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case ClothDiyParam_DiyHistoryShareCode(field0: final field0):
         sse_encode_i_32(1, serializer);
         sse_encode_list_diy_history_share_code_params(field0, serializer);
+      case ClothDiyParam_QrCode(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_box_autoadd_cloth_diy_qr_code_params(field0, serializer);
     }
   }
 
@@ -9375,6 +9430,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_opt_box_autoadd_i_64(self.poseId, serializer);
     sse_encode_Map_i_64_i_64_None(self.patternData, serializer);
     sse_encode_list_cloth_params(self.clothes, serializer);
+  }
+
+  @protected
+  void sse_encode_cloth_diy_qr_code_params(
+    ClothDiyQrCodeParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.shareCode, serializer);
   }
 
   @protected

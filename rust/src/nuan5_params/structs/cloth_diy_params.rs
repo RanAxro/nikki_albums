@@ -16,3 +16,8 @@ pub struct DiyHistoryShareCodeParams{
   pub time_stamp: f64,
   pub share_code: String,
 }
+
+#[derive(Clone)]
+pub struct ClothDiyQrCodeParams{
+  pub share_code: String,
+}

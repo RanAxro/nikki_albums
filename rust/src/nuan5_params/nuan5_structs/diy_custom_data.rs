@@ -22,3 +22,17 @@ pub struct DiyHistoryShareCode{
   #[serde(rename = "ShareCode")]
   pub share_code: String,
 }
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct ClothDiyQrCodeCustomData{
+  #[serde(rename = "Content")]
+  pub content: ClothDiyQrCodeContent,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct ClothDiyQrCodeContent{
+  #[serde(rename = "Content")]
+  pub share_code: String,
+}

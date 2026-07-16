@@ -55,12 +55,13 @@ extension ClothDiyParamPatterns on ClothDiyParam {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ClothDiyParam_ClothDiy value)?  clothDiy,TResult Function( ClothDiyParam_DiyHistoryShareCode value)?  diyHistoryShareCode,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ClothDiyParam_ClothDiy value)?  clothDiy,TResult Function( ClothDiyParam_DiyHistoryShareCode value)?  diyHistoryShareCode,TResult Function( ClothDiyParam_QrCode value)?  qrCode,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
 return clothDiy(_that);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
-return diyHistoryShareCode(_that);case _:
+return diyHistoryShareCode(_that);case ClothDiyParam_QrCode() when qrCode != null:
+return qrCode(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return diyHistoryShareCode(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ClothDiyParam_ClothDiy value)  clothDiy,required TResult Function( ClothDiyParam_DiyHistoryShareCode value)  diyHistoryShareCode,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ClothDiyParam_ClothDiy value)  clothDiy,required TResult Function( ClothDiyParam_DiyHistoryShareCode value)  diyHistoryShareCode,required TResult Function( ClothDiyParam_QrCode value)  qrCode,}){
 final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy():
 return clothDiy(_that);case ClothDiyParam_DiyHistoryShareCode():
-return diyHistoryShareCode(_that);}
+return diyHistoryShareCode(_that);case ClothDiyParam_QrCode():
+return qrCode(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +99,13 @@ return diyHistoryShareCode(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ClothDiyParam_ClothDiy value)?  clothDiy,TResult? Function( ClothDiyParam_DiyHistoryShareCode value)?  diyHistoryShareCode,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ClothDiyParam_ClothDiy value)?  clothDiy,TResult? Function( ClothDiyParam_DiyHistoryShareCode value)?  diyHistoryShareCode,TResult? Function( ClothDiyParam_QrCode value)?  qrCode,}){
 final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
 return clothDiy(_that);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
-return diyHistoryShareCode(_that);case _:
+return diyHistoryShareCode(_that);case ClothDiyParam_QrCode() when qrCode != null:
+return qrCode(_that);case _:
   return null;
 
 }
@@ -119,11 +122,12 @@ return diyHistoryShareCode(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ClothDiyParams field0)?  clothDiy,TResult Function( List<DiyHistoryShareCodeParams> field0)?  diyHistoryShareCode,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ClothDiyParams field0)?  clothDiy,TResult Function( List<DiyHistoryShareCodeParams> field0)?  diyHistoryShareCode,TResult Function( ClothDiyQrCodeParams field0)?  qrCode,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
 return clothDiy(_that.field0);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
-return diyHistoryShareCode(_that.field0);case _:
+return diyHistoryShareCode(_that.field0);case ClothDiyParam_QrCode() when qrCode != null:
+return qrCode(_that.field0);case _:
   return orElse();
 
 }
@@ -141,11 +145,12 @@ return diyHistoryShareCode(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ClothDiyParams field0)  clothDiy,required TResult Function( List<DiyHistoryShareCodeParams> field0)  diyHistoryShareCode,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ClothDiyParams field0)  clothDiy,required TResult Function( List<DiyHistoryShareCodeParams> field0)  diyHistoryShareCode,required TResult Function( ClothDiyQrCodeParams field0)  qrCode,}) {final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy():
 return clothDiy(_that.field0);case ClothDiyParam_DiyHistoryShareCode():
-return diyHistoryShareCode(_that.field0);}
+return diyHistoryShareCode(_that.field0);case ClothDiyParam_QrCode():
+return qrCode(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +164,12 @@ return diyHistoryShareCode(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ClothDiyParams field0)?  clothDiy,TResult? Function( List<DiyHistoryShareCodeParams> field0)?  diyHistoryShareCode,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ClothDiyParams field0)?  clothDiy,TResult? Function( List<DiyHistoryShareCodeParams> field0)?  diyHistoryShareCode,TResult? Function( ClothDiyQrCodeParams field0)?  qrCode,}) {final _that = this;
 switch (_that) {
 case ClothDiyParam_ClothDiy() when clothDiy != null:
 return clothDiy(_that.field0);case ClothDiyParam_DiyHistoryShareCode() when diyHistoryShareCode != null:
-return diyHistoryShareCode(_that.field0);case _:
+return diyHistoryShareCode(_that.field0);case ClothDiyParam_QrCode() when qrCode != null:
+return qrCode(_that.field0);case _:
   return null;
 
 }
@@ -303,6 +309,72 @@ class _$ClothDiyParam_DiyHistoryShareCodeCopyWithImpl<$Res>
   return _then(ClothDiyParam_DiyHistoryShareCode(
 null == field0 ? _self._field0 : field0 // ignore: cast_nullable_to_non_nullable
 as List<DiyHistoryShareCodeParams>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ClothDiyParam_QrCode extends ClothDiyParam {
+  const ClothDiyParam_QrCode(this.field0): super._();
+  
+
+@override final  ClothDiyQrCodeParams field0;
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ClothDiyParam_QrCodeCopyWith<ClothDiyParam_QrCode> get copyWith => _$ClothDiyParam_QrCodeCopyWithImpl<ClothDiyParam_QrCode>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_QrCode&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'ClothDiyParam.qrCode(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ClothDiyParam_QrCodeCopyWith<$Res> implements $ClothDiyParamCopyWith<$Res> {
+  factory $ClothDiyParam_QrCodeCopyWith(ClothDiyParam_QrCode value, $Res Function(ClothDiyParam_QrCode) _then) = _$ClothDiyParam_QrCodeCopyWithImpl;
+@useResult
+$Res call({
+ ClothDiyQrCodeParams field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$ClothDiyParam_QrCodeCopyWithImpl<$Res>
+    implements $ClothDiyParam_QrCodeCopyWith<$Res> {
+  _$ClothDiyParam_QrCodeCopyWithImpl(this._self, this._then);
+
+  final ClothDiyParam_QrCode _self;
+  final $Res Function(ClothDiyParam_QrCode) _then;
+
+/// Create a copy of ClothDiyParam
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(ClothDiyParam_QrCode(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as ClothDiyQrCodeParams,
   ));
 }
 
