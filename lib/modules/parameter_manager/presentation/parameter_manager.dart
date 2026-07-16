@@ -129,6 +129,58 @@ class _ParameterManagerState extends State<ParameterManager>{
     );
   }
 
+  void onDeleteItem(String uuid){
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+      final bool? result = await showAppDialog<bool>(
+        context: context,
+        builder: (BuildContext context){
+          return AppConfirmDialog(message: "parameter_manager.delete_item");
+        },
+      );
+
+      if(result == true){
+        manager.deleteItem(uuid);
+        await manager.save();
+      }
+    });
+  }
+
+  void onEditItem(String uuid){
+    final ParamItem? item = manager.getItem(uuid);
+    if(item == null) return;
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      showAppDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AppDialog(
+            useIntrinsicHeight: false,
+            child: ParamItemEditPanel(
+              manager: manager,
+              controller: ParamItemEditController(
+                initName: item.title,
+                initCode: item.value,
+                initCover: item.image == null ? null : NativeParamItemCover(
+                  path: manager.getImagePath(item.image!),
+                  isCache: false,
+                ),
+                initParamType: item.type
+              ),
+              initTag: item.tag,
+              createMode: false,
+              onCancel: Navigator.of(context).pop,
+              onFinish: (ParamItemCreation creation) async{
+                manager.setItem(item.uuid, creation);
+                Navigator.of(context).pop();
+                await manager.save();
+              },
+            ),
+          );
+        },
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context){
     if(isInit == null){
@@ -325,57 +377,8 @@ class _ParameterManagerState extends State<ParameterManager>{
                       return WaterfallGallery(
                         items: manager.getSortedItemList().reversed.where((item) => item.type.value == index).toList(),
                         manager: manager,
-                        onDelete: (String uuid) async{
-                          WidgetsBinding.instance.addPostFrameCallback((_) async{
-                            final bool? result = await showAppDialog<bool>(
-                              context: context,
-                              builder: (BuildContext context){
-                                return AppConfirmDialog(message: "parameter_manager.delete_item");
-                              },
-                            );
-
-                            if(result == true){
-                              manager.deleteItem(uuid);
-                              await manager.save();
-                            }
-                          });
-                        },
-                        onEdit: (String uuid){
-                          final ParamItem? item = manager.getItem(uuid);
-                          if(item == null) return;
-
-                          WidgetsBinding.instance.addPostFrameCallback((_){
-                            showAppDialog(
-                              context: context,
-                              builder: (BuildContext context){
-                                return AppDialog(
-                                  useIntrinsicHeight: false,
-                                  child: ParamItemEditPanel(
-                                    manager: manager,
-                                    controller: ParamItemEditController(
-                                      initName: item.title,
-                                      initCode: item.value,
-                                      initCover: item.image == null ? null : NativeParamItemCover(
-                                        path: manager.getImagePath(item.image!),
-                                        isCache: false,
-                                      ),
-                                      initParamType: item.type
-                                    ),
-                                    initTag: item.tag,
-                                    createMode: false,
-                                    onCancel: Navigator.of(context).pop,
-                                    onFinish: (ParamItemCreation creation) async{
-                                      manager.setItem(item.uuid, creation);
-                                      Navigator.of(context).pop();
-                                      await manager.save();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                          });
-
-                        },
+                        onDelete: onDeleteItem,
+                        onEdit: onEditItem,
                       );
                     },
                   ),
@@ -402,6 +405,96 @@ class WaterfallGallery extends StatelessWidget{
     this.onDelete,
     this.onEdit,
   });
+
+
+  Future<void> showViewerDialog(BuildContext context, ParamItem item) async{
+    final dynamic param = await tryDeByType(item.type, item.value);
+
+    final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
+
+    if(context.mounted){
+      await showAppDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AppDialog(
+            maxWidth: 500,
+            useIntrinsicHeight: false,
+            child: Column(
+              spacing: bigPadding,
+              children: [
+                /// params viewer
+                Expanded(
+                  child: Builder(
+                    builder: (BuildContext context){
+                      if(param is CameraParams){
+                        return CameraParamsEditPanel(
+                          controller: CameraParamsEditController(cameraParams: param, allowEdit: false),
+                          reader: reader,
+                        );
+                      }
+                      if(param is ClothDiyParams){
+                        return ClothDiyParamsPanel(
+                          shareCode: item.value,
+                          clothDiyParams: param,
+                          reader: reader,
+                        );
+                      }
+                      if(param is RichBuildingParams){
+                        return RichBuildingParamsPanel(
+                          shareCode: item.value,
+                          richBuildingParams: param,
+                          reader: reader,
+                        );
+                      }
+
+                      return Center(
+                        child: AppText.tr("parameter_manager.invalid_param"),
+                      );
+                    },
+                  ),
+                ),
+
+                /// bottom button
+                Row(
+                  spacing: listSpacing,
+                  children: [
+                    AppButton.smallIcon(
+                      toolTip: "parameter_manager.delete",
+                      onClick: (){
+                        Navigator.of(context).pop();
+                        onDelete?.call(item.uuid);
+                      },
+                      child: AppIcon("delete"),
+                    ),
+
+                    AppButton.smallIcon(
+                      toolTip: "parameter_manager.edit",
+                      isTransparent: false,
+                      onClick: (){
+                        Navigator.of(context).pop();
+                        onEdit?.call(item.uuid);
+                      },
+                      child: AppIcon("edit"),
+                    ),
+
+                    Expanded(
+                      child: AppButton.smallText(
+                        isTransparent: false,
+                        onClick: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: AppText.tr("parameter_manager.close"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context){
@@ -430,89 +523,7 @@ class WaterfallGallery extends StatelessWidget{
               colorRole: ColorRole.primary,
               isTransparent: false,
               onClick: () async{
-                final dynamic param = await tryDeByType(item.type, item.value);
-
-                final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
-
-                if(context.mounted){
-                  showAppDialog(
-                    context: context,
-                    builder: (BuildContext context){
-                      return AppDialog(
-                        maxWidth: 500,
-                        useIntrinsicHeight: false,
-                        child: Column(
-                          spacing: bigPadding,
-                          children: [
-                            Expanded(
-                              child: Builder(
-                                builder: (BuildContext context){
-                                  if(param is CameraParams){
-                                    return CameraParamsEditPanel(
-                                      controller: CameraParamsEditController(cameraParams: param, allowEdit: false),
-                                      reader: reader,
-                                    );
-                                  }
-                                  if(param is ClothDiyParams){
-                                    return ClothDiyParamsPanel(
-                                      shareCode: item.value,
-                                      clothDiyParams: param,
-                                      reader: reader,
-                                    );
-                                  }
-                                  if(param is RichBuildingParams){
-                                    return RichBuildingParamsPanel(
-                                      shareCode: item.value,
-                                      richBuildingParams: param,
-                                      reader: reader,
-                                    );
-                                  }
-
-                                  return Center(
-                                    child: AppText.tr("parameter_manager.invalid_param"),
-                                  );
-                                },
-                              ),
-                            ),
-
-                            Row(
-                              spacing: listSpacing,
-                              children: [
-                                AppButton.smallIcon(
-                                  toolTip: "parameter_manager.delete",
-                                  onClick: (){
-                                    Navigator.of(context).pop();
-                                    onDelete?.call(item.uuid);
-                                  },
-                                  child: AppIcon("delete"),
-                                ),
-
-                                AppButton.smallIcon(
-                                  toolTip: "parameter_manager.edit",
-                                  onClick: (){
-                                    Navigator.of(context).pop();
-                                    onEdit?.call(item.uuid);
-                                  },
-                                  child: AppIcon("edit"),
-                                ),
-
-                                Expanded(
-                                  child: AppButton.smallText(
-                                    isTransparent: false,
-                                    onClick: (){
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: AppText.tr("parameter_manager.close"),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                }
+                showViewerDialog(context, item);
               },
               child: Column(
                 spacing: listSpacing,
