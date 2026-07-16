@@ -240,7 +240,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                                       onClick: (){
                                         controller.cover.value = null;
                                       },
-                                      child: AppIcon("cross"),
+                                      child: AppIcon("cross", height: 16),
                                     ),
                                   ),
                                 ],
@@ -497,9 +497,15 @@ class ImageImportListener extends StatelessWidget{
             spacing: bigPadding,
             mainAxisSize: MainAxisSize.min,
             children: [
-              AppText.tr("left-clickToSelectImage"),
-              AppText.tr("dragImageHere"),
-              AppText.tr("right-clickToPasteImage"),
+              AppText.tr("parameter_manager.drag_cover_image_here", fontSize: 24),
+              Row(
+                spacing: bigPadding,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AppText.tr("parameter_manager.left_click_select"),
+                  AppText.tr("parameter_manager.right_click_paste"),
+                ],
+              ),
             ],
           ),
         );
@@ -533,12 +539,7 @@ class ImageImportListener extends StatelessWidget{
       ),
       backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          bigPadding,
-          0,
-          bigPadding,
-          bigPadding,
-        ),
+        padding: const EdgeInsets.fromLTRB(bigPadding, 0, bigPadding, bigPadding),
         child: processor,
       ),
     );

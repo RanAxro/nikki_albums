@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/widgets/common/component.dart";
+
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -314,18 +316,20 @@ class _ParameterManagerState extends State<ParameterManager>{
               controller: controller,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index){
-                return ListenableBuilder(
-                  listenable: manager,
-                  builder: (BuildContext context, Widget? child){
-                    return WaterfallGallery(
-                      items: manager.items.where((item) => item.type.value == index).toList(),
-                      manager: manager,
-                      onDelete: (String uuid) async{
-                        manager.deleteItem(uuid);
-                        await manager.save();
-                      },
-                    );
-                  },
+                return KeepAliveWrapper(
+                  child: ListenableBuilder(
+                    listenable: manager,
+                    builder: (BuildContext context, Widget? child){
+                      return WaterfallGallery(
+                        items: manager.items.where((item) => item.type.value == index).toList(),
+                        manager: manager,
+                        onDelete: (String uuid) async{
+                          manager.deleteItem(uuid);
+                          await manager.save();
+                        },
+                      );
+                    },
+                  ),
                 );
               },
             ),

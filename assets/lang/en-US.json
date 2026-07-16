@@ -235,6 +235,7 @@
     "name": "Name",
     "tag": "Tag",
     "cover": "Cover",
+    "drag_cover_image_here": "Please drag the picture here.",
     "select_cover": "Please select an image as the cover.",
     "paste": "Paste",
     "copy": "Copy",

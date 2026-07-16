@@ -230,6 +230,7 @@
     "name": "名称",
     "tag": "标签",
     "cover": "封面",
+    "drag_cover_image_here": "请把图片拖动到此处",
     "select_cover": "请选择一张图片作为封面",
     "paste": "粘贴",
     "copy": "复制",
