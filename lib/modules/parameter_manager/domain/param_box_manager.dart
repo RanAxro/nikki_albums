@@ -1,8 +1,8 @@
 
-import "package:nikki_albums/modules/album/album.dart";
-
 import "../model/param_item.dart";
 import "../model/param_box.dart";
+import "../model/param_type.dart";
+import "package:nikki_albums/modules/album/album.dart";
 import "package:nikki_albums/utils/system/system.dart";
 
 import "dart:io";
@@ -85,6 +85,9 @@ class ParamBoxManager extends ChangeNotifier{
 
   String _generateAvailableUuid(){
     final Set<String> unusable = _box.item.map((ParamItem item) => item.uuid).toSet();
+    unusable.addAll(_box.tag.map((ParamTag tag) => tag.uuid));
+    unusable.addAll(_box.set.map((ParamSet set) => set.uuid));
+
     while(true){
       final String uuid = UuidV4().generate();
       if(!unusable.contains(uuid)){
@@ -156,6 +159,49 @@ class ParamBoxManager extends ChangeNotifier{
     ));
 
     notifyListeners();
+  }
+
+  List<ParamTag> get tagList => _box.tag;
+
+  ParamTag? getTag(String uuid){
+    for(final ParamTag tag in _box.tag){
+      if(uuid == tag.uuid){
+        return tag;
+      }
+    }
+    return null;
+  }
+
+  List<ParamItem> getTagItems(String uuid){
+    return _box.item.where((ParamItem item) => !item.delete && item.tag.contains(uuid)).toList();
+  }
+
+  void createTag(String name, int color, ParamType? specifiedType){
+    _box.tag.add(ParamTag(
+      uuid: _generateAvailableUuid(),
+      name: name,
+      color: color,
+      specifiedType: specifiedType,
+    ));
+
+    notifyListeners();
+  }
+
+  void setTag(String uuid, {String? name, int? color}){
+    final ParamTag? tag = getTag(uuid);
+
+    if(name != null) tag?.name != null;
+    if(color != null) tag?.color != null;
+
+    notifyListeners();
+  }
+
+  bool deleteTag(String uuid){
+    final ParamTag? tag = getTag(uuid);
+    final bool result = _box.tag.remove(tag);
+
+    notifyListeners();
+    return tag != null && result;
   }
 
   bool deleteItem(String uuid){
