@@ -61,8 +61,8 @@ class ParamBox{
 class ParamSet{
   final String uuid;
   String name;
-  final List<ParamType> allowType;
-  final List<ParamSet> children;
+  final ParamType allowType;
+  final List<String> children;
 
   ParamSet({
     required this.uuid,
@@ -75,8 +75,8 @@ class ParamSet{
   Map<String, dynamic> toMap() => {
     "uuid": uuid,
     "name": name,
-    "allow_type": allowType.map((ParamType type) => type.toValue()).toList(),
-    "children": children.map((ParamSet set) => set.toMap()).toList(),
+    "allow_type": allowType.toValue(),
+    "children": children,
   };
 
   static ParamSet? fromMap(dynamic map){
@@ -88,8 +88,8 @@ class ParamSet{
       return ParamSet(
         uuid: map["uuid"] as String,
         name: map["name"] as String,
-        allowType: (map["allow_type"] as List).map(ParamType.fromValue).toList() as List<ParamType>,
-        children: map["children"] is List ? (map["children"] as List<Map>).map(ParamSet.fromMap).toList() as List<ParamSet> : [],
+        allowType: ParamType.fromValue(map["allow_type"]) as ParamType,
+        children: map["children"] is List ? (map["children"] as List).whereType<String>().nonNulls.toList() : [],
       );
     }catch(e){
       return null;
@@ -99,8 +99,8 @@ class ParamSet{
   Map<int, dynamic> toMsgpackMap() => {
     1: uuid,
     2: name,
-    3: allowType.map((ParamType type) => type.toValue()).toList(),
-    if(children.isNotEmpty) 4: children.map((ParamSet set) => set.toMsgpackMap()).toList(),
+    3: allowType.toValue(),
+    if(children.isNotEmpty) 4: children,
   };
 
   static ParamSet? fromMsgpackMap(dynamic map){
@@ -112,8 +112,8 @@ class ParamSet{
       return ParamSet(
         uuid: map[1] as String,
         name: map[2] as String,
-        allowType: (map[3] as List).map(ParamType.fromValue).toList() as List<ParamType>,
-        children: map[4] is List ? (map[4] as List<Map>).map(ParamSet.fromMsgpackMap).toList() as List<ParamSet> : [],
+        allowType: ParamType.fromValue(map[3]) as ParamType,
+        children: map[4] is List ? (map[4] as List).whereType<String>().nonNulls.toList() : [],
       );
     }catch(e, s){
       if(kDebugMode){
@@ -128,16 +128,22 @@ class ParamSet{
 class ParamTag{
   final String uuid;
   String name;
+  int color;
+  final ParamType? specifiedType;
 
   ParamTag({
     required this.uuid,
     required this.name,
+    required this.color,
+    required this.specifiedType,
   });
 
 
   Map<String, dynamic> toMap() => {
     "uuid": uuid,
     "name": name,
+    "color": color,
+    "specified_type": specifiedType?.toValue(),
   };
 
   static ParamTag? fromMap(dynamic map){
@@ -149,6 +155,8 @@ class ParamTag{
       return ParamTag(
         uuid: map["uuid"] as String,
         name: map["name"] as String,
+        color: map["color"] as int,
+        specifiedType: ParamType.fromValue(map["specified_type"]),
       );
     }catch(e){
       return null;
@@ -158,6 +166,8 @@ class ParamTag{
   Map<int, dynamic> toMsgpackMap() => {
     1: uuid,
     2: name,
+    3: color,
+    4: specifiedType?.toValue(),
   };
 
   static ParamTag? fromMsgpackMap(dynamic map){
@@ -169,6 +179,8 @@ class ParamTag{
       return ParamTag(
         uuid: map[1] as String,
         name: map[2] as String,
+        color: map[3] as int,
+        specifiedType: ParamType.fromValue(map[4]),
       );
     }catch(e, s){
       if(kDebugMode){
