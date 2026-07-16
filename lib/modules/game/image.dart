@@ -16,7 +16,7 @@ enum ImageSource{
   other
 }
 
-class ImageItem {
+class ImageItem{
   final int id;
   final ImageSource source;
   final Path path;

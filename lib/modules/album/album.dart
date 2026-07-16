@@ -1900,46 +1900,40 @@ class _ExhibitState extends State<Exhibit> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return RFutureBuilder(
-      future: Future(() {
-        if (widget.imageItem.cover == null) {
+      future: Future((){
+        if(widget.imageItem.cover == null){
           return MediaThumbnail.fromCache(
-            id: widget.imageItem.name,
-            imagePath: Path(
-              widget.imageItem.thumbnail ?? widget.imageItem.path.path,
-            ),
+            id: "${widget.imageItem.name}${widget.imageItem.time}",
+            imagePath: Path(widget.imageItem.thumbnail ?? widget.imageItem.path.path),
             targetWidth: 720,
             isVideo: widget.imageItem.isVideo,
           );
-        } else {
+        }else{
           return MediaThumbnail.fromCache(
-            id: widget.imageItem.cover!,
-            imagePath: Path(
-              widget.imageItem.thumbnail ?? widget.imageItem.cover!,
-            ),
+            id: "${widget.imageItem.cover}${widget.imageItem.time}",
+            imagePath: Path(widget.imageItem.thumbnail ?? widget.imageItem.cover!),
             targetWidth: 720,
             isVideo: false,
           );
         }
       }),
-      builder: (context, image) {
+      builder: (context, image){
         final Widget exhibit = NotifierBuilder(
           listenable: widget.game.album.whenSelectedImagesChange,
-          builder: (BuildContext context, Widget? child) {
-            final bool isSelected = widget.game.album.selectedImages.contains(
-              widget.imageItem,
-            );
+          builder: (BuildContext context, Widget? child){
+            final bool isSelected = widget.game.album.selectedImages.contains(widget.imageItem);
 
             return Stack(
               children: [
                 Positioned.fill(
                   child: RawImage(image: image, fit: BoxFit.cover),
                 ),
-                if (isSelected)
+                if(isSelected)
                   Positioned.fill(child: ColoredBox(color: Color(0x66000000))),
 
-                if (isSelected)
+                if(isSelected)
                   Positioned(
                     left: smallPadding,
                     top: smallPadding,
@@ -1949,20 +1943,14 @@ class _ExhibitState extends State<Exhibit> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: AppTheme.of(
-                            context,
-                          )!.colorScheme.secondary.onColor,
+                          color: AppTheme.of(context)!.colorScheme.secondary.onColor,
                           width: smallBorder,
                         ),
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.onColor,
+                        color: AppTheme.of(context)!.colorScheme.secondary.onColor,
                       ),
                       child: Image.asset(
                         "assets/icon/tick.webp",
-                        color: AppTheme.of(
-                          context,
-                        )!.colorScheme.secondary.color,
+                        color: AppTheme.of(context)!.colorScheme.secondary.color,
                       ),
                     ),
                   ),
@@ -1972,27 +1960,23 @@ class _ExhibitState extends State<Exhibit> {
         );
 
         final Widget groundLayout = Listener(
-          onPointerDown: (e) {
-            if (e.kind == PointerDeviceKind.mouse &&
-                e.buttons == kPrimaryMouseButton) {
+          onPointerDown: (e){
+            if(e.kind == PointerDeviceKind.mouse && e.buttons == kPrimaryMouseButton){
               widget.game.album.invertImage(widget.imageItem);
             }
-            if (e.kind == PointerDeviceKind.mouse &&
-                e.buttons == kSecondaryMouseButton) {
+            if(e.kind == PointerDeviceKind.mouse && e.buttons == kSecondaryMouseButton){
               showAppDialog(
                 context: context,
-                builder: (BuildContext context) {
+                builder: (BuildContext context){
                   return RFutureBuilder(
                     future: widget.game.album.images,
-                    builder: (BuildContext context, Set<ImageItem> images) {
-                      if (widget.imageItem.isVideo) {
+                    builder: (BuildContext context, Set<ImageItem> images){
+                      if(widget.imageItem.isVideo){
                         return VideoViewerDialog(video: widget.imageItem);
-                      } else {
+                      }else{
                         return ImageViewerDialog(
                           game: widget.game,
-                          images: widget.game.album
-                              .sortImages(images)
-                              .toList(growable: false),
+                          images: widget.game.album.sortImages(images).toList(growable: false),
                           initImage: widget.imageItem,
                         );
                       }
@@ -2008,53 +1992,43 @@ class _ExhibitState extends State<Exhibit> {
         bool isHover = false;
 
         return StatefulBuilder(
-          builder:
-              (
-                BuildContext context,
-                void Function(void Function()) setButtonState,
-              ) {
-                return MouseRegion(
-                  onEnter: (_) {
-                    final bool isPrimaryMouseDown = AlbumValuePool.of(
-                      context,
-                    ).isPrimaryMouseDown.value;
-                    final bool isDragScrollbar = AlbumValuePool.of(
-                      context,
-                    ).isDragScrollbar.value;
-                    final bool isPressTag = AlbumValuePool.of(
-                      context,
-                    ).isPressTag.value;
-                    // 长按多选
-                    if (isPrimaryMouseDown && !isDragScrollbar && !isPressTag) {
-                      widget.game.album.invertImage(widget.imageItem);
-                    }
+          builder: (BuildContext context, void Function(void Function()) setButtonState){
+            return MouseRegion(
+              onEnter: (_) {
+                final bool isPrimaryMouseDown = AlbumValuePool.of(context).isPrimaryMouseDown.value;
+                final bool isDragScrollbar = AlbumValuePool.of(context).isDragScrollbar.value;
+                final bool isPressTag = AlbumValuePool.of(context).isPressTag.value;
+                // 长按多选
+                if(isPrimaryMouseDown && !isDragScrollbar && !isPressTag){
+                  widget.game.album.invertImage(widget.imageItem);
+                }
 
-                    setButtonState(() {
-                      isHover = true;
-                    });
-                  },
-                  onHover: (_) {
-                    setButtonState(() {
-                      isHover = true;
-                    });
-                  },
-                  onExit: (_) {
-                    setButtonState(() {
-                      isHover = false;
-                    });
-                  },
-                  child: Stack(
-                    children: [
-                      groundLayout,
-
-                      if(widget.game.selectedAlbum != AlbumType.Video && widget.game.selectedAlbum != AlbumType.ExternalVideo)
-                        _generateTagButton(context, isHover),
-
-                      _generateParamSaverButton(context, isHover),
-                    ],
-                  ),
-                );
+                setButtonState((){
+                  isHover = true;
+                });
               },
+              onHover: (_){
+                setButtonState((){
+                  isHover = true;
+                });
+              },
+              onExit: (_){
+                setButtonState((){
+                  isHover = false;
+                });
+              },
+              child: Stack(
+                children: [
+                  groundLayout,
+
+                  if(widget.game.selectedAlbum != AlbumType.Video && widget.game.selectedAlbum != AlbumType.ExternalVideo)
+                    _generateTagButton(context, isHover),
+
+                  _generateParamSaverButton(context, isHover),
+                ],
+              ),
+            );
+          },
         );
       },
     );
@@ -3319,7 +3293,7 @@ class SelectionViewerDialog extends StatelessWidget {
       builder: (BuildContext context, ImageItem item) {
         return RFutureBuilder(
           future: MediaThumbnail.fromCache(
-            id: item.name,
+            id: "${item.name}${item.time}",
             imagePath: item.path,
             targetWidth: 720,
             isVideo: item.isVideo,
@@ -3870,7 +3844,7 @@ class ImportImagesDialog extends StatelessWidget {
                       builder: (BuildContext context, ImageItem item) {
                         return RFutureBuilder(
                           future: MediaThumbnail.fromCache(
-                            id: item.name,
+                            id: "${item.name}${item.time}",
                             imagePath: item.path,
                             targetWidth: 720,
                             isVideo: item.isVideo,

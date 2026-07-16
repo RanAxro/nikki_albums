@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import "dart:ui" as ui;
 import "dart:typed_data";
 import "dart:async";
+import "dart:io";
 
 import "package:media_kit/media_kit.dart";
 import "package:media_kit_video/media_kit_video.dart";
@@ -146,13 +147,13 @@ abstract class ImageThumbnail{
     late ImageStreamListener listener;
 
     listener = ImageStreamListener(
-      (ImageInfo info, bool synchronousCall) {
+      (ImageInfo info, bool synchronousCall){
         // ImageStream 发出 ImageInfo 时，完成 Completer
         completer.complete(info.image);
         // 完成后，移除监听器以防止内存泄漏
         stream.removeListener(listener);
       },
-      onError: (dynamic exception, StackTrace? stackTrace) {
+      onError: (dynamic exception, StackTrace? stackTrace){
         completer.completeError(exception, stackTrace);
         stream.removeListener(listener);
         FlutterError.reportError(
@@ -168,37 +169,37 @@ abstract class ImageThumbnail{
 
     stream.addListener(listener);
 
-    try {
+    try{
       // 等待 app.Image 对象加载完成
       final ui.Image image = await completer.future;
       return image;
-    } catch (e) {
+    }catch(e){
       return null;
     }
   }
 
   static Future<ui.Image?> fromCache({required String id, Path? imagePath, int? targetWidth, int? targetHeight}) async{
-    if (_imageCache.containsKey(id)) return _imageCache[id];
+    if(_imageCache.containsKey(id)) return _imageCache[id];
 
-    if (imagePath == null) return null;
+    if(imagePath == null) return null;
 
-    if (!await imagePath.file.exists()) return null;
+    if(!await imagePath.file.exists()) return null;
 
     final ui.Image? image = await from(
-      imageProvider: FileImage(imagePath.file),
+      imageProvider: MemoryImage(await File(imagePath.path).readAsBytes()),
       targetWidth: targetWidth,
       targetHeight: targetHeight,
     );
 
-    if (image == null) return null;
+    if(image == null) return null;
 
     _imageCache[id] = image;
 
     return image;
   }
 
-  static ui.Image? findCache(String id) {
-    if (_imageCache.containsKey(id)) return _imageCache[id];
+  static ui.Image? findCache(String id){
+    if(_imageCache.containsKey(id)) return _imageCache[id];
 
     return null;
   }
