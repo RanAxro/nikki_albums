@@ -1757,7 +1757,18 @@ class _ExhibitState extends State<Exhibit> {
     );
   }
 
-  void _showParamItemEditPanel(BuildContext context, [String? initCode, ParamItemCover? initCover]){
+  Future<void> _showParamItemEditPanel(BuildContext context, [String? initCode, ParamItemCover? initCover]) async{
+    final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
+    if(!manager.isInit){
+      await manager.init();
+    }
+    if(!manager.isInit){
+      return;
+    }
+
+    if(!context.mounted){
+      return;
+    }
     final ParamItemEditController controller = ParamItemEditController(
       initCode: initCode,
       initCover: initCover,
@@ -1769,35 +1780,30 @@ class _ExhibitState extends State<Exhibit> {
         return AppDialog(
           useIntrinsicHeight: false,
           child: ParamItemEditPanel(
+            manager: manager,
             controller: controller,
             onCancel: (){
               controller.dispose();
               Navigator.of(context).pop();
             },
             onFinish: (ParamItemCreation creation) async{
-              final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
-              if(!manager.isInit){
-                await manager.init();
+              if(context.mounted){
+                AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
               }
-              if(manager.isInit){
+              try{
+                await manager.createItem(creation);
+                await manager.save();
                 if(context.mounted){
-                  AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
+                  AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
                 }
-                try{
-                  await manager.createItem(creation);
-                  await manager.save();
-                  if(context.mounted){
-                    AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
-                  }
-                }catch(e){
-                  if(context.mounted){
-                    AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
-                  }
-                }finally{
-                  controller.dispose();
-                  if(context.mounted){
-                    Navigator.of(context).pop();
-                  }
+              }catch(e){
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
+                }
+              }finally{
+                controller.dispose();
+                if(context.mounted){
+                  Navigator.of(context).pop();
                 }
               }
             },
