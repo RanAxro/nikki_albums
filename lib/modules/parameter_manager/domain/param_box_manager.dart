@@ -133,6 +133,29 @@ class ParamBoxManager extends ChangeNotifier{
     }
   }
 
+  Future<bool> deleteImage(String uuid) async{
+    final String imagePath = getImagePath(uuid);
+    final File imageFile = File(imagePath);
+    try{
+      if(await imageFile.exists()){
+        await imageFile.delete();
+      }
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+
+  ParamItem? getItem(String uuid){
+    for(final ParamItem item in _box.item){
+      if(uuid == item.uuid){
+        return item;
+      }
+    }
+    return null;
+  }
+
   Future<void> createItem(ParamItemCreation creation) async{
     final String uuid = _generateAvailableUuid();
     final int time = DateTime.timestamp().millisecondsSinceEpoch;
@@ -160,6 +183,38 @@ class ParamBoxManager extends ChangeNotifier{
 
     notifyListeners();
   }
+
+  Future<void> setItem(String uuid, ParamItemCreation creation) async{
+    final ParamItem? item = getItem(uuid);
+    if(item == null) return;
+
+    final int time = DateTime.timestamp().millisecondsSinceEpoch;
+
+    item.modifiedTime = time;
+    item.top = creation.top;
+    item.title = creation.title;
+    item.description = creation.description;
+    item.tag = creation.tag;
+    item.set = creation.set;
+    if(creation.cover == null){
+      item.originImagePath = null;
+      item.image = null;
+      await deleteImage(uuid);
+    }else{
+      if(creation.cover!.path != getImagePath(uuid)){
+        bool hasImage = false;
+        if(creation.cover != null){
+          hasImage = await addImage(uuid, creation.cover!.path);
+        }
+
+        item.originImagePath = creation.cover!.path;
+        item.image = hasImage ? uuid : null;
+      }
+    }
+
+    notifyListeners();
+  }
+
 
   List<ParamTag> get tagList => _box.tag;
 
