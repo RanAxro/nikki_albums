@@ -145,7 +145,7 @@ class AppDialog extends StatelessWidget {
   }
 }
 
-class AppConfirmDialog extends StatelessWidget {
+class AppConfirmDialog extends StatelessWidget{
   final ColorRole colorRole;
   final double? maxWidth;
   final double? maxHeight;
@@ -155,7 +155,7 @@ class AppConfirmDialog extends StatelessWidget {
   final String? title;
   final bool isTranslateTitle;
   final bool useCloseButton;
-  final String? message;
+  final String message;
   final bool isTranslateMessage;
   final String yMessage;
   final bool isTranslateYMessage;
@@ -174,7 +174,7 @@ class AppConfirmDialog extends StatelessWidget {
     this.title,
     this.isTranslateTitle = true,
     this.useCloseButton = false,
-    this.message,
+    required this.message,
     this.isTranslateMessage = false,
     this.yMessage = "confirm",
     this.isTranslateYMessage = true,
@@ -184,7 +184,7 @@ class AppConfirmDialog extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return AppDialog(
       colorRole: colorRole,
       maxWidth: maxWidth,
@@ -203,70 +203,64 @@ class AppConfirmDialog extends StatelessWidget {
           block5H,
 
           SmoothPointerScroll(
-            builder:
-                (
-                  BuildContext context,
-                  ScrollController controller,
-                  ScrollPhysics physics,
-                  IndependentScrollbarController scrollbarController,
-                ) {
-                  return SingleChildScrollView(
-                    child: AppText(message!, isTranslate: isTranslateMessage),
-                  );
-                },
+            builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController) {
+              return SingleChildScrollView(
+                child: AppText(message, isTranslate: isTranslateMessage),
+              );
+            },
           ),
 
           block5H,
 
           Row(
             spacing: listSpacing,
-            children: isRisk
-                ? [
-                    Expanded(
-                      child: AppButton.smallIcon(
-                        width: null,
-                        isTransparent: false,
-                        onClick: () {
-                          Navigator.of(context).pop(true);
-                        },
-                        child: AppText(yMessage, isTranslate: isTranslateYMessage),
-                      ),
-                    ),
-                    Expanded(
-                      child: AppButton.smallIcon(
-                        width: null,
-                        colorRole: ColorRole.highlight,
-                        isTransparent: false,
-                        onClick: () {
-                          Navigator.of(context).pop(false);
-                        },
-                        child: AppText(nMessage, isTranslate: isTranslateNMessage),
-                      ),
-                    ),
-                  ]
-                : [
-                    Expanded(
-                      child: AppButton.smallIcon(
-                        width: null,
-                        isTransparent: false,
-                        onClick: () {
-                          Navigator.of(context).pop(false);
-                        },
-                        child: AppText(nMessage, isTranslate: isTranslateNMessage),
-                      ),
-                    ),
-                    Expanded(
-                      child: AppButton.smallIcon(
-                        width: null,
-                        colorRole: ColorRole.highlight,
-                        isTransparent: false,
-                        onClick: () {
-                          Navigator.of(context).pop(true);
-                        },
-                        child: AppText(yMessage, isTranslate: isTranslateYMessage),
-                      ),
-                    ),
-                  ],
+            children: isRisk ?
+              [
+                Expanded(
+                  child: AppButton.smallIcon(
+                    width: null,
+                    isTransparent: false,
+                    onClick: (){
+                      Navigator.of(context).pop(true);
+                    },
+                    child: AppText(yMessage, isTranslate: isTranslateYMessage),
+                  ),
+                ),
+                Expanded(
+                  child: AppButton.smallIcon(
+                    width: null,
+                    colorRole: ColorRole.highlight,
+                    isTransparent: false,
+                    onClick: (){
+                      Navigator.of(context).pop(false);
+                    },
+                    child: AppText(nMessage, isTranslate: isTranslateNMessage),
+                  ),
+                ),
+              ] :
+              [
+                Expanded(
+                  child: AppButton.smallIcon(
+                    width: null,
+                    isTransparent: false,
+                    onClick: (){
+                      Navigator.of(context).pop(false);
+                    },
+                    child: AppText(nMessage, isTranslate: isTranslateNMessage),
+                  ),
+                ),
+                Expanded(
+                  child: AppButton.smallIcon(
+                    width: null,
+                    colorRole: ColorRole.highlight,
+                    isTransparent: false,
+                    onClick: (){
+                      Navigator.of(context).pop(true);
+                    },
+                    child: AppText(yMessage, isTranslate: isTranslateYMessage),
+                  ),
+                ),
+              ],
           ),
         ],
       ),
