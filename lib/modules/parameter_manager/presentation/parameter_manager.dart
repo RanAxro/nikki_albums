@@ -326,8 +326,19 @@ class _ParameterManagerState extends State<ParameterManager>{
                         items: manager.items.where((item) => item.type.value == index).toList(),
                         manager: manager,
                         onDelete: (String uuid) async{
-                          manager.deleteItem(uuid);
-                          await manager.save();
+                          WidgetsBinding.instance.addPostFrameCallback((_) async{
+                            final bool? result = await showAppDialog<bool>(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AppConfirmDialog(message: "parameter_manager.delete_item");
+                              },
+                            );
+
+                            if(result == true){
+                              manager.deleteItem(uuid);
+                              await manager.save();
+                            }
+                          });
                         },
                         onEdit: (String uuid){
                           final ParamItem? item = manager.getItem(uuid);
@@ -468,6 +479,7 @@ class WaterfallGallery extends StatelessWidget{
                               spacing: listSpacing,
                               children: [
                                 AppButton.smallIcon(
+                                  toolTip: "parameter_manager.delete",
                                   onClick: (){
                                     Navigator.of(context).pop();
                                     onDelete?.call(item.uuid);
@@ -476,6 +488,7 @@ class WaterfallGallery extends StatelessWidget{
                                 ),
 
                                 AppButton.smallIcon(
+                                  toolTip: "parameter_manager.edit",
                                   onClick: (){
                                     Navigator.of(context).pop();
                                     onEdit?.call(item.uuid);

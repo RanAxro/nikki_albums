@@ -253,7 +253,9 @@
     "on_save": "Saving...",
     "save_successful": "Save Successful",
     "save_failed": "Save Failed",
+    "edit": "Edit",
     "delete": "Delete",
+    "delete_item": "Are you sure you want to delete it?",
     "delete_tag": "Are you sure you want to delete the tag \"{}\"?"
   },
   "----------file_transfer----------": "----------file_transfer----------",
