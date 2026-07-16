@@ -247,7 +247,8 @@
     "save": "保存",
     "on_save": "保存中",
     "save_successful": "保存成功",
-    "save_failed": "保存失败"
+    "save_failed": "保存失败",
+    "delete": "删除"
   },
   "----------file_transfer----------": "----------file_transfer----------",
   "inputDownloadUrl": "输入下载链接",

@@ -1,7 +1,9 @@
 
 import "../domain/code_parser.dart";
+import "../domain/param_box_manager.dart";
 import "../domain/param_import.dart";
 import "../domain/param_item_edit_controller.dart";
+import "../model/param_box.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
 import "../domain/camera_params_edit_controller.dart";
@@ -15,6 +17,7 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart
 import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/widgets/common/component.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
@@ -27,12 +30,14 @@ import "package:file_picker/file_picker.dart";
 
 
 class ParamItemEditPanel extends StatefulWidget{
+  final ParamBoxManager manager;
   final ParamItemEditController? controller;
   final void Function()? onCancel;
   final void Function(ParamItemCreation)? onFinish;
 
   const ParamItemEditPanel({
     super.key,
+    required this.manager,
     this.controller,
     this.onCancel,
     this.onFinish,
@@ -44,6 +49,7 @@ class ParamItemEditPanel extends StatefulWidget{
 
 class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   late final ParamItemEditController controller;
+  final ManualValueNotifier<List<String>> tagList = ManualValueNotifier([]);
   Nuan5DatabaseReaderV1? reader;
 
   Future<void> initReader() async{
@@ -66,6 +72,13 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
       controller.dispose();
     }
     super.dispose();
+  }
+
+  Color getContrastColor(Color background){
+    // 计算亮度 (YIQ 公式)
+    final double yiq = ((background.red * 299) + (background.green * 587) + (background.blue * 114)) / 1000;
+
+    return yiq >= 128 ? Colors.black : Colors.white;
   }
 
   @override
@@ -187,8 +200,93 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 },
               ),
 
-              /// TODO 标签功能
-              // AppText.tr("parameter_manager.tag"),
+              /// Tag
+              ListenableBuilder(
+                listenable: controller,
+                builder: (BuildContext context, Widget? child){
+                  return ManualValueNotifierBuilder(
+                    valueListenable: tagList,
+                    builder: (BuildContext context, List<String> allTag, Widget? child){
+                      final List<Widget> tagChildren = [];
+
+                      for(final String uuid in allTag){
+                        final ParamTag? tag = widget.manager.getTag(uuid);
+                        if(tag == null){
+                          continue;
+                        }
+
+                        tagChildren.add(Container(
+                          alignment: Alignment.center,
+                          constraints: BoxConstraints(
+                            minWidth: smallButtonSize,
+                          ),
+                          height: smallButtonContentSize + smallPadding,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
+                            color: Color(tag.color),
+                          ),
+                          child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
+                        ));
+                      }
+
+                      return AppButton.smallText(
+                        isTransparent: false,
+                        height: mediumButtonSize,
+                        onClick: (){
+                          showAppDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return AppDialog(
+                                maxWidth: 400,
+                                maxHeight: 600,
+                                useIntrinsicHeight: false,
+                                child: TagSelector(
+                                  manager: widget.manager,
+                                  initTagList: List.of(tagList.value),
+                                  onAdd: (){
+                                    showAppDialog(
+                                      context: context,
+                                      builder: (BuildContext context){
+                                        return AppDialog(
+                                          maxWidth: 400,
+                                          maxHeight: 240,
+                                          useIntrinsicHeight: false,
+                                          child: TagCreator(
+                                            onCancel: Navigator.of(context).pop,
+                                            onFinish: (String name, int color) async{
+                                              Navigator.of(context).pop();
+
+                                              widget.manager.createTag(name, color, null);
+                                              await widget.manager.save();
+                                            },
+                                          ),
+                                        );
+                                      }
+                                    );
+                                  },
+                                  onFinish: (List<String> selectedTag){
+                                    Navigator.of(context).pop();
+                                    tagList.value = selectedTag;
+                                    tagList.notify();
+                                  },
+                                ),
+                              );
+                            }
+                          );
+                        },
+                        child: Row(
+                          spacing: listSpacing,
+                          children: [
+                            AppText.tr("parameter_manager.tag"),
+
+                            ...tagChildren,
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
 
               Expanded(
                 child: Row(
@@ -276,6 +374,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                             type: controller.paramType,
                             value: controller.codeTextController.text,
                             title: controller.nameTextController.text == "" ? null : controller.nameTextController.text,
+                            tag: tagList.value,
                             cover: controller.cover.value,
                           ));
                         }else{
@@ -428,6 +527,257 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   }
 }
 
+
+
+
+class TagSelector extends StatefulWidget{
+  final ParamBoxManager manager;
+  final List<String> initTagList;
+  final void Function()? onAdd;
+  final void Function(List<String>)? onFinish;
+
+  const TagSelector({
+    super.key,
+    required this.manager,
+    this.initTagList = const [],
+    this.onAdd,
+    this.onFinish,
+  });
+
+  @override
+  State<TagSelector> createState() => _TagSelectorState();
+}
+class _TagSelectorState extends State<TagSelector>{
+  final ManualValueNotifier<Map<String, bool>> tagSelectedState = ManualValueNotifier({});
+
+  @override
+  void initState(){
+    super.initState();
+    for(final String uuid in widget.initTagList){
+      tagSelectedState.value[uuid] = true;
+    }
+  }
+
+  @override
+  void dispose(){
+    tagSelectedState.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Column(
+      children: [
+        Row(
+          children: [
+            AppText.tr("parameter_manager.tag"),
+
+            Expanded(child: block0),
+
+            AppButton.smallIcon(
+              onClick: widget.onAdd,
+              child: Icon(Icons.add),
+            ),
+          ],
+        ),
+
+        Expanded(
+          child: SmoothPointerScroll(
+            builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarConrtoller){
+              return SingleChildScrollView(
+                controller: controller,
+                physics: physics,
+                child: ListenableBuilder(
+                  listenable: widget.manager,
+                  builder: (BuildContext context, Widget? child){
+                    return ManualValueNotifierBuilder(
+                      valueListenable: tagSelectedState,
+                      builder: (BuildContext context, Map<String, bool> tagState, Widget? child){
+                        return Column(
+                          spacing: listSpacing,
+                          children: [
+                            for(final ParamTag tag in widget.manager.tagList)
+                              AppSwitch.smallText(
+                                isTransparent: false,
+                                value: tagState[tag.uuid] ?? false,
+                                onChanged: (bool value){
+                                  tagState[tag.uuid] = !(tagState[tag.uuid] ?? false);
+                                  tagSelectedState.notify();
+                                },
+                                child: Row(
+                                  spacing: listSpacing,
+                                  children: [
+                                    SizedBox(
+                                      width: smallButtonSize,
+                                      height: smallButtonSize,
+                                      child: Center(
+                                        child: AppIcon("tick", opacity: tagState[tag.uuid] ?? false ? 1 : 0),
+                                      ),
+                                    ),
+                                    AppIcon("tag_fill", color: Color(tag.color)),
+                                    Expanded(child: AppText(tag.name)),
+                                    AppButton.smallIcon(
+                                      toolTip: "parameter_manager.delete",
+                                      onClick: (){
+                                        widget.manager.deleteTag(tag.uuid);
+                                      },
+                                      child: AppIcon("delete"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ),
+
+        AppButton.smallText(
+          colorRole: ColorRole.highlight,
+          isTransparent: false,
+          onClick: (){
+            final List<String> res = [];
+            for(final entity in tagSelectedState.value.entries){
+              if(entity.value){
+                res.add(entity.key);
+              }
+            }
+
+            widget.onFinish?.call(res);
+          },
+          child: AppText.tr("parameter_manager.finish"),
+        ),
+      ],
+    );
+  }
+}
+
+
+class TagCreator extends StatefulWidget{
+  final void Function()? onCancel;
+  final void Function(String name, int color)? onFinish;
+
+  const TagCreator({
+    super.key,
+    this.onCancel,
+    this.onFinish,
+  });
+
+  @override
+  State<TagCreator> createState() => _TagCreatorState();
+}
+class _TagCreatorState extends State<TagCreator>{
+  static const List<Color> _swatches = [
+    Colors.red,
+    Colors.pink,
+    Colors.purple,
+    Colors.deepPurple,
+    Colors.indigo,
+    Colors.blue,
+    Colors.lightBlue,
+    Colors.cyan,
+    Colors.teal,
+    Colors.green,
+    Colors.lightGreen,
+    Colors.lime,
+    Colors.yellow,
+    Colors.amber,
+    Colors.orange,
+    Colors.deepOrange,
+    Colors.brown,
+    Colors.grey,
+    Colors.blueGrey,
+  ];
+
+  final TextEditingController nameTextController = TextEditingController();
+  final ValueNotifier<Color> color = ValueNotifier(Colors.orange);
+
+  @override
+  void dispose(){
+    nameTextController.dispose();
+    color.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Column(
+      spacing: listSpacing,
+      children: [
+        Row(
+          spacing: listSpacing,
+          children: [
+            ValueListenableBuilder(
+              valueListenable: color,
+              builder: (BuildContext context, Color currentColor, Widget? child){
+                return AppIcon("tag_fill", height: 20, color: currentColor);
+              },
+            ),
+
+            Expanded(
+              child: AppTextFiled(
+                labelText: "parameter_manager.name",
+                controller: nameTextController,
+              ),
+            ),
+          ],
+        ),
+
+        Expanded(
+          child: Center(
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: smallCardMaxHeight),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: smallButtonContentSize,
+                  mainAxisSpacing: listSpacing,
+                  crossAxisSpacing: listSpacing,
+                  childAspectRatio: 1 / 1,
+                ),
+                itemCount: _swatches.length,
+                itemBuilder: (BuildContext context, int index){
+                  return GestureDetector(
+                    onTap: (){
+                      color.value = _swatches[index];
+                    },
+                    child: ClipOval(child: Container(color: _swatches[index])),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+
+        Row(
+          children: [
+            Expanded(
+              child: AppButton.smallText(
+                isTransparent: false,
+                onClick: widget.onCancel?.call,
+                child: AppText.tr("parameter_manager.cancel"),
+              ),
+            ),
+            Expanded(
+              child: AppButton.smallText(
+                colorRole: ColorRole.highlight,
+                isTransparent: false,
+                onClick: (){
+                  widget.onFinish?.call(nameTextController.text, color.value.toARGB32());
+                },
+                child: AppText.tr("parameter_manager.save"),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
 
 
 class ImageImportListener extends StatelessWidget{
