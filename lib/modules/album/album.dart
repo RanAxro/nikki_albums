@@ -1757,6 +1757,56 @@ class _ExhibitState extends State<Exhibit> {
     );
   }
 
+  void _showParamItemEditPanel(BuildContext context, [String? initCode, ParamItemCover? initCover]){
+    final ParamItemEditController controller = ParamItemEditController(
+      initCode: initCode,
+      initCover: initCover,
+    );
+
+    showAppDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AppDialog(
+          useIntrinsicHeight: false,
+          child: ParamItemEditPanel(
+            controller: controller,
+            onCancel: (){
+              controller.dispose();
+              Navigator.of(context).pop();
+            },
+            onFinish: (ParamItemCreation creation) async{
+              final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
+              if(!manager.isInit){
+                await manager.init();
+              }
+              if(manager.isInit){
+                if(context.mounted){
+                  AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
+                }
+                try{
+                  await manager.createItem(creation);
+                  await manager.save();
+                  if(context.mounted){
+                    AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
+                  }
+                }catch(e){
+                  if(context.mounted){
+                    AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
+                  }
+                }finally{
+                  controller.dispose();
+                  if(context.mounted){
+                    Navigator.of(context).pop();
+                  }
+                }
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+
   Widget _generateParamSaverButton(BuildContext context, bool isHover){
     if(!isHover){
       return block0;
@@ -1786,75 +1836,26 @@ class _ExhibitState extends State<Exhibit> {
               valid: (MediaParam mediaParam){
                 mediaParam.whenOrNull(
                   nikkiPhoto: (NikkiPhotoParams nikkiPhotoParams){
-                    final String? param = nikkiPhotoParams.camera?.params;
-
-                    if(param == null){
+                    final String? code = nikkiPhotoParams.camera?.params;
+                    if(code == null){
                       return;
                     }
 
-                    showAppDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AppDialog(
-                          useIntrinsicHeight: false,
-                          child: ParamItemEditPanel(
-                            controller: ParamItemEditController(
-                              initCode: param,
-                              initCover: NativeParamItemCover(
-                                path: widget.imageItem.path.path,
-                                isCache: false,
-                              ),
-                            ),
-                            onCancel: (){
-                              Navigator.of(context).pop();
-                            },
-                            onFinish: (ParamItemCreation creation) async{
-                              final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
-                              if(!manager.isInit){
-                                await manager.init();
-                              }
-                              if(manager.isInit){
-                                AppToast.showMessage(context: context, message: context.tr("parameter_manager.on_save"));
-                                try{
-                                  await manager.createItem(creation);
-                                  await manager.save();
-                                  AppToast.showMessage(context: context, message: context.tr("parameter_manager.save_successful"));
-                                }catch(e){
-                                  AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.save_failed")}\n$e");
-                                }finally{
-                                  Navigator.of(context).pop();
-                                }
-                              }
-                            },
-                          ),
-                        );
-                      },
-                    );
+                    _showParamItemEditPanel(context, code, NativeParamItemCover(
+                      path: widget.imageItem.path.path,
+                      isCache: false,
+                    ));
                   },
                   clockInPhoto: (ClockInPhotoParams clockInPhotoParams){
-                    final String? param = clockInPhotoParams.camera?.params;
-
-                    if(param == null){
+                    final String? code = clockInPhotoParams.camera?.params;
+                    if(code == null){
                       return;
                     }
 
-                    showAppDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AppDialog(
-                          useIntrinsicHeight: false,
-                          child: ParamItemEditPanel(
-                            controller: ParamItemEditController(
-                              initCode: param,
-                              initCover: NativeParamItemCover(
-                                path: widget.imageItem.path.path,
-                                isCache: false,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
+                    _showParamItemEditPanel(context, code, NativeParamItemCover(
+                      path: widget.imageItem.path.path,
+                      isCache: false,
+                    ));
                   },
                   diy: (ClothDiyParams clothDiyParams) async{
                     if(widget.game.selectedUid == null){
@@ -1867,27 +1868,20 @@ class _ExhibitState extends State<Exhibit> {
                       uid: widget.game.selectedUid!.value,
                     );
 
-                    if(code == null){
-                      return;
-                    }
-
-                    showAppDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AppDialog(
-                          useIntrinsicHeight: false,
-                          child: ParamItemEditPanel(
-                            controller: ParamItemEditController(
-                              initCode: code,
-                              initCover: NativeParamItemCover(
-                                path: widget.imageItem.path.path,
-                                isCache: false,
-                              ),
-                            ),
-                          ),
+                    if(context.mounted){
+                      if(code == null){
+                        AppToast.showMessage(
+                          context: context,
+                          message: "${context.tr("parameter_manager.diy_image_have_no_share_code")}\n${context.tr("parameter_manager.diy_image_have_no_share_code_tip")}",
+                          state: false
                         );
-                      },
-                    );
+                      }else{
+                        _showParamItemEditPanel(context, code, NativeParamItemCover(
+                          path: widget.imageItem.path.path,
+                          isCache: false,
+                        ));
+                      }
+                    }
                   },
                 );
               },

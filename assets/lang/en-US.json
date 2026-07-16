@@ -223,6 +223,8 @@
     "find_no_uid": "No uid found.",
     "preview": "Preview",
     "cloth_diy_share_code_import_album_diy": "Import from the Lookbook",
+    "diy_image_have_no_share_code": "This picture does not have a matching share code.",
+    "diy_image_have_no_share_code_tip": "Please generate a sharing code within the game and then try again.",
     "cloth_diy_share_code_import_qr_code": "Import from the QR Code",
     "find_no_qr_code": "No QR code was detected.",
     "invalid_qr_code": "Invalid QR code",

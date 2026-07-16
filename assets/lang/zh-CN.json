@@ -218,6 +218,8 @@
     "find_no_uid": "未找到uid",
     "preview": "预览",
     "cloth_diy_share_code_import_album_diy": "从星绘图册导入",
+    "diy_image_have_no_share_code": "该图片无搭配码",
+    "diy_image_have_no_share_code_tip": "请在游戏内生成分享码后重试",
     "cloth_diy_share_code_import_qr_code": "从二维码导入",
     "find_no_qr_code": "未识别到二维码",
     "invalid_qr_code": "无效的二维码",
