@@ -1178,6 +1178,7 @@ class AppText extends StatelessWidget {
   final FontWeight? fontWeight;
   final TextOverflow? overflow;
   final bool? softWrap;
+  final Color? color;
 
   const AppText(
     this.data, {
@@ -1187,6 +1188,7 @@ class AppText extends StatelessWidget {
     this.fontWeight,
     this.overflow,
     this.softWrap,
+    this.color,
   });
 
   factory AppText.tr(
@@ -1196,6 +1198,7 @@ class AppText extends StatelessWidget {
     FontWeight? fontWeight,
     TextOverflow? overflow,
     bool? softWrap,
+    Color? color,
   }){
     return AppText(
       data,
@@ -1205,20 +1208,18 @@ class AppText extends StatelessWidget {
       fontWeight: fontWeight,
       overflow: overflow,
       softWrap: softWrap,
+      color: color,
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Text(
       isTranslate ? context.tr(data) : data,
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
-        color: AppColorScheme.of(
-          context,
-        ).byRole(ColorRole.of(context)).onByState(ColorState.of(context)),
-        // color: AppTheme.of(context).colorScheme.byRole(AppThemeRole.of(context).colorRole).onByState(AppThemeState.of(context).colorState),
+        color: color ?? AppColorScheme.of(context).byRole(ColorRole.of(context)).onByState(ColorState.of(context)),
       ),
       overflow: overflow,
       softWrap: softWrap,
