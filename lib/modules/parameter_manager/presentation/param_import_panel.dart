@@ -1,4 +1,8 @@
 
+import "dart:convert";
+
+import "package:nikki_albums/utils/system/system.dart";
+
 import "cloth_diy_params_panel.dart";
 import "camera_params_edit_panel.dart";
 import "../domain/camera_params_edit_controller.dart";
@@ -11,11 +15,17 @@ import "package:nikki_albums/modules/game/game.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
+import "package:nikki_albums/utils/clipboard.dart";
+import "package:nikki_albums/utils/qr_code.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
+import "dart:typed_data";
 
 import "package:path/path.dart" as p;
+import "package:desktop_drop/desktop_drop.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:file_picker/file_picker.dart";
 
 
 class CameraParamsImportInputPanel extends StatefulWidget{
@@ -320,6 +330,192 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
           ],
         );
       },
+    );
+  }
+}
+
+
+class ClothDiyShareCodeImportQrCodePanel extends StatefulWidget{
+  final void Function(String shareCode, String? path)? onFinish;
+
+  const ClothDiyShareCodeImportQrCodePanel({
+    super.key,
+    this.onFinish,
+  });
+
+  @override
+  State<ClothDiyShareCodeImportQrCodePanel> createState() => _ClothDiyShareCodeImportQrCodePanelState();
+}
+
+class _ClothDiyShareCodeImportQrCodePanelState extends State<ClothDiyShareCodeImportQrCodePanel>{
+  static const List<String> allowExtension = [".png", ".jpg", ".jpeg", ".webp"];
+
+  final ValueNotifier<bool> isDrag = ValueNotifier<bool>(false);
+
+  Future<Uint8List?> _pickFiles() async {
+    final FilePickerResult? location = await FilePicker.platform.pickFiles(
+      dialogTitle: context.tr("parameter_manager.select_qr_code_image"),
+      lockParentWindow: true,
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if(location != null){
+      final String? path = location.paths.firstOrNull;
+      if(path != null && allowExtension.contains(p.extension(path))){
+        final File file = File(path);
+        return await file.readAsBytes();
+      }
+    }
+
+    return null;
+  }
+
+  Future<Uint8List?> _dragDone(DropDoneDetails details) async{
+    final String? path = details.files.firstOrNull?.path;
+
+    if(path != null && allowExtension.contains(p.extension(path))){
+      final File file = File(path);
+      return await file.readAsBytes();
+    }
+
+    return null;
+  }
+
+  Future<Uint8List?> _paste() async{
+    final Uint8List? imageBytes = await readImageFromClipboard();
+
+    if(imageBytes == null){
+      final String? path = (await readFilesFromClipboard()).firstOrNull?.path;
+
+      if(path != null && allowExtension.contains(p.extension(path))){
+        final File file = File(path);
+        return await file.readAsBytes();
+      }
+    }else{
+      return imageBytes;
+    }
+
+    return null;
+  }
+
+  Future<void> _decode(BuildContext context, Uint8List bytes) async{
+    final String? text = await decodeQRCode(bytes);
+
+    if(text == null){
+      if(context.mounted){
+        AppToast.showMessage(context: context, message: context.tr("parameter_manager.find_no_qr_code"), state: false);
+      }
+    }else{
+      final ClothDiyParam? clothDiyParam = await deClothDiyParam(paramType: ClothDiyParamType.qrCode, bytes: utf8.encode(text));
+      final String? shareCode = clothDiyParam?.whenOrNull(
+        qrCode: (ClothDiyQrCodeParams clothDiyQrCodeParams){
+          return clothDiyQrCodeParams.shareCode;
+        },
+      );
+
+      if(shareCode == null){
+        if(context.mounted){
+          AppToast.showMessage(context: context, message: context.tr("parameter_manager.invalid_qr_code"), state: false);
+        }
+      }else{
+        widget.onFinish?.call(shareCode, await _saveImage(bytes));
+      }
+    }
+  }
+
+  Future<String?> _saveImage(Uint8List bytes) async{
+    final String tempPath = p.join((await getTempPath()).path, "QrCode");
+    final File tempFile = File(tempPath);
+
+    try{
+      if(!await tempFile.exists()){
+        await tempFile.create(recursive: true);
+      }
+      await tempFile.writeAsBytes(bytes);
+
+      return tempPath;
+    }catch(e){
+      return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context){
+    final Widget ui = ValueListenableBuilder(
+      valueListenable: isDrag,
+      builder: (BuildContext context, bool isDrag, Widget? child){
+        return Container(
+          width: double.infinity,
+          height: double.infinity,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isDrag ? AppTheme.of(context)!.colorScheme.background.enabledColor : AppTheme.of(context)!.colorScheme.background.disabledColor,
+            border: Border.all(
+              color: isDrag ? AppTheme.of(context)!.colorScheme.secondary.hoveredColor : AppTheme.of(context)!.colorScheme.secondary.pressedColor,
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(smallBorderRadius),
+          ),
+          child: Column(
+            spacing: bigPadding,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppText.tr("parameter_manager.drag_qr_code_image_here", fontSize: 28),
+
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                spacing: bigPadding,
+                children: [
+                  AppText.tr("parameter_manager.left_click_select"),
+                  AppText.tr("parameter_manager.right_click_paste"),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    final Widget processor = DropTarget(
+      onDragEntered: (DropEventDetails details){
+        isDrag.value = true;
+      },
+      onDragExited: (DropEventDetails details){
+        isDrag.value = false;
+      },
+      onDragDone: (DropDoneDetails details) async{
+        final Uint8List? bytes = await _dragDone(details);
+        if(context.mounted && bytes != null){
+          _decode(context, bytes);
+        }
+      },
+      child: GestureDetector(
+        onTap: () async{
+          final Uint8List? bytes = await _pickFiles();
+          if(context.mounted && bytes != null){
+            _decode(context, bytes);
+          }
+        },
+        onSecondaryTap: () async{
+          final Uint8List? bytes = await _paste();
+          if(context.mounted && bytes != null){
+            _decode(context, bytes);
+          }
+        },
+        child: ui,
+      ),
+    );
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(smallBorderRadius),
+      ),
+      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(bigPadding, 0, bigPadding, bigPadding),
+        child: processor,
+      ),
     );
   }
 }

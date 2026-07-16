@@ -75,8 +75,11 @@ class _ParameterManagerState extends State<ParameterManager>{
     init();
   }
 
-  void add(BuildContext context, [String? code]){
-    final ParamItemEditController controller = ParamItemEditController(initCode: code);
+  void add(BuildContext context, [String? code, ParamItemCover? cover]){
+    final ParamItemEditController controller = ParamItemEditController(
+      initCode: code,
+      initCover: cover,
+    );
 
     showAppDialog(
       context: context,
@@ -255,6 +258,19 @@ class _ParameterManagerState extends State<ParameterManager>{
                             controller.close();
                           },
                           child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
+                        ),
+                      if(page.value == 1)
+                        AppButton.smallText(
+                          height: mediumButtonSize,
+                          onClick: () async{
+                            final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
+                            if(context.mounted && result != null){
+                              add(context, result.$1, result.$2 == null ? null : NativeParamItemCover(path: result.$2!, isCache: true));
+                            }
+
+                            controller.close();
+                          },
+                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
                         ),
                     ];
                   },

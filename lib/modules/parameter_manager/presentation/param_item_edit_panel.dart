@@ -396,6 +396,25 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                           child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
                         ),
                       ),
+
+                    if(controller.paramType == ParamType.cloth)
+                      IntrinsicWidth(
+                        child: AppButton.smallText(
+                          colorRole: ColorRole.highlight,
+                          isTransparent: false,
+                          onClick: () async{
+                            final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
+
+                            if(result != null){
+                              controller.codeTextController.text = result.$1;
+                              if(result.$2 != null){
+                                controller.cover.value = NativeParamItemCover(path: result.$2!, isCache: true);
+                              }
+                            }
+                          },
+                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
+                        ),
+                      ),
                   ],
                 ),
               );

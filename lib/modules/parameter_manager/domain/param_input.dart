@@ -1,19 +1,17 @@
 
-import "package:nikki_albums/info.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/equality.dart";
-
 import "code_parser.dart";
 import "../presentation/param_import_panel.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/equality.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/modules/game/game.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/info.dart";
 
 import "package:flutter/material.dart";
-import "package:collection/collection.dart";
 
 import "package:path/path.dart" as p;
 
@@ -106,4 +104,22 @@ Future<String?> tryGetClothDiyShareCode({required ClothDiyParams params, require
 void goToClothDiyShareCodeImportAlbumDIY(){
   contentController.index = 1;
   AppState.currentGame.value?.selectedAlbum = AlbumType.DIY;
+}
+
+Future<(String, String?)?> showClothDiyShareCodeImportQrCodePanel({required BuildContext context}) async{
+  return showAppDialog<(String, String?)?>(
+    context: context,
+    builder: (BuildContext context){
+      return AppDialog(
+        title: "",
+        maxWidth: 900,
+        useIntrinsicHeight: false,
+        child: ClothDiyShareCodeImportQrCodePanel(
+          onFinish: (String shareCode, String? path){
+            Navigator.of(context).pop((shareCode, path));
+          },
+        ),
+      );
+    },
+  );
 }
