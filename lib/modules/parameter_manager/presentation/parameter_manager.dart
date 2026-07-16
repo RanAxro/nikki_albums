@@ -18,6 +18,7 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
+import "package:nikki_albums/widgets/common/non_cache_file_image.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/utils/color/utils.dart";
 
@@ -134,7 +135,10 @@ class _ParameterManagerState extends State<ParameterManager>{
       final bool? result = await showAppDialog<bool>(
         context: context,
         builder: (BuildContext context){
-          return AppConfirmDialog(message: "parameter_manager.delete_item");
+          return AppConfirmDialog(
+            message: "parameter_manager.delete_item",
+            isTranslateMessage: true,
+          );
         },
       );
 
@@ -533,7 +537,7 @@ class WaterfallGallery extends StatelessWidget{
                   if(item.image != null)
                     ClipRRect(
                       borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
-                      child: Image.file(File(manager.getImagePath(item.image!))),
+                      child: Image(image: NonCacheFileImage(File(manager.getImagePath(item.image!)))),
                     ),
 
                   if(item.tag.isNotEmpty)

@@ -19,6 +19,7 @@ import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/color/utils.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
+import "package:nikki_albums/widgets/common/non_cache_file_image.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
@@ -325,7 +326,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                                     child: Builder(
                                       builder: (BuildContext context){
                                         if(cover is NativeParamItemCover){
-                                          return Image.file(File(cover.path));
+                                          return Image(image: NonCacheFileImage(File(cover.path)));
                                         }
                                         if(cover is NetworkParamItemCover){
                                           return Image.network(cover.path);

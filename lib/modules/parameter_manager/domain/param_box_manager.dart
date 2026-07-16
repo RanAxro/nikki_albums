@@ -5,8 +5,8 @@ import "../model/param_type.dart";
 import "package:nikki_albums/modules/album/album.dart";
 import "package:nikki_albums/utils/system/system.dart";
 
-import "dart:io";
 import "package:flutter/foundation.dart";
+import "dart:io";
 
 import "package:path/path.dart" as p;
 import "package:uuid/v4.dart";
