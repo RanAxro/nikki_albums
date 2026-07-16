@@ -81,7 +81,13 @@ class ParamBoxManager extends ChangeNotifier{
     await saveFile.rename(manifestFile.path);
   }
 
-  List<ParamItem> get items => _box.item.where((ParamItem item) => !item.delete).toList();
+  List<ParamItem> get itemList => _box.item.where((ParamItem item) => !item.delete).toList();
+
+  List<ParamItem> getSortedItemList([int Function(ParamItem, ParamItem)? compare]){
+    final List<ParamItem> list = itemList;
+    list.sort(compare ?? (a, b) => a.createdTime.compareTo(b.createdTime));
+    return list;
+  }
 
   String _generateAvailableUuid(){
     final Set<String> unusable = _box.item.map((ParamItem item) => item.uuid).toSet();

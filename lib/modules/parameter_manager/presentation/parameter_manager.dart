@@ -323,7 +323,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                     listenable: manager,
                     builder: (BuildContext context, Widget? child){
                       return WaterfallGallery(
-                        items: manager.items.where((item) => item.type.value == index).toList(),
+                        items: manager.getSortedItemList().reversed.where((item) => item.type.value == index).toList(),
                         manager: manager,
                         onDelete: (String uuid) async{
                           WidgetsBinding.instance.addPostFrameCallback((_) async{
