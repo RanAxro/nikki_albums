@@ -3,7 +3,7 @@ import "rich_building_params_panel.dart";
 import "param_item_edit_panel.dart";
 import "../model/param_item.dart";
 import "../domain/camera_params_edit_controller.dart";
-import "../domain/param_input.dart";
+import "../domain/param_import.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../domain/code_parser.dart";
 import "../domain/param_box_manager.dart";
@@ -205,73 +205,73 @@ class _ParameterManagerState extends State<ParameterManager>{
                   childrenBuilder: (BuildContext context, MenuController controller){
                     return [
                       if(page.value == 0)
-                        AppButton.smallText(
-                          height: mediumButtonSize,
-                          onClick: () async{
-                            final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
-                            if(context.mounted && result?.$1 != null){
-                              add(context, result?.$1);
-                            }
+                        ...[
+                          AppButton.smallText(
+                            height: mediumButtonSize,
+                            onClick: () async{
+                              final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
+                              if(context.mounted && result?.$1 != null){
+                                add(context, result?.$1);
+                              }
 
-                            controller.close();
-                          },
-                          child: AppText.tr("parameter_manager.camera_params_import_input"),
-                        ),
-                      if(page.value == 0)
-                        AppButton.smallText(
-                          height: mediumButtonSize,
-                          onClick: (){
-                            controller.close();
-                            goToCameraParamsImportAlbumNikkiPhotos();
-                          },
-                          child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
-                        ),
-                      if(page.value == 0)
-                        AppButton.smallText(
-                          height: mediumButtonSize,
-                          onClick: (){
-                            controller.close();
-                            goToCameraParamsImportAlbumClockInPhoto();
-                          },
-                          child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
-                        ),
+                              controller.close();
+                            },
+                            child: AppText.tr("parameter_manager.camera_params_import_input"),
+                          ),
+                          AppButton.smallText(
+                            height: mediumButtonSize,
+                            onClick: (){
+                              controller.close();
+                              goToCameraParamsImportAlbumNikkiPhotos();
+                            },
+                            child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
+                          ),
+                          AppButton.smallText(
+                            height: mediumButtonSize,
+                            onClick: (){
+                              controller.close();
+                              goToCameraParamsImportAlbumClockInPhoto();
+                            },
+                            child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
+                          ),
+                        ],
 
                       if(page.value == 1)
-                        AppButton.smallText(
-                          height: mediumButtonSize,
-                          onClick: () async{
-                            final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
-                            if(context.mounted && result != null){
-                              add(context, result);
-                            }
+                        ...[
+                          AppButton.smallText(
+                            height: mediumButtonSize,
+                            onClick: () async{
+                              final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
+                              if(context.mounted && result != null){
+                                add(context, result);
+                              }
 
-                            controller.close();
-                          },
-                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
-                        ),
-                      if(page.value == 1)
-                        AppButton.smallText(
-                          height: mediumButtonSize,
-                          onClick: () async{
-                            goToClothDiyShareCodeImportAlbumDIY();
+                              controller.close();
+                            },
+                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
+                          ),
+                          AppButton.smallText(
+                            height: mediumButtonSize,
+                            onClick: () async{
+                              goToClothDiyShareCodeImportAlbumDIY();
 
-                            controller.close();
-                          },
-                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
-                        ),
-                      if(page.value == 1)
-                        AppButton.smallText(
-                          height: mediumButtonSize,
-                          onClick: () async{
-                            final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
-                            if(context.mounted && result != null){
-                              add(context, result.$1, result.$2 == null ? null : NativeParamItemCover(path: result.$2!, isCache: true));
-                            }
+                              controller.close();
+                            },
+                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
+                          ),
+                          AppButton.smallText(
+                            height: mediumButtonSize,
+                            onClick: () async{
+                              final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
+                              if(context.mounted && result != null){
+                                add(context, result.$1, result.$2 == null ? null : NativeParamItemCover(path: result.$2!, isCache: true));
+                              }
 
-                            controller.close();
-                          },
-                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
-                        ),
+                              controller.close();
+                            },
+                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
+                          ),
+                        ],
                     ];
                   },
                   builder: (BuildContext context, MenuController controller, Widget? child){

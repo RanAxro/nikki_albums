@@ -1,5 +1,5 @@
 
-import "../domain/param_input.dart";
+import "../domain/param_import.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
@@ -327,94 +327,90 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                     AppText.tr("parameter_manager.invalid_param"),
 
                     if(controller.paramType == ParamType.camera)
-                      IntrinsicWidth(
-                        child: AppButton.smallText(
-                          colorRole: ColorRole.highlight,
-                          isTransparent: false,
-                          onClick: () async{
-                            final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
+                      ...[
+                        IntrinsicWidth(
+                          child: AppButton.smallText(
+                            colorRole: ColorRole.highlight,
+                            isTransparent: false,
+                            onClick: () async{
+                              final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
 
-                            if(result?.$1 != null){
-                              controller.codeTextController.text = result!.$1!;
-                            }
-                          },
-                          child: AppText.tr("parameter_manager.camera_params_import_input"),
-                        ),
-                      ),
-
-                    if(controller.paramType == ParamType.camera)
-                      IntrinsicWidth(
-                        child: AppButton.smallText(
-                          colorRole: ColorRole.highlight,
-                          isTransparent: false,
-                          onClick: (){
-                            Navigator.of(context).pop();
-                            goToCameraParamsImportAlbumNikkiPhotos();
-                          },
-                          child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
-                        ),
-                      ),
-
-                    if(controller.paramType == ParamType.camera)
-                      IntrinsicWidth(
-                        child: AppButton.smallText(
-                          colorRole: ColorRole.highlight,
-                          isTransparent: false,
-                          onClick: (){
-                            Navigator.of(context).pop();
-                            goToCameraParamsImportAlbumClockInPhoto();
-                          },
-                          child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
-                        ),
-                      ),
-
-                    if(controller.paramType == ParamType.cloth)
-                      IntrinsicWidth(
-                        child: AppButton.smallText(
-                          colorRole: ColorRole.highlight,
-                          isTransparent: false,
-                          onClick: () async{
-                            final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
-
-                            if(result != null){
-                              controller.codeTextController.text = result;
-                            }
-                          },
-                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
-                        ),
-                      ),
-
-                    if(controller.paramType == ParamType.cloth)
-                      IntrinsicWidth(
-                        child: AppButton.smallText(
-                          colorRole: ColorRole.highlight,
-                          isTransparent: false,
-                          onClick: (){
-                            Navigator.of(context).pop();
-                            goToClothDiyShareCodeImportAlbumDIY();
-                          },
-                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
-                        ),
-                      ),
-
-                    if(controller.paramType == ParamType.cloth)
-                      IntrinsicWidth(
-                        child: AppButton.smallText(
-                          colorRole: ColorRole.highlight,
-                          isTransparent: false,
-                          onClick: () async{
-                            final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
-
-                            if(result != null){
-                              controller.codeTextController.text = result.$1;
-                              if(result.$2 != null){
-                                controller.cover.value = NativeParamItemCover(path: result.$2!, isCache: true);
+                              if(result?.$1 != null){
+                                controller.codeTextController.text = result!.$1!;
                               }
-                            }
-                          },
-                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
+                            },
+                            child: AppText.tr("parameter_manager.camera_params_import_input"),
+                          ),
                         ),
-                      ),
+                        IntrinsicWidth(
+                          child: AppButton.smallText(
+                            colorRole: ColorRole.highlight,
+                            isTransparent: false,
+                            onClick: (){
+                              Navigator.of(context).pop();
+                              goToCameraParamsImportAlbumNikkiPhotos();
+                            },
+                            child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
+                          ),
+                        ),
+                        IntrinsicWidth(
+                          child: AppButton.smallText(
+                            colorRole: ColorRole.highlight,
+                            isTransparent: false,
+                            onClick: (){
+                              Navigator.of(context).pop();
+                              goToCameraParamsImportAlbumClockInPhoto();
+                            },
+                            child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
+                          ),
+                        ),
+                      ],
+
+                    if(controller.paramType == ParamType.cloth)
+                      ...[
+                        IntrinsicWidth(
+                          child: AppButton.smallText(
+                            colorRole: ColorRole.highlight,
+                            isTransparent: false,
+                            onClick: () async{
+                              final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
+
+                              if(result != null){
+                                controller.codeTextController.text = result;
+                              }
+                            },
+                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
+                          ),
+                        ),
+                        IntrinsicWidth(
+                          child: AppButton.smallText(
+                            colorRole: ColorRole.highlight,
+                            isTransparent: false,
+                            onClick: (){
+                              Navigator.of(context).pop();
+                              goToClothDiyShareCodeImportAlbumDIY();
+                            },
+                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
+                          ),
+                        ),
+                        IntrinsicWidth(
+                          child: AppButton.smallText(
+                            colorRole: ColorRole.highlight,
+                            isTransparent: false,
+                            onClick: () async{
+                              final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
+
+                              if(result != null){
+                                controller.codeTextController.text = result.$1;
+                                if(result.$2 != null){
+                                  controller.cover.value = NativeParamItemCover(path: result.$2!, isCache: true);
+                                }
+                              }
+                            },
+                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
+                          ),
+                        ),
+                      ],
                   ],
                 ),
               );

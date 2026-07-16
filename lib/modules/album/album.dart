@@ -27,7 +27,7 @@ import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/modules/nuan5_params/presentation/media_params_tree.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
-import "package:nikki_albums/modules/parameter_manager/domain/param_input.dart";
+import "package:nikki_albums/modules/parameter_manager/domain/param_import.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_item_edit_controller.dart";
 import "package:nikki_albums/modules/parameter_manager/model/param_item.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/param_item_edit_panel.dart";
