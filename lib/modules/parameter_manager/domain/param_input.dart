@@ -38,3 +38,26 @@ Future<(String?, CameraParams)?> showCameraParamsImportInputPanel({required Buil
 void goToCameraParamsImportAlbum(){
   contentController.index = 1;
 }
+
+Future<String?> showClothDiyShareCodeImportHistoryPanel({required BuildContext context}) async{
+  final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
+
+  if(context.mounted){
+    return showAppDialog<String?>(
+      context: context,
+      builder: (BuildContext context){
+        return AppDialog(
+          maxWidth: 900,
+          useIntrinsicHeight: false,
+          child: ClothDiyShareCodeImportHistoryPanel(
+            onCancel: Navigator.of(context).pop,
+            onFinish: Navigator.of(context).pop,
+            reader: reader,
+          ),
+        );
+      }
+    );
+  }
+
+  return null;
+}

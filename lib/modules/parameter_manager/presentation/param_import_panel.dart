@@ -151,11 +151,19 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
 
   @override
   Widget build(BuildContext context){
+    if(AppState.currentGame.value == null){
+      return Center(
+        child: AppText.tr("parameter_manager.to_select_game"),
+      );
+    }
+
     return ValueListenableBuilder(
       valueListenable: currentUid,
       builder: (BuildContext context, String? uid, Widget? child){
         if(uid == null){
-          return block0;
+          return Center(
+            child: AppText.tr("parameter_manager.find_no_uid"),
+          );
         }
 
         final List<String> shareCodeList = shareCodeMap[uid] ?? const [];
@@ -204,8 +212,12 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
               child: Row(
                 spacing: listSpacing,
                 children: [
-                  SizedBox(
+                  Container(
                     width: 260,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(smallBorderRadius),
+                      color: AppColorScheme.of(context).background.enabledColor
+                    ),
                     child: SmoothPointerScroll(
                       builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
                         return SingleChildScrollView(
@@ -218,15 +230,14 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
                                   valueListenable: selectedShareCode,
                                   builder: (BuildContext context, String? selected, Widget? child){
                                     return AppFloatingIndicatorButtonTarget(
-                                      defaultTarget: selected == shareCode,
-                                      child: AppButton.smallText(
-                                        onClick: (){
+                                      child: AppSwitch.smallText(
+                                        value: selected == shareCode,
+                                        onChanged: (bool value){
                                           if(selectedShareCode.value == shareCode){
                                             selectedShareCode.value = null;
                                           }else{
                                             selectedShareCode.value = shareCode;
                                           }
-                                          print(selectedShareCode.value);
                                         },
                                         child: AppText(shareCode),
                                       ),
@@ -247,7 +258,7 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
                       builder: (BuildContext context, String? selected, Widget? child){
                         if(selected == null){
                           return Center(
-                            child: AppText("预览"),
+                            child: AppText.tr("parameter_manager.preview"),
                           );
                         }
 
@@ -275,6 +286,7 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
             ),
 
             Row(
+              spacing: listSpacing,
               children: [
                 Expanded(
                   child: AppButton.smallText(
