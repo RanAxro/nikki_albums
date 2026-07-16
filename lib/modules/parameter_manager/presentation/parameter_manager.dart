@@ -329,6 +329,42 @@ class _ParameterManagerState extends State<ParameterManager>{
                           manager.deleteItem(uuid);
                           await manager.save();
                         },
+                        onEdit: (String uuid){
+                          final ParamItem? item = manager.getItem(uuid);
+                          if(item == null) return;
+
+                          WidgetsBinding.instance.addPostFrameCallback((_){
+                            showAppDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AppDialog(
+                                  useIntrinsicHeight: false,
+                                  child: ParamItemEditPanel(
+                                    manager: manager,
+                                    controller: ParamItemEditController(
+                                      initName: item.title,
+                                      initCode: item.value,
+                                      initCover: item.image == null ? null : NativeParamItemCover(
+                                        path: manager.getImagePath(item.image!),
+                                        isCache: false,
+                                      ),
+                                      initParamType: item.type
+                                    ),
+                                    initTag: item.tag,
+                                    createMode: false,
+                                    onCancel: Navigator.of(context).pop,
+                                    onFinish: (ParamItemCreation creation) async{
+                                      manager.setItem(item.uuid, creation);
+                                      Navigator.of(context).pop();
+                                      await manager.save();
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          });
+
+                        },
                       );
                     },
                   ),
@@ -346,12 +382,14 @@ class WaterfallGallery extends StatelessWidget{
   final List<ParamItem> items;
   final ParamBoxManager manager;
   final void Function(String uuid)? onDelete;
+  final void Function(String uuid)? onEdit;
 
   const WaterfallGallery({
     super.key,
     required this.items,
     required this.manager,
     this.onDelete,
+    this.onEdit,
   });
 
   @override
@@ -431,10 +469,18 @@ class WaterfallGallery extends StatelessWidget{
                               children: [
                                 AppButton.smallIcon(
                                   onClick: (){
-                                    onDelete?.call(item.uuid);
                                     Navigator.of(context).pop();
+                                    onDelete?.call(item.uuid);
                                   },
                                   child: AppIcon("delete"),
+                                ),
+
+                                AppButton.smallIcon(
+                                  onClick: (){
+                                    Navigator.of(context).pop();
+                                    onEdit?.call(item.uuid);
+                                  },
+                                  child: AppIcon("edit"),
                                 ),
 
                                 Expanded(

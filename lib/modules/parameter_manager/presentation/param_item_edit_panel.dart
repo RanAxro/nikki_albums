@@ -35,6 +35,8 @@ class ParamItemEditPanel extends StatefulWidget{
   final ParamItemEditController? controller;
   final void Function()? onCancel;
   final void Function(ParamItemCreation)? onFinish;
+  final List<String> initTag;
+  final bool createMode;
 
   const ParamItemEditPanel({
     super.key,
@@ -42,6 +44,8 @@ class ParamItemEditPanel extends StatefulWidget{
     this.controller,
     this.onCancel,
     this.onFinish,
+    this.initTag = const [],
+    this.createMode = true,
   });
 
   @override
@@ -50,7 +54,7 @@ class ParamItemEditPanel extends StatefulWidget{
 
 class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   late final ParamItemEditController controller;
-  final ManualValueNotifier<List<String>> tagList = ManualValueNotifier([]);
+  late final ManualValueNotifier<List<String>> tagList;
   Nuan5DatabaseReaderV1? reader;
 
   Future<void> initReader() async{
@@ -64,6 +68,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   void initState(){
     super.initState();
     controller = widget.controller ?? ParamItemEditController();
+    tagList = ManualValueNotifier(List.of(widget.initTag));
     initReader();
   }
 
@@ -111,9 +116,12 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 child: Row(
                   children: [
                     Expanded(
-                      child: AppTextFiled(
-                        controller: controller.codeTextController,
-                        labelText: "parameter_manager.param_or_code",
+                      child: IgnorePointer(
+                        ignoring: !widget.createMode,
+                        child: AppTextFiled(
+                          controller: controller.codeTextController,
+                          labelText: "parameter_manager.param_or_code",
+                        ),
                       ),
                     ),
                     AppFloatingIndicatorButtonTarget(
@@ -136,7 +144,8 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         child: Icon(Icons.copy),
                       ),
                     ),
-                    AppFloatingIndicatorButtonTarget(
+                    if(widget.createMode)
+                      AppFloatingIndicatorButtonTarget(
                       child: AppButton.smallIcon(
                         toolTip: "parameter_manager.paste",
                         onClick: () async{
@@ -148,7 +157,8 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         child: Icon(Icons.paste),
                       ),
                     ),
-                    AppFloatingIndicatorButtonTarget(
+                    if(widget.createMode)
+                      AppFloatingIndicatorButtonTarget(
                       child: AppButton.smallIcon(
                         toolTip: "parameter_manager.clear",
                         onClick: () async{
@@ -161,37 +171,40 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 ),
               ),
 
-              ListenableBuilder(
-                listenable: controller,
-                builder: (BuildContext context, Widget? child){
-                  return AppRadioStack(
-                    selectedIndex: [
-                      ParamType.camera,
-                      ParamType.cloth,
-                      ParamType.home,
-                    ].indexOf(controller.paramType),
-                    children: [
-                      AppButton.smallText(
-                        onClick: (){
-                          controller.setParamType(ParamType.camera);
-                        },
-                        child: AppText.tr("parameter_manager.camera"),
-                      ),
-                      AppButton.smallText(
-                        onClick: (){
-                          controller.setParamType(ParamType.cloth);
-                        },
-                        child: AppText.tr("parameter_manager.cloth"),
-                      ),
-                      AppButton.smallText(
-                        onClick: (){
-                          controller.setParamType(ParamType.home);
-                        },
-                        child: AppText.tr("parameter_manager.home"),
-                      ),
-                    ],
-                  );
-                },
+              IgnorePointer(
+                ignoring: !widget.createMode,
+                child: ListenableBuilder(
+                  listenable: controller,
+                  builder: (BuildContext context, Widget? child){
+                    return AppRadioStack(
+                      selectedIndex: [
+                        ParamType.camera,
+                        ParamType.cloth,
+                        ParamType.home,
+                      ].indexOf(controller.paramType),
+                      children: [
+                        AppButton.smallText(
+                          onClick: (){
+                            controller.setParamType(ParamType.camera);
+                          },
+                          child: AppText.tr("parameter_manager.camera"),
+                        ),
+                        AppButton.smallText(
+                          onClick: (){
+                            controller.setParamType(ParamType.cloth);
+                          },
+                          child: AppText.tr("parameter_manager.cloth"),
+                        ),
+                        AppButton.smallText(
+                          onClick: (){
+                            controller.setParamType(ParamType.home);
+                          },
+                          child: AppText.tr("parameter_manager.home"),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
 
               /// Tag
@@ -425,7 +438,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                   children: [
                     AppText.tr("parameter_manager.invalid_param"),
 
-                    if(controller.paramType == ParamType.camera)
+                    if(widget.createMode && controller.paramType == ParamType.camera)
                       ...[
                         IntrinsicWidth(
                           child: AppButton.smallText(
@@ -465,7 +478,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         ),
                       ],
 
-                    if(controller.paramType == ParamType.cloth)
+                    if(widget.createMode && controller.paramType == ParamType.cloth)
                       ...[
                         IntrinsicWidth(
                           child: AppButton.smallText(
