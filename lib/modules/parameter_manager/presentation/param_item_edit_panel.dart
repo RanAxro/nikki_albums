@@ -349,9 +349,51 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                           isTransparent: false,
                           onClick: (){
                             Navigator.of(context).pop();
-                            goToCameraParamsImportAlbum();
+                            goToCameraParamsImportAlbumNikkiPhotos();
                           },
-                          child: AppText.tr("parameter_manager.camera_params_import_album"),
+                          child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
+                        ),
+                      ),
+
+                    if(controller.paramType == ParamType.camera)
+                      IntrinsicWidth(
+                        child: AppButton.smallText(
+                          colorRole: ColorRole.highlight,
+                          isTransparent: false,
+                          onClick: (){
+                            Navigator.of(context).pop();
+                            goToCameraParamsImportAlbumClockInPhoto();
+                          },
+                          child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
+                        ),
+                      ),
+
+                    if(controller.paramType == ParamType.cloth)
+                      IntrinsicWidth(
+                        child: AppButton.smallText(
+                          colorRole: ColorRole.highlight,
+                          isTransparent: false,
+                          onClick: () async{
+                            final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
+
+                            if(result != null){
+                              controller.codeTextController.text = result;
+                            }
+                          },
+                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
+                        ),
+                      ),
+
+                    if(controller.paramType == ParamType.cloth)
+                      IntrinsicWidth(
+                        child: AppButton.smallText(
+                          colorRole: ColorRole.highlight,
+                          isTransparent: false,
+                          onClick: (){
+                            Navigator.of(context).pop();
+                            goToClothDiyShareCodeImportAlbumDIY();
+                          },
+                          child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
                         ),
                       ),
                   ],

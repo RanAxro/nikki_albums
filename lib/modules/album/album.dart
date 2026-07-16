@@ -1,7 +1,5 @@
 
 
-import "package:nikki_albums/modules/parameter_manager/domain/param_item_edit_controller.dart";
-
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/info.dart";
@@ -29,10 +27,13 @@ import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/modules/nuan5_params/presentation/media_params_tree.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
+import "package:nikki_albums/modules/parameter_manager/domain/param_input.dart";
+import "package:nikki_albums/modules/parameter_manager/domain/param_item_edit_controller.dart";
 import "package:nikki_albums/modules/parameter_manager/model/param_item.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/param_item_edit_panel.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/clock_in_photo_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -1762,7 +1763,7 @@ class _ExhibitState extends State<Exhibit> {
     }
 
     final AlbumType albumType = widget.game.selectedAlbum;
-    if(albumType != AlbumType.NikkiPhotos_HighQuality && albumType != AlbumType.ClockInPhoto){
+    if(albumType != AlbumType.NikkiPhotos_HighQuality && albumType != AlbumType.ClockInPhoto && albumType != AlbumType.DIY){
       return block0;
     }
 
@@ -1845,6 +1846,39 @@ class _ExhibitState extends State<Exhibit> {
                           child: ParamItemEditPanel(
                             controller: ParamItemEditController(
                               initCode: param,
+                              initCover: NativeParamItemCover(
+                                path: widget.imageItem.path.path,
+                                isCache: false,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  diy: (ClothDiyParams clothDiyParams) async{
+                    if(widget.game.selectedUid == null){
+                      return;
+                    }
+
+                    final String? code = await tryGetClothDiyShareCode(
+                      params: clothDiyParams,
+                      game: widget.game,
+                      uid: widget.game.selectedUid!.value,
+                    );
+
+                    if(code == null){
+                      return;
+                    }
+
+                    showAppDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AppDialog(
+                          useIntrinsicHeight: false,
+                          child: ParamItemEditPanel(
+                            controller: ParamItemEditController(
+                              initCode: code,
                               initCover: NativeParamItemCover(
                                 path: widget.imageItem.path.path,
                                 isCache: false,
