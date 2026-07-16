@@ -12,18 +12,17 @@ class ParamItemEditController extends ChangeNotifier{
   final String? initCode;
   final ParamItemCover? initCover;
   final ParamType? initParamType;
-  final bool createMode;
 
   ParamItemEditController({
     this.initName,
     this.initCode,
     this.initCover,
     this.initParamType,
-    this.createMode = false,
   }){
     _init();
   }
 
+  bool _isInit = false;
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController codeTextController = TextEditingController();
@@ -58,6 +57,7 @@ class ParamItemEditController extends ChangeNotifier{
     }
 
     codeTextController.addListener(onCodeTextChanged);
+    _isInit = true;
   }
 
   String get code => codeTextController.text;
@@ -65,7 +65,7 @@ class ParamItemEditController extends ChangeNotifier{
   ParamType get paramType => _paramType;
 
   Future<void> setParamType(ParamType newParamType) async{
-    if(newParamType == _paramType){
+    if(_isInit && newParamType == _paramType){
       return;
     }
 
