@@ -1,6 +1,9 @@
 
+import "camera_params_edit_panel.dart";
+import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
 import "param_item_edit_panel.dart";
+import "../model/param_type.dart";
 import "../model/param_item.dart";
 import "../domain/camera_params_edit_controller.dart";
 import "../domain/param_import.dart";
@@ -20,9 +23,6 @@ import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart";
-
-import "camera_params_edit_panel.dart";
-import "cloth_diy_params_panel.dart";
 
 
 final ContentItem item = ContentItem(
@@ -75,10 +75,18 @@ class _ParameterManagerState extends State<ParameterManager>{
     init();
   }
 
-  void add(BuildContext context, [String? code, ParamItemCover? cover]){
+  @override
+  void dispose(){
+    super.dispose();
+    page.dispose();
+    manager.dispose();
+  }
+
+  void add(BuildContext context, {String? code, ParamItemCover? cover, ParamType? paramType}){
     final ParamItemEditController controller = ParamItemEditController(
       initCode: code,
       initCover: cover,
+      initParamType: paramType,
     );
 
     showAppDialog(
@@ -196,9 +204,19 @@ class _ParameterManagerState extends State<ParameterManager>{
 
                 AppButton.smallText(
                   onClick: (){
-                    add(context);
+                    add(context, paramType: [
+                      ParamType.camera,
+                      ParamType.cloth,
+                      ParamType.home,
+                    ][page.value]);
                   },
-                  child: AppText.tr("parameter_manager.add"),
+                  child: Row(
+                    spacing: listSpacing,
+                    children: [
+                      Icon(Icons.add),
+                      AppText.tr("parameter_manager.add"),
+                    ],
+                  ),
                 ),
 
                 AppDropdown(
@@ -211,7 +229,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                             onClick: () async{
                               final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
                               if(context.mounted && result?.$1 != null){
-                                add(context, result?.$1);
+                                add(context, code: result?.$1);
                               }
 
                               controller.close();
@@ -243,7 +261,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                             onClick: () async{
                               final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
                               if(context.mounted && result != null){
-                                add(context, result);
+                                add(context, code: result);
                               }
 
                               controller.close();
@@ -264,7 +282,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                             onClick: () async{
                               final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
                               if(context.mounted && result != null){
-                                add(context, result.$1, result.$2 == null ? null : NativeParamItemCover(path: result.$2!, isCache: true));
+                                add(context, code: result.$1, cover: result.$2 == null ? null : NativeParamItemCover(path: result.$2!, isCache: true));
                               }
 
                               controller.close();

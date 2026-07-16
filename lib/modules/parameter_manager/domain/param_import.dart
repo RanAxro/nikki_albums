@@ -112,6 +112,7 @@ Future<(String, String?)?> showClothDiyShareCodeImportQrCodePanel({required Buil
     builder: (BuildContext context){
       return AppDialog(
         title: "",
+        isTranslate: false,
         maxWidth: 900,
         useIntrinsicHeight: false,
         child: ClothDiyShareCodeImportQrCodePanel(
