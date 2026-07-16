@@ -613,8 +613,20 @@ class _TagSelectorState extends State<TagSelector>{
                                     Expanded(child: AppText(tag.name)),
                                     AppButton.smallIcon(
                                       toolTip: "parameter_manager.delete",
-                                      onClick: (){
-                                        widget.manager.deleteTag(tag.uuid);
+                                      onClick: () async{
+                                        final bool? result = await showAppDialog<bool>(
+                                          context: context,
+                                          builder: (BuildContext context){
+                                            return AppConfirmDialog(
+                                              message: context.tr("parameter_manager.delete_tag", args: [tag.name]),
+                                              isTranslateMessage: false,
+                                            );
+                                          },
+                                        );
+
+                                        if(result == true){
+                                          widget.manager.deleteTag(tag.uuid);
+                                        }
                                       },
                                       child: AppIcon("delete"),
                                     ),

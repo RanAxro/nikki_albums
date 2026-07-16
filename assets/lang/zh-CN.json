@@ -248,7 +248,8 @@
     "on_save": "保存中",
     "save_successful": "保存成功",
     "save_failed": "保存失败",
-    "delete": "删除"
+    "delete": "删除",
+    "delete_tag": "你确定要删除标签\"{}\"吗"
   },
   "----------file_transfer----------": "----------file_transfer----------",
   "inputDownloadUrl": "输入下载链接",

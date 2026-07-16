@@ -385,73 +385,75 @@ class WaterfallGallery extends StatelessWidget{
 
                 final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
 
-                showAppDialog(
-                  context: context,
-                  builder: (BuildContext context){
-                    return AppDialog(
-                      maxWidth: 500,
-                      useIntrinsicHeight: false,
-                      child: Column(
-                        spacing: bigPadding,
-                        children: [
-                          Expanded(
-                            child: Builder(
-                              builder: (BuildContext context){
-                                if(param is CameraParams){
-                                  return CameraParamsEditPanel(
-                                    controller: CameraParamsEditController(cameraParams: param, allowEdit: false),
-                                    reader: reader,
-                                  );
-                                }
-                                if(param is ClothDiyParams){
-                                  return ClothDiyParamsPanel(
-                                    shareCode: item.value,
-                                    clothDiyParams: param,
-                                    reader: reader,
-                                  );
-                                }
-                                if(param is RichBuildingParams){
-                                  return RichBuildingParamsPanel(
-                                    shareCode: item.value,
-                                    richBuildingParams: param,
-                                    reader: reader,
-                                  );
-                                }
+                if(context.mounted){
+                  showAppDialog(
+                    context: context,
+                    builder: (BuildContext context){
+                      return AppDialog(
+                        maxWidth: 500,
+                        useIntrinsicHeight: false,
+                        child: Column(
+                          spacing: bigPadding,
+                          children: [
+                            Expanded(
+                              child: Builder(
+                                builder: (BuildContext context){
+                                  if(param is CameraParams){
+                                    return CameraParamsEditPanel(
+                                      controller: CameraParamsEditController(cameraParams: param, allowEdit: false),
+                                      reader: reader,
+                                    );
+                                  }
+                                  if(param is ClothDiyParams){
+                                    return ClothDiyParamsPanel(
+                                      shareCode: item.value,
+                                      clothDiyParams: param,
+                                      reader: reader,
+                                    );
+                                  }
+                                  if(param is RichBuildingParams){
+                                    return RichBuildingParamsPanel(
+                                      shareCode: item.value,
+                                      richBuildingParams: param,
+                                      reader: reader,
+                                    );
+                                  }
 
-                                return Center(
-                                  child: AppText.tr("parameter_manager.invalid_param"),
-                                );
-                              },
-                            ),
-                          ),
-
-                          Row(
-                            spacing: listSpacing,
-                            children: [
-                              AppButton.smallIcon(
-                                onClick: (){
-                                  onDelete?.call(item.uuid);
-                                  Navigator.of(context).pop();
+                                  return Center(
+                                    child: AppText.tr("parameter_manager.invalid_param"),
+                                  );
                                 },
-                                child: AppIcon("delete"),
                               ),
+                            ),
 
-                              Expanded(
-                                child: AppButton.smallText(
-                                  isTransparent: false,
+                            Row(
+                              spacing: listSpacing,
+                              children: [
+                                AppButton.smallIcon(
                                   onClick: (){
+                                    onDelete?.call(item.uuid);
                                     Navigator.of(context).pop();
                                   },
-                                  child: AppText.tr("parameter_manager.close"),
+                                  child: AppIcon("delete"),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
+
+                                Expanded(
+                                  child: AppButton.smallText(
+                                    isTransparent: false,
+                                    onClick: (){
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: AppText.tr("parameter_manager.close"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
               },
               child: Column(
                 spacing: listSpacing,
