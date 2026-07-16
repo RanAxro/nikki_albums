@@ -1,10 +1,9 @@
 
-import "package:nikki_albums/widgets/common/component.dart";
-
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
 import "param_item_edit_panel.dart";
+import "../model/param_box.dart";
 import "../model/param_type.dart";
 import "../model/param_item.dart";
 import "../domain/camera_params_edit_controller.dart";
@@ -18,7 +17,9 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/utils/clipboard.dart";
+import "package:nikki_albums/utils/color/utils.dart";
 
 import "package:flutter/material.dart";
 import "dart:io";
@@ -97,6 +98,7 @@ class _ParameterManagerState extends State<ParameterManager>{
         return AppDialog(
           useIntrinsicHeight: false,
           child: ParamItemEditPanel(
+            manager: manager,
             controller: controller,
             onCancel: (){
               Navigator.of(context).pop();
@@ -342,13 +344,13 @@ class _ParameterManagerState extends State<ParameterManager>{
 
 class WaterfallGallery extends StatelessWidget{
   final List<ParamItem> items;
-  final ParamBoxManager? manager;
+  final ParamBoxManager manager;
   final void Function(String uuid)? onDelete;
 
   const WaterfallGallery({
     super.key,
     required this.items,
-    this.manager,
+    required this.manager,
     this.onDelete,
   });
 
@@ -456,10 +458,47 @@ class WaterfallGallery extends StatelessWidget{
                 children: [
                   AppText(item.title ?? ""),
 
-                  if(manager != null && item.image != null)
+                  if(item.image != null)
                     ClipRRect(
                       borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
-                      child: Image.file(File(manager!.getImagePath(item.image!))),
+                      child: Image.file(File(manager.getImagePath(item.image!))),
+                    ),
+
+                  if(item.tag.isNotEmpty)
+                    Builder(
+                      builder: (BuildContext context){
+                        final List<Widget> children = [];
+
+                        for(final String uuid in item.tag){
+                          final ParamTag? tag = manager.getTag(uuid);
+                          if(tag != null){
+                            children.add(IntrinsicWidth(
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                                constraints: BoxConstraints(
+                                  minWidth: smallButtonSize,
+                                ),
+                                height: smallButtonContentSize + smallPadding,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
+                                  color: Color(tag.color),
+                                ),
+                                child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
+                              ),
+                            ));
+                          }
+                        }
+
+                        return Align(
+                          alignment: Alignment.centerLeft,
+                          child: Wrap(
+                            spacing: listSpacing,
+                            runSpacing: listSpacing,
+                            children: children,
+                          ),
+                        );
+                      },
                     ),
 
                   AppButton.smallText(

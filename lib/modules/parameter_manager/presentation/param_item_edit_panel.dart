@@ -16,6 +16,7 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/utils/system/system.dart";
+import "package:nikki_albums/utils/color/utils.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 
@@ -72,13 +73,6 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
       controller.dispose();
     }
     super.dispose();
-  }
-
-  Color getContrastColor(Color background){
-    // 计算亮度 (YIQ 公式)
-    final double yiq = ((background.red * 299) + (background.green * 587) + (background.blue * 114)) / 1000;
-
-    return yiq >= 128 ? Colors.black : Colors.white;
   }
 
   @override
@@ -217,6 +211,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
 
                         tagChildren.add(Container(
                           alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(horizontal: smallPadding),
                           constraints: BoxConstraints(
                             minWidth: smallButtonSize,
                           ),

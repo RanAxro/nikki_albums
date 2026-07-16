@@ -1,7 +1,7 @@
 
+import "code_parser.dart";
 import "../model/param_item.dart";
 import "../model/param_type.dart";
-import "code_parser.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 
 import "package:flutter/material.dart";
