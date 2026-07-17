@@ -1,4 +1,48 @@
 const config = {
+	"v3.09": {
+		"releaseDate": "2026-7-17",
+		"description": {
+			"de": "Parameter-Manager hinzugefügt, unterstützt Parameter-/Freigabecode-Analyse",
+			"en": "Added parameter manager, supports parameter/share code parsing",
+			"es": "Agregado gestor de parámetros, admite análisis de parámetros/códigos de compartir",
+			"fr": "Ajout du gestionnaire de paramètres, prend en charge l'analyse des paramètres/codes de partage",
+			"id": "Menambahkan pengelola parameter, mendukung parsing parameter/kode berbagi",
+			"it": "Aggiunto gestore parametri, supporta analisi parametri/codici condivisione",
+			"ja": "パラメータマネージャー機能を追加、パラメータ/シェアコードの解析に対応",
+			"ko": "파라미터 관리자 기능 추가, 파라미터/공유 코드 파싱 지원",
+			"pt": "Adicionado gerenciador de parâmetros, suporta análise de parâmetros/códigos de compartilhamento",
+			"th": "เพิ่มตัวจัดการพารามิเตอร์ รองรับการแยกวิเคราะห์พารามิเตอร์/รหัสแชร์",
+			"zh": "加入参数管理器功能，支持参数/分享码解析",
+			"tw": "加入參數管理器功能，支援參數/分享碼解析"
+			
+      // "de-DE": "",
+      // "en-US": "",
+      // "es-ES": "",
+      // "fr-FR": "",
+      // "id-ID": "",
+      // "it-IT": "",
+      // "ja-JP": "",
+      // "ko-KR": "",
+      // "pt-BR": "",
+      // "th-TH": "",
+      // "zh-CN": "",
+      // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.09/Nikki%20Albums-v3.09-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.09/Nikki%20Albums-v3.09-Windows-x64.zip"
+			}
+		]
+	},
 	"v3.28": {
 		"releaseDate": "2026-7-13",
 		"description": {
@@ -14,19 +58,6 @@ const config = {
 			"th": "[เบต้า] เพิ่มตัวจัดการพารามิเตอร์ รองรับการแยกวิเคราะห์พารามิเตอร์/รหัสแชร์",
 			"zh": "[体验版] 加入参数管理器功能，支持参数/分享码解析",
 			"tw": "[體驗版] 加入參數管理器功能，支援參數/分享碼解析"
-			
-      // "de-DE": "",
-      // "en-US": "",
-      // "es-ES": "",
-      // "fr-FR": "",
-      // "id-ID": "",
-      // "it-IT": "",
-      // "ja-JP": "",
-      // "ko-KR": "",
-      // "pt-BR": "",
-      // "th-TH": "",
-      // "zh-CN": "",
-      // "zh-TW": ""
 		},
 		"downloads": [
 			{
