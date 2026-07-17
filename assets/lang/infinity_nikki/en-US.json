@@ -28,6 +28,8 @@
       "false_5": "Multi-Color Toning",
       "true_6": "Apply Base Color",
       "false_6": "Remove Base Color",
+      "true_7": "On",
+      "false_7": "Off",
       "nikki_photo_params": "Nikki Photo Info",
       "clock_in_photo_params": "World Expedition Info",
       "collage_params": "Collage Poster Data",
@@ -201,7 +203,9 @@
       "image_id": "Image Id",
       "cloth_diy_data": {
         "time": "Generation Time",
-        "condition": "Dyeing Conditions"
+        "condition": "Dyeing Conditions",
+        "effect": "Effect",
+        "effect_scheme": "Effect Scheme"
       },
       "home_build_data": {
         "cover_image": "Scheme Cover",
@@ -236,6 +240,11 @@
       "evolution_1": "Evolution 1",
       "evolution_2": "Evolution 2",
       "evolution_3": "Full Evolution"
+    },
+    "effect_scheme": {
+      "allOn": "All On",
+      "allOff": "All Off",
+      "custom": "Custom"
     }
   }
 }

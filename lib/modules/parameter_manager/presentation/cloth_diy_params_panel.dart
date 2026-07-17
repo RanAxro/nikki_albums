@@ -356,6 +356,16 @@ class ClothDiyParamsPanel extends StatelessWidget{
                         ],
                       ),
 
+                      if(clothParams.effectHidden != null)
+                        Row(
+                          spacing: listSpacing,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            AppText(trText("cloth_diy_data.effect"), fontWeight: FontWeight.bold),
+                            AppText(trBool(!clothParams.effectHidden!, index: 7), softWrap: false),
+                          ],
+                        ),
+
                       AppDivider(),
 
                       if(clothParams.diy != null)
@@ -456,6 +466,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
           );
 
           final DyeCondition? condition = reader == null ? null : handler.getDyeCondition(reader!, clothDiyParams.clothes);
+          final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
           return Column(
             spacing: listSpacing,
             children: [
@@ -480,6 +491,13 @@ class ClothDiyParamsPanel extends StatelessWidget{
                       AppText(trText((condition?.name).toString(), category: "dye_condition")),
                     ],
                   ),
+                  if(effectScheme != null)
+                    TableRow(
+                      children: [
+                        AppText(trText("cloth_diy_data.effect_scheme")),
+                        AppText(trText((effectScheme.name).toString(), category: "effect_scheme")),
+                      ],
+                    ),
                 ].map((TableRow tableRow) => TableRow(
                   children: tableRow.children.map((child) => Padding(
                     padding: const EdgeInsets.all(smallPadding),

@@ -262,6 +262,22 @@ class ClothDiyHandler{
 
     return res;
   }
+
+  EffectScheme? getEffectScheme(List<ClothParams> cloth){
+    final Iterable<bool> effectHidden = cloth.map((ClothParams clothParams) => clothParams.effectHidden).nonNulls;
+    if(effectHidden.isEmpty){
+      return null;
+    }
+
+    bool state = effectHidden.first;
+    for(final bool current in effectHidden){
+      if(state != current){
+        return EffectScheme.custom;
+      }
+    }
+
+    return state ? EffectScheme.allOff : EffectScheme.allOn;
+  }
 }
 
 

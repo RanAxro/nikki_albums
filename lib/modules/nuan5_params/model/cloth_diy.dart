@@ -19,3 +19,9 @@ enum DyeCondition implements Comparable<DyeCondition>{
   bool operator <=(DyeCondition other) => value <= other.value;
   bool operator >=(DyeCondition other) => value >= other.value;
 }
+
+enum EffectScheme{
+  allOn,
+  allOff,
+  custom,
+}

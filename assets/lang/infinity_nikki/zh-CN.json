@@ -56,6 +56,8 @@
       "false_5": "多彩调色",
       "true_6": "应用底色",
       "false_6": "取消底色",
+      "true_7": "开启",
+      "false_7": "关闭",
       "nikki_photo_params": "暖暖图片信息",
       "clock_in_photo_params": "世界巡游信息",
       "collage_params": "趣拼海报信息",
@@ -229,7 +231,9 @@
       "image_id": "原图id",
       "cloth_diy_data": {
         "time": "染色码生成时间",
-        "condition": "染色条件"
+        "condition": "染色条件",
+        "effect": "特效",
+        "effect_scheme": "特效方案"
       },
       "home_build_data": {
         "cover_image": "方案封面",
@@ -264,6 +268,11 @@
       "evolution_1": "一进可染",
       "evolution_2": "二进可染",
       "evolution_3": "满进可染"
+    },
+    "effect_scheme": {
+      "allOn": "全部开启",
+      "allOff": "全部关闭",
+      "custom": "自定义"
     }
   }
 }
