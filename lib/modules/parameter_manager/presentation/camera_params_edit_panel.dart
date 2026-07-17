@@ -266,6 +266,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                               child: AppCachedNetworkImage(
                                 imageUrl: imageUrl,
                                 cacheKey: getCacheKey?.call(buildArgs),
+                                errorWidget: selectorHandler.imageErrorWidget,
                               ),
                             ),
 

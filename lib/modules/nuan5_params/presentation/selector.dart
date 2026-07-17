@@ -153,6 +153,7 @@ class _SelectorState extends State<Selector>{
                                       child: AppCachedNetworkImage(
                                         imageUrl: widget.handler.getValueImageUrl(reader, id),
                                         cacheKey: id.toString(),
+                                        errorWidget: widget.handler.imageErrorWidget,
                                       ),
                                     ),
 

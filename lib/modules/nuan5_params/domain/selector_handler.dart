@@ -3,6 +3,9 @@ import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dar
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
 import "package:nikki_albums/modules/nuan5_params/model/image.dart";
+import "package:nikki_albums/widgets/app/component.dart";
+
+import "package:flutter/material.dart";
 
 
 abstract class SelectorHandler{
@@ -19,6 +22,12 @@ abstract class SelectorHandler{
   String getValueText(int value);
 
   String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value);
+
+  Widget imageErrorWidget(BuildContext context, String url, Object error){
+    return Center(
+      child: AppText("?"),
+    );
+  }
 
   int? getValueType(Nuan5DatabaseReaderV1 reader, int value){
     final List<int> allType = getType(reader);
@@ -197,6 +206,19 @@ class MomoPoseSelectorHandler extends SelectorHandler{
   @override
   String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
     return Nuan5Image.momoPose(value);
+  }
+
+  @override
+  Widget imageErrorWidget(BuildContext context, String url, Object error){
+    return Padding(
+      padding: const EdgeInsets.all(smallPadding),
+      child: Stack(
+        children: [
+          Positioned.fill(child: AppIcon("momo_default", isDye: false)),
+          Center(child: AppText("?")),
+        ],
+      ),
+    );
   }
 
   @override

@@ -1862,6 +1862,7 @@ class _AppSwitchButtonState extends State<AppSwitchButton>{
 class AppCachedNetworkImage extends StatelessWidget{
   final String imageUrl;
   final String? cacheKey;
+  final Widget Function(BuildContext, String, Object)? errorWidget;
   final double? width;
   final double? height;
   final BoxFit? fit;
@@ -1872,6 +1873,7 @@ class AppCachedNetworkImage extends StatelessWidget{
     super.key,
     required this.imageUrl,
     this.cacheKey,
+    this.errorWidget,
     this.width,
     this.height,
     this.fit,
@@ -1886,7 +1888,7 @@ class AppCachedNetworkImage extends StatelessWidget{
       cacheKey: cacheKey,
       fadeInDuration: animationTime,
       fadeOutDuration: animationTime,
-      errorWidget: (BuildContext context, String url, Object error){
+      errorWidget: errorWidget ?? (BuildContext context, String url, Object error){
         return Center(
           child: AppText("?"),
         );
