@@ -1,7 +1,7 @@
 [
   {
     "id": "infinity-nikki-cloth-lang",
-    "versionId": "e888f617-74d8-4043-906b-919f92b9c82b",
+    "versionId": "a97596cf-cac3-4307-a828-56f79ba57077",
     "files": [
       {
         "path": "en-US.json",
@@ -47,7 +47,7 @@
   },
   {
     "id": "infinity-nikki-cloth-outfit-lang",
-    "versionId": "6c654341-866a-416a-9222-c5792653cf46",
+    "versionId": "49b85efe-fa77-41c6-a72a-c65a94901dfd",
     "files": [
       {
         "path": "en-US.json",
@@ -93,7 +93,7 @@
   },
   {
     "id": "infinity_nikki",
-    "versionId": "6c654341-866a-416a-9222-c5792653cf46",
+    "versionId": "758da773-2ec1-441f-92f4-6eb7ff5d4e4d",
     "files": [
       {
         "path": "en-US.bin",
@@ -139,7 +139,7 @@
   },
   {
     "id": "nuan5_database",
-    "versionId": "6c654341-866a-416a-9222-c5792653cf46",
+    "versionId": "f22740be-bb1b-47ac-bbd3-c2558edc1d20",
     "files": [
       {
         "path": "v1.db",
