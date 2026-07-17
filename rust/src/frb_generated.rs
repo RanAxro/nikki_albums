@@ -3423,9 +3423,11 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::ClothParams
             <Option<crate::nuan5_params::structs::nikki_photo_params::DiyData>>::sse_decode(
                 deserializer,
             );
+        let mut var_effectHidden = <Option<bool>>::sse_decode(deserializer);
         return crate::nuan5_params::structs::nikki_photo_params::ClothParams {
             cloth: var_cloth,
             diy: var_diy,
+            effect_hidden: var_effectHidden,
         };
     }
 }
@@ -4976,6 +4978,17 @@ impl SseDecode for Option<crate::nuan5_params::structs::world::Area> {
             return Some(<crate::nuan5_params::structs::world::Area>::sse_decode(
                 deserializer,
             ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<bool>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -7085,6 +7098,7 @@ impl flutter_rust_bridge::IntoDart
         [
             self.cloth.into_into_dart().into_dart(),
             self.diy.into_into_dart().into_dart(),
+            self.effect_hidden.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -9874,6 +9888,7 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::ClothParams
         <Option<crate::nuan5_params::structs::nikki_photo_params::DiyData>>::sse_encode(
             self.diy, serializer,
         );
+        <Option<bool>>::sse_encode(self.effect_hidden, serializer);
     }
 }
 
@@ -11159,6 +11174,16 @@ impl SseEncode for Option<crate::nuan5_params::structs::world::Area> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::nuan5_params::structs::world::Area>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <bool>::sse_encode(value, serializer);
         }
     }
 }

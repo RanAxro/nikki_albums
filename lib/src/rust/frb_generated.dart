@@ -3006,6 +3006,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
   CameraParams dco_decode_box_autoadd_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_camera_params(raw);
@@ -3487,11 +3493,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ClothParams dco_decode_cloth_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
     return ClothParams(
       cloth: dco_decode_cloth(arr[0]),
       diy: dco_decode_opt_box_autoadd_diy_data(arr[1]),
+      effectHidden: dco_decode_opt_box_autoadd_bool(arr[2]),
     );
   }
 
@@ -4495,6 +4502,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_area(raw);
+  }
+
+  @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_bool(raw);
   }
 
   @protected
@@ -5595,6 +5608,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_bool(deserializer));
+  }
+
+  @protected
   CameraParams sse_decode_box_autoadd_camera_params(
     SseDeserializer deserializer,
   ) {
@@ -6186,7 +6205,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_cloth = sse_decode_cloth(deserializer);
     var var_diy = sse_decode_opt_box_autoadd_diy_data(deserializer);
-    return ClothParams(cloth: var_cloth, diy: var_diy);
+    var var_effectHidden = sse_decode_opt_box_autoadd_bool(deserializer);
+    return ClothParams(
+      cloth: var_cloth,
+      diy: var_diy,
+      effectHidden: var_effectHidden,
+    );
   }
 
   @protected
@@ -7423,6 +7447,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_area(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_bool(deserializer));
     } else {
       return null;
     }
@@ -8838,6 +8873,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_camera_params(
     CameraParams self,
     SseSerializer serializer,
@@ -9446,6 +9487,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_cloth(self.cloth, serializer);
     sse_encode_opt_box_autoadd_diy_data(self.diy, serializer);
+    sse_encode_opt_box_autoadd_bool(self.effectHidden, serializer);
   }
 
   @protected
@@ -10502,6 +10544,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_area(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_bool(self, serializer);
     }
   }
 

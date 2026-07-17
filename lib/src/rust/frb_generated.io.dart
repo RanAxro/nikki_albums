@@ -208,6 +208,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Area dco_decode_box_autoadd_area(dynamic raw);
 
   @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw);
+
+  @protected
   CameraParams dco_decode_box_autoadd_camera_params(dynamic raw);
 
   @protected
@@ -715,6 +718,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Area? dco_decode_opt_box_autoadd_area(dynamic raw);
 
   @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw);
+
+  @protected
   CameraParamsMomoHidden? dco_decode_opt_box_autoadd_camera_params_momo_hidden(
     dynamic raw,
   );
@@ -1114,6 +1120,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Area sse_decode_box_autoadd_area(SseDeserializer deserializer);
+
+  @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
 
   @protected
   CameraParams sse_decode_box_autoadd_camera_params(
@@ -1739,6 +1748,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer);
 
   @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
   CameraParamsMomoHidden? sse_decode_opt_box_autoadd_camera_params_momo_hidden(
     SseDeserializer deserializer,
   );
@@ -2225,6 +2237,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_box_autoadd_area(Area self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_camera_params(
@@ -3038,6 +3053,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_camera_params_momo_hidden(

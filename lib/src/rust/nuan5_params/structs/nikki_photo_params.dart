@@ -17,11 +17,12 @@ part 'nikki_photo_params.freezed.dart';
 class ClothParams {
   final Cloth cloth;
   final DiyData? diy;
+  final bool? effectHidden;
 
-  const ClothParams({required this.cloth, this.diy});
+  const ClothParams({required this.cloth, this.diy, this.effectHidden});
 
   @override
-  int get hashCode => cloth.hashCode ^ diy.hashCode;
+  int get hashCode => cloth.hashCode ^ diy.hashCode ^ effectHidden.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -29,7 +30,8 @@ class ClothParams {
       other is ClothParams &&
           runtimeType == other.runtimeType &&
           cloth == other.cloth &&
-          diy == other.diy;
+          diy == other.diy &&
+          effectHidden == other.effectHidden;
 }
 
 class DiyData {

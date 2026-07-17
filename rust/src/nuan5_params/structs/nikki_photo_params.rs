@@ -174,6 +174,7 @@ pub struct DressingParams{
 pub struct ClothParams{
   pub cloth: Cloth,
   pub diy: Option<DiyData>,
+  pub effect_hidden: Option<bool>,
 }
 
 #[derive(Clone)]

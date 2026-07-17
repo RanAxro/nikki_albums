@@ -89,6 +89,9 @@ pub struct Content{
 
   #[serde(rename = "wearingDIYInfos")]
   pub wearing_diy_infos: AdaptiveArray<NikkiDIY>,
+
+  #[serde(rename = "nsHiddenData")]
+  pub ns_hidden_data: Option<IdMap<i64>>,
 }
 
 #[derive(Clone)]
