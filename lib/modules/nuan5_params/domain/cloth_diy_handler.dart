@@ -66,7 +66,7 @@ class ClothDiyHandler{
   }
 
   int getColorPalette(int grid){
-    return grid == -1 ? -1 : 1 + grid ~/ 8;
+    return grid == -1 ? -1 : 1 + (grid - 1) ~/ 8;
   }
 
   int? getColorSwatch(int grid){
