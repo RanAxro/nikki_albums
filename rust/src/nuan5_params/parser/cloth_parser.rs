@@ -32,12 +32,21 @@ pub fn parse_cloth(id: &i64) -> Cloth{
 }
 
 fn get_outfit(outfit_feature: i64, state: u8) -> Option<i64>{
+  if outfit_feature == 9042 && state == 0 {
+    return Some(2018);
+  }
+  if outfit_feature == 304 && state == 7 {
+    return Some(3030403);
+  }
+
   match state{
     0 => Some(1 * OUTFIT_SIZE + outfit_feature),
     2 => Some((1 * OUTFIT_SIZE + outfit_feature) * 100 + 1),
     3 => Some((1 * OUTFIT_SIZE + outfit_feature) * 100 + 2),
     4 => Some((1 * OUTFIT_SIZE + outfit_feature) * 100 + 3),
     5 => Some((1 * OUTFIT_SIZE + outfit_feature) * 100 + 4),
+    6 => Some(3 * OUTFIT_SIZE + outfit_feature),
+    7 => Some(3 * OUTFIT_SIZE + outfit_feature),
     9 => Some(2 * OUTFIT_SIZE + outfit_feature),
     _ => None,
   }
