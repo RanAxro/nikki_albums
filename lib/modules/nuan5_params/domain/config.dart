@@ -50,6 +50,6 @@ extension Nuan5ConfigUtil on Nuan5Config{
     if(item == null){
       return null;
     }
-    return item.baseUrl.replaceAll(item.replace, value);
+    return item.baseUrl.replaceAll(item.replace, value.toString());
   }
 }

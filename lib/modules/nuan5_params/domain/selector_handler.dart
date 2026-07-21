@@ -184,7 +184,7 @@ class MomoPoseSelectorHandler extends SelectorHandler{
 
   @override
   List<int> getValue(Nuan5Config config, int? type){
-    return config.momoPose.keys.toList();
+    return config.table?.momoPose ?? config.momoPose.keys.toList();
   }
 
   @override
