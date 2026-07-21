@@ -1,8 +1,6 @@
 
-import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
-
 import "../domain/camera_params_edit_controller.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
 import "package:nikki_albums/modules/nuan5_params/presentation/selector.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
@@ -20,13 +18,13 @@ import "package:easy_localization/easy_localization.dart";
 class CameraParamsEditPanel extends StatefulWidget{
   final CameraParamsEditController controller;
   final void Function(CameraParamsEditController)? onChanged;
-  final Nuan5DatabaseReaderV1? reader;
+  final Nuan5Config? config;
 
   const CameraParamsEditPanel({
     super.key,
     required this.controller,
     this.onChanged,
-    this.reader,
+    this.config,
   });
 
   @override
@@ -286,7 +284,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
 
   @override
   Widget build(BuildContext context){
-    final Nuan5DatabaseReaderV1? reader = widget.reader;
+    final Nuan5Config? config = widget.config;
 
     return SmoothPointerScroll(
       builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
@@ -413,7 +411,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                 getDisplay: (){
                   return controller.cameraParams.light.whenOrNull(
                     some: (paramId, strength){
-                      final int? id = reader == null ? null : lightSelectorHandler.getInitValue(reader, paramId);
+                      final int? id = config == null ? null : lightSelectorHandler.getInitValue(config, paramId);
                       return id == null ? null : lightSelectorHandler.getValueText(id);
                     },
                   ) ?? trBool(false, index: 2);
@@ -425,10 +423,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                       light: LightParams.none(),
                     );
                   }else{
-                    final res = await reader?.get_(category: Nuan5DatabaseCategory.light, ids: [id]);
-                    final String? paramId = res?[id]?.whenOrNull(
-                      light: (lightData) => lightData.paramId,
-                    );
+                    final String? paramId = config?.light[id]?.paramId;
 
                     if(paramId == null){
                       controller.cameraParams = controller.cameraParams.copyWith(
@@ -452,13 +447,13 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                   );
                 },
                 getImageUrl: (LightParams_Some lightSome){
-                  if(reader == null) return null;
-                  final int? id = lightSelectorHandler.getInitValue(reader, lightSome.id);
-                  return id == null ? null : lightSelectorHandler.getValueImageUrl(reader, id);
+                  if(config == null) return null;
+                  final int? id = lightSelectorHandler.getInitValue(config, lightSome.id);
+                  return id == null ? null : lightSelectorHandler.getValueImageUrl(config, id);
                 },
                 getCacheKey: (LightParams_Some lightSome){
-                  if(reader == null) return null;
-                  return lightSelectorHandler.getInitValue(reader, lightSome.id)?.toString();
+                  if(config == null) return null;
+                  return lightSelectorHandler.getInitValue(config, lightSome.id)?.toString();
                 },
               ),
 
@@ -469,7 +464,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                 getDisplay: (){
                   return controller.cameraParams.filter.whenOrNull(
                     some: (paramId, strength){
-                      final int? id = reader == null ? null : filterSelectorHandler.getInitValue(reader, paramId);
+                      final int? id = config == null ? null : filterSelectorHandler.getInitValue(config, paramId);
                       return id == null ? null : filterSelectorHandler.getValueText(id);
                     },
                   ) ?? trBool(false, index: 2);
@@ -481,10 +476,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                       filter: FilterParams.none(),
                     );
                   }else{
-                    final res = await reader?.get_(category: Nuan5DatabaseCategory.filter, ids: [id]);
-                    final String? paramId = res?[id]?.whenOrNull(
-                      filter: (filterData) => filterData.paramId,
-                    );
+                    final String? paramId = config?.filter[id]?.paramId;
 
                     if(paramId == null){
                       controller.cameraParams = controller.cameraParams.copyWith(
@@ -508,13 +500,13 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                   );
                 },
                 getImageUrl: (FilterParams_Some filterSome){
-                  if(reader == null) return null;
-                  final int? id = filterSelectorHandler.getInitValue(reader, filterSome.id);
-                  return id == null ? null : filterSelectorHandler.getValueImageUrl(reader, id);
+                  if(config == null) return null;
+                  final int? id = filterSelectorHandler.getInitValue(config, filterSome.id);
+                  return id == null ? null : filterSelectorHandler.getValueImageUrl(config, id);
                 },
                 getCacheKey: (FilterParams_Some filterSome){
-                  if(reader == null) return null;
-                  return filterSelectorHandler.getInitValue(reader, filterSome.id)?.toString();
+                  if(config == null) return null;
+                  return filterSelectorHandler.getInitValue(config, filterSome.id)?.toString();
                 },
               ),
 
@@ -572,8 +564,8 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                               );
                             },
                             getImageUrl: (int momoPose){
-                              if(reader == null) return null;
-                              return momoPoseSelectorHandler.getValueImageUrl(reader, momoPose);
+                              if(config == null) return null;
+                              return momoPoseSelectorHandler.getValueImageUrl(config, momoPose);
                             },
                             getCacheKey: (int momoPose) => momoPose.toString(),
                           ),

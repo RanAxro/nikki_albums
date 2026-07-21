@@ -1,5 +1,5 @@
 
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
@@ -13,13 +13,13 @@ import "package:url_launcher/url_launcher_string.dart";
 class RichBuildingParamsPanel extends StatelessWidget{
   final String shareCode;
   final RichBuildingParams richBuildingParams;
-  final Nuan5DatabaseReaderV1? reader;
+  final Nuan5Config? config;
 
   const RichBuildingParamsPanel({
     super.key,
     required this.shareCode,
     required this.richBuildingParams,
-    required this.reader,
+    required this.config,
   });
 
   @override

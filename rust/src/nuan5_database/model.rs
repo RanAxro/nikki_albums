@@ -1,25 +1,83 @@
+use std::collections::HashMap;
 use prost::Message;
 
-pub enum Nuan5DatabaseCategory{
-  Light = 1,
-  LightType = 2,
-  Filter = 3,
-  FilterType = 4,
-  MomoPose = 5,
-  ClothDyeArea = 6,
-  ClothDyePalette = 7,
-  ClothDiySwatchColor = 8,
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5Config{
+  #[prost(message, tag = "20000")]
+  pub table: Option<Nuan5Table>,
+
+  #[prost(message, tag = "20001")]
+  pub network_image: Option<Nuan5NetworkImage>,
+
+  #[prost(map = "int32, message", tag = "1")]
+  pub light: HashMap<i32, Nuan5Light>,
+
+  #[prost(map = "int32, message", tag = "2")]
+  pub light_type: HashMap<i32, Nuan5LightType>,
+
+  #[prost(map = "int32, message", tag = "3")]
+  pub filter: HashMap<i32, Nuan5Filter>,
+
+  #[prost(map = "int32, message", tag = "4")]
+  pub filter_type: HashMap<i32, Nuan5FilterType>,
+
+  #[prost(map = "int32, message", tag = "5")]
+  pub momo_pose: HashMap<i32, Nuan5MomoPose>,
+
+  #[prost(map = "int32, message", tag = "6")]
+  pub cloth_dye_area: HashMap<i32, Nuan5ClothDyeArea>,
+
+  #[prost(map = "int32, message", tag = "7")]
+  pub cloth_dye_palette: HashMap<i32, Nuan5ClothDyePalette>,
+
+  #[prost(map = "int32, message", tag = "8")]
+  pub cloth_diy_swatch_color: HashMap<i32, Nuan5ClothDiySwatchColor>,
 }
 
-pub enum Nuan5DatabaseItem{
-  Light(Nuan5Light),
-  LightType(Nuan5LightType),
-  Filter(Nuan5Filter),
-  FilterType(Nuan5FilterType),
-  MomoPose(Nuan5MomoPose),
-  ClothDyeArea(Nuan5ClothDyeArea),
-  ClothDyePalette(Nuan5ClothDyePalette),
-  ClothDiySwatchColor(Nuan5ClothDiySwatchColor),
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5Table{
+  #[prost(int32, repeated, tag = "1")]
+  pub light_type: Vec<i32>,
+
+  #[prost(int32, repeated, tag = "2")]
+  pub filter_type: Vec<i32>,
+
+  #[prost(int32, repeated, tag = "3")]
+  pub momo_pose: Vec<i32>,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5NetworkImage{
+  #[prost(message, tag = "1")]
+  pub light: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "2")]
+  pub filter: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "3")]
+  pub momo_pose: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "4")]
+  pub cloth: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "5")]
+  pub cloth_outfit: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "6")]
+  pub diy_pattern: Option<Nuan5NetworkImageItem>,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5NetworkImageItem{
+  #[prost(string, tag = "1")]
+  pub base_url: String,
+
+  #[prost(string, tag = "2")]
+  pub replace: String,
 }
 
 #[derive(Clone, PartialEq)]

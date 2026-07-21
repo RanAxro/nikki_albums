@@ -11,7 +11,6 @@ import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
 import 'nuan5_database/model.dart';
 import 'nuan5_database/nuan5_database.dart';
-import 'nuan5_database/reader_v1.dart';
 import 'nuan5_params/decode.dart';
 import 'nuan5_params/decrypt.dart';
 import 'nuan5_params/encode.dart';
@@ -92,7 +91,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -70501186;
+  int get rustContentHash => 1549207290;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -130,59 +129,6 @@ abstract class RustLibApi extends BaseApi {
 
   MediaKey crateNuan5ParamsDecryptMediaKeyFromStrBytes({
     required List<int> bytes,
-  });
-
-  Future<void> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Close({
-    required Nuan5DatabaseReaderV1 that,
-  });
-
-  Future<Map<int, Nuan5DatabaseItem>>
-  crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Get({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  });
-
-  Map<int, Nuan5DatabaseItem>
-  crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSync({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  });
-
-  Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Has({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-  });
-
-  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSync({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-  });
-
-  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen({
-    required Nuan5DatabaseReaderV1 that,
-  });
-
-  Future<Int32List> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1List({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  });
-
-  Int32List crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSync({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  });
-
-  Nuan5DatabaseReaderV1 crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1New();
-
-  Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Open({
-    required Nuan5DatabaseReaderV1 that,
-    required String path,
   });
 
   Future<ClothDiyParam?> crateNuan5ParamsDecodeClothDiyDeFile({
@@ -350,7 +296,7 @@ abstract class RustLibApi extends BaseApi {
     required List<int> bytes,
   });
 
-  Future<Uint8List?> crateNuan5DatabaseReaderV1Nuan5DataDecrypt({
+  Future<Uint8List?> crateNuan5DatabaseNuan5DatabaseNuan5DatabaseDecrypt({
     required String input,
   });
 
@@ -361,6 +307,12 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Nuan5ClothDyePalette>
   crateNuan5DatabaseModelNuan5ClothDyePaletteDefault();
+
+  Future<Nuan5Config> crateNuan5DatabaseModelNuan5ConfigDefault();
+
+  Future<Nuan5Config?> crateNuan5DatabaseModelNuan5ConfigTryFrom({
+    required String path,
+  });
 
   Future<Nuan5DiyPattern> crateNuan5DatabaseModelNuan5DiyPatternDefault();
 
@@ -373,6 +325,13 @@ abstract class RustLibApi extends BaseApi {
   Future<Nuan5LightType> crateNuan5DatabaseModelNuan5LightTypeDefault();
 
   Future<Nuan5MomoPose> crateNuan5DatabaseModelNuan5MomoPoseDefault();
+
+  Future<Nuan5NetworkImage> crateNuan5DatabaseModelNuan5NetworkImageDefault();
+
+  Future<Nuan5NetworkImageItem>
+  crateNuan5DatabaseModelNuan5NetworkImageItemDefault();
+
+  Future<Nuan5Table> crateNuan5DatabaseModelNuan5TableDefault();
 
   Future<Uint8List> crateSerdeConfigSeSerializeGameConfig({
     required GameConfig value,
@@ -420,15 +379,6 @@ abstract class RustLibApi extends BaseApi {
   get rust_arc_decrement_strong_count_MediaKey;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_MediaKeyPtr;
-
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_Nuan5DatabaseReaderV1;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_Nuan5DatabaseReaderV1;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_Nuan5DatabaseReaderV1Ptr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -672,378 +622,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<void> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Close({
-    required Nuan5DatabaseReaderV1 that,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 9,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_unit,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1CloseConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1CloseConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_close",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<Map<int, Nuan5DatabaseItem>>
-  crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Get({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_nuan_5_database_category(category, serializer);
-          sse_encode_list_prim_i_32_loose(ids, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 10,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_Map_i_32_nuan_5_database_item_None,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetConstMeta,
-        argValues: [that, category, ids],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_get",
-        argNames: ["that", "category", "ids"],
-      );
-
-  @override
-  Map<int, Nuan5DatabaseItem>
-  crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSync({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_nuan_5_database_category(category, serializer);
-          sse_encode_list_prim_i_32_loose(ids, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_Map_i_32_nuan_5_database_item_None,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSyncConstMeta,
-        argValues: [that, category, ids],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSyncConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_get_sync",
-        argNames: ["that", "category", "ids"],
-      );
-
-  @override
-  Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Has({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_nuan_5_database_category(category, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 12,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_bool,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasConstMeta,
-        argValues: [that, category],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_has",
-        argNames: ["that", "category"],
-      );
-
-  @override
-  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSync({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_nuan_5_database_category(category, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_bool,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSyncConstMeta,
-        argValues: [that, category],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSyncConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_has_sync",
-        argNames: ["that", "category"],
-      );
-
-  @override
-  bool crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen({
-    required Nuan5DatabaseReaderV1 that,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_bool,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpenConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpenConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_is_open",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<Int32List> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1List({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_nuan_5_database_category(category, serializer);
-          sse_encode_usize(from, serializer);
-          sse_encode_isize(max, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 15,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_list_prim_i_32_strict,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListConstMeta,
-        argValues: [that, category, from, max],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_list",
-        argNames: ["that", "category", "from", "max"],
-      );
-
-  @override
-  Int32List crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSync({
-    required Nuan5DatabaseReaderV1 that,
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_nuan_5_database_category(category, serializer);
-          sse_encode_usize(from, serializer);
-          sse_encode_isize(max, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_list_prim_i_32_strict,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSyncConstMeta,
-        argValues: [that, category, from, max],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSyncConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_list_sync",
-        argNames: ["that", "category", "from", "max"],
-      );
-
-  @override
-  Nuan5DatabaseReaderV1 crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1New() {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1NewConstMeta,
-        argValues: [],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1NewConstMeta =>
-      const TaskConstMeta(debugName: "Nuan5DatabaseReaderV1_new", argNames: []);
-
-  @override
-  Future<bool> crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Open({
-    required Nuan5DatabaseReaderV1 that,
-    required String path,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-            that,
-            serializer,
-          );
-          sse_encode_String(path, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 18,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_bool,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1OpenConstMeta,
-        argValues: [that, path],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1OpenConstMeta =>
-      const TaskConstMeta(
-        debugName: "Nuan5DatabaseReaderV1_open",
-        argNames: ["that", "path"],
-      );
-
-  @override
   Future<ClothDiyParam?> crateNuan5ParamsDecodeClothDiyDeFile({
     required ClothDiyParamType paramType,
     required String path,
@@ -1057,7 +635,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 9,
             port: port_,
           );
         },
@@ -1095,7 +673,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 26,
+            funcId: 10,
             port: port_,
           );
         },
@@ -1131,7 +709,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 27,
+            funcId: 11,
             port: port_,
           );
         },
@@ -1166,7 +744,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 28,
+            funcId: 12,
             port: port_,
           );
         },
@@ -1201,7 +779,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 29,
+            funcId: 13,
             port: port_,
           );
         },
@@ -1234,7 +812,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 30,
+            funcId: 14,
             port: port_,
           );
         },
@@ -1269,7 +847,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 31,
+            funcId: 15,
             port: port_,
           );
         },
@@ -1302,7 +880,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 32,
+            funcId: 16,
             port: port_,
           );
         },
@@ -1335,7 +913,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 33,
+            funcId: 17,
             port: port_,
           );
         },
@@ -1368,7 +946,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 34,
+            funcId: 18,
             port: port_,
           );
         },
@@ -1401,7 +979,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 35,
+            funcId: 19,
             port: port_,
           );
         },
@@ -1434,7 +1012,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 36,
+            funcId: 20,
             port: port_,
           );
         },
@@ -1467,7 +1045,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 37,
+            funcId: 21,
             port: port_,
           );
         },
@@ -1504,7 +1082,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 38,
+            funcId: 22,
             port: port_,
           );
         },
@@ -1541,7 +1119,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 39,
+            funcId: 23,
             port: port_,
           );
         },
@@ -1578,7 +1156,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 40,
+            funcId: 24,
             port: port_,
           );
         },
@@ -1606,7 +1184,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 41)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 25)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1639,7 +1217,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 42,
+            funcId: 26,
             port: port_,
           );
         },
@@ -1675,7 +1253,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 43,
+            funcId: 27,
             port: port_,
           );
         },
@@ -1705,7 +1283,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 44,
+            funcId: 28,
             port: port_,
           );
         },
@@ -1742,7 +1320,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 45,
+            funcId: 29,
             port: port_,
           );
         },
@@ -1782,7 +1360,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 46,
+            funcId: 30,
             port: port_,
           );
         },
@@ -1822,7 +1400,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 47,
+            funcId: 31,
             port: port_,
           );
         },
@@ -1859,7 +1437,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 48)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 32)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_media_custom_data,
@@ -1903,7 +1481,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 49,
+              funcId: 33,
               port: port_,
             );
           },
@@ -1942,7 +1520,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 50)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 34)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1982,7 +1560,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 51,
+            funcId: 35,
             port: port_,
           );
         },
@@ -2019,7 +1597,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 52)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 36)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -2065,7 +1643,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 53,
+              funcId: 37,
               port: port_,
             );
           },
@@ -2109,7 +1687,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 54,
+            funcId: 38,
             port: port_,
           );
         },
@@ -2155,7 +1733,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 55,
+              funcId: 39,
               port: port_,
             );
           },
@@ -2194,7 +1772,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 56)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 40)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -2222,7 +1800,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_list_prim_u_8_loose(bytes, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 57)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 41)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -2244,7 +1822,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<Uint8List?> crateNuan5DatabaseReaderV1Nuan5DataDecrypt({
+  Future<Uint8List?> crateNuan5DatabaseNuan5DatabaseNuan5DatabaseDecrypt({
     required String input,
   }) {
     return handler.executeNormal(
@@ -2255,7 +1833,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 58,
+            funcId: 42,
             port: port_,
           );
         },
@@ -2263,15 +1841,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_opt_list_prim_u_8_strict,
           decodeErrorData: null,
         ),
-        constMeta: kCrateNuan5DatabaseReaderV1Nuan5DataDecryptConstMeta,
+        constMeta:
+            kCrateNuan5DatabaseNuan5DatabaseNuan5DatabaseDecryptConstMeta,
         argValues: [input],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateNuan5DatabaseReaderV1Nuan5DataDecryptConstMeta =>
-      const TaskConstMeta(debugName: "nuan5_data_decrypt", argNames: ["input"]);
+  TaskConstMeta
+  get kCrateNuan5DatabaseNuan5DatabaseNuan5DatabaseDecryptConstMeta =>
+      const TaskConstMeta(
+        debugName: "nuan5_database_decrypt",
+        argNames: ["input"],
+      );
 
   @override
   Future<Nuan5ClothDiySwatchColor>
@@ -2283,7 +1866,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 59,
+            funcId: 43,
             port: port_,
           );
         },
@@ -2315,7 +1898,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 60,
+            funcId: 44,
             port: port_,
           );
         },
@@ -2346,7 +1929,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 61,
+            funcId: 45,
             port: port_,
           );
         },
@@ -2369,6 +1952,66 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Nuan5Config> crateNuan5DatabaseModelNuan5ConfigDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 46,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_config,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5ConfigDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5ConfigDefaultConstMeta =>
+      const TaskConstMeta(debugName: "nuan_5_config_default", argNames: []);
+
+  @override
+  Future<Nuan5Config?> crateNuan5DatabaseModelNuan5ConfigTryFrom({
+    required String path,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(path, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 47,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_nuan_5_config,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5ConfigTryFromConstMeta,
+        argValues: [path],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5ConfigTryFromConstMeta =>
+      const TaskConstMeta(
+        debugName: "nuan_5_config_try_from",
+        argNames: ["path"],
+      );
+
+  @override
   Future<Nuan5DiyPattern> crateNuan5DatabaseModelNuan5DiyPatternDefault() {
     return handler.executeNormal(
       NormalTask(
@@ -2377,7 +2020,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 62,
+            funcId: 48,
             port: port_,
           );
         },
@@ -2407,7 +2050,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 63,
+            funcId: 49,
             port: port_,
           );
         },
@@ -2434,7 +2077,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 64,
+            funcId: 50,
             port: port_,
           );
         },
@@ -2464,7 +2107,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 65,
+            funcId: 51,
             port: port_,
           );
         },
@@ -2491,7 +2134,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 66,
+            funcId: 52,
             port: port_,
           );
         },
@@ -2518,7 +2161,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 67,
+            funcId: 53,
             port: port_,
           );
         },
@@ -2537,6 +2180,96 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "nuan_5_momo_pose_default", argNames: []);
 
   @override
+  Future<Nuan5NetworkImage> crateNuan5DatabaseModelNuan5NetworkImageDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 54,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_network_image,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5NetworkImageDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5NetworkImageDefaultConstMeta =>
+      const TaskConstMeta(
+        debugName: "nuan_5_network_image_default",
+        argNames: [],
+      );
+
+  @override
+  Future<Nuan5NetworkImageItem>
+  crateNuan5DatabaseModelNuan5NetworkImageItemDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 55,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_network_image_item,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5DatabaseModelNuan5NetworkImageItemDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5DatabaseModelNuan5NetworkImageItemDefaultConstMeta =>
+      const TaskConstMeta(
+        debugName: "nuan_5_network_image_item_default",
+        argNames: [],
+      );
+
+  @override
+  Future<Nuan5Table> crateNuan5DatabaseModelNuan5TableDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 56,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_table,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5TableDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5TableDefaultConstMeta =>
+      const TaskConstMeta(debugName: "nuan_5_table_default", argNames: []);
+
+  @override
   Future<Uint8List> crateSerdeConfigSeSerializeGameConfig({
     required GameConfig value,
     required bool pretty,
@@ -2550,7 +2283,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 68,
+            funcId: 57,
             port: port_,
           );
         },
@@ -2585,7 +2318,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 69,
+            funcId: 58,
             port: port_,
           );
         },
@@ -2620,7 +2353,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 70,
+            funcId: 59,
             port: port_,
           );
         },
@@ -2649,7 +2382,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 60)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -2674,7 +2407,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(key, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 61)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_translate_text,
@@ -2718,14 +2451,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get rust_arc_decrement_strong_count_MediaKey => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey;
 
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_Nuan5DatabaseReaderV1 => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_Nuan5DatabaseReaderV1 => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1;
-
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -2760,24 +2485,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseReaderV1
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  Nuan5DatabaseReaderV1
-  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   ClothDiyShareCode
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     dynamic raw,
@@ -2805,15 +2512,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseReaderV1
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
@@ -2822,12 +2520,90 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Map<int, Nuan5DatabaseItem> dco_decode_Map_i_32_nuan_5_database_item_None(
+  Map<int, Nuan5ClothDiySwatchColor>
+  dco_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5ClothDyeArea> dco_decode_Map_i_32_nuan_5_cloth_dye_area_None(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_database_item(
+      dco_decode_list_record_i_32_nuan_5_cloth_dye_area(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5ClothDyePalette>
+  dco_decode_Map_i_32_nuan_5_cloth_dye_palette_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5Filter> dco_decode_Map_i_32_nuan_5_filter_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_filter(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5FilterType> dco_decode_Map_i_32_nuan_5_filter_type_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_filter_type(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5Light> dco_decode_Map_i_32_nuan_5_light_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_light(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5LightType> dco_decode_Map_i_32_nuan_5_light_type_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_light_type(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5MomoPose> dco_decode_Map_i_32_nuan_5_momo_pose_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_momo_pose(
         raw,
       ).map((e) => MapEntry(e.$1, e.$2)),
     );
@@ -2877,15 +2653,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseReaderV1
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   RustStreamSink<MediaCustomDataResult>
   dco_decode_StreamSink_media_custom_data_result_Sse(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -2911,12 +2678,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
-  }
-
-  @protected
-  Nuan5DatabaseReader dco_decode_TraitDef_Nuan5DatabaseReader(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    throw UnimplementedError();
   }
 
   @protected
@@ -3174,55 +2935,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5ClothDiySwatchColor dco_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(
+  Nuan5Config dco_decode_box_autoadd_nuan_5_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nuan_5_config(raw);
+  }
+
+  @protected
+  Nuan5NetworkImage dco_decode_box_autoadd_nuan_5_network_image(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nuan_5_network_image(raw);
+  }
+
+  @protected
+  Nuan5NetworkImageItem dco_decode_box_autoadd_nuan_5_network_image_item(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_cloth_diy_swatch_color(raw);
+    return dco_decode_nuan_5_network_image_item(raw);
   }
 
   @protected
-  Nuan5ClothDyeArea dco_decode_box_autoadd_nuan_5_cloth_dye_area(dynamic raw) {
+  Nuan5Table dco_decode_box_autoadd_nuan_5_table(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_cloth_dye_area(raw);
-  }
-
-  @protected
-  Nuan5ClothDyePalette dco_decode_box_autoadd_nuan_5_cloth_dye_palette(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_cloth_dye_palette(raw);
-  }
-
-  @protected
-  Nuan5Filter dco_decode_box_autoadd_nuan_5_filter(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_filter(raw);
-  }
-
-  @protected
-  Nuan5FilterType dco_decode_box_autoadd_nuan_5_filter_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_filter_type(raw);
-  }
-
-  @protected
-  Nuan5Light dco_decode_box_autoadd_nuan_5_light(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_light(raw);
-  }
-
-  @protected
-  Nuan5LightType dco_decode_box_autoadd_nuan_5_light_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_light_type(raw);
-  }
-
-  @protected
-  Nuan5MomoPose dco_decode_box_autoadd_nuan_5_momo_pose(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nuan_5_momo_pose(raw);
+    return dco_decode_nuan_5_table(raw);
   }
 
   @protected
@@ -3829,12 +3564,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PlatformInt64 dco_decode_isize(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dcoDecodeI64(raw);
-  }
-
-  @protected
   LightParams dco_decode_light_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -3961,12 +3690,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<int> dco_decode_list_prim_i_32_loose(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw as List<int>;
-  }
-
-  @protected
   Int32List dco_decode_list_prim_i_32_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Int32List;
@@ -3991,11 +3714,79 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<(int, Nuan5DatabaseItem)>
-  dco_decode_list_record_i_32_nuan_5_database_item(dynamic raw) {
+  List<(int, Nuan5ClothDiySwatchColor)>
+  dco_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>)
-        .map(dco_decode_record_i_32_nuan_5_database_item)
+        .map(dco_decode_record_i_32_nuan_5_cloth_diy_swatch_color)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5ClothDyeArea)>
+  dco_decode_list_record_i_32_nuan_5_cloth_dye_area(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_cloth_dye_area)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5ClothDyePalette)>
+  dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_cloth_dye_palette)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5Filter)> dco_decode_list_record_i_32_nuan_5_filter(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_filter)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5FilterType)> dco_decode_list_record_i_32_nuan_5_filter_type(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_filter_type)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5Light)> dco_decode_list_record_i_32_nuan_5_light(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_light)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5LightType)> dco_decode_list_record_i_32_nuan_5_light_type(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_light_type)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5MomoPose)> dco_decode_list_record_i_32_nuan_5_momo_pose(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_momo_pose)
         .toList();
   }
 
@@ -4355,50 +4146,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseCategory dco_decode_nuan_5_database_category(dynamic raw) {
+  Nuan5Config dco_decode_nuan_5_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Nuan5DatabaseCategory.values[raw as int];
-  }
-
-  @protected
-  Nuan5DatabaseItem dco_decode_nuan_5_database_item(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return Nuan5DatabaseItem_Light(
-          dco_decode_box_autoadd_nuan_5_light(raw[1]),
-        );
-      case 1:
-        return Nuan5DatabaseItem_LightType(
-          dco_decode_box_autoadd_nuan_5_light_type(raw[1]),
-        );
-      case 2:
-        return Nuan5DatabaseItem_Filter(
-          dco_decode_box_autoadd_nuan_5_filter(raw[1]),
-        );
-      case 3:
-        return Nuan5DatabaseItem_FilterType(
-          dco_decode_box_autoadd_nuan_5_filter_type(raw[1]),
-        );
-      case 4:
-        return Nuan5DatabaseItem_MomoPose(
-          dco_decode_box_autoadd_nuan_5_momo_pose(raw[1]),
-        );
-      case 5:
-        return Nuan5DatabaseItem_ClothDyeArea(
-          dco_decode_box_autoadd_nuan_5_cloth_dye_area(raw[1]),
-        );
-      case 6:
-        return Nuan5DatabaseItem_ClothDyePalette(
-          dco_decode_box_autoadd_nuan_5_cloth_dye_palette(raw[1]),
-        );
-      case 7:
-        return Nuan5DatabaseItem_ClothDiySwatchColor(
-          dco_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(raw[1]),
-        );
-      default:
-        throw Exception("unreachable");
-    }
+    final arr = raw as List<dynamic>;
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    return Nuan5Config(
+      table: dco_decode_opt_box_autoadd_nuan_5_table(arr[0]),
+      networkImage: dco_decode_opt_box_autoadd_nuan_5_network_image(arr[1]),
+      light: dco_decode_Map_i_32_nuan_5_light_None(arr[2]),
+      lightType: dco_decode_Map_i_32_nuan_5_light_type_None(arr[3]),
+      filter: dco_decode_Map_i_32_nuan_5_filter_None(arr[4]),
+      filterType: dco_decode_Map_i_32_nuan_5_filter_type_None(arr[5]),
+      momoPose: dco_decode_Map_i_32_nuan_5_momo_pose_None(arr[6]),
+      clothDyeArea: dco_decode_Map_i_32_nuan_5_cloth_dye_area_None(arr[7]),
+      clothDyePalette: dco_decode_Map_i_32_nuan_5_cloth_dye_palette_None(
+        arr[8],
+      ),
+      clothDiySwatchColor:
+          dco_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(arr[9]),
+    );
   }
 
   @protected
@@ -4459,6 +4226,47 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return Nuan5MomoPose(stringId: dco_decode_String(arr[0]));
+  }
+
+  @protected
+  Nuan5NetworkImage dco_decode_nuan_5_network_image(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return Nuan5NetworkImage(
+      light: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[0]),
+      filter: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[1]),
+      momoPose: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[2]),
+      cloth: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[3]),
+      clothOutfit: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[4]),
+      diyPattern: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[5]),
+    );
+  }
+
+  @protected
+  Nuan5NetworkImageItem dco_decode_nuan_5_network_image_item(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Nuan5NetworkImageItem(
+      baseUrl: dco_decode_String(arr[0]),
+      replace: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
+  Nuan5Table dco_decode_nuan_5_table(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return Nuan5Table(
+      lightType: dco_decode_list_prim_i_32_strict(arr[0]),
+      filterType: dco_decode_list_prim_i_32_strict(arr[1]),
+      momoPose: dco_decode_list_prim_i_32_strict(arr[2]),
+    );
   }
 
   @protected
@@ -4606,6 +4414,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   NikkiParams? dco_decode_opt_box_autoadd_nikki_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_nikki_params(raw);
+  }
+
+  @protected
+  Nuan5Config? dco_decode_opt_box_autoadd_nuan_5_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_nuan_5_config(raw);
+  }
+
+  @protected
+  Nuan5NetworkImage? dco_decode_opt_box_autoadd_nuan_5_network_image(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_nuan_5_network_image(raw);
+  }
+
+  @protected
+  Nuan5NetworkImageItem? dco_decode_opt_box_autoadd_nuan_5_network_image_item(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_nuan_5_network_image_item(raw);
+  }
+
+  @protected
+  Nuan5Table? dco_decode_opt_box_autoadd_nuan_5_table(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_nuan_5_table(raw);
   }
 
   @protected
@@ -4876,7 +4716,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  (int, Nuan5DatabaseItem) dco_decode_record_i_32_nuan_5_database_item(
+  (int, Nuan5ClothDiySwatchColor)
+  dco_decode_record_i_32_nuan_5_cloth_diy_swatch_color(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_i_32(arr[0]),
+      dco_decode_nuan_5_cloth_diy_swatch_color(arr[1]),
+    );
+  }
+
+  @protected
+  (int, Nuan5ClothDyeArea) dco_decode_record_i_32_nuan_5_cloth_dye_area(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -4884,7 +4738,74 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 2) {
       throw Exception('Expected 2 elements, got ${arr.length}');
     }
-    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_database_item(arr[1]));
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_cloth_dye_area(arr[1]));
+  }
+
+  @protected
+  (int, Nuan5ClothDyePalette) dco_decode_record_i_32_nuan_5_cloth_dye_palette(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_i_32(arr[0]),
+      dco_decode_nuan_5_cloth_dye_palette(arr[1]),
+    );
+  }
+
+  @protected
+  (int, Nuan5Filter) dco_decode_record_i_32_nuan_5_filter(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_filter(arr[1]));
+  }
+
+  @protected
+  (int, Nuan5FilterType) dco_decode_record_i_32_nuan_5_filter_type(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_filter_type(arr[1]));
+  }
+
+  @protected
+  (int, Nuan5Light) dco_decode_record_i_32_nuan_5_light(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_light(arr[1]));
+  }
+
+  @protected
+  (int, Nuan5LightType) dco_decode_record_i_32_nuan_5_light_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_light_type(arr[1]));
+  }
+
+  @protected
+  (int, Nuan5MomoPose) dco_decode_record_i_32_nuan_5_momo_pose(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_momo_pose(arr[1]));
   }
 
   @protected
@@ -5331,30 +5252,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseReaderV1
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  Nuan5DatabaseReaderV1
-  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   ClothDiyShareCode
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     SseDeserializer deserializer,
@@ -5391,18 +5288,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseReaderV1
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   Map<String, bool> sse_decode_Map_String_bool_None(
     SseDeserializer deserializer,
   ) {
@@ -5412,11 +5297,80 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Map<int, Nuan5DatabaseItem> sse_decode_Map_i_32_nuan_5_database_item_None(
+  Map<int, Nuan5ClothDiySwatchColor>
+  sse_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_list_record_i_32_nuan_5_database_item(deserializer);
+    var inner = sse_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
+      deserializer,
+    );
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5ClothDyeArea> sse_decode_Map_i_32_nuan_5_cloth_dye_area_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_cloth_dye_area(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5ClothDyePalette>
+  sse_decode_Map_i_32_nuan_5_cloth_dye_palette_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_cloth_dye_palette(
+      deserializer,
+    );
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5Filter> sse_decode_Map_i_32_nuan_5_filter_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_filter(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5FilterType> sse_decode_Map_i_32_nuan_5_filter_type_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_filter_type(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5Light> sse_decode_Map_i_32_nuan_5_light_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_light(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5LightType> sse_decode_Map_i_32_nuan_5_light_type_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_light_type(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5MomoPose> sse_decode_Map_i_32_nuan_5_momo_pose_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_momo_pose(deserializer);
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
   }
 
@@ -5469,18 +5423,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return MediaKeyImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  Nuan5DatabaseReaderV1
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return Nuan5DatabaseReaderV1Impl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -5804,65 +5746,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5ClothDiySwatchColor sse_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(
+  Nuan5Config sse_decode_box_autoadd_nuan_5_config(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_cloth_diy_swatch_color(deserializer));
+    return (sse_decode_nuan_5_config(deserializer));
   }
 
   @protected
-  Nuan5ClothDyeArea sse_decode_box_autoadd_nuan_5_cloth_dye_area(
+  Nuan5NetworkImage sse_decode_box_autoadd_nuan_5_network_image(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_cloth_dye_area(deserializer));
+    return (sse_decode_nuan_5_network_image(deserializer));
   }
 
   @protected
-  Nuan5ClothDyePalette sse_decode_box_autoadd_nuan_5_cloth_dye_palette(
+  Nuan5NetworkImageItem sse_decode_box_autoadd_nuan_5_network_image_item(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_cloth_dye_palette(deserializer));
+    return (sse_decode_nuan_5_network_image_item(deserializer));
   }
 
   @protected
-  Nuan5Filter sse_decode_box_autoadd_nuan_5_filter(
-    SseDeserializer deserializer,
-  ) {
+  Nuan5Table sse_decode_box_autoadd_nuan_5_table(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_filter(deserializer));
-  }
-
-  @protected
-  Nuan5FilterType sse_decode_box_autoadd_nuan_5_filter_type(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_filter_type(deserializer));
-  }
-
-  @protected
-  Nuan5Light sse_decode_box_autoadd_nuan_5_light(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_light(deserializer));
-  }
-
-  @protected
-  Nuan5LightType sse_decode_box_autoadd_nuan_5_light_type(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_light_type(deserializer));
-  }
-
-  @protected
-  Nuan5MomoPose sse_decode_box_autoadd_nuan_5_momo_pose(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nuan_5_momo_pose(deserializer));
+    return (sse_decode_nuan_5_table(deserializer));
   }
 
   @protected
@@ -6588,12 +6498,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PlatformInt64 sse_decode_isize(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getPlatformInt64();
-  }
-
-  @protected
   LightParams sse_decode_light_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -6804,13 +6708,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<int> sse_decode_list_prim_i_32_loose(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var len_ = sse_decode_i_32(deserializer);
-    return deserializer.buffer.getInt32List(len_);
-  }
-
-  @protected
   Int32List sse_decode_list_prim_i_32_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
@@ -6839,16 +6736,118 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<(int, Nuan5DatabaseItem)>
-  sse_decode_list_record_i_32_nuan_5_database_item(
+  List<(int, Nuan5ClothDiySwatchColor)>
+  sse_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <(int, Nuan5DatabaseItem)>[];
+    var ans_ = <(int, Nuan5ClothDiySwatchColor)>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_record_i_32_nuan_5_database_item(deserializer));
+      ans_.add(
+        sse_decode_record_i_32_nuan_5_cloth_diy_swatch_color(deserializer),
+      );
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5ClothDyeArea)>
+  sse_decode_list_record_i_32_nuan_5_cloth_dye_area(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5ClothDyeArea)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_cloth_dye_area(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5ClothDyePalette)>
+  sse_decode_list_record_i_32_nuan_5_cloth_dye_palette(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5ClothDyePalette)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_cloth_dye_palette(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5Filter)> sse_decode_list_record_i_32_nuan_5_filter(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5Filter)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_filter(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5FilterType)> sse_decode_list_record_i_32_nuan_5_filter_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5FilterType)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_filter_type(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5Light)> sse_decode_list_record_i_32_nuan_5_light(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5Light)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_light(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5LightType)> sse_decode_list_record_i_32_nuan_5_light_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5LightType)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_light_type(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5MomoPose)> sse_decode_list_record_i_32_nuan_5_momo_pose(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5MomoPose)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_momo_pose(deserializer));
     }
     return ans_;
   }
@@ -7291,57 +7290,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5DatabaseCategory sse_decode_nuan_5_database_category(
-    SseDeserializer deserializer,
-  ) {
+  Nuan5Config sse_decode_nuan_5_config(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Nuan5DatabaseCategory.values[inner];
-  }
-
-  @protected
-  Nuan5DatabaseItem sse_decode_nuan_5_database_item(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_light(deserializer);
-        return Nuan5DatabaseItem_Light(var_field0);
-      case 1:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_light_type(deserializer);
-        return Nuan5DatabaseItem_LightType(var_field0);
-      case 2:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_filter(deserializer);
-        return Nuan5DatabaseItem_Filter(var_field0);
-      case 3:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_filter_type(
-          deserializer,
-        );
-        return Nuan5DatabaseItem_FilterType(var_field0);
-      case 4:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_momo_pose(deserializer);
-        return Nuan5DatabaseItem_MomoPose(var_field0);
-      case 5:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_cloth_dye_area(
-          deserializer,
-        );
-        return Nuan5DatabaseItem_ClothDyeArea(var_field0);
-      case 6:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_cloth_dye_palette(
-          deserializer,
-        );
-        return Nuan5DatabaseItem_ClothDyePalette(var_field0);
-      case 7:
-        var var_field0 = sse_decode_box_autoadd_nuan_5_cloth_diy_swatch_color(
-          deserializer,
-        );
-        return Nuan5DatabaseItem_ClothDiySwatchColor(var_field0);
-      default:
-        throw UnimplementedError('');
-    }
+    var var_table = sse_decode_opt_box_autoadd_nuan_5_table(deserializer);
+    var var_networkImage = sse_decode_opt_box_autoadd_nuan_5_network_image(
+      deserializer,
+    );
+    var var_light = sse_decode_Map_i_32_nuan_5_light_None(deserializer);
+    var var_lightType = sse_decode_Map_i_32_nuan_5_light_type_None(
+      deserializer,
+    );
+    var var_filter = sse_decode_Map_i_32_nuan_5_filter_None(deserializer);
+    var var_filterType = sse_decode_Map_i_32_nuan_5_filter_type_None(
+      deserializer,
+    );
+    var var_momoPose = sse_decode_Map_i_32_nuan_5_momo_pose_None(deserializer);
+    var var_clothDyeArea = sse_decode_Map_i_32_nuan_5_cloth_dye_area_None(
+      deserializer,
+    );
+    var var_clothDyePalette = sse_decode_Map_i_32_nuan_5_cloth_dye_palette_None(
+      deserializer,
+    );
+    var var_clothDiySwatchColor =
+        sse_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(deserializer);
+    return Nuan5Config(
+      table: var_table,
+      networkImage: var_networkImage,
+      light: var_light,
+      lightType: var_lightType,
+      filter: var_filter,
+      filterType: var_filterType,
+      momoPose: var_momoPose,
+      clothDyeArea: var_clothDyeArea,
+      clothDyePalette: var_clothDyePalette,
+      clothDiySwatchColor: var_clothDiySwatchColor,
+    );
   }
 
   @protected
@@ -7386,6 +7369,62 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_stringId = sse_decode_String(deserializer);
     return Nuan5MomoPose(stringId: var_stringId);
+  }
+
+  @protected
+  Nuan5NetworkImage sse_decode_nuan_5_network_image(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_light = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    var var_filter = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    var var_momoPose = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    var var_cloth = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    var var_clothOutfit = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    var var_diyPattern = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    return Nuan5NetworkImage(
+      light: var_light,
+      filter: var_filter,
+      momoPose: var_momoPose,
+      cloth: var_cloth,
+      clothOutfit: var_clothOutfit,
+      diyPattern: var_diyPattern,
+    );
+  }
+
+  @protected
+  Nuan5NetworkImageItem sse_decode_nuan_5_network_image_item(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_baseUrl = sse_decode_String(deserializer);
+    var var_replace = sse_decode_String(deserializer);
+    return Nuan5NetworkImageItem(baseUrl: var_baseUrl, replace: var_replace);
+  }
+
+  @protected
+  Nuan5Table sse_decode_nuan_5_table(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_lightType = sse_decode_list_prim_i_32_strict(deserializer);
+    var var_filterType = sse_decode_list_prim_i_32_strict(deserializer);
+    var var_momoPose = sse_decode_list_prim_i_32_strict(deserializer);
+    return Nuan5Table(
+      lightType: var_lightType,
+      filterType: var_filterType,
+      momoPose: var_momoPose,
+    );
   }
 
   @protected
@@ -7647,6 +7686,58 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_nikki_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Nuan5Config? sse_decode_opt_box_autoadd_nuan_5_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nuan_5_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Nuan5NetworkImage? sse_decode_opt_box_autoadd_nuan_5_network_image(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nuan_5_network_image(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Nuan5NetworkImageItem? sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nuan_5_network_image_item(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Nuan5Table? sse_decode_opt_box_autoadd_nuan_5_table(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nuan_5_table(deserializer));
     } else {
       return null;
     }
@@ -8029,12 +8120,83 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  (int, Nuan5DatabaseItem) sse_decode_record_i_32_nuan_5_database_item(
+  (int, Nuan5ClothDiySwatchColor)
+  sse_decode_record_i_32_nuan_5_cloth_diy_swatch_color(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_i_32(deserializer);
-    var var_field1 = sse_decode_nuan_5_database_item(deserializer);
+    var var_field1 = sse_decode_nuan_5_cloth_diy_swatch_color(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5ClothDyeArea) sse_decode_record_i_32_nuan_5_cloth_dye_area(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_cloth_dye_area(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5ClothDyePalette) sse_decode_record_i_32_nuan_5_cloth_dye_palette(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_cloth_dye_palette(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5Filter) sse_decode_record_i_32_nuan_5_filter(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_filter(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5FilterType) sse_decode_record_i_32_nuan_5_filter_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_filter_type(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5Light) sse_decode_record_i_32_nuan_5_light(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_light(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5LightType) sse_decode_record_i_32_nuan_5_light_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_light_type(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5MomoPose) sse_decode_record_i_32_nuan_5_momo_pose(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_momo_pose(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -8558,32 +8720,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    Nuan5DatabaseReaderV1 self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as Nuan5DatabaseReaderV1Impl).frbInternalSseEncode(move: true),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    Nuan5DatabaseReaderV1 self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as Nuan5DatabaseReaderV1Impl).frbInternalSseEncode(move: false),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     ClothDiyShareCode self,
     SseSerializer serializer,
@@ -8622,19 +8758,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    Nuan5DatabaseReaderV1 self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as Nuan5DatabaseReaderV1Impl).frbInternalSseEncode(move: false),
-      serializer,
-    );
-  }
-
-  @protected
   void sse_encode_Map_String_bool_None(
     Map<String, bool> self,
     SseSerializer serializer,
@@ -8647,12 +8770,96 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_Map_i_32_nuan_5_database_item_None(
-    Map<int, Nuan5DatabaseItem> self,
+  void sse_encode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(
+    Map<int, Nuan5ClothDiySwatchColor> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_record_i_32_nuan_5_database_item(
+    sse_encode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_dye_area_None(
+    Map<int, Nuan5ClothDyeArea> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_cloth_dye_area(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_dye_palette_None(
+    Map<int, Nuan5ClothDyePalette> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_cloth_dye_palette(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_filter_None(
+    Map<int, Nuan5Filter> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_filter(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_filter_type_None(
+    Map<int, Nuan5FilterType> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_filter_type(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_light_None(
+    Map<int, Nuan5Light> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_light(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_light_type_None(
+    Map<int, Nuan5LightType> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_light_type(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_momo_pose_None(
+    Map<int, Nuan5MomoPose> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_momo_pose(
       self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
@@ -8717,19 +8924,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as MediaKeyImpl).frbInternalSseEncode(move: null),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-    Nuan5DatabaseReaderV1 self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as Nuan5DatabaseReaderV1Impl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
@@ -9107,75 +9301,39 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_nuan_5_cloth_diy_swatch_color(
-    Nuan5ClothDiySwatchColor self,
+  void sse_encode_box_autoadd_nuan_5_config(
+    Nuan5Config self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_cloth_diy_swatch_color(self, serializer);
+    sse_encode_nuan_5_config(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_nuan_5_cloth_dye_area(
-    Nuan5ClothDyeArea self,
+  void sse_encode_box_autoadd_nuan_5_network_image(
+    Nuan5NetworkImage self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_cloth_dye_area(self, serializer);
+    sse_encode_nuan_5_network_image(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_nuan_5_cloth_dye_palette(
-    Nuan5ClothDyePalette self,
+  void sse_encode_box_autoadd_nuan_5_network_image_item(
+    Nuan5NetworkImageItem self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_cloth_dye_palette(self, serializer);
+    sse_encode_nuan_5_network_image_item(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_nuan_5_filter(
-    Nuan5Filter self,
+  void sse_encode_box_autoadd_nuan_5_table(
+    Nuan5Table self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_filter(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_nuan_5_filter_type(
-    Nuan5FilterType self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_filter_type(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_nuan_5_light(
-    Nuan5Light self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_light(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_nuan_5_light_type(
-    Nuan5LightType self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_light_type(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_nuan_5_momo_pose(
-    Nuan5MomoPose self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nuan_5_momo_pose(self, serializer);
+    sse_encode_nuan_5_table(self, serializer);
   }
 
   @protected
@@ -9783,12 +9941,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_isize(PlatformInt64 self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putPlatformInt64(self);
-  }
-
-  @protected
   void sse_encode_light_params(LightParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -9968,18 +10120,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_prim_i_32_loose(
-    List<int> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    serializer.buffer.putInt32List(
-      self is Int32List ? self : Int32List.fromList(self),
-    );
-  }
-
-  @protected
   void sse_encode_list_prim_i_32_strict(
     Int32List self,
     SseSerializer serializer,
@@ -10022,14 +10162,98 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_record_i_32_nuan_5_database_item(
-    List<(int, Nuan5DatabaseItem)> self,
+  void sse_encode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
+    List<(int, Nuan5ClothDiySwatchColor)> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
-      sse_encode_record_i_32_nuan_5_database_item(item, serializer);
+      sse_encode_record_i_32_nuan_5_cloth_diy_swatch_color(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_dye_area(
+    List<(int, Nuan5ClothDyeArea)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_cloth_dye_area(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_dye_palette(
+    List<(int, Nuan5ClothDyePalette)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_cloth_dye_palette(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_filter(
+    List<(int, Nuan5Filter)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_filter(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_filter_type(
+    List<(int, Nuan5FilterType)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_filter_type(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_light(
+    List<(int, Nuan5Light)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_light(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_light_type(
+    List<(int, Nuan5LightType)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_light_type(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_momo_pose(
+    List<(int, Nuan5MomoPose)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_momo_pose(item, serializer);
     }
   }
 
@@ -10397,49 +10621,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_nuan_5_database_category(
-    Nuan5DatabaseCategory self,
-    SseSerializer serializer,
-  ) {
+  void sse_encode_nuan_5_config(Nuan5Config self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
-  void sse_encode_nuan_5_database_item(
-    Nuan5DatabaseItem self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case Nuan5DatabaseItem_Light(field0: final field0):
-        sse_encode_i_32(0, serializer);
-        sse_encode_box_autoadd_nuan_5_light(field0, serializer);
-      case Nuan5DatabaseItem_LightType(field0: final field0):
-        sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_nuan_5_light_type(field0, serializer);
-      case Nuan5DatabaseItem_Filter(field0: final field0):
-        sse_encode_i_32(2, serializer);
-        sse_encode_box_autoadd_nuan_5_filter(field0, serializer);
-      case Nuan5DatabaseItem_FilterType(field0: final field0):
-        sse_encode_i_32(3, serializer);
-        sse_encode_box_autoadd_nuan_5_filter_type(field0, serializer);
-      case Nuan5DatabaseItem_MomoPose(field0: final field0):
-        sse_encode_i_32(4, serializer);
-        sse_encode_box_autoadd_nuan_5_momo_pose(field0, serializer);
-      case Nuan5DatabaseItem_ClothDyeArea(field0: final field0):
-        sse_encode_i_32(5, serializer);
-        sse_encode_box_autoadd_nuan_5_cloth_dye_area(field0, serializer);
-      case Nuan5DatabaseItem_ClothDyePalette(field0: final field0):
-        sse_encode_i_32(6, serializer);
-        sse_encode_box_autoadd_nuan_5_cloth_dye_palette(field0, serializer);
-      case Nuan5DatabaseItem_ClothDiySwatchColor(field0: final field0):
-        sse_encode_i_32(7, serializer);
-        sse_encode_box_autoadd_nuan_5_cloth_diy_swatch_color(
-          field0,
-          serializer,
-        );
-    }
+    sse_encode_opt_box_autoadd_nuan_5_table(self.table, serializer);
+    sse_encode_opt_box_autoadd_nuan_5_network_image(
+      self.networkImage,
+      serializer,
+    );
+    sse_encode_Map_i_32_nuan_5_light_None(self.light, serializer);
+    sse_encode_Map_i_32_nuan_5_light_type_None(self.lightType, serializer);
+    sse_encode_Map_i_32_nuan_5_filter_None(self.filter, serializer);
+    sse_encode_Map_i_32_nuan_5_filter_type_None(self.filterType, serializer);
+    sse_encode_Map_i_32_nuan_5_momo_pose_None(self.momoPose, serializer);
+    sse_encode_Map_i_32_nuan_5_cloth_dye_area_None(
+      self.clothDyeArea,
+      serializer,
+    );
+    sse_encode_Map_i_32_nuan_5_cloth_dye_palette_None(
+      self.clothDyePalette,
+      serializer,
+    );
+    sse_encode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(
+      self.clothDiySwatchColor,
+      serializer,
+    );
   }
 
   @protected
@@ -10490,6 +10695,56 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.stringId, serializer);
+  }
+
+  @protected
+  void sse_encode_nuan_5_network_image(
+    Nuan5NetworkImage self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.light,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.filter,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.momoPose,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.cloth,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.clothOutfit,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.diyPattern,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_nuan_5_network_image_item(
+    Nuan5NetworkImageItem self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.baseUrl, serializer);
+    sse_encode_String(self.replace, serializer);
+  }
+
+  @protected
+  void sse_encode_nuan_5_table(Nuan5Table self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_i_32_strict(self.lightType, serializer);
+    sse_encode_list_prim_i_32_strict(self.filterType, serializer);
+    sse_encode_list_prim_i_32_strict(self.momoPose, serializer);
   }
 
   @protected
@@ -10749,6 +11004,58 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_nikki_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nuan_5_config(
+    Nuan5Config? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nuan_5_config(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nuan_5_network_image(
+    Nuan5NetworkImage? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nuan_5_network_image(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+    Nuan5NetworkImageItem? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nuan_5_network_image_item(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nuan_5_table(
+    Nuan5Table? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nuan_5_table(self, serializer);
     }
   }
 
@@ -11086,13 +11393,83 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_record_i_32_nuan_5_database_item(
-    (int, Nuan5DatabaseItem) self,
+  void sse_encode_record_i_32_nuan_5_cloth_diy_swatch_color(
+    (int, Nuan5ClothDiySwatchColor) self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.$1, serializer);
-    sse_encode_nuan_5_database_item(self.$2, serializer);
+    sse_encode_nuan_5_cloth_diy_swatch_color(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_cloth_dye_area(
+    (int, Nuan5ClothDyeArea) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_cloth_dye_area(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_cloth_dye_palette(
+    (int, Nuan5ClothDyePalette) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_cloth_dye_palette(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_filter(
+    (int, Nuan5Filter) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_filter(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_filter_type(
+    (int, Nuan5FilterType) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_filter_type(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_light(
+    (int, Nuan5Light) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_light(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_light_type(
+    (int, Nuan5LightType) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_light_type(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_momo_pose(
+    (int, Nuan5MomoPose) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_momo_pose(self.$2, serializer);
   }
 
   @protected
@@ -11550,102 +11927,4 @@ class MediaKeyImpl extends RustOpaque implements MediaKey {
     rustArcDecrementStrongCountPtr:
         RustLib.instance.api.rust_arc_decrement_strong_count_MediaKeyPtr,
   );
-}
-
-@sealed
-class Nuan5DatabaseReaderV1Impl extends RustOpaque
-    implements Nuan5DatabaseReaderV1 {
-  // Not to be used by end users
-  Nuan5DatabaseReaderV1Impl.frbInternalDcoDecode(List<dynamic> wire)
-    : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  Nuan5DatabaseReaderV1Impl.frbInternalSseDecode(
-    BigInt ptr,
-    int externalSizeOnNative,
-  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib
-        .instance
-        .api
-        .rust_arc_increment_strong_count_Nuan5DatabaseReaderV1,
-    rustArcDecrementStrongCount: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_Nuan5DatabaseReaderV1,
-    rustArcDecrementStrongCountPtr: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_Nuan5DatabaseReaderV1Ptr,
-  );
-
-  Future<void> close() => RustLib.instance.api
-      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Close(that: this);
-
-  Future<Map<int, Nuan5DatabaseItem>> get_({
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  }) => RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Get(
-    that: this,
-    category: category,
-    ids: ids,
-  );
-
-  Map<int, Nuan5DatabaseItem> getSync({
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  }) => RustLib.instance.api
-      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1GetSync(
-        that: this,
-        category: category,
-        ids: ids,
-      );
-
-  Future<bool> has({required Nuan5DatabaseCategory category}) =>
-      RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Has(
-        that: this,
-        category: category,
-      );
-
-  bool hasSync({required Nuan5DatabaseCategory category}) => RustLib
-      .instance
-      .api
-      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1HasSync(
-        that: this,
-        category: category,
-      );
-
-  bool isOpen() => RustLib.instance.api
-      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1IsOpen(that: this);
-
-  Future<Int32List> list({
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  }) =>
-      RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1List(
-        that: this,
-        category: category,
-        from: from,
-        max: max,
-      );
-
-  Int32List listSync({
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  }) => RustLib.instance.api
-      .crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1ListSync(
-        that: this,
-        category: category,
-        from: from,
-        max: max,
-      );
-
-  Future<bool> open({required String path}) =>
-      RustLib.instance.api.crateNuan5DatabaseReaderV1Nuan5DatabaseReaderV1Open(
-        that: this,
-        path: path,
-      );
 }

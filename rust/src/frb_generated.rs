@@ -26,8 +26,6 @@
 
 // Section: imports
 
-use crate::nuan5_database::nuan5_database::Nuan5DatabaseReader;
-use crate::nuan5_database::reader_v1::*;
 use crate::nuan5_params::decrypt::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
@@ -41,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -70501186;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1549207290;
 
 // Section: executor
 
@@ -346,540 +344,6 @@ fn wire__crate__nuan5_params__decrypt__MediaKey_from_str_bytes_impl(
                 Ok(output_ok)
             })(
             ))
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_close_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_close",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, true,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
-                            _ => unreachable!(),
-                        }
-                    }
-                    let mut api_that_guard = api_that_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok({
-                        crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::close(
-                            &mut *api_that_guard,
-                        );
-                    })?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_get",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
-                &mut deserializer,
-            );
-            let api_ids = <Vec<i32>>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
-                    }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::get(
-                            &*api_that_guard,
-                            &api_category,
-                            &api_ids,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_sync_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_get_sync",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
-                &mut deserializer,
-            );
-            let api_ids = <Vec<i32>>::sse_decode(&mut deserializer);
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let mut api_that_guard = None;
-                let decode_indices_ =
-                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                            &api_that, 0, false,
-                        ),
-                    ]);
-                for i in decode_indices_ {
-                    match i {
-                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                        _ => unreachable!(),
-                    }
-                }
-                let api_that_guard = api_that_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::get_sync(
-                        &*api_that_guard,
-                        &api_category,
-                        &api_ids,
-                    ),
-                )?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_has",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
-                &mut deserializer,
-            );
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
-                    }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::has(
-                            &*api_that_guard,
-                            &api_category,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_sync_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_has_sync",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
-                &mut deserializer,
-            );
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let mut api_that_guard = None;
-                let decode_indices_ =
-                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                            &api_that, 0, false,
-                        ),
-                    ]);
-                for i in decode_indices_ {
-                    match i {
-                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                        _ => unreachable!(),
-                    }
-                }
-                let api_that_guard = api_that_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::has_sync(
-                        &*api_that_guard,
-                        &api_category,
-                    ),
-                )?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_is_open",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let mut api_that_guard = None;
-                let decode_indices_ =
-                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                            &api_that, 0, false,
-                        ),
-                    ]);
-                for i in decode_indices_ {
-                    match i {
-                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                        _ => unreachable!(),
-                    }
-                }
-                let api_that_guard = api_that_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::is_open(
-                        &*api_that_guard,
-                    ),
-                )?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_list",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
-                &mut deserializer,
-            );
-            let api_from = <usize>::sse_decode(&mut deserializer);
-            let api_max = <isize>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, false,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                            _ => unreachable!(),
-                        }
-                    }
-                    let api_that_guard = api_that_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::list(
-                            &*api_that_guard,
-                            &api_category,
-                            api_from,
-                            api_max,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_sync_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_list_sync",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_category = <crate::nuan5_database::model::Nuan5DatabaseCategory>::sse_decode(
-                &mut deserializer,
-            );
-            let api_from = <usize>::sse_decode(&mut deserializer);
-            let api_max = <isize>::sse_decode(&mut deserializer);
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let mut api_that_guard = None;
-                let decode_indices_ =
-                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                            &api_that, 0, false,
-                        ),
-                    ]);
-                for i in decode_indices_ {
-                    match i {
-                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                        _ => unreachable!(),
-                    }
-                }
-                let api_that_guard = api_that_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::list_sync(
-                        &*api_that_guard,
-                        &api_category,
-                        api_from,
-                        api_max,
-                    ),
-                )?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_new_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_new",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let output_ok = Result::<_, ()>::Ok(
-                    crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::new(),
-                )?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_open_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Nuan5DatabaseReaderV1_open",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-            >>::sse_decode(&mut deserializer);
-            let api_path = <String>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let mut api_that_guard = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                &api_that, 0, true,
-                            ),
-                        ]);
-                    for i in decode_indices_ {
-                        match i {
-                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
-                            _ => unreachable!(),
-                        }
-                    }
-                    let mut api_that_guard = api_that_guard.unwrap();
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::reader_v1::Nuan5DatabaseReaderV1::open(
-                            &mut *api_that_guard,
-                            &api_path,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
         },
     )
 }
@@ -2417,7 +1881,7 @@ fn wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
         },
     )
 }
-fn wire__crate__nuan5_database__reader_v1__nuan5_data_decrypt_impl(
+fn wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -2425,7 +1889,7 @@ fn wire__crate__nuan5_database__reader_v1__nuan5_data_decrypt_impl(
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "nuan5_data_decrypt",
+            debug_name: "nuan5_database_decrypt",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
@@ -2444,7 +1908,7 @@ fn wire__crate__nuan5_database__reader_v1__nuan5_data_decrypt_impl(
             move |context| {
                 transform_result_sse::<_, ()>((move || {
                     let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::reader_v1::nuan5_data_decrypt(&api_input),
+                        crate::nuan5_database::nuan5_database::nuan5_database_decrypt(&api_input),
                     )?;
                     Ok(output_ok)
                 })())
@@ -2547,6 +2011,74 @@ fn wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
                 transform_result_sse::<_, ()>((move || {
                     let output_ok = Result::<_, ()>::Ok(
                         crate::nuan5_database::model::Nuan5ClothDyePalette::default(),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_database__model__nuan_5_config_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_config_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::nuan5_database::model::Nuan5Config::default())?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_config_try_from",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_database::model::Nuan5Config::try_from(&api_path),
                     )?;
                     Ok(output_ok)
                 })())
@@ -2756,6 +2288,107 @@ fn wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
         },
     )
 }
+fn wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_network_image_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_database::model::Nuan5NetworkImage::default(),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_network_image_item_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_database::model::Nuan5NetworkImageItem::default(),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_database__model__nuan_5_table_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_table_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::nuan5_database::model::Nuan5Table::default())?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__serde_config__se__serialize_game_config_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -2950,9 +2583,6 @@ flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>
 );
-flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
-    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>
-);
 
 // Section: dart2rust
 
@@ -2994,16 +2624,6 @@ impl SseDecode for MediaKey {
     }
 }
 
-impl SseDecode for Nuan5DatabaseReaderV1 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <RustOpaqueMoi<
-            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-        >>::sse_decode(deserializer);
-        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
-    }
-}
-
 impl SseDecode for std::collections::HashMap<String, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3012,11 +2632,82 @@ impl SseDecode for std::collections::HashMap<String, bool> {
     }
 }
 
-impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DatabaseItem> {
+impl SseDecode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor>
+{
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner =
-            <Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>>::sse_decode(deserializer);
+            <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)>>::sse_decode(
+                deserializer,
+            );
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyeArea> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyePalette>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>>::sse_decode(
+                deserializer,
+            );
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5Filter> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5Filter)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5FilterType> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5FilterType)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5Light> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5Light)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5LightType> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5LightType)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5MomoPose> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner =
+            <Vec<(i32, crate::nuan5_database::model::Nuan5MomoPose)>>::sse_decode(deserializer);
         return inner.into_iter().collect();
     }
 }
@@ -3059,18 +2750,6 @@ impl SseDecode
 
 impl SseDecode
     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <usize>::sse_decode(deserializer);
-        return decode_rust_opaque_moi(inner);
-    }
-}
-
-impl SseDecode
-    for RustOpaqueMoi<
-        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-    >
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3918,13 +3597,6 @@ impl SseDecode for i64 {
     }
 }
 
-impl SseDecode for isize {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_i64::<NativeEndian>().unwrap() as _
-    }
-}
-
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::LightParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4200,14 +3872,111 @@ impl SseDecode for Vec<u8> {
     }
 }
 
-impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)> {
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(
+                i32,
+                crate::nuan5_database::model::Nuan5ClothDiySwatchColor,
+            )>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(
-                <(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>::sse_decode(deserializer),
+                <(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5Filter)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(i32, crate::nuan5_database::model::Nuan5Filter)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5FilterType)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5FilterType)>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5Light)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(i32, crate::nuan5_database::model::Nuan5Light)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5LightType)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5LightType)>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5MomoPose)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5MomoPose)>::sse_decode(deserializer),
             );
         }
         return ans_;
@@ -4778,79 +4547,57 @@ impl SseDecode for crate::nuan5_database::model::Nuan5ClothDyePalette {
     }
 }
 
-impl SseDecode for crate::nuan5_database::model::Nuan5DatabaseCategory {
+impl SseDecode for crate::nuan5_database::model::Nuan5Config {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::nuan5_database::model::Nuan5DatabaseCategory::Light,
-            1 => crate::nuan5_database::model::Nuan5DatabaseCategory::LightType,
-            2 => crate::nuan5_database::model::Nuan5DatabaseCategory::Filter,
-            3 => crate::nuan5_database::model::Nuan5DatabaseCategory::FilterType,
-            4 => crate::nuan5_database::model::Nuan5DatabaseCategory::MomoPose,
-            5 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyeArea,
-            6 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyePalette,
-            7 => crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDiySwatchColor,
-            _ => unreachable!("Invalid variant for Nuan5DatabaseCategory: {}", inner),
+        let mut var_table =
+            <Option<crate::nuan5_database::model::Nuan5Table>>::sse_decode(deserializer);
+        let mut var_networkImage =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImage>>::sse_decode(deserializer);
+        let mut var_light = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5Light,
+        >>::sse_decode(deserializer);
+        let mut var_lightType = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5LightType,
+        >>::sse_decode(deserializer);
+        let mut var_filter = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5Filter,
+        >>::sse_decode(deserializer);
+        let mut var_filterType = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5FilterType,
+        >>::sse_decode(deserializer);
+        let mut var_momoPose = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5MomoPose,
+        >>::sse_decode(deserializer);
+        let mut var_clothDyeArea = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5ClothDyeArea,
+        >>::sse_decode(deserializer);
+        let mut var_clothDyePalette = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5ClothDyePalette,
+        >>::sse_decode(deserializer);
+        let mut var_clothDiySwatchColor = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5ClothDiySwatchColor,
+        >>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5Config {
+            table: var_table,
+            network_image: var_networkImage,
+            light: var_light,
+            light_type: var_lightType,
+            filter: var_filter,
+            filter_type: var_filterType,
+            momo_pose: var_momoPose,
+            cloth_dye_area: var_clothDyeArea,
+            cloth_dye_palette: var_clothDyePalette,
+            cloth_diy_swatch_color: var_clothDiySwatchColor,
         };
-    }
-}
-
-impl SseDecode for crate::nuan5_database::model::Nuan5DatabaseItem {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut tag_ = <i32>::sse_decode(deserializer);
-        match tag_ {
-            0 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5Light>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::Light(var_field0);
-            }
-            1 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5LightType>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::LightType(var_field0);
-            }
-            2 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5Filter>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::Filter(var_field0);
-            }
-            3 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5FilterType>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::FilterType(var_field0);
-            }
-            4 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5MomoPose>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::MomoPose(var_field0);
-            }
-            5 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5ClothDyeArea>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(var_field0);
-            }
-            6 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_decode(deserializer);
-                return crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(
-                    var_field0,
-                );
-            }
-            7 => {
-                let mut var_field0 =
-                    <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_decode(
-                        deserializer,
-                    );
-                return crate::nuan5_database::model::Nuan5DatabaseItem::ClothDiySwatchColor(
-                    var_field0,
-                );
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
     }
 }
 
@@ -4910,6 +4657,58 @@ impl SseDecode for crate::nuan5_database::model::Nuan5MomoPose {
         let mut var_stringId = <String>::sse_decode(deserializer);
         return crate::nuan5_database::model::Nuan5MomoPose {
             string_id: var_stringId,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_database::model::Nuan5NetworkImage {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_light =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_decode(deserializer);
+        let mut var_filter =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_decode(deserializer);
+        let mut var_momoPose =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_decode(deserializer);
+        let mut var_cloth =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_decode(deserializer);
+        let mut var_clothOutfit =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_decode(deserializer);
+        let mut var_diyPattern =
+            <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5NetworkImage {
+            light: var_light,
+            filter: var_filter,
+            momo_pose: var_momoPose,
+            cloth: var_cloth,
+            cloth_outfit: var_clothOutfit,
+            diy_pattern: var_diyPattern,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_database::model::Nuan5NetworkImageItem {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_baseUrl = <String>::sse_decode(deserializer);
+        let mut var_replace = <String>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5NetworkImageItem {
+            base_url: var_baseUrl,
+            replace: var_replace,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_database::model::Nuan5Table {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_lightType = <Vec<i32>>::sse_decode(deserializer);
+        let mut var_filterType = <Vec<i32>>::sse_decode(deserializer);
+        let mut var_momoPose = <Vec<i32>>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5Table {
+            light_type: var_lightType,
+            filter_type: var_filterType,
+            momo_pose: var_momoPose,
         };
     }
 }
@@ -5198,6 +4997,58 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::Nikk
                     deserializer,
                 ),
             );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_database::model::Nuan5Config> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::nuan5_database::model::Nuan5Config>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_database::model::Nuan5NetworkImage> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_database::model::Nuan5NetworkImage>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_database::model::Nuan5NetworkImageItem> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_database::model::Nuan5NetworkImageItem>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_database::model::Nuan5Table> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::nuan5_database::model::Nuan5Table>::sse_decode(
+                deserializer,
+            ));
         } else {
             return None;
         }
@@ -5627,12 +5478,80 @@ impl SseDecode for (f64, f64, f64, f64) {
     }
 }
 
-impl SseDecode for (i32, crate::nuan5_database::model::Nuan5DatabaseItem) {
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <i32>::sse_decode(deserializer);
         let mut var_field1 =
-            <crate::nuan5_database::model::Nuan5DatabaseItem>::sse_decode(deserializer);
+            <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5ClothDyeArea) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5ClothDyeArea>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5ClothDyePalette) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5Filter) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 = <crate::nuan5_database::model::Nuan5Filter>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5FilterType) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5FilterType>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5Light) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 = <crate::nuan5_database::model::Nuan5Light>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5LightType) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5LightType>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5MomoPose) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5MomoPose>::sse_decode(deserializer);
         return (var_field0, var_field1);
     }
 }
@@ -6276,255 +6195,255 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        9 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_close_impl(
+        9 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        10 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_impl(
+        10 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        12 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_impl(
+        11 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        15 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_impl(
+        12 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        18 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_open_impl(
+        13 => wire__crate__nuan5_params__decode__de_home_build_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
+        14 => wire__crate__serde_config__de__decode_game_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        26 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
+        15 => wire__crate__nuan5_params__decode__decode_media_param_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
+        16 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        28 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
+        17 => wire__crate__serde_config__de__decode_theme_config_file_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__nuan5_params__decode__de_home_build_param_impl(
+        18 => wire__crate__serde_config__de__deserialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__serde_config__de__decode_game_config_file_impl(
+        19 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__nuan5_params__decode__decode_media_param_impl(
+        20 => wire__crate__serde_config__de__deserialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__serde_config__de__decode_plugin_info_file_impl(
+        21 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__serde_config__de__decode_theme_config_file_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        34 => wire__crate__serde_config__de__deserialize_game_config_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        35 => wire__crate__serde_config__de__deserialize_plugin_info_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        36 => wire__crate__serde_config__de__deserialize_theme_config_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        37 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        38 => {
+        22 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        39 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        23 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        40 => {
+        24 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        42 => wire__crate__nuan5_params__decode__home_build_de_network_impl(
+        26 => wire__crate__nuan5_params__decode__home_build_de_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        43 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
+        27 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        44 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        45 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        46 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
+        28 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        29 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+        30 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
+        31 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        49 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
+        33 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        51 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
+        35 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        53 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
+        37 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        54 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
+        38 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        55 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
+        39 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__nuan5_database__reader_v1__nuan5_data_decrypt_impl(
+        42 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        59 => wire__crate__nuan5_database__model__nuan_5_cloth_diy_swatch_color_default_impl(
+        43 => wire__crate__nuan5_database__model__nuan_5_cloth_diy_swatch_color_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        60 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
+        44 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        61 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
+        45 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        62 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
+        46 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        63 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
+        47 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        64 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
+        48 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        65 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
+        49 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        66 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
+        50 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        67 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
+        51 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        68 => wire__crate__serde_config__se__serialize_game_config_impl(
+        52 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        69 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+        53 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        70 => wire__crate__serde_config__se__serialize_theme_config_impl(
+        54 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        55 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        56 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        57 => wire__crate__serde_config__se__serialize_game_config_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        58 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        59 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -6580,55 +6499,30 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        11 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_get_sync_impl(
+        25 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        32 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        13 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_has_sync_impl(
+        34 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        14 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_is_open_impl(
+        36 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        16 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_list_sync_impl(
+        40 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        41 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        17 => wire__crate__nuan5_database__reader_v1__Nuan5DatabaseReaderV1_new_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        41 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        48 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        50 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        52 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        56 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        57 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        71 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        72 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+        60 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        61 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -6683,26 +6577,6 @@ impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<
 
 impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<MediaKey>> for MediaKey {
     fn into_into_dart(self) -> FrbWrapper<MediaKey> {
-        self.into()
-    }
-}
-
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for FrbWrapper<Nuan5DatabaseReaderV1> {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
-            .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for FrbWrapper<Nuan5DatabaseReaderV1>
-{
-}
-
-impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<Nuan5DatabaseReaderV1>>
-    for Nuan5DatabaseReaderV1
-{
-    fn into_into_dart(self) -> FrbWrapper<Nuan5DatabaseReaderV1> {
         self.into()
     }
 }
@@ -8331,74 +8205,31 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5ClothD
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5DatabaseCategory {
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Config {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::Light => 0.into_dart(),
-            Self::LightType => 1.into_dart(),
-            Self::Filter => 2.into_dart(),
-            Self::FilterType => 3.into_dart(),
-            Self::MomoPose => 4.into_dart(),
-            Self::ClothDyeArea => 5.into_dart(),
-            Self::ClothDyePalette => 6.into_dart(),
-            Self::ClothDiySwatchColor => 7.into_dart(),
-            _ => unreachable!(),
-        }
+        [
+            self.table.into_into_dart().into_dart(),
+            self.network_image.into_into_dart().into_dart(),
+            self.light.into_into_dart().into_dart(),
+            self.light_type.into_into_dart().into_dart(),
+            self.filter.into_into_dart().into_dart(),
+            self.filter_type.into_into_dart().into_dart(),
+            self.momo_pose.into_into_dart().into_dart(),
+            self.cloth_dye_area.into_into_dart().into_dart(),
+            self.cloth_dye_palette.into_into_dart().into_dart(),
+            self.cloth_diy_swatch_color.into_into_dart().into_dart(),
+        ]
+        .into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_database::model::Nuan5DatabaseCategory
+    for crate::nuan5_database::model::Nuan5Config
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5DatabaseCategory>
-    for crate::nuan5_database::model::Nuan5DatabaseCategory
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Config>
+    for crate::nuan5_database::model::Nuan5Config
 {
-    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5DatabaseCategory {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5DatabaseItem {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            crate::nuan5_database::model::Nuan5DatabaseItem::Light(field0) => {
-                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::LightType(field0) => {
-                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::Filter(field0) => {
-                [2.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::FilterType(field0) => {
-                [3.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::MomoPose(field0) => {
-                [4.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(field0) => {
-                [5.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(field0) => {
-                [6.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDiySwatchColor(field0) => {
-                [7.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_database::model::Nuan5DatabaseItem
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5DatabaseItem>
-    for crate::nuan5_database::model::Nuan5DatabaseItem
-{
-    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5DatabaseItem {
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5Config {
         self
     }
 }
@@ -8509,6 +8340,74 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5MomoPo
     for crate::nuan5_database::model::Nuan5MomoPose
 {
     fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5MomoPose {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5NetworkImage {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.light.into_into_dart().into_dart(),
+            self.filter.into_into_dart().into_dart(),
+            self.momo_pose.into_into_dart().into_dart(),
+            self.cloth.into_into_dart().into_dart(),
+            self.cloth_outfit.into_into_dart().into_dart(),
+            self.diy_pattern.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5NetworkImage
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5NetworkImage>
+    for crate::nuan5_database::model::Nuan5NetworkImage
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5NetworkImage {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5NetworkImageItem {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.base_url.into_into_dart().into_dart(),
+            self.replace.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5NetworkImageItem
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5NetworkImageItem>
+    for crate::nuan5_database::model::Nuan5NetworkImageItem
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5NetworkImageItem {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Table {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.light_type.into_into_dart().into_dart(),
+            self.filter_type.into_into_dart().into_dart(),
+            self.momo_pose.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5Table
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Table>
+    for crate::nuan5_database::model::Nuan5Table
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5Table {
         self
     }
 }
@@ -9505,18 +9404,6 @@ impl SseEncode for MediaKey {
     }
 }
 
-impl SseEncode for Nuan5DatabaseReaderV1 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueMoi<
-            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-        >>::sse_encode(
-            flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
-            serializer,
-        );
-    }
-}
-
 impl SseEncode for std::collections::HashMap<String, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -9524,10 +9411,84 @@ impl SseEncode for std::collections::HashMap<String, bool> {
     }
 }
 
-impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DatabaseItem> {
+impl SseEncode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor>
+{
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>>::sse_encode(
+        <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyeArea> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyePalette>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5Filter> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5Filter)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5FilterType> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5FilterType)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5Light> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5Light)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5LightType> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5LightType)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5MomoPose> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5MomoPose)>>::sse_encode(
             self.into_iter().collect(),
             serializer,
         );
@@ -9572,19 +9533,6 @@ impl SseEncode
 
 impl SseEncode
     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        let (ptr, size) = self.sse_encode_raw();
-        <usize>::sse_encode(ptr, serializer);
-        <i32>::sse_encode(size, serializer);
-    }
-}
-
-impl SseEncode
-    for RustOpaqueMoi<
-        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>,
-    >
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10313,16 +10261,6 @@ impl SseEncode for i64 {
     }
 }
 
-impl SseEncode for isize {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer
-            .cursor
-            .write_i64::<NativeEndian>(self as _)
-            .unwrap();
-    }
-}
-
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::LightParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10543,12 +10481,86 @@ impl SseEncode for Vec<u8> {
     }
 }
 
-impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5DatabaseItem)> {
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <(i32, crate::nuan5_database::model::Nuan5DatabaseItem)>::sse_encode(item, serializer);
+            <(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5Filter)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5Filter)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5FilterType)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5FilterType)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5Light)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5Light)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5LightType)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5LightType)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5MomoPose)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5MomoPose)>::sse_encode(item, serializer);
         }
     }
 }
@@ -11011,72 +11023,36 @@ impl SseEncode for crate::nuan5_database::model::Nuan5ClothDyePalette {
     }
 }
 
-impl SseEncode for crate::nuan5_database::model::Nuan5DatabaseCategory {
+impl SseEncode for crate::nuan5_database::model::Nuan5Config {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::nuan5_database::model::Nuan5DatabaseCategory::Light => 0,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::LightType => 1,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::Filter => 2,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::FilterType => 3,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::MomoPose => 4,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyeArea => 5,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDyePalette => 6,
-                crate::nuan5_database::model::Nuan5DatabaseCategory::ClothDiySwatchColor => 7,
-                _ => {
-                    unimplemented!("");
-                }
-            },
+        <Option<crate::nuan5_database::model::Nuan5Table>>::sse_encode(self.table, serializer);
+        <Option<crate::nuan5_database::model::Nuan5NetworkImage>>::sse_encode(
+            self.network_image,
             serializer,
         );
-    }
-}
-
-impl SseEncode for crate::nuan5_database::model::Nuan5DatabaseItem {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        match self {
-            crate::nuan5_database::model::Nuan5DatabaseItem::Light(field0) => {
-                <i32>::sse_encode(0, serializer);
-                <crate::nuan5_database::model::Nuan5Light>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::LightType(field0) => {
-                <i32>::sse_encode(1, serializer);
-                <crate::nuan5_database::model::Nuan5LightType>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::Filter(field0) => {
-                <i32>::sse_encode(2, serializer);
-                <crate::nuan5_database::model::Nuan5Filter>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::FilterType(field0) => {
-                <i32>::sse_encode(3, serializer);
-                <crate::nuan5_database::model::Nuan5FilterType>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::MomoPose(field0) => {
-                <i32>::sse_encode(4, serializer);
-                <crate::nuan5_database::model::Nuan5MomoPose>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyeArea(field0) => {
-                <i32>::sse_encode(5, serializer);
-                <crate::nuan5_database::model::Nuan5ClothDyeArea>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDyePalette(field0) => {
-                <i32>::sse_encode(6, serializer);
-                <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_encode(
-                    field0, serializer,
-                );
-            }
-            crate::nuan5_database::model::Nuan5DatabaseItem::ClothDiySwatchColor(field0) => {
-                <i32>::sse_encode(7, serializer);
-                <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_encode(
-                    field0, serializer,
-                );
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5Light>>::sse_encode(
+            self.light, serializer,
+        );
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5LightType>>::sse_encode(
+            self.light_type,
+            serializer,
+        );
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5Filter>>::sse_encode(
+            self.filter,
+            serializer,
+        );
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5FilterType>>::sse_encode(
+            self.filter_type,
+            serializer,
+        );
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5MomoPose>>::sse_encode(
+            self.momo_pose,
+            serializer,
+        );
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyeArea>>::sse_encode(self.cloth_dye_area, serializer);
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyePalette>>::sse_encode(self.cloth_dye_palette, serializer);
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor>>::sse_encode(self.cloth_diy_swatch_color, serializer);
     }
 }
 
@@ -11121,6 +11097,51 @@ impl SseEncode for crate::nuan5_database::model::Nuan5MomoPose {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.string_id, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_database::model::Nuan5NetworkImage {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_encode(
+            self.light, serializer,
+        );
+        <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_encode(
+            self.filter,
+            serializer,
+        );
+        <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_encode(
+            self.momo_pose,
+            serializer,
+        );
+        <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_encode(
+            self.cloth, serializer,
+        );
+        <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_encode(
+            self.cloth_outfit,
+            serializer,
+        );
+        <Option<crate::nuan5_database::model::Nuan5NetworkImageItem>>::sse_encode(
+            self.diy_pattern,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_database::model::Nuan5NetworkImageItem {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.base_url, serializer);
+        <String>::sse_encode(self.replace, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_database::model::Nuan5Table {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<i32>>::sse_encode(self.light_type, serializer);
+        <Vec<i32>>::sse_encode(self.filter_type, serializer);
+        <Vec<i32>>::sse_encode(self.momo_pose, serializer);
     }
 }
 
@@ -11350,6 +11371,46 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::Nikk
             <crate::nuan5_params::structs::nikki_photo_params::NikkiParams>::sse_encode(
                 value, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_database::model::Nuan5Config> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_database::model::Nuan5Config>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_database::model::Nuan5NetworkImage> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_database::model::Nuan5NetworkImage>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_database::model::Nuan5NetworkImageItem> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_database::model::Nuan5NetworkImageItem>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_database::model::Nuan5Table> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_database::model::Nuan5Table>::sse_encode(value, serializer);
         }
     }
 }
@@ -11691,11 +11752,67 @@ impl SseEncode for (f64, f64, f64, f64) {
     }
 }
 
-impl SseEncode for (i32, crate::nuan5_database::model::Nuan5DatabaseItem) {
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.0, serializer);
-        <crate::nuan5_database::model::Nuan5DatabaseItem>::sse_encode(self.1, serializer);
+        <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5ClothDyeArea) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5ClothDyeArea>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5ClothDyePalette) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5Filter) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5Filter>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5FilterType) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5FilterType>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5Light) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5Light>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5LightType) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5LightType>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5MomoPose) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5MomoPose>::sse_encode(self.1, serializer);
     }
 }
 
@@ -12242,8 +12359,6 @@ mod io {
     // Section: imports
 
     use super::*;
-    use crate::nuan5_database::nuan5_database::Nuan5DatabaseReader;
-    use crate::nuan5_database::reader_v1::*;
     use crate::nuan5_params::decrypt::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
@@ -12295,20 +12410,6 @@ mod io {
         ptr: *const std::ffi::c_void,
     ) {
         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>::decrement_strong_count(ptr as _);
-    }
-
-    #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>>::increment_strong_count(ptr as _);
-    }
-
-    #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNuan5DatabaseReaderV1(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Nuan5DatabaseReaderV1>>::decrement_strong_count(ptr as _);
     }
 }
 #[cfg(not(target_family = "wasm"))]

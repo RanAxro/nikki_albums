@@ -11,7 +11,7 @@ import "../domain/param_import.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../domain/code_parser.dart";
 import "../domain/param_box_manager.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
@@ -414,7 +414,7 @@ class WaterfallGallery extends StatelessWidget{
   Future<void> showViewerDialog(BuildContext context, ParamItem item) async{
     final dynamic param = await tryDeByType(item.type, item.value);
 
-    final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
+    final Nuan5Config? config = await GlobalNuan5Config.init();
 
     if(context.mounted){
       await showAppDialog(
@@ -433,21 +433,21 @@ class WaterfallGallery extends StatelessWidget{
                       if(param is CameraParams){
                         return CameraParamsEditPanel(
                           controller: CameraParamsEditController(cameraParams: param, allowEdit: false),
-                          reader: reader,
+                          config: config,
                         );
                       }
                       if(param is ClothDiyParams){
                         return ClothDiyParamsPanel(
                           shareCode: item.value,
                           clothDiyParams: param,
-                          reader: reader,
+                          config: config,
                         );
                       }
                       if(param is RichBuildingParams){
                         return RichBuildingParamsPanel(
                           shareCode: item.value,
                           richBuildingParams: param,
-                          reader: reader,
+                          config: config,
                         );
                       }
 

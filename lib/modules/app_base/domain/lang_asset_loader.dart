@@ -1,8 +1,9 @@
 
+
 import "../app_registry.dart";
 import "package:nikki_albums/utils/json.dart";
 import "package:nikki_albums/modules/hot_update/domain/hot_update_service.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/src/rust/nuan5_database/nuan5_database.dart";
 
 import "package:flutter/services.dart";
 import "package:flutter/foundation.dart";
@@ -39,7 +40,7 @@ class AppLangAssetLoader extends AssetLoader{
     try{
       final String localePath = getLocalePath(await getHotUpdateAssetsPath(id), "", locale, ".bin");
       
-      final Uint8List? decrypted = await nuan5DataDecrypt(input: localePath);
+      final Uint8List? decrypted = await nuan5DatabaseDecrypt(input: localePath);
       if(decrypted == null){
         return {};
       }

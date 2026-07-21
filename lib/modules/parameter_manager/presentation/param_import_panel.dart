@@ -3,7 +3,7 @@ import "cloth_diy_params_panel.dart";
 import "camera_params_edit_panel.dart";
 import "../domain/camera_params_edit_controller.dart";
 import "../domain/code_parser.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
@@ -29,13 +29,13 @@ import "package:file_picker/file_picker.dart";
 class CameraParamsImportInputPanel extends StatefulWidget{
   final void Function()? onCancel;
   final void Function(String?, CameraParams)? onFinish;
-  final Nuan5DatabaseReaderV1? reader;
+  final Nuan5Config? config;
 
   const CameraParamsImportInputPanel({
     super.key,
     this.onCancel,
     this.onFinish,
-    this.reader,
+    this.config,
   });
 
   @override
@@ -58,7 +58,7 @@ class _CameraParamsImportInputPanelState extends State<CameraParamsImportInputPa
                 physics: physics,
                 child: CameraParamsEditPanel(
                   controller: controller,
-                  reader: widget.reader,
+                  config: widget.config,
                 ),
               );
             },
@@ -97,13 +97,13 @@ class _CameraParamsImportInputPanelState extends State<CameraParamsImportInputPa
 class ClothDiyShareCodeImportHistoryPanel extends StatefulWidget{
   final void Function()? onCancel;
   final void Function(String)? onFinish;
-  final Nuan5DatabaseReaderV1? reader;
+  final Nuan5Config? config;
 
   const ClothDiyShareCodeImportHistoryPanel({
     super.key,
     this.onCancel,
     this.onFinish,
-    this.reader,
+    this.config,
   });
 
   @override
@@ -282,7 +282,7 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
                             return ClothDiyParamsPanel(
                               shareCode: selected,
                               clothDiyParams: clothDiyParams,
-                              reader: widget.reader,
+                              config: widget.config,
                             );
                           },
                         );

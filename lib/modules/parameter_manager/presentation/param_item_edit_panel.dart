@@ -10,7 +10,7 @@ import "../domain/camera_params_edit_controller.dart";
 import "../presentation/camera_params_edit_panel.dart";
 import "../presentation/cloth_diy_params_panel.dart";
 import "../presentation/rich_building_params_panel.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
@@ -56,10 +56,10 @@ class ParamItemEditPanel extends StatefulWidget{
 class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
   late final ParamItemEditController controller;
   late final ManualValueNotifier<List<String>> tagList;
-  Nuan5DatabaseReaderV1? reader;
+  Nuan5Config? config;
 
   Future<void> initReader() async{
-    reader = await Nuan5Data.init();
+    config = await GlobalNuan5Config.init();
     setState((){
 
     });
@@ -412,7 +412,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                     cameraParams: param,
                     allowEdit: false,
                   ),
-                  reader: reader,
+                  config: config,
                 );
               }
 
@@ -420,7 +420,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 return ClothDiyParamsPanel(
                   shareCode: controller.code,
                   clothDiyParams: param,
-                  reader: reader,
+                  config: config,
                 );
               }
 
@@ -428,7 +428,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 return RichBuildingParamsPanel(
                   shareCode: controller.code,
                   richBuildingParams: param,
-                  reader: reader,
+                  config: config,
                 );
               }
 

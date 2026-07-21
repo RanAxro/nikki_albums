@@ -5,10 +5,8 @@
 
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-part 'model.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
 class Nuan5ClothDiySwatchColor {
   final Float64List rgba;
@@ -101,38 +99,67 @@ class Nuan5ClothDyePalette {
           evolution2 == other.evolution2;
 }
 
-enum Nuan5DatabaseCategory {
-  light,
-  lightType,
-  filter,
-  filterType,
-  momoPose,
-  clothDyeArea,
-  clothDyePalette,
-  clothDiySwatchColor,
-}
+class Nuan5Config {
+  final Nuan5Table? table;
+  final Nuan5NetworkImage? networkImage;
+  final Map<int, Nuan5Light> light;
+  final Map<int, Nuan5LightType> lightType;
+  final Map<int, Nuan5Filter> filter;
+  final Map<int, Nuan5FilterType> filterType;
+  final Map<int, Nuan5MomoPose> momoPose;
+  final Map<int, Nuan5ClothDyeArea> clothDyeArea;
+  final Map<int, Nuan5ClothDyePalette> clothDyePalette;
+  final Map<int, Nuan5ClothDiySwatchColor> clothDiySwatchColor;
 
-@freezed
-sealed class Nuan5DatabaseItem with _$Nuan5DatabaseItem {
-  const Nuan5DatabaseItem._();
+  const Nuan5Config({
+    this.table,
+    this.networkImage,
+    required this.light,
+    required this.lightType,
+    required this.filter,
+    required this.filterType,
+    required this.momoPose,
+    required this.clothDyeArea,
+    required this.clothDyePalette,
+    required this.clothDiySwatchColor,
+  });
 
-  const factory Nuan5DatabaseItem.light(Nuan5Light field0) =
-      Nuan5DatabaseItem_Light;
-  const factory Nuan5DatabaseItem.lightType(Nuan5LightType field0) =
-      Nuan5DatabaseItem_LightType;
-  const factory Nuan5DatabaseItem.filter(Nuan5Filter field0) =
-      Nuan5DatabaseItem_Filter;
-  const factory Nuan5DatabaseItem.filterType(Nuan5FilterType field0) =
-      Nuan5DatabaseItem_FilterType;
-  const factory Nuan5DatabaseItem.momoPose(Nuan5MomoPose field0) =
-      Nuan5DatabaseItem_MomoPose;
-  const factory Nuan5DatabaseItem.clothDyeArea(Nuan5ClothDyeArea field0) =
-      Nuan5DatabaseItem_ClothDyeArea;
-  const factory Nuan5DatabaseItem.clothDyePalette(Nuan5ClothDyePalette field0) =
-      Nuan5DatabaseItem_ClothDyePalette;
-  const factory Nuan5DatabaseItem.clothDiySwatchColor(
-    Nuan5ClothDiySwatchColor field0,
-  ) = Nuan5DatabaseItem_ClothDiySwatchColor;
+  static Future<Nuan5Config> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5ConfigDefault();
+
+  static Future<Nuan5Config?> tryFrom({required String path}) => RustLib
+      .instance
+      .api
+      .crateNuan5DatabaseModelNuan5ConfigTryFrom(path: path);
+
+  @override
+  int get hashCode =>
+      table.hashCode ^
+      networkImage.hashCode ^
+      light.hashCode ^
+      lightType.hashCode ^
+      filter.hashCode ^
+      filterType.hashCode ^
+      momoPose.hashCode ^
+      clothDyeArea.hashCode ^
+      clothDyePalette.hashCode ^
+      clothDiySwatchColor.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5Config &&
+          runtimeType == other.runtimeType &&
+          table == other.table &&
+          networkImage == other.networkImage &&
+          light == other.light &&
+          lightType == other.lightType &&
+          filter == other.filter &&
+          filterType == other.filterType &&
+          momoPose == other.momoPose &&
+          clothDyeArea == other.clothDyeArea &&
+          clothDyePalette == other.clothDyePalette &&
+          clothDiySwatchColor == other.clothDiySwatchColor;
 }
 
 class Nuan5DiyPattern {
@@ -251,4 +278,95 @@ class Nuan5MomoPose {
       other is Nuan5MomoPose &&
           runtimeType == other.runtimeType &&
           stringId == other.stringId;
+}
+
+class Nuan5NetworkImage {
+  final Nuan5NetworkImageItem? light;
+  final Nuan5NetworkImageItem? filter;
+  final Nuan5NetworkImageItem? momoPose;
+  final Nuan5NetworkImageItem? cloth;
+  final Nuan5NetworkImageItem? clothOutfit;
+  final Nuan5NetworkImageItem? diyPattern;
+
+  const Nuan5NetworkImage({
+    this.light,
+    this.filter,
+    this.momoPose,
+    this.cloth,
+    this.clothOutfit,
+    this.diyPattern,
+  });
+
+  static Future<Nuan5NetworkImage> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5NetworkImageDefault();
+
+  @override
+  int get hashCode =>
+      light.hashCode ^
+      filter.hashCode ^
+      momoPose.hashCode ^
+      cloth.hashCode ^
+      clothOutfit.hashCode ^
+      diyPattern.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5NetworkImage &&
+          runtimeType == other.runtimeType &&
+          light == other.light &&
+          filter == other.filter &&
+          momoPose == other.momoPose &&
+          cloth == other.cloth &&
+          clothOutfit == other.clothOutfit &&
+          diyPattern == other.diyPattern;
+}
+
+class Nuan5NetworkImageItem {
+  final String baseUrl;
+  final String replace;
+
+  const Nuan5NetworkImageItem({required this.baseUrl, required this.replace});
+
+  static Future<Nuan5NetworkImageItem> default_() => RustLib.instance.api
+      .crateNuan5DatabaseModelNuan5NetworkImageItemDefault();
+
+  @override
+  int get hashCode => baseUrl.hashCode ^ replace.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5NetworkImageItem &&
+          runtimeType == other.runtimeType &&
+          baseUrl == other.baseUrl &&
+          replace == other.replace;
+}
+
+class Nuan5Table {
+  final Int32List lightType;
+  final Int32List filterType;
+  final Int32List momoPose;
+
+  const Nuan5Table({
+    required this.lightType,
+    required this.filterType,
+    required this.momoPose,
+  });
+
+  static Future<Nuan5Table> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5TableDefault();
+
+  @override
+  int get hashCode =>
+      lightType.hashCode ^ filterType.hashCode ^ momoPose.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5Table &&
+          runtimeType == other.runtimeType &&
+          lightType == other.lightType &&
+          filterType == other.filterType &&
+          momoPose == other.momoPose;
 }

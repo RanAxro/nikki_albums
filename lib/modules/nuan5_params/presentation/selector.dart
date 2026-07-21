@@ -1,7 +1,7 @@
 
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
 import "package:nikki_albums/widgets/common/component.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -27,24 +27,24 @@ class Selector extends StatefulWidget{
 
 class _SelectorState extends State<Selector>{
   bool? isInit;
-  late final Nuan5DatabaseReaderV1 reader;
+  late final Nuan5Config config;
   late final List<int> allType;
   final ValueNotifier<int?> selectedId = ValueNotifier(null);
 
   late final PageController pageController;
 
   Future<void> initData() async{
-    final Nuan5DatabaseReaderV1? readerV1 = await Nuan5Data.init();
+    final Nuan5Config? globalConfig = await GlobalNuan5Config.init();
 
-    if(readerV1 == null){
+    if(globalConfig == null){
       isInit = false;
       return;
     }
 
-    reader = readerV1;
+    config = globalConfig;
 
-    allType = widget.handler.getType(reader);
-    selectedId.value = widget.handler.getInitValue(reader, widget.initValue);
+    allType = widget.handler.getType(config);
+    selectedId.value = widget.handler.getInitValue(config, widget.initValue);
 
     setState((){
       initPageController();
@@ -56,7 +56,7 @@ class _SelectorState extends State<Selector>{
     if(selectedId.value == null){
       pageController = PageController(initialPage: 0);
     }else{
-      final int? initType = widget.handler.getValueType(reader, selectedId.value!);
+      final int? initType = widget.handler.getValueType(config, selectedId.value!);
 
       if(initType == null){
         pageController = PageController(initialPage: 0);
@@ -112,7 +112,7 @@ class _SelectorState extends State<Selector>{
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int page){
-                final List<int> allValue = widget.handler.getValue(reader, allType.isEmpty ? null : allType.elementAt(page));
+                final List<int> allValue = widget.handler.getValue(config, allType.isEmpty ? null : allType.elementAt(page));
 
                 return SmoothPointerScroll(
                   builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
@@ -151,7 +151,7 @@ class _SelectorState extends State<Selector>{
                                     AspectRatio(
                                       aspectRatio: 1,
                                       child: AppCachedNetworkImage(
-                                        imageUrl: widget.handler.getValueImageUrl(reader, id),
+                                        imageUrl: widget.handler.getValueImageUrl(config, id),
                                         cacheKey: id.toString(),
                                         errorWidget: widget.handler.imageErrorWidget,
                                       ),

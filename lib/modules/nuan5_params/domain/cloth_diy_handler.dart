@@ -1,6 +1,5 @@
 
 import "../model/cloth_diy.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
 
@@ -37,12 +36,8 @@ class ClothDiyHandler{
     return res.nonNulls.toList();
   }
 
-  int? getDyeZone(Nuan5DatabaseReaderV1 reader, int id, int featureTag, int targetGroupId){
-    final Map<int, Nuan5DatabaseItem> read = reader.getSync(category: Nuan5DatabaseCategory.clothDyeArea, ids: [id]);
-    final Nuan5ClothDyeArea? data = read[id]?.whenOrNull(
-      clothDyeArea: (Nuan5ClothDyeArea d) => d,
-    );
-
+  int? getDyeZone(Nuan5Config config, int id, int featureTag, int targetGroupId){
+    final Nuan5ClothDyeArea? data = config.clothDyeArea[id];
     if(data == null){
       return null;
     }
@@ -73,12 +68,8 @@ class ClothDiyHandler{
     return grid == -1 ? null : grid % 8 == 0 ? 8 : grid % 8;
   }
 
-  (double, double, double, double)? getSwatchRGBAColor(Nuan5DatabaseReaderV1 reader, int grid){
-    final Map<int, Nuan5DatabaseItem> read = reader.getSync(category: Nuan5DatabaseCategory.clothDiySwatchColor, ids: [grid]);
-
-    final Nuan5ClothDiySwatchColor? data = read[grid]?.whenOrNull(
-      clothDiySwatchColor: (Nuan5ClothDiySwatchColor d) => d,
-    );
+  (double, double, double, double)? getSwatchRGBAColor(Nuan5Config config, int grid){
+    final Nuan5ClothDiySwatchColor? data = config.clothDiySwatchColor[grid];
     if(data == null){
       return null;
     }
@@ -116,15 +107,10 @@ class ClothDiyHandler{
     return availableId;
   }
 
-  int? getColorPaletteSerialNumber(Nuan5DatabaseReaderV1 reader, int id, int palette){
+  int? getColorPaletteSerialNumber(Nuan5Config config, int id, int palette){
     final int availableId = _generateAvailableId(id);
 
-    final Map<int, Nuan5DatabaseItem> read = reader.getSync(category: Nuan5DatabaseCategory.clothDyePalette, ids: [availableId]);
-
-    final Nuan5ClothDyePalette? data = read[availableId]?.whenOrNull(
-      clothDyePalette: (Nuan5ClothDyePalette d) => d,
-    );
-
+    final Nuan5ClothDyePalette? data = config.clothDyePalette[availableId];
     if(data == null){
       return null;
     }
@@ -148,8 +134,8 @@ class ClothDiyHandler{
     return null;
   }
 
-  String? getColorPaletteSerialNumberStr(Nuan5DatabaseReaderV1 reader, int id, int palette){
-    final int? serialNumber = getColorPaletteSerialNumber(reader, id, palette);
+  String? getColorPaletteSerialNumberStr(Nuan5Config config, int id, int palette){
+    final int? serialNumber = getColorPaletteSerialNumber(config, id, palette);
     if(serialNumber == null){
       return null;
     }
@@ -157,7 +143,7 @@ class ClothDiyHandler{
     return serialNumber.toString().padLeft(2, "0");
   }
 
-  DyeCondition? getClothDyeCondition(Nuan5DatabaseReaderV1 reader, ClothParams clothParams){
+  DyeCondition? getClothDyeCondition(Nuan5Config config, ClothParams clothParams){
     if(clothParams.diy == null){
       return DyeCondition.directly;
     }
@@ -173,12 +159,7 @@ class ClothDiyHandler{
     }
 
     final int availableId = _generateAvailableId(clothParams.cloth.id);
-    final Map<int, Nuan5DatabaseItem> read = reader.getSync(category: Nuan5DatabaseCategory.clothDyePalette, ids: [availableId]);
-
-    final Nuan5ClothDyePalette? data = read[availableId]?.whenOrNull(
-      clothDyePalette: (Nuan5ClothDyePalette d) => d,
-    );
-
+    final Nuan5ClothDyePalette? data = config.clothDyePalette[availableId];
     if(data == null){
       return null;
     }
@@ -243,11 +224,11 @@ class ClothDiyHandler{
     return old;
   }
 
-  DyeCondition? getDyeCondition(Nuan5DatabaseReaderV1 reader, List<ClothParams> cloth){
+  DyeCondition? getDyeCondition(Nuan5Config config, List<ClothParams> cloth){
     DyeCondition? res;
 
     for(final ClothParams clothParams in cloth){
-      final DyeCondition? condition = getClothDyeCondition(reader, clothParams);
+      final DyeCondition? condition = getClothDyeCondition(config, clothParams);
 
       if(condition == null){
         continue;

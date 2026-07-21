@@ -1,8 +1,6 @@
 
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
-import "package:nikki_albums/src/rust/nuan5_database/model.dart";
-import "package:nikki_albums/src/rust/nuan5_database/reader_v1.dart";
-import "package:nikki_albums/modules/nuan5_params/model/image.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
 import "package:flutter/material.dart";
@@ -11,17 +9,17 @@ import "package:flutter/material.dart";
 abstract class SelectorHandler{
   const SelectorHandler();
 
-  int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw);
+  int? getInitValue(Nuan5Config config, Object? raw);
 
-  List<int> getType(Nuan5DatabaseReaderV1 reader);
+  List<int> getType(Nuan5Config config);
 
   String getTypeText(int type);
 
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type);
+  List<int> getValue(Nuan5Config config, int? type);
 
   String getValueText(int value);
 
-  String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value);
+  String getValueImageUrl(Nuan5Config config, int value);
 
   Widget imageErrorWidget(BuildContext context, String url, Object error){
     return Center(
@@ -29,11 +27,11 @@ abstract class SelectorHandler{
     );
   }
 
-  int? getValueType(Nuan5DatabaseReaderV1 reader, int value){
-    final List<int> allType = getType(reader);
+  int? getValueType(Nuan5Config config, int value){
+    final List<int> allType = getType(config);
 
     for(final int type in allType){
-      final List<int> allValue = getValue(reader, type);
+      final List<int> allValue = getValue(config, type);
       if(allValue.contains(value)){
         return type;
       }
@@ -48,7 +46,7 @@ class LightSelectorHandler extends SelectorHandler{
   const LightSelectorHandler();
 
   @override
-  int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
+  int? getInitValue(Nuan5Config config, Object? raw){
     if(raw == null){
       return null;
     }
@@ -58,13 +56,10 @@ class LightSelectorHandler extends SelectorHandler{
     }
 
     if(raw is String){
-      final List<int> light = reader.listSync(category: Nuan5DatabaseCategory.light, from: BigInt.zero, max: -1);
-      final Map<int, Nuan5DatabaseItem> lightData = reader.getSync(category: Nuan5DatabaseCategory.light, ids: light);
+      for(final MapEntry<int, Nuan5Light> entry in config.light.entries){
+        final Nuan5Light data = entry.value;
 
-      for(final MapEntry<int, Nuan5DatabaseItem> entry in lightData.entries){
-        final Nuan5Light? data = entry.value.whenOrNull(light: (d) => d);
-
-        if(data != null && (raw == data.paramId || raw == data.stringId)){
+        if(raw == data.paramId || raw == data.stringId){
           return entry.key;
         }
       }
@@ -74,8 +69,8 @@ class LightSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getType(Nuan5DatabaseReaderV1 reader){
-    return reader.listSync(category: Nuan5DatabaseCategory.lightType, from: BigInt.zero, max: -1);
+  List<int> getType(Nuan5Config config){
+    return config.table?.lightType ?? config.lightType.keys.toList();
   }
 
   @override
@@ -84,21 +79,17 @@ class LightSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type){
+  List<int> getValue(Nuan5Config config, int? type){
     if(type == null){
       return [];
     }
 
-    final Map<int, Nuan5DatabaseItem> data = reader.getSync(category: Nuan5DatabaseCategory.lightType, ids: [type]);
-
-    return data[type]?.whenOrNull(
-      lightType: (d) => d.light,
-    ) ?? [];
+    return config.lightType[type]?.light ?? [];
   }
 
   @override
-  String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
-    return Nuan5Image.light(value);
+  String getValueImageUrl(Nuan5Config config, int value){
+    return config.getImageUrl(config.networkImage?.light, value) ?? "";
   }
 
   @override
@@ -112,7 +103,7 @@ class FilterSelectorHandler extends SelectorHandler{
   const FilterSelectorHandler();
 
   @override
-  int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
+  int? getInitValue(Nuan5Config config, Object? raw){
     if(raw == null){
       return null;
     }
@@ -122,13 +113,10 @@ class FilterSelectorHandler extends SelectorHandler{
     }
 
     if(raw is String){
-      final List<int> filter = reader.listSync(category: Nuan5DatabaseCategory.filter, from: BigInt.zero, max: -1);
-      final Map<int, Nuan5DatabaseItem> filterData = reader.getSync(category: Nuan5DatabaseCategory.filter, ids: filter);
+      for(final MapEntry<int, Nuan5Filter> entry in config.filter.entries){
+        final Nuan5Filter data = entry.value;
 
-      for(final MapEntry<int, Nuan5DatabaseItem> entry in filterData.entries){
-        final Nuan5Filter? data = entry.value.whenOrNull(filter: (d) => d);
-
-        if(data != null && (raw == data.paramId || raw == data.stringId)){
+        if(raw == data.paramId || raw == data.stringId){
           return entry.key;
         }
       }
@@ -138,8 +126,8 @@ class FilterSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getType(Nuan5DatabaseReaderV1 reader){
-    return reader.listSync(category: Nuan5DatabaseCategory.filterType, from: BigInt.zero, max: -1);
+  List<int> getType(Nuan5Config config){
+    return config.table?.filterType ?? config.filterType.keys.toList();
   }
 
   @override
@@ -148,21 +136,17 @@ class FilterSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type){
+  List<int> getValue(Nuan5Config config, int? type){
     if(type == null){
       return [];
     }
 
-    final Map<int, Nuan5DatabaseItem> data = reader.getSync(category: Nuan5DatabaseCategory.filterType, ids: [type]);
-
-    return data[type]?.whenOrNull(
-      filterType: (d) => d.filter,
-    ) ?? [];
+    return config.filterType[type]?.filter ?? [];
   }
 
   @override
-  String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
-    return Nuan5Image.filter(value);
+  String getValueImageUrl(Nuan5Config config, int value){
+    return config.getImageUrl(config.networkImage?.filter, value) ?? "";
   }
 
   @override
@@ -176,7 +160,7 @@ class MomoPoseSelectorHandler extends SelectorHandler{
   const MomoPoseSelectorHandler();
 
   @override
-  int? getInitValue(Nuan5DatabaseReaderV1 reader, Object? raw){
+  int? getInitValue(Nuan5Config config, Object? raw){
     if(raw == null){
       return null;
     }
@@ -189,7 +173,7 @@ class MomoPoseSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getType(Nuan5DatabaseReaderV1 reader){
+  List<int> getType(Nuan5Config config){
     return [];
   }
 
@@ -199,13 +183,13 @@ class MomoPoseSelectorHandler extends SelectorHandler{
   }
 
   @override
-  List<int> getValue(Nuan5DatabaseReaderV1 reader, int? type){
-    return reader.listSync(category: Nuan5DatabaseCategory.momoPose, from: BigInt.zero, max: -1);
+  List<int> getValue(Nuan5Config config, int? type){
+    return config.momoPose.keys.toList();
   }
 
   @override
-  String getValueImageUrl(Nuan5DatabaseReaderV1 reader, int value){
-    return Nuan5Image.momoPose(value);
+  String getValueImageUrl(Nuan5Config config, int value){
+    return config.getImageUrl(config.networkImage?.momoPose, value) ?? "";
   }
 
   @override

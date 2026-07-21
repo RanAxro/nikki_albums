@@ -3,7 +3,7 @@ import "code_parser.dart";
 import "../presentation/param_import_panel.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/equality.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
 import "package:nikki_albums/modules/game/game.dart";
@@ -18,7 +18,7 @@ import "package:path/path.dart" as p;
 
 
 Future<(String?, CameraParams)?> showCameraParamsImportInputPanel({required BuildContext context}) async{
-  final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
+  final Nuan5Config? config = await GlobalNuan5Config.init();
 
   if(context.mounted){
     return showAppDialog<(String?, CameraParams)?>(
@@ -32,7 +32,7 @@ Future<(String?, CameraParams)?> showCameraParamsImportInputPanel({required Buil
             onFinish: (String? code, CameraParams cameraParams){
               Navigator.of(context).pop((code, cameraParams));
             },
-            reader: reader,
+            config: config,
           ),
         );
       }
@@ -53,7 +53,7 @@ void goToCameraParamsImportAlbumClockInPhoto(){
 }
 
 Future<String?> showClothDiyShareCodeImportHistoryPanel({required BuildContext context}) async{
-  final Nuan5DatabaseReaderV1? reader = await Nuan5Data.init();
+  final Nuan5Config? config = await GlobalNuan5Config.init();
 
   if(context.mounted){
     return showAppDialog<String?>(
@@ -65,7 +65,7 @@ Future<String?> showClothDiyShareCodeImportHistoryPanel({required BuildContext c
           child: ClothDiyShareCodeImportHistoryPanel(
             onCancel: Navigator.of(context).pop,
             onFinish: Navigator.of(context).pop,
-            reader: reader,
+            config: config,
           ),
         );
       }

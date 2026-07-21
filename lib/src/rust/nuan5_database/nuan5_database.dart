@@ -4,29 +4,11 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
-import 'model.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `Nuan5Database`
-// These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `close`, `get`, `has`, `is_open`, `list`, `open`
+// These functions are ignored because they are not marked as `pub`: `derive_key`
 
-abstract class Nuan5DatabaseReader {
-  Future<void> close();
-
-  Future<Map<int, Nuan5DatabaseItem>> get_({
-    required Nuan5DatabaseCategory category,
-    required List<int> ids,
-  });
-
-  Future<bool> has({required Nuan5DatabaseCategory category});
-
-  bool isOpen();
-
-  Future<Int32List> list({
-    required Nuan5DatabaseCategory category,
-    required BigInt from,
-    required PlatformInt64 max,
-  });
-
-  Future<bool> open({required String path});
-}
+Future<Uint8List?> nuan5DatabaseDecrypt({required String input}) => RustLib
+    .instance
+    .api
+    .crateNuan5DatabaseNuan5DatabaseNuan5DatabaseDecrypt(input: input);

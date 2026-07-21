@@ -1,10 +1,10 @@
 
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/model/cloth_diy.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
 import "package:nikki_albums/modules/nuan5_params/model/image.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/cloth_diy_handler.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
-import "package:nikki_albums/modules/nuan5_params/domain/database.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
@@ -32,13 +32,13 @@ class _TableRowBox{
 class ClothDiyParamsPanel extends StatelessWidget{
   final String shareCode;
   final ClothDiyParams clothDiyParams;
-  final Nuan5DatabaseReaderV1? reader;
+  final Nuan5Config? config;
 
   const ClothDiyParamsPanel({
     super.key,
     required this.shareCode,
     required this.clothDiyParams,
-    required this.reader,
+    required this.config,
   });
 
   final ClothDiyHandler handler = const ClothDiyHandler();
@@ -105,9 +105,9 @@ class ClothDiyParamsPanel extends StatelessWidget{
   }){
     final int palette = handler.getColorPalette(colorParams.colorGrid);
     final int? swatch = handler.getColorSwatch(colorParams.colorGrid);
-    final String? serialNumberStr = reader == null ? null : handler.getColorPaletteSerialNumberStr(reader!, id, palette);
-    final int? zone = reader == null ? null : handler.getDyeZone(reader!, id, featureTag, targetGroupId);
-    final (double, double, double, double)? rgbaColor = reader == null ? null : handler.getSwatchRGBAColor(reader!, colorParams.colorGrid);
+    final String? serialNumberStr = config == null ? null : handler.getColorPaletteSerialNumberStr(config!, id, palette);
+    final int? zone = config == null ? null : handler.getDyeZone(config!, id, featureTag, targetGroupId);
+    final (double, double, double, double)? rgbaColor = config == null ? null : handler.getSwatchRGBAColor(config!, colorParams.colorGrid);
     final Color color = rgbaColor == null ? convertColor(colorParams.color) : convertColor(rgbaColor);
 
     return _TableRowBox(
@@ -153,9 +153,9 @@ class ClothDiyParamsPanel extends StatelessWidget{
   }){
     final int palette = handler.getColorPalette(specialEffectData.colorGrid);
     final int? swatch = handler.getColorSwatch(specialEffectData.colorGrid);
-    final String? serialNumberStr = reader == null ? null : handler.getColorPaletteSerialNumberStr(reader!, id, palette);
-    final int? zone = reader == null ? null : handler.getDyeZone(reader!, id, specialEffectData.featureTag, specialEffectData.targetGroupId);
-    final (double, double, double, double)? rgbaColor = reader == null ? null : handler.getSwatchRGBAColor(reader!, specialEffectData.colorGrid);
+    final String? serialNumberStr = config == null ? null : handler.getColorPaletteSerialNumberStr(config!, id, palette);
+    final int? zone = config == null ? null : handler.getDyeZone(config!, id, specialEffectData.featureTag, specialEffectData.targetGroupId);
+    final (double, double, double, double)? rgbaColor = config == null ? null : handler.getSwatchRGBAColor(config!, specialEffectData.colorGrid);
     final Color? color = rgbaColor == null ? null : convertColor(rgbaColor);
 
     return _TableRowBox(
@@ -186,14 +186,14 @@ class ClothDiyParamsPanel extends StatelessWidget{
     required int id,
     required PatternCreationData patternCreationData,
   }){
-    final int? zone = reader == null ? null : handler.getDyeZone(reader!, id, patternCreationData.featureTag, patternCreationData.targetGroupId);
+    final int? zone = config == null ? null : handler.getDyeZone(config!, id, patternCreationData.featureTag, patternCreationData.targetGroupId);
 
     return _TableRowBox(
       zone: zone,
       child: TableRow(
         children: [
           AppCachedNetworkImage(
-            imageUrl: Nuan5Image.clothDiyPattern(patternCreationData.textureId),
+            imageUrl: config?.getImageUrl(config?.networkImage?.diyPattern, patternCreationData.textureId) ?? "",
             cacheKey: patternCreationData.textureId.toString(),
             width: 40,
             height: 40,
@@ -313,7 +313,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
               final ClothParams clothParams = clothParamsList.elementAt(index);
               final int? outfit = clothParams.cloth.outfit;
 
-              final DyeCondition? condition = reader == null ? null : handler.getClothDyeCondition(reader!, clothParams);
+              final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
 
               return AppFloatingIndicatorButtonTarget(
                 child: AppSuperTooltip(
@@ -329,7 +329,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
                             child: AspectRatio(
                               aspectRatio: 2 / 3,
                               child: AppCachedNetworkImage(
-                                imageUrl: Nuan5Image.outfit(outfit),
+                                imageUrl: config?.getImageUrl(config?.networkImage?.clothOutfit, outfit) ?? "",
                                 cacheKey: outfit.toString(),
                                 fit: BoxFit.contain,
                               ),
@@ -451,7 +451,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
                         AspectRatio(
                           aspectRatio: 1,
                           child: AppCachedNetworkImage(
-                            imageUrl: Nuan5Image.cloth(clothParams.cloth.id),
+                            imageUrl: config?.getImageUrl(config?.networkImage?.cloth, clothParams.cloth.id) ?? "",
                             cacheKey: clothParams.cloth.id.toString(),
                           ),
                         ),
@@ -465,7 +465,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
             },
           );
 
-          final DyeCondition? condition = reader == null ? null : handler.getDyeCondition(reader!, clothDiyParams.clothes);
+          final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
           final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
           return Column(
             spacing: listSpacing,
