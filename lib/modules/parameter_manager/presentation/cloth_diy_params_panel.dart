@@ -2,7 +2,6 @@
 import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/model/cloth_diy.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
-import "package:nikki_albums/modules/nuan5_params/model/image.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/cloth_diy_handler.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
