@@ -1296,7 +1296,9 @@ class _AppTextFiledState extends State<AppTextFiled>{
     super.initState();
     controller = widget.controller ?? TextEditingController();
     hasController = widget.controller != null;
-    controller.text = widget.initText ?? "";
+    if(widget.initText != null){
+      controller.text = widget.initText!;
+    }
   }
 
   @override
