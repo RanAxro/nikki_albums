@@ -3,6 +3,7 @@ import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
 import "param_item_edit_panel.dart";
+import "../model/parameter_manager.dart";
 import "../model/param_box.dart";
 import "../model/param_type.dart";
 import "../model/param_item.dart";
@@ -15,6 +16,8 @@ import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
 import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
@@ -51,6 +54,7 @@ class ParameterManager extends StatefulWidget{
 
 class _ParameterManagerState extends State<ParameterManager>{
   final ValueNotifier<int> page = ValueNotifier<int>(0);
+  final ValueNotifier<SearchConfig> searchConfig = ValueNotifier(SearchConfig.defaultConfig);
   late final PageController controller;
   bool? isInit;
   late final ParamBoxManager manager;
@@ -84,6 +88,119 @@ class _ParameterManagerState extends State<ParameterManager>{
     super.dispose();
     page.dispose();
     manager.dispose();
+  }
+
+  void search(BuildContext context){
+    Widget child = ValueListenableBuilder(
+      valueListenable: searchConfig,
+      builder: (BuildContext context, SearchConfig currentSearchConfig, Widget? child){
+        return Column(
+          spacing: listSpacing,
+          children: [
+            AppTextFiled(
+              autofocus: true,
+              initText: currentSearchConfig.value,
+              onChanged: (String value){
+                searchConfig.value = currentSearchConfig.copyWith(value: value);
+              },
+              labelText: "parameter_manager.search",
+            ),
+
+            AppFloatingIndicatorButtonGroup(
+              child: Column(
+                children: [
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchName,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchName: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_name"),
+                  ),
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchTag,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchTag: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_tag"),
+                  ),
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchClothesName,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchClothesName: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_clothes_name"),
+                  ),
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchOutfitName,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchOutfitName: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_outfit_name"),
+                  ),
+                ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: child)).toList(),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    showAppDialog(
+      context: context,
+      builder: (BuildContext context){
+        return Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(top: topBarHeight + smallPadding),
+            child: AppDialog(
+              maxWidth: 800,
+              child: child,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<List<ParamItem>> getShowItem(int typeIndex) async{
+    final SearchConfig currentSearchConfig = searchConfig.value;
+    final Set<String> targetTag = manager.tagList
+      .map((ParamTag tag) => tag.name.contains(currentSearchConfig.value) ? tag.uuid : null)
+      .nonNulls.toSet();
+
+    final List<ParamItem> res = [];
+    for(final ParamItem item in manager.getSortedItemList().reversed){
+      if(item.type.value != typeIndex){
+        continue;
+      }
+      if(currentSearchConfig.value == ""){
+        res.add(item);
+        continue;
+      }
+      if(currentSearchConfig.searchName && item.title?.contains(currentSearchConfig.value) == true){
+        res.add(item);
+        continue;
+      }
+      if(currentSearchConfig.searchTag && item.tag.any((String uuid) => targetTag.contains(uuid))){
+        res.add(item);
+        continue;
+      }
+      if((currentSearchConfig.searchClothesName || currentSearchConfig.searchOutfitName) && item.type == ParamType.cloth){
+        final ClothDiyParams? params = await tryDeClothDiyShareCode(item.value);
+        for(final ClothParams clothParams in params?.clothes ?? const []){
+          if(currentSearchConfig.searchClothesName && trText(clothParams.cloth.id.toString(), category: "cloth").contains(currentSearchConfig.value)){
+            res.add(item);
+            break;
+          }
+          if(currentSearchConfig.searchOutfitName && trText(clothParams.cloth.outfit.toString(), category: "cloth_outfit").contains(currentSearchConfig.value)){
+            res.add(item);
+            break;
+          }
+        }
+      }
+    }
+
+    return res;
   }
 
   void add(BuildContext context, {String? code, ParamItemCover? cover, ParamType? paramType}){
@@ -209,59 +326,98 @@ class _ParameterManagerState extends State<ParameterManager>{
             height: topBarHeight,
             child: Row(
               children: [
+                ValueListenableBuilder(
+                  valueListenable: page,
+                  builder: (BuildContext context, int currentPage, Widget? child){
+                    return AppRadioStack(
+                      direction: Axis.horizontal,
+                      selectedIndex: currentPage,
+                      children: [
+                        AppButton.smallText(
+                          onClick: (){
+                            page.value = 0;
+                            controller.animateToPage(0, duration: animationTime, curve: animationCurve);
+                          },
+                          child: Row(
+                            spacing: listSpacing,
+                            children: [
+                              AppIcon("camera"),
+                              AppText.tr("parameter_manager.camera"),
+                            ],
+                          ),
+                        ),
+                        AppButton.smallText(
+                          onClick: (){
+                            page.value = 1;
+                            controller.animateToPage(1, duration: animationTime, curve: animationCurve);
+                          },
+                          child: Row(
+                            spacing: listSpacing,
+                            children: [
+                              AppIcon("cloth"),
+                              AppText.tr("parameter_manager.cloth"),
+                            ],
+                          ),
+                        ),
+                        AppButton.smallText(
+                          onClick: (){
+                            page.value = 2;
+                            controller.animateToPage(2, duration: animationTime, curve: animationCurve);
+                          },
+                          child: Row(
+                            spacing: listSpacing,
+                            children: [
+                              AppIcon("home"),
+                              AppText.tr("parameter_manager.home"),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+
+                /// Search Button
                 Expanded(
-                  child: ValueListenableBuilder(
-                    valueListenable: page,
-                    builder: (BuildContext context, int currentPage, Widget? child){
-                      return AppRadioStack(
-                        direction: Axis.horizontal,
-                        selectedIndex: currentPage,
-                        children: [
-                          AppButton.smallText(
-                            onClick: (){
-                              page.value = 0;
-                              controller.animateToPage(0, duration: animationTime, curve: animationCurve);
-                            },
-                            child: Row(
-                              spacing: listSpacing,
-                              children: [
-                                AppIcon("camera"),
-                                AppText.tr("parameter_manager.camera"),
-                              ],
-                            ),
-                          ),
-                          AppButton.smallText(
-                            onClick: (){
-                              page.value = 1;
-                              controller.animateToPage(1, duration: animationTime, curve: animationCurve);
-                            },
-                            child: Row(
-                              spacing: listSpacing,
-                              children: [
-                                AppIcon("cloth"),
-                                AppText.tr("parameter_manager.cloth"),
-                              ],
-                            ),
-                          ),
-                          AppButton.smallText(
-                            onClick: (){
-                              page.value = 2;
-                              controller.animateToPage(2, duration: animationTime, curve: animationCurve);
-                            },
-                            child: Row(
-                              spacing: listSpacing,
-                              children: [
-                                AppIcon("home"),
-                                AppText.tr("parameter_manager.home"),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
+                  child: AppButton.smallText(
+                    margin: const EdgeInsets.symmetric(horizontal: bigPadding),
+                    colorRole: ColorRole.secondary,
+                    isTransparent: false,
+                    onClick: (){
+                      search(context);
                     },
+                    child: Row(
+                      spacing: listSpacing,
+                      children: [
+                        Icon(Icons.search),
+                        Expanded(
+                          child: ValueListenableBuilder(
+                            valueListenable: searchConfig,
+                            builder: (BuildContext context, SearchConfig currentSearchConfig, Widget? child){
+                              if(currentSearchConfig.value == ""){
+                                return AppText.tr("parameter_manager.search");
+                              }
+                              return Row(
+                                spacing: listSpacing,
+                                children: [
+                                  Expanded(child: AppText(currentSearchConfig.value)),
+                                  AppButton.smallIcon(
+                                    onClick: (){
+                                      searchConfig.value = searchConfig.value.copyWith(value: "");
+                                    },
+                                    child: AppIcon("cross"),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
+                /// Add Button
                 AppButton.smallText(
                   onClick: (){
                     add(context, paramType: [
@@ -279,6 +435,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                   ),
                 ),
 
+                /// More Method Button
                 AppDropdown(
                   childrenBuilder: (BuildContext context, MenuController controller){
                     return [
@@ -361,6 +518,11 @@ class _ParameterManagerState extends State<ParameterManager>{
                     );
                   },
                 ),
+
+                /// Setting
+                AppButton.smallIcon(
+                  child: AppIcon("setting"),
+                ),
               ],
             ),
           ),
@@ -378,11 +540,21 @@ class _ParameterManagerState extends State<ParameterManager>{
                   child: ListenableBuilder(
                     listenable: manager,
                     builder: (BuildContext context, Widget? child){
-                      return WaterfallGallery(
-                        items: manager.getSortedItemList().reversed.where((item) => item.type.value == index).toList(),
-                        manager: manager,
-                        onDelete: onDeleteItem,
-                        onEdit: onEditItem,
+                      return ValueListenableBuilder(
+                        valueListenable: searchConfig,
+                        builder: (BuildContext context, SearchConfig currentSearchConfig, Widget? child){
+                          return RFutureBuilder(
+                            future: getShowItem(index),
+                            builder: (BuildContext context, List<ParamItem> items){
+                              return WaterfallGallery(
+                                items: items,
+                                manager: manager,
+                                onDelete: onDeleteItem,
+                                onEdit: onEditItem,
+                              );
+                            },
+                          );
+                        },
                       );
                     },
                   ),
@@ -509,94 +681,100 @@ class WaterfallGallery extends StatelessWidget{
         const double maxItemWidth = 300;
         final int crossAxisCount = (constraints.maxWidth / maxItemWidth).ceil();
 
-        return MasonryGridView.count(
-          crossAxisCount: crossAxisCount,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          padding: const EdgeInsets.all(8),
-          // ========== 懒加载 ==========
-          // 只构建视口内 + 上下各 3 屏范围的 item
-          cacheExtent: constraints.maxHeight * 3,
-          itemCount: items.length,
-          itemBuilder: (context, index){
-            final ParamItem item = items[index];
+        return SmoothPointerScroll(
+          builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+            return MasonryGridView.count(
+              controller: controller,
+              physics: physics,
+              crossAxisCount: crossAxisCount,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              padding: const EdgeInsets.all(8),
+              // ========== 懒加载 ==========
+              // 只构建视口内 + 上下各 3 屏范围的 item
+              cacheExtent: constraints.maxHeight * 3,
+              itemCount: items.length,
+              itemBuilder: (context, index){
+                final ParamItem item = items[index];
 
-            return AppButton(
-              padding: const EdgeInsets.all(smallPadding),
-              borderRadius: smallBorderRadius,
-              colorRole: ColorRole.primary,
-              isTransparent: false,
-              onClick: () async{
-                showViewerDialog(context, item);
-              },
-              child: Column(
-                spacing: listSpacing,
-                children: [
-                  AppText(item.title ?? ""),
+                return AppButton(
+                  padding: const EdgeInsets.all(smallPadding),
+                  borderRadius: smallBorderRadius,
+                  colorRole: ColorRole.primary,
+                  isTransparent: false,
+                  onClick: () async{
+                    showViewerDialog(context, item);
+                  },
+                  child: Column(
+                    spacing: listSpacing,
+                    children: [
+                      AppText(item.title ?? ""),
 
-                  if(item.image != null)
-                    ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
-                      child: Image(image: NonCacheFileImage(File(manager.getImagePath(item.image!)))),
-                    ),
+                      if(item.image != null)
+                        ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
+                          child: Image(image: NonCacheFileImage(File(manager.getImagePath(item.image!)))),
+                        ),
 
-                  if(item.tag.isNotEmpty)
-                    Builder(
-                      builder: (BuildContext context){
-                        final List<Widget> children = [];
+                      if(item.tag.isNotEmpty)
+                        Builder(
+                          builder: (BuildContext context){
+                            final List<Widget> children = [];
 
-                        for(final String uuid in item.tag){
-                          final ParamTag? tag = manager.getTag(uuid);
-                          if(tag != null){
-                            children.add(IntrinsicWidth(
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                                constraints: BoxConstraints(
-                                  minWidth: smallButtonSize,
-                                ),
-                                height: smallButtonContentSize + smallPadding,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
-                                  color: Color(tag.color),
-                                ),
-                                child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
+                            for(final String uuid in item.tag){
+                              final ParamTag? tag = manager.getTag(uuid);
+                              if(tag != null){
+                                children.add(IntrinsicWidth(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                                    constraints: BoxConstraints(
+                                      minWidth: smallButtonSize,
+                                    ),
+                                    height: smallButtonContentSize + smallPadding,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
+                                      color: Color(tag.color),
+                                    ),
+                                    child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
+                                  ),
+                                ));
+                              }
+                            }
+
+                            return Align(
+                              alignment: Alignment.centerLeft,
+                              child: Wrap(
+                                spacing: listSpacing,
+                                runSpacing: listSpacing,
+                                children: children,
                               ),
-                            ));
+                            );
+                          },
+                        ),
+
+                      AppButton.smallText(
+                        toolTip: "parameter_manager.click_to_copy",
+                        colorRole: ColorRole.secondary,
+                        isTransparent: false,
+                        onClick: () async{
+                          try{
+                            await copyTextToClipboard(item.value);
+                            if(context.mounted){
+                              AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
+                            }
+                          }catch(e){
+                            if(context.mounted){
+                              AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
+                            }
                           }
-                        }
-
-                        return Align(
-                          alignment: Alignment.centerLeft,
-                          child: Wrap(
-                            spacing: listSpacing,
-                            runSpacing: listSpacing,
-                            children: children,
-                          ),
-                        );
-                      },
-                    ),
-
-                  AppButton.smallText(
-                    toolTip: "parameter_manager.click_to_copy",
-                    colorRole: ColorRole.secondary,
-                    isTransparent: false,
-                    onClick: () async{
-                      try{
-                        await copyTextToClipboard(item.value);
-                        if(context.mounted){
-                          AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
-                        }
-                      }catch(e){
-                        if(context.mounted){
-                          AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
-                        }
-                      }
-                    },
-                    child: AppText(item.value, overflow: TextOverflow.ellipsis),
+                        },
+                        child: AppText(item.value, overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             );
           },
         );
