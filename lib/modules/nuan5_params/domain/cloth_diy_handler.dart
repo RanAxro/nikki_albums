@@ -244,6 +244,14 @@ class ClothDiyHandler{
     return res;
   }
 
+  bool? getPatternCreationOverridePatternA(Nuan5Config config, int textureId, bool? raw){
+    if(config.diyPattern[textureId]?.hasAlphaChannel == true){
+      return raw == true;
+    }else{
+      return null;
+    }
+  }
+
   EffectScheme? getEffectScheme(List<ClothParams> cloth){
     final Iterable<bool> effectHidden = cloth.map((ClothParams clothParams) => clothParams.effectHidden).nonNulls;
     if(effectHidden.isEmpty){

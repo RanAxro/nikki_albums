@@ -2554,6 +2554,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<int, Nuan5DiyPattern> dco_decode_Map_i_32_nuan_5_diy_pattern_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_diy_pattern(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
   Map<int, Nuan5Filter> dco_decode_Map_i_32_nuan_5_filter_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
@@ -3741,6 +3753,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Nuan5DiyPattern)> dco_decode_list_record_i_32_nuan_5_diy_pattern(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_diy_pattern)
+        .toList();
+  }
+
+  @protected
   List<(int, Nuan5Filter)> dco_decode_list_record_i_32_nuan_5_filter(
     dynamic raw,
   ) {
@@ -4149,8 +4171,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Config dco_decode_nuan_5_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 10)
-      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    if (arr.length != 11)
+      throw Exception('unexpected arr length: expect 11 but see ${arr.length}');
     return Nuan5Config(
       table: dco_decode_opt_box_autoadd_nuan_5_table(arr[0]),
       networkImage: dco_decode_opt_box_autoadd_nuan_5_network_image(arr[1]),
@@ -4165,6 +4187,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       ),
       clothDiySwatchColor:
           dco_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(arr[9]),
+      diyPattern: dco_decode_Map_i_32_nuan_5_diy_pattern_None(arr[10]),
     );
   }
 
@@ -4174,7 +4197,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     final arr = raw as List<dynamic>;
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return Nuan5DiyPattern(stringId: dco_decode_String(arr[0]));
+    return Nuan5DiyPattern(hasAlphaChannel: dco_decode_bool(arr[0]));
   }
 
   @protected
@@ -4757,6 +4780,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, Nuan5DiyPattern) dco_decode_record_i_32_nuan_5_diy_pattern(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_diy_pattern(arr[1]));
+  }
+
+  @protected
   (int, Nuan5Filter) dco_decode_record_i_32_nuan_5_filter(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -5326,6 +5361,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var inner = sse_decode_list_record_i_32_nuan_5_cloth_dye_palette(
       deserializer,
     );
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5DiyPattern> sse_decode_Map_i_32_nuan_5_diy_pattern_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_diy_pattern(deserializer);
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
   }
 
@@ -6783,6 +6827,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Nuan5DiyPattern)> sse_decode_list_record_i_32_nuan_5_diy_pattern(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5DiyPattern)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_diy_pattern(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<(int, Nuan5Filter)> sse_decode_list_record_i_32_nuan_5_filter(
     SseDeserializer deserializer,
   ) {
@@ -7313,6 +7371,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     );
     var var_clothDiySwatchColor =
         sse_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(deserializer);
+    var var_diyPattern = sse_decode_Map_i_32_nuan_5_diy_pattern_None(
+      deserializer,
+    );
     return Nuan5Config(
       table: var_table,
       networkImage: var_networkImage,
@@ -7324,14 +7385,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       clothDyeArea: var_clothDyeArea,
       clothDyePalette: var_clothDyePalette,
       clothDiySwatchColor: var_clothDiySwatchColor,
+      diyPattern: var_diyPattern,
     );
   }
 
   @protected
   Nuan5DiyPattern sse_decode_nuan_5_diy_pattern(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_stringId = sse_decode_String(deserializer);
-    return Nuan5DiyPattern(stringId: var_stringId);
+    var var_hasAlphaChannel = sse_decode_bool(deserializer);
+    return Nuan5DiyPattern(hasAlphaChannel: var_hasAlphaChannel);
   }
 
   @protected
@@ -8151,6 +8213,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, Nuan5DiyPattern) sse_decode_record_i_32_nuan_5_diy_pattern(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_diy_pattern(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
   (int, Nuan5Filter) sse_decode_record_i_32_nuan_5_filter(
     SseDeserializer deserializer,
   ) {
@@ -8800,6 +8872,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_record_i_32_nuan_5_cloth_dye_palette(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_diy_pattern_None(
+    Map<int, Nuan5DiyPattern> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_diy_pattern(
       self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
@@ -10198,6 +10282,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_diy_pattern(
+    List<(int, Nuan5DiyPattern)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_diy_pattern(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_filter(
     List<(int, Nuan5Filter)> self,
     SseSerializer serializer,
@@ -10645,6 +10741,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.clothDiySwatchColor,
       serializer,
     );
+    sse_encode_Map_i_32_nuan_5_diy_pattern_None(self.diyPattern, serializer);
   }
 
   @protected
@@ -10653,7 +10750,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.stringId, serializer);
+    sse_encode_bool(self.hasAlphaChannel, serializer);
   }
 
   @protected
@@ -11420,6 +11517,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.$1, serializer);
     sse_encode_nuan_5_cloth_dye_palette(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_diy_pattern(
+    (int, Nuan5DiyPattern) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_diy_pattern(self.$2, serializer);
   }
 
   @protected

@@ -110,6 +110,7 @@ class Nuan5Config {
   final Map<int, Nuan5ClothDyeArea> clothDyeArea;
   final Map<int, Nuan5ClothDyePalette> clothDyePalette;
   final Map<int, Nuan5ClothDiySwatchColor> clothDiySwatchColor;
+  final Map<int, Nuan5DiyPattern> diyPattern;
 
   const Nuan5Config({
     this.table,
@@ -122,6 +123,7 @@ class Nuan5Config {
     required this.clothDyeArea,
     required this.clothDyePalette,
     required this.clothDiySwatchColor,
+    required this.diyPattern,
   });
 
   static Future<Nuan5Config> default_() =>
@@ -143,7 +145,8 @@ class Nuan5Config {
       momoPose.hashCode ^
       clothDyeArea.hashCode ^
       clothDyePalette.hashCode ^
-      clothDiySwatchColor.hashCode;
+      clothDiySwatchColor.hashCode ^
+      diyPattern.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -159,26 +162,27 @@ class Nuan5Config {
           momoPose == other.momoPose &&
           clothDyeArea == other.clothDyeArea &&
           clothDyePalette == other.clothDyePalette &&
-          clothDiySwatchColor == other.clothDiySwatchColor;
+          clothDiySwatchColor == other.clothDiySwatchColor &&
+          diyPattern == other.diyPattern;
 }
 
 class Nuan5DiyPattern {
-  final String stringId;
+  final bool hasAlphaChannel;
 
-  const Nuan5DiyPattern({required this.stringId});
+  const Nuan5DiyPattern({required this.hasAlphaChannel});
 
   static Future<Nuan5DiyPattern> default_() =>
       RustLib.instance.api.crateNuan5DatabaseModelNuan5DiyPatternDefault();
 
   @override
-  int get hashCode => stringId.hashCode;
+  int get hashCode => hasAlphaChannel.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Nuan5DiyPattern &&
           runtimeType == other.runtimeType &&
-          stringId == other.stringId;
+          hasAlphaChannel == other.hasAlphaChannel;
 }
 
 class Nuan5Filter {

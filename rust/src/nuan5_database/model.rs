@@ -33,6 +33,9 @@ pub struct Nuan5Config{
 
   #[prost(map = "int32, message", tag = "8")]
   pub cloth_diy_swatch_color: HashMap<i32, Nuan5ClothDiySwatchColor>,
+
+  #[prost(map = "int32, message", tag = "9")]
+  pub diy_pattern: HashMap<i32, Nuan5DiyPattern>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -166,6 +169,6 @@ pub struct Nuan5ClothDiySwatchColor{
 #[derive(Clone, PartialEq)]
 #[derive(Message)]
 pub struct Nuan5DiyPattern{
-  #[prost(string, tag = "1")]
-  pub string_id: String,
+  #[prost(bool, tag = "3")]
+  pub has_alpha_channel: bool,
 }

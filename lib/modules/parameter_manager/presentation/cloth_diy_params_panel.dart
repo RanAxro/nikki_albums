@@ -186,6 +186,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
     required PatternCreationData patternCreationData,
   }){
     final int? zone = config == null ? null : handler.getDyeZone(config!, id, patternCreationData.featureTag, patternCreationData.targetGroupId);
+    final bool? overridePatternA = config == null ? null : handler.getPatternCreationOverridePatternA(config!, patternCreationData.textureId, patternCreationData.overridePatternA);
 
     return _TableRowBox(
       zone: zone,
@@ -205,8 +206,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
             message: trText("tiling"),
             child: AppText(patternCreationData.tiling.toString()),
           ),
-          patternCreationData.overridePatternA == null ? block0 :
-            AppText(trBool(patternCreationData.overridePatternA!, index: 6)),
+          overridePatternA == null ? block0 : AppText(trBool(overridePatternA, index: 6)),
 
         ].map((Widget widget) => Padding(
           padding: const EdgeInsets.all(tinyPadding),

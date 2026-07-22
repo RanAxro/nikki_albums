@@ -111,6 +111,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_Map_i_32_nuan_5_cloth_dye_palette_None(dynamic raw);
 
   @protected
+  Map<int, Nuan5DiyPattern> dco_decode_Map_i_32_nuan_5_diy_pattern_None(
+    dynamic raw,
+  );
+
+  @protected
   Map<int, Nuan5Filter> dco_decode_Map_i_32_nuan_5_filter_None(dynamic raw);
 
   @protected
@@ -566,6 +571,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(dynamic raw);
 
   @protected
+  List<(int, Nuan5DiyPattern)> dco_decode_list_record_i_32_nuan_5_diy_pattern(
+    dynamic raw,
+  );
+
+  @protected
   List<(int, Nuan5Filter)> dco_decode_list_record_i_32_nuan_5_filter(
     dynamic raw,
   );
@@ -904,6 +914,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5DiyPattern) dco_decode_record_i_32_nuan_5_diy_pattern(dynamic raw);
+
+  @protected
   (int, Nuan5Filter) dco_decode_record_i_32_nuan_5_filter(dynamic raw);
 
   @protected
@@ -1075,6 +1088,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   Map<int, Nuan5ClothDyePalette>
   sse_decode_Map_i_32_nuan_5_cloth_dye_palette_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<int, Nuan5DiyPattern> sse_decode_Map_i_32_nuan_5_diy_pattern_None(
     SseDeserializer deserializer,
   );
 
@@ -1636,6 +1654,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5DiyPattern)> sse_decode_list_record_i_32_nuan_5_diy_pattern(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(int, Nuan5Filter)> sse_decode_list_record_i_32_nuan_5_filter(
     SseDeserializer deserializer,
   );
@@ -2050,6 +2073,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5DiyPattern) sse_decode_record_i_32_nuan_5_diy_pattern(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (int, Nuan5Filter) sse_decode_record_i_32_nuan_5_filter(
     SseDeserializer deserializer,
   );
@@ -2260,6 +2288,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_i_32_nuan_5_cloth_dye_palette_None(
     Map<int, Nuan5ClothDyePalette> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_diy_pattern_None(
+    Map<int, Nuan5DiyPattern> self,
     SseSerializer serializer,
   );
 
@@ -2969,6 +3003,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_diy_pattern(
+    List<(int, Nuan5DiyPattern)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_filter(
     List<(int, Nuan5Filter)> self,
     SseSerializer serializer,
@@ -3496,6 +3536,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_32_nuan_5_cloth_dye_palette(
     (int, Nuan5ClothDyePalette) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_diy_pattern(
+    (int, Nuan5DiyPattern) self,
     SseSerializer serializer,
   );
 
