@@ -137,7 +137,11 @@ class _ClothDiyShareCodeImportHistoryPanelState extends State<ClothDiyShareCodeI
           final ClothDiyParam? clothDiyParam = await clothDiyDeFile(paramType: ClothDiyParamType.diyHistoryShareCode, path: entity.path);
           clothDiyParam?.whenOrNull(
             diyHistoryShareCode: (List<DiyHistoryShareCodeParams> box){
-              shareCodeMap[uid] = box.map((DiyHistoryShareCodeParams item) => item.shareCode).toList();
+              final List<DiyHistoryShareCodeParams> sorted = List.of(box);
+              sorted.sort((DiyHistoryShareCodeParams p1, DiyHistoryShareCodeParams p2){
+                return p1.timeStamp.compareTo(p2.timeStamp);
+              });
+              shareCodeMap[uid] = sorted.map((DiyHistoryShareCodeParams item) => item.shareCode).toList().reversed.toList();
             },
           );
         }catch(e){
