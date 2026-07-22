@@ -1261,8 +1261,9 @@ class AppIcon extends StatelessWidget{
   }
 }
 
-class AppTextFiled extends StatelessWidget{
+class AppTextFiled extends StatefulWidget{
   final bool autofocus;
+  final String? initText;
   final TextEditingController? controller;
   final String? labelText;
   final bool isTranslateLabel;
@@ -1273,6 +1274,7 @@ class AppTextFiled extends StatelessWidget{
   const AppTextFiled({
     super.key,
     this.autofocus = false,
+    this.initText,
     this.controller,
     this.labelText,
     this.isTranslateLabel = true,
@@ -1282,16 +1284,40 @@ class AppTextFiled extends StatelessWidget{
   });
 
   @override
+  State<AppTextFiled> createState() => _AppTextFiledState();
+}
+
+class _AppTextFiledState extends State<AppTextFiled>{
+  late TextEditingController controller;
+  late bool hasController;
+
+  @override
+  void initState(){
+    super.initState();
+    controller = widget.controller ?? TextEditingController();
+    hasController = widget.controller != null;
+    controller.text = widget.initText ?? "";
+  }
+
+  @override
+  void dispose(){
+    if(!hasController){
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context){
     return TextField(
-      autofocus: autofocus,
+      autofocus: widget.autofocus,
       controller: controller,
-      onChanged: onChanged,
+      onChanged: widget.onChanged,
       cursorColor: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
       style: TextStyle(color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor),
       decoration: InputDecoration(
-        labelText: isTranslateLabel && labelText != null ? context.tr(labelText!) : labelText,
-        hintText: isTranslateHint && hintText != null ? context.tr(hintText!) : hintText,
+        labelText: widget.isTranslateLabel && widget.labelText != null ? context.tr(widget.labelText!) : widget.labelText,
+        hintText: widget.isTranslateHint && widget.hintText != null ? context.tr(widget.hintText!) : widget.hintText,
         labelStyle: TextStyle(
           color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
         ),
@@ -1314,9 +1340,7 @@ class AppTextFiled extends StatelessWidget{
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: AppColorScheme.of(
-          context,
-        ).byRole(ColorRole.of(context)).enabledColor,
+        fillColor: AppColorScheme.of(context).byRole(ColorRole.of(context)).enabledColor,
       ),
     );
   }
