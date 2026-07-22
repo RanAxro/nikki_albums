@@ -31,6 +31,7 @@ class ParamItemEditController extends ChangeNotifier{
   ParamType _paramType = ParamType.camera;
 
   void onCodeTextChanged(){
+    codeTextController.text = codeTextController.text.replaceAll(RegExp(r"[^A-Za-z0-9+/=#]"), "");
     tryDeCodeDebounce(codeTextController.text, onFinished: _setParam);
   }
 
