@@ -487,7 +487,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
       target_group_id: item.target_group_id,
       feature_tag: item.feature_tag,
       texture_id: pattern_creation.replace_texture_id,
-      override_pattern_a: pattern_creation.override_pattern_a.unwrap_or(false),
+      override_pattern_a: pattern_creation.override_pattern_a,
       tiling: 0.0,
     }
   }
@@ -497,7 +497,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
       target_group_id: item.target_group_id,
       feature_tag: item.feature_tag,
       texture_id: 0,
-      override_pattern_a: false,
+      override_pattern_a: None,
       tiling: pattern_creation_ext.tiling_data,
     }
   }

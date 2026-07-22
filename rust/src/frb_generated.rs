@@ -5353,7 +5353,7 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::PatternCrea
         let mut var_targetGroupId = <i64>::sse_decode(deserializer);
         let mut var_featureTag = <i64>::sse_decode(deserializer);
         let mut var_textureId = <i64>::sse_decode(deserializer);
-        let mut var_overridePatternA = <bool>::sse_decode(deserializer);
+        let mut var_overridePatternA = <Option<bool>>::sse_decode(deserializer);
         let mut var_tiling = <f64>::sse_decode(deserializer);
         return crate::nuan5_params::structs::nikki_photo_params::PatternCreationData {
             target_group_id: var_targetGroupId,
@@ -11658,7 +11658,7 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::PatternCrea
         <i64>::sse_encode(self.target_group_id, serializer);
         <i64>::sse_encode(self.feature_tag, serializer);
         <i64>::sse_encode(self.texture_id, serializer);
-        <bool>::sse_encode(self.override_pattern_a, serializer);
+        <Option<bool>>::sse_encode(self.override_pattern_a, serializer);
         <f64>::sse_encode(self.tiling, serializer);
     }
 }

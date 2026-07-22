@@ -398,14 +398,14 @@ class PatternCreationData {
   final PlatformInt64 targetGroupId;
   final PlatformInt64 featureTag;
   final PlatformInt64 textureId;
-  final bool overridePatternA;
+  final bool? overridePatternA;
   final double tiling;
 
   const PatternCreationData({
     required this.targetGroupId,
     required this.featureTag,
     required this.textureId,
-    required this.overridePatternA,
+    this.overridePatternA,
     required this.tiling,
   });
 

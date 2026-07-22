@@ -220,7 +220,7 @@ pub struct PatternCreationData{
   pub target_group_id: i64,
   pub feature_tag: i64,
   pub texture_id: i64,
-  pub override_pattern_a: bool,
+  pub override_pattern_a: Option<bool>,
   pub tiling: f64,
 }
 

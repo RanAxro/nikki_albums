@@ -4624,7 +4624,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       targetGroupId: dco_decode_i_64(arr[0]),
       featureTag: dco_decode_i_64(arr[1]),
       textureId: dco_decode_i_64(arr[2]),
-      overridePatternA: dco_decode_bool(arr[3]),
+      overridePatternA: dco_decode_opt_box_autoadd_bool(arr[3]),
       tiling: dco_decode_f_64(arr[4]),
     );
   }
@@ -8016,7 +8016,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_targetGroupId = sse_decode_i_64(deserializer);
     var var_featureTag = sse_decode_i_64(deserializer);
     var var_textureId = sse_decode_i_64(deserializer);
-    var var_overridePatternA = sse_decode_bool(deserializer);
+    var var_overridePatternA = sse_decode_opt_box_autoadd_bool(deserializer);
     var var_tiling = sse_decode_f_64(deserializer);
     return PatternCreationData(
       targetGroupId: var_targetGroupId,
@@ -11317,7 +11317,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_64(self.targetGroupId, serializer);
     sse_encode_i_64(self.featureTag, serializer);
     sse_encode_i_64(self.textureId, serializer);
-    sse_encode_bool(self.overridePatternA, serializer);
+    sse_encode_opt_box_autoadd_bool(self.overridePatternA, serializer);
     sse_encode_f_64(self.tiling, serializer);
   }
 

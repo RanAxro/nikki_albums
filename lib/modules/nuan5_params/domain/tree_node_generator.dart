@@ -712,10 +712,11 @@ TreeNode genClothParams(ClothParams params){
                       title: trText("texture"),
                       message: trText(patternCreation.textureId.toString(), category: "pattern_creation_texture"),
                     ),
-                    TreeNode(
-                      title: trText("override_pattern_a"),
-                      message: trBool(patternCreation.overridePatternA, index: 6),
-                    ),
+                    if(patternCreation.overridePatternA != null)
+                      TreeNode(
+                        title: trText("override_pattern_a"),
+                        message: trBool(patternCreation.overridePatternA!, index: 6),
+                      ),
                     TreeNode(
                       title: trText("tiling"),
                       message: patternCreation.tiling.toStringAsFixed(1),

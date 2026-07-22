@@ -205,7 +205,8 @@ class ClothDiyParamsPanel extends StatelessWidget{
             message: trText("tiling"),
             child: AppText(patternCreationData.tiling.toString()),
           ),
-          AppText(trBool(patternCreationData.overridePatternA, index: 6)),
+          patternCreationData.overridePatternA == null ? block0 :
+            AppText(trBool(patternCreationData.overridePatternA!, index: 6)),
 
         ].map((Widget widget) => Padding(
           padding: const EdgeInsets.all(tinyPadding),
