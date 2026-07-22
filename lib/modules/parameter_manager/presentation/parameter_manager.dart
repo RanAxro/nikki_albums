@@ -22,14 +22,19 @@ import "package:nikki_albums/modules/frame/frame.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/widgets/common/non_cache_file_image.dart";
+import "package:nikki_albums/utils/path.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/utils/color/utils.dart";
+import "package:nikki_albums/utils/qr_code.dart";
+import "package:nikki_albums/utils/system/system.dart";
 
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Path;
 import "dart:io";
 
 import "package:easy_localization/easy_localization.dart";
 import "package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart";
+import "package:path/path.dart" as p;
+import "package:qr_flutter/qr_flutter.dart";
 
 
 final ContentItem item = ContentItem(
@@ -598,6 +603,87 @@ class WaterfallGallery extends StatelessWidget{
             child: Column(
               spacing: bigPadding,
               children: [
+                /// Param Code Bar
+                AppFloatingIndicatorButtonGroup(
+                  child: Row(
+                    spacing: listSpacing,
+                    children: [
+                      block5W,
+                      Expanded(
+                        child: AppText(item.value, fontSize: 16, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, softWrap: false),
+                      ),
+
+                      AppFloatingIndicatorButtonTarget(
+                        child: AppButton.smallText(
+                          onClick: () async{
+                            try{
+                              await copyTextToClipboard(item.value);
+                              if(context.mounted){
+                                AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
+                              }
+                            }catch(e){
+                              if(context.mounted){
+                                AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
+                              }
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              Icon(Icons.copy),
+                              AppText.tr("parameter_manager.copy"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if(param is ClothDiyParams)
+                        AppFloatingIndicatorButtonTarget(
+                          child: AppButton.smallText(
+                            onClick: () async{
+                              final String qrData = "{\"Content\":{\"Content\":\"${item.value}\"}}";
+
+                              showAppDialog(
+                                context: context,
+                                builder: (BuildContext context){
+                                  return AppDialog(
+                                    maxWidth: 400,
+                                    maxHeight: 400,
+                                    useIntrinsicHeight: false,
+                                    child: QrImageView(
+                                      data: qrData,
+                                    ),
+                                  );
+                                }
+                              );
+
+                              try{
+                                final String tempPath = p.join((await getTempPath()).path, "QrCodeGenerate.png");
+                                await saveQrToFile(qrData, tempPath);
+                                final bool res = await copyFilesToClipboard([Path(tempPath)]);
+                                if(context.mounted){
+                                  if(res){
+                                    AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
+                                  }else{
+                                    AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_failed"), state: false);
+                                  }
+                                }
+                              }catch(e){
+                                if(context.mounted){
+                                  AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
+                                }
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.qr_code),
+                                AppText.tr("parameter_manager.qr_code"),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+
                 /// params viewer
                 Expanded(
                   child: Builder(
