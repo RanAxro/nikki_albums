@@ -1261,7 +1261,8 @@ class AppIcon extends StatelessWidget{
   }
 }
 
-class AppTextFiled extends StatelessWidget {
+class AppTextFiled extends StatelessWidget{
+  final bool autofocus;
   final TextEditingController? controller;
   final String? labelText;
   final bool isTranslateLabel;
@@ -1271,6 +1272,7 @@ class AppTextFiled extends StatelessWidget {
 
   const AppTextFiled({
     super.key,
+    this.autofocus = false,
     this.controller,
     this.labelText,
     this.isTranslateLabel = true,
@@ -1280,37 +1282,24 @@ class AppTextFiled extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return TextField(
+      autofocus: autofocus,
       controller: controller,
       onChanged: onChanged,
-      cursorColor: AppColorScheme.of(
-        context,
-      ).byRole(ColorRole.of(context)).onColor,
-      style: TextStyle(
-        color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
-      ),
+      cursorColor: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
+      style: TextStyle(color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor),
       decoration: InputDecoration(
-        labelText: isTranslateLabel && labelText != null
-            ? context.tr(labelText!)
-            : labelText,
-        hintText: isTranslateHint && hintText != null
-            ? context.tr(hintText!)
-            : hintText,
+        labelText: isTranslateLabel && labelText != null ? context.tr(labelText!) : labelText,
+        hintText: isTranslateHint && hintText != null ? context.tr(hintText!) : hintText,
         labelStyle: TextStyle(
-          color: AppColorScheme.of(
-            context,
-          ).byRole(ColorRole.of(context)).onColor,
+          color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
         ),
         floatingLabelStyle: TextStyle(
-          color: AppColorScheme.of(
-            context,
-          ).byRole(ColorRole.of(context)).onPressedColor,
+          color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onPressedColor,
         ),
         hintStyle: TextStyle(
-          color: AppColorScheme.of(
-            context,
-          ).byRole(ColorRole.of(context)).onColor,
+          color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onColor,
         ),
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(smallBorderRadius),
