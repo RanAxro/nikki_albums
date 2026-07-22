@@ -710,7 +710,7 @@ TreeNode genClothParams(ClothParams params){
                   children: [
                     TreeNode(
                       title: trText("texture"),
-                      message: trText(patternCreation.textureId.toString(), category: "pattern_creation_texture"),
+                      message: trText(patternCreation.textureId.toString(), category: "diy_pattern"),
                     ),
                     if(patternCreation.overridePatternA != null)
                       TreeNode(

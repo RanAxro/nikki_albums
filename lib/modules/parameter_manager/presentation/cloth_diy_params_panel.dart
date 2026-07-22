@@ -201,7 +201,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText(trText("diy_zone") + (zone?.toString() ?? "${patternCreationData.featureTag} - ${patternCreationData.targetGroupId}")),
 
-          AppText(trText(patternCreationData.textureId.toString(), category: "cloth_diy_pattern")),
+          AppText(trText(patternCreationData.textureId.toString(), category: "diy_pattern")),
           Tooltip(
             message: trText("tiling"),
             child: AppText(patternCreationData.tiling.toString()),
