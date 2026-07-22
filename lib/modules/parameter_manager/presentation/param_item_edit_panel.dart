@@ -91,6 +91,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
           child: Column(
             spacing: listSpacing,
             children: [
+              /// Name Input
               Row(
                 spacing: listSpacing,
                 children: [
@@ -113,6 +114,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 ],
               ),
 
+              /// Code Input
               AppFloatingIndicatorButtonGroup(
                 child: Row(
                   children: [
@@ -168,10 +170,109 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         child: AppIcon("cross"),
                       ),
                     ),
+                    if(widget.createMode)
+                      ListenableBuilder(
+                        listenable: controller,
+                        builder: (BuildContext context, Widget? child){
+                          if(controller.param != null){
+                            return block0;
+                          }
+
+                          return AppFloatingIndicatorButtonGroup(
+                            child: AppDropdown(
+                              childrenBuilder: (BuildContext context, MenuController menuController){
+                                if(controller.paramType == ParamType.camera){
+                                  return [
+                                    AppButton.smallText(
+                                      onClick: () async{
+                                        menuController.close();
+                                        final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
+
+                                        if(result?.$1 != null){
+                                          controller.codeTextController.text = result!.$1!;
+                                        }
+                                      },
+                                      child: AppText.tr("parameter_manager.camera_params_import_input"),
+                                    ),
+                                    AppButton.smallText(
+                                      onClick: (){
+                                        menuController.close();
+                                        Navigator.of(context).pop();
+                                        goToCameraParamsImportAlbumNikkiPhotos();
+                                      },
+                                      child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
+                                    ),
+                                    AppButton.smallText(
+                                      onClick: (){
+                                        menuController.close();
+                                        Navigator.of(context).pop();
+                                        goToCameraParamsImportAlbumClockInPhoto();
+                                      },
+                                      child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
+                                    ),
+                                  ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: child)).toList();
+                                }
+
+                                if(controller.paramType == ParamType.cloth){
+                                  return [
+                                    AppButton.smallText(
+                                      onClick: () async{
+                                        menuController.close();
+                                        final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
+
+                                        if(result != null){
+                                          controller.codeTextController.text = result;
+                                        }
+                                      },
+                                      child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
+                                    ),
+                                    AppButton.smallText(
+                                      onClick: (){
+                                        menuController.close();
+                                        Navigator.of(context).pop();
+                                        goToClothDiyShareCodeImportAlbumDIY();
+                                      },
+                                      child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
+                                    ),
+                                    AppButton.smallText(
+                                      onClick: () async{
+                                        menuController.close();
+                                        final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
+
+                                        if(result != null){
+                                          controller.codeTextController.text = result.$1;
+                                          if(result.$2 != null){
+                                            controller.cover.value = NativeParamItemCover(path: result.$2!, isCache: true);
+                                          }
+                                        }
+                                      },
+                                      child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
+                                    ),
+                                  ];
+                                }
+
+                                return [];
+                              },
+                              builder: (BuildContext context, MenuController menuController, Widget? child){
+                                return AppFloatingIndicatorButtonTarget(
+                                  child: AppButton.smallIcon(
+                                    toolTip: "parameter_manager.more_method",
+                                    onClick: (){
+                                      menuController.isOpen ? menuController.close() : menuController.open();
+                                    },
+                                    child: Icon(Icons.more_horiz),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
                   ],
                 ),
               ),
 
+              /// Type
               IgnorePointer(
                 ignoring: !widget.createMode,
                 child: ListenableBuilder(
@@ -297,17 +398,37 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                 },
               ),
 
+              /// Cover
               Expanded(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: bigPadding),
-                      child: AppText.tr("parameter_manager.cover"),
-                    ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 50),
-                        height: 300,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: smallPadding, top: smallPadding, bottom: smallPadding),
+                  child: Column(
+                    spacing: listSpacing,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        spacing: listSpacing,
+                        children: [
+                          AppText.tr("parameter_manager.cover", fontSize: 16),
+                          Expanded(child: block0),
+                          ValueListenableBuilder(
+                            valueListenable: controller.cover,
+                            builder: (BuildContext context, ParamItemCover? cover, Widget? child){
+                              if(cover == null){
+                                return block0;
+                              }
+                              return AppButton.smallIcon(
+                                toolTip: "parameter_manager.clear",
+                                onClick: (){
+                                  controller.cover.value = null;
+                                },
+                                child: AppIcon("cross"),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      Expanded(
                         child: ValueListenableBuilder(
                           valueListenable: controller.cover,
                           builder: (BuildContext context, ParamItemCover? cover, Widget? child){
@@ -319,46 +440,18 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                               );
                             }
 
-                            return IntrinsicWidth(
-                              child: Stack(
-                                children: [
-                                  Positioned.fill(
-                                    child: Builder(
-                                      builder: (BuildContext context){
-                                        if(cover is NativeParamItemCover){
-                                          return Image(image: NonCacheFileImage(File(cover.path)));
-                                        }
-                                        if(cover is NetworkParamItemCover){
-                                          return Image.network(cover.path);
-                                        }
-                                        return block0;
-                                      },
-                                    ),
-                                  ),
-
-                                  Positioned(
-                                    top: 0,
-                                    right: 0,
-                                    child: AppButton.smallIcon(
-                                      borderRadius: 10,
-                                      width: 20,
-                                      height: 20,
-                                      isTransparent: false,
-                                      colorRole: ColorRole.highlight,
-                                      onClick: (){
-                                        controller.cover.value = null;
-                                      },
-                                      child: AppIcon("cross", height: 16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
+                            if(cover is NativeParamItemCover){
+                              return Image(image: NonCacheFileImage(File(cover.path)));
+                            }
+                            if(cover is NetworkParamItemCover){
+                              return Image.network(cover.path);
+                            }
+                            return block0;
                           },
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
@@ -433,99 +526,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
               }
 
               return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: bigPadding,
-                  children: [
-                    AppText.tr("parameter_manager.invalid_param"),
-
-                    if(widget.createMode && controller.paramType == ParamType.camera)
-                      ...[
-                        IntrinsicWidth(
-                          child: AppButton.smallText(
-                            colorRole: ColorRole.highlight,
-                            isTransparent: false,
-                            onClick: () async{
-                              final (String?, CameraParams)? result = await showCameraParamsImportInputPanel(context: context);
-
-                              if(result?.$1 != null){
-                                controller.codeTextController.text = result!.$1!;
-                              }
-                            },
-                            child: AppText.tr("parameter_manager.camera_params_import_input"),
-                          ),
-                        ),
-                        IntrinsicWidth(
-                          child: AppButton.smallText(
-                            colorRole: ColorRole.highlight,
-                            isTransparent: false,
-                            onClick: (){
-                              Navigator.of(context).pop();
-                              goToCameraParamsImportAlbumNikkiPhotos();
-                            },
-                            child: AppText.tr("parameter_manager.camera_params_import_album_nikki_photos"),
-                          ),
-                        ),
-                        IntrinsicWidth(
-                          child: AppButton.smallText(
-                            colorRole: ColorRole.highlight,
-                            isTransparent: false,
-                            onClick: (){
-                              Navigator.of(context).pop();
-                              goToCameraParamsImportAlbumClockInPhoto();
-                            },
-                            child: AppText.tr("parameter_manager.camera_params_import_album_clock_in_photo"),
-                          ),
-                        ),
-                      ],
-
-                    if(widget.createMode && controller.paramType == ParamType.cloth)
-                      ...[
-                        IntrinsicWidth(
-                          child: AppButton.smallText(
-                            colorRole: ColorRole.highlight,
-                            isTransparent: false,
-                            onClick: () async{
-                              final String? result = await showClothDiyShareCodeImportHistoryPanel(context: context);
-
-                              if(result != null){
-                                controller.codeTextController.text = result;
-                              }
-                            },
-                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_history"),
-                          ),
-                        ),
-                        IntrinsicWidth(
-                          child: AppButton.smallText(
-                            colorRole: ColorRole.highlight,
-                            isTransparent: false,
-                            onClick: (){
-                              Navigator.of(context).pop();
-                              goToClothDiyShareCodeImportAlbumDIY();
-                            },
-                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_album_diy"),
-                          ),
-                        ),
-                        IntrinsicWidth(
-                          child: AppButton.smallText(
-                            colorRole: ColorRole.highlight,
-                            isTransparent: false,
-                            onClick: () async{
-                              final (String, String?)? result = await showClothDiyShareCodeImportQrCodePanel(context: context);
-
-                              if(result != null){
-                                controller.codeTextController.text = result.$1;
-                                if(result.$2 != null){
-                                  controller.cover.value = NativeParamItemCover(path: result.$2!, isCache: true);
-                                }
-                              }
-                            },
-                            child: AppText.tr("parameter_manager.cloth_diy_share_code_import_qr_code"),
-                          ),
-                        ),
-                      ],
-                  ],
-                ),
+                child: AppText.tr("parameter_manager.invalid_param"),
               );
 
             },
@@ -888,7 +889,7 @@ class ImageImportListener extends StatelessWidget{
       },
     );
 
-    final Widget processor = DropTarget(
+    return DropTarget(
       onDragEntered: (DropEventDetails details){
         isDrag.value = true;
       },
@@ -906,17 +907,6 @@ class ImageImportListener extends StatelessWidget{
           _paste(context);
         },
         child: ui,
-      ),
-    );
-
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(smallBorderRadius),
-      ),
-      backgroundColor: AppTheme.of(context)!.colorScheme.background.color,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(bigPadding, 0, bigPadding, bigPadding),
-        child: processor,
       ),
     );
   }
