@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/modules/parameter_manager/presentation/parameter_manager.dart";
+
 import "../domain/fix_app_assets.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
@@ -154,71 +156,63 @@ class AppStorage extends StatelessWidget{
             child: AppText.tr("app_storage.parameter_manager.name"),
           ),
 
-          ValueListenableBuilder(
-            valueListenable: AppState.customParamBoxPath,
-            builder: (BuildContext context, String? customPath, Widget? child){
-              return RFutureBuilder(
-                future: ParamBoxManager.getDefaultParamBoxPath(),
-                builder: (BuildContext context, String defaultPath){
-                  final String path = customPath ?? defaultPath;
-
-                  return Row(
-                    spacing: listSpacing,
-                    children: [
-                      Expanded(
-                        child: AppButton.smallText(
-                          toolTip: "app_storage.parameter_manager.open_data_dir",
-                          onClick: (){
-                            Explorer.openDir(Directory(path));
+          GlobalParamBoxManagerBuilder(
+            builder: (BuildContext context, ParamBoxManager globalManager){
+              return Row(
+                spacing: listSpacing,
+                children: [
+                  Expanded(
+                    child: AppButton.smallText(
+                      toolTip: "app_storage.parameter_manager.open_data_dir",
+                      onClick: (){
+                        Explorer.openDir(Directory(globalManager.directory.path));
+                      },
+                      child: Row(
+                        spacing: listSpacing,
+                        children: [
+                          AppText.tr("app_storage.parameter_manager.data_dir"),
+                          AppText(globalManager.directory.path, overflow: TextOverflow.ellipsis),
+                        ],
+                      ),
+                    ),
+                  ),
+                  AppDropdown(
+                    childrenBuilder: (BuildContext _, MenuController controller){
+                      return [
+                        AppButton.smallText(
+                          onClick: () async{
+                            controller.close();
+                            await changeParamBoxPath(context, globalManager.directory.path, await GlobalParamBoxManagerBuilder.getDefaultParamBoxPath());
                           },
-                          child: Row(
-                            spacing: listSpacing,
-                            children: [
-                              AppText.tr("app_storage.parameter_manager.data_dir"),
-                              AppText(path, overflow: TextOverflow.ellipsis),
-                            ],
-                          ),
+                          child: AppText.tr("app_storage.parameter_manager.default_data_dir"),
                         ),
-                      ),
-                      AppDropdown(
-                        childrenBuilder: (BuildContext _, MenuController controller){
-                          return [
-                            AppButton.smallText(
-                              onClick: () async{
-                                controller.close();
-                                await changeParamBoxPath(context, path, defaultPath);
-                              },
-                              child: AppText.tr("app_storage.parameter_manager.default_data_dir"),
-                            ),
-                            AppButton.smallText(
-                              onClick: () async{
-                                controller.close();
-                                String? newPath = await NativeFilePicker.getDirectoryPath(
-                                  dialogTitle: "app_storage.parameter_manager.select_data_dir",
-                                  lockParentWindow: true,
-                                );
+                        AppButton.smallText(
+                          onClick: () async{
+                            controller.close();
+                            String? newPath = await NativeFilePicker.getDirectoryPath(
+                              dialogTitle: "app_storage.parameter_manager.select_data_dir",
+                              lockParentWindow: true,
+                            );
 
-                                if(newPath == null){
-                                  return;
-                                }
+                            if(newPath == null){
+                              return;
+                            }
 
-                                await changeParamBoxPath(context, path, newPath);
-                              },
-                              child: AppText.tr("app_storage.parameter_manager.custom_data_dir"),
-                            ),
-                          ];
-                        },
-                        builder: (BuildContext context, MenuController controller, Widget? child){
-                          return AppButton.smallIcon(
-                            toolTip: "app_storage.parameter_manager.change_data_dir",
-                            onClick: controller.isOpen ? controller.close : controller.open,
-                            child: AppIcon("folder"),
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                },
+                            await changeParamBoxPath(context, globalManager.directory.path, newPath);
+                          },
+                          child: AppText.tr("app_storage.parameter_manager.custom_data_dir"),
+                        ),
+                      ];
+                    },
+                    builder: (BuildContext context, MenuController controller, Widget? child){
+                      return AppButton.smallIcon(
+                        toolTip: "app_storage.parameter_manager.change_data_dir",
+                        onClick: controller.isOpen ? controller.close : controller.open,
+                        child: AppIcon("folder"),
+                      );
+                    },
+                  ),
+                ],
               );
             },
           ),

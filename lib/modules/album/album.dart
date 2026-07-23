@@ -1,5 +1,7 @@
 
 
+import "package:nikki_albums/modules/parameter_manager/presentation/parameter_manager.dart";
+
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/info.dart";
@@ -1757,8 +1759,7 @@ class _ExhibitState extends State<Exhibit> {
     );
   }
 
-  Future<void> _showParamItemEditPanel(BuildContext context, [String? initCode, ParamItemCover? initCover]) async{
-    final ParamBoxManager manager = await ParamBoxManager.getDefaultParamBox();
+  Future<void> _showParamItemEditPanel(BuildContext context, ParamBoxManager manager, [String? initCode, ParamItemCover? initCover]) async{
     if(!manager.isInit){
       await manager.init();
     }
@@ -1836,6 +1837,8 @@ class _ExhibitState extends State<Exhibit> {
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: () async{
+            final ParamBoxManager globalManager = await GlobalParamBoxManagerBuilder.getGlobalManager(AppState.customParamBoxPath.value);
+
             final MediaCustomData? customData = await widget.imageItem.getParam(widget.game.selectedUid!.value, widget.game.selectedAlbum);
 
             customData?.whenOrNull(
@@ -1847,7 +1850,7 @@ class _ExhibitState extends State<Exhibit> {
                       return;
                     }
 
-                    _showParamItemEditPanel(context, code, NativeParamItemCover(
+                    _showParamItemEditPanel(context, globalManager, code, NativeParamItemCover(
                       path: widget.imageItem.path.path,
                       isCache: false,
                     ));
@@ -1858,7 +1861,7 @@ class _ExhibitState extends State<Exhibit> {
                       return;
                     }
 
-                    _showParamItemEditPanel(context, code, NativeParamItemCover(
+                    _showParamItemEditPanel(context, globalManager, code, NativeParamItemCover(
                       path: widget.imageItem.path.path,
                       isCache: false,
                     ));
@@ -1882,7 +1885,7 @@ class _ExhibitState extends State<Exhibit> {
                           state: false
                         );
                       }else{
-                        _showParamItemEditPanel(context, code, NativeParamItemCover(
+                        _showParamItemEditPanel(context, globalManager, code, NativeParamItemCover(
                           path: widget.imageItem.path.path,
                           isCache: false,
                         ));

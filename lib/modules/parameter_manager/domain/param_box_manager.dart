@@ -30,20 +30,6 @@ Future<String?> downloadImage(String url) async{
 }
 
 class ParamBoxManager extends ChangeNotifier{
-  static ParamBoxManager? _defaultParamBox;
-
-  static Future<String> getDefaultParamBoxPath() async{
-    final String basePath = (await getAppDataDirectoryPath()).path;
-    return p.join(basePath, "ParamBox");
-  }
-
-  static Future<ParamBoxManager> getDefaultParamBox() async{
-    _defaultParamBox ??= ParamBoxManager(Directory(await getDefaultParamBoxPath()));
-
-    return _defaultParamBox!;
-  }
-
-
   final Directory directory;
   final File manifestFile;
 

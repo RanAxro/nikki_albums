@@ -41,12 +41,40 @@ import "package:qr_flutter/qr_flutter.dart";
 final ContentItem item = ContentItem(
   name: "parameter_manager",
   icon: AppIcon("parameter_manager", height: mediumButtonContentSize),
-  page: const ParameterManagerPathListener(),
+  page: GlobalParamBoxManagerBuilder(
+    builder: (BuildContext context, ParamBoxManager manager){
+      return ParameterManager(initManager: manager);
+    },
+  ),
 );
 
 
-class ParameterManagerPathListener extends StatelessWidget{
-  const ParameterManagerPathListener({super.key});
+class GlobalParamBoxManagerBuilder extends StatelessWidget{
+  static ParamBoxManager? _globalParamBox;
+
+  static Future<String> getDefaultParamBoxPath() async{
+    final String basePath = (await getAppDataDirectoryPath()).path;
+    return p.join(basePath, "ParamBox");
+  }
+
+  static Future<ParamBoxManager> getGlobalManager(String? customPath) async{
+    final String path = customPath ?? await getDefaultParamBoxPath();
+
+    if(_globalParamBox != null && _globalParamBox!.directory.path == path){
+      return _globalParamBox!;
+    }
+
+    _globalParamBox = ParamBoxManager(Directory(path));
+    return _globalParamBox!;
+  }
+
+
+  final Widget Function(BuildContext, ParamBoxManager) builder;
+
+  const GlobalParamBoxManagerBuilder({
+    super.key,
+    required this.builder,
+  });
 
   @override
   Widget build(BuildContext context){
@@ -54,13 +82,9 @@ class ParameterManagerPathListener extends StatelessWidget{
       valueListenable: AppState.customParamBoxPath,
       builder: (BuildContext context, String? customPath, Widget? child){
         return RFutureBuilder(
-          future: ParamBoxManager.getDefaultParamBoxPath(),
-          builder: (BuildContext context, String defaultPath){
-            final String path = customPath ?? defaultPath;
-
-            return ParameterManager(
-              initManager: ParamBoxManager(Directory(path)),
-            );
+          future: getGlobalManager(customPath),
+          builder: (BuildContext context, ParamBoxManager globalManager){
+            return builder(context, globalManager);
           },
         );
       },
@@ -70,12 +94,12 @@ class ParameterManagerPathListener extends StatelessWidget{
 
 class ParameterManager extends StatefulWidget{
   final int initPage;
-  final ParamBoxManager? initManager;
+  final ParamBoxManager initManager;
 
   const ParameterManager({
     super.key,
     this.initPage = 0,
-    this.initManager,
+    required this.initManager,
   });
 
   @override
@@ -90,11 +114,7 @@ class _ParameterManagerState extends State<ParameterManager>{
   late final ParamBoxManager manager;
 
   Future<void> init() async{
-    if(widget.initManager != null){
-      manager = widget.initManager!;
-    }else{
-      manager = await ParamBoxManager.getDefaultParamBox();
-    }
+    manager = widget.initManager;
 
     if(!manager.isInit){
       await manager.init();
