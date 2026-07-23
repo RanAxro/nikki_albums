@@ -37,7 +37,7 @@
   <!-- zh-Hans: Simplified Chinese -->
   <url>
     <loc>https://nikki.ranaxro.com/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -66,7 +66,7 @@
   <!-- zh-Hant: Traditional Chinese -->
   <url>
     <loc>https://nikki.ranaxro.com/tw/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -95,7 +95,7 @@
   <!-- en: English -->
   <url>
     <loc>https://nikki.ranaxro.com/en/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -124,7 +124,7 @@
   <!-- ja: Japanese -->
   <url>
     <loc>https://nikki.ranaxro.com/ja/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -153,7 +153,7 @@
   <!-- ko: Korean -->
   <url>
     <loc>https://nikki.ranaxro.com/ko/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -182,7 +182,7 @@
   <!-- fr: French -->
   <url>
     <loc>https://nikki.ranaxro.com/fr/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -211,7 +211,7 @@
   <!-- de: German -->
   <url>
     <loc>https://nikki.ranaxro.com/de/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -240,7 +240,7 @@
   <!-- es: Spanish -->
   <url>
     <loc>https://nikki.ranaxro.com/es/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -269,7 +269,7 @@
   <!-- it: Italian -->
   <url>
     <loc>https://nikki.ranaxro.com/it/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -298,7 +298,7 @@
   <!-- pt: Portuguese -->
   <url>
     <loc>https://nikki.ranaxro.com/pt/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -327,7 +327,7 @@
   <!-- id: Indonesian -->
   <url>
     <loc>https://nikki.ranaxro.com/id/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
@@ -356,7 +356,7 @@
   <!-- th: Thai -->
   <url>
     <loc>https://nikki.ranaxro.com/th/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nikki.ranaxro.com/en/"/>
