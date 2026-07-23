@@ -79,10 +79,23 @@
   "downloadFailed": "Download failed",
   "toOfficialWebsite": "Visit the official website",
   "toGitHub": "GitHub",
-  "app_storage": "App Storage",
-  "fix_app_assets": "Repair Resources",
-  "fix_app_assets_message": "Restart required after resource repair",
-  "fix_app_assets_failed": "Resource repair failed",
+  "app_storage": {
+    "name": "App Storage",
+    "fix_app_assets": "Repair Resources",
+    "fix_app_assets_message": "Restart required after resource repair",
+    "fix_app_assets_failed": "Resource repair failed",
+    "parameter_manager": {
+      "name": "Parameter Manager",
+      "data_dir": "Data storage location",
+      "open_data_dir": "Open the storage location",
+      "change_data_dir": "Change the storage location",
+      "select_data_dir": "Select the location for data storage",
+      "default_data_dir": "Default location",
+      "custom_data_dir": "Custom location",
+      "copy_data_failed": "File copy failed",
+      "change_data_successfully": "Data transfer successfully!"
+    }
+  },
   "----------error_log----------": "----------error_log----------",
   "error_log": "Error Report Log",
   "error_log_error_tab": "Error Report",

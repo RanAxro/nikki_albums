@@ -79,10 +79,23 @@
   "downloadFailed": "下载失败",
   "toOfficialWebsite": "前往官网",
   "toGitHub": "GitHub",
-  "app_storage": "应用储存",
-  "fix_app_assets": "资源修复",
-  "fix_app_assets_message": "资源修复后需重启程序",
-  "fix_app_assets_failed": "资源修复失败",
+  "app_storage": {
+    "name": "应用储存",
+    "fix_app_assets": "资源修复",
+    "fix_app_assets_message": "资源修复后需重启程序",
+    "fix_app_assets_failed": "资源修复失败",
+    "parameter_manager": {
+      "name": "参数管理器",
+      "data_dir": "数据储存位置",
+      "open_data_dir": "打开储存位置",
+      "change_data_dir": "更改储存位置",
+      "select_data_dir": "选择文件储存位置",
+      "default_data_dir": "默认位置",
+      "custom_data_dir": "自定义位置",
+      "copy_data_failed": "文件复制失败",
+      "change_data_successfully": "数据移动成功"
+    }
+  },
   "----------error_log----------": "----------error_log----------",
   "error_log": "错误报告日志",
   "error_log_error_tab": "错误报告",

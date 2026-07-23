@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/modules/app_base/state.dart";
+
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -40,8 +42,32 @@ import "package:qr_flutter/qr_flutter.dart";
 final ContentItem item = ContentItem(
   name: "parameter_manager",
   icon: AppIcon("parameter_manager", height: mediumButtonContentSize),
-  page: const ParameterManager(),
+  page: const ParameterManagerPathListener(),
 );
+
+
+class ParameterManagerPathListener extends StatelessWidget{
+  const ParameterManagerPathListener({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return ValueListenableBuilder(
+      valueListenable: AppState.customParamBoxPath,
+      builder: (BuildContext context, String? customPath, Widget? child){
+        return RFutureBuilder(
+          future: ParamBoxManager.getDefaultParamBoxPath(),
+          builder: (BuildContext context, String defaultPath){
+            final String path = customPath ?? defaultPath;
+
+            return ParameterManager(
+              initManager: ParamBoxManager(Directory(path)),
+            );
+          },
+        );
+      },
+    );
+  }
+}
 
 class ParameterManager extends StatefulWidget{
   final int initPage;
@@ -522,11 +548,6 @@ class _ParameterManagerState extends State<ParameterManager>{
                       child: Icon(Icons.arrow_drop_down_rounded),
                     );
                   },
-                ),
-
-                /// Setting
-                AppButton.smallIcon(
-                  child: AppIcon("setting"),
                 ),
               ],
             ),

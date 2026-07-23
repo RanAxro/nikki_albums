@@ -132,7 +132,7 @@ class SettingDialog extends StatelessWidget {
                                       title = "version_information";
                                       break;
                                     case SettingPage.appStorage:
-                                      title = "app_storage";
+                                      title = "app_storage.name";
                                       break;
                                     case SettingPage.errorLog:
                                       title = "error_log";

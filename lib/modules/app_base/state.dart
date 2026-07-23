@@ -46,6 +46,9 @@ abstract class AppState {
   /// creation
   static final ValueNotifier<String?> creationDirectoryPath = _createStateValue<String?>(null);
 
+  /// parameter manager
+  static final ValueNotifier<String?> customParamBoxPath = _createStateValue<String?>(null);
+
   /// only windows
   static final ValueNotifier<bool> isUseMaximizeOrRestoreButton = _createStateValue<bool>(true);
   static final ValueNotifier<bool> needFileAssociationHelper = _createStateValue<bool>(true);
@@ -149,6 +152,10 @@ abstract class AppState {
       "creationDirectoryPath",
       (String? value) => creationDirectoryPath.value = value,
     );
+    assign<String?>(
+      "customParamBoxPath",
+          (String? value) => customParamBoxPath.value = value,
+    );
     assign<bool>(
       "isUseMaximizeOrRestoreButton",
       (bool value) => isUseMaximizeOrRestoreButton.value = value,
@@ -202,6 +209,7 @@ abstract class AppState {
       "isShowImageCustomData": isShowImageCustomData.value,
       "imageCustomDataWidgetSize": imageCustomDataWidgetSize.value,
       "creationDirectoryPath": creationDirectoryPath.value,
+      "customParamBoxPath": customParamBoxPath.value,
       "isUseMaximizeOrRestoreButton": isUseMaximizeOrRestoreButton.value,
       "needFileAssociationHelper": needFileAssociationHelper.value,
       "livePhotoExportFormat": livePhotoExportFormat.value,
