@@ -1,6 +1,4 @@
 
-import "package:nikki_albums/modules/app_base/state.dart";
-
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -29,6 +27,7 @@ import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/utils/color/utils.dart";
 import "package:nikki_albums/utils/qr_code.dart";
 import "package:nikki_albums/utils/system/system.dart";
+import "package:nikki_albums/modules/app_base/state.dart";
 
 import "package:flutter/material.dart" hide Path;
 import "dart:io";
@@ -168,6 +167,13 @@ class _ParameterManagerState extends State<ParameterManager>{
                     },
                     child: AppText.tr("parameter_manager.search_outfit_name"),
                   ),
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchLightOrFilter,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchLightOrFilter: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_light_or_filter"),
+                  ),
                 ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: child)).toList(),
               ),
             ),
@@ -200,32 +206,65 @@ class _ParameterManagerState extends State<ParameterManager>{
       .nonNulls.toSet();
 
     final List<ParamItem> res = [];
+
+    itemLoop:
     for(final ParamItem item in manager.getSortedItemList().reversed){
       if(item.type.value != typeIndex){
-        continue;
+        continue itemLoop;
       }
       if(currentSearchConfig.value == ""){
         res.add(item);
-        continue;
+        continue itemLoop;
       }
       if(currentSearchConfig.searchName && item.title?.contains(currentSearchConfig.value) == true){
         res.add(item);
-        continue;
+        continue itemLoop;
       }
       if(currentSearchConfig.searchTag && item.tag.any((String uuid) => targetTag.contains(uuid))){
         res.add(item);
-        continue;
+        continue itemLoop;
       }
       if((currentSearchConfig.searchClothesName || currentSearchConfig.searchOutfitName) && item.type == ParamType.cloth){
         final ClothDiyParams? params = await tryDeClothDiyShareCode(item.value);
         for(final ClothParams clothParams in params?.clothes ?? const []){
           if(currentSearchConfig.searchClothesName && trText(clothParams.cloth.id.toString(), category: "cloth").contains(currentSearchConfig.value)){
             res.add(item);
-            break;
+            continue itemLoop;
           }
           if(currentSearchConfig.searchOutfitName && trText(clothParams.cloth.outfit.toString(), category: "cloth_outfit").contains(currentSearchConfig.value)){
             res.add(item);
-            break;
+            continue itemLoop;
+          }
+        }
+      }
+      if(currentSearchConfig.searchLightOrFilter && item.type == ParamType.camera){
+        final CameraParams? params = await tryDeCameraParameter(item.value);
+        final String? lightId = params?.light.whenOrNull(some: (id, strength) => id);
+        final String? filterId = params?.filter.whenOrNull(some: (id, strength) => id);
+
+        final Nuan5Config? config = await GlobalNuan5Config.init();
+        if(lightId != null && config != null){
+          for(final MapEntry<int, Nuan5Light> entry in config.light.entries){
+            if(lightId != entry.value.paramId && lightId != entry.value.stringId){
+              continue;
+            }
+
+            if(trText(entry.key.toString(), category: "light").contains(currentSearchConfig.value)){
+              res.add(item);
+              continue itemLoop;
+            }
+          }
+        }
+        if(filterId != null && config != null){
+          for(final MapEntry<int, Nuan5Filter> entry in config.filter.entries){
+            if(filterId != entry.value.paramId && filterId != entry.value.stringId){
+              continue;
+            }
+
+            if(trText(entry.key.toString(), category: "filter").contains(currentSearchConfig.value)){
+              res.add(item);
+              continue itemLoop;
+            }
           }
         }
       }

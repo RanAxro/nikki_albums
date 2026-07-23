@@ -6,6 +6,7 @@ class SearchConfig{
     searchTag: true,
     searchClothesName: false,
     searchOutfitName: false,
+    searchLightOrFilter: false,
   );
 
   final String value;
@@ -13,6 +14,7 @@ class SearchConfig{
   final bool searchTag;
   final bool searchClothesName;
   final bool searchOutfitName;
+  final bool searchLightOrFilter;
 
   const SearchConfig({
     required this.value,
@@ -20,6 +22,7 @@ class SearchConfig{
     required this.searchTag,
     required this.searchClothesName,
     required this.searchOutfitName,
+    required this.searchLightOrFilter,
   });
 
   SearchConfig copyWith({
@@ -28,6 +31,7 @@ class SearchConfig{
     bool? searchTag,
     bool? searchClothesName,
     bool? searchOutfitName,
+    bool? searchLightOrFilter,
   }){
     return SearchConfig(
       value: value ?? this.value,
@@ -35,6 +39,7 @@ class SearchConfig{
       searchTag: searchTag ?? this.searchTag,
       searchClothesName: searchClothesName ?? this.searchClothesName,
       searchOutfitName: searchOutfitName ?? this.searchOutfitName,
+      searchLightOrFilter: searchLightOrFilter ?? this.searchLightOrFilter,
     );
   }
 
@@ -46,8 +51,9 @@ class SearchConfig{
     other.searchName == searchName &&
     other.searchTag == searchTag &&
     other.searchClothesName == searchClothesName &&
-    other.searchOutfitName == searchOutfitName;
+    other.searchOutfitName == searchOutfitName &&
+    other.searchLightOrFilter == searchLightOrFilter;
 
   @override
-  int get hashCode => Object.hash(value, searchName, searchTag, searchClothesName, searchOutfitName);
+  int get hashCode => Object.hash(value, searchName, searchTag, searchClothesName, searchOutfitName, searchLightOrFilter);
 }
