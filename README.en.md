@@ -71,6 +71,14 @@ Join our group to share usage tips with fellow players, report encountered issue
 2. Fixed incorrect display of texture names.
 3. Fixed wrong rendering of base color parameters for texture drawing.
 
+
+***
+
+# Acknowledgments
+
+[Resonance Tracker](https://gongeo.us/) > Provide icons for Infinity Nikki clothing sets and other items  
+[BuildingMomo](https://infinitymomo.com) > Home ShareCode api Adaptation
+
 ***
 
 <br/>

@@ -80,6 +80,14 @@
 
 ***
 
+# 致谢
+
+[暖暖共鸣录](https://gongeo.us/) > 提供无限暖暖套装服饰等图标  
+[搬砖吧大喵](https://infinitymomo.com) > 家园码接口适配
+
+
+***
+
 <br/>
 <div align="center" style="font-size: 20px">
   <a href="docs/declarations.zh.md">声明</a>
