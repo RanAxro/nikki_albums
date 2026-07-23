@@ -47,10 +47,14 @@ function switchShowcaseTab(tab) {
 	// Tab buttons class
 	document.getElementById('tab-wall').classList.toggle('active', tab === 'wall');
 	document.getElementById('tab-decode').classList.toggle('active', tab === 'decode');
+	document.getElementById('tab-parameter').classList.toggle('active', tab === 'parameter');
+	document.getElementById('tab-lookbook').classList.toggle('active', tab === 'lookbook');
 
 	// Image toggle
 	document.getElementById('img-wall').classList.toggle('active', tab === 'wall');
 	document.getElementById('img-decode').classList.toggle('active', tab === 'decode');
+	document.getElementById('img-parameter').classList.toggle('active', tab === 'parameter');
+	document.getElementById('img-lookbook').classList.toggle('active', tab === 'lookbook');
 }
 
 // Mobile Navigation Drawer Toggle

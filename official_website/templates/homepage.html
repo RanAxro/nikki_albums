@@ -317,11 +317,15 @@
 				<div class="showcase-tabs">
 					<button class="showcase-tab active" id="tab-wall" onclick="switchShowcaseTab('wall')">{{homepage.tab.wall}}</button>
 					<button class="showcase-tab" id="tab-decode" onclick="switchShowcaseTab('decode')">{{homepage.tab.decode}}</button>
+					<button class="showcase-tab" id="tab-parameter" onclick="switchShowcaseTab('parameter')">{{homepage.tab.parameter}}</button>
+					<button class="showcase-tab" id="tab-lookbook" onclick="switchShowcaseTab('lookbook')">{{homepage.tab.lookbook}}</button>
 				</div>
 			</div>
 			<div class="showcase-body">
-				<img id="img-wall" class="showcase-img active" src="https://file-nikki.ranaxro.com/images/web/p1.zh.webp" alt="Photo Wall Screen">
-				<img id="img-decode" class="showcase-img" src="https://file-nikki.ranaxro.com/images/web/p2.zh.webp" alt="Metadata Decoder Screen">
+				<img id="img-wall" class="showcase-img active" src="https://file-nikki.ranaxro.com/images/web/p1.{{zh_or_en}}.webp" alt="Photo Wall Screen">
+				<img id="img-decode" class="showcase-img" src="https://file-nikki.ranaxro.com/images/web/p2.{{zh_or_en}}.webp" alt="Metadata Decoder Screen">
+				<img id="img-parameter" class="showcase-img" src="https://file-nikki.ranaxro.com/images/web/p3.{{zh_or_en}}.webp" alt="Parameter Manager Screen">
+				<img id="img-lookbook" class="showcase-img" src="https://file-nikki.ranaxro.com/images/web/p4.{{zh_or_en}}.webp" alt="LookBook Code Screen">
 			</div>
 		</section>
 
@@ -365,6 +369,14 @@
 				</div>
 				<h3>{{homepage.card.5.title}}</h3>
 				<span>{{homepage.card.5.description}}</span>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon">
+					<img src="{{root}}/official_website/assets/icon/parameter_manager.svg" alt="parameter manager">
+				</div>
+				<h3>{{homepage.card.6.title}}</h3>
+				<span>{{homepage.card.6.description}}</span>
 			</div>
 		</section>
 	</main>

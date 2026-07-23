@@ -320,7 +320,8 @@ function build() {
         ...toLangVars,
         root,
         current_lang: lang,
-        is_root_lang: lang === CONFIG.rootLang
+        is_root_lang: lang === CONFIG.rootLang,
+        zh_or_en: (lang === "zh" || lang === "tw") ? "zh" : "en"
       };
 
       let html = renderTemplate(template, renderData, i18n, lang);

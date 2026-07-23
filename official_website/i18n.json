@@ -66,7 +66,9 @@
       "compat_hint": "支持 Windows 10/11 和 macOS (M系列芯片)",
       "tab": {
         "wall": "相册概览",
-        "decode": "参数解码"
+        "decode": "参数解码",
+        "parameter": "参数管理器",
+        "lookbook": "搭配码预览"
       },
       "card": {
         "1": {
@@ -88,6 +90,10 @@
         "5": {
           "title": "多渠道无损分享",
           "description": "支持一键复制到剪贴板，通过本地硬盘或局域网无损导出，分享快人一步。"
+        },
+        "6": {
+          "title": "参数管理器",
+          "description": "轻松管理相机参数，搭配码，家园码。并支持查看所有参数"
         }
       },
       "footer": {
@@ -292,6 +298,10 @@
         "5": {
           "title": "多管道無損分享",
           "description": "支援一鍵複製到剪貼簿，透過本地硬碟或區域網路無損匯出，分享更加即時。"
+        },
+        "6": {
+          "title": "參數管理器",
+          "description": "可輕鬆管理相機參數、搭配碼、家園碼，並開放檢視全部參數"
         }
       },
       "footer": {
@@ -474,7 +484,9 @@
       "compat_hint": "Supports Windows 10/11 & macOS (Apple Silicon)",
       "tab": {
         "wall": "Album Showcase",
-        "decode": "Metadata Decoder"
+        "decode": "Metadata Decoder",
+        "parameter": "Parameter Manager",
+        "lookbook": "LookBook Code Preview"
       },
       "card": {
         "1": {
@@ -496,6 +508,10 @@
         "5": {
           "title": "Lossless Sharing",
           "description": "Copy to clipboard or export losslessly via local drive or LAN for lightning-fast sharing."
+        },
+        "6": {
+          "title": "Parameter Manager",
+          "description": "Easily manage camera parameters, outfit codes and home codes. It also supports viewing all parameters."
         }
       },
       "footer": {
@@ -697,6 +713,10 @@
         "5": {
           "title": "多彩な無劣化共有",
           "description": "クリップボードへのコピー、ローカルディスクやLAN経由の無劣化転送で、素早く共有。"
+        },
+        "6": {
+          "title": "パラメータ管理",
+          "description": "カメラパラメータ、コーデコード、ハウスコードを簡単に管理できます。すべてのパラメータを確認することも可能です。"
         }
       },
       "footer": {
@@ -898,6 +918,10 @@
         "5": {
           "title": "다채널 무손실 공유",
           "description": "클립보드 복사, 로컬 드라이브 또는 LAN을 통한 무손실 내보내기로 빠른 공유 가능."
+        },
+        "6": {
+          "title": "매개변수 관리자",
+          "description": "카메라 매개변수, 코디 코드, 하우스 코드를 간편하게 관리할 수 있으며 모든 매개변수를 조회하는 기능도 지원합니다."
         }
       },
       "footer": {
@@ -1075,6 +1099,10 @@
         "5": {
           "title": "Partage Sans Perte",
           "description": "Copie dans le presse-papiers ou export sans perte via disque local ou LAN pour un partage rapide."
+        },
+        "6": {
+          "title": "Gestionnaire de paramètres",
+          "description": "Gérez simplement les paramètres de caméra, les codes de tenue et les codes de résidence. La consultation de l'ensemble des paramètres est également prise en charge."
         }
       },
       "footer": {
@@ -1252,6 +1280,10 @@
         "5": {
           "title": "Verlustfreies Teilen",
           "description": "In die Zwischenablage kopieren oder verlustfrei über lokale Festplatte oder LAN exportieren."
+        },
+        "6": {
+          "title": "Parameter-Manager",
+          "description": "Verwalten Sie einfach Kameraparameter, Outfit-Codes und Heimcodes. Sie können zudem sämtliche Parameter einsehen."
         }
       },
       "footer": {
@@ -1429,6 +1461,10 @@
         "5": {
           "title": "Compartir Sin Pérdidas",
           "description": "Copia al portapapeles o exporta sin pérdidas vía disco local o red para compartir rápidamente."
+        },
+        "6": {
+          "title": "Gestor de parámetros",
+          "description": "Gestiona fácilmente los parámetros de cámara, códigos de combinación y códigos de hogar. Además permite visualizar todos los parámetros."
         }
       },
       "footer": {
@@ -1606,6 +1642,10 @@
         "5": {
           "title": "Condivisione Senza Perdita",
           "description": "Copia negli appunti o esporta senza perdita via disco locale o LAN per una condivisione veloce."
+        },
+        "6": {
+          "title": "Gestore dei parametri",
+          "description": "Gestisci facilmente i parametri della fotocamera, i codici abbigliamento e i codici della casa. Supporta inoltre la visualizzazione di tutti i parametri."
         }
       },
       "footer": {
@@ -1783,6 +1823,10 @@
         "5": {
           "title": "Partilha Sem Perdas",
           "description": "Copie para a área de transferência o exporte sem perdas via disco local ou rede local."
+        },
+        "6": {
+          "title": "Gerenciador de Parâmetros",
+          "description": "Gerencie facilmente parâmetros de câmera, códigos de combinação e códigos de lar. Também é possível visualizar todos os parâmetros."
         }
       },
       "footer": {
@@ -1960,6 +2004,10 @@
         "5": {
           "title": "Berbagi Tanpa Penurunan Kualitas",
           "description": "Salin ke papan klip atau ekspor tanpa kehilangan kualitas via drive lokal atau LAN."
+        },
+        "6": {
+          "title": "Manajer Parameter",
+          "description": "Kelola parameter kamera, kode kombinasi dan kode rumah dengan mudah. Juga mendukung peninjauan seluruh parameter."
         }
       },
       "footer": {
@@ -2137,6 +2185,10 @@
         "5": {
           "title": "การแชร์แบบไม่สูญเสียความละเอียด",
           "description": "คัดลอกไปยังคลิปบอร์ดหรือส่งออกผ่านไดรฟ์โลคอลหรือ LAN โดยไม่ลดทอนคุณภาพ"
+        },
+        "6": {
+          "title": "ตัวจัดการพารามิเตอร์",
+          "description": "จัดการพารามิเตอร์กล้อง โค้ดชุดแต่งตัว และโค้ดบ้านได้อย่างง่ายดาย รองรับการตรวจดูพารามิเตอร์ทั้งหมดด้วย"
         }
       },
       "footer": {
