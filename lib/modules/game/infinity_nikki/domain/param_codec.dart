@@ -42,7 +42,7 @@ abstract class InfinityNikkiParamCodec{
     }
   }
 
-  static Future<MediaCustomData?> decodeFileUnchecked(MediaParamType paramType, String path, {String? uid, bool cache = true}) async{
+  static Future<MediaCustomData?> decodeFileUnchecked(MediaParamType paramType, String path, {String? uid, bool cache = false}) async{
     _debugOutputData(path, uid);
 
     if(cache && hasCache(path)){
@@ -64,7 +64,7 @@ abstract class InfinityNikkiParamCodec{
     return result;
   }
 
-  static MediaCustomData? decodeFileUncheckedSync(MediaParamType paramType, String path, {String? uid, bool cache = true}){
+  static MediaCustomData? decodeFileUncheckedSync(MediaParamType paramType, String path, {String? uid, bool cache = false}){
     _debugOutputData(path, uid);
 
     if(cache && hasCache(path)){
