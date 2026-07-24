@@ -1,19 +1,19 @@
 const config = {
-	"v3.010.01": {
-		"releaseDate": "2026-7-23",
+	"v3.010.02": {
+		"releaseDate": "2026-7-24",
 		"description": {
-			"de": "Bug behoben, bei dem die Daten des Parameter-Managers nicht synchronisiert wurden",
-			"en": "Fixed the bug causing asynchronous data in the parameter manager",
-			"es": "Corregido el error que provocaba la desincronización de datos en el gestor de parámetros",
-			"fr": "Correction du bug entraînant une désynchronisation des données du gestionnaire de paramètres",
-			"id": "Memperbaiki bug yang menyebabkan data manajer parameter tidak sinkron",
-			"it": "Risolto il bug che causava la mancata sincronizzazione dei dati nel gestore dei parametri",
-			"ja": "パラメータ管理のデータが同期しない不具合を修正",
-			"ko": "매개변수 관리자 데이터 비동기 문제 버그 수정",
-			"pt": "Corrigido o bug que causava dessincronização dos dados do gerenciador de parâmetros",
-			"th": "แก้ไขบั๊กที่ทำให้ข้อมูลตัวจัดการพารามิเตอร์ไม่ซิงโครไนซ์กัน",
-			"zh": "修复参数管理器数据不同步的bug",
-			"tw": "修復參數管理器資料無法同步的錯誤"
+			"de": "Bug behoben, bei dem sich die Parameter und Freigabecodes der Bilder im Stern-Zeichenbuch nicht aktualisiert haben",
+			"en": "Fixed the bug where parameters and share codes of images in the star drawing album failed to update",
+			"es": "Corregido el error por el que no se actualizaban los parámetros ni los códigos compartidos de las imágenes del álbum de dibujos estelares",
+			"fr": "Correction du bug empêchant la mise à jour des paramètres et des codes de partage des images de l'album de dessins stellaires",
+			"id": "Memperbaiki bug parameter dan kode bagikan gambar di album gambar bintang tidak diperbarui",
+			"it": "Risolto il bug che impediva l'aggiornamento dei parametri e dei codici di condivisione delle immagini nell'album dei disegni stellari",
+			"ja": "星描きアルバム内画像のパラメータと共有コードが更新されない不具合を修正",
+			"ko": "별 그림 앨범 이미지의 매개변수 및 공유 코드가 갱신되지 않는 버그 수정",
+			"pt": "Corrigido o bug que impedia a atualização dos parâmetros e códigos de compartilhamento das imagens do álbum de desenhos estelares",
+			"th": "แก้ไขบั๊กที่พารามิเตอร์และโค้ดแชร์ของรูปในอัลบั้มวาดรูปดาวไม่อัปเดต",
+			"zh": "修复星绘图册图片的参数与分享码不更新的bug",
+			"tw": "修復星繪圖冊圖片的參數與分享碼無法更新的錯誤"
 			
 			// "de": "",
 			// "en": "",
@@ -40,6 +40,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.02/Nikki%20Albums-v3.010.02-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.02/Nikki%20Albums-v3.010.02-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.010.01": {
+		"releaseDate": "2026-7-23",
+		"description": {
+			"de": "Bug behoben, bei dem die Daten des Parameter-Managers nicht synchronisiert wurden",
+			"en": "Fixed the bug causing asynchronous data in the parameter manager",
+			"es": "Corregido el error que provocaba la desincronización de datos en el gestor de parámetros",
+			"fr": "Correction du bug entraînant une désynchronisation des données du gestionnaire de paramètres",
+			"id": "Memperbaiki bug yang menyebabkan data manajer parameter tidak sinkron",
+			"it": "Risolto il bug che causava la mancata sincronizzazione dei dati nel gestore dei parametri",
+			"ja": "パラメータ管理のデータが同期しない不具合を修正",
+			"ko": "매개변수 관리자 데이터 비동기 문제 버그 수정",
+			"pt": "Corrigido o bug que causava dessincronização dos dados do gerenciador de parâmetros",
+			"th": "แก้ไขบั๊กที่ทำให้ข้อมูลตัวจัดการพารามิเตอร์ไม่ซิงโครไนซ์กัน",
+			"zh": "修复参数管理器数据不同步的bug",
+			"tw": "修復參數管理器資料無法同步的錯誤"
 		},
 		"downloads": [
 			{
