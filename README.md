@@ -26,6 +26,10 @@
   <img src="https://file-nikki.ranaxro.com/images/web/p1.zh.webp" width="48%" />
   <img src="https://file-nikki.ranaxro.com/images/web/p2.zh.webp" width="48%" />
 </p>
+<p>
+  <img src="https://file-nikki.ranaxro.com/images/web/p3.zh.webp" width="48%" />
+  <img src="https://file-nikki.ranaxro.com/images/web/p4.zh.webp" width="48%" />
+</p>
 
 
 
