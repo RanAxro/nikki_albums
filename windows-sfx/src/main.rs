@@ -12,7 +12,7 @@ use std::process::exit;
 use crate::utils::*;
 
 
-const VERSION: usize = 21;
+const VERSION: usize = 22;
 
 
 #[derive(Embed)]
