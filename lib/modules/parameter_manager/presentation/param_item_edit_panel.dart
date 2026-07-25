@@ -127,6 +127,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         ),
                       ),
                     ),
+                    /// Copy
                     AppFloatingIndicatorButtonTarget(
                       child: AppButton.smallIcon(
                         toolTip: "parameter_manager.copy",
@@ -147,6 +148,7 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         child: Icon(Icons.copy),
                       ),
                     ),
+                    /// Paste
                     if(widget.createMode)
                       AppFloatingIndicatorButtonTarget(
                       child: AppButton.smallIcon(
@@ -154,12 +156,13 @@ class _ParamItemEditPanelState extends State<ParamItemEditPanel>{
                         onClick: () async{
                           final String? text = await readTextFromClipboard();
                           if(text != null){
-                            controller.codeTextController.text = text;
+                            controller.codeTextController.text = text.replaceAll(RegExp(r"[^A-Za-z0-9+/=#]"), "");
                           }
                         },
                         child: Icon(Icons.paste),
                       ),
                     ),
+                    /// Clear
                     if(widget.createMode)
                       AppFloatingIndicatorButtonTarget(
                       child: AppButton.smallIcon(
