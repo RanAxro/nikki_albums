@@ -1,7 +1,4 @@
 
-
-import "package:nikki_albums/modules/parameter_manager/presentation/parameter_manager.dart";
-
 import "album_view.dart";
 import "album_previewer.dart";
 import "package:nikki_albums/info.dart";
@@ -12,6 +9,7 @@ import "package:nikki_albums/modules/game/infinity_nikki/service/live_photo_expo
 import "package:nikki_albums/modules/game/infinity_nikki/domain/param_codec.dart";
 import "package:nikki_albums/modules/nuan5_params/model/tree_node.dart";
 import "package:nikki_albums/modules/album/mp4_to_gif.dart";
+import "package:nikki_albums/modules/parameter_manager/presentation/parameter_manager.dart";
 import 'package:nikki_albums/utils/ffmpeg_manager.dart';
 import 'package:nikki_albums/utils/exiftool_manager.dart';
 import "package:nikki_albums/modules/image_edit/presentation/image_editor.dart";

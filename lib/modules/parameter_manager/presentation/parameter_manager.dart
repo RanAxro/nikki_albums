@@ -415,6 +415,7 @@ class _ParameterManagerState extends State<ParameterManager>{
             height: topBarHeight,
             child: Row(
               children: [
+                /// Nav
                 ValueListenableBuilder(
                   valueListenable: page,
                   builder: (BuildContext context, int currentPage, Widget? child){
@@ -848,98 +849,119 @@ class WaterfallGallery extends StatelessWidget{
 
         return SmoothPointerScroll(
           builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-            return MasonryGridView.count(
-              controller: controller,
-              physics: physics,
-              crossAxisCount: crossAxisCount,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              padding: const EdgeInsets.all(8),
-              // ========== 懒加载 ==========
-              // 只构建视口内 + 上下各 3 屏范围的 item
-              cacheExtent: constraints.maxHeight * 3,
-              itemCount: items.length,
-              itemBuilder: (context, index){
-                final ParamItem item = items[index];
+            return Row(
+              children: [
+                Expanded(
+                  child: MasonryGridView.count(
+                    controller: controller,
+                    physics: physics,
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    padding: const EdgeInsets.all(8),
+                    // ========== 懒加载 ==========
+                    // 只构建视口内 + 上下各 3 屏范围的 item
+                    cacheExtent: constraints.maxHeight * 3,
+                    itemCount: items.length,
+                    itemBuilder: (context, index){
+                      final ParamItem item = items[index];
 
-                return AppButton(
-                  padding: const EdgeInsets.all(smallPadding),
-                  borderRadius: smallBorderRadius,
-                  colorRole: ColorRole.primary,
-                  isTransparent: false,
-                  onClick: () async{
-                    showViewerDialog(context, item);
-                  },
-                  child: Column(
-                    spacing: listSpacing,
-                    children: [
-                      AppText(item.title ?? ""),
-
-                      if(item.image != null)
-                        ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
-                          child: Image(image: NonCacheFileImage(File(manager.getImagePath(item.image!)))),
-                        ),
-
-                      if(item.tag.isNotEmpty)
-                        Builder(
-                          builder: (BuildContext context){
-                            final List<Widget> children = [];
-
-                            for(final String uuid in item.tag){
-                              final ParamTag? tag = manager.getTag(uuid);
-                              if(tag != null){
-                                children.add(IntrinsicWidth(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    padding: const EdgeInsets.symmetric(horizontal: smallPadding),
-                                    constraints: BoxConstraints(
-                                      minWidth: smallButtonSize,
-                                    ),
-                                    height: smallButtonContentSize + smallPadding,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
-                                      color: Color(tag.color),
-                                    ),
-                                    child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
-                                  ),
-                                ));
-                              }
-                            }
-
-                            return Align(
-                              alignment: Alignment.centerLeft,
-                              child: Wrap(
-                                spacing: listSpacing,
-                                runSpacing: listSpacing,
-                                children: children,
-                              ),
-                            );
-                          },
-                        ),
-
-                      AppButton.smallText(
-                        toolTip: "parameter_manager.click_to_copy",
-                        colorRole: ColorRole.secondary,
+                      return AppButton(
+                        padding: const EdgeInsets.all(smallPadding),
+                        borderRadius: smallBorderRadius,
+                        colorRole: ColorRole.primary,
                         isTransparent: false,
                         onClick: () async{
-                          try{
-                            await copyTextToClipboard(item.value);
-                            if(context.mounted){
-                              AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
-                            }
-                          }catch(e){
-                            if(context.mounted){
-                              AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
-                            }
-                          }
+                          showViewerDialog(context, item);
                         },
-                        child: AppText(item.value, overflow: TextOverflow.ellipsis),
-                      ),
-                    ],
+                        child: Column(
+                          spacing: listSpacing,
+                          children: [
+                            AppText(item.title ?? ""),
+
+                            if(item.image != null)
+                              ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
+                                child: Image(image: NonCacheFileImage(File(manager.getImagePath(item.image!)))),
+                              ),
+
+                            if(item.tag.isNotEmpty)
+                              Builder(
+                                builder: (BuildContext context){
+                                  final List<Widget> children = [];
+
+                                  for(final String uuid in item.tag){
+                                    final ParamTag? tag = manager.getTag(uuid);
+                                    if(tag != null){
+                                      children.add(IntrinsicWidth(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                                          constraints: BoxConstraints(
+                                            minWidth: smallButtonSize,
+                                          ),
+                                          height: smallButtonContentSize + smallPadding,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
+                                            color: Color(tag.color),
+                                          ),
+                                          child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
+                                        ),
+                                      ));
+                                    }
+                                  }
+
+                                  return Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Wrap(
+                                      spacing: listSpacing,
+                                      runSpacing: listSpacing,
+                                      children: children,
+                                    ),
+                                  );
+                                },
+                              ),
+
+                            AppButton.smallText(
+                              toolTip: "parameter_manager.click_to_copy",
+                              colorRole: ColorRole.secondary,
+                              isTransparent: false,
+                              onClick: () async{
+                                try{
+                                  await copyTextToClipboard(item.value);
+                                  if(context.mounted){
+                                    AppToast.showMessage(context: context, message: context.tr("parameter_manager.copy_successful"));
+                                  }
+                                }catch(e){
+                                  if(context.mounted){
+                                    AppToast.showMessage(context: context, message: "${context.tr("parameter_manager.copy_failed")}\n$e", state: false);
+                                  }
+                                }
+                              },
+                              child: AppText(item.value, overflow: TextOverflow.ellipsis),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+                IndependentScrollbar(
+                  controller: scrollbarController,
+                  thickness: scrollbarThickness,
+                  thumbRadius: Radius.circular(5),
+                  color: AppTheme.of(
+                    context,
+                  )!.colorScheme.secondary.onColor.withAlpha(100),
+                  hoveredColor: AppTheme.of(
+                    context,
+                  )!.colorScheme.secondary.onColor.withAlpha(125),
+                  pressedColor: AppTheme.of(
+                    context,
+                  )!.colorScheme.secondary.onColor.withAlpha(150),
+                ),
+                SizedBox(width: safeMargin),
+              ],
             );
           },
         );
