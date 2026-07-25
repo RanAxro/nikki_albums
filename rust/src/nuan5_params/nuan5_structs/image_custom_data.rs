@@ -82,7 +82,7 @@ pub struct Content{
   pub pose_id: Option<i64>,
 
   #[serde(rename = "patternData")]
-  pub pattern_data: IdMap<i64>,
+  pub pattern_data: Option<IdMap<i64>>,
 
   #[serde(rename = "wearingClothes")]
   pub wearing_clothes: Vec<i64>,

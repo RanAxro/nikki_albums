@@ -150,7 +150,7 @@ pub(crate) fn convert_collage_params(data: &image_custom_data::CollageCustomData
 pub(crate) fn convert_diy_params(data: &image_custom_data::DIYCustomData) -> ClothDiyParams{
   ClothDiyParams{
     pose_id: data.content.pose_id,
-    pattern_data: data.content.pattern_data.as_map(),
+    pattern_data: data.content.pattern_data.clone().unwrap_or(IdMap::new()).as_map(),
     clothes: convert_cloth(&data.content.wearing_clothes, Some(&data.content.wearing_diy_infos), &data.content.ns_hidden_data),
   }
 }
@@ -603,7 +603,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
 pub(crate) fn convert_net_cloth_diy_params(data: &diy_custom_data::NetDIYCustomData) -> ClothDiyParams{
   ClothDiyParams{
     pose_id: data.content.content.pose_id,
-    pattern_data: data.content.content.pattern_data.as_map(),
+    pattern_data: data.content.content.pattern_data.clone().unwrap_or(IdMap::new()).as_map(),
     clothes: convert_cloth(&data.content.content.wearing_clothes, Some(&data.content.content.wearing_diy_infos), &data.content.content.ns_hidden_data),
   }
 }
