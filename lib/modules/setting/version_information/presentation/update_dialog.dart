@@ -15,7 +15,7 @@ import "package:easy_localization/easy_localization.dart";
 
 class UpdateDialog extends StatelessWidget{
   final UpdateInfo info;
-  final ValueNotifier<double> downloadProgress = ValueNotifier<double>(0);
+  final ValueNotifier<double?> downloadProgress = ValueNotifier<double?>(null);
   final ValueNotifier<String?> errorMessage = ValueNotifier<String?>(null);
 
   UpdateDialog({super.key, required this.info});
@@ -68,19 +68,12 @@ class UpdateDialog extends StatelessWidget{
                 );
               },
             ),
-            ValueListenableBuilder(
-              valueListenable: errorMessage,
-              builder: (BuildContext context, String? error, Widget? child){
-                if(error == null) return block0;
-
-                return AppButton.smallText(
-                  width: null,
-                  onClick: () {
-                    launchOfficialWebsite(context: context);
-                  },
-                  child: AppText.tr("toOfficialWebsite"),
-                );
+            AppButton.smallText(
+              width: null,
+              onClick: () {
+                launchOfficialWebsite(context: context);
               },
+              child: AppText.tr("toOfficialWebsite"),
             ),
 
             /// 下载按钮
@@ -108,7 +101,7 @@ class UpdateDialog extends StatelessWidget{
                 updater.update(
                   info,
                   onProgress: (double progress){
-                    downloadProgress.value = progress;
+                    downloadProgress.value = progress == 0 ? null : progress;
                   },
                   onError: (String message){
                     errorMessage.value = message;
