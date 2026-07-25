@@ -137,7 +137,6 @@ class _ParameterManagerState extends State<ParameterManager>{
   void dispose(){
     super.dispose();
     page.dispose();
-    manager.dispose();
   }
 
   void search(BuildContext context){
