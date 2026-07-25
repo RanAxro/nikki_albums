@@ -1,20 +1,20 @@
 const config = {
-	"v3.010.02": {
-		"releaseDate": "2026-7-24",
+	"v3.010.03": {
+		"releaseDate": "2026-7-25",
 		"description": {
-			"de": "Bug behoben, bei dem sich die Parameter und Freigabecodes der Bilder im Stern-Zeichenbuch nicht aktualisiert haben",
-			"en": "Fixed the bug where parameters and share codes of images in the star drawing album failed to update",
-			"es": "Corregido el error por el que no se actualizaban los parámetros ni los códigos compartidos de las imágenes del álbum de dibujos estelares",
-			"fr": "Correction du bug empêchant la mise à jour des paramètres et des codes de partage des images de l'album de dessins stellaires",
-			"id": "Memperbaiki bug parameter dan kode bagikan gambar di album gambar bintang tidak diperbarui",
-			"it": "Risolto il bug che impediva l'aggiornamento dei parametri e dei codici di condivisione delle immagini nell'album dei disegni stellari",
-			"ja": "星描きアルバム内画像のパラメータと共有コードが更新されない不具合を修正",
-			"ko": "별 그림 앨범 이미지의 매개변수 및 공유 코드가 갱신되지 않는 버그 수정",
-			"pt": "Corrigido o bug que impedia a atualização dos parâmetros e códigos de compartilhamento das imagens do álbum de desenhos estelares",
-			"th": "แก้ไขบั๊กที่พารามิเตอร์และโค้ดแชร์ของรูปในอัลบั้มวาดรูปดาวไม่อัปเดต",
-			"zh": "修复星绘图册图片的参数与分享码不更新的bug",
-			"tw": "修復星繪圖冊圖片的參數與分享碼無法更新的錯誤"
-			
+			"de": "1. Bug behoben, bei dem die Reihenfolge des Texts bei der Eingabe von Freigabecodes fehlerhaft war\n2. Scrollleiste hinzugefügt",
+			"en": "1. Fixed the bug of abnormal text order when entering share codes\n2. Added scroll bar",
+			"es": "1. Corregido el error de orden anómalo del texto al introducir códigos compartidos\n2. Se añadió la barra de desplazamiento",
+			"fr": "1. Correction du bug d'ordre anormal du texte lors de la saisie des codes de partage\n2. Ajout d'une barre de défilement",
+			"id": "1. Memperbaiki bug urutan teks yang salah saat memasukkan kode bagikan\n2. Menambahkan bilah gulir",
+			"it": "1. Risolto il bug con ordine del testo errato durante l'inserimento dei codici di condivisione\n2. Aggiunta barra di scorrimento",
+			"ja": "1. 共有コード入力時に文字列の並びが乱れる不具合を修正\n2. スクロールバーを追加",
+			"ko": "1. 공유 코드 입력 시 문자 순서가 비정상적인 버그 수정\n2. 스크롤 바 추가",
+			"pt": "1. Corrigido o bug de ordem incorreta do texto ao inserir códigos de compartilhamento\n2. Adicionada barra de rolagem",
+			"th": "1. แก้ไขบั๊กที่ลำดับข้อความผิดปกติขณะกรอกโค้ดแชร์\n2. เพิ่มแถบเลื่อน",
+			"zh": "1. 修复输入分享码时，文字顺序异常的bug\n2. 增加了滚动条",
+			"tw": "1. 修復輸入分享碼時文字順序異常的錯誤\n2. 新增捲軸列"
+
 			// "de": "",
 			// "en": "",
 			// "es": "",
@@ -40,6 +40,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.03/Nikki%20Albums-v3.010.03-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.03/Nikki%20Albums-v3.010.03-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.010.02": {
+		"releaseDate": "2026-7-24",
+		"description": {
+			"de": "Bug behoben, bei dem sich die Parameter und Freigabecodes der Bilder im Stern-Zeichenbuch nicht aktualisiert haben",
+			"en": "Fixed the bug where parameters and share codes of images in the star drawing album failed to update",
+			"es": "Corregido el error por el que no se actualizaban los parámetros ni los códigos compartidos de las imágenes del álbum de dibujos estelares",
+			"fr": "Correction du bug empêchant la mise à jour des paramètres et des codes de partage des images de l'album de dessins stellaires",
+			"id": "Memperbaiki bug parameter dan kode bagikan gambar di album gambar bintang tidak diperbarui",
+			"it": "Risolto il bug che impediva l'aggiornamento dei parametri e dei codici di condivisione delle immagini nell'album dei disegni stellari",
+			"ja": "星描きアルバム内画像のパラメータと共有コードが更新されない不具合を修正",
+			"ko": "별 그림 앨범 이미지의 매개변수 및 공유 코드가 갱신되지 않는 버그 수정",
+			"pt": "Corrigido o bug que impedia a atualização dos parâmetros e códigos de compartilhamento das imagens do álbum de desenhos estelares",
+			"th": "แก้ไขบั๊กที่พารามิเตอร์และโค้ดแชร์ของรูปในอัลบั้มวาดรูปดาวไม่อัปเดต",
+			"zh": "修复星绘图册图片的参数与分享码不更新的bug",
+			"tw": "修復星繪圖冊圖片的參數與分享碼無法更新的錯誤"
 		},
 		"downloads": [
 			{
