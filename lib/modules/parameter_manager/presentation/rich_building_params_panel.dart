@@ -34,6 +34,7 @@ class RichBuildingParamsPanel extends StatelessWidget{
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: AppRadioStack(
+                    selectedIndex: richBuildingParams.templateType,
                     children: [
                       AppButton.smallText(
                         child: AppText.tr("parameter_manager.island_scheme"),
