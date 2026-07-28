@@ -1,19 +1,19 @@
 const config = {
-	"v3.010.04": {
-		"releaseDate": "2026-7-25",
+	"v3.010.05": {
+		"releaseDate": "2026-7-28",
 		"description": {
-			"de": "1. Fehler behoben, bei dem die Parameter einzelner LookBook-Codes unwirksam waren",
-			"en": "1. Fixed the bug that caused some LookBook Code parameters to be invalid",
-			"es": "1. Corregido el error por el que los parámetros de algunos LookBook Code resultaban inválidos",
-			"fr": "1. Correction du bug rendant invalides les paramètres de certains LookBook Code",
-			"id": "1. Memperbaiki bug dimana beberapa parameter LookBook Code menjadi tidak valid",
-			"it": "1. Risolto il bug per cui i parametri di alcuni LookBook Code risultavano non validi",
-			"ja": "1. 一部のLookBook Codeパラメータが無効になる不具合を修正",
-			"ko": "1. 일부 LookBook Code 매개변수가 무효화되는 버그를 수정함",
-			"pt": "1. Corrigido o bug que deixava os parâmetros de alguns LookBook Code inválidos",
-			"th": "1. แก้ไขบั๊กที่พารามิเตอร์ของบาง LookBook Code ไม่ทำงาน",
-			"zh": "1. 修复部分搭配码参数无效的bug",
-			"tw": "1. 修復部分搭配碼參數失效的錯誤"
+			"de": "1. Bug behoben, bei dem die Typen der Inselvorlage und Gruppenvorlage bei den Heimvorlagen falsch angezeigt wurden",
+			"en": "1. Fix the bug where the island scheme and group scheme types for the home scheme display incorrectly",
+			"es": "1. Corregido el error de visualización errónea de los tipos de esquema de isla y esquema grupal en los códigos de hogar",
+			"fr": "1. Correction du bug d'affichage erroné des types de schéma d'île et de schéma de groupe pour les codes de résidence",
+			"id": "1. Memperbaiki bug jenis skema pulau dan skema grup pada kode rumah tampil dengan salah",
+			"it": "1. Risolto il bug di visualizzazione errata dei tipi di schema isola e schema gruppo relativi ai codici della casa",
+			"ja": "1. ハウスコードの島プラン、グループプランの種類表示が異常な不具合を修正",
+			"ko": "1. 하우스 코드의 섬 설계 및 그룹 설계 타입 표시 오류 버그 수정",
+			"pt": "1. Corrigido o bug de exibição incorreta dos tipos de esquema de ilha e esquema de grupo nos códigos de lar",
+			"th": "1. แก้ไขบั๊กประเภทแผนเกาะและแผนกลุ่มของโค้ดบ้านแสดงผลผิด",
+			"zh": "1. 修复家园码的岛屿方案与组合方案类型显示错误的bug",
+			"tw": "1. 修復家園碼的島嶼方案與組合方案類型顯示異常之錯誤"
 
 			// "de": "",
 			// "en": "",
@@ -40,6 +40,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.04/Nikki%20Albums-v3.010.04-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.04/Nikki%20Albums-v3.010.04-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.010.04": {
+		"releaseDate": "2026-7-25",
+		"description": {
+			"de": "1. Fehler behoben, bei dem die Parameter einzelner LookBook-Codes unwirksam waren",
+			"en": "1. Fixed the bug that caused some LookBook Code parameters to be invalid",
+			"es": "1. Corregido el error por el que los parámetros de algunos LookBook Code resultaban inválidos",
+			"fr": "1. Correction du bug rendant invalides les paramètres de certains LookBook Code",
+			"id": "1. Memperbaiki bug dimana beberapa parameter LookBook Code menjadi tidak valid",
+			"it": "1. Risolto il bug per cui i parametri di alcuni LookBook Code risultavano non validi",
+			"ja": "1. 一部のLookBook Codeパラメータが無効になる不具合を修正",
+			"ko": "1. 일부 LookBook Code 매개변수가 무효화되는 버그를 수정함",
+			"pt": "1. Corrigido o bug que deixava os parâmetros de alguns LookBook Code inválidos",
+			"th": "1. แก้ไขบั๊กที่พารามิเตอร์ของบาง LookBook Code ไม่ทำงาน",
+			"zh": "1. 修复部分搭配码参数无效的bug",
+			"tw": "1. 修復部分搭配碼參數失效的錯誤"
 		},
 		"downloads": [
 			{
