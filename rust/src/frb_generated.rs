@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1549207290;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1112247712;
 
 // Section: executor
 
@@ -1916,40 +1916,6 @@ fn wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
         },
     )
 }
-fn wire__crate__nuan5_database__model__nuan_5_cloth_diy_swatch_color_default_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "nuan_5_cloth_diy_swatch_color_default",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::nuan5_database::model::Nuan5ClothDiySwatchColor::default(),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
 fn wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -2079,6 +2045,40 @@ fn wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
                 transform_result_sse::<_, ()>((move || {
                     let output_ok = Result::<_, ()>::Ok(
                         crate::nuan5_database::model::Nuan5Config::try_from(&api_path),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_diy_color_swatch_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_database::model::Nuan5DiyColorSwatch::default(),
                     )?;
                     Ok(output_ok)
                 })())
@@ -2632,19 +2632,6 @@ impl SseDecode for std::collections::HashMap<String, bool> {
     }
 }
 
-impl SseDecode
-    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner =
-            <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)>>::sse_decode(
-                deserializer,
-            );
-        return inner.into_iter().collect();
-    }
-}
-
 impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyeArea> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2663,6 +2650,18 @@ impl SseDecode
             <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>>::sse_decode(
                 deserializer,
             );
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DiyColorSwatch>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(i32, crate::nuan5_database::model::Nuan5DiyColorSwatch)>>::sse_decode(
+            deserializer,
+        );
         return inner.into_iter().collect();
     }
 }
@@ -3881,21 +3880,6 @@ impl SseDecode for Vec<u8> {
     }
 }
 
-impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut len_ = <i32>::sse_decode(deserializer);
-        let mut ans_ = Vec::with_capacity(len_ as usize);
-        for idx_ in 0..len_ {
-            ans_.push(<(
-                i32,
-                crate::nuan5_database::model::Nuan5ClothDiySwatchColor,
-            )>::sse_decode(deserializer));
-        }
-        return ans_;
-    }
-}
-
 impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3918,6 +3902,22 @@ impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)
         for idx_ in 0..len_ {
             ans_.push(
                 <(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>::sse_decode(
+                    deserializer,
+                ),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5DiyColorSwatch)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5DiyColorSwatch)>::sse_decode(
                     deserializer,
                 ),
             );
@@ -4528,14 +4528,6 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoP
     }
 }
 
-impl SseDecode for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_rgba = <Vec<f64>>::sse_decode(deserializer);
-        return crate::nuan5_database::model::Nuan5ClothDiySwatchColor { rgba: var_rgba };
-    }
-}
-
 impl SseDecode for crate::nuan5_database::model::Nuan5ClothDyeArea {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4605,9 +4597,9 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Config {
             i32,
             crate::nuan5_database::model::Nuan5ClothDyePalette,
         >>::sse_decode(deserializer);
-        let mut var_clothDiySwatchColor = <std::collections::HashMap<
+        let mut var_diyColorSwatch = <std::collections::HashMap<
             i32,
-            crate::nuan5_database::model::Nuan5ClothDiySwatchColor,
+            crate::nuan5_database::model::Nuan5DiyColorSwatch,
         >>::sse_decode(deserializer);
         let mut var_diyPattern = <std::collections::HashMap<
             i32,
@@ -4623,9 +4615,17 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Config {
             momo_pose: var_momoPose,
             cloth_dye_area: var_clothDyeArea,
             cloth_dye_palette: var_clothDyePalette,
-            cloth_diy_swatch_color: var_clothDiySwatchColor,
+            diy_color_swatch: var_diyColorSwatch,
             diy_pattern: var_diyPattern,
         };
+    }
+}
+
+impl SseDecode for crate::nuan5_database::model::Nuan5DiyColorSwatch {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_rgba = <Vec<f64>>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5DiyColorSwatch { rgba: var_rgba };
     }
 }
 
@@ -5506,16 +5506,6 @@ impl SseDecode for (f64, f64, f64, f64) {
     }
 }
 
-impl SseDecode for (i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_field0 = <i32>::sse_decode(deserializer);
-        let mut var_field1 =
-            <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_decode(deserializer);
-        return (var_field0, var_field1);
-    }
-}
-
 impl SseDecode for (i32, crate::nuan5_database::model::Nuan5ClothDyeArea) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5532,6 +5522,16 @@ impl SseDecode for (i32, crate::nuan5_database::model::Nuan5ClothDyePalette) {
         let mut var_field0 = <i32>::sse_decode(deserializer);
         let mut var_field1 =
             <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5DiyColorSwatch) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5DiyColorSwatch>::sse_decode(deserializer);
         return (var_field0, var_field1);
     }
 }
@@ -6385,31 +6385,31 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        43 => wire__crate__nuan5_database__model__nuan_5_cloth_diy_swatch_color_default_impl(
+        43 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        44 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
+        44 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
+        45 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        46 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
+        46 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
+        47 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
             port,
             ptr,
             rust_vec_len,
@@ -8179,23 +8179,6 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [self.rgba.into_into_dart().into_dart()].into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_database::model::Nuan5ClothDiySwatchColor
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5ClothDiySwatchColor>
-    for crate::nuan5_database::model::Nuan5ClothDiySwatchColor
-{
-    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5ClothDyeArea {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -8255,7 +8238,7 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Config
             self.momo_pose.into_into_dart().into_dart(),
             self.cloth_dye_area.into_into_dart().into_dart(),
             self.cloth_dye_palette.into_into_dart().into_dart(),
-            self.cloth_diy_swatch_color.into_into_dart().into_dart(),
+            self.diy_color_swatch.into_into_dart().into_dart(),
             self.diy_pattern.into_into_dart().into_dart(),
         ]
         .into_dart()
@@ -8269,6 +8252,23 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5Config
     for crate::nuan5_database::model::Nuan5Config
 {
     fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5Config {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5DiyColorSwatch {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.rgba.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5DiyColorSwatch
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5DiyColorSwatch>
+    for crate::nuan5_database::model::Nuan5DiyColorSwatch
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5DiyColorSwatch {
         self
     }
 }
@@ -9450,18 +9450,6 @@ impl SseEncode for std::collections::HashMap<String, bool> {
     }
 }
 
-impl SseEncode
-    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)>>::sse_encode(
-            self.into_iter().collect(),
-            serializer,
-        );
-    }
-}
-
 impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyeArea> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -9478,6 +9466,18 @@ impl SseEncode
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DiyColorSwatch>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5DiyColorSwatch)>>::sse_encode(
             self.into_iter().collect(),
             serializer,
         );
@@ -10530,18 +10530,6 @@ impl SseEncode for Vec<u8> {
     }
 }
 
-impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.len() as _, serializer);
-        for item in self {
-            <(i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor)>::sse_encode(
-                item, serializer,
-            );
-        }
-    }
-}
-
 impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyeArea)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10558,6 +10546,18 @@ impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <(i32, crate::nuan5_database::model::Nuan5ClothDyePalette)>::sse_encode(
+                item, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5DiyColorSwatch)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5DiyColorSwatch)>::sse_encode(
                 item, serializer,
             );
         }
@@ -11054,13 +11054,6 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoP
     }
 }
 
-impl SseEncode for crate::nuan5_database::model::Nuan5ClothDiySwatchColor {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<f64>>::sse_encode(self.rgba, serializer);
-    }
-}
-
 impl SseEncode for crate::nuan5_database::model::Nuan5ClothDyeArea {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11111,11 +11104,18 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Config {
         );
         <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyeArea>>::sse_encode(self.cloth_dye_area, serializer);
         <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDyePalette>>::sse_encode(self.cloth_dye_palette, serializer);
-        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor>>::sse_encode(self.cloth_diy_swatch_color, serializer);
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DiyColorSwatch>>::sse_encode(self.diy_color_swatch, serializer);
         <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5DiyPattern>>::sse_encode(
             self.diy_pattern,
             serializer,
         );
+    }
+}
+
+impl SseEncode for crate::nuan5_database::model::Nuan5DiyColorSwatch {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<f64>>::sse_encode(self.rgba, serializer);
     }
 }
 
@@ -11815,14 +11815,6 @@ impl SseEncode for (f64, f64, f64, f64) {
     }
 }
 
-impl SseEncode for (i32, crate::nuan5_database::model::Nuan5ClothDiySwatchColor) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.0, serializer);
-        <crate::nuan5_database::model::Nuan5ClothDiySwatchColor>::sse_encode(self.1, serializer);
-    }
-}
-
 impl SseEncode for (i32, crate::nuan5_database::model::Nuan5ClothDyeArea) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11836,6 +11828,14 @@ impl SseEncode for (i32, crate::nuan5_database::model::Nuan5ClothDyePalette) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.0, serializer);
         <crate::nuan5_database::model::Nuan5ClothDyePalette>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5DiyColorSwatch) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5DiyColorSwatch>::sse_encode(self.1, serializer);
     }
 }
 

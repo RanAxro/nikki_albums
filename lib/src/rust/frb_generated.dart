@@ -91,7 +91,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1549207290;
+  int get rustContentHash => -1112247712;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -300,9 +300,6 @@ abstract class RustLibApi extends BaseApi {
     required String input,
   });
 
-  Future<Nuan5ClothDiySwatchColor>
-  crateNuan5DatabaseModelNuan5ClothDiySwatchColorDefault();
-
   Future<Nuan5ClothDyeArea> crateNuan5DatabaseModelNuan5ClothDyeAreaDefault();
 
   Future<Nuan5ClothDyePalette>
@@ -313,6 +310,9 @@ abstract class RustLibApi extends BaseApi {
   Future<Nuan5Config?> crateNuan5DatabaseModelNuan5ConfigTryFrom({
     required String path,
   });
+
+  Future<Nuan5DiyColorSwatch>
+  crateNuan5DatabaseModelNuan5DiyColorSwatchDefault();
 
   Future<Nuan5DiyPattern> crateNuan5DatabaseModelNuan5DiyPatternDefault();
 
@@ -1857,39 +1857,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<Nuan5ClothDiySwatchColor>
-  crateNuan5DatabaseModelNuan5ClothDiySwatchColorDefault() {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 43,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_nuan_5_cloth_diy_swatch_color,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateNuan5DatabaseModelNuan5ClothDiySwatchColorDefaultConstMeta,
-        argValues: [],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateNuan5DatabaseModelNuan5ClothDiySwatchColorDefaultConstMeta =>
-      const TaskConstMeta(
-        debugName: "nuan_5_cloth_diy_swatch_color_default",
-        argNames: [],
-      );
-
-  @override
   Future<Nuan5ClothDyeArea> crateNuan5DatabaseModelNuan5ClothDyeAreaDefault() {
     return handler.executeNormal(
       NormalTask(
@@ -1898,7 +1865,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 44,
+            funcId: 43,
             port: port_,
           );
         },
@@ -1929,7 +1896,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 45,
+            funcId: 44,
             port: port_,
           );
         },
@@ -1960,7 +1927,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 46,
+            funcId: 45,
             port: port_,
           );
         },
@@ -1990,7 +1957,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 47,
+            funcId: 46,
             port: port_,
           );
         },
@@ -2009,6 +1976,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "nuan_5_config_try_from",
         argNames: ["path"],
+      );
+
+  @override
+  Future<Nuan5DiyColorSwatch>
+  crateNuan5DatabaseModelNuan5DiyColorSwatchDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 47,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_diy_color_swatch,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5DiyColorSwatchDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5DatabaseModelNuan5DiyColorSwatchDefaultConstMeta =>
+      const TaskConstMeta(
+        debugName: "nuan_5_diy_color_swatch_default",
+        argNames: [],
       );
 
   @override
@@ -2520,17 +2519,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Map<int, Nuan5ClothDiySwatchColor>
-  dco_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
-    );
-  }
-
-  @protected
   Map<int, Nuan5ClothDyeArea> dco_decode_Map_i_32_nuan_5_cloth_dye_area_None(
     dynamic raw,
   ) {
@@ -2548,6 +2536,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
       dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5DiyColorSwatch>
+  dco_decode_Map_i_32_nuan_5_diy_color_swatch_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_diy_color_swatch(
         raw,
       ).map((e) => MapEntry(e.$1, e.$2)),
     );
@@ -3726,15 +3725,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<(int, Nuan5ClothDiySwatchColor)>
-  dco_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>)
-        .map(dco_decode_record_i_32_nuan_5_cloth_diy_swatch_color)
-        .toList();
-  }
-
-  @protected
   List<(int, Nuan5ClothDyeArea)>
   dco_decode_list_record_i_32_nuan_5_cloth_dye_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -3749,6 +3739,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>)
         .map(dco_decode_record_i_32_nuan_5_cloth_dye_palette)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5DiyColorSwatch)>
+  dco_decode_list_record_i_32_nuan_5_diy_color_swatch(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_diy_color_swatch)
         .toList();
   }
 
@@ -4126,19 +4125,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5ClothDiySwatchColor dco_decode_nuan_5_cloth_diy_swatch_color(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return Nuan5ClothDiySwatchColor(
-      rgba: dco_decode_list_prim_f_64_strict(arr[0]),
-    );
-  }
-
-  @protected
   Nuan5ClothDyeArea dco_decode_nuan_5_cloth_dye_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -4185,10 +4171,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       clothDyePalette: dco_decode_Map_i_32_nuan_5_cloth_dye_palette_None(
         arr[8],
       ),
-      clothDiySwatchColor:
-          dco_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(arr[9]),
+      diyColorSwatch: dco_decode_Map_i_32_nuan_5_diy_color_swatch_None(arr[9]),
       diyPattern: dco_decode_Map_i_32_nuan_5_diy_pattern_None(arr[10]),
     );
+  }
+
+  @protected
+  Nuan5DiyColorSwatch dco_decode_nuan_5_diy_color_swatch(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return Nuan5DiyColorSwatch(rgba: dco_decode_list_prim_f_64_strict(arr[0]));
   }
 
   @protected
@@ -4739,20 +4733,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  (int, Nuan5ClothDiySwatchColor)
-  dco_decode_record_i_32_nuan_5_cloth_diy_swatch_color(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2) {
-      throw Exception('Expected 2 elements, got ${arr.length}');
-    }
-    return (
-      dco_decode_i_32(arr[0]),
-      dco_decode_nuan_5_cloth_diy_swatch_color(arr[1]),
-    );
-  }
-
-  @protected
   (int, Nuan5ClothDyeArea) dco_decode_record_i_32_nuan_5_cloth_dye_area(
     dynamic raw,
   ) {
@@ -4776,6 +4756,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return (
       dco_decode_i_32(arr[0]),
       dco_decode_nuan_5_cloth_dye_palette(arr[1]),
+    );
+  }
+
+  @protected
+  (int, Nuan5DiyColorSwatch) dco_decode_record_i_32_nuan_5_diy_color_swatch(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_i_32(arr[0]),
+      dco_decode_nuan_5_diy_color_swatch(arr[1]),
     );
   }
 
@@ -5332,18 +5327,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Map<int, Nuan5ClothDiySwatchColor>
-  sse_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
-      deserializer,
-    );
-    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
-  }
-
-  @protected
   Map<int, Nuan5ClothDyeArea> sse_decode_Map_i_32_nuan_5_cloth_dye_area_None(
     SseDeserializer deserializer,
   ) {
@@ -5359,6 +5342,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_record_i_32_nuan_5_cloth_dye_palette(
+      deserializer,
+    );
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5DiyColorSwatch>
+  sse_decode_Map_i_32_nuan_5_diy_color_swatch_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_diy_color_swatch(
       deserializer,
     );
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
@@ -6780,23 +6775,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<(int, Nuan5ClothDiySwatchColor)>
-  sse_decode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <(int, Nuan5ClothDiySwatchColor)>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(
-        sse_decode_record_i_32_nuan_5_cloth_diy_swatch_color(deserializer),
-      );
-    }
-    return ans_;
-  }
-
-  @protected
   List<(int, Nuan5ClothDyeArea)>
   sse_decode_list_record_i_32_nuan_5_cloth_dye_area(
     SseDeserializer deserializer,
@@ -6822,6 +6800,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <(int, Nuan5ClothDyePalette)>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_record_i_32_nuan_5_cloth_dye_palette(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5DiyColorSwatch)>
+  sse_decode_list_record_i_32_nuan_5_diy_color_swatch(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5DiyColorSwatch)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_diy_color_swatch(deserializer));
     }
     return ans_;
   }
@@ -7303,15 +7296,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nuan5ClothDiySwatchColor sse_decode_nuan_5_cloth_diy_swatch_color(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_rgba = sse_decode_list_prim_f_64_strict(deserializer);
-    return Nuan5ClothDiySwatchColor(rgba: var_rgba);
-  }
-
-  @protected
   Nuan5ClothDyeArea sse_decode_nuan_5_cloth_dye_area(
     SseDeserializer deserializer,
   ) {
@@ -7369,8 +7353,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_clothDyePalette = sse_decode_Map_i_32_nuan_5_cloth_dye_palette_None(
       deserializer,
     );
-    var var_clothDiySwatchColor =
-        sse_decode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(deserializer);
+    var var_diyColorSwatch = sse_decode_Map_i_32_nuan_5_diy_color_swatch_None(
+      deserializer,
+    );
     var var_diyPattern = sse_decode_Map_i_32_nuan_5_diy_pattern_None(
       deserializer,
     );
@@ -7384,9 +7369,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       momoPose: var_momoPose,
       clothDyeArea: var_clothDyeArea,
       clothDyePalette: var_clothDyePalette,
-      clothDiySwatchColor: var_clothDiySwatchColor,
+      diyColorSwatch: var_diyColorSwatch,
       diyPattern: var_diyPattern,
     );
+  }
+
+  @protected
+  Nuan5DiyColorSwatch sse_decode_nuan_5_diy_color_swatch(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_rgba = sse_decode_list_prim_f_64_strict(deserializer);
+    return Nuan5DiyColorSwatch(rgba: var_rgba);
   }
 
   @protected
@@ -8182,17 +8176,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  (int, Nuan5ClothDiySwatchColor)
-  sse_decode_record_i_32_nuan_5_cloth_diy_swatch_color(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_i_32(deserializer);
-    var var_field1 = sse_decode_nuan_5_cloth_diy_swatch_color(deserializer);
-    return (var_field0, var_field1);
-  }
-
-  @protected
   (int, Nuan5ClothDyeArea) sse_decode_record_i_32_nuan_5_cloth_dye_area(
     SseDeserializer deserializer,
   ) {
@@ -8209,6 +8192,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_i_32(deserializer);
     var var_field1 = sse_decode_nuan_5_cloth_dye_palette(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5DiyColorSwatch) sse_decode_record_i_32_nuan_5_diy_color_swatch(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_diy_color_swatch(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -8842,18 +8835,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(
-    Map<int, Nuan5ClothDiySwatchColor> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
-      self.entries.map((e) => (e.key, e.value)).toList(),
-      serializer,
-    );
-  }
-
-  @protected
   void sse_encode_Map_i_32_nuan_5_cloth_dye_area_None(
     Map<int, Nuan5ClothDyeArea> self,
     SseSerializer serializer,
@@ -8872,6 +8853,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_record_i_32_nuan_5_cloth_dye_palette(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_diy_color_swatch_None(
+    Map<int, Nuan5DiyColorSwatch> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_diy_color_swatch(
       self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
@@ -10246,18 +10239,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_record_i_32_nuan_5_cloth_diy_swatch_color(
-    List<(int, Nuan5ClothDiySwatchColor)> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_record_i_32_nuan_5_cloth_diy_swatch_color(item, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_list_record_i_32_nuan_5_cloth_dye_area(
     List<(int, Nuan5ClothDyeArea)> self,
     SseSerializer serializer,
@@ -10278,6 +10259,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_record_i_32_nuan_5_cloth_dye_palette(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_diy_color_swatch(
+    List<(int, Nuan5DiyColorSwatch)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_diy_color_swatch(item, serializer);
     }
   }
 
@@ -10683,15 +10676,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_nuan_5_cloth_diy_swatch_color(
-    Nuan5ClothDiySwatchColor self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_prim_f_64_strict(self.rgba, serializer);
-  }
-
-  @protected
   void sse_encode_nuan_5_cloth_dye_area(
     Nuan5ClothDyeArea self,
     SseSerializer serializer,
@@ -10737,11 +10721,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.clothDyePalette,
       serializer,
     );
-    sse_encode_Map_i_32_nuan_5_cloth_diy_swatch_color_None(
-      self.clothDiySwatchColor,
+    sse_encode_Map_i_32_nuan_5_diy_color_swatch_None(
+      self.diyColorSwatch,
       serializer,
     );
     sse_encode_Map_i_32_nuan_5_diy_pattern_None(self.diyPattern, serializer);
+  }
+
+  @protected
+  void sse_encode_nuan_5_diy_color_swatch(
+    Nuan5DiyColorSwatch self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_f_64_strict(self.rgba, serializer);
   }
 
   @protected
@@ -11490,16 +11483,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_record_i_32_nuan_5_cloth_diy_swatch_color(
-    (int, Nuan5ClothDiySwatchColor) self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.$1, serializer);
-    sse_encode_nuan_5_cloth_diy_swatch_color(self.$2, serializer);
-  }
-
-  @protected
   void sse_encode_record_i_32_nuan_5_cloth_dye_area(
     (int, Nuan5ClothDyeArea) self,
     SseSerializer serializer,
@@ -11517,6 +11500,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.$1, serializer);
     sse_encode_nuan_5_cloth_dye_palette(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_diy_color_swatch(
+    (int, Nuan5DiyColorSwatch) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_diy_color_swatch(self.$2, serializer);
   }
 
   @protected

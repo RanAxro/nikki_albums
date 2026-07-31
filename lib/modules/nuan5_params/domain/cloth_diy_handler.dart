@@ -69,7 +69,7 @@ class ClothDiyHandler{
   }
 
   (double, double, double, double)? getSwatchRGBAColor(Nuan5Config config, int grid){
-    final Nuan5ClothDiySwatchColor? data = config.clothDiySwatchColor[grid];
+    final Nuan5DiyColorSwatch? data = config.diyColorSwatch[grid];
     if(data == null){
       return null;
     }

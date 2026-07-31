@@ -8,25 +8,6 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
-class Nuan5ClothDiySwatchColor {
-  final Float64List rgba;
-
-  const Nuan5ClothDiySwatchColor({required this.rgba});
-
-  static Future<Nuan5ClothDiySwatchColor> default_() => RustLib.instance.api
-      .crateNuan5DatabaseModelNuan5ClothDiySwatchColorDefault();
-
-  @override
-  int get hashCode => rgba.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Nuan5ClothDiySwatchColor &&
-          runtimeType == other.runtimeType &&
-          rgba == other.rgba;
-}
-
 class Nuan5ClothDyeArea {
   final int maxColorAreaNum;
   final int maxPatternAreaNum;
@@ -109,7 +90,7 @@ class Nuan5Config {
   final Map<int, Nuan5MomoPose> momoPose;
   final Map<int, Nuan5ClothDyeArea> clothDyeArea;
   final Map<int, Nuan5ClothDyePalette> clothDyePalette;
-  final Map<int, Nuan5ClothDiySwatchColor> clothDiySwatchColor;
+  final Map<int, Nuan5DiyColorSwatch> diyColorSwatch;
   final Map<int, Nuan5DiyPattern> diyPattern;
 
   const Nuan5Config({
@@ -122,7 +103,7 @@ class Nuan5Config {
     required this.momoPose,
     required this.clothDyeArea,
     required this.clothDyePalette,
-    required this.clothDiySwatchColor,
+    required this.diyColorSwatch,
     required this.diyPattern,
   });
 
@@ -145,7 +126,7 @@ class Nuan5Config {
       momoPose.hashCode ^
       clothDyeArea.hashCode ^
       clothDyePalette.hashCode ^
-      clothDiySwatchColor.hashCode ^
+      diyColorSwatch.hashCode ^
       diyPattern.hashCode;
 
   @override
@@ -162,8 +143,27 @@ class Nuan5Config {
           momoPose == other.momoPose &&
           clothDyeArea == other.clothDyeArea &&
           clothDyePalette == other.clothDyePalette &&
-          clothDiySwatchColor == other.clothDiySwatchColor &&
+          diyColorSwatch == other.diyColorSwatch &&
           diyPattern == other.diyPattern;
+}
+
+class Nuan5DiyColorSwatch {
+  final Float64List rgba;
+
+  const Nuan5DiyColorSwatch({required this.rgba});
+
+  static Future<Nuan5DiyColorSwatch> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5DiyColorSwatchDefault();
+
+  @override
+  int get hashCode => rgba.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5DiyColorSwatch &&
+          runtimeType == other.runtimeType &&
+          rgba == other.rgba;
 }
 
 class Nuan5DiyPattern {

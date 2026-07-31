@@ -32,7 +32,7 @@ pub struct Nuan5Config{
   pub cloth_dye_palette: HashMap<i32, Nuan5ClothDyePalette>,
 
   #[prost(map = "int32, message", tag = "8")]
-  pub cloth_diy_swatch_color: HashMap<i32, Nuan5ClothDiySwatchColor>,
+  pub diy_color_swatch: HashMap<i32, Nuan5DiyColorSwatch>,
 
   #[prost(map = "int32, message", tag = "9")]
   pub diy_pattern: HashMap<i32, Nuan5DiyPattern>,
@@ -161,7 +161,7 @@ pub struct Nuan5ClothDyePalette{
 
 #[derive(Clone, PartialEq)]
 #[derive(Message)]
-pub struct Nuan5ClothDiySwatchColor{
+pub struct Nuan5DiyColorSwatch{
   #[prost(double, repeated, tag = "1")]
   pub rgba: Vec<f64>,
 }
