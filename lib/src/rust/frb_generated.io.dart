@@ -5,6 +5,8 @@
 
 import 'api/simple.dart';
 import 'config/app_persistent_state.dart';
+import 'config/hot_update.dart';
+import 'config/update.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
@@ -109,6 +111,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_Map_String_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue_None(
     dynamic raw,
   );
+
+  @protected
+  Map<String, String> dco_decode_Map_String_String_None(dynamic raw);
 
   @protected
   Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw);
@@ -218,6 +223,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AppPersistentState dco_decode_app_persistent_state(dynamic raw);
 
   @protected
+  AppVersionHotUpdateInfo dco_decode_app_version_hot_update_info(dynamic raw);
+
+  @protected
   Area dco_decode_area(dynamic raw);
 
   @protected
@@ -285,6 +293,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   HomeBuildParam dco_decode_box_autoadd_home_build_param(dynamic raw);
+
+  @protected
+  HotUpdateInfo dco_decode_box_autoadd_hot_update_info(dynamic raw);
 
   @protected
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
@@ -393,6 +404,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int dco_decode_box_autoadd_u_32(dynamic raw);
 
   @protected
+  UpdateInfo dco_decode_box_autoadd_update_info(dynamic raw);
+
+  @protected
   WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw);
 
   @protected
@@ -492,6 +506,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FileEntityType dco_decode_file_entity_type(dynamic raw);
 
   @protected
+  FileHotUpdateInfo dco_decode_file_hot_update_info(dynamic raw);
+
+  @protected
   FilterParams dco_decode_filter_params(dynamic raw);
 
   @protected
@@ -513,6 +530,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   HomeBuildParamType dco_decode_home_build_param_type(dynamic raw);
 
   @protected
+  HotUpdateInfo dco_decode_hot_update_info(dynamic raw);
+
+  @protected
   int dco_decode_i_32(dynamic raw);
 
   @protected
@@ -526,6 +546,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<AndroidGameLocationConfig> dco_decode_list_android_game_location_config(
+    dynamic raw,
+  );
+
+  @protected
+  List<AppVersionHotUpdateInfo> dco_decode_list_app_version_hot_update_info(
     dynamic raw,
   );
 
@@ -544,6 +569,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<FileEntityLocationConfig> dco_decode_list_file_entity_location_config(
     dynamic raw,
   );
+
+  @protected
+  List<FileHotUpdateInfo> dco_decode_list_file_hot_update_info(dynamic raw);
 
   @protected
   List<GameAlbumConfig> dco_decode_list_game_album_config(dynamic raw);
@@ -642,6 +670,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
+
+  @protected
+  List<(String, String)> dco_decode_list_record_string_string(dynamic raw);
 
   @protected
   List<RegionPicture> dco_decode_list_region_picture(dynamic raw);
@@ -805,6 +836,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
 
   @protected
+  HotUpdateInfo? dco_decode_opt_box_autoadd_hot_update_info(dynamic raw);
+
+  @protected
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
 
   @protected
@@ -875,6 +909,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
+  UpdateInfo? dco_decode_opt_box_autoadd_update_info(dynamic raw);
+
+  @protected
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw);
 
   @protected
@@ -921,6 +958,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Platform dco_decode_platform(dynamic raw);
+
+  @protected
+  PlatformUpdateInfo dco_decode_platform_update_info(dynamic raw);
 
   @protected
   PluginInfo dco_decode_plugin_info(dynamic raw);
@@ -985,6 +1025,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (String, bool) dco_decode_record_string_bool(dynamic raw);
 
   @protected
+  (String, String) dco_decode_record_string_string(dynamic raw);
+
+  @protected
   (int, int, int) dco_decode_record_u_8_u_8_u_8(dynamic raw);
 
   @protected
@@ -1045,6 +1088,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void dco_decode_unit(dynamic raw);
+
+  @protected
+  UpdateInfo dco_decode_update_info(dynamic raw);
 
   @protected
   BigInt dco_decode_usize(dynamic raw);
@@ -1122,6 +1168,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   Map<String, Value>
   sse_decode_Map_String_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<String, String> sse_decode_Map_String_String_None(
     SseDeserializer deserializer,
   );
 
@@ -1255,6 +1306,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  AppVersionHotUpdateInfo sse_decode_app_version_hot_update_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Area sse_decode_area(SseDeserializer deserializer);
 
   @protected
@@ -1340,6 +1396,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   HomeBuildParam sse_decode_box_autoadd_home_build_param(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  HotUpdateInfo sse_decode_box_autoadd_hot_update_info(
     SseDeserializer deserializer,
   );
 
@@ -1486,6 +1547,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int sse_decode_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
+  UpdateInfo sse_decode_box_autoadd_update_info(SseDeserializer deserializer);
+
+  @protected
   WeaponParams sse_decode_box_autoadd_weapon_params(
     SseDeserializer deserializer,
   );
@@ -1599,6 +1663,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FileEntityType sse_decode_file_entity_type(SseDeserializer deserializer);
 
   @protected
+  FileHotUpdateInfo sse_decode_file_hot_update_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
 
   @protected
@@ -1624,6 +1693,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  HotUpdateInfo sse_decode_hot_update_info(SseDeserializer deserializer);
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
@@ -1641,6 +1713,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<AppVersionHotUpdateInfo> sse_decode_list_app_version_hot_update_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer);
 
   @protected
@@ -1653,6 +1730,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<FileEntityLocationConfig> sse_decode_list_file_entity_location_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<FileHotUpdateInfo> sse_decode_list_file_hot_update_info(
     SseDeserializer deserializer,
   );
 
@@ -1773,6 +1855,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(String, bool)> sse_decode_list_record_string_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(String, String)> sse_decode_list_record_string_string(
     SseDeserializer deserializer,
   );
 
@@ -1972,6 +2059,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  HotUpdateInfo? sse_decode_opt_box_autoadd_hot_update_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
@@ -2066,6 +2158,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
+  UpdateInfo? sse_decode_opt_box_autoadd_update_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   WeaponParams? sse_decode_opt_box_autoadd_weapon_params(
     SseDeserializer deserializer,
   );
@@ -2122,6 +2219,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Platform sse_decode_platform(SseDeserializer deserializer);
+
+  @protected
+  PlatformUpdateInfo sse_decode_platform_update_info(
+    SseDeserializer deserializer,
+  );
 
   @protected
   PluginInfo sse_decode_plugin_info(SseDeserializer deserializer);
@@ -2204,6 +2306,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (String, bool) sse_decode_record_string_bool(SseDeserializer deserializer);
 
   @protected
+  (String, String) sse_decode_record_string_string(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (int, int, int) sse_decode_record_u_8_u_8_u_8(SseDeserializer deserializer);
 
   @protected
@@ -2270,6 +2377,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_decode_unit(SseDeserializer deserializer);
+
+  @protected
+  UpdateInfo sse_decode_update_info(SseDeserializer deserializer);
 
   @protected
   BigInt sse_decode_usize(SseDeserializer deserializer);
@@ -2366,6 +2476,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Map_String_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue_None(
     Map<String, Value> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_String_String_None(
+    Map<String, String> self,
     SseSerializer serializer,
   );
 
@@ -2521,6 +2637,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_app_version_hot_update_info(
+    AppVersionHotUpdateInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_area(Area self, SseSerializer serializer);
 
   @protected
@@ -2628,6 +2750,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_home_build_param(
     HomeBuildParam self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_hot_update_info(
+    HotUpdateInfo self,
     SseSerializer serializer,
   );
 
@@ -2812,6 +2940,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_update_info(
+    UpdateInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_weapon_params(
     WeaponParams self,
     SseSerializer serializer,
@@ -2965,6 +3099,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_file_hot_update_info(
+    FileHotUpdateInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
 
   @protected
@@ -2998,6 +3138,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_hot_update_info(HotUpdateInfo self, SseSerializer serializer);
+
+  @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
@@ -3012,6 +3155,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_android_game_location_config(
     List<AndroidGameLocationConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_app_version_hot_update_info(
+    List<AppVersionHotUpdateInfo> self,
     SseSerializer serializer,
   );
 
@@ -3033,6 +3182,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_file_entity_location_config(
     List<FileEntityLocationConfig> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_file_hot_update_info(
+    List<FileHotUpdateInfo> self,
     SseSerializer serializer,
   );
 
@@ -3181,6 +3336,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_record_string_bool(
     List<(String, bool)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_string_string(
+    List<(String, String)> self,
     SseSerializer serializer,
   );
 
@@ -3443,6 +3604,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_hot_update_info(
+    HotUpdateInfo? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_i_64(
     PlatformInt64? self,
     SseSerializer serializer,
@@ -3563,6 +3730,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_box_autoadd_update_info(
+    UpdateInfo? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_weapon_params(
     WeaponParams? self,
     SseSerializer serializer,
@@ -3633,6 +3806,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_platform(Platform self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_platform_update_info(
+    PlatformUpdateInfo self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_plugin_info(PluginInfo self, SseSerializer serializer);
@@ -3735,6 +3914,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_string_string(
+    (String, String) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_record_u_8_u_8_u_8(
     (int, int, int) self,
     SseSerializer serializer,
@@ -3814,6 +3999,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_unit(void self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_update_info(UpdateInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer);

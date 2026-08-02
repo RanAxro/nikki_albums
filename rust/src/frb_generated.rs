@@ -40,7 +40,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -503626435;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -409657287;
 
 // Section: executor
 
@@ -1234,6 +1234,105 @@ fn wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
                     })(),
                 )
             }
+        },
+    )
+}
+fn wire__crate__config__hot_update__hot_update_info_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "hot_update_info_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::config::hot_update::HotUpdateInfo::from_json(&api_json),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__config__hot_update__hot_update_info_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "hot_update_info_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::hot_update::HotUpdateInfo>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::hot_update::HotUpdateInfo::to_json(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "hot_update_info_to_json_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::hot_update::HotUpdateInfo>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::hot_update::HotUpdateInfo::to_json_pretty(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
         },
     )
 }
@@ -2678,6 +2777,101 @@ fn wire__crate__serde_config__structs__common__translate_text_from_key_impl(
         },
     )
 }
+fn wire__crate__config__update__update_info_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "update_info_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok =
+                    Result::<_, ()>::Ok(crate::config::update::UpdateInfo::from_json(&api_json))?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__config__update__update_info_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "update_info_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::update::UpdateInfo>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::update::UpdateInfo::to_json(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__update__update_info_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "update_info_to_json_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::update::UpdateInfo>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::update::UpdateInfo::to_json_pretty(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
 
 // Section: related_funcs
 
@@ -2748,6 +2942,14 @@ impl SseDecode for std::collections::HashMap<String, Value> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<(String, Value)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode for std::collections::HashMap<String, String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(String, String)>>::sse_decode(deserializer);
         return inner.into_iter().collect();
     }
 }
@@ -3024,6 +3226,18 @@ impl SseDecode for crate::config::app_persistent_state::AppPersistentState {
             lang: var_lang,
             theme: var_theme,
             unknown_field: var_unknownField,
+        };
+    }
+}
+
+impl SseDecode for crate::config::hot_update::AppVersionHotUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_min = <i32>::sse_decode(deserializer);
+        let mut var_max = <i32>::sse_decode(deserializer);
+        return crate::config::hot_update::AppVersionHotUpdateInfo {
+            min: var_min,
+            max: var_max,
         };
     }
 }
@@ -3578,6 +3792,18 @@ impl SseDecode for crate::serde_config::structs::common::FileEntityType {
     }
 }
 
+impl SseDecode for crate::config::hot_update::FileHotUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_path = <String>::sse_decode(deserializer);
+        let mut var_downloadLink = <String>::sse_decode(deserializer);
+        return crate::config::hot_update::FileHotUpdateInfo {
+            path: var_path,
+            download_link: var_downloadLink,
+        };
+    }
+}
+
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::FilterParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3746,6 +3972,24 @@ impl SseDecode for crate::nuan5_params::decode::HomeBuildParamType {
     }
 }
 
+impl SseDecode for crate::config::hot_update::HotUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_id = <String>::sse_decode(deserializer);
+        let mut var_versionId = <String>::sse_decode(deserializer);
+        let mut var_targetAppVersion =
+            <Vec<crate::config::hot_update::AppVersionHotUpdateInfo>>::sse_decode(deserializer);
+        let mut var_files =
+            <Vec<crate::config::hot_update::FileHotUpdateInfo>>::sse_decode(deserializer);
+        return crate::config::hot_update::HotUpdateInfo {
+            id: var_id,
+            version_id: var_versionId,
+            target_app_version: var_targetAppVersion,
+            files: var_files,
+        };
+    }
+}
+
 impl SseDecode for i32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3811,6 +4055,20 @@ impl SseDecode for Vec<crate::serde_config::structs::game_config::AndroidGameLoc
     }
 }
 
+impl SseDecode for Vec<crate::config::hot_update::AppVersionHotUpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::config::hot_update::AppVersionHotUpdateInfo>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<crate::nuan5_params::structs::nikki_photo_params::ClothParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3864,6 +4122,20 @@ impl SseDecode for Vec<crate::serde_config::structs::common::FileEntityLocationC
                     deserializer,
                 ),
             );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::config::hot_update::FileHotUpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::config::hot_update::FileHotUpdateInfo>::sse_decode(
+                deserializer,
+            ));
         }
         return ans_;
     }
@@ -4204,6 +4476,18 @@ impl SseDecode for Vec<(String, bool)> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<(String, bool)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<(String, String)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(String, String)>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -5099,6 +5383,19 @@ impl SseDecode for Option<crate::nuan5_params::decode::HomeBuildParam> {
     }
 }
 
+impl SseDecode for Option<crate::config::hot_update::HotUpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::config::hot_update::HotUpdateInfo>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5386,6 +5683,19 @@ impl SseDecode for Option<u32> {
     }
 }
 
+impl SseDecode for Option<crate::config::update::UpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::config::update::UpdateInfo>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::WeaponParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5622,6 +5932,23 @@ impl SseDecode for crate::serde_config::structs::common::Platform {
     }
 }
 
+impl SseDecode for crate::config::update::PlatformUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_version = <i32>::sse_decode(deserializer);
+        let mut var_versionString = <String>::sse_decode(deserializer);
+        let mut var_downloadLink = <String>::sse_decode(deserializer);
+        let mut var_updateMessage =
+            <std::collections::HashMap<String, String>>::sse_decode(deserializer);
+        return crate::config::update::PlatformUpdateInfo {
+            version: var_version,
+            version_string: var_versionString,
+            download_link: var_downloadLink,
+            update_message: var_updateMessage,
+        };
+    }
+}
+
 impl SseDecode for crate::serde_config::structs::plugin_info::PluginInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5806,6 +6133,15 @@ impl SseDecode for (String, bool) {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <String>::sse_decode(deserializer);
         let mut var_field1 = <bool>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (String, String) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <String>::sse_decode(deserializer);
+        let mut var_field1 = <String>::sse_decode(deserializer);
         return (var_field0, var_field1);
     }
 }
@@ -6259,6 +6595,18 @@ impl SseDecode for () {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {}
 }
 
+impl SseDecode for crate::config::update::UpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_windows = <crate::config::update::PlatformUpdateInfo>::sse_decode(deserializer);
+        let mut var_macos = <crate::config::update::PlatformUpdateInfo>::sse_decode(deserializer);
+        return crate::config::update::UpdateInfo {
+            windows: var_windows,
+            macos: var_macos,
+        };
+    }
+}
+
 impl SseDecode for usize {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6524,153 +6872,153 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        32 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        33 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
+        34 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        35 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+        36 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        34 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
+        37 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
+        39 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        38 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
+        41 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        40 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
+        43 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        41 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
+        44 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
+        45 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
+        48 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        46 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
+        49 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
+        50 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        48 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
+        51 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        49 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
+        52 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        50 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
+        53 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        51 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
+        54 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        52 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
+        55 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        53 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
+        56 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        54 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
+        57 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        55 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
+        58 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        56 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
+        59 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        57 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
+        60 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
+        61 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        59 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
+        62 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        60 => wire__crate__serde_config__se__serialize_game_config_impl(
+        63 => wire__crate__serde_config__se__serialize_game_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        61 => wire__crate__serde_config__se__serialize_plugin_info_impl(
+        64 => wire__crate__serde_config__se__serialize_plugin_info_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        62 => wire__crate__serde_config__se__serialize_theme_config_impl(
+        65 => wire__crate__serde_config__se__serialize_theme_config_impl(
             port,
             ptr,
             rust_vec_len,
@@ -6742,29 +7090,51 @@ fn pde_ffi_dispatcher_sync_impl(
             data_len,
         ),
         28 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        35 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+        31 => wire__crate__config__hot_update__hot_update_info_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+        32 => wire__crate__config__hot_update__hot_update_info_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+        33 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        43 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        44 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+        38 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        63 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        64 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+        40 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        42 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        46 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        47 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        66 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        67 => wire__crate__serde_config__structs__common__translate_text_from_key_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        68 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
+        69 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
+        70 => wire__crate__config__update__update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -6965,6 +7335,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::app_persistent_state::AppP
     for crate::config::app_persistent_state::AppPersistentState
 {
     fn into_into_dart(self) -> crate::config::app_persistent_state::AppPersistentState {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::hot_update::AppVersionHotUpdateInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.min.into_into_dart().into_dart(),
+            self.max.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::hot_update::AppVersionHotUpdateInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::AppVersionHotUpdateInfo>
+    for crate::config::hot_update::AppVersionHotUpdateInfo
+{
+    fn into_into_dart(self) -> crate::config::hot_update::AppVersionHotUpdateInfo {
         self
     }
 }
@@ -7697,6 +8088,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::common::Fil
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::hot_update::FileHotUpdateInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.path.into_into_dart().into_dart(),
+            self.download_link.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::hot_update::FileHotUpdateInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::FileHotUpdateInfo>
+    for crate::config::hot_update::FileHotUpdateInfo
+{
+    fn into_into_dart(self) -> crate::config::hot_update::FileHotUpdateInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
     for crate::nuan5_params::structs::nikki_photo_params::FilterParams
 {
@@ -7885,6 +8297,29 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::decode::HomeBuildPar
     for crate::nuan5_params::decode::HomeBuildParamType
 {
     fn into_into_dart(self) -> crate::nuan5_params::decode::HomeBuildParamType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::hot_update::HotUpdateInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.id.into_into_dart().into_dart(),
+            self.version_id.into_into_dart().into_dart(),
+            self.target_app_version.into_into_dart().into_dart(),
+            self.files.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::hot_update::HotUpdateInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::HotUpdateInfo>
+    for crate::config::hot_update::HotUpdateInfo
+{
+    fn into_into_dart(self) -> crate::config::hot_update::HotUpdateInfo {
         self
     }
 }
@@ -8908,6 +9343,29 @@ impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::common::Pla
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::update::PlatformUpdateInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.version.into_into_dart().into_dart(),
+            self.version_string.into_into_dart().into_dart(),
+            self.download_link.into_into_dart().into_dart(),
+            self.update_message.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::update::PlatformUpdateInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::update::PlatformUpdateInfo>
+    for crate::config::update::PlatformUpdateInfo
+{
+    fn into_into_dart(self) -> crate::config::update::PlatformUpdateInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::serde_config::structs::plugin_info::PluginInfo {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -9438,6 +9896,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::serde_config::structs::common::Tra
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::update::UpdateInfo {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.windows.into_into_dart().into_dart(),
+            self.macos.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::update::UpdateInfo
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::update::UpdateInfo>
+    for crate::config::update::UpdateInfo
+{
+    fn into_into_dart(self) -> crate::config::update::UpdateInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
     for crate::nuan5_params::structs::nikki_photo_params::WeaponParams
 {
@@ -9703,6 +10182,13 @@ impl SseEncode for std::collections::HashMap<String, Value> {
     }
 }
 
+impl SseEncode for std::collections::HashMap<String, String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(String, String)>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
 impl SseEncode for std::collections::HashMap<String, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -9957,6 +10443,14 @@ impl SseEncode for crate::config::app_persistent_state::AppPersistentState {
         <String>::sse_encode(self.lang, serializer);
         <i32>::sse_encode(self.theme, serializer);
         <std::collections::HashMap<String, Value>>::sse_encode(self.unknown_field, serializer);
+    }
+}
+
+impl SseEncode for crate::config::hot_update::AppVersionHotUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.min, serializer);
+        <i32>::sse_encode(self.max, serializer);
     }
 }
 
@@ -10443,6 +10937,14 @@ impl SseEncode for crate::serde_config::structs::common::FileEntityType {
     }
 }
 
+impl SseEncode for crate::config::hot_update::FileHotUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.path, serializer);
+        <String>::sse_encode(self.download_link, serializer);
+    }
+}
+
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::FilterParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10576,6 +11078,19 @@ impl SseEncode for crate::nuan5_params::decode::HomeBuildParamType {
     }
 }
 
+impl SseEncode for crate::config::hot_update::HotUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.id, serializer);
+        <String>::sse_encode(self.version_id, serializer);
+        <Vec<crate::config::hot_update::AppVersionHotUpdateInfo>>::sse_encode(
+            self.target_app_version,
+            serializer,
+        );
+        <Vec<crate::config::hot_update::FileHotUpdateInfo>>::sse_encode(self.files, serializer);
+    }
+}
+
 impl SseEncode for i32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10634,6 +11149,16 @@ impl SseEncode for Vec<crate::serde_config::structs::game_config::AndroidGameLoc
     }
 }
 
+impl SseEncode for Vec<crate::config::hot_update::AppVersionHotUpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::config::hot_update::AppVersionHotUpdateInfo>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<crate::nuan5_params::structs::nikki_photo_params::ClothParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10676,6 +11201,16 @@ impl SseEncode for Vec<crate::serde_config::structs::common::FileEntityLocationC
             <crate::serde_config::structs::common::FileEntityLocationConfig>::sse_encode(
                 item, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::config::hot_update::FileHotUpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::config::hot_update::FileHotUpdateInfo>::sse_encode(item, serializer);
         }
     }
 }
@@ -10940,6 +11475,16 @@ impl SseEncode for Vec<(String, bool)> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <(String, bool)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<(String, String)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(String, String)>::sse_encode(item, serializer);
         }
     }
 }
@@ -11650,6 +12195,16 @@ impl SseEncode for Option<crate::nuan5_params::decode::HomeBuildParam> {
     }
 }
 
+impl SseEncode for Option<crate::config::hot_update::HotUpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::config::hot_update::HotUpdateInfo>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<i64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11880,6 +12435,16 @@ impl SseEncode for Option<u32> {
     }
 }
 
+impl SseEncode for Option<crate::config::update::UpdateInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::config::update::UpdateInfo>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::WeaponParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12069,6 +12634,16 @@ impl SseEncode for crate::serde_config::structs::common::Platform {
     }
 }
 
+impl SseEncode for crate::config::update::PlatformUpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.version, serializer);
+        <String>::sse_encode(self.version_string, serializer);
+        <String>::sse_encode(self.download_link, serializer);
+        <std::collections::HashMap<String, String>>::sse_encode(self.update_message, serializer);
+    }
+}
+
 impl SseEncode for crate::serde_config::structs::plugin_info::PluginInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12218,6 +12793,14 @@ impl SseEncode for (String, bool) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.0, serializer);
         <bool>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (String, String) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.0, serializer);
+        <String>::sse_encode(self.1, serializer);
     }
 }
 
@@ -12584,6 +13167,14 @@ impl SseEncode for u8 {
 impl SseEncode for () {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
+}
+
+impl SseEncode for crate::config::update::UpdateInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::config::update::PlatformUpdateInfo>::sse_encode(self.windows, serializer);
+        <crate::config::update::PlatformUpdateInfo>::sse_encode(self.macos, serializer);
+    }
 }
 
 impl SseEncode for usize {

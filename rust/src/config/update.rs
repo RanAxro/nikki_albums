@@ -5,20 +5,14 @@ use crate::impl_json_frb;
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct AppPersistentState{
-  pub is_agree_agreement: bool,
-  pub is_initial_startup: bool,
-
-  pub lang: String,
-  pub theme: i32,
-
-  #[serde(flatten)]
-  pub unknown_field: HashMap<String, serde_json::Value>,
+pub struct UpdateInfo{
+  pub windows: PlatformUpdateInfo,
+  pub macos: PlatformUpdateInfo,
 }
 
-impl_json_frb!(AppPersistentState);
+impl_json_frb!(UpdateInfo);
 
-// impl AppPersistentState{
+// impl UpdateInfo{
 //   #[frb(sync)]
 //   pub fn from_json(json: &str) -> Option<Self>{
 //     serde_json::from_str(json).ok()
@@ -34,3 +28,18 @@ impl_json_frb!(AppPersistentState);
 //     serde_json::to_string_pretty(self)
 //   }
 // }
+
+#[frb]
+#[derive(Serialize, Deserialize)]
+pub struct PlatformUpdateInfo{
+  pub version: i32,
+
+  #[serde(rename = "versionString")]
+  pub version_string: String,
+
+  #[serde(rename = "downloadLink")]
+  pub download_link: String,
+
+  #[serde(rename = "updateMessage")]
+  pub update_message: HashMap<String, String>,
+}
