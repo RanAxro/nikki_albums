@@ -13,7 +13,7 @@ pub struct AppPersistentState{
   pub theme: i32,
 
   #[serde(flatten)]
-  pub unknown_field: HashMap<String, serde_json::Value>,
+  pub unknown_field: HashMap<String, String>,
 }
 
 impl_json_frb!(AppPersistentState);
