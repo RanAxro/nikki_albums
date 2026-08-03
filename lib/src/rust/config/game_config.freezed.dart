@@ -14,22 +14,22 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WindowsGameSearcherConfig {
 
- Object? get toLauncher; Object get toInstall;
+ Object get field0;
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WindowsGameSearcherConfig&&const DeepCollectionEquality().equals(other.toLauncher, toLauncher)&&const DeepCollectionEquality().equals(other.toInstall, toInstall));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WindowsGameSearcherConfig&&const DeepCollectionEquality().equals(other.field0, field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(toLauncher),const DeepCollectionEquality().hash(toInstall));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
 
 @override
 String toString() {
-  return 'WindowsGameSearcherConfig(toLauncher: $toLauncher, toInstall: $toInstall)';
+  return 'WindowsGameSearcherConfig(field0: $field0)';
 }
 
 
@@ -119,11 +119,11 @@ return configFile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( WindowsRegistryConfig? toLauncher,  WindowsRegistryConfig toInstall,  bool useConfigFile)?  registry,TResult Function( String path,  ConfigFileType configType,  String? toLauncher,  String? toLauncherRegex,  String toInstall,  String? toInstallRegex)?  configFile,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( WindowsGameRegistrySearcherConfig field0)?  registry,TResult Function( WindowsGameConfigFileSearcherConfig field0)?  configFile,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case WindowsGameSearcherConfig_Registry() when registry != null:
-return registry(_that.toLauncher,_that.toInstall,_that.useConfigFile);case WindowsGameSearcherConfig_ConfigFile() when configFile != null:
-return configFile(_that.path,_that.configType,_that.toLauncher,_that.toLauncherRegex,_that.toInstall,_that.toInstallRegex);case _:
+return registry(_that.field0);case WindowsGameSearcherConfig_ConfigFile() when configFile != null:
+return configFile(_that.field0);case _:
   return orElse();
 
 }
@@ -141,11 +141,11 @@ return configFile(_that.path,_that.configType,_that.toLauncher,_that.toLauncherR
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( WindowsRegistryConfig? toLauncher,  WindowsRegistryConfig toInstall,  bool useConfigFile)  registry,required TResult Function( String path,  ConfigFileType configType,  String? toLauncher,  String? toLauncherRegex,  String toInstall,  String? toInstallRegex)  configFile,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( WindowsGameRegistrySearcherConfig field0)  registry,required TResult Function( WindowsGameConfigFileSearcherConfig field0)  configFile,}) {final _that = this;
 switch (_that) {
 case WindowsGameSearcherConfig_Registry():
-return registry(_that.toLauncher,_that.toInstall,_that.useConfigFile);case WindowsGameSearcherConfig_ConfigFile():
-return configFile(_that.path,_that.configType,_that.toLauncher,_that.toLauncherRegex,_that.toInstall,_that.toInstallRegex);}
+return registry(_that.field0);case WindowsGameSearcherConfig_ConfigFile():
+return configFile(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +159,11 @@ return configFile(_that.path,_that.configType,_that.toLauncher,_that.toLauncherR
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( WindowsRegistryConfig? toLauncher,  WindowsRegistryConfig toInstall,  bool useConfigFile)?  registry,TResult? Function( String path,  ConfigFileType configType,  String? toLauncher,  String? toLauncherRegex,  String toInstall,  String? toInstallRegex)?  configFile,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( WindowsGameRegistrySearcherConfig field0)?  registry,TResult? Function( WindowsGameConfigFileSearcherConfig field0)?  configFile,}) {final _that = this;
 switch (_that) {
 case WindowsGameSearcherConfig_Registry() when registry != null:
-return registry(_that.toLauncher,_that.toInstall,_that.useConfigFile);case WindowsGameSearcherConfig_ConfigFile() when configFile != null:
-return configFile(_that.path,_that.configType,_that.toLauncher,_that.toLauncherRegex,_that.toInstall,_that.toInstallRegex);case _:
+return registry(_that.field0);case WindowsGameSearcherConfig_ConfigFile() when configFile != null:
+return configFile(_that.field0);case _:
   return null;
 
 }
@@ -175,12 +175,10 @@ return configFile(_that.path,_that.configType,_that.toLauncher,_that.toLauncherR
 
 
 class WindowsGameSearcherConfig_Registry extends WindowsGameSearcherConfig {
-  const WindowsGameSearcherConfig_Registry({this.toLauncher, required this.toInstall, required this.useConfigFile}): super._();
+  const WindowsGameSearcherConfig_Registry(this.field0): super._();
   
 
-@override final  WindowsRegistryConfig? toLauncher;
-@override final  WindowsRegistryConfig toInstall;
- final  bool useConfigFile;
+@override final  WindowsGameRegistrySearcherConfig field0;
 
 /// Create a copy of WindowsGameSearcherConfig
 /// with the given fields replaced by the non-null parameter values.
@@ -192,16 +190,16 @@ $WindowsGameSearcherConfig_RegistryCopyWith<WindowsGameSearcherConfig_Registry> 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WindowsGameSearcherConfig_Registry&&(identical(other.toLauncher, toLauncher) || other.toLauncher == toLauncher)&&(identical(other.toInstall, toInstall) || other.toInstall == toInstall)&&(identical(other.useConfigFile, useConfigFile) || other.useConfigFile == useConfigFile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WindowsGameSearcherConfig_Registry&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,toLauncher,toInstall,useConfigFile);
+int get hashCode => Object.hash(runtimeType,field0);
 
 @override
 String toString() {
-  return 'WindowsGameSearcherConfig.registry(toLauncher: $toLauncher, toInstall: $toInstall, useConfigFile: $useConfigFile)';
+  return 'WindowsGameSearcherConfig.registry(field0: $field0)';
 }
 
 
@@ -212,7 +210,7 @@ abstract mixin class $WindowsGameSearcherConfig_RegistryCopyWith<$Res> implement
   factory $WindowsGameSearcherConfig_RegistryCopyWith(WindowsGameSearcherConfig_Registry value, $Res Function(WindowsGameSearcherConfig_Registry) _then) = _$WindowsGameSearcherConfig_RegistryCopyWithImpl;
 @useResult
 $Res call({
- WindowsRegistryConfig? toLauncher, WindowsRegistryConfig toInstall, bool useConfigFile
+ WindowsGameRegistrySearcherConfig field0
 });
 
 
@@ -229,12 +227,10 @@ class _$WindowsGameSearcherConfig_RegistryCopyWithImpl<$Res>
 
 /// Create a copy of WindowsGameSearcherConfig
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? toLauncher = freezed,Object? toInstall = null,Object? useConfigFile = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
   return _then(WindowsGameSearcherConfig_Registry(
-toLauncher: freezed == toLauncher ? _self.toLauncher : toLauncher // ignore: cast_nullable_to_non_nullable
-as WindowsRegistryConfig?,toInstall: null == toInstall ? _self.toInstall : toInstall // ignore: cast_nullable_to_non_nullable
-as WindowsRegistryConfig,useConfigFile: null == useConfigFile ? _self.useConfigFile : useConfigFile // ignore: cast_nullable_to_non_nullable
-as bool,
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as WindowsGameRegistrySearcherConfig,
   ));
 }
 
@@ -245,15 +241,10 @@ as bool,
 
 
 class WindowsGameSearcherConfig_ConfigFile extends WindowsGameSearcherConfig {
-  const WindowsGameSearcherConfig_ConfigFile({required this.path, required this.configType, this.toLauncher, this.toLauncherRegex, required this.toInstall, this.toInstallRegex}): super._();
+  const WindowsGameSearcherConfig_ConfigFile(this.field0): super._();
   
 
- final  String path;
- final  ConfigFileType configType;
-@override final  String? toLauncher;
- final  String? toLauncherRegex;
-@override final  String toInstall;
- final  String? toInstallRegex;
+@override final  WindowsGameConfigFileSearcherConfig field0;
 
 /// Create a copy of WindowsGameSearcherConfig
 /// with the given fields replaced by the non-null parameter values.
@@ -265,16 +256,16 @@ $WindowsGameSearcherConfig_ConfigFileCopyWith<WindowsGameSearcherConfig_ConfigFi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WindowsGameSearcherConfig_ConfigFile&&(identical(other.path, path) || other.path == path)&&(identical(other.configType, configType) || other.configType == configType)&&(identical(other.toLauncher, toLauncher) || other.toLauncher == toLauncher)&&(identical(other.toLauncherRegex, toLauncherRegex) || other.toLauncherRegex == toLauncherRegex)&&(identical(other.toInstall, toInstall) || other.toInstall == toInstall)&&(identical(other.toInstallRegex, toInstallRegex) || other.toInstallRegex == toInstallRegex));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WindowsGameSearcherConfig_ConfigFile&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,path,configType,toLauncher,toLauncherRegex,toInstall,toInstallRegex);
+int get hashCode => Object.hash(runtimeType,field0);
 
 @override
 String toString() {
-  return 'WindowsGameSearcherConfig.configFile(path: $path, configType: $configType, toLauncher: $toLauncher, toLauncherRegex: $toLauncherRegex, toInstall: $toInstall, toInstallRegex: $toInstallRegex)';
+  return 'WindowsGameSearcherConfig.configFile(field0: $field0)';
 }
 
 
@@ -285,7 +276,7 @@ abstract mixin class $WindowsGameSearcherConfig_ConfigFileCopyWith<$Res> impleme
   factory $WindowsGameSearcherConfig_ConfigFileCopyWith(WindowsGameSearcherConfig_ConfigFile value, $Res Function(WindowsGameSearcherConfig_ConfigFile) _then) = _$WindowsGameSearcherConfig_ConfigFileCopyWithImpl;
 @useResult
 $Res call({
- String path, ConfigFileType configType, String? toLauncher, String? toLauncherRegex, String toInstall, String? toInstallRegex
+ WindowsGameConfigFileSearcherConfig field0
 });
 
 
@@ -302,15 +293,10 @@ class _$WindowsGameSearcherConfig_ConfigFileCopyWithImpl<$Res>
 
 /// Create a copy of WindowsGameSearcherConfig
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? configType = null,Object? toLauncher = freezed,Object? toLauncherRegex = freezed,Object? toInstall = null,Object? toInstallRegex = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
   return _then(WindowsGameSearcherConfig_ConfigFile(
-path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String,configType: null == configType ? _self.configType : configType // ignore: cast_nullable_to_non_nullable
-as ConfigFileType,toLauncher: freezed == toLauncher ? _self.toLauncher : toLauncher // ignore: cast_nullable_to_non_nullable
-as String?,toLauncherRegex: freezed == toLauncherRegex ? _self.toLauncherRegex : toLauncherRegex // ignore: cast_nullable_to_non_nullable
-as String?,toInstall: null == toInstall ? _self.toInstall : toInstall // ignore: cast_nullable_to_non_nullable
-as String,toInstallRegex: freezed == toInstallRegex ? _self.toInstallRegex : toInstallRegex // ignore: cast_nullable_to_non_nullable
-as String?,
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as WindowsGameConfigFileSearcherConfig,
   ));
 }
 

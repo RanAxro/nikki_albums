@@ -6,15 +6,12 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< Value>>
-abstract class Value implements RustOpaqueInterface {}
-
 class AppPersistentState {
   final bool isAgreeAgreement;
   final bool isInitialStartup;
   final String lang;
   final int theme;
-  final Map<String, Value> unknownField;
+  final Map<String, String> unknownField;
 
   const AppPersistentState({
     required this.isAgreeAgreement,

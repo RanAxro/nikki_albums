@@ -7,5 +7,5 @@ pub mod nuan5_database;
 pub mod nuan5_params;
 pub mod thumbnail;
 pub mod ue5_transform;
-pub mod serde_config;
+// pub mod serde_config;
 pub mod config;
