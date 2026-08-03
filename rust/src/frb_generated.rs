@@ -4638,6 +4638,19 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::ObjectParam
     }
 }
 
+impl SseDecode for Option<std::collections::HashMap<String, String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<std::collections::HashMap<String, String>>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5938,7 +5951,8 @@ impl SseDecode for crate::config::common::text_config::TranslateTextConfig {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_key = <String>::sse_decode(deserializer);
         let mut var_args = <Option<Vec<String>>>::sse_decode(deserializer);
-        let mut var_namedArgs = <Option<Vec<String>>>::sse_decode(deserializer);
+        let mut var_namedArgs =
+            <Option<std::collections::HashMap<String, String>>>::sse_decode(deserializer);
         let mut var_gender = <Option<String>>::sse_decode(deserializer);
         return crate::config::common::text_config::TranslateTextConfig {
             key: var_key,
@@ -10950,6 +10964,16 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::ObjectParam
     }
 }
 
+impl SseEncode for Option<std::collections::HashMap<String, String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <std::collections::HashMap<String, String>>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11980,7 +12004,10 @@ impl SseEncode for crate::config::common::text_config::TranslateTextConfig {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.key, serializer);
         <Option<Vec<String>>>::sse_encode(self.args, serializer);
-        <Option<Vec<String>>>::sse_encode(self.named_args, serializer);
+        <Option<std::collections::HashMap<String, String>>>::sse_encode(
+            self.named_args,
+            serializer,
+        );
         <Option<String>>::sse_encode(self.gender, serializer);
     }
 }

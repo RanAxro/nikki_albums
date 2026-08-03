@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 
@@ -24,7 +25,7 @@ pub struct TranslateTextConfig{
   pub args: Option<Vec<String>>,
 
   #[serde(skip_serializing_if = "Option::is_none")]
-  pub named_args: Option<Vec<String>>,
+  pub named_args: Option<HashMap<String, String>>,
 
   #[serde(skip_serializing_if = "Option::is_none")]
   pub gender: Option<String>,

@@ -37,7 +37,7 @@ sealed class TextConfig with _$TextConfig {
 class TranslateTextConfig {
   final String key;
   final List<String>? args;
-  final List<String>? namedArgs;
+  final Map<String, String>? namedArgs;
   final String? gender;
 
   const TranslateTextConfig({
