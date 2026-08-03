@@ -20,7 +20,7 @@ pub enum StringProcessConfig{
 #[frb]
 #[derive(Serialize, Deserialize)]
 pub struct StringJoinProcessConfig{
-  pub symbol: String,
+  pub separator: String,
   pub target: Vec<Vec<StringProcessConfig>>,
 }
 

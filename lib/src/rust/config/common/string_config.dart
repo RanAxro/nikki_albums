@@ -25,20 +25,23 @@ class StringConfig {
 }
 
 class StringJoinProcessConfig {
-  final String symbol;
+  final String separator;
   final List<List<StringProcessConfig>> target;
 
-  const StringJoinProcessConfig({required this.symbol, required this.target});
+  const StringJoinProcessConfig({
+    required this.separator,
+    required this.target,
+  });
 
   @override
-  int get hashCode => symbol.hashCode ^ target.hashCode;
+  int get hashCode => separator.hashCode ^ target.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is StringJoinProcessConfig &&
           runtimeType == other.runtimeType &&
-          symbol == other.symbol &&
+          separator == other.separator &&
           target == other.target;
 }
 

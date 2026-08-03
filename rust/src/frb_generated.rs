@@ -5647,13 +5647,13 @@ impl SseDecode for crate::config::common::string_config::StringConfig {
 impl SseDecode for crate::config::common::string_config::StringJoinProcessConfig {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_symbol = <String>::sse_decode(deserializer);
+        let mut var_separator = <String>::sse_decode(deserializer);
         let mut var_target =
             <Vec<Vec<crate::config::common::string_config::StringProcessConfig>>>::sse_decode(
                 deserializer,
             );
         return crate::config::common::string_config::StringJoinProcessConfig {
-            symbol: var_symbol,
+            separator: var_separator,
             target: var_target,
         };
     }
@@ -8619,7 +8619,7 @@ impl flutter_rust_bridge::IntoDart
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
-            self.symbol.into_into_dart().into_dart(),
+            self.separator.into_into_dart().into_dart(),
             self.target.into_into_dart().into_dart(),
         ]
         .into_dart()
@@ -11729,7 +11729,7 @@ impl SseEncode for crate::config::common::string_config::StringConfig {
 impl SseEncode for crate::config::common::string_config::StringJoinProcessConfig {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.symbol, serializer);
+        <String>::sse_encode(self.separator, serializer);
         <Vec<Vec<crate::config::common::string_config::StringProcessConfig>>>::sse_encode(
             self.target,
             serializer,

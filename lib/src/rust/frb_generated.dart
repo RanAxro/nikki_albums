@@ -4896,7 +4896,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 2)
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return StringJoinProcessConfig(
-      symbol: dco_decode_String(arr[0]),
+      separator: dco_decode_String(arr[0]),
       target: dco_decode_list_list_string_process_config(arr[1]),
     );
   }
@@ -8348,9 +8348,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_symbol = sse_decode_String(deserializer);
+    var var_separator = sse_decode_String(deserializer);
     var var_target = sse_decode_list_list_string_process_config(deserializer);
-    return StringJoinProcessConfig(symbol: var_symbol, target: var_target);
+    return StringJoinProcessConfig(
+      separator: var_separator,
+      target: var_target,
+    );
   }
 
   @protected
@@ -11659,7 +11662,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.symbol, serializer);
+    sse_encode_String(self.separator, serializer);
     sse_encode_list_list_string_process_config(self.target, serializer);
   }
 
