@@ -11,19 +11,19 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 class WindowsRegistryConfig {
   final WindowsRegistryHive hive;
   final String path;
-  final String key;
-  final WindowsRegistryValue value;
+  final String valueName;
+  final WindowsRegistryValueType valueType;
 
   const WindowsRegistryConfig({
     required this.hive,
     required this.path,
-    required this.key,
-    required this.value,
+    required this.valueName,
+    required this.valueType,
   });
 
   @override
   int get hashCode =>
-      hive.hashCode ^ path.hashCode ^ key.hashCode ^ value.hashCode;
+      hive.hashCode ^ path.hashCode ^ valueName.hashCode ^ valueType.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -32,8 +32,8 @@ class WindowsRegistryConfig {
           runtimeType == other.runtimeType &&
           hive == other.hive &&
           path == other.path &&
-          key == other.key &&
-          value == other.value;
+          valueName == other.valueName &&
+          valueType == other.valueType;
 }
 
 enum WindowsRegistryHive {
@@ -45,4 +45,4 @@ enum WindowsRegistryHive {
   currentConfig,
 }
 
-enum WindowsRegistryValue { binary, int, string, stringArray }
+enum WindowsRegistryValueType { binary, int, string, stringArray }

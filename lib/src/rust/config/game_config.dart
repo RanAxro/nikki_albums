@@ -275,17 +275,14 @@ class WindowsGameRegistryLocationConfig {
 class WindowsGameRegistrySearcherConfig {
   final WindowsGameRegistryLocationConfig? toLauncher;
   final WindowsGameRegistryLocationConfig toInstall;
-  final bool useConfigFile;
 
   const WindowsGameRegistrySearcherConfig({
     this.toLauncher,
     required this.toInstall,
-    required this.useConfigFile,
   });
 
   @override
-  int get hashCode =>
-      toLauncher.hashCode ^ toInstall.hashCode ^ useConfigFile.hashCode;
+  int get hashCode => toLauncher.hashCode ^ toInstall.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -293,8 +290,7 @@ class WindowsGameRegistrySearcherConfig {
       other is WindowsGameRegistrySearcherConfig &&
           runtimeType == other.runtimeType &&
           toLauncher == other.toLauncher &&
-          toInstall == other.toInstall &&
-          useConfigFile == other.useConfigFile;
+          toInstall == other.toInstall;
 }
 
 @freezed

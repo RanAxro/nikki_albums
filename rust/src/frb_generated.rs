@@ -6111,11 +6111,9 @@ impl SseDecode for crate::config::game_config::WindowsGameRegistrySearcherConfig
             <crate::config::game_config::WindowsGameRegistryLocationConfig>::sse_decode(
                 deserializer,
             );
-        let mut var_useConfigFile = <bool>::sse_decode(deserializer);
         return crate::config::game_config::WindowsGameRegistrySearcherConfig {
             to_launcher: var_toLauncher,
             to_install: var_toInstall,
-            use_config_file: var_useConfigFile,
         };
     }
 }
@@ -6156,16 +6154,16 @@ impl SseDecode for crate::config::common::windows_registry_config::WindowsRegist
                 deserializer,
             );
         let mut var_path = <String>::sse_decode(deserializer);
-        let mut var_key = <String>::sse_decode(deserializer);
-        let mut var_value =
-            <crate::config::common::windows_registry_config::WindowsRegistryValue>::sse_decode(
+        let mut var_valueName = <String>::sse_decode(deserializer);
+        let mut var_valueType =
+            <crate::config::common::windows_registry_config::WindowsRegistryValueType>::sse_decode(
                 deserializer,
             );
         return crate::config::common::windows_registry_config::WindowsRegistryConfig {
             hive: var_hive,
             path: var_path,
-            key: var_key,
-            value: var_value,
+            value_name: var_valueName,
+            value_type: var_valueType,
         };
     }
 }
@@ -6188,16 +6186,16 @@ impl SseDecode for crate::config::common::windows_registry_config::WindowsRegist
     }
 }
 
-impl SseDecode for crate::config::common::windows_registry_config::WindowsRegistryValue {
+impl SseDecode for crate::config::common::windows_registry_config::WindowsRegistryValueType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <i32>::sse_decode(deserializer);
         return match inner {
-            0 => crate::config::common::windows_registry_config::WindowsRegistryValue::Binary,
-            1 => crate::config::common::windows_registry_config::WindowsRegistryValue::Int,
-            2 => crate::config::common::windows_registry_config::WindowsRegistryValue::String,
-            3 => crate::config::common::windows_registry_config::WindowsRegistryValue::StringArray,
-            _ => unreachable!("Invalid variant for WindowsRegistryValue: {}", inner),
+            0 => crate::config::common::windows_registry_config::WindowsRegistryValueType::Binary,
+1 => crate::config::common::windows_registry_config::WindowsRegistryValueType::Int,
+2 => crate::config::common::windows_registry_config::WindowsRegistryValueType::String,
+3 => crate::config::common::windows_registry_config::WindowsRegistryValueType::StringArray,
+            _ => unreachable!("Invalid variant for WindowsRegistryValueType: {}", inner),
         };
     }
 }
@@ -9158,7 +9156,6 @@ impl flutter_rust_bridge::IntoDart
         [
             self.to_launcher.into_into_dart().into_dart(),
             self.to_install.into_into_dart().into_dart(),
-            self.use_config_file.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -9210,8 +9207,8 @@ impl flutter_rust_bridge::IntoDart
         [
             self.hive.into_into_dart().into_dart(),
             self.path.into_into_dart().into_dart(),
-            self.key.into_into_dart().into_dart(),
-            self.value.into_into_dart().into_dart(),
+            self.value_name.into_into_dart().into_dart(),
+            self.value_type.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -9262,7 +9259,7 @@ impl
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
-    for crate::config::common::windows_registry_config::WindowsRegistryValue
+    for crate::config::common::windows_registry_config::WindowsRegistryValueType
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
@@ -9275,17 +9272,17 @@ impl flutter_rust_bridge::IntoDart
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::config::common::windows_registry_config::WindowsRegistryValue
+    for crate::config::common::windows_registry_config::WindowsRegistryValueType
 {
 }
 impl
     flutter_rust_bridge::IntoIntoDart<
-        crate::config::common::windows_registry_config::WindowsRegistryValue,
-    > for crate::config::common::windows_registry_config::WindowsRegistryValue
+        crate::config::common::windows_registry_config::WindowsRegistryValueType,
+    > for crate::config::common::windows_registry_config::WindowsRegistryValueType
 {
     fn into_into_dart(
         self,
-    ) -> crate::config::common::windows_registry_config::WindowsRegistryValue {
+    ) -> crate::config::common::windows_registry_config::WindowsRegistryValueType {
         self
     }
 }
@@ -12135,7 +12132,6 @@ impl SseEncode for crate::config::game_config::WindowsGameRegistrySearcherConfig
             self.to_install,
             serializer,
         );
-        <bool>::sse_encode(self.use_config_file, serializer);
     }
 }
 
@@ -12169,9 +12165,10 @@ impl SseEncode for crate::config::common::windows_registry_config::WindowsRegist
             self.hive, serializer,
         );
         <String>::sse_encode(self.path, serializer);
-        <String>::sse_encode(self.key, serializer);
-        <crate::config::common::windows_registry_config::WindowsRegistryValue>::sse_encode(
-            self.value, serializer,
+        <String>::sse_encode(self.value_name, serializer);
+        <crate::config::common::windows_registry_config::WindowsRegistryValueType>::sse_encode(
+            self.value_type,
+            serializer,
         );
     }
 }
@@ -12189,13 +12186,13 @@ crate::config::common::windows_registry_config::WindowsRegistryHive::CurrentConf
     }
 }
 
-impl SseEncode for crate::config::common::windows_registry_config::WindowsRegistryValue {
+impl SseEncode for crate::config::common::windows_registry_config::WindowsRegistryValueType {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(match self {crate::config::common::windows_registry_config::WindowsRegistryValue::Binary => { 0 }
-crate::config::common::windows_registry_config::WindowsRegistryValue::Int => { 1 }
-crate::config::common::windows_registry_config::WindowsRegistryValue::String => { 2 }
-crate::config::common::windows_registry_config::WindowsRegistryValue::StringArray => { 3 }
+        <i32>::sse_encode(match self {crate::config::common::windows_registry_config::WindowsRegistryValueType::Binary => { 0 }
+crate::config::common::windows_registry_config::WindowsRegistryValueType::Int => { 1 }
+crate::config::common::windows_registry_config::WindowsRegistryValueType::String => { 2 }
+crate::config::common::windows_registry_config::WindowsRegistryValueType::StringArray => { 3 }
  _ => { unimplemented!(""); }}, serializer);
     }
 }

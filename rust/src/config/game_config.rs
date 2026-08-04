@@ -85,7 +85,6 @@ pub enum WindowsGameSearcherConfig{
 pub struct WindowsGameRegistrySearcherConfig{
   pub to_launcher: Option<WindowsGameRegistryLocationConfig>,
   pub to_install: WindowsGameRegistryLocationConfig,
-  pub use_config_file: bool,
 }
 
 #[frb]

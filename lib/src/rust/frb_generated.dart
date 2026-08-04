@@ -5172,15 +5172,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_windows_game_registry_searcher_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return WindowsGameRegistrySearcherConfig(
       toLauncher:
           dco_decode_opt_box_autoadd_windows_game_registry_location_config(
             arr[0],
           ),
       toInstall: dco_decode_windows_game_registry_location_config(arr[1]),
-      useConfigFile: dco_decode_bool(arr[2]),
     );
   }
 
@@ -5214,8 +5213,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return WindowsRegistryConfig(
       hive: dco_decode_windows_registry_hive(arr[0]),
       path: dco_decode_String(arr[1]),
-      key: dco_decode_String(arr[2]),
-      value: dco_decode_windows_registry_value(arr[3]),
+      valueName: dco_decode_String(arr[2]),
+      valueType: dco_decode_windows_registry_value_type(arr[3]),
     );
   }
 
@@ -5226,9 +5225,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  WindowsRegistryValue dco_decode_windows_registry_value(dynamic raw) {
+  WindowsRegistryValueType dco_decode_windows_registry_value_type(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return WindowsRegistryValue.values[raw as int];
+    return WindowsRegistryValueType.values[raw as int];
   }
 
   @protected
@@ -8665,11 +8664,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_toInstall = sse_decode_windows_game_registry_location_config(
       deserializer,
     );
-    var var_useConfigFile = sse_decode_bool(deserializer);
     return WindowsGameRegistrySearcherConfig(
       toLauncher: var_toLauncher,
       toInstall: var_toInstall,
-      useConfigFile: var_useConfigFile,
     );
   }
 
@@ -8705,13 +8702,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_hive = sse_decode_windows_registry_hive(deserializer);
     var var_path = sse_decode_String(deserializer);
-    var var_key = sse_decode_String(deserializer);
-    var var_value = sse_decode_windows_registry_value(deserializer);
+    var var_valueName = sse_decode_String(deserializer);
+    var var_valueType = sse_decode_windows_registry_value_type(deserializer);
     return WindowsRegistryConfig(
       hive: var_hive,
       path: var_path,
-      key: var_key,
-      value: var_value,
+      valueName: var_valueName,
+      valueType: var_valueType,
     );
   }
 
@@ -8725,12 +8722,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  WindowsRegistryValue sse_decode_windows_registry_value(
+  WindowsRegistryValueType sse_decode_windows_registry_value_type(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_32(deserializer);
-    return WindowsRegistryValue.values[inner];
+    return WindowsRegistryValueType.values[inner];
   }
 
   @protected
@@ -11932,7 +11929,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.toInstall,
       serializer,
     );
-    sse_encode_bool(self.useConfigFile, serializer);
   }
 
   @protected
@@ -11965,8 +11961,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_windows_registry_hive(self.hive, serializer);
     sse_encode_String(self.path, serializer);
-    sse_encode_String(self.key, serializer);
-    sse_encode_windows_registry_value(self.value, serializer);
+    sse_encode_String(self.valueName, serializer);
+    sse_encode_windows_registry_value_type(self.valueType, serializer);
   }
 
   @protected
@@ -11979,8 +11975,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_windows_registry_value(
-    WindowsRegistryValue self,
+  void sse_encode_windows_registry_value_type(
+    WindowsRegistryValueType self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs

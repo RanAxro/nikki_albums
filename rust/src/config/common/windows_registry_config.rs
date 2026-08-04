@@ -15,7 +15,7 @@ pub enum WindowsRegistryHive{
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
-pub enum WindowsRegistryValue{
+pub enum WindowsRegistryValueType{
   Binary,
   Int,
   String,
@@ -27,6 +27,6 @@ pub enum WindowsRegistryValue{
 pub struct WindowsRegistryConfig{
   pub hive: WindowsRegistryHive,
   pub path: String,
-  pub key: String,
-  pub value: WindowsRegistryValue,
+  pub value_name: String,
+  pub value_type: WindowsRegistryValueType,
 }

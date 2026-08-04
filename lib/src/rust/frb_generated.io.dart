@@ -1041,7 +1041,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   WindowsRegistryHive dco_decode_windows_registry_hive(dynamic raw);
 
   @protected
-  WindowsRegistryValue dco_decode_windows_registry_value(dynamic raw);
+  WindowsRegistryValueType dco_decode_windows_registry_value_type(dynamic raw);
 
   @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
@@ -2278,7 +2278,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  WindowsRegistryValue sse_decode_windows_registry_value(
+  WindowsRegistryValueType sse_decode_windows_registry_value_type(
     SseDeserializer deserializer,
   );
 
@@ -3816,8 +3816,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_windows_registry_value(
-    WindowsRegistryValue self,
+  void sse_encode_windows_registry_value_type(
+    WindowsRegistryValueType self,
     SseSerializer serializer,
   );
 }
