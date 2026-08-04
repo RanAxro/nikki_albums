@@ -3556,12 +3556,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ConfigFileType dco_decode_config_file_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ConfigFileType.values[raw as int];
-  }
-
-  @protected
   CustomData dco_decode_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -5468,7 +5462,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return WindowsGameConfigFileSearcherConfig(
       path: dco_decode_String(arr[0]),
-      configType: dco_decode_config_file_type(arr[1]),
+      configType: dco_decode_file_type(arr[1]),
       toLauncher:
           dco_decode_opt_box_autoadd_windows_game_config_file_location_config(
             arr[2],
@@ -6523,13 +6517,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       templateId: var_templateId,
       regionPictures: var_regionPictures,
     );
-  }
-
-  @protected
-  ConfigFileType sse_decode_config_file_type(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return ConfigFileType.values[inner];
   }
 
   @protected
@@ -9003,7 +8990,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_path = sse_decode_String(deserializer);
-    var var_configType = sse_decode_config_file_type(deserializer);
+    var var_configType = sse_decode_file_type(deserializer);
     var var_toLauncher =
         sse_decode_opt_box_autoadd_windows_game_config_file_location_config(
           deserializer,
@@ -10155,15 +10142,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.templateId, serializer);
     sse_encode_list_region_picture(self.regionPictures, serializer);
-  }
-
-  @protected
-  void sse_encode_config_file_type(
-    ConfigFileType self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
   }
 
   @protected
@@ -12344,7 +12322,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.path, serializer);
-    sse_encode_config_file_type(self.configType, serializer);
+    sse_encode_file_type(self.configType, serializer);
     sse_encode_opt_box_autoadd_windows_game_config_file_location_config(
       self.toLauncher,
       serializer,

@@ -420,9 +420,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CollageParams dco_decode_collage_params(dynamic raw);
 
   @protected
-  ConfigFileType dco_decode_config_file_type(dynamic raw);
-
-  @protected
   CustomData dco_decode_custom_data(dynamic raw);
 
   @protected
@@ -1523,9 +1520,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams sse_decode_collage_params(SseDeserializer deserializer);
-
-  @protected
-  ConfigFileType sse_decode_config_file_type(SseDeserializer deserializer);
 
   @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
@@ -2887,12 +2881,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_collage_params(CollageParams self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_config_file_type(
-    ConfigFileType self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);

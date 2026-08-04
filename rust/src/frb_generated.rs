@@ -3430,18 +3430,6 @@ impl SseDecode for crate::nuan5_params::structs::collage_params::CollageParams {
     }
 }
 
-impl SseDecode for crate::config::game_config::ConfigFileType {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::config::game_config::ConfigFileType::Json,
-            1 => crate::config::game_config::ConfigFileType::Ini,
-            _ => unreachable!("Invalid variant for ConfigFileType: {}", inner),
-        };
-    }
-}
-
 impl SseDecode for crate::nuan5_params::decrypt::CustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6393,7 +6381,7 @@ impl SseDecode for crate::config::game_config::WindowsGameConfigFileSearcherConf
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_path = <String>::sse_decode(deserializer);
         let mut var_configType =
-            <crate::config::game_config::ConfigFileType>::sse_decode(deserializer);
+            <crate::config::common::file_reader_config::FileType>::sse_decode(deserializer);
         let mut var_toLauncher = <Option<
             crate::config::game_config::WindowsGameConfigFileLocationConfig,
         >>::sse_decode(deserializer);
@@ -7340,27 +7328,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::collage_par
     for crate::nuan5_params::structs::collage_params::CollageParams
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::collage_params::CollageParams {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::config::game_config::ConfigFileType {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::Json => 0.into_dart(),
-            Self::Ini => 1.into_dart(),
-            _ => unreachable!(),
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::config::game_config::ConfigFileType
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::config::game_config::ConfigFileType>
-    for crate::config::game_config::ConfigFileType
-{
-    fn into_into_dart(self) -> crate::config::game_config::ConfigFileType {
         self
     }
 }
@@ -10184,22 +10151,6 @@ impl SseEncode for crate::nuan5_params::structs::collage_params::CollageParams {
     }
 }
 
-impl SseEncode for crate::config::game_config::ConfigFileType {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::config::game_config::ConfigFileType::Json => 0,
-                crate::config::game_config::ConfigFileType::Ini => 1,
-                _ => {
-                    unimplemented!("");
-                }
-            },
-            serializer,
-        );
-    }
-}
-
 impl SseEncode for crate::nuan5_params::decrypt::CustomData {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12567,7 +12518,10 @@ impl SseEncode for crate::config::game_config::WindowsGameConfigFileSearcherConf
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.path, serializer);
-        <crate::config::game_config::ConfigFileType>::sse_encode(self.config_type, serializer);
+        <crate::config::common::file_reader_config::FileType>::sse_encode(
+            self.config_type,
+            serializer,
+        );
         <Option<crate::config::game_config::WindowsGameConfigFileLocationConfig>>::sse_encode(
             self.to_launcher,
             serializer,

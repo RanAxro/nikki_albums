@@ -4,14 +4,13 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import 'common/file_reader_config.dart';
 import 'common/string_config.dart';
 import 'common/text_config.dart';
 import 'common/windows_registry_config.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'game_config.freezed.dart';
-
-enum ConfigFileType { json, ini }
 
 class GameAlbumConfig {
   final String id;
@@ -194,7 +193,7 @@ class WindowsGameConfigFileLocationConfig {
 
 class WindowsGameConfigFileSearcherConfig {
   final String path;
-  final ConfigFileType configType;
+  final FileType configType;
   final WindowsGameConfigFileLocationConfig? toLauncher;
   final WindowsGameConfigFileLocationConfig toInstall;
 

@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Serialize, Deserialize};
+use crate::config::common::file_reader_config::FileType;
 use crate::config::common::string_config::StringConfig;
 use crate::config::common::text_config::TextConfig;
 use crate::config::common::windows_registry_config::WindowsRegistryConfig;
@@ -99,16 +100,9 @@ pub struct WindowsGameRegistryLocationConfig{
 #[derive(Serialize, Deserialize)]
 pub struct WindowsGameConfigFileSearcherConfig{
   pub path: String,
-  pub config_type: ConfigFileType,
+  pub config_type: FileType,
   pub to_launcher: Option<WindowsGameConfigFileLocationConfig>,
   pub to_install: WindowsGameConfigFileLocationConfig,
-}
-
-#[frb]
-#[derive(Serialize, Deserialize)]
-pub enum ConfigFileType{
-  Json,
-  Ini,
 }
 
 #[frb]

@@ -1,4 +1,6 @@
 
+export "package:nikki_albums/src/rust/config/common/file_reader_config.dart";
+
 import "package:nikki_albums/src/rust/config/common/file_reader_config.dart";
 
 import "dart:convert";
