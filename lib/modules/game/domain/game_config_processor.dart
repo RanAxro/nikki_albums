@@ -1,5 +1,4 @@
 
-
 import "game_fs_proxy/game_fs_proxy.dart";
 import "package:nikki_albums/modules/config/domain/common/common.dart";
 import "package:nikki_albums/src/rust/config/game_config.dart";
@@ -22,37 +21,38 @@ abstract final class GameConfigProcessor{
       String? launcherPath;
       String? installPath;
       for(final WindowsGameSearcherConfig searcherConfig in locationConfig.searcher){
-        await searcherConfig.when(
-          registry: (WindowsGameRegistrySearcherConfig registrySearcherConfig){
+        switch(searcherConfig){
+          case WindowsGameSearcherConfig_Registry(field0: final registrySearcherConfig):
             if(registrySearcherConfig.toLauncher == null && locationConfig.requireLauncher){
-              return;
+              break;
             }
 
             if(registrySearcherConfig.toLauncher != null){
               launcherPath = _readRegistryString(registrySearcherConfig.toLauncher!) ?? launcherPath;
             }
             installPath = _readRegistryString(registrySearcherConfig.toInstall) ?? installPath;
-          },
-          configFile: (WindowsGameConfigFileSearcherConfig configFileSearcherConfig) async{
+            break;
+          case WindowsGameSearcherConfig_ConfigFile(field0: final configFileSearcherConfig):
             if(configFileSearcherConfig.toLauncher == null && locationConfig.requireLauncher){
-              return;
+              break;
             }
 
+            const String launcherToken = "l", installToken = "i";
             final Map<String, dynamic>? configResult = await FileReaderConfigProcessor.withConfig(FileReaderConfig(
               path: configFileSearcherConfig.path,
               fileType: configFileSearcherConfig.configType,
               keys: {
-                "launcher": ?configFileSearcherConfig.toLauncher?.key,
-                "install": configFileSearcherConfig.toInstall.key,
+                launcherToken: ?configFileSearcherConfig.toLauncher?.key,
+                installToken: configFileSearcherConfig.toInstall.key,
               },
             ));
 
             if(configFileSearcherConfig.toLauncher != null){
-              launcherPath = configResult?["launcher"] ?? configFileSearcherConfig.toLauncher?.failed ?? launcherPath;
+              launcherPath = configResult?[launcherToken] ?? configFileSearcherConfig.toLauncher?.failed ?? launcherPath;
             }
-            installPath = configResult?["install"] ?? configFileSearcherConfig.toInstall.failed ?? installPath;
-          },
-        );
+            installPath = configResult?[installToken] ?? configFileSearcherConfig.toInstall.failed ?? installPath;
+            break;
+        }
 
         if(launcherPath != null && installPath != null){
           finishedChannel.add(locationConfig.channelId);
@@ -60,7 +60,7 @@ abstract final class GameConfigProcessor{
             config: config,
             channelId: locationConfig.channelId,
             launcherPath: launcherPath,
-            installPath: installPath!,
+            installPath: installPath,
           ));
           break;
         }
@@ -72,7 +72,7 @@ abstract final class GameConfigProcessor{
         res.add(GameInitializer(
           config: config,
           channelId: locationConfig.channelId,
-          installPath: installPath!,
+          installPath: installPath,
         ));
       }
     }
