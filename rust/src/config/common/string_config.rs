@@ -1,5 +1,9 @@
 use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
+use crate::impl_json_frb;
+
+
+impl_json_frb!(StringConfig);
 
 #[frb]
 #[derive(Serialize, Deserialize)]

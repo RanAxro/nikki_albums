@@ -13,6 +13,15 @@ class StringConfig {
 
   const StringConfig({required this.process});
 
+  static StringConfig? fromJson({required String json}) => RustLib.instance.api
+      .crateConfigCommonStringConfigStringConfigFromJson(json: json);
+
+  String toJson() => RustLib.instance.api
+      .crateConfigCommonStringConfigStringConfigToJson(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigCommonStringConfigStringConfigToJsonPretty(that: this);
+
   @override
   int get hashCode => process.hashCode;
 

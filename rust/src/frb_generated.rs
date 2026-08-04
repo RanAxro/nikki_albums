@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1034248999;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -189504087;
 
 // Section: executor
 
@@ -759,6 +759,91 @@ fn wire__crate__nuan5_params__encode__encode_camera_params_impl(
             }
         },
     )
+}
+fn wire__crate__config__common__file_reader_config__file_reader_config_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "file_reader_config_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::config::common::file_reader_config::FileReaderConfig::from_json(
+                        &api_json,
+                    ),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__config__common__file_reader_config__file_reader_config_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "file_reader_config_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::common::file_reader_config::FileReaderConfig>::sse_decode(
+                    &mut deserializer,
+                );
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::common::file_reader_config::FileReaderConfig::to_json(
+                            &api_that,
+                        )?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__common__file_reader_config__file_reader_config_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "file_reader_config_to_json_pretty", port: None, mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync }, move || { 
+            let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
+            let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::common::file_reader_config::FileReaderConfig>::sse_decode(&mut deserializer);deserializer.end();
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>((move || {
+                     let output_ok = crate::config::common::file_reader_config::FileReaderConfig::to_json_pretty(&api_that)?;   Ok(output_ok)
+                })()) })
 }
 fn wire__crate__config__game_config__game_config_from_json_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -2475,6 +2560,108 @@ fn wire__crate__nuan5_database__model__nuan_5_table_default_impl(
         },
     )
 }
+fn wire__crate__config__common__string_config__string_config_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "string_config_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::config::common::string_config::StringConfig::from_json(&api_json),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__config__common__string_config__string_config_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "string_config_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::common::string_config::StringConfig>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::common::string_config::StringConfig::to_json(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__common__string_config__string_config_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "string_config_to_json_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::common::string_config::StringConfig>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::common::string_config::StringConfig::to_json_pretty(
+                            &api_that,
+                        )?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
 fn wire__crate__api__simple__test_add_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -2504,6 +2691,106 @@ fn wire__crate__api__simple__test_add_impl(
                     Result::<_, ()>::Ok(crate::api::simple::test_add(api_num1, api_num2))?;
                 Ok(output_ok)
             })())
+        },
+    )
+}
+fn wire__crate__config__common__text_config__text_config_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "text_config_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::config::common::text_config::TextConfig::from_json(&api_json),
+                )?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__config__common__text_config__text_config_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "text_config_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::common::text_config::TextConfig>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::common::text_config::TextConfig::to_json(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__common__text_config__text_config_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "text_config_to_json_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::common::text_config::TextConfig>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::common::text_config::TextConfig::to_json_pretty(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
         },
     )
 }
@@ -3353,6 +3640,33 @@ impl SseDecode for crate::config::hot_update::FileHotUpdateInfo {
         return crate::config::hot_update::FileHotUpdateInfo {
             path: var_path,
             download_link: var_downloadLink,
+        };
+    }
+}
+
+impl SseDecode for crate::config::common::file_reader_config::FileReaderConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_path = <String>::sse_decode(deserializer);
+        let mut var_fileType =
+            <crate::config::common::file_reader_config::FileType>::sse_decode(deserializer);
+        let mut var_keys = <std::collections::HashMap<String, String>>::sse_decode(deserializer);
+        return crate::config::common::file_reader_config::FileReaderConfig {
+            path: var_path,
+            file_type: var_fileType,
+            keys: var_keys,
+        };
+    }
+}
+
+impl SseDecode for crate::config::common::file_reader_config::FileType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::config::common::file_reader_config::FileType::Json,
+            1 => crate::config::common::file_reader_config::FileType::Ini,
+            _ => unreachable!("Invalid variant for FileType: {}", inner),
         };
     }
 }
@@ -4783,6 +5097,21 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
     }
 }
 
+impl SseDecode for Option<crate::config::common::file_reader_config::FileReaderConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::config::common::file_reader_config::FileReaderConfig>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::config::game_config::GameConfig> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5035,6 +5364,19 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::Shoo
                 <crate::nuan5_params::structs::nikki_photo_params::ShootingTime>::sse_decode(
                     deserializer,
                 ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::config::common::string_config::StringConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::config::common::string_config::StringConfig>::sse_decode(deserializer),
             );
         } else {
             return None;
@@ -6251,159 +6593,159 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        22 => {
+        25 => {
             wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        23 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
+        26 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        24 => {
+        27 => {
             wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
         }
-        26 => wire__crate__nuan5_params__decode__home_build_de_network_impl(
+        29 => wire__crate__nuan5_params__decode__home_build_de_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
+        30 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        32 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        33 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
+        34 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        35 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+        36 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        34 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
+        37 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        36 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
+        39 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        38 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
+        41 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        40 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
+        43 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        41 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
+        44 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
+        45 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        45 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
+        48 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        46 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
+        49 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        47 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
+        50 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        48 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
+        51 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        49 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
+        52 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        50 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
+        53 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        51 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
+        54 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        52 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
+        55 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        53 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
+        56 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        54 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
+        57 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        55 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
+        58 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        56 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
+        59 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        57 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
+        60 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        58 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
+        61 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        59 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
+        62 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
             port,
             ptr,
             rust_vec_len,
@@ -6474,60 +6816,107 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        19 => wire__crate__config__game_config__game_config_from_json_impl(
+        19 => wire__crate__config__common__file_reader_config__file_reader_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        20 => {
+        20 => wire__crate__config__common__file_reader_config__file_reader_config_to_json_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        21 => {
+            wire__crate__config__common__file_reader_config__file_reader_config_to_json_pretty_impl(
+                ptr,
+                rust_vec_len,
+                data_len,
+            )
+        }
+        22 => wire__crate__config__game_config__game_config_from_json_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        23 => {
             wire__crate__config__game_config__game_config_to_json_impl(ptr, rust_vec_len, data_len)
         }
-        21 => wire__crate__config__game_config__game_config_to_json_pretty_impl(
+        24 => wire__crate__config__game_config__game_config_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        28 => wire__crate__config__hot_update__hot_update_info_from_json_impl(
+        28 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        31 => wire__crate__config__hot_update__hot_update_info_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        29 => wire__crate__config__hot_update__hot_update_info_to_json_impl(
+        32 => wire__crate__config__hot_update__hot_update_info_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        30 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(
+        33 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        35 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+        38 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        37 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+        40 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        39 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+        42 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        43 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        44 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+        46 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        47 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        60 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        61 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
-        62 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
-        63 => wire__crate__config__update__update_info_to_json_pretty_impl(
+        63 => wire__crate__config__common__string_config__string_config_from_json_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        64 => wire__crate__config__common__string_config__string_config_to_json_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        65 => wire__crate__config__common__string_config__string_config_to_json_pretty_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        66 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        67 => wire__crate__config__common__text_config__text_config_from_json_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        68 => wire__crate__config__common__text_config__text_config_to_json_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        69 => wire__crate__config__common__text_config__text_config_to_json_pretty_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        70 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
+        71 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
+        72 => wire__crate__config__update__update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -7273,6 +7662,49 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::FileHotUpdateI
     for crate::config::hot_update::FileHotUpdateInfo
 {
     fn into_into_dart(self) -> crate::config::hot_update::FileHotUpdateInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::common::file_reader_config::FileReaderConfig {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.path.into_into_dart().into_dart(),
+            self.file_type.into_into_dart().into_dart(),
+            self.keys.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::common::file_reader_config::FileReaderConfig
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::common::file_reader_config::FileReaderConfig>
+    for crate::config::common::file_reader_config::FileReaderConfig
+{
+    fn into_into_dart(self) -> crate::config::common::file_reader_config::FileReaderConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::common::file_reader_config::FileType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Json => 0.into_dart(),
+            Self::Ini => 1.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::common::file_reader_config::FileType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::common::file_reader_config::FileType>
+    for crate::config::common::file_reader_config::FileType
+{
+    fn into_into_dart(self) -> crate::config::common::file_reader_config::FileType {
         self
     }
 }
@@ -9946,6 +10378,34 @@ impl SseEncode for crate::config::hot_update::FileHotUpdateInfo {
     }
 }
 
+impl SseEncode for crate::config::common::file_reader_config::FileReaderConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.path, serializer);
+        <crate::config::common::file_reader_config::FileType>::sse_encode(
+            self.file_type,
+            serializer,
+        );
+        <std::collections::HashMap<String, String>>::sse_encode(self.keys, serializer);
+    }
+}
+
+impl SseEncode for crate::config::common::file_reader_config::FileType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::config::common::file_reader_config::FileType::Json => 0,
+                crate::config::common::file_reader_config::FileType::Ini => 1,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::FilterParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11079,6 +11539,18 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
     }
 }
 
+impl SseEncode for Option<crate::config::common::file_reader_config::FileReaderConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::config::common::file_reader_config::FileReaderConfig>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
 impl SseEncode for Option<crate::config::game_config::GameConfig> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11281,6 +11753,16 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::Shoo
             <crate::nuan5_params::structs::nikki_photo_params::ShootingTime>::sse_encode(
                 value, serializer,
             );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::config::common::string_config::StringConfig> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::config::common::string_config::StringConfig>::sse_encode(value, serializer);
         }
     }
 }

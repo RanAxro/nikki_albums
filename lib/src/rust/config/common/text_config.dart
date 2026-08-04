@@ -32,6 +32,15 @@ sealed class TextConfig with _$TextConfig {
       TextConfig_Literal;
   const factory TextConfig.translate(TranslateTextConfig field0) =
       TextConfig_Translate;
+
+  static TextConfig? fromJson({required String json}) => RustLib.instance.api
+      .crateConfigCommonTextConfigTextConfigFromJson(json: json);
+
+  String toJson() => RustLib.instance.api
+      .crateConfigCommonTextConfigTextConfigToJson(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigCommonTextConfigTextConfigToJsonPretty(that: this);
 }
 
 class TranslateTextConfig {

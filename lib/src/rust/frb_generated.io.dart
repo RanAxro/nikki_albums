@@ -5,6 +5,7 @@
 
 import 'api/simple.dart';
 import 'config/app_persistent_state.dart';
+import 'config/common/file_reader_config.dart';
 import 'config/common/string_config.dart';
 import 'config/common/text_config.dart';
 import 'config/common/windows_registry_config.dart';
@@ -242,6 +243,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
 
   @protected
+  FileReaderConfig dco_decode_box_autoadd_file_reader_config(dynamic raw);
+
+  @protected
   GameConfig dco_decode_box_autoadd_game_config(dynamic raw);
 
   @protected
@@ -326,6 +330,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ShootingTime dco_decode_box_autoadd_shooting_time(dynamic raw);
+
+  @protected
+  StringConfig dco_decode_box_autoadd_string_config(dynamic raw);
 
   @protected
   StringJoinProcessConfig dco_decode_box_autoadd_string_join_process_config(
@@ -455,6 +462,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   FileHotUpdateInfo dco_decode_file_hot_update_info(dynamic raw);
+
+  @protected
+  FileReaderConfig dco_decode_file_reader_config(dynamic raw);
+
+  @protected
+  FileType dco_decode_file_type(dynamic raw);
 
   @protected
   FilterParams dco_decode_filter_params(dynamic raw);
@@ -750,6 +763,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
 
   @protected
+  FileReaderConfig? dco_decode_opt_box_autoadd_file_reader_config(dynamic raw);
+
+  @protected
   GameConfig? dco_decode_opt_box_autoadd_game_config(dynamic raw);
 
   @protected
@@ -810,6 +826,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ShootingTime? dco_decode_opt_box_autoadd_shooting_time(dynamic raw);
+
+  @protected
+  StringConfig? dco_decode_opt_box_autoadd_string_config(dynamic raw);
 
   @protected
   Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
@@ -1267,6 +1286,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  FileReaderConfig sse_decode_box_autoadd_file_reader_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer);
 
   @protected
@@ -1381,6 +1405,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ShootingTime sse_decode_box_autoadd_shooting_time(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  StringConfig sse_decode_box_autoadd_string_config(
     SseDeserializer deserializer,
   );
 
@@ -1540,6 +1569,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FileHotUpdateInfo sse_decode_file_hot_update_info(
     SseDeserializer deserializer,
   );
+
+  @protected
+  FileReaderConfig sse_decode_file_reader_config(SseDeserializer deserializer);
+
+  @protected
+  FileType sse_decode_file_type(SseDeserializer deserializer);
 
   @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
@@ -1897,6 +1932,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  FileReaderConfig? sse_decode_opt_box_autoadd_file_reader_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   GameConfig? sse_decode_opt_box_autoadd_game_config(
     SseDeserializer deserializer,
   );
@@ -1983,6 +2023,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ShootingTime? sse_decode_opt_box_autoadd_shooting_time(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  StringConfig? sse_decode_opt_box_autoadd_string_config(
     SseDeserializer deserializer,
   );
 
@@ -2550,6 +2595,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_file_reader_config(
+    FileReaderConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_game_config(
     GameConfig self,
     SseSerializer serializer,
@@ -2699,6 +2750,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_shooting_time(
     ShootingTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_string_config(
+    StringConfig self,
     SseSerializer serializer,
   );
 
@@ -2899,6 +2956,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     FileHotUpdateInfo self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_file_reader_config(
+    FileReaderConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_file_type(FileType self, SseSerializer serializer);
 
   @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
@@ -3357,6 +3423,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_file_reader_config(
+    FileReaderConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_game_config(
     GameConfig? self,
     SseSerializer serializer,
@@ -3467,6 +3539,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_shooting_time(
     ShootingTime? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_string_config(
+    StringConfig? self,
     SseSerializer serializer,
   );
 
