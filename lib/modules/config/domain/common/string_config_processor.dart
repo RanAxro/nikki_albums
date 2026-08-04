@@ -6,11 +6,11 @@ abstract final class StringConfigProcessor{
   static final RegExp _varReg = RegExp(r'\$([^$]*)\$');
   static final RegExp _groupReg = RegExp(r'\$(\d+)\$');
 
-  String withConfig(StringConfig config, String raw, [Map<String, String>? varMap]){
+  static String withConfig(StringConfig config, String raw, [Map<String, String>? varMap]){
     return withProcess(config.process, raw, varMap);
   }
 
-  String withProcess(List<StringProcessConfig> process, String raw, [Map<String, String>? varMap]){
+  static String withProcess(List<StringProcessConfig> process, String raw, [Map<String, String>? varMap]){
     String s = raw;
     for(final StringProcessConfig p in process){
       p.when(
@@ -38,13 +38,13 @@ abstract final class StringConfigProcessor{
     });
   }
 
-  String withJoinProcess(StringJoinProcessConfig joinProcess, String raw){
+  static String withJoinProcess(StringJoinProcessConfig joinProcess, String raw){
     return joinProcess.target.map((List<StringProcessConfig> process){
       return withProcess(process, raw);
     }).join(joinProcess.separator);
   }
 
-  String withMatchProcess(StringMatchProcessConfig matchProcess, String raw){
+  static String withMatchProcess(StringMatchProcessConfig matchProcess, String raw){
     try{
       final RegExp regex = RegExp(matchProcess.regex);
 
@@ -64,7 +64,7 @@ abstract final class StringConfigProcessor{
     }
   }
 
-  String withReplaceProcess(StringReplaceProcessConfig replaceProcess, String raw){
+  static String withReplaceProcess(StringReplaceProcessConfig replaceProcess, String raw){
     final RegExp regex = RegExp(replaceProcess.regex);
 
     return raw.replaceFirstMapped(regex, (Match match){
@@ -75,7 +75,7 @@ abstract final class StringConfigProcessor{
     }, replaceProcess.which - 1);
   }
 
-  String withReplaceAllProcess(StringReplaceAllProcessConfig replaceAllProcess, String raw){
+  static String withReplaceAllProcess(StringReplaceAllProcessConfig replaceAllProcess, String raw){
     final RegExp regex = RegExp(replaceAllProcess.regex);
 
     return raw.replaceAllMapped(regex, (Match match){

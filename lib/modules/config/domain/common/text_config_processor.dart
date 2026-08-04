@@ -7,7 +7,7 @@ import "package:easy_localization/easy_localization.dart";
 
 
 abstract final class TextConfigProcessor{
-  String withConfig(TextConfig config, [BuildContext? context]){
+  static String withConfig(TextConfig config, [BuildContext? context]){
     return config.when(
       literal: (LiteralTextConfig literalTextConfig){
         return literalTextConfig.text;
