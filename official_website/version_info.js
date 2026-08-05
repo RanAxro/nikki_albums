@@ -46,13 +46,13 @@ const config = {
 				"system": "system_macos",
 				"type": "type_1",
 				"suffix": "suffix_zip",
-				"link": "https://file-nikki.ranaxro.com/app/v3.010.04/Nikki%20Albums-v3.010.04-MacOS-arm64.zip"
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.05/Nikki%20Albums-v3.010.05-MacOS-arm64.zip"
 			},
 			{
 				"system": "system_windows",
 				"type": "type_1",
 				"suffix": "suffix_zip",
-				"link": "https://file-nikki.ranaxro.com/app/v3.010.04/Nikki%20Albums-v3.010.04-Windows-x64.zip"
+				"link": "https://file-nikki.ranaxro.com/app/v3.010.05/Nikki%20Albums-v3.010.05-Windows-x64.zip"
 			}
 		]
 	},
