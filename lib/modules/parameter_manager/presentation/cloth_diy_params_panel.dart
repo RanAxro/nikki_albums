@@ -7,9 +7,10 @@ import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dar
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
-import "package:nikki_albums/utils/clipboard.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/widgets/app/component.dart";
+import "package:nikki_albums/utils/clipboard.dart";
+import "package:nikki_albums/utils/extension.dart";
 
 import "package:flutter/material.dart" hide ColorSwatch;
 import "dart:collection";
@@ -41,6 +42,123 @@ class ClothDiyParamsPanel extends StatelessWidget{
   });
 
   final ClothDiyHandler handler = const ClothDiyHandler();
+
+  @override
+  Widget build(BuildContext context){
+    final List<ClothParams> clothParamsList = handler.getSortedCloth(clothDiyParams.clothes);
+
+    return AppFloatingIndicatorButtonGroup(
+      child: SmoothPointerScroll(
+        builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+          final GridView gridView = GridView.builder(
+            controller: scrollController,
+            physics: physics,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 128,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
+              childAspectRatio: 128 / (128 + 36),
+            ),
+            itemCount: clothParamsList.length,
+            itemBuilder: (BuildContext context, int index){
+              final ClothParams clothParams = clothParamsList.elementAt(index);
+
+              return AppFloatingIndicatorButtonTarget(
+                child: AppSuperTooltip(
+                  direction: TooltipDirection.auto,
+                  content: ClothDetailPanel(
+                    config: config,
+                    handler: handler,
+                    clothParams: clothParams,
+                  ),
+                  child: AppButton(
+                    borderRadius: smallBorderRadius,
+                    isTransparent: false,
+                    child: Column(
+                      spacing: listSpacing,
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: AppCachedNetworkImage(
+                            imageUrl: config?.getImageUrl(config?.networkImage?.cloth, clothParams.cloth.id) ?? "",
+                            cacheKey: clothParams.cloth.id.toString(),
+                          ),
+                        ),
+
+                        AppText(trText(clothParams.cloth.id.toString(), category: "cloth"), softWrap: false),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+
+          final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
+          final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
+          return Column(
+            spacing: listSpacing,
+            children: [
+              Table(
+                columnWidths: const {
+                  0: IntrinsicColumnWidth(),
+                  1: FlexColumnWidth(),
+                },
+                border: TableBorder.all(
+                  color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+                ),
+                children: [
+                  TableRow(
+                    children: [
+                      AppText(trText("cloth_diy_data.time")),
+                      AppText(DateTime.fromMillisecondsSinceEpoch(ClothDiyShareCode.fromCodeStr(shareCode).timestamp()).toString()),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      AppText(trText("cloth_diy_data.condition")),
+                      AppText(trText((condition?.name).toString(), category: "dye_condition")),
+                    ],
+                  ),
+                  if(effectScheme != null)
+                    TableRow(
+                      children: [
+                        AppText(trText("cloth_diy_data.effect_scheme")),
+                        AppText(trText((effectScheme.name).toString(), category: "effect_scheme")),
+                      ],
+                    ),
+                ].map((TableRow tableRow) => TableRow(
+                  children: tableRow.children.map((child) => Padding(
+                    padding: const EdgeInsets.all(smallPadding),
+                    child: child,
+                  )).toList(),
+                )).toList(),
+              ),
+
+              Expanded(
+                child: gridView,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+class ClothDetailPanel extends StatelessWidget{
+  final Nuan5Config? config;
+  final ClothDiyHandler handler;
+  final ClothParams clothParams;
+
+  const ClothDetailPanel({
+    super.key,
+    this.config,
+    required this.handler,
+    required this.clothParams,
+  });
+
 
   static const Map<int, TableColumnWidth> _outfitDyeTableColumnWidth = {
     0: IntrinsicColumnWidth(),
@@ -126,17 +244,17 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText("${serialNumberStr ?? "  "} ${trText(palette.toString(), category: "diy_color_palette")}"),
 
-          swatch == null ?
-            _buildColorCopyText(color) :
-            AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
+          swatch == null
+            ? _buildColorCopyText(color)
+            : AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
 
           if(roughness != null)
-            colorMode == null ?
-              AppText("") :
-              Tooltip(
-                message: trText("glossiness"),
-                child: AppText((1 - roughness).toStringAsFixed(1)),
-              ),
+            colorMode == null
+              ? AppText("")
+              : Tooltip(
+                  message: trText("glossiness"),
+                  child: AppText((1 - roughness).toStringAsFixed(1)),
+                ),
 
         ].map((Widget widget) => Padding(
           padding: const EdgeInsets.all(tinyPadding),
@@ -167,9 +285,9 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
           AppText("${serialNumberStr ?? "  "} ${trText(palette.toString(), category: "diy_color_palette")}"),
 
-          swatch == null ?
-            _buildColorCopyText(color) :
-            AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
+          swatch == null
+            ? _buildColorCopyText(color)
+            : AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
 
           AppText(trBool(specialEffectData.coverDiyColor, index: 5)),
 
@@ -294,225 +412,163 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final List<ClothParams> clothParamsList = handler.getSortedCloth(clothDiyParams.clothes);
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints){
+        final int? outfit = clothParams.cloth.outfit;
+        final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
 
-    return AppFloatingIndicatorButtonGroup(
-      child: SmoothPointerScroll(
-        builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-          final GridView gridView = GridView.builder(
-            controller: scrollController,
-            physics: physics,
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 128,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
-              childAspectRatio: 128 / (128 + 36),
-            ),
-            itemCount: clothParamsList.length,
-            itemBuilder: (BuildContext context, int index){
-              final ClothParams clothParams = clothParamsList.elementAt(index);
-              final int? outfit = clothParams.cloth.outfit;
-
-              final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
-
-              return AppFloatingIndicatorButtonTarget(
-                child: AppSuperTooltip(
-                  width: 300,
-                  direction: TooltipDirection.auto,
-                  content: Column(
-                    spacing: listSpacing,
-                    children: [
-                      if(outfit != null)
-                        Center(
-                          child: SizedBox(
-                            width: 150,
-                            child: AspectRatio(
-                              aspectRatio: 2 / 3,
-                              child: AppCachedNetworkImage(
-                                imageUrl: config?.getImageUrl(config?.networkImage?.clothOutfit, outfit) ?? "",
-                                cacheKey: outfit.toString(),
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      if(outfit != null)
-                        Row(
-                          spacing: listSpacing,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            AppText.tr("infinity_nikki.media_params.outfit", fontWeight: FontWeight.bold),
-                            AppText(trText(outfit.toString(), category: "cloth_outfit"), softWrap: false),
-                          ],
-                        ),
-
-                      Row(
-                        spacing: listSpacing,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          AppText(trText("cloth_diy_data.condition"), fontWeight: FontWeight.bold),
-                          AppText(trText((condition?.name).toString(), category: "dye_condition"), softWrap: false),
-                        ],
-                      ),
-
-                      if(clothParams.effectHidden != null)
-                        Row(
-                          spacing: listSpacing,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            AppText(trText("cloth_diy_data.effect"), fontWeight: FontWeight.bold),
-                            AppText(trBool(!clothParams.effectHidden!, index: 7), softWrap: false),
-                          ],
-                        ),
-
-                      AppDivider(),
-
-                      if(clothParams.diy != null)
-                        Expanded(
-                          child: AppTab(
-                            children: [
-                              if(clothParams.diy!.outfitDye.isNotEmpty)
-                                (
-                                  nav: AppButton.smallText(
-                                    child: AppText(trText("outfit_dye")),
-                                  ),
-                                  page: SmoothPointerScroll(
-                                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-                                      return SingleChildScrollView(
-                                        controller: controller,
-                                        physics: physics,
-                                        child: Table(
-                                          border: TableBorder.all(
-                                            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-                                          ),
-                                          columnWidths: _outfitDyeTableColumnWidth,
-                                          children: _buildOutfitDye(clothParams.cloth.id, clothParams.diy!.outfitDye),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-
-                              if(clothParams.diy!.specialEffect.isNotEmpty)
-                                (
-                                  nav: AppButton.smallText(
-                                    child: AppText(trText("special_effect")),
-                                  ),
-                                  page: SmoothPointerScroll(
-                                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-                                      return SingleChildScrollView(
-                                        controller: controller,
-                                        physics: physics,
-                                        child: Table(
-                                          border: TableBorder.all(
-                                            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-                                          ),
-                                          columnWidths: _specialEffectTableColumnWidth,
-                                          children: _buildSpecialEffect(clothParams.cloth.id, clothParams.diy!.specialEffect),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-
-                              if(clothParams.diy!.patternCreation.isNotEmpty)
-                                (
-                                  nav: AppButton.smallText(
-                                    child: AppText(trText("pattern_creation")),
-                                  ),
-                                  page: SmoothPointerScroll(
-                                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-                                      return SingleChildScrollView(
-                                        controller: controller,
-                                        physics: physics,
-                                        child: Table(
-                                          border: TableBorder.all(
-                                            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-                                          ),
-                                          columnWidths: _patternCreationColumnWidth,
-                                          children: _buildPatternCreation(clothParams.cloth.id, clothParams.diy!.patternCreation),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                  child: AppButton(
-                    borderRadius: smallBorderRadius,
-                    isTransparent: false,
-                    child: Column(
-                      spacing: listSpacing,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: AppCachedNetworkImage(
-                            imageUrl: config?.getImageUrl(config?.networkImage?.cloth, clothParams.cloth.id) ?? "",
-                            cacheKey: clothParams.cloth.id.toString(),
-                          ),
-                        ),
-
-                        AppText(trText(clothParams.cloth.id.toString(), category: "cloth"), softWrap: false),
-                      ],
+        final Widget clothBaseInfoPanel = Column(
+          spacing: listSpacing,
+          children: [
+            if(outfit != null)
+              Center(
+                child: SizedBox(
+                  width: 150,
+                  child: AspectRatio(
+                    aspectRatio: 2 / 3,
+                    child: AppCachedNetworkImage(
+                      imageUrl: config?.getImageUrl(config?.networkImage?.clothOutfit, outfit) ?? "",
+                      cacheKey: outfit.toString(),
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
-              );
-            },
-          );
+              ),
 
-          final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
-          final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
-          return Column(
-            spacing: listSpacing,
-            children: [
-              Table(
-                columnWidths: const {
-                  0: IntrinsicColumnWidth(),
-                  1: FlexColumnWidth(),
-                },
-                border: TableBorder.all(
-                  color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-                ),
+            if(outfit != null)
+              Row(
+                spacing: listSpacing,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  TableRow(
-                    children: [
-                      AppText(trText("cloth_diy_data.time")),
-                      AppText(DateTime.fromMillisecondsSinceEpoch(ClothDiyShareCode.fromCodeStr(shareCode).timestamp()).toString()),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      AppText(trText("cloth_diy_data.condition")),
-                      AppText(trText((condition?.name).toString(), category: "dye_condition")),
-                    ],
-                  ),
-                  if(effectScheme != null)
-                    TableRow(
-                      children: [
-                        AppText(trText("cloth_diy_data.effect_scheme")),
-                        AppText(trText((effectScheme.name).toString(), category: "effect_scheme")),
-                      ],
-                    ),
-                ].map((TableRow tableRow) => TableRow(
-                  children: tableRow.children.map((child) => Padding(
-                    padding: const EdgeInsets.all(smallPadding),
-                    child: child,
-                  )).toList(),
-                )).toList(),
+                  AppText.tr("infinity_nikki.media_params.outfit", fontWeight: FontWeight.bold),
+                  AppText(trText(outfit.toString(), category: "cloth_outfit"), softWrap: false),
+                ],
               ),
 
-              Expanded(
-                child: gridView,
+            Row(
+              spacing: listSpacing,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AppText(trText("cloth_diy_data.condition"), fontWeight: FontWeight.bold),
+                AppText(trText((condition?.name).toString(), category: "dye_condition"), softWrap: false),
+              ],
+            ),
+
+            if(clothParams.effectHidden != null)
+              Row(
+                spacing: listSpacing,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AppText(trText("cloth_diy_data.effect"), fontWeight: FontWeight.bold),
+                  AppText(trBool(!clothParams.effectHidden!, index: 7), softWrap: false),
+                ],
               ),
+          ],
+        );
+
+        final Widget? clothDiyInfoPanel = clothParams.diy.let((_){
+          return AppTab(
+            children: [
+              if(clothParams.diy!.outfitDye.isNotEmpty)
+                (
+                  nav: AppButton.smallText(
+                    child: AppText(trText("outfit_dye")),
+                  ),
+                  page: SmoothPointerScroll(
+                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+                      return SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        child: Table(
+                          border: TableBorder.all(
+                            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+                          ),
+                          columnWidths: _outfitDyeTableColumnWidth,
+                          children: _buildOutfitDye(clothParams.cloth.id, clothParams.diy!.outfitDye),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+              if(clothParams.diy!.specialEffect.isNotEmpty)
+                (
+                  nav: AppButton.smallText(
+                    child: AppText(trText("special_effect")),
+                  ),
+                  page: SmoothPointerScroll(
+                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+                      return SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        child: Table(
+                          border: TableBorder.all(
+                            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+                          ),
+                          columnWidths: _specialEffectTableColumnWidth,
+                          children: _buildSpecialEffect(clothParams.cloth.id, clothParams.diy!.specialEffect),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+              if(clothParams.diy!.patternCreation.isNotEmpty)
+                (
+                  nav: AppButton.smallText(
+                    child: AppText(trText("pattern_creation")),
+                  ),
+                  page: SmoothPointerScroll(
+                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+                      return SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        child: Table(
+                          border: TableBorder.all(
+                            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+                          ),
+                          columnWidths: _patternCreationColumnWidth,
+                          children: _buildPatternCreation(clothParams.cloth.id, clothParams.diy!.patternCreation),
+                        ),
+                      );
+                    },
+                  ),
+                ),
             ],
           );
-        },
-      ),
+        });
+
+
+        if(constraints.maxWidth > 650){
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: listSpacing,
+            children: [
+              SizedBox(
+                width: 300,
+                child: clothBaseInfoPanel,
+              ),
+              if(clothDiyInfoPanel != null)
+                SizedBox(
+                  width: 300,
+                  child: clothDiyInfoPanel,
+                ),
+            ],
+          );
+        }else{
+          return SizedBox(
+            width: 300,
+            child: Column(
+              children: [
+                clothBaseInfoPanel,
+
+                if(clothDiyInfoPanel != null)
+                  Expanded(child: clothDiyInfoPanel),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }
