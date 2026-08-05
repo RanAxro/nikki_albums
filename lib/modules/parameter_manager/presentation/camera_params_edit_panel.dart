@@ -127,7 +127,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                           min: min,
                           max: max,
                           divisions: divisions,
-                          value: value,
+                          value: value.clamp(min, max),
                           onChanged: (newValue){
                             setState((){
                               value = newValue;
