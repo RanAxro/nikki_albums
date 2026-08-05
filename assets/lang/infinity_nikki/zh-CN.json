@@ -231,6 +231,7 @@
       "image_id": "原图id",
       "cloth_diy_data": {
         "time": "染色码生成时间",
+        "grow_up_or_evolution": "进化/焕新",
         "condition": "染色条件",
         "effect": "特效",
         "effect_scheme": "特效方案"

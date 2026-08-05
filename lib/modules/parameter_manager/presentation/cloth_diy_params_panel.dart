@@ -244,9 +244,7 @@ class ClothDetailPanel extends StatelessWidget{
 
           AppText("${serialNumberStr ?? "  "} ${trText(palette.toString(), category: "diy_color_palette")}"),
 
-          swatch == null
-            ? _buildColorCopyText(color)
-            : AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
+          swatch == null ? _buildColorCopyText(color) : AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
 
           if(roughness != null)
             colorMode == null
@@ -285,9 +283,7 @@ class ClothDetailPanel extends StatelessWidget{
 
           AppText("${serialNumberStr ?? "  "} ${trText(palette.toString(), category: "diy_color_palette")}"),
 
-          swatch == null
-            ? _buildColorCopyText(color)
-            : AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
+          swatch == null ? _buildColorCopyText(color) : AppText(trText("color_swatch.${ColorSwatch.fromFlag(swatch).name}")),
 
           AppText(trBool(specialEffectData.coverDiyColor, index: 5)),
 
@@ -417,53 +413,77 @@ class ClothDetailPanel extends StatelessWidget{
         final int? outfit = clothParams.cloth.outfit;
         final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
 
-        final Widget clothBaseInfoPanel = Column(
-          spacing: listSpacing,
+        final Widget clothBaseInfoPanel = Table(
+          border: TableBorder.all(
+            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+          ),
+          columnWidths: const {
+            0: IntrinsicColumnWidth(),
+            1: FlexColumnWidth(),
+          },
           children: [
-            if(outfit != null)
-              Center(
-                child: SizedBox(
-                  width: 150,
-                  child: AspectRatio(
-                    aspectRatio: 2 / 3,
-                    child: AppCachedNetworkImage(
-                      imageUrl: config?.getImageUrl(config?.networkImage?.clothOutfit, outfit) ?? "",
-                      cacheKey: outfit.toString(),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ),
-
-            if(outfit != null)
-              Row(
-                spacing: listSpacing,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AppText.tr("infinity_nikki.media_params.outfit", fontWeight: FontWeight.bold),
-                  AppText(trText(outfit.toString(), category: "cloth_outfit"), softWrap: false),
-                ],
-              ),
-
-            Row(
-              spacing: listSpacing,
-              mainAxisSize: MainAxisSize.min,
+            /// 套装
+            TableRow(
               children: [
-                AppText(trText("cloth_diy_data.condition"), fontWeight: FontWeight.bold),
-                AppText(trText((condition?.name).toString(), category: "dye_condition"), softWrap: false),
+                AppText.tr("infinity_nikki.media_params.outfit"),
+
+                outfit == null ? AppText(trBool(false, index: 2)) :
+                  Column(
+                    children: [
+                      AppText(trText(outfit.toString(), category: "cloth_outfit")),
+                      SizedBox(
+                        width: 150,
+                        child: AspectRatio(
+                          aspectRatio: 2 / 3,
+                          child: AppCachedNetworkImage(
+                            imageUrl: config?.getImageUrl(config?.networkImage?.clothOutfit, outfit) ?? "",
+                            cacheKey: outfit.toString(),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
 
-            if(clothParams.effectHidden != null)
-              Row(
-                spacing: listSpacing,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AppText(trText("cloth_diy_data.effect"), fontWeight: FontWeight.bold),
-                  AppText(trBool(!clothParams.effectHidden!, index: 7), softWrap: false),
-                ],
-              ),
-          ],
+            /// 进化/焕新
+            TableRow(
+              children: [
+                AppText(trText("cloth_diy_data.grow_up_or_evolution")),
+                Center(
+                  child: AppText(trText("nikki_cloth_state.${NikkiClothState.fromFlag(clothParams.cloth.state).name}")),
+                ),
+              ],
+            ),
+
+            /// 染色条件
+            TableRow(
+              children: [
+                AppText(trText("cloth_diy_data.condition")),
+                Center(
+                  child: AppText(trText((condition?.name).toString(), category: "dye_condition")),
+                ),
+              ],
+            ),
+
+            /// 特效
+            TableRow(
+              children: [
+                AppText(trText("cloth_diy_data.effect")),
+                Center(
+                  child: AppText(trBool(!clothParams.effectHidden!, index: 7)),
+                ),
+              ],
+            ),
+          ].map((TableRow tableRow) => TableRow(
+            children: tableRow.children.map((Widget widget){
+              return Padding(
+                padding: const EdgeInsets.all(tinyPadding),
+                child: widget,
+              );
+            }).toList(),
+          )).toList(),
         );
 
         final Widget? clothDiyInfoPanel = clothParams.diy.let((_){
@@ -544,9 +564,12 @@ class ClothDetailPanel extends StatelessWidget{
             mainAxisSize: MainAxisSize.min,
             spacing: listSpacing,
             children: [
-              SizedBox(
-                width: 300,
-                child: clothBaseInfoPanel,
+              Align(
+                alignment: Alignment.topCenter,
+                child: SizedBox(
+                  width: 300,
+                  child: clothBaseInfoPanel,
+                ),
               ),
               if(clothDiyInfoPanel != null)
                 SizedBox(

@@ -203,6 +203,7 @@
       "image_id": "Image Id",
       "cloth_diy_data": {
         "time": "Generation Time",
+        "grow_up_or_evolution": "Grow Up/Evolution",
         "condition": "Dyeing Conditions",
         "effect": "Effect",
         "effect_scheme": "Effect Scheme"
