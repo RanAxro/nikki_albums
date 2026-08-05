@@ -1919,8 +1919,8 @@ class AppCachedNetworkImage extends StatelessWidget{
 
 class AppSuperTooltip extends StatelessWidget{
   final EdgeInsetsGeometry padding;
-  final double? width;
-  final double? height;
+  final double? contentWidth;
+  final double? contentHeight;
   final ColorRole colorRole;
   final TooltipDirection direction;
   final Widget content;
@@ -1929,8 +1929,8 @@ class AppSuperTooltip extends StatelessWidget{
   const AppSuperTooltip({
     super.key,
     this.padding = const EdgeInsets.all(smallPadding),
-    this.width,
-    this.height,
+    this.contentWidth,
+    this.contentHeight,
     this.colorRole = ColorRole.background,
     this.direction = TooltipDirection.auto,
     required this.content,
@@ -1960,8 +1960,8 @@ class AppSuperTooltip extends StatelessWidget{
       content: Padding(
         padding: padding,
         child: SizedBox(
-          width: width,
-          height: height,
+          width: contentWidth,
+          height: contentHeight,
           child: content,
         ),
       ),
