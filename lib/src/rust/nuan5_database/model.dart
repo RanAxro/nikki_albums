@@ -6,7 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
 class Nuan5Cloth {
   final int clothType;
@@ -95,6 +95,25 @@ class Nuan5ClothDyePalette {
           evolution2 == other.evolution2;
 }
 
+class Nuan5ClothOutfit {
+  final Int32List components;
+
+  const Nuan5ClothOutfit({required this.components});
+
+  static Future<Nuan5ClothOutfit> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5ClothOutfitDefault();
+
+  @override
+  int get hashCode => components.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5ClothOutfit &&
+          runtimeType == other.runtimeType &&
+          components == other.components;
+}
+
 class Nuan5ClothSpecialPatternDyeArea {
   final int maxColorAreaNum;
   final Int32List customAreaOrder;
@@ -134,6 +153,7 @@ class Nuan5Config {
   final Map<int, Nuan5DiyColorSwatch> diyColorSwatch;
   final Map<int, Nuan5DiyPattern> diyPattern;
   final Map<int, Nuan5Cloth> cloth;
+  final Map<int, Nuan5ClothOutfit> clothOutfit;
   final Map<int, Nuan5NikkiClothInfo> nikkiClothInfo;
 
   const Nuan5Config({
@@ -149,6 +169,7 @@ class Nuan5Config {
     required this.diyColorSwatch,
     required this.diyPattern,
     required this.cloth,
+    required this.clothOutfit,
     required this.nikkiClothInfo,
   });
 
@@ -174,6 +195,7 @@ class Nuan5Config {
       diyColorSwatch.hashCode ^
       diyPattern.hashCode ^
       cloth.hashCode ^
+      clothOutfit.hashCode ^
       nikkiClothInfo.hashCode;
 
   @override
@@ -193,6 +215,7 @@ class Nuan5Config {
           diyColorSwatch == other.diyColorSwatch &&
           diyPattern == other.diyPattern &&
           cloth == other.cloth &&
+          clothOutfit == other.clothOutfit &&
           nikkiClothInfo == other.nikkiClothInfo;
 }
 

@@ -40,6 +40,9 @@ pub struct Nuan5Config{
   #[prost(map = "int32, message", tag = "11")]
   pub cloth: HashMap<i32, Nuan5Cloth>,
 
+  #[prost(map = "int32, message", tag = "12")]
+  pub cloth_outfit: HashMap<i32, Nuan5ClothOutfit>,
+
   #[prost(map = "int32, message", tag = "18")]
   pub nikki_cloth_info: HashMap<i32, Nuan5NikkiClothInfo>,
 }
@@ -194,6 +197,13 @@ pub struct Nuan5DiyPattern{
 pub struct Nuan5Cloth{
   #[prost(int32, tag = "1")]
   pub cloth_type: i32,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5ClothOutfit{
+  #[prost(int32, repeated, tag = "1")]
+  pub components: Vec<i32>,
 }
 
 #[derive(Clone, PartialEq)]

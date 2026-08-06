@@ -445,7 +445,7 @@ class ClothDetailPanel extends StatelessWidget{
   Widget build(BuildContext context){
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
-        final int? outfit = clothParams.cloth.outfit;
+        final int? outfit = handler.getClothOutfit(config, clothParams.cloth);
         final int? patternMode = config.let<int?>((c) => handler.getDisplayPatternMode(c, clothParams.cloth.id, clothParams.patternMode));
         final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
 
@@ -487,14 +487,16 @@ class ClothDetailPanel extends StatelessWidget{
             ),
 
             /// 进化/焕新
-            TableRow(
-              children: [
-                AppText(trText("cloth_diy_data.grow_up_or_evolution")),
-                Center(
-                  child: AppText(trText("nikki_cloth_state.${NikkiClothState.fromFlag(clothParams.cloth.state).name}")),
-                ),
-              ],
-            ),
+            /// 肤色 = 86  state不为进化/焕新值
+            if(clothParams.cloth.clothType != 86)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.grow_up_or_evolution")),
+                  Center(
+                    child: AppText(trText("nikki_cloth_state.${NikkiClothState.fromFlag(clothParams.cloth.state).name}")),
+                  ),
+                ],
+              ),
 
             /// 款型
             if(patternMode != null)

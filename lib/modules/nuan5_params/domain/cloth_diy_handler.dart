@@ -18,6 +18,19 @@ const List<int> defaultSortingBasis = [
 class ClothDiyHandler{
   const ClothDiyHandler();
 
+  int? getClothOutfit(Nuan5Config? config, Cloth cloth){
+    if(config == null){
+      return cloth.outfit;
+    }
+
+    for(final MapEntry<int, Nuan5ClothOutfit> entity in config.clothOutfit.entries){
+      if(entity.value.components.contains(cloth.id)){
+        return entity.key;
+      }
+    }
+    return null;
+  }
+
   int getClothType(Nuan5Config? config, Cloth cloth){
     int? clothType = config?.cloth[cloth.id]?.clothType;
     clothType = clothType ?? cloth.species * 100 + cloth.clothType;
@@ -28,10 +41,6 @@ class ClothDiyHandler{
     final List<ClothParams?> res = List.filled(basis.length, null);
 
     for(final ClothParams clothParams in cloth){
-      // if(clothParams.cloth.id % 100 == 42){
-      //   continue;
-      // }
-
       final int index = basis.indexOf(clothParams.cloth.clothType);
       if(index == -1){
         res.add(clothParams);
