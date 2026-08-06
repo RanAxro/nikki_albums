@@ -435,7 +435,10 @@ class ClothDetailPanel extends StatelessWidget{
               children: [
                 AppText.tr("infinity_nikki.media_params.outfit"),
 
-                outfit == null ? AppText(trBool(false, index: 2)) :
+                outfit == null ?
+                  Center(
+                    child: AppText(trBool(false, index: 2)),
+                  ) :
                   Column(
                     children: [
                       AppText(trText(outfit.toString(), category: "cloth_outfit")),
