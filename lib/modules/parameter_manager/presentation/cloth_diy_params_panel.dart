@@ -490,14 +490,15 @@ class ClothDetailPanel extends StatelessWidget{
             ),
 
             /// 特效
-            TableRow(
-              children: [
-                AppText(trText("cloth_diy_data.effect")),
-                Center(
-                  child: AppText(trBool(!clothParams.effectHidden!, index: 7)),
-                ),
-              ],
-            ),
+            if(clothParams.effectHidden != null)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.effect")),
+                  Center(
+                    child: AppText(trBool(!clothParams.effectHidden!, index: 7)),
+                  ),
+                ],
+              ),
           ].map((TableRow tableRow) => TableRow(
             children: tableRow.children.map((Widget widget){
               return Padding(
