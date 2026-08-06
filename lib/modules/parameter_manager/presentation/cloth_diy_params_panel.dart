@@ -47,10 +47,10 @@ class ClothDiyParamsPanel extends StatelessWidget{
   Widget build(BuildContext context){
     final List<ClothParams> clothParamsList = handler.getSortedCloth(clothDiyParams.clothes);
 
-    return AppFloatingIndicatorButtonGroup(
+    final Widget gridView = AppFloatingIndicatorButtonGroup(
       child: SmoothPointerScroll(
         builder: (BuildContext context, ScrollController scrollController, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
-          final GridView gridView = GridView.builder(
+          return GridView.builder(
             controller: scrollController,
             physics: physics,
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -111,55 +111,55 @@ class ClothDiyParamsPanel extends StatelessWidget{
               );
             },
           );
-
-          final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
-          final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
-          return Column(
-            spacing: listSpacing,
-            children: [
-              Table(
-                columnWidths: const {
-                  0: IntrinsicColumnWidth(),
-                  1: FlexColumnWidth(),
-                },
-                border: TableBorder.all(
-                  color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
-                ),
-                children: [
-                  TableRow(
-                    children: [
-                      AppText(trText("cloth_diy_data.time")),
-                      AppText(DateTime.fromMillisecondsSinceEpoch(ClothDiyShareCode.fromCodeStr(shareCode).timestamp()).toString()),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      AppText(trText("cloth_diy_data.condition")),
-                      AppText(trText((condition?.name).toString(), category: "dye_condition")),
-                    ],
-                  ),
-                  if(effectScheme != null)
-                    TableRow(
-                      children: [
-                        AppText(trText("cloth_diy_data.effect_scheme")),
-                        AppText(trText((effectScheme.name).toString(), category: "effect_scheme")),
-                      ],
-                    ),
-                ].map((TableRow tableRow) => TableRow(
-                  children: tableRow.children.map((child) => Padding(
-                    padding: const EdgeInsets.all(smallPadding),
-                    child: child,
-                  )).toList(),
-                )).toList(),
-              ),
-
-              Expanded(
-                child: gridView,
-              ),
-            ],
-          );
         },
       ),
+    );
+
+    final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
+    final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
+    return Column(
+      spacing: listSpacing,
+      children: [
+        Table(
+          columnWidths: const {
+            0: IntrinsicColumnWidth(),
+            1: FlexColumnWidth(),
+          },
+          border: TableBorder.all(
+            color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
+          ),
+          children: [
+            TableRow(
+              children: [
+                AppText(trText("cloth_diy_data.time")),
+                AppText(DateTime.fromMillisecondsSinceEpoch(ClothDiyShareCode.fromCodeStr(shareCode).timestamp()).toString()),
+              ],
+            ),
+            TableRow(
+              children: [
+                AppText(trText("cloth_diy_data.condition")),
+                AppText(trText((condition?.name).toString(), category: "dye_condition")),
+              ],
+            ),
+            if(effectScheme != null)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.effect_scheme")),
+                  AppText(trText((effectScheme.name).toString(), category: "effect_scheme")),
+                ],
+              ),
+          ].map((TableRow tableRow) => TableRow(
+            children: tableRow.children.map((child) => Padding(
+              padding: const EdgeInsets.all(smallPadding),
+              child: child,
+            )).toList(),
+          )).toList(),
+        ),
+
+        Expanded(
+          child: gridView,
+        ),
+      ],
     );
   }
 }
