@@ -204,6 +204,7 @@
       "cloth_diy_data": {
         "time": "Generation Time",
         "grow_up_or_evolution": "Grow Up/Evolution",
+        "pattern_mode": "Details",
         "condition": "Dyeing Conditions",
         "effect": "Effect",
         "effect_scheme": "Effect Scheme"
@@ -232,6 +233,15 @@
       "65": "Europe",
       "66": "Europe(Test)",
       "67": "Europe(Pre)"
+    },
+    "cloth_pattern_mode": {
+      "0": "Default",
+      "1": "Second",
+      "2": "Third",
+      "3": "Fourth",
+      "4": "Fifth",
+      "5": "Sixth",
+      "6": "Seventh"
     },
     "dye_condition": {
       "null": "Unknown",

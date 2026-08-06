@@ -6,7 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
 class Nuan5ClothDyeArea {
   final int maxColorAreaNum;
@@ -114,6 +114,7 @@ class Nuan5Config {
   final Map<int, Nuan5ClothDyePalette> clothDyePalette;
   final Map<int, Nuan5DiyColorSwatch> diyColorSwatch;
   final Map<int, Nuan5DiyPattern> diyPattern;
+  final Map<int, Nuan5NikkiClothInfo> nikkiClothInfo;
 
   const Nuan5Config({
     this.table,
@@ -127,6 +128,7 @@ class Nuan5Config {
     required this.clothDyePalette,
     required this.diyColorSwatch,
     required this.diyPattern,
+    required this.nikkiClothInfo,
   });
 
   static Future<Nuan5Config> default_() =>
@@ -149,7 +151,8 @@ class Nuan5Config {
       clothDyeArea.hashCode ^
       clothDyePalette.hashCode ^
       diyColorSwatch.hashCode ^
-      diyPattern.hashCode;
+      diyPattern.hashCode ^
+      nikkiClothInfo.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -166,7 +169,8 @@ class Nuan5Config {
           clothDyeArea == other.clothDyeArea &&
           clothDyePalette == other.clothDyePalette &&
           diyColorSwatch == other.diyColorSwatch &&
-          diyPattern == other.diyPattern;
+          diyPattern == other.diyPattern &&
+          nikkiClothInfo == other.nikkiClothInfo;
 }
 
 class Nuan5DiyColorSwatch {
@@ -367,6 +371,25 @@ class Nuan5NetworkImageItem {
           runtimeType == other.runtimeType &&
           baseUrl == other.baseUrl &&
           replace == other.replace;
+}
+
+class Nuan5NikkiClothInfo {
+  final int patternNum;
+
+  const Nuan5NikkiClothInfo({required this.patternNum});
+
+  static Future<Nuan5NikkiClothInfo> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5NikkiClothInfoDefault();
+
+  @override
+  int get hashCode => patternNum.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5NikkiClothInfo &&
+          runtimeType == other.runtimeType &&
+          patternNum == other.patternNum;
 }
 
 class Nuan5Table {

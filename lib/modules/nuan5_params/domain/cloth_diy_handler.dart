@@ -36,7 +36,23 @@ class ClothDiyHandler{
     return res.nonNulls.toList();
   }
 
-  int? getDyeZone(Nuan5Config config, int id, int patternMode, int featureTag, int targetGroupId){
+  /// 如果部件仅有一种 1 种款型, 则返回 null
+  int? getDisplayPatternMode(Nuan5Config config, int id, int? patternMode){
+    patternMode = patternMode ?? 0;
+
+    if(patternMode > 0){
+      return patternMode;
+    }
+
+    if(config.nikkiClothInfo[id]?.patternNum == 1){
+      return null;
+    }
+    return patternMode;
+  }
+
+  int? getDyeZone(Nuan5Config config, int id, int? patternMode, int featureTag, int targetGroupId){
+    patternMode = patternMode ?? 0;
+
     final Nuan5ClothDyeArea? data = config.clothDyeArea[id];
     if(data == null){
       return null;

@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 use prost::Message;
-use serde::{Deserialize, Serialize};
 
 #[derive(Clone, PartialEq)]
 #[derive(Message)]
@@ -37,6 +36,9 @@ pub struct Nuan5Config{
 
   #[prost(map = "int32, message", tag = "9")]
   pub diy_pattern: HashMap<i32, Nuan5DiyPattern>,
+
+  #[prost(map = "int32, message", tag = "18")]
+  pub nikki_cloth_info: HashMap<i32, Nuan5NikkiClothInfo>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -130,12 +132,6 @@ pub struct Nuan5MomoPose{
 pub struct Nuan5ClothDyeArea{
   #[prost(int32, tag = "1")]
   pub max_color_area_num: i32,
-  //
-  // #[prost(int32, tag = "2")]
-  // pub max_pattern_area_num: i32,
-
-  // #[prost(int32, tag = "3")]
-  // pub max_pattern_mask_num: i32,
 
   #[prost(int32, repeated, tag = "4")]
   pub custom_area_order: Vec<i32>,
@@ -149,12 +145,6 @@ pub struct Nuan5ClothDyeArea{
 pub struct Nuan5ClothSpecialPatternDyeArea{
   #[prost(int32, tag = "1")]
   pub max_color_area_num: i32,
-  //
-  // #[prost(int32, optional, tag = "2")]
-  // pub max_pattern_area_num: Option<i32>,
-
-  // #[prost(int32, optional, tag = "3")]
-  // pub max_pattern_mask_num: Option<i32>,
 
   #[prost(int32, repeated, tag = "4")]
   pub custom_area_order: Vec<i32>,
@@ -191,4 +181,11 @@ pub struct Nuan5DiyColorSwatch{
 pub struct Nuan5DiyPattern{
   #[prost(bool, tag = "3")]
   pub has_alpha_channel: bool,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5NikkiClothInfo{
+  #[prost(int32, tag = "2")]
+  pub pattern_num: i32,
 }

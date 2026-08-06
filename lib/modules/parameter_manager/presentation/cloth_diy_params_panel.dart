@@ -215,7 +215,7 @@ class ClothDetailPanel extends StatelessWidget{
   _TableRowBox _buildOutfitDyeTable({
     required int id,
     required int featureTag,
-    required int patternMode,
+    required int? patternMode,
     required int targetGroupId,
     required DyeColorParams colorParams,
     int? colorMode,
@@ -265,7 +265,7 @@ class ClothDetailPanel extends StatelessWidget{
 
   _TableRowBox _buildSpecialEffectTable({
     required int id,
-    required int patternMode,
+    required int? patternMode,
     required SpecialEffectData specialEffectData,
   }){
     final int palette = handler.getColorPalette(specialEffectData.colorGrid);
@@ -299,7 +299,7 @@ class ClothDetailPanel extends StatelessWidget{
 
   _TableRowBox _buildPatternCreationTable({
     required int id,
-    required int patternMode,
+    required int? patternMode,
     required PatternCreationData patternCreationData,
   }){
     final int? zone = config == null ? null : handler.getDyeZone(config!, id, patternMode, patternCreationData.featureTag, patternCreationData.targetGroupId);
@@ -333,7 +333,7 @@ class ClothDetailPanel extends StatelessWidget{
     );
   }
 
-  List<TableRow> _buildOutfitDye(int id, int patternMode, List<OutfitDyeData> outfitDye){
+  List<TableRow> _buildOutfitDye(int id, int? patternMode, List<OutfitDyeData> outfitDye){
     final SplayTreeMap<int, TableRow> children = SplayTreeMap();
     final List<TableRow> noZoneChildren = [];
 
@@ -371,7 +371,7 @@ class ClothDetailPanel extends StatelessWidget{
     return children.values.toList()..addAll(noZoneChildren);
   }
 
-  List<TableRow> _buildSpecialEffect(int id, int patternMode, List<SpecialEffectData> specialEffect){
+  List<TableRow> _buildSpecialEffect(int id, int? patternMode, List<SpecialEffectData> specialEffect){
     final SplayTreeMap<int, TableRow> children = SplayTreeMap();
     final List<TableRow> noZoneChildren = [];
 
@@ -392,7 +392,7 @@ class ClothDetailPanel extends StatelessWidget{
     return children.values.toList()..addAll(noZoneChildren);
   }
 
-  List<TableRow> _buildPatternCreation(int id, int patternMode, List<PatternCreationData> patternCreation){
+  List<TableRow> _buildPatternCreation(int id, int? patternMode, List<PatternCreationData> patternCreation){
     final SplayTreeMap<int, TableRow> children = SplayTreeMap();
     final List<TableRow> noZoneChildren = [];
 
@@ -418,6 +418,7 @@ class ClothDetailPanel extends StatelessWidget{
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
         final int? outfit = clothParams.cloth.outfit;
+        final int? patternMode = config.let<int?>((c) => handler.getDisplayPatternMode(c, clothParams.cloth.id, clothParams.patternMode));
         final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
 
         final Widget clothBaseInfoPanel = Table(
@@ -463,6 +464,17 @@ class ClothDetailPanel extends StatelessWidget{
                 ),
               ],
             ),
+
+            /// 款型
+            if(patternMode != null)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.pattern_mode")),
+                  Center(
+                    child: AppText(trText(patternMode.toString(), category: "cloth_pattern_mode")),
+                  ),
+                ],
+              ),
 
             /// 染色条件
             TableRow(
@@ -511,7 +523,7 @@ class ClothDetailPanel extends StatelessWidget{
                             color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
                           ),
                           columnWidths: _outfitDyeTableColumnWidth,
-                          children: _buildOutfitDye(clothParams.cloth.id, clothParams.patternMode ?? 0, clothParams.diy!.outfitDye),
+                          children: _buildOutfitDye(clothParams.cloth.id, clothParams.patternMode, clothParams.diy!.outfitDye),
                         ),
                       );
                     },
@@ -533,7 +545,7 @@ class ClothDetailPanel extends StatelessWidget{
                             color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
                           ),
                           columnWidths: _specialEffectTableColumnWidth,
-                          children: _buildSpecialEffect(clothParams.cloth.id, clothParams.patternMode ?? 0, clothParams.diy!.specialEffect),
+                          children: _buildSpecialEffect(clothParams.cloth.id, clothParams.patternMode, clothParams.diy!.specialEffect),
                         ),
                       );
                     },
@@ -555,7 +567,7 @@ class ClothDetailPanel extends StatelessWidget{
                             color: AppColorScheme.of(context).byRole(ColorRole.of(context)).hoveredColor,
                           ),
                           columnWidths: _patternCreationColumnWidth,
-                          children: _buildPatternCreation(clothParams.cloth.id, clothParams.patternMode ?? 0, clothParams.diy!.patternCreation),
+                          children: _buildPatternCreation(clothParams.cloth.id, clothParams.patternMode, clothParams.diy!.patternCreation),
                         ),
                       );
                     },

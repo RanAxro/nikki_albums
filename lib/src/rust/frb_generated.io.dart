@@ -146,6 +146,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<int, Nuan5NikkiClothInfo>
+  dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(dynamic raw);
+
+  @protected
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
 
   @protected
@@ -607,6 +611,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5NikkiClothInfo)>
+  dco_decode_list_record_i_32_nuan_5_nikki_cloth_info(dynamic raw);
+
+  @protected
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
 
   @protected
@@ -721,6 +729,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5NetworkImageItem dco_decode_nuan_5_network_image_item(dynamic raw);
+
+  @protected
+  Nuan5NikkiClothInfo dco_decode_nuan_5_nikki_cloth_info(dynamic raw);
 
   @protected
   Nuan5Table dco_decode_nuan_5_table(dynamic raw);
@@ -934,6 +945,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (int, Nuan5MomoPose) dco_decode_record_i_32_nuan_5_momo_pose(dynamic raw);
+
+  @protected
+  (int, Nuan5NikkiClothInfo) dco_decode_record_i_32_nuan_5_nikki_cloth_info(
+    dynamic raw,
+  );
 
   @protected
   (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
@@ -1165,6 +1181,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<int, Nuan5MomoPose> sse_decode_Map_i_32_nuan_5_momo_pose_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<int, Nuan5NikkiClothInfo>
+  sse_decode_Map_i_32_nuan_5_nikki_cloth_info_None(
     SseDeserializer deserializer,
   );
 
@@ -1744,6 +1766,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5NikkiClothInfo)>
+  sse_decode_list_record_i_32_nuan_5_nikki_cloth_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
     SseDeserializer deserializer,
   );
@@ -1886,6 +1914,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5NetworkImageItem sse_decode_nuan_5_network_image_item(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5NikkiClothInfo sse_decode_nuan_5_nikki_cloth_info(
     SseDeserializer deserializer,
   );
 
@@ -2175,6 +2208,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5NikkiClothInfo) sse_decode_record_i_32_nuan_5_nikki_cloth_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (PlatformInt64, bool) sse_decode_record_i_64_bool(
     SseDeserializer deserializer,
   );
@@ -2454,6 +2492,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_i_32_nuan_5_momo_pose_None(
     Map<int, Nuan5MomoPose> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_nikki_cloth_info_None(
+    Map<int, Nuan5NikkiClothInfo> self,
     SseSerializer serializer,
   );
 
@@ -3175,6 +3219,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_nikki_cloth_info(
+    List<(int, Nuan5NikkiClothInfo)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_64_bool(
     List<(PlatformInt64, bool)> self,
     SseSerializer serializer,
@@ -3366,6 +3416,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_nuan_5_network_image_item(
     Nuan5NetworkImageItem self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_nikki_cloth_info(
+    Nuan5NikkiClothInfo self,
     SseSerializer serializer,
   );
 
@@ -3720,6 +3776,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_32_nuan_5_momo_pose(
     (int, Nuan5MomoPose) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_nikki_cloth_info(
+    (int, Nuan5NikkiClothInfo) self,
     SseSerializer serializer,
   );
 
