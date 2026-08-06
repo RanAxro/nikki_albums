@@ -86,23 +86,33 @@ class ClothDiyParamsPanel extends StatelessWidget{
                           ),
                         ),
 
-                        Row(
-                          spacing: listSpacing,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Tooltip(
-                              message: trText(clothType.toString(), category: "cloth_type"),
-                              child: AppCachedNetworkImage(
-                                imageUrl: config?.getImageUrl(config?.networkImage?.clothType, clothType) ?? "",
-                                cacheKey: "cloth_type_$clothType",
-                                width: 24,
-                                height: 24,
-                                color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onDisabledColor,
-                              ),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+                          child: IntrinsicWidth(
+                            child: Row(
+                              spacing: listSpacing,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Tooltip(
+                                  message: trText(clothType.toString(), category: "cloth_type"),
+                                  child: AppCachedNetworkImage(
+                                    imageUrl: config?.getImageUrl(config?.networkImage?.clothType, clothType) ?? "",
+                                    cacheKey: "cloth_type_$clothType",
+                                    width: 24,
+                                    height: 24,
+                                    color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onDisabledColor,
+                                  ),
+                                ),
 
-                            AppText(trText(clothParams.cloth.id.toString(), category: "cloth"), softWrap: false),
-                          ],
+                                Expanded(
+                                  child: Tooltip(
+                                    message: trText(clothParams.cloth.id.toString(), category: "cloth"),
+                                    child: AppText(trText(clothParams.cloth.id.toString(), category: "cloth"), softWrap: false, overflow: TextOverflow.ellipsis),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
