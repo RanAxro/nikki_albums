@@ -62,6 +62,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
             itemCount: clothParamsList.length,
             itemBuilder: (BuildContext context, int index){
               final ClothParams clothParams = clothParamsList.elementAt(index);
+              final int clothType = handler.getClothType(config, clothParams.cloth);
 
               return AppFloatingIndicatorButtonTarget(
                 child: AppSuperTooltip(
@@ -85,7 +86,24 @@ class ClothDiyParamsPanel extends StatelessWidget{
                           ),
                         ),
 
-                        AppText(trText(clothParams.cloth.id.toString(), category: "cloth"), softWrap: false),
+                        Row(
+                          spacing: listSpacing,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Tooltip(
+                              message: trText(clothType.toString(), category: "cloth_type"),
+                              child: AppCachedNetworkImage(
+                                imageUrl: config?.getImageUrl(config?.networkImage?.clothType, clothType) ?? "",
+                                cacheKey: "cloth_type_$clothType",
+                                width: 24,
+                                height: 24,
+                                color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onDisabledColor,
+                              ),
+                            ),
+
+                            AppText(trText(clothParams.cloth.id.toString(), category: "cloth"), softWrap: false),
+                          ],
+                        ),
                       ],
                     ),
                   ),

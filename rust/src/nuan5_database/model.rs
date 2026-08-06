@@ -37,6 +37,9 @@ pub struct Nuan5Config{
   #[prost(map = "int32, message", tag = "9")]
   pub diy_pattern: HashMap<i32, Nuan5DiyPattern>,
 
+  #[prost(map = "int32, message", tag = "11")]
+  pub cloth: HashMap<i32, Nuan5Cloth>,
+
   #[prost(map = "int32, message", tag = "18")]
   pub nikki_cloth_info: HashMap<i32, Nuan5NikkiClothInfo>,
 }
@@ -74,6 +77,9 @@ pub struct Nuan5NetworkImage{
 
   #[prost(message, tag = "6")]
   pub diy_pattern: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "7")]
+  pub cloth_type: Option<Nuan5NetworkImageItem>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -181,6 +187,13 @@ pub struct Nuan5DiyColorSwatch{
 pub struct Nuan5DiyPattern{
   #[prost(bool, tag = "3")]
   pub has_alpha_channel: bool,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5Cloth{
+  #[prost(int32, tag = "1")]
+  pub cloth_type: i32,
 }
 
 #[derive(Clone, PartialEq)]

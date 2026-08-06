@@ -1883,6 +1883,7 @@ class AppCachedNetworkImage extends StatelessWidget{
   final BoxFit? fit;
   final Alignment alignment;
   final ImageRepeat repeat;
+  final Color? color;
 
   const AppCachedNetworkImage({
     super.key,
@@ -1894,6 +1895,7 @@ class AppCachedNetworkImage extends StatelessWidget{
     this.fit,
     this.alignment = Alignment.center,
     this.repeat = ImageRepeat.noRepeat,
+    this.color,
   });
 
   @override
@@ -1913,6 +1915,7 @@ class AppCachedNetworkImage extends StatelessWidget{
       fit: fit,
       alignment: alignment,
       repeat: repeat,
+      color: color,
     );
   }
 }

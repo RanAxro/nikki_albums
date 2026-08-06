@@ -2,6 +2,7 @@
 import "../model/cloth_diy.dart";
 import "package:nikki_albums/src/rust/nuan5_database/model.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/src/rust/nuan5_params/structs/cloth.dart";
 
 import "dart:math";
 
@@ -17,13 +18,19 @@ const List<int> defaultSortingBasis = [
 class ClothDiyHandler{
   const ClothDiyHandler();
 
+  int getClothType(Nuan5Config? config, Cloth cloth){
+    int? clothType = config?.cloth[cloth.id]?.clothType;
+    clothType = clothType ?? cloth.species * 100 + cloth.clothType;
+    return clothType;
+  }
+
   List<ClothParams> getSortedCloth(List<ClothParams> cloth, [List<int> basis = defaultSortingBasis]){
     final List<ClothParams?> res = List.filled(basis.length, null);
 
     for(final ClothParams clothParams in cloth){
-      if(clothParams.cloth.id % 100 == 42){
-        continue;
-      }
+      // if(clothParams.cloth.id % 100 == 42){
+      //   continue;
+      // }
 
       final int index = basis.indexOf(clothParams.cloth.clothType);
       if(index == -1){
