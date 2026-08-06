@@ -150,8 +150,12 @@ pub(crate) fn convert_collage_params(data: &image_custom_data::CollageCustomData
 pub(crate) fn convert_diy_params(data: &image_custom_data::DIYCustomData) -> ClothDiyParams{
   ClothDiyParams{
     pose_id: data.content.pose_id,
-    pattern_data: data.content.pattern_data.clone().unwrap_or(IdMap::new()).as_map(),
-    clothes: convert_cloth(&data.content.wearing_clothes, Some(&data.content.wearing_diy_infos), &data.content.ns_hidden_data),
+    clothes: convert_cloth(
+      &data.content.wearing_clothes,
+      Some(&data.content.wearing_diy_infos),
+      &data.content.pattern_data,
+      &data.content.ns_hidden_data,
+    ),
   }
 }
 
@@ -323,7 +327,7 @@ pub(crate) fn convert_nikki_params(data: &image_custom_data::SocialPhoto) -> Nik
     scale: (data.photo_info.nikki_scale_x, data.photo_info.nikki_scale_y, data.photo_info.nikki_scale_z),
     dressing: DressingParams{
       clothes: data.photo_info.nikki_clothes.as_ref().map(|nikki_clothes|{
-        convert_cloth(nikki_clothes, Some(&data.photo_info.nikki_diy), &None)
+        convert_cloth(nikki_clothes, Some(&data.photo_info.nikki_diy), &None, &None)
       }).unwrap_or(vec![]),
       eureka: data.photo_info.magicball_color_ids.clone().unwrap_or(vec![]).iter().map(parse_eureka).collect(),
     },
@@ -404,7 +408,12 @@ pub(crate) fn convert_task_params(data: &image_custom_data::NikkiPhotoCustomData
   res
 }
 
-pub(crate) fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>, data_effect_hidden: &Option<IdMap<i64>>) -> Vec<ClothParams>{
+pub(crate) fn convert_cloth(
+  data: &Vec<i64>,
+  data_nikki_diy: Option<&AdaptiveArray<image_custom_data::NikkiDIY>>,
+  data_pattern_data: &Option<IdMap<i64>>,
+  data_effect_hidden: &Option<IdMap<i64>>,
+) -> Vec<ClothParams>{
   let mut res = Vec::new();
 
   let mut set = HashSet::new();
@@ -420,8 +429,15 @@ pub(crate) fn convert_cloth(data: &Vec<i64>, data_nikki_diy: Option<&AdaptiveArr
       res.push(ClothParams{
         cloth: parse_cloth(cloth),
         diy: None,
+        pattern_mode: None,
         effect_hidden: None,
       })
+    }
+  }
+
+  if let Some(pattern_data) = data_pattern_data {
+    for clothParams in res.iter_mut() {
+      clothParams.pattern_mode = pattern_data.get(&clothParams.cloth.id).copied();
     }
   }
 
@@ -532,6 +548,7 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
           pattern_creation: vec![convert_pattern_creation_ext(item, pattern_creation_ext)],
         },
       }),
+      pattern_mode: None,
       effect_hidden: None,
     }
   }
@@ -603,8 +620,12 @@ pub(crate) fn convert_nikki_diy(data: &AdaptiveArray<image_custom_data::NikkiDIY
 pub(crate) fn convert_net_cloth_diy_params(data: &diy_custom_data::NetDIYCustomData) -> ClothDiyParams{
   ClothDiyParams{
     pose_id: data.content.content.pose_id,
-    pattern_data: data.content.content.pattern_data.clone().unwrap_or(IdMap::new()).as_map(),
-    clothes: convert_cloth(&data.content.content.wearing_clothes, Some(&data.content.content.wearing_diy_infos), &data.content.content.ns_hidden_data),
+    clothes: convert_cloth(
+      &data.content.content.wearing_clothes,
+      Some(&data.content.content.wearing_diy_infos),
+      &data.content.content.pattern_data,
+      &data.content.content.ns_hidden_data,
+    ),
   }
 }
 

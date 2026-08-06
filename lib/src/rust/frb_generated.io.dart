@@ -112,6 +112,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_Map_i_32_nuan_5_cloth_dye_palette_None(dynamic raw);
 
   @protected
+  Map<int, Nuan5ClothSpecialPatternDyeArea>
+  dco_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(dynamic raw);
+
+  @protected
   Map<int, Nuan5DiyColorSwatch>
   dco_decode_Map_i_32_nuan_5_diy_color_swatch_None(dynamic raw);
 
@@ -143,9 +147,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
-
-  @protected
-  Map<PlatformInt64, PlatformInt64> dco_decode_Map_i_64_i_64_None(dynamic raw);
 
   @protected
   ClothDiyShareCode
@@ -568,6 +569,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(dynamic raw);
 
   @protected
+  List<(int, Nuan5ClothSpecialPatternDyeArea)>
+  dco_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    dynamic raw,
+  );
+
+  @protected
   List<(int, Nuan5DiyColorSwatch)>
   dco_decode_list_record_i_32_nuan_5_diy_color_swatch(dynamic raw);
 
@@ -601,11 +608,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
-
-  @protected
-  List<(PlatformInt64, PlatformInt64)> dco_decode_list_record_i_64_i_64(
-    dynamic raw,
-  );
 
   @protected
   List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
@@ -685,6 +687,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5ClothDyePalette dco_decode_nuan_5_cloth_dye_palette(dynamic raw);
+
+  @protected
+  Nuan5ClothSpecialPatternDyeArea
+  dco_decode_nuan_5_cloth_special_pattern_dye_area(dynamic raw);
 
   @protected
   Nuan5Config dco_decode_nuan_5_config(dynamic raw);
@@ -903,6 +909,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5ClothSpecialPatternDyeArea)
+  dco_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area(dynamic raw);
+
+  @protected
   (int, Nuan5DiyColorSwatch) dco_decode_record_i_32_nuan_5_diy_color_swatch(
     dynamic raw,
   );
@@ -927,9 +937,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
-
-  @protected
-  (PlatformInt64, PlatformInt64) dco_decode_record_i_64_i_64(dynamic raw);
 
   @protected
   (String, bool) dco_decode_record_string_bool(dynamic raw);
@@ -1120,6 +1127,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<int, Nuan5ClothSpecialPatternDyeArea>
+  sse_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Map<int, Nuan5DiyColorSwatch>
   sse_decode_Map_i_32_nuan_5_diy_color_swatch_None(
     SseDeserializer deserializer,
@@ -1157,11 +1170,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  Map<PlatformInt64, PlatformInt64> sse_decode_Map_i_64_i_64_None(
     SseDeserializer deserializer,
   );
 
@@ -1694,6 +1702,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5ClothSpecialPatternDyeArea)>
+  sse_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(int, Nuan5DiyColorSwatch)>
   sse_decode_list_record_i_32_nuan_5_diy_color_swatch(
     SseDeserializer deserializer,
@@ -1731,11 +1745,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  List<(PlatformInt64, PlatformInt64)> sse_decode_list_record_i_64_i_64(
     SseDeserializer deserializer,
   );
 
@@ -1835,6 +1844,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5ClothDyePalette sse_decode_nuan_5_cloth_dye_palette(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5ClothSpecialPatternDyeArea
+  sse_decode_nuan_5_cloth_special_pattern_dye_area(
     SseDeserializer deserializer,
   );
 
@@ -2119,6 +2134,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5ClothSpecialPatternDyeArea)
+  sse_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (int, Nuan5DiyColorSwatch) sse_decode_record_i_32_nuan_5_diy_color_swatch(
     SseDeserializer deserializer,
   );
@@ -2155,11 +2176,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (PlatformInt64, bool) sse_decode_record_i_64_bool(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  (PlatformInt64, PlatformInt64) sse_decode_record_i_64_i_64(
     SseDeserializer deserializer,
   );
 
@@ -2394,6 +2410,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(
+    Map<int, Nuan5ClothSpecialPatternDyeArea> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_Map_i_32_nuan_5_diy_color_swatch_None(
     Map<int, Nuan5DiyColorSwatch> self,
     SseSerializer serializer,
@@ -2438,12 +2460,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_i_64_bool_None(
     Map<PlatformInt64, bool> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_Map_i_64_i_64_None(
-    Map<PlatformInt64, PlatformInt64> self,
     SseSerializer serializer,
   );
 
@@ -3111,6 +3127,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    List<(int, Nuan5ClothSpecialPatternDyeArea)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_diy_color_swatch(
     List<(int, Nuan5DiyColorSwatch)> self,
     SseSerializer serializer,
@@ -3155,12 +3177,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_record_i_64_bool(
     List<(PlatformInt64, bool)> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_list_record_i_64_i_64(
-    List<(PlatformInt64, PlatformInt64)> self,
     SseSerializer serializer,
   );
 
@@ -3293,6 +3309,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_nuan_5_cloth_dye_palette(
     Nuan5ClothDyePalette self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_cloth_special_pattern_dye_area(
+    Nuan5ClothSpecialPatternDyeArea self,
     SseSerializer serializer,
   );
 
@@ -3654,6 +3676,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    (int, Nuan5ClothSpecialPatternDyeArea) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_record_i_32_nuan_5_diy_color_swatch(
     (int, Nuan5DiyColorSwatch) self,
     SseSerializer serializer,
@@ -3698,12 +3726,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_64_bool(
     (PlatformInt64, bool) self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_record_i_64_i_64(
-    (PlatformInt64, PlatformInt64) self,
     SseSerializer serializer,
   );
 

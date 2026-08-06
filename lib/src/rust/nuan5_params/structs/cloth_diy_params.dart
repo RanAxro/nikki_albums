@@ -12,17 +12,12 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 class ClothDiyParams {
   final PlatformInt64? poseId;
-  final Map<PlatformInt64, PlatformInt64> patternData;
   final List<ClothParams> clothes;
 
-  const ClothDiyParams({
-    this.poseId,
-    required this.patternData,
-    required this.clothes,
-  });
+  const ClothDiyParams({this.poseId, required this.clothes});
 
   @override
-  int get hashCode => poseId.hashCode ^ patternData.hashCode ^ clothes.hashCode;
+  int get hashCode => poseId.hashCode ^ clothes.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -30,7 +25,6 @@ class ClothDiyParams {
       other is ClothDiyParams &&
           runtimeType == other.runtimeType &&
           poseId == other.poseId &&
-          patternData == other.patternData &&
           clothes == other.clothes;
 }
 

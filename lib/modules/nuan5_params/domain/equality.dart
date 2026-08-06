@@ -23,13 +23,11 @@ class ClothDiyParamsEquality implements Equality<ClothDiyParams>{
   @override
   bool equals(ClothDiyParams e1, ClothDiyParams e2){
     return e1.poseId == e2.poseId &&
-      _unorderedEquality.equals(e1.patternData, e2.patternData) &&
       clothParamsEquality.equals(e1.clothes, e2.clothes);
   }
 
   @override
   int hash(ClothDiyParams e) => e.poseId.hashCode ^
-    _unorderedEquality.hash(e.patternData) ^
     clothParamsEquality.hash(e.clothes);
 
   @override

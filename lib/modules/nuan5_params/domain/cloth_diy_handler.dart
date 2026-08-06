@@ -36,24 +36,27 @@ class ClothDiyHandler{
     return res.nonNulls.toList();
   }
 
-  int? getDyeZone(Nuan5Config config, int id, int featureTag, int targetGroupId){
+  int? getDyeZone(Nuan5Config config, int id, int patternMode, int featureTag, int targetGroupId){
     final Nuan5ClothDyeArea? data = config.clothDyeArea[id];
     if(data == null){
       return null;
     }
 
+    final int maxColorAreaNum = data.specialPattern[patternMode]?.maxColorAreaNum ?? data.maxColorAreaNum;
+    final List<int> customAreaOrder = data.specialPattern[patternMode]?.customAreaOrder ?? data.customAreaOrder;
+
     int zone;
     if(featureTag == 3){
-      zone = data.maxColorAreaNum + targetGroupId;
+      zone = maxColorAreaNum + targetGroupId;
     }else{
       zone = targetGroupId;
     }
 
     if(featureTag == 1 || featureTag == 3){
-      if(data.customAreaOrder.contains(zone)){
-        zone = 1 + data.customAreaOrder.indexOf(zone);
+      if(customAreaOrder.contains(zone)){
+        zone = 1 + customAreaOrder.indexOf(zone);
       }else{
-        zone += data.customAreaOrder.where((int t) => t > zone).length;
+        zone += customAreaOrder.where((int t) => t > zone).length;
       }
     }
 
