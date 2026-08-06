@@ -591,7 +591,15 @@ class ClothDetailPanel extends StatelessWidget{
                 alignment: Alignment.topCenter,
                 child: SizedBox(
                   width: 300,
-                  child: clothBaseInfoPanel,
+                  child: SmoothPointerScroll(
+                    builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+                      return SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        child: clothBaseInfoPanel,
+                      );
+                    },
+                  ),
                 ),
               ),
               if(clothDiyInfoPanel != null)
