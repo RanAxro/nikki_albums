@@ -43,6 +43,12 @@ pub struct Nuan5Config{
   #[prost(map = "int32, message", tag = "12")]
   pub cloth_outfit: HashMap<i32, Nuan5ClothOutfit>,
 
+  #[prost(map = "int32, message", tag = "16")]
+  pub cloth_prop: HashMap<i32, Nuan5ClothProp>,
+
+  #[prost(map = "int32, message", tag = "17")]
+  pub cloth_tag: HashMap<i32, Nuan5ClothTag>,
+
   #[prost(map = "int32, message", tag = "18")]
   pub nikki_cloth_info: HashMap<i32, Nuan5NikkiClothInfo>,
 }
@@ -83,6 +89,12 @@ pub struct Nuan5NetworkImage{
 
   #[prost(message, tag = "7")]
   pub cloth_type: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "9")]
+  pub cloth_prop: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "10")]
+  pub cloth_tag: Option<Nuan5NetworkImageItem>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -208,7 +220,28 @@ pub struct Nuan5ClothOutfit{
 
 #[derive(Clone, PartialEq)]
 #[derive(Message)]
+pub struct Nuan5ClothProp{
+
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5ClothTag{
+  #[prost(double, repeated, tag = "1")]
+  pub rgba: Vec<f64>,
+  #[prost(string, tag = "2")]
+  pub background_id: String,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
 pub struct Nuan5NikkiClothInfo{
   #[prost(int32, tag = "2")]
   pub pattern_num: i32,
+  #[prost(int32, repeated, tag = "3")]
+  pub props: Vec<i32>,
+  #[prost(int32, tag = "4")]
+  pub major_prop: i32,
+  #[prost(int32, repeated, tag = "5")]
+  pub tags: Vec<i32>,
 }

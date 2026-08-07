@@ -93,7 +93,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -325377848;
+  int get rustContentHash => -1345561548;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -329,8 +329,12 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Nuan5ClothOutfit> crateNuan5DatabaseModelNuan5ClothOutfitDefault();
 
+  Future<Nuan5ClothProp> crateNuan5DatabaseModelNuan5ClothPropDefault();
+
   Future<Nuan5ClothSpecialPatternDyeArea>
   crateNuan5DatabaseModelNuan5ClothSpecialPatternDyeAreaDefault();
+
+  Future<Nuan5ClothTag> crateNuan5DatabaseModelNuan5ClothTagDefault();
 
   Future<Nuan5Config> crateNuan5DatabaseModelNuan5ConfigDefault();
 
@@ -2160,6 +2164,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Nuan5ClothProp> crateNuan5DatabaseModelNuan5ClothPropDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 53,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_cloth_prop,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5ClothPropDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5ClothPropDefaultConstMeta =>
+      const TaskConstMeta(debugName: "nuan_5_cloth_prop_default", argNames: []);
+
+  @override
   Future<Nuan5ClothSpecialPatternDyeArea>
   crateNuan5DatabaseModelNuan5ClothSpecialPatternDyeAreaDefault() {
     return handler.executeNormal(
@@ -2169,7 +2200,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 53,
+            funcId: 54,
             port: port_,
           );
         },
@@ -2193,6 +2224,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Nuan5ClothTag> crateNuan5DatabaseModelNuan5ClothTagDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 55,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_cloth_tag,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5ClothTagDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5ClothTagDefaultConstMeta =>
+      const TaskConstMeta(debugName: "nuan_5_cloth_tag_default", argNames: []);
+
+  @override
   Future<Nuan5Config> crateNuan5DatabaseModelNuan5ConfigDefault() {
     return handler.executeNormal(
       NormalTask(
@@ -2201,7 +2259,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 54,
+            funcId: 56,
             port: port_,
           );
         },
@@ -2231,7 +2289,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 55,
+            funcId: 57,
             port: port_,
           );
         },
@@ -2262,7 +2320,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 56,
+            funcId: 58,
             port: port_,
           );
         },
@@ -2293,7 +2351,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 57,
+            funcId: 59,
             port: port_,
           );
         },
@@ -2323,7 +2381,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 58,
+            funcId: 60,
             port: port_,
           );
         },
@@ -2350,7 +2408,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 59,
+            funcId: 61,
             port: port_,
           );
         },
@@ -2380,7 +2438,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 60,
+            funcId: 62,
             port: port_,
           );
         },
@@ -2407,7 +2465,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 61,
+            funcId: 63,
             port: port_,
           );
         },
@@ -2434,7 +2492,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 62,
+            funcId: 64,
             port: port_,
           );
         },
@@ -2461,7 +2519,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 63,
+            funcId: 65,
             port: port_,
           );
         },
@@ -2492,7 +2550,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 64,
+            funcId: 66,
             port: port_,
           );
         },
@@ -2525,7 +2583,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 65,
+            funcId: 67,
             port: port_,
           );
         },
@@ -2556,7 +2614,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 66,
+            funcId: 68,
             port: port_,
           );
         },
@@ -2583,7 +2641,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 67)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_string_config,
@@ -2612,7 +2670,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_string_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 68)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 70)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2640,7 +2698,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_string_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2669,7 +2727,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 70)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -2694,7 +2752,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 73)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_text_config,
@@ -2722,7 +2780,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_text_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 74)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2747,7 +2805,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_text_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 73)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 75)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2774,7 +2832,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 74)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 76)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_update_info,
@@ -2800,7 +2858,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 75)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 77)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2823,7 +2881,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 76)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 78)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2990,11 +3048,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<int, Nuan5ClothProp> dco_decode_Map_i_32_nuan_5_cloth_prop_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_cloth_prop(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
   Map<int, Nuan5ClothSpecialPatternDyeArea>
   dco_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
       dco_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Nuan5ClothTag> dco_decode_Map_i_32_nuan_5_cloth_tag_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_cloth_tag(
         raw,
       ).map((e) => MapEntry(e.$1, e.$2)),
     );
@@ -4184,6 +4266,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Nuan5ClothProp)> dco_decode_list_record_i_32_nuan_5_cloth_prop(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_cloth_prop)
+        .toList();
+  }
+
+  @protected
   List<(int, Nuan5ClothSpecialPatternDyeArea)>
   dco_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     dynamic raw,
@@ -4191,6 +4283,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>)
         .map(dco_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area)
+        .toList();
+  }
+
+  @protected
+  List<(int, Nuan5ClothTag)> dco_decode_list_record_i_32_nuan_5_cloth_tag(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_cloth_tag)
         .toList();
   }
 
@@ -4602,6 +4704,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5ClothProp dco_decode_nuan_5_cloth_prop(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.isNotEmpty)
+      throw Exception('unexpected arr length: expect 0 but see ${arr.length}');
+    return Nuan5ClothProp();
+  }
+
+  @protected
   Nuan5ClothSpecialPatternDyeArea
   dco_decode_nuan_5_cloth_special_pattern_dye_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -4615,11 +4726,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5ClothTag dco_decode_nuan_5_cloth_tag(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Nuan5ClothTag(
+      rgba: dco_decode_list_prim_f_64_strict(arr[0]),
+      backgroundId: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
   Nuan5Config dco_decode_nuan_5_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 14)
-      throw Exception('unexpected arr length: expect 14 but see ${arr.length}');
+    if (arr.length != 16)
+      throw Exception('unexpected arr length: expect 16 but see ${arr.length}');
     return Nuan5Config(
       table: dco_decode_opt_box_autoadd_nuan_5_table(arr[0]),
       networkImage: dco_decode_opt_box_autoadd_nuan_5_network_image(arr[1]),
@@ -4636,7 +4759,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       diyPattern: dco_decode_Map_i_32_nuan_5_diy_pattern_None(arr[10]),
       cloth: dco_decode_Map_i_32_nuan_5_cloth_None(arr[11]),
       clothOutfit: dco_decode_Map_i_32_nuan_5_cloth_outfit_None(arr[12]),
-      nikkiClothInfo: dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(arr[13]),
+      clothProp: dco_decode_Map_i_32_nuan_5_cloth_prop_None(arr[13]),
+      clothTag: dco_decode_Map_i_32_nuan_5_cloth_tag_None(arr[14]),
+      nikkiClothInfo: dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(arr[15]),
     );
   }
 
@@ -4713,8 +4838,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5NetworkImage dco_decode_nuan_5_network_image(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 7)
-      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    if (arr.length != 9)
+      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
     return Nuan5NetworkImage(
       light: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[0]),
       filter: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[1]),
@@ -4723,6 +4848,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       clothOutfit: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[4]),
       diyPattern: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[5]),
       clothType: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[6]),
+      clothProp: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[7]),
+      clothTag: dco_decode_opt_box_autoadd_nuan_5_network_image_item(arr[8]),
     );
   }
 
@@ -4742,9 +4869,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5NikkiClothInfo dco_decode_nuan_5_nikki_cloth_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return Nuan5NikkiClothInfo(patternNum: dco_decode_i_32(arr[0]));
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return Nuan5NikkiClothInfo(
+      patternNum: dco_decode_i_32(arr[0]),
+      props: dco_decode_list_prim_i_32_strict(arr[1]),
+      majorProp: dco_decode_i_32(arr[2]),
+      tags: dco_decode_list_prim_i_32_strict(arr[3]),
+    );
   }
 
   @protected
@@ -5240,6 +5372,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, Nuan5ClothProp) dco_decode_record_i_32_nuan_5_cloth_prop(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_cloth_prop(arr[1]));
+  }
+
+  @protected
   (int, Nuan5ClothSpecialPatternDyeArea)
   dco_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -5251,6 +5393,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       dco_decode_i_32(arr[0]),
       dco_decode_nuan_5_cloth_special_pattern_dye_area(arr[1]),
     );
+  }
+
+  @protected
+  (int, Nuan5ClothTag) dco_decode_record_i_32_nuan_5_cloth_tag(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_cloth_tag(arr[1]));
   }
 
   @protected
@@ -5989,6 +6141,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<int, Nuan5ClothProp> sse_decode_Map_i_32_nuan_5_cloth_prop_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_cloth_prop(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
   Map<int, Nuan5ClothSpecialPatternDyeArea>
   sse_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(
     SseDeserializer deserializer,
@@ -5998,6 +6159,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
           deserializer,
         );
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Nuan5ClothTag> sse_decode_Map_i_32_nuan_5_cloth_tag_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_cloth_tag(deserializer);
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
   }
 
@@ -7436,6 +7606,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Nuan5ClothProp)> sse_decode_list_record_i_32_nuan_5_cloth_prop(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5ClothProp)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_cloth_prop(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<(int, Nuan5ClothSpecialPatternDyeArea)>
   sse_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     SseDeserializer deserializer,
@@ -7450,6 +7634,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           deserializer,
         ),
       );
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(int, Nuan5ClothTag)> sse_decode_list_record_i_32_nuan_5_cloth_tag(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5ClothTag)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_cloth_tag(deserializer));
     }
     return ans_;
   }
@@ -7984,6 +8182,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Nuan5ClothProp sse_decode_nuan_5_cloth_prop(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return Nuan5ClothProp();
+  }
+
+  @protected
   Nuan5ClothSpecialPatternDyeArea
   sse_decode_nuan_5_cloth_special_pattern_dye_area(
     SseDeserializer deserializer,
@@ -7995,6 +8199,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       maxColorAreaNum: var_maxColorAreaNum,
       customAreaOrder: var_customAreaOrder,
     );
+  }
+
+  @protected
+  Nuan5ClothTag sse_decode_nuan_5_cloth_tag(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_rgba = sse_decode_list_prim_f_64_strict(deserializer);
+    var var_backgroundId = sse_decode_String(deserializer);
+    return Nuan5ClothTag(rgba: var_rgba, backgroundId: var_backgroundId);
   }
 
   @protected
@@ -8029,6 +8241,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_clothOutfit = sse_decode_Map_i_32_nuan_5_cloth_outfit_None(
       deserializer,
     );
+    var var_clothProp = sse_decode_Map_i_32_nuan_5_cloth_prop_None(
+      deserializer,
+    );
+    var var_clothTag = sse_decode_Map_i_32_nuan_5_cloth_tag_None(deserializer);
     var var_nikkiClothInfo = sse_decode_Map_i_32_nuan_5_nikki_cloth_info_None(
       deserializer,
     );
@@ -8046,6 +8262,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       diyPattern: var_diyPattern,
       cloth: var_cloth,
       clothOutfit: var_clothOutfit,
+      clothProp: var_clothProp,
+      clothTag: var_clothTag,
       nikkiClothInfo: var_nikkiClothInfo,
     );
   }
@@ -8129,6 +8347,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_clothType = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
       deserializer,
     );
+    var var_clothProp = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
+    var var_clothTag = sse_decode_opt_box_autoadd_nuan_5_network_image_item(
+      deserializer,
+    );
     return Nuan5NetworkImage(
       light: var_light,
       filter: var_filter,
@@ -8137,6 +8361,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       clothOutfit: var_clothOutfit,
       diyPattern: var_diyPattern,
       clothType: var_clothType,
+      clothProp: var_clothProp,
+      clothTag: var_clothTag,
     );
   }
 
@@ -8156,7 +8382,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_patternNum = sse_decode_i_32(deserializer);
-    return Nuan5NikkiClothInfo(patternNum: var_patternNum);
+    var var_props = sse_decode_list_prim_i_32_strict(deserializer);
+    var var_majorProp = sse_decode_i_32(deserializer);
+    var var_tags = sse_decode_list_prim_i_32_strict(deserializer);
+    return Nuan5NikkiClothInfo(
+      patternNum: var_patternNum,
+      props: var_props,
+      majorProp: var_majorProp,
+      tags: var_tags,
+    );
   }
 
   @protected
@@ -8908,6 +9142,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, Nuan5ClothProp) sse_decode_record_i_32_nuan_5_cloth_prop(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_cloth_prop(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
   (int, Nuan5ClothSpecialPatternDyeArea)
   sse_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     SseDeserializer deserializer,
@@ -8917,6 +9161,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_field1 = sse_decode_nuan_5_cloth_special_pattern_dye_area(
       deserializer,
     );
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5ClothTag) sse_decode_record_i_32_nuan_5_cloth_tag(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_cloth_tag(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -9733,12 +9987,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_prop_None(
+    Map<int, Nuan5ClothProp> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_cloth_prop(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(
     Map<int, Nuan5ClothSpecialPatternDyeArea> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_tag_None(
+    Map<int, Nuan5ClothTag> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_cloth_tag(
       self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
@@ -11157,6 +11435,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_prop(
+    List<(int, Nuan5ClothProp)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_cloth_prop(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     List<(int, Nuan5ClothSpecialPatternDyeArea)> self,
     SseSerializer serializer,
@@ -11168,6 +11458,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         item,
         serializer,
       );
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_tag(
+    List<(int, Nuan5ClothTag)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_cloth_tag(item, serializer);
     }
   }
 
@@ -11615,6 +11917,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_nuan_5_cloth_prop(
+    Nuan5ClothProp self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+  }
+
+  @protected
   void sse_encode_nuan_5_cloth_special_pattern_dye_area(
     Nuan5ClothSpecialPatternDyeArea self,
     SseSerializer serializer,
@@ -11622,6 +11932,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.maxColorAreaNum, serializer);
     sse_encode_list_prim_i_32_strict(self.customAreaOrder, serializer);
+  }
+
+  @protected
+  void sse_encode_nuan_5_cloth_tag(
+    Nuan5ClothTag self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_f_64_strict(self.rgba, serializer);
+    sse_encode_String(self.backgroundId, serializer);
   }
 
   @protected
@@ -11652,6 +11972,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_Map_i_32_nuan_5_diy_pattern_None(self.diyPattern, serializer);
     sse_encode_Map_i_32_nuan_5_cloth_None(self.cloth, serializer);
     sse_encode_Map_i_32_nuan_5_cloth_outfit_None(self.clothOutfit, serializer);
+    sse_encode_Map_i_32_nuan_5_cloth_prop_None(self.clothProp, serializer);
+    sse_encode_Map_i_32_nuan_5_cloth_tag_None(self.clothTag, serializer);
     sse_encode_Map_i_32_nuan_5_nikki_cloth_info_None(
       self.nikkiClothInfo,
       serializer,
@@ -11751,6 +12073,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.clothType,
       serializer,
     );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.clothProp,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_nuan_5_network_image_item(
+      self.clothTag,
+      serializer,
+    );
   }
 
   @protected
@@ -11770,6 +12100,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.patternNum, serializer);
+    sse_encode_list_prim_i_32_strict(self.props, serializer);
+    sse_encode_i_32(self.majorProp, serializer);
+    sse_encode_list_prim_i_32_strict(self.tags, serializer);
   }
 
   @protected
@@ -12484,6 +12817,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_record_i_32_nuan_5_cloth_prop(
+    (int, Nuan5ClothProp) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_cloth_prop(self.$2, serializer);
+  }
+
+  @protected
   void sse_encode_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     (int, Nuan5ClothSpecialPatternDyeArea) self,
     SseSerializer serializer,
@@ -12491,6 +12834,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.$1, serializer);
     sse_encode_nuan_5_cloth_special_pattern_dye_area(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_cloth_tag(
+    (int, Nuan5ClothTag) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_cloth_tag(self.$2, serializer);
   }
 
   @protected

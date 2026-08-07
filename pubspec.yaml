@@ -163,6 +163,7 @@ flutter:
     - assets/icon/
     - assets/icon/album/
     - assets/icon/big/
+    - assets/icon/infinity_nikki/
 #    - assets/map/
     - assets/web/send_file/
     - assets/bin/

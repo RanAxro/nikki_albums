@@ -207,7 +207,8 @@
         "pattern_mode": "Details",
         "condition": "Dyeing Conditions",
         "effect": "Effect",
-        "effect_scheme": "Effect Scheme"
+        "effect_scheme": "Effect Scheme",
+        "prop": "Style"
       },
       "home_build_data": {
         "cover_image": "Scheme Cover",

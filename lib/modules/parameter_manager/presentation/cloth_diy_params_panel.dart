@@ -1,9 +1,11 @@
 
+import "package:cached_network_image/cached_network_image.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/model/cloth_diy.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/cloth_diy_handler.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/common.dart";
 import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
@@ -127,6 +129,8 @@ class ClothDiyParamsPanel extends StatelessWidget{
 
     final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
     final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
+    final Map<int, int>? props = config.let((c) => handler.getProps(c, clothParamsList));
+
     return Column(
       spacing: listSpacing,
       children: [
@@ -158,6 +162,64 @@ class ClothDiyParamsPanel extends StatelessWidget{
                   AppText(trText((effectScheme.name).toString(), category: "effect_scheme")),
                 ],
               ),
+
+            if(props != null && props.isNotEmpty)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.prop")),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: AppSuperTooltip(
+                      content: IntrinsicWidth(
+                        child: IntrinsicHeight(
+                          child: Column(
+                            spacing: listSpacing,
+                            children: [
+                              for(final (int index, MapEntry<int, int> prop) in props.entries.indexed)
+                                ClothPropText(
+                                  propBackground: CachedNetworkImageProvider(
+                                    config?.getImageUrl(config?.networkImage?.clothProp, prop.key) ?? "",
+                                    cacheKey: "cloth_type_${prop.key}",
+                                  ),
+                                  propText: trText(prop.key.toString(), category: "cloth_prop"),
+                                  propScore: prop.value.toString(),
+                                  propLevel: [
+                                    ClothPropLevel.SS,
+                                    ClothPropLevel.S,
+                                    ClothPropLevel.A,
+                                    ClothPropLevel.B,
+                                    ClothPropLevel.C,
+                                    ClothPropLevel.D,
+                                  ][index],
+                                )
+                            ],
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        spacing: bigPadding,
+                        children: [
+                          ClothPropText(
+                            propBackground: CachedNetworkImageProvider(
+                              config?.getImageUrl(config?.networkImage?.clothProp, props.keys.first) ?? "",
+                              cacheKey: "cloth_type_${props.keys.first}",
+                            ),
+                            propText: trText(props.keys.first.toString(), category: "cloth_prop"),
+                            propScore: props.values.first.toString(),
+                            propLevel: ClothPropLevel.SS,
+                          ),
+
+                          AppButton.smallIcon(
+                            child: AppIcon("view"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
           ].map((TableRow tableRow) => TableRow(
             children: tableRow.children.map((child) => Padding(
               padding: const EdgeInsets.all(smallPadding),

@@ -120,8 +120,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<int, Nuan5ClothProp> dco_decode_Map_i_32_nuan_5_cloth_prop_None(
+    dynamic raw,
+  );
+
+  @protected
   Map<int, Nuan5ClothSpecialPatternDyeArea>
   dco_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(dynamic raw);
+
+  @protected
+  Map<int, Nuan5ClothTag> dco_decode_Map_i_32_nuan_5_cloth_tag_None(
+    dynamic raw,
+  );
 
   @protected
   Map<int, Nuan5DiyColorSwatch>
@@ -589,8 +599,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5ClothProp)> dco_decode_list_record_i_32_nuan_5_cloth_prop(
+    dynamic raw,
+  );
+
+  @protected
   List<(int, Nuan5ClothSpecialPatternDyeArea)>
   dco_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    dynamic raw,
+  );
+
+  @protected
+  List<(int, Nuan5ClothTag)> dco_decode_list_record_i_32_nuan_5_cloth_tag(
     dynamic raw,
   );
 
@@ -719,8 +739,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5ClothOutfit dco_decode_nuan_5_cloth_outfit(dynamic raw);
 
   @protected
+  Nuan5ClothProp dco_decode_nuan_5_cloth_prop(dynamic raw);
+
+  @protected
   Nuan5ClothSpecialPatternDyeArea
   dco_decode_nuan_5_cloth_special_pattern_dye_area(dynamic raw);
+
+  @protected
+  Nuan5ClothTag dco_decode_nuan_5_cloth_tag(dynamic raw);
 
   @protected
   Nuan5Config dco_decode_nuan_5_config(dynamic raw);
@@ -950,8 +976,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5ClothProp) dco_decode_record_i_32_nuan_5_cloth_prop(dynamic raw);
+
+  @protected
   (int, Nuan5ClothSpecialPatternDyeArea)
   dco_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area(dynamic raw);
+
+  @protected
+  (int, Nuan5ClothTag) dco_decode_record_i_32_nuan_5_cloth_tag(dynamic raw);
 
   @protected
   (int, Nuan5DiyColorSwatch) dco_decode_record_i_32_nuan_5_diy_color_swatch(
@@ -1183,8 +1215,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<int, Nuan5ClothProp> sse_decode_Map_i_32_nuan_5_cloth_prop_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Map<int, Nuan5ClothSpecialPatternDyeArea>
   sse_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<int, Nuan5ClothTag> sse_decode_Map_i_32_nuan_5_cloth_tag_None(
     SseDeserializer deserializer,
   );
 
@@ -1774,8 +1816,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5ClothProp)> sse_decode_list_record_i_32_nuan_5_cloth_prop(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(int, Nuan5ClothSpecialPatternDyeArea)>
   sse_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(int, Nuan5ClothTag)> sse_decode_list_record_i_32_nuan_5_cloth_tag(
     SseDeserializer deserializer,
   );
 
@@ -1932,10 +1984,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5ClothOutfit sse_decode_nuan_5_cloth_outfit(SseDeserializer deserializer);
 
   @protected
+  Nuan5ClothProp sse_decode_nuan_5_cloth_prop(SseDeserializer deserializer);
+
+  @protected
   Nuan5ClothSpecialPatternDyeArea
   sse_decode_nuan_5_cloth_special_pattern_dye_area(
     SseDeserializer deserializer,
   );
+
+  @protected
+  Nuan5ClothTag sse_decode_nuan_5_cloth_tag(SseDeserializer deserializer);
 
   @protected
   Nuan5Config sse_decode_nuan_5_config(SseDeserializer deserializer);
@@ -2233,8 +2291,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5ClothProp) sse_decode_record_i_32_nuan_5_cloth_prop(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (int, Nuan5ClothSpecialPatternDyeArea)
   sse_decode_record_i_32_nuan_5_cloth_special_pattern_dye_area(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (int, Nuan5ClothTag) sse_decode_record_i_32_nuan_5_cloth_tag(
     SseDeserializer deserializer,
   );
 
@@ -2526,8 +2594,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_prop_None(
+    Map<int, Nuan5ClothProp> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(
     Map<int, Nuan5ClothSpecialPatternDyeArea> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_cloth_tag_None(
+    Map<int, Nuan5ClothTag> self,
     SseSerializer serializer,
   );
 
@@ -3261,8 +3341,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_prop(
+    List<(int, Nuan5ClothProp)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     List<(int, Nuan5ClothSpecialPatternDyeArea)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_i_32_nuan_5_cloth_tag(
+    List<(int, Nuan5ClothTag)> self,
     SseSerializer serializer,
   );
 
@@ -3462,8 +3554,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_nuan_5_cloth_prop(
+    Nuan5ClothProp self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_nuan_5_cloth_special_pattern_dye_area(
     Nuan5ClothSpecialPatternDyeArea self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_cloth_tag(
+    Nuan5ClothTag self,
     SseSerializer serializer,
   );
 
@@ -3843,8 +3947,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_i_32_nuan_5_cloth_prop(
+    (int, Nuan5ClothProp) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_record_i_32_nuan_5_cloth_special_pattern_dye_area(
     (int, Nuan5ClothSpecialPatternDyeArea) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_cloth_tag(
+    (int, Nuan5ClothTag) self,
     SseSerializer serializer,
   );
 
