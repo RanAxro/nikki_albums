@@ -532,6 +532,8 @@ class ClothDetailPanel extends StatelessWidget{
         final int? outfit = handler.getClothOutfit(config, clothParams.cloth);
         final int? patternMode = config.let<int?>((c) => handler.getDisplayPatternMode(c, clothParams.cloth.id, clothParams.patternMode));
         final DyeCondition? condition = config == null ? null : handler.getClothDyeCondition(config!, clothParams);
+        final List<int>? props = config?.nikkiClothInfo[clothParams.cloth.id]?.props;
+        final List<int>? tags = config?.nikkiClothInfo[clothParams.cloth.id]?.tags;
 
         final Widget clothBaseInfoPanel = Table(
           border: TableBorder.all(
@@ -613,6 +615,59 @@ class ClothDetailPanel extends StatelessWidget{
                   ),
                 ],
               ),
+
+            /// 风格
+            if(props != null && props.isNotEmpty)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.prop")),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      spacing: listSpacing,
+                      children: [
+                        for(final (int id, int score) in props.indexed)
+                          ClothPropText(
+                            propBackground: CachedNetworkImageProvider(
+                              config?.getImageUrl(config?.networkImage?.clothProp, id) ?? "",
+                              cacheKey: "cloth_type_$id",
+                            ),
+                            propText: trText(id.toString(), category: "cloth_prop"),
+                            propScore: score.toString(),
+                            height: 20,
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+            if(tags != null && tags.isNotEmpty)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.tag")),
+
+                  Wrap(
+                    children: tags.map((int id){
+                      final Nuan5ClothTag? info = config?.clothTag[id];
+                      if(info == null){
+                        return null;
+                      }
+
+                      return ClothTagText(
+                        tagBackground: CachedNetworkImageProvider(
+                          config?.getImageUrl(config?.networkImage?.clothTag, info.backgroundId) ?? "",
+                          cacheKey: "cloth_tag_${info.backgroundId}",
+                        ),
+                        tagText: trText(id.toString(), category: "cloth_tag"),
+                        tagColor: info.rgba,
+                      );
+                    }).nonNulls.toList(),
+                  ),
+                ],
+              ),
+
           ].map((TableRow tableRow) => TableRow(
             children: tableRow.children.map((Widget widget){
               return Padding(
