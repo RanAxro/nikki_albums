@@ -130,6 +130,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
     final DyeCondition? condition = config == null ? null : handler.getDyeCondition(config!, clothDiyParams.clothes);
     final EffectScheme? effectScheme = handler.getEffectScheme(clothParamsList);
     final Map<int, int>? props = config.let((c) => handler.getProps(c, clothParamsList));
+    final Map<int, Nuan5ClothTag>? tags = config.let((c) => handler.getTags(c, clothParamsList));
 
     return Column(
       spacing: listSpacing,
@@ -216,6 +217,27 @@ class ClothDiyParamsPanel extends StatelessWidget{
                         ],
                       ),
                     ),
+                  ),
+                ],
+              ),
+
+            if(tags != null && tags.isNotEmpty)
+              TableRow(
+                children: [
+                  AppText(trText("cloth_diy_data.tag")),
+
+                  Wrap(
+                    children: [
+                      for(final MapEntry<int, Nuan5ClothTag> entry in tags.entries)
+                        ClothTagText(
+                          tagBackground: CachedNetworkImageProvider(
+                            config?.getImageUrl(config?.networkImage?.clothTag, entry.value.backgroundId) ?? "",
+                            cacheKey: "cloth_tag_${entry.value.backgroundId}",
+                          ),
+                          tagText: trText(entry.key.toString(), category: "cloth_tag"),
+                          tagColor: entry.value.rgba,
+                        ),
+                    ],
                   ),
                 ],
               ),

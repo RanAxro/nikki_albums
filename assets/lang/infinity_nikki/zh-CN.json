@@ -236,7 +236,8 @@
         "condition": "染色条件",
         "effect": "特效",
         "effect_scheme": "特效方案",
-        "prop": "风格"
+        "prop": "风格",
+        "tag": "服饰标签"
       },
       "home_build_data": {
         "cover_image": "方案封面",

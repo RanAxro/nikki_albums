@@ -57,6 +57,28 @@ class ClothDiyHandler{
     return Map.fromEntries(sortedEntries.reversed);
   }
 
+  Map<int, Nuan5ClothTag> getTags(Nuan5Config config, List<ClothParams> cloth){
+    final Map<int, int> tags = config.clothTag.map((id, info) => MapEntry(id, 0));
+
+    for(final ClothParams clothParams in cloth){
+      final Nuan5NikkiClothInfo? info = config.nikkiClothInfo[clothParams.cloth.id];
+      if(info == null){
+        continue;
+      }
+
+      for(final int tag in info.tags){
+        if(tags.containsKey(tag)){
+          tags[tag] = tags[tag]! + 1;
+        }
+      }
+    }
+
+    final List<MapEntry<int, int>> sortedEntries = tags.entries
+      .where((entry) => entry.value != 0)
+      .toList()..sort((a, b) => a.value.compareTo(b.value));
+    return Map.fromEntries(sortedEntries.reversed.map((entry) => MapEntry(entry.key, config.clothTag[entry.key]!)));
+  }
+
   List<ClothParams> getSortedCloth(List<ClothParams> cloth, [List<int> basis = defaultSortingBasis]){
     final List<ClothParams?> res = List.filled(basis.length, null);
 

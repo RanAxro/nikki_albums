@@ -208,7 +208,8 @@
         "condition": "Dyeing Conditions",
         "effect": "Effect",
         "effect_scheme": "Effect Scheme",
-        "prop": "Style"
+        "prop": "Style",
+        "tag": "Label"
       },
       "home_build_data": {
         "cover_image": "Scheme Cover",
