@@ -59,21 +59,21 @@ Join our group to share usage tips with fellow players, report encountered issue
 ***
 
 # Changelog
-## v3.010
-### New Features
-1. Added search function in Parameter Manager; searchable targets include names, tags, clothing names, suit names, lighting presets and filters.
-2. Auto strip plain text and irrelevant symbols when pasting or manually inputting share codes.
-3. New feature to generate QR codes for outfit sharing codes.
-4. Outfit code history records are sorted in reverse chronological order (newest first).
-5. Support custom storage path for parameter data files.
+## v3.011
+- Features
+  1. Added a search function to the Parameter Manager, supporting searches by name, tag, clothing name, suit name, light and filter
+  2. Automatically remove extra text and irrelevant symbols from share codes during pasting or manual entry
+  3. Added the feature to generate QR codes for LookBook Codes
+  4. Sort LookBook Code history records in reverse chronological order
+  5. Support custom storage paths for parameter data
 
-### Performance & Optimizations
-1. Overall UI optimization.
+- Performance & Optimization
+  1. Optimized the UI
 
-### Bug Fixes
-1. Fixed abnormal color display issues on the dye palette under certain scenarios.
-2. Fixed incorrect display of texture names.
-3. Fixed wrong rendering of base color parameters for texture drawing.
+- Bug Fixes
+  1. Fixed the bug causing incorrect display of the color palette in certain scenarios
+  2. Fixed the bug of wrong texture name display
+  3. Fixed the bug with incorrect display of the base color parameter for texture rendering
 
 
 ***

@@ -1,19 +1,19 @@
 const config = {
-	"v3.010.05": {
-		"releaseDate": "2026-7-28",
+	"v3.011": {
+		"releaseDate": "2026-8-8",
 		"description": {
-			"de": "1. Bug behoben, bei dem die Typen der Inselvorlage und Gruppenvorlage bei den Heimvorlagen falsch angezeigt wurden",
-			"en": "1. Fix the bug where the island scheme and group scheme types for the home scheme display incorrectly",
-			"es": "1. Corregido el error de visualización errónea de los tipos de esquema de isla y esquema grupal en los códigos de hogar",
-			"fr": "1. Correction du bug d'affichage erroné des types de schéma d'île et de schéma de groupe pour les codes de résidence",
-			"id": "1. Memperbaiki bug jenis skema pulau dan skema grup pada kode rumah tampil dengan salah",
-			"it": "1. Risolto il bug di visualizzazione errata dei tipi di schema isola e schema gruppo relativi ai codici della casa",
-			"ja": "1. ハウスコードの島プラン、グループプランの種類表示が異常な不具合を修正",
-			"ko": "1. 하우스 코드의 섬 설계 및 그룹 설계 타입 표시 오류 버그 수정",
-			"pt": "1. Corrigido o bug de exibição incorreta dos tipos de esquema de ilha e esquema de grupo nos códigos de lar",
-			"th": "1. แก้ไขบั๊กประเภทแผนเกาะและแผนกลุ่มของโค้ดบ้านแสดงผลผิด",
-			"zh": "1. 修复家园码的岛屿方案与组合方案类型显示错误的bug",
-			"tw": "1. 修復家園碼的島嶼方案與組合方案類型顯示異常之錯誤"
+			"de": "- Funktionen\n  1. Im Outfit-Code-Panel werden Stilpunkte und Tags aller Kleidungsstücke zusammengefasst\n  2. Im Outfit-Code-Panel werden Evolutions- und Erneuerungsparameter der Kleidung angezeigt\n  3. Im Outfit-Code-Panel wird der Kleidungsschnitt eingeblendet\n  4. Im Outfit-Code-Panel wird die Kategorie jedes Kleidungsstücks angezeigt\n  5. Suche nach Outfit-Codes anhand von Kleidungsstilen und Tags möglich\n  6. Suchhinweise hinzugefügt\n  7. Die Suche nach Lichtern und Filtern in zwei separate Optionen aufgeteilt\n  8. Suche von Freigabecodes nach Pinyin oder Pinyin-Anfangsbuchstaben unterstützt\n\n- Leistung & Optimierung\n  1. UI des Outfit-Code-Bereichs optimiert\n\n- Fehlerbehebungen\n  1. Bug behoben, bei dem der Schieberegler nicht angezeigt wurde, wenn Kameraparameterwerte den gültigen Bereich überschreiten\n  2. Problem der fehlenden Kaskadenlöschung im ScreenShot-Album behoben",
+			"en": "- Features\n  1. The LookBook Code panel adds statistics for style scores and tags of all clothing items\n  2. The LookBook Code panel adds display for clothing evolution/refresh parameters\n  3. The LookBook Code panel adds display for clothing silhouettes\n  4. The LookBook Code panel adds display for the category of each clothing item\n  5. Support searching LookBook Codes by clothing style and clothing tags\n  6. Added search prompt hints\n  7. Split light and filter search into two independent options\n  8. Support searching share codes by text pinyin or pinyin initial abbreviations\n\n- Performance & Optimization\n  1. Optimized the LookBook Code UI\n\n- Bug Fixes\n  1. Fixed the bug where the slider would not show when camera parameter values overflow\n  2. Fixed the issue that the ScreenShot album lacked cascading deletion capability",
+			"es": "- Funciones\n  1. El panel de códigos de combinación incorpora estadísticas de puntuaciones de estilo y etiquetas de todas las prendas\n  2. El panel de códigos de combinación muestra los parámetros de evolución y renovación de las prendas\n  3. El panel de códigos de combinación muestra el patronaje de cada prenda\n  4. El panel de códigos de combinación muestra la categoría de cada prenda\n  5. Búsqueda de códigos de combinación por estilo y etiquetas de prenda habilitada\n  6. Se añadieron pistas de búsqueda\n  7. La búsqueda de luces y filtros se divide en dos opciones independientes\n  8. Búsqueda de códigos compartidos por pinyin o iniciales de pinyin disponible\n\n- Rendimiento y optimizaciones\n  1. Interfaz de códigos de combinación optimizada\n\n- Corrección de errores\n  1. Solucionado el fallo por el que el deslizador no aparecía al exceder los valores límite de parámetros de cámara\n  2. Arreglado el problema de eliminación en cascada ausente en el álbum ScreenShot",
+			"fr": "- Fonctionnalités\n  1. Le panneau des codes de tenue affiche le score de style et les tags de tous les vêtements de manière statistique\n  2. Le panneau des codes de tenue affiche les paramètres d'évolution et de renouvellement des vêtements\n  3. Le panneau des codes de tenue affiche la coupe des vêtements\n  4. Le panneau des codes de tenue affiche la catégorie de chaque vêtement\n  5. Recherche de codes de tenue selon le style et les tags des vêtements prise en charge\n  6. Indices de recherche ajoutés\n  7. La recherche lumière et filtre est scindée en deux options indépendantes\n  8. Recherche des codes de partage par pinyin ou initiales de pinyin disponible\n\n- Performances et optimisations\n  1. Optimisation de l'interface des codes de tenue\n\n- Corrections de bugs\n  1. Correction du bug où le curseur n'apparaissait pas en cas de dépassement des valeurs des paramètres caméra\n  2. Résolu le manque de suppression en cascade dans l'album ScreenShot",
+			"id": "- Fitur\n  1. Panel kode paduan menampilkan skor gaya dan label seluruh pakaian secara statistik\n  2. Panel kode paduan menampilkan parameter evolusi dan pembaruan pakaian\n  3. Panel kode paduan menampilkan potongan model pakaian\n  4. Panel kode paduan menampilkan tipe tiap item pakaian\n  5. Mendukung pencarian kode paduan berdasarkan gaya dan label pakaian\n  6. Menambahkan petunjuk pencarian\n  7. Pencarian lampu dan filter dipisah jadi dua opsi mandiri\n  8. Mendukung pencarian kode berbagi lewat pinyin atau inisial pinyin teks\n\n- Performa & Optimasi\n  1. Optimasi antarmuka kode paduan\n\n- Perbaikan Bug\n  1. Memperbaiki bug slider tidak muncul saat nilai parameter kamera melebihi batas\n  2. Memperbaiki masalah album ScreenShot yang tidak bisa hapus data secara berantai",
+			"it": "- Funzionalità\n  1. Nel pannello dei codici abbinamento vengono statisticati punteggi stile e tag di tutti i capi\n  2. Nel pannello dei codici abbinamento vengono mostrati i parametri di evoluzione e rinnovo degli abiti\n  3. Nel pannello dei codici abbinamento viene visualizzata la modellatura di ogni indumento\n  4. Nel pannello dei codici abbinamento viene indicata la tipologia di ogni capo\n  5. Ricerca codici abbinamento per stile e tag dell'abbigliamento supportata\n  6. Aggiunti suggerimenti di ricerca\n  7. La ricerca luci/filtri divisa in due opzioni separate\n  8. Ricerca codici condivisi tramite pinyin o iniziali pinyin supportata\n\n- Prestazioni e ottimizzazioni\n  1. Ottimizzata l'interfaccia dei codici abbinamento\n\n- Correzione bug\n  1. Risolto il bug per cui il cursore non appariva in caso di superamento soglia dei parametri fotocamera\n  2. Risolta l'assenza di eliminazione a cascata nell'album ScreenShot",
+			"ja": "- 機能\n  1.コーデコードパネルに全衣装のスタイルスコアとタグの集計表示を追加\n  2.コーデコードパネルに衣装の進化・リフレッシュパラメータ表示機能を追加\n  3.コーデコードパネルに衣装シルエットの表示項目を追加\n  4.コーデコードパネルに各衣装の種別表示を追加\n  5.衣装スタイル・タグによるコーデコード検索に対応\n  6.検索補助ワードを追加\n  7.ライト検索とフィルター検索を独立した2項目に分割\n  8.ピンインまたはピンイン頭文字で共有コードを検索可能に\n\n- パフォーマンス・最適化\n  1.コーデコード画面UIを調整最適化\n\n- 不具合修正\n  1.カメラパラメータの数値が上限超過時、スライダーが非表示となる不具合を修正\n  2.ScreenShotアルバムの連鎖削除機能が動作しない問題を改善",
+			"ko": "- 기능\n  1. 코디 코드 패널에 모든 의상의 스타일 점수와 태그 통계 기능 추가\n  2. 코디 코드 패널에 의상 진화·리뉴얼 매개변수 표시 기능 추가\n  3. 코디 코드 패널에 의상 실루엣 정보 표시 추가\n  4. 코디 코드 패널에 개별 의상 종류 표시 추가\n  5. 의상 스타일·태그 기준 코디 코드 검색 지원\n  6. 검색 힌트 문구 추가\n  7. 조명 검색과 필터 검색을 독립된 두 옵션으로 분리\n  8. 텍스트 병음 혹은 병음 초성 약어로 공유 코드 검색 지원\n\n- 성능 및 최적화\n  1. 코디 코드 UI 최적화\n\n- 버그 수정\n  1. 카메라 매개변수 값 오버플로우 시 슬라이더가 보이지 않는 버그 수정\n  2. ScreenShot 앨범 연쇄 삭제 기능 누락 문제 수정",
+			"pt": "- Funcionalidades\n  1. Painel de códigos de combinação exibe estatísticas de pontuação de estilo e tags de todas as roupas\n  2. Painel de códigos de combinação mostra parâmetros de evolução e renovação das peças\n  3. Painel de códigos de combinação exibe o corte de cada peça de roupa\n  4. Painel de códigos de combinação exibe a categoria de cada item vestuário\n  5. Busca de códigos de combinação por estilo e tags da roupa suportada\n  6. Dicas de busca adicionadas\n  7. Busca de luzes e filtros separada em duas opções independentes\n  8. Busca de códigos compartilhados por pinyin ou iniciais de pinyin habilitada\n\n- Desempenho e otimizações\n  1. Interface dos códigos de combinação otimizada\n\n- Correção de bugs\n  1. Corrigido bug do controle deslizante oculto com valores de parâmetro da câmera acima do limite\n  2. Resolvida falta de exclusão em cascata no álbum ScreenShot",
+			"th": "- ความสามารถ\n  1. แผงโค้ดชุดแต่งตัวแสดงสถิติคะแนนสไตล์และแท็กของเครื่องแต่งกายทุกชิ้น\n  2. แผงโค้ดชุดแต่งตัวแสดงพารามิเตอร์วิวัฒนาการและรีเฟรชชุด\n  3. แผงโค้ดชุดแต่งตัวแสดงรูปทรงตัดเย็บของชุด\n  4. แผงโค้ดชุดแต่งตัวแสดงประเภทของเครื่องแต่งกายแต่ละชิ้น\n  5. รองรับค้นหาโค้ดชุดตามสไตล์และแท็กชุด\n  6. เพิ่มข้อความแนะนำการค้นหา\n  7. แยกตัวเลือกค้นหาแสงและฟิลเตอร์ออกเป็น 2 รายการแยกกัน\n  8. ค้นหาโค้ดแชร์ด้วยพินอินหรือตัวย่อตัวแรกพินอินได้\n\n- ประสิทธิภาพและการปรับปรุง\n  1. ปรับปรุงอินเทอร์เฟซของโค้ดชุดแต่งตัว\n\n- แก้ไขบั๊ก\n  1. แก้ไขบั๊กแถบเลื่อนไม่แสดงเมื่อค่าพารามิเตอร์กล้องเกินขอบเขต\n  2. แก้ไขปัญหาอัลบั้ม ScreenShot ไม่สามารถลบข้อมูลแบบต่อเนื่องได้",
+			"zh": "- 功能\n  1. 搭配码面板新增统计所有服饰的风格分数与标签\n  2. 搭配码面板新增显示服装的进化/焕新参数\n  3. 搭配码面板新增显示衣服版型\n  4. 搭配码面板新增显示每个服饰的类型\n  5. 支持按服饰风格和服饰标签搜索搭配码\n  6. 添加搜索提示词\n  7. 拆分灯光/滤镜搜索为两个独立选项\n  8. 支持按文字拼音或拼音首字母缩写搜索分享码\n- 性能与优化\n  1. 优化搭配码ui\n- bug修复\n  1. 修复相机参数的参数值溢出时，拖动条不显示的bug\n  2. 修复ScreenShot相册没有连锁删除的问题",
+			"tw": "- 功能\n  1. 搭配碼面板新增統計所有服飾的風格分數與標籤\n  2. 搭配碼面板新增顯示服裝進化煥新參數\n  3. 搭配碼面板新增顯示衣服版型資訊\n  4. 搭配碼面板新增顯示各件服飾的分類類型\n  5. 可依服飾風格、標籤篩選搜尋搭配碼\n  6. 新增搜尋提示用字\n  7. 將燈光、濾鏡搜尋拆成兩個獨立選項\n  8. 支援以漢語拼音或是拼音首碼縮寫搜尋分享碼\n\n- 效能與最佳化\n  1. 調整最佳化搭配碼操作介面\n\n- 問題修復\n  1. 修正相機參數數值超出上限時滑桿無法顯示的錯誤\n  2. 修復ScreenShot相簿缺少連動刪除機制的問題"
 
 			// "de": "",
 			// "en": "",
@@ -40,6 +40,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.011/Nikki%20Albums-v3.011-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.011/Nikki%20Albums-v3.011-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.010.05": {
+		"releaseDate": "2026-7-28",
+		"description": {
+			"de": "1. Bug behoben, bei dem die Typen der Inselvorlage und Gruppenvorlage bei den Heimvorlagen falsch angezeigt wurden",
+			"en": "1. Fix the bug where the island scheme and group scheme types for the home scheme display incorrectly",
+			"es": "1. Corregido el error de visualización errónea de los tipos de esquema de isla y esquema grupal en los códigos de hogar",
+			"fr": "1. Correction du bug d'affichage erroné des types de schéma d'île et de schéma de groupe pour les codes de résidence",
+			"id": "1. Memperbaiki bug jenis skema pulau dan skema grup pada kode rumah tampil dengan salah",
+			"it": "1. Risolto il bug di visualizzazione errata dei tipi di schema isola e schema gruppo relativi ai codici della casa",
+			"ja": "1. ハウスコードの島プラン、グループプランの種類表示が異常な不具合を修正",
+			"ko": "1. 하우스 코드의 섬 설계 및 그룹 설계 타입 표시 오류 버그 수정",
+			"pt": "1. Corrigido o bug de exibição incorreta dos tipos de esquema de ilha e esquema de grupo nos códigos de lar",
+			"th": "1. แก้ไขบั๊กประเภทแผนเกาะและแผนกลุ่มของโค้ดบ้านแสดงผลผิด",
+			"zh": "1. 修复家园码的岛屿方案与组合方案类型显示错误的bug",
+			"tw": "1. 修復家園碼的島嶼方案與組合方案類型顯示異常之錯誤"
 		},
 		"downloads": [
 			{
