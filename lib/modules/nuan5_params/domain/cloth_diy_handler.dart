@@ -80,7 +80,7 @@ class ClothDiyHandler{
   }
 
   List<ClothParams> getSortedCloth(List<ClothParams> cloth, [List<int> basis = defaultSortingBasis]){
-    final List<ClothParams?> res = List.filled(basis.length, null);
+    final List<ClothParams?> res = List.generate(basis.length, (_) => null);
 
     for(final ClothParams clothParams in cloth){
       final int index = basis.indexOf(clothParams.cloth.clothType);
