@@ -620,6 +620,7 @@ class _TagSelectorState extends State<TagSelector>{
                                 child: Row(
                                   spacing: listSpacing,
                                   children: [
+                                    /// tick
                                     SizedBox(
                                       width: smallButtonSize,
                                       height: smallButtonSize,
@@ -627,8 +628,43 @@ class _TagSelectorState extends State<TagSelector>{
                                         child: AppIcon("tick", opacity: tagState[tag.uuid] ?? false ? 1 : 0),
                                       ),
                                     ),
+
+                                    /// icon
                                     AppIcon("tag_fill", color: Color(tag.color)),
+
+                                    /// name
                                     Expanded(child: AppText(tag.name)),
+
+                                    /// edit
+                                    AppButton.smallIcon(
+                                      toolTip: "parameter_manager.edit",
+                                      onClick: () async{
+                                        showAppDialog(
+                                          context: context,
+                                          builder: (BuildContext context){
+                                            return AppDialog(
+                                              maxWidth: 400,
+                                              maxHeight: 240,
+                                              useIntrinsicHeight: false,
+                                              child: TagCreator(
+                                                initName: tag.name,
+                                                initColor: Color(tag.color),
+                                                onCancel: Navigator.of(context).pop,
+                                                onFinish: (String name, int color) async{
+                                                  Navigator.of(context).pop();
+
+                                                  widget.manager.setTag(tag.uuid, name: name, color: color);
+                                                  await widget.manager.save();
+                                                },
+                                              ),
+                                            );
+                                          }
+                                        );
+                                      },
+                                      child: AppIcon("edit"),
+                                    ),
+
+                                    /// delete
                                     AppButton.smallIcon(
                                       toolTip: "parameter_manager.delete",
                                       onClick: () async{
@@ -684,11 +720,15 @@ class _TagSelectorState extends State<TagSelector>{
 
 
 class TagCreator extends StatefulWidget{
+  final String? initName;
+  final Color? initColor;
   final void Function()? onCancel;
   final void Function(String name, int color)? onFinish;
 
   const TagCreator({
     super.key,
+    this.initName,
+    this.initColor,
     this.onCancel,
     this.onFinish,
   });
@@ -719,8 +759,15 @@ class _TagCreatorState extends State<TagCreator>{
     Colors.blueGrey,
   ];
 
-  final TextEditingController nameTextController = TextEditingController();
-  final ValueNotifier<Color> color = ValueNotifier(Colors.orange);
+  late final TextEditingController nameTextController;
+  late final ValueNotifier<Color> color;
+
+  @override
+  void initState(){
+    super.initState();
+    nameTextController = TextEditingController(text: widget.initName);
+    color = ValueNotifier(widget.initColor ?? Colors.orange);
+  }
 
   @override
   void dispose(){

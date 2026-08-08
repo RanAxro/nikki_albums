@@ -237,8 +237,8 @@ class ParamBoxManager extends ChangeNotifier{
   void setTag(String uuid, {String? name, int? color}){
     final ParamTag? tag = getTag(uuid);
 
-    if(name != null) tag?.name != null;
-    if(color != null) tag?.color != null;
+    if(name != null) tag?.name = name;
+    if(color != null) tag?.color = color;
 
     notifyListeners();
   }
