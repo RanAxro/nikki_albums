@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/utils/extension.dart";
+
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -794,6 +796,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                               return WaterfallGallery(
                                 items: items,
                                 manager: manager,
+                                config: config,
                                 onDelete: onDeleteItem,
                                 onEdit: onEditItem,
                               );
@@ -816,6 +819,7 @@ class _ParameterManagerState extends State<ParameterManager>{
 class WaterfallGallery extends StatelessWidget{
   final List<ParamItem> items;
   final ParamBoxManager manager;
+  final Nuan5Config? config;
   final void Function(String uuid)? onDelete;
   final void Function(String uuid)? onEdit;
 
@@ -823,6 +827,7 @@ class WaterfallGallery extends StatelessWidget{
     super.key,
     required this.items,
     required this.manager,
+    this.config,
     this.onDelete,
     this.onEdit,
   });
@@ -998,6 +1003,51 @@ class WaterfallGallery extends StatelessWidget{
     }
   }
 
+  Widget? buildExtraInfo(ParamItem item){
+    if(item.type != ParamType.cloth || config == null){
+      return null;
+    }
+
+    const ClothDiyHandler handler = ClothDiyHandler();
+    return RFutureBuilder(
+      future: tryDeClothDiyShareCode(item.value),
+      waitingBuilder: (BuildContext context, Widget child) => block0,
+      builder: (BuildContext context, ClothDiyParams? params){
+        if(params == null){
+          return block0;
+        }
+
+        final int? majorProp = config.let((c) => handler.getProps(c, params.clothes))?.keys.firstOrNull;
+        final MapEntry<int, Nuan5ClothTag>? majorTag = config.let((c) => handler.getTags(c, params.clothes))?.entries.first;
+        return Row(
+          spacing: listSpacing,
+          children: [
+            if(majorProp != null)
+              ClothPropText(
+                propBackground: CachedNetworkImageProvider(
+                  config?.getImageUrl(config?.networkImage?.clothProp, majorProp) ?? "",
+                  cacheKey: "cloth_prop_$majorProp",
+                ),
+                propText: trText(majorProp.toString(), category: "cloth_prop"),
+                height: 22,
+              ),
+
+            if(majorTag != null)
+              ClothTagText(
+                tagBackground: CachedNetworkImageProvider(
+                  config?.getImageUrl(config?.networkImage?.clothTag, majorTag.value.backgroundId) ?? "",
+                  cacheKey: "cloth_tag_${majorTag.value.backgroundId}",
+                ),
+                tagText: trText(majorTag.key.toString(), category: "cloth_tag"),
+                tagColor: majorTag.value.rgba,
+                height: 22,
+              ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context){
     return LayoutBuilder(
@@ -1037,14 +1087,20 @@ class WaterfallGallery extends StatelessWidget{
                         child: Column(
                           spacing: listSpacing,
                           children: [
+                            /// 名称
                             AppText(item.title ?? ""),
 
+                            /// 图片
                             if(item.image != null)
                               ClipRRect(
                                 borderRadius: BorderRadiusGeometry.circular(smallBorderRadius),
                                 child: Image(image: NonCacheFileImage(File(manager.getImagePath(item.image!)))),
                               ),
 
+                            /// extra
+                            ?buildExtraInfo(item),
+
+                            /// 标签
                             if(item.tag.isNotEmpty)
                               Builder(
                                 builder: (BuildContext context){
@@ -1082,6 +1138,7 @@ class WaterfallGallery extends StatelessWidget{
                                 },
                               ),
 
+                            /// 分享码
                             AppButton.smallText(
                               toolTip: "parameter_manager.click_to_copy",
                               colorRole: ColorRole.secondary,
