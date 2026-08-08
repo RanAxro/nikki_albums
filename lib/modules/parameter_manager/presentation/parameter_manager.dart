@@ -176,72 +176,115 @@ class _ParameterManagerState extends State<ParameterManager>{
             ),
 
             AppFloatingIndicatorButtonGroup(
-              child: Column(
+              child: Wrap(
                 children: [
                   AppSwitchButton(
+                    expand: false,
                     value: currentSearchConfig.searchName,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchName: value);
                     },
                     child: AppText.tr("parameter_manager.search_name"),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchTag,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchTag: value);
-                      searchTip.value = value ? SearchOption.tag : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.tag;
                     },
-                    child: AppText.tr("parameter_manager.search_tag"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchTag,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchTag: value);
+                        searchTip.value = value ? SearchOption.tag : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_tag"),
+                    ),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchClothesName,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchClothesName: value);
-                      searchTip.value = value ? SearchOption.clothesName : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.clothesName;
                     },
-                    child: AppText.tr("parameter_manager.search_clothes_name"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchClothesName,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchClothesName: value);
+                        searchTip.value = value ? SearchOption.clothesName : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_clothes_name"),
+                    ),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchOutfitName,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchOutfitName: value);
-                      searchTip.value = value ? SearchOption.outfitName : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.outfitName;
                     },
-                    child: AppText.tr("parameter_manager.search_outfit_name"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchOutfitName,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchOutfitName: value);
+                        searchTip.value = value ? SearchOption.outfitName : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_outfit_name"),
+                    ),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchClothMajorPropName,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchClothMajorPropName: value);
-                      searchTip.value = value ? SearchOption.clothPropName : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.clothPropName;
                     },
-                    child: AppText.tr("parameter_manager.search_cloth_major_prop_name"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchClothMajorPropName,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchClothMajorPropName: value);
+                        searchTip.value = value ? SearchOption.clothPropName : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_cloth_major_prop_name"),
+                    ),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchClothTagName,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchClothTagName: value);
-                      searchTip.value = value ? SearchOption.clothTagName : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.clothTagName;
                     },
-                    child: AppText.tr("parameter_manager.search_cloth_tag_name"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchClothTagName,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchClothTagName: value);
+                        searchTip.value = value ? SearchOption.clothTagName : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_cloth_tag_name"),
+                    ),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchLight,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchLight: value);
-                      searchTip.value = value ? SearchOption.light : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.light;
                     },
-                    child: AppText.tr("parameter_manager.search_light"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchLight,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchLight: value);
+                        searchTip.value = value ? SearchOption.light : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_light"),
+                    ),
                   ),
-                  AppSwitchButton(
-                    value: currentSearchConfig.searchFilter,
-                    onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchFilter: value);
-                      searchTip.value = value ? SearchOption.filter : null;
+                  GestureDetector(
+                    onSecondaryTap: (){
+                      searchTip.value = SearchOption.filter;
                     },
-                    child: AppText.tr("parameter_manager.search_filter"),
+                    child: AppSwitchButton(
+                      expand: false,
+                      value: currentSearchConfig.searchFilter,
+                      onChanged: (bool value){
+                        searchConfig.value = currentSearchConfig.copyWith(searchFilter: value);
+                        searchTip.value = value ? SearchOption.filter : null;
+                      },
+                      child: AppText.tr("parameter_manager.search_filter"),
+                    ),
                   ),
-                ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: child)).toList(),
+                ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: IntrinsicWidth(child: child))).toList(),
               ),
             ),
 
@@ -293,15 +336,9 @@ class _ParameterManagerState extends State<ParameterManager>{
           alignment: Alignment.topCenter,
           child: Padding(
             padding: const EdgeInsets.only(top: topBarHeight + smallPadding),
-            child: ValueListenableBuilder(
-              valueListenable: searchTip,
-              builder: (BuildContext context, SearchOption? option, Widget? child){
-                return AppDialog(
-                  maxWidth: 800,
-                  useIntrinsicHeight: option == null,
-                  child: child!,
-                );
-              },
+            child: AppDialog(
+              maxWidth: 800,
+              useIntrinsicHeight: false,
               child: child,
             ),
           ),

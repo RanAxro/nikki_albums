@@ -1865,7 +1865,7 @@ class _AppSwitchButtonState extends State<AppSwitchButton>{
       },
       child: widget.child == null ? switchWidget : Row(
         children: [
-          Expanded(child: widget.child!),
+          widget.expand ? Expanded(child: widget.child!) : widget.child!,
 
           switchWidget,
         ],
