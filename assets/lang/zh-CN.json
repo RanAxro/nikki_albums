@@ -229,7 +229,8 @@
     "search_outfit_name": "搜索套装名",
     "search_cloth_major_prop_name": "搜索服饰风格",
     "search_cloth_tag_name": "搜索服饰标签",
-    "search_light_or_filter": "搜索灯光/滤镜",
+    "search_light": "搜索灯光",
+    "search_filter": "搜索滤镜",
     "search_tip": {
       "tag": "标签",
       "clothesName": "衣服名",

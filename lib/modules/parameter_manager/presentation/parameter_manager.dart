@@ -226,12 +226,20 @@ class _ParameterManagerState extends State<ParameterManager>{
                     child: AppText.tr("parameter_manager.search_cloth_tag_name"),
                   ),
                   AppSwitchButton(
-                    value: currentSearchConfig.searchLightOrFilter,
+                    value: currentSearchConfig.searchLight,
                     onChanged: (bool value){
-                      searchConfig.value = currentSearchConfig.copyWith(searchLightOrFilter: value);
+                      searchConfig.value = currentSearchConfig.copyWith(searchLight: value);
                       searchTip.value = value ? SearchOption.light : null;
                     },
-                    child: AppText.tr("parameter_manager.search_light_or_filter"),
+                    child: AppText.tr("parameter_manager.search_light"),
+                  ),
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchFilter,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchFilter: value);
+                      searchTip.value = value ? SearchOption.filter : null;
+                    },
+                    child: AppText.tr("parameter_manager.search_filter"),
                   ),
                 ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: child)).toList(),
               ),
@@ -365,10 +373,9 @@ class _ParameterManagerState extends State<ParameterManager>{
           }
         }
       }
-      if(currentSearchConfig.searchLightOrFilter && item.type == ParamType.camera){
+      if(currentSearchConfig.searchLight && item.type == ParamType.camera){
         final CameraParams? params = await tryDeCameraParameter(item.value);
         final String? lightId = params?.light.whenOrNull(some: (id, strength) => id);
-        final String? filterId = params?.filter.whenOrNull(some: (id, strength) => id);
 
         final Nuan5Config? config = await GlobalNuan5Config.init();
         if(lightId != null && config != null){
@@ -383,6 +390,12 @@ class _ParameterManagerState extends State<ParameterManager>{
             }
           }
         }
+      }
+      if(currentSearchConfig.searchFilter && item.type == ParamType.camera){
+        final CameraParams? params = await tryDeCameraParameter(item.value);
+        final String? filterId = params?.filter.whenOrNull(some: (id, strength) => id);
+
+        final Nuan5Config? config = await GlobalNuan5Config.init();
         if(filterId != null && config != null){
           for(final MapEntry<int, Nuan5Filter> entry in config.filter.entries){
             if(filterId != entry.value.paramId && filterId != entry.value.stringId){

@@ -19,7 +19,8 @@ class SearchConfig{
     searchOutfitName: false,
     searchClothMajorPropName: false,
     searchClothTagName: false,
-    searchLightOrFilter: false,
+    searchLight: false,
+    searchFilter: false,
   );
 
   final String value;
@@ -29,7 +30,8 @@ class SearchConfig{
   final bool searchOutfitName;
   final bool searchClothMajorPropName;
   final bool searchClothTagName;
-  final bool searchLightOrFilter;
+  final bool searchLight;
+  final bool searchFilter;
 
   const SearchConfig({
     required this.value,
@@ -39,7 +41,8 @@ class SearchConfig{
     required this.searchOutfitName,
     required this.searchClothMajorPropName,
     required this.searchClothTagName,
-    required this.searchLightOrFilter,
+    required this.searchLight,
+    required this.searchFilter,
   });
 
   SearchConfig copyWith({
@@ -50,7 +53,8 @@ class SearchConfig{
     bool? searchOutfitName,
     bool? searchClothMajorPropName,
     bool? searchClothTagName,
-    bool? searchLightOrFilter,
+    bool? searchLight,
+    bool? searchFilter,
   }){
     return SearchConfig(
       value: value ?? this.value,
@@ -60,7 +64,8 @@ class SearchConfig{
       searchOutfitName: searchOutfitName ?? this.searchOutfitName,
       searchClothMajorPropName: searchClothMajorPropName ?? this.searchClothMajorPropName,
       searchClothTagName: searchClothTagName ?? this.searchClothTagName,
-      searchLightOrFilter: searchLightOrFilter ?? this.searchLightOrFilter,
+      searchLight: searchLight ?? this.searchLight,
+      searchFilter: searchFilter ?? this.searchFilter,
     );
   }
 
@@ -75,7 +80,8 @@ class SearchConfig{
     other.searchOutfitName == searchOutfitName &&
     other.searchClothMajorPropName == searchClothMajorPropName &&
     other.searchClothTagName == searchClothTagName &&
-    other.searchLightOrFilter == searchLightOrFilter;
+    other.searchLight == searchLight &&
+    other.searchFilter == searchFilter;
 
   @override
   int get hashCode => Object.hash(
@@ -86,6 +92,7 @@ class SearchConfig{
     searchOutfitName,
     searchClothMajorPropName,
     searchClothTagName,
-    searchLightOrFilter,
+    searchLight,
+    searchFilter,
   );
 }

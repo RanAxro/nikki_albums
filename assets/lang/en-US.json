@@ -234,7 +234,8 @@
     "search_outfit_name": "Search Outfit Name",
     "search_cloth_major_prop_name": "Search Clothes Style",
     "search_cloth_tag_name": "Search Clothes Label",
-    "search_light_or_filter": "Search Light/Filter",
+    "search_light": "Search Light",
+    "search_filter": "Search Filter",
     "search_tip": {
       "tag": "Tag",
       "clothesName": "Clothes Name",
