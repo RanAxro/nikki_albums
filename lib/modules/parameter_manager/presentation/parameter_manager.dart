@@ -1,4 +1,6 @@
 
+import "dart:collection";
+
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -1182,46 +1184,24 @@ class _SearchTipGridState extends State<SearchTipGrid>{
     return res;
   }
 
-  List<Widget> buildOutfitItem(){
-    final List<Widget> res = [];
-    if(widget.config == null){
-      return res;
-    }
-    final Nuan5Config config = widget.config!;
-
-    for(final int outfit in config.clothOutfit.keys){
-      final String name = trText(outfit.toString(), category: "cloth_outfit");
-      if(_match(name, widget.keyword)){
-        res.add(AppFloatingIndicatorButtonTarget(
-          child: AppButton.smallText(
-            onClick: (){
-              widget.onSelect?.call(name);
-            },
-            child: Tooltip(
-              message: name,
-              child: AppText(name, overflow: TextOverflow.ellipsis),
-            ),
-          ),
-        ));
-      }
-    }
-
-    return res;
-  }
-
   List<Widget> buildClothItem(){
-    final List<Widget> res = [];
+    final SplayTreeMap<String, Widget> res = SplayTreeMap();
     if(widget.config == null){
-      return res;
+      return [];
     }
     final Nuan5Config config = widget.config!;
 
     for(final int cloth in config.nikkiClothInfo.keys){
-      final String name = trText(cloth.toString(), category: "cloth");
+      final String clothId = cloth.toString();
+      final String name = trText(clothId, category: "cloth");
+      if(name == clothId){
+        continue;
+      }
+
       if(_match(name, widget.keyword)){
         final int? clothType = config.cloth[cloth]?.clothType;
 
-        res.add(AppFloatingIndicatorButtonTarget(
+        res[_getSortableName(name)] = AppFloatingIndicatorButtonTarget(
           child: AppButton.smallText(
             onClick: (){
               widget.onSelect?.call(name);
@@ -1250,11 +1230,43 @@ class _SearchTipGridState extends State<SearchTipGrid>{
               ],
             ),
           ),
-        ));
+        );
       }
     }
 
-    return res;
+    return res.values.toList();
+  }
+
+  List<Widget> buildOutfitItem(){
+    final SplayTreeMap<String, Widget> res = SplayTreeMap();
+    if(widget.config == null){
+      return [];
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final int outfit in config.clothOutfit.keys){
+      final String outfitId = outfit.toString();
+      final String name = trText(outfitId, category: "cloth_outfit");
+      if(name == outfitId){
+        continue;
+      }
+
+      if(_match(name, widget.keyword)){
+        res[_getSortableName(name)] = AppFloatingIndicatorButtonTarget(
+          child: AppButton.smallText(
+            onClick: (){
+              widget.onSelect?.call(name);
+            },
+            child: Tooltip(
+              message: name,
+              child: AppText(name, overflow: TextOverflow.ellipsis),
+            ),
+          ),
+        );
+      }
+    }
+
+    return res.values.toList();
   }
 
   List<Widget> buildClothPropItem(){
@@ -1286,16 +1298,21 @@ class _SearchTipGridState extends State<SearchTipGrid>{
   }
 
   List<Widget> buildClothTagItem(){
-    final List<Widget> res = [];
+    final SplayTreeMap<String, Widget> res = SplayTreeMap();
     if(widget.config == null){
-      return res;
+      return [];
     }
     final Nuan5Config config = widget.config!;
 
     for(final MapEntry<int, Nuan5ClothTag> entry in config.clothTag.entries){
-      final String name = trText(entry.key.toString(), category: "cloth_tag");
+      final String clothTagId = entry.key.toString();
+      final String name = trText(clothTagId, category: "cloth_tag");
+      if(name == clothTagId){
+        continue;
+      }
+
       if(_match(name, widget.keyword)){
-        res.add(AppRawButton(
+        res[_getSortableName(name)] = AppRawButton(
           onClick: (){
             widget.onSelect?.call(name);
           },
@@ -1307,24 +1324,29 @@ class _SearchTipGridState extends State<SearchTipGrid>{
             tagText: name,
             tagColor: entry.value.rgba,
           ),
-        ));
+        );
       }
     }
 
-    return res;
+    return res.values.toList();
   }
 
   List<Widget> buildLightItem(){
-    final List<Widget> res = [];
+    final SplayTreeMap<String, Widget> res = SplayTreeMap();
     if(widget.config == null){
-      return res;
+      return [];
     }
     final Nuan5Config config = widget.config!;
 
     for(final int light in config.light.keys){
-      final String name = trText(light.toString(), category: "light");
+      final String lightId = light.toString();
+      final String name = trText(lightId, category: "light");
+      if(name == lightId){
+        continue;
+      }
+
       if(_match(name, widget.keyword)){
-        res.add(AppFloatingIndicatorButtonTarget(
+        res[_getSortableName(name)] = AppFloatingIndicatorButtonTarget(
           child: AppButton(
             borderRadius: smallBorderRadius,
             padding: const EdgeInsets.all(smallPadding),
@@ -1350,24 +1372,29 @@ class _SearchTipGridState extends State<SearchTipGrid>{
               ],
             ),
           ),
-        ));
+        );
       }
     }
 
-    return res;
+    return res.values.toList();
   }
 
   List<Widget> buildFilterItem(){
-    final List<Widget> res = [];
+    final SplayTreeMap<String, Widget> res = SplayTreeMap();
     if(widget.config == null){
-      return res;
+      return [];
     }
     final Nuan5Config config = widget.config!;
 
     for(final int filter in config.filter.keys){
-      final String name = trText(filter.toString(), category: "filter");
+      final String filterId = filter.toString();
+      final String name = trText(filterId, category: "filter");
+      if(name == filterId){
+        continue;
+      }
+
       if(_match(name, widget.keyword)){
-        res.add(AppFloatingIndicatorButtonTarget(
+        res[_getSortableName(name)] = AppFloatingIndicatorButtonTarget(
           child: AppButton(
             borderRadius: smallBorderRadius,
             padding: const EdgeInsets.all(smallPadding),
@@ -1393,11 +1420,11 @@ class _SearchTipGridState extends State<SearchTipGrid>{
               ],
             ),
           ),
-        ));
+        );
       }
     }
 
-    return res;
+    return res.values.toList();
   }
 
   @override
@@ -1445,6 +1472,14 @@ class _SearchTipGridState extends State<SearchTipGrid>{
 
 final Map<String, String> _matchPinYinCache = {};
 final Map<String, String> _matchShortPinYinCache = {};
+String _getSortableName(String name){
+  try{
+    final String sourcePinyin = _matchPinYinCache[name] ??= PinyinHelper.getPinyin(name, separator: "", format: PinyinFormat.WITHOUT_TONE);
+    return sourcePinyin;
+  }catch(e){
+    return name;
+  }
+}
 bool _match(String source, String target){
   try{
     final String sourcePinyin = _matchPinYinCache[source] ??= PinyinHelper.getPinyin(source, separator: "", format: PinyinFormat.WITHOUT_TONE);
