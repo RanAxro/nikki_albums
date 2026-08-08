@@ -272,12 +272,15 @@ class _ParameterManagerState extends State<ParameterManager>{
           currentSearchConfig.searchClothTagName
         ) && item.type == ParamType.cloth){
         final ClothDiyParams? params = await tryDeClothDiyShareCode(item.value);
+
         for(final ClothParams clothParams in params?.clothes ?? const []){
           if(currentSearchConfig.searchClothesName && trText(clothParams.cloth.id.toString(), category: "cloth").contains(currentSearchConfig.value)){
             res.add(item);
             continue itemLoop;
           }
-          if(currentSearchConfig.searchOutfitName && trText(clothParams.cloth.outfit.toString(), category: "cloth_outfit").contains(currentSearchConfig.value)){
+
+          final int? outfit = handler.getClothOutfit(config, clothParams.cloth);
+          if(outfit!= null && currentSearchConfig.searchOutfitName && trText(outfit.toString(), category: "cloth_outfit").contains(currentSearchConfig.value)){
             res.add(item);
             continue itemLoop;
           }
