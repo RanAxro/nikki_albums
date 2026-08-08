@@ -1,7 +1,4 @@
 
-import "package:cached_network_image/cached_network_image.dart";
-import "package:nikki_albums/modules/nuan5_params/presentation/common.dart";
-
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -15,6 +12,7 @@ import "../domain/param_import.dart";
 import "../domain/param_item_edit_controller.dart";
 import "../domain/code_parser.dart";
 import "../domain/param_box_manager.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/common.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/cloth_diy_handler.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
@@ -40,6 +38,8 @@ import "package:easy_localization/easy_localization.dart";
 import "package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart";
 import "package:path/path.dart" as p;
 import "package:qr_flutter/qr_flutter.dart";
+import "package:cached_network_image/cached_network_image.dart";
+import "package:lpinyin/lpinyin.dart";
 
 
 final ContentItem item = ContentItem(
@@ -364,7 +364,7 @@ class _ParameterManagerState extends State<ParameterManager>{
         res.add(item);
         continue itemLoop;
       }
-      if(currentSearchConfig.searchName && item.title?.contains(currentSearchConfig.value) == true){
+      if(currentSearchConfig.searchName && item.title != null && _match(item.title!, currentSearchConfig.value)){
         res.add(item);
         continue itemLoop;
       }
@@ -380,13 +380,13 @@ class _ParameterManagerState extends State<ParameterManager>{
         final ClothDiyParams? params = await tryDeClothDiyShareCode(item.value);
 
         for(final ClothParams clothParams in params?.clothes ?? const []){
-          if(currentSearchConfig.searchClothesName && trText(clothParams.cloth.id.toString(), category: "cloth").contains(currentSearchConfig.value)){
+          if(currentSearchConfig.searchClothesName && _match(trText(clothParams.cloth.id.toString(), category: "cloth"), currentSearchConfig.value)){
             res.add(item);
             continue itemLoop;
           }
 
           final int? outfit = handler.getClothOutfit(config, clothParams.cloth);
-          if(outfit!= null && currentSearchConfig.searchOutfitName && trText(outfit.toString(), category: "cloth_outfit").contains(currentSearchConfig.value)){
+          if(outfit!= null && currentSearchConfig.searchOutfitName && _match(trText(outfit.toString(), category: "cloth_outfit"), currentSearchConfig.value)){
             res.add(item);
             continue itemLoop;
           }
@@ -394,7 +394,7 @@ class _ParameterManagerState extends State<ParameterManager>{
 
         if(config != null && params != null){
           final int? majorProp = handler.getProps(config!, params.clothes).keys.firstOrNull;
-          if(majorProp != null && currentSearchConfig.searchClothMajorPropName && trText(majorProp.toString(), category: "cloth_prop").contains(currentSearchConfig.value)){
+          if(majorProp != null && currentSearchConfig.searchClothMajorPropName && _match(trText(majorProp.toString(), category: "cloth_prop"), currentSearchConfig.value)){
             res.add(item);
             continue itemLoop;
           }
@@ -402,7 +402,7 @@ class _ParameterManagerState extends State<ParameterManager>{
           final Iterable<int> tags = handler.getTags(config!, params.clothes).keys;
           if(currentSearchConfig.searchClothTagName){
             for(final int tag in tags){
-              if(trText(tag.toString(), category: "cloth_tag").contains(currentSearchConfig.value)){
+              if(_match(trText(tag.toString(), category: "cloth_tag"), currentSearchConfig.value)){
                 res.add(item);
                 continue itemLoop;
               }
@@ -421,7 +421,7 @@ class _ParameterManagerState extends State<ParameterManager>{
               continue;
             }
 
-            if(trText(entry.key.toString(), category: "light").contains(currentSearchConfig.value)){
+            if(_match(trText(entry.key.toString(), category: "light"), currentSearchConfig.value)){
               res.add(item);
               continue itemLoop;
             }
@@ -439,7 +439,7 @@ class _ParameterManagerState extends State<ParameterManager>{
               continue;
             }
 
-            if(trText(entry.key.toString(), category: "filter").contains(currentSearchConfig.value)){
+            if(_match(trText(entry.key.toString(), category: "filter"), currentSearchConfig.value)){
               res.add(item);
               continue itemLoop;
             }
@@ -1443,6 +1443,24 @@ class _SearchTipGridState extends State<SearchTipGrid>{
 }
 
 
+final Map<String, String> _matchPinYinCache = {};
+final Map<String, String> _matchShortPinYinCache = {};
 bool _match(String source, String target){
+  try{
+    final String sourcePinyin = _matchPinYinCache[source] ??= PinyinHelper.getPinyin(source, separator: "", format: PinyinFormat.WITHOUT_TONE);
+    if(sourcePinyin.contains(target.replaceAll(" ", ""))){
+      return true;
+    }
+  }catch(e){
+    // 拼音匹配失败
+  }
+  try{
+    final String sourcePinyin = _matchShortPinYinCache[source] ??= PinyinHelper.getShortPinyin(source);
+    if(sourcePinyin.contains(target.replaceAll(" ", ""))){
+      return true;
+    }
+  }catch(e){
+    // 拼音首字母匹配失败
+  }
   return source.contains(target);
 }

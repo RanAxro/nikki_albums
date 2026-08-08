@@ -57,6 +57,7 @@ dependencies:
   msgpack_dart: ^1.0.1
   cached_network_image: ^3.4.1
   zxing2: ^0.2.4
+  lpinyin: ^2.0.3
 
   # algorithm
   archive: ^4.0.7
