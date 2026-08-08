@@ -2,6 +2,7 @@ import "package:nikki_albums/modules/hot_update/domain/check_app_hot_updates.dar
 import "package:nikki_albums/modules/initial_startup/presentation/initial_startup_setting.dart";
 
 import "package:nikki_albums/modules/app_base/app_registry.dart";
+import "package:nikki_albums/modules/setting/version_information/presentation/update_dialog.dart";
 import "package:nikki_albums/utils/system/windows.dart";
 import "package:nikki_albums/modules/setting/version_information/domain/check_app_updates.dart";
 import "ui_android.dart";
@@ -68,9 +69,11 @@ class _FrameState extends State<Frame> {
 
         await Future.delayed(const Duration(seconds: 1));
 
-        setState(() {
-          _appRebuildKey++;
-        });
+        if(!isUpdate){
+          setState((){
+            _appRebuildKey++;
+          });
+        }
       }
     } catch (e) {
       if (context.mounted) {

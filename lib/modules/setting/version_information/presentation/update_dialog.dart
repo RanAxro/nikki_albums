@@ -13,6 +13,8 @@ import "dart:io";
 import "package:easy_localization/easy_localization.dart";
 
 
+bool isUpdate = false;
+
 class UpdateDialog extends StatelessWidget{
   final UpdateInfo info;
   final ValueNotifier<double?> downloadProgress = ValueNotifier<double?>(null);
@@ -95,6 +97,8 @@ class UpdateDialog extends StatelessWidget{
                   );
                   return;
                 }
+
+                isUpdate = true;
 
                 showProgressBar(context: context, valueListenable: downloadProgress);
 
