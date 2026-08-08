@@ -706,7 +706,13 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInGame: r"\X6Game\ScreenShot",
     locateInBackup: null,
     locateInRecycleBin: r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\ScreenShot",
-    chainDeletion: {},
+    chainDeletion: {
+      AlbumType.NikkiPhotos_HighQuality: false,
+      AlbumType.NikkiPhotos_LowQuality: true,
+      AlbumType.MagazinePhotos: false,
+      AlbumType.ClockInPhoto: false,
+      AlbumType.Collage_CollagePhoto: false,
+    },
     supportedPlatforms: inWindows | inMacOS,
   ),
   AlbumType.ExternalVideo: AlbumsInfoItem(
