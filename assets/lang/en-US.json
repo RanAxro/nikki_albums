@@ -235,6 +235,15 @@
     "search_cloth_major_prop_name": "Search Clothes Style",
     "search_cloth_tag_name": "Search Clothes Label",
     "search_light_or_filter": "Search Light/Filter",
+    "search_tip": {
+      "tag": "Tag",
+      "clothesName": "Clothes Name",
+      "outfitName": "Outfit Name",
+      "clothPropName": "Style",
+      "clothTagName": "Label",
+      "light": "Light",
+      "filter": "Filter"
+    },
     "add": "Add",
     "more_method": "Other Import Methods",
     "camera_params_import_input": "Manually adjust the parameters",

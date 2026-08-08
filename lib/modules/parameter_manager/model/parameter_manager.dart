@@ -1,4 +1,15 @@
 
+enum SearchOption{
+  name,
+  tag,
+  clothesName,
+  outfitName,
+  clothPropName,
+  clothTagName,
+  light,
+  filter,
+}
+
 class SearchConfig{
   static const SearchConfig defaultConfig = SearchConfig(
     value: "",

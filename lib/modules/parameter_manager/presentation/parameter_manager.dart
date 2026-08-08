@@ -1,4 +1,7 @@
 
+import "package:cached_network_image/cached_network_image.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/common.dart";
+
 import "camera_params_edit_panel.dart";
 import "cloth_diy_params_panel.dart";
 import "rich_building_params_panel.dart";
@@ -115,6 +118,8 @@ class _ParameterManagerState extends State<ParameterManager>{
   late final ParamBoxManager manager;
   Nuan5Config? config;
   final ClothDiyHandler handler = ClothDiyHandler();
+  final ValueNotifier<SearchOption?> searchTip = ValueNotifier(SearchOption.tag);
+  final ValueNotifier<int> updateTextField = ValueNotifier(0);
 
   Future<void> init() async{
     manager = widget.initManager;
@@ -155,13 +160,19 @@ class _ParameterManagerState extends State<ParameterManager>{
         return Column(
           spacing: listSpacing,
           children: [
-            AppTextFiled(
-              autofocus: true,
-              initText: currentSearchConfig.value,
-              onChanged: (String value){
-                searchConfig.value = currentSearchConfig.copyWith(value: value);
+            ValueListenableBuilder(
+              valueListenable: updateTextField,
+              builder: (BuildContext context, int k, Widget? child){
+                return AppTextFiled(
+                  key: ValueKey(k),
+                  autofocus: true,
+                  initText: currentSearchConfig.value,
+                  onChanged: (String value){
+                    searchConfig.value = currentSearchConfig.copyWith(value: value);
+                  },
+                  labelText: "parameter_manager.search",
+                );
               },
-              labelText: "parameter_manager.search",
             ),
 
             AppFloatingIndicatorButtonGroup(
@@ -178,6 +189,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                     value: currentSearchConfig.searchTag,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchTag: value);
+                      searchTip.value = value ? SearchOption.tag : null;
                     },
                     child: AppText.tr("parameter_manager.search_tag"),
                   ),
@@ -185,6 +197,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                     value: currentSearchConfig.searchClothesName,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchClothesName: value);
+                      searchTip.value = value ? SearchOption.clothesName : null;
                     },
                     child: AppText.tr("parameter_manager.search_clothes_name"),
                   ),
@@ -192,6 +205,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                     value: currentSearchConfig.searchOutfitName,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchOutfitName: value);
+                      searchTip.value = value ? SearchOption.outfitName : null;
                     },
                     child: AppText.tr("parameter_manager.search_outfit_name"),
                   ),
@@ -199,6 +213,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                     value: currentSearchConfig.searchClothMajorPropName,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchClothMajorPropName: value);
+                      searchTip.value = value ? SearchOption.clothPropName : null;
                     },
                     child: AppText.tr("parameter_manager.search_cloth_major_prop_name"),
                   ),
@@ -206,6 +221,7 @@ class _ParameterManagerState extends State<ParameterManager>{
                     value: currentSearchConfig.searchClothTagName,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchClothTagName: value);
+                      searchTip.value = value ? SearchOption.clothTagName : null;
                     },
                     child: AppText.tr("parameter_manager.search_cloth_tag_name"),
                   ),
@@ -213,11 +229,49 @@ class _ParameterManagerState extends State<ParameterManager>{
                     value: currentSearchConfig.searchLightOrFilter,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchLightOrFilter: value);
+                      searchTip.value = value ? SearchOption.light : null;
                     },
                     child: AppText.tr("parameter_manager.search_light_or_filter"),
                   ),
                 ].map((Widget child) => AppFloatingIndicatorButtonTarget(child: child)).toList(),
               ),
+            ),
+
+            ValueListenableBuilder(
+              valueListenable: searchTip,
+              builder: (BuildContext context, SearchOption? option, Widget? child){
+                if(option == null){
+                  return block0;
+                }
+
+                return Expanded(
+                  child: Column(
+                    spacing: listSpacing,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: smallPadding),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: AppText.tr("parameter_manager.search_tip.${option.name}", fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      Expanded(
+                        child: SearchTipGrid(
+                          manager: manager,
+                          config: config,
+                          option: option,
+                          keyword: searchConfig.value.value,
+                          onSelect: (String value){
+                            searchConfig.value = currentSearchConfig.copyWith(value: value);
+                            updateTextField.value++;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
         );
@@ -231,8 +285,15 @@ class _ParameterManagerState extends State<ParameterManager>{
           alignment: Alignment.topCenter,
           child: Padding(
             padding: const EdgeInsets.only(top: topBarHeight + smallPadding),
-            child: AppDialog(
-              maxWidth: 800,
+            child: ValueListenableBuilder(
+              valueListenable: searchTip,
+              builder: (BuildContext context, SearchOption? option, Widget? child){
+                return AppDialog(
+                  maxWidth: 800,
+                  useIntrinsicHeight: option == null,
+                  child: child!,
+                );
+              },
               child: child,
             ),
           ),
@@ -1016,4 +1077,322 @@ class WaterfallGallery extends StatelessWidget{
       },
     );
   }
+}
+
+
+class SearchTipGrid extends StatefulWidget{
+  final ParamBoxManager manager;
+  final Nuan5Config? config;
+  final SearchOption option;
+  final String keyword;
+  final void Function(String)? onSelect;
+
+  const SearchTipGrid({
+    super.key,
+    required this.manager,
+    this.config,
+    required this.option,
+    this.keyword = "",
+    this.onSelect,
+  });
+
+  @override
+  State<SearchTipGrid> createState() => _SearchTipGridState();
+}
+class _SearchTipGridState extends State<SearchTipGrid>{
+
+  List<Widget> buildTagItem(){
+    final List<Widget> res = [];
+
+    for(final ParamTag tag in widget.manager.tagList){
+      if(_match(tag.name, widget.keyword)){
+        res.add(AppRawButton(
+          onClick: (){
+            widget.onSelect?.call(tag.name);
+          },
+          child: IntrinsicWidth(
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: smallPadding),
+              constraints: BoxConstraints(
+                minWidth: smallButtonSize,
+              ),
+              height: smallButtonContentSize + smallPadding,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(0.5 * (smallButtonContentSize + smallPadding)),
+                color: Color(tag.color),
+              ),
+              child: AppText(tag.name, color: getContrastColor(Color(tag.color))),
+            ),
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  List<Widget> buildOutfitItem(){
+    final List<Widget> res = [];
+    if(widget.config == null){
+      return res;
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final int outfit in config.clothOutfit.keys){
+      final String name = trText(outfit.toString(), category: "cloth_outfit");
+      if(_match(name, widget.keyword)){
+        res.add(AppFloatingIndicatorButtonTarget(
+          child: AppButton.smallText(
+            onClick: (){
+              widget.onSelect?.call(name);
+            },
+            child: Tooltip(
+              message: name,
+              child: AppText(name, overflow: TextOverflow.ellipsis),
+            ),
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  List<Widget> buildClothItem(){
+    final List<Widget> res = [];
+    if(widget.config == null){
+      return res;
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final int cloth in config.nikkiClothInfo.keys){
+      final String name = trText(cloth.toString(), category: "cloth");
+      if(_match(name, widget.keyword)){
+        final int? clothType = config.cloth[cloth]?.clothType;
+
+        res.add(AppFloatingIndicatorButtonTarget(
+          child: AppButton.smallText(
+            onClick: (){
+              widget.onSelect?.call(name);
+            },
+            child: Row(
+              spacing: listSpacing,
+              children: [
+                if(clothType != null)
+                  Tooltip(
+                    message: trText(clothType.toString(), category: "cloth_type"),
+                    child: AppCachedNetworkImage(
+                      imageUrl: config.getImageUrl(config.networkImage?.clothType, clothType) ?? "",
+                      cacheKey: "cloth_type_$clothType",
+                      width: 24,
+                      height: 24,
+                      color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onDisabledColor,
+                    ),
+                  ),
+
+                Expanded(
+                  child: Tooltip(
+                    message: name,
+                    child: AppText(name, overflow: TextOverflow.ellipsis),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  List<Widget> buildClothPropItem(){
+    final List<Widget> res = [];
+    if(widget.config == null){
+      return res;
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final int prop in config.clothProp.keys){
+      final String name = trText(prop.toString(), category: "cloth_prop");
+      if(_match(name, widget.keyword)){
+        res.add(AppRawButton(
+          onClick: (){
+            widget.onSelect?.call(name);
+          },
+          child: ClothPropText(
+            propBackground: CachedNetworkImageProvider(
+              config.getImageUrl(config.networkImage?.clothProp, prop) ?? "",
+              cacheKey: "cloth_prop_$prop",
+            ),
+            propText: name,
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  List<Widget> buildClothTagItem(){
+    final List<Widget> res = [];
+    if(widget.config == null){
+      return res;
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final MapEntry<int, Nuan5ClothTag> entry in config.clothTag.entries){
+      final String name = trText(entry.key.toString(), category: "cloth_tag");
+      if(_match(name, widget.keyword)){
+        res.add(AppRawButton(
+          onClick: (){
+            widget.onSelect?.call(name);
+          },
+          child: ClothTagText(
+            tagBackground: CachedNetworkImageProvider(
+              config.getImageUrl(config.networkImage?.clothTag, entry.value.backgroundId) ?? "",
+              cacheKey: "cloth_tag_${entry.value.backgroundId}",
+            ),
+            tagText: name,
+            tagColor: entry.value.rgba,
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  List<Widget> buildLightItem(){
+    final List<Widget> res = [];
+    if(widget.config == null){
+      return res;
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final int light in config.light.keys){
+      final String name = trText(light.toString(), category: "light");
+      if(_match(name, widget.keyword)){
+        res.add(AppFloatingIndicatorButtonTarget(
+          child: AppButton(
+            borderRadius: smallBorderRadius,
+            padding: const EdgeInsets.all(smallPadding),
+            height: 120,
+            onClick: (){
+              widget.onSelect?.call(name);
+            },
+            child: Column(
+              spacing: listSpacing,
+              children: [
+                AppCachedNetworkImage(
+                  imageUrl: config.getImageUrl(config.networkImage?.light, light) ?? "",
+                  cacheKey: light.toString(),
+                  width: 80,
+                ),
+
+                Expanded(
+                  child: Tooltip(
+                    message: name,
+                    child: AppText(name, overflow: TextOverflow.ellipsis),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  List<Widget> buildFilterItem(){
+    final List<Widget> res = [];
+    if(widget.config == null){
+      return res;
+    }
+    final Nuan5Config config = widget.config!;
+
+    for(final int filter in config.filter.keys){
+      final String name = trText(filter.toString(), category: "filter");
+      if(_match(name, widget.keyword)){
+        res.add(AppFloatingIndicatorButtonTarget(
+          child: AppButton(
+            borderRadius: smallBorderRadius,
+            padding: const EdgeInsets.all(smallPadding),
+            height: 120,
+            onClick: (){
+              widget.onSelect?.call(name);
+            },
+            child: Column(
+              spacing: listSpacing,
+              children: [
+                AppCachedNetworkImage(
+                  imageUrl: config.getImageUrl(config.networkImage?.filter, filter) ?? "",
+                  cacheKey: filter.toString(),
+                  width: 80,
+                ),
+
+                Expanded(
+                  child: Tooltip(
+                    message: name,
+                    child: AppText(name, overflow: TextOverflow.ellipsis),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+      }
+    }
+
+    return res;
+  }
+
+  @override
+  Widget build(BuildContext context){
+    final double maxCrossAxisExtent = switch(widget.option){
+      SearchOption.name => throw UnimplementedError(),
+      SearchOption.tag => 150,
+      SearchOption.clothesName => 150,
+      SearchOption.outfitName => 150,
+      SearchOption.clothPropName => 130,
+      SearchOption.clothTagName => 100,
+      SearchOption.light => 130,
+      SearchOption.filter => 130,
+    };
+
+    final List<Widget> children = switch(widget.option){
+      SearchOption.name => throw UnimplementedError(),
+      SearchOption.tag => buildTagItem(),
+      SearchOption.clothesName => buildClothItem(),
+      SearchOption.outfitName => buildOutfitItem(),
+      SearchOption.clothPropName => buildClothPropItem(),
+      SearchOption.clothTagName => buildClothTagItem(),
+      SearchOption.light => buildLightItem(),
+      SearchOption.filter => buildFilterItem(),
+    };
+
+    return AppFloatingIndicatorButtonGroup(
+      child: SmoothPointerScroll(
+        builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+          return AlignedGridView.extent(
+            controller: controller,
+            physics: physics,
+            maxCrossAxisExtent: maxCrossAxisExtent,
+            itemCount: children.length,
+            itemBuilder: (context, index){
+              return children[index];
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+bool _match(String source, String target){
+  return source.contains(target);
 }

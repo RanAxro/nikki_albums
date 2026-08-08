@@ -204,7 +204,7 @@ class ClothDiyParamsPanel extends StatelessWidget{
                           ClothPropText(
                             propBackground: CachedNetworkImageProvider(
                               config?.getImageUrl(config?.networkImage?.clothProp, props.keys.first) ?? "",
-                              cacheKey: "cloth_type_${props.keys.first}",
+                              cacheKey: "cloth_prop_${props.keys.first}",
                             ),
                             propText: trText(props.keys.first.toString(), category: "cloth_prop"),
                             propScore: props.values.first.toString(),
