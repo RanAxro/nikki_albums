@@ -232,6 +232,8 @@
     "search_tag": "Search Tag",
     "search_clothes_name": "Search Clothes Name",
     "search_outfit_name": "Search Outfit Name",
+    "search_cloth_major_prop_name": "Search Clothes Style",
+    "search_cloth_tag_name": "Search Clothes Label",
     "search_light_or_filter": "Search Light/Filter",
     "add": "Add",
     "more_method": "Other Import Methods",

@@ -13,6 +13,7 @@ import "../domain/param_item_edit_controller.dart";
 import "../domain/code_parser.dart";
 import "../domain/param_box_manager.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/cloth_diy_handler.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
@@ -112,12 +113,20 @@ class _ParameterManagerState extends State<ParameterManager>{
   late final PageController controller;
   bool? isInit;
   late final ParamBoxManager manager;
+  Nuan5Config? config;
+  final ClothDiyHandler handler = ClothDiyHandler();
 
   Future<void> init() async{
     manager = widget.initManager;
 
     if(!manager.isInit){
       await manager.init();
+    }
+
+    try{
+      config = await GlobalNuan5Config.init();
+    }catch(e){
+      config = null;
     }
 
     setState((){
@@ -187,6 +196,20 @@ class _ParameterManagerState extends State<ParameterManager>{
                     child: AppText.tr("parameter_manager.search_outfit_name"),
                   ),
                   AppSwitchButton(
+                    value: currentSearchConfig.searchClothMajorPropName,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchClothMajorPropName: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_cloth_major_prop_name"),
+                  ),
+                  AppSwitchButton(
+                    value: currentSearchConfig.searchClothTagName,
+                    onChanged: (bool value){
+                      searchConfig.value = currentSearchConfig.copyWith(searchClothTagName: value);
+                    },
+                    child: AppText.tr("parameter_manager.search_cloth_tag_name"),
+                  ),
+                  AppSwitchButton(
                     value: currentSearchConfig.searchLightOrFilter,
                     onChanged: (bool value){
                       searchConfig.value = currentSearchConfig.copyWith(searchLightOrFilter: value);
@@ -243,7 +266,11 @@ class _ParameterManagerState extends State<ParameterManager>{
         res.add(item);
         continue itemLoop;
       }
-      if((currentSearchConfig.searchClothesName || currentSearchConfig.searchOutfitName) && item.type == ParamType.cloth){
+      if((currentSearchConfig.searchClothesName ||
+          currentSearchConfig.searchOutfitName ||
+          currentSearchConfig.searchClothMajorPropName ||
+          currentSearchConfig.searchClothTagName
+        ) && item.type == ParamType.cloth){
         final ClothDiyParams? params = await tryDeClothDiyShareCode(item.value);
         for(final ClothParams clothParams in params?.clothes ?? const []){
           if(currentSearchConfig.searchClothesName && trText(clothParams.cloth.id.toString(), category: "cloth").contains(currentSearchConfig.value)){
@@ -253,6 +280,24 @@ class _ParameterManagerState extends State<ParameterManager>{
           if(currentSearchConfig.searchOutfitName && trText(clothParams.cloth.outfit.toString(), category: "cloth_outfit").contains(currentSearchConfig.value)){
             res.add(item);
             continue itemLoop;
+          }
+        }
+
+        if(config != null && params != null){
+          final int? majorProp = handler.getProps(config!, params.clothes).keys.firstOrNull;
+          if(majorProp != null && currentSearchConfig.searchClothMajorPropName && trText(majorProp.toString(), category: "cloth_prop").contains(currentSearchConfig.value)){
+            res.add(item);
+            continue itemLoop;
+          }
+
+          final Iterable<int> tags = handler.getTags(config!, params.clothes).keys;
+          if(currentSearchConfig.searchClothTagName){
+            for(final int tag in tags){
+              if(trText(tag.toString(), category: "cloth_tag").contains(currentSearchConfig.value)){
+                res.add(item);
+                continue itemLoop;
+              }
+            }
           }
         }
       }

@@ -6,6 +6,8 @@ class SearchConfig{
     searchTag: true,
     searchClothesName: false,
     searchOutfitName: false,
+    searchClothMajorPropName: false,
+    searchClothTagName: false,
     searchLightOrFilter: false,
   );
 
@@ -14,6 +16,8 @@ class SearchConfig{
   final bool searchTag;
   final bool searchClothesName;
   final bool searchOutfitName;
+  final bool searchClothMajorPropName;
+  final bool searchClothTagName;
   final bool searchLightOrFilter;
 
   const SearchConfig({
@@ -22,6 +26,8 @@ class SearchConfig{
     required this.searchTag,
     required this.searchClothesName,
     required this.searchOutfitName,
+    required this.searchClothMajorPropName,
+    required this.searchClothTagName,
     required this.searchLightOrFilter,
   });
 
@@ -31,6 +37,8 @@ class SearchConfig{
     bool? searchTag,
     bool? searchClothesName,
     bool? searchOutfitName,
+    bool? searchClothMajorPropName,
+    bool? searchClothTagName,
     bool? searchLightOrFilter,
   }){
     return SearchConfig(
@@ -39,6 +47,8 @@ class SearchConfig{
       searchTag: searchTag ?? this.searchTag,
       searchClothesName: searchClothesName ?? this.searchClothesName,
       searchOutfitName: searchOutfitName ?? this.searchOutfitName,
+      searchClothMajorPropName: searchClothMajorPropName ?? this.searchClothMajorPropName,
+      searchClothTagName: searchClothTagName ?? this.searchClothTagName,
       searchLightOrFilter: searchLightOrFilter ?? this.searchLightOrFilter,
     );
   }
@@ -52,8 +62,19 @@ class SearchConfig{
     other.searchTag == searchTag &&
     other.searchClothesName == searchClothesName &&
     other.searchOutfitName == searchOutfitName &&
+    other.searchClothMajorPropName == searchClothMajorPropName &&
+    other.searchClothTagName == searchClothTagName &&
     other.searchLightOrFilter == searchLightOrFilter;
 
   @override
-  int get hashCode => Object.hash(value, searchName, searchTag, searchClothesName, searchOutfitName, searchLightOrFilter);
+  int get hashCode => Object.hash(
+    value,
+    searchName,
+    searchTag,
+    searchClothesName,
+    searchOutfitName,
+    searchClothMajorPropName,
+    searchClothTagName,
+    searchLightOrFilter,
+  );
 }
