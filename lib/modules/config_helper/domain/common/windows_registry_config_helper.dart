@@ -10,7 +10,7 @@ import "package:win32/win32.dart";
 import "package:win32_registry/win32_registry.dart";
 
 
-abstract final class WindowsRegistryConfigProcessor{
+abstract final class WindowsRegistryConfigHelper{
   static T? _read<T>(WindowsRegistryConfig config, T? Function(RegistryKey) reader){
     late final T? value;
     try{
@@ -40,28 +40,6 @@ abstract final class WindowsRegistryConfigProcessor{
     return value;
   }
 
-  static RegistryValue? withConfig(WindowsRegistryConfig config){
-    return _read(config, (key) => key.getValue(config.valueName));
-  }
-
-  static Object? withConfigAsObject(WindowsRegistryConfig config){
-    return _read(config, (key) => switch(config.valueType){
-      WindowsRegistryValueType.binary => key.getBinaryValue(config.valueName),
-      WindowsRegistryValueType.int => key.getIntValue(config.valueName),
-      WindowsRegistryValueType.string => key.getStringValue(config.valueName),
-      WindowsRegistryValueType.stringArray => key.getStringArrayValue(config.valueName),
-    });
-  }
-
-  static String? withConfigAsString(WindowsRegistryConfig config){
-    return _read(config, (key) => switch(config.valueType){
-      WindowsRegistryValueType.binary => key.getBinaryValue(config.valueName).let(utf8.decode),
-      WindowsRegistryValueType.int => key.getIntValue(config.valueName).toString(),
-      WindowsRegistryValueType.string => key.getStringValue(config.valueName),
-      WindowsRegistryValueType.stringArray => key.getStringArrayValue(config.valueName)?.firstOrNull,
-    });
-  }
-
   static RegistryHive _toRegistryHive(WindowsRegistryHive hive){
     return switch(hive){
       WindowsRegistryHive.classesRoot => RegistryHive.classesRoot,
@@ -71,5 +49,27 @@ abstract final class WindowsRegistryConfigProcessor{
       WindowsRegistryHive.performanceData => RegistryHive.performanceData,
       WindowsRegistryHive.currentConfig => RegistryHive.currentConfig,
     };
+  }
+
+  static RegistryValue? resolveByConfig(WindowsRegistryConfig config){
+    return _read(config, (key) => key.getValue(config.valueName));
+  }
+
+  static Object? resolveByConfigAsObject(WindowsRegistryConfig config){
+    return _read(config, (key) => switch(config.valueType){
+      WindowsRegistryValueType.binary => key.getBinaryValue(config.valueName),
+      WindowsRegistryValueType.int => key.getIntValue(config.valueName),
+      WindowsRegistryValueType.string => key.getStringValue(config.valueName),
+      WindowsRegistryValueType.stringArray => key.getStringArrayValue(config.valueName),
+    });
+  }
+
+  static String? resolveByConfigAsString(WindowsRegistryConfig config){
+    return _read(config, (key) => switch(config.valueType){
+      WindowsRegistryValueType.binary => key.getBinaryValue(config.valueName).let(utf8.decode),
+      WindowsRegistryValueType.int => key.getIntValue(config.valueName).toString(),
+      WindowsRegistryValueType.string => key.getStringValue(config.valueName),
+      WindowsRegistryValueType.stringArray => key.getStringArrayValue(config.valueName)?.firstOrNull,
+    });
   }
 }

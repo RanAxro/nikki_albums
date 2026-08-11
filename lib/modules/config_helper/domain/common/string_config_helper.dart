@@ -4,29 +4,29 @@ export "package:nikki_albums/src/rust/config/common/string_config.dart";
 import "package:nikki_albums/src/rust/config/common/string_config.dart";
 
 
-abstract final class StringConfigProcessor{
+abstract final class StringConfigHelper{
   static final RegExp _varReg = RegExp(r'\$([^$]*)\$');
   static final RegExp _groupReg = RegExp(r'\$(\d+)\$');
 
-  static String withConfig(StringConfig config, String raw, [Map<String, String>? varMap]){
-    return withProcess(config.process, raw, varMap);
+  static String resolveByConfig(String raw, StringConfig config, [Map<String, String>? varMap]){
+    return resolveByProcess(raw, config.process, varMap);
   }
 
-  static String withProcess(List<StringProcessConfig> process, String raw, [Map<String, String>? varMap]){
+  static String resolveByProcess(String raw, List<StringProcessConfig> process, [Map<String, String>? varMap]){
     String s = raw;
     for(final StringProcessConfig p in process){
       p.when(
         join: (StringJoinProcessConfig joinProcess){
-          s = withJoinProcess(joinProcess, s);
+          s = resolveByJoinProcess(s, joinProcess);
         },
         match: (StringMatchProcessConfig matchProcess){
-          s = withMatchProcess(matchProcess, s);
+          s = resolveByMatchProcess(s, matchProcess);
         },
         replace: (StringReplaceProcessConfig replaceProcess){
-          s = withReplaceProcess(replaceProcess, s);
+          s = resolveByReplaceProcess(s, replaceProcess);
         },
         replaceAll: (StringReplaceAllProcessConfig replaceAllProcess){
-          s = withReplaceAllProcess(replaceAllProcess, s);
+          s = resolveByReplaceAllProcess(s, replaceAllProcess);
         },
       );
     }
@@ -40,13 +40,13 @@ abstract final class StringConfigProcessor{
     });
   }
 
-  static String withJoinProcess(StringJoinProcessConfig joinProcess, String raw){
+  static String resolveByJoinProcess(String raw, StringJoinProcessConfig joinProcess){
     return joinProcess.target.map((List<StringProcessConfig> process){
-      return withProcess(process, raw);
+      return resolveByProcess(raw, process);
     }).join(joinProcess.separator);
   }
 
-  static String withMatchProcess(StringMatchProcessConfig matchProcess, String raw){
+  static String resolveByMatchProcess(String raw, StringMatchProcessConfig matchProcess){
     try{
       final RegExp regex = RegExp(matchProcess.regex);
 
@@ -62,11 +62,11 @@ abstract final class StringConfigProcessor{
         return targetMatch.group(group)!;
       });
     }catch(e){
-      return withProcess(matchProcess.failed, raw);
+      return resolveByProcess(raw, matchProcess.failed);
     }
   }
 
-  static String withReplaceProcess(StringReplaceProcessConfig replaceProcess, String raw){
+  static String resolveByReplaceProcess(String raw, StringReplaceProcessConfig replaceProcess){
     final RegExp regex = RegExp(replaceProcess.regex);
 
     return raw.replaceFirstMapped(regex, (Match match){
@@ -77,7 +77,7 @@ abstract final class StringConfigProcessor{
     }, replaceProcess.which - 1);
   }
 
-  static String withReplaceAllProcess(StringReplaceAllProcessConfig replaceAllProcess, String raw){
+  static String resolveByReplaceAllProcess(String raw, StringReplaceAllProcessConfig replaceAllProcess){
     final RegExp regex = RegExp(replaceAllProcess.regex);
 
     return raw.replaceAllMapped(regex, (Match match){

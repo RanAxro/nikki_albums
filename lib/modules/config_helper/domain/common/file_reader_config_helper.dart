@@ -9,8 +9,8 @@ import "dart:io";
 import "package:ini/ini.dart" as ini;
 
 
-abstract final class FileReaderConfigProcessor{
-  static Future<Map<String, dynamic>?> withConfig(FileReaderConfig config){
+abstract final class FileReaderConfigHelper{
+  static Future<Map<String, dynamic>?> resolveFromConfig(FileReaderConfig config){
     return switch(config.fileType){
       FileType.json => readJson(config.path, config.keys),
       FileType.ini => readIni(config.path, config.keys),

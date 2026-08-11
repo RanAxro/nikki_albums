@@ -8,8 +8,8 @@ import 'package:flutter/widgets.dart';
 import "package:easy_localization/easy_localization.dart";
 
 
-abstract final class TextConfigProcessor{
-  static String withConfig(TextConfig config, [BuildContext? context]){
+abstract final class TextConfigHelper{
+  static String resolveByConfig(TextConfig config, [BuildContext? context]){
     return config.when(
       literal: (LiteralTextConfig literalTextConfig){
         return literalTextConfig.text;

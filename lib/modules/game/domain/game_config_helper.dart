@@ -1,6 +1,6 @@
 
 import "game_fs_proxy/game_fs_proxy.dart";
-import "package:nikki_albums/modules/config/domain/common/common.dart";
+import "package:nikki_albums/modules/config_helper/domain/common/common.dart";
 import "package:nikki_albums/src/rust/config/game_config.dart";
 
 
@@ -38,7 +38,7 @@ abstract final class GameConfigProcessor{
             }
 
             const String launcherToken = "l", installToken = "i";
-            final Map<String, dynamic>? configResult = await FileReaderConfigProcessor.withConfig(FileReaderConfig(
+            final Map<String, dynamic>? configResult = await FileReaderConfigHelper.resolveFromConfig(FileReaderConfig(
               path: configFileSearcherConfig.path,
               fileType: configFileSearcherConfig.configType,
               keys: {
@@ -82,12 +82,12 @@ abstract final class GameConfigProcessor{
 
   static String? _readRegistryString(WindowsGameRegistryLocationConfig config){
     // 读注册表
-    final String? value = WindowsRegistryConfigProcessor.withConfigAsString(config.registry);
+    final String? value = WindowsRegistryConfigHelper.resolveByConfigAsString(config.registry);
     if(value == null){
       return config.failed;
     }
 
-    return StringConfigProcessor.withConfig(config.output, value);
+    return StringConfigHelper.resolveByConfig(value, config.output);
   }
 }
 
