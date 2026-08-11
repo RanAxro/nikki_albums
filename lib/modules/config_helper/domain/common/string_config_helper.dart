@@ -12,23 +12,15 @@ abstract final class StringConfigHelper{
     return resolveByProcess(raw, config.process, varMap);
   }
 
-  static String resolveByProcess(String raw, List<StringProcessConfig> process, [Map<String, String>? varMap]){
+  static String resolveByProcess(String raw, List<StringProcessConfig> processes, [Map<String, String>? varMap]){
     String s = raw;
-    for(final StringProcessConfig p in process){
-      p.when(
-        join: (StringJoinProcessConfig joinProcess){
-          s = resolveByJoinProcess(s, joinProcess);
-        },
-        match: (StringMatchProcessConfig matchProcess){
-          s = resolveByMatchProcess(s, matchProcess);
-        },
-        replace: (StringReplaceProcessConfig replaceProcess){
-          s = resolveByReplaceProcess(s, replaceProcess);
-        },
-        replaceAll: (StringReplaceAllProcessConfig replaceAllProcess){
-          s = resolveByReplaceAllProcess(s, replaceAllProcess);
-        },
-      );
+    for(final StringProcessConfig process in processes){
+      s = switch(process){
+        StringProcessConfig_Join(field0: final joinProcess) => resolveByJoinProcess(s, joinProcess),
+        StringProcessConfig_Match(field0: final matchProcess) => resolveByMatchProcess(s, matchProcess),
+        StringProcessConfig_Replace(field0: final replaceProcess) => resolveByReplaceProcess(s, replaceProcess),
+        StringProcessConfig_ReplaceAll(field0: final replaceAllProcess) => resolveByReplaceAllProcess(s, replaceAllProcess),
+      };
     }
 
     if(varMap == null || varMap.isEmpty){
