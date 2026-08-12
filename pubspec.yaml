@@ -33,6 +33,9 @@ dependencies:
   flutter:
     sdk: flutter
   # ui
+  forui: ^0.25.0
+  flutter_riverpod: ^3.4.2
+
   easy_localization: ^3.0.8
   multi_split_view: ^3.6.1
   flutter_fancy_tree_view: ^1.6.0
