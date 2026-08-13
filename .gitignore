@@ -9,6 +9,7 @@
 .build/
 /build_web/
 /website/
+/build_official_website/
 .buildlog/
 .history
 .svn/

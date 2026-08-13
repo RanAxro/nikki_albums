@@ -9,7 +9,7 @@ const rootDir = "";
 const CONFIG = {
   templateDir: path.join(rootDir, 'official_website', 'templates'),
   i18nFile: path.join(rootDir, 'official_website', 'i18n.json'),
-  outputDir: path.join(rootDir, ""),
+  outputDir: path.join(rootDir, "build_official_website"),
   rootLang: "zh",
   domain: "nikki.ranaxro.com",
   /**
@@ -204,7 +204,7 @@ function buildDomainVars(currentLang) {
 function buildToLangVars(currentOutputDir) {
   const vars = {};
   for (const lang of supportedLang) {
-    const targetDir = lang === CONFIG.rootLang ? '.' : lang;
+    const targetDir = path.join(CONFIG.outputDir, lang === CONFIG.rootLang ? '.' : lang);
     let rel = path.relative(currentOutputDir, targetDir);
     if (!rel || rel === '.') {
       rel = '.';
