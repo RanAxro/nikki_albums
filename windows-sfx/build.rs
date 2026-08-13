@@ -13,7 +13,7 @@ fn main(){
 
   let status = Command::new("bin/ResourceHacker.exe")
     .args([
-      "-open", r"..\build\windows\x64\runner\Release\nikki_albums.exe",
+      "-open", r"..\src\nikki_albums\build\windows\x64\runner\Release\nikki_albums.exe",
       "-save", r"target\temp\output.rc",
       "-action", "extract",
       "-mask", ",,",
