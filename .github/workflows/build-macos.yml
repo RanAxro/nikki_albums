@@ -40,9 +40,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            macos/Pods
+            src/nikki_albums/macos/Pods
             ~/Library/Caches/CocoaPods
-          key: ${{ runner.os }}-pods-${{ hashFiles('macos/Podfile.lock') }}
+          key: ${{ runner.os }}-pods-${{ hashFiles('src/nikki_albums/macos/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
 
@@ -50,15 +50,19 @@ jobs:
         run: flutter config --no-enable-swift-package-manager
 
       - name: Install dependencies
+        working-directory: src/nikki_albums
         run: flutter pub get
 
       - name: Build macOS app (arm64 only)
+        working-directory: src/nikki_albums
         run: FLUTTER_XCODE_ARCHS=arm64 flutter build macos --release
 
       - name: Code sign the App
+        working-directory: src/nikki_albums
         run: codesign --force --deep --sign - "build/macos/Build/Products/Release/Nikki Albums.app"
 
       - name: Zip the App Bundle
+        working-directory: src/nikki_albums
         run: |
           cd build/macos/Build/Products/Release
           zip -r -y nikki_albums-macos.zip "Nikki Albums.app"
@@ -67,4 +71,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nikki_albums-macos
-          path: build/macos/Build/Products/Release/nikki_albums-macos.zip
+          path: src/nikki_albums/build/macos/Build/Products/Release/nikki_albums-macos.zip

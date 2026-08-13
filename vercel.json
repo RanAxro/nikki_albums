@@ -1,6 +1,6 @@
 {
-  "buildCommand": "node scripts/build_official_website.js",
-  "outputDirectory": ".",
+  "buildCommand": "node scripts/vercel/build_official_website.js && node scripts/vercel/copy_static_api.js",
+  "outputDirectory": "build_official_website",
   "trailingSlash": false,
   "rewrites": [
     {

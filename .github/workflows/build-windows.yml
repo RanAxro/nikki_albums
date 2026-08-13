@@ -61,7 +61,7 @@ jobs:
       - name: Download FFmpeg and ExifTool Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: windows/runner/resources/bin/
+          path: src/nikki_albums/windows/runner/resources/bin/
           merge-multiple: true
 
       - name: Install Rust
@@ -87,9 +87,11 @@ jobs:
             ${{ runner.os }}-pub-
 
       - name: Install dependencies
+        working-directory: src/nikki_albums
         run: flutter pub get
 
       - name: Build Windows app
+        working-directory: src/nikki_albums
         run: flutter build windows --release
 
       - name: Build SFX Executable
