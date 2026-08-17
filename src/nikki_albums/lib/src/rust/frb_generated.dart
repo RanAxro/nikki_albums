@@ -3242,10 +3242,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 5)
       throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return AppPersistentState(
-      isAgreeAgreement: dco_decode_bool(arr[0]),
-      isInitialStartup: dco_decode_bool(arr[1]),
-      lang: dco_decode_String(arr[2]),
-      theme: dco_decode_i_32(arr[3]),
+      isAgreeAgreement: dco_decode_opt_box_autoadd_bool(arr[0]),
+      isInitialStartup: dco_decode_opt_box_autoadd_bool(arr[1]),
+      lang: dco_decode_opt_String(arr[2]),
+      theme: dco_decode_opt_box_autoadd_i_32(arr[3]),
       unknownField: dco_decode_Map_String_String_None(arr[4]),
     );
   }
@@ -3390,6 +3390,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   HotUpdateInfo dco_decode_box_autoadd_hot_update_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_hot_update_info(raw);
+  }
+
+  @protected
+  int dco_decode_box_autoadd_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
   }
 
   @protected
@@ -5005,6 +5011,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? dco_decode_opt_box_autoadd_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_i_32(raw);
+  }
+
+  @protected
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_i_64(raw);
@@ -6330,10 +6342,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_isAgreeAgreement = sse_decode_bool(deserializer);
-    var var_isInitialStartup = sse_decode_bool(deserializer);
-    var var_lang = sse_decode_String(deserializer);
-    var var_theme = sse_decode_i_32(deserializer);
+    var var_isAgreeAgreement = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_isInitialStartup = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_lang = sse_decode_opt_String(deserializer);
+    var var_theme = sse_decode_opt_box_autoadd_i_32(deserializer);
     var var_unknownField = sse_decode_Map_String_String_None(deserializer);
     return AppPersistentState(
       isAgreeAgreement: var_isAgreeAgreement,
@@ -6505,6 +6517,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_hot_update_info(deserializer));
+  }
+
+  @protected
+  int sse_decode_box_autoadd_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_i_32(deserializer));
   }
 
   @protected
@@ -8609,6 +8627,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? sse_decode_opt_box_autoadd_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_i_32(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -10232,10 +10261,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_bool(self.isAgreeAgreement, serializer);
-    sse_encode_bool(self.isInitialStartup, serializer);
-    sse_encode_String(self.lang, serializer);
-    sse_encode_i_32(self.theme, serializer);
+    sse_encode_opt_box_autoadd_bool(self.isAgreeAgreement, serializer);
+    sse_encode_opt_box_autoadd_bool(self.isInitialStartup, serializer);
+    sse_encode_opt_String(self.lang, serializer);
+    sse_encode_opt_box_autoadd_i_32(self.theme, serializer);
     sse_encode_Map_String_String_None(self.unknownField, serializer);
   }
 
@@ -10421,6 +10450,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_hot_update_info(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self, serializer);
   }
 
   @protected
@@ -12305,6 +12340,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_hot_update_info(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_i_32(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_i_32(self, serializer);
     }
   }
 

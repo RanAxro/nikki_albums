@@ -3401,10 +3401,10 @@ impl SseDecode for String {
 impl SseDecode for crate::config::app_persistent_state::AppPersistentState {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_isAgreeAgreement = <bool>::sse_decode(deserializer);
-        let mut var_isInitialStartup = <bool>::sse_decode(deserializer);
-        let mut var_lang = <String>::sse_decode(deserializer);
-        let mut var_theme = <i32>::sse_decode(deserializer);
+        let mut var_isAgreeAgreement = <Option<bool>>::sse_decode(deserializer);
+        let mut var_isInitialStartup = <Option<bool>>::sse_decode(deserializer);
+        let mut var_lang = <Option<String>>::sse_decode(deserializer);
+        let mut var_theme = <Option<i32>>::sse_decode(deserializer);
         let mut var_unknownField =
             <std::collections::HashMap<String, String>>::sse_decode(deserializer);
         return crate::config::app_persistent_state::AppPersistentState {
@@ -5572,6 +5572,17 @@ impl SseDecode for Option<crate::config::hot_update::HotUpdateInfo> {
             return Some(<crate::config::hot_update::HotUpdateInfo>::sse_decode(
                 deserializer,
             ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<i32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<i32>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -10635,10 +10646,10 @@ impl SseEncode for String {
 impl SseEncode for crate::config::app_persistent_state::AppPersistentState {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_agree_agreement, serializer);
-        <bool>::sse_encode(self.is_initial_startup, serializer);
-        <String>::sse_encode(self.lang, serializer);
-        <i32>::sse_encode(self.theme, serializer);
+        <Option<bool>>::sse_encode(self.is_agree_agreement, serializer);
+        <Option<bool>>::sse_encode(self.is_initial_startup, serializer);
+        <Option<String>>::sse_encode(self.lang, serializer);
+        <Option<i32>>::sse_encode(self.theme, serializer);
         <std::collections::HashMap<String, String>>::sse_encode(self.unknown_field, serializer);
     }
 }
@@ -12380,6 +12391,16 @@ impl SseEncode for Option<crate::config::hot_update::HotUpdateInfo> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::config::hot_update::HotUpdateInfo>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<i32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <i32>::sse_encode(value, serializer);
         }
     }
 }

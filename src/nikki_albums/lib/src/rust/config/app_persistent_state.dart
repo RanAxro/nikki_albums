@@ -5,22 +5,19 @@
 
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'app_persistent_state.freezed.dart';
 
-class AppPersistentState {
-  final bool isAgreeAgreement;
-  final bool isInitialStartup;
-  final String lang;
-  final int theme;
-  final Map<String, String> unknownField;
-
-  const AppPersistentState({
-    required this.isAgreeAgreement,
-    required this.isInitialStartup,
-    required this.lang,
-    required this.theme,
-    required this.unknownField,
-  });
-
+@freezed
+sealed class AppPersistentState with _$AppPersistentState {
+  const AppPersistentState._();
+  const factory AppPersistentState({
+    bool? isAgreeAgreement,
+    bool? isInitialStartup,
+    String? lang,
+    int? theme,
+    required Map<String, String> unknownField,
+  }) = _AppPersistentState;
   static AppPersistentState? fromJson({required String json}) => RustLib
       .instance
       .api
@@ -31,23 +28,4 @@ class AppPersistentState {
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigAppPersistentStateAppPersistentStateToJsonPretty(that: this);
-
-  @override
-  int get hashCode =>
-      isAgreeAgreement.hashCode ^
-      isInitialStartup.hashCode ^
-      lang.hashCode ^
-      theme.hashCode ^
-      unknownField.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is AppPersistentState &&
-          runtimeType == other.runtimeType &&
-          isAgreeAgreement == other.isAgreeAgreement &&
-          isInitialStartup == other.isInitialStartup &&
-          lang == other.lang &&
-          theme == other.theme &&
-          unknownField == other.unknownField;
 }

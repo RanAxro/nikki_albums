@@ -3,34 +3,17 @@ use flutter_rust_bridge::frb;
 use serde::{Serialize, Deserialize};
 use crate::impl_json_frb;
 
-#[frb]
+#[frb(dart_metadata=("freezed"))]
 #[derive(Serialize, Deserialize)]
 pub struct AppPersistentState{
-  pub is_agree_agreement: bool,
-  pub is_initial_startup: bool,
+  pub is_agree_agreement: Option<bool>,
+  pub is_initial_startup: Option<bool>,
 
-  pub lang: String,
-  pub theme: i32,
+  pub lang: Option<String>,
+  pub theme: Option<i32>,
 
   #[serde(flatten)]
   pub unknown_field: HashMap<String, String>,
 }
 
 impl_json_frb!(AppPersistentState);
-
-// impl AppPersistentState{
-//   #[frb(sync)]
-//   pub fn from_json(json: &str) -> Option<Self>{
-//     serde_json::from_str(json).ok()
-//   }
-// 
-//   #[frb(sync)]
-//   pub fn to_json(&self) -> Result<String, serde_json::error::Error>{
-//     serde_json::to_string(self)
-//   }
-// 
-//   #[frb(sync)]
-//   pub fn to_json_pretty(&self) -> Result<String, serde_json::error::Error>{
-//     serde_json::to_string_pretty(self)
-//   }
-// }
