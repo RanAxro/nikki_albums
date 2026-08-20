@@ -812,6 +812,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.2"
+  nikki_albums_annotation:
+    dependency: "direct main"
+    description:
+      path: "../nikki_albums_annotation"
+      relative: true
+    source: path
+    version: "1.0.0"
   nm:
     dependency: transitive
     description:
