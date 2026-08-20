@@ -1018,7 +1018,7 @@ class WaterfallGallery extends StatelessWidget{
         }
 
         final int? majorProp = config.let((c) => handler.getProps(c, params.clothes))?.keys.firstOrNull;
-        final MapEntry<int, Nuan5ClothTag>? majorTag = config.let((c) => handler.getTags(c, params.clothes))?.entries.first;
+        final MapEntry<int, Nuan5ClothTag>? majorTag = config.let((c) => handler.getTags(c, params.clothes))?.entries.firstOrNull;
         return Row(
           spacing: listSpacing,
           children: [
