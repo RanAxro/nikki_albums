@@ -1,19 +1,19 @@
 const config = {
-	"v3.011.01": {
-		"releaseDate": "2026-8-9",
+	"v3.011.02": {
+		"releaseDate": "2026-8-20",
 		"description": {
-			"de": "1. Bug behoben, bei dem das Parameterpanel einzelner LookBook-Codes nicht angezeigt wurde",
-			"en": "1. Fixed the bug where the parameter panel of some LookBook Codes failed to display",
-			"es": "1. Corregido el error que ocultaba el panel de parámetros de algunos códigos LookBook",
-			"fr": "1. Correction du bug empêchant l'affichage du panneau de paramètres de certains codes LookBook",
-			"id": "1. Memperbaiki bug panel parameter beberapa LookBook Code tidak muncul",
-			"it": "1. Risolto il bug che nascondeva il pannello parametri di alcuni codici LookBook",
-			"ja": "1. 一部のLookBook Codeパラメータパネルが表示されない不具合を修正",
-			"ko": "1. 일부 LookBook Code 매개변수 패널이 표시되지 않는 버그 수정",
-			"pt": "1. Corrigido o bug que impedia a exibição do painel de parâmetros de alguns códigos LookBook",
-			"th": "1. แก้ไขบั๊กที่แผงพารามิเตอร์ของบาง LookBook Code ไม่แสดงผล",
-			"zh": "1. 修复了部分搭配码参数面板不显示的bug",
-			"tw": "1. 修復部分搭配碼參數面板無法顯示的錯誤",
+			"de": "Behebt einen Bug, bei dem die LookBook‑Code‑Daten unter bestimmten Umständen falsch angezeigt werden",
+			"en": "Fix the bug where LookBook Code data is displayed incorrectly in some cases",
+			"es": "Corrige el error por el que los datos del código LookBook se muestran incorrectamente en algunos casos",
+			"fr": "Corrige le bogue où les données du code LookBook s'affichent incorrectement dans certains cas",
+			"id": "Memperbaiki bug di mana data LookBook Code ditampilkan salah dalam beberapa kondisi",
+			"it": "Risolto il bug per cui i dati del codice LookBook vengono visualizzati in modo errato in alcuni casi",
+			"ja": "一部の状況でLookBook Codeのデータ表示が異常になる不具合を修正",
+			"ko": "일부 상황에서 LookBook Code 데이터 표시가 잘못되는 버그 수정",
+			"pt": "Corrige o bug em que os dados do Código LookBook são exibidos incorretamente em alguns casos",
+			"th": "แก้ไขบัคที่ข้อมูล LookBook Code แสดงผลไม่ถูกต้องในบางกรณี",
+			"zh": "修复部分情况下，搭配码数据显示错误的bug",
+			"tw": "修復部分情況下，搭配碼資料顯示錯誤的bug",
 
 			// "de": "",
 			// "en": "",
@@ -46,13 +46,44 @@ const config = {
 				"system": "system_macos",
 				"type": "type_1",
 				"suffix": "suffix_zip",
-				"link": "https://file-nikki.ranaxro.com/app/v3.011/Nikki%20Albums-v3.011-MacOS-arm64.zip"
+				"link": "https://file-nikki.ranaxro.com/app/v3.011.02/Nikki%20Albums-v3.011.02-MacOS-arm64.zip"
 			},
 			{
 				"system": "system_windows",
 				"type": "type_1",
 				"suffix": "suffix_zip",
-				"link": "https://file-nikki.ranaxro.com/app/v3.011/Nikki%20Albums-v3.011-Windows-x64.zip"
+				"link": "https://file-nikki.ranaxro.com/app/v3.011.02/Nikki%20Albums-v3.011.02-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.011.01": {
+		"releaseDate": "2026-8-9",
+		"description": {
+			"de": "1. Bug behoben, bei dem das Parameterpanel einzelner LookBook-Codes nicht angezeigt wurde",
+			"en": "1. Fixed the bug where the parameter panel of some LookBook Codes failed to display",
+			"es": "1. Corregido el error que ocultaba el panel de parámetros de algunos códigos LookBook",
+			"fr": "1. Correction du bug empêchant l'affichage du panneau de paramètres de certains codes LookBook",
+			"id": "1. Memperbaiki bug panel parameter beberapa LookBook Code tidak muncul",
+			"it": "1. Risolto il bug che nascondeva il pannello parametri di alcuni codici LookBook",
+			"ja": "1. 一部のLookBook Codeパラメータパネルが表示されない不具合を修正",
+			"ko": "1. 일부 LookBook Code 매개변수 패널이 표시되지 않는 버그 수정",
+			"pt": "1. Corrigido o bug que impedia a exibição do painel de parâmetros de alguns códigos LookBook",
+			"th": "1. แก้ไขบั๊กที่แผงพารามิเตอร์ของบาง LookBook Code ไม่แสดงผล",
+			"zh": "1. 修复了部分搭配码参数面板不显示的bug",
+			"tw": "1. 修復部分搭配碼參數面板無法顯示的錯誤"
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.011.01/Nikki%20Albums-v3.011.01-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.011.01/Nikki%20Albums-v3.011.01-Windows-x64.zip"
 			}
 		]
 	},
