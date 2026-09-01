@@ -363,3 +363,18 @@ fn test_2(){
     }
   }
 }
+
+#[test]
+fn test_3(){
+  use super::decrypt::*;
+
+  let key = ClothDiyShareCode::from_code_str("1RTkmhUCDPB#").unwrap();
+  let res = cloth_diy_decode_network(&key);
+
+  if let Ok(data) = res {
+    let d = from_slice(&data).unwrap();
+    let param = convert_net_cloth_diy_params(&d);
+
+    println!("{:?}", param.pose_id);
+  }
+}

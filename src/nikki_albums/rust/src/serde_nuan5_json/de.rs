@@ -2158,7 +2158,18 @@ impl<'de, 'a> de::Deserializer<'de> for IdMapDeserializer<'de, 'a>{
           _ => Err(self.de.peek_invalid_type(&visitor)),
         }
       }
-      _ => Err(self.de.peek_error(ErrorCode::ExpectedColonAtStart)),
+      b'{' => {
+        check_recursion!{
+          (self.de).discard();
+          let ret = visitor.visit_map(MapAccess::new(self.de));
+        }
+
+        match (ret, self.de.end_object()){
+          (Ok(ret), Ok(())) => Ok(ret),
+          (Err(err), _) | (_, Err(err)) => Err(err),
+        }
+      }
+      _ => Err(self.de.peek_invalid_type(&visitor)),
     }
   }
 }
