@@ -83,6 +83,12 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_macos_build_settings(target)
+
+    # Xcode 27 no longer accepts deployment targets below macOS 12. Keep all
+    # plugin pods aligned with the Runner's declared minimum version.
+    target.build_configurations.each do |config|
+      config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '14.0'
+    end
   end
 
   inject_dylib_copy_phase

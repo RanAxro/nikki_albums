@@ -1247,7 +1247,7 @@ class MacOSTitleBar extends StatelessWidget {
     return AppBackground(
       colorRole: ColorRole.secondary,
       child: SizedBox(
-        height: windowTitleBarHeight,
+        height: macOSWindowTitleBarHeight,
         child: Stack(
           children: [
             Positioned.fill(child: DragToMoveArea(child: Container())),
