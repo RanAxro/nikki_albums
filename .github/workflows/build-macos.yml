@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-macos:
-    runs-on: macos-15
+    runs-on: xcode-27
     env:
       PUB_CACHE: ${{ github.workspace }}/.pub-cache
     steps:
