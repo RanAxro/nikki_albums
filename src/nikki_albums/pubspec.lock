@@ -819,6 +819,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0"
+  nikki_albums_generator:
+    dependency: "direct dev"
+    description:
+      path: "../nikki_albums_generator"
+      relative: true
+    source: path
+    version: "1.0.0"
   nm:
     dependency: transitive
     description:

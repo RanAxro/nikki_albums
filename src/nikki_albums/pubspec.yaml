@@ -121,6 +121,8 @@ dev_dependencies:
     sdk: flutter
   freezed: ^3.2.5
   build_runner: ^2.14.1
+  nikki_albums_generator:
+    path: ../nikki_albums_generator
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,0 +1,13 @@
+# Read about `build.yaml` at https://pub.dev/packages/build_config
+builders:
+  # 生成 @AppStateDefine 注解对应的代码。
+  #
+  # 新增 Generator 时，在 lib/src/generators/<name> 下实现 Generator 与 Builder 工厂，
+  # 在 lib/nikki_albums_generator.dart 中导出，然后在这里登记。
+  app_state:
+    import: "package:nikki_albums_generator/nikki_albums_generator.dart"
+    builder_factories: ["appStateBuilder"]
+    build_extensions: { ".dart": [".app_state.g.part"] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
