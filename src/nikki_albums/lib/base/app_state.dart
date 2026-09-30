@@ -12,13 +12,15 @@ typedef Persistent = AppPersistentState;
 @AppStateDefine("用户是否同意政策")
 final _isAgreeAgreement = AppStateItemDefine<bool, Persistent>(
   defaultValue: false,
-  ref: (p) => p.isAgreeAgreement,
+  readPersistent: (d, p) => p.isAgreeAgreement ?? d,
+  writePersistent: (v, p) => p.copyWith(isAgreeAgreement: v),
 );
 
 @AppStateDefine("是否首次使用程序")
 final _isInitialStartup = AppStateItemDefine<bool, Persistent>(
   defaultValue: false,
-  ref: (p) => p.isInitialStartup,
+  readPersistent: (d, p) => p.isInitialStartup ?? d,
+  writePersistent: (v, p) => p.copyWith(isInitialStartup: v),
 );
 
 @AppStateDefine("当前语言")
@@ -46,56 +48,30 @@ abstract class AppStateItem<T, P> extends Notifier<T>{
 
   T get defaultValue => _define.defaultValue;
 
-  bool get isPersist => _define.ref != null || (_define.readPersistent != null && _define.writePersistent != null);
+  bool get isPersist => _define.readPersistent != null && _define.writePersistent != null;
 
   @override
   T build() => defaultValue;
 
   void fromPersistent(P p){
     if(!isPersist) return;
-    if(_define.readPersistent != null){
-      state = _define.readPersistent!.call(defaultValue, p);
-    }else{
-      state = _fromPersistentByRef(p);
-    }
-  }
-
-  T _fromPersistentByRef(P p){
-    return _define.ref?.call(p) ?? defaultValue;
+    state = _define.readPersistent!.call(defaultValue, p);
   }
 
   P toPersistent(P p){
     if(!isPersist) return p;
-    if(_define.writePersistent != null){
-      return _define.writePersistent!.call(state, p);
-    }else{
-      return _toPersistentByRef(state, p);
-    }
-  }
-
-  P _toPersistentByRef(T v, P p){
-    return p;
+    return _define.writePersistent!.call(state, p);
   }
 }
 
 class IsAgreeAgreementState extends AppStateItem<bool, Persistent>{
   @override
   AppStateItemDefine<bool, Persistent> get _define => _isAgreeAgreement;
-
-  @override
-  Persistent _toPersistentByRef(bool v, Persistent p){
-    return p.copyWith(isAgreeAgreement: v);
-  }
 }
 
 class IsInitialStartupState extends AppStateItem<bool, Persistent>{
   @override
   AppStateItemDefine<bool, Persistent> get _define => _isInitialStartup;
-
-  @override
-  Persistent _toPersistentByRef(bool v, Persistent p){
-    return p.copyWith(isInitialStartup: v);
-  }
 }
 
 class LangState extends AppStateItem<Locale, Persistent>{
