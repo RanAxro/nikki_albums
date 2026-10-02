@@ -661,3 +661,9 @@ pub(crate) fn convert_rich_build_data(data: &build_data::RichBuildData) -> RichB
     version: data.extra_info.content.version.clone(),
   }
 }
+
+pub(crate) fn convert_build_data(data: &build_data::BuildData) -> BuildingParams{
+  BuildingParams{
+    furniture_count: data.place_info.len() as i32,
+  }
+}

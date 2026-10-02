@@ -272,14 +272,14 @@ pub fn cloth_diy_de_file(param_type: &ClothDiyParamType, path: &str) -> Result<O
 #[frb]
 pub enum HomeBuildParamType{
   NetHomeBuild,
-  // BuildData,
+  BuildData,
 }
 
 #[frb]
 #[derive(Clone)]
 pub enum HomeBuildParam{
   NetHomeBuild(RichBuildingParams),
-  // BuildData(BuildingParams),
+  BuildData(BuildingParams),
 }
 
 #[frb]
@@ -288,7 +288,7 @@ pub fn de_home_build_param(param_type: &HomeBuildParamType, bytes: &[u8]) -> Opt
 
   let decoded = match param_type{
     NetHomeBuild => from_slice(&bytes).ok().as_ref().map(convert_rich_build_data).map(HomeBuildParam::NetHomeBuild),
-    // BuildData => from_slice(&bytes).ok().as_ref().map(convert_build_data).map(HomeBuildParam::BuildData),
+    BuildData => from_slice(&bytes).ok().as_ref().map(convert_build_data).map(HomeBuildParam::BuildData),
   };
 
   decoded
