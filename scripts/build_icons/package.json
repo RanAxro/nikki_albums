@@ -1,0 +1,15 @@
+{
+  "name": "build_icons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build_icons.mjs",
+  "keywords": [],
+  "author": "RanAxro",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "svg2ttf": "^6.1.0",
+    "svgicons2svgfont": "^12.0.0",
+    "svgo": "^3.3.5"
+  }
+}
