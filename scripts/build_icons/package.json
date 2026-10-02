@@ -8,7 +8,9 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@xmldom/xmldom": "^0.9.12",
     "svg2ttf": "^6.1.0",
+    "svg-pathdata": "^6.0.3",
     "svgicons2svgfont": "^12.0.0",
     "svgo": "^3.3.5"
   }
