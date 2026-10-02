@@ -20,7 +20,7 @@ version: 3.011.01+1
 #version: 3.08.03+1
 
 environment:
-  sdk: ">=3.12.0 <4.0.0"
+  sdk: ">=3.13.0 <4.0.0"
   flutter: ">=3.44.0"
 
 # Dependencies specify other packages that your package needs in order to work.
@@ -34,7 +34,8 @@ dependencies:
     sdk: flutter
   # ui
   forui: ^0.25.0
-  flutter_riverpod: ^3.4.2
+  flutter_riverpod: ^3.4.3
+  riverpod_annotation: ^4.0.7
 
   easy_localization: ^3.0.8
   multi_split_view: ^3.6.1
@@ -86,7 +87,7 @@ dependencies:
 
   rust_lib_nikki_albums:
     path: rust_builder
-  flutter_rust_bridge: 2.12.0
+  flutter_rust_bridge: ^2.12.0
 
   freezed_annotation: ^3.1.0
 
@@ -119,8 +120,9 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   integration_test:
     sdk: flutter
-  freezed: ^3.2.5
-  build_runner: ^2.14.1
+  freezed: ^4.0.2
+  build_runner: ^2.16.1
+  riverpod_generator: ^4.0.9
   nikki_albums_generator:
     path: ../nikki_albums_generator
 
@@ -186,3 +188,6 @@ flutter:
     - family: RanAppKey
       fonts:
         - asset: assets/fonts/RanAppKey.ttf
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/app_icons.ttf
