@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nikki_photo_params.dart';
@@ -9,6 +9,7 @@ part of 'nikki_photo_params.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$EditPhotoState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditPhotoState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is EditPhotoState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'EditPhotoState()';
+    return 'EditPhotoState()';
 }
 
 
@@ -190,16 +191,18 @@ $EditPhotoState_EnabledCopyWith<EditPhotoState_Enabled> get copyWith => _$EditPh
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditPhotoState_Enabled&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is EditPhotoState_Enabled&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'EditPhotoState.enabled(field0: $field0)';
+    return 'EditPhotoState.enabled(field0: $field0)';
 }
 
 
@@ -251,7 +254,7 @@ class EditPhotoState_Disabled extends EditPhotoState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditPhotoState_Disabled);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is EditPhotoState_Disabled);
 }
 
 
@@ -260,7 +263,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'EditPhotoState.disabled()';
+    return 'EditPhotoState.disabled()';
 }
 
 
@@ -278,7 +281,7 @@ mixin _$FilterParams {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FilterParams);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is FilterParams);
 }
 
 
@@ -287,7 +290,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'FilterParams()';
+    return 'FilterParams()';
 }
 
 
@@ -449,16 +452,18 @@ $FilterParams_SomeCopyWith<FilterParams_Some> get copyWith => _$FilterParams_Som
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FilterParams_Some&&(identical(other.id, id) || other.id == id)&&(identical(other.strength, strength) || other.strength == strength));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is FilterParams_Some&&(identical(other.id, id) || other.id == id)&&(identical(other.strength, strength) || other.strength == strength));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,strength);
+int get hashCode {
+    return Object.hash(runtimeType,id,strength);
+}
 
 @override
 String toString() {
-  return 'FilterParams.some(id: $id, strength: $strength)';
+    return 'FilterParams.some(id: $id, strength: $strength)';
 }
 
 
@@ -511,7 +516,7 @@ class FilterParams_None extends FilterParams {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FilterParams_None);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is FilterParams_None);
 }
 
 
@@ -520,7 +525,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'FilterParams.none()';
+    return 'FilterParams.none()';
 }
 
 
@@ -538,7 +543,7 @@ mixin _$LightParams {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LightParams);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LightParams);
 }
 
 
@@ -547,7 +552,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LightParams()';
+    return 'LightParams()';
 }
 
 
@@ -709,16 +714,18 @@ $LightParams_SomeCopyWith<LightParams_Some> get copyWith => _$LightParams_SomeCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LightParams_Some&&(identical(other.id, id) || other.id == id)&&(identical(other.strength, strength) || other.strength == strength));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LightParams_Some&&(identical(other.id, id) || other.id == id)&&(identical(other.strength, strength) || other.strength == strength));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,strength);
+int get hashCode {
+    return Object.hash(runtimeType,id,strength);
+}
 
 @override
 String toString() {
-  return 'LightParams.some(id: $id, strength: $strength)';
+    return 'LightParams.some(id: $id, strength: $strength)';
 }
 
 
@@ -771,7 +778,7 @@ class LightParams_None extends LightParams {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LightParams_None);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LightParams_None);
 }
 
 
@@ -780,7 +787,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LightParams.none()';
+    return 'LightParams.none()';
 }
 
 
@@ -798,7 +805,7 @@ mixin _$LocationType {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType);
 }
 
 
@@ -807,7 +814,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LocationType()';
+    return 'LocationType()';
 }
 
 
@@ -969,7 +976,7 @@ class LocationType_Unknown extends LocationType {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Unknown);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Unknown);
 }
 
 
@@ -978,7 +985,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LocationType.unknown()';
+    return 'LocationType.unknown()';
 }
 
 
@@ -1006,16 +1013,18 @@ $LocationType_ExactCopyWith<LocationType_Exact> get copyWith => _$LocationType_E
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Exact&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Exact&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'LocationType.exact(field0: $field0)';
+    return 'LocationType.exact(field0: $field0)';
 }
 
 
@@ -1066,7 +1075,7 @@ $LocationCopyWith<$Res> get field0 {
 
 
 class LocationType_Guessed extends LocationType {
-  const LocationType_Guessed(final  List<Location> field0): _field0 = field0,super._();
+  const LocationType_Guessed( List<Location> field0): _field0 = field0,super._();
   
 
  final  List<Location> _field0;
@@ -1087,16 +1096,18 @@ $LocationType_GuessedCopyWith<LocationType_Guessed> get copyWith => _$LocationTy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Guessed&&const DeepCollectionEquality().equals(other._field0, _field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationType_Guessed&&const DeepCollectionEquality().equals(other.field0, _field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+}
 
 @override
 String toString() {
-  return 'LocationType.guessed(field0: $field0)';
+    return 'LocationType.guessed(field0: $field0)';
 }
 
 
@@ -1143,7 +1154,7 @@ mixin _$MomoHiddenState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoHiddenState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoHiddenState);
 }
 
 
@@ -1152,7 +1163,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MomoHiddenState()';
+    return 'MomoHiddenState()';
 }
 
 
@@ -1308,7 +1319,7 @@ class MomoHiddenState_Enabled extends MomoHiddenState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoHiddenState_Enabled);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoHiddenState_Enabled);
 }
 
 
@@ -1317,7 +1328,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MomoHiddenState.enabled()';
+    return 'MomoHiddenState.enabled()';
 }
 
 
@@ -1345,16 +1356,18 @@ $MomoHiddenState_DisabledCopyWith<MomoHiddenState_Disabled> get copyWith => _$Mo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoHiddenState_Disabled&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoHiddenState_Disabled&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MomoHiddenState.disabled(field0: $field0)';
+    return 'MomoHiddenState.disabled(field0: $field0)';
 }
 
 
@@ -1401,16 +1414,21 @@ mixin _$OutfitDyeData {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OutfitDyeData&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as OutfitDyeData;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OutfitDyeData&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as OutfitDyeData;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'OutfitDyeData(field0: $field0)';
+  final _this = this as OutfitDyeData;
+  return 'OutfitDyeData(field0: ${_this.field0})';
 }
 
 
@@ -1571,16 +1589,18 @@ $OutfitDyeData_HairCopyWith<OutfitDyeData_Hair> get copyWith => _$OutfitDyeData_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OutfitDyeData_Hair&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is OutfitDyeData_Hair&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'OutfitDyeData.hair(field0: $field0)';
+    return 'OutfitDyeData.hair(field0: $field0)';
 }
 
 
@@ -1637,16 +1657,18 @@ $OutfitDyeData_GeneralCopyWith<OutfitDyeData_General> get copyWith => _$OutfitDy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OutfitDyeData_General&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is OutfitDyeData_General&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'OutfitDyeData.general(field0: $field0)';
+    return 'OutfitDyeData.general(field0: $field0)';
 }
 
 
@@ -1693,7 +1715,7 @@ mixin _$RichCameraParamsMomoHidden {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden);
 }
 
 
@@ -1702,7 +1724,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RichCameraParamsMomoHidden()';
+    return 'RichCameraParamsMomoHidden()';
 }
 
 
@@ -1858,7 +1880,7 @@ class RichCameraParamsMomoHidden_Enable extends RichCameraParamsMomoHidden {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden_Enable);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden_Enable);
 }
 
 
@@ -1867,7 +1889,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RichCameraParamsMomoHidden.enable()';
+    return 'RichCameraParamsMomoHidden.enable()';
 }
 
 
@@ -1902,16 +1924,18 @@ $RichCameraParamsMomoHidden_DisableCopyWith<RichCameraParamsMomoHidden_Disable> 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden_Disable&&(identical(other.momoPose, momoPose) || other.momoPose == momoPose)&&(identical(other.horizontal, horizontal) || other.horizontal == horizontal)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.height, height) || other.height == height)&&(identical(other.rotateMomo, rotateMomo) || other.rotateMomo == rotateMomo)&&(identical(other.autoGroundSnap, autoGroundSnap) || other.autoGroundSnap == autoGroundSnap)&&(identical(other.floatingEffect, floatingEffect) || other.floatingEffect == floatingEffect)&&(identical(other.poseWithNikki, poseWithNikki) || other.poseWithNikki == poseWithNikki));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden_Disable&&(identical(other.momoPose, momoPose) || other.momoPose == momoPose)&&(identical(other.horizontal, horizontal) || other.horizontal == horizontal)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.height, height) || other.height == height)&&(identical(other.rotateMomo, rotateMomo) || other.rotateMomo == rotateMomo)&&(identical(other.autoGroundSnap, autoGroundSnap) || other.autoGroundSnap == autoGroundSnap)&&(identical(other.floatingEffect, floatingEffect) || other.floatingEffect == floatingEffect)&&(identical(other.poseWithNikki, poseWithNikki) || other.poseWithNikki == poseWithNikki));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,momoPose,horizontal,distance,height,rotateMomo,autoGroundSnap,floatingEffect,poseWithNikki);
+int get hashCode {
+    return Object.hash(runtimeType,momoPose,horizontal,distance,height,rotateMomo,autoGroundSnap,floatingEffect,poseWithNikki);
+}
 
 @override
 String toString() {
-  return 'RichCameraParamsMomoHidden.disable(momoPose: $momoPose, horizontal: $horizontal, distance: $distance, height: $height, rotateMomo: $rotateMomo, autoGroundSnap: $autoGroundSnap, floatingEffect: $floatingEffect, poseWithNikki: $poseWithNikki)';
+    return 'RichCameraParamsMomoHidden.disable(momoPose: $momoPose, horizontal: $horizontal, distance: $distance, height: $height, rotateMomo: $rotateMomo, autoGroundSnap: $autoGroundSnap, floatingEffect: $floatingEffect, poseWithNikki: $poseWithNikki)';
 }
 
 
@@ -1965,16 +1989,21 @@ mixin _$TaskParams {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as TaskParams;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as TaskParams;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'TaskParams(field0: $field0)';
+  final _this = this as TaskParams;
+  return 'TaskParams(field0: ${_this.field0})';
 }
 
 
@@ -2141,16 +2170,18 @@ $TaskParams_PuzzleCopyWith<TaskParams_Puzzle> get copyWith => _$TaskParams_Puzzl
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams_Puzzle&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams_Puzzle&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'TaskParams.puzzle(field0: $field0)';
+    return 'TaskParams.puzzle(field0: $field0)';
 }
 
 
@@ -2192,7 +2223,7 @@ as PlatformInt64,
 
 
 class TaskParams_Risk extends TaskParams {
-  const TaskParams_Risk(final  Map<PlatformInt64, bool> field0): _field0 = field0,super._();
+  const TaskParams_Risk( Map<PlatformInt64, bool> field0): _field0 = field0,super._();
   
 
  final  Map<PlatformInt64, bool> _field0;
@@ -2213,16 +2244,18 @@ $TaskParams_RiskCopyWith<TaskParams_Risk> get copyWith => _$TaskParams_RiskCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams_Risk&&const DeepCollectionEquality().equals(other._field0, _field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams_Risk&&const DeepCollectionEquality().equals(other.field0, _field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+}
 
 @override
 String toString() {
-  return 'TaskParams.risk(field0: $field0)';
+    return 'TaskParams.risk(field0: $field0)';
 }
 
 
@@ -2264,7 +2297,7 @@ as Map<PlatformInt64, bool>,
 
 
 class TaskParams_Interactive extends TaskParams {
-  const TaskParams_Interactive(final  Map<PlatformInt64, bool> field0): _field0 = field0,super._();
+  const TaskParams_Interactive( Map<PlatformInt64, bool> field0): _field0 = field0,super._();
   
 
  final  Map<PlatformInt64, bool> _field0;
@@ -2285,16 +2318,18 @@ $TaskParams_InteractiveCopyWith<TaskParams_Interactive> get copyWith => _$TaskPa
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams_Interactive&&const DeepCollectionEquality().equals(other._field0, _field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskParams_Interactive&&const DeepCollectionEquality().equals(other.field0, _field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+}
 
 @override
 String toString() {
-  return 'TaskParams.interactive(field0: $field0)';
+    return 'TaskParams.interactive(field0: $field0)';
 }
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'decrypt.dart';
@@ -9,6 +9,7 @@ part of 'decrypt.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$CustomData {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomData);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomData);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'CustomData()';
+    return 'CustomData()';
 }
 
 
@@ -185,7 +186,7 @@ class CustomData_Invalid extends CustomData {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomData_Invalid);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomData_Invalid);
 }
 
 
@@ -194,7 +195,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'CustomData.invalid()';
+    return 'CustomData.invalid()';
 }
 
 
@@ -222,16 +223,18 @@ $CustomData_ValidCopyWith<CustomData_Valid> get copyWith => _$CustomData_ValidCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomData_Valid&&const DeepCollectionEquality().equals(other.field0, field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomData_Valid&&const DeepCollectionEquality().equals(other.field0, field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+}
 
 @override
 String toString() {
-  return 'CustomData.valid(field0: $field0)';
+    return 'CustomData.valid(field0: $field0)';
 }
 
 
@@ -278,16 +281,21 @@ mixin _$MediaDecodeEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as MediaDecodeEvent;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as MediaDecodeEvent;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'MediaDecodeEvent(field0: $field0)';
+  final _this = this as MediaDecodeEvent;
+  return 'MediaDecodeEvent(field0: ${_this.field0})';
 }
 
 
@@ -448,16 +456,18 @@ $MediaDecodeEvent_ProgressCopyWith<MediaDecodeEvent_Progress> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent_Progress&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent_Progress&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaDecodeEvent.progress(field0: $field0)';
+    return 'MediaDecodeEvent.progress(field0: $field0)';
 }
 
 
@@ -499,7 +509,7 @@ as double,
 
 
 class MediaDecodeEvent_Result extends MediaDecodeEvent {
-  const MediaDecodeEvent_Result(final  List<CustomData?> field0): _field0 = field0,super._();
+  const MediaDecodeEvent_Result( List<CustomData?> field0): _field0 = field0,super._();
   
 
  final  List<CustomData?> _field0;
@@ -520,16 +530,18 @@ $MediaDecodeEvent_ResultCopyWith<MediaDecodeEvent_Result> get copyWith => _$Medi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent_Result&&const DeepCollectionEquality().equals(other._field0, _field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaDecodeEvent_Result&&const DeepCollectionEquality().equals(other.field0, _field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+}
 
 @override
 String toString() {
-  return 'MediaDecodeEvent.result(field0: $field0)';
+    return 'MediaDecodeEvent.result(field0: $field0)';
 }
 
 

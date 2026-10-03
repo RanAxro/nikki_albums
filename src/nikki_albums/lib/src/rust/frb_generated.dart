@@ -12,8 +12,10 @@ import 'config/common/windows_registry_config.dart';
 import 'config/game_config.dart';
 import 'config/hot_update.dart';
 import 'config/update.dart';
+
 import 'dart:async';
 import 'dart:convert';
+
 import 'frb_generated.dart';
 import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
@@ -32,7 +34,9 @@ import 'nuan5_params/structs/collage_params.dart';
 import 'nuan5_params/structs/eureka.dart';
 import 'nuan5_params/structs/nikki_photo_params.dart';
 import 'nuan5_params/structs/world.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
 import 'thumbnail/mp4_h264.dart';
@@ -2988,9 +2992,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Map<String, String> dco_decode_Map_String_String_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_string_string(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_string_string(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3006,9 +3009,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Map<int, Nuan5Cloth> dco_decode_Map_i_32_nuan_5_cloth_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3018,9 +3020,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_dye_area(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth_dye_area(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3029,9 +3030,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_Map_i_32_nuan_5_cloth_dye_palette_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth_dye_palette(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3041,9 +3041,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_outfit(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth_outfit(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3053,9 +3052,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_prop(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth_prop(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3064,9 +3062,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_Map_i_32_nuan_5_cloth_special_pattern_dye_area_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth_special_pattern_dye_area(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3076,9 +3073,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_cloth_tag(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_cloth_tag(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3087,9 +3083,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_Map_i_32_nuan_5_diy_color_swatch_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_diy_color_swatch(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_diy_color_swatch(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3099,9 +3094,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_diy_pattern(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_diy_pattern(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3109,9 +3103,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Map<int, Nuan5Filter> dco_decode_Map_i_32_nuan_5_filter_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_filter(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_filter(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3121,9 +3114,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_filter_type(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_filter_type(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3131,9 +3123,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Map<int, Nuan5Light> dco_decode_Map_i_32_nuan_5_light_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_light(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_light(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3143,9 +3134,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_light_type(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_light_type(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3155,9 +3145,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_momo_pose(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_momo_pose(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3166,9 +3155,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
-      dco_decode_list_record_i_32_nuan_5_nikki_cloth_info(
-        raw,
-      ).map((e) => MapEntry(e.$1, e.$2)),
+      dco_decode_list_record_i_32_nuan_5_nikki_cloth_info(raw)
+          .map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3290,6 +3278,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   bool dco_decode_box_autoadd_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as bool;
+  }
+
+  @protected
+  BuildingParams dco_decode_box_autoadd_building_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_building_params(raw);
   }
 
   @protected
@@ -3653,6 +3647,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_box_autoadd_windows_game_registry_searcher_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_windows_game_registry_searcher_config(raw);
+  }
+
+  @protected
+  BuildingParams dco_decode_building_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return BuildingParams(furnitureCount: dco_decode_i_32(arr[0]));
   }
 
   @protected
@@ -4049,6 +4052,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 0:
         return HomeBuildParam_NetHomeBuild(
           dco_decode_box_autoadd_rich_building_params(raw[1]),
+        );
+      case 1:
+        return HomeBuildParam_BuildData(
+          dco_decode_box_autoadd_building_params(raw[1]),
         );
       default:
         throw Exception("unreachable");
@@ -6400,6 +6407,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BuildingParams sse_decode_box_autoadd_building_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_building_params(deserializer));
+  }
+
+  @protected
   CameraParams sse_decode_box_autoadd_camera_params(
     SseDeserializer deserializer,
   ) {
@@ -6828,6 +6843,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_windows_game_registry_searcher_config(deserializer));
+  }
+
+  @protected
+  BuildingParams sse_decode_building_params(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_furnitureCount = sse_decode_i_32(deserializer);
+    return BuildingParams(furnitureCount: var_furnitureCount);
   }
 
   @protected
@@ -7282,6 +7304,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           deserializer,
         );
         return HomeBuildParam_NetHomeBuild(var_field0);
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_building_params(deserializer);
+        return HomeBuildParam_BuildData(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -10312,6 +10337,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_building_params(
+    BuildingParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_building_params(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_camera_params(
     CameraParams self,
     SseSerializer serializer,
@@ -10807,6 +10841,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_building_params(
+    BuildingParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.furnitureCount, serializer);
+  }
+
+  @protected
   void sse_encode_camera_params(CameraParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_record_f_64_f_64_f_64(self.cameraActorLoc, serializer);
@@ -11158,6 +11201,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case HomeBuildParam_NetHomeBuild(field0: final field0):
         sse_encode_i_32(0, serializer);
         sse_encode_box_autoadd_rich_building_params(field0, serializer);
+      case HomeBuildParam_BuildData(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_building_params(field0, serializer);
     }
   }
 

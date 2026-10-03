@@ -6,8 +6,10 @@
 import '../../frb_generated.dart';
 import 'cloth.dart';
 import 'eureka.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+
 import 'world.dart';
 part 'nikki_photo_params.freezed.dart';
 
