@@ -12,9 +12,11 @@ import 'config/common/windows_registry_config.dart';
 import 'config/game_config.dart';
 import 'config/hot_update.dart';
 import 'config/update.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
+
 import 'frb_generated.dart';
 import 'nuan5_database/model.dart';
 import 'nuan5_database/nuan5_database.dart';
@@ -31,7 +33,9 @@ import 'nuan5_params/structs/collage_params.dart';
 import 'nuan5_params/structs/eureka.dart';
 import 'nuan5_params/structs/nikki_photo_params.dart';
 import 'nuan5_params/structs/world.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
+
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
 import 'thumbnail/mp4_h264.dart';
@@ -226,6 +230,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   bool dco_decode_box_autoadd_bool(dynamic raw);
 
   @protected
+  BuildingParams dco_decode_box_autoadd_building_params(dynamic raw);
+
+  @protected
   CameraParams dco_decode_box_autoadd_camera_params(dynamic raw);
 
   @protected
@@ -414,6 +421,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   WindowsGameRegistrySearcherConfig
   dco_decode_box_autoadd_windows_game_registry_searcher_config(dynamic raw);
+
+  @protected
+  BuildingParams dco_decode_building_params(dynamic raw);
 
   @protected
   CameraParams dco_decode_camera_params(dynamic raw);
@@ -1347,6 +1357,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
 
   @protected
+  BuildingParams sse_decode_box_autoadd_building_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CameraParams sse_decode_box_autoadd_camera_params(
     SseDeserializer deserializer,
   );
@@ -1603,6 +1618,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   sse_decode_box_autoadd_windows_game_registry_searcher_config(
     SseDeserializer deserializer,
   );
+
+  @protected
+  BuildingParams sse_decode_building_params(SseDeserializer deserializer);
 
   @protected
   CameraParams sse_decode_camera_params(SseDeserializer deserializer);
@@ -2750,6 +2768,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_building_params(
+    BuildingParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_camera_params(
     CameraParams self,
     SseSerializer serializer,
@@ -3067,6 +3091,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_windows_game_registry_searcher_config(
     WindowsGameRegistrySearcherConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_building_params(
+    BuildingParams self,
     SseSerializer serializer,
   );
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_persistent_state.dart';
@@ -9,6 +9,7 @@ part of 'app_persistent_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $AppPersistentStateCopyWith<AppPersistentState> get copyWith => _$AppPersistentS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppPersistentState&&(identical(other.isAgreeAgreement, isAgreeAgreement) || other.isAgreeAgreement == isAgreeAgreement)&&(identical(other.isInitialStartup, isInitialStartup) || other.isInitialStartup == isInitialStartup)&&(identical(other.lang, lang) || other.lang == lang)&&(identical(other.theme, theme) || other.theme == theme)&&const DeepCollectionEquality().equals(other.unknownField, unknownField));
+  final _this = this as AppPersistentState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppPersistentState&&(identical(other.isAgreeAgreement, _this.isAgreeAgreement) || other.isAgreeAgreement == _this.isAgreeAgreement)&&(identical(other.isInitialStartup, _this.isInitialStartup) || other.isInitialStartup == _this.isInitialStartup)&&(identical(other.lang, _this.lang) || other.lang == _this.lang)&&(identical(other.theme, _this.theme) || other.theme == _this.theme)&&const DeepCollectionEquality().equals(other.unknownField, _this.unknownField));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isAgreeAgreement,isInitialStartup,lang,theme,const DeepCollectionEquality().hash(unknownField));
+int get hashCode {
+  final _this = this as AppPersistentState;
+  return Object.hash(runtimeType,_this.isAgreeAgreement,_this.isInitialStartup,_this.lang,_this.theme,const DeepCollectionEquality().hash(_this.unknownField));
+}
 
 @override
 String toString() {
-  return 'AppPersistentState(isAgreeAgreement: $isAgreeAgreement, isInitialStartup: $isInitialStartup, lang: $lang, theme: $theme, unknownField: $unknownField)';
+  final _this = this as AppPersistentState;
+  return 'AppPersistentState(isAgreeAgreement: ${_this.isAgreeAgreement}, isInitialStartup: ${_this.isInitialStartup}, lang: ${_this.lang}, theme: ${_this.theme}, unknownField: ${_this.unknownField})';
 }
 
 
@@ -63,7 +69,7 @@ class _$AppPersistentStateCopyWithImpl<$Res>
 /// Create a copy of AppPersistentState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? isAgreeAgreement = freezed,Object? isInitialStartup = freezed,Object? lang = freezed,Object? theme = freezed,Object? unknownField = null,}) {
-  return _then(_self.copyWith(
+  return _then(AppPersistentState(
 isAgreeAgreement: freezed == isAgreeAgreement ? _self.isAgreeAgreement : isAgreeAgreement // ignore: cast_nullable_to_non_nullable
 as bool?,isInitialStartup: freezed == isInitialStartup ? _self.isInitialStartup : isInitialStartup // ignore: cast_nullable_to_non_nullable
 as bool?,lang: freezed == lang ? _self.lang : lang // ignore: cast_nullable_to_non_nullable
@@ -204,7 +210,7 @@ return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.t
 
 
 class _AppPersistentState extends AppPersistentState {
-  const _AppPersistentState({this.isAgreeAgreement, this.isInitialStartup, this.lang, this.theme, required final  Map<String, String> unknownField}): _unknownField = unknownField,super._();
+  const _AppPersistentState({this.isAgreeAgreement, this.isInitialStartup, this.lang, this.theme, required  Map<String, String> unknownField}): _unknownField = unknownField,super._();
   
 
 @override final  bool? isAgreeAgreement;
@@ -229,16 +235,18 @@ _$AppPersistentStateCopyWith<_AppPersistentState> get copyWith => __$AppPersiste
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppPersistentState&&(identical(other.isAgreeAgreement, isAgreeAgreement) || other.isAgreeAgreement == isAgreeAgreement)&&(identical(other.isInitialStartup, isInitialStartup) || other.isInitialStartup == isInitialStartup)&&(identical(other.lang, lang) || other.lang == lang)&&(identical(other.theme, theme) || other.theme == theme)&&const DeepCollectionEquality().equals(other._unknownField, _unknownField));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppPersistentState&&(identical(other.isAgreeAgreement, isAgreeAgreement) || other.isAgreeAgreement == isAgreeAgreement)&&(identical(other.isInitialStartup, isInitialStartup) || other.isInitialStartup == isInitialStartup)&&(identical(other.lang, lang) || other.lang == lang)&&(identical(other.theme, theme) || other.theme == theme)&&const DeepCollectionEquality().equals(other.unknownField, _unknownField));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isAgreeAgreement,isInitialStartup,lang,theme,const DeepCollectionEquality().hash(_unknownField));
+int get hashCode {
+    return Object.hash(runtimeType,isAgreeAgreement,isInitialStartup,lang,theme,const DeepCollectionEquality().hash(_unknownField));
+}
 
 @override
 String toString() {
-  return 'AppPersistentState(isAgreeAgreement: $isAgreeAgreement, isInitialStartup: $isInitialStartup, lang: $lang, theme: $theme, unknownField: $unknownField)';
+    return 'AppPersistentState(isAgreeAgreement: $isAgreeAgreement, isInitialStartup: $isInitialStartup, lang: $lang, theme: $theme, unknownField: $unknownField)';
 }
 
 

@@ -7,7 +7,9 @@ import '../../frb_generated.dart';
 import 'cloth.dart';
 import 'eureka.dart';
 import 'nikki_photo_params.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+
 import 'world.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `ClockInPhotoMainParams`

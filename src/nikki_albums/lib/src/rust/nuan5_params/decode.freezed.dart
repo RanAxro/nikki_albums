@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'decode.dart';
@@ -9,6 +9,7 @@ part of 'decode.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,16 +21,21 @@ mixin _$ClothDiyParam {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as ClothDiyParam;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as ClothDiyParam;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'ClothDiyParam(field0: $field0)';
+  final _this = this as ClothDiyParam;
+  return 'ClothDiyParam(field0: ${_this.field0})';
 }
 
 
@@ -196,16 +202,18 @@ $ClothDiyParam_ClothDiyCopyWith<ClothDiyParam_ClothDiy> get copyWith => _$ClothD
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_ClothDiy&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_ClothDiy&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'ClothDiyParam.clothDiy(field0: $field0)';
+    return 'ClothDiyParam.clothDiy(field0: $field0)';
 }
 
 
@@ -247,7 +255,7 @@ as ClothDiyParams,
 
 
 class ClothDiyParam_DiyHistoryShareCode extends ClothDiyParam {
-  const ClothDiyParam_DiyHistoryShareCode(final  List<DiyHistoryShareCodeParams> field0): _field0 = field0,super._();
+  const ClothDiyParam_DiyHistoryShareCode( List<DiyHistoryShareCodeParams> field0): _field0 = field0,super._();
   
 
  final  List<DiyHistoryShareCodeParams> _field0;
@@ -268,16 +276,18 @@ $ClothDiyParam_DiyHistoryShareCodeCopyWith<ClothDiyParam_DiyHistoryShareCode> ge
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_DiyHistoryShareCode&&const DeepCollectionEquality().equals(other._field0, _field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_DiyHistoryShareCode&&const DeepCollectionEquality().equals(other.field0, _field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_field0));
+}
 
 @override
 String toString() {
-  return 'ClothDiyParam.diyHistoryShareCode(field0: $field0)';
+    return 'ClothDiyParam.diyHistoryShareCode(field0: $field0)';
 }
 
 
@@ -334,16 +344,18 @@ $ClothDiyParam_QrCodeCopyWith<ClothDiyParam_QrCode> get copyWith => _$ClothDiyPa
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_QrCode&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ClothDiyParam_QrCode&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'ClothDiyParam.qrCode(field0: $field0)';
+    return 'ClothDiyParam.qrCode(field0: $field0)';
 }
 
 
@@ -384,61 +396,35 @@ as ClothDiyQrCodeParams,
 /// @nodoc
 mixin _$HomeBuildParam {
 
- RichBuildingParams get field0;
-/// Create a copy of HomeBuildParam
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$HomeBuildParamCopyWith<HomeBuildParam> get copyWith => _$HomeBuildParamCopyWithImpl<HomeBuildParam>(this as HomeBuildParam, _$identity);
+ Object get field0;
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam&&(identical(other.field0, field0) || other.field0 == field0));
+  final _this = this as HomeBuildParam;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+  final _this = this as HomeBuildParam;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'HomeBuildParam(field0: $field0)';
+  final _this = this as HomeBuildParam;
+  return 'HomeBuildParam(field0: ${_this.field0})';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $HomeBuildParamCopyWith<$Res>  {
-  factory $HomeBuildParamCopyWith(HomeBuildParam value, $Res Function(HomeBuildParam) _then) = _$HomeBuildParamCopyWithImpl;
-@useResult
-$Res call({
- RichBuildingParams field0
-});
-
-
-
-
-}
-/// @nodoc
-class _$HomeBuildParamCopyWithImpl<$Res>
-    implements $HomeBuildParamCopyWith<$Res> {
-  _$HomeBuildParamCopyWithImpl(this._self, this._then);
-
-  final HomeBuildParam _self;
-  final $Res Function(HomeBuildParam) _then;
-
-/// Create a copy of HomeBuildParam
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? field0 = null,}) {
-  return _then(_self.copyWith(
-field0: null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as RichBuildingParams,
-  ));
-}
-
+class $HomeBuildParamCopyWith<$Res>  {
+$HomeBuildParamCopyWith(HomeBuildParam _, $Res Function(HomeBuildParam) __);
 }
 
 
@@ -456,11 +442,12 @@ extension HomeBuildParamPatterns on HomeBuildParam {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( HomeBuildParam_NetHomeBuild value)?  netHomeBuild,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( HomeBuildParam_NetHomeBuild value)?  netHomeBuild,TResult Function( HomeBuildParam_BuildData value)?  buildData,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
-return netHomeBuild(_that);case _:
+return netHomeBuild(_that);case HomeBuildParam_BuildData() when buildData != null:
+return buildData(_that);case _:
   return orElse();
 
 }
@@ -478,11 +465,12 @@ return netHomeBuild(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( HomeBuildParam_NetHomeBuild value)  netHomeBuild,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( HomeBuildParam_NetHomeBuild value)  netHomeBuild,required TResult Function( HomeBuildParam_BuildData value)  buildData,}){
 final _that = this;
 switch (_that) {
 case HomeBuildParam_NetHomeBuild():
-return netHomeBuild(_that);}
+return netHomeBuild(_that);case HomeBuildParam_BuildData():
+return buildData(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -496,11 +484,12 @@ return netHomeBuild(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( HomeBuildParam_NetHomeBuild value)?  netHomeBuild,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( HomeBuildParam_NetHomeBuild value)?  netHomeBuild,TResult? Function( HomeBuildParam_BuildData value)?  buildData,}){
 final _that = this;
 switch (_that) {
 case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
-return netHomeBuild(_that);case _:
+return netHomeBuild(_that);case HomeBuildParam_BuildData() when buildData != null:
+return buildData(_that);case _:
   return null;
 
 }
@@ -517,10 +506,11 @@ return netHomeBuild(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( RichBuildingParams field0)?  netHomeBuild,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( RichBuildingParams field0)?  netHomeBuild,TResult Function( BuildingParams field0)?  buildData,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
-return netHomeBuild(_that.field0);case _:
+return netHomeBuild(_that.field0);case HomeBuildParam_BuildData() when buildData != null:
+return buildData(_that.field0);case _:
   return orElse();
 
 }
@@ -538,10 +528,11 @@ return netHomeBuild(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( RichBuildingParams field0)  netHomeBuild,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( RichBuildingParams field0)  netHomeBuild,required TResult Function( BuildingParams field0)  buildData,}) {final _that = this;
 switch (_that) {
 case HomeBuildParam_NetHomeBuild():
-return netHomeBuild(_that.field0);}
+return netHomeBuild(_that.field0);case HomeBuildParam_BuildData():
+return buildData(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -555,10 +546,11 @@ return netHomeBuild(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( RichBuildingParams field0)?  netHomeBuild,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( RichBuildingParams field0)?  netHomeBuild,TResult? Function( BuildingParams field0)?  buildData,}) {final _that = this;
 switch (_that) {
 case HomeBuildParam_NetHomeBuild() when netHomeBuild != null:
-return netHomeBuild(_that.field0);case _:
+return netHomeBuild(_that.field0);case HomeBuildParam_BuildData() when buildData != null:
+return buildData(_that.field0);case _:
   return null;
 
 }
@@ -577,7 +569,7 @@ class HomeBuildParam_NetHomeBuild extends HomeBuildParam {
 
 /// Create a copy of HomeBuildParam
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $HomeBuildParam_NetHomeBuildCopyWith<HomeBuildParam_NetHomeBuild> get copyWith => _$HomeBuildParam_NetHomeBuildCopyWithImpl<HomeBuildParam_NetHomeBuild>(this, _$identity);
 
@@ -585,16 +577,18 @@ $HomeBuildParam_NetHomeBuildCopyWith<HomeBuildParam_NetHomeBuild> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam_NetHomeBuild&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam_NetHomeBuild&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'HomeBuildParam.netHomeBuild(field0: $field0)';
+    return 'HomeBuildParam.netHomeBuild(field0: $field0)';
 }
 
 
@@ -603,7 +597,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $HomeBuildParam_NetHomeBuildCopyWith<$Res> implements $HomeBuildParamCopyWith<$Res> {
   factory $HomeBuildParam_NetHomeBuildCopyWith(HomeBuildParam_NetHomeBuild value, $Res Function(HomeBuildParam_NetHomeBuild) _then) = _$HomeBuildParam_NetHomeBuildCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  RichBuildingParams field0
 });
@@ -622,10 +616,78 @@ class _$HomeBuildParam_NetHomeBuildCopyWithImpl<$Res>
 
 /// Create a copy of HomeBuildParam
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
   return _then(HomeBuildParam_NetHomeBuild(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
 as RichBuildingParams,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class HomeBuildParam_BuildData extends HomeBuildParam {
+  const HomeBuildParam_BuildData(this.field0): super._();
+  
+
+@override final  BuildingParams field0;
+
+/// Create a copy of HomeBuildParam
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HomeBuildParam_BuildDataCopyWith<HomeBuildParam_BuildData> get copyWith => _$HomeBuildParam_BuildDataCopyWithImpl<HomeBuildParam_BuildData>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBuildParam_BuildData&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
+
+@override
+String toString() {
+    return 'HomeBuildParam.buildData(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HomeBuildParam_BuildDataCopyWith<$Res> implements $HomeBuildParamCopyWith<$Res> {
+  factory $HomeBuildParam_BuildDataCopyWith(HomeBuildParam_BuildData value, $Res Function(HomeBuildParam_BuildData) _then) = _$HomeBuildParam_BuildDataCopyWithImpl;
+@useResult
+$Res call({
+ BuildingParams field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$HomeBuildParam_BuildDataCopyWithImpl<$Res>
+    implements $HomeBuildParam_BuildDataCopyWith<$Res> {
+  _$HomeBuildParam_BuildDataCopyWithImpl(this._self, this._then);
+
+  final HomeBuildParam_BuildData _self;
+  final $Res Function(HomeBuildParam_BuildData) _then;
+
+/// Create a copy of HomeBuildParam
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(HomeBuildParam_BuildData(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as BuildingParams,
   ));
 }
 
@@ -641,7 +703,7 @@ mixin _$MediaCustomData {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaCustomData);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaCustomData);
 }
 
 
@@ -650,7 +712,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MediaCustomData()';
+    return 'MediaCustomData()';
 }
 
 
@@ -806,7 +868,7 @@ class MediaCustomData_Invalid extends MediaCustomData {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaCustomData_Invalid);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaCustomData_Invalid);
 }
 
 
@@ -815,7 +877,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MediaCustomData.invalid()';
+    return 'MediaCustomData.invalid()';
 }
 
 
@@ -843,16 +905,18 @@ $MediaCustomData_ValidCopyWith<MediaCustomData_Valid> get copyWith => _$MediaCus
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaCustomData_Valid&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaCustomData_Valid&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaCustomData.valid(field0: $field0)';
+    return 'MediaCustomData.valid(field0: $field0)';
 }
 
 
@@ -908,16 +972,21 @@ mixin _$MediaParam {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as MediaParam;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as MediaParam;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'MediaParam(field0: $field0)';
+  final _this = this as MediaParam;
+  return 'MediaParam(field0: ${_this.field0})';
 }
 
 
@@ -1096,16 +1165,18 @@ $MediaParam_CameraParamsCopyWith<MediaParam_CameraParams> get copyWith => _$Medi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_CameraParams&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_CameraParams&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaParam.cameraParams(field0: $field0)';
+    return 'MediaParam.cameraParams(field0: $field0)';
 }
 
 
@@ -1162,16 +1233,18 @@ $MediaParam_NikkiPhotoCopyWith<MediaParam_NikkiPhoto> get copyWith => _$MediaPar
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_NikkiPhoto&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_NikkiPhoto&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaParam.nikkiPhoto(field0: $field0)';
+    return 'MediaParam.nikkiPhoto(field0: $field0)';
 }
 
 
@@ -1228,16 +1301,18 @@ $MediaParam_ClockInPhotoCopyWith<MediaParam_ClockInPhoto> get copyWith => _$Medi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_ClockInPhoto&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_ClockInPhoto&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaParam.clockInPhoto(field0: $field0)';
+    return 'MediaParam.clockInPhoto(field0: $field0)';
 }
 
 
@@ -1294,16 +1369,18 @@ $MediaParam_CollageCopyWith<MediaParam_Collage> get copyWith => _$MediaParam_Col
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_Collage&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_Collage&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaParam.collage(field0: $field0)';
+    return 'MediaParam.collage(field0: $field0)';
 }
 
 
@@ -1360,16 +1437,18 @@ $MediaParam_DIYCopyWith<MediaParam_DIY> get copyWith => _$MediaParam_DIYCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_DIY&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaParam_DIY&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'MediaParam.diy(field0: $field0)';
+    return 'MediaParam.diy(field0: $field0)';
 }
 
 
