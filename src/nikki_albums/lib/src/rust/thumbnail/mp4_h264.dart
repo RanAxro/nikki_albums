@@ -5,6 +5,7 @@
 
 import '../frb_generated.dart';
 import '../thumbnail.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 /// 生成 MP4 H.264 缩略图

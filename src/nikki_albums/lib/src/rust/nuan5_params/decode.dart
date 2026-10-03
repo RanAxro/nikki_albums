@@ -5,8 +5,10 @@
 
 import '../frb_generated.dart';
 import 'decrypt.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+
 import 'structs/building_params.dart';
 import 'structs/camera_params.dart';
 import 'structs/clock_in_photo_params.dart';
@@ -144,12 +146,14 @@ sealed class HomeBuildParam with _$HomeBuildParam {
 
   const factory HomeBuildParam.netHomeBuild(RichBuildingParams field0) =
       HomeBuildParam_NetHomeBuild;
+  const factory HomeBuildParam.buildData(BuildingParams field0) =
+      HomeBuildParam_BuildData;
 }
 
 /// ============================================================
 /// HomeBuild
 /// ============================================================
-enum HomeBuildParamType { netHomeBuild }
+enum HomeBuildParamType { netHomeBuild, buildData }
 
 @freezed
 sealed class MediaCustomData with _$MediaCustomData {

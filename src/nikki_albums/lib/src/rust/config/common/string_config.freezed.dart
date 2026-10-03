@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'string_config.dart';
@@ -9,6 +9,7 @@ part of 'string_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,16 +21,21 @@ mixin _$StringProcessConfig {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as StringProcessConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as StringProcessConfig;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'StringProcessConfig(field0: $field0)';
+  final _this = this as StringProcessConfig;
+  return 'StringProcessConfig(field0: ${_this.field0})';
 }
 
 
@@ -202,16 +208,18 @@ $StringProcessConfig_JoinCopyWith<StringProcessConfig_Join> get copyWith => _$St
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_Join&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_Join&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'StringProcessConfig.join(field0: $field0)';
+    return 'StringProcessConfig.join(field0: $field0)';
 }
 
 
@@ -268,16 +276,18 @@ $StringProcessConfig_MatchCopyWith<StringProcessConfig_Match> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_Match&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_Match&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'StringProcessConfig.match(field0: $field0)';
+    return 'StringProcessConfig.match(field0: $field0)';
 }
 
 
@@ -334,16 +344,18 @@ $StringProcessConfig_ReplaceCopyWith<StringProcessConfig_Replace> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_Replace&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_Replace&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'StringProcessConfig.replace(field0: $field0)';
+    return 'StringProcessConfig.replace(field0: $field0)';
 }
 
 
@@ -400,16 +412,18 @@ $StringProcessConfig_ReplaceAllCopyWith<StringProcessConfig_ReplaceAll> get copy
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_ReplaceAll&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StringProcessConfig_ReplaceAll&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'StringProcessConfig.replaceAll(field0: $field0)';
+    return 'StringProcessConfig.replaceAll(field0: $field0)';
 }
 
 

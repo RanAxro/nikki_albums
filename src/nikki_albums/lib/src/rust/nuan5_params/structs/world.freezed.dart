@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'world.dart';
@@ -9,6 +9,7 @@ part of 'world.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $LocationCopyWith<Location> get copyWith => _$LocationCopyWithImpl<Location>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Location&&(identical(other.dimension, dimension) || other.dimension == dimension)&&(identical(other.subarea, subarea) || other.subarea == subarea));
+  final _this = this as Location;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Location&&(identical(other.dimension, _this.dimension) || other.dimension == _this.dimension)&&(identical(other.subarea, _this.subarea) || other.subarea == _this.subarea));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dimension,subarea);
+int get hashCode {
+  final _this = this as Location;
+  return Object.hash(runtimeType,_this.dimension,_this.subarea);
+}
 
 @override
 String toString() {
-  return 'Location(dimension: $dimension, subarea: $subarea)';
+  final _this = this as Location;
+  return 'Location(dimension: ${_this.dimension}, subarea: ${_this.subarea})';
 }
 
 
@@ -226,16 +232,18 @@ $Location_StandardCopyWith<Location_Standard> get copyWith => _$Location_Standar
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Location_Standard&&(identical(other.dimension, dimension) || other.dimension == dimension)&&(identical(other.nation, nation) || other.nation == nation)&&(identical(other.region, region) || other.region == region)&&(identical(other.area, area) || other.area == area)&&(identical(other.subarea, subarea) || other.subarea == subarea));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Location_Standard&&(identical(other.dimension, dimension) || other.dimension == dimension)&&(identical(other.nation, nation) || other.nation == nation)&&(identical(other.region, region) || other.region == region)&&(identical(other.area, area) || other.area == area)&&(identical(other.subarea, subarea) || other.subarea == subarea));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dimension,nation,region,area,subarea);
+int get hashCode {
+    return Object.hash(runtimeType,dimension,nation,region,area,subarea);
+}
 
 @override
 String toString() {
-  return 'Location.standard(dimension: $dimension, nation: $nation, region: $region, area: $area, subarea: $subarea)';
+    return 'Location.standard(dimension: $dimension, nation: $nation, region: $region, area: $area, subarea: $subarea)';
 }
 
 
@@ -297,16 +305,18 @@ $Location_SpecialCopyWith<Location_Special> get copyWith => _$Location_SpecialCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Location_Special&&(identical(other.dimension, dimension) || other.dimension == dimension)&&(identical(other.subarea, subarea) || other.subarea == subarea));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Location_Special&&(identical(other.dimension, dimension) || other.dimension == dimension)&&(identical(other.subarea, subarea) || other.subarea == subarea));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dimension,subarea);
+int get hashCode {
+    return Object.hash(runtimeType,dimension,subarea);
+}
 
 @override
 String toString() {
-  return 'Location.special(dimension: $dimension, subarea: $subarea)';
+    return 'Location.special(dimension: $dimension, subarea: $subarea)';
 }
 
 

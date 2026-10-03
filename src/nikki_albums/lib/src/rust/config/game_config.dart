@@ -8,6 +8,7 @@ import 'common/file_reader_config.dart';
 import 'common/string_config.dart';
 import 'common/text_config.dart';
 import 'common/windows_registry_config.dart';
+
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'game_config.freezed.dart';

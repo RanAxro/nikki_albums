@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'text_config.dart';
@@ -9,6 +9,7 @@ part of 'text_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,16 +21,21 @@ mixin _$TextConfig {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TextConfig&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as TextConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TextConfig&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as TextConfig;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'TextConfig(field0: $field0)';
+  final _this = this as TextConfig;
+  return 'TextConfig(field0: ${_this.field0})';
 }
 
 
@@ -190,16 +196,18 @@ $TextConfig_LiteralCopyWith<TextConfig_Literal> get copyWith => _$TextConfig_Lit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TextConfig_Literal&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TextConfig_Literal&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'TextConfig.literal(field0: $field0)';
+    return 'TextConfig.literal(field0: $field0)';
 }
 
 
@@ -256,16 +264,18 @@ $TextConfig_TranslateCopyWith<TextConfig_Translate> get copyWith => _$TextConfig
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TextConfig_Translate&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TextConfig_Translate&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'TextConfig.translate(field0: $field0)';
+    return 'TextConfig.translate(field0: $field0)';
 }
 
 
