@@ -3461,6 +3461,16 @@ impl SseDecode for bool {
     }
 }
 
+impl SseDecode for crate::nuan5_params::structs::building_params::BuildingParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_furnitureCount = <i32>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::building_params::BuildingParams {
+            furniture_count: var_furnitureCount,
+        };
+    }
+}
+
 impl SseDecode for crate::nuan5_params::structs::camera_params::CameraParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4031,6 +4041,13 @@ impl SseDecode for crate::nuan5_params::decode::HomeBuildParam {
                     );
                 return crate::nuan5_params::decode::HomeBuildParam::NetHomeBuild(var_field0);
             }
+            1 => {
+                let mut var_field0 =
+                    <crate::nuan5_params::structs::building_params::BuildingParams>::sse_decode(
+                        deserializer,
+                    );
+                return crate::nuan5_params::decode::HomeBuildParam::BuildData(var_field0);
+            }
             _ => {
                 unimplemented!("");
             }
@@ -4044,6 +4061,7 @@ impl SseDecode for crate::nuan5_params::decode::HomeBuildParamType {
         let mut inner = <i32>::sse_decode(deserializer);
         return match inner {
             0 => crate::nuan5_params::decode::HomeBuildParamType::NetHomeBuild,
+            1 => crate::nuan5_params::decode::HomeBuildParamType::BuildData,
             _ => unreachable!("Invalid variant for HomeBuildParamType: {}", inner),
         };
     }
@@ -7588,6 +7606,26 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Area
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::building_params::BuildingParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.furniture_count.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::building_params::BuildingParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::building_params::BuildingParams>
+    for crate::nuan5_params::structs::building_params::BuildingParams
+{
+    fn into_into_dart(self) -> crate::nuan5_params::structs::building_params::BuildingParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::camera_params::CameraParams {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -8344,6 +8382,9 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::HomeBuildPar
             crate::nuan5_params::decode::HomeBuildParam::NetHomeBuild(field0) => {
                 [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
+            crate::nuan5_params::decode::HomeBuildParam::BuildData(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
             _ => {
                 unimplemented!("");
             }
@@ -8366,6 +8407,7 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_params::decode::HomeBuildPar
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
             Self::NetHomeBuild => 0.into_dart(),
+            Self::BuildData => 1.into_dart(),
             _ => unreachable!(),
         }
     }
@@ -10698,6 +10740,13 @@ impl SseEncode for bool {
     }
 }
 
+impl SseEncode for crate::nuan5_params::structs::building_params::BuildingParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.furniture_count, serializer);
+    }
+}
+
 impl SseEncode for crate::nuan5_params::structs::camera_params::CameraParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11173,6 +11222,12 @@ impl SseEncode for crate::nuan5_params::decode::HomeBuildParam {
                     field0, serializer,
                 );
             }
+            crate::nuan5_params::decode::HomeBuildParam::BuildData(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <crate::nuan5_params::structs::building_params::BuildingParams>::sse_encode(
+                    field0, serializer,
+                );
+            }
             _ => {
                 unimplemented!("");
             }
@@ -11186,6 +11241,7 @@ impl SseEncode for crate::nuan5_params::decode::HomeBuildParamType {
         <i32>::sse_encode(
             match self {
                 crate::nuan5_params::decode::HomeBuildParamType::NetHomeBuild => 0,
+                crate::nuan5_params::decode::HomeBuildParamType::BuildData => 1,
                 _ => {
                     unimplemented!("");
                 }
