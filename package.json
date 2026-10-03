@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build:icons": "node scripts/build_icons/build_icons.mjs"
+  }
+}
