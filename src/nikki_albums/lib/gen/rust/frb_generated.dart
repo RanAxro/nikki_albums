@@ -4,6 +4,10 @@
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
 import 'api/simple.dart';
+import 'archive/archive.dart';
+import 'archive/error.dart';
+import 'archive/file.dart';
+import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
 import 'config/common/file_reader_config.dart';
 import 'config/common/string_config.dart';
@@ -97,7 +101,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -1345561548;
+  int get rustContentHash => 527557423;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -135,6 +139,171 @@ abstract class RustLibApi extends BaseApi {
 
   MediaKey crateNuan5ParamsDecryptMediaKeyFromStrBytes({
     required List<int> bytes,
+  });
+
+  Future<String> crateArchiveZipZipArchiveZipArchiveComment({
+    required ZipArchive that,
+  });
+
+  Future<bool> crateArchiveZipZipArchiveZipArchiveContains({
+    required ZipArchive that,
+    required String name,
+  });
+
+  Future<ZipArchive> crateArchiveZipZipArchiveZipArchiveCreate({
+    required String path,
+    required bool overwrite,
+  });
+
+  Future<List<ArchiveFileStat>> crateArchiveZipZipArchiveZipArchiveEntries({
+    required ZipArchive that,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractAll({
+    required ZipArchive that,
+    required String directory,
+    required bool overwrite,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractAllWithPassword({
+    required ZipArchive that,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+    required String destination,
+    required bool overwrite,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByIndexWithPassword({
+    required ZipArchive that,
+    required BigInt fileNumber,
+    required String destination,
+    required bool overwrite,
+    required String password,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByName({
+    required ZipArchive that,
+    required String name,
+    required String destination,
+    required bool overwrite,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByNameWithPassword({
+    required ZipArchive that,
+    required String name,
+    required String destination,
+    required bool overwrite,
+    required String password,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractMultiByIndex({
+    required ZipArchive that,
+    required Uint64List fileNumbers,
+    required String directory,
+    required bool overwrite,
+  });
+
+  Future<void>
+  crateArchiveZipZipArchiveZipArchiveExtractMultiByIndexWithPassword({
+    required ZipArchive that,
+    required Uint64List fileNumbers,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  });
+
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractMultiByName({
+    required ZipArchive that,
+    required List<String> names,
+    required String directory,
+    required bool overwrite,
+  });
+
+  Future<void>
+  crateArchiveZipZipArchiveZipArchiveExtractMultiByNameWithPassword({
+    required ZipArchive that,
+    required List<String> names,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  });
+
+  Future<List<String>> crateArchiveZipZipArchiveZipArchiveFilenames({
+    required ZipArchive that,
+  });
+
+  Future<BigInt?> crateArchiveZipZipArchiveZipArchiveIndexOf({
+    required ZipArchive that,
+    required String name,
+  });
+
+  Future<bool> crateArchiveZipZipArchiveZipArchiveIsEmpty({
+    required ZipArchive that,
+  });
+
+  Future<BigInt> crateArchiveZipZipArchiveZipArchiveLen({
+    required ZipArchive that,
+  });
+
+  Future<ZipArchive> crateArchiveZipZipArchiveZipArchiveOpen({
+    required String path,
+    required bool autoCreate,
+  });
+
+  Future<ZipArchive> crateArchiveZipZipArchiveZipArchiveOpenExisting({
+    required String path,
+  });
+
+  Future<String> crateArchiveZipZipArchiveZipArchivePath({
+    required ZipArchive that,
+  });
+
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+  });
+
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByIndexWithPassword({
+    required ZipArchive that,
+    required BigInt fileNumber,
+    required String password,
+  });
+
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByName({
+    required ZipArchive that,
+    required String name,
+  });
+
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByNameWithPassword({
+    required ZipArchive that,
+    required String name,
+    required String password,
+  });
+
+  Future<String> crateArchiveZipZipArchiveZipArchiveReadStringByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+  });
+
+  Future<String> crateArchiveZipZipArchiveZipArchiveReadStringByName({
+    required ZipArchive that,
+    required String name,
+  });
+
+  Future<ArchiveFileStat> crateArchiveZipZipArchiveZipArchiveStatByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+  });
+
+  Future<ArchiveFileStat> crateArchiveZipZipArchiveZipArchiveStatByName({
+    required ZipArchive that,
+    required String name,
   });
 
   AppPersistentState? crateConfigAppPersistentStateAppPersistentStateFromJson({
@@ -428,6 +597,14 @@ abstract class RustLibApi extends BaseApi {
   get rust_arc_decrement_strong_count_MediaKey;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_MediaKeyPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_ZipArchive;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_ZipArchive;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ZipArchivePtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -671,6 +848,1155 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<String> crateArchiveZipZipArchiveZipArchiveComment({
+    required ZipArchive that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 38,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveCommentConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveCommentConstMeta =>
+      const TaskConstMeta(debugName: "ZipArchive_comment", argNames: ["that"]);
+
+  @override
+  Future<bool> crateArchiveZipZipArchiveZipArchiveContains({
+    required ZipArchive that,
+    required String name,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 39,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveContainsConstMeta,
+        argValues: [that, name],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveContainsConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_contains",
+        argNames: ["that", "name"],
+      );
+
+  @override
+  Future<ZipArchive> crateArchiveZipZipArchiveZipArchiveCreate({
+    required String path,
+    required bool overwrite,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(path, serializer);
+          sse_encode_bool(overwrite, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 40,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveCreateConstMeta,
+        argValues: [path, overwrite],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveCreateConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_create",
+        argNames: ["path", "overwrite"],
+      );
+
+  @override
+  Future<List<ArchiveFileStat>> crateArchiveZipZipArchiveZipArchiveEntries({
+    required ZipArchive that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 41,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_archive_file_stat,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveEntriesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveEntriesConstMeta =>
+      const TaskConstMeta(debugName: "ZipArchive_entries", argNames: ["that"]);
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractAll({
+    required ZipArchive that,
+    required String directory,
+    required bool overwrite,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(directory, serializer);
+          sse_encode_bool(overwrite, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 42,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveExtractAllConstMeta,
+        argValues: [that, directory, overwrite],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveExtractAllConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_all",
+        argNames: ["that", "directory", "overwrite"],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractAllWithPassword({
+    required ZipArchive that,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(directory, serializer);
+          sse_encode_bool(overwrite, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 43,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractAllWithPasswordConstMeta,
+        argValues: [that, directory, overwrite, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractAllWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_all_with_password",
+        argNames: ["that", "directory", "overwrite", "password"],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+    required String destination,
+    required bool overwrite,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_usize(fileNumber, serializer);
+          sse_encode_String(destination, serializer);
+          sse_encode_bool(overwrite, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 44,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveExtractByIndexConstMeta,
+        argValues: [that, fileNumber, destination, overwrite],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractByIndexConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_by_index",
+        argNames: ["that", "fileNumber", "destination", "overwrite"],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByIndexWithPassword({
+    required ZipArchive that,
+    required BigInt fileNumber,
+    required String destination,
+    required bool overwrite,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_usize(fileNumber, serializer);
+          sse_encode_String(destination, serializer);
+          sse_encode_bool(overwrite, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 45,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractByIndexWithPasswordConstMeta,
+        argValues: [that, fileNumber, destination, overwrite, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractByIndexWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_by_index_with_password",
+        argNames: [
+          "that",
+          "fileNumber",
+          "destination",
+          "overwrite",
+          "password",
+        ],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByName({
+    required ZipArchive that,
+    required String name,
+    required String destination,
+    required bool overwrite,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          sse_encode_String(destination, serializer);
+          sse_encode_bool(overwrite, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 46,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveExtractByNameConstMeta,
+        argValues: [that, name, destination, overwrite],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractByNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_by_name",
+        argNames: ["that", "name", "destination", "overwrite"],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractByNameWithPassword({
+    required ZipArchive that,
+    required String name,
+    required String destination,
+    required bool overwrite,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          sse_encode_String(destination, serializer);
+          sse_encode_bool(overwrite, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 47,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractByNameWithPasswordConstMeta,
+        argValues: [that, name, destination, overwrite, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractByNameWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_by_name_with_password",
+        argNames: ["that", "name", "destination", "overwrite", "password"],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractMultiByIndex({
+    required ZipArchive that,
+    required Uint64List fileNumbers,
+    required String directory,
+    required bool overwrite,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_list_prim_usize_strict(fileNumbers, serializer);
+          sse_encode_String(directory, serializer);
+          sse_encode_bool(overwrite, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 48,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractMultiByIndexConstMeta,
+        argValues: [that, fileNumbers, directory, overwrite],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractMultiByIndexConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_multi_by_index",
+        argNames: ["that", "fileNumbers", "directory", "overwrite"],
+      );
+
+  @override
+  Future<void>
+  crateArchiveZipZipArchiveZipArchiveExtractMultiByIndexWithPassword({
+    required ZipArchive that,
+    required Uint64List fileNumbers,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_list_prim_usize_strict(fileNumbers, serializer);
+          sse_encode_String(directory, serializer);
+          sse_encode_bool(overwrite, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 49,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractMultiByIndexWithPasswordConstMeta,
+        argValues: [that, fileNumbers, directory, overwrite, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractMultiByIndexWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_multi_by_index_with_password",
+        argNames: ["that", "fileNumbers", "directory", "overwrite", "password"],
+      );
+
+  @override
+  Future<void> crateArchiveZipZipArchiveZipArchiveExtractMultiByName({
+    required ZipArchive that,
+    required List<String> names,
+    required String directory,
+    required bool overwrite,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_list_String(names, serializer);
+          sse_encode_String(directory, serializer);
+          sse_encode_bool(overwrite, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 50,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractMultiByNameConstMeta,
+        argValues: [that, names, directory, overwrite],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractMultiByNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_multi_by_name",
+        argNames: ["that", "names", "directory", "overwrite"],
+      );
+
+  @override
+  Future<void>
+  crateArchiveZipZipArchiveZipArchiveExtractMultiByNameWithPassword({
+    required ZipArchive that,
+    required List<String> names,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_list_String(names, serializer);
+          sse_encode_String(directory, serializer);
+          sse_encode_bool(overwrite, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 51,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveExtractMultiByNameWithPasswordConstMeta,
+        argValues: [that, names, directory, overwrite, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveExtractMultiByNameWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_extract_multi_by_name_with_password",
+        argNames: ["that", "names", "directory", "overwrite", "password"],
+      );
+
+  @override
+  Future<List<String>> crateArchiveZipZipArchiveZipArchiveFilenames({
+    required ZipArchive that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 52,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveFilenamesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveFilenamesConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_filenames",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<BigInt?> crateArchiveZipZipArchiveZipArchiveIndexOf({
+    required ZipArchive that,
+    required String name,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 53,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_usize,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveIndexOfConstMeta,
+        argValues: [that, name],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveIndexOfConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_index_of",
+        argNames: ["that", "name"],
+      );
+
+  @override
+  Future<bool> crateArchiveZipZipArchiveZipArchiveIsEmpty({
+    required ZipArchive that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 54,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveIsEmptyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveIsEmptyConstMeta =>
+      const TaskConstMeta(debugName: "ZipArchive_is_empty", argNames: ["that"]);
+
+  @override
+  Future<BigInt> crateArchiveZipZipArchiveZipArchiveLen({
+    required ZipArchive that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 55,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_usize,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveLenConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveLenConstMeta =>
+      const TaskConstMeta(debugName: "ZipArchive_len", argNames: ["that"]);
+
+  @override
+  Future<ZipArchive> crateArchiveZipZipArchiveZipArchiveOpen({
+    required String path,
+    required bool autoCreate,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(path, serializer);
+          sse_encode_bool(autoCreate, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 56,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveOpenConstMeta,
+        argValues: [path, autoCreate],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveOpenConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_open",
+        argNames: ["path", "autoCreate"],
+      );
+
+  @override
+  Future<ZipArchive> crateArchiveZipZipArchiveZipArchiveOpenExisting({
+    required String path,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(path, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 57,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveOpenExistingConstMeta,
+        argValues: [path],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveOpenExistingConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_open_existing",
+        argNames: ["path"],
+      );
+
+  @override
+  Future<String> crateArchiveZipZipArchiveZipArchivePath({
+    required ZipArchive that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 58,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchivePathConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchivePathConstMeta =>
+      const TaskConstMeta(debugName: "ZipArchive_path", argNames: ["that"]);
+
+  @override
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_usize(fileNumber, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 59,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveReadByIndexConstMeta,
+        argValues: [that, fileNumber],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveReadByIndexConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_read_by_index",
+        argNames: ["that", "fileNumber"],
+      );
+
+  @override
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByIndexWithPassword({
+    required ZipArchive that,
+    required BigInt fileNumber,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_usize(fileNumber, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 60,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveReadByIndexWithPasswordConstMeta,
+        argValues: [that, fileNumber, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveReadByIndexWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_read_by_index_with_password",
+        argNames: ["that", "fileNumber", "password"],
+      );
+
+  @override
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByName({
+    required ZipArchive that,
+    required String name,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 61,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveReadByNameConstMeta,
+        argValues: [that, name],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveReadByNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_read_by_name",
+        argNames: ["that", "name"],
+      );
+
+  @override
+  Future<Uint8List> crateArchiveZipZipArchiveZipArchiveReadByNameWithPassword({
+    required ZipArchive that,
+    required String name,
+    required String password,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          sse_encode_String(password, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 62,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveReadByNameWithPasswordConstMeta,
+        argValues: [that, name, password],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveReadByNameWithPasswordConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_read_by_name_with_password",
+        argNames: ["that", "name", "password"],
+      );
+
+  @override
+  Future<String> crateArchiveZipZipArchiveZipArchiveReadStringByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_usize(fileNumber, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 63,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveReadStringByIndexConstMeta,
+        argValues: [that, fileNumber],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveReadStringByIndexConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_read_string_by_index",
+        argNames: ["that", "fileNumber"],
+      );
+
+  @override
+  Future<String> crateArchiveZipZipArchiveZipArchiveReadStringByName({
+    required ZipArchive that,
+    required String name,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 64,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta:
+            kCrateArchiveZipZipArchiveZipArchiveReadStringByNameConstMeta,
+        argValues: [that, name],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateArchiveZipZipArchiveZipArchiveReadStringByNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_read_string_by_name",
+        argNames: ["that", "name"],
+      );
+
+  @override
+  Future<ArchiveFileStat> crateArchiveZipZipArchiveZipArchiveStatByIndex({
+    required ZipArchive that,
+    required BigInt fileNumber,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_usize(fileNumber, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 65,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_archive_file_stat,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveStatByIndexConstMeta,
+        argValues: [that, fileNumber],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveStatByIndexConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_stat_by_index",
+        argNames: ["that", "fileNumber"],
+      );
+
+  @override
+  Future<ArchiveFileStat> crateArchiveZipZipArchiveZipArchiveStatByName({
+    required ZipArchive that,
+    required String name,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+            that,
+            serializer,
+          );
+          sse_encode_String(name, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 66,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_archive_file_stat,
+          decodeErrorData: sse_decode_archive_error,
+        ),
+        constMeta: kCrateArchiveZipZipArchiveZipArchiveStatByNameConstMeta,
+        argValues: [that, name],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateArchiveZipZipArchiveZipArchiveStatByNameConstMeta =>
+      const TaskConstMeta(
+        debugName: "ZipArchive_stat_by_name",
+        argNames: ["that", "name"],
+      );
+
+  @override
   AppPersistentState? crateConfigAppPersistentStateAppPersistentStateFromJson({
     required String json,
   }) {
@@ -679,7 +2005,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 67)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_app_persistent_state,
@@ -709,7 +2035,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_app_persistent_state(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 68)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -739,7 +2065,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_app_persistent_state(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -774,7 +2100,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 70,
             port: port_,
           );
         },
@@ -812,7 +2138,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 13,
+            funcId: 71,
             port: port_,
           );
         },
@@ -848,7 +2174,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 14,
+            funcId: 72,
             port: port_,
           );
         },
@@ -883,7 +2209,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 15,
+            funcId: 73,
             port: port_,
           );
         },
@@ -918,7 +2244,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 16,
+            funcId: 74,
             port: port_,
           );
         },
@@ -953,7 +2279,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 17,
+            funcId: 75,
             port: port_,
           );
         },
@@ -986,7 +2312,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 18,
+            funcId: 76,
             port: port_,
           );
         },
@@ -1016,7 +2342,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 77)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_file_reader_config,
@@ -1046,7 +2372,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_file_reader_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 78)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1076,7 +2402,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_file_reader_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 79)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1104,7 +2430,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 80)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_game_config,
@@ -1130,7 +2456,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_game_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 81)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1155,7 +2481,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_game_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 24)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 82)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1190,7 +2516,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 83,
             port: port_,
           );
         },
@@ -1227,7 +2553,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 26,
+            funcId: 84,
             port: port_,
           );
         },
@@ -1264,7 +2590,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 27,
+            funcId: 85,
             port: port_,
           );
         },
@@ -1292,7 +2618,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 28)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1325,7 +2651,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 29,
+            funcId: 87,
             port: port_,
           );
         },
@@ -1361,7 +2687,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 30,
+            funcId: 88,
             port: port_,
           );
         },
@@ -1391,7 +2717,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 31)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 89)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_hot_update_info,
@@ -1419,7 +2745,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_hot_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 32)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 90)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1447,7 +2773,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_hot_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 33)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 91)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -1475,7 +2801,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 34,
+            funcId: 92,
             port: port_,
           );
         },
@@ -1512,7 +2838,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 35,
+            funcId: 93,
             port: port_,
           );
         },
@@ -1552,7 +2878,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 36,
+            funcId: 94,
             port: port_,
           );
         },
@@ -1592,7 +2918,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 37,
+            funcId: 95,
             port: port_,
           );
         },
@@ -1629,7 +2955,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 38)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 96)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_media_custom_data,
@@ -1673,7 +2999,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 39,
+              funcId: 97,
               port: port_,
             );
           },
@@ -1712,7 +3038,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 40)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 98)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1752,7 +3078,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 41,
+            funcId: 99,
             port: port_,
           );
         },
@@ -1789,7 +3115,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 42)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 100,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1835,7 +3165,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 43,
+              funcId: 101,
               port: port_,
             );
           },
@@ -1879,7 +3209,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 44,
+            funcId: 102,
             port: port_,
           );
         },
@@ -1925,7 +3255,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 45,
+              funcId: 103,
               port: port_,
             );
           },
@@ -1964,7 +3294,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 46)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 104,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -1992,7 +3326,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_list_prim_u_8_loose(bytes, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 47)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 105,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -2025,7 +3363,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 48,
+            funcId: 106,
             port: port_,
           );
         },
@@ -2057,7 +3395,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 49,
+            funcId: 107,
             port: port_,
           );
         },
@@ -2084,7 +3422,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 50,
+            funcId: 108,
             port: port_,
           );
         },
@@ -2115,7 +3453,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 51,
+            funcId: 109,
             port: port_,
           );
         },
@@ -2146,7 +3484,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 52,
+            funcId: 110,
             port: port_,
           );
         },
@@ -2176,7 +3514,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 53,
+            funcId: 111,
             port: port_,
           );
         },
@@ -2204,7 +3542,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 54,
+            funcId: 112,
             port: port_,
           );
         },
@@ -2236,7 +3574,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 55,
+            funcId: 113,
             port: port_,
           );
         },
@@ -2263,7 +3601,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 56,
+            funcId: 114,
             port: port_,
           );
         },
@@ -2293,7 +3631,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 57,
+            funcId: 115,
             port: port_,
           );
         },
@@ -2324,7 +3662,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 58,
+            funcId: 116,
             port: port_,
           );
         },
@@ -2355,7 +3693,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 59,
+            funcId: 117,
             port: port_,
           );
         },
@@ -2385,7 +3723,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 60,
+            funcId: 118,
             port: port_,
           );
         },
@@ -2412,7 +3750,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 61,
+            funcId: 119,
             port: port_,
           );
         },
@@ -2442,7 +3780,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 62,
+            funcId: 120,
             port: port_,
           );
         },
@@ -2469,7 +3807,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 63,
+            funcId: 121,
             port: port_,
           );
         },
@@ -2496,7 +3834,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 64,
+            funcId: 122,
             port: port_,
           );
         },
@@ -2523,7 +3861,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 65,
+            funcId: 123,
             port: port_,
           );
         },
@@ -2554,7 +3892,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 66,
+            funcId: 124,
             port: port_,
           );
         },
@@ -2587,7 +3925,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 67,
+            funcId: 125,
             port: port_,
           );
         },
@@ -2618,7 +3956,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 68,
+            funcId: 126,
             port: port_,
           );
         },
@@ -2645,7 +3983,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 127,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_string_config,
@@ -2674,7 +4016,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_string_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 70)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 128,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2702,7 +4048,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_string_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 129,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2731,7 +4081,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 130,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -2756,7 +4110,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 73)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 131,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_text_config,
@@ -2784,7 +4142,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_text_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 74)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 132,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2809,7 +4171,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_text_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 75)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 133,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2836,7 +4202,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 76)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 134,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_update_info,
@@ -2862,7 +4232,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 77)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 135,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2885,7 +4259,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 78)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 136,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2928,6 +4306,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get rust_arc_decrement_strong_count_MediaKey => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey;
 
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_ZipArchive => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_ZipArchive => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive;
+
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -2962,6 +4348,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ZipArchive
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ZipArchive
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   ClothDiyShareCode
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     dynamic raw,
@@ -2986,6 +4390,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return MediaKeyImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ZipArchive
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -3196,6 +4609,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ZipArchive
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   RustStreamSink<MediaCustomDataResult>
   dco_decode_StreamSink_media_custom_data_result_Sse(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -3224,6 +4646,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Archive dco_decode_TraitDef_Archive(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError();
+  }
+
+  @protected
   AppPersistentState dco_decode_app_persistent_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3247,6 +4675,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return AppVersionHotUpdateInfo(
       min: dco_decode_i_32(arr[0]),
       max: dco_decode_i_32(arr[1]),
+    );
+  }
+
+  @protected
+  ArchiveError dco_decode_archive_error(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ArchiveError.values[raw as int];
+  }
+
+  @protected
+  ArchiveFileStat dco_decode_archive_file_stat(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 12)
+      throw Exception('unexpected arr length: expect 12 but see ${arr.length}');
+    return ArchiveFileStat(
+      isFile: dco_decode_bool(arr[0]),
+      isDir: dco_decode_bool(arr[1]),
+      isSymlink: dco_decode_bool(arr[2]),
+      isEncrypted: dco_decode_bool(arr[3]),
+      compressionMethod: dco_decode_u_16(arr[4]),
+      compressedSize: dco_decode_u_64(arr[5]),
+      size: dco_decode_u_64(arr[6]),
+      crc32: dco_decode_u_32(arr[7]),
+      unixMode: dco_decode_opt_box_autoadd_u_32(arr[8]),
+      changed: dco_decode_opt_box_autoadd_i_64(arr[9]),
+      modified: dco_decode_opt_box_autoadd_i_64(arr[10]),
+      accessed: dco_decode_opt_box_autoadd_i_64(arr[11]),
     );
   }
 
@@ -3607,6 +5063,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   UpdateInfo dco_decode_box_autoadd_update_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_update_info(raw);
+  }
+
+  @protected
+  BigInt dco_decode_box_autoadd_usize(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_usize(raw);
   }
 
   @protected
@@ -4127,6 +5589,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<ArchiveFileStat> dco_decode_list_archive_file_stat(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_archive_file_stat).toList();
+  }
+
+  @protected
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_cloth_params).toList();
@@ -4238,6 +5706,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
+  }
+
+  @protected
+  Uint64List dco_decode_list_prim_usize_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as Uint64List;
   }
 
   @protected
@@ -5161,6 +6635,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt? dco_decode_opt_box_autoadd_usize(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_usize(raw);
+  }
+
+  @protected
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_weapon_params(raw);
@@ -5846,6 +7326,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
+  }
+
+  @protected
   int dco_decode_u_8(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -6067,6 +7553,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ZipArchive
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  ZipArchive
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   ClothDiyShareCode
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     SseDeserializer deserializer,
@@ -6097,6 +7607,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return MediaKeyImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  ZipArchive
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -6314,6 +7836,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ZipArchive
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ZipArchiveImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   RustStreamSink<MediaCustomDataResult>
   sse_decode_StreamSink_media_custom_data_result_Sse(
     SseDeserializer deserializer,
@@ -6371,6 +7905,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_min = sse_decode_i_32(deserializer);
     var var_max = sse_decode_i_32(deserializer);
     return AppVersionHotUpdateInfo(min: var_min, max: var_max);
+  }
+
+  @protected
+  ArchiveError sse_decode_archive_error(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ArchiveError.values[inner];
+  }
+
+  @protected
+  ArchiveFileStat sse_decode_archive_file_stat(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_isFile = sse_decode_bool(deserializer);
+    var var_isDir = sse_decode_bool(deserializer);
+    var var_isSymlink = sse_decode_bool(deserializer);
+    var var_isEncrypted = sse_decode_bool(deserializer);
+    var var_compressionMethod = sse_decode_u_16(deserializer);
+    var var_compressedSize = sse_decode_u_64(deserializer);
+    var var_size = sse_decode_u_64(deserializer);
+    var var_crc32 = sse_decode_u_32(deserializer);
+    var var_unixMode = sse_decode_opt_box_autoadd_u_32(deserializer);
+    var var_changed = sse_decode_opt_box_autoadd_i_64(deserializer);
+    var var_modified = sse_decode_opt_box_autoadd_i_64(deserializer);
+    var var_accessed = sse_decode_opt_box_autoadd_i_64(deserializer);
+    return ArchiveFileStat(
+      isFile: var_isFile,
+      isDir: var_isDir,
+      isSymlink: var_isSymlink,
+      isEncrypted: var_isEncrypted,
+      compressionMethod: var_compressionMethod,
+      compressedSize: var_compressedSize,
+      size: var_size,
+      crc32: var_crc32,
+      unixMode: var_unixMode,
+      changed: var_changed,
+      modified: var_modified,
+      accessed: var_accessed,
+    );
   }
 
   @protected
@@ -6791,6 +8363,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   UpdateInfo sse_decode_box_autoadd_update_info(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_update_info(deserializer));
+  }
+
+  @protected
+  BigInt sse_decode_box_autoadd_usize(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_usize(deserializer));
   }
 
   @protected
@@ -7394,6 +8972,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<ArchiveFileStat> sse_decode_list_archive_file_stat(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <ArchiveFileStat>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_archive_file_stat(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -7588,6 +9180,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
+  Uint64List sse_decode_list_prim_usize_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var len_ = sse_decode_i_32(deserializer);
+    return deserializer.buffer.getUint64List(len_);
   }
 
   @protected
@@ -8929,6 +10528,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt? sse_decode_opt_box_autoadd_usize(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_usize(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   WeaponParams? sse_decode_opt_box_autoadd_weapon_params(
     SseDeserializer deserializer,
   ) {
@@ -9688,6 +11298,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
+  }
+
+  @protected
   int sse_decode_u_8(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint8();
@@ -9931,6 +11547,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ZipArchiveImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ZipArchiveImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     ClothDiyShareCode self,
     SseSerializer serializer,
@@ -9964,6 +11606,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as MediaKeyImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ZipArchiveImpl).frbInternalSseEncode(move: false),
       serializer,
     );
   }
@@ -10224,6 +11879,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ZipArchiveImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_StreamSink_media_custom_data_result_Sse(
     RustStreamSink<MediaCustomDataResult> self,
     SseSerializer serializer,
@@ -10301,6 +11969,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.min, serializer);
     sse_encode_i_32(self.max, serializer);
+  }
+
+  @protected
+  void sse_encode_archive_error(ArchiveError self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_archive_file_stat(
+    ArchiveFileStat self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.isFile, serializer);
+    sse_encode_bool(self.isDir, serializer);
+    sse_encode_bool(self.isSymlink, serializer);
+    sse_encode_bool(self.isEncrypted, serializer);
+    sse_encode_u_16(self.compressionMethod, serializer);
+    sse_encode_u_64(self.compressedSize, serializer);
+    sse_encode_u_64(self.size, serializer);
+    sse_encode_u_32(self.crc32, serializer);
+    sse_encode_opt_box_autoadd_u_32(self.unixMode, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.changed, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.modified, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.accessed, serializer);
   }
 
   @protected
@@ -10784,6 +12478,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_update_info(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_usize(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(self, serializer);
   }
 
   @protected
@@ -11278,6 +12978,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_archive_file_stat(
+    List<ArchiveFileStat> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_archive_file_stat(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_cloth_params(
     List<ClothParams> self,
     SseSerializer serializer,
@@ -11465,6 +13177,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
+  }
+
+  @protected
+  void sse_encode_list_prim_usize_strict(
+    Uint64List self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    serializer.buffer.putUint64List(self);
   }
 
   @protected
@@ -12670,6 +14392,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_usize(
+    BigInt? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_usize(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_weapon_params(
     WeaponParams? self,
     SseSerializer serializer,
@@ -13314,6 +15049,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
+  }
+
+  @protected
   void sse_encode_u_8(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint8(self);
@@ -13549,4 +15290,230 @@ class MediaKeyImpl extends RustOpaque implements MediaKey {
     rustArcDecrementStrongCountPtr:
         RustLib.instance.api.rust_arc_decrement_strong_count_MediaKeyPtr,
   );
+}
+
+@sealed
+class ZipArchiveImpl extends RustOpaque implements ZipArchive {
+  // Not to be used by end users
+  ZipArchiveImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  ZipArchiveImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_ZipArchive,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_ZipArchive,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_ZipArchivePtr,
+  );
+
+  Future<String> comment() => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveComment(that: this);
+
+  Future<bool> contains({required String name}) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveContains(that: this, name: name);
+
+  /// Return every entry and its metadata in archive order.
+  Future<List<ArchiveFileStat>> entries() => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveEntries(that: this);
+
+  Future<void> extractAll({
+    required String directory,
+    required bool overwrite,
+  }) => RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveExtractAll(
+    that: this,
+    directory: directory,
+    overwrite: overwrite,
+  );
+
+  Future<void> extractAllWithPassword({
+    required String directory,
+    required bool overwrite,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractAllWithPassword(
+        that: this,
+        directory: directory,
+        overwrite: overwrite,
+        password: password,
+      );
+
+  Future<void> extractByIndex({
+    required BigInt fileNumber,
+    required String destination,
+    required bool overwrite,
+  }) => RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveExtractByIndex(
+    that: this,
+    fileNumber: fileNumber,
+    destination: destination,
+    overwrite: overwrite,
+  );
+
+  Future<void> extractByIndexWithPassword({
+    required BigInt fileNumber,
+    required String destination,
+    required bool overwrite,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractByIndexWithPassword(
+        that: this,
+        fileNumber: fileNumber,
+        destination: destination,
+        overwrite: overwrite,
+        password: password,
+      );
+
+  /// Extract one entry to an exact file or directory path.
+  Future<void> extractByName({
+    required String name,
+    required String destination,
+    required bool overwrite,
+  }) => RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveExtractByName(
+    that: this,
+    name: name,
+    destination: destination,
+    overwrite: overwrite,
+  );
+
+  /// Extract one encrypted entry to an exact file or directory path.
+  Future<void> extractByNameWithPassword({
+    required String name,
+    required String destination,
+    required bool overwrite,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractByNameWithPassword(
+        that: this,
+        name: name,
+        destination: destination,
+        overwrite: overwrite,
+        password: password,
+      );
+
+  Future<void> extractMultiByIndex({
+    required Uint64List fileNumbers,
+    required String directory,
+    required bool overwrite,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractMultiByIndex(
+        that: this,
+        fileNumbers: fileNumbers,
+        directory: directory,
+        overwrite: overwrite,
+      );
+
+  Future<void> extractMultiByIndexWithPassword({
+    required Uint64List fileNumbers,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractMultiByIndexWithPassword(
+        that: this,
+        fileNumbers: fileNumbers,
+        directory: directory,
+        overwrite: overwrite,
+        password: password,
+      );
+
+  /// Extract selected entries below `directory` by exact archive name.
+  Future<void> extractMultiByName({
+    required List<String> names,
+    required String directory,
+    required bool overwrite,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractMultiByName(
+        that: this,
+        names: names,
+        directory: directory,
+        overwrite: overwrite,
+      );
+
+  /// Extract selected encrypted entries below `directory` by exact name.
+  Future<void> extractMultiByNameWithPassword({
+    required List<String> names,
+    required String directory,
+    required bool overwrite,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveExtractMultiByNameWithPassword(
+        that: this,
+        names: names,
+        directory: directory,
+        overwrite: overwrite,
+        password: password,
+      );
+
+  Future<List<String>> filenames() => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveFilenames(that: this);
+
+  Future<BigInt?> indexOf({required String name}) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveIndexOf(that: this, name: name);
+
+  Future<bool> isEmpty() => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveIsEmpty(that: this);
+
+  Future<BigInt> len() =>
+      RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveLen(that: this);
+
+  Future<String> path() =>
+      RustLib.instance.api.crateArchiveZipZipArchiveZipArchivePath(that: this);
+
+  Future<Uint8List> readByIndex({required BigInt fileNumber}) =>
+      RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveReadByIndex(
+        that: this,
+        fileNumber: fileNumber,
+      );
+
+  Future<Uint8List> readByIndexWithPassword({
+    required BigInt fileNumber,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveReadByIndexWithPassword(
+        that: this,
+        fileNumber: fileNumber,
+        password: password,
+      );
+
+  /// Read and decompress one entry by its exact archive name.
+  Future<Uint8List> readByName({required String name}) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveReadByName(that: this, name: name);
+
+  /// Read and decompress one encrypted entry by its exact archive name.
+  Future<Uint8List> readByNameWithPassword({
+    required String name,
+    required String password,
+  }) => RustLib.instance.api
+      .crateArchiveZipZipArchiveZipArchiveReadByNameWithPassword(
+        that: this,
+        name: name,
+        password: password,
+      );
+
+  Future<String> readStringByIndex({required BigInt fileNumber}) =>
+      RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveReadStringByIndex(
+        that: this,
+        fileNumber: fileNumber,
+      );
+
+  Future<String> readStringByName({required String name}) =>
+      RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveReadStringByName(
+        that: this,
+        name: name,
+      );
+
+  Future<ArchiveFileStat> statByIndex({required BigInt fileNumber}) =>
+      RustLib.instance.api.crateArchiveZipZipArchiveZipArchiveStatByIndex(
+        that: this,
+        fileNumber: fileNumber,
+      );
+
+  Future<ArchiveFileStat> statByName({required String name}) => RustLib
+      .instance
+      .api
+      .crateArchiveZipZipArchiveZipArchiveStatByName(that: this, name: name);
 }

@@ -26,6 +26,8 @@
 
 // Section: imports
 
+use crate::archive::archive::Archive;
+use crate::archive::zip::zip_archive::*;
 use crate::nuan5_params::decrypt::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
@@ -39,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1345561548;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 527557423;
 
 // Section: executor
 
@@ -344,6 +346,1417 @@ fn wire__crate__nuan5_params__decrypt__MediaKey_from_str_bytes_impl(
                 Ok(output_ok)
             })(
             ))
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_comment_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_comment",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::comment(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_contains_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_contains",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::contains(
+                            &*api_that_guard,
+                            &api_name,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_create_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_create",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::create(
+                        api_path,
+                        api_overwrite,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_entries_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_entries",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::entries(
+                        &mut *api_that_guard,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_all_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_extract_all",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_directory = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_all(
+                        &mut *api_that_guard,
+                        api_directory,
+                        api_overwrite,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_all_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_extract_all_with_password",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_directory = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            let api_password = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::extract_all_with_password(
+                            &mut *api_that_guard,
+                            api_directory,
+                            api_overwrite,
+                            api_password,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_index_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_extract_by_index",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_file_number = <usize>::sse_decode(&mut deserializer);
+            let api_destination = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_by_index(
+                        &mut *api_that_guard,
+                        api_file_number,
+                        api_destination,
+                        api_overwrite,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_index_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ZipArchive_extract_by_index_with_password", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { 
+            let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
+            let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>>::sse_decode(&mut deserializer);
+let api_file_number = <usize>::sse_decode(&mut deserializer);
+let api_destination = <String>::sse_decode(&mut deserializer);
+let api_overwrite = <bool>::sse_decode(&mut deserializer);
+let api_password = <String>::sse_decode(&mut deserializer);deserializer.end(); move |context|  {
+                    transform_result_sse::<_, crate::archive::error::ArchiveError>((move ||  {
+                        let mut api_that_guard = None;
+let decode_indices_ = flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(&api_that, 0, true)]);
+        for i in decode_indices_ {
+            match i {
+                0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                _ => unreachable!(),
+            }
+        }
+        let mut api_that_guard = api_that_guard.unwrap();
+ let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_by_index_with_password(&mut *api_that_guard, api_file_number, api_destination, api_overwrite, api_password)?;   Ok(output_ok)
+                    })())
+                } })
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_name_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_extract_by_name",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            let api_destination = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_by_name(
+                        &mut *api_that_guard,
+                        api_name,
+                        api_destination,
+                        api_overwrite,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_name_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ZipArchive_extract_by_name_with_password", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { 
+            let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
+            let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>>::sse_decode(&mut deserializer);
+let api_name = <String>::sse_decode(&mut deserializer);
+let api_destination = <String>::sse_decode(&mut deserializer);
+let api_overwrite = <bool>::sse_decode(&mut deserializer);
+let api_password = <String>::sse_decode(&mut deserializer);deserializer.end(); move |context|  {
+                    transform_result_sse::<_, crate::archive::error::ArchiveError>((move ||  {
+                        let mut api_that_guard = None;
+let decode_indices_ = flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(&api_that, 0, true)]);
+        for i in decode_indices_ {
+            match i {
+                0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                _ => unreachable!(),
+            }
+        }
+        let mut api_that_guard = api_that_guard.unwrap();
+ let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_by_name_with_password(&mut *api_that_guard, api_name, api_destination, api_overwrite, api_password)?;   Ok(output_ok)
+                    })())
+                } })
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_index_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_extract_multi_by_index",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_file_numbers = <Vec<usize>>::sse_decode(&mut deserializer);
+            let api_directory = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::extract_multi_by_index(
+                            &mut *api_that_guard,
+                            api_file_numbers,
+                            api_directory,
+                            api_overwrite,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_index_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ZipArchive_extract_multi_by_index_with_password", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { 
+            let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
+            let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>>::sse_decode(&mut deserializer);
+let api_file_numbers = <Vec<usize>>::sse_decode(&mut deserializer);
+let api_directory = <String>::sse_decode(&mut deserializer);
+let api_overwrite = <bool>::sse_decode(&mut deserializer);
+let api_password = <String>::sse_decode(&mut deserializer);deserializer.end(); move |context|  {
+                    transform_result_sse::<_, crate::archive::error::ArchiveError>((move ||  {
+                        let mut api_that_guard = None;
+let decode_indices_ = flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(&api_that, 0, true)]);
+        for i in decode_indices_ {
+            match i {
+                0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                _ => unreachable!(),
+            }
+        }
+        let mut api_that_guard = api_that_guard.unwrap();
+ let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_multi_by_index_with_password(&mut *api_that_guard, api_file_numbers, api_directory, api_overwrite, api_password)?;   Ok(output_ok)
+                    })())
+                } })
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_name_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_extract_multi_by_name",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_names = <Vec<String>>::sse_decode(&mut deserializer);
+            let api_directory = <String>::sse_decode(&mut deserializer);
+            let api_overwrite = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::extract_multi_by_name(
+                            &mut *api_that_guard,
+                            api_names,
+                            api_directory,
+                            api_overwrite,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_name_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ZipArchive_extract_multi_by_name_with_password", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { 
+            let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
+            let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>>::sse_decode(&mut deserializer);
+let api_names = <Vec<String>>::sse_decode(&mut deserializer);
+let api_directory = <String>::sse_decode(&mut deserializer);
+let api_overwrite = <bool>::sse_decode(&mut deserializer);
+let api_password = <String>::sse_decode(&mut deserializer);deserializer.end(); move |context|  {
+                    transform_result_sse::<_, crate::archive::error::ArchiveError>((move ||  {
+                        let mut api_that_guard = None;
+let decode_indices_ = flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(&api_that, 0, true)]);
+        for i in decode_indices_ {
+            match i {
+                0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                _ => unreachable!(),
+            }
+        }
+        let mut api_that_guard = api_that_guard.unwrap();
+ let output_ok = crate::archive::zip::zip_archive::ZipArchive::extract_multi_by_name_with_password(&mut *api_that_guard, api_names, api_directory, api_overwrite, api_password)?;   Ok(output_ok)
+                    })())
+                } })
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_filenames_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_filenames",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::filenames(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_index_of_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_index_of",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::index_of(
+                            &*api_that_guard,
+                            &api_name,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_is_empty_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_is_empty",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::is_empty(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_len_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_len",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::len(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_open_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_open",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            let api_auto_create = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::open(
+                        api_path,
+                        api_auto_create,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_open_existing_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_open_existing",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_path = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::open_existing(api_path)?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_path_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_path",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::archive::zip::zip_archive::ZipArchive::path(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_read_by_index_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_read_by_index",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_file_number = <usize>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::read_by_index(
+                        &mut *api_that_guard,
+                        api_file_number,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_read_by_index_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_read_by_index_with_password",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_file_number = <usize>::sse_decode(&mut deserializer);
+            let api_password = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::read_by_index_with_password(
+                            &mut *api_that_guard,
+                            api_file_number,
+                            api_password,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_read_by_name_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_read_by_name",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::read_by_name(
+                        &mut *api_that_guard,
+                        api_name,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_read_by_name_with_password_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_read_by_name_with_password",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            let api_password = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::read_by_name_with_password(
+                            &mut *api_that_guard,
+                            api_name,
+                            api_password,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_read_string_by_index_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_read_string_by_index",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_file_number = <usize>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::read_string_by_index(
+                            &mut *api_that_guard,
+                            api_file_number,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_read_string_by_name_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_read_string_by_name",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::archive::zip::zip_archive::ZipArchive::read_string_by_name(
+                            &mut *api_that_guard,
+                            api_name,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_stat_by_index_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_stat_by_index",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_file_number = <usize>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::stat_by_index(
+                        &mut *api_that_guard,
+                        api_file_number,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__archive__zip__zip_archive__ZipArchive_stat_by_name_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ZipArchive_stat_by_name",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
+            >>::sse_decode(&mut deserializer);
+            let api_name = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, crate::archive::error::ArchiveError>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, true,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let mut api_that_guard = api_that_guard.unwrap();
+                    let output_ok = crate::archive::zip::zip_archive::ZipArchive::stat_by_name(
+                        &mut *api_that_guard,
+                        api_name,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
         },
     )
 }
@@ -3104,6 +4517,9 @@ flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>
 );
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>
+);
 
 // Section: dart2rust
 
@@ -3140,6 +4556,16 @@ impl SseDecode for MediaKey {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <RustOpaqueMoi<
             flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for ZipArchive {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>,
         >>::sse_decode(deserializer);
         return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
     }
@@ -3352,6 +4778,16 @@ impl SseDecode
 }
 
 impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
     for StreamSink<
         crate::nuan5_params::decode::MediaCustomDataResult,
         flutter_rust_bridge::for_generated::SseCodec,
@@ -3425,6 +4861,60 @@ impl SseDecode for crate::config::hot_update::AppVersionHotUpdateInfo {
         return crate::config::hot_update::AppVersionHotUpdateInfo {
             min: var_min,
             max: var_max,
+        };
+    }
+}
+
+impl SseDecode for crate::archive::error::ArchiveError {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::archive::error::ArchiveError::Io,
+            1 => crate::archive::error::ArchiveError::InvalidArchive,
+            2 => crate::archive::error::ArchiveError::UnsupportedArchive,
+            3 => crate::archive::error::ArchiveError::FileNotFound,
+            4 => crate::archive::error::ArchiveError::InvalidPassword,
+            5 => crate::archive::error::ArchiveError::PasswordRequired,
+            6 => crate::archive::error::ArchiveError::CompressionMethodNotSupported,
+            7 => crate::archive::error::ArchiveError::InvalidEntryName,
+            8 => crate::archive::error::ArchiveError::EntryAlreadyExists,
+            9 => crate::archive::error::ArchiveError::DestinationExists,
+            10 => crate::archive::error::ArchiveError::InvalidUtf8,
+            11 => crate::archive::error::ArchiveError::Unknown,
+            _ => unreachable!("Invalid variant for ArchiveError: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::archive::file::ArchiveFileStat {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_isFile = <bool>::sse_decode(deserializer);
+        let mut var_isDir = <bool>::sse_decode(deserializer);
+        let mut var_isSymlink = <bool>::sse_decode(deserializer);
+        let mut var_isEncrypted = <bool>::sse_decode(deserializer);
+        let mut var_compressionMethod = <u16>::sse_decode(deserializer);
+        let mut var_compressedSize = <u64>::sse_decode(deserializer);
+        let mut var_size = <u64>::sse_decode(deserializer);
+        let mut var_crc32 = <u32>::sse_decode(deserializer);
+        let mut var_unixMode = <Option<u32>>::sse_decode(deserializer);
+        let mut var_changed = <Option<i64>>::sse_decode(deserializer);
+        let mut var_modified = <Option<i64>>::sse_decode(deserializer);
+        let mut var_accessed = <Option<i64>>::sse_decode(deserializer);
+        return crate::archive::file::ArchiveFileStat {
+            is_file: var_isFile,
+            is_dir: var_isDir,
+            is_symlink: var_isSymlink,
+            is_encrypted: var_isEncrypted,
+            compression_method: var_compressionMethod,
+            compressed_size: var_compressedSize,
+            size: var_size,
+            crc32: var_crc32,
+            unix_mode: var_unixMode,
+            changed: var_changed,
+            modified: var_modified,
+            accessed: var_accessed,
         };
     }
 }
@@ -4148,6 +5638,20 @@ impl SseDecode for Vec<crate::config::hot_update::AppVersionHotUpdateInfo> {
     }
 }
 
+impl SseDecode for Vec<crate::archive::file::ArchiveFileStat> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::archive::file::ArchiveFileStat>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<crate::nuan5_params::structs::nikki_photo_params::ClothParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4363,6 +5867,18 @@ impl SseDecode for Vec<u8> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<u8>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<usize> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<usize>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -5890,6 +7406,17 @@ impl SseDecode for Option<crate::config::update::UpdateInfo> {
     }
 }
 
+impl SseDecode for Option<usize> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<usize>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::WeaponParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6832,6 +8359,13 @@ impl SseDecode for u32 {
     }
 }
 
+impl SseDecode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u64::<NativeEndian>().unwrap()
+    }
+}
+
 impl SseDecode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -7064,246 +8598,79 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        12 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        13 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        14 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        15 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        16 => wire__crate__nuan5_params__decode__de_home_build_param_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        17 => wire__crate__nuan5_params__decode__decode_media_param_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        18 => wire__crate__nuan5_params__encode__encode_camera_params_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        25 => {
-            wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
-        }
-        26 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        27 => {
-            wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len)
-        }
-        29 => wire__crate__nuan5_params__decode__home_build_de_network_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        30 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        34 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        35 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-        36 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        37 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        39 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        41 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        43 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        44 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        45 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        48 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        49 => wire__crate__nuan5_database__model__nuan_5_cloth_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        50 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        51 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        52 => wire__crate__nuan5_database__model__nuan_5_cloth_outfit_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        53 => wire__crate__nuan5_database__model__nuan_5_cloth_prop_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        54 => {
-            wire__crate__nuan5_database__model__nuan_5_cloth_special_pattern_dye_area_default_impl(
-                port,
-                ptr,
-                rust_vec_len,
-                data_len,
-            )
-        }
-        55 => wire__crate__nuan5_database__model__nuan_5_cloth_tag_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        56 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        57 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        58 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        59 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        60 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        61 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        62 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        63 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        64 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        65 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        66 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        67 => wire__crate__nuan5_database__model__nuan_5_nikki_cloth_info_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        68 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
-        _ => unreachable!(),
-    }
+                        38 => wire__crate__archive__zip__zip_archive__ZipArchive_comment_impl(port, ptr, rust_vec_len, data_len),
+39 => wire__crate__archive__zip__zip_archive__ZipArchive_contains_impl(port, ptr, rust_vec_len, data_len),
+40 => wire__crate__archive__zip__zip_archive__ZipArchive_create_impl(port, ptr, rust_vec_len, data_len),
+41 => wire__crate__archive__zip__zip_archive__ZipArchive_entries_impl(port, ptr, rust_vec_len, data_len),
+42 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_all_impl(port, ptr, rust_vec_len, data_len),
+43 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_all_with_password_impl(port, ptr, rust_vec_len, data_len),
+44 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_index_impl(port, ptr, rust_vec_len, data_len),
+45 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_index_with_password_impl(port, ptr, rust_vec_len, data_len),
+46 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_name_impl(port, ptr, rust_vec_len, data_len),
+47 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_by_name_with_password_impl(port, ptr, rust_vec_len, data_len),
+48 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_index_impl(port, ptr, rust_vec_len, data_len),
+49 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_index_with_password_impl(port, ptr, rust_vec_len, data_len),
+50 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_name_impl(port, ptr, rust_vec_len, data_len),
+51 => wire__crate__archive__zip__zip_archive__ZipArchive_extract_multi_by_name_with_password_impl(port, ptr, rust_vec_len, data_len),
+52 => wire__crate__archive__zip__zip_archive__ZipArchive_filenames_impl(port, ptr, rust_vec_len, data_len),
+53 => wire__crate__archive__zip__zip_archive__ZipArchive_index_of_impl(port, ptr, rust_vec_len, data_len),
+54 => wire__crate__archive__zip__zip_archive__ZipArchive_is_empty_impl(port, ptr, rust_vec_len, data_len),
+55 => wire__crate__archive__zip__zip_archive__ZipArchive_len_impl(port, ptr, rust_vec_len, data_len),
+56 => wire__crate__archive__zip__zip_archive__ZipArchive_open_impl(port, ptr, rust_vec_len, data_len),
+57 => wire__crate__archive__zip__zip_archive__ZipArchive_open_existing_impl(port, ptr, rust_vec_len, data_len),
+58 => wire__crate__archive__zip__zip_archive__ZipArchive_path_impl(port, ptr, rust_vec_len, data_len),
+59 => wire__crate__archive__zip__zip_archive__ZipArchive_read_by_index_impl(port, ptr, rust_vec_len, data_len),
+60 => wire__crate__archive__zip__zip_archive__ZipArchive_read_by_index_with_password_impl(port, ptr, rust_vec_len, data_len),
+61 => wire__crate__archive__zip__zip_archive__ZipArchive_read_by_name_impl(port, ptr, rust_vec_len, data_len),
+62 => wire__crate__archive__zip__zip_archive__ZipArchive_read_by_name_with_password_impl(port, ptr, rust_vec_len, data_len),
+63 => wire__crate__archive__zip__zip_archive__ZipArchive_read_string_by_index_impl(port, ptr, rust_vec_len, data_len),
+64 => wire__crate__archive__zip__zip_archive__ZipArchive_read_string_by_name_impl(port, ptr, rust_vec_len, data_len),
+65 => wire__crate__archive__zip__zip_archive__ZipArchive_stat_by_index_impl(port, ptr, rust_vec_len, data_len),
+66 => wire__crate__archive__zip__zip_archive__ZipArchive_stat_by_name_impl(port, ptr, rust_vec_len, data_len),
+70 => wire__crate__nuan5_params__decode__cloth_diy_de_file_impl(port, ptr, rust_vec_len, data_len),
+71 => wire__crate__nuan5_params__decode__cloth_diy_de_network_impl(port, ptr, rust_vec_len, data_len),
+72 => wire__crate__nuan5_params__decrypt__cloth_diy_decode_network_impl(port, ptr, rust_vec_len, data_len),
+73 => wire__crate__nuan5_params__decode__de_cloth_diy_param_impl(port, ptr, rust_vec_len, data_len),
+74 => wire__crate__nuan5_params__decode__de_home_build_param_impl(port, ptr, rust_vec_len, data_len),
+75 => wire__crate__nuan5_params__decode__decode_media_param_impl(port, ptr, rust_vec_len, data_len),
+76 => wire__crate__nuan5_params__encode__encode_camera_params_impl(port, ptr, rust_vec_len, data_len),
+83 => wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
+84 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
+85 => wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
+87 => wire__crate__nuan5_params__decode__home_build_de_network_impl(port, ptr, rust_vec_len, data_len),
+88 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(port, ptr, rust_vec_len, data_len),
+92 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+93 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+94 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(port, ptr, rust_vec_len, data_len),
+95 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(port, ptr, rust_vec_len, data_len),
+97 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(port, ptr, rust_vec_len, data_len),
+99 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(port, ptr, rust_vec_len, data_len),
+101 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(port, ptr, rust_vec_len, data_len),
+102 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(port, ptr, rust_vec_len, data_len),
+103 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(port, ptr, rust_vec_len, data_len),
+106 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(port, ptr, rust_vec_len, data_len),
+107 => wire__crate__nuan5_database__model__nuan_5_cloth_default_impl(port, ptr, rust_vec_len, data_len),
+108 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(port, ptr, rust_vec_len, data_len),
+109 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(port, ptr, rust_vec_len, data_len),
+110 => wire__crate__nuan5_database__model__nuan_5_cloth_outfit_default_impl(port, ptr, rust_vec_len, data_len),
+111 => wire__crate__nuan5_database__model__nuan_5_cloth_prop_default_impl(port, ptr, rust_vec_len, data_len),
+112 => wire__crate__nuan5_database__model__nuan_5_cloth_special_pattern_dye_area_default_impl(port, ptr, rust_vec_len, data_len),
+113 => wire__crate__nuan5_database__model__nuan_5_cloth_tag_default_impl(port, ptr, rust_vec_len, data_len),
+114 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(port, ptr, rust_vec_len, data_len),
+115 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(port, ptr, rust_vec_len, data_len),
+116 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(port, ptr, rust_vec_len, data_len),
+117 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(port, ptr, rust_vec_len, data_len),
+118 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(port, ptr, rust_vec_len, data_len),
+119 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(port, ptr, rust_vec_len, data_len),
+120 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(port, ptr, rust_vec_len, data_len),
+121 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(port, ptr, rust_vec_len, data_len),
+122 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(port, ptr, rust_vec_len, data_len),
+123 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(port, ptr, rust_vec_len, data_len),
+124 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(port, ptr, rust_vec_len, data_len),
+125 => wire__crate__nuan5_database__model__nuan_5_nikki_cloth_info_default_impl(port, ptr, rust_vec_len, data_len),
+126 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(port, ptr, rust_vec_len, data_len),
+                        _ => unreachable!(),
+                    }
 }
 
 fn pde_ffi_dispatcher_sync_impl(
@@ -7352,122 +8719,122 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        9 => wire__crate__config__app_persistent_state__app_persistent_state_from_json_impl(
+        67 => wire__crate__config__app_persistent_state__app_persistent_state_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        10 => wire__crate__config__app_persistent_state__app_persistent_state_to_json_impl(
+        68 => wire__crate__config__app_persistent_state__app_persistent_state_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        11 => wire__crate__config__app_persistent_state__app_persistent_state_to_json_pretty_impl(
+        69 => wire__crate__config__app_persistent_state__app_persistent_state_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        19 => wire__crate__config__common__file_reader_config__file_reader_config_from_json_impl(
+        77 => wire__crate__config__common__file_reader_config__file_reader_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        20 => wire__crate__config__common__file_reader_config__file_reader_config_to_json_impl(
+        78 => wire__crate__config__common__file_reader_config__file_reader_config_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        21 => {
+        79 => {
             wire__crate__config__common__file_reader_config__file_reader_config_to_json_pretty_impl(
                 ptr,
                 rust_vec_len,
                 data_len,
             )
         }
-        22 => wire__crate__config__game_config__game_config_from_json_impl(
+        80 => wire__crate__config__game_config__game_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        23 => {
+        81 => {
             wire__crate__config__game_config__game_config_to_json_impl(ptr, rust_vec_len, data_len)
         }
-        24 => wire__crate__config__game_config__game_config_to_json_pretty_impl(
+        82 => wire__crate__config__game_config__game_config_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        28 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-        31 => wire__crate__config__hot_update__hot_update_info_from_json_impl(
+        86 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        89 => wire__crate__config__hot_update__hot_update_info_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        32 => wire__crate__config__hot_update__hot_update_info_to_json_impl(
+        90 => wire__crate__config__hot_update__hot_update_info_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        33 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(
+        91 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        38 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
+        96 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        40 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
+        98 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        42 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
+        100 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        46 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-        47 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
+        104 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+        105 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        69 => wire__crate__config__common__string_config__string_config_from_json_impl(
+        127 => wire__crate__config__common__string_config__string_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        70 => wire__crate__config__common__string_config__string_config_to_json_impl(
+        128 => wire__crate__config__common__string_config__string_config_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        71 => wire__crate__config__common__string_config__string_config_to_json_pretty_impl(
+        129 => wire__crate__config__common__string_config__string_config_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        72 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        73 => wire__crate__config__common__text_config__text_config_from_json_impl(
+        130 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        131 => wire__crate__config__common__text_config__text_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        74 => wire__crate__config__common__text_config__text_config_to_json_impl(
+        132 => wire__crate__config__common__text_config__text_config_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        75 => wire__crate__config__common__text_config__text_config_to_json_pretty_impl(
+        133 => wire__crate__config__common__text_config__text_config_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        76 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
-        77 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
-        78 => wire__crate__config__update__update_info_to_json_pretty_impl(
+        134 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
+        135 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
+        136 => wire__crate__config__update__update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -7527,6 +8894,21 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<MediaKey>> for MediaKey {
 }
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<ZipArchive> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<ZipArchive> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<ZipArchive>> for ZipArchive {
+    fn into_into_dart(self) -> FrbWrapper<ZipArchive> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::config::app_persistent_state::AppPersistentState {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -7568,6 +8950,68 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::AppVersionHotU
     for crate::config::hot_update::AppVersionHotUpdateInfo
 {
     fn into_into_dart(self) -> crate::config::hot_update::AppVersionHotUpdateInfo {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::archive::error::ArchiveError {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Io => 0.into_dart(),
+            Self::InvalidArchive => 1.into_dart(),
+            Self::UnsupportedArchive => 2.into_dart(),
+            Self::FileNotFound => 3.into_dart(),
+            Self::InvalidPassword => 4.into_dart(),
+            Self::PasswordRequired => 5.into_dart(),
+            Self::CompressionMethodNotSupported => 6.into_dart(),
+            Self::InvalidEntryName => 7.into_dart(),
+            Self::EntryAlreadyExists => 8.into_dart(),
+            Self::DestinationExists => 9.into_dart(),
+            Self::InvalidUtf8 => 10.into_dart(),
+            Self::Unknown => 11.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::archive::error::ArchiveError
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::archive::error::ArchiveError>
+    for crate::archive::error::ArchiveError
+{
+    fn into_into_dart(self) -> crate::archive::error::ArchiveError {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::archive::file::ArchiveFileStat {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.is_file.into_into_dart().into_dart(),
+            self.is_dir.into_into_dart().into_dart(),
+            self.is_symlink.into_into_dart().into_dart(),
+            self.is_encrypted.into_into_dart().into_dart(),
+            self.compression_method.into_into_dart().into_dart(),
+            self.compressed_size.into_into_dart().into_dart(),
+            self.size.into_into_dart().into_dart(),
+            self.crc32.into_into_dart().into_dart(),
+            self.unix_mode.into_into_dart().into_dart(),
+            self.changed.into_into_dart().into_dart(),
+            self.modified.into_into_dart().into_dart(),
+            self.accessed.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::archive::file::ArchiveFileStat
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::archive::file::ArchiveFileStat>
+    for crate::archive::file::ArchiveFileStat
+{
+    fn into_into_dart(self) -> crate::archive::file::ArchiveFileStat {
         self
     }
 }
@@ -10427,6 +11871,13 @@ impl SseEncode for MediaKey {
     }
 }
 
+impl SseEncode for ZipArchive {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
 impl SseEncode for std::collections::HashMap<String, String> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10643,6 +12094,17 @@ impl SseEncode
 }
 
 impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
     for StreamSink<
         crate::nuan5_params::decode::MediaCustomDataResult,
         flutter_rust_bridge::for_generated::SseCodec,
@@ -10701,6 +12163,50 @@ impl SseEncode for crate::config::hot_update::AppVersionHotUpdateInfo {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.min, serializer);
         <i32>::sse_encode(self.max, serializer);
+    }
+}
+
+impl SseEncode for crate::archive::error::ArchiveError {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::archive::error::ArchiveError::Io => 0,
+                crate::archive::error::ArchiveError::InvalidArchive => 1,
+                crate::archive::error::ArchiveError::UnsupportedArchive => 2,
+                crate::archive::error::ArchiveError::FileNotFound => 3,
+                crate::archive::error::ArchiveError::InvalidPassword => 4,
+                crate::archive::error::ArchiveError::PasswordRequired => 5,
+                crate::archive::error::ArchiveError::CompressionMethodNotSupported => 6,
+                crate::archive::error::ArchiveError::InvalidEntryName => 7,
+                crate::archive::error::ArchiveError::EntryAlreadyExists => 8,
+                crate::archive::error::ArchiveError::DestinationExists => 9,
+                crate::archive::error::ArchiveError::InvalidUtf8 => 10,
+                crate::archive::error::ArchiveError::Unknown => 11,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::archive::file::ArchiveFileStat {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_file, serializer);
+        <bool>::sse_encode(self.is_dir, serializer);
+        <bool>::sse_encode(self.is_symlink, serializer);
+        <bool>::sse_encode(self.is_encrypted, serializer);
+        <u16>::sse_encode(self.compression_method, serializer);
+        <u64>::sse_encode(self.compressed_size, serializer);
+        <u64>::sse_encode(self.size, serializer);
+        <u32>::sse_encode(self.crc32, serializer);
+        <Option<u32>>::sse_encode(self.unix_mode, serializer);
+        <Option<i64>>::sse_encode(self.changed, serializer);
+        <Option<i64>>::sse_encode(self.modified, serializer);
+        <Option<i64>>::sse_encode(self.accessed, serializer);
     }
 }
 
@@ -11320,6 +12826,16 @@ impl SseEncode for Vec<crate::config::hot_update::AppVersionHotUpdateInfo> {
     }
 }
 
+impl SseEncode for Vec<crate::archive::file::ArchiveFileStat> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::archive::file::ArchiveFileStat>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<crate::nuan5_params::structs::nikki_photo_params::ClothParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11488,6 +13004,16 @@ impl SseEncode for Vec<u8> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <u8>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<usize> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <usize>::sse_encode(item, serializer);
         }
     }
 }
@@ -12687,6 +14213,16 @@ impl SseEncode for Option<crate::config::update::UpdateInfo> {
     }
 }
 
+impl SseEncode for Option<usize> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <usize>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::WeaponParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -13432,6 +14968,13 @@ impl SseEncode for u32 {
     }
 }
 
+impl SseEncode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u64::<NativeEndian>(self).unwrap();
+    }
+}
+
 impl SseEncode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -13617,6 +15160,8 @@ mod io {
     // Section: imports
 
     use super::*;
+    use crate::archive::archive::Archive;
+    use crate::archive::zip::zip_archive::*;
     use crate::nuan5_params::decrypt::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
@@ -13668,6 +15213,20 @@ mod io {
         ptr: *const std::ffi::c_void,
     ) {
         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MediaKey>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ZipArchive>>::decrement_strong_count(ptr as _);
     }
 }
 #[cfg(not(target_family = "wasm"))]

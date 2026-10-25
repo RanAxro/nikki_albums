@@ -4,6 +4,10 @@
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
 import 'api/simple.dart';
+import 'archive/archive.dart';
+import 'archive/error.dart';
+import 'archive/file.dart';
+import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
 import 'config/common/file_reader_config.dart';
 import 'config/common/string_config.dart';
@@ -61,6 +65,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   get rust_arc_decrement_strong_count_MediaKeyPtr => wire
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr;
 
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_ZipArchivePtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchivePtr;
+
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw);
 
@@ -83,6 +91,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ZipArchive
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  );
+
+  @protected
+  ZipArchive
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  );
+
+  @protected
   ClothDiyShareCode
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     dynamic raw,
@@ -97,6 +117,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   MediaKey
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    dynamic raw,
+  );
+
+  @protected
+  ZipArchive
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
     dynamic raw,
   );
 
@@ -193,6 +219,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ZipArchive
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  );
+
+  @protected
   RustStreamSink<MediaCustomDataResult>
   dco_decode_StreamSink_media_custom_data_result_Sse(dynamic raw);
 
@@ -209,10 +241,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String dco_decode_String(dynamic raw);
 
   @protected
+  Archive dco_decode_TraitDef_Archive(dynamic raw);
+
+  @protected
   AppPersistentState dco_decode_app_persistent_state(dynamic raw);
 
   @protected
   AppVersionHotUpdateInfo dco_decode_app_version_hot_update_info(dynamic raw);
+
+  @protected
+  ArchiveError dco_decode_archive_error(dynamic raw);
+
+  @protected
+  ArchiveFileStat dco_decode_archive_file_stat(dynamic raw);
 
   @protected
   Area dco_decode_area(dynamic raw);
@@ -401,6 +442,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   UpdateInfo dco_decode_box_autoadd_update_info(dynamic raw);
 
   @protected
+  BigInt dco_decode_box_autoadd_usize(dynamic raw);
+
+  @protected
   WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw);
 
   @protected
@@ -541,6 +585,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<ArchiveFileStat> dco_decode_list_archive_file_stat(dynamic raw);
+
+  @protected
   List<ClothParams> dco_decode_list_cloth_params(dynamic raw);
 
   @protected
@@ -594,6 +641,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
+
+  @protected
+  Uint64List dco_decode_list_prim_usize_strict(dynamic raw);
 
   @protected
   List<(int, Nuan5Cloth)> dco_decode_list_record_i_32_nuan_5_cloth(dynamic raw);
@@ -921,6 +971,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   UpdateInfo? dco_decode_opt_box_autoadd_update_info(dynamic raw);
 
   @protected
+  BigInt? dco_decode_opt_box_autoadd_usize(dynamic raw);
+
+  @protected
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw);
 
   @protected
@@ -1108,6 +1161,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int dco_decode_u_32(dynamic raw);
 
   @protected
+  BigInt dco_decode_u_64(dynamic raw);
+
+  @protected
   int dco_decode_u_8(dynamic raw);
 
   @protected
@@ -1182,6 +1238,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ZipArchive
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ZipArchive
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClothDiyShareCode
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     SseDeserializer deserializer,
@@ -1196,6 +1264,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   MediaKey
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ZipArchive
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
     SseDeserializer deserializer,
   );
 
@@ -1312,6 +1386,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ZipArchive
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   RustStreamSink<MediaCustomDataResult>
   sse_decode_StreamSink_media_custom_data_result_Sse(
     SseDeserializer deserializer,
@@ -1338,6 +1418,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AppVersionHotUpdateInfo sse_decode_app_version_hot_update_info(
     SseDeserializer deserializer,
   );
+
+  @protected
+  ArchiveError sse_decode_archive_error(SseDeserializer deserializer);
+
+  @protected
+  ArchiveFileStat sse_decode_archive_file_stat(SseDeserializer deserializer);
 
   @protected
   Area sse_decode_area(SseDeserializer deserializer);
@@ -1586,6 +1672,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   UpdateInfo sse_decode_box_autoadd_update_info(SseDeserializer deserializer);
 
   @protected
+  BigInt sse_decode_box_autoadd_usize(SseDeserializer deserializer);
+
+  @protected
   WeaponParams sse_decode_box_autoadd_weapon_params(
     SseDeserializer deserializer,
   );
@@ -1752,6 +1841,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<ArchiveFileStat> sse_decode_list_archive_file_stat(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<ClothParams> sse_decode_list_cloth_params(SseDeserializer deserializer);
 
   @protected
@@ -1819,6 +1913,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
+  Uint64List sse_decode_list_prim_usize_strict(SseDeserializer deserializer);
 
   @protected
   List<(int, Nuan5Cloth)> sse_decode_list_record_i_32_nuan_5_cloth(
@@ -2234,6 +2331,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  BigInt? sse_decode_opt_box_autoadd_usize(SseDeserializer deserializer);
+
+  @protected
   WeaponParams? sse_decode_opt_box_autoadd_weapon_params(
     SseDeserializer deserializer,
   );
@@ -2471,6 +2571,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int sse_decode_u_32(SseDeserializer deserializer);
 
   @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer);
+
+  @protected
   int sse_decode_u_8(SseDeserializer deserializer);
 
   @protected
@@ -2568,6 +2671,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     ClothDiyShareCode self,
     SseSerializer serializer,
@@ -2584,6 +2701,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey(
     MediaKey self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
     SseSerializer serializer,
   );
 
@@ -2717,6 +2841,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ZipArchive self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_StreamSink_media_custom_data_result_Sse(
     RustStreamSink<MediaCustomDataResult> self,
     SseSerializer serializer,
@@ -2746,6 +2877,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_app_version_hot_update_info(
     AppVersionHotUpdateInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_archive_error(ArchiveError self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_archive_file_stat(
+    ArchiveFileStat self,
     SseSerializer serializer,
   );
 
@@ -3059,6 +3199,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_usize(BigInt self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_weapon_params(
     WeaponParams self,
     SseSerializer serializer,
@@ -3269,6 +3412,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_archive_file_stat(
+    List<ArchiveFileStat> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_cloth_params(
     List<ClothParams> self,
     SseSerializer serializer,
@@ -3358,6 +3507,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_prim_u_8_strict(
     Uint8List self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_prim_usize_strict(
+    Uint64List self,
     SseSerializer serializer,
   );
 
@@ -3887,6 +4042,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_usize(BigInt? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_weapon_params(
     WeaponParams? self,
     SseSerializer serializer,
@@ -4172,6 +4330,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_u_32(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer);
+
+  @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
 
   @protected
@@ -4361,5 +4522,39 @@ class RustLibWire implements BaseWire {
       );
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKey =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMediaKeyPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchivePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchivePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchivePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchivePtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 }
