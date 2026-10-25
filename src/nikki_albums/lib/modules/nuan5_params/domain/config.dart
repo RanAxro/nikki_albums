@@ -1,7 +1,7 @@
-export "package:nikki_albums/src/rust/nuan5_database/model.dart";
+export "package:nikki_albums/gen/rust/nuan5_database/model.dart";
 
 import "package:nikki_albums/modules/hot_update/domain/hot_update_service.dart";
-import "package:nikki_albums/src/rust/nuan5_database/model.dart";
+import "package:nikki_albums/gen/rust/nuan5_database/model.dart";
 
 import "dart:io";
 import "package:path/path.dart" as p;

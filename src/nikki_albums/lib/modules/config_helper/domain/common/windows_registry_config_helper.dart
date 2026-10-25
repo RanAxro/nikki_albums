@@ -1,7 +1,7 @@
 
-export "package:nikki_albums/src/rust/config/common/windows_registry_config.dart";
+export "package:nikki_albums/gen/rust/config/common/windows_registry_config.dart";
 
-import "package:nikki_albums/src/rust/config/common/windows_registry_config.dart";
+import "package:nikki_albums/gen/rust/config/common/windows_registry_config.dart";
 import "package:nikki_albums/utils/extension.dart";
 
 import "dart:convert";

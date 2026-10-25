@@ -1,6 +1,6 @@
 
-import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/cloth_diy_params.dart";
 
 import "package:collection/collection.dart";
 

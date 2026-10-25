@@ -1,8 +1,8 @@
 
 import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
 import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dart";
-import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/decrypt.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/building_params.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 

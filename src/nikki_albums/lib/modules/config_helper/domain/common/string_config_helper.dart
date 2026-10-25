@@ -1,7 +1,7 @@
 
-export "package:nikki_albums/src/rust/config/common/string_config.dart";
+export "package:nikki_albums/gen/rust/config/common/string_config.dart";
 
-import "package:nikki_albums/src/rust/config/common/string_config.dart";
+import "package:nikki_albums/gen/rust/config/common/string_config.dart";
 
 
 abstract final class StringConfigHelper{

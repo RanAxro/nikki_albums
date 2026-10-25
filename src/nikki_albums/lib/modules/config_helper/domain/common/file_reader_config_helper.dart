@@ -1,7 +1,7 @@
 
-export "package:nikki_albums/src/rust/config/common/file_reader_config.dart";
+export "package:nikki_albums/gen/rust/config/common/file_reader_config.dart";
 
-import "package:nikki_albums/src/rust/config/common/file_reader_config.dart";
+import "package:nikki_albums/gen/rust/config/common/file_reader_config.dart";
 
 import "dart:convert";
 import "dart:io";

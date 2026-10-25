@@ -1,11 +1,11 @@
 
 import "package:nikki_albums/modules/parameter_manager/model/param_type.dart";
 import "package:nikki_albums/utils/system/system.dart";
-import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
-import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/building_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/decrypt.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/decode.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/camera_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/cloth_diy_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/building_params.dart";
 
 import "dart:convert";
 import "dart:async";

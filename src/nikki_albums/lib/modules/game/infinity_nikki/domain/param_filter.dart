@@ -2,8 +2,8 @@
 import "package:nikki_albums/modules/game/uid.dart";
 import "package:nikki_albums/modules/game/image.dart";
 import "package:nikki_albums/info.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/decode.dart";
 
 
 

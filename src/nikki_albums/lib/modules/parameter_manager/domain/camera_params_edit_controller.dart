@@ -1,7 +1,7 @@
 
-import "package:nikki_albums/src/rust/nuan5_params/encode.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/encode.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/camera_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/nikki_photo_params.dart";
 
 import "package:flutter/material.dart";
 

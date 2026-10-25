@@ -3,7 +3,7 @@
 import "../app_registry.dart";
 import "package:nikki_albums/utils/json.dart";
 import "package:nikki_albums/modules/hot_update/domain/hot_update_service.dart";
-import "package:nikki_albums/src/rust/nuan5_database/nuan5_database.dart";
+import "package:nikki_albums/gen/rust/nuan5_database/nuan5_database.dart";
 
 import "package:flutter/services.dart";
 import "package:flutter/foundation.dart";

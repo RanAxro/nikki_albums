@@ -1,7 +1,7 @@
 
-export "package:nikki_albums/src/rust/config/common/text_config.dart";
+export "package:nikki_albums/gen/rust/config/common/text_config.dart";
 
-import "package:nikki_albums/src/rust/config/common/text_config.dart";
+import "package:nikki_albums/gen/rust/config/common/text_config.dart";
 
 import 'package:flutter/widgets.dart';
 

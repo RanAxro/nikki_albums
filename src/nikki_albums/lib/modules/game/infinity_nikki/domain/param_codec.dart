@@ -1,7 +1,7 @@
 
 import "package:nikki_albums/modules/app_base/state.dart";
-import "package:nikki_albums/src/rust/nuan5_params/decode.dart";
-import "package:nikki_albums/src/rust/nuan5_params/decrypt.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/decode.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/decrypt.dart";
 
 import "package:flutter/foundation.dart";
 import "dart:convert";

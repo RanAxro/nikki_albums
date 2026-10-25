@@ -1,6 +1,6 @@
 rust_input: crate
 rust_root: rust
-dart_output: lib/src/rust
+dart_output: lib/gen/rust
 
 web: false
 enable_lifetime: true

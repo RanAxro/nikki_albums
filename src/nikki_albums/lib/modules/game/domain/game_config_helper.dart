@@ -1,7 +1,7 @@
 
 import "game_fs_proxy/game_fs_proxy.dart";
 import "package:nikki_albums/modules/config_helper/domain/common/common.dart";
-import "package:nikki_albums/src/rust/config/game_config.dart";
+import "package:nikki_albums/gen/rust/config/game_config.dart";
 
 
 abstract final class GameConfigProcessor{

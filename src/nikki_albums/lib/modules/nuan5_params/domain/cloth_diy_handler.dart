@@ -1,8 +1,8 @@
 
 import "../model/cloth_diy.dart";
-import "package:nikki_albums/src/rust/nuan5_database/model.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/cloth.dart";
+import "package:nikki_albums/gen/rust/nuan5_database/model.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/cloth.dart";
 
 import "dart:math";
 

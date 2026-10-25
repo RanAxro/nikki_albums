@@ -4,9 +4,9 @@ import "package:nikki_albums/modules/nuan5_params/domain/tree_node_generator.dar
 import "package:nikki_albums/modules/nuan5_params/domain/selector_handler.dart";
 import "package:nikki_albums/modules/nuan5_params/presentation/selector.dart";
 import "package:nikki_albums/modules/nuan5_params/model/enumeration.dart";
-import "package:nikki_albums/src/rust/nuan5_database/model.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.dart";
-import "package:nikki_albums/src/rust/nuan5_params/structs/camera_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_database/model.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/nikki_photo_params.dart";
+import "package:nikki_albums/gen/rust/nuan5_params/structs/camera_params.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 
