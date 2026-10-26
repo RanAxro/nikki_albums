@@ -47,11 +47,22 @@ sealed class IconRule with _$IconRule {
   const factory IconRule.image(ImageIconRule field0) = IconRule_Image;
   const factory IconRule.font(FontIconRule field0) = IconRule_Font;
 
-  static IconRule? fromJson({required String json}) =>
+  static IconRule fromJson({required String json}) =>
       RustLib.instance.api.crateConfigRulesIconRuleIconRuleFromJson(json: json);
+
+  static IconRule fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigRulesIconRuleIconRuleFromJsonBytes(json: json);
 
   String toJson() =>
       RustLib.instance.api.crateConfigRulesIconRuleIconRuleToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigRulesIconRuleIconRuleToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigRulesIconRuleIconRuleToJsonBytesPretty(that: this);
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigRulesIconRuleIconRuleToJsonPretty(that: this);

@@ -9,10 +9,13 @@ import 'archive/error.dart';
 import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
+import 'config/common/platform.dart';
 import 'config/hot_update.dart';
+import 'config/plugin.dart';
 import 'config/rules/icon_rule.dart';
 import 'config/rules/string_rule.dart';
 import 'config/rules/text_rule.dart';
+import 'config/script.dart';
 import 'config/update.dart';
 
 import 'dart:async';
@@ -385,6 +388,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw);
 
   @protected
+  PluginInfo dco_decode_box_autoadd_plugin_info(dynamic raw);
+
+  @protected
   Region dco_decode_box_autoadd_region(dynamic raw);
 
   @protected
@@ -500,6 +506,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams dco_decode_dye_color_params(dynamic raw);
 
   @protected
+  EasyScript dco_decode_easy_script(dynamic raw);
+
+  @protected
   EditPhotoParams dco_decode_edit_photo_params(dynamic raw);
 
   @protected
@@ -567,6 +576,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<EasyScript> dco_decode_list_easy_script(dynamic raw);
+
+  @protected
   List<Eureka> dco_decode_list_eureka(dynamic raw);
 
   @protected
@@ -589,6 +601,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<PatternCreationData> dco_decode_list_pattern_creation_data(dynamic raw);
+
+  @protected
+  List<Platform> dco_decode_list_platform(dynamic raw);
 
   @protected
   Float64List dco_decode_list_prim_f_64_strict(dynamic raw);
@@ -807,11 +822,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String? dco_decode_opt_String(dynamic raw);
 
   @protected
-  AppPersistentState? dco_decode_opt_box_autoadd_app_persistent_state(
-    dynamic raw,
-  );
-
-  @protected
   Area? dco_decode_opt_box_autoadd_area(dynamic raw);
 
   @protected
@@ -839,9 +849,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
-
-  @protected
-  HotUpdateInfo? dco_decode_opt_box_autoadd_hot_update_info(dynamic raw);
 
   @protected
   int? dco_decode_opt_box_autoadd_i_32(dynamic raw);
@@ -903,19 +910,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ShootingTime? dco_decode_opt_box_autoadd_shooting_time(dynamic raw);
 
   @protected
-  StringRule? dco_decode_opt_box_autoadd_string_rule(dynamic raw);
-
-  @protected
   Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
 
   @protected
-  TextRule? dco_decode_opt_box_autoadd_text_rule(dynamic raw);
-
-  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
-
-  @protected
-  UpdateInfo? dco_decode_opt_box_autoadd_update_info(dynamic raw);
 
   @protected
   BigInt? dco_decode_opt_box_autoadd_usize(dynamic raw);
@@ -945,7 +943,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotographyParams dco_decode_photography_params(dynamic raw);
 
   @protected
+  Platform dco_decode_platform(dynamic raw);
+
+  @protected
   PlatformUpdateInfo dco_decode_platform_update_info(dynamic raw);
+
+  @protected
+  PluginInfo dco_decode_plugin_info(dynamic raw);
 
   @protected
   (double, double) dco_decode_record_f_64_f_64(dynamic raw);
@@ -1036,6 +1040,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RichCameraParamsMomoHidden dco_decode_rich_camera_params_momo_hidden(
     dynamic raw,
   );
+
+  @protected
+  Script dco_decode_script(dynamic raw);
 
   @protected
   ShootingDate dco_decode_shooting_date(dynamic raw);
@@ -1486,6 +1493,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PluginInfo sse_decode_box_autoadd_plugin_info(SseDeserializer deserializer);
+
+  @protected
   Region sse_decode_box_autoadd_region(SseDeserializer deserializer);
 
   @protected
@@ -1627,6 +1637,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams sse_decode_dye_color_params(SseDeserializer deserializer);
 
   @protected
+  EasyScript sse_decode_easy_script(SseDeserializer deserializer);
+
+  @protected
   EditPhotoParams sse_decode_edit_photo_params(SseDeserializer deserializer);
 
   @protected
@@ -1700,6 +1713,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<EasyScript> sse_decode_list_easy_script(SseDeserializer deserializer);
+
+  @protected
   List<Eureka> sse_decode_list_eureka(SseDeserializer deserializer);
 
   @protected
@@ -1734,6 +1750,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<PatternCreationData> sse_decode_list_pattern_creation_data(
     SseDeserializer deserializer,
   );
+
+  @protected
+  List<Platform> sse_decode_list_platform(SseDeserializer deserializer);
 
   @protected
   Float64List sse_decode_list_prim_f_64_strict(SseDeserializer deserializer);
@@ -1994,11 +2013,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
-  AppPersistentState? sse_decode_opt_box_autoadd_app_persistent_state(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer);
 
   @protected
@@ -2032,11 +2046,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   HomeBuildParam? sse_decode_opt_box_autoadd_home_build_param(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  HotUpdateInfo? sse_decode_opt_box_autoadd_hot_update_info(
     SseDeserializer deserializer,
   );
 
@@ -2122,23 +2131,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  StringRule? sse_decode_opt_box_autoadd_string_rule(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
-  TextRule? sse_decode_opt_box_autoadd_text_rule(SseDeserializer deserializer);
-
-  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
-
-  @protected
-  UpdateInfo? sse_decode_opt_box_autoadd_update_info(
-    SseDeserializer deserializer,
-  );
 
   @protected
   BigInt? sse_decode_opt_box_autoadd_usize(SseDeserializer deserializer);
@@ -2176,9 +2172,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotographyParams sse_decode_photography_params(SseDeserializer deserializer);
 
   @protected
+  Platform sse_decode_platform(SseDeserializer deserializer);
+
+  @protected
   PlatformUpdateInfo sse_decode_platform_update_info(
     SseDeserializer deserializer,
   );
+
+  @protected
+  PluginInfo sse_decode_plugin_info(SseDeserializer deserializer);
 
   @protected
   (double, double) sse_decode_record_f_64_f_64(SseDeserializer deserializer);
@@ -2297,6 +2299,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RichCameraParamsMomoHidden sse_decode_rich_camera_params_momo_hidden(
     SseDeserializer deserializer,
   );
+
+  @protected
+  Script sse_decode_script(SseDeserializer deserializer);
 
   @protected
   ShootingDate sse_decode_shooting_date(SseDeserializer deserializer);
@@ -2846,6 +2851,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_plugin_info(
+    PluginInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_region(Region self, SseSerializer serializer);
 
   @protected
@@ -3026,6 +3037,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_easy_script(EasyScript self, SseSerializer serializer);
+
+  @protected
   void sse_encode_edit_photo_params(
     EditPhotoParams self,
     SseSerializer serializer,
@@ -3119,6 +3133,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_easy_script(
+    List<EasyScript> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_eureka(List<Eureka> self, SseSerializer serializer);
 
   @protected
@@ -3159,6 +3179,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     List<PatternCreationData> self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_list_platform(List<Platform> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_f_64_strict(
@@ -3503,12 +3526,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
-  void sse_encode_opt_box_autoadd_app_persistent_state(
-    AppPersistentState? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer);
 
   @protected
@@ -3553,12 +3570,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_home_build_param(
     HomeBuildParam? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_hot_update_info(
-    HotUpdateInfo? self,
     SseSerializer serializer,
   );
 
@@ -3668,31 +3679,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_string_rule(
-    StringRule? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_subarea(
     Subarea? self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_text_rule(
-    TextRule? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_opt_box_autoadd_update_info(
-    UpdateInfo? self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_opt_box_autoadd_usize(BigInt? self, SseSerializer serializer);
@@ -3740,10 +3733,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_platform(Platform self, SseSerializer serializer);
+
+  @protected
   void sse_encode_platform_update_info(
     PlatformUpdateInfo self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_plugin_info(PluginInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_record_f_64_f_64(
@@ -3888,6 +3887,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     RichCameraParamsMomoHidden self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_script(Script self, SseSerializer serializer);
 
   @protected
   void sse_encode_shooting_date(ShootingDate self, SseSerializer serializer);

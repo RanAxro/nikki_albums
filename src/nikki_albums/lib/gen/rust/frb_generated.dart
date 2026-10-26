@@ -9,10 +9,13 @@ import 'archive/error.dart';
 import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
+import 'config/common/platform.dart';
 import 'config/hot_update.dart';
+import 'config/plugin.dart';
 import 'config/rules/icon_rule.dart';
 import 'config/rules/string_rule.dart';
 import 'config/rules/text_rule.dart';
+import 'config/script.dart';
 import 'config/update.dart';
 
 import 'dart:async';
@@ -99,7 +102,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1063934337;
+  int get rustContentHash => 1312065127;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -304,11 +307,24 @@ abstract class RustLibApi extends BaseApi {
     required String name,
   });
 
-  AppPersistentState? crateConfigAppPersistentStateAppPersistentStateFromJson({
+  AppPersistentState crateConfigAppPersistentStateAppPersistentStateFromJson({
     required String json,
   });
 
+  AppPersistentState
+  crateConfigAppPersistentStateAppPersistentStateFromJsonBytes({
+    required List<int> json,
+  });
+
   String crateConfigAppPersistentStateAppPersistentStateToJson({
+    required AppPersistentState that,
+  });
+
+  Uint8List crateConfigAppPersistentStateAppPersistentStateToJsonBytes({
+    required AppPersistentState that,
+  });
+
+  Uint8List crateConfigAppPersistentStateAppPersistentStateToJsonBytesPretty({
     required AppPersistentState that,
   });
 
@@ -378,19 +394,43 @@ abstract class RustLibApi extends BaseApi {
     required HomeBuildShareCode shareCode,
   });
 
-  HotUpdateInfo? crateConfigHotUpdateHotUpdateInfoFromJson({
+  HotUpdateInfo crateConfigHotUpdateHotUpdateInfoFromJson({
     required String json,
   });
 
+  HotUpdateInfo crateConfigHotUpdateHotUpdateInfoFromJsonBytes({
+    required List<int> json,
+  });
+
   String crateConfigHotUpdateHotUpdateInfoToJson({required HotUpdateInfo that});
+
+  Uint8List crateConfigHotUpdateHotUpdateInfoToJsonBytes({
+    required HotUpdateInfo that,
+  });
+
+  Uint8List crateConfigHotUpdateHotUpdateInfoToJsonBytesPretty({
+    required HotUpdateInfo that,
+  });
 
   String crateConfigHotUpdateHotUpdateInfoToJsonPretty({
     required HotUpdateInfo that,
   });
 
-  IconRule? crateConfigRulesIconRuleIconRuleFromJson({required String json});
+  IconRule crateConfigRulesIconRuleIconRuleFromJson({required String json});
+
+  IconRule crateConfigRulesIconRuleIconRuleFromJsonBytes({
+    required List<int> json,
+  });
 
   String crateConfigRulesIconRuleIconRuleToJson({required IconRule that});
+
+  Uint8List crateConfigRulesIconRuleIconRuleToJsonBytes({
+    required IconRule that,
+  });
+
+  Uint8List crateConfigRulesIconRuleIconRuleToJsonBytesPretty({
+    required IconRule that,
+  });
 
   String crateConfigRulesIconRuleIconRuleToJsonPretty({required IconRule that});
 
@@ -524,11 +564,39 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Nuan5Table> crateNuan5DatabaseModelNuan5TableDefault();
 
-  StringRule? crateConfigRulesStringRuleStringRuleFromJson({
+  PluginInfo crateConfigPluginPluginInfoFromJson({required String json});
+
+  PluginInfo crateConfigPluginPluginInfoFromJsonBytes({
+    required List<int> json,
+  });
+
+  String crateConfigPluginPluginInfoToJson({required PluginInfo that});
+
+  Uint8List crateConfigPluginPluginInfoToJsonBytes({required PluginInfo that});
+
+  Uint8List crateConfigPluginPluginInfoToJsonBytesPretty({
+    required PluginInfo that,
+  });
+
+  String crateConfigPluginPluginInfoToJsonPretty({required PluginInfo that});
+
+  StringRule crateConfigRulesStringRuleStringRuleFromJson({
     required String json,
   });
 
+  StringRule crateConfigRulesStringRuleStringRuleFromJsonBytes({
+    required List<int> json,
+  });
+
   String crateConfigRulesStringRuleStringRuleToJson({required StringRule that});
+
+  Uint8List crateConfigRulesStringRuleStringRuleToJsonBytes({
+    required StringRule that,
+  });
+
+  Uint8List crateConfigRulesStringRuleStringRuleToJsonBytesPretty({
+    required StringRule that,
+  });
 
   String crateConfigRulesStringRuleStringRuleToJsonPretty({
     required StringRule that,
@@ -536,15 +604,37 @@ abstract class RustLibApi extends BaseApi {
 
   int crateApiSimpleTestAdd({required int num1, required int num2});
 
-  TextRule? crateConfigRulesTextRuleTextRuleFromJson({required String json});
+  TextRule crateConfigRulesTextRuleTextRuleFromJson({required String json});
+
+  TextRule crateConfigRulesTextRuleTextRuleFromJsonBytes({
+    required List<int> json,
+  });
 
   String crateConfigRulesTextRuleTextRuleToJson({required TextRule that});
 
+  Uint8List crateConfigRulesTextRuleTextRuleToJsonBytes({
+    required TextRule that,
+  });
+
+  Uint8List crateConfigRulesTextRuleTextRuleToJsonBytesPretty({
+    required TextRule that,
+  });
+
   String crateConfigRulesTextRuleTextRuleToJsonPretty({required TextRule that});
 
-  UpdateInfo? crateConfigUpdateUpdateInfoFromJson({required String json});
+  UpdateInfo crateConfigUpdateUpdateInfoFromJson({required String json});
+
+  UpdateInfo crateConfigUpdateUpdateInfoFromJsonBytes({
+    required List<int> json,
+  });
 
   String crateConfigUpdateUpdateInfoToJson({required UpdateInfo that});
+
+  Uint8List crateConfigUpdateUpdateInfoToJsonBytes({required UpdateInfo that});
+
+  Uint8List crateConfigUpdateUpdateInfoToJsonBytesPretty({
+    required UpdateInfo that,
+  });
 
   String crateConfigUpdateUpdateInfoToJsonPretty({required UpdateInfo that});
 
@@ -1973,7 +2063,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  AppPersistentState? crateConfigAppPersistentStateAppPersistentStateFromJson({
+  AppPersistentState crateConfigAppPersistentStateAppPersistentStateFromJson({
     required String json,
   }) {
     return handler.executeSync(
@@ -1984,8 +2074,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 67)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_app_persistent_state,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_app_persistent_state,
+          decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta:
             kCrateConfigAppPersistentStateAppPersistentStateFromJsonConstMeta,
@@ -2003,6 +2093,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  AppPersistentState
+  crateConfigAppPersistentStateAppPersistentStateFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 68)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_app_persistent_state,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateConfigAppPersistentStateAppPersistentStateFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigAppPersistentStateAppPersistentStateFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "app_persistent_state_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
   String crateConfigAppPersistentStateAppPersistentStateToJson({
     required AppPersistentState that,
   }) {
@@ -2011,7 +2132,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_app_persistent_state(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 68)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2033,6 +2154,66 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Uint8List crateConfigAppPersistentStateAppPersistentStateToJsonBytes({
+    required AppPersistentState that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_app_persistent_state(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 70)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateConfigAppPersistentStateAppPersistentStateToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigAppPersistentStateAppPersistentStateToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "app_persistent_state_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigAppPersistentStateAppPersistentStateToJsonBytesPretty({
+    required AppPersistentState that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_app_persistent_state(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateConfigAppPersistentStateAppPersistentStateToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigAppPersistentStateAppPersistentStateToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "app_persistent_state_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   String crateConfigAppPersistentStateAppPersistentStateToJsonPretty({
     required AppPersistentState that,
   }) {
@@ -2041,7 +2222,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_app_persistent_state(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2076,7 +2257,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 70,
+            funcId: 73,
             port: port_,
           );
         },
@@ -2114,7 +2295,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 71,
+            funcId: 74,
             port: port_,
           );
         },
@@ -2150,7 +2331,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 72,
+            funcId: 75,
             port: port_,
           );
         },
@@ -2185,7 +2366,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 73,
+            funcId: 76,
             port: port_,
           );
         },
@@ -2220,7 +2401,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 74,
+            funcId: 77,
             port: port_,
           );
         },
@@ -2255,7 +2436,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 75,
+            funcId: 78,
             port: port_,
           );
         },
@@ -2288,7 +2469,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 76,
+            funcId: 79,
             port: port_,
           );
         },
@@ -2325,7 +2506,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 77,
+            funcId: 80,
             port: port_,
           );
         },
@@ -2362,7 +2543,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 78,
+            funcId: 81,
             port: port_,
           );
         },
@@ -2399,7 +2580,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 79,
+            funcId: 82,
             port: port_,
           );
         },
@@ -2427,7 +2608,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 80)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 83)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2460,7 +2641,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 81,
+            funcId: 84,
             port: port_,
           );
         },
@@ -2496,7 +2677,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 82,
+            funcId: 85,
             port: port_,
           );
         },
@@ -2518,7 +2699,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  HotUpdateInfo? crateConfigHotUpdateHotUpdateInfoFromJson({
+  HotUpdateInfo crateConfigHotUpdateHotUpdateInfoFromJson({
     required String json,
   }) {
     return handler.executeSync(
@@ -2526,11 +2707,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 83)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_hot_update_info,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_hot_update_info,
+          decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateConfigHotUpdateHotUpdateInfoFromJsonConstMeta,
         argValues: [json],
@@ -2546,6 +2727,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  HotUpdateInfo crateConfigHotUpdateHotUpdateInfoFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 87)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_hot_update_info,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigHotUpdateHotUpdateInfoFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigHotUpdateHotUpdateInfoFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "hot_update_info_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
   String crateConfigHotUpdateHotUpdateInfoToJson({
     required HotUpdateInfo that,
   }) {
@@ -2554,7 +2763,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_hot_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 84)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 88)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2574,6 +2783,63 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Uint8List crateConfigHotUpdateHotUpdateInfoToJsonBytes({
+    required HotUpdateInfo that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_hot_update_info(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 89)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigHotUpdateHotUpdateInfoToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigHotUpdateHotUpdateInfoToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "hot_update_info_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigHotUpdateHotUpdateInfoToJsonBytesPretty({
+    required HotUpdateInfo that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_hot_update_info(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 90)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigHotUpdateHotUpdateInfoToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigHotUpdateHotUpdateInfoToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "hot_update_info_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   String crateConfigHotUpdateHotUpdateInfoToJsonPretty({
     required HotUpdateInfo that,
   }) {
@@ -2582,7 +2848,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_hot_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 85)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 91)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2602,17 +2868,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  IconRule? crateConfigRulesIconRuleIconRuleFromJson({required String json}) {
+  IconRule crateConfigRulesIconRuleIconRuleFromJson({required String json}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 92)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_icon_rule,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_icon_rule,
+          decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateConfigRulesIconRuleIconRuleFromJsonConstMeta,
         argValues: [json],
@@ -2625,13 +2891,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "icon_rule_from_json", argNames: ["json"]);
 
   @override
+  IconRule crateConfigRulesIconRuleIconRuleFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 93)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_icon_rule,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesIconRuleIconRuleFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesIconRuleIconRuleFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "icon_rule_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
   String crateConfigRulesIconRuleIconRuleToJson({required IconRule that}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_icon_rule(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 87)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 94)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2648,6 +2942,63 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "icon_rule_to_json", argNames: ["that"]);
 
   @override
+  Uint8List crateConfigRulesIconRuleIconRuleToJsonBytes({
+    required IconRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_icon_rule(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 95)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesIconRuleIconRuleToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesIconRuleIconRuleToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "icon_rule_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigRulesIconRuleIconRuleToJsonBytesPretty({
+    required IconRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_icon_rule(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 96)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesIconRuleIconRuleToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigRulesIconRuleIconRuleToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "icon_rule_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   String crateConfigRulesIconRuleIconRuleToJsonPretty({
     required IconRule that,
   }) {
@@ -2656,7 +3007,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_icon_rule(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 88)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 97)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2684,7 +3035,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 89,
+            funcId: 98,
             port: port_,
           );
         },
@@ -2721,7 +3072,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 90,
+            funcId: 99,
             port: port_,
           );
         },
@@ -2761,7 +3112,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 91,
+            funcId: 100,
             port: port_,
           );
         },
@@ -2801,7 +3152,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 92,
+            funcId: 101,
             port: port_,
           );
         },
@@ -2838,7 +3189,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 93)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 102,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_media_custom_data,
@@ -2882,7 +3237,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 94,
+              funcId: 103,
               port: port_,
             );
           },
@@ -2921,7 +3276,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 95)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 104,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -2961,7 +3320,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 96,
+            funcId: 105,
             port: port_,
           );
         },
@@ -2998,7 +3357,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 97)!;
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 106,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -3044,7 +3407,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 98,
+              funcId: 107,
               port: port_,
             );
           },
@@ -3088,7 +3451,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 99,
+            funcId: 108,
             port: port_,
           );
         },
@@ -3134,7 +3497,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 100,
+              funcId: 109,
               port: port_,
             );
           },
@@ -3176,7 +3539,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 101,
+            funcId: 110,
           )!;
         },
         codec: SseCodec(
@@ -3208,7 +3571,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 102,
+            funcId: 111,
           )!;
         },
         codec: SseCodec(
@@ -3242,7 +3605,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 103,
+            funcId: 112,
             port: port_,
           );
         },
@@ -3274,7 +3637,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 104,
+            funcId: 113,
             port: port_,
           );
         },
@@ -3301,7 +3664,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 105,
+            funcId: 114,
             port: port_,
           );
         },
@@ -3332,7 +3695,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 106,
+            funcId: 115,
             port: port_,
           );
         },
@@ -3363,7 +3726,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 107,
+            funcId: 116,
             port: port_,
           );
         },
@@ -3393,7 +3756,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 108,
+            funcId: 117,
             port: port_,
           );
         },
@@ -3421,7 +3784,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 109,
+            funcId: 118,
             port: port_,
           );
         },
@@ -3453,7 +3816,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 110,
+            funcId: 119,
             port: port_,
           );
         },
@@ -3480,7 +3843,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 111,
+            funcId: 120,
             port: port_,
           );
         },
@@ -3510,7 +3873,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 112,
+            funcId: 121,
             port: port_,
           );
         },
@@ -3541,7 +3904,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 113,
+            funcId: 122,
             port: port_,
           );
         },
@@ -3572,7 +3935,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 114,
+            funcId: 123,
             port: port_,
           );
         },
@@ -3602,7 +3965,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 115,
+            funcId: 124,
             port: port_,
           );
         },
@@ -3629,7 +3992,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 116,
+            funcId: 125,
             port: port_,
           );
         },
@@ -3659,7 +4022,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 117,
+            funcId: 126,
             port: port_,
           );
         },
@@ -3686,7 +4049,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 118,
+            funcId: 127,
             port: port_,
           );
         },
@@ -3713,7 +4076,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 119,
+            funcId: 128,
             port: port_,
           );
         },
@@ -3740,7 +4103,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 120,
+            funcId: 129,
             port: port_,
           );
         },
@@ -3771,7 +4134,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 121,
+            funcId: 130,
             port: port_,
           );
         },
@@ -3804,7 +4167,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 122,
+            funcId: 131,
             port: port_,
           );
         },
@@ -3835,7 +4198,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 123,
+            funcId: 132,
             port: port_,
           );
         },
@@ -3854,7 +4217,188 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "nuan_5_table_default", argNames: []);
 
   @override
-  StringRule? crateConfigRulesStringRuleStringRuleFromJson({
+  PluginInfo crateConfigPluginPluginInfoFromJson({required String json}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(json, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 133,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_plugin_info,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigPluginPluginInfoFromJsonConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigPluginPluginInfoFromJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "plugin_info_from_json",
+        argNames: ["json"],
+      );
+
+  @override
+  PluginInfo crateConfigPluginPluginInfoFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 134,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_plugin_info,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigPluginPluginInfoFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigPluginPluginInfoFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "plugin_info_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
+  String crateConfigPluginPluginInfoToJson({required PluginInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_plugin_info(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 135,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigPluginPluginInfoToJsonConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigPluginPluginInfoToJsonConstMeta =>
+      const TaskConstMeta(debugName: "plugin_info_to_json", argNames: ["that"]);
+
+  @override
+  Uint8List crateConfigPluginPluginInfoToJsonBytes({required PluginInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_plugin_info(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 136,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigPluginPluginInfoToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigPluginPluginInfoToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "plugin_info_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigPluginPluginInfoToJsonBytesPretty({
+    required PluginInfo that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_plugin_info(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 137,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigPluginPluginInfoToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigPluginPluginInfoToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "plugin_info_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
+  String crateConfigPluginPluginInfoToJsonPretty({required PluginInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_plugin_info(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 138,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigPluginPluginInfoToJsonPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigPluginPluginInfoToJsonPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "plugin_info_to_json_pretty",
+        argNames: ["that"],
+      );
+
+  @override
+  StringRule crateConfigRulesStringRuleStringRuleFromJson({
     required String json,
   }) {
     return handler.executeSync(
@@ -3865,12 +4409,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 124,
+            funcId: 139,
           )!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_string_rule,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_string_rule,
+          decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateConfigRulesStringRuleStringRuleFromJsonConstMeta,
         argValues: [json],
@@ -3886,6 +4430,39 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  StringRule crateConfigRulesStringRuleStringRuleFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 140,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_string_rule,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesStringRuleStringRuleFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigRulesStringRuleStringRuleFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "string_rule_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
   String crateConfigRulesStringRuleStringRuleToJson({
     required StringRule that,
   }) {
@@ -3897,7 +4474,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 125,
+            funcId: 141,
           )!;
         },
         codec: SseCodec(
@@ -3915,6 +4492,72 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "string_rule_to_json", argNames: ["that"]);
 
   @override
+  Uint8List crateConfigRulesStringRuleStringRuleToJsonBytes({
+    required StringRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_string_rule(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 142,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesStringRuleStringRuleToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesStringRuleStringRuleToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "string_rule_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigRulesStringRuleStringRuleToJsonBytesPretty({
+    required StringRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_string_rule(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 143,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateConfigRulesStringRuleStringRuleToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigRulesStringRuleStringRuleToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "string_rule_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   String crateConfigRulesStringRuleStringRuleToJsonPretty({
     required StringRule that,
   }) {
@@ -3926,7 +4569,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 126,
+            funcId: 144,
           )!;
         },
         codec: SseCodec(
@@ -3958,7 +4601,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 127,
+            funcId: 145,
           )!;
         },
         codec: SseCodec(
@@ -3976,7 +4619,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "test_add", argNames: ["num1", "num2"]);
 
   @override
-  TextRule? crateConfigRulesTextRuleTextRuleFromJson({required String json}) {
+  TextRule crateConfigRulesTextRuleTextRuleFromJson({required String json}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -3985,12 +4628,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 128,
+            funcId: 146,
           )!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_text_rule,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_text_rule,
+          decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateConfigRulesTextRuleTextRuleFromJsonConstMeta,
         argValues: [json],
@@ -4003,6 +4646,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "text_rule_from_json", argNames: ["json"]);
 
   @override
+  TextRule crateConfigRulesTextRuleTextRuleFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 147,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_text_rule,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesTextRuleTextRuleFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesTextRuleTextRuleFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "text_rule_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
   String crateConfigRulesTextRuleTextRuleToJson({required TextRule that}) {
     return handler.executeSync(
       SyncTask(
@@ -4012,7 +4687,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 129,
+            funcId: 148,
           )!;
         },
         codec: SseCodec(
@@ -4030,6 +4705,71 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "text_rule_to_json", argNames: ["that"]);
 
   @override
+  Uint8List crateConfigRulesTextRuleTextRuleToJsonBytes({
+    required TextRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_text_rule(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 149,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesTextRuleTextRuleToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesTextRuleTextRuleToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "text_rule_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigRulesTextRuleTextRuleToJsonBytesPretty({
+    required TextRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_text_rule(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 150,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesTextRuleTextRuleToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateConfigRulesTextRuleTextRuleToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "text_rule_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   String crateConfigRulesTextRuleTextRuleToJsonPretty({
     required TextRule that,
   }) {
@@ -4041,7 +4781,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 130,
+            funcId: 151,
           )!;
         },
         codec: SseCodec(
@@ -4062,7 +4802,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  UpdateInfo? crateConfigUpdateUpdateInfoFromJson({required String json}) {
+  UpdateInfo crateConfigUpdateUpdateInfoFromJson({required String json}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4071,12 +4811,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 131,
+            funcId: 152,
           )!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_update_info,
-          decodeErrorData: null,
+          decodeSuccessData: sse_decode_update_info,
+          decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateConfigUpdateUpdateInfoFromJsonConstMeta,
         argValues: [json],
@@ -4092,6 +4832,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  UpdateInfo crateConfigUpdateUpdateInfoFromJsonBytes({
+    required List<int> json,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(json, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 153,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_update_info,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigUpdateUpdateInfoFromJsonBytesConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigUpdateUpdateInfoFromJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "update_info_from_json_bytes",
+        argNames: ["json"],
+      );
+
+  @override
   String crateConfigUpdateUpdateInfoToJson({required UpdateInfo that}) {
     return handler.executeSync(
       SyncTask(
@@ -4101,7 +4873,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 132,
+            funcId: 154,
           )!;
         },
         codec: SseCodec(
@@ -4119,6 +4891,68 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "update_info_to_json", argNames: ["that"]);
 
   @override
+  Uint8List crateConfigUpdateUpdateInfoToJsonBytes({required UpdateInfo that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_update_info(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 155,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigUpdateUpdateInfoToJsonBytesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigUpdateUpdateInfoToJsonBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "update_info_to_json_bytes",
+        argNames: ["that"],
+      );
+
+  @override
+  Uint8List crateConfigUpdateUpdateInfoToJsonBytesPretty({
+    required UpdateInfo that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_update_info(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 156,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_8_strict,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigUpdateUpdateInfoToJsonBytesPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigUpdateUpdateInfoToJsonBytesPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "update_info_to_json_bytes_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   String crateConfigUpdateUpdateInfoToJsonPretty({required UpdateInfo that}) {
     return handler.executeSync(
       SyncTask(
@@ -4128,7 +4962,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 133,
+            funcId: 157,
           )!;
         },
         codec: SseCodec(
@@ -4825,6 +5659,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PluginInfo dco_decode_box_autoadd_plugin_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_plugin_info(raw);
+  }
+
+  @protected
   Region dco_decode_box_autoadd_region(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_region(raw);
@@ -5180,6 +6020,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  EasyScript dco_decode_easy_script(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return EasyScript.values[raw as int];
+  }
+
+  @protected
   EditPhotoParams dco_decode_edit_photo_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -5404,6 +6250,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<EasyScript> dco_decode_list_easy_script(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_easy_script).toList();
+  }
+
+  @protected
   List<Eureka> dco_decode_list_eureka(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_eureka).toList();
@@ -5453,6 +6305,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return (raw as List<dynamic>)
         .map(dco_decode_pattern_creation_data)
         .toList();
+  }
+
+  @protected
+  List<Platform> dco_decode_list_platform(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_platform).toList();
   }
 
   @protected
@@ -6155,16 +7013,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  AppPersistentState? dco_decode_opt_box_autoadd_app_persistent_state(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null
-        ? null
-        : dco_decode_box_autoadd_app_persistent_state(raw);
-  }
-
-  @protected
   Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_area(raw);
@@ -6220,12 +7068,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_home_build_param(raw);
-  }
-
-  @protected
-  HotUpdateInfo? dco_decode_opt_box_autoadd_hot_update_info(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_hot_update_info(raw);
   }
 
   @protected
@@ -6348,33 +7190,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringRule? dco_decode_opt_box_autoadd_string_rule(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_string_rule(raw);
-  }
-
-  @protected
   Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_subarea(raw);
   }
 
   @protected
-  TextRule? dco_decode_opt_box_autoadd_text_rule(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_text_rule(raw);
-  }
-
-  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
-  }
-
-  @protected
-  UpdateInfo? dco_decode_opt_box_autoadd_update_info(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_update_info(raw);
   }
 
   @protected
@@ -6480,6 +7304,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Platform dco_decode_platform(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Platform.values[raw as int];
+  }
+
+  @protected
   PlatformUpdateInfo dco_decode_platform_update_info(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -6490,6 +7320,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       versionString: dco_decode_String(arr[1]),
       downloadLink: dco_decode_String(arr[2]),
       updateMessage: dco_decode_Map_String_String_None(arr[3]),
+    );
+  }
+
+  @protected
+  PluginInfo dco_decode_plugin_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 13)
+      throw Exception('unexpected arr length: expect 13 but see ${arr.length}');
+    return PluginInfo(
+      asExtensionOf: dco_decode_opt_String(arr[0]),
+      uuid: dco_decode_String(arr[1]),
+      name: dco_decode_text_rule(arr[2]),
+      description: dco_decode_text_rule(arr[3]),
+      icon: dco_decode_opt_box_autoadd_icon_rule(arr[4]),
+      version: dco_decode_u_32(arr[5]),
+      author: dco_decode_opt_String(arr[6]),
+      web: dco_decode_opt_String(arr[7]),
+      downloadUrl: dco_decode_opt_String(arr[8]),
+      pluginList: dco_decode_opt_String(arr[9]),
+      appVersion: dco_decode_u_32(arr[10]),
+      platforms: dco_decode_list_platform(arr[11]),
+      entrance: dco_decode_script(arr[12]),
     );
   }
 
@@ -6821,6 +7674,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           floatingEffect: dco_decode_bool(raw[7]),
           poseWithNikki: dco_decode_bool(raw[8]),
         );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  Script dco_decode_script(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return Script_EasyScript(dco_decode_list_easy_script(raw[1]));
+      case 1:
+        return Script_JS(dco_decode_String(raw[1]));
+      case 2:
+        return Script_Wasm(dco_decode_String(raw[1]));
       default:
         throw Exception("unreachable");
     }
@@ -7809,6 +8677,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PluginInfo sse_decode_box_autoadd_plugin_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_plugin_info(deserializer));
+  }
+
+  @protected
   Region sse_decode_box_autoadd_region(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_region(deserializer));
@@ -8220,6 +9094,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  EasyScript sse_decode_easy_script(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return EasyScript.values[inner];
+  }
+
+  @protected
   EditPhotoParams sse_decode_edit_photo_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_hasSticker = sse_decode_bool(deserializer);
@@ -8481,6 +9362,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<EasyScript> sse_decode_list_easy_script(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <EasyScript>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_easy_script(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<Eureka> sse_decode_list_eureka(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -8584,6 +9477,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <PatternCreationData>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_pattern_creation_data(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Platform> sse_decode_list_platform(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Platform>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_platform(deserializer));
     }
     return ans_;
   }
@@ -9485,19 +10390,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  AppPersistentState? sse_decode_opt_box_autoadd_app_persistent_state(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_app_persistent_state(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -9603,19 +10495,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_home_build_param(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  HotUpdateInfo? sse_decode_opt_box_autoadd_hot_update_info(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_hot_update_info(deserializer));
     } else {
       return null;
     }
@@ -9849,19 +10728,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringRule? sse_decode_opt_box_autoadd_string_rule(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_string_rule(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -9873,35 +10739,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextRule? sse_decode_opt_box_autoadd_text_rule(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_text_rule(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_u_32(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  UpdateInfo? sse_decode_opt_box_autoadd_update_info(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_update_info(deserializer));
     } else {
       return null;
     }
@@ -10053,6 +10895,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Platform sse_decode_platform(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Platform.values[inner];
+  }
+
+  @protected
   PlatformUpdateInfo sse_decode_platform_update_info(
     SseDeserializer deserializer,
   ) {
@@ -10066,6 +10915,39 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       versionString: var_versionString,
       downloadLink: var_downloadLink,
       updateMessage: var_updateMessage,
+    );
+  }
+
+  @protected
+  PluginInfo sse_decode_plugin_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_asExtensionOf = sse_decode_opt_String(deserializer);
+    var var_uuid = sse_decode_String(deserializer);
+    var var_name = sse_decode_text_rule(deserializer);
+    var var_description = sse_decode_text_rule(deserializer);
+    var var_icon = sse_decode_opt_box_autoadd_icon_rule(deserializer);
+    var var_version = sse_decode_u_32(deserializer);
+    var var_author = sse_decode_opt_String(deserializer);
+    var var_web = sse_decode_opt_String(deserializer);
+    var var_downloadUrl = sse_decode_opt_String(deserializer);
+    var var_pluginList = sse_decode_opt_String(deserializer);
+    var var_appVersion = sse_decode_u_32(deserializer);
+    var var_platforms = sse_decode_list_platform(deserializer);
+    var var_entrance = sse_decode_script(deserializer);
+    return PluginInfo(
+      asExtensionOf: var_asExtensionOf,
+      uuid: var_uuid,
+      name: var_name,
+      description: var_description,
+      icon: var_icon,
+      version: var_version,
+      author: var_author,
+      web: var_web,
+      downloadUrl: var_downloadUrl,
+      pluginList: var_pluginList,
+      appVersion: var_appVersion,
+      platforms: var_platforms,
+      entrance: var_entrance,
     );
   }
 
@@ -10404,6 +11286,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           floatingEffect: var_floatingEffect,
           poseWithNikki: var_poseWithNikki,
         );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  Script sse_decode_script(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_list_easy_script(deserializer);
+        return Script_EasyScript(var_field0);
+      case 1:
+        var var_field0 = sse_decode_String(deserializer);
+        return Script_JS(var_field0);
+      case 2:
+        var var_field0 = sse_decode_String(deserializer);
+        return Script_Wasm(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -11500,6 +12402,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_plugin_info(
+    PluginInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_plugin_info(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_region(Region self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_region(self, serializer);
@@ -11867,6 +12778,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_easy_script(EasyScript self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
   void sse_encode_edit_photo_params(
     EditPhotoParams self,
     SseSerializer serializer,
@@ -12094,6 +13011,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_easy_script(
+    List<EasyScript> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_easy_script(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_eureka(List<Eureka> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
@@ -12180,6 +13109,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_pattern_creation_data(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_platform(List<Platform> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_platform(item, serializer);
     }
   }
 
@@ -12969,19 +13907,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_app_persistent_state(
-    AppPersistentState? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_app_persistent_state(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -13089,19 +14014,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_home_build_param(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_hot_update_info(
-    HotUpdateInfo? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_hot_update_info(self, serializer);
     }
   }
 
@@ -13337,19 +14249,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_string_rule(
-    StringRule? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_string_rule(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_subarea(
     Subarea? self,
     SseSerializer serializer,
@@ -13363,38 +14262,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_text_rule(
-    TextRule? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_text_rule(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_u_32(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_update_info(
-    UpdateInfo? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_update_info(self, serializer);
     }
   }
 
@@ -13520,6 +14393,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_platform(Platform self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
   void sse_encode_platform_update_info(
     PlatformUpdateInfo self,
     SseSerializer serializer,
@@ -13529,6 +14408,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_String(self.versionString, serializer);
     sse_encode_String(self.downloadLink, serializer);
     sse_encode_Map_String_String_None(self.updateMessage, serializer);
+  }
+
+  @protected
+  void sse_encode_plugin_info(PluginInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_String(self.asExtensionOf, serializer);
+    sse_encode_String(self.uuid, serializer);
+    sse_encode_text_rule(self.name, serializer);
+    sse_encode_text_rule(self.description, serializer);
+    sse_encode_opt_box_autoadd_icon_rule(self.icon, serializer);
+    sse_encode_u_32(self.version, serializer);
+    sse_encode_opt_String(self.author, serializer);
+    sse_encode_opt_String(self.web, serializer);
+    sse_encode_opt_String(self.downloadUrl, serializer);
+    sse_encode_opt_String(self.pluginList, serializer);
+    sse_encode_u_32(self.appVersion, serializer);
+    sse_encode_list_platform(self.platforms, serializer);
+    sse_encode_script(self.entrance, serializer);
   }
 
   @protected
@@ -13827,6 +14724,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_bool(autoGroundSnap, serializer);
         sse_encode_bool(floatingEffect, serializer);
         sse_encode_bool(poseWithNikki, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_script(Script self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case Script_EasyScript(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_list_easy_script(field0, serializer);
+      case Script_JS(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_String(field0, serializer);
+      case Script_Wasm(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_String(field0, serializer);
     }
   }
 

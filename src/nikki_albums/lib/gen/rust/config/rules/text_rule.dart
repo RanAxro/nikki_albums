@@ -33,11 +33,22 @@ sealed class TextRule with _$TextRule {
   const factory TextRule.translate(TranslateTextRule field0) =
       TextRule_Translate;
 
-  static TextRule? fromJson({required String json}) =>
+  static TextRule fromJson({required String json}) =>
       RustLib.instance.api.crateConfigRulesTextRuleTextRuleFromJson(json: json);
+
+  static TextRule fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigRulesTextRuleTextRuleFromJsonBytes(json: json);
 
   String toJson() =>
       RustLib.instance.api.crateConfigRulesTextRuleTextRuleToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigRulesTextRuleTextRuleToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigRulesTextRuleTextRuleToJsonBytesPretty(that: this);
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigRulesTextRuleTextRuleToJsonPretty(that: this);

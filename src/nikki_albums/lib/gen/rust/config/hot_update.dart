@@ -56,11 +56,22 @@ class HotUpdateInfo {
     required this.files,
   });
 
-  static HotUpdateInfo? fromJson({required String json}) => RustLib.instance.api
+  static HotUpdateInfo fromJson({required String json}) => RustLib.instance.api
       .crateConfigHotUpdateHotUpdateInfoFromJson(json: json);
+
+  static HotUpdateInfo fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigHotUpdateHotUpdateInfoFromJsonBytes(json: json);
 
   String toJson() =>
       RustLib.instance.api.crateConfigHotUpdateHotUpdateInfoToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigHotUpdateHotUpdateInfoToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigHotUpdateHotUpdateInfoToJsonBytesPretty(that: this);
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigHotUpdateHotUpdateInfoToJsonPretty(that: this);

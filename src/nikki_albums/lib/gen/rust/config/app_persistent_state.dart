@@ -19,13 +19,26 @@ sealed class AppPersistentState with _$AppPersistentState {
     int? theme,
     required Map<String, String> unknownField,
   }) = _AppPersistentState;
-  static AppPersistentState? fromJson({required String json}) => RustLib
+  static AppPersistentState fromJson({required String json}) => RustLib
       .instance
       .api
       .crateConfigAppPersistentStateAppPersistentStateFromJson(json: json);
 
+  static AppPersistentState fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigAppPersistentStateAppPersistentStateFromJsonBytes(json: json);
+
   String toJson() => RustLib.instance.api
       .crateConfigAppPersistentStateAppPersistentStateToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigAppPersistentStateAppPersistentStateToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigAppPersistentStateAppPersistentStateToJsonBytesPretty(
+        that: this,
+      );
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigAppPersistentStateAppPersistentStateToJsonPretty(that: this);

@@ -116,11 +116,22 @@ class StringRule {
 
   const StringRule({required this.process});
 
-  static StringRule? fromJson({required String json}) => RustLib.instance.api
+  static StringRule fromJson({required String json}) => RustLib.instance.api
       .crateConfigRulesStringRuleStringRuleFromJson(json: json);
+
+  static StringRule fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigRulesStringRuleStringRuleFromJsonBytes(json: json);
 
   String toJson() => RustLib.instance.api
       .crateConfigRulesStringRuleStringRuleToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigRulesStringRuleStringRuleToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigRulesStringRuleStringRuleToJsonBytesPretty(that: this);
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigRulesStringRuleStringRuleToJsonPretty(that: this);

@@ -1,6 +1,8 @@
+use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 use crate::config::common::platform::Platform;
 use crate::config::script::Script;
+use crate::impl_json_frb;
 use super::rules::{
   text_rule::TextRule,
   icon_rule::IconRule,
@@ -13,6 +15,7 @@ pub enum PluginSource{
   External,
 }
 
+#[frb]
 #[derive(Serialize, Deserialize)]
 pub struct PluginInfo{
   pub as_extension_of: Option<String>,
@@ -30,3 +33,5 @@ pub struct PluginInfo{
 
   pub entrance: Script,
 }
+
+impl_json_frb!(PluginInfo);

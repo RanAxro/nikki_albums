@@ -44,11 +44,20 @@ class UpdateInfo {
 
   const UpdateInfo({required this.windows, required this.macos});
 
-  static UpdateInfo? fromJson({required String json}) =>
+  static UpdateInfo fromJson({required String json}) =>
       RustLib.instance.api.crateConfigUpdateUpdateInfoFromJson(json: json);
+
+  static UpdateInfo fromJsonBytes({required List<int> json}) =>
+      RustLib.instance.api.crateConfigUpdateUpdateInfoFromJsonBytes(json: json);
 
   String toJson() =>
       RustLib.instance.api.crateConfigUpdateUpdateInfoToJson(that: this);
+
+  Uint8List toJsonBytes() =>
+      RustLib.instance.api.crateConfigUpdateUpdateInfoToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigUpdateUpdateInfoToJsonBytesPretty(that: this);
 
   String toJsonPretty() =>
       RustLib.instance.api.crateConfigUpdateUpdateInfoToJsonPretty(that: this);

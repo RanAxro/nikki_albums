@@ -9,9 +9,9 @@ pub enum Script{
 
 #[derive(Serialize, Deserialize)]
 pub enum EasyScript{
-  RegisterLoc(),
-  RegisterGlobalLoc(),
-  RegisterIcon(),
-  RegisterGlobalIcon(),
-  RegisterScript(),
+  RegisterLoc,
+  RegisterGlobalLoc,
+  RegisterIcon,
+  RegisterGlobalIcon,
+  RegisterScript,
 }
