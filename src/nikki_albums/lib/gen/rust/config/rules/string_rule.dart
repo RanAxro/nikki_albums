@@ -7,41 +7,13 @@ import '../../frb_generated.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-part 'string_config.freezed.dart';
+part 'string_rule.freezed.dart';
 
-class StringConfig {
-  final List<StringProcessConfig> process;
-
-  const StringConfig({required this.process});
-
-  static StringConfig? fromJson({required String json}) => RustLib.instance.api
-      .crateConfigCommonStringConfigStringConfigFromJson(json: json);
-
-  String toJson() => RustLib.instance.api
-      .crateConfigCommonStringConfigStringConfigToJson(that: this);
-
-  String toJsonPretty() => RustLib.instance.api
-      .crateConfigCommonStringConfigStringConfigToJsonPretty(that: this);
-
-  @override
-  int get hashCode => process.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is StringConfig &&
-          runtimeType == other.runtimeType &&
-          process == other.process;
-}
-
-class StringJoinProcessConfig {
+class StringJoinProcess {
   final String separator;
-  final List<List<StringProcessConfig>> target;
+  final List<List<StringProcess>> target;
 
-  const StringJoinProcessConfig({
-    required this.separator,
-    required this.target,
-  });
+  const StringJoinProcess({required this.separator, required this.target});
 
   @override
   int get hashCode => separator.hashCode ^ target.hashCode;
@@ -49,19 +21,19 @@ class StringJoinProcessConfig {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StringJoinProcessConfig &&
+      other is StringJoinProcess &&
           runtimeType == other.runtimeType &&
           separator == other.separator &&
           target == other.target;
 }
 
-class StringMatchProcessConfig {
+class StringMatchProcess {
   final String regex;
   final int which;
   final String successful;
-  final List<StringProcessConfig> failed;
+  final List<StringProcess> failed;
 
-  const StringMatchProcessConfig({
+  const StringMatchProcess({
     required this.regex,
     required this.which,
     required this.successful,
@@ -75,7 +47,7 @@ class StringMatchProcessConfig {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StringMatchProcessConfig &&
+      other is StringMatchProcess &&
           runtimeType == other.runtimeType &&
           regex == other.regex &&
           which == other.which &&
@@ -84,25 +56,24 @@ class StringMatchProcessConfig {
 }
 
 @freezed
-sealed class StringProcessConfig with _$StringProcessConfig {
-  const StringProcessConfig._();
+sealed class StringProcess with _$StringProcess {
+  const StringProcess._();
 
-  const factory StringProcessConfig.join(StringJoinProcessConfig field0) =
-      StringProcessConfig_Join;
-  const factory StringProcessConfig.match(StringMatchProcessConfig field0) =
-      StringProcessConfig_Match;
-  const factory StringProcessConfig.replace(StringReplaceProcessConfig field0) =
-      StringProcessConfig_Replace;
-  const factory StringProcessConfig.replaceAll(
-    StringReplaceAllProcessConfig field0,
-  ) = StringProcessConfig_ReplaceAll;
+  const factory StringProcess.join(StringJoinProcess field0) =
+      StringProcess_Join;
+  const factory StringProcess.match(StringMatchProcess field0) =
+      StringProcess_Match;
+  const factory StringProcess.replace(StringReplaceProcess field0) =
+      StringProcess_Replace;
+  const factory StringProcess.replaceAll(StringReplaceAllProcess field0) =
+      StringProcess_ReplaceAll;
 }
 
-class StringReplaceAllProcessConfig {
+class StringReplaceAllProcess {
   final String regex;
   final String to;
 
-  const StringReplaceAllProcessConfig({required this.regex, required this.to});
+  const StringReplaceAllProcess({required this.regex, required this.to});
 
   @override
   int get hashCode => regex.hashCode ^ to.hashCode;
@@ -110,18 +81,18 @@ class StringReplaceAllProcessConfig {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StringReplaceAllProcessConfig &&
+      other is StringReplaceAllProcess &&
           runtimeType == other.runtimeType &&
           regex == other.regex &&
           to == other.to;
 }
 
-class StringReplaceProcessConfig {
+class StringReplaceProcess {
   final String regex;
   final int which;
   final String to;
 
-  const StringReplaceProcessConfig({
+  const StringReplaceProcess({
     required this.regex,
     required this.which,
     required this.to,
@@ -133,9 +104,34 @@ class StringReplaceProcessConfig {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StringReplaceProcessConfig &&
+      other is StringReplaceProcess &&
           runtimeType == other.runtimeType &&
           regex == other.regex &&
           which == other.which &&
           to == other.to;
+}
+
+class StringRule {
+  final List<StringProcess> process;
+
+  const StringRule({required this.process});
+
+  static StringRule? fromJson({required String json}) => RustLib.instance.api
+      .crateConfigRulesStringRuleStringRuleFromJson(json: json);
+
+  String toJson() => RustLib.instance.api
+      .crateConfigRulesStringRuleStringRuleToJson(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigRulesStringRuleStringRuleToJsonPretty(that: this);
+
+  @override
+  int get hashCode => process.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StringRule &&
+          runtimeType == other.runtimeType &&
+          process == other.process;
 }

@@ -9,12 +9,10 @@ import 'archive/error.dart';
 import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
-import 'config/common/file_reader_config.dart';
-import 'config/common/string_config.dart';
-import 'config/common/text_config.dart';
-import 'config/common/windows_registry_config.dart';
-import 'config/game_config.dart';
 import 'config/hot_update.dart';
+import 'config/rules/icon_rule.dart';
+import 'config/rules/string_rule.dart';
+import 'config/rules/text_rule.dart';
 import 'config/update.dart';
 
 import 'dart:async';
@@ -101,7 +99,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 527557423;
+  int get rustContentHash => 1063934337;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -351,26 +349,6 @@ abstract class RustLibApi extends BaseApi {
     required CameraParams cameraParams,
   });
 
-  FileReaderConfig? crateConfigCommonFileReaderConfigFileReaderConfigFromJson({
-    required String json,
-  });
-
-  String crateConfigCommonFileReaderConfigFileReaderConfigToJson({
-    required FileReaderConfig that,
-  });
-
-  String crateConfigCommonFileReaderConfigFileReaderConfigToJsonPretty({
-    required FileReaderConfig that,
-  });
-
-  GameConfig? crateConfigGameConfigGameConfigFromJson({required String json});
-
-  String crateConfigGameConfigGameConfigToJson({required GameConfig that});
-
-  String crateConfigGameConfigGameConfigToJsonPretty({
-    required GameConfig that,
-  });
-
   Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
     required List<int> jpegBytes,
     int? targetWidth,
@@ -409,6 +387,12 @@ abstract class RustLibApi extends BaseApi {
   String crateConfigHotUpdateHotUpdateInfoToJsonPretty({
     required HotUpdateInfo that,
   });
+
+  IconRule? crateConfigRulesIconRuleIconRuleFromJson({required String json});
+
+  String crateConfigRulesIconRuleIconRuleToJson({required IconRule that});
+
+  String crateConfigRulesIconRuleIconRuleToJsonPretty({required IconRule that});
 
   Future<void> crateApiSimpleInitApp();
 
@@ -540,31 +524,23 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Nuan5Table> crateNuan5DatabaseModelNuan5TableDefault();
 
-  StringConfig? crateConfigCommonStringConfigStringConfigFromJson({
+  StringRule? crateConfigRulesStringRuleStringRuleFromJson({
     required String json,
   });
 
-  String crateConfigCommonStringConfigStringConfigToJson({
-    required StringConfig that,
-  });
+  String crateConfigRulesStringRuleStringRuleToJson({required StringRule that});
 
-  String crateConfigCommonStringConfigStringConfigToJsonPretty({
-    required StringConfig that,
+  String crateConfigRulesStringRuleStringRuleToJsonPretty({
+    required StringRule that,
   });
 
   int crateApiSimpleTestAdd({required int num1, required int num2});
 
-  TextConfig? crateConfigCommonTextConfigTextConfigFromJson({
-    required String json,
-  });
+  TextRule? crateConfigRulesTextRuleTextRuleFromJson({required String json});
 
-  String crateConfigCommonTextConfigTextConfigToJson({
-    required TextConfig that,
-  });
+  String crateConfigRulesTextRuleTextRuleToJson({required TextRule that});
 
-  String crateConfigCommonTextConfigTextConfigToJsonPretty({
-    required TextConfig that,
-  });
+  String crateConfigRulesTextRuleTextRuleToJsonPretty({required TextRule that});
 
   UpdateInfo? crateConfigUpdateUpdateInfoFromJson({required String json});
 
@@ -2334,173 +2310,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  FileReaderConfig? crateConfigCommonFileReaderConfigFileReaderConfigFromJson({
-    required String json,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 77)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_file_reader_config,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateConfigCommonFileReaderConfigFileReaderConfigFromJsonConstMeta,
-        argValues: [json],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateConfigCommonFileReaderConfigFileReaderConfigFromJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "file_reader_config_from_json",
-        argNames: ["json"],
-      );
-
-  @override
-  String crateConfigCommonFileReaderConfigFileReaderConfigToJson({
-    required FileReaderConfig that,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_file_reader_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 78)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta:
-            kCrateConfigCommonFileReaderConfigFileReaderConfigToJsonConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateConfigCommonFileReaderConfigFileReaderConfigToJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "file_reader_config_to_json",
-        argNames: ["that"],
-      );
-
-  @override
-  String crateConfigCommonFileReaderConfigFileReaderConfigToJsonPretty({
-    required FileReaderConfig that,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_file_reader_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 79)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta:
-            kCrateConfigCommonFileReaderConfigFileReaderConfigToJsonPrettyConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateConfigCommonFileReaderConfigFileReaderConfigToJsonPrettyConstMeta =>
-      const TaskConstMeta(
-        debugName: "file_reader_config_to_json_pretty",
-        argNames: ["that"],
-      );
-
-  @override
-  GameConfig? crateConfigGameConfigGameConfigFromJson({required String json}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 80)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_game_config,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateConfigGameConfigGameConfigFromJsonConstMeta,
-        argValues: [json],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateConfigGameConfigGameConfigFromJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "game_config_from_json",
-        argNames: ["json"],
-      );
-
-  @override
-  String crateConfigGameConfigGameConfigToJson({required GameConfig that}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_game_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 81)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateConfigGameConfigGameConfigToJsonConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateConfigGameConfigGameConfigToJsonConstMeta =>
-      const TaskConstMeta(debugName: "game_config_to_json", argNames: ["that"]);
-
-  @override
-  String crateConfigGameConfigGameConfigToJsonPretty({
-    required GameConfig that,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_game_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 82)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateConfigGameConfigGameConfigToJsonPrettyConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateConfigGameConfigGameConfigToJsonPrettyConstMeta =>
-      const TaskConstMeta(
-        debugName: "game_config_to_json_pretty",
-        argNames: ["that"],
-      );
-
-  @override
   Future<Thumbnail> crateThumbnailJpegGenerateThumbnail({
     required List<int> jpegBytes,
     int? targetWidth,
@@ -2516,7 +2325,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 83,
+            funcId: 77,
             port: port_,
           );
         },
@@ -2553,7 +2362,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 84,
+            funcId: 78,
             port: port_,
           );
         },
@@ -2590,7 +2399,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 85,
+            funcId: 79,
             port: port_,
           );
         },
@@ -2618,7 +2427,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 80)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2651,7 +2460,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 87,
+            funcId: 81,
             port: port_,
           );
         },
@@ -2687,7 +2496,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 88,
+            funcId: 82,
             port: port_,
           );
         },
@@ -2717,7 +2526,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 89)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 83)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_hot_update_info,
@@ -2745,7 +2554,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_hot_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 90)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 84)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2773,7 +2582,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_hot_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 91)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 85)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2793,6 +2602,80 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  IconRule? crateConfigRulesIconRuleIconRuleFromJson({required String json}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(json, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_icon_rule,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateConfigRulesIconRuleIconRuleFromJsonConstMeta,
+        argValues: [json],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesIconRuleIconRuleFromJsonConstMeta =>
+      const TaskConstMeta(debugName: "icon_rule_from_json", argNames: ["json"]);
+
+  @override
+  String crateConfigRulesIconRuleIconRuleToJson({required IconRule that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_icon_rule(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 87)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesIconRuleIconRuleToJsonConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesIconRuleIconRuleToJsonConstMeta =>
+      const TaskConstMeta(debugName: "icon_rule_to_json", argNames: ["that"]);
+
+  @override
+  String crateConfigRulesIconRuleIconRuleToJsonPretty({
+    required IconRule that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_icon_rule(that, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 88)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateConfigRulesIconRuleIconRuleToJsonPrettyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateConfigRulesIconRuleIconRuleToJsonPrettyConstMeta =>
+      const TaskConstMeta(
+        debugName: "icon_rule_to_json_pretty",
+        argNames: ["that"],
+      );
+
+  @override
   Future<void> crateApiSimpleInitApp() {
     return handler.executeNormal(
       NormalTask(
@@ -2801,7 +2684,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 92,
+            funcId: 89,
             port: port_,
           );
         },
@@ -2838,7 +2721,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 93,
+            funcId: 90,
             port: port_,
           );
         },
@@ -2878,7 +2761,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 94,
+            funcId: 91,
             port: port_,
           );
         },
@@ -2918,7 +2801,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 95,
+            funcId: 92,
             port: port_,
           );
         },
@@ -2955,7 +2838,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 96)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 93)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_media_custom_data,
@@ -2999,7 +2882,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 97,
+              funcId: 94,
               port: port_,
             );
           },
@@ -3038,7 +2921,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 98)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 95)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -3078,7 +2961,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 99,
+            funcId: 96,
             port: port_,
           );
         },
@@ -3115,11 +2998,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             key,
             serializer,
           );
-          return pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 100,
-          )!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 97)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_custom_data,
@@ -3165,7 +3044,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 101,
+              funcId: 98,
               port: port_,
             );
           },
@@ -3209,7 +3088,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 102,
+            funcId: 99,
             port: port_,
           );
         },
@@ -3255,7 +3134,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 103,
+              funcId: 100,
               port: port_,
             );
           },
@@ -3297,7 +3176,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 104,
+            funcId: 101,
           )!;
         },
         codec: SseCodec(
@@ -3329,7 +3208,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 105,
+            funcId: 102,
           )!;
         },
         codec: SseCodec(
@@ -3363,7 +3242,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 106,
+            funcId: 103,
             port: port_,
           );
         },
@@ -3395,7 +3274,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 107,
+            funcId: 104,
             port: port_,
           );
         },
@@ -3422,7 +3301,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 108,
+            funcId: 105,
             port: port_,
           );
         },
@@ -3453,7 +3332,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 109,
+            funcId: 106,
             port: port_,
           );
         },
@@ -3484,7 +3363,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 110,
+            funcId: 107,
             port: port_,
           );
         },
@@ -3514,7 +3393,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 111,
+            funcId: 108,
             port: port_,
           );
         },
@@ -3542,7 +3421,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 112,
+            funcId: 109,
             port: port_,
           );
         },
@@ -3574,7 +3453,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 113,
+            funcId: 110,
             port: port_,
           );
         },
@@ -3601,7 +3480,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 114,
+            funcId: 111,
             port: port_,
           );
         },
@@ -3631,7 +3510,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 115,
+            funcId: 112,
             port: port_,
           );
         },
@@ -3662,7 +3541,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 116,
+            funcId: 113,
             port: port_,
           );
         },
@@ -3693,7 +3572,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 117,
+            funcId: 114,
             port: port_,
           );
         },
@@ -3723,7 +3602,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 118,
+            funcId: 115,
             port: port_,
           );
         },
@@ -3750,7 +3629,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 119,
+            funcId: 116,
             port: port_,
           );
         },
@@ -3780,7 +3659,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 120,
+            funcId: 117,
             port: port_,
           );
         },
@@ -3807,7 +3686,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 121,
+            funcId: 118,
             port: port_,
           );
         },
@@ -3834,7 +3713,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 122,
+            funcId: 119,
             port: port_,
           );
         },
@@ -3861,7 +3740,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 123,
+            funcId: 120,
             port: port_,
           );
         },
@@ -3892,7 +3771,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 124,
+            funcId: 121,
             port: port_,
           );
         },
@@ -3925,7 +3804,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 125,
+            funcId: 122,
             port: port_,
           );
         },
@@ -3956,7 +3835,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 126,
+            funcId: 123,
             port: port_,
           );
         },
@@ -3975,7 +3854,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "nuan_5_table_default", argNames: []);
 
   @override
-  StringConfig? crateConfigCommonStringConfigStringConfigFromJson({
+  StringRule? crateConfigRulesStringRuleStringRuleFromJson({
     required String json,
   }) {
     return handler.executeSync(
@@ -3986,80 +3865,75 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 127,
+            funcId: 124,
           )!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_string_config,
+          decodeSuccessData: sse_decode_opt_box_autoadd_string_rule,
           decodeErrorData: null,
         ),
-        constMeta: kCrateConfigCommonStringConfigStringConfigFromJsonConstMeta,
+        constMeta: kCrateConfigRulesStringRuleStringRuleFromJsonConstMeta,
         argValues: [json],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateConfigCommonStringConfigStringConfigFromJsonConstMeta =>
+  TaskConstMeta get kCrateConfigRulesStringRuleStringRuleFromJsonConstMeta =>
       const TaskConstMeta(
-        debugName: "string_config_from_json",
+        debugName: "string_rule_from_json",
         argNames: ["json"],
       );
 
   @override
-  String crateConfigCommonStringConfigStringConfigToJson({
-    required StringConfig that,
+  String crateConfigRulesStringRuleStringRuleToJson({
+    required StringRule that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_string_config(that, serializer);
+          sse_encode_box_autoadd_string_rule(that, serializer);
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 128,
+            funcId: 125,
           )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateConfigCommonStringConfigStringConfigToJsonConstMeta,
+        constMeta: kCrateConfigRulesStringRuleStringRuleToJsonConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateConfigCommonStringConfigStringConfigToJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "string_config_to_json",
-        argNames: ["that"],
-      );
+  TaskConstMeta get kCrateConfigRulesStringRuleStringRuleToJsonConstMeta =>
+      const TaskConstMeta(debugName: "string_rule_to_json", argNames: ["that"]);
 
   @override
-  String crateConfigCommonStringConfigStringConfigToJsonPretty({
-    required StringConfig that,
+  String crateConfigRulesStringRuleStringRuleToJsonPretty({
+    required StringRule that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_string_config(that, serializer);
+          sse_encode_box_autoadd_string_rule(that, serializer);
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 129,
+            funcId: 126,
           )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta:
-            kCrateConfigCommonStringConfigStringConfigToJsonPrettyConstMeta,
+        constMeta: kCrateConfigRulesStringRuleStringRuleToJsonPrettyConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
@@ -4067,9 +3941,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateConfigCommonStringConfigStringConfigToJsonPrettyConstMeta =>
+  get kCrateConfigRulesStringRuleStringRuleToJsonPrettyConstMeta =>
       const TaskConstMeta(
-        debugName: "string_config_to_json_pretty",
+        debugName: "string_rule_to_json_pretty",
         argNames: ["that"],
       );
 
@@ -4084,7 +3958,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 130,
+            funcId: 127,
           )!;
         },
         codec: SseCodec(
@@ -4102,9 +3976,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "test_add", argNames: ["num1", "num2"]);
 
   @override
-  TextConfig? crateConfigCommonTextConfigTextConfigFromJson({
-    required String json,
-  }) {
+  TextRule? crateConfigRulesTextRuleTextRuleFromJson({required String json}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4113,85 +3985,79 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 131,
+            funcId: 128,
           )!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_text_config,
+          decodeSuccessData: sse_decode_opt_box_autoadd_text_rule,
           decodeErrorData: null,
         ),
-        constMeta: kCrateConfigCommonTextConfigTextConfigFromJsonConstMeta,
+        constMeta: kCrateConfigRulesTextRuleTextRuleFromJsonConstMeta,
         argValues: [json],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateConfigCommonTextConfigTextConfigFromJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "text_config_from_json",
-        argNames: ["json"],
-      );
+  TaskConstMeta get kCrateConfigRulesTextRuleTextRuleFromJsonConstMeta =>
+      const TaskConstMeta(debugName: "text_rule_from_json", argNames: ["json"]);
 
   @override
-  String crateConfigCommonTextConfigTextConfigToJson({
-    required TextConfig that,
-  }) {
+  String crateConfigRulesTextRuleTextRuleToJson({required TextRule that}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_text_config(that, serializer);
+          sse_encode_box_autoadd_text_rule(that, serializer);
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 132,
+            funcId: 129,
           )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateConfigCommonTextConfigTextConfigToJsonConstMeta,
+        constMeta: kCrateConfigRulesTextRuleTextRuleToJsonConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateConfigCommonTextConfigTextConfigToJsonConstMeta =>
-      const TaskConstMeta(debugName: "text_config_to_json", argNames: ["that"]);
+  TaskConstMeta get kCrateConfigRulesTextRuleTextRuleToJsonConstMeta =>
+      const TaskConstMeta(debugName: "text_rule_to_json", argNames: ["that"]);
 
   @override
-  String crateConfigCommonTextConfigTextConfigToJsonPretty({
-    required TextConfig that,
+  String crateConfigRulesTextRuleTextRuleToJsonPretty({
+    required TextRule that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_text_config(that, serializer);
+          sse_encode_box_autoadd_text_rule(that, serializer);
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 133,
+            funcId: 130,
           )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: sse_decode_AnyhowException,
         ),
-        constMeta: kCrateConfigCommonTextConfigTextConfigToJsonPrettyConstMeta,
+        constMeta: kCrateConfigRulesTextRuleTextRuleToJsonPrettyConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta
-  get kCrateConfigCommonTextConfigTextConfigToJsonPrettyConstMeta =>
+  TaskConstMeta get kCrateConfigRulesTextRuleTextRuleToJsonPrettyConstMeta =>
       const TaskConstMeta(
-        debugName: "text_config_to_json_pretty",
+        debugName: "text_rule_to_json_pretty",
         argNames: ["that"],
       );
 
@@ -4205,7 +4071,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 134,
+            funcId: 131,
           )!;
         },
         codec: SseCodec(
@@ -4235,7 +4101,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 135,
+            funcId: 132,
           )!;
         },
         codec: SseCodec(
@@ -4262,7 +4128,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 136,
+            funcId: 133,
           )!;
         },
         codec: SseCodec(
@@ -4407,14 +4273,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return Map.fromEntries(
       dco_decode_list_record_string_string(raw)
           .map((e) => MapEntry(e.$1, e.$2)),
-    );
-  }
-
-  @protected
-  Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Map.fromEntries(
-      dco_decode_list_record_string_bool(raw).map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -4819,15 +4677,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FileReaderConfig dco_decode_box_autoadd_file_reader_config(dynamic raw) {
+  FontIconRule dco_decode_box_autoadd_font_icon_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_file_reader_config(raw);
-  }
-
-  @protected
-  GameConfig dco_decode_box_autoadd_game_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_game_config(raw);
+    return dco_decode_font_icon_rule(raw);
   }
 
   @protected
@@ -4855,9 +4707,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  LiteralTextConfig dco_decode_box_autoadd_literal_text_config(dynamic raw) {
+  IconRule dco_decode_box_autoadd_icon_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_literal_text_config(raw);
+    return dco_decode_icon_rule(raw);
+  }
+
+  @protected
+  ImageIconRule dco_decode_box_autoadd_image_icon_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_image_icon_rule(raw);
+  }
+
+  @protected
+  LiteralTextRule dco_decode_box_autoadd_literal_text_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_literal_text_rule(raw);
   }
 
   @protected
@@ -4998,39 +4862,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringConfig dco_decode_box_autoadd_string_config(dynamic raw) {
+  StringJoinProcess dco_decode_box_autoadd_string_join_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_string_config(raw);
+    return dco_decode_string_join_process(raw);
   }
 
   @protected
-  StringJoinProcessConfig dco_decode_box_autoadd_string_join_process_config(
+  StringMatchProcess dco_decode_box_autoadd_string_match_process(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_string_match_process(raw);
+  }
+
+  @protected
+  StringReplaceAllProcess dco_decode_box_autoadd_string_replace_all_process(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_string_join_process_config(raw);
+    return dco_decode_string_replace_all_process(raw);
   }
 
   @protected
-  StringMatchProcessConfig dco_decode_box_autoadd_string_match_process_config(
+  StringReplaceProcess dco_decode_box_autoadd_string_replace_process(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_string_match_process_config(raw);
+    return dco_decode_string_replace_process(raw);
   }
 
   @protected
-  StringReplaceAllProcessConfig
-  dco_decode_box_autoadd_string_replace_all_process_config(dynamic raw) {
+  StringRule dco_decode_box_autoadd_string_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_string_replace_all_process_config(raw);
-  }
-
-  @protected
-  StringReplaceProcessConfig
-  dco_decode_box_autoadd_string_replace_process_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_string_replace_process_config(raw);
+    return dco_decode_string_rule(raw);
   }
 
   @protected
@@ -5040,17 +4902,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextConfig dco_decode_box_autoadd_text_config(dynamic raw) {
+  TextRule dco_decode_box_autoadd_text_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_text_config(raw);
+    return dco_decode_text_rule(raw);
   }
 
   @protected
-  TranslateTextConfig dco_decode_box_autoadd_translate_text_config(
-    dynamic raw,
-  ) {
+  TranslateTextRule dco_decode_box_autoadd_translate_text_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_translate_text_config(raw);
+    return dco_decode_translate_text_rule(raw);
   }
 
   @protected
@@ -5075,40 +4935,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_weapon_params(raw);
-  }
-
-  @protected
-  WindowsGameConfig dco_decode_box_autoadd_windows_game_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_windows_game_config(raw);
-  }
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  dco_decode_box_autoadd_windows_game_config_file_location_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_windows_game_config_file_location_config(raw);
-  }
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  dco_decode_box_autoadd_windows_game_config_file_searcher_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_windows_game_config_file_searcher_config(raw);
-  }
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  dco_decode_box_autoadd_windows_game_registry_location_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_windows_game_registry_location_config(raw);
-  }
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  dco_decode_box_autoadd_windows_game_registry_searcher_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_windows_game_registry_searcher_config(raw);
   }
 
   @protected
@@ -5420,25 +5246,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FileReaderConfig dco_decode_file_reader_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return FileReaderConfig(
-      path: dco_decode_String(arr[0]),
-      fileType: dco_decode_file_type(arr[1]),
-      keys: dco_decode_Map_String_String_None(arr[2]),
-    );
-  }
-
-  @protected
-  FileType dco_decode_file_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FileType.values[raw as int];
-  }
-
-  @protected
   FilterParams dco_decode_filter_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -5455,55 +5262,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  GameAlbumConfig dco_decode_game_album_config(dynamic raw) {
+  FontIconRule dco_decode_font_icon_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 14)
-      throw Exception('unexpected arr length: expect 14 but see ${arr.length}');
-    return GameAlbumConfig(
-      id: dco_decode_String(arr[0]),
-      visible: dco_decode_bool(arr[1]),
-      name: dco_decode_text_config(arr[2]),
-      description: dco_decode_opt_box_autoadd_text_config(arr[3]),
-      icon: dco_decode_opt_String(arr[4]),
-      requireUid: dco_decode_bool(arr[5]),
-      locate: dco_decode_String(arr[6]),
-      toMedia: dco_decode_String(arr[7]),
-      toCover: dco_decode_opt_String(arr[8]),
-      toThumbnail: dco_decode_opt_String(arr[9]),
-      allowMove: dco_decode_bool(arr[10]),
-      allowDelete: dco_decode_bool(arr[11]),
-      allowCache: dco_decode_bool(arr[12]),
-      chainDeletion: dco_decode_Map_String_bool_None(arr[13]),
-    );
-  }
-
-  @protected
-  GameChannelConfig dco_decode_game_channel_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return GameChannelConfig(
-      id: dco_decode_String(arr[0]),
-      name: dco_decode_text_config(arr[1]),
-      icon: dco_decode_opt_String(arr[2]),
-    );
-  }
-
-  @protected
-  GameConfig dco_decode_game_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 6)
-      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
-    return GameConfig(
-      id: dco_decode_String(arr[0]),
-      name: dco_decode_text_config(arr[1]),
-      icon: dco_decode_opt_String(arr[2]),
-      albumsConfig: dco_decode_list_game_album_config(arr[3]),
-      channelConfig: dco_decode_list_game_channel_config(arr[4]),
-      windows: dco_decode_opt_box_autoadd_windows_game_config(arr[5]),
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return FontIconRule(
+      global: dco_decode_bool(arr[0]),
+      path: dco_decode_String(arr[1]),
+      fontFamily: dco_decode_String(arr[2]),
+      codePoint: dco_decode_u_32(arr[3]),
     );
   }
 
@@ -5554,6 +5322,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PlatformInt64 dco_decode_i_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeI64(raw);
+  }
+
+  @protected
+  IconRule dco_decode_icon_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return IconRule_Image(dco_decode_box_autoadd_image_icon_rule(raw[1]));
+      case 1:
+        return IconRule_Font(dco_decode_box_autoadd_font_icon_rule(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  ImageIconRule dco_decode_image_icon_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return ImageIconRule(
+      global: dco_decode_bool(arr[0]),
+      path: dco_decode_String(arr[1]),
+    );
   }
 
   @protected
@@ -5623,25 +5416,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<GameAlbumConfig> dco_decode_list_game_album_config(dynamic raw) {
+  List<List<StringProcess>> dco_decode_list_list_string_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_game_album_config).toList();
-  }
-
-  @protected
-  List<GameChannelConfig> dco_decode_list_game_channel_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_game_channel_config).toList();
-  }
-
-  @protected
-  List<List<StringProcessConfig>> dco_decode_list_list_string_process_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>)
-        .map(dco_decode_list_string_process_config)
-        .toList();
+    return (raw as List<dynamic>).map(dco_decode_list_string_process).toList();
   }
 
   @protected
@@ -5868,12 +5645,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_record_string_bool).toList();
-  }
-
-  @protected
   List<(String, String)> dco_decode_list_record_string_string(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_record_string_string).toList();
@@ -5892,11 +5663,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<StringProcessConfig> dco_decode_list_string_process_config(dynamic raw) {
+  List<StringProcess> dco_decode_list_string_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>)
-        .map(dco_decode_string_process_config)
-        .toList();
+    return (raw as List<dynamic>).map(dco_decode_string_process).toList();
   }
 
   @protected
@@ -5906,32 +5675,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<WindowsGameLocationConfig> dco_decode_list_windows_game_location_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>)
-        .map(dco_decode_windows_game_location_config)
-        .toList();
-  }
-
-  @protected
-  List<WindowsGameSearcherConfig> dco_decode_list_windows_game_searcher_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>)
-        .map(dco_decode_windows_game_searcher_config)
-        .toList();
-  }
-
-  @protected
-  LiteralTextConfig dco_decode_literal_text_config(dynamic raw) {
+  LiteralTextRule dco_decode_literal_text_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return LiteralTextConfig(text: dco_decode_String(arr[0]));
+    return LiteralTextRule(text: dco_decode_String(arr[0]));
   }
 
   @protected
@@ -6468,18 +6217,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FileReaderConfig? dco_decode_opt_box_autoadd_file_reader_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_file_reader_config(raw);
-  }
-
-  @protected
-  GameConfig? dco_decode_opt_box_autoadd_game_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_game_config(raw);
-  }
-
-  @protected
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_home_build_param(raw);
@@ -6501,6 +6238,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_i_64(raw);
+  }
+
+  @protected
+  IconRule? dco_decode_opt_box_autoadd_icon_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_icon_rule(raw);
   }
 
   @protected
@@ -6605,9 +6348,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringConfig? dco_decode_opt_box_autoadd_string_config(dynamic raw) {
+  StringRule? dco_decode_opt_box_autoadd_string_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_string_config(raw);
+    return raw == null ? null : dco_decode_box_autoadd_string_rule(raw);
   }
 
   @protected
@@ -6617,9 +6360,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextConfig? dco_decode_opt_box_autoadd_text_config(dynamic raw) {
+  TextRule? dco_decode_opt_box_autoadd_text_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_text_config(raw);
+    return raw == null ? null : dco_decode_box_autoadd_text_rule(raw);
   }
 
   @protected
@@ -6644,36 +6387,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_weapon_params(raw);
-  }
-
-  @protected
-  WindowsGameConfig? dco_decode_opt_box_autoadd_windows_game_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_windows_game_config(raw);
-  }
-
-  @protected
-  WindowsGameConfigFileLocationConfig?
-  dco_decode_opt_box_autoadd_windows_game_config_file_location_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null
-        ? null
-        : dco_decode_box_autoadd_windows_game_config_file_location_config(raw);
-  }
-
-  @protected
-  WindowsGameRegistryLocationConfig?
-  dco_decode_opt_box_autoadd_windows_game_registry_location_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null
-        ? null
-        : dco_decode_box_autoadd_windows_game_registry_location_config(raw);
   }
 
   @protected
@@ -7009,16 +6722,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  (String, bool) dco_decode_record_string_bool(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2) {
-      throw Exception('Expected 2 elements, got ${arr.length}');
-    }
-    return (dco_decode_String(arr[0]), dco_decode_bool(arr[1]));
-  }
-
-  @protected
   (String, String) dco_decode_record_string_string(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -7160,59 +6863,50 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringConfig dco_decode_string_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return StringConfig(process: dco_decode_list_string_process_config(arr[0]));
-  }
-
-  @protected
-  StringJoinProcessConfig dco_decode_string_join_process_config(dynamic raw) {
+  StringJoinProcess dco_decode_string_join_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 2)
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return StringJoinProcessConfig(
+    return StringJoinProcess(
       separator: dco_decode_String(arr[0]),
-      target: dco_decode_list_list_string_process_config(arr[1]),
+      target: dco_decode_list_list_string_process(arr[1]),
     );
   }
 
   @protected
-  StringMatchProcessConfig dco_decode_string_match_process_config(dynamic raw) {
+  StringMatchProcess dco_decode_string_match_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 4)
       throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return StringMatchProcessConfig(
+    return StringMatchProcess(
       regex: dco_decode_String(arr[0]),
       which: dco_decode_i_32(arr[1]),
       successful: dco_decode_String(arr[2]),
-      failed: dco_decode_list_string_process_config(arr[3]),
+      failed: dco_decode_list_string_process(arr[3]),
     );
   }
 
   @protected
-  StringProcessConfig dco_decode_string_process_config(dynamic raw) {
+  StringProcess dco_decode_string_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
       case 0:
-        return StringProcessConfig_Join(
-          dco_decode_box_autoadd_string_join_process_config(raw[1]),
+        return StringProcess_Join(
+          dco_decode_box_autoadd_string_join_process(raw[1]),
         );
       case 1:
-        return StringProcessConfig_Match(
-          dco_decode_box_autoadd_string_match_process_config(raw[1]),
+        return StringProcess_Match(
+          dco_decode_box_autoadd_string_match_process(raw[1]),
         );
       case 2:
-        return StringProcessConfig_Replace(
-          dco_decode_box_autoadd_string_replace_process_config(raw[1]),
+        return StringProcess_Replace(
+          dco_decode_box_autoadd_string_replace_process(raw[1]),
         );
       case 3:
-        return StringProcessConfig_ReplaceAll(
-          dco_decode_box_autoadd_string_replace_all_process_config(raw[1]),
+        return StringProcess_ReplaceAll(
+          dco_decode_box_autoadd_string_replace_all_process(raw[1]),
         );
       default:
         throw Exception("unreachable");
@@ -7220,32 +6914,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringReplaceAllProcessConfig dco_decode_string_replace_all_process_config(
-    dynamic raw,
-  ) {
+  StringReplaceAllProcess dco_decode_string_replace_all_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 2)
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return StringReplaceAllProcessConfig(
+    return StringReplaceAllProcess(
       regex: dco_decode_String(arr[0]),
       to: dco_decode_String(arr[1]),
     );
   }
 
   @protected
-  StringReplaceProcessConfig dco_decode_string_replace_process_config(
-    dynamic raw,
-  ) {
+  StringReplaceProcess dco_decode_string_replace_process(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 3)
       throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return StringReplaceProcessConfig(
+    return StringReplaceProcess(
       regex: dco_decode_String(arr[0]),
       which: dco_decode_i_32(arr[1]),
       to: dco_decode_String(arr[2]),
     );
+  }
+
+  @protected
+  StringRule dco_decode_string_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return StringRule(process: dco_decode_list_string_process(arr[0]));
   }
 
   @protected
@@ -7270,16 +6969,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextConfig dco_decode_text_config(dynamic raw) {
+  TextRule dco_decode_text_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
       case 0:
-        return TextConfig_Literal(
-          dco_decode_box_autoadd_literal_text_config(raw[1]),
+        return TextRule_Literal(
+          dco_decode_box_autoadd_literal_text_rule(raw[1]),
         );
       case 1:
-        return TextConfig_Translate(
-          dco_decode_box_autoadd_translate_text_config(raw[1]),
+        return TextRule_Translate(
+          dco_decode_box_autoadd_translate_text_rule(raw[1]),
         );
       default:
         throw Exception("unreachable");
@@ -7300,16 +6999,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TranslateTextConfig dco_decode_translate_text_config(dynamic raw) {
+  TranslateTextRule dco_decode_translate_text_rule(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return TranslateTextConfig(
-      key: dco_decode_String(arr[0]),
-      args: dco_decode_opt_list_String(arr[1]),
-      namedArgs: dco_decode_opt_Map_String_String_None(arr[2]),
-      gender: dco_decode_opt_String(arr[3]),
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return TranslateTextRule(
+      global: dco_decode_bool(arr[0]),
+      key: dco_decode_String(arr[1]),
+      args: dco_decode_opt_list_String(arr[2]),
+      namedArgs: dco_decode_opt_Map_String_String_None(arr[3]),
+      gender: dco_decode_opt_String(arr[4]),
     );
   }
 
@@ -7372,141 +7072,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       slotType: dco_decode_String(arr[1]),
       state: dco_decode_opt_String(arr[2]),
     );
-  }
-
-  @protected
-  WindowsGameConfig dco_decode_windows_game_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return WindowsGameConfig(
-      locate: dco_decode_list_windows_game_location_config(arr[0]),
-    );
-  }
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  dco_decode_windows_game_config_file_location_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return WindowsGameConfigFileLocationConfig(
-      key: dco_decode_String(arr[0]),
-      output: dco_decode_string_config(arr[1]),
-      failed: dco_decode_opt_String(arr[2]),
-    );
-  }
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  dco_decode_windows_game_config_file_searcher_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return WindowsGameConfigFileSearcherConfig(
-      path: dco_decode_String(arr[0]),
-      configType: dco_decode_file_type(arr[1]),
-      toLauncher:
-          dco_decode_opt_box_autoadd_windows_game_config_file_location_config(
-            arr[2],
-          ),
-      toInstall: dco_decode_windows_game_config_file_location_config(arr[3]),
-    );
-  }
-
-  @protected
-  WindowsGameLocationConfig dco_decode_windows_game_location_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return WindowsGameLocationConfig(
-      channelId: dco_decode_String(arr[0]),
-      requireLauncher: dco_decode_bool(arr[1]),
-      searcher: dco_decode_list_windows_game_searcher_config(arr[2]),
-    );
-  }
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  dco_decode_windows_game_registry_location_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return WindowsGameRegistryLocationConfig(
-      registry: dco_decode_windows_registry_config(arr[0]),
-      output: dco_decode_string_config(arr[1]),
-      failed: dco_decode_opt_String(arr[2]),
-    );
-  }
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  dco_decode_windows_game_registry_searcher_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return WindowsGameRegistrySearcherConfig(
-      toLauncher:
-          dco_decode_opt_box_autoadd_windows_game_registry_location_config(
-            arr[0],
-          ),
-      toInstall: dco_decode_windows_game_registry_location_config(arr[1]),
-    );
-  }
-
-  @protected
-  WindowsGameSearcherConfig dco_decode_windows_game_searcher_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return WindowsGameSearcherConfig_Registry(
-          dco_decode_box_autoadd_windows_game_registry_searcher_config(raw[1]),
-        );
-      case 1:
-        return WindowsGameSearcherConfig_ConfigFile(
-          dco_decode_box_autoadd_windows_game_config_file_searcher_config(
-            raw[1],
-          ),
-        );
-      default:
-        throw Exception("unreachable");
-    }
-  }
-
-  @protected
-  WindowsRegistryConfig dco_decode_windows_registry_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return WindowsRegistryConfig(
-      hive: dco_decode_windows_registry_hive(arr[0]),
-      path: dco_decode_String(arr[1]),
-      valueName: dco_decode_String(arr[2]),
-      valueType: dco_decode_windows_registry_value_type(arr[3]),
-    );
-  }
-
-  @protected
-  WindowsRegistryHive dco_decode_windows_registry_hive(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return WindowsRegistryHive.values[raw as int];
-  }
-
-  @protected
-  WindowsRegistryValueType dco_decode_windows_registry_value_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return WindowsRegistryValueType.values[raw as int];
   }
 
   @protected
@@ -7630,15 +7195,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_record_string_string(deserializer);
-    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
-  }
-
-  @protected
-  Map<String, bool> sse_decode_Map_String_bool_None(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_list_record_string_bool(deserializer);
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
   }
 
@@ -8077,17 +7633,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FileReaderConfig sse_decode_box_autoadd_file_reader_config(
+  FontIconRule sse_decode_box_autoadd_font_icon_rule(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_file_reader_config(deserializer));
-  }
-
-  @protected
-  GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_game_config(deserializer));
+    return (sse_decode_font_icon_rule(deserializer));
   }
 
   @protected
@@ -8119,11 +7669,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  LiteralTextConfig sse_decode_box_autoadd_literal_text_config(
+  IconRule sse_decode_box_autoadd_icon_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_icon_rule(deserializer));
+  }
+
+  @protected
+  ImageIconRule sse_decode_box_autoadd_image_icon_rule(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_literal_text_config(deserializer));
+    return (sse_decode_image_icon_rule(deserializer));
+  }
+
+  @protected
+  LiteralTextRule sse_decode_box_autoadd_literal_text_rule(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_literal_text_rule(deserializer));
   }
 
   @protected
@@ -8292,45 +7856,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringConfig sse_decode_box_autoadd_string_config(
+  StringJoinProcess sse_decode_box_autoadd_string_join_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_string_config(deserializer));
+    return (sse_decode_string_join_process(deserializer));
   }
 
   @protected
-  StringJoinProcessConfig sse_decode_box_autoadd_string_join_process_config(
+  StringMatchProcess sse_decode_box_autoadd_string_match_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_string_join_process_config(deserializer));
+    return (sse_decode_string_match_process(deserializer));
   }
 
   @protected
-  StringMatchProcessConfig sse_decode_box_autoadd_string_match_process_config(
+  StringReplaceAllProcess sse_decode_box_autoadd_string_replace_all_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_string_match_process_config(deserializer));
+    return (sse_decode_string_replace_all_process(deserializer));
   }
 
   @protected
-  StringReplaceAllProcessConfig
-  sse_decode_box_autoadd_string_replace_all_process_config(
+  StringReplaceProcess sse_decode_box_autoadd_string_replace_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_string_replace_all_process_config(deserializer));
+    return (sse_decode_string_replace_process(deserializer));
   }
 
   @protected
-  StringReplaceProcessConfig
-  sse_decode_box_autoadd_string_replace_process_config(
-    SseDeserializer deserializer,
-  ) {
+  StringRule sse_decode_box_autoadd_string_rule(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_string_replace_process_config(deserializer));
+    return (sse_decode_string_rule(deserializer));
   }
 
   @protected
@@ -8340,17 +7900,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextConfig sse_decode_box_autoadd_text_config(SseDeserializer deserializer) {
+  TextRule sse_decode_box_autoadd_text_rule(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_text_config(deserializer));
+    return (sse_decode_text_rule(deserializer));
   }
 
   @protected
-  TranslateTextConfig sse_decode_box_autoadd_translate_text_config(
+  TranslateTextRule sse_decode_box_autoadd_translate_text_rule(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_translate_text_config(deserializer));
+    return (sse_decode_translate_text_rule(deserializer));
   }
 
   @protected
@@ -8377,50 +7937,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_weapon_params(deserializer));
-  }
-
-  @protected
-  WindowsGameConfig sse_decode_box_autoadd_windows_game_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_windows_game_config(deserializer));
-  }
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  sse_decode_box_autoadd_windows_game_config_file_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_windows_game_config_file_location_config(deserializer));
-  }
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  sse_decode_box_autoadd_windows_game_config_file_searcher_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_windows_game_config_file_searcher_config(deserializer));
-  }
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  sse_decode_box_autoadd_windows_game_registry_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_windows_game_registry_location_config(deserializer));
-  }
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  sse_decode_box_autoadd_windows_game_registry_searcher_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_windows_game_registry_searcher_config(deserializer));
   }
 
   @protected
@@ -8768,26 +8284,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FileReaderConfig sse_decode_file_reader_config(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_path = sse_decode_String(deserializer);
-    var var_fileType = sse_decode_file_type(deserializer);
-    var var_keys = sse_decode_Map_String_String_None(deserializer);
-    return FileReaderConfig(
-      path: var_path,
-      fileType: var_fileType,
-      keys: var_keys,
-    );
-  }
-
-  @protected
-  FileType sse_decode_file_type(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return FileType.values[inner];
-  }
-
-  @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -8805,69 +8301,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  GameAlbumConfig sse_decode_game_album_config(SseDeserializer deserializer) {
+  FontIconRule sse_decode_font_icon_rule(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_id = sse_decode_String(deserializer);
-    var var_visible = sse_decode_bool(deserializer);
-    var var_name = sse_decode_text_config(deserializer);
-    var var_description = sse_decode_opt_box_autoadd_text_config(deserializer);
-    var var_icon = sse_decode_opt_String(deserializer);
-    var var_requireUid = sse_decode_bool(deserializer);
-    var var_locate = sse_decode_String(deserializer);
-    var var_toMedia = sse_decode_String(deserializer);
-    var var_toCover = sse_decode_opt_String(deserializer);
-    var var_toThumbnail = sse_decode_opt_String(deserializer);
-    var var_allowMove = sse_decode_bool(deserializer);
-    var var_allowDelete = sse_decode_bool(deserializer);
-    var var_allowCache = sse_decode_bool(deserializer);
-    var var_chainDeletion = sse_decode_Map_String_bool_None(deserializer);
-    return GameAlbumConfig(
-      id: var_id,
-      visible: var_visible,
-      name: var_name,
-      description: var_description,
-      icon: var_icon,
-      requireUid: var_requireUid,
-      locate: var_locate,
-      toMedia: var_toMedia,
-      toCover: var_toCover,
-      toThumbnail: var_toThumbnail,
-      allowMove: var_allowMove,
-      allowDelete: var_allowDelete,
-      allowCache: var_allowCache,
-      chainDeletion: var_chainDeletion,
-    );
-  }
-
-  @protected
-  GameChannelConfig sse_decode_game_channel_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_id = sse_decode_String(deserializer);
-    var var_name = sse_decode_text_config(deserializer);
-    var var_icon = sse_decode_opt_String(deserializer);
-    return GameChannelConfig(id: var_id, name: var_name, icon: var_icon);
-  }
-
-  @protected
-  GameConfig sse_decode_game_config(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_id = sse_decode_String(deserializer);
-    var var_name = sse_decode_text_config(deserializer);
-    var var_icon = sse_decode_opt_String(deserializer);
-    var var_albumsConfig = sse_decode_list_game_album_config(deserializer);
-    var var_channelConfig = sse_decode_list_game_channel_config(deserializer);
-    var var_windows = sse_decode_opt_box_autoadd_windows_game_config(
-      deserializer,
-    );
-    return GameConfig(
-      id: var_id,
-      name: var_name,
-      icon: var_icon,
-      albumsConfig: var_albumsConfig,
-      channelConfig: var_channelConfig,
-      windows: var_windows,
+    var var_global = sse_decode_bool(deserializer);
+    var var_path = sse_decode_String(deserializer);
+    var var_fontFamily = sse_decode_String(deserializer);
+    var var_codePoint = sse_decode_u_32(deserializer);
+    return FontIconRule(
+      global: var_global,
+      path: var_path,
+      fontFamily: var_fontFamily,
+      codePoint: var_codePoint,
     );
   }
 
@@ -8926,6 +8370,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getPlatformInt64();
+  }
+
+  @protected
+  IconRule sse_decode_icon_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_box_autoadd_image_icon_rule(deserializer);
+        return IconRule_Image(var_field0);
+      case 1:
+        var var_field0 = sse_decode_box_autoadd_font_icon_rule(deserializer);
+        return IconRule_Font(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  ImageIconRule sse_decode_image_icon_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_global = sse_decode_bool(deserializer);
+    var var_path = sse_decode_String(deserializer);
+    return ImageIconRule(global: var_global, path: var_path);
   }
 
   @protected
@@ -9038,43 +8507,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<GameAlbumConfig> sse_decode_list_game_album_config(
+  List<List<StringProcess>> sse_decode_list_list_string_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <GameAlbumConfig>[];
+    var ans_ = <List<StringProcess>>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_game_album_config(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  List<GameChannelConfig> sse_decode_list_game_channel_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <GameChannelConfig>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_game_channel_config(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  List<List<StringProcessConfig>> sse_decode_list_list_string_process_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <List<StringProcessConfig>>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_list_string_process_config(deserializer));
+      ans_.add(sse_decode_list_string_process(deserializer));
     }
     return ans_;
   }
@@ -9423,20 +8864,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<(String, bool)> sse_decode_list_record_string_bool(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <(String, bool)>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_record_string_bool(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
   List<(String, String)> sse_decode_list_record_string_string(
     SseDeserializer deserializer,
   ) {
@@ -9479,15 +8906,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<StringProcessConfig> sse_decode_list_string_process_config(
+  List<StringProcess> sse_decode_list_string_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <StringProcessConfig>[];
+    var ans_ = <StringProcess>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_string_process_config(deserializer));
+      ans_.add(sse_decode_string_process(deserializer));
     }
     return ans_;
   }
@@ -9505,40 +8932,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<WindowsGameLocationConfig> sse_decode_list_windows_game_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <WindowsGameLocationConfig>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_windows_game_location_config(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  List<WindowsGameSearcherConfig> sse_decode_list_windows_game_searcher_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <WindowsGameSearcherConfig>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_windows_game_searcher_config(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  LiteralTextConfig sse_decode_literal_text_config(
-    SseDeserializer deserializer,
-  ) {
+  LiteralTextRule sse_decode_literal_text_rule(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_text = sse_decode_String(deserializer);
-    return LiteralTextConfig(text: var_text);
+    return LiteralTextRule(text: var_text);
   }
 
   @protected
@@ -10199,32 +9596,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FileReaderConfig? sse_decode_opt_box_autoadd_file_reader_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_file_reader_config(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  GameConfig? sse_decode_opt_box_autoadd_game_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_game_config(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   HomeBuildParam? sse_decode_opt_box_autoadd_home_build_param(
     SseDeserializer deserializer,
   ) {
@@ -10267,6 +9638,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_i_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  IconRule? sse_decode_opt_box_autoadd_icon_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_icon_rule(deserializer));
     } else {
       return null;
     }
@@ -10467,13 +9849,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringConfig? sse_decode_opt_box_autoadd_string_config(
+  StringRule? sse_decode_opt_box_autoadd_string_rule(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_string_config(deserializer));
+      return (sse_decode_box_autoadd_string_rule(deserializer));
     } else {
       return null;
     }
@@ -10491,13 +9873,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextConfig? sse_decode_opt_box_autoadd_text_config(
-    SseDeserializer deserializer,
-  ) {
+  TextRule? sse_decode_opt_box_autoadd_text_rule(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_text_config(deserializer));
+      return (sse_decode_box_autoadd_text_rule(deserializer));
     } else {
       return null;
     }
@@ -10546,51 +9926,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_weapon_params(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  WindowsGameConfig? sse_decode_opt_box_autoadd_windows_game_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_windows_game_config(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  WindowsGameConfigFileLocationConfig?
-  sse_decode_opt_box_autoadd_windows_game_config_file_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_windows_game_config_file_location_config(
-        deserializer,
-      ));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  WindowsGameRegistryLocationConfig?
-  sse_decode_opt_box_autoadd_windows_game_registry_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_windows_game_registry_location_config(
-        deserializer,
-      ));
     } else {
       return null;
     }
@@ -10929,14 +10264,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  (String, bool) sse_decode_record_string_bool(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_String(deserializer);
-    var var_field1 = sse_decode_bool(deserializer);
-    return (var_field0, var_field1);
-  }
-
-  @protected
   (String, String) sse_decode_record_string_string(
     SseDeserializer deserializer,
   ) {
@@ -11116,35 +10443,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringConfig sse_decode_string_config(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_process = sse_decode_list_string_process_config(deserializer);
-    return StringConfig(process: var_process);
-  }
-
-  @protected
-  StringJoinProcessConfig sse_decode_string_join_process_config(
+  StringJoinProcess sse_decode_string_join_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_separator = sse_decode_String(deserializer);
-    var var_target = sse_decode_list_list_string_process_config(deserializer);
-    return StringJoinProcessConfig(
-      separator: var_separator,
-      target: var_target,
-    );
+    var var_target = sse_decode_list_list_string_process(deserializer);
+    return StringJoinProcess(separator: var_separator, target: var_target);
   }
 
   @protected
-  StringMatchProcessConfig sse_decode_string_match_process_config(
+  StringMatchProcess sse_decode_string_match_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_regex = sse_decode_String(deserializer);
     var var_which = sse_decode_i_32(deserializer);
     var var_successful = sse_decode_String(deserializer);
-    var var_failed = sse_decode_list_string_process_config(deserializer);
-    return StringMatchProcessConfig(
+    var var_failed = sse_decode_list_string_process(deserializer);
+    return StringMatchProcess(
       regex: var_regex,
       which: var_which,
       successful: var_successful,
@@ -11153,62 +10470,62 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StringProcessConfig sse_decode_string_process_config(
-    SseDeserializer deserializer,
-  ) {
+  StringProcess sse_decode_string_process(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     var tag_ = sse_decode_i_32(deserializer);
     switch (tag_) {
       case 0:
-        var var_field0 = sse_decode_box_autoadd_string_join_process_config(
+        var var_field0 = sse_decode_box_autoadd_string_join_process(
           deserializer,
         );
-        return StringProcessConfig_Join(var_field0);
+        return StringProcess_Join(var_field0);
       case 1:
-        var var_field0 = sse_decode_box_autoadd_string_match_process_config(
+        var var_field0 = sse_decode_box_autoadd_string_match_process(
           deserializer,
         );
-        return StringProcessConfig_Match(var_field0);
+        return StringProcess_Match(var_field0);
       case 2:
-        var var_field0 = sse_decode_box_autoadd_string_replace_process_config(
+        var var_field0 = sse_decode_box_autoadd_string_replace_process(
           deserializer,
         );
-        return StringProcessConfig_Replace(var_field0);
+        return StringProcess_Replace(var_field0);
       case 3:
-        var var_field0 =
-            sse_decode_box_autoadd_string_replace_all_process_config(
-              deserializer,
-            );
-        return StringProcessConfig_ReplaceAll(var_field0);
+        var var_field0 = sse_decode_box_autoadd_string_replace_all_process(
+          deserializer,
+        );
+        return StringProcess_ReplaceAll(var_field0);
       default:
         throw UnimplementedError('');
     }
   }
 
   @protected
-  StringReplaceAllProcessConfig sse_decode_string_replace_all_process_config(
+  StringReplaceAllProcess sse_decode_string_replace_all_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_regex = sse_decode_String(deserializer);
     var var_to = sse_decode_String(deserializer);
-    return StringReplaceAllProcessConfig(regex: var_regex, to: var_to);
+    return StringReplaceAllProcess(regex: var_regex, to: var_to);
   }
 
   @protected
-  StringReplaceProcessConfig sse_decode_string_replace_process_config(
+  StringReplaceProcess sse_decode_string_replace_process(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_regex = sse_decode_String(deserializer);
     var var_which = sse_decode_i_32(deserializer);
     var var_to = sse_decode_String(deserializer);
-    return StringReplaceProcessConfig(
-      regex: var_regex,
-      which: var_which,
-      to: var_to,
-    );
+    return StringReplaceProcess(regex: var_regex, which: var_which, to: var_to);
+  }
+
+  @protected
+  StringRule sse_decode_string_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_process = sse_decode_list_string_process(deserializer);
+    return StringRule(process: var_process);
   }
 
   @protected
@@ -11239,21 +10556,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TextConfig sse_decode_text_config(SseDeserializer deserializer) {
+  TextRule sse_decode_text_rule(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     var tag_ = sse_decode_i_32(deserializer);
     switch (tag_) {
       case 0:
-        var var_field0 = sse_decode_box_autoadd_literal_text_config(
-          deserializer,
-        );
-        return TextConfig_Literal(var_field0);
+        var var_field0 = sse_decode_box_autoadd_literal_text_rule(deserializer);
+        return TextRule_Literal(var_field0);
       case 1:
-        var var_field0 = sse_decode_box_autoadd_translate_text_config(
+        var var_field0 = sse_decode_box_autoadd_translate_text_rule(
           deserializer,
         );
-        return TextConfig_Translate(var_field0);
+        return TextRule_Translate(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -11269,15 +10584,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TranslateTextConfig sse_decode_translate_text_config(
+  TranslateTextRule sse_decode_translate_text_rule(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_global = sse_decode_bool(deserializer);
     var var_key = sse_decode_String(deserializer);
     var var_args = sse_decode_opt_list_String(deserializer);
     var var_namedArgs = sse_decode_opt_Map_String_String_None(deserializer);
     var var_gender = sse_decode_opt_String(deserializer);
-    return TranslateTextConfig(
+    return TranslateTextRule(
+      global: var_global,
       key: var_key,
       args: var_args,
       namedArgs: var_namedArgs,
@@ -11335,166 +10652,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_slotType = sse_decode_String(deserializer);
     var var_state = sse_decode_opt_String(deserializer);
     return WeaponParams(id: var_id, slotType: var_slotType, state: var_state);
-  }
-
-  @protected
-  WindowsGameConfig sse_decode_windows_game_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_locate = sse_decode_list_windows_game_location_config(deserializer);
-    return WindowsGameConfig(locate: var_locate);
-  }
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  sse_decode_windows_game_config_file_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_key = sse_decode_String(deserializer);
-    var var_output = sse_decode_string_config(deserializer);
-    var var_failed = sse_decode_opt_String(deserializer);
-    return WindowsGameConfigFileLocationConfig(
-      key: var_key,
-      output: var_output,
-      failed: var_failed,
-    );
-  }
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  sse_decode_windows_game_config_file_searcher_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_path = sse_decode_String(deserializer);
-    var var_configType = sse_decode_file_type(deserializer);
-    var var_toLauncher =
-        sse_decode_opt_box_autoadd_windows_game_config_file_location_config(
-          deserializer,
-        );
-    var var_toInstall = sse_decode_windows_game_config_file_location_config(
-      deserializer,
-    );
-    return WindowsGameConfigFileSearcherConfig(
-      path: var_path,
-      configType: var_configType,
-      toLauncher: var_toLauncher,
-      toInstall: var_toInstall,
-    );
-  }
-
-  @protected
-  WindowsGameLocationConfig sse_decode_windows_game_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_channelId = sse_decode_String(deserializer);
-    var var_requireLauncher = sse_decode_bool(deserializer);
-    var var_searcher = sse_decode_list_windows_game_searcher_config(
-      deserializer,
-    );
-    return WindowsGameLocationConfig(
-      channelId: var_channelId,
-      requireLauncher: var_requireLauncher,
-      searcher: var_searcher,
-    );
-  }
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  sse_decode_windows_game_registry_location_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_registry = sse_decode_windows_registry_config(deserializer);
-    var var_output = sse_decode_string_config(deserializer);
-    var var_failed = sse_decode_opt_String(deserializer);
-    return WindowsGameRegistryLocationConfig(
-      registry: var_registry,
-      output: var_output,
-      failed: var_failed,
-    );
-  }
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  sse_decode_windows_game_registry_searcher_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_toLauncher =
-        sse_decode_opt_box_autoadd_windows_game_registry_location_config(
-          deserializer,
-        );
-    var var_toInstall = sse_decode_windows_game_registry_location_config(
-      deserializer,
-    );
-    return WindowsGameRegistrySearcherConfig(
-      toLauncher: var_toLauncher,
-      toInstall: var_toInstall,
-    );
-  }
-
-  @protected
-  WindowsGameSearcherConfig sse_decode_windows_game_searcher_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        var var_field0 =
-            sse_decode_box_autoadd_windows_game_registry_searcher_config(
-              deserializer,
-            );
-        return WindowsGameSearcherConfig_Registry(var_field0);
-      case 1:
-        var var_field0 =
-            sse_decode_box_autoadd_windows_game_config_file_searcher_config(
-              deserializer,
-            );
-        return WindowsGameSearcherConfig_ConfigFile(var_field0);
-      default:
-        throw UnimplementedError('');
-    }
-  }
-
-  @protected
-  WindowsRegistryConfig sse_decode_windows_registry_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_hive = sse_decode_windows_registry_hive(deserializer);
-    var var_path = sse_decode_String(deserializer);
-    var var_valueName = sse_decode_String(deserializer);
-    var var_valueType = sse_decode_windows_registry_value_type(deserializer);
-    return WindowsRegistryConfig(
-      hive: var_hive,
-      path: var_path,
-      valueName: var_valueName,
-      valueType: var_valueType,
-    );
-  }
-
-  @protected
-  WindowsRegistryHive sse_decode_windows_registry_hive(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return WindowsRegistryHive.values[inner];
-  }
-
-  @protected
-  WindowsRegistryValueType sse_decode_windows_registry_value_type(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return WindowsRegistryValueType.values[inner];
   }
 
   @protected
@@ -11630,18 +10787,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_record_string_string(
-      self.entries.map((e) => (e.key, e.value)).toList(),
-      serializer,
-    );
-  }
-
-  @protected
-  void sse_encode_Map_String_bool_None(
-    Map<String, bool> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_record_string_bool(
       self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
@@ -12145,21 +11290,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_file_reader_config(
-    FileReaderConfig self,
+  void sse_encode_box_autoadd_font_icon_rule(
+    FontIconRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_file_reader_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_game_config(
-    GameConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_game_config(self, serializer);
+    sse_encode_font_icon_rule(self, serializer);
   }
 
   @protected
@@ -12196,12 +11332,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_literal_text_config(
-    LiteralTextConfig self,
+  void sse_encode_box_autoadd_icon_rule(
+    IconRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_literal_text_config(self, serializer);
+    sse_encode_icon_rule(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_image_icon_rule(
+    ImageIconRule self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_image_icon_rule(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_literal_text_rule(
+    LiteralTextRule self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_literal_text_rule(self, serializer);
   }
 
   @protected
@@ -12397,48 +11551,48 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_string_config(
-    StringConfig self,
+  void sse_encode_box_autoadd_string_join_process(
+    StringJoinProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_string_config(self, serializer);
+    sse_encode_string_join_process(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_string_join_process_config(
-    StringJoinProcessConfig self,
+  void sse_encode_box_autoadd_string_match_process(
+    StringMatchProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_string_join_process_config(self, serializer);
+    sse_encode_string_match_process(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_string_match_process_config(
-    StringMatchProcessConfig self,
+  void sse_encode_box_autoadd_string_replace_all_process(
+    StringReplaceAllProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_string_match_process_config(self, serializer);
+    sse_encode_string_replace_all_process(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_string_replace_all_process_config(
-    StringReplaceAllProcessConfig self,
+  void sse_encode_box_autoadd_string_replace_process(
+    StringReplaceProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_string_replace_all_process_config(self, serializer);
+    sse_encode_string_replace_process(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_string_replace_process_config(
-    StringReplaceProcessConfig self,
+  void sse_encode_box_autoadd_string_rule(
+    StringRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_string_replace_process_config(self, serializer);
+    sse_encode_string_rule(self, serializer);
   }
 
   @protected
@@ -12448,21 +11602,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_text_config(
-    TextConfig self,
+  void sse_encode_box_autoadd_text_rule(
+    TextRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_text_config(self, serializer);
+    sse_encode_text_rule(self, serializer);
   }
 
   @protected
-  void sse_encode_box_autoadd_translate_text_config(
-    TranslateTextConfig self,
+  void sse_encode_box_autoadd_translate_text_rule(
+    TranslateTextRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_translate_text_config(self, serializer);
+    sse_encode_translate_text_rule(self, serializer);
   }
 
   @protected
@@ -12493,51 +11647,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_weapon_params(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_config(
-    WindowsGameConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_game_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_config_file_location_config(
-    WindowsGameConfigFileLocationConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_game_config_file_location_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_config_file_searcher_config(
-    WindowsGameConfigFileSearcherConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_game_config_file_searcher_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_registry_location_config(
-    WindowsGameRegistryLocationConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_game_registry_location_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_registry_searcher_config(
-    WindowsGameRegistrySearcherConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_game_registry_searcher_config(self, serializer);
   }
 
   @protected
@@ -12818,23 +11927,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_file_reader_config(
-    FileReaderConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.path, serializer);
-    sse_encode_file_type(self.fileType, serializer);
-    sse_encode_Map_String_String_None(self.keys, serializer);
-  }
-
-  @protected
-  void sse_encode_file_type(FileType self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -12848,47 +11940,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_game_album_config(
-    GameAlbumConfig self,
-    SseSerializer serializer,
-  ) {
+  void sse_encode_font_icon_rule(FontIconRule self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.id, serializer);
-    sse_encode_bool(self.visible, serializer);
-    sse_encode_text_config(self.name, serializer);
-    sse_encode_opt_box_autoadd_text_config(self.description, serializer);
-    sse_encode_opt_String(self.icon, serializer);
-    sse_encode_bool(self.requireUid, serializer);
-    sse_encode_String(self.locate, serializer);
-    sse_encode_String(self.toMedia, serializer);
-    sse_encode_opt_String(self.toCover, serializer);
-    sse_encode_opt_String(self.toThumbnail, serializer);
-    sse_encode_bool(self.allowMove, serializer);
-    sse_encode_bool(self.allowDelete, serializer);
-    sse_encode_bool(self.allowCache, serializer);
-    sse_encode_Map_String_bool_None(self.chainDeletion, serializer);
-  }
-
-  @protected
-  void sse_encode_game_channel_config(
-    GameChannelConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.id, serializer);
-    sse_encode_text_config(self.name, serializer);
-    sse_encode_opt_String(self.icon, serializer);
-  }
-
-  @protected
-  void sse_encode_game_config(GameConfig self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.id, serializer);
-    sse_encode_text_config(self.name, serializer);
-    sse_encode_opt_String(self.icon, serializer);
-    sse_encode_list_game_album_config(self.albumsConfig, serializer);
-    sse_encode_list_game_channel_config(self.channelConfig, serializer);
-    sse_encode_opt_box_autoadd_windows_game_config(self.windows, serializer);
+    sse_encode_bool(self.global, serializer);
+    sse_encode_String(self.path, serializer);
+    sse_encode_String(self.fontFamily, serializer);
+    sse_encode_u_32(self.codePoint, serializer);
   }
 
   @protected
@@ -12941,6 +11998,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putPlatformInt64(self);
+  }
+
+  @protected
+  void sse_encode_icon_rule(IconRule self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case IconRule_Image(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_image_icon_rule(field0, serializer);
+      case IconRule_Font(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_font_icon_rule(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_image_icon_rule(
+    ImageIconRule self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.global, serializer);
+    sse_encode_String(self.path, serializer);
   }
 
   @protected
@@ -13035,38 +12115,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_game_album_config(
-    List<GameAlbumConfig> self,
+  void sse_encode_list_list_string_process(
+    List<List<StringProcess>> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
-      sse_encode_game_album_config(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_list_game_channel_config(
-    List<GameChannelConfig> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_game_channel_config(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_list_list_string_process_config(
-    List<List<StringProcessConfig>> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_list_string_process_config(item, serializer);
+      sse_encode_list_string_process(item, serializer);
     }
   }
 
@@ -13385,18 +12441,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_record_string_bool(
-    List<(String, bool)> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_record_string_bool(item, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_list_record_string_string(
     List<(String, String)> self,
     SseSerializer serializer,
@@ -13433,14 +12477,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_string_process_config(
-    List<StringProcessConfig> self,
+  void sse_encode_list_string_process(
+    List<StringProcess> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
-      sse_encode_string_process_config(item, serializer);
+      sse_encode_string_process(item, serializer);
     }
   }
 
@@ -13457,32 +12501,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_windows_game_location_config(
-    List<WindowsGameLocationConfig> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_windows_game_location_config(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_list_windows_game_searcher_config(
-    List<WindowsGameSearcherConfig> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_windows_game_searcher_config(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_literal_text_config(
-    LiteralTextConfig self,
+  void sse_encode_literal_text_rule(
+    LiteralTextRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -14060,32 +13080,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_file_reader_config(
-    FileReaderConfig? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_file_reader_config(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_game_config(
-    GameConfig? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_game_config(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_home_build_param(
     HomeBuildParam? self,
     SseSerializer serializer,
@@ -14131,6 +13125,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_i_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_icon_rule(
+    IconRule? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_icon_rule(self, serializer);
     }
   }
 
@@ -14330,15 +13337,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_string_config(
-    StringConfig? self,
+  void sse_encode_opt_box_autoadd_string_rule(
+    StringRule? self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
-      sse_encode_box_autoadd_string_config(self, serializer);
+      sse_encode_box_autoadd_string_rule(self, serializer);
     }
   }
 
@@ -14356,15 +13363,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_text_config(
-    TextConfig? self,
+  void sse_encode_opt_box_autoadd_text_rule(
+    TextRule? self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
-      sse_encode_box_autoadd_text_config(self, serializer);
+      sse_encode_box_autoadd_text_rule(self, serializer);
     }
   }
 
@@ -14414,51 +13421,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_weapon_params(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_windows_game_config(
-    WindowsGameConfig? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_windows_game_config(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_windows_game_config_file_location_config(
-    WindowsGameConfigFileLocationConfig? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_windows_game_config_file_location_config(
-        self,
-        serializer,
-      );
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_windows_game_registry_location_config(
-    WindowsGameRegistryLocationConfig? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_windows_game_registry_location_config(
-        self,
-        serializer,
-      );
     }
   }
 
@@ -14763,16 +13725,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_record_string_bool(
-    (String, bool) self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.$1, serializer);
-    sse_encode_bool(self.$2, serializer);
-  }
-
-  @protected
   void sse_encode_record_string_string(
     (String, String) self,
     SseSerializer serializer,
@@ -14905,64 +13857,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_string_config(StringConfig self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_string_process_config(self.process, serializer);
-  }
-
-  @protected
-  void sse_encode_string_join_process_config(
-    StringJoinProcessConfig self,
+  void sse_encode_string_join_process(
+    StringJoinProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.separator, serializer);
-    sse_encode_list_list_string_process_config(self.target, serializer);
+    sse_encode_list_list_string_process(self.target, serializer);
   }
 
   @protected
-  void sse_encode_string_match_process_config(
-    StringMatchProcessConfig self,
+  void sse_encode_string_match_process(
+    StringMatchProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.regex, serializer);
     sse_encode_i_32(self.which, serializer);
     sse_encode_String(self.successful, serializer);
-    sse_encode_list_string_process_config(self.failed, serializer);
+    sse_encode_list_string_process(self.failed, serializer);
   }
 
   @protected
-  void sse_encode_string_process_config(
-    StringProcessConfig self,
-    SseSerializer serializer,
-  ) {
+  void sse_encode_string_process(StringProcess self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
-      case StringProcessConfig_Join(field0: final field0):
+      case StringProcess_Join(field0: final field0):
         sse_encode_i_32(0, serializer);
-        sse_encode_box_autoadd_string_join_process_config(field0, serializer);
-      case StringProcessConfig_Match(field0: final field0):
+        sse_encode_box_autoadd_string_join_process(field0, serializer);
+      case StringProcess_Match(field0: final field0):
         sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_string_match_process_config(field0, serializer);
-      case StringProcessConfig_Replace(field0: final field0):
+        sse_encode_box_autoadd_string_match_process(field0, serializer);
+      case StringProcess_Replace(field0: final field0):
         sse_encode_i_32(2, serializer);
-        sse_encode_box_autoadd_string_replace_process_config(
-          field0,
-          serializer,
-        );
-      case StringProcessConfig_ReplaceAll(field0: final field0):
+        sse_encode_box_autoadd_string_replace_process(field0, serializer);
+      case StringProcess_ReplaceAll(field0: final field0):
         sse_encode_i_32(3, serializer);
-        sse_encode_box_autoadd_string_replace_all_process_config(
-          field0,
-          serializer,
-        );
+        sse_encode_box_autoadd_string_replace_all_process(field0, serializer);
     }
   }
 
   @protected
-  void sse_encode_string_replace_all_process_config(
-    StringReplaceAllProcessConfig self,
+  void sse_encode_string_replace_all_process(
+    StringReplaceAllProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -14971,14 +13908,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_string_replace_process_config(
-    StringReplaceProcessConfig self,
+  void sse_encode_string_replace_process(
+    StringReplaceProcess self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.regex, serializer);
     sse_encode_i_32(self.which, serializer);
     sse_encode_String(self.to, serializer);
+  }
+
+  @protected
+  void sse_encode_string_rule(StringRule self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_string_process(self.process, serializer);
   }
 
   @protected
@@ -15004,15 +13947,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_text_config(TextConfig self, SseSerializer serializer) {
+  void sse_encode_text_rule(TextRule self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
-      case TextConfig_Literal(field0: final field0):
+      case TextRule_Literal(field0: final field0):
         sse_encode_i_32(0, serializer);
-        sse_encode_box_autoadd_literal_text_config(field0, serializer);
-      case TextConfig_Translate(field0: final field0):
+        sse_encode_box_autoadd_literal_text_rule(field0, serializer);
+      case TextRule_Translate(field0: final field0):
         sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_translate_text_config(field0, serializer);
+        sse_encode_box_autoadd_translate_text_rule(field0, serializer);
     }
   }
 
@@ -15025,11 +13968,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_translate_text_config(
-    TranslateTextConfig self,
+  void sse_encode_translate_text_rule(
+    TranslateTextRule self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.global, serializer);
     sse_encode_String(self.key, serializer);
     sse_encode_opt_list_String(self.args, serializer);
     sse_encode_opt_Map_String_String_None(self.namedArgs, serializer);
@@ -15084,134 +14028,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_64(self.id, serializer);
     sse_encode_String(self.slotType, serializer);
     sse_encode_opt_String(self.state, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_game_config(
-    WindowsGameConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_windows_game_location_config(self.locate, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_game_config_file_location_config(
-    WindowsGameConfigFileLocationConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.key, serializer);
-    sse_encode_string_config(self.output, serializer);
-    sse_encode_opt_String(self.failed, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_game_config_file_searcher_config(
-    WindowsGameConfigFileSearcherConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.path, serializer);
-    sse_encode_file_type(self.configType, serializer);
-    sse_encode_opt_box_autoadd_windows_game_config_file_location_config(
-      self.toLauncher,
-      serializer,
-    );
-    sse_encode_windows_game_config_file_location_config(
-      self.toInstall,
-      serializer,
-    );
-  }
-
-  @protected
-  void sse_encode_windows_game_location_config(
-    WindowsGameLocationConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.channelId, serializer);
-    sse_encode_bool(self.requireLauncher, serializer);
-    sse_encode_list_windows_game_searcher_config(self.searcher, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_game_registry_location_config(
-    WindowsGameRegistryLocationConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_registry_config(self.registry, serializer);
-    sse_encode_string_config(self.output, serializer);
-    sse_encode_opt_String(self.failed, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_game_registry_searcher_config(
-    WindowsGameRegistrySearcherConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_opt_box_autoadd_windows_game_registry_location_config(
-      self.toLauncher,
-      serializer,
-    );
-    sse_encode_windows_game_registry_location_config(
-      self.toInstall,
-      serializer,
-    );
-  }
-
-  @protected
-  void sse_encode_windows_game_searcher_config(
-    WindowsGameSearcherConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case WindowsGameSearcherConfig_Registry(field0: final field0):
-        sse_encode_i_32(0, serializer);
-        sse_encode_box_autoadd_windows_game_registry_searcher_config(
-          field0,
-          serializer,
-        );
-      case WindowsGameSearcherConfig_ConfigFile(field0: final field0):
-        sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_windows_game_config_file_searcher_config(
-          field0,
-          serializer,
-        );
-    }
-  }
-
-  @protected
-  void sse_encode_windows_registry_config(
-    WindowsRegistryConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_windows_registry_hive(self.hive, serializer);
-    sse_encode_String(self.path, serializer);
-    sse_encode_String(self.valueName, serializer);
-    sse_encode_windows_registry_value_type(self.valueType, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_registry_hive(
-    WindowsRegistryHive self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
-  void sse_encode_windows_registry_value_type(
-    WindowsRegistryValueType self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
   }
 }
 

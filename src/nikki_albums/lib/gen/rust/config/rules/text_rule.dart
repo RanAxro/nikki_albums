@@ -7,12 +7,12 @@ import '../../frb_generated.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-part 'text_config.freezed.dart';
+part 'text_rule.freezed.dart';
 
-class LiteralTextConfig {
+class LiteralTextRule {
   final String text;
 
-  const LiteralTextConfig({required this.text});
+  const LiteralTextRule({required this.text});
 
   @override
   int get hashCode => text.hashCode;
@@ -20,37 +20,38 @@ class LiteralTextConfig {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LiteralTextConfig &&
+      other is LiteralTextRule &&
           runtimeType == other.runtimeType &&
           text == other.text;
 }
 
 @freezed
-sealed class TextConfig with _$TextConfig {
-  const TextConfig._();
+sealed class TextRule with _$TextRule {
+  const TextRule._();
 
-  const factory TextConfig.literal(LiteralTextConfig field0) =
-      TextConfig_Literal;
-  const factory TextConfig.translate(TranslateTextConfig field0) =
-      TextConfig_Translate;
+  const factory TextRule.literal(LiteralTextRule field0) = TextRule_Literal;
+  const factory TextRule.translate(TranslateTextRule field0) =
+      TextRule_Translate;
 
-  static TextConfig? fromJson({required String json}) => RustLib.instance.api
-      .crateConfigCommonTextConfigTextConfigFromJson(json: json);
+  static TextRule? fromJson({required String json}) =>
+      RustLib.instance.api.crateConfigRulesTextRuleTextRuleFromJson(json: json);
 
-  String toJson() => RustLib.instance.api
-      .crateConfigCommonTextConfigTextConfigToJson(that: this);
+  String toJson() =>
+      RustLib.instance.api.crateConfigRulesTextRuleTextRuleToJson(that: this);
 
   String toJsonPretty() => RustLib.instance.api
-      .crateConfigCommonTextConfigTextConfigToJsonPretty(that: this);
+      .crateConfigRulesTextRuleTextRuleToJsonPretty(that: this);
 }
 
-class TranslateTextConfig {
+class TranslateTextRule {
+  final bool global;
   final String key;
   final List<String>? args;
   final Map<String, String>? namedArgs;
   final String? gender;
 
-  const TranslateTextConfig({
+  const TranslateTextRule({
+    required this.global,
     required this.key,
     this.args,
     this.namedArgs,
@@ -59,13 +60,18 @@ class TranslateTextConfig {
 
   @override
   int get hashCode =>
-      key.hashCode ^ args.hashCode ^ namedArgs.hashCode ^ gender.hashCode;
+      global.hashCode ^
+      key.hashCode ^
+      args.hashCode ^
+      namedArgs.hashCode ^
+      gender.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TranslateTextConfig &&
+      other is TranslateTextRule &&
           runtimeType == other.runtimeType &&
+          global == other.global &&
           key == other.key &&
           args == other.args &&
           namedArgs == other.namedArgs &&

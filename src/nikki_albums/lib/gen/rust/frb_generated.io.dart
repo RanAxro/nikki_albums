@@ -9,12 +9,10 @@ import 'archive/error.dart';
 import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
-import 'config/common/file_reader_config.dart';
-import 'config/common/string_config.dart';
-import 'config/common/text_config.dart';
-import 'config/common/windows_registry_config.dart';
-import 'config/game_config.dart';
 import 'config/hot_update.dart';
+import 'config/rules/icon_rule.dart';
+import 'config/rules/string_rule.dart';
+import 'config/rules/text_rule.dart';
 import 'config/update.dart';
 
 import 'dart:async';
@@ -128,9 +126,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<String, String> dco_decode_Map_String_String_None(dynamic raw);
-
-  @protected
-  Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw);
 
   @protected
   Map<int, Nuan5Cloth> dco_decode_Map_i_32_nuan_5_cloth_None(dynamic raw);
@@ -314,10 +309,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
 
   @protected
-  FileReaderConfig dco_decode_box_autoadd_file_reader_config(dynamic raw);
-
-  @protected
-  GameConfig dco_decode_box_autoadd_game_config(dynamic raw);
+  FontIconRule dco_decode_box_autoadd_font_icon_rule(dynamic raw);
 
   @protected
   HomeBuildParam dco_decode_box_autoadd_home_build_param(dynamic raw);
@@ -332,7 +324,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
 
   @protected
-  LiteralTextConfig dco_decode_box_autoadd_literal_text_config(dynamic raw);
+  IconRule dco_decode_box_autoadd_icon_rule(dynamic raw);
+
+  @protected
+  ImageIconRule dco_decode_box_autoadd_image_icon_rule(dynamic raw);
+
+  @protected
+  LiteralTextRule dco_decode_box_autoadd_literal_text_rule(dynamic raw);
 
   @protected
   Location dco_decode_box_autoadd_location(dynamic raw);
@@ -406,34 +404,32 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ShootingTime dco_decode_box_autoadd_shooting_time(dynamic raw);
 
   @protected
-  StringConfig dco_decode_box_autoadd_string_config(dynamic raw);
+  StringJoinProcess dco_decode_box_autoadd_string_join_process(dynamic raw);
 
   @protected
-  StringJoinProcessConfig dco_decode_box_autoadd_string_join_process_config(
+  StringMatchProcess dco_decode_box_autoadd_string_match_process(dynamic raw);
+
+  @protected
+  StringReplaceAllProcess dco_decode_box_autoadd_string_replace_all_process(
     dynamic raw,
   );
 
   @protected
-  StringMatchProcessConfig dco_decode_box_autoadd_string_match_process_config(
+  StringReplaceProcess dco_decode_box_autoadd_string_replace_process(
     dynamic raw,
   );
 
   @protected
-  StringReplaceAllProcessConfig
-  dco_decode_box_autoadd_string_replace_all_process_config(dynamic raw);
-
-  @protected
-  StringReplaceProcessConfig
-  dco_decode_box_autoadd_string_replace_process_config(dynamic raw);
+  StringRule dco_decode_box_autoadd_string_rule(dynamic raw);
 
   @protected
   Subarea dco_decode_box_autoadd_subarea(dynamic raw);
 
   @protected
-  TextConfig dco_decode_box_autoadd_text_config(dynamic raw);
+  TextRule dco_decode_box_autoadd_text_rule(dynamic raw);
 
   @protected
-  TranslateTextConfig dco_decode_box_autoadd_translate_text_config(dynamic raw);
+  TranslateTextRule dco_decode_box_autoadd_translate_text_rule(dynamic raw);
 
   @protected
   int dco_decode_box_autoadd_u_32(dynamic raw);
@@ -446,25 +442,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams dco_decode_box_autoadd_weapon_params(dynamic raw);
-
-  @protected
-  WindowsGameConfig dco_decode_box_autoadd_windows_game_config(dynamic raw);
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  dco_decode_box_autoadd_windows_game_config_file_location_config(dynamic raw);
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  dco_decode_box_autoadd_windows_game_config_file_searcher_config(dynamic raw);
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  dco_decode_box_autoadd_windows_game_registry_location_config(dynamic raw);
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  dco_decode_box_autoadd_windows_game_registry_searcher_config(dynamic raw);
 
   @protected
   BuildingParams dco_decode_building_params(dynamic raw);
@@ -541,22 +518,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FileHotUpdateInfo dco_decode_file_hot_update_info(dynamic raw);
 
   @protected
-  FileReaderConfig dco_decode_file_reader_config(dynamic raw);
-
-  @protected
-  FileType dco_decode_file_type(dynamic raw);
-
-  @protected
   FilterParams dco_decode_filter_params(dynamic raw);
 
   @protected
-  GameAlbumConfig dco_decode_game_album_config(dynamic raw);
-
-  @protected
-  GameChannelConfig dco_decode_game_channel_config(dynamic raw);
-
-  @protected
-  GameConfig dco_decode_game_config(dynamic raw);
+  FontIconRule dco_decode_font_icon_rule(dynamic raw);
 
   @protected
   HomeBuildParam dco_decode_home_build_param(dynamic raw);
@@ -572,6 +537,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PlatformInt64 dco_decode_i_64(dynamic raw);
+
+  @protected
+  IconRule dco_decode_icon_rule(dynamic raw);
+
+  @protected
+  ImageIconRule dco_decode_image_icon_rule(dynamic raw);
 
   @protected
   LightParams dco_decode_light_params(dynamic raw);
@@ -602,15 +573,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<FileHotUpdateInfo> dco_decode_list_file_hot_update_info(dynamic raw);
 
   @protected
-  List<GameAlbumConfig> dco_decode_list_game_album_config(dynamic raw);
-
-  @protected
-  List<GameChannelConfig> dco_decode_list_game_channel_config(dynamic raw);
-
-  @protected
-  List<List<StringProcessConfig>> dco_decode_list_list_string_process_config(
-    dynamic raw,
-  );
+  List<List<StringProcess>> dco_decode_list_list_string_process(dynamic raw);
 
   @protected
   List<Location> dco_decode_list_location(dynamic raw);
@@ -717,9 +680,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
 
   @protected
-  List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
-
-  @protected
   List<(String, String)> dco_decode_list_record_string_string(dynamic raw);
 
   @protected
@@ -729,23 +689,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<SpecialEffectData> dco_decode_list_special_effect_data(dynamic raw);
 
   @protected
-  List<StringProcessConfig> dco_decode_list_string_process_config(dynamic raw);
+  List<StringProcess> dco_decode_list_string_process(dynamic raw);
 
   @protected
   List<TaskParams> dco_decode_list_task_params(dynamic raw);
 
   @protected
-  List<WindowsGameLocationConfig> dco_decode_list_windows_game_location_config(
-    dynamic raw,
-  );
-
-  @protected
-  List<WindowsGameSearcherConfig> dco_decode_list_windows_game_searcher_config(
-    dynamic raw,
-  );
-
-  @protected
-  LiteralTextConfig dco_decode_literal_text_config(dynamic raw);
+  LiteralTextRule dco_decode_literal_text_rule(dynamic raw);
 
   @protected
   Location dco_decode_location(dynamic raw);
@@ -888,12 +838,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
 
   @protected
-  FileReaderConfig? dco_decode_opt_box_autoadd_file_reader_config(dynamic raw);
-
-  @protected
-  GameConfig? dco_decode_opt_box_autoadd_game_config(dynamic raw);
-
-  @protected
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
 
   @protected
@@ -904,6 +848,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
+
+  @protected
+  IconRule? dco_decode_opt_box_autoadd_icon_rule(dynamic raw);
 
   @protected
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw);
@@ -956,13 +903,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ShootingTime? dco_decode_opt_box_autoadd_shooting_time(dynamic raw);
 
   @protected
-  StringConfig? dco_decode_opt_box_autoadd_string_config(dynamic raw);
+  StringRule? dco_decode_opt_box_autoadd_string_rule(dynamic raw);
 
   @protected
   Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
 
   @protected
-  TextConfig? dco_decode_opt_box_autoadd_text_config(dynamic raw);
+  TextRule? dco_decode_opt_box_autoadd_text_rule(dynamic raw);
 
   @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
@@ -975,21 +922,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams? dco_decode_opt_box_autoadd_weapon_params(dynamic raw);
-
-  @protected
-  WindowsGameConfig? dco_decode_opt_box_autoadd_windows_game_config(
-    dynamic raw,
-  );
-
-  @protected
-  WindowsGameConfigFileLocationConfig?
-  dco_decode_opt_box_autoadd_windows_game_config_file_location_config(
-    dynamic raw,
-  );
-
-  @protected
-  WindowsGameRegistryLocationConfig?
-  dco_decode_opt_box_autoadd_windows_game_registry_location_config(dynamic raw);
 
   @protected
   List<String>? dco_decode_opt_list_String(dynamic raw);
@@ -1086,9 +1018,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
 
   @protected
-  (String, bool) dco_decode_record_string_bool(dynamic raw);
-
-  @protected
   (String, String) dco_decode_record_string_string(dynamic raw);
 
   @protected
@@ -1118,26 +1047,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   SpecialEffectData dco_decode_special_effect_data(dynamic raw);
 
   @protected
-  StringConfig dco_decode_string_config(dynamic raw);
+  StringJoinProcess dco_decode_string_join_process(dynamic raw);
 
   @protected
-  StringJoinProcessConfig dco_decode_string_join_process_config(dynamic raw);
+  StringMatchProcess dco_decode_string_match_process(dynamic raw);
 
   @protected
-  StringMatchProcessConfig dco_decode_string_match_process_config(dynamic raw);
+  StringProcess dco_decode_string_process(dynamic raw);
 
   @protected
-  StringProcessConfig dco_decode_string_process_config(dynamic raw);
+  StringReplaceAllProcess dco_decode_string_replace_all_process(dynamic raw);
 
   @protected
-  StringReplaceAllProcessConfig dco_decode_string_replace_all_process_config(
-    dynamic raw,
-  );
+  StringReplaceProcess dco_decode_string_replace_process(dynamic raw);
 
   @protected
-  StringReplaceProcessConfig dco_decode_string_replace_process_config(
-    dynamic raw,
-  );
+  StringRule dco_decode_string_rule(dynamic raw);
 
   @protected
   Subarea dco_decode_subarea(dynamic raw);
@@ -1146,13 +1071,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TaskParams dco_decode_task_params(dynamic raw);
 
   @protected
-  TextConfig dco_decode_text_config(dynamic raw);
+  TextRule dco_decode_text_rule(dynamic raw);
 
   @protected
   Thumbnail dco_decode_thumbnail(dynamic raw);
 
   @protected
-  TranslateTextConfig dco_decode_translate_text_config(dynamic raw);
+  TranslateTextRule dco_decode_translate_text_rule(dynamic raw);
 
   @protected
   int dco_decode_u_16(dynamic raw);
@@ -1177,44 +1102,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams dco_decode_weapon_params(dynamic raw);
-
-  @protected
-  WindowsGameConfig dco_decode_windows_game_config(dynamic raw);
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  dco_decode_windows_game_config_file_location_config(dynamic raw);
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  dco_decode_windows_game_config_file_searcher_config(dynamic raw);
-
-  @protected
-  WindowsGameLocationConfig dco_decode_windows_game_location_config(
-    dynamic raw,
-  );
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  dco_decode_windows_game_registry_location_config(dynamic raw);
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  dco_decode_windows_game_registry_searcher_config(dynamic raw);
-
-  @protected
-  WindowsGameSearcherConfig dco_decode_windows_game_searcher_config(
-    dynamic raw,
-  );
-
-  @protected
-  WindowsRegistryConfig dco_decode_windows_registry_config(dynamic raw);
-
-  @protected
-  WindowsRegistryHive dco_decode_windows_registry_hive(dynamic raw);
-
-  @protected
-  WindowsRegistryValueType dco_decode_windows_registry_value_type(dynamic raw);
 
   @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
@@ -1275,11 +1162,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<String, String> sse_decode_Map_String_String_None(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  Map<String, bool> sse_decode_Map_String_bool_None(
     SseDeserializer deserializer,
   );
 
@@ -1502,12 +1384,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  FileReaderConfig sse_decode_box_autoadd_file_reader_config(
+  FontIconRule sse_decode_box_autoadd_font_icon_rule(
     SseDeserializer deserializer,
   );
-
-  @protected
-  GameConfig sse_decode_box_autoadd_game_config(SseDeserializer deserializer);
 
   @protected
   HomeBuildParam sse_decode_box_autoadd_home_build_param(
@@ -1526,7 +1405,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
-  LiteralTextConfig sse_decode_box_autoadd_literal_text_config(
+  IconRule sse_decode_box_autoadd_icon_rule(SseDeserializer deserializer);
+
+  @protected
+  ImageIconRule sse_decode_box_autoadd_image_icon_rule(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LiteralTextRule sse_decode_box_autoadd_literal_text_rule(
     SseDeserializer deserializer,
   );
 
@@ -1628,40 +1515,36 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  StringConfig sse_decode_box_autoadd_string_config(
+  StringJoinProcess sse_decode_box_autoadd_string_join_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringJoinProcessConfig sse_decode_box_autoadd_string_join_process_config(
+  StringMatchProcess sse_decode_box_autoadd_string_match_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringMatchProcessConfig sse_decode_box_autoadd_string_match_process_config(
+  StringReplaceAllProcess sse_decode_box_autoadd_string_replace_all_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringReplaceAllProcessConfig
-  sse_decode_box_autoadd_string_replace_all_process_config(
+  StringReplaceProcess sse_decode_box_autoadd_string_replace_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringReplaceProcessConfig
-  sse_decode_box_autoadd_string_replace_process_config(
-    SseDeserializer deserializer,
-  );
+  StringRule sse_decode_box_autoadd_string_rule(SseDeserializer deserializer);
 
   @protected
   Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
-  TextConfig sse_decode_box_autoadd_text_config(SseDeserializer deserializer);
+  TextRule sse_decode_box_autoadd_text_rule(SseDeserializer deserializer);
 
   @protected
-  TranslateTextConfig sse_decode_box_autoadd_translate_text_config(
+  TranslateTextRule sse_decode_box_autoadd_translate_text_rule(
     SseDeserializer deserializer,
   );
 
@@ -1676,35 +1559,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams sse_decode_box_autoadd_weapon_params(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfig sse_decode_box_autoadd_windows_game_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  sse_decode_box_autoadd_windows_game_config_file_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  sse_decode_box_autoadd_windows_game_config_file_searcher_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  sse_decode_box_autoadd_windows_game_registry_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  sse_decode_box_autoadd_windows_game_registry_searcher_config(
     SseDeserializer deserializer,
   );
 
@@ -1793,24 +1647,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  FileReaderConfig sse_decode_file_reader_config(SseDeserializer deserializer);
-
-  @protected
-  FileType sse_decode_file_type(SseDeserializer deserializer);
-
-  @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
 
   @protected
-  GameAlbumConfig sse_decode_game_album_config(SseDeserializer deserializer);
-
-  @protected
-  GameChannelConfig sse_decode_game_channel_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  GameConfig sse_decode_game_config(SseDeserializer deserializer);
+  FontIconRule sse_decode_font_icon_rule(SseDeserializer deserializer);
 
   @protected
   HomeBuildParam sse_decode_home_build_param(SseDeserializer deserializer);
@@ -1828,6 +1668,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
+
+  @protected
+  IconRule sse_decode_icon_rule(SseDeserializer deserializer);
+
+  @protected
+  ImageIconRule sse_decode_image_icon_rule(SseDeserializer deserializer);
 
   @protected
   LightParams sse_decode_light_params(SseDeserializer deserializer);
@@ -1862,17 +1708,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<GameAlbumConfig> sse_decode_list_game_album_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  List<GameChannelConfig> sse_decode_list_game_channel_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  List<List<StringProcessConfig>> sse_decode_list_list_string_process_config(
+  List<List<StringProcess>> sse_decode_list_list_string_process(
     SseDeserializer deserializer,
   );
 
@@ -2003,11 +1839,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<(String, bool)> sse_decode_list_record_string_bool(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   List<(String, String)> sse_decode_list_record_string_string(
     SseDeserializer deserializer,
   );
@@ -2023,7 +1854,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<StringProcessConfig> sse_decode_list_string_process_config(
+  List<StringProcess> sse_decode_list_string_process(
     SseDeserializer deserializer,
   );
 
@@ -2031,19 +1862,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<TaskParams> sse_decode_list_task_params(SseDeserializer deserializer);
 
   @protected
-  List<WindowsGameLocationConfig> sse_decode_list_windows_game_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  List<WindowsGameSearcherConfig> sse_decode_list_windows_game_searcher_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  LiteralTextConfig sse_decode_literal_text_config(
-    SseDeserializer deserializer,
-  );
+  LiteralTextRule sse_decode_literal_text_rule(SseDeserializer deserializer);
 
   @protected
   Location sse_decode_location(SseDeserializer deserializer);
@@ -2212,16 +2031,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  FileReaderConfig? sse_decode_opt_box_autoadd_file_reader_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  GameConfig? sse_decode_opt_box_autoadd_game_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   HomeBuildParam? sse_decode_opt_box_autoadd_home_build_param(
     SseDeserializer deserializer,
   );
@@ -2236,6 +2045,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
+
+  @protected
+  IconRule? sse_decode_opt_box_autoadd_icon_rule(SseDeserializer deserializer);
 
   @protected
   LocationParams? sse_decode_opt_box_autoadd_location_params(
@@ -2310,7 +2122,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  StringConfig? sse_decode_opt_box_autoadd_string_config(
+  StringRule? sse_decode_opt_box_autoadd_string_rule(
     SseDeserializer deserializer,
   );
 
@@ -2318,9 +2130,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
-  TextConfig? sse_decode_opt_box_autoadd_text_config(
-    SseDeserializer deserializer,
-  );
+  TextRule? sse_decode_opt_box_autoadd_text_rule(SseDeserializer deserializer);
 
   @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
@@ -2335,23 +2145,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams? sse_decode_opt_box_autoadd_weapon_params(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfig? sse_decode_opt_box_autoadd_windows_game_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfigFileLocationConfig?
-  sse_decode_opt_box_autoadd_windows_game_config_file_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameRegistryLocationConfig?
-  sse_decode_opt_box_autoadd_windows_game_registry_location_config(
     SseDeserializer deserializer,
   );
 
@@ -2482,9 +2275,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  (String, bool) sse_decode_record_string_bool(SseDeserializer deserializer);
-
-  @protected
   (String, String) sse_decode_record_string_string(
     SseDeserializer deserializer,
   );
@@ -2520,32 +2310,30 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  StringConfig sse_decode_string_config(SseDeserializer deserializer);
-
-  @protected
-  StringJoinProcessConfig sse_decode_string_join_process_config(
+  StringJoinProcess sse_decode_string_join_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringMatchProcessConfig sse_decode_string_match_process_config(
+  StringMatchProcess sse_decode_string_match_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringProcessConfig sse_decode_string_process_config(
+  StringProcess sse_decode_string_process(SseDeserializer deserializer);
+
+  @protected
+  StringReplaceAllProcess sse_decode_string_replace_all_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringReplaceAllProcessConfig sse_decode_string_replace_all_process_config(
+  StringReplaceProcess sse_decode_string_replace_process(
     SseDeserializer deserializer,
   );
 
   @protected
-  StringReplaceProcessConfig sse_decode_string_replace_process_config(
-    SseDeserializer deserializer,
-  );
+  StringRule sse_decode_string_rule(SseDeserializer deserializer);
 
   @protected
   Subarea sse_decode_subarea(SseDeserializer deserializer);
@@ -2554,13 +2342,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TaskParams sse_decode_task_params(SseDeserializer deserializer);
 
   @protected
-  TextConfig sse_decode_text_config(SseDeserializer deserializer);
+  TextRule sse_decode_text_rule(SseDeserializer deserializer);
 
   @protected
   Thumbnail sse_decode_thumbnail(SseDeserializer deserializer);
 
   @protected
-  TranslateTextConfig sse_decode_translate_text_config(
+  TranslateTextRule sse_decode_translate_text_rule(
     SseDeserializer deserializer,
   );
 
@@ -2587,60 +2375,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   WeaponParams sse_decode_weapon_params(SseDeserializer deserializer);
-
-  @protected
-  WindowsGameConfig sse_decode_windows_game_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfigFileLocationConfig
-  sse_decode_windows_game_config_file_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameConfigFileSearcherConfig
-  sse_decode_windows_game_config_file_searcher_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameLocationConfig sse_decode_windows_game_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameRegistryLocationConfig
-  sse_decode_windows_game_registry_location_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameRegistrySearcherConfig
-  sse_decode_windows_game_registry_searcher_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsGameSearcherConfig sse_decode_windows_game_searcher_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsRegistryConfig sse_decode_windows_registry_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsRegistryHive sse_decode_windows_registry_hive(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  WindowsRegistryValueType sse_decode_windows_registry_value_type(
-    SseDeserializer deserializer,
-  );
 
   @protected
   void sse_encode_AnyhowException(
@@ -2714,12 +2448,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_String_String_None(
     Map<String, String> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_Map_String_bool_None(
-    Map<String, bool> self,
     SseSerializer serializer,
   );
 
@@ -2983,14 +2711,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_file_reader_config(
-    FileReaderConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_game_config(
-    GameConfig self,
+  void sse_encode_box_autoadd_font_icon_rule(
+    FontIconRule self,
     SseSerializer serializer,
   );
 
@@ -3016,8 +2738,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_literal_text_config(
-    LiteralTextConfig self,
+  void sse_encode_box_autoadd_icon_rule(
+    IconRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_image_icon_rule(
+    ImageIconRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_literal_text_rule(
+    LiteralTextRule self,
     SseSerializer serializer,
   );
 
@@ -3145,32 +2879,32 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_string_config(
-    StringConfig self,
+  void sse_encode_box_autoadd_string_join_process(
+    StringJoinProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_box_autoadd_string_join_process_config(
-    StringJoinProcessConfig self,
+  void sse_encode_box_autoadd_string_match_process(
+    StringMatchProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_box_autoadd_string_match_process_config(
-    StringMatchProcessConfig self,
+  void sse_encode_box_autoadd_string_replace_all_process(
+    StringReplaceAllProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_box_autoadd_string_replace_all_process_config(
-    StringReplaceAllProcessConfig self,
+  void sse_encode_box_autoadd_string_replace_process(
+    StringReplaceProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_box_autoadd_string_replace_process_config(
-    StringReplaceProcessConfig self,
+  void sse_encode_box_autoadd_string_rule(
+    StringRule self,
     SseSerializer serializer,
   );
 
@@ -3178,14 +2912,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_text_config(
-    TextConfig self,
+  void sse_encode_box_autoadd_text_rule(
+    TextRule self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_box_autoadd_translate_text_config(
-    TranslateTextConfig self,
+  void sse_encode_box_autoadd_translate_text_rule(
+    TranslateTextRule self,
     SseSerializer serializer,
   );
 
@@ -3204,36 +2938,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_weapon_params(
     WeaponParams self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_config(
-    WindowsGameConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_config_file_location_config(
-    WindowsGameConfigFileLocationConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_config_file_searcher_config(
-    WindowsGameConfigFileSearcherConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_registry_location_config(
-    WindowsGameRegistryLocationConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_windows_game_registry_searcher_config(
-    WindowsGameRegistrySearcherConfig self,
     SseSerializer serializer,
   );
 
@@ -3352,31 +3056,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_file_reader_config(
-    FileReaderConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_file_type(FileType self, SseSerializer serializer);
-
-  @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
 
   @protected
-  void sse_encode_game_album_config(
-    GameAlbumConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_game_channel_config(
-    GameChannelConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_game_config(GameConfig self, SseSerializer serializer);
+  void sse_encode_font_icon_rule(FontIconRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_home_build_param(
@@ -3398,6 +3081,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_icon_rule(IconRule self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_image_icon_rule(ImageIconRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_light_params(LightParams self, SseSerializer serializer);
@@ -3439,20 +3128,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_game_album_config(
-    List<GameAlbumConfig> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_list_game_channel_config(
-    List<GameChannelConfig> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_list_list_string_process_config(
-    List<List<StringProcessConfig>> self,
+  void sse_encode_list_list_string_process(
+    List<List<StringProcess>> self,
     SseSerializer serializer,
   );
 
@@ -3613,12 +3290,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_record_string_bool(
-    List<(String, bool)> self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_list_record_string_string(
     List<(String, String)> self,
     SseSerializer serializer,
@@ -3637,8 +3308,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_string_process_config(
-    List<StringProcessConfig> self,
+  void sse_encode_list_string_process(
+    List<StringProcess> self,
     SseSerializer serializer,
   );
 
@@ -3649,20 +3320,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_windows_game_location_config(
-    List<WindowsGameLocationConfig> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_list_windows_game_searcher_config(
-    List<WindowsGameSearcherConfig> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_literal_text_config(
-    LiteralTextConfig self,
+  void sse_encode_literal_text_rule(
+    LiteralTextRule self,
     SseSerializer serializer,
   );
 
@@ -3892,18 +3551,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_file_reader_config(
-    FileReaderConfig? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_game_config(
-    GameConfig? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_home_build_param(
     HomeBuildParam? self,
     SseSerializer serializer,
@@ -3921,6 +3568,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_i_64(
     PlatformInt64? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_icon_rule(
+    IconRule? self,
     SseSerializer serializer,
   );
 
@@ -4015,8 +3668,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_string_config(
-    StringConfig? self,
+  void sse_encode_opt_box_autoadd_string_rule(
+    StringRule? self,
     SseSerializer serializer,
   );
 
@@ -4027,8 +3680,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_text_config(
-    TextConfig? self,
+  void sse_encode_opt_box_autoadd_text_rule(
+    TextRule? self,
     SseSerializer serializer,
   );
 
@@ -4047,24 +3700,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_weapon_params(
     WeaponParams? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_windows_game_config(
-    WindowsGameConfig? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_windows_game_config_file_location_config(
-    WindowsGameConfigFileLocationConfig? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_windows_game_registry_location_config(
-    WindowsGameRegistryLocationConfig? self,
     SseSerializer serializer,
   );
 
@@ -4225,12 +3860,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_record_string_bool(
-    (String, bool) self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_record_string_string(
     (String, String) self,
     SseSerializer serializer,
@@ -4273,37 +3902,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_string_config(StringConfig self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_string_join_process_config(
-    StringJoinProcessConfig self,
+  void sse_encode_string_join_process(
+    StringJoinProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_string_match_process_config(
-    StringMatchProcessConfig self,
+  void sse_encode_string_match_process(
+    StringMatchProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_string_process_config(
-    StringProcessConfig self,
+  void sse_encode_string_process(StringProcess self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_string_replace_all_process(
+    StringReplaceAllProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_string_replace_all_process_config(
-    StringReplaceAllProcessConfig self,
+  void sse_encode_string_replace_process(
+    StringReplaceProcess self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_string_replace_process_config(
-    StringReplaceProcessConfig self,
-    SseSerializer serializer,
-  );
+  void sse_encode_string_rule(StringRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_subarea(Subarea self, SseSerializer serializer);
@@ -4312,14 +3938,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_task_params(TaskParams self, SseSerializer serializer);
 
   @protected
-  void sse_encode_text_config(TextConfig self, SseSerializer serializer);
+  void sse_encode_text_rule(TextRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_thumbnail(Thumbnail self, SseSerializer serializer);
 
   @protected
-  void sse_encode_translate_text_config(
-    TranslateTextConfig self,
+  void sse_encode_translate_text_rule(
+    TranslateTextRule self,
     SseSerializer serializer,
   );
 
@@ -4346,66 +3972,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_weapon_params(WeaponParams self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_windows_game_config(
-    WindowsGameConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_game_config_file_location_config(
-    WindowsGameConfigFileLocationConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_game_config_file_searcher_config(
-    WindowsGameConfigFileSearcherConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_game_location_config(
-    WindowsGameLocationConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_game_registry_location_config(
-    WindowsGameRegistryLocationConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_game_registry_searcher_config(
-    WindowsGameRegistrySearcherConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_game_searcher_config(
-    WindowsGameSearcherConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_registry_config(
-    WindowsRegistryConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_registry_hive(
-    WindowsRegistryHive self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_windows_registry_value_type(
-    WindowsRegistryValueType self,
-    SseSerializer serializer,
-  );
 }
 
 // Section: wire_class
