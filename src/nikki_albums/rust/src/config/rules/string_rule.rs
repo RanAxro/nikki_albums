@@ -3,43 +3,43 @@ use serde::{Deserialize, Serialize};
 use crate::impl_json_frb;
 
 
-impl_json_frb!(StringConfig);
+impl_json_frb!(StringRule);
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct StringConfig{
-  pub process: Vec<StringProcessConfig>,
+pub struct StringRule{
+  pub process: Vec<StringProcess>,
 }
 
 #[frb]
 #[derive(Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum StringProcessConfig{
-  Join(StringJoinProcessConfig),
-  Match(StringMatchProcessConfig),
-  Replace(StringReplaceProcessConfig),
-  ReplaceAll(StringReplaceAllProcessConfig),
+pub enum StringProcess{
+  Join(StringJoinProcess),
+  Match(StringMatchProcess),
+  Replace(StringReplaceProcess),
+  ReplaceAll(StringReplaceAllProcess),
 }
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct StringJoinProcessConfig{
+pub struct StringJoinProcess{
   pub separator: String,
-  pub target: Vec<Vec<StringProcessConfig>>,
+  pub target: Vec<Vec<StringProcess>>,
 }
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct StringMatchProcessConfig{
+pub struct StringMatchProcess{
   pub regex: String,
   pub which: i32,
   pub successful: String,
-  pub failed: Vec<StringProcessConfig>,
+  pub failed: Vec<StringProcess>,
 }
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct StringReplaceProcessConfig{
+pub struct StringReplaceProcess{
   pub regex: String,
   pub which: i32,
   pub to: String,
@@ -47,7 +47,7 @@ pub struct StringReplaceProcessConfig{
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct StringReplaceAllProcessConfig{
+pub struct StringReplaceAllProcess{
   pub regex: String,
   pub to: String,
 }

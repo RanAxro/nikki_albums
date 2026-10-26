@@ -24,7 +24,7 @@ pub enum WindowsRegistryValueType{
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct WindowsRegistryConfig{
+pub struct WindowsRegistryRule{
   pub hive: WindowsRegistryHive,
   pub path: String,
   pub value_name: String,
