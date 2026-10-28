@@ -1,7 +1,7 @@
+use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 use crate::config::common::platform::Platform;
-use crate::config::script::Script;
 use crate::impl_json_frb;
 use super::rules::{
   text_rule::TextRule,
@@ -31,7 +31,34 @@ pub struct PluginInfo{
   pub app_version: u32,
   pub platforms: Vec<Platform>,
 
-  pub entrance: Script,
+  pub script_info: ScriptInfo,
 }
 
 impl_json_frb!(PluginInfo);
+
+
+#[frb]
+#[derive(Serialize, Deserialize)]
+pub enum ScriptInfo{
+  NES(Vec<NES>),
+  JS(JSScriptInfo),
+  Wasm(String),
+}
+
+
+#[frb]
+#[derive(Serialize, Deserialize)]
+pub struct JSScriptInfo{
+  pub entrance: String,
+  pub modules: HashMap<String, String>,
+}
+
+
+#[derive(Serialize, Deserialize)]
+pub enum NES{
+  RegisterLoc,
+  RegisterGlobalLoc,
+  RegisterIcon,
+  RegisterGlobalIcon,
+  RegisterScript,
+}
