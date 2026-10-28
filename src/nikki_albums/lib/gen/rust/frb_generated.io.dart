@@ -10,12 +10,12 @@ import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
 import 'config/app_persistent_state.dart';
 import 'config/common/platform.dart';
+import 'config/game.dart';
 import 'config/hot_update.dart';
 import 'config/plugin.dart';
 import 'config/rules/icon_rule.dart';
 import 'config/rules/string_rule.dart';
 import 'config/rules/text_rule.dart';
-import 'config/script.dart';
 import 'config/update.dart';
 
 import 'dart:async';
@@ -315,6 +315,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FontIconRule dco_decode_box_autoadd_font_icon_rule(dynamic raw);
 
   @protected
+  Game dco_decode_box_autoadd_game(dynamic raw);
+
+  @protected
+  GameSession dco_decode_box_autoadd_game_session(dynamic raw);
+
+  @protected
   HomeBuildParam dco_decode_box_autoadd_home_build_param(dynamic raw);
 
   @protected
@@ -331,6 +337,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ImageIconRule dco_decode_box_autoadd_image_icon_rule(dynamic raw);
+
+  @protected
+  JSScriptInfo dco_decode_box_autoadd_js_script_info(dynamic raw);
 
   @protected
   LiteralTextRule dco_decode_box_autoadd_literal_text_rule(dynamic raw);
@@ -506,9 +515,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams dco_decode_dye_color_params(dynamic raw);
 
   @protected
-  EasyScript dco_decode_easy_script(dynamic raw);
-
-  @protected
   EditPhotoParams dco_decode_edit_photo_params(dynamic raw);
 
   @protected
@@ -533,6 +539,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FontIconRule dco_decode_font_icon_rule(dynamic raw);
 
   @protected
+  Game dco_decode_game(dynamic raw);
+
+  @protected
+  GameSession dco_decode_game_session(dynamic raw);
+
+  @protected
   HomeBuildParam dco_decode_home_build_param(dynamic raw);
 
   @protected
@@ -552,6 +564,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ImageIconRule dco_decode_image_icon_rule(dynamic raw);
+
+  @protected
+  JSScriptInfo dco_decode_js_script_info(dynamic raw);
 
   @protected
   LightParams dco_decode_light_params(dynamic raw);
@@ -576,19 +591,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<EasyScript> dco_decode_list_easy_script(dynamic raw);
-
-  @protected
   List<Eureka> dco_decode_list_eureka(dynamic raw);
 
   @protected
   List<FileHotUpdateInfo> dco_decode_list_file_hot_update_info(dynamic raw);
 
   @protected
+  List<Game> dco_decode_list_game(dynamic raw);
+
+  @protected
   List<List<StringProcess>> dco_decode_list_list_string_process(dynamic raw);
 
   @protected
   List<Location> dco_decode_list_location(dynamic raw);
+
+  @protected
+  List<NES> dco_decode_list_nes(dynamic raw);
 
   @protected
   List<ObjectParams> dco_decode_list_object_params(dynamic raw);
@@ -749,6 +767,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nation dco_decode_nation(dynamic raw);
 
   @protected
+  NES dco_decode_nes(dynamic raw);
+
+  @protected
   NikkiParams dco_decode_nikki_params(dynamic raw);
 
   @protected
@@ -846,6 +867,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
+
+  @protected
+  GameSession? dco_decode_opt_box_autoadd_game_session(dynamic raw);
 
   @protected
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
@@ -1042,7 +1066,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Script dco_decode_script(dynamic raw);
+  ScriptInfo dco_decode_script_info(dynamic raw);
 
   @protected
   ShootingDate dco_decode_shooting_date(dynamic raw);
@@ -1396,6 +1420,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Game sse_decode_box_autoadd_game(SseDeserializer deserializer);
+
+  @protected
+  GameSession sse_decode_box_autoadd_game_session(SseDeserializer deserializer);
+
+  @protected
   HomeBuildParam sse_decode_box_autoadd_home_build_param(
     SseDeserializer deserializer,
   );
@@ -1416,6 +1446,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ImageIconRule sse_decode_box_autoadd_image_icon_rule(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  JSScriptInfo sse_decode_box_autoadd_js_script_info(
     SseDeserializer deserializer,
   );
 
@@ -1637,9 +1672,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams sse_decode_dye_color_params(SseDeserializer deserializer);
 
   @protected
-  EasyScript sse_decode_easy_script(SseDeserializer deserializer);
-
-  @protected
   EditPhotoParams sse_decode_edit_photo_params(SseDeserializer deserializer);
 
   @protected
@@ -1666,6 +1698,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FontIconRule sse_decode_font_icon_rule(SseDeserializer deserializer);
 
   @protected
+  Game sse_decode_game(SseDeserializer deserializer);
+
+  @protected
+  GameSession sse_decode_game_session(SseDeserializer deserializer);
+
+  @protected
   HomeBuildParam sse_decode_home_build_param(SseDeserializer deserializer);
 
   @protected
@@ -1687,6 +1725,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ImageIconRule sse_decode_image_icon_rule(SseDeserializer deserializer);
+
+  @protected
+  JSScriptInfo sse_decode_js_script_info(SseDeserializer deserializer);
 
   @protected
   LightParams sse_decode_light_params(SseDeserializer deserializer);
@@ -1713,9 +1754,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<EasyScript> sse_decode_list_easy_script(SseDeserializer deserializer);
-
-  @protected
   List<Eureka> sse_decode_list_eureka(SseDeserializer deserializer);
 
   @protected
@@ -1724,12 +1762,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<Game> sse_decode_list_game(SseDeserializer deserializer);
+
+  @protected
   List<List<StringProcess>> sse_decode_list_list_string_process(
     SseDeserializer deserializer,
   );
 
   @protected
   List<Location> sse_decode_list_location(SseDeserializer deserializer);
+
+  @protected
+  List<NES> sse_decode_list_nes(SseDeserializer deserializer);
 
   @protected
   List<ObjectParams> sse_decode_list_object_params(
@@ -1924,6 +1968,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nation sse_decode_nation(SseDeserializer deserializer);
 
   @protected
+  NES sse_decode_nes(SseDeserializer deserializer);
+
+  @protected
   NikkiParams sse_decode_nikki_params(SseDeserializer deserializer);
 
   @protected
@@ -2041,6 +2088,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? sse_decode_opt_box_autoadd_dye_color_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  GameSession? sse_decode_opt_box_autoadd_game_session(
     SseDeserializer deserializer,
   );
 
@@ -2301,7 +2353,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Script sse_decode_script(SseDeserializer deserializer);
+  ScriptInfo sse_decode_script_info(SseDeserializer deserializer);
 
   @protected
   ShootingDate sse_decode_shooting_date(SseDeserializer deserializer);
@@ -2722,6 +2774,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_game(Game self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_game_session(
+    GameSession self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_home_build_param(
     HomeBuildParam self,
     SseSerializer serializer,
@@ -2751,6 +2812,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_image_icon_rule(
     ImageIconRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_js_script_info(
+    JSScriptInfo self,
     SseSerializer serializer,
   );
 
@@ -3037,9 +3104,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_easy_script(EasyScript self, SseSerializer serializer);
-
-  @protected
   void sse_encode_edit_photo_params(
     EditPhotoParams self,
     SseSerializer serializer,
@@ -3076,6 +3140,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_font_icon_rule(FontIconRule self, SseSerializer serializer);
 
   @protected
+  void sse_encode_game(Game self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_game_session(GameSession self, SseSerializer serializer);
+
+  @protected
   void sse_encode_home_build_param(
     HomeBuildParam self,
     SseSerializer serializer,
@@ -3101,6 +3171,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_image_icon_rule(ImageIconRule self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_js_script_info(JSScriptInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_light_params(LightParams self, SseSerializer serializer);
@@ -3133,12 +3206,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_easy_script(
-    List<EasyScript> self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_list_eureka(List<Eureka> self, SseSerializer serializer);
 
   @protected
@@ -3148,6 +3215,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_game(List<Game> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_list_string_process(
     List<List<StringProcess>> self,
     SseSerializer serializer,
@@ -3155,6 +3225,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_list_location(List<Location> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_nes(List<NES> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_object_params(
@@ -3406,6 +3479,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_nation(Nation self, SseSerializer serializer);
 
   @protected
+  void sse_encode_nes(NES self, SseSerializer serializer);
+
+  @protected
   void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer);
 
   @protected
@@ -3564,6 +3640,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_dye_color_params(
     DyeColorParams? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_game_session(
+    GameSession? self,
     SseSerializer serializer,
   );
 
@@ -3889,7 +3971,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_script(Script self, SseSerializer serializer);
+  void sse_encode_script_info(ScriptInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_shooting_date(ShootingDate self, SseSerializer serializer);

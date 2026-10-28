@@ -7,13 +7,40 @@ import '../frb_generated.dart';
 import 'common/platform.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 
 import 'rules/icon_rule.dart';
 import 'rules/text_rule.dart';
-import 'script.dart';
+part 'plugin.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PluginSource`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`
+
+class JSScriptInfo {
+  final String entrance;
+  final Map<String, String> modules;
+
+  const JSScriptInfo({required this.entrance, required this.modules});
+
+  @override
+  int get hashCode => entrance.hashCode ^ modules.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is JSScriptInfo &&
+          runtimeType == other.runtimeType &&
+          entrance == other.entrance &&
+          modules == other.modules;
+}
+
+enum NES {
+  registerLoc,
+  registerGlobalLoc,
+  registerIcon,
+  registerGlobalIcon,
+  registerScript,
+}
 
 class PluginInfo {
   final String? asExtensionOf;
@@ -28,7 +55,7 @@ class PluginInfo {
   final String? pluginList;
   final int appVersion;
   final List<Platform> platforms;
-  final Script entrance;
+  final ScriptInfo scriptInfo;
 
   const PluginInfo({
     this.asExtensionOf,
@@ -43,7 +70,7 @@ class PluginInfo {
     this.pluginList,
     required this.appVersion,
     required this.platforms,
-    required this.entrance,
+    required this.scriptInfo,
   });
 
   static PluginInfo fromJson({required String json}) =>
@@ -78,7 +105,7 @@ class PluginInfo {
       pluginList.hashCode ^
       appVersion.hashCode ^
       platforms.hashCode ^
-      entrance.hashCode;
+      scriptInfo.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -97,5 +124,14 @@ class PluginInfo {
           pluginList == other.pluginList &&
           appVersion == other.appVersion &&
           platforms == other.platforms &&
-          entrance == other.entrance;
+          scriptInfo == other.scriptInfo;
+}
+
+@freezed
+sealed class ScriptInfo with _$ScriptInfo {
+  const ScriptInfo._();
+
+  const factory ScriptInfo.nes(List<NES> field0) = ScriptInfo_NES;
+  const factory ScriptInfo.js(JSScriptInfo field0) = ScriptInfo_JS;
+  const factory ScriptInfo.wasm(String field0) = ScriptInfo_Wasm;
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppPersistentState {
 
- bool? get isAgreeAgreement; bool? get isInitialStartup; String? get lang; int? get theme; Map<String, String> get unknownField;
+ bool? get isAgreeAgreement; bool? get isInitialStartup; String? get lang; int? get theme; GameSession? get selectedGame; Map<String, String> get unknownField;
 /// Create a copy of AppPersistentState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $AppPersistentStateCopyWith<AppPersistentState> get copyWith => _$AppPersistentS
 @override
 bool operator ==(Object other) {
   final _this = this as AppPersistentState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppPersistentState&&(identical(other.isAgreeAgreement, _this.isAgreeAgreement) || other.isAgreeAgreement == _this.isAgreeAgreement)&&(identical(other.isInitialStartup, _this.isInitialStartup) || other.isInitialStartup == _this.isInitialStartup)&&(identical(other.lang, _this.lang) || other.lang == _this.lang)&&(identical(other.theme, _this.theme) || other.theme == _this.theme)&&const DeepCollectionEquality().equals(other.unknownField, _this.unknownField));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppPersistentState&&(identical(other.isAgreeAgreement, _this.isAgreeAgreement) || other.isAgreeAgreement == _this.isAgreeAgreement)&&(identical(other.isInitialStartup, _this.isInitialStartup) || other.isInitialStartup == _this.isInitialStartup)&&(identical(other.lang, _this.lang) || other.lang == _this.lang)&&(identical(other.theme, _this.theme) || other.theme == _this.theme)&&(identical(other.selectedGame, _this.selectedGame) || other.selectedGame == _this.selectedGame)&&const DeepCollectionEquality().equals(other.unknownField, _this.unknownField));
 }
 
 
 @override
 int get hashCode {
   final _this = this as AppPersistentState;
-  return Object.hash(runtimeType,_this.isAgreeAgreement,_this.isInitialStartup,_this.lang,_this.theme,const DeepCollectionEquality().hash(_this.unknownField));
+  return Object.hash(runtimeType,_this.isAgreeAgreement,_this.isInitialStartup,_this.lang,_this.theme,_this.selectedGame,const DeepCollectionEquality().hash(_this.unknownField));
 }
 
 @override
 String toString() {
   final _this = this as AppPersistentState;
-  return 'AppPersistentState(isAgreeAgreement: ${_this.isAgreeAgreement}, isInitialStartup: ${_this.isInitialStartup}, lang: ${_this.lang}, theme: ${_this.theme}, unknownField: ${_this.unknownField})';
+  return 'AppPersistentState(isAgreeAgreement: ${_this.isAgreeAgreement}, isInitialStartup: ${_this.isInitialStartup}, lang: ${_this.lang}, theme: ${_this.theme}, selectedGame: ${_this.selectedGame}, unknownField: ${_this.unknownField})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $AppPersistentStateCopyWith<$Res>  {
   factory $AppPersistentStateCopyWith(AppPersistentState value, $Res Function(AppPersistentState) _then) = _$AppPersistentStateCopyWithImpl;
 @useResult
 $Res call({
- bool? isAgreeAgreement, bool? isInitialStartup, String? lang, int? theme, Map<String, String> unknownField
+ bool? isAgreeAgreement, bool? isInitialStartup, String? lang, int? theme, GameSession? selectedGame, Map<String, String> unknownField
 });
 
 
@@ -68,13 +68,14 @@ class _$AppPersistentStateCopyWithImpl<$Res>
 
 /// Create a copy of AppPersistentState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isAgreeAgreement = freezed,Object? isInitialStartup = freezed,Object? lang = freezed,Object? theme = freezed,Object? unknownField = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isAgreeAgreement = freezed,Object? isInitialStartup = freezed,Object? lang = freezed,Object? theme = freezed,Object? selectedGame = freezed,Object? unknownField = null,}) {
   return _then(AppPersistentState(
 isAgreeAgreement: freezed == isAgreeAgreement ? _self.isAgreeAgreement : isAgreeAgreement // ignore: cast_nullable_to_non_nullable
 as bool?,isInitialStartup: freezed == isInitialStartup ? _self.isInitialStartup : isInitialStartup // ignore: cast_nullable_to_non_nullable
 as bool?,lang: freezed == lang ? _self.lang : lang // ignore: cast_nullable_to_non_nullable
 as String?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as int?,unknownField: null == unknownField ? _self.unknownField : unknownField // ignore: cast_nullable_to_non_nullable
+as int?,selectedGame: freezed == selectedGame ? _self.selectedGame : selectedGame // ignore: cast_nullable_to_non_nullable
+as GameSession?,unknownField: null == unknownField ? _self.unknownField : unknownField // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,
   ));
 }
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool? isAgreeAgreement,  bool? isInitialStartup,  String? lang,  int? theme,  Map<String, String> unknownField)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool? isAgreeAgreement,  bool? isInitialStartup,  String? lang,  int? theme,  GameSession? selectedGame,  Map<String, String> unknownField)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppPersistentState() when $default != null:
-return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.theme,_that.unknownField);case _:
+return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.theme,_that.selectedGame,_that.unknownField);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool? isAgreeAgreement,  bool? isInitialStartup,  String? lang,  int? theme,  Map<String, String> unknownField)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool? isAgreeAgreement,  bool? isInitialStartup,  String? lang,  int? theme,  GameSession? selectedGame,  Map<String, String> unknownField)  $default,) {final _that = this;
 switch (_that) {
 case _AppPersistentState():
-return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.theme,_that.unknownField);}
+return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.theme,_that.selectedGame,_that.unknownField);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +196,10 @@ return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool? isAgreeAgreement,  bool? isInitialStartup,  String? lang,  int? theme,  Map<String, String> unknownField)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool? isAgreeAgreement,  bool? isInitialStartup,  String? lang,  int? theme,  GameSession? selectedGame,  Map<String, String> unknownField)?  $default,) {final _that = this;
 switch (_that) {
 case _AppPersistentState() when $default != null:
-return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.theme,_that.unknownField);case _:
+return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.theme,_that.selectedGame,_that.unknownField);case _:
   return null;
 
 }
@@ -210,13 +211,14 @@ return $default(_that.isAgreeAgreement,_that.isInitialStartup,_that.lang,_that.t
 
 
 class _AppPersistentState extends AppPersistentState {
-  const _AppPersistentState({this.isAgreeAgreement, this.isInitialStartup, this.lang, this.theme, required  Map<String, String> unknownField}): _unknownField = unknownField,super._();
+  const _AppPersistentState({this.isAgreeAgreement, this.isInitialStartup, this.lang, this.theme, this.selectedGame, required  Map<String, String> unknownField}): _unknownField = unknownField,super._();
   
 
 @override final  bool? isAgreeAgreement;
 @override final  bool? isInitialStartup;
 @override final  String? lang;
 @override final  int? theme;
+@override final  GameSession? selectedGame;
  final  Map<String, String> _unknownField;
 @override Map<String, String> get unknownField {
   if (_unknownField is EqualUnmodifiableMapView) return _unknownField;
@@ -235,18 +237,18 @@ _$AppPersistentStateCopyWith<_AppPersistentState> get copyWith => __$AppPersiste
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppPersistentState&&(identical(other.isAgreeAgreement, isAgreeAgreement) || other.isAgreeAgreement == isAgreeAgreement)&&(identical(other.isInitialStartup, isInitialStartup) || other.isInitialStartup == isInitialStartup)&&(identical(other.lang, lang) || other.lang == lang)&&(identical(other.theme, theme) || other.theme == theme)&&const DeepCollectionEquality().equals(other.unknownField, _unknownField));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppPersistentState&&(identical(other.isAgreeAgreement, isAgreeAgreement) || other.isAgreeAgreement == isAgreeAgreement)&&(identical(other.isInitialStartup, isInitialStartup) || other.isInitialStartup == isInitialStartup)&&(identical(other.lang, lang) || other.lang == lang)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.selectedGame, selectedGame) || other.selectedGame == selectedGame)&&const DeepCollectionEquality().equals(other.unknownField, _unknownField));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,isAgreeAgreement,isInitialStartup,lang,theme,const DeepCollectionEquality().hash(_unknownField));
+    return Object.hash(runtimeType,isAgreeAgreement,isInitialStartup,lang,theme,selectedGame,const DeepCollectionEquality().hash(_unknownField));
 }
 
 @override
 String toString() {
-    return 'AppPersistentState(isAgreeAgreement: $isAgreeAgreement, isInitialStartup: $isInitialStartup, lang: $lang, theme: $theme, unknownField: $unknownField)';
+    return 'AppPersistentState(isAgreeAgreement: $isAgreeAgreement, isInitialStartup: $isInitialStartup, lang: $lang, theme: $theme, selectedGame: $selectedGame, unknownField: $unknownField)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$AppPersistentStateCopyWith<$Res> implements $AppPersisten
   factory _$AppPersistentStateCopyWith(_AppPersistentState value, $Res Function(_AppPersistentState) _then) = __$AppPersistentStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool? isAgreeAgreement, bool? isInitialStartup, String? lang, int? theme, Map<String, String> unknownField
+ bool? isAgreeAgreement, bool? isInitialStartup, String? lang, int? theme, GameSession? selectedGame, Map<String, String> unknownField
 });
 
 
@@ -274,13 +276,14 @@ class __$AppPersistentStateCopyWithImpl<$Res>
 
 /// Create a copy of AppPersistentState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isAgreeAgreement = freezed,Object? isInitialStartup = freezed,Object? lang = freezed,Object? theme = freezed,Object? unknownField = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isAgreeAgreement = freezed,Object? isInitialStartup = freezed,Object? lang = freezed,Object? theme = freezed,Object? selectedGame = freezed,Object? unknownField = null,}) {
   return _then(_AppPersistentState(
 isAgreeAgreement: freezed == isAgreeAgreement ? _self.isAgreeAgreement : isAgreeAgreement // ignore: cast_nullable_to_non_nullable
 as bool?,isInitialStartup: freezed == isInitialStartup ? _self.isInitialStartup : isInitialStartup // ignore: cast_nullable_to_non_nullable
 as bool?,lang: freezed == lang ? _self.lang : lang // ignore: cast_nullable_to_non_nullable
 as String?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as int?,unknownField: null == unknownField ? _self._unknownField : unknownField // ignore: cast_nullable_to_non_nullable
+as int?,selectedGame: freezed == selectedGame ? _self.selectedGame : selectedGame // ignore: cast_nullable_to_non_nullable
+as GameSession?,unknownField: null == unknownField ? _self._unknownField : unknownField // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,
   ));
 }
