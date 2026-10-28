@@ -47,6 +47,9 @@ dependencies:
   super_tooltip: ^2.1.1
   flutter_staggered_grid_view: ^0.7.0
   # util
+  quickjs_engine: ^0.1.6
+
+
   #  hive: ^2.2.3
   #  hive_flutter: ^1.1.0
   path: ^1.9.1
@@ -179,6 +182,7 @@ flutter:
     - assets/icon/big/
     - assets/icon/infinity_nikki/
 #    - assets/map/
+    - assets/plugin/
     - assets/web/send_file/
     - assets/bin/
 

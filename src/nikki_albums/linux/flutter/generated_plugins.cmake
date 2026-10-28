@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   irondash_engine_context
   media_kit_libs_linux
   media_kit_video
+  quickjs_engine
   screen_retriever_linux
   super_native_extensions
   url_launcher_linux

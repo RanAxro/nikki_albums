@@ -1,3 +1,4 @@
+add_compile_options(/utf-8)
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
 project(nikki_albums LANGUAGES CXX)
