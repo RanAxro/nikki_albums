@@ -7,6 +7,7 @@ export "package:nikki_albums/gen/rust/config/plugin.dart";
 import "package:nikki_albums/gen/rust/config/plugin.dart";
 
 import "dart:typed_data";
+import "dart:convert";
 
 
 abstract class PluginReader{
@@ -28,4 +29,9 @@ abstract class PluginReader{
   Future<bool> existFile(String filename);
 
   Future<Uint8List> readFile(String filename);
+
+  Future<String> readFileAsString(String filename) async{
+    final Uint8List bytes = await readFile(filename);
+    return utf8.decode(bytes);
+  }
 }
