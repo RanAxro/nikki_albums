@@ -30,7 +30,6 @@ import 'nuan5_params/structs/cloth_diy_params.dart';
 import 'nuan5_params/structs/collage_params.dart';
 import 'nuan5_params/structs/eureka.dart';
 import 'nuan5_params/structs/nikki_photo_params.dart';
-import 'nuan5_params/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -211,16 +210,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AppVersionHotUpdateInfo dco_decode_app_version_hot_update_info(dynamic raw);
 
   @protected
-  Area dco_decode_area(dynamic raw);
-
-  @protected
   bool dco_decode_bool(dynamic raw);
 
   @protected
   AppPersistentState dco_decode_box_autoadd_app_persistent_state(dynamic raw);
-
-  @protected
-  Area dco_decode_box_autoadd_area(dynamic raw);
 
   @protected
   bool dco_decode_box_autoadd_bool(dynamic raw);
@@ -254,9 +247,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CustomData dco_decode_box_autoadd_custom_data(dynamic raw);
 
   @protected
-  Dimension dco_decode_box_autoadd_dimension(dynamic raw);
-
-  @protected
   DiyData dco_decode_box_autoadd_diy_data(dynamic raw);
 
   @protected
@@ -284,9 +274,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LiteralTextConfig dco_decode_box_autoadd_literal_text_config(dynamic raw);
 
   @protected
-  Location dco_decode_box_autoadd_location(dynamic raw);
-
-  @protected
   LocationParams dco_decode_box_autoadd_location_params(dynamic raw);
 
   @protected
@@ -300,9 +287,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoParams dco_decode_box_autoadd_momo_params(dynamic raw);
-
-  @protected
-  Nation dco_decode_box_autoadd_nation(dynamic raw);
 
   @protected
   NikkiParams dco_decode_box_autoadd_nikki_params(dynamic raw);
@@ -334,9 +318,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw);
-
-  @protected
-  Region dco_decode_box_autoadd_region(dynamic raw);
 
   @protected
   RichBuildingParams dco_decode_box_autoadd_rich_building_params(dynamic raw);
@@ -374,9 +355,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   StringReplaceProcessConfig
   dco_decode_box_autoadd_string_replace_process_config(dynamic raw);
-
-  @protected
-  Subarea dco_decode_box_autoadd_subarea(dynamic raw);
 
   @protected
   TextConfig dco_decode_box_autoadd_text_config(dynamic raw);
@@ -447,9 +425,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DecryptionError dco_decode_decryption_error(dynamic raw);
-
-  @protected
-  Dimension dco_decode_dimension(dynamic raw);
 
   @protected
   DiyData dco_decode_diy_data(dynamic raw);
@@ -551,9 +526,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<List<StringProcessConfig>> dco_decode_list_list_string_process_config(
     dynamic raw,
   );
-
-  @protected
-  List<Location> dco_decode_list_location(dynamic raw);
 
   @protected
   List<ObjectParams> dco_decode_list_object_params(dynamic raw);
@@ -685,13 +657,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LiteralTextConfig dco_decode_literal_text_config(dynamic raw);
 
   @protected
-  Location dco_decode_location(dynamic raw);
-
-  @protected
   LocationParams dco_decode_location_params(dynamic raw);
-
-  @protected
-  LocationType dco_decode_location_type(dynamic raw);
 
   @protected
   MediaCustomData dco_decode_media_custom_data(dynamic raw);
@@ -716,9 +682,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoParams dco_decode_momo_params(dynamic raw);
-
-  @protected
-  Nation dco_decode_nation(dynamic raw);
 
   @protected
   NikkiParams dco_decode_nikki_params(dynamic raw);
@@ -799,9 +762,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Area? dco_decode_opt_box_autoadd_area(dynamic raw);
-
-  @protected
   bool? dco_decode_opt_box_autoadd_bool(dynamic raw);
 
   @protected
@@ -814,9 +774,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
-
-  @protected
-  Dimension? dco_decode_opt_box_autoadd_dimension(dynamic raw);
 
   @protected
   DiyData? dco_decode_opt_box_autoadd_diy_data(dynamic raw);
@@ -849,9 +806,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw);
 
   @protected
-  Nation? dco_decode_opt_box_autoadd_nation(dynamic raw);
-
-  @protected
   NikkiParams? dco_decode_opt_box_autoadd_nikki_params(dynamic raw);
 
   @protected
@@ -874,9 +828,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ObjectParams? dco_decode_opt_box_autoadd_object_params(dynamic raw);
 
   @protected
-  Region? dco_decode_opt_box_autoadd_region(dynamic raw);
-
-  @protected
   RichCameraParams? dco_decode_opt_box_autoadd_rich_camera_params(dynamic raw);
 
   @protected
@@ -891,9 +842,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   StringConfig? dco_decode_opt_box_autoadd_string_config(dynamic raw);
-
-  @protected
-  Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
 
   @protected
   TextConfig? dco_decode_opt_box_autoadd_text_config(dynamic raw);
@@ -1023,9 +971,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (String, String) dco_decode_record_string_string(dynamic raw);
 
   @protected
-  Region dco_decode_region(dynamic raw);
-
-  @protected
   RegionPicture dco_decode_region_picture(dynamic raw);
 
   @protected
@@ -1069,9 +1014,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   StringReplaceProcessConfig dco_decode_string_replace_process_config(
     dynamic raw,
   );
-
-  @protected
-  Subarea dco_decode_subarea(dynamic raw);
 
   @protected
   TaskParams dco_decode_task_params(dynamic raw);
@@ -1324,18 +1266,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Area sse_decode_area(SseDeserializer deserializer);
-
-  @protected
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
   AppPersistentState sse_decode_box_autoadd_app_persistent_state(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Area sse_decode_box_autoadd_area(SseDeserializer deserializer);
 
   @protected
   bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
@@ -1379,9 +1315,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CustomData sse_decode_box_autoadd_custom_data(SseDeserializer deserializer);
 
   @protected
-  Dimension sse_decode_box_autoadd_dimension(SseDeserializer deserializer);
-
-  @protected
   DiyData sse_decode_box_autoadd_diy_data(SseDeserializer deserializer);
 
   @protected
@@ -1421,9 +1354,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Location sse_decode_box_autoadd_location(SseDeserializer deserializer);
-
-  @protected
   LocationParams sse_decode_box_autoadd_location_params(
     SseDeserializer deserializer,
   );
@@ -1443,9 +1373,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoParams sse_decode_box_autoadd_momo_params(SseDeserializer deserializer);
-
-  @protected
-  Nation sse_decode_box_autoadd_nation(SseDeserializer deserializer);
 
   @protected
   NikkiParams sse_decode_box_autoadd_nikki_params(SseDeserializer deserializer);
@@ -1487,9 +1414,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OutfitDyeHairData sse_decode_box_autoadd_outfit_dye_hair_data(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Region sse_decode_box_autoadd_region(SseDeserializer deserializer);
 
   @protected
   RichBuildingParams sse_decode_box_autoadd_rich_building_params(
@@ -1543,9 +1467,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   sse_decode_box_autoadd_string_replace_process_config(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
   TextConfig sse_decode_box_autoadd_text_config(SseDeserializer deserializer);
@@ -1638,9 +1559,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DecryptionError sse_decode_decryption_error(SseDeserializer deserializer);
-
-  @protected
-  Dimension sse_decode_dimension(SseDeserializer deserializer);
 
   @protected
   DiyData sse_decode_diy_data(SseDeserializer deserializer);
@@ -1754,9 +1672,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<List<StringProcessConfig>> sse_decode_list_list_string_process_config(
     SseDeserializer deserializer,
   );
-
-  @protected
-  List<Location> sse_decode_list_location(SseDeserializer deserializer);
 
   @protected
   List<ObjectParams> sse_decode_list_object_params(
@@ -1922,13 +1837,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Location sse_decode_location(SseDeserializer deserializer);
-
-  @protected
   LocationParams sse_decode_location_params(SseDeserializer deserializer);
-
-  @protected
-  LocationType sse_decode_location_type(SseDeserializer deserializer);
 
   @protected
   MediaCustomData sse_decode_media_custom_data(SseDeserializer deserializer);
@@ -1957,9 +1866,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoParams sse_decode_momo_params(SseDeserializer deserializer);
-
-  @protected
-  Nation sse_decode_nation(SseDeserializer deserializer);
 
   @protected
   NikkiParams sse_decode_nikki_params(SseDeserializer deserializer);
@@ -2056,9 +1962,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer);
-
-  @protected
   bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer);
 
   @protected
@@ -2075,9 +1978,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CustomData? sse_decode_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Dimension? sse_decode_opt_box_autoadd_dimension(SseDeserializer deserializer);
 
   @protected
   DiyData? sse_decode_opt_box_autoadd_diy_data(SseDeserializer deserializer);
@@ -2126,9 +2026,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Nation? sse_decode_opt_box_autoadd_nation(SseDeserializer deserializer);
-
-  @protected
   NikkiParams? sse_decode_opt_box_autoadd_nikki_params(
     SseDeserializer deserializer,
   );
@@ -2159,9 +2056,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Region? sse_decode_opt_box_autoadd_region(SseDeserializer deserializer);
-
-  @protected
   RichCameraParams? sse_decode_opt_box_autoadd_rich_camera_params(
     SseDeserializer deserializer,
   );
@@ -2186,9 +2080,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   StringConfig? sse_decode_opt_box_autoadd_string_config(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
   TextConfig? sse_decode_opt_box_autoadd_text_config(
@@ -2360,9 +2251,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  Region sse_decode_region(SseDeserializer deserializer);
-
-  @protected
   RegionPicture sse_decode_region_picture(SseDeserializer deserializer);
 
   @protected
@@ -2416,9 +2304,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   StringReplaceProcessConfig sse_decode_string_replace_process_config(
     SseDeserializer deserializer,
   );
-
-  @protected
-  Subarea sse_decode_subarea(SseDeserializer deserializer);
 
   @protected
   TaskParams sse_decode_task_params(SseDeserializer deserializer);
@@ -2720,9 +2605,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_area(Area self, SseSerializer serializer);
-
-  @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
 
   @protected
@@ -2730,9 +2612,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     AppPersistentState self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_box_autoadd_area(Area self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
@@ -2782,12 +2661,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_custom_data(
     CustomData self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_dimension(
-    Dimension self,
     SseSerializer serializer,
   );
 
@@ -2843,9 +2716,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_location(Location self, SseSerializer serializer);
-
-  @protected
   void sse_encode_box_autoadd_location_params(
     LocationParams self,
     SseSerializer serializer,
@@ -2874,9 +2744,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     MomoParams self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_box_autoadd_nation(Nation self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_nikki_params(
@@ -2931,9 +2798,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     OutfitDyeHairData self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_box_autoadd_region(Region self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_rich_building_params(
@@ -2994,9 +2858,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     StringReplaceProcessConfig self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_text_config(
@@ -3108,9 +2969,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     DecryptionError self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_dimension(Dimension self, SseSerializer serializer);
 
   @protected
   void sse_encode_diy_data(DiyData self, SseSerializer serializer);
@@ -3261,9 +3119,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     List<List<StringProcessConfig>> self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_list_location(List<Location> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_object_params(
@@ -3467,16 +3322,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_location(Location self, SseSerializer serializer);
-
-  @protected
   void sse_encode_location_params(
     LocationParams self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_location_type(LocationType self, SseSerializer serializer);
 
   @protected
   void sse_encode_media_custom_data(
@@ -3519,9 +3368,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_momo_params(MomoParams self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_nation(Nation self, SseSerializer serializer);
 
   @protected
   void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer);
@@ -3650,9 +3496,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer);
-
-  @protected
   void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer);
 
   @protected
@@ -3670,12 +3513,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_custom_data(
     CustomData? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_dimension(
-    Dimension? self,
     SseSerializer serializer,
   );
 
@@ -3740,12 +3577,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_nation(
-    Nation? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_nikki_params(
     NikkiParams? self,
     SseSerializer serializer,
@@ -3782,12 +3613,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_region(
-    Region? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_rich_camera_params(
     RichCameraParams? self,
     SseSerializer serializer,
@@ -3814,12 +3639,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_string_config(
     StringConfig? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_subarea(
-    Subarea? self,
     SseSerializer serializer,
   );
 
@@ -4031,9 +3850,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_region(Region self, SseSerializer serializer);
-
-  @protected
   void sse_encode_region_picture(RegionPicture self, SseSerializer serializer);
 
   @protected
@@ -4098,9 +3914,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     StringReplaceProcessConfig self,
     SseSerializer serializer,
   );
-
-  @protected
-  void sse_encode_subarea(Subarea self, SseSerializer serializer);
 
   @protected
   void sse_encode_task_params(TaskParams self, SseSerializer serializer);

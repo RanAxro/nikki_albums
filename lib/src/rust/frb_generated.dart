@@ -31,7 +31,6 @@ import 'nuan5_params/structs/cloth_diy_params.dart';
 import 'nuan5_params/structs/collage_params.dart';
 import 'nuan5_params/structs/eureka.dart';
 import 'nuan5_params/structs/nikki_photo_params.dart';
-import 'nuan5_params/structs/world.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'thumbnail.dart';
 import 'thumbnail/jpeg.dart';
@@ -3263,12 +3262,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Area dco_decode_area(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Area.values[raw as int];
-  }
-
-  @protected
   bool dco_decode_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as bool;
@@ -3278,12 +3271,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   AppPersistentState dco_decode_box_autoadd_app_persistent_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_app_persistent_state(raw);
-  }
-
-  @protected
-  Area dco_decode_box_autoadd_area(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_area(raw);
   }
 
   @protected
@@ -3345,12 +3332,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Dimension dco_decode_box_autoadd_dimension(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_dimension(raw);
-  }
-
-  @protected
   DiyData dco_decode_box_autoadd_diy_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_diy_data(raw);
@@ -3405,12 +3386,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Location dco_decode_box_autoadd_location(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_location(raw);
-  }
-
-  @protected
   LocationParams dco_decode_box_autoadd_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_location_params(raw);
@@ -3438,12 +3413,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MomoParams dco_decode_box_autoadd_momo_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_momo_params(raw);
-  }
-
-  @protected
-  Nation dco_decode_box_autoadd_nation(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_nation(raw);
   }
 
   @protected
@@ -3502,12 +3471,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_outfit_dye_hair_data(raw);
-  }
-
-  @protected
-  Region dco_decode_box_autoadd_region(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_region(raw);
   }
 
   @protected
@@ -3575,12 +3538,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   dco_decode_box_autoadd_string_replace_process_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_string_replace_process_config(raw);
-  }
-
-  @protected
-  Subarea dco_decode_box_autoadd_subarea(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_subarea(raw);
   }
 
   @protected
@@ -3822,12 +3779,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   DecryptionError dco_decode_decryption_error(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return DecryptionError.values[raw as int];
-  }
-
-  @protected
-  Dimension dco_decode_dimension(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Dimension.values[raw as int];
   }
 
   @protected
@@ -4164,12 +4115,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<Location> dco_decode_list_location(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_location).toList();
-  }
-
-  @protected
   List<ObjectParams> dco_decode_list_object_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_object_params).toList();
@@ -4448,28 +4393,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Location dco_decode_location(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return Location_Standard(
-          dimension: dco_decode_opt_box_autoadd_dimension(raw[1]),
-          nation: dco_decode_opt_box_autoadd_nation(raw[2]),
-          region: dco_decode_opt_box_autoadd_region(raw[3]),
-          area: dco_decode_opt_box_autoadd_area(raw[4]),
-          subarea: dco_decode_opt_box_autoadd_subarea(raw[5]),
-        );
-      case 1:
-        return Location_Special(
-          dimension: dco_decode_opt_box_autoadd_dimension(raw[1]),
-          subarea: dco_decode_opt_box_autoadd_subarea(raw[2]),
-        );
-      default:
-        throw Exception("unreachable");
-    }
-  }
-
-  @protected
   LocationParams dco_decode_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -4477,23 +4400,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return LocationParams(
       pos: dco_decode_record_f_64_f_64_f_64(arr[0]),
-      loc: dco_decode_location_type(arr[1]),
+      worldId: dco_decode_opt_box_autoadd_i_64(arr[1]),
     );
-  }
-
-  @protected
-  LocationType dco_decode_location_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return LocationType_Unknown();
-      case 1:
-        return LocationType_Exact(dco_decode_box_autoadd_location(raw[1]));
-      case 2:
-        return LocationType_Guessed(dco_decode_list_location(raw[1]));
-      default:
-        throw Exception("unreachable");
-    }
   }
 
   @protected
@@ -4610,12 +4518,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       scale: dco_decode_record_f_64_f_64_f_64(arr[2]),
       clothes: dco_decode_list_cloth_params(arr[3]),
     );
-  }
-
-  @protected
-  Nation dco_decode_nation(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Nation.values[raw as int];
   }
 
   @protected
@@ -4929,12 +4831,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_area(raw);
-  }
-
-  @protected
   bool? dco_decode_opt_box_autoadd_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_bool(raw);
@@ -4960,12 +4856,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_custom_data(raw);
-  }
-
-  @protected
-  Dimension? dco_decode_opt_box_autoadd_dimension(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_dimension(raw);
   }
 
   @protected
@@ -5029,12 +4919,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nation? dco_decode_opt_box_autoadd_nation(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_nation(raw);
-  }
-
-  @protected
   NikkiParams? dco_decode_opt_box_autoadd_nikki_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_nikki_params(raw);
@@ -5079,12 +4963,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Region? dco_decode_opt_box_autoadd_region(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_region(raw);
-  }
-
-  @protected
   RichCameraParams? dco_decode_opt_box_autoadd_rich_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_rich_camera_params(raw);
@@ -5115,12 +4993,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   StringConfig? dco_decode_opt_box_autoadd_string_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_string_config(raw);
-  }
-
-  @protected
-  Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_subarea(raw);
   }
 
   @protected
@@ -5530,12 +5402,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Region dco_decode_region(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Region.values[raw as int];
-  }
-
-  @protected
   RegionPicture dco_decode_region_picture(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -5747,12 +5613,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       which: dco_decode_i_32(arr[1]),
       to: dco_decode_String(arr[2]),
     );
-  }
-
-  @protected
-  Subarea dco_decode_subarea(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Subarea.values[raw as int];
   }
 
   @protected
@@ -6355,13 +6215,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Area sse_decode_area(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Area.values[inner];
-  }
-
-  @protected
   bool sse_decode_bool(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint8() != 0;
@@ -6373,12 +6226,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_app_persistent_state(deserializer));
-  }
-
-  @protected
-  Area sse_decode_box_autoadd_area(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_area(deserializer));
   }
 
   @protected
@@ -6450,12 +6297,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Dimension sse_decode_box_autoadd_dimension(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_dimension(deserializer));
-  }
-
-  @protected
   DiyData sse_decode_box_autoadd_diy_data(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_diy_data(deserializer));
@@ -6522,12 +6363,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Location sse_decode_box_autoadd_location(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_location(deserializer));
-  }
-
-  @protected
   LocationParams sse_decode_box_autoadd_location_params(
     SseDeserializer deserializer,
   ) {
@@ -6561,12 +6396,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MomoParams sse_decode_box_autoadd_momo_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_momo_params(deserializer));
-  }
-
-  @protected
-  Nation sse_decode_box_autoadd_nation(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_nation(deserializer));
   }
 
   @protected
@@ -6637,12 +6466,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_outfit_dye_hair_data(deserializer));
-  }
-
-  @protected
-  Region sse_decode_box_autoadd_region(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_region(deserializer));
   }
 
   @protected
@@ -6726,12 +6549,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_string_replace_process_config(deserializer));
-  }
-
-  @protected
-  Subarea sse_decode_box_autoadd_subarea(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_subarea(deserializer));
   }
 
   @protected
@@ -7030,13 +6847,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_32(deserializer);
     return DecryptionError.values[inner];
-  }
-
-  @protected
-  Dimension sse_decode_dimension(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Dimension.values[inner];
   }
 
   @protected
@@ -7440,18 +7250,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <List<StringProcessConfig>>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_list_string_process_config(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  List<Location> sse_decode_list_location(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <Location>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_location(deserializer));
     }
     return ans_;
   }
@@ -7900,58 +7698,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Location sse_decode_location(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        var var_dimension = sse_decode_opt_box_autoadd_dimension(deserializer);
-        var var_nation = sse_decode_opt_box_autoadd_nation(deserializer);
-        var var_region = sse_decode_opt_box_autoadd_region(deserializer);
-        var var_area = sse_decode_opt_box_autoadd_area(deserializer);
-        var var_subarea = sse_decode_opt_box_autoadd_subarea(deserializer);
-        return Location_Standard(
-          dimension: var_dimension,
-          nation: var_nation,
-          region: var_region,
-          area: var_area,
-          subarea: var_subarea,
-        );
-      case 1:
-        var var_dimension = sse_decode_opt_box_autoadd_dimension(deserializer);
-        var var_subarea = sse_decode_opt_box_autoadd_subarea(deserializer);
-        return Location_Special(dimension: var_dimension, subarea: var_subarea);
-      default:
-        throw UnimplementedError('');
-    }
-  }
-
-  @protected
   LocationParams sse_decode_location_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_pos = sse_decode_record_f_64_f_64_f_64(deserializer);
-    var var_loc = sse_decode_location_type(deserializer);
-    return LocationParams(pos: var_pos, loc: var_loc);
-  }
-
-  @protected
-  LocationType sse_decode_location_type(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        return LocationType_Unknown();
-      case 1:
-        var var_field0 = sse_decode_box_autoadd_location(deserializer);
-        return LocationType_Exact(var_field0);
-      case 2:
-        var var_field0 = sse_decode_list_location(deserializer);
-        return LocationType_Guessed(var_field0);
-      default:
-        throw UnimplementedError('');
-    }
+    var var_worldId = sse_decode_opt_box_autoadd_i_64(deserializer);
+    return LocationParams(pos: var_pos, worldId: var_worldId);
   }
 
   @protected
@@ -8075,13 +7826,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       scale: var_scale,
       clothes: var_clothes,
     );
-  }
-
-  @protected
-  Nation sse_decode_nation(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Nation.values[inner];
   }
 
   @protected
@@ -8459,17 +8203,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_area(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -8514,19 +8247,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_custom_data(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  Dimension? sse_decode_opt_box_autoadd_dimension(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_dimension(deserializer));
     } else {
       return null;
     }
@@ -8659,17 +8379,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Nation? sse_decode_opt_box_autoadd_nation(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_nation(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   NikkiParams? sse_decode_opt_box_autoadd_nikki_params(
     SseDeserializer deserializer,
   ) {
@@ -8748,17 +8457,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Region? sse_decode_opt_box_autoadd_region(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_region(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   RichCameraParams? sse_decode_opt_box_autoadd_rich_camera_params(
     SseDeserializer deserializer,
   ) {
@@ -8821,17 +8519,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_string_config(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_subarea(deserializer));
     } else {
       return null;
     }
@@ -9283,13 +8970,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  Region sse_decode_region(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Region.values[inner];
-  }
-
-  @protected
   RegionPicture sse_decode_region_picture(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_position = sse_decode_record_f_64_f_64(deserializer);
@@ -9545,13 +9225,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       which: var_which,
       to: var_to,
     );
-  }
-
-  @protected
-  Subarea sse_decode_subarea(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Subarea.values[inner];
   }
 
   @protected
@@ -10250,12 +9923,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_area(Area self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
   void sse_encode_bool(bool self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint8(self ? 1 : 0);
@@ -10268,12 +9935,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_app_persistent_state(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_area(Area self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_area(self, serializer);
   }
 
   @protected
@@ -10355,15 +10016,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_dimension(
-    Dimension self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_dimension(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_diy_data(DiyData self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_diy_data(self, serializer);
@@ -10442,15 +10094,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_location(
-    Location self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_location(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_location_params(
     LocationParams self,
     SseSerializer serializer,
@@ -10493,12 +10136,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_momo_params(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_nation(Nation self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_nation(self, serializer);
   }
 
   @protected
@@ -10580,12 +10217,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_outfit_dye_hair_data(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_region(Region self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_region(self, serializer);
   }
 
   @protected
@@ -10676,12 +10307,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_string_replace_process_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_subarea(Subarea self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_subarea(self, serializer);
   }
 
   @protected
@@ -10930,12 +10555,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     DecryptionError self,
     SseSerializer serializer,
   ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
-  void sse_encode_dimension(Dimension self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.index, serializer);
   }
@@ -11274,15 +10893,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_list_string_process_config(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_list_location(List<Location> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_location(item, serializer);
     }
   }
 
@@ -11687,52 +11297,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_location(Location self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case Location_Standard(
-        dimension: final dimension,
-        nation: final nation,
-        region: final region,
-        area: final area,
-        subarea: final subarea,
-      ):
-        sse_encode_i_32(0, serializer);
-        sse_encode_opt_box_autoadd_dimension(dimension, serializer);
-        sse_encode_opt_box_autoadd_nation(nation, serializer);
-        sse_encode_opt_box_autoadd_region(region, serializer);
-        sse_encode_opt_box_autoadd_area(area, serializer);
-        sse_encode_opt_box_autoadd_subarea(subarea, serializer);
-      case Location_Special(dimension: final dimension, subarea: final subarea):
-        sse_encode_i_32(1, serializer);
-        sse_encode_opt_box_autoadd_dimension(dimension, serializer);
-        sse_encode_opt_box_autoadd_subarea(subarea, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_location_params(
     LocationParams self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_record_f_64_f_64_f_64(self.pos, serializer);
-    sse_encode_location_type(self.loc, serializer);
-  }
-
-  @protected
-  void sse_encode_location_type(LocationType self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case LocationType_Unknown():
-        sse_encode_i_32(0, serializer);
-      case LocationType_Exact(field0: final field0):
-        sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_location(field0, serializer);
-      case LocationType_Guessed(field0: final field0):
-        sse_encode_i_32(2, serializer);
-        sse_encode_list_location(field0, serializer);
-    }
+    sse_encode_opt_box_autoadd_i_64(self.worldId, serializer);
   }
 
   @protected
@@ -11839,12 +11410,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_record_f_64_f_64_f_64(self.rot, serializer);
     sse_encode_record_f_64_f_64_f_64(self.scale, serializer);
     sse_encode_list_cloth_params(self.clothes, serializer);
-  }
-
-  @protected
-  void sse_encode_nation(Nation self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
   }
 
   @protected
@@ -12159,16 +11724,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_area(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -12214,19 +11769,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_custom_data(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_dimension(
-    Dimension? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_dimension(self, serializer);
     }
   }
 
@@ -12361,19 +11903,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_nation(
-    Nation? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_nation(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_nikki_params(
     NikkiParams? self,
     SseSerializer serializer,
@@ -12452,19 +11981,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_region(
-    Region? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_region(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_rich_camera_params(
     RichCameraParams? self,
     SseSerializer serializer,
@@ -12526,19 +12042,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_string_config(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_subarea(
-    Subarea? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_subarea(self, serializer);
     }
   }
 
@@ -12957,12 +12460,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_region(Region self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
   void sse_encode_region_picture(RegionPicture self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_record_f_64_f_64(self.position, serializer);
@@ -13153,12 +12650,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_String(self.regex, serializer);
     sse_encode_i_32(self.which, serializer);
     sse_encode_String(self.to, serializer);
-  }
-
-  @protected
-  void sse_encode_subarea(Subarea self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
   }
 
   @protected

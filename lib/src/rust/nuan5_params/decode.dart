@@ -15,7 +15,6 @@ import 'structs/cloth_diy_params.dart';
 import 'structs/collage_params.dart';
 import 'structs/eureka.dart';
 import 'structs/nikki_photo_params.dart';
-import 'structs/world.dart';
 part 'decode.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `get_flag`

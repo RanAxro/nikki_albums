@@ -62,5 +62,5 @@ app.*.map.json
 /th/
 
 
-src/
-scripts/build_icons/
+/src/
+/scripts/build_icons/

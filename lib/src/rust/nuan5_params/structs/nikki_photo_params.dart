@@ -8,10 +8,9 @@ import 'cloth.dart';
 import 'eureka.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-import 'world.dart';
 part 'nikki_photo_params.freezed.dart';
 
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `NikkiPhotoMainParams`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `LocationType`, `NikkiPhotoMainParams`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class ClothParams {
@@ -157,12 +156,12 @@ sealed class LightParams with _$LightParams {
 
 class LocationParams {
   final (double, double, double) pos;
-  final LocationType loc;
+  final PlatformInt64? worldId;
 
-  const LocationParams({required this.pos, required this.loc});
+  const LocationParams({required this.pos, this.worldId});
 
   @override
-  int get hashCode => pos.hashCode ^ loc.hashCode;
+  int get hashCode => pos.hashCode ^ worldId.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -170,17 +169,7 @@ class LocationParams {
       other is LocationParams &&
           runtimeType == other.runtimeType &&
           pos == other.pos &&
-          loc == other.loc;
-}
-
-@freezed
-sealed class LocationType with _$LocationType {
-  const LocationType._();
-
-  const factory LocationType.unknown() = LocationType_Unknown;
-  const factory LocationType.exact(Location field0) = LocationType_Exact;
-  const factory LocationType.guessed(List<Location> field0) =
-      LocationType_Guessed;
+          worldId == other.worldId;
 }
 
 @freezed

@@ -129,7 +129,8 @@ pub struct ShootingTime{
 #[derive(Clone)]
 pub struct LocationParams{
   pub pos: (f64, f64, f64),
-  pub loc: LocationType,
+  pub world_id: Option<i64>,
+  // pub loc: LocationType,
 }
 
 #[derive(Clone)]

@@ -3429,31 +3429,6 @@ impl SseDecode for crate::config::hot_update::AppVersionHotUpdateInfo {
     }
 }
 
-impl SseDecode for crate::nuan5_params::structs::world::Area {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::nuan5_params::structs::world::Area::MemorialMountains,
-            1 => crate::nuan5_params::structs::world::Area::Florawish,
-            2 => crate::nuan5_params::structs::world::Area::BreezyMeadow,
-            3 => crate::nuan5_params::structs::world::Area::Stoneville,
-            4 => crate::nuan5_params::structs::world::Area::AbandonedDistrict,
-            5 => crate::nuan5_params::structs::world::Area::WishingWoods,
-            6 => crate::nuan5_params::structs::world::Area::FireworkIsles,
-            7 => crate::nuan5_params::structs::world::Area::SerenityIsland,
-            8 => crate::nuan5_params::structs::world::Area::DanqingIsland,
-            9 => crate::nuan5_params::structs::world::Area::DanqingRealm,
-            10 => crate::nuan5_params::structs::world::Area::ItzalandCanyon,
-            11 => crate::nuan5_params::structs::world::Area::ElderwoodForest,
-            12 => crate::nuan5_params::structs::world::Area::Spira,
-            13 => crate::nuan5_params::structs::world::Area::Boneyard,
-            14 => crate::nuan5_params::structs::world::Area::WanxiangRealm,
-            _ => unreachable!("Invalid variant for Area: {}", inner),
-        };
-    }
-}
-
 impl SseDecode for bool {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3727,19 +3702,6 @@ impl SseDecode for crate::nuan5_params::decrypt::DecryptionError {
             11 => crate::nuan5_params::decrypt::DecryptionError::InvalidHomeBuildShareCode,
             12 => crate::nuan5_params::decrypt::DecryptionError::DeserializationFailed,
             _ => unreachable!("Invalid variant for DecryptionError: {}", inner),
-        };
-    }
-}
-
-impl SseDecode for crate::nuan5_params::structs::world::Dimension {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::nuan5_params::structs::world::Dimension::Miraland,
-            1 => crate::nuan5_params::structs::world::Dimension::SeaOfStars,
-            2 => crate::nuan5_params::structs::world::Dimension::Home,
-            _ => unreachable!("Invalid variant for Dimension: {}", inner),
         };
     }
 }
@@ -4228,20 +4190,6 @@ impl SseDecode for Vec<Vec<crate::config::common::string_config::StringProcessCo
     }
 }
 
-impl SseDecode for Vec<crate::nuan5_params::structs::world::Location> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut len_ = <i32>::sse_decode(deserializer);
-        let mut ans_ = Vec::with_capacity(len_ as usize);
-        for idx_ in 0..len_ {
-            ans_.push(<crate::nuan5_params::structs::world::Location>::sse_decode(
-                deserializer,
-            ));
-        }
-        return ans_;
-    }
-}
-
 impl SseDecode for Vec<crate::nuan5_params::structs::nikki_photo_params::ObjectParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4702,96 +4650,15 @@ impl SseDecode for crate::config::common::text_config::LiteralTextConfig {
     }
 }
 
-impl SseDecode for crate::nuan5_params::structs::world::Location {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut tag_ = <i32>::sse_decode(deserializer);
-        match tag_ {
-            0 => {
-                let mut var_dimension =
-                    <Option<crate::nuan5_params::structs::world::Dimension>>::sse_decode(
-                        deserializer,
-                    );
-                let mut var_nation =
-                    <Option<crate::nuan5_params::structs::world::Nation>>::sse_decode(deserializer);
-                let mut var_region =
-                    <Option<crate::nuan5_params::structs::world::Region>>::sse_decode(deserializer);
-                let mut var_area =
-                    <Option<crate::nuan5_params::structs::world::Area>>::sse_decode(deserializer);
-                let mut var_subarea =
-                    <Option<crate::nuan5_params::structs::world::Subarea>>::sse_decode(
-                        deserializer,
-                    );
-                return crate::nuan5_params::structs::world::Location::Standard {
-                    dimension: var_dimension,
-                    nation: var_nation,
-                    region: var_region,
-                    area: var_area,
-                    subarea: var_subarea,
-                };
-            }
-            1 => {
-                let mut var_dimension =
-                    <Option<crate::nuan5_params::structs::world::Dimension>>::sse_decode(
-                        deserializer,
-                    );
-                let mut var_subarea =
-                    <Option<crate::nuan5_params::structs::world::Subarea>>::sse_decode(
-                        deserializer,
-                    );
-                return crate::nuan5_params::structs::world::Location::Special {
-                    dimension: var_dimension,
-                    subarea: var_subarea,
-                };
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
-    }
-}
-
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::LocationParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_pos = <(f64, f64, f64)>::sse_decode(deserializer);
-        let mut var_loc =
-            <crate::nuan5_params::structs::nikki_photo_params::LocationType>::sse_decode(
-                deserializer,
-            );
+        let mut var_worldId = <Option<i64>>::sse_decode(deserializer);
         return crate::nuan5_params::structs::nikki_photo_params::LocationParams {
             pos: var_pos,
-            loc: var_loc,
+            world_id: var_worldId,
         };
-    }
-}
-
-impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::LocationType {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut tag_ = <i32>::sse_decode(deserializer);
-        match tag_ {
-            0 => {
-                return crate::nuan5_params::structs::nikki_photo_params::LocationType::Unknown;
-            }
-            1 => {
-                let mut var_field0 =
-                    <crate::nuan5_params::structs::world::Location>::sse_decode(deserializer);
-                return crate::nuan5_params::structs::nikki_photo_params::LocationType::Exact(
-                    var_field0,
-                );
-            }
-            2 => {
-                let mut var_field0 =
-                    <Vec<crate::nuan5_params::structs::world::Location>>::sse_decode(deserializer);
-                return crate::nuan5_params::structs::nikki_photo_params::LocationType::Guessed(
-                    var_field0,
-                );
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
     }
 }
 
@@ -4959,24 +4826,6 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::MomoParams 
             rot: var_rot,
             scale: var_scale,
             clothes: var_clothes,
-        };
-    }
-}
-
-impl SseDecode for crate::nuan5_params::structs::world::Nation {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::nuan5_params::structs::world::Nation::HeartcraftKingdom,
-            1 => crate::nuan5_params::structs::world::Nation::EmpireOfLight,
-            2 => crate::nuan5_params::structs::world::Nation::TerraAlliance,
-            3 => crate::nuan5_params::structs::world::Nation::StarhailFederation,
-            4 => crate::nuan5_params::structs::world::Nation::LinlangEmpire,
-            5 => crate::nuan5_params::structs::world::Nation::TwinmoonKingdom,
-            6 => crate::nuan5_params::structs::world::Nation::WhalePort,
-            7 => crate::nuan5_params::structs::world::Nation::Umbraso,
-            _ => unreachable!("Invalid variant for Nation: {}", inner),
         };
     }
 }
@@ -5416,19 +5265,6 @@ impl SseDecode for Option<crate::config::app_persistent_state::AppPersistentStat
     }
 }
 
-impl SseDecode for Option<crate::nuan5_params::structs::world::Area> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::nuan5_params::structs::world::Area>::sse_decode(
-                deserializer,
-            ));
-        } else {
-            return None;
-        }
-    }
-}
-
 impl SseDecode for Option<bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5475,19 +5311,6 @@ impl SseDecode for Option<crate::nuan5_params::decrypt::CustomData> {
             return Some(<crate::nuan5_params::decrypt::CustomData>::sse_decode(
                 deserializer,
             ));
-        } else {
-            return None;
-        }
-    }
-}
-
-impl SseDecode for Option<crate::nuan5_params::structs::world::Dimension> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(
-                <crate::nuan5_params::structs::world::Dimension>::sse_decode(deserializer),
-            );
         } else {
             return None;
         }
@@ -5632,19 +5455,6 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::Momo
     }
 }
 
-impl SseDecode for Option<crate::nuan5_params::structs::world::Nation> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::nuan5_params::structs::world::Nation>::sse_decode(
-                deserializer,
-            ));
-        } else {
-            return None;
-        }
-    }
-}
-
 impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::NikkiParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5727,19 +5537,6 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::Obje
     }
 }
 
-impl SseDecode for Option<crate::nuan5_params::structs::world::Region> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::nuan5_params::structs::world::Region>::sse_decode(
-                deserializer,
-            ));
-        } else {
-            return None;
-        }
-    }
-}
-
 impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::RichCameraParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5805,19 +5602,6 @@ impl SseDecode for Option<crate::config::common::string_config::StringConfig> {
             return Some(
                 <crate::config::common::string_config::StringConfig>::sse_decode(deserializer),
             );
-        } else {
-            return None;
-        }
-    }
-}
-
-impl SseDecode for Option<crate::nuan5_params::structs::world::Subarea> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::nuan5_params::structs::world::Subarea>::sse_decode(
-                deserializer,
-            ));
         } else {
             return None;
         }
@@ -6289,18 +6073,6 @@ impl SseDecode for (String, String) {
     }
 }
 
-impl SseDecode for crate::nuan5_params::structs::world::Region {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::nuan5_params::structs::world::Region::Wishfield,
-            1 => crate::nuan5_params::structs::world::Region::Itzaland,
-            _ => unreachable!("Invalid variant for Region: {}", inner),
-        };
-    }
-}
-
 impl SseDecode for crate::nuan5_params::structs::collage_params::RegionPicture {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6582,120 +6354,6 @@ impl SseDecode for crate::config::common::string_config::StringReplaceProcessCon
             regex: var_regex,
             which: var_which,
             to: var_to,
-        };
-    }
-}
-
-impl SseDecode for crate::nuan5_params::structs::world::Subarea {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <i32>::sse_decode(deserializer);
-        return match inner {
-            0 => crate::nuan5_params::structs::world::Subarea::OldFlorawishMemorial,
-            1 => crate::nuan5_params::structs::world::Subarea::StylistGuildMemorial,
-            2 => crate::nuan5_params::structs::world::Subarea::DreamwovenRuins,
-            3 => crate::nuan5_params::structs::world::Subarea::FortuneFalls,
-            4 => crate::nuan5_params::structs::world::Subarea::GreatWishtreeSquare,
-            5 => crate::nuan5_params::structs::world::Subarea::LakesideDistrict,
-            6 => crate::nuan5_params::structs::world::Subarea::OutskirtsForest,
-            7 => crate::nuan5_params::structs::world::Subarea::AbandonedFanaticWisherCamp,
-            8 => crate::nuan5_params::structs::world::Subarea::BreezyMeadowActivityArea,
-            9 => crate::nuan5_params::structs::world::Subarea::BugSongHills,
-            10 => crate::nuan5_params::structs::world::Subarea::CiciaHighlands,
-            11 => crate::nuan5_params::structs::world::Subarea::HeartcraftKingdomOutpost,
-            12 => crate::nuan5_params::structs::world::Subarea::LakesideHill,
-            13 => crate::nuan5_params::structs::world::Subarea::MeadowWharf,
-            14 => crate::nuan5_params::structs::world::Subarea::QueenPalaceRuins,
-            15 => crate::nuan5_params::structs::world::Subarea::RelicHill,
-            16 => crate::nuan5_params::structs::world::Subarea::SleepyFishHills,
-            17 => crate::nuan5_params::structs::world::Subarea::SwanGazebo,
-            18 => crate::nuan5_params::structs::world::Subarea::DyeWorkshop,
-            19 => crate::nuan5_params::structs::world::Subarea::FlowerFieldsResidence,
-            20 => crate::nuan5_params::structs::world::Subarea::RockfallValley,
-            21 => crate::nuan5_params::structs::world::Subarea::StonevilleMarket,
-            22 => crate::nuan5_params::structs::world::Subarea::ChooChooStation,
-            23 => crate::nuan5_params::structs::world::Subarea::GoldenFields,
-            24 => crate::nuan5_params::structs::world::Subarea::MarketOfMirth,
-            25 => crate::nuan5_params::structs::world::Subarea::Prosperville,
-            26 => crate::nuan5_params::structs::world::Subarea::RippleEstate,
-            27 => crate::nuan5_params::structs::world::Subarea::StellarFishingGround,
-            28 => crate::nuan5_params::structs::world::Subarea::Stonecrown,
-            29 => crate::nuan5_params::structs::world::Subarea::WindriderMill,
-            30 => crate::nuan5_params::structs::world::Subarea::BrookwoodForest,
-            31 => crate::nuan5_params::structs::world::Subarea::CavernOfWishes,
-            32 => crate::nuan5_params::structs::world::Subarea::FallenWishHighlands,
-            33 => crate::nuan5_params::structs::world::Subarea::GrandTreeValley,
-            34 => crate::nuan5_params::structs::world::Subarea::SacredMountains,
-            35 => crate::nuan5_params::structs::world::Subarea::ValleyOfBlossoms,
-            36 => crate::nuan5_params::structs::world::Subarea::ClearheartLake,
-            37 => crate::nuan5_params::structs::world::Subarea::CrescentMoonRuins,
-            38 => crate::nuan5_params::structs::world::Subarea::FlamingForest,
-            39 => crate::nuan5_params::structs::world::Subarea::RelicIsles,
-            40 => crate::nuan5_params::structs::world::Subarea::SongbreezeHighland,
-            41 => crate::nuan5_params::structs::world::Subarea::SparkheartIsland,
-            42 => crate::nuan5_params::structs::world::Subarea::OldRuins,
-            43 => crate::nuan5_params::structs::world::Subarea::Soakville,
-            44 => crate::nuan5_params::structs::world::Subarea::SoakvilleOutskirts,
-            45 => crate::nuan5_params::structs::world::Subarea::Steamville,
-            46 => crate::nuan5_params::structs::world::Subarea::DanqingIsland_BackMountain,
-            47 => crate::nuan5_params::structs::world::Subarea::BambooGrove,
-            48 => crate::nuan5_params::structs::world::Subarea::DanqingIsland_Inkville,
-            49 => crate::nuan5_params::structs::world::Subarea::InkwashStream,
-            50 => crate::nuan5_params::structs::world::Subarea::LoongPagoda,
-            51 => crate::nuan5_params::structs::world::Subarea::LoongPeak,
-            52 => crate::nuan5_params::structs::world::Subarea::ReedblossomShore,
-            53 => crate::nuan5_params::structs::world::Subarea::GreenBambooGrove,
-            54 => crate::nuan5_params::structs::world::Subarea::InkPool,
-            55 => crate::nuan5_params::structs::world::Subarea::InkshorePlain,
-            56 => crate::nuan5_params::structs::world::Subarea::DanqingRealm_Inkville,
-            57 => crate::nuan5_params::structs::world::Subarea::WildfieldWaterside,
-            58 => crate::nuan5_params::structs::world::Subarea::BehemothObservationSite,
-            59 => crate::nuan5_params::structs::world::Subarea::Coliseum,
-            60 => crate::nuan5_params::structs::world::Subarea::ElderwoodShade,
-            61 => crate::nuan5_params::structs::world::Subarea::ElderwoodWharf,
-            62 => crate::nuan5_params::structs::world::Subarea::ForestOfSlumber,
-            63 => crate::nuan5_params::structs::world::Subarea::ForgottenStreet,
-            64 => crate::nuan5_params::structs::world::Subarea::GiantVineForest,
-            65 => crate::nuan5_params::structs::world::Subarea::LeafRiver,
-            66 => crate::nuan5_params::structs::world::Subarea::MothershroomWoods,
-            67 => crate::nuan5_params::structs::world::Subarea::ParkyaCraterLake,
-            68 => crate::nuan5_params::structs::world::Subarea::Pottsville,
-            69 => crate::nuan5_params::structs::world::Subarea::RockvilleRuins,
-            70 => crate::nuan5_params::structs::world::Subarea::ShellIsland,
-            71 => crate::nuan5_params::structs::world::Subarea::Shroomville,
-            72 => crate::nuan5_params::structs::world::Subarea::SnailRanch,
-            73 => crate::nuan5_params::structs::world::Subarea::SpiraWaterfall,
-            74 => crate::nuan5_params::structs::world::Subarea::TitanGraveyard,
-            75 => crate::nuan5_params::structs::world::Subarea::TitansOutpostRuins,
-            76 => crate::nuan5_params::structs::world::Subarea::Spira1F,
-            77 => crate::nuan5_params::structs::world::Subarea::Spira2F,
-            78 => crate::nuan5_params::structs::world::Subarea::Spira3F,
-            79 => crate::nuan5_params::structs::world::Subarea::SpiraShelldome,
-            80 => crate::nuan5_params::structs::world::Subarea::BluePools,
-            81 => crate::nuan5_params::structs::world::Subarea::Cultivarium,
-            82 => crate::nuan5_params::structs::world::Subarea::DragonRuins,
-            83 => crate::nuan5_params::structs::world::Subarea::DragonrestFlowerfield,
-            84 => crate::nuan5_params::structs::world::Subarea::GlimmeringLake,
-            85 => crate::nuan5_params::structs::world::Subarea::GreatLumieville,
-            86 => crate::nuan5_params::structs::world::Subarea::HealingGround,
-            87 => crate::nuan5_params::structs::world::Subarea::HollowbreathPassage,
-            88 => crate::nuan5_params::structs::world::Subarea::LonestoneShore,
-            89 => crate::nuan5_params::structs::world::Subarea::SoulSpring,
-            90 => crate::nuan5_params::structs::world::Subarea::WanxiangRealm_BackMountain,
-            91 => crate::nuan5_params::structs::world::Subarea::CaiYeMarket,
-            92 => crate::nuan5_params::structs::world::Subarea::CaiYeOutskirts,
-            93 => crate::nuan5_params::structs::world::Subarea::DazzlebloomMeadow,
-            94 => crate::nuan5_params::structs::world::Subarea::DeepValleySpring,
-            95 => crate::nuan5_params::structs::world::Subarea::JiuhuaPavilion,
-            96 => crate::nuan5_params::structs::world::Subarea::JiuhuaPenitentiary,
-            97 => crate::nuan5_params::structs::world::Subarea::ValleyPath,
-            98 => crate::nuan5_params::structs::world::Subarea::WhereWoodEchoes,
-            99 => crate::nuan5_params::structs::world::Subarea::Crystalvale,
-            100 => crate::nuan5_params::structs::world::Subarea::DreamStarIsles,
-            101 => crate::nuan5_params::structs::world::Subarea::Starshore,
-            102 => crate::nuan5_params::structs::world::Subarea::UnboundWharf,
-            103 => crate::nuan5_params::structs::world::Subarea::DockArea,
-            _ => unreachable!("Invalid variant for Subarea: {}", inner),
         };
     }
 }
@@ -7543,40 +7201,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::AppVersionHotU
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Area {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::MemorialMountains => 0.into_dart(),
-            Self::Florawish => 1.into_dart(),
-            Self::BreezyMeadow => 2.into_dart(),
-            Self::Stoneville => 3.into_dart(),
-            Self::AbandonedDistrict => 4.into_dart(),
-            Self::WishingWoods => 5.into_dart(),
-            Self::FireworkIsles => 6.into_dart(),
-            Self::SerenityIsland => 7.into_dart(),
-            Self::DanqingIsland => 8.into_dart(),
-            Self::DanqingRealm => 9.into_dart(),
-            Self::ItzalandCanyon => 10.into_dart(),
-            Self::ElderwoodForest => 11.into_dart(),
-            Self::Spira => 12.into_dart(),
-            Self::Boneyard => 13.into_dart(),
-            Self::WanxiangRealm => 14.into_dart(),
-            _ => unreachable!(),
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::world::Area
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Area>
-    for crate::nuan5_params::structs::world::Area
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::world::Area {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::camera_params::CameraParams {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -7919,28 +7543,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::decrypt::DecryptionE
     for crate::nuan5_params::decrypt::DecryptionError
 {
     fn into_into_dart(self) -> crate::nuan5_params::decrypt::DecryptionError {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Dimension {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::Miraland => 0.into_dart(),
-            Self::SeaOfStars => 1.into_dart(),
-            Self::Home => 2.into_dart(),
-            _ => unreachable!(),
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::world::Dimension
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Dimension>
-    for crate::nuan5_params::structs::world::Dimension
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::world::Dimension {
         self
     }
 }
@@ -8447,55 +8049,13 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::common::text_config::Liter
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Location {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            crate::nuan5_params::structs::world::Location::Standard {
-                dimension,
-                nation,
-                region,
-                area,
-                subarea,
-            } => [
-                0.into_dart(),
-                dimension.into_into_dart().into_dart(),
-                nation.into_into_dart().into_dart(),
-                region.into_into_dart().into_dart(),
-                area.into_into_dart().into_dart(),
-                subarea.into_into_dart().into_dart(),
-            ]
-            .into_dart(),
-            crate::nuan5_params::structs::world::Location::Special { dimension, subarea } => [
-                1.into_dart(),
-                dimension.into_into_dart().into_dart(),
-                subarea.into_into_dart().into_dart(),
-            ]
-            .into_dart(),
-            _ => {
-                unimplemented!("");
-            }
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::world::Location
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Location>
-    for crate::nuan5_params::structs::world::Location
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::world::Location {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
     for crate::nuan5_params::structs::nikki_photo_params::LocationParams
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.pos.into_into_dart().into_dart(),
-            self.loc.into_into_dart().into_dart(),
+            self.world_id.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -8510,40 +8070,6 @@ impl
     > for crate::nuan5_params::structs::nikki_photo_params::LocationParams
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::LocationParams {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart
-    for crate::nuan5_params::structs::nikki_photo_params::LocationType
-{
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            crate::nuan5_params::structs::nikki_photo_params::LocationType::Unknown => {
-                [0.into_dart()].into_dart()
-            }
-            crate::nuan5_params::structs::nikki_photo_params::LocationType::Exact(field0) => {
-                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            crate::nuan5_params::structs::nikki_photo_params::LocationType::Guessed(field0) => {
-                [2.into_dart(), field0.into_into_dart().into_dart()].into_dart()
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::nikki_photo_params::LocationType
-{
-}
-impl
-    flutter_rust_bridge::IntoIntoDart<
-        crate::nuan5_params::structs::nikki_photo_params::LocationType,
-    > for crate::nuan5_params::structs::nikki_photo_params::LocationType
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::LocationType {
         self
     }
 }
@@ -8754,33 +8280,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::nikki_photo
     for crate::nuan5_params::structs::nikki_photo_params::MomoParams
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::MomoParams {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Nation {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::HeartcraftKingdom => 0.into_dart(),
-            Self::EmpireOfLight => 1.into_dart(),
-            Self::TerraAlliance => 2.into_dart(),
-            Self::StarhailFederation => 3.into_dart(),
-            Self::LinlangEmpire => 4.into_dart(),
-            Self::TwinmoonKingdom => 5.into_dart(),
-            Self::WhalePort => 6.into_dart(),
-            Self::Umbraso => 7.into_dart(),
-            _ => unreachable!(),
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::world::Nation
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Nation>
-    for crate::nuan5_params::structs::world::Nation
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::world::Nation {
         self
     }
 }
@@ -9440,27 +8939,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::update::PlatformUpdateInfo
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Region {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::Wishfield => 0.into_dart(),
-            Self::Itzaland => 1.into_dart(),
-            _ => unreachable!(),
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::world::Region
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Region>
-    for crate::nuan5_params::structs::world::Region
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::world::Region {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::collage_params::RegionPicture {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -9816,129 +9294,6 @@ impl
     > for crate::config::common::string_config::StringReplaceProcessConfig
 {
     fn into_into_dart(self) -> crate::config::common::string_config::StringReplaceProcessConfig {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::world::Subarea {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            Self::OldFlorawishMemorial => 0.into_dart(),
-            Self::StylistGuildMemorial => 1.into_dart(),
-            Self::DreamwovenRuins => 2.into_dart(),
-            Self::FortuneFalls => 3.into_dart(),
-            Self::GreatWishtreeSquare => 4.into_dart(),
-            Self::LakesideDistrict => 5.into_dart(),
-            Self::OutskirtsForest => 6.into_dart(),
-            Self::AbandonedFanaticWisherCamp => 7.into_dart(),
-            Self::BreezyMeadowActivityArea => 8.into_dart(),
-            Self::BugSongHills => 9.into_dart(),
-            Self::CiciaHighlands => 10.into_dart(),
-            Self::HeartcraftKingdomOutpost => 11.into_dart(),
-            Self::LakesideHill => 12.into_dart(),
-            Self::MeadowWharf => 13.into_dart(),
-            Self::QueenPalaceRuins => 14.into_dart(),
-            Self::RelicHill => 15.into_dart(),
-            Self::SleepyFishHills => 16.into_dart(),
-            Self::SwanGazebo => 17.into_dart(),
-            Self::DyeWorkshop => 18.into_dart(),
-            Self::FlowerFieldsResidence => 19.into_dart(),
-            Self::RockfallValley => 20.into_dart(),
-            Self::StonevilleMarket => 21.into_dart(),
-            Self::ChooChooStation => 22.into_dart(),
-            Self::GoldenFields => 23.into_dart(),
-            Self::MarketOfMirth => 24.into_dart(),
-            Self::Prosperville => 25.into_dart(),
-            Self::RippleEstate => 26.into_dart(),
-            Self::StellarFishingGround => 27.into_dart(),
-            Self::Stonecrown => 28.into_dart(),
-            Self::WindriderMill => 29.into_dart(),
-            Self::BrookwoodForest => 30.into_dart(),
-            Self::CavernOfWishes => 31.into_dart(),
-            Self::FallenWishHighlands => 32.into_dart(),
-            Self::GrandTreeValley => 33.into_dart(),
-            Self::SacredMountains => 34.into_dart(),
-            Self::ValleyOfBlossoms => 35.into_dart(),
-            Self::ClearheartLake => 36.into_dart(),
-            Self::CrescentMoonRuins => 37.into_dart(),
-            Self::FlamingForest => 38.into_dart(),
-            Self::RelicIsles => 39.into_dart(),
-            Self::SongbreezeHighland => 40.into_dart(),
-            Self::SparkheartIsland => 41.into_dart(),
-            Self::OldRuins => 42.into_dart(),
-            Self::Soakville => 43.into_dart(),
-            Self::SoakvilleOutskirts => 44.into_dart(),
-            Self::Steamville => 45.into_dart(),
-            Self::DanqingIsland_BackMountain => 46.into_dart(),
-            Self::BambooGrove => 47.into_dart(),
-            Self::DanqingIsland_Inkville => 48.into_dart(),
-            Self::InkwashStream => 49.into_dart(),
-            Self::LoongPagoda => 50.into_dart(),
-            Self::LoongPeak => 51.into_dart(),
-            Self::ReedblossomShore => 52.into_dart(),
-            Self::GreenBambooGrove => 53.into_dart(),
-            Self::InkPool => 54.into_dart(),
-            Self::InkshorePlain => 55.into_dart(),
-            Self::DanqingRealm_Inkville => 56.into_dart(),
-            Self::WildfieldWaterside => 57.into_dart(),
-            Self::BehemothObservationSite => 58.into_dart(),
-            Self::Coliseum => 59.into_dart(),
-            Self::ElderwoodShade => 60.into_dart(),
-            Self::ElderwoodWharf => 61.into_dart(),
-            Self::ForestOfSlumber => 62.into_dart(),
-            Self::ForgottenStreet => 63.into_dart(),
-            Self::GiantVineForest => 64.into_dart(),
-            Self::LeafRiver => 65.into_dart(),
-            Self::MothershroomWoods => 66.into_dart(),
-            Self::ParkyaCraterLake => 67.into_dart(),
-            Self::Pottsville => 68.into_dart(),
-            Self::RockvilleRuins => 69.into_dart(),
-            Self::ShellIsland => 70.into_dart(),
-            Self::Shroomville => 71.into_dart(),
-            Self::SnailRanch => 72.into_dart(),
-            Self::SpiraWaterfall => 73.into_dart(),
-            Self::TitanGraveyard => 74.into_dart(),
-            Self::TitansOutpostRuins => 75.into_dart(),
-            Self::Spira1F => 76.into_dart(),
-            Self::Spira2F => 77.into_dart(),
-            Self::Spira3F => 78.into_dart(),
-            Self::SpiraShelldome => 79.into_dart(),
-            Self::BluePools => 80.into_dart(),
-            Self::Cultivarium => 81.into_dart(),
-            Self::DragonRuins => 82.into_dart(),
-            Self::DragonrestFlowerfield => 83.into_dart(),
-            Self::GlimmeringLake => 84.into_dart(),
-            Self::GreatLumieville => 85.into_dart(),
-            Self::HealingGround => 86.into_dart(),
-            Self::HollowbreathPassage => 87.into_dart(),
-            Self::LonestoneShore => 88.into_dart(),
-            Self::SoulSpring => 89.into_dart(),
-            Self::WanxiangRealm_BackMountain => 90.into_dart(),
-            Self::CaiYeMarket => 91.into_dart(),
-            Self::CaiYeOutskirts => 92.into_dart(),
-            Self::DazzlebloomMeadow => 93.into_dart(),
-            Self::DeepValleySpring => 94.into_dart(),
-            Self::JiuhuaPavilion => 95.into_dart(),
-            Self::JiuhuaPenitentiary => 96.into_dart(),
-            Self::ValleyPath => 97.into_dart(),
-            Self::WhereWoodEchoes => 98.into_dart(),
-            Self::Crystalvale => 99.into_dart(),
-            Self::DreamStarIsles => 100.into_dart(),
-            Self::Starshore => 101.into_dart(),
-            Self::UnboundWharf => 102.into_dart(),
-            Self::DockArea => 103.into_dart(),
-            _ => unreachable!(),
-        }
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::nuan5_params::structs::world::Subarea
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::world::Subarea>
-    for crate::nuan5_params::structs::world::Subarea
-{
-    fn into_into_dart(self) -> crate::nuan5_params::structs::world::Subarea {
         self
     }
 }
@@ -10651,35 +10006,6 @@ impl SseEncode for crate::config::hot_update::AppVersionHotUpdateInfo {
     }
 }
 
-impl SseEncode for crate::nuan5_params::structs::world::Area {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::nuan5_params::structs::world::Area::MemorialMountains => 0,
-                crate::nuan5_params::structs::world::Area::Florawish => 1,
-                crate::nuan5_params::structs::world::Area::BreezyMeadow => 2,
-                crate::nuan5_params::structs::world::Area::Stoneville => 3,
-                crate::nuan5_params::structs::world::Area::AbandonedDistrict => 4,
-                crate::nuan5_params::structs::world::Area::WishingWoods => 5,
-                crate::nuan5_params::structs::world::Area::FireworkIsles => 6,
-                crate::nuan5_params::structs::world::Area::SerenityIsland => 7,
-                crate::nuan5_params::structs::world::Area::DanqingIsland => 8,
-                crate::nuan5_params::structs::world::Area::DanqingRealm => 9,
-                crate::nuan5_params::structs::world::Area::ItzalandCanyon => 10,
-                crate::nuan5_params::structs::world::Area::ElderwoodForest => 11,
-                crate::nuan5_params::structs::world::Area::Spira => 12,
-                crate::nuan5_params::structs::world::Area::Boneyard => 13,
-                crate::nuan5_params::structs::world::Area::WanxiangRealm => 14,
-                _ => {
-                    unimplemented!("");
-                }
-            },
-            serializer,
-        );
-    }
-}
-
 impl SseEncode for bool {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10907,23 +10233,6 @@ impl SseEncode for crate::nuan5_params::decrypt::DecryptionError {
                 crate::nuan5_params::decrypt::DecryptionError::NetworkError => 10,
                 crate::nuan5_params::decrypt::DecryptionError::InvalidHomeBuildShareCode => 11,
                 crate::nuan5_params::decrypt::DecryptionError::DeserializationFailed => 12,
-                _ => {
-                    unimplemented!("");
-                }
-            },
-            serializer,
-        );
-    }
-}
-
-impl SseEncode for crate::nuan5_params::structs::world::Dimension {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::nuan5_params::structs::world::Dimension::Miraland => 0,
-                crate::nuan5_params::structs::world::Dimension::SeaOfStars => 1,
-                crate::nuan5_params::structs::world::Dimension::Home => 2,
                 _ => {
                     unimplemented!("");
                 }
@@ -11329,16 +10638,6 @@ impl SseEncode for Vec<Vec<crate::config::common::string_config::StringProcessCo
     }
 }
 
-impl SseEncode for Vec<crate::nuan5_params::structs::world::Location> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.len() as _, serializer);
-        for item in self {
-            <crate::nuan5_params::structs::world::Location>::sse_encode(item, serializer);
-        }
-    }
-}
-
 impl SseEncode for Vec<crate::nuan5_params::structs::nikki_photo_params::ObjectParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11694,79 +10993,11 @@ impl SseEncode for crate::config::common::text_config::LiteralTextConfig {
     }
 }
 
-impl SseEncode for crate::nuan5_params::structs::world::Location {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        match self {
-            crate::nuan5_params::structs::world::Location::Standard {
-                dimension,
-                nation,
-                region,
-                area,
-                subarea,
-            } => {
-                <i32>::sse_encode(0, serializer);
-                <Option<crate::nuan5_params::structs::world::Dimension>>::sse_encode(
-                    dimension, serializer,
-                );
-                <Option<crate::nuan5_params::structs::world::Nation>>::sse_encode(
-                    nation, serializer,
-                );
-                <Option<crate::nuan5_params::structs::world::Region>>::sse_encode(
-                    region, serializer,
-                );
-                <Option<crate::nuan5_params::structs::world::Area>>::sse_encode(area, serializer);
-                <Option<crate::nuan5_params::structs::world::Subarea>>::sse_encode(
-                    subarea, serializer,
-                );
-            }
-            crate::nuan5_params::structs::world::Location::Special { dimension, subarea } => {
-                <i32>::sse_encode(1, serializer);
-                <Option<crate::nuan5_params::structs::world::Dimension>>::sse_encode(
-                    dimension, serializer,
-                );
-                <Option<crate::nuan5_params::structs::world::Subarea>>::sse_encode(
-                    subarea, serializer,
-                );
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
-    }
-}
-
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::LocationParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <(f64, f64, f64)>::sse_encode(self.pos, serializer);
-        <crate::nuan5_params::structs::nikki_photo_params::LocationType>::sse_encode(
-            self.loc, serializer,
-        );
-    }
-}
-
-impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::LocationType {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        match self {
-            crate::nuan5_params::structs::nikki_photo_params::LocationType::Unknown => {
-                <i32>::sse_encode(0, serializer);
-            }
-            crate::nuan5_params::structs::nikki_photo_params::LocationType::Exact(field0) => {
-                <i32>::sse_encode(1, serializer);
-                <crate::nuan5_params::structs::world::Location>::sse_encode(field0, serializer);
-            }
-            crate::nuan5_params::structs::nikki_photo_params::LocationType::Guessed(field0) => {
-                <i32>::sse_encode(2, serializer);
-                <Vec<crate::nuan5_params::structs::world::Location>>::sse_encode(
-                    field0, serializer,
-                );
-            }
-            _ => {
-                unimplemented!("");
-            }
-        }
+        <Option<i64>>::sse_encode(self.world_id, serializer);
     }
 }
 
@@ -11911,28 +11142,6 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::MomoParams 
         <(f64, f64, f64)>::sse_encode(self.scale, serializer);
         <Vec<crate::nuan5_params::structs::nikki_photo_params::ClothParams>>::sse_encode(
             self.clothes,
-            serializer,
-        );
-    }
-}
-
-impl SseEncode for crate::nuan5_params::structs::world::Nation {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::nuan5_params::structs::world::Nation::HeartcraftKingdom => 0,
-                crate::nuan5_params::structs::world::Nation::EmpireOfLight => 1,
-                crate::nuan5_params::structs::world::Nation::TerraAlliance => 2,
-                crate::nuan5_params::structs::world::Nation::StarhailFederation => 3,
-                crate::nuan5_params::structs::world::Nation::LinlangEmpire => 4,
-                crate::nuan5_params::structs::world::Nation::TwinmoonKingdom => 5,
-                crate::nuan5_params::structs::world::Nation::WhalePort => 6,
-                crate::nuan5_params::structs::world::Nation::Umbraso => 7,
-                _ => {
-                    unimplemented!("");
-                }
-            },
             serializer,
         );
     }
@@ -12256,16 +11465,6 @@ impl SseEncode for Option<crate::config::app_persistent_state::AppPersistentStat
     }
 }
 
-impl SseEncode for Option<crate::nuan5_params::structs::world::Area> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::nuan5_params::structs::world::Area>::sse_encode(value, serializer);
-        }
-    }
-}
-
 impl SseEncode for Option<bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12304,16 +11503,6 @@ impl SseEncode for Option<crate::nuan5_params::decrypt::CustomData> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::nuan5_params::decrypt::CustomData>::sse_encode(value, serializer);
-        }
-    }
-}
-
-impl SseEncode for Option<crate::nuan5_params::structs::world::Dimension> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::nuan5_params::structs::world::Dimension>::sse_encode(value, serializer);
         }
     }
 }
@@ -12428,16 +11617,6 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::Momo
     }
 }
 
-impl SseEncode for Option<crate::nuan5_params::structs::world::Nation> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::nuan5_params::structs::world::Nation>::sse_encode(value, serializer);
-        }
-    }
-}
-
 impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::NikkiParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12502,16 +11681,6 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::Obje
     }
 }
 
-impl SseEncode for Option<crate::nuan5_params::structs::world::Region> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::nuan5_params::structs::world::Region>::sse_encode(value, serializer);
-        }
-    }
-}
-
 impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::RichCameraParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12566,16 +11735,6 @@ impl SseEncode for Option<crate::config::common::string_config::StringConfig> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::config::common::string_config::StringConfig>::sse_encode(value, serializer);
-        }
-    }
-}
-
-impl SseEncode for Option<crate::nuan5_params::structs::world::Subarea> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::nuan5_params::structs::world::Subarea>::sse_encode(value, serializer);
         }
     }
 }
@@ -12949,22 +12108,6 @@ impl SseEncode for (String, String) {
     }
 }
 
-impl SseEncode for crate::nuan5_params::structs::world::Region {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::nuan5_params::structs::world::Region::Wishfield => 0,
-                crate::nuan5_params::structs::world::Region::Itzaland => 1,
-                _ => {
-                    unimplemented!("");
-                }
-            },
-            serializer,
-        );
-    }
-}
-
 impl SseEncode for crate::nuan5_params::structs::collage_params::RegionPicture {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -13152,124 +12295,6 @@ impl SseEncode for crate::config::common::string_config::StringReplaceProcessCon
         <String>::sse_encode(self.regex, serializer);
         <i32>::sse_encode(self.which, serializer);
         <String>::sse_encode(self.to, serializer);
-    }
-}
-
-impl SseEncode for crate::nuan5_params::structs::world::Subarea {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(
-            match self {
-                crate::nuan5_params::structs::world::Subarea::OldFlorawishMemorial => 0,
-                crate::nuan5_params::structs::world::Subarea::StylistGuildMemorial => 1,
-                crate::nuan5_params::structs::world::Subarea::DreamwovenRuins => 2,
-                crate::nuan5_params::structs::world::Subarea::FortuneFalls => 3,
-                crate::nuan5_params::structs::world::Subarea::GreatWishtreeSquare => 4,
-                crate::nuan5_params::structs::world::Subarea::LakesideDistrict => 5,
-                crate::nuan5_params::structs::world::Subarea::OutskirtsForest => 6,
-                crate::nuan5_params::structs::world::Subarea::AbandonedFanaticWisherCamp => 7,
-                crate::nuan5_params::structs::world::Subarea::BreezyMeadowActivityArea => 8,
-                crate::nuan5_params::structs::world::Subarea::BugSongHills => 9,
-                crate::nuan5_params::structs::world::Subarea::CiciaHighlands => 10,
-                crate::nuan5_params::structs::world::Subarea::HeartcraftKingdomOutpost => 11,
-                crate::nuan5_params::structs::world::Subarea::LakesideHill => 12,
-                crate::nuan5_params::structs::world::Subarea::MeadowWharf => 13,
-                crate::nuan5_params::structs::world::Subarea::QueenPalaceRuins => 14,
-                crate::nuan5_params::structs::world::Subarea::RelicHill => 15,
-                crate::nuan5_params::structs::world::Subarea::SleepyFishHills => 16,
-                crate::nuan5_params::structs::world::Subarea::SwanGazebo => 17,
-                crate::nuan5_params::structs::world::Subarea::DyeWorkshop => 18,
-                crate::nuan5_params::structs::world::Subarea::FlowerFieldsResidence => 19,
-                crate::nuan5_params::structs::world::Subarea::RockfallValley => 20,
-                crate::nuan5_params::structs::world::Subarea::StonevilleMarket => 21,
-                crate::nuan5_params::structs::world::Subarea::ChooChooStation => 22,
-                crate::nuan5_params::structs::world::Subarea::GoldenFields => 23,
-                crate::nuan5_params::structs::world::Subarea::MarketOfMirth => 24,
-                crate::nuan5_params::structs::world::Subarea::Prosperville => 25,
-                crate::nuan5_params::structs::world::Subarea::RippleEstate => 26,
-                crate::nuan5_params::structs::world::Subarea::StellarFishingGround => 27,
-                crate::nuan5_params::structs::world::Subarea::Stonecrown => 28,
-                crate::nuan5_params::structs::world::Subarea::WindriderMill => 29,
-                crate::nuan5_params::structs::world::Subarea::BrookwoodForest => 30,
-                crate::nuan5_params::structs::world::Subarea::CavernOfWishes => 31,
-                crate::nuan5_params::structs::world::Subarea::FallenWishHighlands => 32,
-                crate::nuan5_params::structs::world::Subarea::GrandTreeValley => 33,
-                crate::nuan5_params::structs::world::Subarea::SacredMountains => 34,
-                crate::nuan5_params::structs::world::Subarea::ValleyOfBlossoms => 35,
-                crate::nuan5_params::structs::world::Subarea::ClearheartLake => 36,
-                crate::nuan5_params::structs::world::Subarea::CrescentMoonRuins => 37,
-                crate::nuan5_params::structs::world::Subarea::FlamingForest => 38,
-                crate::nuan5_params::structs::world::Subarea::RelicIsles => 39,
-                crate::nuan5_params::structs::world::Subarea::SongbreezeHighland => 40,
-                crate::nuan5_params::structs::world::Subarea::SparkheartIsland => 41,
-                crate::nuan5_params::structs::world::Subarea::OldRuins => 42,
-                crate::nuan5_params::structs::world::Subarea::Soakville => 43,
-                crate::nuan5_params::structs::world::Subarea::SoakvilleOutskirts => 44,
-                crate::nuan5_params::structs::world::Subarea::Steamville => 45,
-                crate::nuan5_params::structs::world::Subarea::DanqingIsland_BackMountain => 46,
-                crate::nuan5_params::structs::world::Subarea::BambooGrove => 47,
-                crate::nuan5_params::structs::world::Subarea::DanqingIsland_Inkville => 48,
-                crate::nuan5_params::structs::world::Subarea::InkwashStream => 49,
-                crate::nuan5_params::structs::world::Subarea::LoongPagoda => 50,
-                crate::nuan5_params::structs::world::Subarea::LoongPeak => 51,
-                crate::nuan5_params::structs::world::Subarea::ReedblossomShore => 52,
-                crate::nuan5_params::structs::world::Subarea::GreenBambooGrove => 53,
-                crate::nuan5_params::structs::world::Subarea::InkPool => 54,
-                crate::nuan5_params::structs::world::Subarea::InkshorePlain => 55,
-                crate::nuan5_params::structs::world::Subarea::DanqingRealm_Inkville => 56,
-                crate::nuan5_params::structs::world::Subarea::WildfieldWaterside => 57,
-                crate::nuan5_params::structs::world::Subarea::BehemothObservationSite => 58,
-                crate::nuan5_params::structs::world::Subarea::Coliseum => 59,
-                crate::nuan5_params::structs::world::Subarea::ElderwoodShade => 60,
-                crate::nuan5_params::structs::world::Subarea::ElderwoodWharf => 61,
-                crate::nuan5_params::structs::world::Subarea::ForestOfSlumber => 62,
-                crate::nuan5_params::structs::world::Subarea::ForgottenStreet => 63,
-                crate::nuan5_params::structs::world::Subarea::GiantVineForest => 64,
-                crate::nuan5_params::structs::world::Subarea::LeafRiver => 65,
-                crate::nuan5_params::structs::world::Subarea::MothershroomWoods => 66,
-                crate::nuan5_params::structs::world::Subarea::ParkyaCraterLake => 67,
-                crate::nuan5_params::structs::world::Subarea::Pottsville => 68,
-                crate::nuan5_params::structs::world::Subarea::RockvilleRuins => 69,
-                crate::nuan5_params::structs::world::Subarea::ShellIsland => 70,
-                crate::nuan5_params::structs::world::Subarea::Shroomville => 71,
-                crate::nuan5_params::structs::world::Subarea::SnailRanch => 72,
-                crate::nuan5_params::structs::world::Subarea::SpiraWaterfall => 73,
-                crate::nuan5_params::structs::world::Subarea::TitanGraveyard => 74,
-                crate::nuan5_params::structs::world::Subarea::TitansOutpostRuins => 75,
-                crate::nuan5_params::structs::world::Subarea::Spira1F => 76,
-                crate::nuan5_params::structs::world::Subarea::Spira2F => 77,
-                crate::nuan5_params::structs::world::Subarea::Spira3F => 78,
-                crate::nuan5_params::structs::world::Subarea::SpiraShelldome => 79,
-                crate::nuan5_params::structs::world::Subarea::BluePools => 80,
-                crate::nuan5_params::structs::world::Subarea::Cultivarium => 81,
-                crate::nuan5_params::structs::world::Subarea::DragonRuins => 82,
-                crate::nuan5_params::structs::world::Subarea::DragonrestFlowerfield => 83,
-                crate::nuan5_params::structs::world::Subarea::GlimmeringLake => 84,
-                crate::nuan5_params::structs::world::Subarea::GreatLumieville => 85,
-                crate::nuan5_params::structs::world::Subarea::HealingGround => 86,
-                crate::nuan5_params::structs::world::Subarea::HollowbreathPassage => 87,
-                crate::nuan5_params::structs::world::Subarea::LonestoneShore => 88,
-                crate::nuan5_params::structs::world::Subarea::SoulSpring => 89,
-                crate::nuan5_params::structs::world::Subarea::WanxiangRealm_BackMountain => 90,
-                crate::nuan5_params::structs::world::Subarea::CaiYeMarket => 91,
-                crate::nuan5_params::structs::world::Subarea::CaiYeOutskirts => 92,
-                crate::nuan5_params::structs::world::Subarea::DazzlebloomMeadow => 93,
-                crate::nuan5_params::structs::world::Subarea::DeepValleySpring => 94,
-                crate::nuan5_params::structs::world::Subarea::JiuhuaPavilion => 95,
-                crate::nuan5_params::structs::world::Subarea::JiuhuaPenitentiary => 96,
-                crate::nuan5_params::structs::world::Subarea::ValleyPath => 97,
-                crate::nuan5_params::structs::world::Subarea::WhereWoodEchoes => 98,
-                crate::nuan5_params::structs::world::Subarea::Crystalvale => 99,
-                crate::nuan5_params::structs::world::Subarea::DreamStarIsles => 100,
-                crate::nuan5_params::structs::world::Subarea::Starshore => 101,
-                crate::nuan5_params::structs::world::Subarea::UnboundWharf => 102,
-                crate::nuan5_params::structs::world::Subarea::DockArea => 103,
-                _ => {
-                    unimplemented!("");
-                }
-            },
-            serializer,
-        );
     }
 }
 

@@ -183,7 +183,12 @@ pub(crate) fn convert_nikki_photo_photography_params(data: &image_custom_data::N
       }
     }),
     location: data.social_photo.as_ref().map(|social_photo|{
-      parse_location(social_photo.photo_info.nikki_loc_x, social_photo.photo_info.nikki_loc_y, social_photo.photo_info.nikki_loc_z)
+      parse_location(
+        social_photo.photo_info.nikki_loc_x,
+        social_photo.photo_info.nikki_loc_y,
+        social_photo.photo_info.nikki_loc_z,
+        social_photo.track_info.as_ref(),
+      )
     }),
     weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
     photo_wall: match &data.photo_wall_plugin{
@@ -210,7 +215,12 @@ pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data
       }
     }),
     location: data.social_photo.as_ref().map(|social_photo|{
-      parse_location(social_photo.photo_info.nikki_loc_x, social_photo.photo_info.nikki_loc_y, social_photo.photo_info.nikki_loc_z)
+      parse_location(
+        social_photo.photo_info.nikki_loc_x,
+        social_photo.photo_info.nikki_loc_y,
+        social_photo.photo_info.nikki_loc_z,
+        social_photo.track_info.as_ref(),
+      )
     }),
     weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
     photo_wall: vec![],
