@@ -5,6 +5,7 @@ class TreeNode{
   final Widget? icon;
   final String title;
   final String? message;
+  final Widget? extra;
   final void Function(BuildContext)? onClick;
   final Iterable<TreeNode> children;
   final bool initiallyExpanded;
@@ -14,6 +15,7 @@ class TreeNode{
     this.icon,
     required this.title,
     this.message,
+    this.extra,
     this.onClick,
     this.children = const [],
     this.initiallyExpanded = false,

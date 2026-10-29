@@ -111,10 +111,70 @@ class TreeNodeTile extends StatelessWidget{
   Widget build(BuildContext context){
     final node = entry.node;
 
+    Widget child = Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: smallButtonSize,
+          height: smallButtonSize,
+          child: Center(
+            child: entry.hasChildren ? AnimatedRotation(
+              turns: entry.isExpanded ? 0.25 : 0,
+              duration: const Duration(milliseconds: 100),
+              child: const Icon(
+                Icons.chevron_right,
+                size: smallButtonContentSize,
+                color: Colors.grey,
+              ),
+            ) : null,
+          ),
+        ),
+        const SizedBox(width: 4),
+
+        if(node.icon != null)
+          SizedBox(
+            width: smallButtonSize,
+            height: smallButtonSize,
+            child: node.icon,
+          ),
+        if(node.icon != null)
+          const SizedBox(width: 4),
+
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppText(node.title, fontWeight: FontWeight.bold),
+              const SizedBox(width: 12),
+              if(node.message != null)
+                Expanded(
+                  child: AppText(
+                    node.message!,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+
+    if(entry.node.extra != null){
+      child = Column(
+        children: [
+          child,
+          ?entry.node.extra,
+        ],
+      );
+    }
+
     return AppFloatingIndicatorButtonTarget(
       child: AppButton.smallText(
         toolTip: node.tooltip,
         isTranslate: false,
+        height: null,
         onClick: entry.hasChildren ? onToggle : () => node.onClick?.call(context),
         child: TreeIndentation(
           entry: entry,
@@ -124,55 +184,7 @@ class TreeNodeTile extends StatelessWidget{
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: smallButtonSize,
-                  height: smallButtonSize,
-                  child: Center(
-                    child: entry.hasChildren ? AnimatedRotation(
-                      turns: entry.isExpanded ? 0.25 : 0,
-                      duration: const Duration(milliseconds: 100),
-                      child: const Icon(
-                        Icons.chevron_right,
-                        size: smallButtonContentSize,
-                        color: Colors.grey,
-                      ),
-                    ) : null,
-                  ),
-                ),
-                const SizedBox(width: 4),
-
-                if(node.icon != null)
-                  SizedBox(
-                    width: smallButtonSize,
-                    height: smallButtonSize,
-                    child: node.icon,
-                  ),
-                if(node.icon != null)
-                  const SizedBox(width: 4),
-
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      AppText(node.title, fontWeight: FontWeight.bold),
-                      const SizedBox(width: 12),
-                      if(node.message != null)
-                        Expanded(
-                          child: AppText(
-                            node.message!,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: false,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: child,
           ),
         ),
       ),
