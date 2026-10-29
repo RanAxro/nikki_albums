@@ -1,0 +1,21 @@
+{
+  "uuid": "infinity-nikki-uuid",
+  "name": {
+    "text": "name a"
+  },
+  "description": {
+    "text": "desc "
+  },
+  "version": 1,
+  "app_version": 1,
+  "platforms": ["Windows"],
+ 
+  "script_info": {
+    "JS": {
+      "entrance": "registration.js",
+      "modules": {
+        "game": "scripts/game.js"
+      }
+    }
+  }
+}
