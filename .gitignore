@@ -60,3 +60,7 @@ app.*.map.json
 /pt/
 /id/
 /th/
+
+
+src/
+scripts/build_icons/
