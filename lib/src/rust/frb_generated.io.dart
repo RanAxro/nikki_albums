@@ -167,6 +167,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(dynamic raw);
 
   @protected
+  Map<int, Nuan5World> dco_decode_Map_i_32_nuan_5_world_None(dynamic raw);
+
+  @protected
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
 
   @protected
@@ -307,6 +310,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5Table dco_decode_box_autoadd_nuan_5_table(dynamic raw);
+
+  @protected
+  Nuan5WorldMapTileInfo dco_decode_box_autoadd_nuan_5_world_map_tile_info(
+    dynamic raw,
+  );
 
   @protected
   ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
@@ -623,6 +631,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_list_record_i_32_nuan_5_nikki_cloth_info(dynamic raw);
 
   @protected
+  List<(int, Nuan5World)> dco_decode_list_record_i_32_nuan_5_world(dynamic raw);
+
+  @protected
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
 
   @protected
@@ -748,6 +759,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5Table dco_decode_nuan_5_table(dynamic raw);
 
   @protected
+  Nuan5World dco_decode_nuan_5_world(dynamic raw);
+
+  @protected
+  Nuan5WorldMapTileInfo dco_decode_nuan_5_world_map_tile_info(dynamic raw);
+
+  @protected
   ObjectParams dco_decode_object_params(dynamic raw);
 
   @protected
@@ -823,6 +840,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5Table? dco_decode_opt_box_autoadd_nuan_5_table(dynamic raw);
+
+  @protected
+  Nuan5WorldMapTileInfo? dco_decode_opt_box_autoadd_nuan_5_world_map_tile_info(
+    dynamic raw,
+  );
 
   @protected
   ObjectParams? dco_decode_opt_box_autoadd_object_params(dynamic raw);
@@ -960,6 +982,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (int, Nuan5NikkiClothInfo) dco_decode_record_i_32_nuan_5_nikki_cloth_info(
     dynamic raw,
   );
+
+  @protected
+  (int, Nuan5World) dco_decode_record_i_32_nuan_5_world(dynamic raw);
 
   @protected
   (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
@@ -1215,6 +1240,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<int, Nuan5World> sse_decode_Map_i_32_nuan_5_world_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
     SseDeserializer deserializer,
   );
@@ -1399,6 +1429,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5Table sse_decode_box_autoadd_nuan_5_table(SseDeserializer deserializer);
+
+  @protected
+  Nuan5WorldMapTileInfo sse_decode_box_autoadd_nuan_5_world_map_tile_info(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ObjectParams sse_decode_box_autoadd_object_params(
@@ -1789,6 +1824,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5World)> sse_decode_list_record_i_32_nuan_5_world(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
     SseDeserializer deserializer,
   );
@@ -1946,6 +1986,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5Table sse_decode_nuan_5_table(SseDeserializer deserializer);
 
   @protected
+  Nuan5World sse_decode_nuan_5_world(SseDeserializer deserializer);
+
+  @protected
+  Nuan5WorldMapTileInfo sse_decode_nuan_5_world_map_tile_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ObjectParams sse_decode_object_params(SseDeserializer deserializer);
 
   @protected
@@ -2047,6 +2095,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5Table? sse_decode_opt_box_autoadd_nuan_5_table(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Nuan5WorldMapTileInfo? sse_decode_opt_box_autoadd_nuan_5_world_map_tile_info(
     SseDeserializer deserializer,
   );
 
@@ -2234,6 +2287,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (int, Nuan5NikkiClothInfo) sse_decode_record_i_32_nuan_5_nikki_cloth_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (int, Nuan5World) sse_decode_record_i_32_nuan_5_world(
     SseDeserializer deserializer,
   );
 
@@ -2545,6 +2603,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_i_32_nuan_5_world_None(
+    Map<int, Nuan5World> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_Map_i_64_bool_None(
     Map<PlatformInt64, bool> self,
     SseSerializer serializer,
@@ -2778,6 +2842,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_nuan_5_table(
     Nuan5Table self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_world_map_tile_info(
+    Nuan5WorldMapTileInfo self,
     SseSerializer serializer,
   );
 
@@ -3262,6 +3332,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_world(
+    List<(int, Nuan5World)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_64_bool(
     List<(PlatformInt64, bool)> self,
     SseSerializer serializer,
@@ -3478,6 +3554,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_nuan_5_table(Nuan5Table self, SseSerializer serializer);
 
   @protected
+  void sse_encode_nuan_5_world(Nuan5World self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_nuan_5_world_map_tile_info(
+    Nuan5WorldMapTileInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_object_params(ObjectParams self, SseSerializer serializer);
 
   @protected
@@ -3603,6 +3688,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_nuan_5_table(
     Nuan5Table? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_nuan_5_world_map_tile_info(
+    Nuan5WorldMapTileInfo? self,
     SseSerializer serializer,
   );
 
@@ -3828,6 +3919,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_32_nuan_5_nikki_cloth_info(
     (int, Nuan5NikkiClothInfo) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_world(
+    (int, Nuan5World) self,
     SseSerializer serializer,
   );
 

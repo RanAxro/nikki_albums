@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use prost::Message;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, PartialEq)]
 #[derive(Message)]
@@ -51,6 +52,9 @@ pub struct Nuan5Config{
 
   #[prost(map = "int32, message", tag = "18")]
   pub nikki_cloth_info: HashMap<i32, Nuan5NikkiClothInfo>,
+
+  #[prost(map = "int32, message", tag = "26")]
+  pub world: HashMap<i32, Nuan5World>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -244,4 +248,41 @@ pub struct Nuan5NikkiClothInfo{
   pub major_prop: i32,
   #[prost(int32, repeated, tag = "5")]
   pub tags: Vec<i32>,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Serialize, Deserialize)]
+#[derive(Message)]
+pub struct Nuan5World{
+  #[prost(message, optional, tag = "1")]
+  pub map_tile_info: Option<Nuan5WorldMapTileInfo>,
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Serialize, Deserialize)]
+#[derive(Message)]
+pub struct Nuan5WorldMapTileInfo{
+  #[prost(string, tag = "1")]
+  pub url_template: String,
+
+  #[prost(uint32, tag = "2")]
+  pub max_zoom: u32,
+
+  #[prost(uint32, tag = "3")]
+  pub min_zoom: u32,
+
+  #[prost(uint32, tag = "4")]
+  pub map_width_of_max_zoom: u32,
+
+  #[prost(uint32, tag = "5")]
+  pub map_height_of_max_zoom: u32,
+
+  #[prost(double, tag = "6")]
+  pub original_point_x: f64,
+
+  #[prost(double, tag = "7")]
+  pub original_point_y: f64,
+
+  #[prost(double, tag = "8")]
+  pub px_pre_unit: f64,
 }

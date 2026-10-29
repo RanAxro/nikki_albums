@@ -6,7 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
 class Nuan5Cloth {
   final int clothType;
@@ -193,6 +193,7 @@ class Nuan5Config {
   final Map<int, Nuan5ClothProp> clothProp;
   final Map<int, Nuan5ClothTag> clothTag;
   final Map<int, Nuan5NikkiClothInfo> nikkiClothInfo;
+  final Map<int, Nuan5World> world;
 
   const Nuan5Config({
     this.table,
@@ -211,6 +212,7 @@ class Nuan5Config {
     required this.clothProp,
     required this.clothTag,
     required this.nikkiClothInfo,
+    required this.world,
   });
 
   static Future<Nuan5Config> default_() =>
@@ -238,7 +240,8 @@ class Nuan5Config {
       clothOutfit.hashCode ^
       clothProp.hashCode ^
       clothTag.hashCode ^
-      nikkiClothInfo.hashCode;
+      nikkiClothInfo.hashCode ^
+      world.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -260,7 +263,8 @@ class Nuan5Config {
           clothOutfit == other.clothOutfit &&
           clothProp == other.clothProp &&
           clothTag == other.clothTag &&
-          nikkiClothInfo == other.nikkiClothInfo;
+          nikkiClothInfo == other.nikkiClothInfo &&
+          world == other.world;
 }
 
 class Nuan5DiyColorSwatch {
@@ -532,4 +536,73 @@ class Nuan5Table {
           lightType == other.lightType &&
           filterType == other.filterType &&
           momoPose == other.momoPose;
+}
+
+class Nuan5World {
+  final Nuan5WorldMapTileInfo? mapTileInfo;
+
+  const Nuan5World({this.mapTileInfo});
+
+  static Future<Nuan5World> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5WorldDefault();
+
+  @override
+  int get hashCode => mapTileInfo.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5World &&
+          runtimeType == other.runtimeType &&
+          mapTileInfo == other.mapTileInfo;
+}
+
+class Nuan5WorldMapTileInfo {
+  final String urlTemplate;
+  final int maxZoom;
+  final int minZoom;
+  final int mapWidthOfMaxZoom;
+  final int mapHeightOfMaxZoom;
+  final double originalPointX;
+  final double originalPointY;
+  final double pxPreUnit;
+
+  const Nuan5WorldMapTileInfo({
+    required this.urlTemplate,
+    required this.maxZoom,
+    required this.minZoom,
+    required this.mapWidthOfMaxZoom,
+    required this.mapHeightOfMaxZoom,
+    required this.originalPointX,
+    required this.originalPointY,
+    required this.pxPreUnit,
+  });
+
+  static Future<Nuan5WorldMapTileInfo> default_() => RustLib.instance.api
+      .crateNuan5DatabaseModelNuan5WorldMapTileInfoDefault();
+
+  @override
+  int get hashCode =>
+      urlTemplate.hashCode ^
+      maxZoom.hashCode ^
+      minZoom.hashCode ^
+      mapWidthOfMaxZoom.hashCode ^
+      mapHeightOfMaxZoom.hashCode ^
+      originalPointX.hashCode ^
+      originalPointY.hashCode ^
+      pxPreUnit.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5WorldMapTileInfo &&
+          runtimeType == other.runtimeType &&
+          urlTemplate == other.urlTemplate &&
+          maxZoom == other.maxZoom &&
+          minZoom == other.minZoom &&
+          mapWidthOfMaxZoom == other.mapWidthOfMaxZoom &&
+          mapHeightOfMaxZoom == other.mapHeightOfMaxZoom &&
+          originalPointX == other.originalPointX &&
+          originalPointY == other.originalPointY &&
+          pxPreUnit == other.pxPreUnit;
 }

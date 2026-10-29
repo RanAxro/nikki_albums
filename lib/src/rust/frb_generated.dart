@@ -92,7 +92,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -1345561548;
+  int get rustContentHash => 1303537435;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -365,6 +365,11 @@ abstract class RustLibApi extends BaseApi {
   crateNuan5DatabaseModelNuan5NikkiClothInfoDefault();
 
   Future<Nuan5Table> crateNuan5DatabaseModelNuan5TableDefault();
+
+  Future<Nuan5World> crateNuan5DatabaseModelNuan5WorldDefault();
+
+  Future<Nuan5WorldMapTileInfo>
+  crateNuan5DatabaseModelNuan5WorldMapTileInfoDefault();
 
   StringConfig? crateConfigCommonStringConfigStringConfigFromJson({
     required String json,
@@ -2632,6 +2637,66 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "nuan_5_table_default", argNames: []);
 
   @override
+  Future<Nuan5World> crateNuan5DatabaseModelNuan5WorldDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 69,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_world,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNuan5DatabaseModelNuan5WorldDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNuan5DatabaseModelNuan5WorldDefaultConstMeta =>
+      const TaskConstMeta(debugName: "nuan_5_world_default", argNames: []);
+
+  @override
+  Future<Nuan5WorldMapTileInfo>
+  crateNuan5DatabaseModelNuan5WorldMapTileInfoDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 70,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_nuan_5_world_map_tile_info,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateNuan5DatabaseModelNuan5WorldMapTileInfoDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateNuan5DatabaseModelNuan5WorldMapTileInfoDefaultConstMeta =>
+      const TaskConstMeta(
+        debugName: "nuan_5_world_map_tile_info_default",
+        argNames: [],
+      );
+
+  @override
   StringConfig? crateConfigCommonStringConfigStringConfigFromJson({
     required String json,
   }) {
@@ -2640,7 +2705,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 69)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_string_config,
@@ -2669,7 +2734,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_string_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 70)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2697,7 +2762,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_string_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 71)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 73)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2726,7 +2791,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_i_32(num1, serializer);
           sse_encode_i_32(num2, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 74)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_i_32,
@@ -2751,7 +2816,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 73)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 75)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_text_config,
@@ -2779,7 +2844,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_text_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 74)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 76)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2804,7 +2869,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_text_config(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 75)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 77)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2831,7 +2896,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(json, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 76)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 78)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_update_info,
@@ -2857,7 +2922,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 77)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 79)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -2880,7 +2945,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_update_info(that, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 78)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 80)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -3172,6 +3237,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<int, Nuan5World> dco_decode_Map_i_32_nuan_5_world_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_nuan_5_world(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
@@ -3451,6 +3526,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Table dco_decode_box_autoadd_nuan_5_table(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_nuan_5_table(raw);
+  }
+
+  @protected
+  Nuan5WorldMapTileInfo dco_decode_box_autoadd_nuan_5_world_map_tile_info(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_nuan_5_world_map_tile_info(raw);
   }
 
   @protected
@@ -4320,6 +4403,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Nuan5World)> dco_decode_list_record_i_32_nuan_5_world(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_nuan_5_world)
+        .toList();
+  }
+
+  @protected
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_record_i_64_bool).toList();
@@ -4643,8 +4736,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Config dco_decode_nuan_5_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 16)
-      throw Exception('unexpected arr length: expect 16 but see ${arr.length}');
+    if (arr.length != 17)
+      throw Exception('unexpected arr length: expect 17 but see ${arr.length}');
     return Nuan5Config(
       table: dco_decode_opt_box_autoadd_nuan_5_table(arr[0]),
       networkImage: dco_decode_opt_box_autoadd_nuan_5_network_image(arr[1]),
@@ -4664,6 +4757,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       clothProp: dco_decode_Map_i_32_nuan_5_cloth_prop_None(arr[13]),
       clothTag: dco_decode_Map_i_32_nuan_5_cloth_tag_None(arr[14]),
       nikkiClothInfo: dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(arr[15]),
+      world: dco_decode_Map_i_32_nuan_5_world_None(arr[16]),
     );
   }
 
@@ -4791,6 +4885,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       lightType: dco_decode_list_prim_i_32_strict(arr[0]),
       filterType: dco_decode_list_prim_i_32_strict(arr[1]),
       momoPose: dco_decode_list_prim_i_32_strict(arr[2]),
+    );
+  }
+
+  @protected
+  Nuan5World dco_decode_nuan_5_world(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return Nuan5World(
+      mapTileInfo: dco_decode_opt_box_autoadd_nuan_5_world_map_tile_info(
+        arr[0],
+      ),
+    );
+  }
+
+  @protected
+  Nuan5WorldMapTileInfo dco_decode_nuan_5_world_map_tile_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 8)
+      throw Exception('unexpected arr length: expect 8 but see ${arr.length}');
+    return Nuan5WorldMapTileInfo(
+      urlTemplate: dco_decode_String(arr[0]),
+      maxZoom: dco_decode_u_32(arr[1]),
+      minZoom: dco_decode_u_32(arr[2]),
+      mapWidthOfMaxZoom: dco_decode_u_32(arr[3]),
+      mapHeightOfMaxZoom: dco_decode_u_32(arr[4]),
+      originalPointX: dco_decode_f_64(arr[5]),
+      originalPointY: dco_decode_f_64(arr[6]),
+      pxPreUnit: dco_decode_f_64(arr[7]),
     );
   }
 
@@ -4954,6 +5079,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Table? dco_decode_opt_box_autoadd_nuan_5_table(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_nuan_5_table(raw);
+  }
+
+  @protected
+  Nuan5WorldMapTileInfo? dco_decode_opt_box_autoadd_nuan_5_world_map_tile_info(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_nuan_5_world_map_tile_info(raw);
   }
 
   @protected
@@ -5369,6 +5504,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       dco_decode_i_32(arr[0]),
       dco_decode_nuan_5_nikki_cloth_info(arr[1]),
     );
+  }
+
+  @protected
+  (int, Nuan5World) dco_decode_record_i_32_nuan_5_world(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_i_32(arr[0]), dco_decode_nuan_5_world(arr[1]));
   }
 
   @protected
@@ -6110,6 +6255,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<int, Nuan5World> sse_decode_Map_i_32_nuan_5_world_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_nuan_5_world(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
   Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
     SseDeserializer deserializer,
   ) {
@@ -6442,6 +6596,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Nuan5Table sse_decode_box_autoadd_nuan_5_table(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_nuan_5_table(deserializer));
+  }
+
+  @protected
+  Nuan5WorldMapTileInfo sse_decode_box_autoadd_nuan_5_world_map_tile_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_nuan_5_world_map_tile_info(deserializer));
   }
 
   @protected
@@ -7565,6 +7727,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Nuan5World)> sse_decode_list_record_i_32_nuan_5_world(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Nuan5World)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_i_32_nuan_5_world(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
     SseDeserializer deserializer,
   ) {
@@ -7992,6 +8168,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_nikkiClothInfo = sse_decode_Map_i_32_nuan_5_nikki_cloth_info_None(
       deserializer,
     );
+    var var_world = sse_decode_Map_i_32_nuan_5_world_None(deserializer);
     return Nuan5Config(
       table: var_table,
       networkImage: var_networkImage,
@@ -8009,6 +8186,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       clothProp: var_clothProp,
       clothTag: var_clothTag,
       nikkiClothInfo: var_nikkiClothInfo,
+      world: var_world,
     );
   }
 
@@ -8147,6 +8325,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       lightType: var_lightType,
       filterType: var_filterType,
       momoPose: var_momoPose,
+    );
+  }
+
+  @protected
+  Nuan5World sse_decode_nuan_5_world(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_mapTileInfo = sse_decode_opt_box_autoadd_nuan_5_world_map_tile_info(
+      deserializer,
+    );
+    return Nuan5World(mapTileInfo: var_mapTileInfo);
+  }
+
+  @protected
+  Nuan5WorldMapTileInfo sse_decode_nuan_5_world_map_tile_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_urlTemplate = sse_decode_String(deserializer);
+    var var_maxZoom = sse_decode_u_32(deserializer);
+    var var_minZoom = sse_decode_u_32(deserializer);
+    var var_mapWidthOfMaxZoom = sse_decode_u_32(deserializer);
+    var var_mapHeightOfMaxZoom = sse_decode_u_32(deserializer);
+    var var_originalPointX = sse_decode_f_64(deserializer);
+    var var_originalPointY = sse_decode_f_64(deserializer);
+    var var_pxPreUnit = sse_decode_f_64(deserializer);
+    return Nuan5WorldMapTileInfo(
+      urlTemplate: var_urlTemplate,
+      maxZoom: var_maxZoom,
+      minZoom: var_minZoom,
+      mapWidthOfMaxZoom: var_mapWidthOfMaxZoom,
+      mapHeightOfMaxZoom: var_mapHeightOfMaxZoom,
+      originalPointX: var_originalPointX,
+      originalPointY: var_originalPointY,
+      pxPreUnit: var_pxPreUnit,
     );
   }
 
@@ -8438,6 +8650,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_nuan_5_table(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Nuan5WorldMapTileInfo? sse_decode_opt_box_autoadd_nuan_5_world_map_tile_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_nuan_5_world_map_tile_info(deserializer));
     } else {
       return null;
     }
@@ -8938,6 +9163,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_i_32(deserializer);
     var var_field1 = sse_decode_nuan_5_nikki_cloth_info(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (int, Nuan5World) sse_decode_record_i_32_nuan_5_world(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_nuan_5_world(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -9792,6 +10027,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_Map_i_32_nuan_5_world_None(
+    Map<int, Nuan5World> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_nuan_5_world(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_Map_i_64_bool_None(
     Map<PlatformInt64, bool> self,
     SseSerializer serializer,
@@ -10190,6 +10437,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_nuan_5_table(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_nuan_5_world_map_tile_info(
+    Nuan5WorldMapTileInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_nuan_5_world_map_tile_info(self, serializer);
   }
 
   @protected
@@ -11180,6 +11436,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_world(
+    List<(int, Nuan5World)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_nuan_5_world(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_record_i_64_bool(
     List<(PlatformInt64, bool)> self,
     SseSerializer serializer,
@@ -11543,6 +11811,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.nikkiClothInfo,
       serializer,
     );
+    sse_encode_Map_i_32_nuan_5_world_None(self.world, serializer);
   }
 
   @protected
@@ -11676,6 +11945,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_list_prim_i_32_strict(self.lightType, serializer);
     sse_encode_list_prim_i_32_strict(self.filterType, serializer);
     sse_encode_list_prim_i_32_strict(self.momoPose, serializer);
+  }
+
+  @protected
+  void sse_encode_nuan_5_world(Nuan5World self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_nuan_5_world_map_tile_info(
+      self.mapTileInfo,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_nuan_5_world_map_tile_info(
+    Nuan5WorldMapTileInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.urlTemplate, serializer);
+    sse_encode_u_32(self.maxZoom, serializer);
+    sse_encode_u_32(self.minZoom, serializer);
+    sse_encode_u_32(self.mapWidthOfMaxZoom, serializer);
+    sse_encode_u_32(self.mapHeightOfMaxZoom, serializer);
+    sse_encode_f_64(self.originalPointX, serializer);
+    sse_encode_f_64(self.originalPointY, serializer);
+    sse_encode_f_64(self.pxPreUnit, serializer);
   }
 
   @protected
@@ -11964,6 +12258,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_nuan_5_table(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_nuan_5_world_map_tile_info(
+    Nuan5WorldMapTileInfo? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_nuan_5_world_map_tile_info(self, serializer);
     }
   }
 
@@ -12427,6 +12734,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.$1, serializer);
     sse_encode_nuan_5_nikki_cloth_info(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_world(
+    (int, Nuan5World) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_nuan_5_world(self.$2, serializer);
   }
 
   @protected
