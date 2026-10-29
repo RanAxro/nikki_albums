@@ -1,10 +1,15 @@
 
+import "package:nikki_albums/ui/album_manager/album.dart";
+import "package:nikki_albums/ui/plugin.dart";
+
+import "../ui/home.dart";
 import "../modules/frame/presentation/header/header_windows.dart";
 import "../modules/frame/presentation/nav/nav_desktop.dart";
 
 import "package:flutter/material.dart";
 import "package:forui/forui.dart";
 import "package:go_router/go_router.dart";
+
 
 
 abstract final class AppRoutes{
@@ -33,6 +38,8 @@ abstract final class AppRoutes{
   static const String parameterManagerInfinityNikkiRecycleBin = "/parameter_manager/infinity_nikki_recycle_bin";
   static const String parameterManagerInfinityNikkiRecycleBinName = "parameter_manager_infinity_nikki_recycle_bin";
 
+  static const String plugin = "/plugin";
+  static const String pluginName = "plugin";
   static const String settings = "/settings";
   static const String settingsName = "settings";
 }
@@ -44,7 +51,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: AppRoutes.bootstrap,
+  initialLocation: AppRoutes.home,
   debugLogDiagnostics: true,
   routes: [
     ShellRoute(
@@ -102,7 +109,7 @@ final List<StatefulShellBranch> appShellRoutes = [
         path: AppRoutes.home,
         name: AppRoutes.homeName,
         builder: (BuildContext context, GoRouterState state){
-          return Text("主页");
+          return HomePage();
         },
       ),
     ],
@@ -113,7 +120,7 @@ final List<StatefulShellBranch> appShellRoutes = [
         path: AppRoutes.albumManagerAlbum,
         name: AppRoutes.albumManagerAlbumName,
         builder: (BuildContext context, GoRouterState state){
-          return Text("相册");
+          return AlbumPage();
         },
       ),
     ],
@@ -125,6 +132,17 @@ final List<StatefulShellBranch> appShellRoutes = [
         name: AppRoutes.albumManagerConfigName,
         builder: (BuildContext context, GoRouterState state){
           return Text("配置项");
+        },
+      ),
+    ],
+  ),
+  StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: AppRoutes.plugin,
+        name: AppRoutes.pluginName,
+        builder: (BuildContext context, GoRouterState state){
+          return PluginPage();
         },
       ),
     ],

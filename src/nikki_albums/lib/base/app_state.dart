@@ -1,6 +1,6 @@
 
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:nikki_albums/src/rust/config/app_persistent_state.dart";
+import "package:nikki_albums/gen/rust/config/app_persistent_state.dart";
 import "package:nikki_albums_annotation/nikki_albums_annotation.dart";
 
 import "dart:ui";
