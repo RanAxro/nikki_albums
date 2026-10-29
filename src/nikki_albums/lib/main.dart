@@ -6,7 +6,7 @@ import "package:nikki_albums/modules/setting/error_log/domain/log_manager.dart";
 import "package:nikki_albums/utils/system/system.dart";
 import "package:nikki_albums/utils/system/system_service_windows.dart";
 import "package:nikki_albums/utils/system/system_service_macos.dart";
-import "package:nikki_albums/src/rust/frb_generated.dart";
+import "package:nikki_albums/gen/rust/frb_generated.dart";
 
 import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
