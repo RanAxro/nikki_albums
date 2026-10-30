@@ -465,12 +465,12 @@ TreeNode genCameraParams(RichCameraParams params){
       ),
       TreeNode(
         title: trText("pose"),
-        message: trText(params.pose.toString(), category: "pose"),
+        message: trText(params.pose.toString(), category: "nikki_pose"),
         children: [
-          if(params.nikkiPoseInfo != null)
+          if(params.nikkiPoseInfo?.playingPercent != null)
             TreeNode(
               title: trText("pose_time"),
-              message: "${(params.nikkiPoseInfo!.nikkiPoseTime * 100).ceil()} %",
+              message: "${(params.nikkiPoseInfo!.playingPercent! * 100).ceil()} %",
             ),
         ],
       ),
