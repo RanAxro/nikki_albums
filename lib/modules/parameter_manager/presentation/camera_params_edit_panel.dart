@@ -53,6 +53,7 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
 
   final LightSelectorHandler lightSelectorHandler = const LightSelectorHandler();
   final FilterSelectorHandler filterSelectorHandler = const FilterSelectorHandler();
+  final NikkiPoseSelectorHandler nikkiPoseSelectorHandler = const NikkiPoseSelectorHandler();
   final MomoPoseSelectorHandler momoPoseSelectorHandler = const MomoPoseSelectorHandler();
 
   Widget _buildSwitchCard({
@@ -510,6 +511,42 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                 },
               ),
 
+              _buildSelectorCard<int>(
+                context: context,
+                text: AppText.tr("infinity_nikki.media_params.pose"),
+                getValue: () => controller.cameraParams.nikkiPoseInfo?.poseId ?? 0,
+                getDisplay: () => nikkiPoseSelectorHandler.getValueText(controller.cameraParams.nikkiPoseInfo?.poseId ?? 0),
+                selectorHandler: nikkiPoseSelectorHandler,
+                onChanged: (int? id) async{
+                  controller.cameraParams = controller.cameraParams.copyWith(
+                    nikkiPoseInfo: CameraParamsNikkiPoseInfo(
+                      poseId: id ?? 0,
+                      playingPercent: controller.cameraParams.nikkiPoseInfo?.playingPercent ?? 0,
+                      inIdle: controller.cameraParams.nikkiPoseInfo?.inIdle ?? false,
+                    ),
+                  );
+                },
+                isBuildZone: () => controller.cameraParams.nikkiPoseInfo?.poseId == 0 ? null : controller.cameraParams.nikkiPoseInfo?.poseId,
+                zoneBuilder: (int nikkiPose){
+                  return _buildSliderCard(
+                    context: context,
+                    text: AppText.tr("infinity_nikki.media_params.pose_time"),
+                    getValue: () => controller.cameraParams.nikkiPoseInfo?.playingPercent ?? 0,
+                    getDisplay: (double time) => "${(time * 100).ceil()} %",
+                    onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWith(nikkiPoseInfo: CameraParamsNikkiPoseInfo(
+                      poseId: nikkiPose,
+                      playingPercent: newValue,
+                      inIdle: controller.cameraParams.nikkiPoseInfo?.inIdle ?? false,
+                    )),
+                  );
+                },
+                getImageUrl: (int nikkiPose){
+                  if(config == null) return null;
+                  return nikkiPoseSelectorHandler.getValueImageUrl(config, nikkiPose);
+                },
+                getCacheKey: (int nikkiPose) => nikkiPose.toString(),
+              ),
+
               _buildSwitchCard(
                 context: context,
                 text: AppText.tr("infinity_nikki.media_params.momo_hidden"),
@@ -557,10 +594,12 @@ class _CameraParamsEditPanelState extends State<CameraParamsEditPanel>{
                             zoneBuilder: (int momoPose){
                               return _buildSliderCard(
                                 context: context,
-                                text: AppText(""),
-                                getValue: () => 0,
-                                getDisplay: (double time) => "$time s",
-                                usable: false,
+                                text: AppText.tr("infinity_nikki.media_params.momo_pose_time"),
+                                getValue: () => controller.cameraParams.momo?.mapOrNull(disable: (CameraParamsMomoHidden_Disable momoHiddenDisable){
+                                  return momoHiddenDisable.momoPoseTime;
+                                }) ?? 0,
+                                getDisplay: (double time) => "${(time * 100).ceil()} %",
+                                onChanged: (double newValue) => controller.cameraParams = controller.cameraParams.copyWithMomo(momo: momoHiddenDisable.copyWith(momoPoseTime: newValue)),
                               );
                             },
                             getImageUrl: (int momoPose){
