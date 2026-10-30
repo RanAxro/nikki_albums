@@ -5,6 +5,8 @@ import "package:nikki_albums/src/rust/nuan5_params/structs/nikki_photo_params.da
 import "package:nikki_albums/src/rust/nuan5_params/structs/clock_in_photo_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/collage_params.dart";
 import "package:nikki_albums/src/rust/nuan5_params/structs/cloth_diy_params.dart";
+import "package:nikki_albums/modules/nuan5_params/domain/config.dart";
+import "package:nikki_albums/modules/nuan5_params/presentation/miraland_map.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/utils/clipboard.dart";
@@ -141,6 +143,7 @@ TreeNode genDiyParams(ClothDiyParams params){
 TreeNode genPhotographyParams(PhotographyParams params){
   return TreeNode(
     title: trText("photography_params"),
+    initiallyExpanded: true,
     children: [
       params.edit.when(
         enabled: (EditPhotoParams editPhotoParams){
@@ -179,24 +182,7 @@ TreeNode genPhotographyParams(PhotographyParams params){
         ),
 
       if(params.location != null)
-        TreeNode(
-          title: trText("location"),
-          icon: Builder(
-            builder: (BuildContext context){
-              return Icon(Icons.map, color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onEnabledColor);
-            },
-          ),
-          /// TODO
-          tooltip: trText("click_to_view_map", category: "common"),
-          message: trText("location_m"),
-          onClick: (BuildContext context){
-            AppToast.showMessage(
-              context: frameKey.currentContext!,
-              message: trText("lack_data", category: "common"),
-              state: false,
-            );
-          },
-        ),
+        genLocationParams(params.location!),
 
       if(params.weather != null)
         TreeNode(
@@ -258,6 +244,66 @@ TreeNode genPhotographyParams(PhotographyParams params){
       ),
 
     ],
+  );
+}
+
+TreeNode genLocationParams(LocationParams params){
+  return TreeNode(
+    title: trText("location"),
+    icon: Builder(
+      builder: (BuildContext context){
+        return Icon(Icons.map, color: AppColorScheme.of(context).byRole(ColorRole.of(context)).onEnabledColor);
+      },
+    ),
+    /// TODO
+    tooltip: trText("click_to_view_map", category: "common"),
+    message: trText(params.worldId.toString(), category: "world"),
+    extra: IgnorePointer(
+      child: RFutureBuilder(
+        future: GlobalNuan5Config.init(),
+        builder: (BuildContext context, Nuan5Config? config){
+          final Nuan5WorldMapTileInfo? info = config?.world[params.worldId]?.mapTileInfo;
+          if(info == null){
+            return block0;
+          }
+
+          return SizedBox(
+            width: smallCardMaxHeight * 2,
+            height: smallCardMaxHeight,
+            child: MiralandMap(
+              markerPoint: Offset(params.pos.$1, params.pos.$2),
+              info: info,
+            ),
+          );
+        },
+      ),
+    ),
+    onClick: (BuildContext context) async{
+      copyTextToClipboard("(${params.pos.$1}, ${params.pos.$2})");
+
+      final Nuan5Config? config = await GlobalNuan5Config.init();
+      if(config != null && context.mounted){
+        final Nuan5WorldMapTileInfo? info = config.world[params.worldId]?.mapTileInfo;
+        if(info != null){
+          showAppDialog(
+            context: context,
+            builder: (context){
+              return MiralandMap(
+                markerPoint: Offset(params.pos.$1, params.pos.$2),
+                info: info,
+              );
+            }
+          );
+          return;
+        }
+      }
+
+      AppToast.showMessage(
+        context: frameKey.currentContext!,
+        message: trText("lack_data", category: "common"),
+        state: false,
+      );
+    },
   );
 }
 
