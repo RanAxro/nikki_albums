@@ -3602,13 +3602,13 @@ impl SseDecode for crate::nuan5_params::structs::camera_params::CameraParamsMomo
 impl SseDecode for crate::nuan5_params::structs::camera_params::CameraParamsNikkiPoseInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_nikkiPose = <i64>::sse_decode(deserializer);
-        let mut var_nikkiPoseTime = <f64>::sse_decode(deserializer);
-        let mut var_nikkiPoseState = <i64>::sse_decode(deserializer);
+        let mut var_poseId = <i64>::sse_decode(deserializer);
+        let mut var_playingPercent = <Option<f64>>::sse_decode(deserializer);
+        let mut var_inIdle = <bool>::sse_decode(deserializer);
         return crate::nuan5_params::structs::camera_params::CameraParamsNikkiPoseInfo {
-            nikki_pose: var_nikkiPose,
-            nikki_pose_time: var_nikkiPoseTime,
-            nikki_pose_state: var_nikkiPoseState,
+            pose_id: var_poseId,
+            playing_percent: var_playingPercent,
+            in_idle: var_inIdle,
         };
     }
 }
@@ -5505,6 +5505,17 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
     }
 }
 
+impl SseDecode for Option<f64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<f64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::config::common::file_reader_config::FileReaderConfig> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6405,13 +6416,13 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::RichCameraP
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::RichCameraParamsNikkiPoseInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_nikkiPose = <i64>::sse_decode(deserializer);
-        let mut var_nikkiPoseTime = <f64>::sse_decode(deserializer);
-        let mut var_nikkiPoseState = <i64>::sse_decode(deserializer);
+        let mut var_poseId = <i64>::sse_decode(deserializer);
+        let mut var_playingPercent = <Option<f64>>::sse_decode(deserializer);
+        let mut var_inIdle = <bool>::sse_decode(deserializer);
         return crate::nuan5_params::structs::nikki_photo_params::RichCameraParamsNikkiPoseInfo {
-            nikki_pose: var_nikkiPose,
-            nikki_pose_time: var_nikkiPoseTime,
-            nikki_pose_state: var_nikkiPoseState,
+            pose_id: var_poseId,
+            playing_percent: var_playingPercent,
+            in_idle: var_inIdle,
         };
     }
 }
@@ -7521,9 +7532,9 @@ impl flutter_rust_bridge::IntoDart
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
-            self.nikki_pose.into_into_dart().into_dart(),
-            self.nikki_pose_time.into_into_dart().into_dart(),
-            self.nikki_pose_state.into_into_dart().into_dart(),
+            self.pose_id.into_into_dart().into_dart(),
+            self.playing_percent.into_into_dart().into_dart(),
+            self.in_idle.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -9379,9 +9390,9 @@ impl flutter_rust_bridge::IntoDart
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
-            self.nikki_pose.into_into_dart().into_dart(),
-            self.nikki_pose_time.into_into_dart().into_dart(),
-            self.nikki_pose_state.into_into_dart().into_dart(),
+            self.pose_id.into_into_dart().into_dart(),
+            self.playing_percent.into_into_dart().into_dart(),
+            self.in_idle.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -10426,9 +10437,9 @@ impl SseEncode for crate::nuan5_params::structs::camera_params::CameraParamsMomo
 impl SseEncode for crate::nuan5_params::structs::camera_params::CameraParamsNikkiPoseInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i64>::sse_encode(self.nikki_pose, serializer);
-        <f64>::sse_encode(self.nikki_pose_time, serializer);
-        <i64>::sse_encode(self.nikki_pose_state, serializer);
+        <i64>::sse_encode(self.pose_id, serializer);
+        <Option<f64>>::sse_encode(self.playing_percent, serializer);
+        <bool>::sse_encode(self.in_idle, serializer);
     }
 }
 
@@ -11932,6 +11943,16 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
     }
 }
 
+impl SseEncode for Option<f64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <f64>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<crate::config::common::file_reader_config::FileReaderConfig> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12622,9 +12643,9 @@ crate::nuan5_params::structs::nikki_photo_params::RichCameraParamsMomoHidden::Di
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::RichCameraParamsNikkiPoseInfo {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i64>::sse_encode(self.nikki_pose, serializer);
-        <f64>::sse_encode(self.nikki_pose_time, serializer);
-        <i64>::sse_encode(self.nikki_pose_state, serializer);
+        <i64>::sse_encode(self.pose_id, serializer);
+        <Option<f64>>::sse_encode(self.playing_percent, serializer);
+        <bool>::sse_encode(self.in_idle, serializer);
     }
 }
 

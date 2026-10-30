@@ -129,26 +129,26 @@ sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
 }
 
 class CameraParamsNikkiPoseInfo {
-  final PlatformInt64 nikkiPose;
-  final double nikkiPoseTime;
-  final PlatformInt64 nikkiPoseState;
+  final PlatformInt64 poseId;
+  final double? playingPercent;
+  final bool inIdle;
 
   const CameraParamsNikkiPoseInfo({
-    required this.nikkiPose,
-    required this.nikkiPoseTime,
-    required this.nikkiPoseState,
+    required this.poseId,
+    this.playingPercent,
+    required this.inIdle,
   });
 
   @override
   int get hashCode =>
-      nikkiPose.hashCode ^ nikkiPoseTime.hashCode ^ nikkiPoseState.hashCode;
+      poseId.hashCode ^ playingPercent.hashCode ^ inIdle.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is CameraParamsNikkiPoseInfo &&
           runtimeType == other.runtimeType &&
-          nikkiPose == other.nikkiPose &&
-          nikkiPoseTime == other.nikkiPoseTime &&
-          nikkiPoseState == other.nikkiPoseState;
+          poseId == other.poseId &&
+          playingPercent == other.playingPercent &&
+          inIdle == other.inIdle;
 }

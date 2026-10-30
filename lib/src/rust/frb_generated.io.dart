@@ -263,6 +263,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
 
   @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw);
+
+  @protected
   FileReaderConfig dco_decode_box_autoadd_file_reader_config(dynamic raw);
 
   @protected
@@ -814,6 +817,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
+
+  @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
 
   @protected
   FileReaderConfig? dco_decode_opt_box_autoadd_file_reader_config(dynamic raw);
@@ -1388,6 +1394,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams sse_decode_box_autoadd_edit_photo_params(
     SseDeserializer deserializer,
   );
+
+  @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
   FileReaderConfig sse_decode_box_autoadd_file_reader_config(
@@ -2083,6 +2092,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams? sse_decode_opt_box_autoadd_dye_color_params(
     SseDeserializer deserializer,
   );
+
+  @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
   FileReaderConfig? sse_decode_opt_box_autoadd_file_reader_config(
@@ -2808,6 +2820,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     EditPhotoParams self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_file_reader_config(
@@ -3696,6 +3711,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     DyeColorParams? self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_file_reader_config(

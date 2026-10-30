@@ -164,9 +164,9 @@ pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> Camer
         },
       }),
       nikki_pose_info: v3.nikki_pose_info.as_ref().map(|info| CameraParamsNikkiPoseInfo{
-        nikki_pose: info.nikki_pose,
-        nikki_pose_time: info.nikki_pose_time,
-        nikki_pose_state: info.nikki_pose_state,
+        pose_id: info.pose_id,
+        playing_percent: info.playing_percent,
+        in_idle: info.in_idle == 1,
       }),
     },
   }
@@ -396,9 +396,9 @@ pub(crate) fn convert_rich_camera_params(data: &image_custom_data::SocialPhoto, 
       }
     }),
     nikki_pose_info: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).nikki_pose_info.as_ref().map(|info| RichCameraParamsNikkiPoseInfo{
-      nikki_pose: info.nikki_pose,
-      nikki_pose_time: info.nikki_pose_time,
-      nikki_pose_state: info.nikki_pose_state,
+      pose_id: info.pose_id,
+      playing_percent: info.playing_percent,
+      in_idle: info.in_idle,
     })
   }
 }

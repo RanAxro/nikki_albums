@@ -5,7 +5,7 @@ use super::structs::{nikki_photo_params::*, camera_params::*};
 
 pub(crate) fn revert_camera_params(data: &CameraParams) -> camera_params::CameraParams{
   camera_params::CameraParams::V3(CameraParamsV3{
-    flag: 0,
+    version: 0,
     portrait_mode: if data.portrait_mode { 1 } else { 0 },
     dx_camera_actor: data.camera_actor_loc.0,
     dy_camera_actor: data.camera_actor_loc.1,
@@ -73,9 +73,9 @@ pub(crate) fn revert_camera_params(data: &CameraParams) -> camera_params::Camera
       _ => CameraParamsV3MomoHidden::Enable,
     },
     nikki_pose_info: data.nikki_pose_info.as_ref().map(|info| CameraParamsV3NikkiPoseInfo{
-      nikki_pose: info.nikki_pose,
-      nikki_pose_time: info.nikki_pose_time,
-      nikki_pose_state: info.nikki_pose_state,
+      pose_id: info.pose_id,
+      playing_percent: info.playing_percent,
+      in_idle: if info.in_idle { 1 } else { 0 },
     }),
   })
 }

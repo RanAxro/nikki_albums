@@ -19,7 +19,7 @@ pub enum CameraParams{
 /// V1
 #[derive(Debug)]
 pub struct CameraParamsV1{
-  pub flag: i64,                        // 1
+  pub version: i64,                     // 1
 
   pub portrait_mode: i64,               // 2
 
@@ -68,7 +68,7 @@ impl Serialize for CameraParamsV1{
     S: Serializer,
   {
     let mut seq = serializer.serialize_seq(Some(31))?;
-    seq.serialize_element(&self.flag)?;
+    seq.serialize_element(&self.version)?;
     seq.serialize_element(&self.portrait_mode)?;
     seq.serialize_element(&self.dx_camera_actor)?;
     seq.serialize_element(&self.dy_camera_actor)?;
@@ -121,7 +121,7 @@ impl<'de> Deserialize<'de> for CameraParamsV1{
       where
         A: SeqAccess<'de>,
       {
-        let flag = seq.next_element()?
+        let version = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(0, &self))?;
         let portrait_mode = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(1, &self))?;
@@ -185,7 +185,7 @@ impl<'de> Deserialize<'de> for CameraParamsV1{
           .ok_or_else(|| de::Error::invalid_length(30, &self))?;
 
         Ok(CameraParamsV1{
-          flag, portrait_mode, dx_camera_actor, dy_camera_actor, dz_camera_actor,
+          version, portrait_mode, dx_camera_actor, dy_camera_actor, dz_camera_actor,
           d_pitch_camera_actor, d_yaw_camera_actor, mode, dx_camera_component,
           dy_camera_component, dz_camera_component, d_pitch_camera_component,
           d_yaw_camera_component, d_roll_camera_actor, camera_focal_length,
@@ -207,7 +207,7 @@ impl<'de> Deserialize<'de> for CameraParamsV1{
 
 #[derive(Debug)]
 pub struct CameraParamsV2{
-  pub flag: i64,                        // 1
+  pub version: i64,                     // 1
 
   pub portrait_mode: i64,               // 2
 
@@ -276,7 +276,7 @@ impl Serialize for CameraParamsV2{
       CameraParamsV2MomoHidden::Enable => 32,
       CameraParamsV2MomoHidden::Disable{ .. } => 40,
     }))?;
-    seq.serialize_element(&self.flag)?;
+    seq.serialize_element(&self.version)?;
     seq.serialize_element(&self.portrait_mode)?;
     seq.serialize_element(&self.dx_camera_actor)?;
     seq.serialize_element(&self.dy_camera_actor)?;
@@ -355,7 +355,7 @@ impl<'de> Deserialize<'de> for CameraParamsV2{
       where
         A: SeqAccess<'de>,
       {
-        let flag = seq.next_element()?
+        let version = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(0, &self))?;
         let portrait_mode = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(1, &self))?;
@@ -436,7 +436,7 @@ impl<'de> Deserialize<'de> for CameraParamsV2{
         };
 
         Ok(CameraParamsV2{
-          flag, portrait_mode, dx_camera_actor, dy_camera_actor, dz_camera_actor,
+          version, portrait_mode, dx_camera_actor, dy_camera_actor, dz_camera_actor,
           d_pitch_camera_actor, d_yaw_camera_actor, mode, dx_camera_component,
           dy_camera_component, dz_camera_component, d_pitch_camera_component,
           d_yaw_camera_component, d_roll_camera_actor, camera_focal_length,
@@ -458,7 +458,7 @@ impl<'de> Deserialize<'de> for CameraParamsV2{
 
 #[derive(Debug)]
 pub struct CameraParamsV3{
-  pub flag: i64,                        // 1
+  pub version: i64,                     // 1
 
   pub portrait_mode: i64,               // 2
 
@@ -523,9 +523,9 @@ pub enum CameraParamsV3MomoHidden{
 
 #[derive(Debug)]
 pub struct CameraParamsV3NikkiPoseInfo{
-  pub nikki_pose: i64,                  // 41
-  pub nikki_pose_time: f64,             // 42
-  pub nikki_pose_state: i64,            // 43
+  pub pose_id: i64,                     // 41
+  pub playing_percent: Option<f64>,     // 42
+  pub in_idle: u8,                      // 43
 }
 
 impl Serialize for CameraParamsV3{
@@ -534,7 +534,7 @@ impl Serialize for CameraParamsV3{
     S: Serializer,
   {
     let mut seq = serializer.serialize_seq(Some(44))?;
-    seq.serialize_element(&self.flag)?;
+    seq.serialize_element(&self.version)?;
     seq.serialize_element(&self.portrait_mode)?;
     seq.serialize_element(&self.dx_camera_actor)?;
     seq.serialize_element(&self.dy_camera_actor)?;
@@ -573,9 +573,16 @@ impl Serialize for CameraParamsV3{
     fn serialize_nikki_pose_info<S: Serializer>(s: &CameraParamsV3, seq: &mut <S as Serializer>::SerializeSeq) -> Result<(), <S as Serializer>::Error>{
       match &s.nikki_pose_info{
         Some(info) => {
-          seq.serialize_element(&info.nikki_pose)?;
-          seq.serialize_element(&info.nikki_pose_time)?;
-          seq.serialize_element(&info.nikki_pose_state)
+          seq.serialize_element(&info.pose_id)?;
+          match &info.playing_percent{
+            Some(p) => {
+              seq.serialize_element(p)?;
+            },
+            None => {
+              seq.serialize_element("")?;
+            },
+          }
+          seq.serialize_element(&info.in_idle)
         },
         None => {
           seq.serialize_element("")?;   // 41
@@ -642,7 +649,7 @@ impl<'de> Deserialize<'de> for CameraParamsV3{
       where
         A: SeqAccess<'de>,
       {
-        let flag = seq.next_element()?
+        let version = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(0, &self))?;
         let portrait_mode = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(1, &self))?;
@@ -739,18 +746,21 @@ impl<'de> Deserialize<'de> for CameraParamsV3{
           Num(f64),
           String(String),
         }
-        let nikki_pose: NikkiPoseInfoValue = seq.next_element()?
+        let nikki_pose_id: NikkiPoseInfoValue = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(40, &self))?;
-        let nikki_pose_time: NikkiPoseInfoValue = seq.next_element()?
+        let nikki_pose_playing_percent: NikkiPoseInfoValue = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(41, &self))?;
-        let nikki_pose_state: NikkiPoseInfoValue = seq.next_element()?
+        let nikki_pose_in_idle: NikkiPoseInfoValue = seq.next_element()?
           .ok_or_else(|| de::Error::invalid_length(42, &self))?;
-        let nikki_pose_info = match (nikki_pose, nikki_pose_time, nikki_pose_state){
-          (NikkiPoseInfoValue::Num(pose), NikkiPoseInfoValue::Num(time), NikkiPoseInfoValue::Num(state)) => {
+        let nikki_pose_info = match (nikki_pose_id, nikki_pose_in_idle){
+          (NikkiPoseInfoValue::Num(id), NikkiPoseInfoValue::Num(state)) => {
             Some(CameraParamsV3NikkiPoseInfo{
-              nikki_pose: pose as i64,
-              nikki_pose_time: time,
-              nikki_pose_state: state as i64,
+              pose_id: id as i64,
+              playing_percent: match nikki_pose_playing_percent{
+                NikkiPoseInfoValue::Num(playing_percent) => Some(playing_percent),
+                _ => None,
+              },
+              in_idle: state as u8,
             })
           },
           _ => None,
@@ -766,7 +776,7 @@ impl<'de> Deserialize<'de> for CameraParamsV3{
         };
 
         Ok(CameraParamsV3{
-          flag, portrait_mode, dx_camera_actor, dy_camera_actor, dz_camera_actor,
+          version, portrait_mode, dx_camera_actor, dy_camera_actor, dz_camera_actor,
           d_pitch_camera_actor, d_yaw_camera_actor, mode, dx_camera_component,
           dy_camera_component, dz_camera_component, d_pitch_camera_component,
           d_yaw_camera_component, d_roll_camera_actor, camera_focal_length,

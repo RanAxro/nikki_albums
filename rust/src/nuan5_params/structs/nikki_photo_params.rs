@@ -76,9 +76,9 @@ pub enum RichCameraParamsMomoHidden{
 
 #[derive(Clone)]
 pub struct RichCameraParamsNikkiPoseInfo{
-  pub nikki_pose: i64,
-  pub nikki_pose_time: f64,
-  pub nikki_pose_state: i64,
+  pub pose_id: i64,
+  pub playing_percent: Option<f64>,
+  pub in_idle: bool,
 }
 
 #[derive(Clone)]

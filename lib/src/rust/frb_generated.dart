@@ -3432,6 +3432,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
   FileReaderConfig dco_decode_box_autoadd_file_reader_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_file_reader_config(raw);
@@ -3768,9 +3774,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 3)
       throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
     return CameraParamsNikkiPoseInfo(
-      nikkiPose: dco_decode_i_64(arr[0]),
-      nikkiPoseTime: dco_decode_f_64(arr[1]),
-      nikkiPoseState: dco_decode_i_64(arr[2]),
+      poseId: dco_decode_i_64(arr[0]),
+      playingPercent: dco_decode_opt_box_autoadd_f_64(arr[1]),
+      inIdle: dco_decode_bool(arr[2]),
     );
   }
 
@@ -5038,6 +5044,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
+  }
+
+  @protected
   FileReaderConfig? dco_decode_opt_box_autoadd_file_reader_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_file_reader_config(raw);
@@ -5700,9 +5712,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 3)
       throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
     return RichCameraParamsNikkiPoseInfo(
-      nikkiPose: dco_decode_i_64(arr[0]),
-      nikkiPoseTime: dco_decode_f_64(arr[1]),
-      nikkiPoseState: dco_decode_i_64(arr[2]),
+      poseId: dco_decode_i_64(arr[0]),
+      playingPercent: dco_decode_opt_box_autoadd_f_64(arr[1]),
+      inIdle: dco_decode_bool(arr[2]),
     );
   }
 
@@ -6553,6 +6565,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_f_64(deserializer));
+  }
+
+  @protected
   FileReaderConfig sse_decode_box_autoadd_file_reader_config(
     SseDeserializer deserializer,
   ) {
@@ -6973,13 +6991,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_nikkiPose = sse_decode_i_64(deserializer);
-    var var_nikkiPoseTime = sse_decode_f_64(deserializer);
-    var var_nikkiPoseState = sse_decode_i_64(deserializer);
+    var var_poseId = sse_decode_i_64(deserializer);
+    var var_playingPercent = sse_decode_opt_box_autoadd_f_64(deserializer);
+    var var_inIdle = sse_decode_bool(deserializer);
     return CameraParamsNikkiPoseInfo(
-      nikkiPose: var_nikkiPose,
-      nikkiPoseTime: var_nikkiPoseTime,
-      nikkiPoseState: var_nikkiPoseState,
+      poseId: var_poseId,
+      playingPercent: var_playingPercent,
+      inIdle: var_inIdle,
     );
   }
 
@@ -8614,6 +8632,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_f_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   FileReaderConfig? sse_decode_opt_box_autoadd_file_reader_config(
     SseDeserializer deserializer,
   ) {
@@ -9486,13 +9515,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_nikkiPose = sse_decode_i_64(deserializer);
-    var var_nikkiPoseTime = sse_decode_f_64(deserializer);
-    var var_nikkiPoseState = sse_decode_i_64(deserializer);
+    var var_poseId = sse_decode_i_64(deserializer);
+    var var_playingPercent = sse_decode_opt_box_autoadd_f_64(deserializer);
+    var var_inIdle = sse_decode_bool(deserializer);
     return RichCameraParamsNikkiPoseInfo(
-      nikkiPose: var_nikkiPose,
-      nikkiPoseTime: var_nikkiPoseTime,
-      nikkiPoseState: var_nikkiPoseState,
+      poseId: var_poseId,
+      playingPercent: var_playingPercent,
+      inIdle: var_inIdle,
     );
   }
 
@@ -10459,6 +10488,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_file_reader_config(
     FileReaderConfig self,
     SseSerializer serializer,
@@ -10901,9 +10936,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_64(self.nikkiPose, serializer);
-    sse_encode_f_64(self.nikkiPoseTime, serializer);
-    sse_encode_i_64(self.nikkiPoseState, serializer);
+    sse_encode_i_64(self.poseId, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.playingPercent, serializer);
+    sse_encode_bool(self.inIdle, serializer);
   }
 
   @protected
@@ -12304,6 +12339,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_f_64(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_file_reader_config(
     FileReaderConfig? self,
     SseSerializer serializer,
@@ -13105,9 +13150,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_64(self.nikkiPose, serializer);
-    sse_encode_f_64(self.nikkiPoseTime, serializer);
-    sse_encode_i_64(self.nikkiPoseState, serializer);
+    sse_encode_i_64(self.poseId, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.playingPercent, serializer);
+    sse_encode_bool(self.inIdle, serializer);
   }
 
   @protected
