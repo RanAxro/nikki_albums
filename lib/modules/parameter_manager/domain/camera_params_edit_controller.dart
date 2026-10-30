@@ -27,10 +27,12 @@ const CameraParams defaultCameraParams = CameraParams(
   light: LightParams.none(),
   filter: FilterParams.none(),
   momo: null,
+  nikkiPoseInfo: null
 );
 
 const CameraParamsMomoHidden defaultCameraParamsMomo = CameraParamsMomoHidden.disable(
   momoPose: 0,
+  momoPoseTime: 0,
   horizontal: 100,
   distance: 100,
   height: 0,
@@ -62,6 +64,7 @@ extension CameraParamsCopyWith on CameraParams{
     double? shadows,
     LightParams? light,
     FilterParams? filter,
+    CameraParamsNikkiPoseInfo? nikkiPoseInfo,
   }){
     return CameraParams(
       cameraActorLoc: cameraActorLoc ?? this.cameraActorLoc,
@@ -84,6 +87,7 @@ extension CameraParamsCopyWith on CameraParams{
       light: light ?? this.light,
       filter: filter ?? this.filter,
       momo: momo,
+      nikkiPoseInfo: nikkiPoseInfo ?? this.nikkiPoseInfo,
     );
   }
 
@@ -111,6 +115,7 @@ extension CameraParamsCopyWith on CameraParams{
       light: light,
       filter: filter,
       momo: momo,
+      nikkiPoseInfo: nikkiPoseInfo,
     );
   }
 }
@@ -118,6 +123,7 @@ extension CameraParamsCopyWith on CameraParams{
 extension CameraParamsMomoHiddenCopyWith on CameraParamsMomoHidden{
   CameraParamsMomoHidden copyWithDisable({
     int? momoPose,
+    double? momoPoseTime,
     double? horizontal,
     double? distance,
     double? height,
@@ -130,6 +136,7 @@ extension CameraParamsMomoHiddenCopyWith on CameraParamsMomoHidden{
       enable: () => CameraParamsMomoHidden.enable(),
       disable: (
         thisMomoPose,
+        thisMomoPoseTime,
         thisHorizontal,
         thisDistance,
         thisHeight,
@@ -140,6 +147,7 @@ extension CameraParamsMomoHiddenCopyWith on CameraParamsMomoHidden{
       ){
         return CameraParamsMomoHidden.disable(
           momoPose: momoPose ?? thisMomoPose,
+          momoPoseTime: momoPoseTime ?? thisMomoPoseTime,
           horizontal: horizontal ?? thisHorizontal,
           distance: distance ?? thisDistance,
           height: height ?? thisHeight,
