@@ -167,6 +167,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_Map_i_32_nuan_5_nikki_cloth_info_None(dynamic raw);
 
   @protected
+  Map<int, Nuan5NikkiPose> dco_decode_Map_i_32_nuan_5_nikki_pose_None(
+    dynamic raw,
+  );
+
+  @protected
   Map<int, Nuan5World> dco_decode_Map_i_32_nuan_5_world_None(dynamic raw);
 
   @protected
@@ -656,6 +661,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_list_record_i_32_nuan_5_nikki_cloth_info(dynamic raw);
 
   @protected
+  List<(int, Nuan5NikkiPose)> dco_decode_list_record_i_32_nuan_5_nikki_pose(
+    dynamic raw,
+  );
+
+  @protected
   List<(int, Nuan5World)> dco_decode_list_record_i_32_nuan_5_world(dynamic raw);
 
   @protected
@@ -782,6 +792,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nuan5NikkiClothInfo dco_decode_nuan_5_nikki_cloth_info(dynamic raw);
+
+  @protected
+  Nuan5NikkiPose dco_decode_nuan_5_nikki_pose(dynamic raw);
 
   @protected
   Nuan5Table dco_decode_nuan_5_table(dynamic raw);
@@ -1029,6 +1042,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   (int, Nuan5NikkiClothInfo) dco_decode_record_i_32_nuan_5_nikki_cloth_info(
     dynamic raw,
   );
+
+  @protected
+  (int, Nuan5NikkiPose) dco_decode_record_i_32_nuan_5_nikki_pose(dynamic raw);
 
   @protected
   (int, Nuan5World) dco_decode_record_i_32_nuan_5_world(dynamic raw);
@@ -1288,6 +1304,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   Map<int, Nuan5NikkiClothInfo>
   sse_decode_Map_i_32_nuan_5_nikki_cloth_info_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<int, Nuan5NikkiPose> sse_decode_Map_i_32_nuan_5_nikki_pose_None(
     SseDeserializer deserializer,
   );
 
@@ -1907,6 +1928,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<(int, Nuan5NikkiPose)> sse_decode_list_record_i_32_nuan_5_nikki_pose(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(int, Nuan5World)> sse_decode_list_record_i_32_nuan_5_world(
     SseDeserializer deserializer,
   );
@@ -2069,6 +2095,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nuan5NikkiClothInfo sse_decode_nuan_5_nikki_cloth_info(
     SseDeserializer deserializer,
   );
+
+  @protected
+  Nuan5NikkiPose sse_decode_nuan_5_nikki_pose(SseDeserializer deserializer);
 
   @protected
   Nuan5Table sse_decode_nuan_5_table(SseDeserializer deserializer);
@@ -2402,6 +2431,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Nuan5NikkiPose) sse_decode_record_i_32_nuan_5_nikki_pose(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (int, Nuan5World) sse_decode_record_i_32_nuan_5_world(
     SseDeserializer deserializer,
   );
@@ -2715,6 +2749,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_i_32_nuan_5_nikki_cloth_info_None(
     Map<int, Nuan5NikkiClothInfo> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_32_nuan_5_nikki_pose_None(
+    Map<int, Nuan5NikkiPose> self,
     SseSerializer serializer,
   );
 
@@ -3481,6 +3521,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_nuan_5_nikki_pose(
+    List<(int, Nuan5NikkiPose)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_world(
     List<(int, Nuan5World)> self,
     SseSerializer serializer,
@@ -3702,6 +3748,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_nuan_5_nikki_cloth_info(
     Nuan5NikkiClothInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_nuan_5_nikki_pose(
+    Nuan5NikkiPose self,
     SseSerializer serializer,
   );
 
@@ -4098,6 +4150,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_32_nuan_5_nikki_cloth_info(
     (int, Nuan5NikkiClothInfo) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_i_32_nuan_5_nikki_pose(
+    (int, Nuan5NikkiPose) self,
     SseSerializer serializer,
   );
 

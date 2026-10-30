@@ -6,7 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clear`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encode_raw`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `encoded_len`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`, `merge_field`
 
 class Nuan5Cloth {
   final int clothType;
@@ -193,6 +193,7 @@ class Nuan5Config {
   final Map<int, Nuan5ClothProp> clothProp;
   final Map<int, Nuan5ClothTag> clothTag;
   final Map<int, Nuan5NikkiClothInfo> nikkiClothInfo;
+  final Map<int, Nuan5NikkiPose> nikkiPose;
   final Map<int, Nuan5World> world;
 
   const Nuan5Config({
@@ -212,6 +213,7 @@ class Nuan5Config {
     required this.clothProp,
     required this.clothTag,
     required this.nikkiClothInfo,
+    required this.nikkiPose,
     required this.world,
   });
 
@@ -241,6 +243,7 @@ class Nuan5Config {
       clothProp.hashCode ^
       clothTag.hashCode ^
       nikkiClothInfo.hashCode ^
+      nikkiPose.hashCode ^
       world.hashCode;
 
   @override
@@ -264,6 +267,7 @@ class Nuan5Config {
           clothProp == other.clothProp &&
           clothTag == other.clothTag &&
           nikkiClothInfo == other.nikkiClothInfo &&
+          nikkiPose == other.nikkiPose &&
           world == other.world;
 }
 
@@ -414,6 +418,7 @@ class Nuan5NetworkImage {
   final Nuan5NetworkImageItem? clothType;
   final Nuan5NetworkImageItem? clothProp;
   final Nuan5NetworkImageItem? clothTag;
+  final Nuan5NetworkImageItem? nikkiPose;
 
   const Nuan5NetworkImage({
     this.light,
@@ -425,6 +430,7 @@ class Nuan5NetworkImage {
     this.clothType,
     this.clothProp,
     this.clothTag,
+    this.nikkiPose,
   });
 
   static Future<Nuan5NetworkImage> default_() =>
@@ -440,7 +446,8 @@ class Nuan5NetworkImage {
       diyPattern.hashCode ^
       clothType.hashCode ^
       clothProp.hashCode ^
-      clothTag.hashCode;
+      clothTag.hashCode ^
+      nikkiPose.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -455,7 +462,8 @@ class Nuan5NetworkImage {
           diyPattern == other.diyPattern &&
           clothType == other.clothType &&
           clothProp == other.clothProp &&
-          clothTag == other.clothTag;
+          clothTag == other.clothTag &&
+          nikkiPose == other.nikkiPose;
 }
 
 class Nuan5NetworkImageItem {
@@ -508,6 +516,21 @@ class Nuan5NikkiClothInfo {
           props == other.props &&
           majorProp == other.majorProp &&
           tags == other.tags;
+}
+
+class Nuan5NikkiPose {
+  const Nuan5NikkiPose();
+
+  static Future<Nuan5NikkiPose> default_() =>
+      RustLib.instance.api.crateNuan5DatabaseModelNuan5NikkiPoseDefault();
+
+  @override
+  int get hashCode => 0;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nuan5NikkiPose && runtimeType == other.runtimeType;
 }
 
 class Nuan5Table {

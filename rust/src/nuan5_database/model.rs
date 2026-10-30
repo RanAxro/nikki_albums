@@ -53,6 +53,9 @@ pub struct Nuan5Config{
   #[prost(map = "int32, message", tag = "18")]
   pub nikki_cloth_info: HashMap<i32, Nuan5NikkiClothInfo>,
 
+  #[prost(map = "int32, message", tag = "21")]
+  pub nikki_pose: HashMap<i32, Nuan5NikkiPose>,
+
   #[prost(map = "int32, message", tag = "26")]
   pub world: HashMap<i32, Nuan5World>,
 }
@@ -99,6 +102,9 @@ pub struct Nuan5NetworkImage{
 
   #[prost(message, tag = "10")]
   pub cloth_tag: Option<Nuan5NetworkImageItem>,
+
+  #[prost(message, tag = "11")]
+  pub nikki_pose: Option<Nuan5NetworkImageItem>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -251,7 +257,12 @@ pub struct Nuan5NikkiClothInfo{
 }
 
 #[derive(Clone, PartialEq)]
-#[derive(Serialize, Deserialize)]
+#[derive(Message)]
+pub struct Nuan5NikkiPose{
+
+}
+
+#[derive(Clone, PartialEq)]
 #[derive(Message)]
 pub struct Nuan5World{
   #[prost(message, optional, tag = "1")]
@@ -259,7 +270,6 @@ pub struct Nuan5World{
 }
 
 #[derive(Clone, PartialEq)]
-#[derive(Serialize, Deserialize)]
 #[derive(Message)]
 pub struct Nuan5WorldMapTileInfo{
   #[prost(string, tag = "1")]
