@@ -41,6 +41,7 @@
       "click_to_view_map": "点击定位到地图",
       "lack_data": "数据缺失",
       "outdated_version": "2.9版本及之前的图片暂不支持查看拍摄地点",
+      "lack_world_map": "该地点暂不支持查看地图",
       "click_to_copy": "点击复制",
       "click_to_copy_param": "点击复制参数"
     },

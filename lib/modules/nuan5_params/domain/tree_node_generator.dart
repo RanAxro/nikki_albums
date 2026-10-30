@@ -303,7 +303,7 @@ TreeNode genLocationParams(LocationParams params){
       if(info == null){
         AppToast.showMessage(
           context: frameKey.currentContext!,
-          message: trText("lack_data", category: "common"),
+          message: trText("lack_world_map", category: "common"),
           state: false,
         );
         return;

@@ -14,6 +14,7 @@
       "click_to_view_map": "Click to locate on the map",
       "lack_data": "Data missing",
       "outdated_version": "Images in version 2.9 and earlier versions do not currently support viewing the shooting location.",
+      "lack_world_map": "This location is currently not supported for map viewing.",
       "click_to_copy_param": "Click to copy parameters"
     },
     "media_params": {
