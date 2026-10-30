@@ -54,6 +54,8 @@ TreeNode genNikkiPhotoParams(NikkiPhotoParams params){
     title: trText("nikki_photo_params"),
     initiallyExpanded: true,
     children: [
+      if(params.multiPlayer != null)
+        genMultiPlayerParams(params.multiPlayer!),
       genPhotographyParams(params.photography),
       if(params.camera != null)
         genCameraParams(params.camera!),
@@ -141,11 +143,36 @@ TreeNode genDiyParams(ClothDiyParams params){
   );
 }
 
+TreeNode genMultiPlayerParams(MultiPlayerParams params){
+  return TreeNode(
+    title: trText("multi_player_params"),
+    children: [
+      TreeNode(
+        title: trText("another_pose"),
+        message: trText(params.poseId.toString(), category: "nikki_pose"),
+        children: [
+          if(params.posePlayingPercent != null)
+            TreeNode(
+              title: trText("pose_time"),
+              message: "${(params.posePlayingPercent! * 100).ceil()} %",
+            ),
+        ],
+      ),
+    ]
+  );
+}
+
 TreeNode genPhotographyParams(PhotographyParams params){
   return TreeNode(
     title: trText("photography_params"),
     initiallyExpanded: true,
     children: [
+      if(params.photoMode != null)
+        TreeNode(
+          title: trText("photo_mode"),
+          message: trText(params.photoMode.toString(), category: "photo_mode"),
+        ),
+
       params.edit.when(
         enabled: (EditPhotoParams editPhotoParams){
           return TreeNode(
@@ -187,8 +214,18 @@ TreeNode genPhotographyParams(PhotographyParams params){
 
       if(params.weather != null)
         TreeNode(
-          title: trText("weather.name"),
-          message: trText("weather.${Weather.fromFlag(params.weather).name}"),
+          title: trText("weather"),
+          message: trText(params.weather.toString(), category: "weather"),
+        ),
+      if(params.windIntensity != null)
+        TreeNode(
+          title: trText("wind_intensity"),
+          message: trText(params.windIntensity.toString(), category: "wind_intensity"),
+        ),
+      if(params.windDirection != null)
+        TreeNode(
+          title: trText("wind_direction"),
+          message: trText(params.windDirection.toString(), category: "wind_direction"),
         ),
 
       TreeNode(
