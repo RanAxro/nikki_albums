@@ -259,6 +259,43 @@
       "allOn": "All On",
       "allOff": "All Off",
       "custom": "Custom"
+    },
+    "photo_mode": {
+      "0": "Regular Shot",
+      "1": "Moment Capturer",
+      "2": "Online mode",
+      "3": "Screenshot"
+    },
+    "wind_intensity": {
+      "-1": "Unknown",
+      "0": "No Wind",
+      "1": "Light Wind",
+      "2": "Moderate Wind",
+      "3": "Strong Wind",
+      "4": "Very Strong Wind"
+    },
+    "wind_direction": {
+      "-1": "Unknown",
+      "0": "East",
+      "1": "South",
+      "2": "West",
+      "3": "North",
+      "4": "Southeast",
+      "5": "Southwest",
+      "6": "Northeast",
+      "7": "Northwest",
+      "8": "None"
+    },
+    "weather": {
+      "-1": "Unknown",
+      "0": "Sunny",
+      "1": "Cloudy",
+      "2": "Rainy",
+      "3": "Thunderstorm",
+      "4": "Rainbow",
+      "5": "WaterspoutCloudy",
+      "6": "WaterspoutRainy",
+      "7": "StarSea"
     }
   }
 }
