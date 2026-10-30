@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::ops::{Deref, DerefMut};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use serde::de::DeserializeOwned;
 
 pub const ID_MAP_TOKEN: &str = "IdMap";
 
@@ -95,5 +96,46 @@ impl<T> OptionMap<T>{
       OptionMap::Some(v) => Some(&v),
       OptionMap::None{} => None,
     }
+  }
+}
+
+
+#[derive(Clone)]
+pub enum OptionValue<T: Serialize + DeserializeOwned>{
+  Value(T),
+  None,
+}
+
+impl<T: Serialize + DeserializeOwned> Serialize for OptionValue<T>{
+  fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+  where
+    S: Serializer
+  {
+    match self{
+      OptionValue::Value(v) => v.serialize(serializer),
+      OptionValue::None => "".serialize(serializer),
+    }
+  }
+}
+
+impl<'de, T: Serialize + DeserializeOwned> Deserialize<'de> for OptionValue<T>{
+  fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+  where
+    D: Deserializer<'de>
+  {
+    #[derive(Deserialize)]
+    enum TemporaryOptionValue<T>{
+      Value(T),
+      None(String),
+    }
+    let value: TemporaryOptionValue<T> = serde::de::Deserialize::deserialize(deserializer)?;
+    Ok(match value{
+      TemporaryOptionValue::Value(v) => {
+        OptionValue::Value(v)
+      },
+      TemporaryOptionValue::None(_) => {
+        OptionValue::None
+      },
+    })
   }
 }

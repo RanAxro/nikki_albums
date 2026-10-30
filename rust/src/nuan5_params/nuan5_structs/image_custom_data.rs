@@ -13,6 +13,13 @@ pub struct NikkiPhotoCustomData{
   #[serde(skip_serializing_if = "Option::is_none")]
   pub interactive_photo: Option<IdMap<bool>>,
 
+  #[serde(rename = "MultiPlayerHandler")]
+  pub multi_player_handler: Option<MultiPlayerHandler>,
+
+  #[serde(rename = "NormalPhotoInfo")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub normal_photo_info: Option<NormalPhotoInfo>,
+
   #[serde(rename = "PhotoWallPlugin")]
   #[serde(skip_serializing_if = "Option::is_none")]
   pub photo_wall_plugin: Option<PhotoWallPlugin>,
@@ -145,6 +152,76 @@ pub struct EditPhotoHandler{
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
+pub struct MultiPlayerHandler{
+  #[serde(rename = "RoleID")]
+  role_id: i64,
+
+  #[serde(rename = "PoseID")]
+  pose_id: OptionValue<i64>,
+
+  #[serde(rename = "PosePlayingPercent")]
+  pose_playing_percent: OptionValue<f64>,
+
+  #[serde(rename = "LocalPoseID")]
+  local_pose_id: OptionValue<i64>,
+
+  #[serde(rename = "LocalPlayType")]
+  local_play_type: i8,
+
+  #[serde(rename = "OtherPlayType")]
+  other_play_type: i8,
+
+  #[serde(rename = "LocalTransforms")]
+  local_transforms: Option<String>
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct NormalPhotoInfo{
+  #[serde(rename = "PhotoMode")]
+  pub photo_mode: i8,
+
+  #[serde(rename = "PlaceableObjIDs")]
+  pub placeable_obj_ids: AdaptiveArray<String>,
+
+  #[serde(rename = "WindIntensity")]
+  pub wind_intensity: i8,
+
+  #[serde(rename = "WindDirection")]
+  pub wind_direction: i8,
+
+  // 仅 PhotoMode == 3，即游戏截图时存在
+  #[serde(rename = "Time")]
+  pub time: Option<Time>,
+
+  #[serde(rename = "WeatherType")]
+  weather_type: Option<i8>,
+
+  #[serde(rename = "PhotoInfo")]
+  photo_info: Option<NormalOutfitInfo>,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct NormalOutfitInfo{
+  #[serde(rename = "IsOutfitReplayable")]
+  pub is_outfit_replayable: bool,
+
+  #[serde(rename = "nikkiClothes")]
+  pub nikki_clothes: AdaptiveArray<i64>,
+
+  #[serde(rename = "nikkiDIY")]
+  pub nikki_diy: AdaptiveArray<NikkiDIY>,
+
+  #[serde(rename = "magicballColorIds")]
+  pub magicball_color_ids: Option<AdaptiveArray<i64>>,
+
+  #[serde(rename = "nikkiWeaponTagName")]
+  pub nikki_weapon_tag_name: Option<String>,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
 pub struct PhotoWallPlugin{
   #[serde(rename = "photoID")]
   pub photo_id: AdaptiveArray<i64>,
@@ -209,7 +286,7 @@ pub struct SocialPhoto{
   pub weapon_snap_shot: Option<WeaponSnapShot>,
 
   #[serde(rename = "WeatherType")]
-  pub weather_type: i64,
+  pub weather_type: i8,
 }
 
 #[with_transform_fields(loc = 3, scale = 3, rot = 3)]
