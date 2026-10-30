@@ -230,6 +230,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CameraParamsNikkiPoseInfo
+  dco_decode_box_autoadd_camera_params_nikki_pose_info(dynamic raw);
+
+  @protected
   ClockInPhotoParams dco_decode_box_autoadd_clock_in_photo_params(dynamic raw);
 
   @protected
@@ -338,6 +342,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_box_autoadd_rich_camera_params_momo_hidden(dynamic raw);
 
   @protected
+  RichCameraParamsNikkiPoseInfo
+  dco_decode_box_autoadd_rich_camera_params_nikki_pose_info(dynamic raw);
+
+  @protected
   ShootingDate dco_decode_box_autoadd_shooting_date(dynamic raw);
 
   @protected
@@ -403,6 +411,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParamsMomoHidden dco_decode_camera_params_momo_hidden(dynamic raw);
+
+  @protected
+  CameraParamsNikkiPoseInfo dco_decode_camera_params_nikki_pose_info(
+    dynamic raw,
+  );
 
   @protected
   ClockInPhotoParams dco_decode_clock_in_photo_params(dynamic raw);
@@ -787,6 +800,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CameraParamsNikkiPoseInfo?
+  dco_decode_opt_box_autoadd_camera_params_nikki_pose_info(dynamic raw);
+
+  @protected
   ClothDiyParam? dco_decode_opt_box_autoadd_cloth_diy_param(dynamic raw);
 
   @protected
@@ -855,6 +872,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   RichCameraParamsMomoHidden?
   dco_decode_opt_box_autoadd_rich_camera_params_momo_hidden(dynamic raw);
+
+  @protected
+  RichCameraParamsNikkiPoseInfo?
+  dco_decode_opt_box_autoadd_rich_camera_params_nikki_pose_info(dynamic raw);
 
   @protected
   ShootingDate? dco_decode_opt_box_autoadd_shooting_date(dynamic raw);
@@ -1006,6 +1027,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RichCameraParamsMomoHidden dco_decode_rich_camera_params_momo_hidden(
+    dynamic raw,
+  );
+
+  @protected
+  RichCameraParamsNikkiPoseInfo dco_decode_rich_camera_params_nikki_pose_info(
     dynamic raw,
   );
 
@@ -1317,6 +1343,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CameraParamsNikkiPoseInfo
+  sse_decode_box_autoadd_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClockInPhotoParams sse_decode_box_autoadd_clock_in_photo_params(
     SseDeserializer deserializer,
   );
@@ -1467,6 +1499,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  RichCameraParamsNikkiPoseInfo
+  sse_decode_box_autoadd_rich_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ShootingDate sse_decode_box_autoadd_shooting_date(
     SseDeserializer deserializer,
   );
@@ -1556,6 +1594,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CameraParamsMomoHidden sse_decode_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CameraParamsNikkiPoseInfo sse_decode_camera_params_nikki_pose_info(
     SseDeserializer deserializer,
   );
 
@@ -2018,6 +2061,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CameraParamsNikkiPoseInfo?
+  sse_decode_opt_box_autoadd_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClothDiyParam? sse_decode_opt_box_autoadd_cloth_diy_param(
     SseDeserializer deserializer,
   );
@@ -2116,6 +2165,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   RichCameraParamsMomoHidden?
   sse_decode_opt_box_autoadd_rich_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  RichCameraParamsNikkiPoseInfo?
+  sse_decode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
     SseDeserializer deserializer,
   );
 
@@ -2321,6 +2376,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RichCameraParamsMomoHidden sse_decode_rich_camera_params_momo_hidden(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  RichCameraParamsNikkiPoseInfo sse_decode_rich_camera_params_nikki_pose_info(
     SseDeserializer deserializer,
   );
 
@@ -2693,6 +2753,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_camera_params_nikki_pose_info(
+    CameraParamsNikkiPoseInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_clock_in_photo_params(
     ClockInPhotoParams self,
     SseSerializer serializer,
@@ -2888,6 +2954,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_rich_camera_params_nikki_pose_info(
+    RichCameraParamsNikkiPoseInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_shooting_date(
     ShootingDate self,
     SseSerializer serializer,
@@ -2992,6 +3064,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_camera_params_momo_hidden(
     CameraParamsMomoHidden self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_camera_params_nikki_pose_info(
+    CameraParamsNikkiPoseInfo self,
     SseSerializer serializer,
   );
 
@@ -3590,6 +3668,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_camera_params_nikki_pose_info(
+    CameraParamsNikkiPoseInfo? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_cloth_diy_param(
     ClothDiyParam? self,
     SseSerializer serializer,
@@ -3712,6 +3796,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_rich_camera_params_momo_hidden(
     RichCameraParamsMomoHidden? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
+    RichCameraParamsNikkiPoseInfo? self,
     SseSerializer serializer,
   );
 
@@ -3964,6 +4054,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_rich_camera_params_momo_hidden(
     RichCameraParamsMomoHidden self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_rich_camera_params_nikki_pose_info(
+    RichCameraParamsNikkiPoseInfo self,
     SseSerializer serializer,
   );
 

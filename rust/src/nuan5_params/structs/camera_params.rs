@@ -25,6 +25,8 @@ pub struct CameraParams{
   pub filter: FilterParams,
   
   pub momo: Option<CameraParamsMomoHidden>,
+  
+  pub nikki_pose_info: Option<CameraParamsNikkiPoseInfo>
 }
 
 #[derive(Clone)]
@@ -32,6 +34,7 @@ pub enum CameraParamsMomoHidden{
   Enable,
   Disable{
     momo_pose: i64,
+    momo_pose_time: f64,
     horizontal: f64,
     distance: f64,
     height: f64,
@@ -40,4 +43,11 @@ pub enum CameraParamsMomoHidden{
     floating_effect: bool,
     pose_with_nikki: bool,
   },
+}
+
+#[derive(Clone)]
+pub struct CameraParamsNikkiPoseInfo{
+  pub nikki_pose: i64,
+  pub nikki_pose_time: f64,
+  pub nikki_pose_state: i64,
 }

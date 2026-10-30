@@ -3369,6 +3369,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  CameraParamsNikkiPoseInfo
+  dco_decode_box_autoadd_camera_params_nikki_pose_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_camera_params_nikki_pose_info(raw);
+  }
+
+  @protected
   ClockInPhotoParams dco_decode_box_autoadd_clock_in_photo_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_clock_in_photo_params(raw);
@@ -3576,6 +3583,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RichCameraParamsNikkiPoseInfo
+  dco_decode_box_autoadd_rich_camera_params_nikki_pose_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_rich_camera_params_nikki_pose_info(raw);
+  }
+
+  @protected
   ShootingDate dco_decode_box_autoadd_shooting_date(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_shooting_date(raw);
@@ -3693,8 +3707,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   CameraParams dco_decode_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 20)
-      throw Exception('unexpected arr length: expect 20 but see ${arr.length}');
+    if (arr.length != 21)
+      throw Exception('unexpected arr length: expect 21 but see ${arr.length}');
     return CameraParams(
       cameraActorLoc: dco_decode_record_f_64_f_64_f_64(arr[0]),
       cameraActorRot: dco_decode_record_f_64_f_64_f_64(arr[1]),
@@ -3716,6 +3730,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       light: dco_decode_light_params(arr[17]),
       filter: dco_decode_filter_params(arr[18]),
       momo: dco_decode_opt_box_autoadd_camera_params_momo_hidden(arr[19]),
+      nikkiPoseInfo: dco_decode_opt_box_autoadd_camera_params_nikki_pose_info(
+        arr[20],
+      ),
     );
   }
 
@@ -3728,17 +3745,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 1:
         return CameraParamsMomoHidden_Disable(
           momoPose: dco_decode_i_64(raw[1]),
-          horizontal: dco_decode_f_64(raw[2]),
-          distance: dco_decode_f_64(raw[3]),
-          height: dco_decode_f_64(raw[4]),
-          rotateMomo: dco_decode_f_64(raw[5]),
-          autoGroundSnap: dco_decode_bool(raw[6]),
-          floatingEffect: dco_decode_bool(raw[7]),
-          poseWithNikki: dco_decode_bool(raw[8]),
+          momoPoseTime: dco_decode_f_64(raw[2]),
+          horizontal: dco_decode_f_64(raw[3]),
+          distance: dco_decode_f_64(raw[4]),
+          height: dco_decode_f_64(raw[5]),
+          rotateMomo: dco_decode_f_64(raw[6]),
+          autoGroundSnap: dco_decode_bool(raw[7]),
+          floatingEffect: dco_decode_bool(raw[8]),
+          poseWithNikki: dco_decode_bool(raw[9]),
         );
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  CameraParamsNikkiPoseInfo dco_decode_camera_params_nikki_pose_info(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return CameraParamsNikkiPoseInfo(
+      nikkiPose: dco_decode_i_64(arr[0]),
+      nikkiPoseTime: dco_decode_f_64(arr[1]),
+      nikkiPoseState: dco_decode_i_64(arr[2]),
+    );
   }
 
   @protected
@@ -4972,6 +5005,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  CameraParamsNikkiPoseInfo?
+  dco_decode_opt_box_autoadd_camera_params_nikki_pose_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_camera_params_nikki_pose_info(raw);
+  }
+
+  @protected
   ClothDiyParam? dco_decode_opt_box_autoadd_cloth_diy_param(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_cloth_diy_param(raw);
@@ -5110,6 +5152,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return raw == null
         ? null
         : dco_decode_box_autoadd_rich_camera_params_momo_hidden(raw);
+  }
+
+  @protected
+  RichCameraParamsNikkiPoseInfo?
+  dco_decode_opt_box_autoadd_rich_camera_params_nikki_pose_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_rich_camera_params_nikki_pose_info(raw);
   }
 
   @protected
@@ -5584,8 +5635,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RichCameraParams dco_decode_rich_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 21)
-      throw Exception('unexpected arr length: expect 21 but see ${arr.length}');
+    if (arr.length != 22)
+      throw Exception('unexpected arr length: expect 22 but see ${arr.length}');
     return RichCameraParams(
       params: dco_decode_String(arr[0]),
       portraitMode: dco_decode_bool(arr[1]),
@@ -5608,6 +5659,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       pose: dco_decode_i_64(arr[18]),
       framedMoment: dco_decode_i_64(arr[19]),
       momo: dco_decode_opt_box_autoadd_rich_camera_params_momo_hidden(arr[20]),
+      nikkiPoseInfo:
+          dco_decode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
+            arr[21],
+          ),
     );
   }
 
@@ -5622,17 +5677,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 1:
         return RichCameraParamsMomoHidden_Disable(
           momoPose: dco_decode_i_64(raw[1]),
-          horizontal: dco_decode_f_64(raw[2]),
-          distance: dco_decode_f_64(raw[3]),
-          height: dco_decode_f_64(raw[4]),
-          rotateMomo: dco_decode_f_64(raw[5]),
-          autoGroundSnap: dco_decode_bool(raw[6]),
-          floatingEffect: dco_decode_bool(raw[7]),
-          poseWithNikki: dco_decode_bool(raw[8]),
+          momoPoseTime: dco_decode_f_64(raw[2]),
+          horizontal: dco_decode_f_64(raw[3]),
+          distance: dco_decode_f_64(raw[4]),
+          height: dco_decode_f_64(raw[5]),
+          rotateMomo: dco_decode_f_64(raw[6]),
+          autoGroundSnap: dco_decode_bool(raw[7]),
+          floatingEffect: dco_decode_bool(raw[8]),
+          poseWithNikki: dco_decode_bool(raw[9]),
         );
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  RichCameraParamsNikkiPoseInfo dco_decode_rich_camera_params_nikki_pose_info(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return RichCameraParamsNikkiPoseInfo(
+      nikkiPose: dco_decode_i_64(arr[0]),
+      nikkiPoseTime: dco_decode_f_64(arr[1]),
+      nikkiPoseState: dco_decode_i_64(arr[2]),
+    );
   }
 
   @protected
@@ -6405,6 +6476,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  CameraParamsNikkiPoseInfo
+  sse_decode_box_autoadd_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_camera_params_nikki_pose_info(deserializer));
+  }
+
+  @protected
   ClockInPhotoParams sse_decode_box_autoadd_clock_in_photo_params(
     SseDeserializer deserializer,
   ) {
@@ -6656,6 +6736,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RichCameraParamsNikkiPoseInfo
+  sse_decode_box_autoadd_rich_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_rich_camera_params_nikki_pose_info(deserializer));
+  }
+
+  @protected
   ShootingDate sse_decode_box_autoadd_shooting_date(
     SseDeserializer deserializer,
   ) {
@@ -6816,6 +6905,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_momo = sse_decode_opt_box_autoadd_camera_params_momo_hidden(
       deserializer,
     );
+    var var_nikkiPoseInfo =
+        sse_decode_opt_box_autoadd_camera_params_nikki_pose_info(deserializer);
     return CameraParams(
       cameraActorLoc: var_cameraActorLoc,
       cameraActorRot: var_cameraActorRot,
@@ -6837,6 +6928,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       light: var_light,
       filter: var_filter,
       momo: var_momo,
+      nikkiPoseInfo: var_nikkiPoseInfo,
     );
   }
 
@@ -6852,6 +6944,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         return CameraParamsMomoHidden_Enable();
       case 1:
         var var_momoPose = sse_decode_i_64(deserializer);
+        var var_momoPoseTime = sse_decode_f_64(deserializer);
         var var_horizontal = sse_decode_f_64(deserializer);
         var var_distance = sse_decode_f_64(deserializer);
         var var_height = sse_decode_f_64(deserializer);
@@ -6861,6 +6954,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_poseWithNikki = sse_decode_bool(deserializer);
         return CameraParamsMomoHidden_Disable(
           momoPose: var_momoPose,
+          momoPoseTime: var_momoPoseTime,
           horizontal: var_horizontal,
           distance: var_distance,
           height: var_height,
@@ -6872,6 +6966,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  CameraParamsNikkiPoseInfo sse_decode_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_nikkiPose = sse_decode_i_64(deserializer);
+    var var_nikkiPoseTime = sse_decode_f_64(deserializer);
+    var var_nikkiPoseState = sse_decode_i_64(deserializer);
+    return CameraParamsNikkiPoseInfo(
+      nikkiPose: var_nikkiPose,
+      nikkiPoseTime: var_nikkiPoseTime,
+      nikkiPoseState: var_nikkiPoseState,
+    );
   }
 
   @protected
@@ -8439,6 +8548,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  CameraParamsNikkiPoseInfo?
+  sse_decode_opt_box_autoadd_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_camera_params_nikki_pose_info(
+        deserializer,
+      ));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   ClothDiyParam? sse_decode_opt_box_autoadd_cloth_diy_param(
     SseDeserializer deserializer,
   ) {
@@ -8703,6 +8828,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_rich_camera_params_momo_hidden(
+        deserializer,
+      ));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  RichCameraParamsNikkiPoseInfo?
+  sse_decode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_rich_camera_params_nikki_pose_info(
         deserializer,
       ));
     } else {
@@ -9274,6 +9415,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_momo = sse_decode_opt_box_autoadd_rich_camera_params_momo_hidden(
       deserializer,
     );
+    var var_nikkiPoseInfo =
+        sse_decode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
+          deserializer,
+        );
     return RichCameraParams(
       params: var_params,
       portraitMode: var_portraitMode,
@@ -9296,6 +9441,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       pose: var_pose,
       framedMoment: var_framedMoment,
       momo: var_momo,
+      nikkiPoseInfo: var_nikkiPoseInfo,
     );
   }
 
@@ -9311,6 +9457,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         return RichCameraParamsMomoHidden_Enable();
       case 1:
         var var_momoPose = sse_decode_i_64(deserializer);
+        var var_momoPoseTime = sse_decode_f_64(deserializer);
         var var_horizontal = sse_decode_f_64(deserializer);
         var var_distance = sse_decode_f_64(deserializer);
         var var_height = sse_decode_f_64(deserializer);
@@ -9320,6 +9467,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_poseWithNikki = sse_decode_bool(deserializer);
         return RichCameraParamsMomoHidden_Disable(
           momoPose: var_momoPose,
+          momoPoseTime: var_momoPoseTime,
           horizontal: var_horizontal,
           distance: var_distance,
           height: var_height,
@@ -9331,6 +9479,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  RichCameraParamsNikkiPoseInfo sse_decode_rich_camera_params_nikki_pose_info(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_nikkiPose = sse_decode_i_64(deserializer);
+    var var_nikkiPoseTime = sse_decode_f_64(deserializer);
+    var var_nikkiPoseState = sse_decode_i_64(deserializer);
+    return RichCameraParamsNikkiPoseInfo(
+      nikkiPose: var_nikkiPose,
+      nikkiPoseTime: var_nikkiPoseTime,
+      nikkiPoseState: var_nikkiPoseState,
+    );
   }
 
   @protected
@@ -10209,6 +10372,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_camera_params_nikki_pose_info(
+    CameraParamsNikkiPoseInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_camera_params_nikki_pose_info(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_clock_in_photo_params(
     ClockInPhotoParams self,
     SseSerializer serializer,
@@ -10503,6 +10675,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_rich_camera_params_nikki_pose_info(
+    RichCameraParamsNikkiPoseInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_rich_camera_params_nikki_pose_info(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_shooting_date(
     ShootingDate self,
     SseSerializer serializer,
@@ -10675,6 +10856,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_light_params(self.light, serializer);
     sse_encode_filter_params(self.filter, serializer);
     sse_encode_opt_box_autoadd_camera_params_momo_hidden(self.momo, serializer);
+    sse_encode_opt_box_autoadd_camera_params_nikki_pose_info(
+      self.nikkiPoseInfo,
+      serializer,
+    );
   }
 
   @protected
@@ -10688,6 +10873,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_i_32(0, serializer);
       case CameraParamsMomoHidden_Disable(
         momoPose: final momoPose,
+        momoPoseTime: final momoPoseTime,
         horizontal: final horizontal,
         distance: final distance,
         height: final height,
@@ -10698,6 +10884,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       ):
         sse_encode_i_32(1, serializer);
         sse_encode_i_64(momoPose, serializer);
+        sse_encode_f_64(momoPoseTime, serializer);
         sse_encode_f_64(horizontal, serializer);
         sse_encode_f_64(distance, serializer);
         sse_encode_f_64(height, serializer);
@@ -10706,6 +10893,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_bool(floatingEffect, serializer);
         sse_encode_bool(poseWithNikki, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_camera_params_nikki_pose_info(
+    CameraParamsNikkiPoseInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.nikkiPose, serializer);
+    sse_encode_f_64(self.nikkiPoseTime, serializer);
+    sse_encode_i_64(self.nikkiPoseState, serializer);
   }
 
   @protected
@@ -12041,6 +12239,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_camera_params_nikki_pose_info(
+    CameraParamsNikkiPoseInfo? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_camera_params_nikki_pose_info(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_cloth_diy_param(
     ClothDiyParam? self,
     SseSerializer serializer,
@@ -12310,6 +12521,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_rich_camera_params_momo_hidden(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
+    RichCameraParamsNikkiPoseInfo? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_rich_camera_params_nikki_pose_info(
+        self,
+        serializer,
+      );
     }
   }
 
@@ -12833,6 +13060,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.momo,
       serializer,
     );
+    sse_encode_opt_box_autoadd_rich_camera_params_nikki_pose_info(
+      self.nikkiPoseInfo,
+      serializer,
+    );
   }
 
   @protected
@@ -12846,6 +13077,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_i_32(0, serializer);
       case RichCameraParamsMomoHidden_Disable(
         momoPose: final momoPose,
+        momoPoseTime: final momoPoseTime,
         horizontal: final horizontal,
         distance: final distance,
         height: final height,
@@ -12856,6 +13088,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       ):
         sse_encode_i_32(1, serializer);
         sse_encode_i_64(momoPose, serializer);
+        sse_encode_f_64(momoPoseTime, serializer);
         sse_encode_f_64(horizontal, serializer);
         sse_encode_f_64(distance, serializer);
         sse_encode_f_64(height, serializer);
@@ -12864,6 +13097,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_bool(floatingEffect, serializer);
         sse_encode_bool(poseWithNikki, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_rich_camera_params_nikki_pose_info(
+    RichCameraParamsNikkiPoseInfo self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.nikkiPose, serializer);
+    sse_encode_f_64(self.nikkiPoseTime, serializer);
+    sse_encode_i_64(self.nikkiPoseState, serializer);
   }
 
   @protected

@@ -55,13 +55,15 @@ pub struct RichCameraParams{
   pub pose: i64,
   pub framed_moment: i64,
   pub momo: Option<RichCameraParamsMomoHidden>,
+  pub nikki_pose_info: Option<RichCameraParamsNikkiPoseInfo>,
 }
 
 #[derive(Clone)]
 pub enum RichCameraParamsMomoHidden{
   Enable,
-  Disable{
+  Disable {
     momo_pose: i64,
+    momo_pose_time: f64,
     horizontal: f64,
     distance: f64,
     height: f64,
@@ -70,6 +72,13 @@ pub enum RichCameraParamsMomoHidden{
     floating_effect: bool,
     pose_with_nikki: bool,
   },
+}
+
+#[derive(Clone)]
+pub struct RichCameraParamsNikkiPoseInfo{
+  pub nikki_pose: i64,
+  pub nikki_pose_time: f64,
+  pub nikki_pose_state: i64,
 }
 
 #[derive(Clone)]

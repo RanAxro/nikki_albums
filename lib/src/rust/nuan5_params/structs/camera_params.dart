@@ -9,7 +9,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'camera_params.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`
 
 class CameraParams {
   final (double, double, double) cameraActorLoc;
@@ -32,6 +32,7 @@ class CameraParams {
   final LightParams light;
   final FilterParams filter;
   final CameraParamsMomoHidden? momo;
+  final CameraParamsNikkiPoseInfo? nikkiPoseInfo;
 
   const CameraParams({
     required this.cameraActorLoc,
@@ -54,6 +55,7 @@ class CameraParams {
     required this.light,
     required this.filter,
     this.momo,
+    this.nikkiPoseInfo,
   });
 
   @override
@@ -77,7 +79,8 @@ class CameraParams {
       shadows.hashCode ^
       light.hashCode ^
       filter.hashCode ^
-      momo.hashCode;
+      momo.hashCode ^
+      nikkiPoseInfo.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -103,7 +106,8 @@ class CameraParams {
           shadows == other.shadows &&
           light == other.light &&
           filter == other.filter &&
-          momo == other.momo;
+          momo == other.momo &&
+          nikkiPoseInfo == other.nikkiPoseInfo;
 }
 
 @freezed
@@ -113,6 +117,7 @@ sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
   const factory CameraParamsMomoHidden.enable() = CameraParamsMomoHidden_Enable;
   const factory CameraParamsMomoHidden.disable({
     required PlatformInt64 momoPose,
+    required double momoPoseTime,
     required double horizontal,
     required double distance,
     required double height,
@@ -121,4 +126,29 @@ sealed class CameraParamsMomoHidden with _$CameraParamsMomoHidden {
     required bool floatingEffect,
     required bool poseWithNikki,
   }) = CameraParamsMomoHidden_Disable;
+}
+
+class CameraParamsNikkiPoseInfo {
+  final PlatformInt64 nikkiPose;
+  final double nikkiPoseTime;
+  final PlatformInt64 nikkiPoseState;
+
+  const CameraParamsNikkiPoseInfo({
+    required this.nikkiPose,
+    required this.nikkiPoseTime,
+    required this.nikkiPoseState,
+  });
+
+  @override
+  int get hashCode =>
+      nikkiPose.hashCode ^ nikkiPoseTime.hashCode ^ nikkiPoseState.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CameraParamsNikkiPoseInfo &&
+          runtimeType == other.runtimeType &&
+          nikkiPose == other.nikkiPose &&
+          nikkiPoseTime == other.nikkiPoseTime &&
+          nikkiPoseState == other.nikkiPoseState;
 }

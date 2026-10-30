@@ -11,7 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'nikki_photo_params.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `LocationType`, `NikkiPhotoMainParams`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class ClothParams {
   final Cloth cloth;
@@ -494,6 +494,7 @@ class RichCameraParams {
   final PlatformInt64 pose;
   final PlatformInt64 framedMoment;
   final RichCameraParamsMomoHidden? momo;
+  final RichCameraParamsNikkiPoseInfo? nikkiPoseInfo;
 
   const RichCameraParams({
     required this.params,
@@ -517,6 +518,7 @@ class RichCameraParams {
     required this.pose,
     required this.framedMoment,
     this.momo,
+    this.nikkiPoseInfo,
   });
 
   @override
@@ -541,7 +543,8 @@ class RichCameraParams {
       filter.hashCode ^
       pose.hashCode ^
       framedMoment.hashCode ^
-      momo.hashCode;
+      momo.hashCode ^
+      nikkiPoseInfo.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -568,7 +571,8 @@ class RichCameraParams {
           filter == other.filter &&
           pose == other.pose &&
           framedMoment == other.framedMoment &&
-          momo == other.momo;
+          momo == other.momo &&
+          nikkiPoseInfo == other.nikkiPoseInfo;
 }
 
 @freezed
@@ -579,6 +583,7 @@ sealed class RichCameraParamsMomoHidden with _$RichCameraParamsMomoHidden {
       RichCameraParamsMomoHidden_Enable;
   const factory RichCameraParamsMomoHidden.disable({
     required PlatformInt64 momoPose,
+    required double momoPoseTime,
     required double horizontal,
     required double distance,
     required double height,
@@ -587,6 +592,31 @@ sealed class RichCameraParamsMomoHidden with _$RichCameraParamsMomoHidden {
     required bool floatingEffect,
     required bool poseWithNikki,
   }) = RichCameraParamsMomoHidden_Disable;
+}
+
+class RichCameraParamsNikkiPoseInfo {
+  final PlatformInt64 nikkiPose;
+  final double nikkiPoseTime;
+  final PlatformInt64 nikkiPoseState;
+
+  const RichCameraParamsNikkiPoseInfo({
+    required this.nikkiPose,
+    required this.nikkiPoseTime,
+    required this.nikkiPoseState,
+  });
+
+  @override
+  int get hashCode =>
+      nikkiPose.hashCode ^ nikkiPoseTime.hashCode ^ nikkiPoseState.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RichCameraParamsNikkiPoseInfo &&
+          runtimeType == other.runtimeType &&
+          nikkiPose == other.nikkiPose &&
+          nikkiPoseTime == other.nikkiPoseTime &&
+          nikkiPoseState == other.nikkiPoseState;
 }
 
 class ShootingDate {

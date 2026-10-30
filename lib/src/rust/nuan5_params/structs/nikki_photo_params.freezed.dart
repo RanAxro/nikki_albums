@@ -1447,11 +1447,11 @@ return disable(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  enable,TResult Function( PlatformInt64 momoPose,  double horizontal,  double distance,  double height,  double rotateMomo,  bool autoGroundSnap,  bool floatingEffect,  bool poseWithNikki)?  disable,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  enable,TResult Function( PlatformInt64 momoPose,  double momoPoseTime,  double horizontal,  double distance,  double height,  double rotateMomo,  bool autoGroundSnap,  bool floatingEffect,  bool poseWithNikki)?  disable,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case RichCameraParamsMomoHidden_Enable() when enable != null:
 return enable();case RichCameraParamsMomoHidden_Disable() when disable != null:
-return disable(_that.momoPose,_that.horizontal,_that.distance,_that.height,_that.rotateMomo,_that.autoGroundSnap,_that.floatingEffect,_that.poseWithNikki);case _:
+return disable(_that.momoPose,_that.momoPoseTime,_that.horizontal,_that.distance,_that.height,_that.rotateMomo,_that.autoGroundSnap,_that.floatingEffect,_that.poseWithNikki);case _:
   return orElse();
 
 }
@@ -1469,11 +1469,11 @@ return disable(_that.momoPose,_that.horizontal,_that.distance,_that.height,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  enable,required TResult Function( PlatformInt64 momoPose,  double horizontal,  double distance,  double height,  double rotateMomo,  bool autoGroundSnap,  bool floatingEffect,  bool poseWithNikki)  disable,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  enable,required TResult Function( PlatformInt64 momoPose,  double momoPoseTime,  double horizontal,  double distance,  double height,  double rotateMomo,  bool autoGroundSnap,  bool floatingEffect,  bool poseWithNikki)  disable,}) {final _that = this;
 switch (_that) {
 case RichCameraParamsMomoHidden_Enable():
 return enable();case RichCameraParamsMomoHidden_Disable():
-return disable(_that.momoPose,_that.horizontal,_that.distance,_that.height,_that.rotateMomo,_that.autoGroundSnap,_that.floatingEffect,_that.poseWithNikki);}
+return disable(_that.momoPose,_that.momoPoseTime,_that.horizontal,_that.distance,_that.height,_that.rotateMomo,_that.autoGroundSnap,_that.floatingEffect,_that.poseWithNikki);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1487,11 +1487,11 @@ return disable(_that.momoPose,_that.horizontal,_that.distance,_that.height,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  enable,TResult? Function( PlatformInt64 momoPose,  double horizontal,  double distance,  double height,  double rotateMomo,  bool autoGroundSnap,  bool floatingEffect,  bool poseWithNikki)?  disable,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  enable,TResult? Function( PlatformInt64 momoPose,  double momoPoseTime,  double horizontal,  double distance,  double height,  double rotateMomo,  bool autoGroundSnap,  bool floatingEffect,  bool poseWithNikki)?  disable,}) {final _that = this;
 switch (_that) {
 case RichCameraParamsMomoHidden_Enable() when enable != null:
 return enable();case RichCameraParamsMomoHidden_Disable() when disable != null:
-return disable(_that.momoPose,_that.horizontal,_that.distance,_that.height,_that.rotateMomo,_that.autoGroundSnap,_that.floatingEffect,_that.poseWithNikki);case _:
+return disable(_that.momoPose,_that.momoPoseTime,_that.horizontal,_that.distance,_that.height,_that.rotateMomo,_that.autoGroundSnap,_that.floatingEffect,_that.poseWithNikki);case _:
   return null;
 
 }
@@ -1535,10 +1535,11 @@ String toString() {
 
 
 class RichCameraParamsMomoHidden_Disable extends RichCameraParamsMomoHidden {
-  const RichCameraParamsMomoHidden_Disable({required this.momoPose, required this.horizontal, required this.distance, required this.height, required this.rotateMomo, required this.autoGroundSnap, required this.floatingEffect, required this.poseWithNikki}): super._();
+  const RichCameraParamsMomoHidden_Disable({required this.momoPose, required this.momoPoseTime, required this.horizontal, required this.distance, required this.height, required this.rotateMomo, required this.autoGroundSnap, required this.floatingEffect, required this.poseWithNikki}): super._();
   
 
  final  PlatformInt64 momoPose;
+ final  double momoPoseTime;
  final  double horizontal;
  final  double distance;
  final  double height;
@@ -1557,16 +1558,16 @@ $RichCameraParamsMomoHidden_DisableCopyWith<RichCameraParamsMomoHidden_Disable> 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden_Disable&&(identical(other.momoPose, momoPose) || other.momoPose == momoPose)&&(identical(other.horizontal, horizontal) || other.horizontal == horizontal)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.height, height) || other.height == height)&&(identical(other.rotateMomo, rotateMomo) || other.rotateMomo == rotateMomo)&&(identical(other.autoGroundSnap, autoGroundSnap) || other.autoGroundSnap == autoGroundSnap)&&(identical(other.floatingEffect, floatingEffect) || other.floatingEffect == floatingEffect)&&(identical(other.poseWithNikki, poseWithNikki) || other.poseWithNikki == poseWithNikki));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RichCameraParamsMomoHidden_Disable&&(identical(other.momoPose, momoPose) || other.momoPose == momoPose)&&(identical(other.momoPoseTime, momoPoseTime) || other.momoPoseTime == momoPoseTime)&&(identical(other.horizontal, horizontal) || other.horizontal == horizontal)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.height, height) || other.height == height)&&(identical(other.rotateMomo, rotateMomo) || other.rotateMomo == rotateMomo)&&(identical(other.autoGroundSnap, autoGroundSnap) || other.autoGroundSnap == autoGroundSnap)&&(identical(other.floatingEffect, floatingEffect) || other.floatingEffect == floatingEffect)&&(identical(other.poseWithNikki, poseWithNikki) || other.poseWithNikki == poseWithNikki));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,momoPose,horizontal,distance,height,rotateMomo,autoGroundSnap,floatingEffect,poseWithNikki);
+int get hashCode => Object.hash(runtimeType,momoPose,momoPoseTime,horizontal,distance,height,rotateMomo,autoGroundSnap,floatingEffect,poseWithNikki);
 
 @override
 String toString() {
-  return 'RichCameraParamsMomoHidden.disable(momoPose: $momoPose, horizontal: $horizontal, distance: $distance, height: $height, rotateMomo: $rotateMomo, autoGroundSnap: $autoGroundSnap, floatingEffect: $floatingEffect, poseWithNikki: $poseWithNikki)';
+  return 'RichCameraParamsMomoHidden.disable(momoPose: $momoPose, momoPoseTime: $momoPoseTime, horizontal: $horizontal, distance: $distance, height: $height, rotateMomo: $rotateMomo, autoGroundSnap: $autoGroundSnap, floatingEffect: $floatingEffect, poseWithNikki: $poseWithNikki)';
 }
 
 
@@ -1577,7 +1578,7 @@ abstract mixin class $RichCameraParamsMomoHidden_DisableCopyWith<$Res> implement
   factory $RichCameraParamsMomoHidden_DisableCopyWith(RichCameraParamsMomoHidden_Disable value, $Res Function(RichCameraParamsMomoHidden_Disable) _then) = _$RichCameraParamsMomoHidden_DisableCopyWithImpl;
 @useResult
 $Res call({
- PlatformInt64 momoPose, double horizontal, double distance, double height, double rotateMomo, bool autoGroundSnap, bool floatingEffect, bool poseWithNikki
+ PlatformInt64 momoPose, double momoPoseTime, double horizontal, double distance, double height, double rotateMomo, bool autoGroundSnap, bool floatingEffect, bool poseWithNikki
 });
 
 
@@ -1594,10 +1595,11 @@ class _$RichCameraParamsMomoHidden_DisableCopyWithImpl<$Res>
 
 /// Create a copy of RichCameraParamsMomoHidden
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? momoPose = null,Object? horizontal = null,Object? distance = null,Object? height = null,Object? rotateMomo = null,Object? autoGroundSnap = null,Object? floatingEffect = null,Object? poseWithNikki = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? momoPose = null,Object? momoPoseTime = null,Object? horizontal = null,Object? distance = null,Object? height = null,Object? rotateMomo = null,Object? autoGroundSnap = null,Object? floatingEffect = null,Object? poseWithNikki = null,}) {
   return _then(RichCameraParamsMomoHidden_Disable(
 momoPose: null == momoPose ? _self.momoPose : momoPose // ignore: cast_nullable_to_non_nullable
-as PlatformInt64,horizontal: null == horizontal ? _self.horizontal : horizontal // ignore: cast_nullable_to_non_nullable
+as PlatformInt64,momoPoseTime: null == momoPoseTime ? _self.momoPoseTime : momoPoseTime // ignore: cast_nullable_to_non_nullable
+as double,horizontal: null == horizontal ? _self.horizontal : horizontal // ignore: cast_nullable_to_non_nullable
 as double,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
 as double,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
 as double,rotateMomo: null == rotateMomo ? _self.rotateMomo : rotateMomo // ignore: cast_nullable_to_non_nullable

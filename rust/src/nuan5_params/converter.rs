@@ -44,6 +44,7 @@ pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> Camer
         }
       },
       momo: None,
+      nikki_pose_info: None,
     },
     camera_params::CameraParams::V2(v2) => CameraParams{
       camera_actor_loc: (v2.dx_camera_actor, v2.dy_camera_actor, v2.dz_camera_actor),
@@ -92,6 +93,7 @@ pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> Camer
           pose_with_nikki,
         } => CameraParamsMomoHidden::Disable{
           momo_pose,
+          momo_pose_time: 0.0,
           horizontal: parse_horizontal(horizontal),
           distance: parse_distance(distance),
           height: parse_height(height),
@@ -100,6 +102,71 @@ pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> Camer
           floating_effect: if floating_effect == 1 { true } else { false },
           pose_with_nikki: if pose_with_nikki == 1 { true } else { false },
         },
+      }),
+      nikki_pose_info: None,
+    },
+    camera_params::CameraParams::V3(v3) => CameraParams{
+      camera_actor_loc: (v3.dx_camera_actor, v3.dy_camera_actor, v3.dz_camera_actor),
+      camera_actor_rot: (v3.d_yaw_camera_actor, v3.d_pitch_camera_actor, v3.d_roll_camera_actor),
+      camera_component_loc: (v3.dx_camera_component, v3.dy_camera_component, v3.dz_camera_component),
+      camera_component_rot: (v3.d_yaw_camera_component, v3.d_pitch_camera_component, v3.d_roll_camera_component),
+      portrait_mode: v3.portrait_mode == 1,
+      camera_focal_length: v3.camera_focal_length,
+      aperture_section: v3.aperture_section,
+      vignette_intensity: v3.vignette_intensity,
+      bloom_intensity: parse_bloom_intensity(v3.bloom_intensity),
+      bloom_threshold: parse_bloom_threshold(v3.bloom_threshold),
+      brightness: parse_brightness(v3.brightness),
+      exposure: parse_exposure(v3.exposure),
+      contrast: parse_contrast(v3.contrast),
+      saturation: parse_saturation(v3.saturation),
+      vibrance: parse_vibrance(v3.vibrance),
+      highlights: parse_highlights(v3.highlights),
+      shadows: parse_shadows(v3.shadows),
+      light: if v3.light_id == "None" {
+        LightParams::None
+      }else{
+        LightParams::Some{
+          id: v3.light_id.clone(),
+          strength: v3.light_strength,
+        }
+      },
+      filter: if v3.filter_id == "None" {
+        FilterParams::None
+      }else{
+        FilterParams::Some{
+          id: v3.filter_id.clone(),
+          strength: v3.filter_strength,
+        }
+      },
+      momo: Some(match v3.momo{
+        camera_params::CameraParamsV3MomoHidden::Enable => CameraParamsMomoHidden::Enable,
+        camera_params::CameraParamsV3MomoHidden::Disable{
+          momo_pose,
+          horizontal,
+          distance,
+          height,
+          rotate_momo,
+          auto_ground_snap,
+          floating_effect,
+          pose_with_nikki,
+          momo_pose_time,
+        } => CameraParamsMomoHidden::Disable{
+          momo_pose,
+          momo_pose_time,
+          horizontal: parse_horizontal(horizontal),
+          distance: parse_distance(distance),
+          height: parse_height(height),
+          rotate_momo: parse_rotate_momo(rotate_momo),
+          auto_ground_snap: if auto_ground_snap == 1 { true } else { false },
+          floating_effect: if floating_effect == 1 { true } else { false },
+          pose_with_nikki: if pose_with_nikki == 1 { true } else { false },
+        },
+      }),
+      nikki_pose_info: v3.nikki_pose_info.as_ref().map(|info| CameraParamsNikkiPoseInfo{
+        nikki_pose: info.nikki_pose,
+        nikki_pose_time: info.nikki_pose_time,
+        nikki_pose_state: info.nikki_pose_state,
       }),
     },
   }
@@ -250,6 +317,7 @@ pub(crate) fn convert_rich_camera_params(data: &image_custom_data::SocialPhoto, 
     light: LightParams::None,
     filter: FilterParams::None,
     momo: None,
+    nikki_pose_info: None,
   };
   
   let params = parse_camera_params(&data.camera_params).as_ref().map(convert_camera_params);
@@ -306,6 +374,7 @@ pub(crate) fn convert_rich_camera_params(data: &image_custom_data::SocialPhoto, 
         CameraParamsMomoHidden::Enable => RichCameraParamsMomoHidden::Enable,
         CameraParamsMomoHidden::Disable{
           momo_pose,
+          momo_pose_time,
           horizontal,
           distance,
           height,
@@ -315,6 +384,7 @@ pub(crate) fn convert_rich_camera_params(data: &image_custom_data::SocialPhoto, 
           pose_with_nikki,
         } => RichCameraParamsMomoHidden::Disable{
           momo_pose,
+          momo_pose_time,
           horizontal,
           distance,
           height,
@@ -325,6 +395,11 @@ pub(crate) fn convert_rich_camera_params(data: &image_custom_data::SocialPhoto, 
         },
       }
     }),
+    nikki_pose_info: params.as_ref().unwrap_or(&DEFAULT_CAMERA_PARAMS).nikki_pose_info.as_ref().map(|info| RichCameraParamsNikkiPoseInfo{
+      nikki_pose: info.nikki_pose,
+      nikki_pose_time: info.nikki_pose_time,
+      nikki_pose_state: info.nikki_pose_state,
+    })
   }
 }
 
