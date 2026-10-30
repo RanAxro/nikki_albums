@@ -59,22 +59,12 @@ Join our group to share usage tips with fellow players, report encountered issue
 ***
 
 # Changelog
-## v3.011
-- Features
-  1. Added a search function to the Parameter Manager, supporting searches by name, tag, clothing name, suit name, light and filter
-  2. Automatically remove extra text and irrelevant symbols from share codes during pasting or manual entry
-  3. Added the feature to generate QR codes for LookBook Codes
-  4. Sort LookBook Code history records in reverse chronological order
-  5. Support custom storage paths for parameter data
-
-- Performance & Optimization
-  1. Optimized the UI
-
-- Bug Fixes
-  1. Fixed the bug causing incorrect display of the color palette in certain scenarios
-  2. Fixed the bug of wrong texture name display
-  3. Fixed the bug with incorrect display of the base color parameter for texture rendering
-
+## v3.012
+1. Support viewing the shooting location of the pictures and locating them on the map. [The function is not available for pictures taken before version 2.10 (2026.9.24).]
+2. Support parsing parameters such as shooting mode, wind direction, and wind force of the pictures.
+3. Support parsing the action parameters used by the other person in a double-person photo.
+4. Camera parameters support parameters for Wanyan's actions, progress of Wanyan's actions, and progress bar for Daqian's actions.  
+[The functions mentioned in points 2, 3, and 4 are not supported for pictures taken before version 2.11 (2026.10.30).]
 
 ***
 

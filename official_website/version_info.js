@@ -1,19 +1,19 @@
 const config = {
-	"v3.011.02": {
-		"releaseDate": "2026-8-20",
+	"v3.012": {
+		"releaseDate": "2026-10-31",
 		"description": {
-			"de": "Behebt einen Bug, bei dem die LookBook‑Code‑Daten unter bestimmten Umständen falsch angezeigt werden",
-			"en": "Fix the bug where LookBook Code data is displayed incorrectly in some cases",
-			"es": "Corrige el error por el que los datos del código LookBook se muestran incorrectamente en algunos casos",
-			"fr": "Corrige le bogue où les données du code LookBook s'affichent incorrectement dans certains cas",
-			"id": "Memperbaiki bug di mana data LookBook Code ditampilkan salah dalam beberapa kondisi",
-			"it": "Risolto il bug per cui i dati del codice LookBook vengono visualizzati in modo errato in alcuni casi",
-			"ja": "一部の状況でLookBook Codeのデータ表示が異常になる不具合を修正",
-			"ko": "일부 상황에서 LookBook Code 데이터 표시가 잘못되는 버그 수정",
-			"pt": "Corrige o bug em que os dados do Código LookBook são exibidos incorretamente em alguns casos",
-			"th": "แก้ไขบัคที่ข้อมูล LookBook Code แสดงผลไม่ถูกต้องในบางกรณี",
-			"zh": "修复部分情况下，搭配码数据显示错误的bug",
-			"tw": "修復部分情況下，搭配碼資料顯示錯誤的bug",
+			"de": "1. Unterstützt die Anzeige des Aufnahmeorts von Bildern und die Lokalisierung auf der Karte [Bei Bildern, die vor Version 2.10 (24.09.2026) aufgenommen wurden, wird diese Funktion derzeit nicht unterstützt]\n2. Unterstützt die Auswertung von Parametern wie Aufnahmemodus, Windrichtung und Windstärke von Bildern.\n3. Unterstützt die Auswertung der Posenparameter, die die andere Person bei Zweierfotos verwendet.\n4. Kameraparameter unterstützen Parameter für Nikki-Posen, den Nikki-Posen-Fortschrittsbalken und den Momo-Posen-Fortschrittsbalken.   \n[Bilder, die vor Version 2.11 (30.10.2026) aufgenommen wurden, unterstützen derzeit die Funktionen der Punkte 2, 3 und 4 nicht]",
+			"en": "1. Supports viewing the shooting location of photos and locating them on the map [Photos taken before version 2.10 (2026.9.24) do not currently support this feature]\n2. Supports parsing parameters such as the photo mode, wind direction, and wind strength of photos.\n3. Supports parsing the pose parameters used by the other person in two-person photos.\n4. Camera parameters support Nikki pose, Nikki pose progress bar, and Momo pose progress bar parameters.   \n[Photos taken before version 2.11 (2026.10.30) do not currently support the features in points 2, 3, and 4]",
+			"es": "1. Permite ver la ubicación de toma de las imágenes y localizarlas en el mapa [Las imágenes tomadas antes de la versión 2.10 (24/9/2026) aún no admiten esta función]\n2. Permite analizar parámetros de las imágenes, como el modo de foto, la dirección del viento y la fuerza del viento.\n3. Permite analizar los parámetros de pose que usa la otra persona en las fotos de dos personas.\n4. Los parámetros de la cámara admiten los parámetros de pose de Nikki, la barra de progreso de pose de Nikki y la barra de progreso de pose de Momo.   \n[Las imágenes tomadas antes de la versión 2.11 (30/10/2026) aún no admiten las funciones de los puntos 2, 3 y 4]",
+			"fr": "1. Permet de consulter le lieu de prise de vue des images et de les localiser sur la carte [Les images prises avant la version 2.10 (24/09/2026) ne prennent pas encore en charge cette fonctionnalité]\n2. Permet d'analyser des paramètres des images tels que le mode photo, la direction du vent et la force du vent.\n3. Permet d'analyser les paramètres de pose utilisés par l'autre personne sur les photos à deux.\n4. Les paramètres de l'appareil photo prennent en charge les paramètres de pose de Nikki, la barre de progression de pose de Nikki et la barre de progression de pose de Momo.   \n[Les images prises avant la version 2.11 (30/10/2026) ne prennent pas encore en charge les fonctionnalités des points 2, 3 et 4]",
+			"id": "1. Mendukung melihat lokasi pengambilan gambar dan menemukannya di peta [Gambar yang diambil sebelum versi 2.10 (24/9/2026) belum mendukung fitur ini]\n2. Mendukung penguraian parameter gambar seperti mode foto, arah angin, dan kekuatan angin.\n3. Mendukung penguraian parameter pose yang digunakan orang lain dalam foto berdua.\n4. Parameter kamera mendukung parameter pose Nikki, bilah kemajuan pose Nikki, dan bilah kemajuan pose Momo.   \n[Gambar yang diambil sebelum versi 2.11 (30/10/2026) belum mendukung fungsi pada poin 2, 3, dan 4]",
+			"it": "1. Consente di visualizzare il luogo di scatto delle immagini e di localizzarle sulla mappa [Le immagini scattate prima della versione 2.10 (24/09/2026) non supportano ancora questa funzione]\n2. Consente di analizzare parametri delle immagini come modalità foto, direzione del vento e intensità del vento.\n3. Consente di analizzare i parametri di posa usati dall'altra persona nelle foto a due.\n4. I parametri della fotocamera supportano i parametri di posa di Nikki, la barra di avanzamento della posa di Nikki e la barra di avanzamento della posa di Momo.   \n[Le immagini scattate prima della versione 2.11 (30/10/2026) non supportano ancora le funzioni dei punti 2, 3 e 4]",
+			"ja": "1. 画像の撮影場所の表示と地図上での位置特定に対応しています [バージョン2.10（2026.9.24）より前に撮影された画像は、現在この機能に対応していません]\n2. 画像の撮影モード、風向、風力などのパラメータの解析に対応しています。\n3. 2人で撮った写真で相手が使用したポーズパラメータの解析に対応しています。\n4. カメラパラメータは、ニキのポーズ、ニキのポーズ進行バー、モモのポーズ進行バーのパラメータに対応しています。   \n[バージョン2.11（2026.10.30）より前に撮影された画像は、現在、第2、3、4点の機能に対応していません]",
+			"ko": "1. 이미지 촬영 장소 확인 및 지도에서 위치 확인을 지원합니다 [2.10 버전(2026.9.24) 이전에 촬영한 이미지는 현재 이 기능을 지원하지 않습니다]\n2. 이미지의 촬영 모드, 풍향, 풍력 등의 매개변수 분석을 지원합니다.\n3. 두 사람이 함께 찍은 사진에서 상대방이 사용한 포즈 매개변수 분석을 지원합니다.\n4. 카메라 매개변수는 니키 포즈, 니키 포즈 진행 표시줄 및 모모 포즈 진행 표시줄 매개변수를 지원합니다.   \n[2.11 버전(2026.10.30) 이전에 촬영한 이미지는 현재 2, 3, 4번 기능을 지원하지 않습니다]",
+			"pt": "1. Permite ver o local de captura das imagens e localizá-las no mapa [As imagens tiradas antes da versão 2.10 (24/09/2026) ainda não suportam esta função]\n2. Permite analisar parâmetros das imagens, como modo de foto, direção do vento e intensidade do vento.\n3. Permite analisar os parâmetros de pose usados pela outra pessoa em fotos de duas pessoas.\n4. Os parâmetros da câmera suportam os parâmetros de pose da Nikki, a barra de progresso de pose da Nikki e a barra de progresso de pose do Momo.   \n[As imagens tiradas antes da versão 2.11 (30/10/2026) ainda não suportam as funções dos pontos 2, 3 e 4]",
+			"th": "1. รองรับการดูสถานที่ถ่ายภาพและระบุตำแหน่งบนแผนที่ [ภาพที่ถ่ายก่อนเวอร์ชัน 2.10 (24/9/2026) ยังไม่รองรับฟีเจอร์นี้]\n2. รองรับการวิเคราะห์พารามิเตอร์ของภาพ เช่น โหมดถ่ายภาพ ทิศทางลม และความแรงลม\n3. รองรับการวิเคราะห์พารามิเตอร์ท่าทางที่อีกฝ่ายใช้ในภาพถ่ายคู่\n4. พารามิเตอร์กล้องรองรับพารามิเตอร์ท่าทางของ Nikki แถบความคืบหน้าท่าทางของ Nikki และแถบความคืบหน้าท่าทางของ Momo   \n[ภาพที่ถ่ายก่อนเวอร์ชัน 2.11 (30/10/2026) ยังไม่รองรับฟังก์ชันในข้อ 2, 3 และ 4]",
+			"zh": "1. 支持查看图片拍摄地点与在地图上定位 [2.10版本(2026.9.24)前拍摄的图片暂不支持此功能]\n2. 支持解析图片的拍照模式、风向、风力等参数。\n3. 支持解析双人合照时对方使用的动作参数。\n4. 相机参数支持暖暖动作、暖暖动作进度调及大喵动作进度条参数。   \n[2.11版本(2026.10.30)前拍摄的图片暂不支持第2.3.4.点的功能]",
+			"tw": "1. 支援查看圖片拍攝地點與在地圖上定位 [2.10版本(2026.9.24)前拍攝的圖片暫不支援此功能]\n2. 支援解析圖片的拍照模式、風向、風力等參數。\n3. 支援解析雙人合照時對方使用的動作參數。\n4. 相機參數支援暖暖動作、暖暖動作進度條及大喵動作進度條參數。   \n[2.11版本(2026.10.30)前拍攝的圖片暫不支援第2.3.4.點的功能]",
 
 			// "de": "",
 			// "en": "",
@@ -40,6 +40,37 @@ const config = {
       // "th-TH": "",
       // "zh-CN": "",
       // "zh-TW": ""
+		},
+		"downloads": [
+			{
+				"system": "system_macos",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.012/Nikki%20Albums-v3.012-MacOS-arm64.zip"
+			},
+			{
+				"system": "system_windows",
+				"type": "type_1",
+				"suffix": "suffix_zip",
+				"link": "https://file-nikki.ranaxro.com/app/v3.012/Nikki%20Albums-v3.012-Windows-x64.zip"
+			}
+		]
+	},
+	"v3.011.02": {
+		"releaseDate": "2026-8-20",
+		"description": {
+			"de": "Behebt einen Bug, bei dem die LookBook‑Code‑Daten unter bestimmten Umständen falsch angezeigt werden",
+			"en": "Fix the bug where LookBook Code data is displayed incorrectly in some cases",
+			"es": "Corrige el error por el que los datos del código LookBook se muestran incorrectamente en algunos casos",
+			"fr": "Corrige le bogue où les données du code LookBook s'affichent incorrectement dans certains cas",
+			"id": "Memperbaiki bug di mana data LookBook Code ditampilkan salah dalam beberapa kondisi",
+			"it": "Risolto il bug per cui i dati del codice LookBook vengono visualizzati in modo errato in alcuni casi",
+			"ja": "一部の状況でLookBook Codeのデータ表示が異常になる不具合を修正",
+			"ko": "일부 상황에서 LookBook Code 데이터 표시가 잘못되는 버그 수정",
+			"pt": "Corrige o bug em que os dados do Código LookBook são exibidos incorretamente em alguns casos",
+			"th": "แก้ไขบัคที่ข้อมูล LookBook Code แสดงผลไม่ถูกต้องในบางกรณี",
+			"zh": "修复部分情况下，搭配码数据显示错误的bug",
+			"tw": "修復部分情況下，搭配碼資料顯示錯誤的bug",
 		},
 		"downloads": [
 			{
