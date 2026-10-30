@@ -40,6 +40,7 @@
     "common": {
       "click_to_view_map": "点击定位到地图",
       "lack_data": "数据缺失",
+      "outdated_version": "2.9版本及之前的图片暂不支持查看拍摄地点",
       "click_to_copy": "点击复制",
       "click_to_copy_param": "点击复制参数"
     },
@@ -69,7 +70,6 @@
       "date": "拍摄日期",
       "time": "拍摄时间",
       "location": "拍摄地点",
-      "location_m": "...",
       "weather": {
         "name": "天气",
         "unknown": "未知",
@@ -122,9 +122,11 @@
       "filter": "滤镜",
       "filter_strength": "滤镜强度",
       "pose": "动作",
+      "pose_time": "进度",
       "framed_moment": "场景定格",
       "momo_hidden": "隐藏大喵",
       "momo_pose": "大喵动作",
+      "momo_pose_time": "进度",
       "horizontal": "左右调整",
       "distance": "前后调整",
       "height": "高度调整",

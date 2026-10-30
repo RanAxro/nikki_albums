@@ -11,8 +11,9 @@ import "package:latlong2/latlong.dart";
 class MiralandMap extends StatelessWidget{
   final Offset? markerPoint;
   final Nuan5WorldMapTileInfo info;
+  final void Function()? onSecondaryTap;
 
-  const MiralandMap({super.key, this.markerPoint, required this.info});
+  const MiralandMap({super.key, this.markerPoint, required this.info, this.onSecondaryTap});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,9 @@ class MiralandMap extends StatelessWidget{
         cameraConstraint: CameraConstraint.containCenter(
           bounds: mc.getMaxBounds(),
         ),
+        onSecondaryTap: (_, _){
+          onSecondaryTap?.call();
+        }
       ),
       children: [
         TileLayer(

@@ -12,6 +12,7 @@ import "package:nikki_albums/widgets/app/component.dart";
 import "package:nikki_albums/utils/clipboard.dart";
 
 import "package:flutter/material.dart" hide ColorSwatch;
+import "package:flutter/foundation.dart";
 import "dart:math";
 
 import "package:easy_localization/easy_localization.dart";
@@ -279,29 +280,50 @@ TreeNode genLocationParams(LocationParams params){
       ),
     ),
     onClick: (BuildContext context) async{
-      copyTextToClipboard("(${params.pos.$1}, ${params.pos.$2})");
-
-      final Nuan5Config? config = await GlobalNuan5Config.init();
-      if(config != null && context.mounted){
-        final Nuan5WorldMapTileInfo? info = config.world[params.worldId]?.mapTileInfo;
-        if(info != null){
-          showAppDialog(
-            context: context,
-            builder: (context){
-              return MiralandMap(
-                markerPoint: Offset(params.pos.$1, params.pos.$2),
-                info: info,
-              );
-            }
-          );
-          return;
-        }
+      if(kDebugMode){
+        copyTextToClipboard("(${params.pos.$1}, ${params.pos.$2})");
       }
 
-      AppToast.showMessage(
-        context: frameKey.currentContext!,
-        message: trText("lack_data", category: "common"),
-        state: false,
+      // 图片版本较旧
+      if(params.worldId == null){
+        AppToast.showMessage(
+          context: frameKey.currentContext!,
+          message: trText("outdated_version", category: "common"),
+          state: false,
+        );
+        return;
+      }
+
+      final Nuan5Config? config = await GlobalNuan5Config.init();
+      if(!context.mounted){
+        return;
+      }
+
+      final Nuan5WorldMapTileInfo? info = config?.world[params.worldId]?.mapTileInfo;
+      if(info == null){
+        AppToast.showMessage(
+          context: frameKey.currentContext!,
+          message: trText("lack_data", category: "common"),
+          state: false,
+        );
+        return;
+      }
+      showAppDialog(
+        context: context,
+        builder: (context){
+          return AppDialog(
+            useIntrinsicHeight: false,
+            title: trText(params.worldId.toString(), category: "world"),
+            isTranslate: false,
+            child: MiralandMap(
+              markerPoint: Offset(params.pos.$1, params.pos.$2),
+              info: info,
+              onSecondaryTap: (){
+                Navigator.of(context).pop();
+              },
+            ),
+          );
+        }
       );
     },
   );
@@ -444,6 +466,13 @@ TreeNode genCameraParams(RichCameraParams params){
       TreeNode(
         title: trText("pose"),
         message: trText(params.pose.toString(), category: "pose"),
+        children: [
+          if(params.nikkiPoseInfo != null)
+            TreeNode(
+              title: trText("pose_time"),
+              message: "${(params.nikkiPoseInfo!.nikkiPoseTime * 100).ceil()} %",
+            ),
+        ],
       ),
       TreeNode(
         title: trText("framed_moment"),
@@ -462,6 +491,7 @@ TreeNode genCameraParams(RichCameraParams params){
           },
           disable: (
             int momoPose,
+            double momoPoseTime,
             double horizontal,
             double distance,
             double height,
@@ -478,6 +508,12 @@ TreeNode genCameraParams(RichCameraParams params){
               TreeNode(
                 title: trText("momo_pose"),
                 message: trText(momoPose.toString(), category: "momo_pose"),
+                children: [
+                  TreeNode(
+                    title: trText("momo_pose_time"),
+                    message: "${(momoPoseTime * 100).ceil()} %",
+                  ),
+                ],
               ),
               TreeNode(
                 title: trText("horizontal"),

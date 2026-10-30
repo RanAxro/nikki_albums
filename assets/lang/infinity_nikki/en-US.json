@@ -13,6 +13,7 @@
     "common": {
       "click_to_view_map": "Click to locate on the map",
       "lack_data": "Data missing",
+      "outdated_version": "Images in version 2.9 and earlier versions do not currently support viewing the shooting location.",
       "click_to_copy_param": "Click to copy parameters"
     },
     "media_params": {
@@ -94,9 +95,11 @@
       "filter": "Filter",
       "filter_strength": "Filter Intensity",
       "pose": "Pose",
+      "pose_time": "Progress",
       "framed_moment": "Framed Moment",
       "momo_hidden": "Hide Momo",
       "momo_pose": "Momo Pose",
+      "momo_pose_time": "Progress",
       "horizontal": "Horizontal",
       "distance": "Distance",
       "height": "Height",
