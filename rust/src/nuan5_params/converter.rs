@@ -174,6 +174,7 @@ pub(crate) fn convert_camera_params(data: &camera_params::CameraParams) -> Camer
 
 pub(crate) fn convert_nikki_photo_params(data: &image_custom_data::NikkiPhotoCustomData) -> NikkiPhotoParams{
   NikkiPhotoParams{
+    multi_player: data.multi_player_handler.as_ref().map(convert_multi_player_params),
     photography: convert_nikki_photo_photography_params(data),
     camera: data.social_photo.as_ref().map(|social_photo|{
       convert_rich_camera_params(social_photo, &data.portrait_mode_handler)
@@ -226,8 +227,17 @@ pub(crate) fn convert_diy_params(data: &image_custom_data::DIYCustomData) -> Clo
   }
 }
 
+pub(crate) fn convert_multi_player_params(data: &image_custom_data::MultiPlayerHandler) -> MultiPlayerParams{
+  MultiPlayerParams{
+    role_id: data.role_id,
+    pose_id: data.pose_id.as_value().cloned(),
+    pose_playing_percent: data.pose_playing_percent.as_value().cloned(),
+  }
+}
+
 pub(crate) fn convert_nikki_photo_photography_params(data: &image_custom_data::NikkiPhotoCustomData) -> PhotographyParams{
   PhotographyParams{
+    photo_mode: data.normal_photo_info.as_ref().map(|info| info.photo_mode.clone()),
     edit: match &data.edit_photo_handler{
       Some(edit_photo_handler) => {
         EditPhotoState::Enabled(EditPhotoParams{
@@ -257,7 +267,9 @@ pub(crate) fn convert_nikki_photo_photography_params(data: &image_custom_data::N
         social_photo.track_info.as_ref(),
       )
     }),
-    weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
+    weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type.clone()),
+    wind_intensity: data.normal_photo_info.as_ref().map(|info| info.wind_intensity.clone()),
+    wind_direction: data.normal_photo_info.as_ref().map(|info| info.wind_direction.clone()),
     photo_wall: match &data.photo_wall_plugin{
       Some(photo_wall) => photo_wall.photo_id.as_vec(),
       None => vec![],
@@ -268,6 +280,7 @@ pub(crate) fn convert_nikki_photo_photography_params(data: &image_custom_data::N
 
 pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data::ClockInPhotoCustomData) -> PhotographyParams{
   PhotographyParams{
+    photo_mode: None,
     edit: EditPhotoState::Disabled,
     date: data.social_photo.as_ref().map(|social_photo|{
       ShootingDate{
@@ -289,7 +302,9 @@ pub(crate) fn convert_clock_in_photo_photography_params(data: &image_custom_data
         social_photo.track_info.as_ref(),
       )
     }),
-    weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type),
+    weather: data.social_photo.as_ref().map(|social_photo| social_photo.weather_type.clone()),
+    wind_intensity: None,
+    wind_direction: None,
     photo_wall: vec![],
     task: vec![],
   }

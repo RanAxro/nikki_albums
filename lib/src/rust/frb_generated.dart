@@ -3468,6 +3468,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_box_autoadd_i_8(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   LiteralTextConfig dco_decode_box_autoadd_literal_text_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_literal_text_config(raw);
@@ -3501,6 +3507,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MomoParams dco_decode_box_autoadd_momo_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_momo_params(raw);
+  }
+
+  @protected
+  MultiPlayerParams dco_decode_box_autoadd_multi_player_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_multi_player_params(raw);
   }
 
   @protected
@@ -4155,6 +4167,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_i_8(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   LightParams dco_decode_light_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -4653,6 +4671,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MultiPlayerParams dco_decode_multi_player_params(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return MultiPlayerParams(
+      roleId: dco_decode_i_64(arr[0]),
+      poseId: dco_decode_opt_box_autoadd_i_64(arr[1]),
+      posePlayingPercent: dco_decode_opt_box_autoadd_f_64(arr[2]),
+    );
+  }
+
+  @protected
   NikkiParams dco_decode_nikki_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -4676,13 +4707,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   NikkiPhotoParams dco_decode_nikki_photo_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return NikkiPhotoParams(
-      photography: dco_decode_photography_params(arr[0]),
-      camera: dco_decode_opt_box_autoadd_rich_camera_params(arr[1]),
-      nikki: dco_decode_opt_box_autoadd_nikki_params(arr[2]),
-      momo: dco_decode_opt_box_autoadd_momo_hidden_state(arr[3]),
+      multiPlayer: dco_decode_opt_box_autoadd_multi_player_params(arr[0]),
+      photography: dco_decode_photography_params(arr[1]),
+      camera: dco_decode_opt_box_autoadd_rich_camera_params(arr[2]),
+      nikki: dco_decode_opt_box_autoadd_nikki_params(arr[3]),
+      momo: dco_decode_opt_box_autoadd_momo_hidden_state(arr[4]),
     );
   }
 
@@ -5080,6 +5112,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? dco_decode_opt_box_autoadd_i_8(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_i_8(raw);
+  }
+
+  @protected
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_location_params(raw);
@@ -5095,6 +5133,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_momo_hidden_state(raw);
+  }
+
+  @protected
+  MultiPlayerParams? dco_decode_opt_box_autoadd_multi_player_params(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_multi_player_params(raw);
   }
 
   @protected
@@ -5324,16 +5370,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PhotographyParams dco_decode_photography_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 7)
-      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
     return PhotographyParams(
-      edit: dco_decode_edit_photo_state(arr[0]),
-      date: dco_decode_opt_box_autoadd_shooting_date(arr[1]),
-      time: dco_decode_opt_box_autoadd_shooting_time(arr[2]),
-      location: dco_decode_opt_box_autoadd_location_params(arr[3]),
-      weather: dco_decode_opt_box_autoadd_i_64(arr[4]),
-      photoWall: dco_decode_list_prim_i_64_strict(arr[5]),
-      task: dco_decode_list_task_params(arr[6]),
+      photoMode: dco_decode_opt_box_autoadd_i_8(arr[0]),
+      edit: dco_decode_edit_photo_state(arr[1]),
+      date: dco_decode_opt_box_autoadd_shooting_date(arr[2]),
+      time: dco_decode_opt_box_autoadd_shooting_time(arr[3]),
+      location: dco_decode_opt_box_autoadd_location_params(arr[4]),
+      weather: dco_decode_opt_box_autoadd_i_8(arr[5]),
+      windIntensity: dco_decode_opt_box_autoadd_i_8(arr[6]),
+      windDirection: dco_decode_opt_box_autoadd_i_8(arr[7]),
+      photoWall: dco_decode_list_prim_i_64_strict(arr[8]),
+      task: dco_decode_list_task_params(arr[9]),
     );
   }
 
@@ -6607,6 +6656,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_box_autoadd_i_8(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_i_8(deserializer));
+  }
+
+  @protected
   LiteralTextConfig sse_decode_box_autoadd_literal_text_config(
     SseDeserializer deserializer,
   ) {
@@ -6648,6 +6703,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MomoParams sse_decode_box_autoadd_momo_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_momo_params(deserializer));
+  }
+
+  @protected
+  MultiPlayerParams sse_decode_box_autoadd_multi_player_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_multi_player_params(deserializer));
   }
 
   @protected
@@ -7407,6 +7470,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_i_8(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getInt8();
+  }
+
+  @protected
   LightParams sse_decode_light_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -8132,6 +8201,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  MultiPlayerParams sse_decode_multi_player_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_roleId = sse_decode_i_64(deserializer);
+    var var_poseId = sse_decode_opt_box_autoadd_i_64(deserializer);
+    var var_posePlayingPercent = sse_decode_opt_box_autoadd_f_64(deserializer);
+    return MultiPlayerParams(
+      roleId: var_roleId,
+      poseId: var_poseId,
+      posePlayingPercent: var_posePlayingPercent,
+    );
+  }
+
+  @protected
   NikkiParams sse_decode_nikki_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_giantState = sse_decode_bool(deserializer);
@@ -8161,6 +8245,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   NikkiPhotoParams sse_decode_nikki_photo_params(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_multiPlayer = sse_decode_opt_box_autoadd_multi_player_params(
+      deserializer,
+    );
     var var_photography = sse_decode_photography_params(deserializer);
     var var_camera = sse_decode_opt_box_autoadd_rich_camera_params(
       deserializer,
@@ -8168,6 +8255,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_nikki = sse_decode_opt_box_autoadd_nikki_params(deserializer);
     var var_momo = sse_decode_opt_box_autoadd_momo_hidden_state(deserializer);
     return NikkiPhotoParams(
+      multiPlayer: var_multiPlayer,
       photography: var_photography,
       camera: var_camera,
       nikki: var_nikki,
@@ -8706,6 +8794,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? sse_decode_opt_box_autoadd_i_8(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_i_8(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   LocationParams? sse_decode_opt_box_autoadd_location_params(
     SseDeserializer deserializer,
   ) {
@@ -8739,6 +8838,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_momo_hidden_state(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  MultiPlayerParams? sse_decode_opt_box_autoadd_multi_player_params(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_multi_player_params(deserializer));
     } else {
       return null;
     }
@@ -9117,19 +9229,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_photoMode = sse_decode_opt_box_autoadd_i_8(deserializer);
     var var_edit = sse_decode_edit_photo_state(deserializer);
     var var_date = sse_decode_opt_box_autoadd_shooting_date(deserializer);
     var var_time = sse_decode_opt_box_autoadd_shooting_time(deserializer);
     var var_location = sse_decode_opt_box_autoadd_location_params(deserializer);
-    var var_weather = sse_decode_opt_box_autoadd_i_64(deserializer);
+    var var_weather = sse_decode_opt_box_autoadd_i_8(deserializer);
+    var var_windIntensity = sse_decode_opt_box_autoadd_i_8(deserializer);
+    var var_windDirection = sse_decode_opt_box_autoadd_i_8(deserializer);
     var var_photoWall = sse_decode_list_prim_i_64_strict(deserializer);
     var var_task = sse_decode_list_task_params(deserializer);
     return PhotographyParams(
+      photoMode: var_photoMode,
       edit: var_edit,
       date: var_date,
       time: var_time,
       location: var_location,
       weather: var_weather,
+      windIntensity: var_windIntensity,
+      windDirection: var_windDirection,
       photoWall: var_photoWall,
       task: var_task,
     );
@@ -10539,6 +10657,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_i_8(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_8(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_literal_text_config(
     LiteralTextConfig self,
     SseSerializer serializer,
@@ -10590,6 +10714,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_momo_params(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_multi_player_params(
+    MultiPlayerParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_multi_player_params(self, serializer);
   }
 
   @protected
@@ -11271,6 +11404,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_i_8(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putInt8(self);
+  }
+
+  @protected
   void sse_encode_light_params(LightParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -11914,6 +12053,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_multi_player_params(
+    MultiPlayerParams self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(self.roleId, serializer);
+    sse_encode_opt_box_autoadd_i_64(self.poseId, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.posePlayingPercent, serializer);
+  }
+
+  @protected
   void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_bool(self.giantState, serializer);
@@ -11934,6 +12084,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_multi_player_params(
+      self.multiPlayer,
+      serializer,
+    );
     sse_encode_photography_params(self.photography, serializer);
     sse_encode_opt_box_autoadd_rich_camera_params(self.camera, serializer);
     sse_encode_opt_box_autoadd_nikki_params(self.nikki, serializer);
@@ -12414,6 +12568,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_i_8(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_i_8(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_location_params(
     LocationParams? self,
     SseSerializer serializer,
@@ -12449,6 +12613,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_momo_hidden_state(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_multi_player_params(
+    MultiPlayerParams? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_multi_player_params(self, serializer);
     }
   }
 
@@ -12804,11 +12981,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_i_8(self.photoMode, serializer);
     sse_encode_edit_photo_state(self.edit, serializer);
     sse_encode_opt_box_autoadd_shooting_date(self.date, serializer);
     sse_encode_opt_box_autoadd_shooting_time(self.time, serializer);
     sse_encode_opt_box_autoadd_location_params(self.location, serializer);
-    sse_encode_opt_box_autoadd_i_64(self.weather, serializer);
+    sse_encode_opt_box_autoadd_i_8(self.weather, serializer);
+    sse_encode_opt_box_autoadd_i_8(self.windIntensity, serializer);
+    sse_encode_opt_box_autoadd_i_8(self.windDirection, serializer);
     sse_encode_list_prim_i_64_strict(self.photoWall, serializer);
     sse_encode_list_task_params(self.task, serializer);
   }

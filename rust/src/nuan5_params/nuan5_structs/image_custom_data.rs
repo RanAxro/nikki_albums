@@ -154,25 +154,25 @@ pub struct EditPhotoHandler{
 #[derive(Serialize, Deserialize)]
 pub struct MultiPlayerHandler{
   #[serde(rename = "RoleID")]
-  role_id: i64,
+  pub role_id: i64,
 
   #[serde(rename = "PoseID")]
-  pose_id: OptionValue<i64>,
+  pub pose_id: OptionValue<i64>,
 
   #[serde(rename = "PosePlayingPercent")]
-  pose_playing_percent: OptionValue<f64>,
+  pub pose_playing_percent: OptionValue<f64>,
 
   #[serde(rename = "LocalPoseID")]
-  local_pose_id: OptionValue<i64>,
+  pub local_pose_id: OptionValue<i64>,
 
   #[serde(rename = "LocalPlayType")]
-  local_play_type: i8,
+  pub local_play_type: i8,
 
   #[serde(rename = "OtherPlayType")]
-  other_play_type: i8,
+  pub other_play_type: i8,
 
   #[serde(rename = "LocalTransforms")]
-  local_transforms: Option<String>
+  pub local_transforms: Option<String>
 }
 
 #[derive(Clone)]
@@ -190,7 +190,6 @@ pub struct NormalPhotoInfo{
   #[serde(rename = "WindDirection")]
   pub wind_direction: i8,
 
-  // 仅 PhotoMode == 3，即游戏截图时存在
   #[serde(rename = "Time")]
   pub time: Option<Time>,
 

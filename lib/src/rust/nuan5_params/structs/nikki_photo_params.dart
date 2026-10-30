@@ -11,7 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'nikki_photo_params.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `LocationType`, `NikkiPhotoMainParams`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
 
 class ClothParams {
   final Cloth cloth;
@@ -209,6 +209,31 @@ class MomoParams {
           clothes == other.clothes;
 }
 
+class MultiPlayerParams {
+  final PlatformInt64 roleId;
+  final PlatformInt64? poseId;
+  final double? posePlayingPercent;
+
+  const MultiPlayerParams({
+    required this.roleId,
+    this.poseId,
+    this.posePlayingPercent,
+  });
+
+  @override
+  int get hashCode =>
+      roleId.hashCode ^ poseId.hashCode ^ posePlayingPercent.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MultiPlayerParams &&
+          runtimeType == other.runtimeType &&
+          roleId == other.roleId &&
+          poseId == other.poseId &&
+          posePlayingPercent == other.posePlayingPercent;
+}
+
 class NikkiParams {
   final bool giantState;
   final bool hidden;
@@ -265,12 +290,14 @@ class NikkiParams {
 }
 
 class NikkiPhotoParams {
+  final MultiPlayerParams? multiPlayer;
   final PhotographyParams photography;
   final RichCameraParams? camera;
   final NikkiParams? nikki;
   final MomoHiddenState? momo;
 
   const NikkiPhotoParams({
+    this.multiPlayer,
     required this.photography,
     this.camera,
     this.nikki,
@@ -279,13 +306,18 @@ class NikkiPhotoParams {
 
   @override
   int get hashCode =>
-      photography.hashCode ^ camera.hashCode ^ nikki.hashCode ^ momo.hashCode;
+      multiPlayer.hashCode ^
+      photography.hashCode ^
+      camera.hashCode ^
+      nikki.hashCode ^
+      momo.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is NikkiPhotoParams &&
           runtimeType == other.runtimeType &&
+          multiPlayer == other.multiPlayer &&
           photography == other.photography &&
           camera == other.camera &&
           nikki == other.nikki &&
@@ -430,31 +462,40 @@ class PatternCreationData {
 }
 
 class PhotographyParams {
+  final int? photoMode;
   final EditPhotoState edit;
   final ShootingDate? date;
   final ShootingTime? time;
   final LocationParams? location;
-  final PlatformInt64? weather;
+  final int? weather;
+  final int? windIntensity;
+  final int? windDirection;
   final Int64List photoWall;
   final List<TaskParams> task;
 
   const PhotographyParams({
+    this.photoMode,
     required this.edit,
     this.date,
     this.time,
     this.location,
     this.weather,
+    this.windIntensity,
+    this.windDirection,
     required this.photoWall,
     required this.task,
   });
 
   @override
   int get hashCode =>
+      photoMode.hashCode ^
       edit.hashCode ^
       date.hashCode ^
       time.hashCode ^
       location.hashCode ^
       weather.hashCode ^
+      windIntensity.hashCode ^
+      windDirection.hashCode ^
       photoWall.hashCode ^
       task.hashCode;
 
@@ -463,11 +504,14 @@ class PhotographyParams {
       identical(this, other) ||
       other is PhotographyParams &&
           runtimeType == other.runtimeType &&
+          photoMode == other.photoMode &&
           edit == other.edit &&
           date == other.date &&
           time == other.time &&
           location == other.location &&
           weather == other.weather &&
+          windIntensity == other.windIntensity &&
+          windDirection == other.windDirection &&
           photoWall == other.photoWall &&
           task == other.task;
 }

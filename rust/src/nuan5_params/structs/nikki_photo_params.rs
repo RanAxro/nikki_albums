@@ -15,6 +15,7 @@ pub struct NikkiPhotoMainParams{
 
 #[derive(Clone)]
 pub struct NikkiPhotoParams{
+  pub multi_player: Option<MultiPlayerParams>,
   pub photography: PhotographyParams,
   pub camera: Option<RichCameraParams>,
   pub nikki: Option<NikkiParams>,
@@ -22,12 +23,22 @@ pub struct NikkiPhotoParams{
 }
 
 #[derive(Clone)]
+pub struct MultiPlayerParams{
+  pub role_id: i64,
+  pub pose_id: Option<i64>,
+  pub pose_playing_percent: Option<f64>,
+}
+
+#[derive(Clone)]
 pub struct PhotographyParams{
+  pub photo_mode: Option<i8>,
   pub edit: EditPhotoState,
   pub date: Option<ShootingDate>,
   pub time: Option<ShootingTime>,
   pub location: Option<LocationParams>,
-  pub weather: Option<i64>,
+  pub weather: Option<i8>,
+  pub wind_intensity: Option<i8>,
+  pub wind_direction: Option<i8>,
   pub photo_wall: Vec<i64>,
   pub task: Vec<TaskParams>,
 }

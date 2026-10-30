@@ -106,6 +106,15 @@ pub enum OptionValue<T: Serialize + DeserializeOwned>{
   None,
 }
 
+impl<T: Serialize + DeserializeOwned> OptionValue<T>{
+  pub fn as_value(&self) -> Option<&T>{
+    match self {
+      OptionValue::Value(v) => Some(v),
+      OptionValue::None => None,
+    }
+  }
+}
+
 impl<T: Serialize + DeserializeOwned> Serialize for OptionValue<T>{
   fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
   where

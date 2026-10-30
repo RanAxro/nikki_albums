@@ -281,6 +281,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
 
   @protected
+  int dco_decode_box_autoadd_i_8(dynamic raw);
+
+  @protected
   LiteralTextConfig dco_decode_box_autoadd_literal_text_config(dynamic raw);
 
   @protected
@@ -297,6 +300,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoParams dco_decode_box_autoadd_momo_params(dynamic raw);
+
+  @protected
+  MultiPlayerParams dco_decode_box_autoadd_multi_player_params(dynamic raw);
 
   @protected
   NikkiParams dco_decode_box_autoadd_nikki_params(dynamic raw);
@@ -516,6 +522,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 dco_decode_i_64(dynamic raw);
 
   @protected
+  int dco_decode_i_8(dynamic raw);
+
+  @protected
   LightParams dco_decode_light_params(dynamic raw);
 
   @protected
@@ -711,6 +720,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MomoParams dco_decode_momo_params(dynamic raw);
 
   @protected
+  MultiPlayerParams dco_decode_multi_player_params(dynamic raw);
+
+  @protected
   NikkiParams dco_decode_nikki_params(dynamic raw);
 
   @protected
@@ -837,6 +849,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
 
   @protected
+  int? dco_decode_opt_box_autoadd_i_8(dynamic raw);
+
+  @protected
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw);
 
   @protected
@@ -844,6 +859,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoHiddenState? dco_decode_opt_box_autoadd_momo_hidden_state(dynamic raw);
+
+  @protected
+  MultiPlayerParams? dco_decode_opt_box_autoadd_multi_player_params(
+    dynamic raw,
+  );
 
   @protected
   NikkiParams? dco_decode_opt_box_autoadd_nikki_params(dynamic raw);
@@ -1420,6 +1440,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
+  int sse_decode_box_autoadd_i_8(SseDeserializer deserializer);
+
+  @protected
   LiteralTextConfig sse_decode_box_autoadd_literal_text_config(
     SseDeserializer deserializer,
   );
@@ -1444,6 +1467,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoParams sse_decode_box_autoadd_momo_params(SseDeserializer deserializer);
+
+  @protected
+  MultiPlayerParams sse_decode_box_autoadd_multi_player_params(
+    SseDeserializer deserializer,
+  );
 
   @protected
   NikkiParams sse_decode_box_autoadd_nikki_params(SseDeserializer deserializer);
@@ -1719,6 +1747,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
 
   @protected
+  int sse_decode_i_8(SseDeserializer deserializer);
+
+  @protected
   LightParams sse_decode_light_params(SseDeserializer deserializer);
 
   @protected
@@ -1960,6 +1991,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MomoParams sse_decode_momo_params(SseDeserializer deserializer);
 
   @protected
+  MultiPlayerParams sse_decode_multi_player_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   NikkiParams sse_decode_nikki_params(SseDeserializer deserializer);
 
   @protected
@@ -2120,6 +2156,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
+  int? sse_decode_opt_box_autoadd_i_8(SseDeserializer deserializer);
+
+  @protected
   LocationParams? sse_decode_opt_box_autoadd_location_params(
     SseDeserializer deserializer,
   );
@@ -2131,6 +2170,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MomoHiddenState? sse_decode_opt_box_autoadd_momo_hidden_state(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  MultiPlayerParams? sse_decode_opt_box_autoadd_multi_player_params(
     SseDeserializer deserializer,
   );
 
@@ -2855,6 +2899,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_i_8(int self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_literal_text_config(
     LiteralTextConfig self,
     SseSerializer serializer,
@@ -2887,6 +2934,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_momo_params(
     MomoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_multi_player_params(
+    MultiPlayerParams self,
     SseSerializer serializer,
   );
 
@@ -3233,6 +3286,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_i_8(int self, SseSerializer serializer);
+
+  @protected
   void sse_encode_light_params(LightParams self, SseSerializer serializer);
 
   @protected
@@ -3539,6 +3595,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_momo_params(MomoParams self, SseSerializer serializer);
 
   @protected
+  void sse_encode_multi_player_params(
+    MultiPlayerParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer);
 
   @protected
@@ -3746,6 +3808,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_i_8(int? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_location_params(
     LocationParams? self,
     SseSerializer serializer,
@@ -3760,6 +3825,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_momo_hidden_state(
     MomoHiddenState? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_multi_player_params(
+    MultiPlayerParams? self,
     SseSerializer serializer,
   );
 

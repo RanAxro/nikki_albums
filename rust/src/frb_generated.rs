@@ -4138,6 +4138,13 @@ impl SseDecode for i64 {
     }
 }
 
+impl SseDecode for i8 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i8().unwrap()
+    }
+}
+
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::LightParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4937,6 +4944,20 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::MomoParams 
     }
 }
 
+impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_roleId = <i64>::sse_decode(deserializer);
+        let mut var_poseId = <Option<i64>>::sse_decode(deserializer);
+        let mut var_posePlayingPercent = <Option<f64>>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams {
+            role_id: var_roleId,
+            pose_id: var_poseId,
+            pose_playing_percent: var_posePlayingPercent,
+        };
+    }
+}
+
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::NikkiParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4981,6 +5002,9 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::NikkiParams
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_multiPlayer = <Option<
+            crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams,
+        >>::sse_decode(deserializer);
         let mut var_photography =
             <crate::nuan5_params::structs::nikki_photo_params::PhotographyParams>::sse_decode(
                 deserializer,
@@ -4996,6 +5020,7 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoP
             crate::nuan5_params::structs::nikki_photo_params::MomoHiddenState,
         >>::sse_decode(deserializer);
         return crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoParams {
+            multi_player: var_multiPlayer,
             photography: var_photography,
             camera: var_camera,
             nikki: var_nikki,
@@ -5581,6 +5606,17 @@ impl SseDecode for Option<i64> {
     }
 }
 
+impl SseDecode for Option<i8> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<i8>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::LocationParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5615,6 +5651,21 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::Momo
         if (<bool>::sse_decode(deserializer)) {
             return Some(
                 <crate::nuan5_params::structs::nikki_photo_params::MomoHiddenState>::sse_decode(
+                    deserializer,
+                ),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams>::sse_decode(
                     deserializer,
                 ),
             );
@@ -6007,6 +6058,7 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::PatternCrea
 impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::PhotographyParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_photoMode = <Option<i8>>::sse_decode(deserializer);
         let mut var_edit =
             <crate::nuan5_params::structs::nikki_photo_params::EditPhotoState>::sse_decode(
                 deserializer,
@@ -6022,18 +6074,23 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::Photography
         let mut var_location = <Option<
             crate::nuan5_params::structs::nikki_photo_params::LocationParams,
         >>::sse_decode(deserializer);
-        let mut var_weather = <Option<i64>>::sse_decode(deserializer);
+        let mut var_weather = <Option<i8>>::sse_decode(deserializer);
+        let mut var_windIntensity = <Option<i8>>::sse_decode(deserializer);
+        let mut var_windDirection = <Option<i8>>::sse_decode(deserializer);
         let mut var_photoWall = <Vec<i64>>::sse_decode(deserializer);
         let mut var_task =
             <Vec<crate::nuan5_params::structs::nikki_photo_params::TaskParams>>::sse_decode(
                 deserializer,
             );
         return crate::nuan5_params::structs::nikki_photo_params::PhotographyParams {
+            photo_mode: var_photoMode,
             edit: var_edit,
             date: var_date,
             time: var_time,
             location: var_location,
             weather: var_weather,
+            wind_intensity: var_windIntensity,
+            wind_direction: var_windDirection,
             photo_wall: var_photoWall,
             task: var_task,
         };
@@ -8551,6 +8608,32 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_params::structs::nikki_photo
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.role_id.into_into_dart().into_dart(),
+            self.pose_id.into_into_dart().into_dart(),
+            self.pose_playing_percent.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams,
+    > for crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams
+{
+    fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
     for crate::nuan5_params::structs::nikki_photo_params::NikkiParams
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
@@ -8587,6 +8670,7 @@ impl flutter_rust_bridge::IntoDart
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
+            self.multi_player.into_into_dart().into_dart(),
             self.photography.into_into_dart().into_dart(),
             self.camera.into_into_dart().into_dart(),
             self.nikki.into_into_dart().into_dart(),
@@ -9202,11 +9286,14 @@ impl flutter_rust_bridge::IntoDart
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
+            self.photo_mode.into_into_dart().into_dart(),
             self.edit.into_into_dart().into_dart(),
             self.date.into_into_dart().into_dart(),
             self.time.into_into_dart().into_dart(),
             self.location.into_into_dart().into_dart(),
             self.weather.into_into_dart().into_dart(),
+            self.wind_intensity.into_into_dart().into_dart(),
+            self.wind_direction.into_into_dart().into_dart(),
             self.photo_wall.into_into_dart().into_dart(),
             self.task.into_into_dart().into_dart(),
         ]
@@ -10883,6 +10970,13 @@ impl SseEncode for i64 {
     }
 }
 
+impl SseEncode for i8 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i8(self).unwrap();
+    }
+}
+
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::LightParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11520,6 +11614,15 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::MomoParams 
     }
 }
 
+impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.role_id, serializer);
+        <Option<i64>>::sse_encode(self.pose_id, serializer);
+        <Option<f64>>::sse_encode(self.pose_playing_percent, serializer);
+    }
+}
+
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::NikkiParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11553,6 +11656,10 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::NikkiParams
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::NikkiPhotoParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams>>::sse_encode(
+            self.multi_player,
+            serializer,
+        );
         <crate::nuan5_params::structs::nikki_photo_params::PhotographyParams>::sse_encode(
             self.photography,
             serializer,
@@ -12005,6 +12112,16 @@ impl SseEncode for Option<i64> {
     }
 }
 
+impl SseEncode for Option<i8> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <i8>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::LocationParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12033,6 +12150,18 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::Momo
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::nuan5_params::structs::nikki_photo_params::MomoHiddenState>::sse_encode(
+                value, serializer,
+            );
+        }
+    }
+}
+
+impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::nuan5_params::structs::nikki_photo_params::MultiPlayerParams>::sse_encode(
                 value, serializer,
             );
         }
@@ -12343,6 +12472,7 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::PatternCrea
 impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::PhotographyParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<i8>>::sse_encode(self.photo_mode, serializer);
         <crate::nuan5_params::structs::nikki_photo_params::EditPhotoState>::sse_encode(
             self.edit, serializer,
         );
@@ -12356,7 +12486,9 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::Photography
             self.location,
             serializer,
         );
-        <Option<i64>>::sse_encode(self.weather, serializer);
+        <Option<i8>>::sse_encode(self.weather, serializer);
+        <Option<i8>>::sse_encode(self.wind_intensity, serializer);
+        <Option<i8>>::sse_encode(self.wind_direction, serializer);
         <Vec<i64>>::sse_encode(self.photo_wall, serializer);
         <Vec<crate::nuan5_params::structs::nikki_photo_params::TaskParams>>::sse_encode(
             self.task, serializer,
