@@ -156,6 +156,51 @@ class FilterSelectorHandler extends SelectorHandler{
 }
 
 
+class NikkiPoseSelectorHandler extends SelectorHandler{
+  const NikkiPoseSelectorHandler();
+
+  @override
+  int? getInitValue(Nuan5Config config, Object? raw){
+    if(raw == null){
+      return null;
+    }
+
+    if(raw is int){
+      return raw == 0 ? null : raw;
+    }
+
+    return null;
+  }
+
+  @override
+  List<int> getType(Nuan5Config config){
+    return [];
+  }
+
+  @override
+  String getTypeText(int type){
+    return type.toString();
+  }
+
+  @override
+  List<int> getValue(Nuan5Config config, int? type){
+    return config.nikkiPose.keys.toList();
+  }
+
+  @override
+  String getValueImageUrl(Nuan5Config config, int value){
+    return config.getImageUrl(config.networkImage?.nikkiPose, value) ?? "";
+  }
+
+  @override
+  String getValueText(int value){
+    return value == 0 ?
+      trBool(false, index: 2) :
+      trText(value.toString(), category: "nikki_pose");
+  }
+}
+
+
 class MomoPoseSelectorHandler extends SelectorHandler{
   const MomoPoseSelectorHandler();
 
