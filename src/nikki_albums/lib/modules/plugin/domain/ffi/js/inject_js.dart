@@ -59,6 +59,83 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
     );
   });
 
+  // path
+  js.onMessage("api.path.separator", (_){
+    return separator;
+  });
+  js.onMessage("api.path.join", (dynamic args){
+    final List<String> params = List<String>.from(args);
+    return join(params);
+  });
+  js.onMessage("api.path.basename", (dynamic args){
+    final String params = args;
+    return basename(params);
+  });
+  js.onMessage("api.path.basenameWithoutExtension", (dynamic args){
+    final String params = args;
+    return basenameWithoutExtension(params);
+  });
+  js.onMessage("api.path.dirname", (dynamic args){
+    final String params = args;
+    return dirname(params);
+  });
+  js.onMessage("api.path.extension", (dynamic args){
+    final List<dynamic> params = args;
+    return extension(params[0], params[1]);
+  });
+  js.onMessage("api.path.rootPrefix", (dynamic args){
+    final String params = args;
+    return rootPrefix(params);
+  });
+  js.onMessage("api.path.isAbsolute", (dynamic args){
+    final String params = args;
+    return isAbsolute(params);
+  });
+  js.onMessage("api.path.isRelative", (dynamic args){
+    final String params = args;
+    return isRelative(params);
+  });
+  js.onMessage("api.path.isRootRelative", (dynamic args){
+    final String params = args;
+    return isRootRelative(params);
+  });
+  js.onMessage("api.path.split", (dynamic args){
+    final String params = args;
+    return split(params);
+  });
+  js.onMessage("api.path.canonicalize", (dynamic args){
+    final String params = args;
+    return canonicalize(params);
+  });
+  js.onMessage("api.path.normalize", (dynamic args){
+    final String params = args;
+    return normalize(params);
+  });
+  js.onMessage("api.path.isWithin", (dynamic args){
+    final List<String> params = List<String>.from(args);
+    return isWithin(params[0], params[1]);
+  });
+  js.onMessage("api.path.equals", (dynamic args){
+    final List<String> params = List<String>.from(args);
+    return equals(params[0], params[1]);
+  });
+  js.onMessage("api.path.withoutExtension", (dynamic args){
+    final String params = args;
+    return withoutExtension(params);
+  });
+  js.onMessage("api.path.setExtension", (dynamic args){
+    final List<String> params = List<String>.from(args);
+    return setExtension(params[0], params[1]);
+  });
+  js.onMessage("api.path.fromUri", (dynamic args){
+    final String params = args;
+    return fromUri(params);
+  });
+  js.onMessage("api.path.toUri", (dynamic args){
+    final String params = args;
+    return toUri(params);
+  });
+
   // windows_registry
   js.onMessage("api.windowsRegistry.HKEY_CLASSES_ROOT", (_){
     return HKEY_CLASSES_ROOT;

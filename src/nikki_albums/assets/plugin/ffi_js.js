@@ -30,6 +30,64 @@ globalThis.api = {
     };
   },
 
+  path: {
+    separator: sendMessage("api.path.separator", "null"),
+    join: function(...parts){
+      return sendMessage("api.path.join", JSON.stringify(parts));
+    },
+    basename: function(path){
+      return sendMessage("api.path.basename", JSON.stringify(path));
+    },
+    basenameWithoutExtension: function(path){
+      return sendMessage("api.path.basenameWithoutExtension", JSON.stringify(path));
+    },
+    dirname: function(path){
+      return sendMessage("api.path.dirname", JSON.stringify(path));
+    },
+    extension: function(path, level = 1){
+      return sendMessage("api.path.extension", JSON.stringify([path, level]));
+    },
+    rootPrefix: function(path){
+      return sendMessage("api.path.rootPrefix", JSON.stringify(path));
+    },
+    isAbsolute: function(path){
+      return sendMessage("api.path.isAbsolute", JSON.stringify(path));
+    },
+    isRelative: function(path){
+      return sendMessage("api.path.isRelative", JSON.stringify(path));
+    },
+    isRootRelative: function(path){
+      return sendMessage("api.path.isRootRelative", JSON.stringify(path));
+    },
+    split: function(path){
+      return sendMessage("api.path.split", JSON.stringify(path));
+    },
+    canonicalize: function(path){
+      return sendMessage("api.path.canonicalize", JSON.stringify(path));
+    },
+    normalize: function(path){
+      return sendMessage("api.path.normalize", JSON.stringify(path));
+    },
+    isWithin: function(parent, child){
+      return sendMessage("api.path.isWithin", JSON.stringify([parent, child]));
+    },
+    equals: function(path1, path2){
+      return sendMessage("api.path.equals", JSON.stringify([path1, path2]));
+    },
+    withoutExtension: function(path){
+      return sendMessage("api.path.withoutExtension", JSON.stringify(path));
+    },
+    setExtension: function(path, extension){
+      return sendMessage("api.path.setExtension", JSON.stringify([path, extension]));
+    },
+    fromUri: function(url){
+      return sendMessage("api.path.fromUri", JSON.stringify(url));
+    },
+    toUri: function(path){
+      return sendMessage("api.path.toUri", JSON.stringify(path));
+    },
+  },
+
   windowsRegistry: {
     HKEY_CLASSES_ROOT: sendMessage("api.windowsRegistry.HKEY_CLASSES_ROOT", "null"),
     HKEY_CURRENT_USER: sendMessage("api.windowsRegistry.HKEY_CURRENT_USER", "null"),
