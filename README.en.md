@@ -35,7 +35,7 @@
 
 Nikki Albums is a desktop utility for managing all your in-game albums and share codes from *Infinity Nikki*.
 
-🚀 **Current Version**: 3.010
+🚀 **Current Version**: 3.012.01
 - **GitHub Download**: [Click here](https://github.com/RanAxro/nikki_albums)
 - **Official Website Download**: [Click here](https://nikki.ranaxro.com/en)
 
@@ -65,6 +65,11 @@ Join our group to share usage tips with fellow players, report encountered issue
 3. Support parsing the action parameters used by the other person in a double-person photo.
 4. Camera parameters support parameters for Wanyan's actions, progress of Wanyan's actions, and progress bar for Daqian's actions.  
 [The functions mentioned in points 2, 3, and 4 are not supported for pictures taken before version 2.11 (2026.10.30).]
+
+## v3.012.01
+1. Fixed issues with the camera lights, filters, warm-up actions, and big kitty actions being out of order.
+2. Added category options for warm-up actions.
+3. Fixed the bug where multiple photos could not parse parameters.
 
 ***
 

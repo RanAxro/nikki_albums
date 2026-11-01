@@ -1,7 +1,7 @@
 [
   {
     "id": "infinity_nikki",
-    "versionId": "b82da435-c664-41ba-8921-ae1c593dd5ba",
+    "versionId": "20831175-11d7-4c1a-8e81-b11391317cbc",
     "files": [
       {
         "path": "en-US.bin",
@@ -47,7 +47,7 @@
   },
   {
     "id": "nuan5_database",
-    "versionId": "9d889426-a44b-4a45-a9c8-f126b839b3a9",
+    "versionId": "5db41b98-8a05-4ff8-a6fd-bed301c2a2d1",
     "files": [
       {
         "path": "v1.db",
