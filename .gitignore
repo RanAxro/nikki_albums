@@ -61,3 +61,12 @@ app.*.map.json
 /pt/
 /id/
 /th/
+
+# 以下是仓库重构前的依赖文件(refactor/app-26-08-11), 重构后不再需要这些文件, 请手动把这些本地文件删除
+/android/
+/build/
+/ios/
+/linux/
+/macos/
+/rust/
+/windows/
