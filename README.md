@@ -37,7 +37,7 @@
 
 暖暖相册（Nikki Albums）是一款管理`无限暖暖`各种相册和分享码的软件。
 
-🚀 **当前版本**：3.010
+🚀 **当前版本**：3.012
 
 - **GitHub下载**：[点击这里](https://github.com/RanAxro/nikki_albums)  
 - **官网下载**：[点击这里](https://nikki.ranaxro.com)  
