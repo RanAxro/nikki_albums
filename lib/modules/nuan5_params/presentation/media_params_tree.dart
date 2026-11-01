@@ -183,7 +183,7 @@ class TreeNodeTile extends StatelessWidget{
             color: AppColorScheme.of(context).byRole(ColorRole.background).onDisabledColor,
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
             child: child,
           ),
         ),
