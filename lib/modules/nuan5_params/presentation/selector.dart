@@ -87,19 +87,27 @@ class _SelectorState extends State<Selector>{
           child: allType.isEmpty ? block0 : AppNavBuilder<int>(
             initValue: pageController.initialPage,
             builder: (BuildContext context, int value, void Function(int) change){
-              return AppRadioStack(
-                selectedIndex: value,
-                direction: Axis.vertical,
-                children: [
-                  for(final (int index, int typeId) in allType.indexed)
-                    AppButton.smallText(
-                      onClick: (){
-                        change(index);
-                        pageController.animateToPage(index, duration: animationTime, curve: animationCurve);
-                      },
-                      child: AppText(widget.handler.getTypeText(typeId)),
+              return SmoothPointerScroll(
+                builder: (BuildContext context, ScrollController controller, ScrollPhysics physics, IndependentScrollbarController scrollbarController){
+                  return SingleChildScrollView(
+                    controller: controller,
+                    physics: physics,
+                    child: AppRadioStack(
+                      selectedIndex: value,
+                      direction: Axis.vertical,
+                      children: [
+                        for(final (int index, int typeId) in allType.indexed)
+                          AppButton.smallText(
+                            onClick: (){
+                              change(index);
+                              pageController.animateToPage(index, duration: animationTime, curve: animationCurve);
+                            },
+                            child: AppText(widget.handler.getTypeText(typeId)),
+                          ),
+                      ],
                     ),
-                ],
+                  );
+                },
               );
             },
           ),
