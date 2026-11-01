@@ -655,71 +655,71 @@ TreeNode genNikkiParams(NikkiParams params){
         children: params.interactions.map((ObjectParams objectParams){
           return TreeNode(
             title: trText(objectParams.id.toString(), category: "interactions"),
-            children: [
-              TreeNode(
-                title: trText("loc"),
-                message: objectParams.loc.toString(),
-              ),
-              TreeNode(
-                title: trText("rot"),
-                message: objectParams.rot.toString(),
-              ),
-              TreeNode(
-                title: trText("scale"),
-                message: objectParams.scale.toString(),
-              ),
-            ],
+            // children: [
+            //   TreeNode(
+            //     title: trText("loc"),
+            //     message: objectParams.loc.toString(),
+            //   ),
+            //   TreeNode(
+            //     title: trText("rot"),
+            //     message: objectParams.rot.toString(),
+            //   ),
+            //   TreeNode(
+            //     title: trText("scale"),
+            //     message: objectParams.scale.toString(),
+            //   ),
+            // ],
           );
         }),
       ),
       TreeNode(
         title: trText("mount"),
         message: params.mount == null ? trBool(false, index: 2) : trText(params.mount!.id.toString(), category: "mount"),
-        children: params.mount == null ? const [] :[
-          TreeNode(
-            title: trText("loc"),
-            message: params.mount!.loc.toString(),
-          ),
-          TreeNode(
-            title: trText("rot"),
-            message: params.mount!.rot.toString(),
-          ),
-          TreeNode(
-            title: trText("scale"),
-            message: params.mount!.scale.toString(),
-          ),
-        ],
+        // children: params.mount == null ? const [] :[
+        //   TreeNode(
+        //     title: trText("loc"),
+        //     message: params.mount!.loc.toString(),
+        //   ),
+        //   TreeNode(
+        //     title: trText("rot"),
+        //     message: params.mount!.rot.toString(),
+        //   ),
+        //   TreeNode(
+        //     title: trText("scale"),
+        //     message: params.mount!.scale.toString(),
+        //   ),
+        // ],
       ),
       TreeNode(
         title: trText("carrier"),
         message: params.carrier == null ? trBool(false, index: 2) : trText(params.carrier!.id.toString(), category: "carrier"),
-        children: params.carrier == null ? const [] :[
-          TreeNode(
-            title: trText("loc"),
-            message: params.carrier!.loc.toString(),
-          ),
-          TreeNode(
-            title: trText("rot"),
-            message: params.carrier!.rot.toString(),
-          ),
-          TreeNode(
-            title: trText("scale"),
-            message: params.carrier!.scale.toString(),
-          ),
-        ],
+        // children: params.carrier == null ? const [] :[
+        //   TreeNode(
+        //     title: trText("loc"),
+        //     message: params.carrier!.loc.toString(),
+        //   ),
+        //   TreeNode(
+        //     title: trText("rot"),
+        //     message: params.carrier!.rot.toString(),
+        //   ),
+        //   TreeNode(
+        //     title: trText("scale"),
+        //     message: params.carrier!.scale.toString(),
+        //   ),
+        // ],
       ),
-      TreeNode(
-        title: trText("loc"),
-        message: params.loc.toString(),
-      ),
-      TreeNode(
-        title: trText("rot"),
-        message: params.rot.toString(),
-      ),
-      TreeNode(
-        title: trText("scale"),
-        message: params.scale.toString(),
-      ),
+      // TreeNode(
+      //   title: trText("loc"),
+      //   message: params.loc.toString(),
+      // ),
+      // TreeNode(
+      //   title: trText("rot"),
+      //   message: params.rot.toString(),
+      // ),
+      // TreeNode(
+      //   title: trText("scale"),
+      //   message: params.scale.toString(),
+      // ),
 
     ],
   );
