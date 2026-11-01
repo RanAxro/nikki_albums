@@ -56,6 +56,9 @@ pub struct Nuan5Config{
   #[prost(map = "int32, message", tag = "21")]
   pub nikki_pose: HashMap<i32, Nuan5NikkiPose>,
 
+  #[prost(map = "int32, message", tag = "22")]
+  pub nikki_pose_type: HashMap<i32, Nuan5NikkiPoseType>,
+
   #[prost(map = "int32, message", tag = "26")]
   pub world: HashMap<i32, Nuan5World>,
 }
@@ -260,6 +263,13 @@ pub struct Nuan5NikkiClothInfo{
 #[derive(Message)]
 pub struct Nuan5NikkiPose{
 
+}
+
+#[derive(Clone, PartialEq)]
+#[derive(Message)]
+pub struct Nuan5NikkiPoseType{
+  #[prost(int32, repeated, tag = "1")]
+  pub nikki_pose: Vec<i32>,
 }
 
 #[derive(Clone, PartialEq)]

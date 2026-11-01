@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1881653408;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 2077894918;
 
 // Section: executor
 
@@ -2764,6 +2764,40 @@ fn wire__crate__nuan5_database__model__nuan_5_nikki_pose_default_impl(
         },
     )
 }
+fn wire__crate__nuan5_database__model__nuan_5_nikki_pose_type_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "nuan_5_nikki_pose_type_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::nuan5_database::model::Nuan5NikkiPoseType::default(),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__nuan5_database__model__nuan_5_table_default_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -3419,6 +3453,18 @@ impl SseDecode for std::collections::HashMap<i32, crate::nuan5_database::model::
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner =
             <Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPose)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5NikkiPoseType>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPoseType)>>::sse_decode(
+            deserializer,
+        );
         return inner.into_iter().collect();
     }
 }
@@ -4673,6 +4719,20 @@ impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPose)> {
     }
 }
 
+impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPoseType)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(
+                <(i32, crate::nuan5_database::model::Nuan5NikkiPoseType)>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5World)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -5239,6 +5299,10 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Config {
             i32,
             crate::nuan5_database::model::Nuan5NikkiPose,
         >>::sse_decode(deserializer);
+        let mut var_nikkiPoseType = <std::collections::HashMap<
+            i32,
+            crate::nuan5_database::model::Nuan5NikkiPoseType,
+        >>::sse_decode(deserializer);
         let mut var_world = <std::collections::HashMap<
             i32,
             crate::nuan5_database::model::Nuan5World,
@@ -5261,6 +5325,7 @@ impl SseDecode for crate::nuan5_database::model::Nuan5Config {
             cloth_tag: var_clothTag,
             nikki_cloth_info: var_nikkiClothInfo,
             nikki_pose: var_nikkiPose,
+            nikki_pose_type: var_nikkiPoseType,
             world: var_world,
         };
     }
@@ -5404,6 +5469,16 @@ impl SseDecode for crate::nuan5_database::model::Nuan5NikkiPose {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         return crate::nuan5_database::model::Nuan5NikkiPose {};
+    }
+}
+
+impl SseDecode for crate::nuan5_database::model::Nuan5NikkiPoseType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_nikkiPose = <Vec<i32>>::sse_decode(deserializer);
+        return crate::nuan5_database::model::Nuan5NikkiPoseType {
+            nikki_pose: var_nikkiPose,
+        };
     }
 }
 
@@ -6380,6 +6455,16 @@ impl SseDecode for (i32, crate::nuan5_database::model::Nuan5NikkiPose) {
     }
 }
 
+impl SseDecode for (i32, crate::nuan5_database::model::Nuan5NikkiPoseType) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_database::model::Nuan5NikkiPoseType>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
 impl SseDecode for (i32, crate::nuan5_database::model::Nuan5World) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -7293,19 +7378,25 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        69 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
+        69 => wire__crate__nuan5_database__model__nuan_5_nikki_pose_type_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        70 => wire__crate__nuan5_database__model__nuan_5_world_default_impl(
+        70 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        71 => wire__crate__nuan5_database__model__nuan_5_world_map_tile_info_default_impl(
+        71 => wire__crate__nuan5_database__model__nuan_5_world_default_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        72 => wire__crate__nuan5_database__model__nuan_5_world_map_tile_info_default_impl(
             port,
             ptr,
             rust_vec_len,
@@ -7443,40 +7534,40 @@ fn pde_ffi_dispatcher_sync_impl(
             rust_vec_len,
             data_len,
         ),
-        72 => wire__crate__config__common__string_config__string_config_from_json_impl(
+        73 => wire__crate__config__common__string_config__string_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        73 => wire__crate__config__common__string_config__string_config_to_json_impl(
+        74 => wire__crate__config__common__string_config__string_config_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        74 => wire__crate__config__common__string_config__string_config_to_json_pretty_impl(
+        75 => wire__crate__config__common__string_config__string_config_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        75 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-        76 => wire__crate__config__common__text_config__text_config_from_json_impl(
+        76 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+        77 => wire__crate__config__common__text_config__text_config_from_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        77 => wire__crate__config__common__text_config__text_config_to_json_impl(
+        78 => wire__crate__config__common__text_config__text_config_to_json_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        78 => wire__crate__config__common__text_config__text_config_to_json_pretty_impl(
+        79 => wire__crate__config__common__text_config__text_config_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        79 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
-        80 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
-        81 => wire__crate__config__update__update_info_to_json_pretty_impl(
+        80 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
+        81 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
+        82 => wire__crate__config__update__update_info_to_json_pretty_impl(
             ptr,
             rust_vec_len,
             data_len,
@@ -8943,6 +9034,7 @@ impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5Config
             self.cloth_tag.into_into_dart().into_dart(),
             self.nikki_cloth_info.into_into_dart().into_dart(),
             self.nikki_pose.into_into_dart().into_dart(),
+            self.nikki_pose_type.into_into_dart().into_dart(),
             self.world.into_into_dart().into_dart(),
         ]
         .into_dart()
@@ -9173,6 +9265,23 @@ impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5NikkiP
     for crate::nuan5_database::model::Nuan5NikkiPose
 {
     fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5NikkiPose {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::nuan5_database::model::Nuan5NikkiPoseType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.nikki_pose.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_database::model::Nuan5NikkiPoseType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::nuan5_database::model::Nuan5NikkiPoseType>
+    for crate::nuan5_database::model::Nuan5NikkiPoseType
+{
+    fn into_into_dart(self) -> crate::nuan5_database::model::Nuan5NikkiPoseType {
         self
     }
 }
@@ -10449,6 +10558,18 @@ impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::
     }
 }
 
+impl SseEncode
+    for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5NikkiPoseType>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPoseType)>>::sse_encode(
+            self.into_iter().collect(),
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5World> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11472,6 +11593,16 @@ impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPose)> {
     }
 }
 
+impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5NikkiPoseType)> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(i32, crate::nuan5_database::model::Nuan5NikkiPoseType)>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5World)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11913,6 +12044,7 @@ impl SseEncode for crate::nuan5_database::model::Nuan5Config {
             self.nikki_pose,
             serializer,
         );
+        <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5NikkiPoseType>>::sse_encode(self.nikki_pose_type, serializer);
         <std::collections::HashMap<i32, crate::nuan5_database::model::Nuan5World>>::sse_encode(
             self.world, serializer,
         );
@@ -12035,6 +12167,13 @@ impl SseEncode for crate::nuan5_database::model::Nuan5NikkiClothInfo {
 impl SseEncode for crate::nuan5_database::model::Nuan5NikkiPose {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
+}
+
+impl SseEncode for crate::nuan5_database::model::Nuan5NikkiPoseType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<i32>>::sse_encode(self.nikki_pose, serializer);
+    }
 }
 
 impl SseEncode for crate::nuan5_database::model::Nuan5Table {
@@ -12805,6 +12944,14 @@ impl SseEncode for (i32, crate::nuan5_database::model::Nuan5NikkiPose) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.0, serializer);
         <crate::nuan5_database::model::Nuan5NikkiPose>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (i32, crate::nuan5_database::model::Nuan5NikkiPoseType) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <crate::nuan5_database::model::Nuan5NikkiPoseType>::sse_encode(self.1, serializer);
     }
 }
 
