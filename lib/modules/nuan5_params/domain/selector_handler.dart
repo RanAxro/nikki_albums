@@ -70,7 +70,7 @@ class LightSelectorHandler extends SelectorHandler{
 
   @override
   List<int> getType(Nuan5Config config){
-    return config.table?.lightType ?? config.lightType.keys.toList();
+    return config.table?.lightType ?? config.lightType.keys.toList()..sort();
   }
 
   @override
@@ -127,7 +127,7 @@ class FilterSelectorHandler extends SelectorHandler{
 
   @override
   List<int> getType(Nuan5Config config){
-    return config.table?.filterType ?? config.filterType.keys.toList();
+    return config.table?.filterType ?? config.filterType.keys.toList()..sort();
   }
 
   @override
@@ -174,17 +174,21 @@ class NikkiPoseSelectorHandler extends SelectorHandler{
 
   @override
   List<int> getType(Nuan5Config config){
-    return [];
+    return config.nikkiPoseType.keys.toList()..sort()..remove(0);
   }
 
   @override
   String getTypeText(int type){
-    return type.toString();
+    return trText(type.toString(), category: "nikki_pose_type");
   }
 
   @override
   List<int> getValue(Nuan5Config config, int? type){
-    return config.nikkiPose.keys.toList();
+    if(type == null){
+      return [];
+    }
+
+    return config.nikkiPoseType[type]?.nikkiPose ?? [];
   }
 
   @override
