@@ -59,6 +59,16 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
     );
   });
 
+  // ini
+  js.onMessage("api.iniDecode", (dynamic args){
+    final List<dynamic> params = args;
+    return iniDecode(params[0], params[1]);
+  });
+  js.onMessage("api.iniEncode", (dynamic args){
+    final Map<String, dynamic> params = args;
+    return iniEncode(params);
+  });
+
   // path
   js.onMessage("api.path.separator", (_){
     return separator;

@@ -30,6 +30,13 @@ globalThis.api = {
     };
   },
 
+  iniDecode: function(content, flatDefaultOption = true){
+    return sendMessage("api.iniDecode", JSON.stringify([content, flatDefaultOption]));
+  },
+  iniEncode: function(content){
+    return sendMessage("api.iniEncode", JSON.stringify(content));
+  },
+
   path: {
     separator: sendMessage("api.path.separator", "null"),
     join: function(...parts){
