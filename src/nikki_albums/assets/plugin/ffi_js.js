@@ -1,37 +1,38 @@
 class FileSystemHandler{
+  _handlerId;
   constructor(handlerId){
-    this.handlerId = handlerId;
+    this._handlerId = handlerId;
   }
 }
 FileSystemHandler.prototype.exists = function(path){
-  return sendMessage("api.file_system.exists", JSON.stringify([this.handlerId, path]));
+  return sendMessage("api.file_system.exists", JSON.stringify([this._handlerId, path]));
 }
 FileSystemHandler.prototype.isFile = function(path){
-  return sendMessage("api.file_system.isFile", JSON.stringify([this.handlerId, path]));
+  return sendMessage("api.file_system.isFile", JSON.stringify([this._handlerId, path]));
 }
 FileSystemHandler.prototype.isDir = function(path){
-  return sendMessage("api.file_system.isDir", JSON.stringify([this.handlerId, path]));
+  return sendMessage("api.file_system.isDir", JSON.stringify([this._handlerId, path]));
 }
 FileSystemHandler.prototype.isLink = function(path){
-  return sendMessage("api.file_system.isLink", JSON.stringify([this.handlerId, path]));
+  return sendMessage("api.file_system.isLink", JSON.stringify([this._handlerId, path]));
 }
 FileSystemHandler.prototype.identical = function(path1, path2){
-  return sendMessage("api.file_system.identical", JSON.stringify([this.handlerId, path1, path2]));
+  return sendMessage("api.file_system.identical", JSON.stringify([this._handlerId, path1, path2]));
 }
 FileSystemHandler.prototype.stat = function(path){
-  return sendMessage("api.file_system.stat", JSON.stringify([this.handlerId, path]));
+  return sendMessage("api.file_system.stat", JSON.stringify([this._handlerId, path]));
 }
 FileSystemHandler.prototype.list = function(path, recursive = false, followLinks = true){
-  return sendMessage("api.file_system.list", JSON.stringify([this.handlerId, path, recursive, followLinks]));
+  return sendMessage("api.file_system.list", JSON.stringify([this._handlerId, path, recursive, followLinks]));
 }
 FileSystemHandler.prototype.readString = function(path, encoding = "utf-8"){
-  return sendMessage("api.file_system.readString", JSON.stringify([this.handlerId, path, encoding]));
+  return sendMessage("api.file_system.readString", JSON.stringify([this._handlerId, path, encoding]));
 }
 FileSystemHandler.prototype.readLines = function(path, encoding = "utf-8"){
-  return sendMessage("api.file_system.readLines", JSON.stringify([this.handlerId, path, encoding]));
+  return sendMessage("api.file_system.readLines", JSON.stringify([this._handlerId, path, encoding]));
 }
 FileSystemHandler.prototype.readBytes = function(path){
-  return sendMessage("api.file_system.readBytes", JSON.stringify([this.handlerId, path]));
+  return sendMessage("api.file_system.readBytes", JSON.stringify([this._handlerId, path]));
 }
 
 
