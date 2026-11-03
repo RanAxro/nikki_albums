@@ -1,6 +1,7 @@
 
 import "../../permission/permission.dart";
 import "../../api/environment.dart" as env;
+import "../../permission/environment.dart" as env;
 import "../../api/file_system.dart" as fs;
 import "../../permission/file_system.dart" as fs;
 import "../../api/ini.dart" as ini;
@@ -66,6 +67,22 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
       fn: () => r.registerGame(params),
     );
   });
+
+  // environment
+  js.onMessage("api.environment.getEnv", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => env.canGetEnv(permission),
+      fn: () => env.getEnv(params),
+    );
+  });
+  js.onMessage("api.environment.getLocalHostname", (_){
+    return requirePermissionThenRun(
+      canCall: () => env.canGetLocalHostname(permission),
+      fn: () => env.getLocalHostname(),
+    );
+  });
+
 
   // ini
   js.onMessage("api.iniDecode", (dynamic args){

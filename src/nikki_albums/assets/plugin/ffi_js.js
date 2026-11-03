@@ -30,6 +30,16 @@ globalThis.api = {
     };
   },
 
+  //environment
+  environment: {
+    getEnv: function(key){
+      return sendMessage("api.environment.getEnv", JSON.stringify(key));
+    },
+    getLocalHostname: function(){
+      return sendMessage("api.environment.getLocalHostname", "null");
+    },
+  },
+
   iniDecode: function(content, flatDefaultOption = true){
     return sendMessage("api.iniDecode", JSON.stringify([content, flatDefaultOption]));
   },
