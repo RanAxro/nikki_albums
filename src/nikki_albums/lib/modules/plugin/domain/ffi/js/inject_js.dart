@@ -173,73 +173,73 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
 
   // file_system
   js.onMessage("api.file_system.exists", (dynamic args){
-    final String params = args;
+    final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canExists(permission),
-      fn: () => fs.exists(params),
+      fn: () => fs.exists(params[0], params[1]),
     );
   });
   js.onMessage("api.file_system.isFile", (dynamic args){
-    final String params = args;
+    final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canIsFile(permission),
-      fn: () => fs.isFile(params),
+      fn: () => fs.isFile(params[0], params[1]),
     );
   });
   js.onMessage("api.file_system.isDir", (dynamic args){
-    final String params = args;
+    final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canIsDir(permission),
-      fn: () => fs.isDir(params),
+      fn: () => fs.isDir(params[0], params[1]),
     );
   });
   js.onMessage("api.file_system.isLink", (dynamic args){
-    final String params = args;
+    final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canIsLink(permission),
-      fn: () => fs.isLink(params),
+      fn: () => fs.isLink(params[0], params[1]),
     );
   });
   js.onMessage("api.file_system.identical", (dynamic args){
     final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canIdentical(permission),
-      fn: () => fs.identical(params[0], params[1]),
+      fn: () => fs.identical(params[0], params[1], params[2]),
     );
   });
   js.onMessage("api.file_system.stat", (dynamic args){
-    final String params = args;
+    final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canStat(permission),
-      fn: () => fs.stat(params),
+      fn: () => fs.stat(params[0], params[1]),
     );
   });
   js.onMessage("api.file_system.list", (dynamic args){
     final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canList(permission),
-      fn: () => fs.list(params[0], params[1], params[2]),
+      fn: () => fs.list(params[0], params[1], params[2], params[3]),
     );
   });
   js.onMessage("api.file_system.readString", (dynamic args){
     final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canReadString(permission),
-      fn: () => fs.readString(params[0], params[1]),
+      fn: () => fs.readString(params[0], params[1], params[2]),
     );
   });
   js.onMessage("api.file_system.readLines", (dynamic args){
     final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canReadLines(permission),
-      fn: () => fs.readLines(params[0], params[1]),
+      fn: () => fs.readLines(params[0], params[1], params[2]),
     );
   });
   js.onMessage("api.file_system.readBytes", (dynamic args){
-    final String params = args;
+    final List params = args;
     return requirePermissionThenRun(
       canCall: () => fs.canReadBytes(permission),
-      fn: () => fs.readBytes(params),
+      fn: () => fs.readBytes(params[0], params[2]),
     );
   });
 
