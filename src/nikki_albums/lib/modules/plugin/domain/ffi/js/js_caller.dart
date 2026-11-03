@@ -7,10 +7,11 @@ import "package:quickjs_engine/js_eval_result.dart";
 
 
 abstract final class PluginJSCaller{
-  static Future<JsEvalResult> searchGame(PluginJSRuntime runtime, String id){
+  static Future<JsEvalResult> searchGame(PluginJSRuntime runtime, String id, String fsHandlerId){
     return runtime.evaluate('''
       (async () => {
-        const res = await globalThis.__apiBridge.game[${jsonEncode(id)}].searchGame();
+        let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(id)}].searchGame(fsHandler);
         res.forEach(g => { g.ownership = ${jsonEncode(id)}; });
         return JSON.stringify(res);
       })();

@@ -1,3 +1,40 @@
+class FileSystemHandler{
+  constructor(handlerId){
+    this.handlerId = handlerId;
+  }
+}
+FileSystemHandler.prototype.exists = function(path){
+  return sendMessage("api.file_system.exists", JSON.stringify([this.handlerId, path]));
+}
+FileSystemHandler.prototype.isFile = function(path){
+  return sendMessage("api.file_system.isFile", JSON.stringify([this.handlerId, path]));
+}
+FileSystemHandler.prototype.isDir = function(path){
+  return sendMessage("api.file_system.isDir", JSON.stringify([this.handlerId, path]));
+}
+FileSystemHandler.prototype.isLink = function(path){
+  return sendMessage("api.file_system.isLink", JSON.stringify([this.handlerId, path]));
+}
+FileSystemHandler.prototype.identical = function(path1, path2){
+  return sendMessage("api.file_system.identical", JSON.stringify([this.handlerId, path1, path2]));
+}
+FileSystemHandler.prototype.stat = function(path){
+  return sendMessage("api.file_system.stat", JSON.stringify([this.handlerId, path]));
+}
+FileSystemHandler.prototype.list = function(path, recursive = false, followLinks = true){
+  return sendMessage("api.file_system.list", JSON.stringify([this.handlerId, path, recursive, followLinks]));
+}
+FileSystemHandler.prototype.readString = function(path, encoding = "utf-8"){
+  return sendMessage("api.file_system.readString", JSON.stringify([this.handlerId, path, encoding]));
+}
+FileSystemHandler.prototype.readLines = function(path, encoding = "utf-8"){
+  return sendMessage("api.file_system.readLines", JSON.stringify([this.handlerId, path, encoding]));
+}
+FileSystemHandler.prototype.readBytes = function(path){
+  return sendMessage("api.file_system.readBytes", JSON.stringify([this.handlerId, path]));
+}
+
+
 globalThis.__apiBridge = {
   game: {},
 };
@@ -105,38 +142,7 @@ globalThis.api = {
     },
   },
 
-  fileSystem: {
-    exists: function(path){
-      return sendMessage("api.file_system.exists", JSON.stringify(path));
-    },
-    isFile: function(path){
-      return sendMessage("api.file_system.isFile", JSON.stringify(path));
-    },
-    isDir: function(path){
-      return sendMessage("api.file_system.isDir", JSON.stringify(path));
-    },
-    isLink: function(path){
-      return sendMessage("api.file_system.isLink", JSON.stringify(path));
-    },
-    identical: function(path1, path2){
-      return sendMessage("api.file_system.identical", JSON.stringify([path1, path2]));
-    },
-    stat: function(path){
-      return sendMessage("api.file_system.stat", JSON.stringify(path));
-    },
-    list: function(path, recursive = false, followLinks = true){
-      return sendMessage("api.file_system.list", JSON.stringify([path, recursive, followLinks]));
-    },
-    readString: function(path, encoding = "utf-8"){
-      return sendMessage("api.file_system.readString", JSON.stringify([path, encoding]));
-    },
-    readLines: function(path, encoding = "utf-8"){
-      return sendMessage("api.file_system.readLines", JSON.stringify([path, encoding]));
-    },
-    readBytes: function(path){
-      return sendMessage("api.file_system.readBytes", JSON.stringify(path));
-    },
-  },
+  fileSystem: new FileSystemHandler(""),
 
   windowsRegistry: {
     HKEY_CLASSES_ROOT: sendMessage("api.windowsRegistry.HKEY_CLASSES_ROOT", "null"),

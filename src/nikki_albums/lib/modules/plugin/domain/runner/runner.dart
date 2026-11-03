@@ -4,6 +4,7 @@ import "../runtime/js_runtime.dart";
 import "../ffi/js/js_bridge.dart";
 import "../../model/exception.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
+import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
 
 import "package:quickjs_engine/js_eval_result.dart";
 import "package:path/path.dart" as p;
@@ -46,7 +47,7 @@ abstract class PluginRunner{
 
   const PluginRunner({required this.reader});
 
-  Future<List<Game>> searchGame(String id);
+  Future<List<Game>> searchGame(String id, NGeneralFileSystem fsHandler);
 
   void dispose();
 }

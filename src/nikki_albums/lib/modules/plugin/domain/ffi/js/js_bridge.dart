@@ -3,6 +3,7 @@ import "js_caller.dart";
 import "../../runtime/js_runtime.dart";
 import "../../../model/exception.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
+import "package:nikki_albums/modules/plugin/domain/api/file_system.dart";
 
 import "dart:convert";
 
@@ -10,8 +11,10 @@ import "package:quickjs_engine/quickjs_engine.dart";
 
 
 abstract final class PluginJSBridge{
-  static Future<List<Game>> searchGame(PluginJSRuntime runtime, String id) async{
-    final JsEvalResult result = await PluginJSCaller.searchGame(runtime, id);
+  static Future<List<Game>> searchGame(PluginJSRuntime runtime, String id, NGeneralFileSystem fsHandler) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final JsEvalResult result = await PluginJSCaller.searchGame(runtime, id, fsHandlerId);
+    PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
