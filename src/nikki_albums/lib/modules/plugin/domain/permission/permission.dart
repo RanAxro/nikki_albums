@@ -1,7 +1,4 @@
 
-export "registration.dart";
-export "windows_registry.dart";
-
 import "../../model/exception.dart";
 
 

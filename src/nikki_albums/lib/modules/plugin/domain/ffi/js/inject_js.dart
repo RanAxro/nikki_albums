@@ -1,6 +1,14 @@
 
-import "../../api/api.dart";
 import "../../permission/permission.dart";
+import "../../api/environment.dart" as env;
+import "../../api/file_system.dart" as fs;
+import "../../permission/file_system.dart" as fs;
+import "../../api/ini.dart" as ini;
+import "../../api/path.dart" as p;
+import "../../api/registration.dart" as r;
+import "../../permission/registration.dart" as r;
+import "../../api/windows_registry.dart" as wr;
+import "../../permission/windows_registry.dart" as wr;
 import "../../../model/exception.dart";
 
 import "package:flutter/services.dart" show rootBundle;
@@ -12,185 +20,257 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
   js.onMessage("api.registerLoc", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterLoc(permission),
-      fn: () => registerLoc(params),
+      canCall: () => r.canRegisterLoc(permission),
+      fn: () => r.registerLoc(params),
     );
   });
   js.onMessage("api.registerGlobalLoc", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterGlobalLoc(permission),
-      fn: () => registerGlobalLoc(params),
+      canCall: () => r.canRegisterGlobalLoc(permission),
+      fn: () => r.registerGlobalLoc(params),
     );
   });
   js.onMessage("api.registerIcon", (dynamic args){
     final List<String> params = List<String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterIcon(permission),
-      fn: () => registerIcon(params),
+      canCall: () => r.canRegisterIcon(permission),
+      fn: () => r.registerIcon(params),
     );
   });
   js.onMessage("api.registerGlobalIcon", (dynamic args){
     final List<String> params = List<String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterGlobalIcon(permission),
-      fn: () => registerGlobalIcon(params),
+      canCall: () => r.canRegisterGlobalIcon(permission),
+      fn: () => r.registerGlobalIcon(params),
     );
   });
   js.onMessage("api.registerFont", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterFont(permission),
-      fn: () => registerFont(params),
+      canCall: () => r.canRegisterFont(permission),
+      fn: () => r.registerFont(params),
     );
   });
   js.onMessage("api.registerGlobalFont", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterGlobalFont(permission),
-      fn: () => registerGlobalFont(params),
+      canCall: () => r.canRegisterGlobalFont(permission),
+      fn: () => r.registerGlobalFont(params),
     );
   });
   js.onMessage("api.registerGame", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
-      canCall: () => canRegisterGame(permission),
-      fn: () => registerGame(params),
+      canCall: () => r.canRegisterGame(permission),
+      fn: () => r.registerGame(params),
     );
   });
 
   // ini
   js.onMessage("api.iniDecode", (dynamic args){
     final List<dynamic> params = args;
-    return iniDecode(params[0], params[1]);
+    return ini.iniDecode(params[0], params[1]);
   });
   js.onMessage("api.iniEncode", (dynamic args){
     final Map<String, dynamic> params = args;
-    return iniEncode(params);
+    return ini.iniEncode(params);
   });
 
   // path
   js.onMessage("api.path.separator", (_){
-    return separator;
+    return p.separator;
   });
   js.onMessage("api.path.join", (dynamic args){
     final List<String> params = List<String>.from(args);
-    return join(params);
+    return p.join(params);
   });
   js.onMessage("api.path.basename", (dynamic args){
     final String params = args;
-    return basename(params);
+    return p.basename(params);
   });
   js.onMessage("api.path.basenameWithoutExtension", (dynamic args){
     final String params = args;
-    return basenameWithoutExtension(params);
+    return p.basenameWithoutExtension(params);
   });
   js.onMessage("api.path.dirname", (dynamic args){
     final String params = args;
-    return dirname(params);
+    return p.dirname(params);
   });
   js.onMessage("api.path.extension", (dynamic args){
     final List<dynamic> params = args;
-    return extension(params[0], params[1]);
+    return p.extension(params[0], params[1]);
   });
   js.onMessage("api.path.rootPrefix", (dynamic args){
     final String params = args;
-    return rootPrefix(params);
+    return p.rootPrefix(params);
   });
   js.onMessage("api.path.isAbsolute", (dynamic args){
     final String params = args;
-    return isAbsolute(params);
+    return p.isAbsolute(params);
   });
   js.onMessage("api.path.isRelative", (dynamic args){
     final String params = args;
-    return isRelative(params);
+    return p.isRelative(params);
   });
   js.onMessage("api.path.isRootRelative", (dynamic args){
     final String params = args;
-    return isRootRelative(params);
+    return p.isRootRelative(params);
   });
   js.onMessage("api.path.split", (dynamic args){
     final String params = args;
-    return split(params);
+    return p.split(params);
   });
   js.onMessage("api.path.canonicalize", (dynamic args){
     final String params = args;
-    return canonicalize(params);
+    return p.canonicalize(params);
   });
   js.onMessage("api.path.normalize", (dynamic args){
     final String params = args;
-    return normalize(params);
+    return p.normalize(params);
   });
   js.onMessage("api.path.isWithin", (dynamic args){
     final List<String> params = List<String>.from(args);
-    return isWithin(params[0], params[1]);
+    return p.isWithin(params[0], params[1]);
   });
   js.onMessage("api.path.equals", (dynamic args){
     final List<String> params = List<String>.from(args);
-    return equals(params[0], params[1]);
+    return p.equals(params[0], params[1]);
   });
   js.onMessage("api.path.withoutExtension", (dynamic args){
     final String params = args;
-    return withoutExtension(params);
+    return p.withoutExtension(params);
   });
   js.onMessage("api.path.setExtension", (dynamic args){
     final List<String> params = List<String>.from(args);
-    return setExtension(params[0], params[1]);
+    return p.setExtension(params[0], params[1]);
   });
   js.onMessage("api.path.fromUri", (dynamic args){
     final String params = args;
-    return fromUri(params);
+    return p.fromUri(params);
   });
   js.onMessage("api.path.toUri", (dynamic args){
     final String params = args;
-    return toUri(params);
+    return p.toUri(params);
+  });
+
+  // file_system
+  js.onMessage("api.file_system.exists", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canExists(permission),
+      fn: () => fs.exists(params),
+    );
+  });
+  js.onMessage("api.file_system.isFile", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canIsFile(permission),
+      fn: () => fs.isFile(params),
+    );
+  });
+  js.onMessage("api.file_system.isDir", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canIsDir(permission),
+      fn: () => fs.isDir(params),
+    );
+  });
+  js.onMessage("api.file_system.isLink", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canIsLink(permission),
+      fn: () => fs.isLink(params),
+    );
+  });
+  js.onMessage("api.file_system.identical", (dynamic args){
+    final List params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canIdentical(permission),
+      fn: () => fs.identical(params[0], params[1]),
+    );
+  });
+  js.onMessage("api.file_system.stat", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canStat(permission),
+      fn: () => fs.stat(params),
+    );
+  });
+  js.onMessage("api.file_system.list", (dynamic args){
+    final List params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canList(permission),
+      fn: () => fs.list(params[0], params[1], params[2]),
+    );
+  });
+  js.onMessage("api.file_system.readString", (dynamic args){
+    final List params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canReadString(permission),
+      fn: () => fs.readString(params[0], params[1]),
+    );
+  });
+  js.onMessage("api.file_system.readLines", (dynamic args){
+    final List params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canReadLines(permission),
+      fn: () => fs.readLines(params[0], params[1]),
+    );
+  });
+  js.onMessage("api.file_system.readBytes", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canReadBytes(permission),
+      fn: () => fs.readBytes(params),
+    );
   });
 
   // windows_registry
   js.onMessage("api.windowsRegistry.HKEY_CLASSES_ROOT", (_){
-    return HKEY_CLASSES_ROOT;
+    return wr.HKEY_CLASSES_ROOT;
   });
   js.onMessage("api.windowsRegistry.HKEY_CURRENT_USER", (_){
-    return HKEY_CURRENT_USER;
+    return wr.HKEY_CURRENT_USER;
   });
   js.onMessage("api.windowsRegistry.HKEY_LOCAL_MACHINE", (_){
-    return HKEY_LOCAL_MACHINE;
+    return wr.HKEY_LOCAL_MACHINE;
   });
   js.onMessage("api.windowsRegistry.HKEY_USERS", (_){
-    return HKEY_USERS;
+    return wr.HKEY_USERS;
   });
   js.onMessage("api.windowsRegistry.HKEY_PERFORMANCE_DATA", (_){
-    return HKEY_PERFORMANCE_DATA;
+    return wr.HKEY_PERFORMANCE_DATA;
   });
   js.onMessage("api.windowsRegistry.HKEY_CURRENT_CONFIG", (_){
-    return HKEY_CURRENT_CONFIG;
+    return wr.HKEY_CURRENT_CONFIG;
   });
   js.onMessage("api.windowsRegistry.readString", (dynamic args){
     final List<dynamic> params = args;
     return requirePermissionThenRun(
-      canCall: () => canReadString(permission),
-      fn: () => readString(params[0], params[1], params[2]),
+      canCall: () => wr.canReadString(permission),
+      fn: () => wr.readString(params[0], params[1], params[2]),
     );
   });
   js.onMessage("api.windowsRegistry.readMultiString", (dynamic args){
     final List<dynamic> params = args;
     return requirePermissionThenRun(
-      canCall: () => canReadMultiString(permission),
-      fn: () => readMultiString(params[0], params[1], params[2]),
+      canCall: () => wr.canReadMultiString(permission),
+      fn: () => wr.readMultiString(params[0], params[1], params[2]),
     );
   });
   js.onMessage("api.windowsRegistry.readInt", (dynamic args){
     final List<dynamic> params = args;
     return requirePermissionThenRun(
-      canCall: () => canReadInt(permission),
-      fn: () => readInt(params[0], params[1], params[2]),
+      canCall: () => wr.canReadInt(permission),
+      fn: () => wr.readInt(params[0], params[1], params[2]),
     );
   });
   js.onMessage("api.windowsRegistry.readBinary", (dynamic args){
     final List<dynamic> params = args;
     return requirePermissionThenRun(
-      canCall: () => canReadBinary(permission),
-      fn: () => readBinary(params[0], params[1], params[2]),
+      canCall: () => wr.canReadBinary(permission),
+      fn: () => wr.readBinary(params[0], params[1], params[2]),
     );
   });
 

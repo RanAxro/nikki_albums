@@ -95,6 +95,39 @@ globalThis.api = {
     },
   },
 
+  fileSystem: {
+    exists: function(path){
+      return sendMessage("api.file_system.exists", JSON.stringify(path));
+    },
+    isFile: function(path){
+      return sendMessage("api.file_system.isFile", JSON.stringify(path));
+    },
+    isDir: function(path){
+      return sendMessage("api.file_system.isDir", JSON.stringify(path));
+    },
+    isLink: function(path){
+      return sendMessage("api.file_system.isLink", JSON.stringify(path));
+    },
+    identical: function(path1, path2){
+      return sendMessage("api.file_system.identical", JSON.stringify([path1, path2]));
+    },
+    stat: function(path){
+      return sendMessage("api.file_system.stat", JSON.stringify(path));
+    },
+    list: function(path, recursive = false, followLinks = true){
+      return sendMessage("api.file_system.list", JSON.stringify([path, recursive, followLinks]));
+    },
+    readString: function(path, encoding = "utf-8"){
+      return sendMessage("api.file_system.readString", JSON.stringify([path, encoding]));
+    },
+    readLines: function(path, encoding = "utf-8"){
+      return sendMessage("api.file_system.readLines", JSON.stringify([path, encoding]));
+    },
+    readBytes: function(path){
+      return sendMessage("api.file_system.readBytes", JSON.stringify(path));
+    },
+  },
+
   windowsRegistry: {
     HKEY_CLASSES_ROOT: sendMessage("api.windowsRegistry.HKEY_CLASSES_ROOT", "null"),
     HKEY_CURRENT_USER: sendMessage("api.windowsRegistry.HKEY_CURRENT_USER", "null"),
