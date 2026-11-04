@@ -1,4 +1,3 @@
-
 async function importDependentModules(){
   return {
     game: await import("game"),
@@ -16,19 +15,7 @@ importDependentModules().then(modules => {
 
   api.registerGame({
     "uuid": "114514",
-    "searchGame": function(){
-      let wr = api.windowsRegistry;
-      let path = wr.readString(wr.HKEY_CURRENT_USER, "Software\\InfinityNikki Launcher", "");
-      return [
-        {
-          info: {
-            channel: "paper",
-            testf: modules.game.imtf(),
-          },
-          install_path: path,
-        },
-      ];
-    }
+    "searchGame": modules.game.searchGameInWindows,
   });
 });
 
