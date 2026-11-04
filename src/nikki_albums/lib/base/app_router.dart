@@ -1,8 +1,8 @@
 
 import "package:nikki_albums/ui/album_manager/album.dart";
 import "package:nikki_albums/ui/plugin.dart";
-
-import "../ui/home.dart";
+import "package:nikki_albums/ui/bootstrap.dart";
+import "package:nikki_albums/ui/home.dart";
 import "../modules/frame/presentation/header/header_windows.dart";
 import "../modules/frame/presentation/nav/nav_desktop.dart";
 
@@ -51,7 +51,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: AppRoutes.home,
+  initialLocation: AppRoutes.bootstrap,
   debugLogDiagnostics: true,
   routes: [
     ShellRoute(
@@ -77,14 +77,7 @@ final GoRouter appRouter = GoRouter(
           path: AppRoutes.bootstrap,
           name: AppRoutes.bootstrapName,
           builder: (context, state){
-            return Align(
-              child: FButton(
-                onPress: (){
-                  context.go(AppRoutes.home);
-                },
-                child: Text("加载中"),
-              ),
-            );
+            return BootstrapPage();
           },
         ),
         StatefulShellRoute.indexedStack(
