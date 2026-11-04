@@ -1,6 +1,7 @@
 
 import "../reader/reader.dart";
 import "../runtime/js_runtime.dart";
+import "../../model/event_handler.dart";
 import "../ffi/js/js_bridge.dart";
 import "../../model/exception.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
@@ -13,7 +14,11 @@ part "js_runner.dart";
 
 
 abstract class PluginRunner{
-  static Future<PluginRunner> init({required PluginReader reader, required Set<Object> permission}) async{
+  static Future<PluginRunner> init({
+    required PluginReader reader,
+    required Set<Object> permission,
+    required PluginEventHandler eventHandler,
+  }) async{
     final PluginInfo info = await reader.readInfo();
 
     switch(info.scriptInfo){
@@ -26,9 +31,13 @@ abstract class PluginRunner{
           final String scriptPath = p.join(p.dirname(scriptInfo.entrance), entry.value);
           modules[entry.key] = await reader.readFileAsString(scriptPath);
         }
-        final PluginJSRuntime runtime = await PluginJSRuntime.init(permission: permission, moduleHandler: (String moduleName){
-          return modules[moduleName] ?? "";
-        });
+        final PluginJSRuntime runtime = await PluginJSRuntime.init(
+          permission: permission,
+          eventHandler: eventHandler,
+          moduleHandler: (String moduleName){
+            return modules[moduleName] ?? "";
+          },
+        );
         final String entrance = await reader.readFileAsString(scriptInfo.entrance);
         final JsEvalResult result = await runtime.evaluate(entrance);
         if(result.isError){

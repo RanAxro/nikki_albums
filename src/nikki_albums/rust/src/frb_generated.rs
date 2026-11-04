@@ -6708,11 +6708,11 @@ impl SseDecode for crate::config::rules::icon_rule::FontIconRule {
 impl SseDecode for crate::config::game::Game {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_ownership = <String>::sse_decode(deserializer);
+        let mut var_uniqueId = <String>::sse_decode(deserializer);
         let mut var_info = <std::collections::HashMap<String, String>>::sse_decode(deserializer);
         let mut var_installPath = <String>::sse_decode(deserializer);
         return crate::config::game::Game {
-            ownership: var_ownership,
+            unique_id: var_uniqueId,
             info: var_info,
             install_path: var_installPath,
         };
@@ -10648,7 +10648,7 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::rules::icon_rule::FontIcon
 impl flutter_rust_bridge::IntoDart for crate::config::game::Game {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
-            self.ownership.into_into_dart().into_dart(),
+            self.unique_id.into_into_dart().into_dart(),
             self.info.into_into_dart().into_dart(),
             self.install_path.into_into_dart().into_dart(),
         ]
@@ -13412,7 +13412,7 @@ impl SseEncode for crate::config::rules::icon_rule::FontIconRule {
 impl SseEncode for crate::config::game::Game {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.ownership, serializer);
+        <String>::sse_encode(self.unique_id, serializer);
         <std::collections::HashMap<String, String>>::sse_encode(self.info, serializer);
         <String>::sse_encode(self.install_path, serializer);
     }

@@ -6691,7 +6691,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 3)
       throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
     return Game(
-      ownership: dco_decode_String(arr[0]),
+      uniqueId: dco_decode_String(arr[0]),
       info: dco_decode_Map_String_String_None(arr[1]),
       installPath: dco_decode_String(arr[2]),
     );
@@ -9837,11 +9837,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   Game sse_decode_game(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_ownership = sse_decode_String(deserializer);
+    var var_uniqueId = sse_decode_String(deserializer);
     var var_info = sse_decode_Map_String_String_None(deserializer);
     var var_installPath = sse_decode_String(deserializer);
     return Game(
-      ownership: var_ownership,
+      uniqueId: var_uniqueId,
       info: var_info,
       installPath: var_installPath,
     );
@@ -13587,7 +13587,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_game(Game self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.ownership, serializer);
+    sse_encode_String(self.uniqueId, serializer);
     sse_encode_Map_String_String_None(self.info, serializer);
     sse_encode_String(self.installPath, serializer);
   }

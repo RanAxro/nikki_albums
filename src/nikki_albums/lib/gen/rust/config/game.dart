@@ -8,12 +8,12 @@ import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 class Game {
-  final String ownership;
+  final String uniqueId;
   final Map<String, String> info;
   final String installPath;
 
   const Game({
-    required this.ownership,
+    required this.uniqueId,
     required this.info,
     required this.installPath,
   });
@@ -56,14 +56,14 @@ class Game {
       RustLib.instance.api.crateConfigGameGameToVecJsonPretty(value: value);
 
   @override
-  int get hashCode => ownership.hashCode ^ info.hashCode ^ installPath.hashCode;
+  int get hashCode => uniqueId.hashCode ^ info.hashCode ^ installPath.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Game &&
           runtimeType == other.runtimeType &&
-          ownership == other.ownership &&
+          uniqueId == other.uniqueId &&
           info == other.info &&
           installPath == other.installPath;
 }

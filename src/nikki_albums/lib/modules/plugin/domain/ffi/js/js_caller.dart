@@ -7,37 +7,37 @@ import "package:quickjs_engine/js_eval_result.dart";
 
 
 abstract final class PluginJSCaller{
-  static Future<JsEvalResult> searchGame(PluginJSRuntime runtime, String id, String fsHandlerId){
+  static Future<JsEvalResult> searchGame(PluginJSRuntime runtime, String uniqueId, String fsHandlerId){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(id)}].searchGame(fsHandler);
-        res.forEach(g => { g.ownership = ${jsonEncode(id)}; });
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uniqueId)}].searchGame(fsHandler);
+        res.forEach(g => { g.unique_id = ${jsonEncode(uniqueId)}; });
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getGameIcon(PluginJSRuntime runtime, String id, String gameJson){
+  static Future<JsEvalResult> getGameIcon(PluginJSRuntime runtime, String uniqueId, String gameJson){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(id)}].getGameIcon(${jsonEncode(gameJson)})
+        await globalThis.__apiBridge.game[${jsonEncode(uniqueId)}].getGameIcon(${jsonEncode(gameJson)})
       ))();
     ''');
   }
 
-  static Future<JsEvalResult> searchAccount(PluginJSRuntime runtime, String id, String gameJson){
+  static Future<JsEvalResult> searchAccount(PluginJSRuntime runtime, String uniqueId, String gameJson){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(id)}].searchAccount(${jsonEncode(gameJson)})
+        await globalThis.__apiBridge.game[${jsonEncode(uniqueId)}].searchAccount(${jsonEncode(gameJson)})
       ))();
     ''');
   }
 
-  static Future<JsEvalResult> getAccountName(PluginJSRuntime runtime, String id, String gameJson, String account){
+  static Future<JsEvalResult> getAccountName(PluginJSRuntime runtime, String uniqueId, String gameJson, String account){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(id)}].getAccountName(
+        await globalThis.__apiBridge.game[${jsonEncode(uniqueId)}].getAccountName(
           ${jsonEncode(gameJson)},
           ${jsonEncode(account)}
         )
@@ -45,10 +45,10 @@ abstract final class PluginJSCaller{
     ''');
   }
 
-  static Future<JsEvalResult> getAccountAvatar(PluginJSRuntime runtime, String id, String gameJson, String account){
+  static Future<JsEvalResult> getAccountAvatar(PluginJSRuntime runtime, String uniqueId, String gameJson, String account){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(id)}].getAccountAvatar(
+        await globalThis.__apiBridge.game[${jsonEncode(uniqueId)}].getAccountAvatar(
           ${jsonEncode(gameJson)},
           ${jsonEncode(account)}
         )
@@ -56,10 +56,10 @@ abstract final class PluginJSCaller{
     ''');
   }
 
-  static Future<JsEvalResult> searchAlbum(PluginJSRuntime runtime, String id, String gameJson, String? account){
+  static Future<JsEvalResult> searchAlbum(PluginJSRuntime runtime, String uniqueId, String gameJson, String? account){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(id)}].searchAlbum(
+        await globalThis.__apiBridge.game[${jsonEncode(uniqueId)}].searchAlbum(
           ${jsonEncode(gameJson)},
           ${jsonEncode(account)}
         )

@@ -5,7 +5,7 @@ use crate::{impl_json_frb, impl_vec_json_frb};
 
 #[derive(Serialize, Deserialize)]
 pub struct Game{
-  pub ownership: String,
+  pub unique_id: String,
   pub info: HashMap<String, String>,
   pub install_path: String,
 }

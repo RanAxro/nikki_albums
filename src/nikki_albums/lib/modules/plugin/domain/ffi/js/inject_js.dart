@@ -10,6 +10,7 @@ import "../../api/registration.dart" as r;
 import "../../permission/registration.dart" as r;
 import "../../api/windows_registry.dart" as wr;
 import "../../permission/windows_registry.dart" as wr;
+import "../../../model/event_handler.dart";
 import "../../../model/exception.dart";
 
 import "package:flutter/services.dart" show rootBundle;
@@ -17,7 +18,7 @@ import "package:flutter/services.dart" show rootBundle;
 import "package:quickjs_engine/quickjs_engine.dart";
 
 
-Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
+Future<void> injectJS(JavascriptRuntime js, Set<Object> permission, PluginEventHandler eventHandler) async{
   js.onMessage("api.registerLoc", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
@@ -64,7 +65,7 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission) async{
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
       canCall: () => r.canRegisterGame(permission),
-      fn: () => r.registerGame(params),
+      fn: () => r.registerGame(params, eventHandler),
     );
   });
 

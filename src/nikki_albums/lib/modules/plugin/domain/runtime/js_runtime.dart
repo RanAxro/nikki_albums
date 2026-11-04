@@ -1,5 +1,6 @@
 
 import "runtime.dart";
+import "../../model/event_handler.dart";
 import "../ffi/js/inject_js.dart";
 
 import "package:quickjs_engine/quickjs_engine.dart";
@@ -9,10 +10,11 @@ class PluginJSRuntime extends PluginRuntime{
   static Future<PluginJSRuntime> init({
     String Function(String)? moduleHandler,
     Set<Object> permission = const {},
+    required PluginEventHandler eventHandler,
   }) async{
     final JavascriptRuntime js = QuickJsRuntime2(moduleHandler: moduleHandler);
     js.enableHandlePromises();
-    await injectJS(js, permission);
+    await injectJS(js, permission, eventHandler);
 
     return PluginJSRuntime._(js, permission: permission);
   }
