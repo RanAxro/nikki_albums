@@ -313,25 +313,32 @@ class HotUpdater {
     if (error is HotUpdateChecksumException) return true;
     if (error is! DioException) return false;
 
-    switch (error.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-      case DioExceptionType.connectionError:
-        return true;
-      case DioExceptionType.badResponse:
-        final int? statusCode = error.response?.statusCode;
-        return statusCode == 408 ||
-            statusCode == 429 ||
-            (statusCode != null && statusCode >= 500);
-      case DioExceptionType.unknown:
-        return error.error is SocketException ||
-            error.error is HandshakeException ||
-            error.error is HttpException;
-      case DioExceptionType.badCertificate:
-      case DioExceptionType.cancel:
-        return false;
+    final DioExceptionType type = error.type;
+    if (type == DioExceptionType.connectionTimeout ||
+        type == DioExceptionType.sendTimeout ||
+        type == DioExceptionType.receiveTimeout ||
+        type == DioExceptionType.connectionError) {
+      return true;
     }
+    if (type == DioExceptionType.badResponse) {
+      final int? statusCode = error.response?.statusCode;
+      return statusCode == 408 ||
+          statusCode == 429 ||
+          (statusCode != null && statusCode >= 500);
+    }
+    if (type == DioExceptionType.unknown) {
+      return error.error is SocketException ||
+          error.error is HandshakeException ||
+          error.error is HttpException;
+    }
+    if (type == DioExceptionType.badCertificate ||
+        type == DioExceptionType.cancel) {
+      return false;
+    }
+
+    // transformTimeout was added in newer Dio versions. Comparing by enum name
+    // keeps this code compilable with both old and new lockfiles.
+    return type.name == "transformTimeout";
   }
 
   Future<void> _runWithConcurrency(
