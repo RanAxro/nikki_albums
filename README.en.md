@@ -71,6 +71,11 @@ Join our group to share usage tips with fellow players, report encountered issue
 2. Added category options for warm-up actions.
 3. Fixed the bug where multiple photos could not parse parameters.
 
+## v3.012.02
+1. Fixed some translation errors
+2. Optimized the hot update function, adding file hash verification and automatic re-downloading
+[Recommended update! Staying on the old version will result in some resources being inaccessible]
+
 ***
 
 # Acknowledgments
