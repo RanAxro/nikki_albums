@@ -1,4 +1,5 @@
 
+import "package:nikki_albums/info.dart";
 import "package:nikki_albums/widgets/common/component.dart";
 import "component.dart";
 
@@ -1903,6 +1904,9 @@ class AppCachedNetworkImage extends StatelessWidget{
     return CachedNetworkImage(
       imageUrl: imageUrl,
       cacheKey: cacheKey,
+      httpHeaders: {
+        "User-Agent": "Nikki Albums/$version",
+      },
       fadeInDuration: animationTime,
       fadeOutDuration: animationTime,
       errorWidget: errorWidget ?? (BuildContext context, String url, Object error){

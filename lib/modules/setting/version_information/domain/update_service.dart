@@ -1,5 +1,7 @@
+
 import "../model/update_info.dart";
 import "launch_official_website.dart";
+import "package:nikki_albums/info.dart";
 import "package:nikki_albums/modules/app_base/state.dart";
 import "package:nikki_albums/utils/system/system.dart";
 
@@ -52,7 +54,10 @@ class WindowsUpdater extends Updater {
         onReceiveProgress: (int received, int total) {
           onProgress?.call((received / total - 0.1).clamp(0, 1));
         },
-        options: Options(headers: {"Referer": "https://nikki.ranaxro.com"}),
+        options: Options(headers: {
+          "Referer": "https://nikki.ranaxro.com",
+          "User-Agent": "Nikki Albums/$version",
+        }),
       );
 
       isDownload = true;

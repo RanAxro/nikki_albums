@@ -1,6 +1,7 @@
 
 import "../model/hot_update_info.dart";
 import "package:nikki_albums/utils/system/system.dart";
+import "package:nikki_albums/info.dart";
 
 import "dart:io";
 
@@ -73,6 +74,9 @@ class HotUpdater{
 
     // 2. 复用单个 Dio，配置合理超时
     final Dio dio = Dio(BaseOptions(
+      headers: {
+        "User-Agent": "Nikki Albums/$version",
+      },
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(minutes: 2),
     ));
