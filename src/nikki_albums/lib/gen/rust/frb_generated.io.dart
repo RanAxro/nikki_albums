@@ -272,6 +272,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BuildingParams dco_decode_box_autoadd_building_params(dynamic raw);
 
   @protected
+  BuiltInIconRule dco_decode_box_autoadd_built_in_icon_rule(dynamic raw);
+
+  @protected
   CameraParams dco_decode_box_autoadd_camera_params(dynamic raw);
 
   @protected
@@ -310,9 +313,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
-
-  @protected
-  FontIconRule dco_decode_box_autoadd_font_icon_rule(dynamic raw);
 
   @protected
   Game dco_decode_box_autoadd_game(dynamic raw);
@@ -465,6 +465,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BuildingParams dco_decode_building_params(dynamic raw);
 
   @protected
+  BuiltInIconRule dco_decode_built_in_icon_rule(dynamic raw);
+
+  @protected
   CameraParams dco_decode_camera_params(dynamic raw);
 
   @protected
@@ -537,9 +540,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   FilterParams dco_decode_filter_params(dynamic raw);
-
-  @protected
-  FontIconRule dco_decode_font_icon_rule(dynamic raw);
 
   @protected
   Game dco_decode_game(dynamic raw);
@@ -1364,6 +1364,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  BuiltInIconRule sse_decode_box_autoadd_built_in_icon_rule(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CameraParams sse_decode_box_autoadd_camera_params(
     SseDeserializer deserializer,
   );
@@ -1414,11 +1419,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   EditPhotoParams sse_decode_box_autoadd_edit_photo_params(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FontIconRule sse_decode_box_autoadd_font_icon_rule(
     SseDeserializer deserializer,
   );
 
@@ -1619,6 +1619,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BuildingParams sse_decode_building_params(SseDeserializer deserializer);
 
   @protected
+  BuiltInIconRule sse_decode_built_in_icon_rule(SseDeserializer deserializer);
+
+  @protected
   CameraParams sse_decode_camera_params(SseDeserializer deserializer);
 
   @protected
@@ -1701,9 +1704,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
-
-  @protected
-  FontIconRule sse_decode_font_icon_rule(SseDeserializer deserializer);
 
   @protected
   Game sse_decode_game(SseDeserializer deserializer);
@@ -2707,6 +2707,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_built_in_icon_rule(
+    BuiltInIconRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_camera_params(
     CameraParams self,
     SseSerializer serializer,
@@ -2772,12 +2778,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_edit_photo_params(
     EditPhotoParams self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_font_icon_rule(
-    FontIconRule self,
     SseSerializer serializer,
   );
 
@@ -3040,6 +3040,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_built_in_icon_rule(
+    BuiltInIconRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_camera_params(CameraParams self, SseSerializer serializer);
 
   @protected
@@ -3149,9 +3155,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_font_icon_rule(FontIconRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_game(Game self, SseSerializer serializer);

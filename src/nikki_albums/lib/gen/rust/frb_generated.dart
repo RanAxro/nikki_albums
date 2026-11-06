@@ -6182,6 +6182,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BuiltInIconRule dco_decode_box_autoadd_built_in_icon_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_built_in_icon_rule(raw);
+  }
+
+  @protected
   CameraParams dco_decode_box_autoadd_camera_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_camera_params(raw);
@@ -6255,12 +6261,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_edit_photo_params(raw);
-  }
-
-  @protected
-  FontIconRule dco_decode_box_autoadd_font_icon_rule(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_font_icon_rule(raw);
   }
 
   @protected
@@ -6555,6 +6555,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return BuildingParams(furnitureCount: dco_decode_i_32(arr[0]));
+  }
+
+  @protected
+  BuiltInIconRule dco_decode_built_in_icon_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return BuiltInIconRule(name: dco_decode_String(arr[0]));
   }
 
   @protected
@@ -6873,19 +6882,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FontIconRule dco_decode_font_icon_rule(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
-    return FontIconRule(
-      global: dco_decode_bool(arr[0]),
-      fontFamily: dco_decode_String(arr[1]),
-      codePoint: dco_decode_u_32(arr[2]),
-    );
-  }
-
-  @protected
   Game dco_decode_game(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -6980,7 +6976,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 0:
         return IconRule_Image(dco_decode_box_autoadd_image_icon_rule(raw[1]));
       case 1:
-        return IconRule_Font(dco_decode_box_autoadd_font_icon_rule(raw[1]));
+        return IconRule_BuiltIn(
+          dco_decode_box_autoadd_built_in_icon_rule(raw[1]),
+        );
       default:
         throw Exception("unreachable");
     }
@@ -9242,6 +9240,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BuiltInIconRule sse_decode_box_autoadd_built_in_icon_rule(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_built_in_icon_rule(deserializer));
+  }
+
+  @protected
   CameraParams sse_decode_box_autoadd_camera_params(
     SseDeserializer deserializer,
   ) {
@@ -9329,14 +9335,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_edit_photo_params(deserializer));
-  }
-
-  @protected
-  FontIconRule sse_decode_box_autoadd_font_icon_rule(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_font_icon_rule(deserializer));
   }
 
   @protected
@@ -9679,6 +9677,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_furnitureCount = sse_decode_i_32(deserializer);
     return BuildingParams(furnitureCount: var_furnitureCount);
+  }
+
+  @protected
+  BuiltInIconRule sse_decode_built_in_icon_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_name = sse_decode_String(deserializer);
+    return BuiltInIconRule(name: var_name);
   }
 
   @protected
@@ -10036,19 +10041,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FontIconRule sse_decode_font_icon_rule(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_global = sse_decode_bool(deserializer);
-    var var_fontFamily = sse_decode_String(deserializer);
-    var var_codePoint = sse_decode_u_32(deserializer);
-    return FontIconRule(
-      global: var_global,
-      fontFamily: var_fontFamily,
-      codePoint: var_codePoint,
-    );
-  }
-
-  @protected
   Game sse_decode_game(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_uniqueId = sse_decode_String(deserializer);
@@ -10146,8 +10138,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_field0 = sse_decode_box_autoadd_image_icon_rule(deserializer);
         return IconRule_Image(var_field0);
       case 1:
-        var var_field0 = sse_decode_box_autoadd_font_icon_rule(deserializer);
-        return IconRule_Font(var_field0);
+        var var_field0 = sse_decode_box_autoadd_built_in_icon_rule(
+          deserializer,
+        );
+        return IconRule_BuiltIn(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -13000,6 +12994,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_built_in_icon_rule(
+    BuiltInIconRule self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_built_in_icon_rule(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_camera_params(
     CameraParams self,
     SseSerializer serializer,
@@ -13102,15 +13105,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_edit_photo_params(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_font_icon_rule(
-    FontIconRule self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_font_icon_rule(self, serializer);
   }
 
   @protected
@@ -13516,6 +13510,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_built_in_icon_rule(
+    BuiltInIconRule self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.name, serializer);
+  }
+
+  @protected
   void sse_encode_camera_params(CameraParams self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_record_f_64_f_64_f_64(self.cameraActorLoc, serializer);
@@ -13797,14 +13800,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_font_icon_rule(FontIconRule self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_bool(self.global, serializer);
-    sse_encode_String(self.fontFamily, serializer);
-    sse_encode_u_32(self.codePoint, serializer);
-  }
-
-  @protected
   void sse_encode_game(Game self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.uniqueId, serializer);
@@ -13887,9 +13882,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case IconRule_Image(field0: final field0):
         sse_encode_i_32(0, serializer);
         sse_encode_box_autoadd_image_icon_rule(field0, serializer);
-      case IconRule_Font(field0: final field0):
+      case IconRule_BuiltIn(field0: final field0):
         sse_encode_i_32(1, serializer);
-        sse_encode_box_autoadd_font_icon_rule(field0, serializer);
+        sse_encode_box_autoadd_built_in_icon_rule(field0, serializer);
     }
   }
 

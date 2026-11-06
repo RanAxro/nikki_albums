@@ -61,12 +61,12 @@ extension IconRulePatterns on IconRule {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( IconRule_Image value)?  image,TResult Function( IconRule_Font value)?  font,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( IconRule_Image value)?  image,TResult Function( IconRule_BuiltIn value)?  builtIn,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case IconRule_Image() when image != null:
-return image(_that);case IconRule_Font() when font != null:
-return font(_that);case _:
+return image(_that);case IconRule_BuiltIn() when builtIn != null:
+return builtIn(_that);case _:
   return orElse();
 
 }
@@ -84,12 +84,12 @@ return font(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( IconRule_Image value)  image,required TResult Function( IconRule_Font value)  font,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( IconRule_Image value)  image,required TResult Function( IconRule_BuiltIn value)  builtIn,}){
 final _that = this;
 switch (_that) {
 case IconRule_Image():
-return image(_that);case IconRule_Font():
-return font(_that);}
+return image(_that);case IconRule_BuiltIn():
+return builtIn(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -103,12 +103,12 @@ return font(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( IconRule_Image value)?  image,TResult? Function( IconRule_Font value)?  font,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( IconRule_Image value)?  image,TResult? Function( IconRule_BuiltIn value)?  builtIn,}){
 final _that = this;
 switch (_that) {
 case IconRule_Image() when image != null:
-return image(_that);case IconRule_Font() when font != null:
-return font(_that);case _:
+return image(_that);case IconRule_BuiltIn() when builtIn != null:
+return builtIn(_that);case _:
   return null;
 
 }
@@ -125,11 +125,11 @@ return font(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ImageIconRule field0)?  image,TResult Function( FontIconRule field0)?  font,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ImageIconRule field0)?  image,TResult Function( BuiltInIconRule field0)?  builtIn,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case IconRule_Image() when image != null:
-return image(_that.field0);case IconRule_Font() when font != null:
-return font(_that.field0);case _:
+return image(_that.field0);case IconRule_BuiltIn() when builtIn != null:
+return builtIn(_that.field0);case _:
   return orElse();
 
 }
@@ -147,11 +147,11 @@ return font(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ImageIconRule field0)  image,required TResult Function( FontIconRule field0)  font,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ImageIconRule field0)  image,required TResult Function( BuiltInIconRule field0)  builtIn,}) {final _that = this;
 switch (_that) {
 case IconRule_Image():
-return image(_that.field0);case IconRule_Font():
-return font(_that.field0);}
+return image(_that.field0);case IconRule_BuiltIn():
+return builtIn(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -165,11 +165,11 @@ return font(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ImageIconRule field0)?  image,TResult? Function( FontIconRule field0)?  font,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ImageIconRule field0)?  image,TResult? Function( BuiltInIconRule field0)?  builtIn,}) {final _that = this;
 switch (_that) {
 case IconRule_Image() when image != null:
-return image(_that.field0);case IconRule_Font() when font != null:
-return font(_that.field0);case _:
+return image(_that.field0);case IconRule_BuiltIn() when builtIn != null:
+return builtIn(_that.field0);case _:
   return null;
 
 }
@@ -248,23 +248,23 @@ as ImageIconRule,
 /// @nodoc
 
 
-class IconRule_Font extends IconRule {
-  const IconRule_Font(this.field0): super._();
+class IconRule_BuiltIn extends IconRule {
+  const IconRule_BuiltIn(this.field0): super._();
   
 
-@override final  FontIconRule field0;
+@override final  BuiltInIconRule field0;
 
 /// Create a copy of IconRule
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$IconRule_FontCopyWith<IconRule_Font> get copyWith => _$IconRule_FontCopyWithImpl<IconRule_Font>(this, _$identity);
+$IconRule_BuiltInCopyWith<IconRule_BuiltIn> get copyWith => _$IconRule_BuiltInCopyWithImpl<IconRule_BuiltIn>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is IconRule_Font&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is IconRule_BuiltIn&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
@@ -275,18 +275,18 @@ int get hashCode {
 
 @override
 String toString() {
-    return 'IconRule.font(field0: $field0)';
+    return 'IconRule.builtIn(field0: $field0)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $IconRule_FontCopyWith<$Res> implements $IconRuleCopyWith<$Res> {
-  factory $IconRule_FontCopyWith(IconRule_Font value, $Res Function(IconRule_Font) _then) = _$IconRule_FontCopyWithImpl;
+abstract mixin class $IconRule_BuiltInCopyWith<$Res> implements $IconRuleCopyWith<$Res> {
+  factory $IconRule_BuiltInCopyWith(IconRule_BuiltIn value, $Res Function(IconRule_BuiltIn) _then) = _$IconRule_BuiltInCopyWithImpl;
 @useResult
 $Res call({
- FontIconRule field0
+ BuiltInIconRule field0
 });
 
 
@@ -294,19 +294,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$IconRule_FontCopyWithImpl<$Res>
-    implements $IconRule_FontCopyWith<$Res> {
-  _$IconRule_FontCopyWithImpl(this._self, this._then);
+class _$IconRule_BuiltInCopyWithImpl<$Res>
+    implements $IconRule_BuiltInCopyWith<$Res> {
+  _$IconRule_BuiltInCopyWithImpl(this._self, this._then);
 
-  final IconRule_Font _self;
-  final $Res Function(IconRule_Font) _then;
+  final IconRule_BuiltIn _self;
+  final $Res Function(IconRule_BuiltIn) _then;
 
 /// Create a copy of IconRule
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
-  return _then(IconRule_Font(
+  return _then(IconRule_BuiltIn(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as FontIconRule,
+as BuiltInIconRule,
   ));
 }
 

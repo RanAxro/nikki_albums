@@ -9,29 +9,20 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'icon_rule.freezed.dart';
 
-class FontIconRule {
-  final bool global;
-  final String fontFamily;
-  final int codePoint;
+class BuiltInIconRule {
+  final String name;
 
-  const FontIconRule({
-    required this.global,
-    required this.fontFamily,
-    required this.codePoint,
-  });
+  const BuiltInIconRule({required this.name});
 
   @override
-  int get hashCode =>
-      global.hashCode ^ fontFamily.hashCode ^ codePoint.hashCode;
+  int get hashCode => name.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FontIconRule &&
+      other is BuiltInIconRule &&
           runtimeType == other.runtimeType &&
-          global == other.global &&
-          fontFamily == other.fontFamily &&
-          codePoint == other.codePoint;
+          name == other.name;
 }
 
 @freezed
@@ -39,7 +30,7 @@ sealed class IconRule with _$IconRule {
   const IconRule._();
 
   const factory IconRule.image(ImageIconRule field0) = IconRule_Image;
-  const factory IconRule.font(FontIconRule field0) = IconRule_Font;
+  const factory IconRule.builtIn(BuiltInIconRule field0) = IconRule_BuiltIn;
 
   static IconRule fromJson({required String json}) =>
       RustLib.instance.api.crateConfigRulesIconRuleIconRuleFromJson(json: json);

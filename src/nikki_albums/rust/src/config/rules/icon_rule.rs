@@ -10,7 +10,7 @@ impl_json_frb!(IconRule);
 #[serde(untagged)]
 pub enum IconRule{
   Image(ImageIconRule),
-  Font(FontIconRule),
+  BuiltIn(BuiltInIconRule),
 }
 
 #[frb]
@@ -18,16 +18,12 @@ pub enum IconRule{
 pub struct ImageIconRule{
   #[serde(default)]
   pub global: bool,
-  
+
   pub path: String,
 }
 
 #[frb]
 #[derive(Serialize, Deserialize)]
-pub struct FontIconRule{
-  #[serde(default)]
-  pub global: bool,
-
-  pub font_family: String,
-  pub code_point: u32,
+pub struct BuiltInIconRule{
+  pub name: String,
 }

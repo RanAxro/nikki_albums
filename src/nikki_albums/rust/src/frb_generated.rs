@@ -6429,6 +6429,14 @@ impl SseDecode for crate::nuan5_params::structs::building_params::BuildingParams
     }
 }
 
+impl SseDecode for crate::config::rules::icon_rule::BuiltInIconRule {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_name = <String>::sse_decode(deserializer);
+        return crate::config::rules::icon_rule::BuiltInIconRule { name: var_name };
+    }
+}
+
 impl SseDecode for crate::nuan5_params::structs::camera_params::CameraParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6882,20 +6890,6 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::FilterParam
     }
 }
 
-impl SseDecode for crate::config::rules::icon_rule::FontIconRule {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_global = <bool>::sse_decode(deserializer);
-        let mut var_fontFamily = <String>::sse_decode(deserializer);
-        let mut var_codePoint = <u32>::sse_decode(deserializer);
-        return crate::config::rules::icon_rule::FontIconRule {
-            global: var_global,
-            font_family: var_fontFamily,
-            code_point: var_codePoint,
-        };
-    }
-}
-
 impl SseDecode for crate::config::game::Game {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -7020,8 +7014,8 @@ impl SseDecode for crate::config::rules::icon_rule::IconRule {
             }
             1 => {
                 let mut var_field0 =
-                    <crate::config::rules::icon_rule::FontIconRule>::sse_decode(deserializer);
-                return crate::config::rules::icon_rule::IconRule::Font(var_field0);
+                    <crate::config::rules::icon_rule::BuiltInIconRule>::sse_decode(deserializer);
+                return crate::config::rules::icon_rule::IconRule::BuiltIn(var_field0);
             }
             _ => {
                 unimplemented!("");
@@ -10192,6 +10186,23 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::rules::icon_rule::BuiltInIconRule {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.name.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::rules::icon_rule::BuiltInIconRule
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::rules::icon_rule::BuiltInIconRule>
+    for crate::config::rules::icon_rule::BuiltInIconRule
+{
+    fn into_into_dart(self) -> crate::config::rules::icon_rule::BuiltInIconRule {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::camera_params::CameraParams {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -10819,28 +10830,6 @@ impl
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::config::rules::icon_rule::FontIconRule {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.global.into_into_dart().into_dart(),
-            self.font_family.into_into_dart().into_dart(),
-            self.code_point.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::config::rules::icon_rule::FontIconRule
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::config::rules::icon_rule::FontIconRule>
-    for crate::config::rules::icon_rule::FontIconRule
-{
-    fn into_into_dart(self) -> crate::config::rules::icon_rule::FontIconRule {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::config::game::Game {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -10979,7 +10968,7 @@ impl flutter_rust_bridge::IntoDart for crate::config::rules::icon_rule::IconRule
             crate::config::rules::icon_rule::IconRule::Image(field0) => {
                 [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
-            crate::config::rules::icon_rule::IconRule::Font(field0) => {
+            crate::config::rules::icon_rule::IconRule::BuiltIn(field0) => {
                 [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
             _ => {
@@ -13233,6 +13222,13 @@ impl SseEncode for crate::nuan5_params::structs::building_params::BuildingParams
     }
 }
 
+impl SseEncode for crate::config::rules::icon_rule::BuiltInIconRule {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.name, serializer);
+    }
+}
+
 impl SseEncode for crate::nuan5_params::structs::camera_params::CameraParams {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -13617,15 +13613,6 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::FilterParam
     }
 }
 
-impl SseEncode for crate::config::rules::icon_rule::FontIconRule {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.global, serializer);
-        <String>::sse_encode(self.font_family, serializer);
-        <u32>::sse_encode(self.code_point, serializer);
-    }
-}
-
 impl SseEncode for crate::config::game::Game {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -13727,9 +13714,9 @@ impl SseEncode for crate::config::rules::icon_rule::IconRule {
                 <i32>::sse_encode(0, serializer);
                 <crate::config::rules::icon_rule::ImageIconRule>::sse_encode(field0, serializer);
             }
-            crate::config::rules::icon_rule::IconRule::Font(field0) => {
+            crate::config::rules::icon_rule::IconRule::BuiltIn(field0) => {
                 <i32>::sse_encode(1, serializer);
-                <crate::config::rules::icon_rule::FontIconRule>::sse_encode(field0, serializer);
+                <crate::config::rules::icon_rule::BuiltInIconRule>::sse_encode(field0, serializer);
             }
             _ => {
                 unimplemented!("");
