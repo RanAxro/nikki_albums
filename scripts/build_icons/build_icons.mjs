@@ -715,6 +715,15 @@ function generateDart(glyphs, opts) {
     );
     L.push('');
   }
+  L.push('  /// 根据生成的图标常量名获取 [IconData]。');
+  L.push('  static IconData byName(String name) {');
+  L.push('    return switch (name) {');
+  for (const g of glyphs) {
+    L.push(`      '${g.dartName}' => ${g.dartName},`);
+  }
+  L.push("      _ => throw ArgumentError.value(name, 'name', 'Unknown icon name'),");
+  L.push('    };');
+  L.push('  }');
   L.push('}');
   return L.join('\n') + '\n';
 }

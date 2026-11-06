@@ -20,4 +20,14 @@ class AppIcons {
   /// top.svg
   static const IconData top = IconData(0xe004, fontFamily: fontFamily);
 
+  /// 根据生成的图标常量名获取 [IconData]。
+  static IconData byName(String name) {
+    return switch (name) {
+      'cross' => cross,
+      'maximizeOrRestore' => maximizeOrRestore,
+      'minimize' => minimize,
+      'top' => top,
+      _ => throw ArgumentError.value(name, 'name', 'Unknown icon name'),
+    };
+  }
 }
