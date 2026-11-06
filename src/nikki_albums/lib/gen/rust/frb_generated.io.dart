@@ -318,6 +318,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Game dco_decode_box_autoadd_game(dynamic raw);
 
   @protected
+  GameRegistry dco_decode_box_autoadd_game_registry(dynamic raw);
+
+  @protected
   GameSession dco_decode_box_autoadd_game_session(dynamic raw);
 
   @protected
@@ -540,6 +543,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Game dco_decode_game(dynamic raw);
+
+  @protected
+  GameRegistry dco_decode_game_registry(dynamic raw);
 
   @protected
   GameSession dco_decode_game_session(dynamic raw);
@@ -879,9 +885,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PlatformInt64? dco_decode_opt_box_autoadd_i_64(dynamic raw);
-
-  @protected
-  IconRule? dco_decode_opt_box_autoadd_icon_rule(dynamic raw);
 
   @protected
   LocationParams? dco_decode_opt_box_autoadd_location_params(dynamic raw);
@@ -1423,6 +1426,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Game sse_decode_box_autoadd_game(SseDeserializer deserializer);
 
   @protected
+  GameRegistry sse_decode_box_autoadd_game_registry(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   GameSession sse_decode_box_autoadd_game_session(SseDeserializer deserializer);
 
   @protected
@@ -1699,6 +1707,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Game sse_decode_game(SseDeserializer deserializer);
+
+  @protected
+  GameRegistry sse_decode_game_registry(SseDeserializer deserializer);
 
   @protected
   GameSession sse_decode_game_session(SseDeserializer deserializer);
@@ -2106,9 +2117,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PlatformInt64? sse_decode_opt_box_autoadd_i_64(SseDeserializer deserializer);
-
-  @protected
-  IconRule? sse_decode_opt_box_autoadd_icon_rule(SseDeserializer deserializer);
 
   @protected
   LocationParams? sse_decode_opt_box_autoadd_location_params(
@@ -2777,6 +2785,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_game(Game self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_game_registry(
+    GameRegistry self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_game_session(
     GameSession self,
     SseSerializer serializer,
@@ -3141,6 +3155,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_game(Game self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_game_registry(GameRegistry self, SseSerializer serializer);
 
   @protected
   void sse_encode_game_session(GameSession self, SseSerializer serializer);
@@ -3661,12 +3678,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_i_64(
     PlatformInt64? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_icon_rule(
-    IconRule? self,
     SseSerializer serializer,
   );
 

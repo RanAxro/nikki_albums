@@ -2,6 +2,19 @@ use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Serialize, Deserialize};
 use crate::{impl_json_frb, impl_vec_json_frb};
+use crate::config::rules::{
+  text_rule::TextRule,
+  icon_rule::IconRule,
+};
+
+#[derive(Serialize, Deserialize)]
+pub struct GameRegistry{
+  pub uuid: String,
+  pub name: TextRule,
+  pub icon: IconRule
+}
+
+impl_json_frb!(GameRegistry);
 
 #[derive(Serialize, Deserialize)]
 pub struct Game{

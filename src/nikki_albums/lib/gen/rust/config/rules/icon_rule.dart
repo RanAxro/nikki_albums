@@ -11,23 +11,18 @@ part 'icon_rule.freezed.dart';
 
 class FontIconRule {
   final bool global;
-  final String path;
   final String fontFamily;
   final int codePoint;
 
   const FontIconRule({
     required this.global,
-    required this.path,
     required this.fontFamily,
     required this.codePoint,
   });
 
   @override
   int get hashCode =>
-      global.hashCode ^
-      path.hashCode ^
-      fontFamily.hashCode ^
-      codePoint.hashCode;
+      global.hashCode ^ fontFamily.hashCode ^ codePoint.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -35,7 +30,6 @@ class FontIconRule {
       other is FontIconRule &&
           runtimeType == other.runtimeType &&
           global == other.global &&
-          path == other.path &&
           fontFamily == other.fontFamily &&
           codePoint == other.codePoint;
 }

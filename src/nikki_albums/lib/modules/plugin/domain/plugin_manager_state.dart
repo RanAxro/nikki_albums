@@ -1,6 +1,7 @@
 
 import "plugin.dart";
 import "plugin_manager.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
 
 import "package:riverpod_annotation/riverpod_annotation.dart";
 import "package:path/path.dart" as p;
@@ -59,9 +60,9 @@ class PluginRegisteredIcon extends _$PluginRegisteredIcon{
 @Riverpod(keepAlive: true)
 class PluginRegisteredGame extends _$PluginRegisteredGame{
   @override
-  List<String> build() => const [];
+  List<GameRegistry> build() => const [];
 
-  void replaceAll(Iterable<String> ids) => state = List.unmodifiable(ids);
-  void add(String id) => state = List.unmodifiable([...state, id]);
+  void replaceAll(Iterable<GameRegistry> ids) => state = List.unmodifiable(ids);
+  void add(GameRegistry id) => state = List.unmodifiable([...state, id]);
   void clear() => state = const [];
 }

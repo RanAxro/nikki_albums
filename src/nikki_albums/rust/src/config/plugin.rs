@@ -20,9 +20,9 @@ pub enum PluginSource{
 pub struct PluginInfo{
   pub as_extension_of: Option<String>,
   pub uuid: String,
-  pub name: TextRule,
-  pub description: TextRule,
-  pub icon: Option<IconRule>,
+  pub name: HashMap<String, String>,
+  pub description: HashMap<String, String>,
+  pub icon: Option<String>,
   pub version: u32,
   pub author: Option<String>,
   pub web: Option<String>,

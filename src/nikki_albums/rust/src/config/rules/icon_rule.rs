@@ -16,15 +16,18 @@ pub enum IconRule{
 #[frb]
 #[derive(Serialize, Deserialize)]
 pub struct ImageIconRule{
+  #[serde(default)]
   pub global: bool,
+  
   pub path: String,
 }
 
 #[frb]
 #[derive(Serialize, Deserialize)]
 pub struct FontIconRule{
+  #[serde(default)]
   pub global: bool,
-  pub path: String,
+
   pub font_family: String,
   pub code_point: u32,
 }

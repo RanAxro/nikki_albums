@@ -8,9 +8,6 @@ import 'common/platform.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-
-import 'rules/icon_rule.dart';
-import 'rules/text_rule.dart';
 part 'plugin.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PluginSource`
@@ -45,9 +42,9 @@ enum NES {
 class PluginInfo {
   final String? asExtensionOf;
   final String uuid;
-  final TextRule name;
-  final TextRule description;
-  final IconRule? icon;
+  final Map<String, String> name;
+  final Map<String, String> description;
+  final String? icon;
   final int version;
   final String? author;
   final String? web;

@@ -62,7 +62,7 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission, PluginEventH
     );
   });
   js.onMessage("api.registerGame", (dynamic args){
-    final Map<String, String> params = Map<String, String>.from(args);
+    final Map params = args;
     return requirePermissionThenRun(
       canCall: () => r.canRegisterGame(permission),
       fn: () => r.registerGame(params, eventHandler),

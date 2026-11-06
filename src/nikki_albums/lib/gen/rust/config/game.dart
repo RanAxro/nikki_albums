@@ -7,6 +7,9 @@ import '../frb_generated.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
+import 'rules/icon_rule.dart';
+import 'rules/text_rule.dart';
+
 class Game {
   final String uniqueId;
   final Map<String, String> info;
@@ -66,6 +69,48 @@ class Game {
           uniqueId == other.uniqueId &&
           info == other.info &&
           installPath == other.installPath;
+}
+
+class GameRegistry {
+  final String uuid;
+  final TextRule name;
+  final IconRule icon;
+
+  const GameRegistry({
+    required this.uuid,
+    required this.name,
+    required this.icon,
+  });
+
+  static GameRegistry fromJson({required String json}) =>
+      RustLib.instance.api.crateConfigGameGameRegistryFromJson(json: json);
+
+  static GameRegistry fromJsonBytes({required List<int> json}) =>
+      RustLib.instance.api.crateConfigGameGameRegistryFromJsonBytes(json: json);
+
+  String toJson() =>
+      RustLib.instance.api.crateConfigGameGameRegistryToJson(that: this);
+
+  Uint8List toJsonBytes() =>
+      RustLib.instance.api.crateConfigGameGameRegistryToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigGameGameRegistryToJsonBytesPretty(that: this);
+
+  String toJsonPretty() =>
+      RustLib.instance.api.crateConfigGameGameRegistryToJsonPretty(that: this);
+
+  @override
+  int get hashCode => uuid.hashCode ^ name.hashCode ^ icon.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GameRegistry &&
+          runtimeType == other.runtimeType &&
+          uuid == other.uuid &&
+          name == other.name &&
+          icon == other.icon;
 }
 
 class GameSession {

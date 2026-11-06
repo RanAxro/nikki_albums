@@ -159,7 +159,7 @@ abstract class _$PluginRegisteredIcon extends $Notifier<Map<String, dynamic>> {
 final pluginRegisteredGameProvider = PluginRegisteredGameProvider._();
 
 final class PluginRegisteredGameProvider
-    extends $NotifierProvider<PluginRegisteredGame, List<String>> {
+    extends $NotifierProvider<PluginRegisteredGame, List<GameRegistry>> {
   PluginRegisteredGameProvider._()
     : super(
         from: null,
@@ -179,28 +179,28 @@ final class PluginRegisteredGameProvider
   PluginRegisteredGame create() => PluginRegisteredGame();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<String> value) {
+  Override overrideWithValue(List<GameRegistry> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<List<String>>(value),
+      providerOverride: $SyncValueProvider<List<GameRegistry>>(value),
     );
   }
 }
 
 String _$pluginRegisteredGameHash() =>
-    r'2e8ff6631d79213072a87b2afb2daee58b46d927';
+    r'b9c5d376a12a63f5983e2610fb1fdf97cc2a0120';
 
-abstract class _$PluginRegisteredGame extends $Notifier<List<String>> {
-  List<String> build();
+abstract class _$PluginRegisteredGame extends $Notifier<List<GameRegistry>> {
+  List<GameRegistry> build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<List<String>, List<String>>;
+    final ref = this.ref as $Ref<List<GameRegistry>, List<GameRegistry>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<List<String>, List<String>>,
-              List<String>,
+              AnyNotifier<List<GameRegistry>, List<GameRegistry>>,
+              List<GameRegistry>,
               Object?,
               Object?
             >;

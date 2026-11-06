@@ -62,6 +62,8 @@ globalThis.api = {
   registerGame: function(gameInfo){
     let id = sendMessage("api.registerGame", JSON.stringify({
       uuid: gameInfo.uuid,
+      name: gameInfo.name,
+      icon: gameInfo.icon,
     }));
     globalThis.__apiBridge.game[String(id)] = {
       searchGame: gameInfo.searchGame,

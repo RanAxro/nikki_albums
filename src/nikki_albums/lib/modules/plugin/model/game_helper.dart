@@ -3,6 +3,10 @@ import "package:uuid/validation.dart";
 
 
 abstract final class GameHelper{
+  static String generateUniqueId(String ownership, String uuid){
+    return "$ownership|$uuid";
+  }
+
   static String getOwnershipByUniqueId(String uniqueId){
     final String ownership = uniqueId.split("|").first;
     UuidValidation.isValidOrThrow(fromString: ownership);

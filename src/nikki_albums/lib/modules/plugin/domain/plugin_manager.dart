@@ -2,6 +2,7 @@ export "plugin_manager_state.dart";
 
 import "plugin_manager_state.dart";
 import "plugin.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
 
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:path/path.dart" as p;
@@ -42,7 +43,7 @@ class PluginManager{
     dispose();
 
     bool loading = true;
-    final List<String> registeredGame = [];
+    final List<GameRegistry> registeredGame = [];
 
     for(final MapEntry<Plugin, bool> entry in _pluginState.entries){
       if(!entry.value){
@@ -54,10 +55,10 @@ class PluginManager{
         final PluginInfo info = await reader.readInfo();
         final PluginRunner runner = await plugin.getRunner(PluginEventHandler(
           onRequestPluginUuid: () => info.uuid,
-          onRegisterGame: (String uniqueId){
-            registeredGame.add(uniqueId);
+          onRegisterGame: (GameRegistry gameRegistry){
+            registeredGame.add(gameRegistry);
             if(!loading){
-              _ref.read(pluginRegisteredGameProvider.notifier).add(uniqueId);
+              _ref.read(pluginRegisteredGameProvider.notifier).add(gameRegistry);
             }
           },
         ), reader);

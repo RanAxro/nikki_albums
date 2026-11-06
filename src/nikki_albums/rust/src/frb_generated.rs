@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1925343723;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -806667966;
 
 // Section: executor
 
@@ -2383,6 +2383,199 @@ fn wire__crate__config__game__game_from_vec_json_bytes_impl(
             transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
                 (move || {
                     let output_ok = crate::config::game::Game::from_vec_json_bytes(&api_json)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__game__game_registry_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "game_registry_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::game::GameRegistry::from_json(&api_json)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__game__game_registry_from_json_bytes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "game_registry_from_json_bytes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <Vec<u8>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::game::GameRegistry::from_json_bytes(&api_json)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__game__game_registry_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "game_registry_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::game::GameRegistry>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::game::GameRegistry::to_json(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__game__game_registry_to_json_bytes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "game_registry_to_json_bytes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::game::GameRegistry>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::game::GameRegistry::to_json_bytes(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__game__game_registry_to_json_bytes_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "game_registry_to_json_bytes_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::game::GameRegistry>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::game::GameRegistry::to_json_bytes_pretty(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__game__game_registry_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "game_registry_to_json_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <crate::config::game::GameRegistry>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok = crate::config::game::GameRegistry::to_json_pretty(&api_that)?;
                     Ok(output_ok)
                 })(),
             )
@@ -6693,12 +6886,10 @@ impl SseDecode for crate::config::rules::icon_rule::FontIconRule {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_global = <bool>::sse_decode(deserializer);
-        let mut var_path = <String>::sse_decode(deserializer);
         let mut var_fontFamily = <String>::sse_decode(deserializer);
         let mut var_codePoint = <u32>::sse_decode(deserializer);
         return crate::config::rules::icon_rule::FontIconRule {
             global: var_global,
-            path: var_path,
             font_family: var_fontFamily,
             code_point: var_codePoint,
         };
@@ -6715,6 +6906,20 @@ impl SseDecode for crate::config::game::Game {
             unique_id: var_uniqueId,
             info: var_info,
             install_path: var_installPath,
+        };
+    }
+}
+
+impl SseDecode for crate::config::game::GameRegistry {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_uuid = <String>::sse_decode(deserializer);
+        let mut var_name = <crate::config::rules::text_rule::TextRule>::sse_decode(deserializer);
+        let mut var_icon = <crate::config::rules::icon_rule::IconRule>::sse_decode(deserializer);
+        return crate::config::game::GameRegistry {
+            uuid: var_uuid,
+            name: var_name,
+            icon: var_icon,
         };
     }
 }
@@ -8332,19 +8537,6 @@ impl SseDecode for Option<i64> {
     }
 }
 
-impl SseDecode for Option<crate::config::rules::icon_rule::IconRule> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::config::rules::icon_rule::IconRule>::sse_decode(
-                deserializer,
-            ));
-        } else {
-            return None;
-        }
-    }
-}
-
 impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::LocationParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -8782,11 +8974,10 @@ impl SseDecode for crate::config::plugin::PluginInfo {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_asExtensionOf = <Option<String>>::sse_decode(deserializer);
         let mut var_uuid = <String>::sse_decode(deserializer);
-        let mut var_name = <crate::config::rules::text_rule::TextRule>::sse_decode(deserializer);
+        let mut var_name = <std::collections::HashMap<String, String>>::sse_decode(deserializer);
         let mut var_description =
-            <crate::config::rules::text_rule::TextRule>::sse_decode(deserializer);
-        let mut var_icon =
-            <Option<crate::config::rules::icon_rule::IconRule>>::sse_decode(deserializer);
+            <std::collections::HashMap<String, String>>::sse_decode(deserializer);
+        let mut var_icon = <Option<String>>::sse_decode(deserializer);
         let mut var_version = <u32>::sse_decode(deserializer);
         let mut var_author = <Option<String>>::sse_decode(deserializer);
         let mut var_web = <Option<String>>::sse_decode(deserializer);
@@ -9641,41 +9832,41 @@ fn pde_ffi_dispatcher_primary_impl(
 77 => wire__crate__nuan5_params__decode__de_home_build_param_impl(port, ptr, rust_vec_len, data_len),
 78 => wire__crate__nuan5_params__decode__decode_media_param_impl(port, ptr, rust_vec_len, data_len),
 79 => wire__crate__nuan5_params__encode__encode_camera_params_impl(port, ptr, rust_vec_len, data_len),
-98 => wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
-99 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
-100 => wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
-102 => wire__crate__nuan5_params__decode__home_build_de_network_impl(port, ptr, rust_vec_len, data_len),
-103 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(port, ptr, rust_vec_len, data_len),
-116 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-117 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
-118 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(port, ptr, rust_vec_len, data_len),
-119 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(port, ptr, rust_vec_len, data_len),
-121 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(port, ptr, rust_vec_len, data_len),
-123 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(port, ptr, rust_vec_len, data_len),
-125 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(port, ptr, rust_vec_len, data_len),
-126 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(port, ptr, rust_vec_len, data_len),
-127 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(port, ptr, rust_vec_len, data_len),
-130 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(port, ptr, rust_vec_len, data_len),
-131 => wire__crate__nuan5_database__model__nuan_5_cloth_default_impl(port, ptr, rust_vec_len, data_len),
-132 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(port, ptr, rust_vec_len, data_len),
-133 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(port, ptr, rust_vec_len, data_len),
-134 => wire__crate__nuan5_database__model__nuan_5_cloth_outfit_default_impl(port, ptr, rust_vec_len, data_len),
-135 => wire__crate__nuan5_database__model__nuan_5_cloth_prop_default_impl(port, ptr, rust_vec_len, data_len),
-136 => wire__crate__nuan5_database__model__nuan_5_cloth_special_pattern_dye_area_default_impl(port, ptr, rust_vec_len, data_len),
-137 => wire__crate__nuan5_database__model__nuan_5_cloth_tag_default_impl(port, ptr, rust_vec_len, data_len),
-138 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(port, ptr, rust_vec_len, data_len),
-139 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(port, ptr, rust_vec_len, data_len),
-140 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(port, ptr, rust_vec_len, data_len),
-141 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(port, ptr, rust_vec_len, data_len),
-142 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(port, ptr, rust_vec_len, data_len),
-143 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(port, ptr, rust_vec_len, data_len),
-144 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(port, ptr, rust_vec_len, data_len),
-145 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(port, ptr, rust_vec_len, data_len),
-146 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(port, ptr, rust_vec_len, data_len),
-147 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(port, ptr, rust_vec_len, data_len),
-148 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(port, ptr, rust_vec_len, data_len),
-149 => wire__crate__nuan5_database__model__nuan_5_nikki_cloth_info_default_impl(port, ptr, rust_vec_len, data_len),
-150 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(port, ptr, rust_vec_len, data_len),
+104 => wire__crate__thumbnail__jpeg__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
+105 => wire__crate__thumbnail__mp4_h264__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
+106 => wire__crate__thumbnail__png__generate_thumbnail_impl(port, ptr, rust_vec_len, data_len),
+108 => wire__crate__nuan5_params__decode__home_build_de_network_impl(port, ptr, rust_vec_len, data_len),
+109 => wire__crate__nuan5_params__decrypt__home_build_decode_network_impl(port, ptr, rust_vec_len, data_len),
+122 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+123 => wire__crate__nuan5_params__decode__media_de_impl(port, ptr, rust_vec_len, data_len),
+124 => wire__crate__nuan5_params__decode__media_de_file_bytes_unchecked_impl(port, ptr, rust_vec_len, data_len),
+125 => wire__crate__nuan5_params__decode__media_de_file_unchecked_impl(port, ptr, rust_vec_len, data_len),
+127 => wire__crate__nuan5_params__decode__media_de_files_unchecked_impl(port, ptr, rust_vec_len, data_len),
+129 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_impl(port, ptr, rust_vec_len, data_len),
+131 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_impl(port, ptr, rust_vec_len, data_len),
+132 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_no_progress_impl(port, ptr, rust_vec_len, data_len),
+133 => wire__crate__nuan5_params__decrypt__media_decode_files_unchecked_stream_impl(port, ptr, rust_vec_len, data_len),
+136 => wire__crate__nuan5_database__nuan5_database__nuan5_database_decrypt_impl(port, ptr, rust_vec_len, data_len),
+137 => wire__crate__nuan5_database__model__nuan_5_cloth_default_impl(port, ptr, rust_vec_len, data_len),
+138 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_area_default_impl(port, ptr, rust_vec_len, data_len),
+139 => wire__crate__nuan5_database__model__nuan_5_cloth_dye_palette_default_impl(port, ptr, rust_vec_len, data_len),
+140 => wire__crate__nuan5_database__model__nuan_5_cloth_outfit_default_impl(port, ptr, rust_vec_len, data_len),
+141 => wire__crate__nuan5_database__model__nuan_5_cloth_prop_default_impl(port, ptr, rust_vec_len, data_len),
+142 => wire__crate__nuan5_database__model__nuan_5_cloth_special_pattern_dye_area_default_impl(port, ptr, rust_vec_len, data_len),
+143 => wire__crate__nuan5_database__model__nuan_5_cloth_tag_default_impl(port, ptr, rust_vec_len, data_len),
+144 => wire__crate__nuan5_database__model__nuan_5_config_default_impl(port, ptr, rust_vec_len, data_len),
+145 => wire__crate__nuan5_database__model__nuan_5_config_try_from_impl(port, ptr, rust_vec_len, data_len),
+146 => wire__crate__nuan5_database__model__nuan_5_diy_color_swatch_default_impl(port, ptr, rust_vec_len, data_len),
+147 => wire__crate__nuan5_database__model__nuan_5_diy_pattern_default_impl(port, ptr, rust_vec_len, data_len),
+148 => wire__crate__nuan5_database__model__nuan_5_filter_default_impl(port, ptr, rust_vec_len, data_len),
+149 => wire__crate__nuan5_database__model__nuan_5_filter_type_default_impl(port, ptr, rust_vec_len, data_len),
+150 => wire__crate__nuan5_database__model__nuan_5_light_default_impl(port, ptr, rust_vec_len, data_len),
+151 => wire__crate__nuan5_database__model__nuan_5_light_type_default_impl(port, ptr, rust_vec_len, data_len),
+152 => wire__crate__nuan5_database__model__nuan_5_momo_pose_default_impl(port, ptr, rust_vec_len, data_len),
+153 => wire__crate__nuan5_database__model__nuan_5_network_image_default_impl(port, ptr, rust_vec_len, data_len),
+154 => wire__crate__nuan5_database__model__nuan_5_network_image_item_default_impl(port, ptr, rust_vec_len, data_len),
+155 => wire__crate__nuan5_database__model__nuan_5_nikki_cloth_info_default_impl(port, ptr, rust_vec_len, data_len),
+156 => wire__crate__nuan5_database__model__nuan_5_table_default_impl(port, ptr, rust_vec_len, data_len),
                         _ => unreachable!(),
                     }
 }
@@ -9706,63 +9897,69 @@ fn pde_ffi_dispatcher_sync_impl(
 81 => wire__crate__config__game__game_from_json_bytes_impl(ptr, rust_vec_len, data_len),
 82 => wire__crate__config__game__game_from_vec_json_impl(ptr, rust_vec_len, data_len),
 83 => wire__crate__config__game__game_from_vec_json_bytes_impl(ptr, rust_vec_len, data_len),
-84 => wire__crate__config__game__game_session_from_json_impl(ptr, rust_vec_len, data_len),
-85 => wire__crate__config__game__game_session_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-86 => wire__crate__config__game__game_session_to_json_impl(ptr, rust_vec_len, data_len),
-87 => wire__crate__config__game__game_session_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-88 => wire__crate__config__game__game_session_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-89 => wire__crate__config__game__game_session_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-90 => wire__crate__config__game__game_to_json_impl(ptr, rust_vec_len, data_len),
-91 => wire__crate__config__game__game_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-92 => wire__crate__config__game__game_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-93 => wire__crate__config__game__game_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-94 => wire__crate__config__game__game_to_vec_json_impl(ptr, rust_vec_len, data_len),
-95 => wire__crate__config__game__game_to_vec_json_bytes_impl(ptr, rust_vec_len, data_len),
-96 => wire__crate__config__game__game_to_vec_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-97 => wire__crate__config__game__game_to_vec_json_pretty_impl(ptr, rust_vec_len, data_len),
-101 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
-104 => wire__crate__config__hot_update__hot_update_info_from_json_impl(ptr, rust_vec_len, data_len),
-105 => wire__crate__config__hot_update__hot_update_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-106 => wire__crate__config__hot_update__hot_update_info_to_json_impl(ptr, rust_vec_len, data_len),
-107 => wire__crate__config__hot_update__hot_update_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-108 => wire__crate__config__hot_update__hot_update_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-109 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-110 => wire__crate__config__rules__icon_rule__icon_rule_from_json_impl(ptr, rust_vec_len, data_len),
-111 => wire__crate__config__rules__icon_rule__icon_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-112 => wire__crate__config__rules__icon_rule__icon_rule_to_json_impl(ptr, rust_vec_len, data_len),
-113 => wire__crate__config__rules__icon_rule__icon_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-114 => wire__crate__config__rules__icon_rule__icon_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-115 => wire__crate__config__rules__icon_rule__icon_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-120 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(ptr, rust_vec_len, data_len),
-122 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(ptr, rust_vec_len, data_len),
-124 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(ptr, rust_vec_len, data_len),
-128 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
-129 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(ptr, rust_vec_len, data_len),
-151 => wire__crate__config__plugin__plugin_info_from_json_impl(ptr, rust_vec_len, data_len),
-152 => wire__crate__config__plugin__plugin_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-153 => wire__crate__config__plugin__plugin_info_to_json_impl(ptr, rust_vec_len, data_len),
-154 => wire__crate__config__plugin__plugin_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-155 => wire__crate__config__plugin__plugin_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-156 => wire__crate__config__plugin__plugin_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-157 => wire__crate__config__rules__string_rule__string_rule_from_json_impl(ptr, rust_vec_len, data_len),
-158 => wire__crate__config__rules__string_rule__string_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-159 => wire__crate__config__rules__string_rule__string_rule_to_json_impl(ptr, rust_vec_len, data_len),
-160 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-161 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-162 => wire__crate__config__rules__string_rule__string_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-163 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-164 => wire__crate__config__rules__text_rule__text_rule_from_json_impl(ptr, rust_vec_len, data_len),
-165 => wire__crate__config__rules__text_rule__text_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-166 => wire__crate__config__rules__text_rule__text_rule_to_json_impl(ptr, rust_vec_len, data_len),
-167 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-168 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-169 => wire__crate__config__rules__text_rule__text_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-170 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
-171 => wire__crate__config__update__update_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-172 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
-173 => wire__crate__config__update__update_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-174 => wire__crate__config__update__update_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-175 => wire__crate__config__update__update_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+84 => wire__crate__config__game__game_registry_from_json_impl(ptr, rust_vec_len, data_len),
+85 => wire__crate__config__game__game_registry_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+86 => wire__crate__config__game__game_registry_to_json_impl(ptr, rust_vec_len, data_len),
+87 => wire__crate__config__game__game_registry_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+88 => wire__crate__config__game__game_registry_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+89 => wire__crate__config__game__game_registry_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+90 => wire__crate__config__game__game_session_from_json_impl(ptr, rust_vec_len, data_len),
+91 => wire__crate__config__game__game_session_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+92 => wire__crate__config__game__game_session_to_json_impl(ptr, rust_vec_len, data_len),
+93 => wire__crate__config__game__game_session_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+94 => wire__crate__config__game__game_session_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+95 => wire__crate__config__game__game_session_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+96 => wire__crate__config__game__game_to_json_impl(ptr, rust_vec_len, data_len),
+97 => wire__crate__config__game__game_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+98 => wire__crate__config__game__game_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+99 => wire__crate__config__game__game_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+100 => wire__crate__config__game__game_to_vec_json_impl(ptr, rust_vec_len, data_len),
+101 => wire__crate__config__game__game_to_vec_json_bytes_impl(ptr, rust_vec_len, data_len),
+102 => wire__crate__config__game__game_to_vec_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+103 => wire__crate__config__game__game_to_vec_json_pretty_impl(ptr, rust_vec_len, data_len),
+107 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+110 => wire__crate__config__hot_update__hot_update_info_from_json_impl(ptr, rust_vec_len, data_len),
+111 => wire__crate__config__hot_update__hot_update_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+112 => wire__crate__config__hot_update__hot_update_info_to_json_impl(ptr, rust_vec_len, data_len),
+113 => wire__crate__config__hot_update__hot_update_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+114 => wire__crate__config__hot_update__hot_update_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+115 => wire__crate__config__hot_update__hot_update_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+116 => wire__crate__config__rules__icon_rule__icon_rule_from_json_impl(ptr, rust_vec_len, data_len),
+117 => wire__crate__config__rules__icon_rule__icon_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+118 => wire__crate__config__rules__icon_rule__icon_rule_to_json_impl(ptr, rust_vec_len, data_len),
+119 => wire__crate__config__rules__icon_rule__icon_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+120 => wire__crate__config__rules__icon_rule__icon_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+121 => wire__crate__config__rules__icon_rule__icon_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+126 => wire__crate__nuan5_params__decode__media_de_file_unchecked_sync_impl(ptr, rust_vec_len, data_len),
+128 => wire__crate__nuan5_params__decrypt__media_decode_file_bytes_unchecked_impl(ptr, rust_vec_len, data_len),
+130 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(ptr, rust_vec_len, data_len),
+134 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
+135 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(ptr, rust_vec_len, data_len),
+157 => wire__crate__config__plugin__plugin_info_from_json_impl(ptr, rust_vec_len, data_len),
+158 => wire__crate__config__plugin__plugin_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+159 => wire__crate__config__plugin__plugin_info_to_json_impl(ptr, rust_vec_len, data_len),
+160 => wire__crate__config__plugin__plugin_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+161 => wire__crate__config__plugin__plugin_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+162 => wire__crate__config__plugin__plugin_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+163 => wire__crate__config__rules__string_rule__string_rule_from_json_impl(ptr, rust_vec_len, data_len),
+164 => wire__crate__config__rules__string_rule__string_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+165 => wire__crate__config__rules__string_rule__string_rule_to_json_impl(ptr, rust_vec_len, data_len),
+166 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+167 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+168 => wire__crate__config__rules__string_rule__string_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+169 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+170 => wire__crate__config__rules__text_rule__text_rule_from_json_impl(ptr, rust_vec_len, data_len),
+171 => wire__crate__config__rules__text_rule__text_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+172 => wire__crate__config__rules__text_rule__text_rule_to_json_impl(ptr, rust_vec_len, data_len),
+173 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+174 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+175 => wire__crate__config__rules__text_rule__text_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+176 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
+177 => wire__crate__config__update__update_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+178 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
+179 => wire__crate__config__update__update_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+180 => wire__crate__config__update__update_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+181 => wire__crate__config__update__update_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
                         _ => unreachable!(),
                     }
 }
@@ -10626,7 +10823,6 @@ impl flutter_rust_bridge::IntoDart for crate::config::rules::icon_rule::FontIcon
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.global.into_into_dart().into_dart(),
-            self.path.into_into_dart().into_dart(),
             self.font_family.into_into_dart().into_dart(),
             self.code_point.into_into_dart().into_dart(),
         ]
@@ -10658,6 +10854,28 @@ impl flutter_rust_bridge::IntoDart for crate::config::game::Game {
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::config::game::Game {}
 impl flutter_rust_bridge::IntoIntoDart<crate::config::game::Game> for crate::config::game::Game {
     fn into_into_dart(self) -> crate::config::game::Game {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::game::GameRegistry {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.uuid.into_into_dart().into_dart(),
+            self.name.into_into_dart().into_dart(),
+            self.icon.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::game::GameRegistry
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::game::GameRegistry>
+    for crate::config::game::GameRegistry
+{
+    fn into_into_dart(self) -> crate::config::game::GameRegistry {
         self
     }
 }
@@ -13403,7 +13621,6 @@ impl SseEncode for crate::config::rules::icon_rule::FontIconRule {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.global, serializer);
-        <String>::sse_encode(self.path, serializer);
         <String>::sse_encode(self.font_family, serializer);
         <u32>::sse_encode(self.code_point, serializer);
     }
@@ -13415,6 +13632,15 @@ impl SseEncode for crate::config::game::Game {
         <String>::sse_encode(self.unique_id, serializer);
         <std::collections::HashMap<String, String>>::sse_encode(self.info, serializer);
         <String>::sse_encode(self.install_path, serializer);
+    }
+}
+
+impl SseEncode for crate::config::game::GameRegistry {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.uuid, serializer);
+        <crate::config::rules::text_rule::TextRule>::sse_encode(self.name, serializer);
+        <crate::config::rules::icon_rule::IconRule>::sse_encode(self.icon, serializer);
     }
 }
 
@@ -14702,16 +14928,6 @@ impl SseEncode for Option<i64> {
     }
 }
 
-impl SseEncode for Option<crate::config::rules::icon_rule::IconRule> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::config::rules::icon_rule::IconRule>::sse_encode(value, serializer);
-        }
-    }
-}
-
 impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::LocationParams> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -15058,9 +15274,9 @@ impl SseEncode for crate::config::plugin::PluginInfo {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Option<String>>::sse_encode(self.as_extension_of, serializer);
         <String>::sse_encode(self.uuid, serializer);
-        <crate::config::rules::text_rule::TextRule>::sse_encode(self.name, serializer);
-        <crate::config::rules::text_rule::TextRule>::sse_encode(self.description, serializer);
-        <Option<crate::config::rules::icon_rule::IconRule>>::sse_encode(self.icon, serializer);
+        <std::collections::HashMap<String, String>>::sse_encode(self.name, serializer);
+        <std::collections::HashMap<String, String>>::sse_encode(self.description, serializer);
+        <Option<String>>::sse_encode(self.icon, serializer);
         <u32>::sse_encode(self.version, serializer);
         <Option<String>>::sse_encode(self.author, serializer);
         <Option<String>>::sse_encode(self.web, serializer);

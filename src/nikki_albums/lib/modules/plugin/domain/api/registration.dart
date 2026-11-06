@@ -1,5 +1,9 @@
 
 import "../../model/event_handler.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
+import "package:nikki_albums/modules/plugin/model/game_helper.dart";
+
+import "dart:convert";
 
 
 void registerLoc(Map<String, String> localeAndPathMap){
@@ -27,13 +31,11 @@ void registerGlobalFont(Map<String, String> fontFamilyAndPathMap){
 
 }
 
-String registerGame(Map<String, String> info, PluginEventHandler eventHandler){
-  if(!info.containsKey("uuid")){
-    throw Exception("Field missing: uuid");
-  }
+String registerGame(Map info, PluginEventHandler eventHandler){
+  final GameRegistry gameRegistry = GameRegistry.fromJson(json: jsonEncode(info));
   final String pluginUuid = eventHandler.onRequestPluginUuid();
-  final String uniqueId = "$pluginUuid|${info["uuid"]}";
-  eventHandler.onRegisterGame(uniqueId);
+  final String uniqueId = GameHelper.generateUniqueId(pluginUuid, gameRegistry.uuid);
+  eventHandler.onRegisterGame(gameRegistry);
   return uniqueId;
 }
 
