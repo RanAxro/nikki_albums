@@ -1,7 +1,7 @@
 
+import "../plugin_helper.dart";
 import "../../model/event_handler.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
-import "package:nikki_albums/modules/plugin/model/game_helper.dart";
 
 import "dart:convert";
 
@@ -31,11 +31,10 @@ void registerGlobalFont(Map<String, String> fontFamilyAndPathMap){
 
 }
 
-String registerGame(Map info, PluginEventHandler eventHandler){
+void registerGame(Map info, PluginEventHandler eventHandler){
   final GameRegistry gameRegistry = GameRegistry.fromJson(json: jsonEncode(info));
-  final String pluginUuid = eventHandler.onRequestPluginUuid();
-  final String uniqueId = GameHelper.generateUniqueId(pluginUuid, gameRegistry.uuid);
-  eventHandler.onRegisterGame(gameRegistry);
-  return uniqueId;
+  PluginHelper.isValidUuidOrThrow(gameRegistry.uuid);
+  final String ownership = eventHandler.onRequestPluginUuid();
+  eventHandler.onRegisterGame(gameRegistry.copyWith(ownership: ownership));
 }
 

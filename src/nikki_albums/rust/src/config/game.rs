@@ -7,8 +7,12 @@ use crate::config::rules::{
   icon_rule::IconRule,
 };
 
+#[frb(dart_metadata=("freezed"))]
 #[derive(Serialize, Deserialize)]
 pub struct GameRegistry{
+  #[serde(default)]
+  pub ownership: String,
+
   pub uuid: String,
   pub name: TextRule,
   pub icon: IconRule

@@ -11,9 +11,9 @@ import "package:quickjs_engine/quickjs_engine.dart";
 
 
 abstract final class PluginJSBridge{
-  static Future<List<Game>> searchGame(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler) async{
+  static Future<List<Game>> searchGame(PluginJSRuntime runtime, String uuid, NGeneralFileSystem fsHandler) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
-    final JsEvalResult result = await PluginJSCaller.searchGame(runtime, uniqueId, fsHandlerId);
+    final JsEvalResult result = await PluginJSCaller.searchGame(runtime, uuid, fsHandlerId);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
@@ -21,18 +21,18 @@ abstract final class PluginJSBridge{
     return Game.fromVecJson(json: result.stringResult);
   }
 
-  static Future<List<String>> searchAccount(PluginJSRuntime runtime, String uniqueId, Game game) async{
+  static Future<List<String>> searchAccount(PluginJSRuntime runtime, String uuid, Game game) async{
     final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.searchAccount(runtime, uniqueId, gameJson);
+    final JsEvalResult result = await PluginJSCaller.searchAccount(runtime, uuid, gameJson);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
     return List<String>.from(jsonDecode(result.stringResult));
   }
 
-  static Future<List<String>> searchAlbum(PluginJSRuntime runtime, String uniqueId, Game game, String? account) async{
+  static Future<List<String>> searchAlbum(PluginJSRuntime runtime, String uuid, Game game, String? account) async{
     final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.searchAlbum(runtime, uniqueId, gameJson, account);
+    final JsEvalResult result = await PluginJSCaller.searchAlbum(runtime, uuid, gameJson, account);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }

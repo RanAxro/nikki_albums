@@ -1,0 +1,318 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'game.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
+T _$identity<T>(T value) => value;
+/// @nodoc
+mixin _$GameRegistry {
+
+ String get ownership; String get uuid; TextRule get name; IconRule get icon;
+/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GameRegistryCopyWith<GameRegistry> get copyWith => _$GameRegistryCopyWithImpl<GameRegistry>(this as GameRegistry, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as GameRegistry;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GameRegistry&&(identical(other.ownership, _this.ownership) || other.ownership == _this.ownership)&&(identical(other.uuid, _this.uuid) || other.uuid == _this.uuid)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.icon, _this.icon) || other.icon == _this.icon));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as GameRegistry;
+  return Object.hash(runtimeType,_this.ownership,_this.uuid,_this.name,_this.icon);
+}
+
+@override
+String toString() {
+  final _this = this as GameRegistry;
+  return 'GameRegistry(ownership: ${_this.ownership}, uuid: ${_this.uuid}, name: ${_this.name}, icon: ${_this.icon})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $GameRegistryCopyWith<$Res>  {
+  factory $GameRegistryCopyWith(GameRegistry value, $Res Function(GameRegistry) _then) = _$GameRegistryCopyWithImpl;
+@useResult
+$Res call({
+ String ownership, String uuid, TextRule name, IconRule icon
+});
+
+
+$TextRuleCopyWith<$Res> get name;$IconRuleCopyWith<$Res> get icon;
+
+}
+/// @nodoc
+class _$GameRegistryCopyWithImpl<$Res>
+    implements $GameRegistryCopyWith<$Res> {
+  _$GameRegistryCopyWithImpl(this._self, this._then);
+
+  final GameRegistry _self;
+  final $Res Function(GameRegistry) _then;
+
+/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,}) {
+  return _then(GameRegistry(
+ownership: null == ownership ? _self.ownership : ownership // ignore: cast_nullable_to_non_nullable
+as String,uuid: null == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as TextRule,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as IconRule,
+  ));
+}
+/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TextRuleCopyWith<$Res> get name {
+  
+  return $TextRuleCopyWith<$Res>(_self.name, (value) {
+    return _then(_self.copyWith(name: value));
+  });
+}/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IconRuleCopyWith<$Res> get icon {
+  
+  return $IconRuleCopyWith<$Res>(_self.icon, (value) {
+    return _then(_self.copyWith(icon: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [GameRegistry].
+extension GameRegistryPatterns on GameRegistry {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _GameRegistry value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _GameRegistry() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _GameRegistry value)  $default,){
+final _that = this;
+switch (_that) {
+case _GameRegistry():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _GameRegistry value)?  $default,){
+final _that = this;
+switch (_that) {
+case _GameRegistry() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _GameRegistry() when $default != null:
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon)  $default,) {final _that = this;
+switch (_that) {
+case _GameRegistry():
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ownership,  String uuid,  TextRule name,  IconRule icon)?  $default,) {final _that = this;
+switch (_that) {
+case _GameRegistry() when $default != null:
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _GameRegistry extends GameRegistry {
+  const _GameRegistry({required this.ownership, required this.uuid, required this.name, required this.icon}): super._();
+  
+
+@override final  String ownership;
+@override final  String uuid;
+@override final  TextRule name;
+@override final  IconRule icon;
+
+/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GameRegistryCopyWith<_GameRegistry> get copyWith => __$GameRegistryCopyWithImpl<_GameRegistry>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GameRegistry&&(identical(other.ownership, ownership) || other.ownership == ownership)&&(identical(other.uuid, uuid) || other.uuid == uuid)&&(identical(other.name, name) || other.name == name)&&(identical(other.icon, icon) || other.icon == icon));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,ownership,uuid,name,icon);
+}
+
+@override
+String toString() {
+    return 'GameRegistry(ownership: $ownership, uuid: $uuid, name: $name, icon: $icon)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$GameRegistryCopyWith<$Res> implements $GameRegistryCopyWith<$Res> {
+  factory _$GameRegistryCopyWith(_GameRegistry value, $Res Function(_GameRegistry) _then) = __$GameRegistryCopyWithImpl;
+@override @useResult
+$Res call({
+ String ownership, String uuid, TextRule name, IconRule icon
+});
+
+
+@override $TextRuleCopyWith<$Res> get name;@override $IconRuleCopyWith<$Res> get icon;
+
+}
+/// @nodoc
+class __$GameRegistryCopyWithImpl<$Res>
+    implements _$GameRegistryCopyWith<$Res> {
+  __$GameRegistryCopyWithImpl(this._self, this._then);
+
+  final _GameRegistry _self;
+  final $Res Function(_GameRegistry) _then;
+
+/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,}) {
+  return _then(_GameRegistry(
+ownership: null == ownership ? _self.ownership : ownership // ignore: cast_nullable_to_non_nullable
+as String,uuid: null == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as TextRule,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as IconRule,
+  ));
+}
+
+/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TextRuleCopyWith<$Res> get name {
+  
+  return $TextRuleCopyWith<$Res>(_self.name, (value) {
+    return _then(_self.copyWith(name: value));
+  });
+}/// Create a copy of GameRegistry
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IconRuleCopyWith<$Res> get icon {
+  
+  return $IconRuleCopyWith<$Res>(_self.icon, (value) {
+    return _then(_self.copyWith(icon: value));
+  });
+}
+}
+
+// dart format on

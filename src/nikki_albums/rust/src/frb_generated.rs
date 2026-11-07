@@ -6907,10 +6907,12 @@ impl SseDecode for crate::config::game::Game {
 impl SseDecode for crate::config::game::GameRegistry {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_ownership = <String>::sse_decode(deserializer);
         let mut var_uuid = <String>::sse_decode(deserializer);
         let mut var_name = <crate::config::rules::text_rule::TextRule>::sse_decode(deserializer);
         let mut var_icon = <crate::config::rules::icon_rule::IconRule>::sse_decode(deserializer);
         return crate::config::game::GameRegistry {
+            ownership: var_ownership,
             uuid: var_uuid,
             name: var_name,
             icon: var_icon,
@@ -10850,6 +10852,7 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::game::Game> for crate::con
 impl flutter_rust_bridge::IntoDart for crate::config::game::GameRegistry {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
+            self.ownership.into_into_dart().into_dart(),
             self.uuid.into_into_dart().into_dart(),
             self.name.into_into_dart().into_dart(),
             self.icon.into_into_dart().into_dart(),
@@ -13625,6 +13628,7 @@ impl SseEncode for crate::config::game::Game {
 impl SseEncode for crate::config::game::GameRegistry {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.ownership, serializer);
         <String>::sse_encode(self.uuid, serializer);
         <crate::config::rules::text_rule::TextRule>::sse_encode(self.name, serializer);
         <crate::config::rules::icon_rule::IconRule>::sse_encode(self.icon, serializer);

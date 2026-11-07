@@ -6898,12 +6898,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   GameRegistry dco_decode_game_registry(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return GameRegistry(
-      uuid: dco_decode_String(arr[0]),
-      name: dco_decode_text_rule(arr[1]),
-      icon: dco_decode_icon_rule(arr[2]),
+      ownership: dco_decode_String(arr[0]),
+      uuid: dco_decode_String(arr[1]),
+      name: dco_decode_text_rule(arr[2]),
+      icon: dco_decode_icon_rule(arr[3]),
     );
   }
 
@@ -10056,10 +10057,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   GameRegistry sse_decode_game_registry(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_ownership = sse_decode_String(deserializer);
     var var_uuid = sse_decode_String(deserializer);
     var var_name = sse_decode_text_rule(deserializer);
     var var_icon = sse_decode_icon_rule(deserializer);
-    return GameRegistry(uuid: var_uuid, name: var_name, icon: var_icon);
+    return GameRegistry(
+      ownership: var_ownership,
+      uuid: var_uuid,
+      name: var_name,
+      icon: var_icon,
+    );
   }
 
   @protected
@@ -13810,6 +13817,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_game_registry(GameRegistry self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.ownership, serializer);
     sse_encode_String(self.uuid, serializer);
     sse_encode_text_rule(self.name, serializer);
     sse_encode_icon_rule(self.icon, serializer);

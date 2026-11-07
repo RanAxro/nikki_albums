@@ -60,12 +60,12 @@ globalThis.api = {
     return sendMessage("api.registerGlobalFont", JSON.stringify(fontFamilyAndPathMap));
   },
   registerGame: function(gameInfo){
-    let id = sendMessage("api.registerGame", JSON.stringify({
+    sendMessage("api.registerGame", JSON.stringify({
       uuid: gameInfo.uuid,
       name: gameInfo.name,
       icon: gameInfo.icon,
     }));
-    globalThis.__apiBridge.game[String(id)] = {
+    globalThis.__apiBridge.game[String(gameInfo.uuid)] = {
       searchGame: gameInfo.searchGame,
     };
   },

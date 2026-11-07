@@ -6,9 +6,11 @@
 import '../frb_generated.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 
 import 'rules/icon_rule.dart';
 import 'rules/text_rule.dart';
+part 'game.freezed.dart';
 
 class Game {
   final String uniqueId;
@@ -71,17 +73,15 @@ class Game {
           installPath == other.installPath;
 }
 
-class GameRegistry {
-  final String uuid;
-  final TextRule name;
-  final IconRule icon;
-
-  const GameRegistry({
-    required this.uuid,
-    required this.name,
-    required this.icon,
-  });
-
+@freezed
+sealed class GameRegistry with _$GameRegistry {
+  const GameRegistry._();
+  const factory GameRegistry({
+    required String ownership,
+    required String uuid,
+    required TextRule name,
+    required IconRule icon,
+  }) = _GameRegistry;
   static GameRegistry fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameGameRegistryFromJson(json: json);
 
@@ -99,18 +99,6 @@ class GameRegistry {
 
   String toJsonPretty() =>
       RustLib.instance.api.crateConfigGameGameRegistryToJsonPretty(that: this);
-
-  @override
-  int get hashCode => uuid.hashCode ^ name.hashCode ^ icon.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is GameRegistry &&
-          runtimeType == other.runtimeType &&
-          uuid == other.uuid &&
-          name == other.name &&
-          icon == other.icon;
 }
 
 class GameSession {
