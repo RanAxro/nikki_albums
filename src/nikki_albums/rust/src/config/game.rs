@@ -15,7 +15,15 @@ pub struct GameRegistry{
 
   pub uuid: String,
   pub name: TextRule,
-  pub icon: IconRule
+  pub icon: IconRule,
+  pub connect_method: GameConnectionMethod,
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum GameConnectionMethod{
+  Native,
+  Adb,
+  Shizuku,
 }
 
 impl_json_frb!(GameRegistry);

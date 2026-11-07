@@ -56,7 +56,7 @@ abstract class PluginRunner{
 
   const PluginRunner({required this.reader});
 
-  Future<List<Game>> searchGame(String id, NGeneralFileSystem fsHandler);
+  Future<List<Game>> searchGame(String uuid, NGeneralFileSystem fsHandler);
 
   void dispose();
 }

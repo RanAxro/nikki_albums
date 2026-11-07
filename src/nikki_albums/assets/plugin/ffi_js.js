@@ -64,6 +64,7 @@ globalThis.api = {
       uuid: gameInfo.uuid,
       name: gameInfo.name,
       icon: gameInfo.icon,
+      connect_method: gameInfo.connect_method,
     }));
     globalThis.__apiBridge.game[String(gameInfo.uuid)] = {
       searchGame: gameInfo.searchGame,

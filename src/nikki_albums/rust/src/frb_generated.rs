@@ -6904,6 +6904,19 @@ impl SseDecode for crate::config::game::Game {
     }
 }
 
+impl SseDecode for crate::config::game::GameConnectionMethod {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::config::game::GameConnectionMethod::Native,
+            1 => crate::config::game::GameConnectionMethod::Adb,
+            2 => crate::config::game::GameConnectionMethod::Shizuku,
+            _ => unreachable!("Invalid variant for GameConnectionMethod: {}", inner),
+        };
+    }
+}
+
 impl SseDecode for crate::config::game::GameRegistry {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6911,11 +6924,14 @@ impl SseDecode for crate::config::game::GameRegistry {
         let mut var_uuid = <String>::sse_decode(deserializer);
         let mut var_name = <crate::config::rules::text_rule::TextRule>::sse_decode(deserializer);
         let mut var_icon = <crate::config::rules::icon_rule::IconRule>::sse_decode(deserializer);
+        let mut var_connectMethod =
+            <crate::config::game::GameConnectionMethod>::sse_decode(deserializer);
         return crate::config::game::GameRegistry {
             ownership: var_ownership,
             uuid: var_uuid,
             name: var_name,
             icon: var_icon,
+            connect_method: var_connectMethod,
         };
     }
 }
@@ -10849,6 +10865,28 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::game::Game> for crate::con
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::game::GameConnectionMethod {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Native => 0.into_dart(),
+            Self::Adb => 1.into_dart(),
+            Self::Shizuku => 2.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::game::GameConnectionMethod
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::game::GameConnectionMethod>
+    for crate::config::game::GameConnectionMethod
+{
+    fn into_into_dart(self) -> crate::config::game::GameConnectionMethod {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::config::game::GameRegistry {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -10856,6 +10894,7 @@ impl flutter_rust_bridge::IntoDart for crate::config::game::GameRegistry {
             self.uuid.into_into_dart().into_dart(),
             self.name.into_into_dart().into_dart(),
             self.icon.into_into_dart().into_dart(),
+            self.connect_method.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -13625,6 +13664,23 @@ impl SseEncode for crate::config::game::Game {
     }
 }
 
+impl SseEncode for crate::config::game::GameConnectionMethod {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::config::game::GameConnectionMethod::Native => 0,
+                crate::config::game::GameConnectionMethod::Adb => 1,
+                crate::config::game::GameConnectionMethod::Shizuku => 2,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for crate::config::game::GameRegistry {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -13632,6 +13688,7 @@ impl SseEncode for crate::config::game::GameRegistry {
         <String>::sse_encode(self.uuid, serializer);
         <crate::config::rules::text_rule::TextRule>::sse_encode(self.name, serializer);
         <crate::config::rules::icon_rule::IconRule>::sse_encode(self.icon, serializer);
+        <crate::config::game::GameConnectionMethod>::sse_encode(self.connect_method, serializer);
     }
 }
 
