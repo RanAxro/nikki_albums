@@ -14,6 +14,7 @@ import 'config/game.dart';
 import 'config/hot_update.dart';
 import 'config/plugin.dart';
 import 'config/rules/icon_rule.dart';
+import 'config/rules/image_rule.dart';
 import 'config/rules/string_rule.dart';
 import 'config/rules/text_rule.dart';
 import 'config/update.dart';
@@ -336,10 +337,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 dco_decode_box_autoadd_i_64(dynamic raw);
 
   @protected
+  IconImageRule dco_decode_box_autoadd_icon_image_rule(dynamic raw);
+
+  @protected
   IconRule dco_decode_box_autoadd_icon_rule(dynamic raw);
 
   @protected
   ImageIconRule dco_decode_box_autoadd_image_icon_rule(dynamic raw);
+
+  @protected
+  ImageRule dco_decode_box_autoadd_image_rule(dynamic raw);
 
   @protected
   JSScriptInfo dco_decode_box_autoadd_js_script_info(dynamic raw);
@@ -367,6 +374,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nation dco_decode_box_autoadd_nation(dynamic raw);
+
+  @protected
+  NativeImageRule dco_decode_box_autoadd_native_image_rule(dynamic raw);
+
+  @protected
+  NGFSImageRule dco_decode_box_autoadd_ngfs_image_rule(dynamic raw);
 
   @protected
   NikkiParams dco_decode_box_autoadd_nikki_params(dynamic raw);
@@ -569,10 +582,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 dco_decode_i_64(dynamic raw);
 
   @protected
+  IconImageRule dco_decode_icon_image_rule(dynamic raw);
+
+  @protected
   IconRule dco_decode_icon_rule(dynamic raw);
 
   @protected
   ImageIconRule dco_decode_image_icon_rule(dynamic raw);
+
+  @protected
+  ImageRule dco_decode_image_rule(dynamic raw);
 
   @protected
   JSScriptInfo dco_decode_js_script_info(dynamic raw);
@@ -776,7 +795,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nation dco_decode_nation(dynamic raw);
 
   @protected
+  NativeImageRule dco_decode_native_image_rule(dynamic raw);
+
+  @protected
   NES dco_decode_nes(dynamic raw);
+
+  @protected
+  NGFSImageRule dco_decode_ngfs_image_rule(dynamic raw);
 
   @protected
   NikkiParams dco_decode_nikki_params(dynamic raw);
@@ -1453,12 +1478,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 sse_decode_box_autoadd_i_64(SseDeserializer deserializer);
 
   @protected
+  IconImageRule sse_decode_box_autoadd_icon_image_rule(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   IconRule sse_decode_box_autoadd_icon_rule(SseDeserializer deserializer);
 
   @protected
   ImageIconRule sse_decode_box_autoadd_image_icon_rule(
     SseDeserializer deserializer,
   );
+
+  @protected
+  ImageRule sse_decode_box_autoadd_image_rule(SseDeserializer deserializer);
 
   @protected
   JSScriptInfo sse_decode_box_autoadd_js_script_info(
@@ -1496,6 +1529,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Nation sse_decode_box_autoadd_nation(SseDeserializer deserializer);
+
+  @protected
+  NativeImageRule sse_decode_box_autoadd_native_image_rule(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  NGFSImageRule sse_decode_box_autoadd_ngfs_image_rule(
+    SseDeserializer deserializer,
+  );
 
   @protected
   NikkiParams sse_decode_box_autoadd_nikki_params(SseDeserializer deserializer);
@@ -1740,10 +1783,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
 
   @protected
+  IconImageRule sse_decode_icon_image_rule(SseDeserializer deserializer);
+
+  @protected
   IconRule sse_decode_icon_rule(SseDeserializer deserializer);
 
   @protected
   ImageIconRule sse_decode_image_icon_rule(SseDeserializer deserializer);
+
+  @protected
+  ImageRule sse_decode_image_rule(SseDeserializer deserializer);
 
   @protected
   JSScriptInfo sse_decode_js_script_info(SseDeserializer deserializer);
@@ -1987,7 +2036,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Nation sse_decode_nation(SseDeserializer deserializer);
 
   @protected
+  NativeImageRule sse_decode_native_image_rule(SseDeserializer deserializer);
+
+  @protected
   NES sse_decode_nes(SseDeserializer deserializer);
+
+  @protected
+  NGFSImageRule sse_decode_ngfs_image_rule(SseDeserializer deserializer);
 
   @protected
   NikkiParams sse_decode_nikki_params(SseDeserializer deserializer);
@@ -2826,6 +2881,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_icon_image_rule(
+    IconImageRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_icon_rule(
     IconRule self,
     SseSerializer serializer,
@@ -2834,6 +2895,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_image_icon_rule(
     ImageIconRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_image_rule(
+    ImageRule self,
     SseSerializer serializer,
   );
 
@@ -2884,6 +2951,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_box_autoadd_nation(Nation self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_native_image_rule(
+    NativeImageRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_ngfs_image_rule(
+    NGFSImageRule self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_nikki_params(
@@ -3201,10 +3280,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_icon_image_rule(IconImageRule self, SseSerializer serializer);
+
+  @protected
   void sse_encode_icon_rule(IconRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_image_icon_rule(ImageIconRule self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_image_rule(ImageRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_js_script_info(JSScriptInfo self, SseSerializer serializer);
@@ -3513,7 +3598,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_nation(Nation self, SseSerializer serializer);
 
   @protected
+  void sse_encode_native_image_rule(
+    NativeImageRule self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_nes(NES self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ngfs_image_rule(NGFSImageRule self, SseSerializer serializer);
 
   @protected
   void sse_encode_nikki_params(NikkiParams self, SseSerializer serializer);
