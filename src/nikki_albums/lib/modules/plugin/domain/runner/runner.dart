@@ -4,8 +4,10 @@ import "../runtime/js_runtime.dart";
 import "../../model/event_handler.dart";
 import "../ffi/js/js_bridge.dart";
 import "../../model/exception.dart";
-import "package:nikki_albums/gen/rust/config/game.dart";
 import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
+import "package:nikki_albums/gen/rust/config/rules/text_rule.dart";
+import "package:nikki_albums/gen/rust/config/rules/icon_rule.dart";
 
 import "package:quickjs_engine/js_eval_result.dart";
 import "package:path/path.dart" as p;
@@ -56,7 +58,13 @@ abstract class PluginRunner{
 
   const PluginRunner({required this.reader});
 
-  Future<List<Game>> searchGame(String uuid, NGeneralFileSystem fsHandler);
+  Future<List<Game>> searchGame(String uniqueId, NGeneralFileSystem fsHandler);
+
+  Future<TextRule> getGameName(Game game);
+
+  Future<IconRule> getGameIcon(Game game);
+
+  Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, Game game);
 
   void dispose();
 }

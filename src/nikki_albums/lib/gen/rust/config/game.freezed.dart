@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GameRegistry {
 
- String get ownership; String get uuid; TextRule get name; IconRule get icon;
+ String get ownership; String get uuid; TextRule get name; IconRule get icon; GameConnectionMethod get connectMethod;
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $GameRegistryCopyWith<GameRegistry> get copyWith => _$GameRegistryCopyWithImpl<G
 @override
 bool operator ==(Object other) {
   final _this = this as GameRegistry;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GameRegistry&&(identical(other.ownership, _this.ownership) || other.ownership == _this.ownership)&&(identical(other.uuid, _this.uuid) || other.uuid == _this.uuid)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.icon, _this.icon) || other.icon == _this.icon));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GameRegistry&&(identical(other.ownership, _this.ownership) || other.ownership == _this.ownership)&&(identical(other.uuid, _this.uuid) || other.uuid == _this.uuid)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.icon, _this.icon) || other.icon == _this.icon)&&(identical(other.connectMethod, _this.connectMethod) || other.connectMethod == _this.connectMethod));
 }
 
 
 @override
 int get hashCode {
   final _this = this as GameRegistry;
-  return Object.hash(runtimeType,_this.ownership,_this.uuid,_this.name,_this.icon);
+  return Object.hash(runtimeType,_this.ownership,_this.uuid,_this.name,_this.icon,_this.connectMethod);
 }
 
 @override
 String toString() {
   final _this = this as GameRegistry;
-  return 'GameRegistry(ownership: ${_this.ownership}, uuid: ${_this.uuid}, name: ${_this.name}, icon: ${_this.icon})';
+  return 'GameRegistry(ownership: ${_this.ownership}, uuid: ${_this.uuid}, name: ${_this.name}, icon: ${_this.icon}, connectMethod: ${_this.connectMethod})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $GameRegistryCopyWith<$Res>  {
   factory $GameRegistryCopyWith(GameRegistry value, $Res Function(GameRegistry) _then) = _$GameRegistryCopyWithImpl;
 @useResult
 $Res call({
- String ownership, String uuid, TextRule name, IconRule icon
+ String ownership, String uuid, TextRule name, IconRule icon, GameConnectionMethod connectMethod
 });
 
 
@@ -68,13 +68,14 @@ class _$GameRegistryCopyWithImpl<$Res>
 
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,Object? connectMethod = null,}) {
   return _then(GameRegistry(
 ownership: null == ownership ? _self.ownership : ownership // ignore: cast_nullable_to_non_nullable
 as String,uuid: null == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as TextRule,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
-as IconRule,
+as IconRule,connectMethod: null == connectMethod ? _self.connectMethod : connectMethod // ignore: cast_nullable_to_non_nullable
+as GameConnectionMethod,
   ));
 }
 /// Create a copy of GameRegistry
@@ -174,10 +175,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GameRegistry() when $default != null:
-return $default(_that.ownership,_that.uuid,_that.name,_that.icon);case _:
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod);case _:
   return orElse();
 
 }
@@ -195,10 +196,10 @@ return $default(_that.ownership,_that.uuid,_that.name,_that.icon);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod)  $default,) {final _that = this;
 switch (_that) {
 case _GameRegistry():
-return $default(_that.ownership,_that.uuid,_that.name,_that.icon);}
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -212,10 +213,10 @@ return $default(_that.ownership,_that.uuid,_that.name,_that.icon);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ownership,  String uuid,  TextRule name,  IconRule icon)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod)?  $default,) {final _that = this;
 switch (_that) {
 case _GameRegistry() when $default != null:
-return $default(_that.ownership,_that.uuid,_that.name,_that.icon);case _:
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod);case _:
   return null;
 
 }
@@ -227,13 +228,14 @@ return $default(_that.ownership,_that.uuid,_that.name,_that.icon);case _:
 
 
 class _GameRegistry extends GameRegistry {
-  const _GameRegistry({required this.ownership, required this.uuid, required this.name, required this.icon}): super._();
+  const _GameRegistry({required this.ownership, required this.uuid, required this.name, required this.icon, required this.connectMethod}): super._();
   
 
 @override final  String ownership;
 @override final  String uuid;
 @override final  TextRule name;
 @override final  IconRule icon;
+@override final  GameConnectionMethod connectMethod;
 
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
@@ -245,18 +247,18 @@ _$GameRegistryCopyWith<_GameRegistry> get copyWith => __$GameRegistryCopyWithImp
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GameRegistry&&(identical(other.ownership, ownership) || other.ownership == ownership)&&(identical(other.uuid, uuid) || other.uuid == uuid)&&(identical(other.name, name) || other.name == name)&&(identical(other.icon, icon) || other.icon == icon));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GameRegistry&&(identical(other.ownership, ownership) || other.ownership == ownership)&&(identical(other.uuid, uuid) || other.uuid == uuid)&&(identical(other.name, name) || other.name == name)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.connectMethod, connectMethod) || other.connectMethod == connectMethod));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,ownership,uuid,name,icon);
+    return Object.hash(runtimeType,ownership,uuid,name,icon,connectMethod);
 }
 
 @override
 String toString() {
-    return 'GameRegistry(ownership: $ownership, uuid: $uuid, name: $name, icon: $icon)';
+    return 'GameRegistry(ownership: $ownership, uuid: $uuid, name: $name, icon: $icon, connectMethod: $connectMethod)';
 }
 
 
@@ -267,7 +269,7 @@ abstract mixin class _$GameRegistryCopyWith<$Res> implements $GameRegistryCopyWi
   factory _$GameRegistryCopyWith(_GameRegistry value, $Res Function(_GameRegistry) _then) = __$GameRegistryCopyWithImpl;
 @override @useResult
 $Res call({
- String ownership, String uuid, TextRule name, IconRule icon
+ String ownership, String uuid, TextRule name, IconRule icon, GameConnectionMethod connectMethod
 });
 
 
@@ -284,13 +286,14 @@ class __$GameRegistryCopyWithImpl<$Res>
 
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,Object? connectMethod = null,}) {
   return _then(_GameRegistry(
 ownership: null == ownership ? _self.ownership : ownership // ignore: cast_nullable_to_non_nullable
 as String,uuid: null == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as TextRule,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
-as IconRule,
+as IconRule,connectMethod: null == connectMethod ? _self.connectMethod : connectMethod // ignore: cast_nullable_to_non_nullable
+as GameConnectionMethod,
   ));
 }
 

@@ -73,6 +73,8 @@ class Game {
           installPath == other.installPath;
 }
 
+enum GameConnectionMethod { native, adb, shizuku }
+
 @freezed
 sealed class GameRegistry with _$GameRegistry {
   const GameRegistry._();
@@ -81,6 +83,7 @@ sealed class GameRegistry with _$GameRegistry {
     required String uuid,
     required TextRule name,
     required IconRule icon,
+    required GameConnectionMethod connectMethod,
   }) = _GameRegistry;
   static GameRegistry fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameGameRegistryFromJson(json: json);

@@ -68,6 +68,9 @@ globalThis.api = {
     }));
     globalThis.__apiBridge.game[String(gameInfo.uuid)] = {
       searchGame: gameInfo.searchGame,
+      getGameIcon: gameInfo.getGameIcon,
+      getGameName: gameInfo.getGameName,
+      searchAccount: gameInfo.searchAccount,
     };
   },
 

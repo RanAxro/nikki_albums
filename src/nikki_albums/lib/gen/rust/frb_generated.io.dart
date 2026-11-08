@@ -545,6 +545,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Game dco_decode_game(dynamic raw);
 
   @protected
+  GameConnectionMethod dco_decode_game_connection_method(dynamic raw);
+
+  @protected
   GameRegistry dco_decode_game_registry(dynamic raw);
 
   @protected
@@ -1707,6 +1710,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Game sse_decode_game(SseDeserializer deserializer);
+
+  @protected
+  GameConnectionMethod sse_decode_game_connection_method(
+    SseDeserializer deserializer,
+  );
 
   @protected
   GameRegistry sse_decode_game_registry(SseDeserializer deserializer);
@@ -3158,6 +3166,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_game(Game self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_game_connection_method(
+    GameConnectionMethod self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_game_registry(GameRegistry self, SseSerializer serializer);
