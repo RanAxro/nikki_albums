@@ -1,4 +1,6 @@
 
+import "package:nikki_albums/modules/config_helper/model/image_rule.dart";
+
 import "../reader/reader.dart";
 import "../runtime/js_runtime.dart";
 import "../../model/event_handler.dart";
@@ -65,6 +67,10 @@ abstract class PluginRunner{
   Future<IconRule> getGameIcon(Game game);
 
   Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, Game game);
+
+  Future<TextRule> getAccountName(NGeneralFileSystem fsHandler, Game game, String account);
+
+  Future<ImageRule> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account);
 
   void dispose();
 }

@@ -71,6 +71,8 @@ globalThis.api = {
       getGameIcon: gameInfo.getGameIcon,
       getGameName: gameInfo.getGameName,
       searchAccount: gameInfo.searchAccount,
+      getAccountName: gameInfo.getAccountName,
+      getAccountAvatar: gameInfo.getAccountAvatar,
     };
   },
 

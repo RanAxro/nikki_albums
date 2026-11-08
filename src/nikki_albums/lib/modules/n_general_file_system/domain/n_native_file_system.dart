@@ -75,11 +75,11 @@ class NNativeFileSystem extends NGeneralFileSystem{
     final NGDirList res = NGDirList(files: [], dirs: [], links: []);
     await for(final FileSystemEntity entity in Directory(_getRealPath(path)).list(recursive: recursive, followLinks: followLinks)){
       if(entity is File){
-        res.files.add(entity.path);
+        res.files.add(p.relative(entity.path, from: root));
       }else if(entity is Directory){
-        res.dirs.add(entity.path);
+        res.dirs.add(p.relative(entity.path, from: root));
       }else if(entity is Link){
-        res.links.add(entity.path);
+        res.links.add(p.relative(entity.path, from: root));
       }
     }
     return res;

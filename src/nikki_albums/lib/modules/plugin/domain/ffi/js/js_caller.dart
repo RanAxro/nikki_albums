@@ -58,7 +58,9 @@ abstract final class PluginJSCaller{
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAccountAvatar(fsHandler, $gameJson, ${jsonEncode(account)});
+        let res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAccountAvatar(fsHandler, $gameJson, ${jsonEncode(account)});
+        res.fs_handler_id = res.fs_handler && res.fs_handler._handlerId;
+        res.fs_handler = undefined;
         return JSON.stringify(res);
       })();
     ''');
