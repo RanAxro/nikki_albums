@@ -68,9 +68,9 @@ abstract class PluginRunner{
 
   Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, Game game);
 
-  Future<TextRule> getAccountName(NGeneralFileSystem fsHandler, Game game, String account);
+  Future<TextRule?> getAccountName(NGeneralFileSystem fsHandler, Game game, String account);
 
-  Future<ImageRule> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account);
+  Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account);
 
   void dispose();
 }

@@ -28,12 +28,12 @@ class PluginJSRunner extends PluginRunner{
   }
 
   @override
-  Future<TextRule> getAccountName(NGeneralFileSystem fsHandler, Game game, String account){
+  Future<TextRule?> getAccountName(NGeneralFileSystem fsHandler, Game game, String account){
     return PluginJSBridge.getAccountName(_runtime, fsHandler, game, account);
   }
 
   @override
-  Future<ImageRule> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account){
+  Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account){
     return PluginJSBridge.getAccountAvatar(_runtime, fsHandler, game, account);
   }
 

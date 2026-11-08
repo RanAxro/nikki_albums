@@ -60,7 +60,7 @@ abstract final class PluginJSBridge{
     return List<String>.from(jsonDecode(result.stringResult));
   }
 
-  static Future<TextRule> getAccountName(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game, String account) async{
+  static Future<TextRule?> getAccountName(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game, String account) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
     final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
     final String gameJson = game.toJson();
@@ -69,10 +69,13 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
+    if(result.stringResult == "null"){
+      return null;
+    }
     return TextRule.fromJson(json: result.stringResult);
   }
 
-  static Future<ImageRule> getAccountAvatar(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game, String account) async{
+  static Future<ImageRule?> getAccountAvatar(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game, String account) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
     final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
     final String gameJson = game.toJson();
@@ -80,6 +83,9 @@ abstract final class PluginJSBridge{
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    if(result.stringResult == "null"){
+      return null;
     }
     final rust.ImageRule rustImageRule = rust.ImageRule.fromJson(json: result.stringResult);
     final ImageRule imageRule = ImageRuleHelper.convertToDart(rustImageRule, onGetNGFS: (_) => fsHandler);
