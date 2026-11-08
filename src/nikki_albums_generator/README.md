@@ -84,6 +84,18 @@ final _lang = AppStateItemDefine<Locale, Persistent>(...);
 还会生成一个聚合类，默认名称为 `AppState`，同时生成 `AppStateNotifier` 与
 `appStateProvider`，用于批量读取、加载和保存所有状态。
 
+聚合类会生成 `copyWith`；`AppStateNotifier` 会生成读取、替换和修改聚合状态的方法：
+
+```dart
+final current = ref.read(appStateProvider.notifier).getAppState();
+ref.read(appStateProvider.notifier).setAppState(current);
+ref
+    .read(appStateProvider.notifier)
+    .setAppStateWith(lang: const Locale("en", "US"));
+```
+
+可空字段也可以通过 `copyWith(field: null)` 明确清空。
+
 生成的名字可以通过 `build.yaml` 中的 `options` 调整：
 
 ```yaml

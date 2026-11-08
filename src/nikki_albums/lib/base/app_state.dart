@@ -1,9 +1,11 @@
 
-import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:nikki_albums/gen/rust/config/app_persistent_state.dart";
 import "package:nikki_albums_annotation/nikki_albums_annotation.dart";
+import "package:nikki_albums/gen/rust/config/app_persistent_state.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
 
 import "dart:ui";
+
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
 part "app_state.g.dart";
 
@@ -37,6 +39,12 @@ final _lang = AppStateItemDefine<Locale, Persistent>(
   writePersistent: (v, p) => p.copyWith(lang: v.toLanguageTag()),
 );
 
+@AppStateDefine("当前游戏会话")
+final _selectedGame = AppStateItemDefine<GameSession?, Persistent>(
+  defaultValue: null,
+  readPersistent: (d, p) => p.selectedGame ?? d,
+  writePersistent: (v, p) => p.copyWith(selectedGame: v),
+);
 
 
 

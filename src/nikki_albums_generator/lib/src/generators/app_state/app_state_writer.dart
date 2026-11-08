@@ -13,7 +13,9 @@ class AppStateWriter {
   String write(List<AppStateItemInfo> items) {
     final persistentType = items.first.persistentType;
     final buffer = StringBuffer()
-      ..writeln('// 该文件由 nikki_albums_generator 根据 @AppStateDefine 注解生成，请勿手动修改。')
+      ..writeln(
+        '// 该文件由 nikki_albums_generator 根据 @AppStateDefine 注解生成，请勿手动修改。',
+      )
       ..writeln('//')
       ..writeln('// 重新生成：dart run build_runner build')
       ..writeln();
@@ -95,6 +97,12 @@ class AppStateWriter {
 
   void _writeAggregateClass(StringBuffer buffer, List<AppStateItemInfo> items) {
     final aggregateClass = options.aggregateClass;
+    final hasNullableItem = items.any((item) => item.valueType.endsWith('?'));
+    if (hasNullableItem) {
+      buffer
+        ..writeln('const _appStateCopyWithSentinel = Object();')
+        ..writeln();
+    }
     buffer.writeln('/// 所有状态项的聚合数据，可以一次性读取全部状态。');
     buffer.writeln('class $aggregateClass {');
     for (final item in items) {
@@ -109,6 +117,16 @@ class AppStateWriter {
     }
     buffer
       ..writeln('  });')
+      ..writeln()
+      ..writeln('  $aggregateClass copyWith({');
+    _writeCopyWithParameters(buffer, items);
+    buffer
+      ..writeln('  }) {')
+      ..writeln('    return $aggregateClass(');
+    _writeCopyWithArguments(buffer, items);
+    buffer
+      ..writeln('    );')
+      ..writeln('  }')
       ..writeln('}')
       ..writeln();
   }
@@ -141,6 +159,26 @@ class AppStateWriter {
       ..writeln('    );')
       ..writeln('  }')
       ..writeln()
+      ..writeln('  $aggregateClass getAppState() {')
+      ..writeln('    return state;')
+      ..writeln('  }')
+      ..writeln()
+      ..writeln('  void setAppState($aggregateClass appState) {')
+      ..writeln('    state = appState;')
+      ..writeln('  }')
+      ..writeln()
+      ..writeln('  $aggregateClass setAppStateWith({');
+    _writeCopyWithParameters(buffer, items);
+    buffer
+      ..writeln('  }) {')
+      ..writeln('    final newState = state.copyWith(');
+    _writeCopyWithForwardArguments(buffer, items);
+    buffer
+      ..writeln('    );')
+      ..writeln('    state = newState;')
+      ..writeln('    return newState;')
+      ..writeln('  }')
+      ..writeln()
       ..writeln('  /// 从持久化数据中恢复所有状态项。')
       ..writeln('  void loadFromPersistent($persistentType p) {');
     for (final item in items) {
@@ -163,6 +201,58 @@ class AppStateWriter {
       ..writeln('    return res;')
       ..writeln('  }')
       ..writeln('}');
+  }
+
+  void _writeCopyWithParameters(
+    StringBuffer buffer,
+    List<AppStateItemInfo> items,
+  ) {
+    for (final item in items) {
+      if (item.valueType.endsWith('?')) {
+        buffer.writeln(
+          '    Object? ${item.fieldInAggregate} = '
+          '_appStateCopyWithSentinel,',
+        );
+      } else {
+        buffer.writeln('    ${item.valueType}? ${item.fieldInAggregate},');
+      }
+    }
+  }
+
+  void _writeCopyWithArguments(
+    StringBuffer buffer,
+    List<AppStateItemInfo> items,
+  ) {
+    for (final item in items) {
+      if (item.valueType.endsWith('?')) {
+        buffer
+          ..writeln(
+            '      ${item.fieldInAggregate}: '
+            'identical(${item.fieldInAggregate}, '
+            '_appStateCopyWithSentinel)',
+          )
+          ..writeln('          ? this.${item.fieldInAggregate}')
+          ..writeln(
+            '          : ${item.fieldInAggregate} as ${item.valueType},',
+          );
+      } else {
+        buffer.writeln(
+          '      ${item.fieldInAggregate}: '
+          '${item.fieldInAggregate} ?? this.${item.fieldInAggregate},',
+        );
+      }
+    }
+  }
+
+  void _writeCopyWithForwardArguments(
+    StringBuffer buffer,
+    List<AppStateItemInfo> items,
+  ) {
+    for (final item in items) {
+      buffer.writeln(
+        '      ${item.fieldInAggregate}: ${item.fieldInAggregate},',
+      );
+    }
   }
 
   void _writeDocComment(
