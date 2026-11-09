@@ -8,38 +8,38 @@ class PluginJSRunner extends PluginRunner{
   const PluginJSRunner._({required super.reader, required this._runtime});
 
   @override
-  Future<List<Game>> searchGame(String uniqueId, NGeneralFileSystem fsHandler){
-    return PluginJSBridge.searchGame(_runtime, uniqueId, fsHandler);
+  Future<List<DeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler){
+    return PluginJSBridge.searchDeviceGame(_runtime, uniqueId, fsHandler);
   }
 
   @override
-  Future<Game?> getGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path){
-    return PluginJSBridge.getGameByPath(_runtime, uniqueId, fsHandler, path);
+  Future<DeviceGame?> getDeviceGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path){
+    return PluginJSBridge.getDeviceGameByPath(_runtime, uniqueId, fsHandler, path);
   }
 
   @override
-  Future<TextRule> getGameName(Game game){
-    return PluginJSBridge.getGameName(_runtime, game);
+  Future<TextRule> getDeviceGameName(DeviceGame deviceGame){
+    return PluginJSBridge.getDeviceGameName(_runtime, deviceGame);
   }
 
   @override
-  Future<IconRule?> getGameIcon(Game game){
-    return PluginJSBridge.getGameIcon(_runtime, game);
+  Future<IconRule?> getDeviceGameIcon(DeviceGame deviceGame){
+    return PluginJSBridge.getDeviceGameIcon(_runtime, deviceGame);
   }
 
   @override
-  Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, Game game){
-    return PluginJSBridge.searchAccount(_runtime, fsHandler, game);
+  Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame){
+    return PluginJSBridge.searchAccount(_runtime, fsHandler, deviceGame);
   }
 
   @override
-  Future<TextRule?> getAccountName(NGeneralFileSystem fsHandler, Game game, String account){
-    return PluginJSBridge.getAccountName(_runtime, fsHandler, game, account);
+  Future<TextRule?> getAccountName(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account){
+    return PluginJSBridge.getAccountName(_runtime, fsHandler, deviceGame, account);
   }
 
   @override
-  Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account){
-    return PluginJSBridge.getAccountAvatar(_runtime, fsHandler, game, account);
+  Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account){
+    return PluginJSBridge.getAccountAvatar(_runtime, fsHandler, deviceGame, account);
   }
 
   @override

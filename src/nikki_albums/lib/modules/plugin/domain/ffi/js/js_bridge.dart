@@ -17,21 +17,21 @@ import "package:quickjs_engine/quickjs_engine.dart";
 
 
 abstract final class PluginJSBridge{
-  static Future<List<Game>> searchGame(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler) async{
+  static Future<List<DeviceGame>> searchDeviceGame(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
     final String uuid = GameHelper.getUuidByUniqueId(uniqueId);
-    final JsEvalResult result = await PluginJSCaller.searchGame(runtime, uuid, uniqueId, fsHandlerId);
+    final JsEvalResult result = await PluginJSCaller.searchDeviceGame(runtime, uuid, uniqueId, fsHandlerId);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return Game.fromVecJson(json: result.stringResult);
+    return DeviceGame.fromVecJson(json: result.stringResult);
   }
 
-  static Future<Game?> getGameByPath(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler, String path) async{
+  static Future<DeviceGame?> getDeviceGameByPath(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler, String path) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
     final String uuid = GameHelper.getUuidByUniqueId(uniqueId);
-    final JsEvalResult result = await PluginJSCaller.getGameByPath(runtime, uuid, uniqueId, fsHandlerId, path);
+    final JsEvalResult result = await PluginJSCaller.getDeviceGameByPath(runtime, uuid, uniqueId, fsHandlerId, path);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
@@ -39,23 +39,23 @@ abstract final class PluginJSBridge{
     if(result.stringResult == "null"){
       return null;
     }
-    return Game.fromJson(json: result.stringResult);
+    return DeviceGame.fromJson(json: result.stringResult);
   }
 
-  static Future<TextRule> getGameName(PluginJSRuntime runtime, Game game) async{
-    final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
-    final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.getGameName(runtime, uuid, gameJson);
+  static Future<TextRule> getDeviceGameName(PluginJSRuntime runtime, DeviceGame deviceGame) async{
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getDeviceGameName(runtime, uuid, deviceGameJson);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
     return TextRule.fromJson(json: result.stringResult);
   }
 
-  static Future<IconRule?> getGameIcon(PluginJSRuntime runtime, Game game) async{
-    final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
-    final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.getGameIcon(runtime, uuid, gameJson);
+  static Future<IconRule?> getDeviceGameIcon(PluginJSRuntime runtime, DeviceGame deviceGame) async{
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getDeviceGameIcon(runtime, uuid, deviceGameJson);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
@@ -65,11 +65,11 @@ abstract final class PluginJSBridge{
     return IconRule.fromJson(json: result.stringResult);
   }
 
-  static Future<List<String>> searchAccount(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game) async{
+  static Future<List<String>> searchAccount(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
-    final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
-    final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.searchAccount(runtime, uuid, fsHandlerId, gameJson);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.searchAccount(runtime, uuid, fsHandlerId, deviceGameJson);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
@@ -77,11 +77,11 @@ abstract final class PluginJSBridge{
     return List<String>.from(jsonDecode(result.stringResult));
   }
 
-  static Future<TextRule?> getAccountName(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game, String account) async{
+  static Future<TextRule?> getAccountName(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
-    final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
-    final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.getAccountName(runtime, uuid, fsHandlerId, gameJson, account);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAccountName(runtime, uuid, fsHandlerId, deviceGameJson, account);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
@@ -92,11 +92,11 @@ abstract final class PluginJSBridge{
     return TextRule.fromJson(json: result.stringResult);
   }
 
-  static Future<ImageRule?> getAccountAvatar(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, Game game, String account) async{
+  static Future<ImageRule?> getAccountAvatar(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
-    final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
-    final String gameJson = game.toJson();
-    final JsEvalResult result = await PluginJSCaller.getAccountAvatar(runtime, uuid, fsHandlerId, gameJson, account);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAccountAvatar(runtime, uuid, fsHandlerId, deviceGameJson, account);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
@@ -109,8 +109,8 @@ abstract final class PluginJSBridge{
     return imageRule;
   }
 
-  static Future<List<String>> searchAlbum(PluginJSRuntime runtime, String uuid, Game game, String? account) async{
-    final String gameJson = game.toJson();
+  static Future<List<String>> searchAlbum(PluginJSRuntime runtime, String uuid, DeviceGame deviceGame, String? account) async{
+    final String gameJson = deviceGame.toJson();
     final JsEvalResult result = await PluginJSCaller.searchAlbum(runtime, uuid, gameJson, account);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);

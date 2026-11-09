@@ -40,17 +40,17 @@ final _lang = AppStateItemDefine<Locale, Persistent>(
 );
 
 @AppStateDefine("当前游戏会话")
-final _selectedGame = AppStateItemDefine<GameSession?, Persistent>(
+final _selectedDeviceGame = AppStateItemDefine<DeviceGameSession?, Persistent>(
   defaultValue: null,
-  readPersistent: (d, p) => p.selectedGame ?? d,
-  writePersistent: (v, p) => p.copyWith(selectedGame: v),
+  readPersistent: (d, p) => p.selectedDeviceGame ?? d,
+  writePersistent: (v, p) => p.copyWith(selectedDeviceGame: v),
 );
 
 @AppStateDefine("自定义游戏")
-final _customGame = AppStateItemDefine<List<Game>, Persistent>(
+final _pickedDeviceGame = AppStateItemDefine<List<DeviceGame>, Persistent>(
   defaultValue: [],
-  readPersistent: (d, p) => p.customGame ?? d,
-  writePersistent: (v, p) => p.copyWith(customGame: v),
+  readPersistent: (d, p) => p.pickedDeviceGame ?? d,
+  writePersistent: (v, p) => p.copyWith(pickedDeviceGame: v),
 );
 
 

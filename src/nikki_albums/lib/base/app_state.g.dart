@@ -48,15 +48,18 @@ class LangState extends AppStateItem<Locale, Persistent> {
 }
 
 /// 当前游戏会话
-class SelectedGameState extends AppStateItem<GameSession?, Persistent> {
+class SelectedDeviceGameState
+    extends AppStateItem<DeviceGameSession?, Persistent> {
   @override
-  AppStateItemDefine<GameSession?, Persistent> get _define => _selectedGame;
+  AppStateItemDefine<DeviceGameSession?, Persistent> get _define =>
+      _selectedDeviceGame;
 }
 
 /// 自定义游戏
-class CustomGameState extends AppStateItem<List<Game>, Persistent> {
+class PickedDeviceGameState extends AppStateItem<List<DeviceGame>, Persistent> {
   @override
-  AppStateItemDefine<List<Game>, Persistent> get _define => _customGame;
+  AppStateItemDefine<List<DeviceGame>, Persistent> get _define =>
+      _pickedDeviceGame;
 }
 
 final _isAgreeAgreementProvider = NotifierProvider<IsAgreeAgreementState, bool>(
@@ -69,13 +72,15 @@ final _isInitialStartupProvider = NotifierProvider<IsInitialStartupState, bool>(
 
 final _langProvider = NotifierProvider<LangState, Locale>(LangState.new);
 
-final _selectedGameProvider = NotifierProvider<SelectedGameState, GameSession?>(
-  SelectedGameState.new,
-);
+final _selectedDeviceGameProvider =
+    NotifierProvider<SelectedDeviceGameState, DeviceGameSession?>(
+      SelectedDeviceGameState.new,
+    );
 
-final _customGameProvider = NotifierProvider<CustomGameState, List<Game>>(
-  CustomGameState.new,
-);
+final _pickedDeviceGameProvider =
+    NotifierProvider<PickedDeviceGameState, List<DeviceGame>>(
+      PickedDeviceGameState.new,
+    );
 
 const _appStateCopyWithSentinel = Object();
 
@@ -91,34 +96,35 @@ class AppState {
   final Locale lang;
 
   /// 当前游戏会话
-  final GameSession? selectedGame;
+  final DeviceGameSession? selectedDeviceGame;
 
   /// 自定义游戏
-  final List<Game> customGame;
+  final List<DeviceGame> pickedDeviceGame;
 
   const AppState({
     required this.isAgreeAgreement,
     required this.isInitialStartup,
     required this.lang,
-    required this.selectedGame,
-    required this.customGame,
+    required this.selectedDeviceGame,
+    required this.pickedDeviceGame,
   });
 
   AppState copyWith({
     bool? isAgreeAgreement,
     bool? isInitialStartup,
     Locale? lang,
-    Object? selectedGame = _appStateCopyWithSentinel,
-    List<Game>? customGame,
+    Object? selectedDeviceGame = _appStateCopyWithSentinel,
+    List<DeviceGame>? pickedDeviceGame,
   }) {
     return AppState(
       isAgreeAgreement: isAgreeAgreement ?? this.isAgreeAgreement,
       isInitialStartup: isInitialStartup ?? this.isInitialStartup,
       lang: lang ?? this.lang,
-      selectedGame: identical(selectedGame, _appStateCopyWithSentinel)
-          ? this.selectedGame
-          : selectedGame as GameSession?,
-      customGame: customGame ?? this.customGame,
+      selectedDeviceGame:
+          identical(selectedDeviceGame, _appStateCopyWithSentinel)
+          ? this.selectedDeviceGame
+          : selectedDeviceGame as DeviceGameSession?,
+      pickedDeviceGame: pickedDeviceGame ?? this.pickedDeviceGame,
     );
   }
 }
@@ -134,8 +140,8 @@ class AppStateNotifier extends Notifier<AppState> {
       isAgreeAgreement: ref.watch(_isAgreeAgreementProvider),
       isInitialStartup: ref.watch(_isInitialStartupProvider),
       lang: ref.watch(_langProvider),
-      selectedGame: ref.watch(_selectedGameProvider),
-      customGame: ref.watch(_customGameProvider),
+      selectedDeviceGame: ref.watch(_selectedDeviceGameProvider),
+      pickedDeviceGame: ref.watch(_pickedDeviceGameProvider),
     );
   }
 
@@ -151,15 +157,15 @@ class AppStateNotifier extends Notifier<AppState> {
     bool? isAgreeAgreement,
     bool? isInitialStartup,
     Locale? lang,
-    Object? selectedGame = _appStateCopyWithSentinel,
-    List<Game>? customGame,
+    Object? selectedDeviceGame = _appStateCopyWithSentinel,
+    List<DeviceGame>? pickedDeviceGame,
   }) {
     final newState = state.copyWith(
       isAgreeAgreement: isAgreeAgreement,
       isInitialStartup: isInitialStartup,
       lang: lang,
-      selectedGame: selectedGame,
-      customGame: customGame,
+      selectedDeviceGame: selectedDeviceGame,
+      pickedDeviceGame: pickedDeviceGame,
     );
     state = newState;
     return newState;
@@ -170,8 +176,8 @@ class AppStateNotifier extends Notifier<AppState> {
     ref.read(_isAgreeAgreementProvider.notifier).fromPersistent(p);
     ref.read(_isInitialStartupProvider.notifier).fromPersistent(p);
     ref.read(_langProvider.notifier).fromPersistent(p);
-    ref.read(_selectedGameProvider.notifier).fromPersistent(p);
-    ref.read(_customGameProvider.notifier).fromPersistent(p);
+    ref.read(_selectedDeviceGameProvider.notifier).fromPersistent(p);
+    ref.read(_pickedDeviceGameProvider.notifier).fromPersistent(p);
   }
 
   /// 把所有状态项写回持久化数据。
@@ -180,8 +186,8 @@ class AppStateNotifier extends Notifier<AppState> {
     res = ref.read(_isAgreeAgreementProvider.notifier).toPersistent(res);
     res = ref.read(_isInitialStartupProvider.notifier).toPersistent(res);
     res = ref.read(_langProvider.notifier).toPersistent(res);
-    res = ref.read(_selectedGameProvider.notifier).toPersistent(res);
-    res = ref.read(_customGameProvider.notifier).toPersistent(res);
+    res = ref.read(_selectedDeviceGameProvider.notifier).toPersistent(res);
+    res = ref.read(_pickedDeviceGameProvider.notifier).toPersistent(res);
     return res;
   }
 }

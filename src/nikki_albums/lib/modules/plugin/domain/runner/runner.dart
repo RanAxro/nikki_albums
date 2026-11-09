@@ -60,19 +60,19 @@ abstract class PluginRunner{
 
   const PluginRunner({required this.reader});
 
-  Future<List<Game>> searchGame(String uniqueId, NGeneralFileSystem fsHandler);
+  Future<List<DeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler);
 
-  Future<Game?> getGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path);
+  Future<DeviceGame?> getDeviceGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path);
 
-  Future<TextRule> getGameName(Game game);
+  Future<TextRule> getDeviceGameName(DeviceGame deviceGame);
 
-  Future<IconRule?> getGameIcon(Game game);
+  Future<IconRule?> getDeviceGameIcon(DeviceGame deviceGame);
 
-  Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, Game game);
+  Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame);
 
-  Future<TextRule?> getAccountName(NGeneralFileSystem fsHandler, Game game, String account);
+  Future<TextRule?> getAccountName(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account);
 
-  Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, Game game, String account);
+  Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account);
 
   void dispose();
 }

@@ -17,11 +17,18 @@ pub struct GameRegistry{
   pub name: TextRule,
   pub icon: IconRule,
   pub connect_method: GameConnectionMethod,
-  pub custom_game_picker: Option<GamePickerConfig>,
+  pub device_game_picker: Option<DeviceGamePickerConfig>,
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct GamePickerConfig{
+pub enum GameConnectionMethod{
+  Native,
+  Adb,
+  Shizuku,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct DeviceGamePickerConfig{
   pub title: Option<TextRule>,
   pub tip: TextRule,
   pub name_text_field_label: Option<TextRule>,
@@ -33,31 +40,25 @@ pub struct GamePickerConfig{
   pub picker_title: Option<TextRule>,
 }
 
-#[derive(Serialize, Deserialize)]
-pub enum GameConnectionMethod{
-  Native,
-  Adb,
-  Shizuku,
-}
 
 impl_json_frb!(GameRegistry);
 
 #[frb(dart_metadata=("freezed"))]
 #[derive(Serialize, Deserialize)]
-pub struct Game{
+pub struct DeviceGame{
   pub unique_id: String,
   pub info: HashMap<String, String>,
   pub install_path: String,
 }
 
-impl_json_frb!(Game);
-impl_vec_json_frb!(Game);
+impl_json_frb!(DeviceGame);
+impl_vec_json_frb!(DeviceGame);
 
 #[derive(Serialize, Deserialize)]
-pub struct GameSession{
-  pub game: Game,
+pub struct DeviceGameSession{
+  pub device_game: DeviceGame,
   pub account: Option<String>,
   pub album: Option<String>,
 }
 
-impl_json_frb!(GameSession);
+impl_json_frb!(DeviceGameSession);

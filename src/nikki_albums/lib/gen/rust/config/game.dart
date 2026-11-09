@@ -13,54 +13,59 @@ import 'rules/text_rule.dart';
 part 'game.freezed.dart';
 
 @freezed
-sealed class Game with _$Game {
-  const Game._();
-  const factory Game({
+sealed class DeviceGame with _$DeviceGame {
+  const DeviceGame._();
+  const factory DeviceGame({
     required String uniqueId,
     required Map<String, String> info,
     required String installPath,
-  }) = _Game;
-  static Game fromJson({required String json}) =>
-      RustLib.instance.api.crateConfigGameGameFromJson(json: json);
+  }) = _DeviceGame;
+  static DeviceGame fromJson({required String json}) =>
+      RustLib.instance.api.crateConfigGameDeviceGameFromJson(json: json);
 
-  static Game fromJsonBytes({required List<int> json}) =>
-      RustLib.instance.api.crateConfigGameGameFromJsonBytes(json: json);
+  static DeviceGame fromJsonBytes({required List<int> json}) =>
+      RustLib.instance.api.crateConfigGameDeviceGameFromJsonBytes(json: json);
 
-  static List<Game> fromVecJson({required String json}) =>
-      RustLib.instance.api.crateConfigGameGameFromVecJson(json: json);
+  static List<DeviceGame> fromVecJson({required String json}) =>
+      RustLib.instance.api.crateConfigGameDeviceGameFromVecJson(json: json);
 
-  static List<Game> fromVecJsonBytes({required List<int> json}) =>
-      RustLib.instance.api.crateConfigGameGameFromVecJsonBytes(json: json);
-
-  String toJson() => RustLib.instance.api.crateConfigGameGameToJson(that: this);
-
-  Uint8List toJsonBytes() =>
-      RustLib.instance.api.crateConfigGameGameToJsonBytes(that: this);
-
-  Uint8List toJsonBytesPretty() =>
-      RustLib.instance.api.crateConfigGameGameToJsonBytesPretty(that: this);
-
-  String toJsonPretty() =>
-      RustLib.instance.api.crateConfigGameGameToJsonPretty(that: this);
-
-  static String toVecJson({required List<Game> value}) =>
-      RustLib.instance.api.crateConfigGameGameToVecJson(value: value);
-
-  static Uint8List toVecJsonBytes({required List<Game> value}) =>
-      RustLib.instance.api.crateConfigGameGameToVecJsonBytes(value: value);
-
-  static Uint8List toVecJsonBytesPretty({required List<Game> value}) => RustLib
+  static List<DeviceGame> fromVecJsonBytes({required List<int> json}) => RustLib
       .instance
       .api
-      .crateConfigGameGameToVecJsonBytesPretty(value: value);
+      .crateConfigGameDeviceGameFromVecJsonBytes(json: json);
 
-  static String toVecJsonPretty({required List<Game> value}) =>
-      RustLib.instance.api.crateConfigGameGameToVecJsonPretty(value: value);
+  String toJson() =>
+      RustLib.instance.api.crateConfigGameDeviceGameToJson(that: this);
+
+  Uint8List toJsonBytes() =>
+      RustLib.instance.api.crateConfigGameDeviceGameToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigGameDeviceGameToJsonBytesPretty(that: this);
+
+  String toJsonPretty() =>
+      RustLib.instance.api.crateConfigGameDeviceGameToJsonPretty(that: this);
+
+  static String toVecJson({required List<DeviceGame> value}) =>
+      RustLib.instance.api.crateConfigGameDeviceGameToVecJson(value: value);
+
+  static Uint8List toVecJsonBytes({required List<DeviceGame> value}) => RustLib
+      .instance
+      .api
+      .crateConfigGameDeviceGameToVecJsonBytes(value: value);
+
+  static Uint8List toVecJsonBytesPretty({required List<DeviceGame> value}) =>
+      RustLib.instance.api.crateConfigGameDeviceGameToVecJsonBytesPretty(
+        value: value,
+      );
+
+  static String toVecJsonPretty({required List<DeviceGame> value}) => RustLib
+      .instance
+      .api
+      .crateConfigGameDeviceGameToVecJsonPretty(value: value);
 }
 
-enum GameConnectionMethod { native, adb, shizuku }
-
-class GamePickerConfig {
+class DeviceGamePickerConfig {
   final TextRule? title;
   final TextRule tip;
   final TextRule? nameTextFieldLabel;
@@ -71,7 +76,7 @@ class GamePickerConfig {
   final TextRule? pickerBtnTooltip;
   final TextRule? pickerTitle;
 
-  const GamePickerConfig({
+  const DeviceGamePickerConfig({
     this.title,
     required this.tip,
     this.nameTextFieldLabel,
@@ -98,7 +103,7 @@ class GamePickerConfig {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GamePickerConfig &&
+      other is DeviceGamePickerConfig &&
           runtimeType == other.runtimeType &&
           title == other.title &&
           tip == other.tip &&
@@ -111,6 +116,48 @@ class GamePickerConfig {
           pickerTitle == other.pickerTitle;
 }
 
+class DeviceGameSession {
+  final DeviceGame deviceGame;
+  final String? account;
+  final String? album;
+
+  const DeviceGameSession({required this.deviceGame, this.account, this.album});
+
+  static DeviceGameSession fromJson({required String json}) =>
+      RustLib.instance.api.crateConfigGameDeviceGameSessionFromJson(json: json);
+
+  static DeviceGameSession fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigGameDeviceGameSessionFromJsonBytes(json: json);
+
+  String toJson() =>
+      RustLib.instance.api.crateConfigGameDeviceGameSessionToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigGameDeviceGameSessionToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigGameDeviceGameSessionToJsonBytesPretty(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigGameDeviceGameSessionToJsonPretty(that: this);
+
+  @override
+  int get hashCode => deviceGame.hashCode ^ account.hashCode ^ album.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DeviceGameSession &&
+          runtimeType == other.runtimeType &&
+          deviceGame == other.deviceGame &&
+          account == other.account &&
+          album == other.album;
+}
+
+enum GameConnectionMethod { native, adb, shizuku }
+
 @freezed
 sealed class GameRegistry with _$GameRegistry {
   const GameRegistry._();
@@ -120,7 +167,7 @@ sealed class GameRegistry with _$GameRegistry {
     required TextRule name,
     required IconRule icon,
     required GameConnectionMethod connectMethod,
-    GamePickerConfig? customGamePicker,
+    DeviceGamePickerConfig? deviceGamePicker,
   }) = _GameRegistry;
   static GameRegistry fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameGameRegistryFromJson(json: json);
@@ -139,42 +186,4 @@ sealed class GameRegistry with _$GameRegistry {
 
   String toJsonPretty() =>
       RustLib.instance.api.crateConfigGameGameRegistryToJsonPretty(that: this);
-}
-
-class GameSession {
-  final Game game;
-  final String? account;
-  final String? album;
-
-  const GameSession({required this.game, this.account, this.album});
-
-  static GameSession fromJson({required String json}) =>
-      RustLib.instance.api.crateConfigGameGameSessionFromJson(json: json);
-
-  static GameSession fromJsonBytes({required List<int> json}) =>
-      RustLib.instance.api.crateConfigGameGameSessionFromJsonBytes(json: json);
-
-  String toJson() =>
-      RustLib.instance.api.crateConfigGameGameSessionToJson(that: this);
-
-  Uint8List toJsonBytes() =>
-      RustLib.instance.api.crateConfigGameGameSessionToJsonBytes(that: this);
-
-  Uint8List toJsonBytesPretty() => RustLib.instance.api
-      .crateConfigGameGameSessionToJsonBytesPretty(that: this);
-
-  String toJsonPretty() =>
-      RustLib.instance.api.crateConfigGameGameSessionToJsonPretty(that: this);
-
-  @override
-  int get hashCode => game.hashCode ^ account.hashCode ^ album.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is GameSession &&
-          runtimeType == other.runtimeType &&
-          game == other.game &&
-          account == other.account &&
-          album == other.album;
 }

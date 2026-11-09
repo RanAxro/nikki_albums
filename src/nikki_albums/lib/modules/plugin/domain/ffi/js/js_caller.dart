@@ -7,22 +7,22 @@ import "package:quickjs_engine/js_eval_result.dart";
 
 
 abstract final class PluginJSCaller{
-  static Future<JsEvalResult> searchGame(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId){
+  static Future<JsEvalResult> searchDeviceGame(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].searchGame(fsHandler);
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].searchDeviceGame(fsHandler);
         res.forEach(g => { g.unique_id = ${jsonEncode(uniqueId)}; });
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getGameByPath(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId, String path){
+  static Future<JsEvalResult> getDeviceGameByPath(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId, String path){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getGameByPath(fsHandler, ${jsonEncode(path)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameByPath(fsHandler, ${jsonEncode(path)});
         if(res){
           res.unique_id = ${jsonEncode(uniqueId)};
         }
@@ -31,47 +31,47 @@ abstract final class PluginJSCaller{
     ''');
   }
 
-  static Future<JsEvalResult> getGameName(PluginJSRuntime runtime, String uuid, String gameJson){
+  static Future<JsEvalResult> getDeviceGameName(PluginJSRuntime runtime, String uuid, String deviceGameJson){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getGameName($gameJson)
+        await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameName($deviceGameJson)
       ))();
     ''');
   }
 
-  static Future<JsEvalResult> getGameIcon(PluginJSRuntime runtime, String uuid, String gameJson){
+  static Future<JsEvalResult> getDeviceGameIcon(PluginJSRuntime runtime, String uuid, String deviceGameJson){
     return runtime.evaluate('''
       (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getGameIcon($gameJson)
+        await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameIcon($deviceGameJson)
       ))();
     ''');
   }
 
-  static Future<JsEvalResult> searchAccount(PluginJSRuntime runtime, String uuid, String fsHandlerId, String gameJson){
+  static Future<JsEvalResult> searchAccount(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].searchAccount(fsHandler, $gameJson);
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].searchAccount(fsHandler, $deviceGameJson);
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAccountName(PluginJSRuntime runtime, String uuid, String fsHandlerId, String gameJson, String account){
+  static Future<JsEvalResult> getAccountName(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String account){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAccountName(fsHandler, $gameJson, ${jsonEncode(account)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAccountName(fsHandler, $deviceGameJson, ${jsonEncode(account)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAccountAvatar(PluginJSRuntime runtime, String uuid, String fsHandlerId, String gameJson, String account){
+  static Future<JsEvalResult> getAccountAvatar(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String account){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        let res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAccountAvatar(fsHandler, $gameJson, ${jsonEncode(account)});
+        let res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAccountAvatar(fsHandler, $deviceGameJson, ${jsonEncode(account)});
         res.fs_handler_id = res.fs_handler && res.fs_handler._handlerId;
         res.fs_handler = undefined;
         return JSON.stringify(res);
