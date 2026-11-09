@@ -6301,15 +6301,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   AppPersistentState dco_decode_app_persistent_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 6)
-      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    if (arr.length != 7)
+      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
     return AppPersistentState(
       isAgreeAgreement: dco_decode_opt_box_autoadd_bool(arr[0]),
       isInitialStartup: dco_decode_opt_box_autoadd_bool(arr[1]),
       lang: dco_decode_opt_String(arr[2]),
       theme: dco_decode_opt_box_autoadd_i_32(arr[3]),
       selectedGame: dco_decode_opt_box_autoadd_game_session(arr[4]),
-      unknownField: dco_decode_Map_String_String_None(arr[5]),
+      customGame: dco_decode_opt_list_game(arr[5]),
+      unknownField: dco_decode_Map_String_String_None(arr[6]),
     );
   }
 
@@ -6475,6 +6476,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Game dco_decode_box_autoadd_game(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_game(raw);
+  }
+
+  @protected
+  GamePickerConfig dco_decode_box_autoadd_game_picker_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_game_picker_config(raw);
   }
 
   @protected
@@ -7133,17 +7140,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GamePickerConfig dco_decode_game_picker_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 9)
+      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
+    return GamePickerConfig(
+      title: dco_decode_opt_box_autoadd_text_rule(arr[0]),
+      tip: dco_decode_text_rule(arr[1]),
+      nameTextFieldLabel: dco_decode_opt_box_autoadd_text_rule(arr[2]),
+      nameTextFieldHint: dco_decode_opt_box_autoadd_text_rule(arr[3]),
+      pathTextFieldLabel: dco_decode_opt_box_autoadd_text_rule(arr[4]),
+      pathTextFieldHint: dco_decode_opt_box_autoadd_text_rule(arr[5]),
+      pathTextFieldError: dco_decode_opt_box_autoadd_text_rule(arr[6]),
+      pickerBtnTooltip: dco_decode_opt_box_autoadd_text_rule(arr[7]),
+      pickerTitle: dco_decode_opt_box_autoadd_text_rule(arr[8]),
+    );
+  }
+
+  @protected
   GameRegistry dco_decode_game_registry(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 5)
-      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
     return GameRegistry(
       ownership: dco_decode_String(arr[0]),
       uuid: dco_decode_String(arr[1]),
       name: dco_decode_text_rule(arr[2]),
       icon: dco_decode_icon_rule(arr[3]),
       connectMethod: dco_decode_game_connection_method(arr[4]),
+      customGamePicker: dco_decode_opt_box_autoadd_game_picker_config(arr[5]),
     );
   }
 
@@ -8177,6 +8204,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GamePickerConfig? dco_decode_opt_box_autoadd_game_picker_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_game_picker_config(raw);
+  }
+
+  @protected
   GameSession? dco_decode_opt_box_autoadd_game_session(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_game_session(raw);
@@ -8308,6 +8341,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  TextRule? dco_decode_opt_box_autoadd_text_rule(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_text_rule(raw);
+  }
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
@@ -8329,6 +8368,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   List<String>? dco_decode_opt_list_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_list_String(raw);
+  }
+
+  @protected
+  List<Game>? dco_decode_opt_list_game(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_game(raw);
   }
 
   @protected
@@ -9426,6 +9471,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_selectedGame = sse_decode_opt_box_autoadd_game_session(
       deserializer,
     );
+    var var_customGame = sse_decode_opt_list_game(deserializer);
     var var_unknownField = sse_decode_Map_String_String_None(deserializer);
     return AppPersistentState(
       isAgreeAgreement: var_isAgreeAgreement,
@@ -9433,6 +9479,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       lang: var_lang,
       theme: var_theme,
       selectedGame: var_selectedGame,
+      customGame: var_customGame,
       unknownField: var_unknownField,
     );
   }
@@ -9628,6 +9675,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Game sse_decode_box_autoadd_game(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_game(deserializer));
+  }
+
+  @protected
+  GamePickerConfig sse_decode_box_autoadd_game_picker_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_game_picker_config(deserializer));
   }
 
   @protected
@@ -10380,6 +10435,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GamePickerConfig sse_decode_game_picker_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_title = sse_decode_opt_box_autoadd_text_rule(deserializer);
+    var var_tip = sse_decode_text_rule(deserializer);
+    var var_nameTextFieldLabel = sse_decode_opt_box_autoadd_text_rule(
+      deserializer,
+    );
+    var var_nameTextFieldHint = sse_decode_opt_box_autoadd_text_rule(
+      deserializer,
+    );
+    var var_pathTextFieldLabel = sse_decode_opt_box_autoadd_text_rule(
+      deserializer,
+    );
+    var var_pathTextFieldHint = sse_decode_opt_box_autoadd_text_rule(
+      deserializer,
+    );
+    var var_pathTextFieldError = sse_decode_opt_box_autoadd_text_rule(
+      deserializer,
+    );
+    var var_pickerBtnTooltip = sse_decode_opt_box_autoadd_text_rule(
+      deserializer,
+    );
+    var var_pickerTitle = sse_decode_opt_box_autoadd_text_rule(deserializer);
+    return GamePickerConfig(
+      title: var_title,
+      tip: var_tip,
+      nameTextFieldLabel: var_nameTextFieldLabel,
+      nameTextFieldHint: var_nameTextFieldHint,
+      pathTextFieldLabel: var_pathTextFieldLabel,
+      pathTextFieldHint: var_pathTextFieldHint,
+      pathTextFieldError: var_pathTextFieldError,
+      pickerBtnTooltip: var_pickerBtnTooltip,
+      pickerTitle: var_pickerTitle,
+    );
+  }
+
+  @protected
   GameRegistry sse_decode_game_registry(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_ownership = sse_decode_String(deserializer);
@@ -10387,12 +10479,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_name = sse_decode_text_rule(deserializer);
     var var_icon = sse_decode_icon_rule(deserializer);
     var var_connectMethod = sse_decode_game_connection_method(deserializer);
+    var var_customGamePicker = sse_decode_opt_box_autoadd_game_picker_config(
+      deserializer,
+    );
     return GameRegistry(
       ownership: var_ownership,
       uuid: var_uuid,
       name: var_name,
       icon: var_icon,
       connectMethod: var_connectMethod,
+      customGamePicker: var_customGamePicker,
     );
   }
 
@@ -11768,6 +11864,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GamePickerConfig? sse_decode_opt_box_autoadd_game_picker_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_game_picker_config(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   GameSession? sse_decode_opt_box_autoadd_game_session(
     SseDeserializer deserializer,
   ) {
@@ -12021,6 +12130,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  TextRule? sse_decode_opt_box_autoadd_text_rule(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_text_rule(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -12061,6 +12181,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_list_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<Game>? sse_decode_opt_list_game(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_game(deserializer));
     } else {
       return null;
     }
@@ -13288,6 +13419,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_opt_String(self.lang, serializer);
     sse_encode_opt_box_autoadd_i_32(self.theme, serializer);
     sse_encode_opt_box_autoadd_game_session(self.selectedGame, serializer);
+    sse_encode_opt_list_game(self.customGame, serializer);
     sse_encode_Map_String_String_None(self.unknownField, serializer);
   }
 
@@ -13487,6 +13619,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_box_autoadd_game(Game self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_game(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_game_picker_config(
+    GamePickerConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_game_picker_config(self, serializer);
   }
 
   @protected
@@ -14229,6 +14370,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_game_picker_config(
+    GamePickerConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_text_rule(self.title, serializer);
+    sse_encode_text_rule(self.tip, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.nameTextFieldLabel, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.nameTextFieldHint, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.pathTextFieldLabel, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.pathTextFieldHint, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.pathTextFieldError, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.pickerBtnTooltip, serializer);
+    sse_encode_opt_box_autoadd_text_rule(self.pickerTitle, serializer);
+  }
+
+  @protected
   void sse_encode_game_registry(GameRegistry self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.ownership, serializer);
@@ -14236,6 +14394,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_text_rule(self.name, serializer);
     sse_encode_icon_rule(self.icon, serializer);
     sse_encode_game_connection_method(self.connectMethod, serializer);
+    sse_encode_opt_box_autoadd_game_picker_config(
+      self.customGamePicker,
+      serializer,
+    );
   }
 
   @protected
@@ -15449,6 +15611,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_game_picker_config(
+    GamePickerConfig? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_game_picker_config(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_game_session(
     GameSession? self,
     SseSerializer serializer,
@@ -15706,6 +15881,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_text_rule(
+    TextRule? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_text_rule(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -15751,6 +15939,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_list_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_game(List<Game>? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_game(self, serializer);
     }
   }
 

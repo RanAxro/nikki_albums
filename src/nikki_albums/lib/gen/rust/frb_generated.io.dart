@@ -319,6 +319,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Game dco_decode_box_autoadd_game(dynamic raw);
 
   @protected
+  GamePickerConfig dco_decode_box_autoadd_game_picker_config(dynamic raw);
+
+  @protected
   GameRegistry dco_decode_box_autoadd_game_registry(dynamic raw);
 
   @protected
@@ -559,6 +562,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   GameConnectionMethod dco_decode_game_connection_method(dynamic raw);
+
+  @protected
+  GamePickerConfig dco_decode_game_picker_config(dynamic raw);
 
   @protected
   GameRegistry dco_decode_game_registry(dynamic raw);
@@ -903,6 +909,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
 
   @protected
+  GamePickerConfig? dco_decode_opt_box_autoadd_game_picker_config(dynamic raw);
+
+  @protected
   GameSession? dco_decode_opt_box_autoadd_game_session(dynamic raw);
 
   @protected
@@ -968,6 +977,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea? dco_decode_opt_box_autoadd_subarea(dynamic raw);
 
   @protected
+  TextRule? dco_decode_opt_box_autoadd_text_rule(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
@@ -978,6 +990,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<String>? dco_decode_opt_list_String(dynamic raw);
+
+  @protected
+  List<Game>? dco_decode_opt_list_game(dynamic raw);
 
   @protected
   Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
@@ -1454,6 +1469,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Game sse_decode_box_autoadd_game(SseDeserializer deserializer);
 
   @protected
+  GamePickerConfig sse_decode_box_autoadd_game_picker_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   GameRegistry sse_decode_box_autoadd_game_registry(
     SseDeserializer deserializer,
   );
@@ -1758,6 +1778,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   GameConnectionMethod sse_decode_game_connection_method(
     SseDeserializer deserializer,
   );
+
+  @protected
+  GamePickerConfig sse_decode_game_picker_config(SseDeserializer deserializer);
 
   @protected
   GameRegistry sse_decode_game_registry(SseDeserializer deserializer);
@@ -2166,6 +2189,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  GamePickerConfig? sse_decode_opt_box_autoadd_game_picker_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   GameSession? sse_decode_opt_box_autoadd_game_session(
     SseDeserializer deserializer,
   );
@@ -2257,6 +2285,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Subarea? sse_decode_opt_box_autoadd_subarea(SseDeserializer deserializer);
 
   @protected
+  TextRule? sse_decode_opt_box_autoadd_text_rule(SseDeserializer deserializer);
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
@@ -2269,6 +2300,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<String>? sse_decode_opt_list_String(SseDeserializer deserializer);
+
+  @protected
+  List<Game>? sse_decode_opt_list_game(SseDeserializer deserializer);
 
   @protected
   Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer);
@@ -2848,6 +2882,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_game(Game self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_game_picker_config(
+    GamePickerConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_game_registry(
     GameRegistry self,
     SseSerializer serializer,
@@ -3249,6 +3289,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_game_connection_method(
     GameConnectionMethod self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_game_picker_config(
+    GamePickerConfig self,
     SseSerializer serializer,
   );
 
@@ -3772,6 +3818,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_game_picker_config(
+    GamePickerConfig? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_game_session(
     GameSession? self,
     SseSerializer serializer,
@@ -3889,6 +3941,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_text_rule(
+    TextRule? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
 
   @protected
@@ -3902,6 +3960,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_opt_list_String(List<String>? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_list_game(List<Game>? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_list_prim_u_8_strict(

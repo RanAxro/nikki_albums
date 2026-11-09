@@ -53,6 +53,12 @@ class SelectedGameState extends AppStateItem<GameSession?, Persistent> {
   AppStateItemDefine<GameSession?, Persistent> get _define => _selectedGame;
 }
 
+/// 自定义游戏
+class CustomGameState extends AppStateItem<List<Game>, Persistent> {
+  @override
+  AppStateItemDefine<List<Game>, Persistent> get _define => _customGame;
+}
+
 final _isAgreeAgreementProvider = NotifierProvider<IsAgreeAgreementState, bool>(
   IsAgreeAgreementState.new,
 );
@@ -65,6 +71,10 @@ final _langProvider = NotifierProvider<LangState, Locale>(LangState.new);
 
 final _selectedGameProvider = NotifierProvider<SelectedGameState, GameSession?>(
   SelectedGameState.new,
+);
+
+final _customGameProvider = NotifierProvider<CustomGameState, List<Game>>(
+  CustomGameState.new,
 );
 
 const _appStateCopyWithSentinel = Object();
@@ -83,11 +93,15 @@ class AppState {
   /// 当前游戏会话
   final GameSession? selectedGame;
 
+  /// 自定义游戏
+  final List<Game> customGame;
+
   const AppState({
     required this.isAgreeAgreement,
     required this.isInitialStartup,
     required this.lang,
     required this.selectedGame,
+    required this.customGame,
   });
 
   AppState copyWith({
@@ -95,6 +109,7 @@ class AppState {
     bool? isInitialStartup,
     Locale? lang,
     Object? selectedGame = _appStateCopyWithSentinel,
+    List<Game>? customGame,
   }) {
     return AppState(
       isAgreeAgreement: isAgreeAgreement ?? this.isAgreeAgreement,
@@ -103,6 +118,7 @@ class AppState {
       selectedGame: identical(selectedGame, _appStateCopyWithSentinel)
           ? this.selectedGame
           : selectedGame as GameSession?,
+      customGame: customGame ?? this.customGame,
     );
   }
 }
@@ -119,6 +135,7 @@ class AppStateNotifier extends Notifier<AppState> {
       isInitialStartup: ref.watch(_isInitialStartupProvider),
       lang: ref.watch(_langProvider),
       selectedGame: ref.watch(_selectedGameProvider),
+      customGame: ref.watch(_customGameProvider),
     );
   }
 
@@ -135,12 +152,14 @@ class AppStateNotifier extends Notifier<AppState> {
     bool? isInitialStartup,
     Locale? lang,
     Object? selectedGame = _appStateCopyWithSentinel,
+    List<Game>? customGame,
   }) {
     final newState = state.copyWith(
       isAgreeAgreement: isAgreeAgreement,
       isInitialStartup: isInitialStartup,
       lang: lang,
       selectedGame: selectedGame,
+      customGame: customGame,
     );
     state = newState;
     return newState;
@@ -152,6 +171,7 @@ class AppStateNotifier extends Notifier<AppState> {
     ref.read(_isInitialStartupProvider.notifier).fromPersistent(p);
     ref.read(_langProvider.notifier).fromPersistent(p);
     ref.read(_selectedGameProvider.notifier).fromPersistent(p);
+    ref.read(_customGameProvider.notifier).fromPersistent(p);
   }
 
   /// 把所有状态项写回持久化数据。
@@ -161,6 +181,7 @@ class AppStateNotifier extends Notifier<AppState> {
     res = ref.read(_isInitialStartupProvider.notifier).toPersistent(res);
     res = ref.read(_langProvider.notifier).toPersistent(res);
     res = ref.read(_selectedGameProvider.notifier).toPersistent(res);
+    res = ref.read(_customGameProvider.notifier).toPersistent(res);
     return res;
   }
 }

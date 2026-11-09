@@ -12,17 +12,14 @@ import 'rules/icon_rule.dart';
 import 'rules/text_rule.dart';
 part 'game.freezed.dart';
 
-class Game {
-  final String uniqueId;
-  final Map<String, String> info;
-  final String installPath;
-
-  const Game({
-    required this.uniqueId,
-    required this.info,
-    required this.installPath,
-  });
-
+@freezed
+sealed class Game with _$Game {
+  const Game._();
+  const factory Game({
+    required String uniqueId,
+    required Map<String, String> info,
+    required String installPath,
+  }) = _Game;
   static Game fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameGameFromJson(json: json);
 
@@ -59,21 +56,60 @@ class Game {
 
   static String toVecJsonPretty({required List<Game> value}) =>
       RustLib.instance.api.crateConfigGameGameToVecJsonPretty(value: value);
+}
+
+enum GameConnectionMethod { native, adb, shizuku }
+
+class GamePickerConfig {
+  final TextRule? title;
+  final TextRule tip;
+  final TextRule? nameTextFieldLabel;
+  final TextRule? nameTextFieldHint;
+  final TextRule? pathTextFieldLabel;
+  final TextRule? pathTextFieldHint;
+  final TextRule? pathTextFieldError;
+  final TextRule? pickerBtnTooltip;
+  final TextRule? pickerTitle;
+
+  const GamePickerConfig({
+    this.title,
+    required this.tip,
+    this.nameTextFieldLabel,
+    this.nameTextFieldHint,
+    this.pathTextFieldLabel,
+    this.pathTextFieldHint,
+    this.pathTextFieldError,
+    this.pickerBtnTooltip,
+    this.pickerTitle,
+  });
 
   @override
-  int get hashCode => uniqueId.hashCode ^ info.hashCode ^ installPath.hashCode;
+  int get hashCode =>
+      title.hashCode ^
+      tip.hashCode ^
+      nameTextFieldLabel.hashCode ^
+      nameTextFieldHint.hashCode ^
+      pathTextFieldLabel.hashCode ^
+      pathTextFieldHint.hashCode ^
+      pathTextFieldError.hashCode ^
+      pickerBtnTooltip.hashCode ^
+      pickerTitle.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Game &&
+      other is GamePickerConfig &&
           runtimeType == other.runtimeType &&
-          uniqueId == other.uniqueId &&
-          info == other.info &&
-          installPath == other.installPath;
+          title == other.title &&
+          tip == other.tip &&
+          nameTextFieldLabel == other.nameTextFieldLabel &&
+          nameTextFieldHint == other.nameTextFieldHint &&
+          pathTextFieldLabel == other.pathTextFieldLabel &&
+          pathTextFieldHint == other.pathTextFieldHint &&
+          pathTextFieldError == other.pathTextFieldError &&
+          pickerBtnTooltip == other.pickerBtnTooltip &&
+          pickerTitle == other.pickerTitle;
 }
-
-enum GameConnectionMethod { native, adb, shizuku }
 
 @freezed
 sealed class GameRegistry with _$GameRegistry {
@@ -84,6 +120,7 @@ sealed class GameRegistry with _$GameRegistry {
     required TextRule name,
     required IconRule icon,
     required GameConnectionMethod connectMethod,
+    GamePickerConfig? customGamePicker,
   }) = _GameRegistry;
   static GameRegistry fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameGameRegistryFromJson(json: json);

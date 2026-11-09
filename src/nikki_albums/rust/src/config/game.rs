@@ -17,6 +17,20 @@ pub struct GameRegistry{
   pub name: TextRule,
   pub icon: IconRule,
   pub connect_method: GameConnectionMethod,
+  pub custom_game_picker: Option<GamePickerConfig>,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct GamePickerConfig{
+  pub title: Option<TextRule>,
+  pub tip: TextRule,
+  pub name_text_field_label: Option<TextRule>,
+  pub name_text_field_hint: Option<TextRule>,
+  pub path_text_field_label: Option<TextRule>,
+  pub path_text_field_hint: Option<TextRule>,
+  pub path_text_field_error: Option<TextRule>,
+  pub picker_btn_tooltip: Option<TextRule>,
+  pub picker_title: Option<TextRule>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -28,6 +42,7 @@ pub enum GameConnectionMethod{
 
 impl_json_frb!(GameRegistry);
 
+#[frb(dart_metadata=("freezed"))]
 #[derive(Serialize, Deserialize)]
 pub struct Game{
   pub unique_id: String,

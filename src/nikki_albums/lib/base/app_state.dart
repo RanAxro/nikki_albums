@@ -46,6 +46,13 @@ final _selectedGame = AppStateItemDefine<GameSession?, Persistent>(
   writePersistent: (v, p) => p.copyWith(selectedGame: v),
 );
 
+@AppStateDefine("自定义游戏")
+final _customGame = AppStateItemDefine<List<Game>, Persistent>(
+  defaultValue: [],
+  readPersistent: (d, p) => p.customGame ?? d,
+  writePersistent: (v, p) => p.copyWith(customGame: v),
+);
+
 
 
 

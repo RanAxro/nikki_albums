@@ -19,6 +19,7 @@ sealed class AppPersistentState with _$AppPersistentState {
     String? lang,
     int? theme,
     GameSession? selectedGame,
+    List<Game>? customGame,
     required Map<String, String> unknownField,
   }) = _AppPersistentState;
   static AppPersistentState fromJson({required String json}) => RustLib
