@@ -1,3 +1,9 @@
+bool canPath(Set<Object> permission){
+  return true;
+}
+bool canName(Set<Object> permission){
+  return true;
+}
 bool canExists(Set<Object> permission){
   return true;
 }

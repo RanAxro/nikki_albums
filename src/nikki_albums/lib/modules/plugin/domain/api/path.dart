@@ -52,6 +52,10 @@ String normalize(String path){
   return p.normalize(path);
 }
 
+String relative(String path, String from){
+  return p.relative(path, from: from);
+}
+
 bool isWithin(String parent, String child){
   return isWithin(parent, child);
 }

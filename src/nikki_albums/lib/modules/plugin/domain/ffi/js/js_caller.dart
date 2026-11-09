@@ -18,6 +18,19 @@ abstract final class PluginJSCaller{
     ''');
   }
 
+  static Future<JsEvalResult> getGameByPath(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId, String path){
+    return runtime.evaluate('''
+      (async () => {
+        let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getGameByPath(fsHandler, ${jsonEncode(path)});
+        if(res){
+          res.unique_id = ${jsonEncode(uniqueId)};
+        }
+        return JSON.stringify(res);
+      })();
+    ''');
+  }
+
   static Future<JsEvalResult> getGameName(PluginJSRuntime runtime, String uuid, String gameJson){
     return runtime.evaluate('''
       (async () => JSON.stringify(

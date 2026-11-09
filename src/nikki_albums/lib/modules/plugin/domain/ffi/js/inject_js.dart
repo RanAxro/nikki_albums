@@ -147,6 +147,10 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission, PluginEventH
     final String params = args;
     return p.normalize(params);
   });
+  js.onMessage("api.path.relative", (dynamic args){
+    final List<String> params = List<String>.from(args);
+    return p.relative(params[0], params[1]);
+  });
   js.onMessage("api.path.isWithin", (dynamic args){
     final List<String> params = List<String>.from(args);
     return p.isWithin(params[0], params[1]);
@@ -173,6 +177,20 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission, PluginEventH
   });
 
   // file_system
+  js.onMessage("api.file_system.path", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canPath(permission),
+      fn: () => fs.path(params),
+    );
+  });
+  js.onMessage("api.file_system.name", (dynamic args){
+    final String params = args;
+    return requirePermissionThenRun(
+      canCall: () => fs.canName(permission),
+      fn: () => fs.name(params),
+    );
+  });
   js.onMessage("api.file_system.exists", (dynamic args){
     final List params = args;
     return requirePermissionThenRun(

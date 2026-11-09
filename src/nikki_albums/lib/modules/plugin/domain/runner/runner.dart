@@ -62,9 +62,11 @@ abstract class PluginRunner{
 
   Future<List<Game>> searchGame(String uniqueId, NGeneralFileSystem fsHandler);
 
+  Future<Game?> getGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path);
+
   Future<TextRule> getGameName(Game game);
 
-  Future<IconRule> getGameIcon(Game game);
+  Future<IconRule?> getGameIcon(Game game);
 
   Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, Game game);
 

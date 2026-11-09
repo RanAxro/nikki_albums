@@ -13,12 +13,17 @@ class PluginJSRunner extends PluginRunner{
   }
 
   @override
+  Future<Game?> getGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path){
+    return PluginJSBridge.getGameByPath(_runtime, uniqueId, fsHandler, path);
+  }
+
+  @override
   Future<TextRule> getGameName(Game game){
     return PluginJSBridge.getGameName(_runtime, game);
   }
 
   @override
-  Future<IconRule> getGameIcon(Game game){
+  Future<IconRule?> getGameIcon(Game game){
     return PluginJSBridge.getGameIcon(_runtime, game);
   }
 

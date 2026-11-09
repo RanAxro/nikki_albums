@@ -4,6 +4,16 @@ class FileSystemHandler{
     this._handlerId = handlerId;
   }
 }
+Object.defineProperty(FileSystemHandler.prototype, "path", {
+  get: function(){
+    return sendMessage("api.file_system.path", JSON.stringify(this._handlerId));
+  },
+});
+Object.defineProperty(FileSystemHandler.prototype, "name", {
+  get: function(){
+    return sendMessage("api.file_system.name", JSON.stringify(this._handlerId));
+  },
+});
 FileSystemHandler.prototype.exists = function(path){
   return sendMessage("api.file_system.exists", JSON.stringify([this._handlerId, path]));
 }
@@ -65,14 +75,26 @@ globalThis.api = {
       name: gameInfo.name,
       icon: gameInfo.icon,
       connect_method: gameInfo.connect_method,
+      custom_game_picker: gameInfo.custom_game_picker && {
+        title: gameInfo.custom_game_picker.title,
+        tip: gameInfo.custom_game_picker.tip,
+        name_text_field_label: gameInfo.custom_game_picker.name_text_field_label,
+        name_text_field_hint: gameInfo.custom_game_picker.name_text_field_hint,
+        path_text_field_label: gameInfo.custom_game_picker.path_text_field_label,
+        path_text_field_hint: gameInfo.custom_game_picker.path_text_field_hint,
+        path_text_field_error: gameInfo.custom_game_picker.path_text_field_error,
+        picker_btn_tooltip: gameInfo.custom_game_picker.picker_btn_tooltip,
+        picker_title: gameInfo.custom_game_picker.picker_title,
+      },
     }));
     globalThis.__apiBridge.game[String(gameInfo.uuid)] = {
-      searchGame: gameInfo.searchGame,
-      getGameIcon: gameInfo.getGameIcon,
-      getGameName: gameInfo.getGameName,
-      searchAccount: gameInfo.searchAccount,
-      getAccountName: gameInfo.getAccountName,
-      getAccountAvatar: gameInfo.getAccountAvatar,
+      searchGame: gameInfo.search_game,
+      getGameByPath: gameInfo.custom_game_picker && gameInfo.custom_game_picker.get_game_by_path,
+      getGameIcon: gameInfo.get_game_icon,
+      getGameName: gameInfo.get_game_name,
+      searchAccount: gameInfo.search_account,
+      getAccountName: gameInfo.get_account_name,
+      getAccountAvatar: gameInfo.get_account_avatar,
     };
   },
 
@@ -130,6 +152,9 @@ globalThis.api = {
     },
     normalize: function(path){
       return sendMessage("api.path.normalize", JSON.stringify(path));
+    },
+    relative: function(path, from){
+      return sendMessage("api.path.relative", JSON.stringify([path, from]));
     },
     isWithin: function(parent, child){
       return sendMessage("api.path.isWithin", JSON.stringify([parent, child]));

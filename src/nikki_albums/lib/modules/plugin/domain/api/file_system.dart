@@ -46,6 +46,14 @@ abstract final class PluginFileSystemHandler{
 }
 
 
+String? path(String handlerId){
+  return PluginFileSystemHandler.get(handlerId).path;
+}
+
+String name(String handlerId){
+  return PluginFileSystemHandler.get(handlerId).name;
+}
+
 Future<bool> exists(String handlerId, String path){
   return PluginFileSystemHandler.get(handlerId).exists(path);
 }

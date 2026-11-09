@@ -28,6 +28,20 @@ abstract final class PluginJSBridge{
     return Game.fromVecJson(json: result.stringResult);
   }
 
+  static Future<Game?> getGameByPath(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler, String path) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(uniqueId);
+    final JsEvalResult result = await PluginJSCaller.getGameByPath(runtime, uuid, uniqueId, fsHandlerId, path);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    if(result.stringResult == "null"){
+      return null;
+    }
+    return Game.fromJson(json: result.stringResult);
+  }
+
   static Future<TextRule> getGameName(PluginJSRuntime runtime, Game game) async{
     final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
     final String gameJson = game.toJson();
@@ -38,12 +52,15 @@ abstract final class PluginJSBridge{
     return TextRule.fromJson(json: result.stringResult);
   }
 
-  static Future<IconRule> getGameIcon(PluginJSRuntime runtime, Game game) async{
+  static Future<IconRule?> getGameIcon(PluginJSRuntime runtime, Game game) async{
     final String uuid = GameHelper.getUuidByUniqueId(game.uniqueId);
     final String gameJson = game.toJson();
     final JsEvalResult result = await PluginJSCaller.getGameIcon(runtime, uuid, gameJson);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    if(result.stringResult == "null"){
+      return null;
     }
     return IconRule.fromJson(json: result.stringResult);
   }

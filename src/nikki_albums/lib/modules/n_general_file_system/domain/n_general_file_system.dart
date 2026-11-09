@@ -37,6 +37,10 @@ class NGDirList{
 abstract class NGeneralFileSystem{
   const NGeneralFileSystem();
 
+  String? get path;
+
+  String get name;
+
   Future<bool> exists(String path);
 
   Future<bool> isFile(String path);
