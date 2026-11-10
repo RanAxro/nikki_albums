@@ -12,6 +12,41 @@ import 'rules/icon_rule.dart';
 import 'rules/text_rule.dart';
 part 'game.freezed.dart';
 
+class CustomAccountAdderConfig {
+  final TextRule? entranceBtnText;
+  final TextRule? title;
+  final TextRule tip;
+  final TextRule? accountTextFieldLabel;
+  final TextRule? accountTextFieldHint;
+
+  const CustomAccountAdderConfig({
+    this.entranceBtnText,
+    this.title,
+    required this.tip,
+    this.accountTextFieldLabel,
+    this.accountTextFieldHint,
+  });
+
+  @override
+  int get hashCode =>
+      entranceBtnText.hashCode ^
+      title.hashCode ^
+      tip.hashCode ^
+      accountTextFieldLabel.hashCode ^
+      accountTextFieldHint.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CustomAccountAdderConfig &&
+          runtimeType == other.runtimeType &&
+          entranceBtnText == other.entranceBtnText &&
+          title == other.title &&
+          tip == other.tip &&
+          accountTextFieldLabel == other.accountTextFieldLabel &&
+          accountTextFieldHint == other.accountTextFieldHint;
+}
+
 @freezed
 sealed class DeviceGame with _$DeviceGame {
   const DeviceGame._();
@@ -84,37 +119,37 @@ class DeviceGameAccount {
 }
 
 class DeviceGamePickerConfig {
+  final TextRule? entranceBtnText;
   final TextRule? title;
   final TextRule tip;
   final TextRule? nameTextFieldLabel;
   final TextRule? nameTextFieldHint;
   final TextRule? pathTextFieldLabel;
   final TextRule? pathTextFieldHint;
-  final TextRule? pathTextFieldError;
   final TextRule? pickerBtnTooltip;
   final TextRule? pickerTitle;
 
   const DeviceGamePickerConfig({
+    this.entranceBtnText,
     this.title,
     required this.tip,
     this.nameTextFieldLabel,
     this.nameTextFieldHint,
     this.pathTextFieldLabel,
     this.pathTextFieldHint,
-    this.pathTextFieldError,
     this.pickerBtnTooltip,
     this.pickerTitle,
   });
 
   @override
   int get hashCode =>
+      entranceBtnText.hashCode ^
       title.hashCode ^
       tip.hashCode ^
       nameTextFieldLabel.hashCode ^
       nameTextFieldHint.hashCode ^
       pathTextFieldLabel.hashCode ^
       pathTextFieldHint.hashCode ^
-      pathTextFieldError.hashCode ^
       pickerBtnTooltip.hashCode ^
       pickerTitle.hashCode;
 
@@ -123,13 +158,13 @@ class DeviceGamePickerConfig {
       identical(this, other) ||
       other is DeviceGamePickerConfig &&
           runtimeType == other.runtimeType &&
+          entranceBtnText == other.entranceBtnText &&
           title == other.title &&
           tip == other.tip &&
           nameTextFieldLabel == other.nameTextFieldLabel &&
           nameTextFieldHint == other.nameTextFieldHint &&
           pathTextFieldLabel == other.pathTextFieldLabel &&
           pathTextFieldHint == other.pathTextFieldHint &&
-          pathTextFieldError == other.pathTextFieldError &&
           pickerBtnTooltip == other.pickerBtnTooltip &&
           pickerTitle == other.pickerTitle;
 }
@@ -186,6 +221,7 @@ sealed class GameRegistry with _$GameRegistry {
     required IconRule icon,
     required GameConnectionMethod connectMethod,
     DeviceGamePickerConfig? deviceGamePicker,
+    CustomAccountAdderConfig? customAccountAdder,
   }) = _GameRegistry;
   static GameRegistry fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameGameRegistryFromJson(json: json);

@@ -37,7 +37,6 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    print(PickedDeviceGameResult.fromJson(json: result.stringResult));
     return PickedDeviceGameResult.fromJson(json: result.stringResult);
   }
 
@@ -106,6 +105,19 @@ abstract final class PluginJSBridge{
     final rust.ImageRule rustImageRule = rust.ImageRule.fromJson(json: result.stringResult);
     final ImageRule imageRule = ImageRuleHelper.convertToDart(rustImageRule, onGetNGFS: (_) => fsHandler);
     return imageRule;
+  }
+
+  static Future<AddedCustomAccountResult> notifyAddCustomAccount(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.notifyAddCustomAccount(runtime, uuid, fsHandlerId, deviceGameJson, account);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    print(AddedCustomAccountResult.fromJson(json: result.stringResult));
+    return AddedCustomAccountResult.fromJson(json: result.stringResult);
   }
 
   static Future<List<String>> searchAlbum(PluginJSRuntime runtime, String uuid, DeviceGame deviceGame, String? account) async{

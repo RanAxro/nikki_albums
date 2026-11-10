@@ -43,6 +43,11 @@ class PluginJSRunner extends PluginRunner{
   }
 
   @override
+  Future<AddedCustomAccountResult> notifyAddCustomAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account){
+    return PluginJSBridge.notifyAddCustomAccount(_runtime, fsHandler, deviceGame, account);
+  }
+
+  @override
   void dispose(){
     _runtime.dispose();
   }

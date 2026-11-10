@@ -79,6 +79,16 @@ abstract final class PluginJSCaller{
     ''');
   }
 
+  static Future<JsEvalResult> notifyAddCustomAccount(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String account){
+    return runtime.evaluate('''
+      (async () => {
+        let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].onAddCustomAccount(fsHandler, $deviceGameJson, ${jsonEncode(account)});
+        return JSON.stringify(res);
+      })();
+    ''');
+  }
+
   static Future<JsEvalResult> searchAlbum(PluginJSRuntime runtime, String uuid, String gameJson, String? account){
     return runtime.evaluate('''
       (async () => JSON.stringify(

@@ -76,6 +76,7 @@ globalThis.api = {
       icon: gameInfo.icon,
       connect_method: gameInfo.connect_method,
       device_game_picker: gameInfo.device_game_picker && {
+        entrance_btn_text: gameInfo.device_game_picker.entrance_btn_text,
         title: gameInfo.device_game_picker.title,
         tip: gameInfo.device_game_picker.tip,
         name_text_field_label: gameInfo.device_game_picker.name_text_field_label,
@@ -84,6 +85,13 @@ globalThis.api = {
         path_text_field_hint: gameInfo.device_game_picker.path_text_field_hint,
         picker_btn_tooltip: gameInfo.device_game_picker.picker_btn_tooltip,
         picker_title: gameInfo.device_game_picker.picker_title,
+      },
+      custom_account_adder: gameInfo.custom_account_adder && {
+        entrance_btn_text: gameInfo.custom_account_adder.entrance_btn_text,
+        title: gameInfo.custom_account_adder.title,
+        tip: gameInfo.custom_account_adder.tip,
+        account_text_field_label: gameInfo.custom_account_adder.account_text_field_label,
+        account_text_field_hint: gameInfo.custom_account_adder.account_text_field_hint,
       },
     }));
     globalThis.__apiBridge.game[String(gameInfo.uuid)] = {
@@ -94,6 +102,7 @@ globalThis.api = {
       searchAccount: gameInfo.search_account,
       getAccountName: gameInfo.get_account_name,
       getAccountAvatar: gameInfo.get_account_avatar,
+      onAddCustomAccount: gameInfo.custom_account_adder && gameInfo.custom_account_adder.on_add_custom_account,
     };
   },
 

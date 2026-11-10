@@ -243,6 +243,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Archive dco_decode_TraitDef_Archive(dynamic raw);
 
   @protected
+  AddedCustomAccountResult dco_decode_added_custom_account_result(dynamic raw);
+
+  @protected
   AppPersistentState dco_decode_app_persistent_state(dynamic raw);
 
   @protected
@@ -259,6 +262,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   bool dco_decode_bool(dynamic raw);
+
+  @protected
+  AddedCustomAccountResult dco_decode_box_autoadd_added_custom_account_result(
+    dynamic raw,
+  );
 
   @protected
   AppPersistentState dco_decode_box_autoadd_app_persistent_state(dynamic raw);
@@ -299,6 +307,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams dco_decode_box_autoadd_collage_params(dynamic raw);
+
+  @protected
+  CustomAccountAdderConfig dco_decode_box_autoadd_custom_account_adder_config(
+    dynamic raw,
+  );
 
   @protected
   CustomData dco_decode_box_autoadd_custom_data(dynamic raw);
@@ -519,6 +532,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams dco_decode_collage_params(dynamic raw);
+
+  @protected
+  CustomAccountAdderConfig dco_decode_custom_account_adder_config(dynamic raw);
 
   @protected
   CustomData dco_decode_custom_data(dynamic raw);
@@ -908,6 +924,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ClothDiyParam? dco_decode_opt_box_autoadd_cloth_diy_param(dynamic raw);
+
+  @protected
+  CustomAccountAdderConfig?
+  dco_decode_opt_box_autoadd_custom_account_adder_config(dynamic raw);
 
   @protected
   CustomData? dco_decode_opt_box_autoadd_custom_data(dynamic raw);
@@ -1392,6 +1412,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
+  AddedCustomAccountResult sse_decode_added_custom_account_result(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   AppPersistentState sse_decode_app_persistent_state(
     SseDeserializer deserializer,
   );
@@ -1412,6 +1437,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
+  AddedCustomAccountResult sse_decode_box_autoadd_added_custom_account_result(
+    SseDeserializer deserializer,
+  );
 
   @protected
   AppPersistentState sse_decode_box_autoadd_app_persistent_state(
@@ -1466,6 +1496,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams sse_decode_box_autoadd_collage_params(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CustomAccountAdderConfig sse_decode_box_autoadd_custom_account_adder_config(
     SseDeserializer deserializer,
   );
 
@@ -1754,6 +1789,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CollageParams sse_decode_collage_params(SseDeserializer deserializer);
+
+  @protected
+  CustomAccountAdderConfig sse_decode_custom_account_adder_config(
+    SseDeserializer deserializer,
+  );
 
   @protected
   CustomData sse_decode_custom_data(SseDeserializer deserializer);
@@ -2213,6 +2253,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ClothDiyParam? sse_decode_opt_box_autoadd_cloth_diy_param(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CustomAccountAdderConfig?
+  sse_decode_opt_box_autoadd_custom_account_adder_config(
     SseDeserializer deserializer,
   );
 
@@ -2815,6 +2861,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
+  void sse_encode_added_custom_account_result(
+    AddedCustomAccountResult self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_app_persistent_state(
     AppPersistentState self,
     SseSerializer serializer,
@@ -2840,6 +2892,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_added_custom_account_result(
+    AddedCustomAccountResult self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_app_persistent_state(
@@ -2904,6 +2962,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_collage_params(
     CollageParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_custom_account_adder_config(
+    CustomAccountAdderConfig self,
     SseSerializer serializer,
   );
 
@@ -3281,6 +3345,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_collage_params(CollageParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_custom_account_adder_config(
+    CustomAccountAdderConfig self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_custom_data(CustomData self, SseSerializer serializer);
@@ -3873,6 +3943,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_cloth_diy_param(
     ClothDiyParam? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_custom_account_adder_config(
+    CustomAccountAdderConfig? self,
     SseSerializer serializer,
   );
 

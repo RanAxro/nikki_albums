@@ -70,3 +70,12 @@ pub enum PickedDeviceGameResult{
 
 impl_json_frb!(PickedDeviceGameResult);
 
+
+#[derive(Serialize, Deserialize)]
+pub enum AddedCustomAccountResult{
+  Ok(String),
+  Err(Option<TextRule>),
+}
+
+impl_json_frb!(AddedCustomAccountResult);
+

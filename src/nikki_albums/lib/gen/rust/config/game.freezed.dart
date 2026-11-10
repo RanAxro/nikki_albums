@@ -285,7 +285,7 @@ as String,
 /// @nodoc
 mixin _$GameRegistry {
 
- String get ownership; String get uuid; TextRule get name; IconRule get icon; GameConnectionMethod get connectMethod; DeviceGamePickerConfig? get deviceGamePicker;
+ String get ownership; String get uuid; TextRule get name; IconRule get icon; GameConnectionMethod get connectMethod; DeviceGamePickerConfig? get deviceGamePicker; CustomAccountAdderConfig? get customAccountAdder;
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -297,20 +297,20 @@ $GameRegistryCopyWith<GameRegistry> get copyWith => _$GameRegistryCopyWithImpl<G
 @override
 bool operator ==(Object other) {
   final _this = this as GameRegistry;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GameRegistry&&(identical(other.ownership, _this.ownership) || other.ownership == _this.ownership)&&(identical(other.uuid, _this.uuid) || other.uuid == _this.uuid)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.icon, _this.icon) || other.icon == _this.icon)&&(identical(other.connectMethod, _this.connectMethod) || other.connectMethod == _this.connectMethod)&&(identical(other.deviceGamePicker, _this.deviceGamePicker) || other.deviceGamePicker == _this.deviceGamePicker));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GameRegistry&&(identical(other.ownership, _this.ownership) || other.ownership == _this.ownership)&&(identical(other.uuid, _this.uuid) || other.uuid == _this.uuid)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.icon, _this.icon) || other.icon == _this.icon)&&(identical(other.connectMethod, _this.connectMethod) || other.connectMethod == _this.connectMethod)&&(identical(other.deviceGamePicker, _this.deviceGamePicker) || other.deviceGamePicker == _this.deviceGamePicker)&&(identical(other.customAccountAdder, _this.customAccountAdder) || other.customAccountAdder == _this.customAccountAdder));
 }
 
 
 @override
 int get hashCode {
   final _this = this as GameRegistry;
-  return Object.hash(runtimeType,_this.ownership,_this.uuid,_this.name,_this.icon,_this.connectMethod,_this.deviceGamePicker);
+  return Object.hash(runtimeType,_this.ownership,_this.uuid,_this.name,_this.icon,_this.connectMethod,_this.deviceGamePicker,_this.customAccountAdder);
 }
 
 @override
 String toString() {
   final _this = this as GameRegistry;
-  return 'GameRegistry(ownership: ${_this.ownership}, uuid: ${_this.uuid}, name: ${_this.name}, icon: ${_this.icon}, connectMethod: ${_this.connectMethod}, deviceGamePicker: ${_this.deviceGamePicker})';
+  return 'GameRegistry(ownership: ${_this.ownership}, uuid: ${_this.uuid}, name: ${_this.name}, icon: ${_this.icon}, connectMethod: ${_this.connectMethod}, deviceGamePicker: ${_this.deviceGamePicker}, customAccountAdder: ${_this.customAccountAdder})';
 }
 
 
@@ -321,7 +321,7 @@ abstract mixin class $GameRegistryCopyWith<$Res>  {
   factory $GameRegistryCopyWith(GameRegistry value, $Res Function(GameRegistry) _then) = _$GameRegistryCopyWithImpl;
 @useResult
 $Res call({
- String ownership, String uuid, TextRule name, IconRule icon, GameConnectionMethod connectMethod, DeviceGamePickerConfig? deviceGamePicker
+ String ownership, String uuid, TextRule name, IconRule icon, GameConnectionMethod connectMethod, DeviceGamePickerConfig? deviceGamePicker, CustomAccountAdderConfig? customAccountAdder
 });
 
 
@@ -338,7 +338,7 @@ class _$GameRegistryCopyWithImpl<$Res>
 
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,Object? connectMethod = null,Object? deviceGamePicker = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,Object? connectMethod = null,Object? deviceGamePicker = freezed,Object? customAccountAdder = freezed,}) {
   return _then(GameRegistry(
 ownership: null == ownership ? _self.ownership : ownership // ignore: cast_nullable_to_non_nullable
 as String,uuid: null == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_non_nullable
@@ -346,7 +346,8 @@ as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non
 as TextRule,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
 as IconRule,connectMethod: null == connectMethod ? _self.connectMethod : connectMethod // ignore: cast_nullable_to_non_nullable
 as GameConnectionMethod,deviceGamePicker: freezed == deviceGamePicker ? _self.deviceGamePicker : deviceGamePicker // ignore: cast_nullable_to_non_nullable
-as DeviceGamePickerConfig?,
+as DeviceGamePickerConfig?,customAccountAdder: freezed == customAccountAdder ? _self.customAccountAdder : customAccountAdder // ignore: cast_nullable_to_non_nullable
+as CustomAccountAdderConfig?,
   ));
 }
 /// Create a copy of GameRegistry
@@ -446,10 +447,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod,  DeviceGamePickerConfig? deviceGamePicker)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod,  DeviceGamePickerConfig? deviceGamePicker,  CustomAccountAdderConfig? customAccountAdder)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GameRegistry() when $default != null:
-return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod,_that.deviceGamePicker);case _:
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod,_that.deviceGamePicker,_that.customAccountAdder);case _:
   return orElse();
 
 }
@@ -467,10 +468,10 @@ return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMe
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod,  DeviceGamePickerConfig? deviceGamePicker)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod,  DeviceGamePickerConfig? deviceGamePicker,  CustomAccountAdderConfig? customAccountAdder)  $default,) {final _that = this;
 switch (_that) {
 case _GameRegistry():
-return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod,_that.deviceGamePicker);}
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod,_that.deviceGamePicker,_that.customAccountAdder);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -484,10 +485,10 @@ return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMe
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod,  DeviceGamePickerConfig? deviceGamePicker)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ownership,  String uuid,  TextRule name,  IconRule icon,  GameConnectionMethod connectMethod,  DeviceGamePickerConfig? deviceGamePicker,  CustomAccountAdderConfig? customAccountAdder)?  $default,) {final _that = this;
 switch (_that) {
 case _GameRegistry() when $default != null:
-return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod,_that.deviceGamePicker);case _:
+return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMethod,_that.deviceGamePicker,_that.customAccountAdder);case _:
   return null;
 
 }
@@ -499,7 +500,7 @@ return $default(_that.ownership,_that.uuid,_that.name,_that.icon,_that.connectMe
 
 
 class _GameRegistry extends GameRegistry {
-  const _GameRegistry({required this.ownership, required this.uuid, required this.name, required this.icon, required this.connectMethod, this.deviceGamePicker}): super._();
+  const _GameRegistry({required this.ownership, required this.uuid, required this.name, required this.icon, required this.connectMethod, this.deviceGamePicker, this.customAccountAdder}): super._();
   
 
 @override final  String ownership;
@@ -508,6 +509,7 @@ class _GameRegistry extends GameRegistry {
 @override final  IconRule icon;
 @override final  GameConnectionMethod connectMethod;
 @override final  DeviceGamePickerConfig? deviceGamePicker;
+@override final  CustomAccountAdderConfig? customAccountAdder;
 
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
@@ -519,18 +521,18 @@ _$GameRegistryCopyWith<_GameRegistry> get copyWith => __$GameRegistryCopyWithImp
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GameRegistry&&(identical(other.ownership, ownership) || other.ownership == ownership)&&(identical(other.uuid, uuid) || other.uuid == uuid)&&(identical(other.name, name) || other.name == name)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.connectMethod, connectMethod) || other.connectMethod == connectMethod)&&(identical(other.deviceGamePicker, deviceGamePicker) || other.deviceGamePicker == deviceGamePicker));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GameRegistry&&(identical(other.ownership, ownership) || other.ownership == ownership)&&(identical(other.uuid, uuid) || other.uuid == uuid)&&(identical(other.name, name) || other.name == name)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.connectMethod, connectMethod) || other.connectMethod == connectMethod)&&(identical(other.deviceGamePicker, deviceGamePicker) || other.deviceGamePicker == deviceGamePicker)&&(identical(other.customAccountAdder, customAccountAdder) || other.customAccountAdder == customAccountAdder));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,ownership,uuid,name,icon,connectMethod,deviceGamePicker);
+    return Object.hash(runtimeType,ownership,uuid,name,icon,connectMethod,deviceGamePicker,customAccountAdder);
 }
 
 @override
 String toString() {
-    return 'GameRegistry(ownership: $ownership, uuid: $uuid, name: $name, icon: $icon, connectMethod: $connectMethod, deviceGamePicker: $deviceGamePicker)';
+    return 'GameRegistry(ownership: $ownership, uuid: $uuid, name: $name, icon: $icon, connectMethod: $connectMethod, deviceGamePicker: $deviceGamePicker, customAccountAdder: $customAccountAdder)';
 }
 
 
@@ -541,7 +543,7 @@ abstract mixin class _$GameRegistryCopyWith<$Res> implements $GameRegistryCopyWi
   factory _$GameRegistryCopyWith(_GameRegistry value, $Res Function(_GameRegistry) _then) = __$GameRegistryCopyWithImpl;
 @override @useResult
 $Res call({
- String ownership, String uuid, TextRule name, IconRule icon, GameConnectionMethod connectMethod, DeviceGamePickerConfig? deviceGamePicker
+ String ownership, String uuid, TextRule name, IconRule icon, GameConnectionMethod connectMethod, DeviceGamePickerConfig? deviceGamePicker, CustomAccountAdderConfig? customAccountAdder
 });
 
 
@@ -558,7 +560,7 @@ class __$GameRegistryCopyWithImpl<$Res>
 
 /// Create a copy of GameRegistry
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,Object? connectMethod = null,Object? deviceGamePicker = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ownership = null,Object? uuid = null,Object? name = null,Object? icon = null,Object? connectMethod = null,Object? deviceGamePicker = freezed,Object? customAccountAdder = freezed,}) {
   return _then(_GameRegistry(
 ownership: null == ownership ? _self.ownership : ownership // ignore: cast_nullable_to_non_nullable
 as String,uuid: null == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_non_nullable
@@ -566,7 +568,8 @@ as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non
 as TextRule,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
 as IconRule,connectMethod: null == connectMethod ? _self.connectMethod : connectMethod // ignore: cast_nullable_to_non_nullable
 as GameConnectionMethod,deviceGamePicker: freezed == deviceGamePicker ? _self.deviceGamePicker : deviceGamePicker // ignore: cast_nullable_to_non_nullable
-as DeviceGamePickerConfig?,
+as DeviceGamePickerConfig?,customAccountAdder: freezed == customAccountAdder ? _self.customAccountAdder : customAccountAdder // ignore: cast_nullable_to_non_nullable
+as CustomAccountAdderConfig?,
   ));
 }
 

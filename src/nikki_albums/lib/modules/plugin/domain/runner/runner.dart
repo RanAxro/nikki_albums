@@ -74,5 +74,7 @@ abstract class PluginRunner{
 
   Future<ImageRule?> getAccountAvatar(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account);
 
+  Future<AddedCustomAccountResult> notifyAddCustomAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account);
+
   void dispose();
 }

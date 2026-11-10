@@ -18,7 +18,10 @@ pub struct GameRegistry{
   pub icon: IconRule,
   pub connect_method: GameConnectionMethod,
   pub device_game_picker: Option<DeviceGamePickerConfig>,
+  pub custom_account_adder: Option<CustomAccountAdderConfig>,
 }
+
+impl_json_frb!(GameRegistry);
 
 #[derive(Serialize, Deserialize)]
 pub enum GameConnectionMethod{
@@ -29,19 +32,25 @@ pub enum GameConnectionMethod{
 
 #[derive(Serialize, Deserialize)]
 pub struct DeviceGamePickerConfig{
+  pub entrance_btn_text: Option<TextRule>,
   pub title: Option<TextRule>,
   pub tip: TextRule,
   pub name_text_field_label: Option<TextRule>,
   pub name_text_field_hint: Option<TextRule>,
   pub path_text_field_label: Option<TextRule>,
   pub path_text_field_hint: Option<TextRule>,
-  pub path_text_field_error: Option<TextRule>,
   pub picker_btn_tooltip: Option<TextRule>,
   pub picker_title: Option<TextRule>,
 }
 
-
-impl_json_frb!(GameRegistry);
+#[derive(Serialize, Deserialize)]
+pub struct CustomAccountAdderConfig{
+  pub entrance_btn_text: Option<TextRule>,
+  pub title: Option<TextRule>,
+  pub tip: TextRule,
+  pub account_text_field_label: Option<TextRule>,
+  pub account_text_field_hint: Option<TextRule>,
+}
 
 #[frb(dart_metadata=("freezed"))]
 #[derive(Serialize, Deserialize)]

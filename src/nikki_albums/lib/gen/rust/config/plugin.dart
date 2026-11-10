@@ -16,6 +16,37 @@ part 'plugin.freezed.dart';
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PluginSource`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`
 
+@freezed
+sealed class AddedCustomAccountResult with _$AddedCustomAccountResult {
+  const AddedCustomAccountResult._();
+
+  const factory AddedCustomAccountResult.ok(String field0) =
+      AddedCustomAccountResult_Ok;
+  const factory AddedCustomAccountResult.err([TextRule? field0]) =
+      AddedCustomAccountResult_Err;
+
+  static AddedCustomAccountResult fromJson({required String json}) => RustLib
+      .instance
+      .api
+      .crateConfigPluginAddedCustomAccountResultFromJson(json: json);
+
+  static AddedCustomAccountResult fromJsonBytes({required List<int> json}) =>
+      RustLib.instance.api
+          .crateConfigPluginAddedCustomAccountResultFromJsonBytes(json: json);
+
+  String toJson() => RustLib.instance.api
+      .crateConfigPluginAddedCustomAccountResultToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigPluginAddedCustomAccountResultToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigPluginAddedCustomAccountResultToJsonBytesPretty(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigPluginAddedCustomAccountResultToJsonPretty(that: this);
+}
+
 class JSScriptInfo {
   final String entrance;
   final Map<String, String> modules;

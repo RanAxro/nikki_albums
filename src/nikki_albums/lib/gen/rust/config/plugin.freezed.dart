@@ -13,6 +13,319 @@ part of 'plugin.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
+mixin _$AddedCustomAccountResult {
+
+ Object? get field0;
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as AddedCustomAccountResult;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddedCustomAccountResult&&const DeepCollectionEquality().equals(other.field0, _this.field0));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as AddedCustomAccountResult;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
+
+@override
+String toString() {
+  final _this = this as AddedCustomAccountResult;
+  return 'AddedCustomAccountResult(field0: ${_this.field0})';
+}
+
+
+}
+
+/// @nodoc
+class $AddedCustomAccountResultCopyWith<$Res>  {
+$AddedCustomAccountResultCopyWith(AddedCustomAccountResult _, $Res Function(AddedCustomAccountResult) __);
+}
+
+
+/// Adds pattern-matching-related methods to [AddedCustomAccountResult].
+extension AddedCustomAccountResultPatterns on AddedCustomAccountResult {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( AddedCustomAccountResult_Ok value)?  ok,TResult Function( AddedCustomAccountResult_Err value)?  err,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case AddedCustomAccountResult_Ok() when ok != null:
+return ok(_that);case AddedCustomAccountResult_Err() when err != null:
+return err(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( AddedCustomAccountResult_Ok value)  ok,required TResult Function( AddedCustomAccountResult_Err value)  err,}){
+final _that = this;
+switch (_that) {
+case AddedCustomAccountResult_Ok():
+return ok(_that);case AddedCustomAccountResult_Err():
+return err(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( AddedCustomAccountResult_Ok value)?  ok,TResult? Function( AddedCustomAccountResult_Err value)?  err,}){
+final _that = this;
+switch (_that) {
+case AddedCustomAccountResult_Ok() when ok != null:
+return ok(_that);case AddedCustomAccountResult_Err() when err != null:
+return err(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String field0)?  ok,TResult Function( TextRule? field0)?  err,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case AddedCustomAccountResult_Ok() when ok != null:
+return ok(_that.field0);case AddedCustomAccountResult_Err() when err != null:
+return err(_that.field0);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String field0)  ok,required TResult Function( TextRule? field0)  err,}) {final _that = this;
+switch (_that) {
+case AddedCustomAccountResult_Ok():
+return ok(_that.field0);case AddedCustomAccountResult_Err():
+return err(_that.field0);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String field0)?  ok,TResult? Function( TextRule? field0)?  err,}) {final _that = this;
+switch (_that) {
+case AddedCustomAccountResult_Ok() when ok != null:
+return ok(_that.field0);case AddedCustomAccountResult_Err() when err != null:
+return err(_that.field0);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class AddedCustomAccountResult_Ok extends AddedCustomAccountResult {
+  const AddedCustomAccountResult_Ok(this.field0): super._();
+  
+
+@override final  String field0;
+
+/// Create a copy of AddedCustomAccountResult
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AddedCustomAccountResult_OkCopyWith<AddedCustomAccountResult_Ok> get copyWith => _$AddedCustomAccountResult_OkCopyWithImpl<AddedCustomAccountResult_Ok>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddedCustomAccountResult_Ok&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
+
+@override
+String toString() {
+    return 'AddedCustomAccountResult.ok(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AddedCustomAccountResult_OkCopyWith<$Res> implements $AddedCustomAccountResultCopyWith<$Res> {
+  factory $AddedCustomAccountResult_OkCopyWith(AddedCustomAccountResult_Ok value, $Res Function(AddedCustomAccountResult_Ok) _then) = _$AddedCustomAccountResult_OkCopyWithImpl;
+@useResult
+$Res call({
+ String field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$AddedCustomAccountResult_OkCopyWithImpl<$Res>
+    implements $AddedCustomAccountResult_OkCopyWith<$Res> {
+  _$AddedCustomAccountResult_OkCopyWithImpl(this._self, this._then);
+
+  final AddedCustomAccountResult_Ok _self;
+  final $Res Function(AddedCustomAccountResult_Ok) _then;
+
+/// Create a copy of AddedCustomAccountResult
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(AddedCustomAccountResult_Ok(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class AddedCustomAccountResult_Err extends AddedCustomAccountResult {
+  const AddedCustomAccountResult_Err([this.field0]): super._();
+  
+
+@override final  TextRule? field0;
+
+/// Create a copy of AddedCustomAccountResult
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AddedCustomAccountResult_ErrCopyWith<AddedCustomAccountResult_Err> get copyWith => _$AddedCustomAccountResult_ErrCopyWithImpl<AddedCustomAccountResult_Err>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AddedCustomAccountResult_Err&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
+
+@override
+String toString() {
+    return 'AddedCustomAccountResult.err(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AddedCustomAccountResult_ErrCopyWith<$Res> implements $AddedCustomAccountResultCopyWith<$Res> {
+  factory $AddedCustomAccountResult_ErrCopyWith(AddedCustomAccountResult_Err value, $Res Function(AddedCustomAccountResult_Err) _then) = _$AddedCustomAccountResult_ErrCopyWithImpl;
+@useResult
+$Res call({
+ TextRule? field0
+});
+
+
+$TextRuleCopyWith<$Res>? get field0;
+
+}
+/// @nodoc
+class _$AddedCustomAccountResult_ErrCopyWithImpl<$Res>
+    implements $AddedCustomAccountResult_ErrCopyWith<$Res> {
+  _$AddedCustomAccountResult_ErrCopyWithImpl(this._self, this._then);
+
+  final AddedCustomAccountResult_Err _self;
+  final $Res Function(AddedCustomAccountResult_Err) _then;
+
+/// Create a copy of AddedCustomAccountResult
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = freezed,}) {
+  return _then(AddedCustomAccountResult_Err(
+freezed == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as TextRule?,
+  ));
+}
+
+/// Create a copy of AddedCustomAccountResult
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TextRuleCopyWith<$Res>? get field0 {
+    if (_self.field0 == null) {
+    return null;
+  }
+
+  return $TextRuleCopyWith<$Res>(_self.field0!, (value) {
+    return _then(_self.copyWith(field0: value));
+  });
+}
+}
+
+/// @nodoc
 mixin _$PickedDeviceGameResult {
 
  Object? get field0;
