@@ -20,6 +20,9 @@ sealed class AppPersistentState with _$AppPersistentState {
     int? theme,
     DeviceGameSession? selectedDeviceGame,
     List<DeviceGame>? pickedDeviceGame,
+    List<DeviceGameAccount>? hiddenAccount,
+    List<DeviceGameAccount>? starredAccount,
+    List<DeviceGameAccount>? customlyAddedAccount,
     required Map<String, String> unknownField,
   }) = _AppPersistentState;
   static AppPersistentState fromJson({required String json}) => RustLib

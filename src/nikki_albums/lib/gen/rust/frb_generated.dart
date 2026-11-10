@@ -6351,8 +6351,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   AppPersistentState dco_decode_app_persistent_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 7)
-      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
     return AppPersistentState(
       isAgreeAgreement: dco_decode_opt_box_autoadd_bool(arr[0]),
       isInitialStartup: dco_decode_opt_box_autoadd_bool(arr[1]),
@@ -6362,7 +6362,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         arr[4],
       ),
       pickedDeviceGame: dco_decode_opt_list_device_game(arr[5]),
-      unknownField: dco_decode_Map_String_String_None(arr[6]),
+      hiddenAccount: dco_decode_opt_list_device_game_account(arr[6]),
+      starredAccount: dco_decode_opt_list_device_game_account(arr[7]),
+      customlyAddedAccount: dco_decode_opt_list_device_game_account(arr[8]),
+      unknownField: dco_decode_Map_String_String_None(arr[9]),
     );
   }
 
@@ -7048,6 +7051,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  DeviceGameAccount dco_decode_device_game_account(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return DeviceGameAccount(
+      deviceGame: dco_decode_device_game(arr[0]),
+      account: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
   DeviceGamePickerConfig dco_decode_device_game_picker_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -7405,6 +7420,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   List<DeviceGame> dco_decode_list_device_game(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_device_game).toList();
+  }
+
+  @protected
+  List<DeviceGameAccount> dco_decode_list_device_game_account(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_device_game_account).toList();
   }
 
   @protected
@@ -8436,6 +8457,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   List<DeviceGame>? dco_decode_opt_list_device_game(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_list_device_game(raw);
+  }
+
+  @protected
+  List<DeviceGameAccount>? dco_decode_opt_list_device_game_account(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_device_game_account(raw);
   }
 
   @protected
@@ -9534,6 +9563,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       deserializer,
     );
     var var_pickedDeviceGame = sse_decode_opt_list_device_game(deserializer);
+    var var_hiddenAccount = sse_decode_opt_list_device_game_account(
+      deserializer,
+    );
+    var var_starredAccount = sse_decode_opt_list_device_game_account(
+      deserializer,
+    );
+    var var_customlyAddedAccount = sse_decode_opt_list_device_game_account(
+      deserializer,
+    );
     var var_unknownField = sse_decode_Map_String_String_None(deserializer);
     return AppPersistentState(
       isAgreeAgreement: var_isAgreeAgreement,
@@ -9542,6 +9580,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       theme: var_theme,
       selectedDeviceGame: var_selectedDeviceGame,
       pickedDeviceGame: var_pickedDeviceGame,
+      hiddenAccount: var_hiddenAccount,
+      starredAccount: var_starredAccount,
+      customlyAddedAccount: var_customlyAddedAccount,
       unknownField: var_unknownField,
     );
   }
@@ -10354,6 +10395,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  DeviceGameAccount sse_decode_device_game_account(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_deviceGame = sse_decode_device_game(deserializer);
+    var var_account = sse_decode_String(deserializer);
+    return DeviceGameAccount(deviceGame: var_deviceGame, account: var_account);
+  }
+
+  @protected
   DeviceGamePickerConfig sse_decode_device_game_picker_config(
     SseDeserializer deserializer,
   ) {
@@ -10766,6 +10817,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <DeviceGame>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_device_game(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<DeviceGameAccount> sse_decode_list_device_game_account(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <DeviceGameAccount>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_device_game_account(deserializer));
     }
     return ans_;
   }
@@ -12269,6 +12334,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<DeviceGameAccount>? sse_decode_opt_list_device_game_account(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_device_game_account(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -13494,6 +13572,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       serializer,
     );
     sse_encode_opt_list_device_game(self.pickedDeviceGame, serializer);
+    sse_encode_opt_list_device_game_account(self.hiddenAccount, serializer);
+    sse_encode_opt_list_device_game_account(self.starredAccount, serializer);
+    sse_encode_opt_list_device_game_account(
+      self.customlyAddedAccount,
+      serializer,
+    );
     sse_encode_Map_String_String_None(self.unknownField, serializer);
   }
 
@@ -14320,6 +14404,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_device_game_account(
+    DeviceGameAccount self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_device_game(self.deviceGame, serializer);
+    sse_encode_String(self.account, serializer);
+  }
+
+  @protected
   void sse_encode_device_game_picker_config(
     DeviceGamePickerConfig self,
     SseSerializer serializer,
@@ -14662,6 +14756,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_device_game(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_device_game_account(
+    List<DeviceGameAccount> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_device_game_account(item, serializer);
     }
   }
 
@@ -16035,6 +16141,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_list_device_game(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_device_game_account(
+    List<DeviceGameAccount>? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_device_game_account(self, serializer);
     }
   }
 

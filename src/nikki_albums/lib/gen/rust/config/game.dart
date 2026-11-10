@@ -65,6 +65,24 @@ sealed class DeviceGame with _$DeviceGame {
       .crateConfigGameDeviceGameToVecJsonPretty(value: value);
 }
 
+class DeviceGameAccount {
+  final DeviceGame deviceGame;
+  final String account;
+
+  const DeviceGameAccount({required this.deviceGame, required this.account});
+
+  @override
+  int get hashCode => deviceGame.hashCode ^ account.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DeviceGameAccount &&
+          runtimeType == other.runtimeType &&
+          deviceGame == other.deviceGame &&
+          account == other.account;
+}
+
 class DeviceGamePickerConfig {
   final TextRule? title;
   final TextRule tip;

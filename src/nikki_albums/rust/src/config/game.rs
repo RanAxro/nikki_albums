@@ -62,3 +62,9 @@ pub struct DeviceGameSession{
 }
 
 impl_json_frb!(DeviceGameSession);
+
+#[derive(Serialize, Deserialize)]
+pub struct DeviceGameAccount{
+  pub device_game: DeviceGame,
+  pub account: String,
+}
