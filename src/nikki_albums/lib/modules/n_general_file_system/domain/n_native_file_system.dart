@@ -22,10 +22,10 @@ class NNativeFileSystem extends NGeneralFileSystem{
       return path;
     }
     path = p.join(root, path);
-    if(!p.isWithin(root, path)){
-      throw Exception("The file does not exist");
+    if(p.isWithin(root, path) || p.equals(root, path)){
+      return path;
     }
-    return path;
+    throw Exception("The file does not exist");
   }
 
   @override
