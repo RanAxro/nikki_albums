@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -125837105;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -833782821;
 
 // Section: executor
 
@@ -5365,6 +5365,210 @@ fn wire__crate__nuan5_database__model__nuan_5_table_default_impl(
         },
     )
 }
+fn wire__crate__config__plugin__picked_device_game_result_from_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "picked_device_game_result_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::plugin::PickedDeviceGameResult::from_json(&api_json)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__plugin__picked_device_game_result_from_json_bytes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "picked_device_game_result_from_json_bytes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_json = <Vec<u8>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::plugin::PickedDeviceGameResult::from_json_bytes(&api_json)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__plugin__picked_device_game_result_to_json_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "picked_device_game_result_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::plugin::PickedDeviceGameResult>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::plugin::PickedDeviceGameResult::to_json(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__plugin__picked_device_game_result_to_json_bytes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "picked_device_game_result_to_json_bytes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::plugin::PickedDeviceGameResult>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::plugin::PickedDeviceGameResult::to_json_bytes(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__plugin__picked_device_game_result_to_json_bytes_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "picked_device_game_result_to_json_bytes_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::plugin::PickedDeviceGameResult>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::plugin::PickedDeviceGameResult::to_json_bytes_pretty(
+                            &api_that,
+                        )?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
+fn wire__crate__config__plugin__picked_device_game_result_to_json_pretty_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "picked_device_game_result_to_json_pretty",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that =
+                <crate::config::plugin::PickedDeviceGameResult>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                (move || {
+                    let output_ok =
+                        crate::config::plugin::PickedDeviceGameResult::to_json_pretty(&api_that)?;
+                    Ok(output_ok)
+                })(),
+            )
+        },
+    )
+}
 fn wire__crate__config__plugin__plugin_info_from_json_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -9344,6 +9548,27 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::Photography
     }
 }
 
+impl SseDecode for crate::config::plugin::PickedDeviceGameResult {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 = <crate::config::game::DeviceGame>::sse_decode(deserializer);
+                return crate::config::plugin::PickedDeviceGameResult::Ok(var_field0);
+            }
+            1 => {
+                let mut var_field0 =
+                    <Option<crate::config::rules::text_rule::TextRule>>::sse_decode(deserializer);
+                return crate::config::plugin::PickedDeviceGameResult::Err(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
 impl SseDecode for crate::config::common::platform::Platform {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -10347,31 +10572,37 @@ fn pde_ffi_dispatcher_sync_impl(
 136 => wire__crate__nuan5_params__decrypt__media_decode_file_unchecked_sync_impl(ptr, rust_vec_len, data_len),
 140 => wire__crate__nuan5_params__decrypt__media_decrypt_impl(ptr, rust_vec_len, data_len),
 141 => wire__crate__nuan5_params__encrypt__media_encode_camera_params_bytes_impl(ptr, rust_vec_len, data_len),
-163 => wire__crate__config__plugin__plugin_info_from_json_impl(ptr, rust_vec_len, data_len),
-164 => wire__crate__config__plugin__plugin_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-165 => wire__crate__config__plugin__plugin_info_to_json_impl(ptr, rust_vec_len, data_len),
-166 => wire__crate__config__plugin__plugin_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-167 => wire__crate__config__plugin__plugin_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-168 => wire__crate__config__plugin__plugin_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-169 => wire__crate__config__rules__string_rule__string_rule_from_json_impl(ptr, rust_vec_len, data_len),
-170 => wire__crate__config__rules__string_rule__string_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-171 => wire__crate__config__rules__string_rule__string_rule_to_json_impl(ptr, rust_vec_len, data_len),
-172 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-173 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-174 => wire__crate__config__rules__string_rule__string_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-175 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
-176 => wire__crate__config__rules__text_rule__text_rule_from_json_impl(ptr, rust_vec_len, data_len),
-177 => wire__crate__config__rules__text_rule__text_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-178 => wire__crate__config__rules__text_rule__text_rule_to_json_impl(ptr, rust_vec_len, data_len),
-179 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-180 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-181 => wire__crate__config__rules__text_rule__text_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
-182 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
-183 => wire__crate__config__update__update_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
-184 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
-185 => wire__crate__config__update__update_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
-186 => wire__crate__config__update__update_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
-187 => wire__crate__config__update__update_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+163 => wire__crate__config__plugin__picked_device_game_result_from_json_impl(ptr, rust_vec_len, data_len),
+164 => wire__crate__config__plugin__picked_device_game_result_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+165 => wire__crate__config__plugin__picked_device_game_result_to_json_impl(ptr, rust_vec_len, data_len),
+166 => wire__crate__config__plugin__picked_device_game_result_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+167 => wire__crate__config__plugin__picked_device_game_result_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+168 => wire__crate__config__plugin__picked_device_game_result_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+169 => wire__crate__config__plugin__plugin_info_from_json_impl(ptr, rust_vec_len, data_len),
+170 => wire__crate__config__plugin__plugin_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+171 => wire__crate__config__plugin__plugin_info_to_json_impl(ptr, rust_vec_len, data_len),
+172 => wire__crate__config__plugin__plugin_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+173 => wire__crate__config__plugin__plugin_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+174 => wire__crate__config__plugin__plugin_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+175 => wire__crate__config__rules__string_rule__string_rule_from_json_impl(ptr, rust_vec_len, data_len),
+176 => wire__crate__config__rules__string_rule__string_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+177 => wire__crate__config__rules__string_rule__string_rule_to_json_impl(ptr, rust_vec_len, data_len),
+178 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+179 => wire__crate__config__rules__string_rule__string_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+180 => wire__crate__config__rules__string_rule__string_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+181 => wire__crate__api__simple__test_add_impl(ptr, rust_vec_len, data_len),
+182 => wire__crate__config__rules__text_rule__text_rule_from_json_impl(ptr, rust_vec_len, data_len),
+183 => wire__crate__config__rules__text_rule__text_rule_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+184 => wire__crate__config__rules__text_rule__text_rule_to_json_impl(ptr, rust_vec_len, data_len),
+185 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+186 => wire__crate__config__rules__text_rule__text_rule_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+187 => wire__crate__config__rules__text_rule__text_rule_to_json_pretty_impl(ptr, rust_vec_len, data_len),
+188 => wire__crate__config__update__update_info_from_json_impl(ptr, rust_vec_len, data_len),
+189 => wire__crate__config__update__update_info_from_json_bytes_impl(ptr, rust_vec_len, data_len),
+190 => wire__crate__config__update__update_info_to_json_impl(ptr, rust_vec_len, data_len),
+191 => wire__crate__config__update__update_info_to_json_bytes_impl(ptr, rust_vec_len, data_len),
+192 => wire__crate__config__update__update_info_to_json_bytes_pretty_impl(ptr, rust_vec_len, data_len),
+193 => wire__crate__config__update__update_info_to_json_pretty_impl(ptr, rust_vec_len, data_len),
                         _ => unreachable!(),
                     }
 }
@@ -12655,6 +12886,33 @@ impl
     > for crate::nuan5_params::structs::nikki_photo_params::PhotographyParams
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::PhotographyParams {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::plugin::PickedDeviceGameResult {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::config::plugin::PickedDeviceGameResult::Ok(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::config::plugin::PickedDeviceGameResult::Err(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::plugin::PickedDeviceGameResult
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::plugin::PickedDeviceGameResult>
+    for crate::config::plugin::PickedDeviceGameResult
+{
+    fn into_into_dart(self) -> crate::config::plugin::PickedDeviceGameResult {
         self
     }
 }
@@ -15992,6 +16250,25 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::Photography
         <Vec<crate::nuan5_params::structs::nikki_photo_params::TaskParams>>::sse_encode(
             self.task, serializer,
         );
+    }
+}
+
+impl SseEncode for crate::config::plugin::PickedDeviceGameResult {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::config::plugin::PickedDeviceGameResult::Ok(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <crate::config::game::DeviceGame>::sse_encode(field0, serializer);
+            }
+            crate::config::plugin::PickedDeviceGameResult::Err(field0) => {
+                <i32>::sse_encode(1, serializer);
+                <Option<crate::config::rules::text_rule::TextRule>>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 

@@ -2,11 +2,9 @@ use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 use crate::config::common::platform::Platform;
+use crate::config::game::DeviceGame;
+use crate::config::rules::text_rule::TextRule;
 use crate::impl_json_frb;
-use super::rules::{
-  text_rule::TextRule,
-  icon_rule::IconRule,
-};
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
@@ -62,3 +60,13 @@ pub enum NES{
   RegisterGlobalIcon,
   RegisterScript,
 }
+
+
+#[derive(Serialize, Deserialize)]
+pub enum PickedDeviceGameResult{
+  Ok(DeviceGame),
+  Err(Option<TextRule>),
+}
+
+impl_json_frb!(PickedDeviceGameResult);
+

@@ -418,6 +418,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OutfitDyeHairData dco_decode_box_autoadd_outfit_dye_hair_data(dynamic raw);
 
   @protected
+  PickedDeviceGameResult dco_decode_box_autoadd_picked_device_game_result(
+    dynamic raw,
+  );
+
+  @protected
   PluginInfo dco_decode_box_autoadd_plugin_info(dynamic raw);
 
   @protected
@@ -1028,6 +1033,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotographyParams dco_decode_photography_params(dynamic raw);
 
   @protected
+  PickedDeviceGameResult dco_decode_picked_device_game_result(dynamic raw);
+
+  @protected
   Platform dco_decode_platform(dynamic raw);
 
   @protected
@@ -1615,6 +1623,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OutfitDyeHairData sse_decode_box_autoadd_outfit_dye_hair_data(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PickedDeviceGameResult sse_decode_box_autoadd_picked_device_game_result(
     SseDeserializer deserializer,
   );
 
@@ -2367,6 +2380,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PhotographyParams sse_decode_photography_params(SseDeserializer deserializer);
 
   @protected
+  PickedDeviceGameResult sse_decode_picked_device_game_result(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Platform sse_decode_platform(SseDeserializer deserializer);
 
   @protected
@@ -3096,6 +3114,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_outfit_dye_hair_data(
     OutfitDyeHairData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_picked_device_game_result(
+    PickedDeviceGameResult self,
     SseSerializer serializer,
   );
 
@@ -4062,6 +4086,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_photography_params(
     PhotographyParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_picked_device_game_result(
+    PickedDeviceGameResult self,
     SseSerializer serializer,
   );
 

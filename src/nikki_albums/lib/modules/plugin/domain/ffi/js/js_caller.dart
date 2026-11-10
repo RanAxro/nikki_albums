@@ -18,13 +18,13 @@ abstract final class PluginJSCaller{
     ''');
   }
 
-  static Future<JsEvalResult> getDeviceGameByPath(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId, String path){
+  static Future<JsEvalResult> notifyPickDeviceGame(PluginJSRuntime runtime, String uuid, String uniqueId, String fsHandlerId, String name){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameByPath(fsHandler, ${jsonEncode(path)});
-        if(res){
-          res.unique_id = ${jsonEncode(uniqueId)};
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].onPickDeviceGame(fsHandler, ${jsonEncode(name)});
+        if(res.Ok){
+          res.Ok.unique_id = ${jsonEncode(uniqueId)};
         }
         return JSON.stringify(res);
       })();

@@ -4,12 +4,13 @@ import "../../api/file_system.dart";
 import "../../runtime/js_runtime.dart";
 import "../../../model/exception.dart";
 import "package:nikki_albums/modules/config_helper/domain/config_helper.dart";
+import "package:nikki_albums/modules/config_helper/model/image_rule.dart";
+import "package:nikki_albums/modules/plugin/model/game_helper.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
 import "package:nikki_albums/gen/rust/config/rules/icon_rule.dart";
 import "package:nikki_albums/gen/rust/config/rules/text_rule.dart";
 import "package:nikki_albums/gen/rust/config/rules/image_rule.dart" as rust;
-import "package:nikki_albums/modules/config_helper/model/image_rule.dart";
-import "package:nikki_albums/modules/plugin/model/game_helper.dart";
+import "package:nikki_albums/gen/rust/config/plugin.dart";
 
 import "dart:convert";
 
@@ -28,18 +29,16 @@ abstract final class PluginJSBridge{
     return DeviceGame.fromVecJson(json: result.stringResult);
   }
 
-  static Future<DeviceGame?> getDeviceGameByPath(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler, String path) async{
+  static Future<PickedDeviceGameResult> notifyPickDeviceGame(PluginJSRuntime runtime, String uniqueId, NGeneralFileSystem fsHandler, String name) async{
     final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
     final String uuid = GameHelper.getUuidByUniqueId(uniqueId);
-    final JsEvalResult result = await PluginJSCaller.getDeviceGameByPath(runtime, uuid, uniqueId, fsHandlerId, path);
+    final JsEvalResult result = await PluginJSCaller.notifyPickDeviceGame(runtime, uuid, uniqueId, fsHandlerId, name);
     PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    if(result.stringResult == "null"){
-      return null;
-    }
-    return DeviceGame.fromJson(json: result.stringResult);
+    print(PickedDeviceGameResult.fromJson(json: result.stringResult));
+    return PickedDeviceGameResult.fromJson(json: result.stringResult);
   }
 
   static Future<TextRule> getDeviceGameName(PluginJSRuntime runtime, DeviceGame deviceGame) async{

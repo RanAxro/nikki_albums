@@ -13,8 +13,8 @@ class PluginJSRunner extends PluginRunner{
   }
 
   @override
-  Future<DeviceGame?> getDeviceGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path){
-    return PluginJSBridge.getDeviceGameByPath(_runtime, uniqueId, fsHandler, path);
+  Future<PickedDeviceGameResult> notifyPickDeviceGame(String uniqueId, NGeneralFileSystem fsHandler, String name){
+    return PluginJSBridge.notifyPickDeviceGame(_runtime, uniqueId, fsHandler, name);
   }
 
   @override

@@ -82,14 +82,13 @@ globalThis.api = {
         name_text_field_hint: gameInfo.device_game_picker.name_text_field_hint,
         path_text_field_label: gameInfo.device_game_picker.path_text_field_label,
         path_text_field_hint: gameInfo.device_game_picker.path_text_field_hint,
-        path_text_field_error: gameInfo.device_game_picker.path_text_field_error,
         picker_btn_tooltip: gameInfo.device_game_picker.picker_btn_tooltip,
         picker_title: gameInfo.device_game_picker.picker_title,
       },
     }));
     globalThis.__apiBridge.game[String(gameInfo.uuid)] = {
       searchDeviceGame: gameInfo.search_device_game,
-      getDeviceGameByPath: gameInfo.device_game_picker && gameInfo.device_game_picker.get_device_game_by_path,
+      onPickDeviceGame: gameInfo.device_game_picker && gameInfo.device_game_picker.on_pick_device_game,
       getDeviceGameIcon: gameInfo.get_device_game_icon,
       getDeviceGameName: gameInfo.get_device_game_name,
       searchAccount: gameInfo.search_account,

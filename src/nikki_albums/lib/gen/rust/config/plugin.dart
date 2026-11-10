@@ -5,9 +5,12 @@
 
 import '../frb_generated.dart';
 import 'common/platform.dart';
+import 'game.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+
+import 'rules/text_rule.dart';
 part 'plugin.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PluginSource`
@@ -37,6 +40,38 @@ enum NES {
   registerIcon,
   registerGlobalIcon,
   registerScript,
+}
+
+@freezed
+sealed class PickedDeviceGameResult with _$PickedDeviceGameResult {
+  const PickedDeviceGameResult._();
+
+  const factory PickedDeviceGameResult.ok(DeviceGame field0) =
+      PickedDeviceGameResult_Ok;
+  const factory PickedDeviceGameResult.err([TextRule? field0]) =
+      PickedDeviceGameResult_Err;
+
+  static PickedDeviceGameResult fromJson({required String json}) => RustLib
+      .instance
+      .api
+      .crateConfigPluginPickedDeviceGameResultFromJson(json: json);
+
+  static PickedDeviceGameResult fromJsonBytes({required List<int> json}) =>
+      RustLib.instance.api.crateConfigPluginPickedDeviceGameResultFromJsonBytes(
+        json: json,
+      );
+
+  String toJson() => RustLib.instance.api
+      .crateConfigPluginPickedDeviceGameResultToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigPluginPickedDeviceGameResultToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigPluginPickedDeviceGameResultToJsonBytesPretty(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigPluginPickedDeviceGameResultToJsonPretty(that: this);
 }
 
 class PluginInfo {

@@ -62,7 +62,7 @@ abstract class PluginRunner{
 
   Future<List<DeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler);
 
-  Future<DeviceGame?> getDeviceGameByPath(String uniqueId, NGeneralFileSystem fsHandler, String path);
+  Future<PickedDeviceGameResult> notifyPickDeviceGame(String uniqueId, NGeneralFileSystem fsHandler, String name);
 
   Future<TextRule> getDeviceGameName(DeviceGame deviceGame);
 
