@@ -118,6 +118,27 @@ class DeviceGameAccount {
           account == other.account;
 }
 
+class DeviceGameAccountNote {
+  final DeviceGameAccount deviceGameAccount;
+  final String note;
+
+  const DeviceGameAccountNote({
+    required this.deviceGameAccount,
+    required this.note,
+  });
+
+  @override
+  int get hashCode => deviceGameAccount.hashCode ^ note.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DeviceGameAccountNote &&
+          runtimeType == other.runtimeType &&
+          deviceGameAccount == other.deviceGameAccount &&
+          note == other.note;
+}
+
 class DeviceGamePickerConfig {
   final TextRule? entranceBtnText;
   final TextRule? title;

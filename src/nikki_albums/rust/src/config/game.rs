@@ -77,3 +77,9 @@ pub struct DeviceGameAccount{
   pub device_game: DeviceGame,
   pub account: String,
 }
+
+#[derive(Serialize, Deserialize)]
+pub struct DeviceGameAccountNote{
+  pub device_game_account: DeviceGameAccount,
+  pub note: String,
+}

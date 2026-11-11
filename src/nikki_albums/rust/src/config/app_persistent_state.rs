@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Serialize, Deserialize};
-use crate::config::game::{DeviceGame, DeviceGameSession, DeviceGameAccount};
+use crate::config::game::{DeviceGame, DeviceGameSession, DeviceGameAccount, DeviceGameAccountNote};
 use crate::impl_json_frb;
 
 #[frb(dart_metadata=("freezed"))]
@@ -17,7 +17,9 @@ pub struct AppPersistentState{
   pub picked_device_game: Option<Vec<DeviceGame>>,
   pub hidden_account: Option<Vec<DeviceGameAccount>>,
   pub starred_account: Option<Vec<DeviceGameAccount>>,
-  pub customly_added_account: Option<Vec<DeviceGameAccount>>,
+  pub top_ranked_account: Option<Vec<DeviceGameAccount>>,
+  pub added_custom_account: Option<Vec<DeviceGameAccount>>,
+  pub account_note: Option<Vec<DeviceGameAccountNote>>,
 
   #[serde(flatten)]
   pub unknown_field: HashMap<String, String>,

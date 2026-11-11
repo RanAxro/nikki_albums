@@ -549,6 +549,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DeviceGameAccount dco_decode_device_game_account(dynamic raw);
 
   @protected
+  DeviceGameAccountNote dco_decode_device_game_account_note(dynamic raw);
+
+  @protected
   DeviceGamePickerConfig dco_decode_device_game_picker_config(dynamic raw);
 
   @protected
@@ -650,6 +653,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<DeviceGameAccount> dco_decode_list_device_game_account(dynamic raw);
+
+  @protected
+  List<DeviceGameAccountNote> dco_decode_list_device_game_account_note(
+    dynamic raw,
+  );
 
   @protected
   List<DiyHistoryShareCodeParams> dco_decode_list_diy_history_share_code_params(
@@ -1033,6 +1041,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<DeviceGameAccount>? dco_decode_opt_list_device_game_account(dynamic raw);
+
+  @protected
+  List<DeviceGameAccountNote>? dco_decode_opt_list_device_game_account_note(
+    dynamic raw,
+  );
 
   @protected
   Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
@@ -1810,6 +1823,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  DeviceGameAccountNote sse_decode_device_game_account_note(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   DeviceGamePickerConfig sse_decode_device_game_picker_config(
     SseDeserializer deserializer,
   );
@@ -1923,6 +1941,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<DeviceGameAccount> sse_decode_list_device_game_account(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<DeviceGameAccountNote> sse_decode_list_device_game_account_note(
     SseDeserializer deserializer,
   );
 
@@ -2398,6 +2421,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<DeviceGameAccount>? sse_decode_opt_list_device_game_account(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<DeviceGameAccountNote>? sse_decode_opt_list_device_game_account_note(
     SseDeserializer deserializer,
   );
 
@@ -3371,6 +3399,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_device_game_account_note(
+    DeviceGameAccountNote self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_device_game_picker_config(
     DeviceGamePickerConfig self,
     SseSerializer serializer,
@@ -3517,6 +3551,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_device_game_account(
     List<DeviceGameAccount> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_device_game_account_note(
+    List<DeviceGameAccountNote> self,
     SseSerializer serializer,
   );
 
@@ -4129,6 +4169,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_list_device_game_account(
     List<DeviceGameAccount>? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_list_device_game_account_note(
+    List<DeviceGameAccountNote>? self,
     SseSerializer serializer,
   );
 

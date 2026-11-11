@@ -62,6 +62,46 @@ class PickedDeviceGameState extends AppStateItem<List<DeviceGame>, Persistent> {
       _pickedDeviceGame;
 }
 
+/// 隐藏的账号
+class HiddenAccountState
+    extends AppStateItem<List<DeviceGameAccount>, Persistent> {
+  @override
+  AppStateItemDefine<List<DeviceGameAccount>, Persistent> get _define =>
+      _hiddenAccount;
+}
+
+/// 标星的账号
+class StarredAccountState
+    extends AppStateItem<List<DeviceGameAccount>, Persistent> {
+  @override
+  AppStateItemDefine<List<DeviceGameAccount>, Persistent> get _define =>
+      _starredAccount;
+}
+
+/// 置顶的账号
+class TopRankedAccountState
+    extends AppStateItem<List<DeviceGameAccount>, Persistent> {
+  @override
+  AppStateItemDefine<List<DeviceGameAccount>, Persistent> get _define =>
+      _topRankedAccount;
+}
+
+/// 用户添加的自定义账号
+class AddedCustomAccountState
+    extends AppStateItem<List<DeviceGameAccount>, Persistent> {
+  @override
+  AppStateItemDefine<List<DeviceGameAccount>, Persistent> get _define =>
+      _addedCustomAccount;
+}
+
+/// 账号备注
+class AccountNoteState
+    extends AppStateItem<List<DeviceGameAccountNote>, Persistent> {
+  @override
+  AppStateItemDefine<List<DeviceGameAccountNote>, Persistent> get _define =>
+      _accountNote;
+}
+
 final _isAgreeAgreementProvider = NotifierProvider<IsAgreeAgreementState, bool>(
   IsAgreeAgreementState.new,
 );
@@ -80,6 +120,31 @@ final _selectedDeviceGameProvider =
 final _pickedDeviceGameProvider =
     NotifierProvider<PickedDeviceGameState, List<DeviceGame>>(
       PickedDeviceGameState.new,
+    );
+
+final _hiddenAccountProvider =
+    NotifierProvider<HiddenAccountState, List<DeviceGameAccount>>(
+      HiddenAccountState.new,
+    );
+
+final _starredAccountProvider =
+    NotifierProvider<StarredAccountState, List<DeviceGameAccount>>(
+      StarredAccountState.new,
+    );
+
+final _topRankedAccountProvider =
+    NotifierProvider<TopRankedAccountState, List<DeviceGameAccount>>(
+      TopRankedAccountState.new,
+    );
+
+final _addedCustomAccountProvider =
+    NotifierProvider<AddedCustomAccountState, List<DeviceGameAccount>>(
+      AddedCustomAccountState.new,
+    );
+
+final _accountNoteProvider =
+    NotifierProvider<AccountNoteState, List<DeviceGameAccountNote>>(
+      AccountNoteState.new,
     );
 
 const _appStateCopyWithSentinel = Object();
@@ -101,12 +166,32 @@ class AppState {
   /// 自定义游戏
   final List<DeviceGame> pickedDeviceGame;
 
+  /// 隐藏的账号
+  final List<DeviceGameAccount> hiddenAccount;
+
+  /// 标星的账号
+  final List<DeviceGameAccount> starredAccount;
+
+  /// 置顶的账号
+  final List<DeviceGameAccount> topRankedAccount;
+
+  /// 用户添加的自定义账号
+  final List<DeviceGameAccount> addedCustomAccount;
+
+  /// 账号备注
+  final List<DeviceGameAccountNote> accountNote;
+
   const AppState({
     required this.isAgreeAgreement,
     required this.isInitialStartup,
     required this.lang,
     required this.selectedDeviceGame,
     required this.pickedDeviceGame,
+    required this.hiddenAccount,
+    required this.starredAccount,
+    required this.topRankedAccount,
+    required this.addedCustomAccount,
+    required this.accountNote,
   });
 
   AppState copyWith({
@@ -115,6 +200,11 @@ class AppState {
     Locale? lang,
     Object? selectedDeviceGame = _appStateCopyWithSentinel,
     List<DeviceGame>? pickedDeviceGame,
+    List<DeviceGameAccount>? hiddenAccount,
+    List<DeviceGameAccount>? starredAccount,
+    List<DeviceGameAccount>? topRankedAccount,
+    List<DeviceGameAccount>? addedCustomAccount,
+    List<DeviceGameAccountNote>? accountNote,
   }) {
     return AppState(
       isAgreeAgreement: isAgreeAgreement ?? this.isAgreeAgreement,
@@ -125,6 +215,11 @@ class AppState {
           ? this.selectedDeviceGame
           : selectedDeviceGame as DeviceGameSession?,
       pickedDeviceGame: pickedDeviceGame ?? this.pickedDeviceGame,
+      hiddenAccount: hiddenAccount ?? this.hiddenAccount,
+      starredAccount: starredAccount ?? this.starredAccount,
+      topRankedAccount: topRankedAccount ?? this.topRankedAccount,
+      addedCustomAccount: addedCustomAccount ?? this.addedCustomAccount,
+      accountNote: accountNote ?? this.accountNote,
     );
   }
 }
@@ -142,6 +237,11 @@ class AppStateNotifier extends Notifier<AppState> {
       lang: ref.watch(_langProvider),
       selectedDeviceGame: ref.watch(_selectedDeviceGameProvider),
       pickedDeviceGame: ref.watch(_pickedDeviceGameProvider),
+      hiddenAccount: ref.watch(_hiddenAccountProvider),
+      starredAccount: ref.watch(_starredAccountProvider),
+      topRankedAccount: ref.watch(_topRankedAccountProvider),
+      addedCustomAccount: ref.watch(_addedCustomAccountProvider),
+      accountNote: ref.watch(_accountNoteProvider),
     );
   }
 
@@ -159,6 +259,11 @@ class AppStateNotifier extends Notifier<AppState> {
     Locale? lang,
     Object? selectedDeviceGame = _appStateCopyWithSentinel,
     List<DeviceGame>? pickedDeviceGame,
+    List<DeviceGameAccount>? hiddenAccount,
+    List<DeviceGameAccount>? starredAccount,
+    List<DeviceGameAccount>? topRankedAccount,
+    List<DeviceGameAccount>? addedCustomAccount,
+    List<DeviceGameAccountNote>? accountNote,
   }) {
     final newState = state.copyWith(
       isAgreeAgreement: isAgreeAgreement,
@@ -166,6 +271,11 @@ class AppStateNotifier extends Notifier<AppState> {
       lang: lang,
       selectedDeviceGame: selectedDeviceGame,
       pickedDeviceGame: pickedDeviceGame,
+      hiddenAccount: hiddenAccount,
+      starredAccount: starredAccount,
+      topRankedAccount: topRankedAccount,
+      addedCustomAccount: addedCustomAccount,
+      accountNote: accountNote,
     );
     state = newState;
     return newState;
@@ -178,6 +288,11 @@ class AppStateNotifier extends Notifier<AppState> {
     ref.read(_langProvider.notifier).fromPersistent(p);
     ref.read(_selectedDeviceGameProvider.notifier).fromPersistent(p);
     ref.read(_pickedDeviceGameProvider.notifier).fromPersistent(p);
+    ref.read(_hiddenAccountProvider.notifier).fromPersistent(p);
+    ref.read(_starredAccountProvider.notifier).fromPersistent(p);
+    ref.read(_topRankedAccountProvider.notifier).fromPersistent(p);
+    ref.read(_addedCustomAccountProvider.notifier).fromPersistent(p);
+    ref.read(_accountNoteProvider.notifier).fromPersistent(p);
   }
 
   /// 把所有状态项写回持久化数据。
@@ -188,6 +303,11 @@ class AppStateNotifier extends Notifier<AppState> {
     res = ref.read(_langProvider.notifier).toPersistent(res);
     res = ref.read(_selectedDeviceGameProvider.notifier).toPersistent(res);
     res = ref.read(_pickedDeviceGameProvider.notifier).toPersistent(res);
+    res = ref.read(_hiddenAccountProvider.notifier).toPersistent(res);
+    res = ref.read(_starredAccountProvider.notifier).toPersistent(res);
+    res = ref.read(_topRankedAccountProvider.notifier).toPersistent(res);
+    res = ref.read(_addedCustomAccountProvider.notifier).toPersistent(res);
+    res = ref.read(_accountNoteProvider.notifier).toPersistent(res);
     return res;
   }
 }

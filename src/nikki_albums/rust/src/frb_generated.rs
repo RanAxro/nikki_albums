@@ -6955,8 +6955,12 @@ impl SseDecode for crate::config::app_persistent_state::AppPersistentState {
             <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_decode(deserializer);
         let mut var_starredAccount =
             <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_decode(deserializer);
-        let mut var_customlyAddedAccount =
+        let mut var_topRankedAccount =
             <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_decode(deserializer);
+        let mut var_addedCustomAccount =
+            <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_decode(deserializer);
+        let mut var_accountNote =
+            <Option<Vec<crate::config::game::DeviceGameAccountNote>>>::sse_decode(deserializer);
         let mut var_unknownField =
             <std::collections::HashMap<String, String>>::sse_decode(deserializer);
         return crate::config::app_persistent_state::AppPersistentState {
@@ -6968,7 +6972,9 @@ impl SseDecode for crate::config::app_persistent_state::AppPersistentState {
             picked_device_game: var_pickedDeviceGame,
             hidden_account: var_hiddenAccount,
             starred_account: var_starredAccount,
-            customly_added_account: var_customlyAddedAccount,
+            top_ranked_account: var_topRankedAccount,
+            added_custom_account: var_addedCustomAccount,
+            account_note: var_accountNote,
             unknown_field: var_unknownField,
         };
     }
@@ -7404,6 +7410,19 @@ impl SseDecode for crate::config::game::DeviceGameAccount {
         return crate::config::game::DeviceGameAccount {
             device_game: var_deviceGame,
             account: var_account,
+        };
+    }
+}
+
+impl SseDecode for crate::config::game::DeviceGameAccountNote {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_deviceGameAccount =
+            <crate::config::game::DeviceGameAccount>::sse_decode(deserializer);
+        let mut var_note = <String>::sse_decode(deserializer);
+        return crate::config::game::DeviceGameAccountNote {
+            device_game_account: var_deviceGameAccount,
+            note: var_note,
         };
     }
 }
@@ -7926,6 +7945,20 @@ impl SseDecode for Vec<crate::config::game::DeviceGameAccount> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<crate::config::game::DeviceGameAccount>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::config::game::DeviceGameAccountNote> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::config::game::DeviceGameAccountNote>::sse_decode(
                 deserializer,
             ));
         }
@@ -9682,6 +9715,19 @@ impl SseDecode for Option<Vec<crate::config::game::DeviceGameAccount>> {
     }
 }
 
+impl SseDecode for Option<Vec<crate::config::game::DeviceGameAccountNote>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <Vec<crate::config::game::DeviceGameAccountNote>>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<Vec<u8>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -10982,7 +11028,9 @@ impl flutter_rust_bridge::IntoDart for crate::config::app_persistent_state::AppP
             self.picked_device_game.into_into_dart().into_dart(),
             self.hidden_account.into_into_dart().into_dart(),
             self.starred_account.into_into_dart().into_dart(),
-            self.customly_added_account.into_into_dart().into_dart(),
+            self.top_ranked_account.into_into_dart().into_dart(),
+            self.added_custom_account.into_into_dart().into_dart(),
+            self.account_note.into_into_dart().into_dart(),
             self.unknown_field.into_into_dart().into_dart(),
         ]
         .into_dart()
@@ -11563,6 +11611,27 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::game::DeviceGameAccount>
     for crate::config::game::DeviceGameAccount
 {
     fn into_into_dart(self) -> crate::config::game::DeviceGameAccount {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::config::game::DeviceGameAccountNote {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.device_game_account.into_into_dart().into_dart(),
+            self.note.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::config::game::DeviceGameAccountNote
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::game::DeviceGameAccountNote>
+    for crate::config::game::DeviceGameAccountNote
+{
+    fn into_into_dart(self) -> crate::config::game::DeviceGameAccountNote {
         self
     }
 }
@@ -14325,7 +14394,15 @@ impl SseEncode for crate::config::app_persistent_state::AppPersistentState {
             serializer,
         );
         <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_encode(
-            self.customly_added_account,
+            self.top_ranked_account,
+            serializer,
+        );
+        <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_encode(
+            self.added_custom_account,
+            serializer,
+        );
+        <Option<Vec<crate::config::game::DeviceGameAccountNote>>>::sse_encode(
+            self.account_note,
             serializer,
         );
         <std::collections::HashMap<String, String>>::sse_encode(self.unknown_field, serializer);
@@ -14697,6 +14774,14 @@ impl SseEncode for crate::config::game::DeviceGameAccount {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <crate::config::game::DeviceGame>::sse_encode(self.device_game, serializer);
         <String>::sse_encode(self.account, serializer);
+    }
+}
+
+impl SseEncode for crate::config::game::DeviceGameAccountNote {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::config::game::DeviceGameAccount>::sse_encode(self.device_game_account, serializer);
+        <String>::sse_encode(self.note, serializer);
     }
 }
 
@@ -15147,6 +15232,16 @@ impl SseEncode for Vec<crate::config::game::DeviceGameAccount> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <crate::config::game::DeviceGameAccount>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::config::game::DeviceGameAccountNote> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::config::game::DeviceGameAccountNote>::sse_encode(item, serializer);
         }
     }
 }
@@ -16530,6 +16625,16 @@ impl SseEncode for Option<Vec<crate::config::game::DeviceGameAccount>> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <Vec<crate::config::game::DeviceGameAccount>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<crate::config::game::DeviceGameAccountNote>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<crate::config::game::DeviceGameAccountNote>>::sse_encode(value, serializer);
         }
     }
 }

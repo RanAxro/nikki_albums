@@ -53,6 +53,41 @@ final _pickedDeviceGame = AppStateItemDefine<List<DeviceGame>, Persistent>(
   writePersistent: (v, p) => p.copyWith(pickedDeviceGame: v),
 );
 
+@AppStateDefine("隐藏的账号")
+final _hiddenAccount = AppStateItemDefine<List<DeviceGameAccount>, Persistent>(
+  defaultValue: [],
+  readPersistent: (d, p) => p.hiddenAccount ?? d,
+  writePersistent: (v, p) => p.copyWith(hiddenAccount: v),
+);
+
+@AppStateDefine("标星的账号")
+final _starredAccount = AppStateItemDefine<List<DeviceGameAccount>, Persistent>(
+  defaultValue: [],
+  readPersistent: (d, p) => p.starredAccount ?? d,
+  writePersistent: (v, p) => p.copyWith(starredAccount: v),
+);
+
+@AppStateDefine("置顶的账号")
+final _topRankedAccount = AppStateItemDefine<List<DeviceGameAccount>, Persistent>(
+  defaultValue: [],
+  readPersistent: (d, p) => p.topRankedAccount ?? d,
+  writePersistent: (v, p) => p.copyWith(topRankedAccount: v),
+);
+
+@AppStateDefine("用户添加的自定义账号")
+final _addedCustomAccount = AppStateItemDefine<List<DeviceGameAccount>, Persistent>(
+  defaultValue: [],
+  readPersistent: (d, p) => p.addedCustomAccount ?? d,
+  writePersistent: (v, p) => p.copyWith(addedCustomAccount: v),
+);
+
+@AppStateDefine("账号备注")
+final _accountNote = AppStateItemDefine<List<DeviceGameAccountNote>, Persistent>(
+  defaultValue: [],
+  readPersistent: (d, p) => p.accountNote ?? d,
+  writePersistent: (v, p) => p.copyWith(accountNote: v),
+);
+
 
 
 
