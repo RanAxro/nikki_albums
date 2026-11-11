@@ -131,9 +131,9 @@ class CustomAccountAdderDialog extends HookConsumerWidget{
               if(onSave != null){
                 return onSave!.call(deviceGameAccount);
               }
-              // ref.read(appStateProvider.notifier).setAppStateWith(
-              //   pickedDeviceGame: [deviceGame, ...ref.read(appStateProvider).pickedDeviceGame],
-              // );
+              ref.read(appStateProvider.notifier).setAppStateWith(
+                addedCustomAccount: [deviceGameAccount, ...ref.read(appStateProvider).addedCustomAccount],
+              );
               Navigator.of(context).pop();
             },
             _ => null,
