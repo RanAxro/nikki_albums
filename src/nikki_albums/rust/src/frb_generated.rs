@@ -2174,6 +2174,48 @@ return crate::config::plugin::AddedCustomAccountResult::Err(var_field0); }
  _ => { unimplemented!(""); }}}
                 }
                 
+                impl SseDecode for crate::config::album::AlbumDensity {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::config::album::AlbumDensity::Compact,
+1 => crate::config::album::AlbumDensity::Spacious,
+            _ => unreachable!("Invalid variant for AlbumDensity: {}", inner),
+        };}
+                }
+                
+                impl SseDecode for crate::config::album::AlbumGridAspectRatio {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::config::album::AlbumGridAspectRatio::Grid11,
+1 => crate::config::album::AlbumGridAspectRatio::Grid32,
+2 => crate::config::album::AlbumGridAspectRatio::Grid43,
+3 => crate::config::album::AlbumGridAspectRatio::Grid169,
+            _ => unreachable!("Invalid variant for AlbumGridAspectRatio: {}", inner),
+        };}
+                }
+                
+                impl SseDecode for crate::config::album::AlbumGridOrientation {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::config::album::AlbumGridOrientation::Portrait,
+1 => crate::config::album::AlbumGridOrientation::Landscape,
+            _ => unreachable!("Invalid variant for AlbumGridOrientation: {}", inner),
+        };}
+                }
+                
+                impl SseDecode for crate::config::album::AlbumSliverType {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::config::album::AlbumSliverType::Grid,
+1 => crate::config::album::AlbumSliverType::WaterfallFlow,
+            _ => unreachable!("Invalid variant for AlbumSliverType: {}", inner),
+        };}
+                }
+                
                 impl SseDecode for crate::config::app_persistent_state::AppPersistentState {
                     // Codec=Sse (Serialization based), see doc to use other codecs
                     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {let mut var_isAgreeAgreement = <Option<bool>>::sse_decode(deserializer);
@@ -2187,8 +2229,12 @@ let mut var_starredAccount = <Option<Vec<crate::config::game::DeviceGameAccount>
 let mut var_topRankedAccount = <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_decode(deserializer);
 let mut var_addedCustomAccount = <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_decode(deserializer);
 let mut var_accountNote = <Option<Vec<crate::config::game::DeviceGameAccountNote>>>::sse_decode(deserializer);
+let mut var_albumSliver = <Option<crate::config::album::AlbumSliverType>>::sse_decode(deserializer);
+let mut var_albumGridOrientation = <Option<crate::config::album::AlbumGridOrientation>>::sse_decode(deserializer);
+let mut var_albumGridAspectRatio = <Option<crate::config::album::AlbumGridAspectRatio>>::sse_decode(deserializer);
+let mut var_albumDensity = <Option<crate::config::album::AlbumDensity>>::sse_decode(deserializer);
 let mut var_unknownField = <std::collections::HashMap<String, String>>::sse_decode(deserializer);
-return crate::config::app_persistent_state::AppPersistentState{is_agree_agreement: var_isAgreeAgreement, is_initial_startup: var_isInitialStartup, lang: var_lang, theme: var_theme, selected_device_game: var_selectedDeviceGame, picked_device_game: var_pickedDeviceGame, hidden_account: var_hiddenAccount, starred_account: var_starredAccount, top_ranked_account: var_topRankedAccount, added_custom_account: var_addedCustomAccount, account_note: var_accountNote, unknown_field: var_unknownField};}
+return crate::config::app_persistent_state::AppPersistentState{is_agree_agreement: var_isAgreeAgreement, is_initial_startup: var_isInitialStartup, lang: var_lang, theme: var_theme, selected_device_game: var_selectedDeviceGame, picked_device_game: var_pickedDeviceGame, hidden_account: var_hiddenAccount, starred_account: var_starredAccount, top_ranked_account: var_topRankedAccount, added_custom_account: var_addedCustomAccount, account_note: var_accountNote, album_sliver: var_albumSliver, album_grid_orientation: var_albumGridOrientation, album_grid_aspect_ratio: var_albumGridAspectRatio, album_density: var_albumDensity, unknown_field: var_unknownField};}
                 }
                 
                 impl SseDecode for crate::config::hot_update::AppVersionHotUpdateInfo {
@@ -3403,6 +3449,42 @@ return crate::nuan5_params::structs::nikki_photo_params::ObjectParams{id: var_id
                     // Codec=Sse (Serialization based), see doc to use other codecs
                     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {if (<bool>::sse_decode(deserializer)) {
                 return Some(<String>::sse_decode(deserializer));
+            } else {
+                return None;
+            }}
+                }
+                
+                impl SseDecode for Option<crate::config::album::AlbumDensity> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {if (<bool>::sse_decode(deserializer)) {
+                return Some(<crate::config::album::AlbumDensity>::sse_decode(deserializer));
+            } else {
+                return None;
+            }}
+                }
+                
+                impl SseDecode for Option<crate::config::album::AlbumGridAspectRatio> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {if (<bool>::sse_decode(deserializer)) {
+                return Some(<crate::config::album::AlbumGridAspectRatio>::sse_decode(deserializer));
+            } else {
+                return None;
+            }}
+                }
+                
+                impl SseDecode for Option<crate::config::album::AlbumGridOrientation> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {if (<bool>::sse_decode(deserializer)) {
+                return Some(<crate::config::album::AlbumGridOrientation>::sse_decode(deserializer));
+            } else {
+                return None;
+            }}
+                }
+                
+                impl SseDecode for Option<crate::config::album::AlbumSliverType> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {if (<bool>::sse_decode(deserializer)) {
+                return Some(<crate::config::album::AlbumSliverType>::sse_decode(deserializer));
             } else {
                 return None;
             }}
@@ -4644,6 +4726,72 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::plugin::AddedCustomAccount
             }
         }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+            impl flutter_rust_bridge::IntoDart for crate::config::album::AlbumDensity {
+                fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+                    match self {
+                    Self::Compact => 0.into_dart(),
+Self::Spacious => 1.into_dart(),
+                    _ => unreachable!(),
+                }
+                }
+            }
+            impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::config::album::AlbumDensity {}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::album::AlbumDensity> for crate::config::album::AlbumDensity {
+            fn into_into_dart(self) -> crate::config::album::AlbumDensity {
+                self
+            }
+        }
+// Codec=Dco (DartCObject based), see doc to use other codecs
+            impl flutter_rust_bridge::IntoDart for crate::config::album::AlbumGridAspectRatio {
+                fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+                    match self {
+                    Self::Grid11 => 0.into_dart(),
+Self::Grid32 => 1.into_dart(),
+Self::Grid43 => 2.into_dart(),
+Self::Grid169 => 3.into_dart(),
+                    _ => unreachable!(),
+                }
+                }
+            }
+            impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::config::album::AlbumGridAspectRatio {}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::album::AlbumGridAspectRatio> for crate::config::album::AlbumGridAspectRatio {
+            fn into_into_dart(self) -> crate::config::album::AlbumGridAspectRatio {
+                self
+            }
+        }
+// Codec=Dco (DartCObject based), see doc to use other codecs
+            impl flutter_rust_bridge::IntoDart for crate::config::album::AlbumGridOrientation {
+                fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+                    match self {
+                    Self::Portrait => 0.into_dart(),
+Self::Landscape => 1.into_dart(),
+                    _ => unreachable!(),
+                }
+                }
+            }
+            impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::config::album::AlbumGridOrientation {}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::album::AlbumGridOrientation> for crate::config::album::AlbumGridOrientation {
+            fn into_into_dart(self) -> crate::config::album::AlbumGridOrientation {
+                self
+            }
+        }
+// Codec=Dco (DartCObject based), see doc to use other codecs
+            impl flutter_rust_bridge::IntoDart for crate::config::album::AlbumSliverType {
+                fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+                    match self {
+                    Self::Grid => 0.into_dart(),
+Self::WaterfallFlow => 1.into_dart(),
+                    _ => unreachable!(),
+                }
+                }
+            }
+            impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::config::album::AlbumSliverType {}
+impl flutter_rust_bridge::IntoIntoDart<crate::config::album::AlbumSliverType> for crate::config::album::AlbumSliverType {
+            fn into_into_dart(self) -> crate::config::album::AlbumSliverType {
+                self
+            }
+        }
+// Codec=Dco (DartCObject based), see doc to use other codecs
             impl flutter_rust_bridge::IntoDart for crate::config::app_persistent_state::AppPersistentState {
                 fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
                     [
@@ -4658,6 +4806,10 @@ self.starred_account.into_into_dart().into_dart(),
 self.top_ranked_account.into_into_dart().into_dart(),
 self.added_custom_account.into_into_dart().into_dart(),
 self.account_note.into_into_dart().into_dart(),
+self.album_sliver.into_into_dart().into_dart(),
+self.album_grid_orientation.into_into_dart().into_dart(),
+self.album_grid_aspect_ratio.into_into_dart().into_dart(),
+self.album_density.into_into_dart().into_dart(),
 self.unknown_field.into_into_dart().into_dart()
                 ].into_dart()
                 }
@@ -6947,6 +7099,36 @@ crate::config::plugin::AddedCustomAccountResult::Err(field0) => { <i32>::sse_enc
  _ => { unimplemented!(""); }}}
                 }
                 
+                impl SseEncode for crate::config::album::AlbumDensity {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<i32>::sse_encode(match self {crate::config::album::AlbumDensity::Compact => { 0 }
+crate::config::album::AlbumDensity::Spacious => { 1 }
+ _ => { unimplemented!(""); }}, serializer);}
+                }
+                
+                impl SseEncode for crate::config::album::AlbumGridAspectRatio {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<i32>::sse_encode(match self {crate::config::album::AlbumGridAspectRatio::Grid11 => { 0 }
+crate::config::album::AlbumGridAspectRatio::Grid32 => { 1 }
+crate::config::album::AlbumGridAspectRatio::Grid43 => { 2 }
+crate::config::album::AlbumGridAspectRatio::Grid169 => { 3 }
+ _ => { unimplemented!(""); }}, serializer);}
+                }
+                
+                impl SseEncode for crate::config::album::AlbumGridOrientation {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<i32>::sse_encode(match self {crate::config::album::AlbumGridOrientation::Portrait => { 0 }
+crate::config::album::AlbumGridOrientation::Landscape => { 1 }
+ _ => { unimplemented!(""); }}, serializer);}
+                }
+                
+                impl SseEncode for crate::config::album::AlbumSliverType {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<i32>::sse_encode(match self {crate::config::album::AlbumSliverType::Grid => { 0 }
+crate::config::album::AlbumSliverType::WaterfallFlow => { 1 }
+ _ => { unimplemented!(""); }}, serializer);}
+                }
+                
                 impl SseEncode for crate::config::app_persistent_state::AppPersistentState {
                     // Codec=Sse (Serialization based), see doc to use other codecs
                     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<Option<bool>>::sse_encode(self.is_agree_agreement, serializer);
@@ -6960,6 +7142,10 @@ crate::config::plugin::AddedCustomAccountResult::Err(field0) => { <i32>::sse_enc
 <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_encode(self.top_ranked_account, serializer);
 <Option<Vec<crate::config::game::DeviceGameAccount>>>::sse_encode(self.added_custom_account, serializer);
 <Option<Vec<crate::config::game::DeviceGameAccountNote>>>::sse_encode(self.account_note, serializer);
+<Option<crate::config::album::AlbumSliverType>>::sse_encode(self.album_sliver, serializer);
+<Option<crate::config::album::AlbumGridOrientation>>::sse_encode(self.album_grid_orientation, serializer);
+<Option<crate::config::album::AlbumGridAspectRatio>>::sse_encode(self.album_grid_aspect_ratio, serializer);
+<Option<crate::config::album::AlbumDensity>>::sse_encode(self.album_density, serializer);
 <std::collections::HashMap<String, String>>::sse_encode(self.unknown_field, serializer);}
                 }
                 
@@ -7981,6 +8167,38 @@ crate::config::plugin::NES::RegisterScript => { 4 }
                     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<bool>::sse_encode(self.is_some(), serializer);
                 if let Some(value) = self {
                     <String>::sse_encode(value, serializer);
+                }}
+                }
+                
+                impl SseEncode for Option<crate::config::album::AlbumDensity> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<bool>::sse_encode(self.is_some(), serializer);
+                if let Some(value) = self {
+                    <crate::config::album::AlbumDensity>::sse_encode(value, serializer);
+                }}
+                }
+                
+                impl SseEncode for Option<crate::config::album::AlbumGridAspectRatio> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<bool>::sse_encode(self.is_some(), serializer);
+                if let Some(value) = self {
+                    <crate::config::album::AlbumGridAspectRatio>::sse_encode(value, serializer);
+                }}
+                }
+                
+                impl SseEncode for Option<crate::config::album::AlbumGridOrientation> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<bool>::sse_encode(self.is_some(), serializer);
+                if let Some(value) = self {
+                    <crate::config::album::AlbumGridOrientation>::sse_encode(value, serializer);
+                }}
+                }
+                
+                impl SseEncode for Option<crate::config::album::AlbumSliverType> {
+                    // Codec=Sse (Serialization based), see doc to use other codecs
+                    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {<bool>::sse_encode(self.is_some(), serializer);
+                if let Some(value) = self {
+                    <crate::config::album::AlbumSliverType>::sse_encode(value, serializer);
                 }}
                 }
                 

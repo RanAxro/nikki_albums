@@ -5,3 +5,4 @@ pub mod hot_update;
 pub mod plugin;
 pub mod rules;
 pub mod game;
+pub mod album;

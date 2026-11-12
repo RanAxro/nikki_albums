@@ -4,6 +4,7 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import 'album.dart';
 import 'game.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
@@ -25,6 +26,10 @@ sealed class AppPersistentState with _$AppPersistentState {
     List<DeviceGameAccount>? topRankedAccount,
     List<DeviceGameAccount>? addedCustomAccount,
     List<DeviceGameAccountNote>? accountNote,
+    AlbumSliverType? albumSliver,
+    AlbumGridOrientation? albumGridOrientation,
+    AlbumGridAspectRatio? albumGridAspectRatio,
+    AlbumDensity? albumDensity,
     required Map<String, String> unknownField,
   }) = _AppPersistentState;
   static AppPersistentState fromJson({required String json}) => RustLib

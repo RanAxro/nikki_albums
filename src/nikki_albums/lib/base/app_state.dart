@@ -2,6 +2,7 @@
 import "package:nikki_albums_annotation/nikki_albums_annotation.dart";
 import "package:nikki_albums/gen/rust/config/app_persistent_state.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
+import "package:nikki_albums/gen/rust/config/album.dart";
 
 import "dart:ui";
 
@@ -87,6 +88,36 @@ final _accountNote = AppStateItemDefine<List<DeviceGameAccountNote>, Persistent>
   readPersistent: (d, p) => p.accountNote ?? d,
   writePersistent: (v, p) => p.copyWith(accountNote: v),
 );
+
+@AppStateDefine("相册布局")
+final _albumSliver = AppStateItemDefine<AlbumSliverType, Persistent>(
+  defaultValue: AlbumSliverType.grid,
+  readPersistent: (d, p) => p.albumSliver ?? d,
+  writePersistent: (v, p) => p.copyWith(albumSliver: v),
+);
+
+@AppStateDefine("相册网格比例方向")
+final _albumGridOrientation = AppStateItemDefine<AlbumGridOrientation, Persistent>(
+  defaultValue: AlbumGridOrientation.landscape,
+  readPersistent: (d, p) => p.albumGridOrientation ?? d,
+  writePersistent: (v, p) => p.copyWith(albumGridOrientation: v),
+);
+
+@AppStateDefine("相册网格宽高比")
+final _albumGridAspectRatio = AppStateItemDefine<AlbumGridAspectRatio, Persistent>(
+  defaultValue: AlbumGridAspectRatio.grid11,
+  readPersistent: (d, p) => p.albumGridAspectRatio ?? d,
+  writePersistent: (v, p) => p.copyWith(albumGridAspectRatio: v),
+);
+
+@AppStateDefine("相册间距密度")
+final _albumDensity = AppStateItemDefine<AlbumDensity, Persistent>(
+  defaultValue: AlbumDensity.compact,
+  readPersistent: (d, p) => p.albumDensity ?? d,
+  writePersistent: (v, p) => p.copyWith(albumDensity: v),
+);
+
+
 
 
 

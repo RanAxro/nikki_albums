@@ -8,6 +8,7 @@ import 'archive/archive.dart';
 import 'archive/error.dart';
 import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
+import 'config/album.dart';
 import 'config/app_persistent_state.dart';
 import 'config/common/platform.dart';
 import 'config/game.dart';
@@ -246,6 +247,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AddedCustomAccountResult dco_decode_added_custom_account_result(dynamic raw);
 
   @protected
+  AlbumDensity dco_decode_album_density(dynamic raw);
+
+  @protected
+  AlbumGridAspectRatio dco_decode_album_grid_aspect_ratio(dynamic raw);
+
+  @protected
+  AlbumGridOrientation dco_decode_album_grid_orientation(dynamic raw);
+
+  @protected
+  AlbumSliverType dco_decode_album_sliver_type(dynamic raw);
+
+  @protected
   AppPersistentState dco_decode_app_persistent_state(dynamic raw);
 
   @protected
@@ -267,6 +280,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AddedCustomAccountResult dco_decode_box_autoadd_added_custom_account_result(
     dynamic raw,
   );
+
+  @protected
+  AlbumDensity dco_decode_box_autoadd_album_density(dynamic raw);
+
+  @protected
+  AlbumGridAspectRatio dco_decode_box_autoadd_album_grid_aspect_ratio(
+    dynamic raw,
+  );
+
+  @protected
+  AlbumGridOrientation dco_decode_box_autoadd_album_grid_orientation(
+    dynamic raw,
+  );
+
+  @protected
+  AlbumSliverType dco_decode_box_autoadd_album_sliver_type(dynamic raw);
 
   @protected
   AppPersistentState dco_decode_box_autoadd_app_persistent_state(dynamic raw);
@@ -926,6 +955,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String? dco_decode_opt_String(dynamic raw);
 
   @protected
+  AlbumDensity? dco_decode_opt_box_autoadd_album_density(dynamic raw);
+
+  @protected
+  AlbumGridAspectRatio? dco_decode_opt_box_autoadd_album_grid_aspect_ratio(
+    dynamic raw,
+  );
+
+  @protected
+  AlbumGridOrientation? dco_decode_opt_box_autoadd_album_grid_orientation(
+    dynamic raw,
+  );
+
+  @protected
+  AlbumSliverType? dco_decode_opt_box_autoadd_album_sliver_type(dynamic raw);
+
+  @protected
   Area? dco_decode_opt_box_autoadd_area(dynamic raw);
 
   @protected
@@ -1439,6 +1484,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  AlbumDensity sse_decode_album_density(SseDeserializer deserializer);
+
+  @protected
+  AlbumGridAspectRatio sse_decode_album_grid_aspect_ratio(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumGridOrientation sse_decode_album_grid_orientation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumSliverType sse_decode_album_sliver_type(SseDeserializer deserializer);
+
+  @protected
   AppPersistentState sse_decode_app_persistent_state(
     SseDeserializer deserializer,
   );
@@ -1462,6 +1523,26 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AddedCustomAccountResult sse_decode_box_autoadd_added_custom_account_result(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumDensity sse_decode_box_autoadd_album_density(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumGridAspectRatio sse_decode_box_autoadd_album_grid_aspect_ratio(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumGridOrientation sse_decode_box_autoadd_album_grid_orientation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumSliverType sse_decode_box_autoadd_album_sliver_type(
     SseDeserializer deserializer,
   );
 
@@ -2279,6 +2360,26 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
+  AlbumDensity? sse_decode_opt_box_autoadd_album_density(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumGridAspectRatio? sse_decode_opt_box_autoadd_album_grid_aspect_ratio(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumGridOrientation? sse_decode_opt_box_autoadd_album_grid_orientation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AlbumSliverType? sse_decode_opt_box_autoadd_album_sliver_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer);
 
   @protected
@@ -2915,6 +3016,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_album_density(AlbumDensity self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_album_grid_aspect_ratio(
+    AlbumGridAspectRatio self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_album_grid_orientation(
+    AlbumGridOrientation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_album_sliver_type(
+    AlbumSliverType self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_app_persistent_state(
     AppPersistentState self,
     SseSerializer serializer,
@@ -2944,6 +3066,30 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_added_custom_account_result(
     AddedCustomAccountResult self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_album_density(
+    AlbumDensity self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_album_grid_aspect_ratio(
+    AlbumGridAspectRatio self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_album_grid_orientation(
+    AlbumGridOrientation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_album_sliver_type(
+    AlbumSliverType self,
     SseSerializer serializer,
   );
 
@@ -3996,6 +4142,30 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_density(
+    AlbumDensity? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_grid_aspect_ratio(
+    AlbumGridAspectRatio? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_grid_orientation(
+    AlbumGridOrientation? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_sliver_type(
+    AlbumSliverType? self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_opt_box_autoadd_area(Area? self, SseSerializer serializer);

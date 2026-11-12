@@ -102,6 +102,34 @@ class AccountNoteState
       _accountNote;
 }
 
+/// 相册布局
+class AlbumSliverState extends AppStateItem<AlbumSliverType, Persistent> {
+  @override
+  AppStateItemDefine<AlbumSliverType, Persistent> get _define => _albumSliver;
+}
+
+/// 相册网格比例方向
+class AlbumGridOrientationState
+    extends AppStateItem<AlbumGridOrientation, Persistent> {
+  @override
+  AppStateItemDefine<AlbumGridOrientation, Persistent> get _define =>
+      _albumGridOrientation;
+}
+
+/// 相册网格宽高比
+class AlbumGridAspectRatioState
+    extends AppStateItem<AlbumGridAspectRatio, Persistent> {
+  @override
+  AppStateItemDefine<AlbumGridAspectRatio, Persistent> get _define =>
+      _albumGridAspectRatio;
+}
+
+/// 相册间距密度
+class AlbumDensityState extends AppStateItem<AlbumDensity, Persistent> {
+  @override
+  AppStateItemDefine<AlbumDensity, Persistent> get _define => _albumDensity;
+}
+
 final _isAgreeAgreementProvider = NotifierProvider<IsAgreeAgreementState, bool>(
   IsAgreeAgreementState.new,
 );
@@ -147,6 +175,23 @@ final _accountNoteProvider =
       AccountNoteState.new,
     );
 
+final _albumSliverProvider =
+    NotifierProvider<AlbumSliverState, AlbumSliverType>(AlbumSliverState.new);
+
+final _albumGridOrientationProvider =
+    NotifierProvider<AlbumGridOrientationState, AlbumGridOrientation>(
+      AlbumGridOrientationState.new,
+    );
+
+final _albumGridAspectRatioProvider =
+    NotifierProvider<AlbumGridAspectRatioState, AlbumGridAspectRatio>(
+      AlbumGridAspectRatioState.new,
+    );
+
+final _albumDensityProvider = NotifierProvider<AlbumDensityState, AlbumDensity>(
+  AlbumDensityState.new,
+);
+
 const _appStateCopyWithSentinel = Object();
 
 /// 所有状态项的聚合数据，可以一次性读取全部状态。
@@ -181,6 +226,18 @@ class AppState {
   /// 账号备注
   final List<DeviceGameAccountNote> accountNote;
 
+  /// 相册布局
+  final AlbumSliverType albumSliver;
+
+  /// 相册网格比例方向
+  final AlbumGridOrientation albumGridOrientation;
+
+  /// 相册网格宽高比
+  final AlbumGridAspectRatio albumGridAspectRatio;
+
+  /// 相册间距密度
+  final AlbumDensity albumDensity;
+
   const AppState({
     required this.isAgreeAgreement,
     required this.isInitialStartup,
@@ -192,6 +249,10 @@ class AppState {
     required this.topRankedAccount,
     required this.addedCustomAccount,
     required this.accountNote,
+    required this.albumSliver,
+    required this.albumGridOrientation,
+    required this.albumGridAspectRatio,
+    required this.albumDensity,
   });
 
   AppState copyWith({
@@ -205,6 +266,10 @@ class AppState {
     List<DeviceGameAccount>? topRankedAccount,
     List<DeviceGameAccount>? addedCustomAccount,
     List<DeviceGameAccountNote>? accountNote,
+    AlbumSliverType? albumSliver,
+    AlbumGridOrientation? albumGridOrientation,
+    AlbumGridAspectRatio? albumGridAspectRatio,
+    AlbumDensity? albumDensity,
   }) {
     return AppState(
       isAgreeAgreement: isAgreeAgreement ?? this.isAgreeAgreement,
@@ -220,6 +285,10 @@ class AppState {
       topRankedAccount: topRankedAccount ?? this.topRankedAccount,
       addedCustomAccount: addedCustomAccount ?? this.addedCustomAccount,
       accountNote: accountNote ?? this.accountNote,
+      albumSliver: albumSliver ?? this.albumSliver,
+      albumGridOrientation: albumGridOrientation ?? this.albumGridOrientation,
+      albumGridAspectRatio: albumGridAspectRatio ?? this.albumGridAspectRatio,
+      albumDensity: albumDensity ?? this.albumDensity,
     );
   }
 }
@@ -242,6 +311,10 @@ class AppStateNotifier extends Notifier<AppState> {
       topRankedAccount: ref.watch(_topRankedAccountProvider),
       addedCustomAccount: ref.watch(_addedCustomAccountProvider),
       accountNote: ref.watch(_accountNoteProvider),
+      albumSliver: ref.watch(_albumSliverProvider),
+      albumGridOrientation: ref.watch(_albumGridOrientationProvider),
+      albumGridAspectRatio: ref.watch(_albumGridAspectRatioProvider),
+      albumDensity: ref.watch(_albumDensityProvider),
     );
   }
 
@@ -264,6 +337,10 @@ class AppStateNotifier extends Notifier<AppState> {
     List<DeviceGameAccount>? topRankedAccount,
     List<DeviceGameAccount>? addedCustomAccount,
     List<DeviceGameAccountNote>? accountNote,
+    AlbumSliverType? albumSliver,
+    AlbumGridOrientation? albumGridOrientation,
+    AlbumGridAspectRatio? albumGridAspectRatio,
+    AlbumDensity? albumDensity,
   }) {
     final newState = state.copyWith(
       isAgreeAgreement: isAgreeAgreement,
@@ -276,6 +353,10 @@ class AppStateNotifier extends Notifier<AppState> {
       topRankedAccount: topRankedAccount,
       addedCustomAccount: addedCustomAccount,
       accountNote: accountNote,
+      albumSliver: albumSliver,
+      albumGridOrientation: albumGridOrientation,
+      albumGridAspectRatio: albumGridAspectRatio,
+      albumDensity: albumDensity,
     );
     state = newState;
     return newState;
@@ -293,6 +374,10 @@ class AppStateNotifier extends Notifier<AppState> {
     ref.read(_topRankedAccountProvider.notifier).fromPersistent(p);
     ref.read(_addedCustomAccountProvider.notifier).fromPersistent(p);
     ref.read(_accountNoteProvider.notifier).fromPersistent(p);
+    ref.read(_albumSliverProvider.notifier).fromPersistent(p);
+    ref.read(_albumGridOrientationProvider.notifier).fromPersistent(p);
+    ref.read(_albumGridAspectRatioProvider.notifier).fromPersistent(p);
+    ref.read(_albumDensityProvider.notifier).fromPersistent(p);
   }
 
   /// 把所有状态项写回持久化数据。
@@ -308,6 +393,10 @@ class AppStateNotifier extends Notifier<AppState> {
     res = ref.read(_topRankedAccountProvider.notifier).toPersistent(res);
     res = ref.read(_addedCustomAccountProvider.notifier).toPersistent(res);
     res = ref.read(_accountNoteProvider.notifier).toPersistent(res);
+    res = ref.read(_albumSliverProvider.notifier).toPersistent(res);
+    res = ref.read(_albumGridOrientationProvider.notifier).toPersistent(res);
+    res = ref.read(_albumGridAspectRatioProvider.notifier).toPersistent(res);
+    res = ref.read(_albumDensityProvider.notifier).toPersistent(res);
     return res;
   }
 }

@@ -33,6 +33,7 @@ zip = "8.6.0"
 chrono = "0.4.45"
 rayon = "1.12.0"
 
+#turbojpeg = "1.5.1"
 zune-jpeg = "0.5.15"
 zune-png = { version = "0.5.2", default-features = false, features = ["std"] }
 zune-core = "0.5.1"

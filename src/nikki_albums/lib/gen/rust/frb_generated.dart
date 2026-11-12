@@ -8,6 +8,7 @@ import 'archive/archive.dart';
 import 'archive/error.dart';
 import 'archive/file.dart';
 import 'archive/zip/zip_archive.dart';
+import 'config/album.dart';
 import 'config/app_persistent_state.dart';
 import 'config/common/platform.dart';
 import 'config/game.dart';
@@ -6809,11 +6810,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AlbumDensity dco_decode_album_density(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return AlbumDensity.values[raw as int];
+  }
+
+  @protected
+  AlbumGridAspectRatio dco_decode_album_grid_aspect_ratio(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return AlbumGridAspectRatio.values[raw as int];
+  }
+
+  @protected
+  AlbumGridOrientation dco_decode_album_grid_orientation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return AlbumGridOrientation.values[raw as int];
+  }
+
+  @protected
+  AlbumSliverType dco_decode_album_sliver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return AlbumSliverType.values[raw as int];
+  }
+
+  @protected
   AppPersistentState dco_decode_app_persistent_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 12)
-      throw Exception('unexpected arr length: expect 12 but see ${arr.length}');
+    if (arr.length != 16)
+      throw Exception('unexpected arr length: expect 16 but see ${arr.length}');
     return AppPersistentState(
       isAgreeAgreement: dco_decode_opt_box_autoadd_bool(arr[0]),
       isInitialStartup: dco_decode_opt_box_autoadd_bool(arr[1]),
@@ -6828,7 +6853,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       topRankedAccount: dco_decode_opt_list_device_game_account(arr[8]),
       addedCustomAccount: dco_decode_opt_list_device_game_account(arr[9]),
       accountNote: dco_decode_opt_list_device_game_account_note(arr[10]),
-      unknownField: dco_decode_Map_String_String_None(arr[11]),
+      albumSliver: dco_decode_opt_box_autoadd_album_sliver_type(arr[11]),
+      albumGridOrientation: dco_decode_opt_box_autoadd_album_grid_orientation(
+        arr[12],
+      ),
+      albumGridAspectRatio: dco_decode_opt_box_autoadd_album_grid_aspect_ratio(
+        arr[13],
+      ),
+      albumDensity: dco_decode_opt_box_autoadd_album_density(arr[14]),
+      unknownField: dco_decode_Map_String_String_None(arr[15]),
     );
   }
 
@@ -6890,6 +6923,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_added_custom_account_result(raw);
+  }
+
+  @protected
+  AlbumDensity dco_decode_box_autoadd_album_density(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_album_density(raw);
+  }
+
+  @protected
+  AlbumGridAspectRatio dco_decode_box_autoadd_album_grid_aspect_ratio(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_album_grid_aspect_ratio(raw);
+  }
+
+  @protected
+  AlbumGridOrientation dco_decode_box_autoadd_album_grid_orientation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_album_grid_orientation(raw);
+  }
+
+  @protected
+  AlbumSliverType dco_decode_box_autoadd_album_sliver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_album_sliver_type(raw);
   }
 
   @protected
@@ -8773,6 +8834,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AlbumDensity? dco_decode_opt_box_autoadd_album_density(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_album_density(raw);
+  }
+
+  @protected
+  AlbumGridAspectRatio? dco_decode_opt_box_autoadd_album_grid_aspect_ratio(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_album_grid_aspect_ratio(raw);
+  }
+
+  @protected
+  AlbumGridOrientation? dco_decode_opt_box_autoadd_album_grid_orientation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_album_grid_orientation(raw);
+  }
+
+  @protected
+  AlbumSliverType? dco_decode_opt_box_autoadd_album_sliver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_album_sliver_type(raw);
+  }
+
+  @protected
   Area? dco_decode_opt_box_autoadd_area(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_area(raw);
@@ -10154,6 +10247,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AlbumDensity sse_decode_album_density(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return AlbumDensity.values[inner];
+  }
+
+  @protected
+  AlbumGridAspectRatio sse_decode_album_grid_aspect_ratio(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return AlbumGridAspectRatio.values[inner];
+  }
+
+  @protected
+  AlbumGridOrientation sse_decode_album_grid_orientation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return AlbumGridOrientation.values[inner];
+  }
+
+  @protected
+  AlbumSliverType sse_decode_album_sliver_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return AlbumSliverType.values[inner];
+  }
+
+  @protected
   AppPersistentState sse_decode_app_persistent_state(
     SseDeserializer deserializer,
   ) {
@@ -10181,6 +10306,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_accountNote = sse_decode_opt_list_device_game_account_note(
       deserializer,
     );
+    var var_albumSliver = sse_decode_opt_box_autoadd_album_sliver_type(
+      deserializer,
+    );
+    var var_albumGridOrientation =
+        sse_decode_opt_box_autoadd_album_grid_orientation(deserializer);
+    var var_albumGridAspectRatio =
+        sse_decode_opt_box_autoadd_album_grid_aspect_ratio(deserializer);
+    var var_albumDensity = sse_decode_opt_box_autoadd_album_density(
+      deserializer,
+    );
     var var_unknownField = sse_decode_Map_String_String_None(deserializer);
     return AppPersistentState(
       isAgreeAgreement: var_isAgreeAgreement,
@@ -10194,6 +10329,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       topRankedAccount: var_topRankedAccount,
       addedCustomAccount: var_addedCustomAccount,
       accountNote: var_accountNote,
+      albumSliver: var_albumSliver,
+      albumGridOrientation: var_albumGridOrientation,
+      albumGridAspectRatio: var_albumGridAspectRatio,
+      albumDensity: var_albumDensity,
       unknownField: var_unknownField,
     );
   }
@@ -10265,6 +10404,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_added_custom_account_result(deserializer));
+  }
+
+  @protected
+  AlbumDensity sse_decode_box_autoadd_album_density(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_album_density(deserializer));
+  }
+
+  @protected
+  AlbumGridAspectRatio sse_decode_box_autoadd_album_grid_aspect_ratio(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_album_grid_aspect_ratio(deserializer));
+  }
+
+  @protected
+  AlbumGridOrientation sse_decode_box_autoadd_album_grid_orientation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_album_grid_orientation(deserializer));
+  }
+
+  @protected
+  AlbumSliverType sse_decode_box_autoadd_album_sliver_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_album_sliver_type(deserializer));
   }
 
   @protected
@@ -12604,6 +12775,58 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AlbumDensity? sse_decode_opt_box_autoadd_album_density(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_album_density(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  AlbumGridAspectRatio? sse_decode_opt_box_autoadd_album_grid_aspect_ratio(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_album_grid_aspect_ratio(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  AlbumGridOrientation? sse_decode_opt_box_autoadd_album_grid_orientation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_album_grid_orientation(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  AlbumSliverType? sse_decode_opt_box_autoadd_album_sliver_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_album_sliver_type(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   Area? sse_decode_opt_box_autoadd_area(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -14337,6 +14560,39 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_album_density(AlbumDensity self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_album_grid_aspect_ratio(
+    AlbumGridAspectRatio self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_album_grid_orientation(
+    AlbumGridOrientation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_album_sliver_type(
+    AlbumSliverType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
   void sse_encode_app_persistent_state(
     AppPersistentState self,
     SseSerializer serializer,
@@ -14359,6 +14615,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       serializer,
     );
     sse_encode_opt_list_device_game_account_note(self.accountNote, serializer);
+    sse_encode_opt_box_autoadd_album_sliver_type(self.albumSliver, serializer);
+    sse_encode_opt_box_autoadd_album_grid_orientation(
+      self.albumGridOrientation,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_album_grid_aspect_ratio(
+      self.albumGridAspectRatio,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_album_density(self.albumDensity, serializer);
     sse_encode_Map_String_String_None(self.unknownField, serializer);
   }
 
@@ -14417,6 +14683,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_added_custom_account_result(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_album_density(
+    AlbumDensity self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_album_density(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_album_grid_aspect_ratio(
+    AlbumGridAspectRatio self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_album_grid_aspect_ratio(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_album_grid_orientation(
+    AlbumGridOrientation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_album_grid_orientation(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_album_sliver_type(
+    AlbumSliverType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_album_sliver_type(self, serializer);
   }
 
   @protected
@@ -16564,6 +16866,58 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_density(
+    AlbumDensity? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_album_density(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_grid_aspect_ratio(
+    AlbumGridAspectRatio? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_album_grid_aspect_ratio(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_grid_orientation(
+    AlbumGridOrientation? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_album_grid_orientation(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_album_sliver_type(
+    AlbumSliverType? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_album_sliver_type(self, serializer);
     }
   }
 

@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Serialize, Deserialize};
+use crate::config::album::{AlbumDensity, AlbumGridAspectRatio, AlbumGridOrientation, AlbumSliverType};
 use crate::config::game::{DeviceGame, DeviceGameSession, DeviceGameAccount, DeviceGameAccountNote};
 use crate::impl_json_frb;
 
@@ -20,6 +21,11 @@ pub struct AppPersistentState{
   pub top_ranked_account: Option<Vec<DeviceGameAccount>>,
   pub added_custom_account: Option<Vec<DeviceGameAccount>>,
   pub account_note: Option<Vec<DeviceGameAccountNote>>,
+
+  pub album_sliver: Option<AlbumSliverType>,
+  pub album_grid_orientation: Option<AlbumGridOrientation>,
+  pub album_grid_aspect_ratio: Option<AlbumGridAspectRatio>,
+  pub album_density: Option<AlbumDensity>,
 
   #[serde(flatten)]
   pub unknown_field: HashMap<String, String>,
