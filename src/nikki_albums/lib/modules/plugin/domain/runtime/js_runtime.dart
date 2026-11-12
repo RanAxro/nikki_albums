@@ -31,6 +31,11 @@ class PluginJSRuntime extends PluginRuntime{
   }
 
   @override
+  JsEvalResult evaluateSync(String code){
+    return _runtime.evaluate(code);
+  }
+
+  @override
   Future<void> dispose() async{
     _runtime.dispose();
   }

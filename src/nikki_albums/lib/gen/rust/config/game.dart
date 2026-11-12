@@ -190,13 +190,14 @@ class DeviceGamePickerConfig {
           pickerTitle == other.pickerTitle;
 }
 
-class DeviceGameSession {
-  final DeviceGame deviceGame;
-  final String? account;
-  final String? album;
-
-  const DeviceGameSession({required this.deviceGame, this.account, this.album});
-
+@freezed
+sealed class DeviceGameSession with _$DeviceGameSession {
+  const DeviceGameSession._();
+  const factory DeviceGameSession({
+    required DeviceGame deviceGame,
+    String? account,
+    GameAlbum? album,
+  }) = _DeviceGameSession;
   static DeviceGameSession fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameDeviceGameSessionFromJson(json: json);
 
@@ -216,18 +217,24 @@ class DeviceGameSession {
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigGameDeviceGameSessionToJsonPretty(that: this);
+}
+
+class GameAlbum {
+  final String category;
+  final String albumType;
+
+  const GameAlbum({required this.category, required this.albumType});
 
   @override
-  int get hashCode => deviceGame.hashCode ^ account.hashCode ^ album.hashCode;
+  int get hashCode => category.hashCode ^ albumType.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DeviceGameSession &&
+      other is GameAlbum &&
           runtimeType == other.runtimeType &&
-          deviceGame == other.deviceGame &&
-          account == other.account &&
-          album == other.album;
+          category == other.category &&
+          albumType == other.albumType;
 }
 
 enum GameConnectionMethod { native, adb, shizuku }

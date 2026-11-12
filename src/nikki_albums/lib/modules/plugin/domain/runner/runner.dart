@@ -76,5 +76,29 @@ abstract class PluginRunner{
 
   Future<AddedCustomAccountResult> notifyAddCustomAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account);
 
+  Future<Map<String, List<String>>> searchAlbum(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account);
+
+  TextRule getAlbumCategoryName(DeviceGame deviceGame, String? account, String category);
+
+  TextRule getAlbumName(DeviceGame deviceGame, String? account, String category, String albumType);
+
+  TextRule? getAlbumDescription(DeviceGame deviceGame, String? account, String category, String albumType);
+
+  IconRule? getAlbumIcon(DeviceGame deviceGame, String? account, String category, String albumType);
+
+  Future<String> getAlbumPath(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType);
+
+  Future<String?> getAlbumMediaIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath);
+
+  Future<String?> getAlbumMediaIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath);
+
+  Future<String?> getAlbumMediaCoverIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath);
+
+  Future<String?> getAlbumMediaCoverIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath);
+
+  Future<String?> getAlbumMediaThumbnailIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath);
+
+  Future<String?> getAlbumMediaThumbnailIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath);
+
   void dispose();
 }

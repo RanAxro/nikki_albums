@@ -9,5 +9,7 @@ abstract class PluginRuntime{
 
   Future<void> evaluate(String code);
 
+  void evaluateSync(String code);
+
   Future<void> dispose();
 }

@@ -103,6 +103,18 @@ globalThis.api = {
       getAccountName: gameInfo.get_account_name,
       getAccountAvatar: gameInfo.get_account_avatar,
       onAddCustomAccount: gameInfo.custom_account_adder && gameInfo.custom_account_adder.on_add_custom_account,
+      searchAlbum: gameInfo.search_album,
+      getAlbumCategoryName: gameInfo.get_album_category_name,
+      getAlbumName: gameInfo.get_album_name,
+      getAlbumDescription: gameInfo.get_album_description,
+      getAlbumIcon: gameInfo.get_album_icon,
+      getAlbumPath: gameInfo.get_album_path,
+      getAlbumMediaIfFile: gameInfo.get_album_media_if_file,
+      getAlbumMediaIfDir: gameInfo.get_album_media_if_dir,
+      getAlbumMediaCoverIfFile: gameInfo.get_album_media_cover_if_file,
+      getAlbumMediaCoverIfDir: gameInfo.get_album_media_cover_if_dir,
+      getAlbumMediaThumbnailIfFile: gameInfo.get_album_media_thumbnail_if_file,
+      getAlbumMediaThumbnailIfDir: gameInfo.get_album_media_thumbnail_if_dir,
     };
   },
 

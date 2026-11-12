@@ -55,7 +55,7 @@ $Res call({
 });
 
 
-
+$DeviceGameSessionCopyWith<$Res>? get selectedDeviceGame;
 
 }
 /// @nodoc
@@ -85,7 +85,19 @@ as List<DeviceGameAccountNote>?,unknownField: null == unknownField ? _self.unkno
 as Map<String, String>,
   ));
 }
+/// Create a copy of AppPersistentState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DeviceGameSessionCopyWith<$Res>? get selectedDeviceGame {
+    if (_self.selectedDeviceGame == null) {
+    return null;
+  }
 
+  return $DeviceGameSessionCopyWith<$Res>(_self.selectedDeviceGame!, (value) {
+    return _then(_self.copyWith(selectedDeviceGame: value));
+  });
+}
 }
 
 
@@ -323,7 +335,7 @@ $Res call({
 });
 
 
-
+@override $DeviceGameSessionCopyWith<$Res>? get selectedDeviceGame;
 
 }
 /// @nodoc
@@ -354,7 +366,19 @@ as Map<String, String>,
   ));
 }
 
+/// Create a copy of AppPersistentState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DeviceGameSessionCopyWith<$Res>? get selectedDeviceGame {
+    if (_self.selectedDeviceGame == null) {
+    return null;
+  }
 
+  return $DeviceGameSessionCopyWith<$Res>(_self.selectedDeviceGame!, (value) {
+    return _then(_self.copyWith(selectedDeviceGame: value));
+  });
+}
 }
 
 // dart format on

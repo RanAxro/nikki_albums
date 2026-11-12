@@ -63,14 +63,20 @@ pub struct DeviceGame{
 impl_json_frb!(DeviceGame);
 impl_vec_json_frb!(DeviceGame);
 
+#[frb(dart_metadata=("freezed"))]
 #[derive(Serialize, Deserialize)]
 pub struct DeviceGameSession{
   pub device_game: DeviceGame,
   pub account: Option<String>,
-  pub album: Option<String>,
+  pub album: Option<GameAlbum>,
 }
 
 impl_json_frb!(DeviceGameSession);
+#[derive(Serialize, Deserialize)]
+pub struct GameAlbum{
+  pub category: String,
+  pub album_type: String,
+}
 
 #[derive(Serialize, Deserialize)]
 pub struct DeviceGameAccount{

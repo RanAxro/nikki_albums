@@ -283,6 +283,288 @@ as String,
 }
 
 /// @nodoc
+mixin _$DeviceGameSession {
+
+ DeviceGame get deviceGame; String? get account; GameAlbum? get album;
+/// Create a copy of DeviceGameSession
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeviceGameSessionCopyWith<DeviceGameSession> get copyWith => _$DeviceGameSessionCopyWithImpl<DeviceGameSession>(this as DeviceGameSession, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as DeviceGameSession;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceGameSession&&(identical(other.deviceGame, _this.deviceGame) || other.deviceGame == _this.deviceGame)&&(identical(other.account, _this.account) || other.account == _this.account)&&(identical(other.album, _this.album) || other.album == _this.album));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as DeviceGameSession;
+  return Object.hash(runtimeType,_this.deviceGame,_this.account,_this.album);
+}
+
+@override
+String toString() {
+  final _this = this as DeviceGameSession;
+  return 'DeviceGameSession(deviceGame: ${_this.deviceGame}, account: ${_this.account}, album: ${_this.album})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DeviceGameSessionCopyWith<$Res>  {
+  factory $DeviceGameSessionCopyWith(DeviceGameSession value, $Res Function(DeviceGameSession) _then) = _$DeviceGameSessionCopyWithImpl;
+@useResult
+$Res call({
+ DeviceGame deviceGame, String? account, GameAlbum? album
+});
+
+
+$DeviceGameCopyWith<$Res> get deviceGame;
+
+}
+/// @nodoc
+class _$DeviceGameSessionCopyWithImpl<$Res>
+    implements $DeviceGameSessionCopyWith<$Res> {
+  _$DeviceGameSessionCopyWithImpl(this._self, this._then);
+
+  final DeviceGameSession _self;
+  final $Res Function(DeviceGameSession) _then;
+
+/// Create a copy of DeviceGameSession
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? deviceGame = null,Object? account = freezed,Object? album = freezed,}) {
+  return _then(DeviceGameSession(
+deviceGame: null == deviceGame ? _self.deviceGame : deviceGame // ignore: cast_nullable_to_non_nullable
+as DeviceGame,account: freezed == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
+as String?,album: freezed == album ? _self.album : album // ignore: cast_nullable_to_non_nullable
+as GameAlbum?,
+  ));
+}
+/// Create a copy of DeviceGameSession
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DeviceGameCopyWith<$Res> get deviceGame {
+  
+  return $DeviceGameCopyWith<$Res>(_self.deviceGame, (value) {
+    return _then(_self.copyWith(deviceGame: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [DeviceGameSession].
+extension DeviceGameSessionPatterns on DeviceGameSession {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DeviceGameSession value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DeviceGameSession() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DeviceGameSession value)  $default,){
+final _that = this;
+switch (_that) {
+case _DeviceGameSession():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DeviceGameSession value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DeviceGameSession() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeviceGame deviceGame,  String? account,  GameAlbum? album)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DeviceGameSession() when $default != null:
+return $default(_that.deviceGame,_that.account,_that.album);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeviceGame deviceGame,  String? account,  GameAlbum? album)  $default,) {final _that = this;
+switch (_that) {
+case _DeviceGameSession():
+return $default(_that.deviceGame,_that.account,_that.album);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeviceGame deviceGame,  String? account,  GameAlbum? album)?  $default,) {final _that = this;
+switch (_that) {
+case _DeviceGameSession() when $default != null:
+return $default(_that.deviceGame,_that.account,_that.album);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _DeviceGameSession extends DeviceGameSession {
+  const _DeviceGameSession({required this.deviceGame, this.account, this.album}): super._();
+  
+
+@override final  DeviceGame deviceGame;
+@override final  String? account;
+@override final  GameAlbum? album;
+
+/// Create a copy of DeviceGameSession
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DeviceGameSessionCopyWith<_DeviceGameSession> get copyWith => __$DeviceGameSessionCopyWithImpl<_DeviceGameSession>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceGameSession&&(identical(other.deviceGame, deviceGame) || other.deviceGame == deviceGame)&&(identical(other.account, account) || other.account == account)&&(identical(other.album, album) || other.album == album));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,deviceGame,account,album);
+}
+
+@override
+String toString() {
+    return 'DeviceGameSession(deviceGame: $deviceGame, account: $account, album: $album)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DeviceGameSessionCopyWith<$Res> implements $DeviceGameSessionCopyWith<$Res> {
+  factory _$DeviceGameSessionCopyWith(_DeviceGameSession value, $Res Function(_DeviceGameSession) _then) = __$DeviceGameSessionCopyWithImpl;
+@override @useResult
+$Res call({
+ DeviceGame deviceGame, String? account, GameAlbum? album
+});
+
+
+@override $DeviceGameCopyWith<$Res> get deviceGame;
+
+}
+/// @nodoc
+class __$DeviceGameSessionCopyWithImpl<$Res>
+    implements _$DeviceGameSessionCopyWith<$Res> {
+  __$DeviceGameSessionCopyWithImpl(this._self, this._then);
+
+  final _DeviceGameSession _self;
+  final $Res Function(_DeviceGameSession) _then;
+
+/// Create a copy of DeviceGameSession
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? deviceGame = null,Object? account = freezed,Object? album = freezed,}) {
+  return _then(_DeviceGameSession(
+deviceGame: null == deviceGame ? _self.deviceGame : deviceGame // ignore: cast_nullable_to_non_nullable
+as DeviceGame,account: freezed == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
+as String?,album: freezed == album ? _self.album : album // ignore: cast_nullable_to_non_nullable
+as GameAlbum?,
+  ));
+}
+
+/// Create a copy of DeviceGameSession
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DeviceGameCopyWith<$Res> get deviceGame {
+  
+  return $DeviceGameCopyWith<$Res>(_self.deviceGame, (value) {
+    return _then(_self.copyWith(deviceGame: value));
+  });
+}
+}
+
+/// @nodoc
 mixin _$GameRegistry {
 
  String get ownership; String get uuid; TextRule get name; IconRule get icon; GameConnectionMethod get connectMethod; DeviceGamePickerConfig? get deviceGamePicker; CustomAccountAdderConfig? get customAccountAdder;

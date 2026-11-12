@@ -116,16 +116,148 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    print(AddedCustomAccountResult.fromJson(json: result.stringResult));
     return AddedCustomAccountResult.fromJson(json: result.stringResult);
   }
 
-  static Future<List<String>> searchAlbum(PluginJSRuntime runtime, String uuid, DeviceGame deviceGame, String? account) async{
-    final String gameJson = deviceGame.toJson();
-    final JsEvalResult result = await PluginJSCaller.searchAlbum(runtime, uuid, gameJson, account);
+  static Future<Map<String, List<String>>> searchAlbum(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.searchAlbum(runtime, uuid, fsHandlerId, deviceGameJson, account);
+    PluginFileSystemHandler.remove(fsHandlerId);
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return List<String>.from(jsonDecode(result.stringResult));
+    return (jsonDecode(result.stringResult) as Map).map((k, v) => MapEntry(k as String, List<String>.from(v as List)));
+  }
+
+  static TextRule getAlbumCategoryName(PluginJSRuntime runtime, DeviceGame deviceGame, String? account, String category){
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = PluginJSCaller.getAlbumCategoryName(runtime, uuid, deviceGameJson, account, category);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return TextRule.fromJson(json: result.stringResult);
+  }
+
+  static TextRule getAlbumName(PluginJSRuntime runtime, DeviceGame deviceGame, String? account, String category, String albumType){
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = PluginJSCaller.getAlbumName(runtime, uuid, deviceGameJson, account, category, albumType);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return TextRule.fromJson(json: result.stringResult);
+  }
+
+  static TextRule? getAlbumDescription(PluginJSRuntime runtime, DeviceGame deviceGame, String? account, String category, String albumType){
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = PluginJSCaller.getAlbumDescription(runtime, uuid, deviceGameJson, account, category, albumType);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    if(result.stringResult == "null"){
+      return null;
+    }
+    return TextRule.fromJson(json: result.stringResult);
+  }
+
+  static IconRule? getAlbumIcon(PluginJSRuntime runtime, DeviceGame deviceGame, String? account, String category, String albumType){
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = PluginJSCaller.getAlbumIcon(runtime, uuid, deviceGameJson, account, category, albumType);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    if(result.stringResult == "null"){
+      return null;
+    }
+    return IconRule.fromJson(json: result.stringResult);
+  }
+
+  static Future<String> getAlbumPath(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumPath(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
+  }
+
+  static Future<String?> getAlbumMediaIfFile(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumMediaIfFile(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType, filePath);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
+  }
+
+  static Future<String?> getAlbumMediaIfDir(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumMediaIfDir(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType, dirPath);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
+  }
+
+  static Future<String?> getAlbumMediaCoverIfFile(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumMediaCoverIfFile(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType, filePath);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
+  }
+
+  static Future<String?> getAlbumMediaCoverIfDir(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumMediaCoverIfDir(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType, dirPath);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
+  }
+
+  static Future<String?> getAlbumMediaThumbnailIfFile(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumMediaThumbnailIfFile(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType, filePath);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
+  }
+
+  static Future<String?> getAlbumMediaThumbnailIfDir(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath) async{
+    final String fsHandlerId = PluginFileSystemHandler.add(fsHandler);
+    final String uuid = GameHelper.getUuidByUniqueId(deviceGame.uniqueId);
+    final String deviceGameJson = deviceGame.toJson();
+    final JsEvalResult result = await PluginJSCaller.getAlbumMediaThumbnailIfDir(runtime, uuid, fsHandlerId, deviceGameJson, account, category, albumType, dirPath);
+    PluginFileSystemHandler.remove(fsHandlerId);
+    if(result.isError){
+      throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
+    }
+    return result.stringResult;
   }
 }

@@ -48,6 +48,66 @@ class PluginJSRunner extends PluginRunner{
   }
 
   @override
+  Future<Map<String, List<String>>> searchAlbum(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account){
+    return PluginJSBridge.searchAlbum(_runtime, fsHandler, deviceGame, account);
+  }
+
+  @override
+  TextRule getAlbumCategoryName(DeviceGame deviceGame, String? account, String category){
+    return PluginJSBridge.getAlbumCategoryName(_runtime, deviceGame, account, category);
+  }
+
+  @override
+  TextRule getAlbumName(DeviceGame deviceGame, String? account, String category, String albumType){
+    return PluginJSBridge.getAlbumName(_runtime, deviceGame, account, category, albumType);
+  }
+
+  @override
+  TextRule? getAlbumDescription(DeviceGame deviceGame, String? account, String category, String albumType){
+    return PluginJSBridge.getAlbumDescription(_runtime, deviceGame, account, category, albumType);
+  }
+
+  @override
+  IconRule? getAlbumIcon(DeviceGame deviceGame, String? account, String category, String albumType){
+    return PluginJSBridge.getAlbumIcon(_runtime, deviceGame, account, category, albumType);
+  }
+
+  @override
+  Future<String> getAlbumPath(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType){
+    return PluginJSBridge.getAlbumPath(_runtime, fsHandler, deviceGame, account, category, albumType);
+  }
+
+  @override
+  Future<String?> getAlbumMediaIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath){
+    return PluginJSBridge.getAlbumMediaIfFile(_runtime, fsHandler, deviceGame, account, category, albumType, filePath);
+  }
+
+  @override
+  Future<String?> getAlbumMediaIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath){
+    return PluginJSBridge.getAlbumMediaIfDir(_runtime, fsHandler, deviceGame, account, category, albumType, dirPath);
+  }
+
+  @override
+  Future<String?> getAlbumMediaCoverIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath){
+    return PluginJSBridge.getAlbumMediaCoverIfFile(_runtime, fsHandler, deviceGame, account, category, albumType, filePath);
+  }
+
+  @override
+  Future<String?> getAlbumMediaCoverIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath){
+    return PluginJSBridge.getAlbumMediaCoverIfDir(_runtime, fsHandler, deviceGame, account, category, albumType, dirPath);
+  }
+
+  @override
+  Future<String?> getAlbumMediaThumbnailIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath){
+    return PluginJSBridge.getAlbumMediaThumbnailIfFile(_runtime, fsHandler, deviceGame, account, category, albumType, filePath);
+  }
+
+  @override
+  Future<String?> getAlbumMediaThumbnailIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath){
+    return PluginJSBridge.getAlbumMediaThumbnailIfDir(_runtime, fsHandler, deviceGame, account, category, albumType, dirPath);
+  }
+
+  @override
   void dispose(){
     _runtime.dispose();
   }

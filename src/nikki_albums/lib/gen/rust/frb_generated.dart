@@ -7027,6 +7027,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GameAlbum dco_decode_box_autoadd_game_album(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_game_album(raw);
+  }
+
+  @protected
   GameRegistry dco_decode_box_autoadd_game_registry(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_game_registry(raw);
@@ -7604,7 +7610,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return DeviceGameSession(
       deviceGame: dco_decode_device_game(arr[0]),
       account: dco_decode_opt_String(arr[1]),
-      album: dco_decode_opt_String(arr[2]),
+      album: dco_decode_opt_box_autoadd_game_album(arr[2]),
     );
   }
 
@@ -7746,6 +7752,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  GameAlbum dco_decode_game_album(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return GameAlbum(
+      category: dco_decode_String(arr[0]),
+      albumType: dco_decode_String(arr[1]),
+    );
   }
 
   @protected
@@ -8831,6 +8849,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_dye_color_params(raw);
+  }
+
+  @protected
+  GameAlbum? dco_decode_opt_box_autoadd_game_album(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_game_album(raw);
   }
 
   @protected
@@ -10400,6 +10424,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  GameAlbum sse_decode_box_autoadd_game_album(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_game_album(deserializer));
+  }
+
+  @protected
   GameRegistry sse_decode_box_autoadd_game_registry(
     SseDeserializer deserializer,
   ) {
@@ -11099,7 +11129,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_deviceGame = sse_decode_device_game(deserializer);
     var var_account = sse_decode_opt_String(deserializer);
-    var var_album = sse_decode_opt_String(deserializer);
+    var var_album = sse_decode_opt_box_autoadd_game_album(deserializer);
     return DeviceGameSession(
       deviceGame: var_deviceGame,
       account: var_account,
@@ -11239,6 +11269,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  GameAlbum sse_decode_game_album(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_category = sse_decode_String(deserializer);
+    var var_albumType = sse_decode_String(deserializer);
+    return GameAlbum(category: var_category, albumType: var_albumType);
   }
 
   @protected
@@ -12698,6 +12736,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_dye_color_params(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  GameAlbum? sse_decode_opt_box_autoadd_game_album(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_game_album(deserializer));
     } else {
       return null;
     }
@@ -14549,6 +14600,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_game_album(
+    GameAlbum self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_game_album(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_game_registry(
     GameRegistry self,
     SseSerializer serializer,
@@ -15221,7 +15281,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_device_game(self.deviceGame, serializer);
     sse_encode_opt_String(self.account, serializer);
-    sse_encode_opt_String(self.album, serializer);
+    sse_encode_opt_box_autoadd_game_album(self.album, serializer);
   }
 
   @protected
@@ -15340,6 +15400,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case FilterParams_None():
         sse_encode_i_32(1, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_game_album(GameAlbum self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.category, serializer);
+    sse_encode_String(self.albumType, serializer);
   }
 
   @protected
@@ -16634,6 +16701,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_dye_color_params(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_game_album(
+    GameAlbum? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_game_album(self, serializer);
     }
   }
 
