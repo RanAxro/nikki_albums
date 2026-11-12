@@ -186,7 +186,7 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 
   static Future<String?> getAlbumMediaIfFile(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath) async{
@@ -198,7 +198,7 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 
   static Future<String?> getAlbumMediaIfDir(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath) async{
@@ -210,7 +210,7 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 
   static Future<String?> getAlbumMediaCoverIfFile(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath) async{
@@ -222,7 +222,7 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 
   static Future<String?> getAlbumMediaCoverIfDir(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath) async{
@@ -234,7 +234,7 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 
   static Future<String?> getAlbumMediaThumbnailIfFile(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath) async{
@@ -246,7 +246,7 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 
   static Future<String?> getAlbumMediaThumbnailIfDir(PluginJSRuntime runtime, NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath) async{
@@ -258,6 +258,6 @@ abstract final class PluginJSBridge{
     if(result.isError){
       throw PluginScriptMalfunctionedException(scriptType: "JS", error: result.stringResult);
     }
-    return result.stringResult;
+    return jsonDecode(result.stringResult);
   }
 }
