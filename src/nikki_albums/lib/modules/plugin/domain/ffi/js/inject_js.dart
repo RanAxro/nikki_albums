@@ -283,8 +283,13 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission, PluginEventH
   });
 
   final String ffi = await rootBundle.loadString("assets/plugin/ffi_js.js");
-  final JsEvalResult result = js.evaluate(ffi);
-  if(result.isError){
-    throw InjectionFailedException("JS", result.stringResult);
+  final JsEvalResult ffiResult = js.evaluate(ffi);
+  if(ffiResult.isError){
+    throw InjectionFailedException("JS", ffiResult.stringResult);
+  }
+  final String ffiModel = await rootBundle.loadString("assets/plugin/ffi_model_js.js");
+  final JsEvalResult ffiModelResult = js.evaluate(ffiModel);
+  if(ffiModelResult.isError){
+    throw InjectionFailedException("JS", ffiModelResult.stringResult);
   }
 }
