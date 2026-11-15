@@ -7528,7 +7528,7 @@ impl SseDecode for crate::config::game::DeviceGameSession {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_deviceGame = <crate::config::game::DeviceGame>::sse_decode(deserializer);
         let mut var_account = <Option<String>>::sse_decode(deserializer);
-        let mut var_album = <Option<crate::config::game::GameAlbum>>::sse_decode(deserializer);
+        let mut var_album = <Option<String>>::sse_decode(deserializer);
         return crate::config::game::DeviceGameSession {
             device_game: var_deviceGame,
             account: var_account,
@@ -7717,18 +7717,6 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::FilterParam
                 unimplemented!("");
             }
         }
-    }
-}
-
-impl SseDecode for crate::config::game::GameAlbum {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_category = <String>::sse_decode(deserializer);
-        let mut var_albumType = <String>::sse_decode(deserializer);
-        return crate::config::game::GameAlbum {
-            category: var_category,
-            album_type: var_albumType,
-        };
     }
 }
 
@@ -9491,17 +9479,6 @@ impl SseDecode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
                     deserializer,
                 ),
             );
-        } else {
-            return None;
-        }
-    }
-}
-
-impl SseDecode for Option<crate::config::game::GameAlbum> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::config::game::GameAlbum>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -12190,27 +12167,6 @@ impl
     > for crate::nuan5_params::structs::nikki_photo_params::FilterParams
 {
     fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::FilterParams {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::config::game::GameAlbum {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.category.into_into_dart().into_dart(),
-            self.album_type.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::config::game::GameAlbum
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::config::game::GameAlbum>
-    for crate::config::game::GameAlbum
-{
-    fn into_into_dart(self) -> crate::config::game::GameAlbum {
         self
     }
 }
@@ -15150,7 +15106,7 @@ impl SseEncode for crate::config::game::DeviceGameSession {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <crate::config::game::DeviceGame>::sse_encode(self.device_game, serializer);
         <Option<String>>::sse_encode(self.account, serializer);
-        <Option<crate::config::game::GameAlbum>>::sse_encode(self.album, serializer);
+        <Option<String>>::sse_encode(self.album, serializer);
     }
 }
 
@@ -15306,14 +15262,6 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::FilterParam
                 unimplemented!("");
             }
         }
-    }
-}
-
-impl SseEncode for crate::config::game::GameAlbum {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.category, serializer);
-        <String>::sse_encode(self.album_type, serializer);
     }
 }
 
@@ -16719,16 +16667,6 @@ impl SseEncode for Option<crate::nuan5_params::structs::nikki_photo_params::DyeC
             <crate::nuan5_params::structs::nikki_photo_params::DyeColorParams>::sse_encode(
                 value, serializer,
             );
-        }
-    }
-}
-
-impl SseEncode for Option<crate::config::game::GameAlbum> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <bool>::sse_encode(self.is_some(), serializer);
-        if let Some(value) = self {
-            <crate::config::game::GameAlbum>::sse_encode(value, serializer);
         }
     }
 }

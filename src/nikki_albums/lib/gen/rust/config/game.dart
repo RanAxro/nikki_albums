@@ -196,7 +196,7 @@ sealed class DeviceGameSession with _$DeviceGameSession {
   const factory DeviceGameSession({
     required DeviceGame deviceGame,
     String? account,
-    GameAlbum? album,
+    String? album,
   }) = _DeviceGameSession;
   static DeviceGameSession fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameDeviceGameSessionFromJson(json: json);
@@ -217,24 +217,6 @@ sealed class DeviceGameSession with _$DeviceGameSession {
 
   String toJsonPretty() => RustLib.instance.api
       .crateConfigGameDeviceGameSessionToJsonPretty(that: this);
-}
-
-class GameAlbum {
-  final String category;
-  final String albumType;
-
-  const GameAlbum({required this.category, required this.albumType});
-
-  @override
-  int get hashCode => category.hashCode ^ albumType.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is GameAlbum &&
-          runtimeType == other.runtimeType &&
-          category == other.category &&
-          albumType == other.albumType;
 }
 
 enum GameConnectionMethod { native, adb, shizuku }

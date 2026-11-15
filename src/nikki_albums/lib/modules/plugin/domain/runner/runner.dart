@@ -64,9 +64,9 @@ abstract class PluginRunner{
 
   Future<PickedDeviceGameResult> notifyPickDeviceGame(String uniqueId, NGeneralFileSystem fsHandler, String name);
 
-  Future<TextRule> getDeviceGameName(DeviceGame deviceGame);
+  TextRule getDeviceGameName(DeviceGame deviceGame);
 
-  Future<IconRule?> getDeviceGameIcon(DeviceGame deviceGame);
+  IconRule? getDeviceGameIcon(DeviceGame deviceGame);
 
   Future<List<String>> searchAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame);
 
@@ -76,29 +76,31 @@ abstract class PluginRunner{
 
   Future<AddedCustomAccountResult> notifyAddCustomAccount(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String account);
 
-  Future<Map<String, List<String>>> searchAlbum(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account);
+  Future<List<String>> searchAlbum(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account);
+
+  String getAlbumCategory(DeviceGame deviceGame, String? account, String albumType);
 
   TextRule getAlbumCategoryName(DeviceGame deviceGame, String? account, String category);
 
-  TextRule getAlbumName(DeviceGame deviceGame, String? account, String category, String albumType);
+  TextRule getAlbumName(DeviceGame deviceGame, String? account, String albumType);
 
-  TextRule? getAlbumDescription(DeviceGame deviceGame, String? account, String category, String albumType);
+  TextRule? getAlbumDescription(DeviceGame deviceGame, String? account, String albumType);
 
-  IconRule? getAlbumIcon(DeviceGame deviceGame, String? account, String category, String albumType);
+  IconRule? getAlbumIcon(DeviceGame deviceGame, String? account, String albumType);
 
-  Future<String> getAlbumPath(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType);
+  Future<String> getAlbumPath(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType);
 
-  Future<String?> getAlbumMediaIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath);
+  Future<String?> getAlbumMediaIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType, String filePath);
 
-  Future<String?> getAlbumMediaIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath);
+  Future<String?> getAlbumMediaIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType, String dirPath);
 
-  Future<String?> getAlbumMediaCoverIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath);
+  Future<String?> getAlbumMediaCoverIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType, String filePath);
 
-  Future<String?> getAlbumMediaCoverIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath);
+  Future<String?> getAlbumMediaCoverIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType, String dirPath);
 
-  Future<String?> getAlbumMediaThumbnailIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String filePath);
+  Future<String?> getAlbumMediaThumbnailIfFile(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType, String filePath);
 
-  Future<String?> getAlbumMediaThumbnailIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String category, String albumType, String dirPath);
+  Future<String?> getAlbumMediaThumbnailIfDir(NGeneralFileSystem fsHandler, DeviceGame deviceGame, String? account, String albumType, String dirPath);
 
   void dispose();
 }

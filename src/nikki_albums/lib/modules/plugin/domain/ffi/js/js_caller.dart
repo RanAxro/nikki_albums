@@ -31,19 +31,15 @@ abstract final class PluginJSCaller{
     ''');
   }
 
-  static Future<JsEvalResult> getDeviceGameName(PluginJSRuntime runtime, String uuid, String deviceGameJson){
-    return runtime.evaluate('''
-      (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameName($deviceGameJson)
-      ))();
+  static JsEvalResult getDeviceGameName(PluginJSRuntime runtime, String uuid, String deviceGameJson){
+    return runtime.evaluateSync('''
+      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameName($deviceGameJson));
     ''');
   }
 
-  static Future<JsEvalResult> getDeviceGameIcon(PluginJSRuntime runtime, String uuid, String deviceGameJson){
-    return runtime.evaluate('''
-      (async () => JSON.stringify(
-        await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameIcon($deviceGameJson)
-      ))();
+  static JsEvalResult getDeviceGameIcon(PluginJSRuntime runtime, String uuid, String deviceGameJson){
+    return runtime.evaluateSync('''
+      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getDeviceGameIcon($deviceGameJson));
     ''');
   }
 
@@ -99,95 +95,101 @@ abstract final class PluginJSCaller{
     ''');
   }
 
+  static JsEvalResult getAlbumCategory(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String albumType){
+    return runtime.evaluateSync('''
+      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumCategory($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}));
+    ''');
+  }
+
   static JsEvalResult getAlbumCategoryName(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String category){
     return runtime.evaluateSync('''
       JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumCategoryName($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}));
     ''');
   }
 
-  static JsEvalResult getAlbumName(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String category, String albumType){
+  static JsEvalResult getAlbumName(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String albumType){
     return runtime.evaluateSync('''
-      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumName($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}));
+      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumName($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}));
     ''');
   }
 
-  static JsEvalResult getAlbumDescription(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String category, String albumType){
+  static JsEvalResult getAlbumDescription(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String albumType){
     return runtime.evaluateSync('''
-      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumDescription($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}));
+      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumDescription($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}));
     ''');
   }
 
-  static JsEvalResult getAlbumIcon(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String category, String albumType){
+  static JsEvalResult getAlbumIcon(PluginJSRuntime runtime, String uuid, String deviceGameJson, String? account, String albumType){
     return runtime.evaluateSync('''
-      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumIcon($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}));
+      JSON.stringify(globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumIcon($deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}));
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumPath(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType){
+  static Future<JsEvalResult> getAlbumPath(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumPath(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumPath(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumMediaIfFile(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType, String filePath){
+  static Future<JsEvalResult> getAlbumMediaIfFile(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType, String filePath){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaIfFile(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}, ${jsonEncode(filePath)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaIfFile(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}, ${jsonEncode(filePath)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumMediaIfDir(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType, String dirPath){
+  static Future<JsEvalResult> getAlbumMediaIfDir(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType, String dirPath){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaIfDir(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}, ${jsonEncode(dirPath)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaIfDir(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}, ${jsonEncode(dirPath)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumMediaCoverIfFile(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType, String filePath){
+  static Future<JsEvalResult> getAlbumMediaCoverIfFile(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType, String filePath){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaCoverIfFile(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}, ${jsonEncode(filePath)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaCoverIfFile(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}, ${jsonEncode(filePath)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumMediaCoverIfDir(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType, String dirPath){
+  static Future<JsEvalResult> getAlbumMediaCoverIfDir(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType, String dirPath){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaCoverIfDir(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}, ${jsonEncode(dirPath)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaCoverIfDir(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}, ${jsonEncode(dirPath)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumMediaThumbnailIfFile(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType, String filePath){
+  static Future<JsEvalResult> getAlbumMediaThumbnailIfFile(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType, String filePath){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaThumbnailIfFile(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}, ${jsonEncode(filePath)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaThumbnailIfFile(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}, ${jsonEncode(filePath)});
         return JSON.stringify(res);
       })();
     ''');
   }
 
-  static Future<JsEvalResult> getAlbumMediaThumbnailIfDir(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String category, String albumType, String dirPath){
+  static Future<JsEvalResult> getAlbumMediaThumbnailIfDir(PluginJSRuntime runtime, String uuid, String fsHandlerId, String deviceGameJson, String? account, String albumType, String dirPath){
     return runtime.evaluate('''
       (async () => {
         let fsHandler = new FileSystemHandler(${jsonEncode(fsHandlerId)});
-        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaThumbnailIfDir(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(category)}, ${jsonEncode(albumType)}, ${jsonEncode(dirPath)});
+        const res = await globalThis.__apiBridge.game[${jsonEncode(uuid)}].getAlbumMediaThumbnailIfDir(fsHandler, $deviceGameJson, ${jsonEncode(account)}, ${jsonEncode(albumType)}, ${jsonEncode(dirPath)});
         return JSON.stringify(res);
       })();
     ''');

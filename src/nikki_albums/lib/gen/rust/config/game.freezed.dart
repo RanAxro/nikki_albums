@@ -285,7 +285,7 @@ as String,
 /// @nodoc
 mixin _$DeviceGameSession {
 
- DeviceGame get deviceGame; String? get account; GameAlbum? get album;
+ DeviceGame get deviceGame; String? get account; String? get album;
 /// Create a copy of DeviceGameSession
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -321,7 +321,7 @@ abstract mixin class $DeviceGameSessionCopyWith<$Res>  {
   factory $DeviceGameSessionCopyWith(DeviceGameSession value, $Res Function(DeviceGameSession) _then) = _$DeviceGameSessionCopyWithImpl;
 @useResult
 $Res call({
- DeviceGame deviceGame, String? account, GameAlbum? album
+ DeviceGame deviceGame, String? account, String? album
 });
 
 
@@ -343,7 +343,7 @@ class _$DeviceGameSessionCopyWithImpl<$Res>
 deviceGame: null == deviceGame ? _self.deviceGame : deviceGame // ignore: cast_nullable_to_non_nullable
 as DeviceGame,account: freezed == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
 as String?,album: freezed == album ? _self.album : album // ignore: cast_nullable_to_non_nullable
-as GameAlbum?,
+as String?,
   ));
 }
 /// Create a copy of DeviceGameSession
@@ -434,7 +434,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeviceGame deviceGame,  String? account,  GameAlbum? album)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeviceGame deviceGame,  String? account,  String? album)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DeviceGameSession() when $default != null:
 return $default(_that.deviceGame,_that.account,_that.album);case _:
@@ -455,7 +455,7 @@ return $default(_that.deviceGame,_that.account,_that.album);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeviceGame deviceGame,  String? account,  GameAlbum? album)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeviceGame deviceGame,  String? account,  String? album)  $default,) {final _that = this;
 switch (_that) {
 case _DeviceGameSession():
 return $default(_that.deviceGame,_that.account,_that.album);}
@@ -472,7 +472,7 @@ return $default(_that.deviceGame,_that.account,_that.album);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeviceGame deviceGame,  String? account,  GameAlbum? album)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeviceGame deviceGame,  String? account,  String? album)?  $default,) {final _that = this;
 switch (_that) {
 case _DeviceGameSession() when $default != null:
 return $default(_that.deviceGame,_that.account,_that.album);case _:
@@ -492,7 +492,7 @@ class _DeviceGameSession extends DeviceGameSession {
 
 @override final  DeviceGame deviceGame;
 @override final  String? account;
-@override final  GameAlbum? album;
+@override final  String? album;
 
 /// Create a copy of DeviceGameSession
 /// with the given fields replaced by the non-null parameter values.
@@ -526,7 +526,7 @@ abstract mixin class _$DeviceGameSessionCopyWith<$Res> implements $DeviceGameSes
   factory _$DeviceGameSessionCopyWith(_DeviceGameSession value, $Res Function(_DeviceGameSession) _then) = __$DeviceGameSessionCopyWithImpl;
 @override @useResult
 $Res call({
- DeviceGame deviceGame, String? account, GameAlbum? album
+ DeviceGame deviceGame, String? account, String? album
 });
 
 
@@ -548,7 +548,7 @@ class __$DeviceGameSessionCopyWithImpl<$Res>
 deviceGame: null == deviceGame ? _self.deviceGame : deviceGame // ignore: cast_nullable_to_non_nullable
 as DeviceGame,account: freezed == account ? _self.account : account // ignore: cast_nullable_to_non_nullable
 as String?,album: freezed == album ? _self.album : album // ignore: cast_nullable_to_non_nullable
-as GameAlbum?,
+as String?,
   ));
 }
 

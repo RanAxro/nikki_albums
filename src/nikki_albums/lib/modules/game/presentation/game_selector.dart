@@ -36,7 +36,7 @@ class GameSelectorPopoverMenu extends HookConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref){
     final PluginManager manager = ref.watch(pluginManagerProvider);
-    final List<GameRegistry> registeredGame = ref.watch(pluginRegisteredGameProvider);
+    final List<GameRegistry> registeredGame = ref.watch(appStateProvider.select((s) => s.registerGame));
 
     final Map<String, Future> tasks = {};
     final Map<String, Widget> widgetCache = {};
@@ -184,43 +184,18 @@ List<FTileGroupMixin> buildDeviceGameMenu({
       tileBuilder: (BuildContext context, int index){
         final DeviceGame deviceGame = deviceGames[index];
 
-        final String getGameIconTaskId = "task-$uniqueId-${deviceGame.toJson()}-getDeviceGameIcon";
-        tasks[getGameIconTaskId] ??= runner.getDeviceGameIcon(deviceGame);
-        final Widget prefix = FutureBuilder(
-          future: tasks[getGameIconTaskId] as Future<IconRule?>,
-          builder: (BuildContext context, AsyncSnapshot<IconRule?> snapshot){
-            if(snapshot.connectionState == ConnectionState.none || snapshot.connectionState == ConnectionState.waiting){
-              return const FCircularProgress();
-            }
-            if(snapshot.hasError){
-              return const SizedBox();
-            }
-            if(snapshot.data == null){
-              return const SizedBox();
-            }
-            final String deviceGameIconCacheId = "widgetCache-$uniqueId-${deviceGame.installPath}-icon";
-            widgetCache[deviceGameIconCacheId] ??= IconRuleHelper.resolve(snapshot.data!, reader: runner.reader);
-            return SizedBox(
-              height: 20,
-              child: widgetCache[deviceGameIconCacheId],
-            );
-          },
+        final IconRule? deviceGameIcon = runner.getDeviceGameIcon(deviceGame);
+        final String deviceGameIconCacheId = "widgetCache-$uniqueId-${deviceGame.installPath}-icon";
+        if(deviceGameIcon != null){
+          widgetCache[deviceGameIconCacheId] ??= IconRuleHelper.resolve(deviceGameIcon, reader: runner.reader);
+        }
+        final Widget prefix = deviceGameIcon == null ? const SizedBox() : SizedBox(
+          height: 20,
+          child: widgetCache[deviceGameIconCacheId],
         );
 
-        final String getGameNameTaskId = "task-$uniqueId-${deviceGame.toJson()}-getDeviceGameName";
-        tasks[getGameNameTaskId] ??= runner.getDeviceGameName(deviceGame);
-        final Widget title = FutureBuilder(
-          future: tasks[getGameNameTaskId] as Future<TextRule>,
-          builder: (BuildContext context, AsyncSnapshot<TextRule> snapshot){
-            if(snapshot.connectionState == ConnectionState.none || snapshot.connectionState == ConnectionState.waiting){
-              return const FCircularProgress();
-            }
-            if(snapshot.hasError || snapshot.data == null){
-              return Text(deviceGame.installPath);
-            }
-            return Text(TextRuleHelper.resolve(snapshot.data!, context: context, pluginUuid: pluginUuid));
-          },
-        );
+        final TextRule deviceGameName = runner.getDeviceGameName(deviceGame);
+        final Widget title = Text(TextRuleHelper.resolve(deviceGameName, context: context, pluginUuid: pluginUuid));
 
         final String searchAccountTaskId = "task-$uniqueId-${deviceGame.toJson()}-searchAccount";
         tasks[searchAccountTaskId] ??= runner.searchAccount(NNativeFileSystem.connect(deviceGame.installPath), deviceGame);

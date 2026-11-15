@@ -104,6 +104,7 @@ globalThis.api = {
       getAccountAvatar: gameInfo.get_account_avatar,
       onAddCustomAccount: gameInfo.custom_account_adder && gameInfo.custom_account_adder.on_add_custom_account,
       searchAlbum: gameInfo.search_album,
+      getAlbumCategory: gameInfo.get_album_category,
       getAlbumCategoryName: gameInfo.get_album_category_name,
       getAlbumName: gameInfo.get_album_name,
       getAlbumDescription: gameInfo.get_album_description,

@@ -68,15 +68,10 @@ impl_vec_json_frb!(DeviceGame);
 pub struct DeviceGameSession{
   pub device_game: DeviceGame,
   pub account: Option<String>,
-  pub album: Option<GameAlbum>,
+  pub album: Option<String>,
 }
 
 impl_json_frb!(DeviceGameSession);
-#[derive(Serialize, Deserialize)]
-pub struct GameAlbum{
-  pub category: String,
-  pub album_type: String,
-}
 
 #[derive(Serialize, Deserialize)]
 pub struct DeviceGameAccount{

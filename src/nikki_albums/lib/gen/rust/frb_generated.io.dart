@@ -369,9 +369,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
 
   @protected
-  GameAlbum dco_decode_box_autoadd_game_album(dynamic raw);
-
-  @protected
   GameRegistry dco_decode_box_autoadd_game_registry(dynamic raw);
 
   @protected
@@ -626,9 +623,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   FilterParams dco_decode_filter_params(dynamic raw);
-
-  @protected
-  GameAlbum dco_decode_game_album(dynamic raw);
 
   @protected
   GameConnectionMethod dco_decode_game_connection_method(dynamic raw);
@@ -1009,9 +1003,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
-
-  @protected
-  GameAlbum? dco_decode_opt_box_autoadd_game_album(dynamic raw);
 
   @protected
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
@@ -1640,9 +1631,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  GameAlbum sse_decode_box_autoadd_game_album(SseDeserializer deserializer);
-
-  @protected
   GameRegistry sse_decode_box_autoadd_game_registry(
     SseDeserializer deserializer,
   );
@@ -1969,9 +1957,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
-
-  @protected
-  GameAlbum sse_decode_game_album(SseDeserializer deserializer);
 
   @protected
   GameConnectionMethod sse_decode_game_connection_method(
@@ -2424,11 +2409,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DyeColorParams? sse_decode_opt_box_autoadd_dye_color_params(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  GameAlbum? sse_decode_opt_box_autoadd_game_album(
     SseDeserializer deserializer,
   );
 
@@ -3211,12 +3191,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_game_album(
-    GameAlbum self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_box_autoadd_game_registry(
     GameRegistry self,
     SseSerializer serializer,
@@ -3644,9 +3618,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_game_album(GameAlbum self, SseSerializer serializer);
 
   @protected
   void sse_encode_game_connection_method(
@@ -4224,12 +4195,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_box_autoadd_dye_color_params(
     DyeColorParams? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_opt_box_autoadd_game_album(
-    GameAlbum? self,
     SseSerializer serializer,
   );
 
