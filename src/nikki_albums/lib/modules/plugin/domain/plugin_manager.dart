@@ -2,7 +2,10 @@ export "plugin_manager_state.dart";
 
 import "plugin_manager_state.dart";
 import "plugin.dart";
+import "package:nikki_albums/base/app_state.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
+
+import "dart:convert";
 
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:path/path.dart" as p;
@@ -55,6 +58,36 @@ class PluginManager{
         final PluginInfo info = await reader.readInfo();
         final PluginRunner runner = await plugin.getRunner(PluginEventHandler(
           onRequestPluginUuid: () => info.uuid,
+          onRegisterLoc: (Map<String, String> localeAndPathMap) async{
+            final Map<String, Map<String, dynamic>> localizations = {};
+            for(final MapEntry<String, String> entry in localeAndPathMap.entries){
+              final String value = await reader.readFileAsString(entry.value);
+              final Map<String, dynamic> loc = jsonDecode(value);
+              localizations[entry.key] = loc;
+            }
+
+            _ref.read(appStateProvider.notifier).setAppStateWith(
+              registerLoc: {
+                ..._ref.read(appStateProvider).registerLoc,
+                info.uuid: localizations,
+              },
+            );
+          },
+          onRegisterGlobalLoc: (Map<String, String> localeAndPathMap) async{
+            final Map<String, Map<String, dynamic>> localizations = {};
+            for(final MapEntry<String, String> entry in localeAndPathMap.entries){
+              final String value = await reader.readFileAsString(entry.value);
+              final Map<String, dynamic> loc = jsonDecode(value);
+              localizations[entry.key] = loc;
+            }
+
+            _ref.read(appStateProvider.notifier).setAppStateWith(
+              registerLoc: {
+                ..._ref.read(appStateProvider).registerGlobalLoc,
+                info.uuid: localizations,
+              },
+            );
+          },
           onRegisterGame: (GameRegistry gameRegistry){
             registeredGame.add(gameRegistry);
             if(!loading){

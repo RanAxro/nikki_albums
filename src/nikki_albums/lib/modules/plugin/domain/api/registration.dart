@@ -6,29 +6,12 @@ import "package:nikki_albums/gen/rust/config/game.dart";
 import "dart:convert";
 
 
-void registerLoc(Map<String, String> localeAndPathMap){
-  print("register sus $localeAndPathMap");
+void registerLoc(Map<String, String> localeAndPathMap, PluginEventHandler eventHandler){
+  eventHandler.onRegisterLoc(localeAndPathMap);
 }
 
-void registerGlobalLoc(Map<String, String> localeAndPathMap){
-
-}
-
-void registerIcon(List<String> iconPaths){
-  print("register icon sus $iconPaths");
-
-}
-
-void registerGlobalIcon(List<String> iconPaths){
-
-}
-
-void registerFont(Map<String, String> fontFamilyAndPathMap){
-
-}
-
-void registerGlobalFont(Map<String, String> fontFamilyAndPathMap){
-
+void registerGlobalLoc(Map<String, String> localeAndPathMap, PluginEventHandler eventHandler){
+  eventHandler.onRegisterGlobalLoc(localeAndPathMap);
 }
 
 void registerGame(Map info, PluginEventHandler eventHandler){

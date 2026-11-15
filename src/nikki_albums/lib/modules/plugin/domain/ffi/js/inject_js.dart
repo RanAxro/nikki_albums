@@ -23,42 +23,14 @@ Future<void> injectJS(JavascriptRuntime js, Set<Object> permission, PluginEventH
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
       canCall: () => r.canRegisterLoc(permission),
-      fn: () => r.registerLoc(params),
+      fn: () => r.registerLoc(params, eventHandler),
     );
   });
   js.onMessage("api.registerGlobalLoc", (dynamic args){
     final Map<String, String> params = Map<String, String>.from(args);
     return requirePermissionThenRun(
       canCall: () => r.canRegisterGlobalLoc(permission),
-      fn: () => r.registerGlobalLoc(params),
-    );
-  });
-  js.onMessage("api.registerIcon", (dynamic args){
-    final List<String> params = List<String>.from(args);
-    return requirePermissionThenRun(
-      canCall: () => r.canRegisterIcon(permission),
-      fn: () => r.registerIcon(params),
-    );
-  });
-  js.onMessage("api.registerGlobalIcon", (dynamic args){
-    final List<String> params = List<String>.from(args);
-    return requirePermissionThenRun(
-      canCall: () => r.canRegisterGlobalIcon(permission),
-      fn: () => r.registerGlobalIcon(params),
-    );
-  });
-  js.onMessage("api.registerFont", (dynamic args){
-    final Map<String, String> params = Map<String, String>.from(args);
-    return requirePermissionThenRun(
-      canCall: () => r.canRegisterFont(permission),
-      fn: () => r.registerFont(params),
-    );
-  });
-  js.onMessage("api.registerGlobalFont", (dynamic args){
-    final Map<String, String> params = Map<String, String>.from(args);
-    return requirePermissionThenRun(
-      canCall: () => r.canRegisterGlobalFont(permission),
-      fn: () => r.registerGlobalFont(params),
+      fn: () => r.registerGlobalLoc(params, eventHandler),
     );
   });
   js.onMessage("api.registerGame", (dynamic args){
