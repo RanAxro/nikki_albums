@@ -41,7 +41,7 @@ void deepMergeMapsInPlace(
 /// 第一个 Map 会被直接修改，后面的作为增量
 void mergeMultipleMapsInPlace(
   Map<String, dynamic> base,
-  List<Map<String, dynamic>> overlays,
+  Iterable<Map<String, dynamic>> overlays,
 ){
   for(final overlay in overlays){
     deepMergeMapsInPlace(base, overlay);

@@ -135,6 +135,10 @@ void appMain(List<String> args) async{
   // );
 
   runApp(AppScope(
+    initAppPersistentState: null,
+    onAppPersistentStateChange: (p){
+      print(p.toJson());
+    },
     configuration: configuration,
     // child: FScaffold(
     //   scaffoldStyle: .delta(

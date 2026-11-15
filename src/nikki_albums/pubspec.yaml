@@ -176,6 +176,8 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
   assets:
+    - assets/localizations/
+
     - assets/lang/
     - assets/lang/infinity_nikki/
     - assets/lang/infinity_nikki/other/

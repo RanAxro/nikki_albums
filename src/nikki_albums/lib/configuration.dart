@@ -1,6 +1,5 @@
 
 import "package:nikki_albums/base/app_configuration.dart";
-import "modules/app_base/domain/lang_asset_loader.dart";
 
 import "dart:ui";
 
@@ -21,8 +20,7 @@ const AppConfiguration configuration = AppConfiguration(
       Locale("th", "TH"),
       Locale("zh", "TW"),
     ],
-    path: "assets/lang",
+    path: "assets/localizations",
     fallbackLocale: Locale("en", "US"),
-    assetLoader: AppLangAssetLoader(),
   ),
 );
