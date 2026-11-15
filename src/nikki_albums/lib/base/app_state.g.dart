@@ -130,6 +130,38 @@ class AlbumDensityState extends AppStateItem<AlbumDensity, Persistent> {
   AppStateItemDefine<AlbumDensity, Persistent> get _define => _albumDensity;
 }
 
+/// 从插件注册的语言 <uuid, <locale, loc>>
+class RegisterLocState
+    extends
+        AppStateItem<
+          Map<String, Map<String, Map<String, dynamic>>>,
+          Persistent
+        > {
+  @override
+  AppStateItemDefine<Map<String, Map<String, Map<String, dynamic>>>, Persistent>
+  get _define => _registerLoc;
+}
+
+/// 从插件注册的全局语言 <uuid, <locale, loc>>
+class RegisterGlobalLocState
+    extends
+        AppStateItem<
+          Map<String, Map<String, Map<String, dynamic>>>,
+          Persistent
+        > {
+  @override
+  AppStateItemDefine<Map<String, Map<String, Map<String, dynamic>>>, Persistent>
+  get _define => _registerGlobalLoc;
+}
+
+/// 从插件注册的GameRegistry <plugin uuid, registry>
+class RegisterGameState
+    extends AppStateItem<Map<String, GameRegistry>, Persistent> {
+  @override
+  AppStateItemDefine<Map<String, GameRegistry>, Persistent> get _define =>
+      _registerGame;
+}
+
 final _isAgreeAgreementProvider = NotifierProvider<IsAgreeAgreementState, bool>(
   IsAgreeAgreementState.new,
 );
@@ -192,6 +224,23 @@ final _albumDensityProvider = NotifierProvider<AlbumDensityState, AlbumDensity>(
   AlbumDensityState.new,
 );
 
+final _registerLocProvider =
+    NotifierProvider<
+      RegisterLocState,
+      Map<String, Map<String, Map<String, dynamic>>>
+    >(RegisterLocState.new);
+
+final _registerGlobalLocProvider =
+    NotifierProvider<
+      RegisterGlobalLocState,
+      Map<String, Map<String, Map<String, dynamic>>>
+    >(RegisterGlobalLocState.new);
+
+final _registerGameProvider =
+    NotifierProvider<RegisterGameState, Map<String, GameRegistry>>(
+      RegisterGameState.new,
+    );
+
 const _appStateCopyWithSentinel = Object();
 
 /// 所有状态项的聚合数据，可以一次性读取全部状态。
@@ -238,6 +287,15 @@ class AppState {
   /// 相册间距密度
   final AlbumDensity albumDensity;
 
+  /// 从插件注册的语言 <uuid, <locale, loc>>
+  final Map<String, Map<String, Map<String, dynamic>>> registerLoc;
+
+  /// 从插件注册的全局语言 <uuid, <locale, loc>>
+  final Map<String, Map<String, Map<String, dynamic>>> registerGlobalLoc;
+
+  /// 从插件注册的GameRegistry <plugin uuid, registry>
+  final Map<String, GameRegistry> registerGame;
+
   const AppState({
     required this.isAgreeAgreement,
     required this.isInitialStartup,
@@ -253,6 +311,9 @@ class AppState {
     required this.albumGridOrientation,
     required this.albumGridAspectRatio,
     required this.albumDensity,
+    required this.registerLoc,
+    required this.registerGlobalLoc,
+    required this.registerGame,
   });
 
   AppState copyWith({
@@ -270,6 +331,9 @@ class AppState {
     AlbumGridOrientation? albumGridOrientation,
     AlbumGridAspectRatio? albumGridAspectRatio,
     AlbumDensity? albumDensity,
+    Map<String, Map<String, Map<String, dynamic>>>? registerLoc,
+    Map<String, Map<String, Map<String, dynamic>>>? registerGlobalLoc,
+    Map<String, GameRegistry>? registerGame,
   }) {
     return AppState(
       isAgreeAgreement: isAgreeAgreement ?? this.isAgreeAgreement,
@@ -289,6 +353,9 @@ class AppState {
       albumGridOrientation: albumGridOrientation ?? this.albumGridOrientation,
       albumGridAspectRatio: albumGridAspectRatio ?? this.albumGridAspectRatio,
       albumDensity: albumDensity ?? this.albumDensity,
+      registerLoc: registerLoc ?? this.registerLoc,
+      registerGlobalLoc: registerGlobalLoc ?? this.registerGlobalLoc,
+      registerGame: registerGame ?? this.registerGame,
     );
   }
 }
@@ -315,6 +382,9 @@ class AppStateNotifier extends Notifier<AppState> {
       albumGridOrientation: ref.watch(_albumGridOrientationProvider),
       albumGridAspectRatio: ref.watch(_albumGridAspectRatioProvider),
       albumDensity: ref.watch(_albumDensityProvider),
+      registerLoc: ref.watch(_registerLocProvider),
+      registerGlobalLoc: ref.watch(_registerGlobalLocProvider),
+      registerGame: ref.watch(_registerGameProvider),
     );
   }
 
@@ -341,6 +411,9 @@ class AppStateNotifier extends Notifier<AppState> {
     AlbumGridOrientation? albumGridOrientation,
     AlbumGridAspectRatio? albumGridAspectRatio,
     AlbumDensity? albumDensity,
+    Map<String, Map<String, Map<String, dynamic>>>? registerLoc,
+    Map<String, Map<String, Map<String, dynamic>>>? registerGlobalLoc,
+    Map<String, GameRegistry>? registerGame,
   }) {
     final newState = state.copyWith(
       isAgreeAgreement: isAgreeAgreement,
@@ -357,6 +430,9 @@ class AppStateNotifier extends Notifier<AppState> {
       albumGridOrientation: albumGridOrientation,
       albumGridAspectRatio: albumGridAspectRatio,
       albumDensity: albumDensity,
+      registerLoc: registerLoc,
+      registerGlobalLoc: registerGlobalLoc,
+      registerGame: registerGame,
     );
     state = newState;
     return newState;
@@ -378,6 +454,9 @@ class AppStateNotifier extends Notifier<AppState> {
     ref.read(_albumGridOrientationProvider.notifier).fromPersistent(p);
     ref.read(_albumGridAspectRatioProvider.notifier).fromPersistent(p);
     ref.read(_albumDensityProvider.notifier).fromPersistent(p);
+    ref.read(_registerLocProvider.notifier).fromPersistent(p);
+    ref.read(_registerGlobalLocProvider.notifier).fromPersistent(p);
+    ref.read(_registerGameProvider.notifier).fromPersistent(p);
   }
 
   /// 把所有状态项写回持久化数据。
@@ -397,6 +476,9 @@ class AppStateNotifier extends Notifier<AppState> {
     res = ref.read(_albumGridOrientationProvider.notifier).toPersistent(res);
     res = ref.read(_albumGridAspectRatioProvider.notifier).toPersistent(res);
     res = ref.read(_albumDensityProvider.notifier).toPersistent(res);
+    res = ref.read(_registerLocProvider.notifier).toPersistent(res);
+    res = ref.read(_registerGlobalLocProvider.notifier).toPersistent(res);
+    res = ref.read(_registerGameProvider.notifier).toPersistent(res);
     return res;
   }
 }

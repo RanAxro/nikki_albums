@@ -118,6 +118,20 @@ final _albumDensity = AppStateItemDefine<AlbumDensity, Persistent>(
 );
 
 
+// ========== 非持久化储存状态 ==========
+@AppStateDefine("从插件注册的语言 <uuid, <locale, loc>>")
+final _registerLoc = AppStateItemDefine<Map<String, Map<String, Map<String, dynamic>>>, Persistent>(
+  defaultValue: {},
+);
+@AppStateDefine("从插件注册的全局语言 <uuid, <locale, loc>>")
+final _registerGlobalLoc = AppStateItemDefine<Map<String, Map<String, Map<String, dynamic>>>, Persistent>(
+  defaultValue: {},
+);
+@AppStateDefine("从插件注册的GameRegistry <plugin uuid, registry>")
+final _registerGame = AppStateItemDefine<Map<String, GameRegistry>, Persistent>(
+  defaultValue: {},
+);
+
 
 
 
