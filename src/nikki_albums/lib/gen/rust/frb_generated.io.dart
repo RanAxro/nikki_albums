@@ -3,6 +3,8 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
+import 'adb/adb_device.dart';
+import 'adb/model.dart';
 import 'api/simple.dart';
 import 'archive/archive.dart';
 import 'archive/error.dart';
@@ -57,6 +59,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   });
 
   CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_AdbServerDevicePtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevicePtr;
+
+  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_ClothDiyShareCodePtr => wire
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCodePtr;
 
@@ -74,6 +80,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw);
+
+  @protected
+  AdbServerDevice
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    dynamic raw,
+  );
 
   @protected
   ClothDiyShareCode
@@ -102,6 +114,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   ZipArchive
   dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    dynamic raw,
+  );
+
+  @protected
+  AdbServerDevice
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
     dynamic raw,
   );
 
@@ -201,6 +219,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Map<PlatformInt64, bool> dco_decode_Map_i_64_bool_None(dynamic raw);
 
   @protected
+  AdbServerDevice
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    dynamic raw,
+  );
+
+  @protected
   ClothDiyShareCode
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     dynamic raw,
@@ -239,6 +263,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   String dco_decode_String(dynamic raw);
+
+  @protected
+  ADBDevice dco_decode_TraitDef_ADBDevice(dynamic raw);
 
   @protected
   Archive dco_decode_TraitDef_Archive(dynamic raw);
@@ -367,6 +394,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   EditPhotoParams dco_decode_box_autoadd_edit_photo_params(dynamic raw);
+
+  @protected
+  FileStat dco_decode_box_autoadd_file_stat(dynamic raw);
 
   @protected
   GameRegistry dco_decode_box_autoadd_game_registry(dynamic raw);
@@ -587,7 +617,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DeviceGameSession dco_decode_device_game_session(dynamic raw);
 
   @protected
+  DeviceInfo dco_decode_device_info(dynamic raw);
+
+  @protected
   Dimension dco_decode_dimension(dynamic raw);
+
+  @protected
+  DirList dco_decode_dir_list(dynamic raw);
 
   @protected
   DiyData dco_decode_diy_data(dynamic raw);
@@ -620,6 +656,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   FileHotUpdateInfo dco_decode_file_hot_update_info(dynamic raw);
+
+  @protected
+  FileStat dco_decode_file_stat(dynamic raw);
 
   @protected
   FilterParams dco_decode_filter_params(dynamic raw);
@@ -1005,6 +1044,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DyeColorParams? dco_decode_opt_box_autoadd_dye_color_params(dynamic raw);
 
   @protected
+  FileStat? dco_decode_opt_box_autoadd_file_stat(dynamic raw);
+
+  @protected
   HomeBuildParam? dco_decode_opt_box_autoadd_home_build_param(dynamic raw);
 
   @protected
@@ -1285,6 +1327,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
+  AdbServerDevice
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClothDiyShareCode
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     SseDeserializer deserializer,
@@ -1311,6 +1359,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   ZipArchive
   sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdbServerDevice
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
     SseDeserializer deserializer,
   );
 
@@ -1424,6 +1478,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Map<PlatformInt64, bool> sse_decode_Map_i_64_bool_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AdbServerDevice
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
     SseDeserializer deserializer,
   );
 
@@ -1629,6 +1689,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   EditPhotoParams sse_decode_box_autoadd_edit_photo_params(
     SseDeserializer deserializer,
   );
+
+  @protected
+  FileStat sse_decode_box_autoadd_file_stat(SseDeserializer deserializer);
 
   @protected
   GameRegistry sse_decode_box_autoadd_game_registry(
@@ -1919,7 +1982,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  DeviceInfo sse_decode_device_info(SseDeserializer deserializer);
+
+  @protected
   Dimension sse_decode_dimension(SseDeserializer deserializer);
+
+  @protected
+  DirList sse_decode_dir_list(SseDeserializer deserializer);
 
   @protected
   DiyData sse_decode_diy_data(SseDeserializer deserializer);
@@ -1954,6 +2023,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   FileHotUpdateInfo sse_decode_file_hot_update_info(
     SseDeserializer deserializer,
   );
+
+  @protected
+  FileStat sse_decode_file_stat(SseDeserializer deserializer);
 
   @protected
   FilterParams sse_decode_filter_params(SseDeserializer deserializer);
@@ -2413,6 +2485,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  FileStat? sse_decode_opt_box_autoadd_file_stat(SseDeserializer deserializer);
+
+  @protected
   HomeBuildParam? sse_decode_opt_box_autoadd_home_build_param(
     SseDeserializer deserializer,
   );
@@ -2777,6 +2852,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    AdbServerDevice self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
     ClothDiyShareCode self,
     SseSerializer serializer,
@@ -2807,6 +2889,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerZipArchive(
     ZipArchive self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    AdbServerDevice self,
     SseSerializer serializer,
   );
 
@@ -2937,6 +3026,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_Map_i_64_bool_None(
     Map<PlatformInt64, bool> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    AdbServerDevice self,
     SseSerializer serializer,
   );
 
@@ -3187,6 +3283,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_edit_photo_params(
     EditPhotoParams self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_file_stat(
+    FileStat self,
     SseSerializer serializer,
   );
 
@@ -3563,7 +3665,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_device_info(DeviceInfo self, SseSerializer serializer);
+
+  @protected
   void sse_encode_dimension(Dimension self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_dir_list(DirList self, SseSerializer serializer);
 
   @protected
   void sse_encode_diy_data(DiyData self, SseSerializer serializer);
@@ -3615,6 +3723,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     FileHotUpdateInfo self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_file_stat(FileStat self, SseSerializer serializer);
 
   @protected
   void sse_encode_filter_params(FilterParams self, SseSerializer serializer);
@@ -4199,6 +4310,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_file_stat(
+    FileStat? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_home_build_param(
     HomeBuildParam? self,
     SseSerializer serializer,
@@ -4644,6 +4761,40 @@ class RustLibWire implements BaseWire {
   /// The symbols are looked up in [dynamicLibrary].
   RustLibWire(ffi.DynamicLibrary dynamicLibrary)
     : _lookup = dynamicLibrary.lookup;
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevicePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevicePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevicePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_nikki_albums_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevice =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerADBServerDevicePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerClothDiyShareCode(
