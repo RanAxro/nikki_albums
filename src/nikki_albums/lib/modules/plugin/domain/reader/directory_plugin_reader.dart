@@ -1,6 +1,7 @@
 
 import "reader.dart";
 import "../../model/exception.dart";
+import "package:nikki_albums/gen/rust/config/plugin.dart";
 
 import "dart:io";
 import "dart:typed_data";

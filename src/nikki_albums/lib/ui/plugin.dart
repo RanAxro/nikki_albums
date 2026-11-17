@@ -1,13 +1,14 @@
 
-import "package:nikki_albums/modules/plugin/domain/plugin.dart";
+import "package:nikki_albums/base/app_state.dart";
+import "package:nikki_albums/modules/plugin/plugin.dart";
 
 import "package:flutter/widgets.dart";
 import "dart:io";
 import "dart:typed_data";
 
 import "package:forui/forui.dart";
+import "package:easy_localization/easy_localization.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:nikki_albums/modules/plugin/domain/plugin_manager.dart";
 import "package:path_provider/path_provider.dart";
 import "package:path/path.dart" as p;
 
@@ -57,6 +58,12 @@ class PluginData{
     required this.info,
     this.iconBytes,
   });
+
+  String getName(BuildContext context){
+    final String locale = context.locale.toLanguageTag();
+    final Map<String, String> nameMap = info.name;
+    return nameMap[locale] ?? nameMap["en-US"] ?? "Plugin Name";
+  }
 }
 
 class PluginManagementList extends ConsumerStatefulWidget{
@@ -70,7 +77,11 @@ class _PluginManagementListState extends ConsumerState<PluginManagementList>{
   Future<PluginData> getPluginData(Plugin plugin) async{
     final PluginReader reader = await plugin.getReader();
     final PluginInfo info = await reader.readInfo();
-    return PluginData(plugin: plugin, info: info);
+    Uint8List? iconBytes;
+    if(info.icon != null){
+      iconBytes = await reader.readFile(info.icon!);
+    }
+    return PluginData(plugin: plugin, info: info, iconBytes: iconBytes);
   }
 
   Stream<List<PluginData>> getPluginDataStream(Iterable<Plugin> plugins) async*{
@@ -93,7 +104,7 @@ class _PluginManagementListState extends ConsumerState<PluginManagementList>{
 
   @override
   Widget build(BuildContext context){
-    final Map<Plugin, bool> plugins = ref.watch(pluginStateProvider);
+    final Map<Plugin, bool> plugins = ref.watch(appStateProvider.select((s) => s.pluginState));
 
     final theme = context.theme;
     return StreamBuilder(
@@ -121,27 +132,51 @@ class _PluginManagementListState extends ConsumerState<PluginManagementList>{
               child: Padding(
                 padding: const .fromLTRB(16, 12, 16, 16),
                 child: Row(
+                  spacing: 10,
                   mainAxisAlignment: .spaceBetween,
                   children: [
                     if(data.iconBytes != null)
-                      Image.memory(data.iconBytes!),
+                      SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: Image.memory(data.iconBytes!, width: 40, height: 40),
+                      ),
                     Flexible(
+                      fit: FlexFit.tight,
                       child: Column(
+                        spacing: 4,
                         crossAxisAlignment: .start,
                         children: [
                           Text(
-                            data.info.uuid,
+                            data.getName(context),
                             style: theme.typography.body.md.copyWith(
                               fontWeight: .w500,
                               color: theme.colors.foreground,
                               height: 1.5,
                             ),
                           ),
+                          // Text(
+                          //   data.info.uuid,
+                          //   style: theme.typography.body.md.copyWith(
+                          //     fontWeight: .w500,
+                          //     color: theme.colors.foreground,
+                          //     height: 1.5,
+                          //   ),
+                          // ),
                           Text(
                             data.plugin.position.path,
                             style: theme.typography.body.sm.copyWith(
                               color: theme.colors.mutedForeground,
                             ),
+                          ),
+                          Row(
+                            children: [
+                              for(final platform in data.info.platforms)
+                                FBadge(
+                                  variant: .secondary,
+                                  child: Text(platform.toString()),
+                                ),
+                            ],
                           ),
                         ],
                       ),
@@ -156,7 +191,7 @@ class _PluginManagementListState extends ConsumerState<PluginManagementList>{
                         value: state.value ?? false,
                         onChange: (value){
                           state.didChange(value);
-                          ref.read(pluginStateProvider.notifier).set(data.plugin, value);
+                          ref.read(pluginManagerProvider).set(data.plugin, value);
                         },
                       ),
                     ),

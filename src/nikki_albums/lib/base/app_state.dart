@@ -1,8 +1,10 @@
 
 import "package:nikki_albums_annotation/nikki_albums_annotation.dart";
+import "package:nikki_albums/modules/plugin/plugin.dart";
+import "package:nikki_albums/modules/game/domain/game_instance.dart";
 import "package:nikki_albums/gen/rust/config/app_persistent_state.dart";
-import "package:nikki_albums/gen/rust/config/game.dart";
 import "package:nikki_albums/gen/rust/config/album.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
 
 import "dart:ui";
 
@@ -127,11 +129,24 @@ final _registerLoc = AppStateItemDefine<Map<String, Map<String, Map<String, dyna
 final _registerGlobalLoc = AppStateItemDefine<Map<String, Map<String, Map<String, dynamic>>>, Persistent>(
   defaultValue: {},
 );
-@AppStateDefine("从插件注册的GameRegistry <plugin uuid, registry>")
-final _registerGame = AppStateItemDefine<Map<String, GameRegistry>, Persistent>(
-  defaultValue: {},
+@AppStateDefine("从插件注册的GameRegistry")
+final _registerGame = AppStateItemDefine<List<GameRegistry>, Persistent>(
+  defaultValue: [],
 );
 
+@AppStateDefine("已加载的插件及启用状态")
+final _pluginState = AppStateItemDefine<Map<Plugin, bool>, Persistent>(
+  defaultValue: {},
+);
+@AppStateDefine("正在运行的所有插件实例")
+final _pluginInstances = AppStateItemDefine<List<PluginInstance>, Persistent>(
+  defaultValue: [],
+);
+
+@AppStateDefine("所有GameInstance")
+final _gameInstances = AppStateItemDefine<List<GameInstance>, Persistent>(
+  defaultValue: [],
+);
 
 
 

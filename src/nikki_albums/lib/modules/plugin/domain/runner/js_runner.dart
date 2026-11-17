@@ -1,11 +1,19 @@
 
-part of "runner.dart";
+import "runner.dart";
+import "../runtime/js_runtime.dart";
+import "../ffi/js/js_bridge.dart";
+import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
+import "package:nikki_albums/modules/config_helper/model/image_rule.dart";
+import "package:nikki_albums/gen/rust/config/plugin.dart";
+import "package:nikki_albums/gen/rust/config/game.dart";
+import "package:nikki_albums/gen/rust/config/rules/text_rule.dart";
+import "package:nikki_albums/gen/rust/config/rules/icon_rule.dart";
 
 
 class PluginJSRunner extends PluginRunner{
   final PluginJSRuntime _runtime;
 
-  const PluginJSRunner._({required super.reader, required this._runtime});
+  const PluginJSRunner({required super.reader, required this._runtime});
 
   @override
   Future<List<DeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler){

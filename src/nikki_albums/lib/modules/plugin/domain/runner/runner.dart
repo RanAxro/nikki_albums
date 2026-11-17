@@ -1,20 +1,20 @@
 
-import "package:nikki_albums/modules/config_helper/model/image_rule.dart";
+export "js_runner.dart";
 
+import "js_runner.dart";
 import "../reader/reader.dart";
 import "../runtime/js_runtime.dart";
 import "../../model/event_handler.dart";
-import "../ffi/js/js_bridge.dart";
 import "../../model/exception.dart";
 import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
+import "package:nikki_albums/modules/config_helper/model/image_rule.dart";
+import "package:nikki_albums/gen/rust/config/plugin.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
 import "package:nikki_albums/gen/rust/config/rules/text_rule.dart";
 import "package:nikki_albums/gen/rust/config/rules/icon_rule.dart";
 
 import "package:quickjs_engine/js_eval_result.dart";
 import "package:path/path.dart" as p;
-
-part "js_runner.dart";
 
 
 abstract class PluginRunner{
@@ -48,7 +48,7 @@ abstract class PluginRunner{
           await runtime.dispose();
           throw PluginScriptMalfunctionedException(scriptType: "JS", script: entrance, error: result.stringResult);
         }
-        return PluginJSRunner._(reader: reader, runtime: runtime);
+        return PluginJSRunner(reader: reader, runtime: runtime);
       case ScriptInfo_Wasm():
       // TODO: Handle this case.
         throw UnimplementedError();

@@ -154,12 +154,32 @@ class RegisterGlobalLocState
   get _define => _registerGlobalLoc;
 }
 
-/// 从插件注册的GameRegistry <plugin uuid, registry>
-class RegisterGameState
-    extends AppStateItem<Map<String, GameRegistry>, Persistent> {
+/// 从插件注册的GameRegistry
+class RegisterGameState extends AppStateItem<List<GameRegistry>, Persistent> {
   @override
-  AppStateItemDefine<Map<String, GameRegistry>, Persistent> get _define =>
+  AppStateItemDefine<List<GameRegistry>, Persistent> get _define =>
       _registerGame;
+}
+
+/// 已加载的插件及启用状态
+class PluginStateState extends AppStateItem<Map<Plugin, bool>, Persistent> {
+  @override
+  AppStateItemDefine<Map<Plugin, bool>, Persistent> get _define => _pluginState;
+}
+
+/// 正在运行的所有插件实例
+class PluginInstancesState
+    extends AppStateItem<List<PluginInstance>, Persistent> {
+  @override
+  AppStateItemDefine<List<PluginInstance>, Persistent> get _define =>
+      _pluginInstances;
+}
+
+/// 所有GameInstance
+class GameInstancesState extends AppStateItem<List<GameInstance>, Persistent> {
+  @override
+  AppStateItemDefine<List<GameInstance>, Persistent> get _define =>
+      _gameInstances;
 }
 
 final _isAgreeAgreementProvider = NotifierProvider<IsAgreeAgreementState, bool>(
@@ -237,8 +257,21 @@ final _registerGlobalLocProvider =
     >(RegisterGlobalLocState.new);
 
 final _registerGameProvider =
-    NotifierProvider<RegisterGameState, Map<String, GameRegistry>>(
+    NotifierProvider<RegisterGameState, List<GameRegistry>>(
       RegisterGameState.new,
+    );
+
+final _pluginStateProvider =
+    NotifierProvider<PluginStateState, Map<Plugin, bool>>(PluginStateState.new);
+
+final _pluginInstancesProvider =
+    NotifierProvider<PluginInstancesState, List<PluginInstance>>(
+      PluginInstancesState.new,
+    );
+
+final _gameInstancesProvider =
+    NotifierProvider<GameInstancesState, List<GameInstance>>(
+      GameInstancesState.new,
     );
 
 const _appStateCopyWithSentinel = Object();
@@ -293,8 +326,17 @@ class AppState {
   /// 从插件注册的全局语言 <uuid, <locale, loc>>
   final Map<String, Map<String, Map<String, dynamic>>> registerGlobalLoc;
 
-  /// 从插件注册的GameRegistry <plugin uuid, registry>
-  final Map<String, GameRegistry> registerGame;
+  /// 从插件注册的GameRegistry
+  final List<GameRegistry> registerGame;
+
+  /// 已加载的插件及启用状态
+  final Map<Plugin, bool> pluginState;
+
+  /// 正在运行的所有插件实例
+  final List<PluginInstance> pluginInstances;
+
+  /// 所有GameInstance
+  final List<GameInstance> gameInstances;
 
   const AppState({
     required this.isAgreeAgreement,
@@ -314,6 +356,9 @@ class AppState {
     required this.registerLoc,
     required this.registerGlobalLoc,
     required this.registerGame,
+    required this.pluginState,
+    required this.pluginInstances,
+    required this.gameInstances,
   });
 
   AppState copyWith({
@@ -333,7 +378,10 @@ class AppState {
     AlbumDensity? albumDensity,
     Map<String, Map<String, Map<String, dynamic>>>? registerLoc,
     Map<String, Map<String, Map<String, dynamic>>>? registerGlobalLoc,
-    Map<String, GameRegistry>? registerGame,
+    List<GameRegistry>? registerGame,
+    Map<Plugin, bool>? pluginState,
+    List<PluginInstance>? pluginInstances,
+    List<GameInstance>? gameInstances,
   }) {
     return AppState(
       isAgreeAgreement: isAgreeAgreement ?? this.isAgreeAgreement,
@@ -356,6 +404,9 @@ class AppState {
       registerLoc: registerLoc ?? this.registerLoc,
       registerGlobalLoc: registerGlobalLoc ?? this.registerGlobalLoc,
       registerGame: registerGame ?? this.registerGame,
+      pluginState: pluginState ?? this.pluginState,
+      pluginInstances: pluginInstances ?? this.pluginInstances,
+      gameInstances: gameInstances ?? this.gameInstances,
     );
   }
 }
@@ -385,6 +436,9 @@ class AppStateNotifier extends Notifier<AppState> {
       registerLoc: ref.watch(_registerLocProvider),
       registerGlobalLoc: ref.watch(_registerGlobalLocProvider),
       registerGame: ref.watch(_registerGameProvider),
+      pluginState: ref.watch(_pluginStateProvider),
+      pluginInstances: ref.watch(_pluginInstancesProvider),
+      gameInstances: ref.watch(_gameInstancesProvider),
     );
   }
 
@@ -413,7 +467,10 @@ class AppStateNotifier extends Notifier<AppState> {
     AlbumDensity? albumDensity,
     Map<String, Map<String, Map<String, dynamic>>>? registerLoc,
     Map<String, Map<String, Map<String, dynamic>>>? registerGlobalLoc,
-    Map<String, GameRegistry>? registerGame,
+    List<GameRegistry>? registerGame,
+    Map<Plugin, bool>? pluginState,
+    List<PluginInstance>? pluginInstances,
+    List<GameInstance>? gameInstances,
   }) {
     final newState = state.copyWith(
       isAgreeAgreement: isAgreeAgreement,
@@ -433,6 +490,9 @@ class AppStateNotifier extends Notifier<AppState> {
       registerLoc: registerLoc,
       registerGlobalLoc: registerGlobalLoc,
       registerGame: registerGame,
+      pluginState: pluginState,
+      pluginInstances: pluginInstances,
+      gameInstances: gameInstances,
     );
     state = newState;
     return newState;
@@ -457,6 +517,9 @@ class AppStateNotifier extends Notifier<AppState> {
     ref.read(_registerLocProvider.notifier).fromPersistent(p);
     ref.read(_registerGlobalLocProvider.notifier).fromPersistent(p);
     ref.read(_registerGameProvider.notifier).fromPersistent(p);
+    ref.read(_pluginStateProvider.notifier).fromPersistent(p);
+    ref.read(_pluginInstancesProvider.notifier).fromPersistent(p);
+    ref.read(_gameInstancesProvider.notifier).fromPersistent(p);
   }
 
   /// 把所有状态项写回持久化数据。
@@ -479,6 +542,9 @@ class AppStateNotifier extends Notifier<AppState> {
     res = ref.read(_registerLocProvider.notifier).toPersistent(res);
     res = ref.read(_registerGlobalLocProvider.notifier).toPersistent(res);
     res = ref.read(_registerGameProvider.notifier).toPersistent(res);
+    res = ref.read(_pluginStateProvider.notifier).toPersistent(res);
+    res = ref.read(_pluginInstancesProvider.notifier).toPersistent(res);
+    res = ref.read(_gameInstancesProvider.notifier).toPersistent(res);
     return res;
   }
 }

@@ -1,8 +1,6 @@
 
 export "directory_plugin_reader.dart";
 export "archive_plugin_reader.dart";
-export "package:nikki_albums/gen/rust/config/plugin.dart";
-
 
 import "package:nikki_albums/gen/rust/config/plugin.dart";
 

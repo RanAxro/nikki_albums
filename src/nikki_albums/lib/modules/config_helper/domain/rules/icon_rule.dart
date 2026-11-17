@@ -1,5 +1,5 @@
 
-import "package:nikki_albums/modules/plugin/domain/plugin.dart";
+import "package:nikki_albums/modules/plugin/plugin.dart";
 import "package:nikki_albums/gen/app_icons.dart";
 import "package:nikki_albums/gen/rust/config/rules/icon_rule.dart";
 

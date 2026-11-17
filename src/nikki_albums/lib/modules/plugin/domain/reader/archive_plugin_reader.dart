@@ -1,5 +1,6 @@
 
 import "reader.dart";
+import "package:nikki_albums/gen/rust/config/plugin.dart";
 import "package:nikki_albums/gen/rust/archive/zip/zip_archive.dart";
 
 import "dart:typed_data";

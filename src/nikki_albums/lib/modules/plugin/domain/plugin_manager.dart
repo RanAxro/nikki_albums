@@ -1,28 +1,27 @@
-export "plugin_manager_state.dart";
 
-import "plugin_manager_state.dart";
 import "plugin.dart";
+import "reader/reader.dart";
+import "runner/runner.dart";
+import "../model/event_handler.dart";
+import "../model/plugin_instance.dart";
 import "package:nikki_albums/base/app_state.dart";
+import "package:nikki_albums/gen/rust/config/plugin.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
 
 import "dart:convert";
 
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:riverpod_annotation/riverpod_annotation.dart";
 import "package:path/path.dart" as p;
 
+part "plugin_manager.g.dart";
 
-class PluginInstance{
-  final Plugin plugin;
-  final PluginInfo info;
-  final PluginReader reader;
-  final PluginRunner runner;
 
-  PluginInstance({
-    required this.plugin,
-    required this.info,
-    required this.reader,
-    required this.runner,
-  });
+@Riverpod(keepAlive: true)
+PluginManager pluginManager(Ref ref){
+  final PluginManager manager = PluginManager(ref);
+  ref.onDispose(manager.dispose);
+  return manager;
 }
 
 class PluginManager{
@@ -30,22 +29,35 @@ class PluginManager{
 
   PluginManager(this._ref);
 
-  final List<PluginInstance> _pluginInstances = [];
 
-  PluginState get _pluginStateNotifier => _ref.read(pluginStateProvider.notifier);
-  Map<Plugin, bool> get _pluginState => _ref.read(pluginStateProvider);
+  Map<Plugin, bool> get _pluginState => _ref.read(appStateProvider.select((s) => s.pluginState));
+  List<PluginInstance> get _pluginInstances => _ref.read(appStateProvider.select((s) => s.pluginInstances));
 
-  bool contain(Plugin plugin) => _pluginStateNotifier.contain(plugin);
-  bool containByPath(String path) => _pluginStateNotifier.containByPath(path);
-  void set(Plugin plugin, [bool usable = true]) => _pluginStateNotifier.set(plugin, usable);
-  void remove(Plugin plugin) => _pluginStateNotifier.remove(plugin);
-  void enable(Plugin plugin) => _pluginStateNotifier.enable(plugin);
-  void disable(Plugin plugin) => _pluginStateNotifier.disable(plugin);
+  bool contain(Plugin plugin){
+    return _pluginState.containsKey(plugin);
+  }
+  bool containByPath(String path){
+    return _pluginState.keys.any((plugin) => p.equals(plugin.position.path, path));
+  }
+  void set(Plugin plugin, [bool usable = true]){
+    _ref.read(appStateProvider.notifier).setAppStateWith(
+      pluginState: Map.unmodifiable({..._pluginState, plugin: usable}),
+    );
+  }
+  void remove(Plugin plugin){
+    final Map<Plugin, bool> next = {..._pluginState}..remove(plugin);
+    _ref.read(appStateProvider.notifier).setAppStateWith(
+      pluginState: Map.unmodifiable(next),
+    );
+  }
+  void enable(Plugin plugin) => set(plugin, true);
+  void disable(Plugin plugin) => set(plugin, false);
 
   Future<void> reload() async{
-    dispose();
+    stop();
 
     bool loading = true;
+    final List<PluginInstance> pluginInstances = [];
     final List<GameRegistry> registeredGame = [];
 
     for(final MapEntry<Plugin, bool> entry in _pluginState.entries){
@@ -67,10 +79,10 @@ class PluginManager{
             }
 
             _ref.read(appStateProvider.notifier).setAppStateWith(
-              registerLoc: {
+              registerLoc: Map.unmodifiable({
                 ..._ref.read(appStateProvider).registerLoc,
                 info.uuid: localizations,
-              },
+              }),
             );
           },
           onRegisterGlobalLoc: (Map<String, String> localeAndPathMap) async{
@@ -82,39 +94,46 @@ class PluginManager{
             }
 
             _ref.read(appStateProvider.notifier).setAppStateWith(
-              registerLoc: {
+              registerGlobalLoc: Map.unmodifiable({
                 ..._ref.read(appStateProvider).registerGlobalLoc,
                 info.uuid: localizations,
-              },
+              }),
             );
           },
           onRegisterGame: (GameRegistry gameRegistry){
             registeredGame.add(gameRegistry);
             if(!loading){
-              _ref.read(pluginRegisteredGameProvider.notifier).add(gameRegistry);
+              _ref.read(appStateProvider.notifier).setAppStateWith(
+                registerGame: List.unmodifiable([..._ref.read(appStateProvider).registerGame, gameRegistry]),
+              );
             }
           },
         ), reader);
-        _pluginInstances.add(PluginInstance(plugin: plugin, info: info, reader: reader, runner: runner));
+        pluginInstances.add(PluginInstance(plugin: plugin, info: info, reader: reader, runner: runner));
       }catch(e){
         print(e);
       }
     }
 
     loading = false;
-    _ref.read(pluginRegisteredGameProvider.notifier).replaceAll(registeredGame);
+    _ref.read(appStateProvider.notifier).setAppStateWith(
+      pluginInstances: List.unmodifiable(pluginInstances),
+      registerGame: List.unmodifiable(registeredGame),
+    );print(pluginInstances);
   }
 
   void stop(){
     dispose();
-    _ref.read(pluginRegisteredGameProvider.notifier).clear();
+    _ref.read(appStateProvider.notifier).setAppStateWith(
+      pluginInstances: List.unmodifiable([]),
+      registerGame: List.unmodifiable([]),
+    );
   }
 
   void dispose(){
     for(final PluginInstance instance in _pluginInstances){
       instance.runner.dispose();
     }
-    _pluginInstances.clear();
   }
 
   PluginRunner getInstanceRunner(Plugin plugin){
