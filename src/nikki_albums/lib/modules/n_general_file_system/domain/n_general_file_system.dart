@@ -41,6 +41,8 @@ abstract class NGeneralFileSystem{
 
   String get name;
 
+  NGeneralFileSystem at(String path);
+
   Future<bool> exists(String path);
 
   Future<bool> isFile(String path);

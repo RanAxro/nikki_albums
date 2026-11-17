@@ -35,6 +35,11 @@ class NNativeFileSystem extends NGeneralFileSystem{
   String get name => p.basename(root);
 
   @override
+  NNativeFileSystem at(String path){
+    return NNativeFileSystem._(_getRealPath(path));
+  }
+
+  @override
   Future<bool> exists(String path) async{
     final FileSystemEntityType type = await FileSystemEntity.type(_getRealPath(path));
     const Set<FileSystemEntityType> test = {.file, .directory, .link};

@@ -37,6 +37,11 @@ class NAdbFileSystem extends NGeneralFileSystem{
   @override
   String get name => p.posix.basename(root);
 
+  @override
+  NAdbFileSystem at(String path){
+    return NAdbFileSystem._(device, _getRealPath(path));
+  }
+
   int _getTypeFromMode(int mode){
     /// ((mode >> 13) & 0b111)
     return (mode >> 13) & 7;
