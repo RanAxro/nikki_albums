@@ -58,6 +58,8 @@ pub struct DeviceGame{
   pub unique_id: String,
   pub info: HashMap<String, String>,
   pub install_path: String,
+  pub connect_method: GameConnectionMethod,
+  pub identifier: String,
 }
 
 impl_json_frb!(DeviceGame);

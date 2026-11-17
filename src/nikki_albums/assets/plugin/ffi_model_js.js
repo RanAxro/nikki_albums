@@ -62,10 +62,14 @@ class NativeImage extends Image{
   }
 }
 
-class DeviceGame{
+class ObtainedDeviceGame{
   constructor(installPath, info){
     this.info = info;
     this.install_path = installPath;
+  }
+
+  static from(obj){
+    return new ObtainedDeviceGame(obj.install_path, obj.info);
   }
 }
 

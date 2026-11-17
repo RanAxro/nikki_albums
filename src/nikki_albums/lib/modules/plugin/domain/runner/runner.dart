@@ -60,7 +60,7 @@ abstract class PluginRunner{
 
   const PluginRunner({required this.reader});
 
-  Future<List<DeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler);
+  Future<List<ObtainedDeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler);
 
   Future<PickedDeviceGameResult> notifyPickDeviceGame(String uniqueId, NGeneralFileSystem fsHandler, String name);
 

@@ -2,9 +2,9 @@ use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 use crate::config::common::platform::Platform;
-use crate::config::game::DeviceGame;
 use crate::config::rules::text_rule::TextRule;
-use crate::impl_json_frb;
+use crate::{impl_json_frb, impl_vec_json_frb};
+use crate::config::game::DeviceGame;
 
 #[derive(Clone)]
 #[derive(Serialize, Deserialize)]
@@ -62,9 +62,29 @@ pub enum NES{
 }
 
 
+#[frb(dart_metadata=("freezed"))]
+#[derive(Serialize, Deserialize)]
+pub struct ObtainedDeviceGame{
+  pub info: HashMap<String, String>,
+  pub install_path: String,
+}
+
+impl_json_frb!(ObtainedDeviceGame);
+impl_vec_json_frb!(ObtainedDeviceGame);
+
+impl DeviceGame{
+  #[frb(sync)]
+  pub fn to_obtained_device_game(&self) -> ObtainedDeviceGame{
+    ObtainedDeviceGame{
+      info: self.info.clone(),
+      install_path: self.install_path.clone(),
+    }
+  }
+}
+
 #[derive(Serialize, Deserialize)]
 pub enum PickedDeviceGameResult{
-  Ok(DeviceGame),
+  Ok(ObtainedDeviceGame),
   Err(Option<TextRule>),
 }
 

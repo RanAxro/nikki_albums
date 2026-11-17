@@ -16,7 +16,7 @@ class PluginJSRunner extends PluginRunner{
   const PluginJSRunner({required super.reader, required this._runtime});
 
   @override
-  Future<List<DeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler){
+  Future<List<ObtainedDeviceGame>> searchDeviceGame(String uniqueId, NGeneralFileSystem fsHandler){
     return PluginJSBridge.searchDeviceGame(_runtime, uniqueId, fsHandler);
   }
 

@@ -8,6 +8,7 @@ import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 
+import 'plugin.dart';
 import 'rules/icon_rule.dart';
 import 'rules/text_rule.dart';
 part 'game.freezed.dart';
@@ -54,6 +55,8 @@ sealed class DeviceGame with _$DeviceGame {
     required String uniqueId,
     required Map<String, String> info,
     required String installPath,
+    required GameConnectionMethod connectMethod,
+    required String identifier,
   }) = _DeviceGame;
   static DeviceGame fromJson({required String json}) =>
       RustLib.instance.api.crateConfigGameDeviceGameFromJson(json: json);
@@ -80,6 +83,9 @@ sealed class DeviceGame with _$DeviceGame {
 
   String toJsonPretty() =>
       RustLib.instance.api.crateConfigGameDeviceGameToJsonPretty(that: this);
+
+  ObtainedDeviceGame toObtainedDeviceGame() => RustLib.instance.api
+      .crateConfigGameDeviceGameToObtainedDeviceGame(that: this);
 
   static String toVecJson({required List<DeviceGame> value}) =>
       RustLib.instance.api.crateConfigGameDeviceGameToVecJson(value: value);

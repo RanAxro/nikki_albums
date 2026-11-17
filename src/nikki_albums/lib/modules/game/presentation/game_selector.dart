@@ -89,15 +89,16 @@ List<FTileGroupMixin> buildGameMenu({
         final GameRegistry gameRegistry = registeredGame[index];
         final String pluginUuid = gameRegistry.ownership;
         final PluginRunner runner = manager.getInstanceRunnerByUuid(pluginUuid);
+        final NNativeFileSystem fsHandler = NNativeFileSystem.connect("");
         final String uniqueId = GameHelper.generateUniqueId(pluginUuid, gameRegistry.uuid);
 
         final String searchGameTaskId = "task-$uniqueId-searchDeviceGame";
-        tasks[searchGameTaskId] ??= runner.searchDeviceGame(uniqueId, NNativeFileSystem.connect(""));
+        tasks[searchGameTaskId] ??= runner.searchDeviceGame(uniqueId, fsHandler);
         final String gameIconCacheId = "widgetCache-$uniqueId-icon";
         widgetCache[gameIconCacheId] ??= IconRuleHelper.resolve(gameRegistry.icon, reader: runner.reader);
         return FutureBuilder(
-          future: tasks[searchGameTaskId] as Future<List<DeviceGame>>,
-          builder: (BuildContext context, AsyncSnapshot<List<DeviceGame>> snapshot){
+          future: tasks[searchGameTaskId] as Future<List<ObtainedDeviceGame>>,
+          builder: (BuildContext context, AsyncSnapshot<List<ObtainedDeviceGame>> snapshot){
             if(snapshot.connectionState == ConnectionState.none || snapshot.connectionState == ConnectionState.waiting){
               return FTileMixin.tile(
                 prefix: SizedBox(
@@ -120,7 +121,7 @@ List<FTileGroupMixin> buildGameMenu({
                 suffix: const Icon(FLucideIcons.chevronRight),
               );
             }
-            final List<DeviceGame> deviceGames = snapshot.data!;
+            final List<ObtainedDeviceGame> obtainedDeviceGames = snapshot.data!;
             return Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child){
                 final List<DeviceGame> pickedDeviceGames = ref.watch(appStateProvider.select((p) => p.pickedDeviceGame));
@@ -142,8 +143,17 @@ List<FTileGroupMixin> buildGameMenu({
                     gameRegistry: gameRegistry,
                     pluginUuid: pluginUuid,
                     runner: runner,
+                    fsHandler: fsHandler,
                     uniqueId: uniqueId,
-                    deviceGames: [...pickedDeviceGames, ...deviceGames],
+                    deviceGames: [...pickedDeviceGames, ...obtainedDeviceGames.map((g){
+                      return DeviceGame(
+                        uniqueId: uniqueId,
+                        info: g.info,
+                        installPath: g.installPath,
+                        connectMethod: gameRegistry.connectMethod,
+                        identifier: "",
+                      );
+                    })],
                   ),
                 );
               },
@@ -174,6 +184,7 @@ List<FTileGroupMixin> buildDeviceGameMenu({
   required GameRegistry gameRegistry,
   required String pluginUuid,
   required PluginRunner runner,
+  required NGeneralFileSystem fsHandler,
   required String uniqueId,
   required List<DeviceGame> deviceGames,
 }){
@@ -182,6 +193,7 @@ List<FTileGroupMixin> buildDeviceGameMenu({
       count: deviceGames.length,
       tileBuilder: (BuildContext context, int index){
         final DeviceGame deviceGame = deviceGames[index];
+        final deviceGameFsHandler = fsHandler.at(deviceGame.installPath);
 
         final IconRule? deviceGameIcon = runner.getDeviceGameIcon(deviceGame);
         final String deviceGameIconCacheId = "widgetCache-$uniqueId-${deviceGame.installPath}-icon";
@@ -197,7 +209,7 @@ List<FTileGroupMixin> buildDeviceGameMenu({
         final Widget title = Text(TextRuleHelper.resolve(deviceGameName, context: context, pluginUuid: pluginUuid));
 
         final String searchAccountTaskId = "task-$uniqueId-${deviceGame.toJson()}-searchAccount";
-        tasks[searchAccountTaskId] ??= runner.searchAccount(NNativeFileSystem.connect(deviceGame.installPath), deviceGame);
+        tasks[searchAccountTaskId] ??= runner.searchAccount(deviceGameFsHandler, deviceGame);
         return FutureBuilder(
           future: tasks[searchAccountTaskId] as Future<List<String>>,
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot){
@@ -259,22 +271,43 @@ List<FTileGroupMixin> buildDeviceGameMenu({
             onPress: (){
               showFDialog(
                 context: context,
-                builder: (context, style, animation) => DeviceGamePickerDialog(
-                  pluginUuid: pluginUuid,
-                  deviceGamePickerConfig: gameRegistry.deviceGamePicker!,
-                  style: style,
-                  animation: animation,
-                  validate: (String path, String name) async{
-                    final PickedDeviceGameResult pickedResult = await runner.notifyPickDeviceGame(uniqueId, NNativeFileSystem.connect(path), name);
-                    return pickedResult.map(
-                      ok: (PickedDeviceGameResult_Ok deviceGame){
-                        final String installPath = p.canonicalize(p.join(path, deviceGame.field0.installPath));
-                        return PickedDeviceGameResult.ok(deviceGame.field0.copyWith(installPath: installPath));
-                      },
-                      err: (PickedDeviceGameResult_Err message) => message,
-                    );
-                  },
-                ),
+                builder: (context, style, animation){
+                  return Consumer(
+                    builder: (BuildContext context, WidgetRef ref, Widget? child){
+                      return DeviceGamePickerDialog(
+                        pluginUuid: pluginUuid,
+                        deviceGamePickerConfig: gameRegistry.deviceGamePicker!,
+                        style: style,
+                        animation: animation,
+                        validate: (String path, String name) async{
+                          final PickedDeviceGameResult pickedResult = await runner.notifyPickDeviceGame(uniqueId, NNativeFileSystem.connect(path), name);
+                          return pickedResult.map(
+                            ok: (PickedDeviceGameResult_Ok obtainedDeviceGame){
+                              final String installPath = p.canonicalize(p.join(path, obtainedDeviceGame.field0.installPath));
+                              return PickedDeviceGameResult.ok(obtainedDeviceGame.field0.copyWith(installPath: installPath));
+                            },
+                            err: (PickedDeviceGameResult_Err message) => message,
+                          );
+                        },
+                        onSave: (ObtainedDeviceGame obtainedDeviceGame){
+                          ref.read(appStateProvider.notifier).setAppStateWith(
+                            pickedDeviceGame: List.unmodifiable([
+                              DeviceGame(
+                                uniqueId: uniqueId,
+                                info: obtainedDeviceGame.info,
+                                installPath: obtainedDeviceGame.installPath,
+                                connectMethod: gameRegistry.connectMethod,
+                                identifier: "",
+                              ),
+                              ...ref.read(appStateProvider).pickedDeviceGame,
+                            ]),
+                          );
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    },
+                  );
+                },
               );
             },
             title: Text(gameRegistry.deviceGamePicker?.entranceBtnText == null

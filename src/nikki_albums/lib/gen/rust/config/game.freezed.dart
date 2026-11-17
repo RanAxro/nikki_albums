@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DeviceGame {
 
- String get uniqueId; Map<String, String> get info; String get installPath;
+ String get uniqueId; Map<String, String> get info; String get installPath; GameConnectionMethod get connectMethod; String get identifier;
 /// Create a copy of DeviceGame
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $DeviceGameCopyWith<DeviceGame> get copyWith => _$DeviceGameCopyWithImpl<DeviceG
 @override
 bool operator ==(Object other) {
   final _this = this as DeviceGame;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceGame&&(identical(other.uniqueId, _this.uniqueId) || other.uniqueId == _this.uniqueId)&&const DeepCollectionEquality().equals(other.info, _this.info)&&(identical(other.installPath, _this.installPath) || other.installPath == _this.installPath));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceGame&&(identical(other.uniqueId, _this.uniqueId) || other.uniqueId == _this.uniqueId)&&const DeepCollectionEquality().equals(other.info, _this.info)&&(identical(other.installPath, _this.installPath) || other.installPath == _this.installPath)&&(identical(other.connectMethod, _this.connectMethod) || other.connectMethod == _this.connectMethod)&&(identical(other.identifier, _this.identifier) || other.identifier == _this.identifier));
 }
 
 
 @override
 int get hashCode {
   final _this = this as DeviceGame;
-  return Object.hash(runtimeType,_this.uniqueId,const DeepCollectionEquality().hash(_this.info),_this.installPath);
+  return Object.hash(runtimeType,_this.uniqueId,const DeepCollectionEquality().hash(_this.info),_this.installPath,_this.connectMethod,_this.identifier);
 }
 
 @override
 String toString() {
   final _this = this as DeviceGame;
-  return 'DeviceGame(uniqueId: ${_this.uniqueId}, info: ${_this.info}, installPath: ${_this.installPath})';
+  return 'DeviceGame(uniqueId: ${_this.uniqueId}, info: ${_this.info}, installPath: ${_this.installPath}, connectMethod: ${_this.connectMethod}, identifier: ${_this.identifier})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $DeviceGameCopyWith<$Res>  {
   factory $DeviceGameCopyWith(DeviceGame value, $Res Function(DeviceGame) _then) = _$DeviceGameCopyWithImpl;
 @useResult
 $Res call({
- String uniqueId, Map<String, String> info, String installPath
+ String uniqueId, Map<String, String> info, String installPath, GameConnectionMethod connectMethod, String identifier
 });
 
 
@@ -68,11 +68,13 @@ class _$DeviceGameCopyWithImpl<$Res>
 
 /// Create a copy of DeviceGame
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uniqueId = null,Object? info = null,Object? installPath = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? uniqueId = null,Object? info = null,Object? installPath = null,Object? connectMethod = null,Object? identifier = null,}) {
   return _then(DeviceGame(
 uniqueId: null == uniqueId ? _self.uniqueId : uniqueId // ignore: cast_nullable_to_non_nullable
 as String,info: null == info ? _self.info : info // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,installPath: null == installPath ? _self.installPath : installPath // ignore: cast_nullable_to_non_nullable
+as String,connectMethod: null == connectMethod ? _self.connectMethod : connectMethod // ignore: cast_nullable_to_non_nullable
+as GameConnectionMethod,identifier: null == identifier ? _self.identifier : identifier // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -155,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uniqueId,  Map<String, String> info,  String installPath)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uniqueId,  Map<String, String> info,  String installPath,  GameConnectionMethod connectMethod,  String identifier)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DeviceGame() when $default != null:
-return $default(_that.uniqueId,_that.info,_that.installPath);case _:
+return $default(_that.uniqueId,_that.info,_that.installPath,_that.connectMethod,_that.identifier);case _:
   return orElse();
 
 }
@@ -176,10 +178,10 @@ return $default(_that.uniqueId,_that.info,_that.installPath);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uniqueId,  Map<String, String> info,  String installPath)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uniqueId,  Map<String, String> info,  String installPath,  GameConnectionMethod connectMethod,  String identifier)  $default,) {final _that = this;
 switch (_that) {
 case _DeviceGame():
-return $default(_that.uniqueId,_that.info,_that.installPath);}
+return $default(_that.uniqueId,_that.info,_that.installPath,_that.connectMethod,_that.identifier);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -193,10 +195,10 @@ return $default(_that.uniqueId,_that.info,_that.installPath);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uniqueId,  Map<String, String> info,  String installPath)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uniqueId,  Map<String, String> info,  String installPath,  GameConnectionMethod connectMethod,  String identifier)?  $default,) {final _that = this;
 switch (_that) {
 case _DeviceGame() when $default != null:
-return $default(_that.uniqueId,_that.info,_that.installPath);case _:
+return $default(_that.uniqueId,_that.info,_that.installPath,_that.connectMethod,_that.identifier);case _:
   return null;
 
 }
@@ -208,7 +210,7 @@ return $default(_that.uniqueId,_that.info,_that.installPath);case _:
 
 
 class _DeviceGame extends DeviceGame {
-  const _DeviceGame({required this.uniqueId, required  Map<String, String> info, required this.installPath}): _info = info,super._();
+  const _DeviceGame({required this.uniqueId, required  Map<String, String> info, required this.installPath, required this.connectMethod, required this.identifier}): _info = info,super._();
   
 
 @override final  String uniqueId;
@@ -220,6 +222,8 @@ class _DeviceGame extends DeviceGame {
 }
 
 @override final  String installPath;
+@override final  GameConnectionMethod connectMethod;
+@override final  String identifier;
 
 /// Create a copy of DeviceGame
 /// with the given fields replaced by the non-null parameter values.
@@ -231,18 +235,18 @@ _$DeviceGameCopyWith<_DeviceGame> get copyWith => __$DeviceGameCopyWithImpl<_Dev
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceGame&&(identical(other.uniqueId, uniqueId) || other.uniqueId == uniqueId)&&const DeepCollectionEquality().equals(other.info, _info)&&(identical(other.installPath, installPath) || other.installPath == installPath));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceGame&&(identical(other.uniqueId, uniqueId) || other.uniqueId == uniqueId)&&const DeepCollectionEquality().equals(other.info, _info)&&(identical(other.installPath, installPath) || other.installPath == installPath)&&(identical(other.connectMethod, connectMethod) || other.connectMethod == connectMethod)&&(identical(other.identifier, identifier) || other.identifier == identifier));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,uniqueId,const DeepCollectionEquality().hash(_info),installPath);
+    return Object.hash(runtimeType,uniqueId,const DeepCollectionEquality().hash(_info),installPath,connectMethod,identifier);
 }
 
 @override
 String toString() {
-    return 'DeviceGame(uniqueId: $uniqueId, info: $info, installPath: $installPath)';
+    return 'DeviceGame(uniqueId: $uniqueId, info: $info, installPath: $installPath, connectMethod: $connectMethod, identifier: $identifier)';
 }
 
 
@@ -253,7 +257,7 @@ abstract mixin class _$DeviceGameCopyWith<$Res> implements $DeviceGameCopyWith<$
   factory _$DeviceGameCopyWith(_DeviceGame value, $Res Function(_DeviceGame) _then) = __$DeviceGameCopyWithImpl;
 @override @useResult
 $Res call({
- String uniqueId, Map<String, String> info, String installPath
+ String uniqueId, Map<String, String> info, String installPath, GameConnectionMethod connectMethod, String identifier
 });
 
 
@@ -270,11 +274,13 @@ class __$DeviceGameCopyWithImpl<$Res>
 
 /// Create a copy of DeviceGame
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uniqueId = null,Object? info = null,Object? installPath = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? uniqueId = null,Object? info = null,Object? installPath = null,Object? connectMethod = null,Object? identifier = null,}) {
   return _then(_DeviceGame(
 uniqueId: null == uniqueId ? _self.uniqueId : uniqueId // ignore: cast_nullable_to_non_nullable
 as String,info: null == info ? _self._info : info // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,installPath: null == installPath ? _self.installPath : installPath // ignore: cast_nullable_to_non_nullable
+as String,connectMethod: null == connectMethod ? _self.connectMethod : connectMethod // ignore: cast_nullable_to_non_nullable
+as GameConnectionMethod,identifier: null == identifier ? _self.identifier : identifier // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

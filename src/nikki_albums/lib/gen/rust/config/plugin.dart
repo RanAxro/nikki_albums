@@ -5,7 +5,6 @@
 
 import '../frb_generated.dart';
 import 'common/platform.dart';
-import 'game.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
@@ -74,10 +73,70 @@ enum NES {
 }
 
 @freezed
+sealed class ObtainedDeviceGame with _$ObtainedDeviceGame {
+  const ObtainedDeviceGame._();
+  const factory ObtainedDeviceGame({
+    required Map<String, String> info,
+    required String installPath,
+  }) = _ObtainedDeviceGame;
+  static ObtainedDeviceGame fromJson({required String json}) => RustLib
+      .instance
+      .api
+      .crateConfigPluginObtainedDeviceGameFromJson(json: json);
+
+  static ObtainedDeviceGame fromJsonBytes({required List<int> json}) => RustLib
+      .instance
+      .api
+      .crateConfigPluginObtainedDeviceGameFromJsonBytes(json: json);
+
+  static List<ObtainedDeviceGame> fromVecJson({required String json}) => RustLib
+      .instance
+      .api
+      .crateConfigPluginObtainedDeviceGameFromVecJson(json: json);
+
+  static List<ObtainedDeviceGame> fromVecJsonBytes({required List<int> json}) =>
+      RustLib.instance.api.crateConfigPluginObtainedDeviceGameFromVecJsonBytes(
+        json: json,
+      );
+
+  String toJson() => RustLib.instance.api
+      .crateConfigPluginObtainedDeviceGameToJson(that: this);
+
+  Uint8List toJsonBytes() => RustLib.instance.api
+      .crateConfigPluginObtainedDeviceGameToJsonBytes(that: this);
+
+  Uint8List toJsonBytesPretty() => RustLib.instance.api
+      .crateConfigPluginObtainedDeviceGameToJsonBytesPretty(that: this);
+
+  String toJsonPretty() => RustLib.instance.api
+      .crateConfigPluginObtainedDeviceGameToJsonPretty(that: this);
+
+  static String toVecJson({required List<ObtainedDeviceGame> value}) => RustLib
+      .instance
+      .api
+      .crateConfigPluginObtainedDeviceGameToVecJson(value: value);
+
+  static Uint8List toVecJsonBytes({required List<ObtainedDeviceGame> value}) =>
+      RustLib.instance.api.crateConfigPluginObtainedDeviceGameToVecJsonBytes(
+        value: value,
+      );
+
+  static Uint8List toVecJsonBytesPretty({
+    required List<ObtainedDeviceGame> value,
+  }) => RustLib.instance.api
+      .crateConfigPluginObtainedDeviceGameToVecJsonBytesPretty(value: value);
+
+  static String toVecJsonPretty({required List<ObtainedDeviceGame> value}) =>
+      RustLib.instance.api.crateConfigPluginObtainedDeviceGameToVecJsonPretty(
+        value: value,
+      );
+}
+
+@freezed
 sealed class PickedDeviceGameResult with _$PickedDeviceGameResult {
   const PickedDeviceGameResult._();
 
-  const factory PickedDeviceGameResult.ok(DeviceGame field0) =
+  const factory PickedDeviceGameResult.ok(ObtainedDeviceGame field0) =
       PickedDeviceGameResult_Ok;
   const factory PickedDeviceGameResult.err([TextRule? field0]) =
       PickedDeviceGameResult_Err;

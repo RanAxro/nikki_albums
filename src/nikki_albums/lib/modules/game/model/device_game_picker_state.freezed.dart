@@ -126,13 +126,13 @@ return success(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  none,TResult Function()?  waiting,TResult Function( TextRule? message)?  error,TResult Function( DeviceGame deviceGame)?  success,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  none,TResult Function()?  waiting,TResult Function( TextRule? message)?  error,TResult Function( ObtainedDeviceGame obtainedDeviceGame)?  success,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case DeviceGamePickerState_None() when none != null:
 return none();case DeviceGamePickerState_Waiting() when waiting != null:
 return waiting();case DeviceGamePickerState_Error() when error != null:
 return error(_that.message);case DeviceGamePickerState_Success() when success != null:
-return success(_that.deviceGame);case _:
+return success(_that.obtainedDeviceGame);case _:
   return orElse();
 
 }
@@ -150,13 +150,13 @@ return success(_that.deviceGame);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  none,required TResult Function()  waiting,required TResult Function( TextRule? message)  error,required TResult Function( DeviceGame deviceGame)  success,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  none,required TResult Function()  waiting,required TResult Function( TextRule? message)  error,required TResult Function( ObtainedDeviceGame obtainedDeviceGame)  success,}) {final _that = this;
 switch (_that) {
 case DeviceGamePickerState_None():
 return none();case DeviceGamePickerState_Waiting():
 return waiting();case DeviceGamePickerState_Error():
 return error(_that.message);case DeviceGamePickerState_Success():
-return success(_that.deviceGame);}
+return success(_that.obtainedDeviceGame);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -170,13 +170,13 @@ return success(_that.deviceGame);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  none,TResult? Function()?  waiting,TResult? Function( TextRule? message)?  error,TResult? Function( DeviceGame deviceGame)?  success,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  none,TResult? Function()?  waiting,TResult? Function( TextRule? message)?  error,TResult? Function( ObtainedDeviceGame obtainedDeviceGame)?  success,}) {final _that = this;
 switch (_that) {
 case DeviceGamePickerState_None() when none != null:
 return none();case DeviceGamePickerState_Waiting() when waiting != null:
 return waiting();case DeviceGamePickerState_Error() when error != null:
 return error(_that.message);case DeviceGamePickerState_Success() when success != null:
-return success(_that.deviceGame);case _:
+return success(_that.obtainedDeviceGame);case _:
   return null;
 
 }
@@ -332,10 +332,10 @@ $TextRuleCopyWith<$Res>? get message {
 
 
 class DeviceGamePickerState_Success implements DeviceGamePickerState {
-  const DeviceGamePickerState_Success(this.deviceGame);
+  const DeviceGamePickerState_Success(this.obtainedDeviceGame);
   
 
- final  DeviceGame deviceGame;
+ final  ObtainedDeviceGame obtainedDeviceGame;
 
 /// Create a copy of DeviceGamePickerState
 /// with the given fields replaced by the non-null parameter values.
@@ -347,18 +347,18 @@ $DeviceGamePickerState_SuccessCopyWith<DeviceGamePickerState_Success> get copyWi
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceGamePickerState_Success&&(identical(other.deviceGame, deviceGame) || other.deviceGame == deviceGame));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceGamePickerState_Success&&(identical(other.obtainedDeviceGame, obtainedDeviceGame) || other.obtainedDeviceGame == obtainedDeviceGame));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,deviceGame);
+    return Object.hash(runtimeType,obtainedDeviceGame);
 }
 
 @override
 String toString() {
-    return 'DeviceGamePickerState.success(deviceGame: $deviceGame)';
+    return 'DeviceGamePickerState.success(obtainedDeviceGame: $obtainedDeviceGame)';
 }
 
 
@@ -369,11 +369,11 @@ abstract mixin class $DeviceGamePickerState_SuccessCopyWith<$Res> implements $De
   factory $DeviceGamePickerState_SuccessCopyWith(DeviceGamePickerState_Success value, $Res Function(DeviceGamePickerState_Success) _then) = _$DeviceGamePickerState_SuccessCopyWithImpl;
 @useResult
 $Res call({
- DeviceGame deviceGame
+ ObtainedDeviceGame obtainedDeviceGame
 });
 
 
-$DeviceGameCopyWith<$Res> get deviceGame;
+$ObtainedDeviceGameCopyWith<$Res> get obtainedDeviceGame;
 
 }
 /// @nodoc
@@ -386,10 +386,10 @@ class _$DeviceGamePickerState_SuccessCopyWithImpl<$Res>
 
 /// Create a copy of DeviceGamePickerState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? deviceGame = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? obtainedDeviceGame = null,}) {
   return _then(DeviceGamePickerState_Success(
-null == deviceGame ? _self.deviceGame : deviceGame // ignore: cast_nullable_to_non_nullable
-as DeviceGame,
+null == obtainedDeviceGame ? _self.obtainedDeviceGame : obtainedDeviceGame // ignore: cast_nullable_to_non_nullable
+as ObtainedDeviceGame,
   ));
 }
 
@@ -397,10 +397,10 @@ as DeviceGame,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DeviceGameCopyWith<$Res> get deviceGame {
+$ObtainedDeviceGameCopyWith<$Res> get obtainedDeviceGame {
   
-  return $DeviceGameCopyWith<$Res>(_self.deviceGame, (value) {
-    return _then(_self.copyWith(deviceGame: value));
+  return $ObtainedDeviceGameCopyWith<$Res>(_self.obtainedDeviceGame, (value) {
+    return _then(_self.copyWith(obtainedDeviceGame: value));
   });
 }
 }

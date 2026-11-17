@@ -1,6 +1,5 @@
 
 import "../model/device_game_picker_state.dart";
-import "package:nikki_albums/base/app_state.dart";
 import "package:nikki_albums/modules/config_helper/domain/config_helper.dart";
 import "package:nikki_albums/gen/rust/config/game.dart";
 import "package:nikki_albums/gen/rust/config/plugin.dart";
@@ -22,7 +21,7 @@ class DeviceGamePickerDialog extends HookConsumerWidget{
   final FDialogStyleDelta style;
   final Animation<double>? animation;
   final FutureOr<PickedDeviceGameResult> Function(String path, String name) validate;
-  final void Function(DeviceGame)? onSave;
+  final void Function(ObtainedDeviceGame)? onSave;
   final void Function()? onCancel;
 
   const DeviceGamePickerDialog({
@@ -69,9 +68,9 @@ class DeviceGamePickerDialog extends HookConsumerWidget{
             try{
               final PickedDeviceGameResult pickedResult = await validate(pathValue.value, nameValue.value);
               switch(pickedResult){
-                case PickedDeviceGameResult_Ok(field0: final DeviceGame deviceGame):
-                  pickerState.value = DeviceGamePickerState.success(deviceGame);
-                  pathController.text = deviceGame.installPath;
+                case PickedDeviceGameResult_Ok(field0: final ObtainedDeviceGame obtainedDeviceGame):
+                  pickerState.value = DeviceGamePickerState.success(obtainedDeviceGame);
+                  pathController.text = obtainedDeviceGame.installPath;
                 case PickedDeviceGameResult_Err(field0: final TextRule? message):
                   pickerState.value = DeviceGamePickerState.error(message);
               }
@@ -153,13 +152,10 @@ class DeviceGamePickerDialog extends HookConsumerWidget{
             _ => null,
           },
           onPress: switch(pickerState.value){
-            DeviceGamePickerState_Success(:final deviceGame) => (){
+            DeviceGamePickerState_Success(:final obtainedDeviceGame) => (){
               if(onSave != null){
-                return onSave!.call(deviceGame);
+                return onSave!.call(obtainedDeviceGame);
               }
-              ref.read(appStateProvider.notifier).setAppStateWith(
-                pickedDeviceGame: [deviceGame, ...ref.read(appStateProvider).pickedDeviceGame],
-              );
               Navigator.of(context).pop();
             },
             _ => null,

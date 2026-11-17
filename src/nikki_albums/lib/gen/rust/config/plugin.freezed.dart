@@ -326,6 +326,273 @@ $TextRuleCopyWith<$Res>? get field0 {
 }
 
 /// @nodoc
+mixin _$ObtainedDeviceGame {
+
+ Map<String, String> get info; String get installPath;
+/// Create a copy of ObtainedDeviceGame
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ObtainedDeviceGameCopyWith<ObtainedDeviceGame> get copyWith => _$ObtainedDeviceGameCopyWithImpl<ObtainedDeviceGame>(this as ObtainedDeviceGame, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as ObtainedDeviceGame;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ObtainedDeviceGame&&const DeepCollectionEquality().equals(other.info, _this.info)&&(identical(other.installPath, _this.installPath) || other.installPath == _this.installPath));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as ObtainedDeviceGame;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.info),_this.installPath);
+}
+
+@override
+String toString() {
+  final _this = this as ObtainedDeviceGame;
+  return 'ObtainedDeviceGame(info: ${_this.info}, installPath: ${_this.installPath})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ObtainedDeviceGameCopyWith<$Res>  {
+  factory $ObtainedDeviceGameCopyWith(ObtainedDeviceGame value, $Res Function(ObtainedDeviceGame) _then) = _$ObtainedDeviceGameCopyWithImpl;
+@useResult
+$Res call({
+ Map<String, String> info, String installPath
+});
+
+
+
+
+}
+/// @nodoc
+class _$ObtainedDeviceGameCopyWithImpl<$Res>
+    implements $ObtainedDeviceGameCopyWith<$Res> {
+  _$ObtainedDeviceGameCopyWithImpl(this._self, this._then);
+
+  final ObtainedDeviceGame _self;
+  final $Res Function(ObtainedDeviceGame) _then;
+
+/// Create a copy of ObtainedDeviceGame
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? info = null,Object? installPath = null,}) {
+  return _then(ObtainedDeviceGame(
+info: null == info ? _self.info : info // ignore: cast_nullable_to_non_nullable
+as Map<String, String>,installPath: null == installPath ? _self.installPath : installPath // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ObtainedDeviceGame].
+extension ObtainedDeviceGamePatterns on ObtainedDeviceGame {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ObtainedDeviceGame value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ObtainedDeviceGame() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ObtainedDeviceGame value)  $default,){
+final _that = this;
+switch (_that) {
+case _ObtainedDeviceGame():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ObtainedDeviceGame value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ObtainedDeviceGame() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, String> info,  String installPath)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ObtainedDeviceGame() when $default != null:
+return $default(_that.info,_that.installPath);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, String> info,  String installPath)  $default,) {final _that = this;
+switch (_that) {
+case _ObtainedDeviceGame():
+return $default(_that.info,_that.installPath);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, String> info,  String installPath)?  $default,) {final _that = this;
+switch (_that) {
+case _ObtainedDeviceGame() when $default != null:
+return $default(_that.info,_that.installPath);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _ObtainedDeviceGame extends ObtainedDeviceGame {
+  const _ObtainedDeviceGame({required  Map<String, String> info, required this.installPath}): _info = info,super._();
+  
+
+ final  Map<String, String> _info;
+@override Map<String, String> get info {
+  if (_info is EqualUnmodifiableMapView) return _info;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_info);
+}
+
+@override final  String installPath;
+
+/// Create a copy of ObtainedDeviceGame
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ObtainedDeviceGameCopyWith<_ObtainedDeviceGame> get copyWith => __$ObtainedDeviceGameCopyWithImpl<_ObtainedDeviceGame>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ObtainedDeviceGame&&const DeepCollectionEquality().equals(other.info, _info)&&(identical(other.installPath, installPath) || other.installPath == installPath));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_info),installPath);
+}
+
+@override
+String toString() {
+    return 'ObtainedDeviceGame(info: $info, installPath: $installPath)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ObtainedDeviceGameCopyWith<$Res> implements $ObtainedDeviceGameCopyWith<$Res> {
+  factory _$ObtainedDeviceGameCopyWith(_ObtainedDeviceGame value, $Res Function(_ObtainedDeviceGame) _then) = __$ObtainedDeviceGameCopyWithImpl;
+@override @useResult
+$Res call({
+ Map<String, String> info, String installPath
+});
+
+
+
+
+}
+/// @nodoc
+class __$ObtainedDeviceGameCopyWithImpl<$Res>
+    implements _$ObtainedDeviceGameCopyWith<$Res> {
+  __$ObtainedDeviceGameCopyWithImpl(this._self, this._then);
+
+  final _ObtainedDeviceGame _self;
+  final $Res Function(_ObtainedDeviceGame) _then;
+
+/// Create a copy of ObtainedDeviceGame
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? info = null,Object? installPath = null,}) {
+  return _then(_ObtainedDeviceGame(
+info: null == info ? _self._info : info // ignore: cast_nullable_to_non_nullable
+as Map<String, String>,installPath: null == installPath ? _self.installPath : installPath // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$PickedDeviceGameResult {
 
  Object? get field0;
@@ -438,7 +705,7 @@ return err(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( DeviceGame field0)?  ok,TResult Function( TextRule? field0)?  err,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ObtainedDeviceGame field0)?  ok,TResult Function( TextRule? field0)?  err,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case PickedDeviceGameResult_Ok() when ok != null:
 return ok(_that.field0);case PickedDeviceGameResult_Err() when err != null:
@@ -460,7 +727,7 @@ return err(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( DeviceGame field0)  ok,required TResult Function( TextRule? field0)  err,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ObtainedDeviceGame field0)  ok,required TResult Function( TextRule? field0)  err,}) {final _that = this;
 switch (_that) {
 case PickedDeviceGameResult_Ok():
 return ok(_that.field0);case PickedDeviceGameResult_Err():
@@ -478,7 +745,7 @@ return err(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( DeviceGame field0)?  ok,TResult? Function( TextRule? field0)?  err,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ObtainedDeviceGame field0)?  ok,TResult? Function( TextRule? field0)?  err,}) {final _that = this;
 switch (_that) {
 case PickedDeviceGameResult_Ok() when ok != null:
 return ok(_that.field0);case PickedDeviceGameResult_Err() when err != null:
@@ -497,7 +764,7 @@ class PickedDeviceGameResult_Ok extends PickedDeviceGameResult {
   const PickedDeviceGameResult_Ok(this.field0): super._();
   
 
-@override final  DeviceGame field0;
+@override final  ObtainedDeviceGame field0;
 
 /// Create a copy of PickedDeviceGameResult
 /// with the given fields replaced by the non-null parameter values.
@@ -531,11 +798,11 @@ abstract mixin class $PickedDeviceGameResult_OkCopyWith<$Res> implements $Picked
   factory $PickedDeviceGameResult_OkCopyWith(PickedDeviceGameResult_Ok value, $Res Function(PickedDeviceGameResult_Ok) _then) = _$PickedDeviceGameResult_OkCopyWithImpl;
 @useResult
 $Res call({
- DeviceGame field0
+ ObtainedDeviceGame field0
 });
 
 
-$DeviceGameCopyWith<$Res> get field0;
+$ObtainedDeviceGameCopyWith<$Res> get field0;
 
 }
 /// @nodoc
@@ -551,7 +818,7 @@ class _$PickedDeviceGameResult_OkCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
   return _then(PickedDeviceGameResult_Ok(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
-as DeviceGame,
+as ObtainedDeviceGame,
   ));
 }
 
@@ -559,9 +826,9 @@ as DeviceGame,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DeviceGameCopyWith<$Res> get field0 {
+$ObtainedDeviceGameCopyWith<$Res> get field0 {
   
-  return $DeviceGameCopyWith<$Res>(_self.field0, (value) {
+  return $ObtainedDeviceGameCopyWith<$Res>(_self.field0, (value) {
     return _then(_self.copyWith(field0: value));
   });
 }

@@ -505,6 +505,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ObjectParams dco_decode_box_autoadd_object_params(dynamic raw);
 
   @protected
+  ObtainedDeviceGame dco_decode_box_autoadd_obtained_device_game(dynamic raw);
+
+  @protected
   OutfitDyeGeneralData dco_decode_box_autoadd_outfit_dye_general_data(
     dynamic raw,
   );
@@ -783,6 +786,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<ObjectParams> dco_decode_list_object_params(dynamic raw);
 
   @protected
+  List<ObtainedDeviceGame> dco_decode_list_obtained_device_game(dynamic raw);
+
+  @protected
   List<CustomData?> dco_decode_list_opt_box_autoadd_custom_data(dynamic raw);
 
   @protected
@@ -1012,6 +1018,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ObjectParams dco_decode_object_params(dynamic raw);
+
+  @protected
+  ObtainedDeviceGame dco_decode_obtained_device_game(dynamic raw);
 
   @protected
   Map<String, String>? dco_decode_opt_Map_String_String_None(dynamic raw);
@@ -1862,6 +1871,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  ObtainedDeviceGame sse_decode_box_autoadd_obtained_device_game(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   OutfitDyeGeneralData sse_decode_box_autoadd_outfit_dye_general_data(
     SseDeserializer deserializer,
   );
@@ -2194,6 +2208,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<ObtainedDeviceGame> sse_decode_list_obtained_device_game(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<CustomData?> sse_decode_list_opt_box_autoadd_custom_data(
     SseDeserializer deserializer,
   );
@@ -2469,6 +2488,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ObjectParams sse_decode_object_params(SseDeserializer deserializer);
+
+  @protected
+  ObtainedDeviceGame sse_decode_obtained_device_game(
+    SseDeserializer deserializer,
+  );
 
   @protected
   Map<String, String>? sse_decode_opt_Map_String_String_None(
@@ -3532,6 +3556,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_obtained_device_game(
+    ObtainedDeviceGame self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_outfit_dye_general_data(
     OutfitDyeGeneralData self,
     SseSerializer serializer,
@@ -3947,6 +3977,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_obtained_device_game(
+    List<ObtainedDeviceGame> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_opt_box_autoadd_custom_data(
     List<CustomData?> self,
     SseSerializer serializer,
@@ -4311,6 +4347,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_object_params(ObjectParams self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_obtained_device_game(
+    ObtainedDeviceGame self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_opt_Map_String_String_None(
