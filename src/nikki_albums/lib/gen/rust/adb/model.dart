@@ -43,12 +43,12 @@ class DeviceInfo {
 }
 
 class DirList {
-  final List<String> filenames;
+  final List<String> fileNames;
   final List<String> dirNames;
   final List<String> linkNames;
 
   const DirList({
-    required this.filenames,
+    required this.fileNames,
     required this.dirNames,
     required this.linkNames,
   });
@@ -58,14 +58,14 @@ class DirList {
 
   @override
   int get hashCode =>
-      filenames.hashCode ^ dirNames.hashCode ^ linkNames.hashCode;
+      fileNames.hashCode ^ dirNames.hashCode ^ linkNames.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is DirList &&
           runtimeType == other.runtimeType &&
-          filenames == other.filenames &&
+          fileNames == other.fileNames &&
           dirNames == other.dirNames &&
           linkNames == other.linkNames;
 }

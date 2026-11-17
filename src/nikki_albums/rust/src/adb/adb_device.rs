@@ -67,6 +67,7 @@ impl ADBDevice for ADBServerDevice{
   }
 
   fn file_stat(&self, path: &str) -> Result<Option<FileStat>, String>{
+    self.inner.stat(path).map_err(|e| e.to_string())?;
     let raw_stat = self.inner.stat_extended(path).map_err(|e| e.to_string())?;
     Ok(raw_stat.map(|stat| FileStat{
       atime: stat.atime,
@@ -83,7 +84,7 @@ impl ADBDevice for ADBServerDevice{
     let mut res = DirList::default();
     for item in raw_list {
       match item{
-        ADBListItemType::File(item) => res.filenames.push(item.name),
+        ADBListItemType::File(item) => res.file_names.push(item.name),
         ADBListItemType::Directory(item) => res.dir_names.push(item.name),
         ADBListItemType::Symlink(item) => res.link_names.push(item.name),
         _ => {},

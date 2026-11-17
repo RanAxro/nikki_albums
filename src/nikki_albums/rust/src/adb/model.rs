@@ -16,7 +16,7 @@ pub struct FileStat{
 
 #[derive(Default)]
 pub struct DirList{
-  pub filenames: Vec<String>,
+  pub file_names: Vec<String>,
   pub dir_names: Vec<String>,
   pub link_names: Vec<String>,
 }
