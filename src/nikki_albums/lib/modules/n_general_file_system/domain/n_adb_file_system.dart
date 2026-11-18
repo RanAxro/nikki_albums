@@ -8,6 +8,7 @@ import "dart:io";
 import "dart:typed_data";
 
 import "package:path/path.dart" as p;
+import "package:watcher/watcher.dart";
 
 
 class NAdbFileSystem extends NGeneralFileSystem{
@@ -143,5 +144,19 @@ class NAdbFileSystem extends NGeneralFileSystem{
   @override
   Future<Uint8List> readBytes(String path){
     return device.readFile(path: _getRealPath(path));
+  }
+
+  @override
+  Stream<FileEvent> watch(String path){
+    /// TODO
+    final DirectoryWatcher watcher = DirectoryWatcher(_getRealPath(path));
+    return watcher.events.map((WatchEvent event){
+      final FileEventType type = switch(event.type){
+        ChangeType.ADD => FileEventType.add,
+        ChangeType.REMOVE => FileEventType.remove,
+        _ => FileEventType.modify,
+      };
+      return FileEvent(type, p.relative(event.path, from: root));
+    });
   }
 }

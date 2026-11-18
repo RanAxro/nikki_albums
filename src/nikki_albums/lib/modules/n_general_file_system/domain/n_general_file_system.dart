@@ -34,6 +34,21 @@ class NGDirList{
   const NGDirList({required this.files, required this.dirs, required this.links});
 }
 
+class FileEvent{
+  final FileEventType type;
+  final String path;
+
+  const FileEvent(this.type, this.path);
+
+  @override
+  String toString() => "FileEvent: $type $path";
+}
+enum FileEventType{
+  add,
+  remove,
+  modify,
+}
+
 abstract class NGeneralFileSystem{
   const NGeneralFileSystem();
 
@@ -62,4 +77,6 @@ abstract class NGeneralFileSystem{
   Future<List<String>> readLines(String path, [Encoding encoding = utf8]);
 
   Future<Uint8List> readBytes(String path);
+
+  Stream<FileEvent> watch(String path);
 }
