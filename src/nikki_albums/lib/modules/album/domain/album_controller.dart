@@ -1,157 +1,112 @@
-import "package:nikki_albums/widgets/common/component.dart";
 
-import "../model/image_extended_data.dart";
-import "../model/classification_standard.dart";
-import "../model/image_data.dart";
-import "images_notifier.dart";
+import "item.dart";
+import "item_provider.dart";
 
-import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "dart:collection";
 
-class AlbumController extends ChangeNotifier {
-  final ImagesNotifier notifier;
-  ClassificationStandard _standard;
-  bool _reverse;
-  final Set<bool Function(ImageData, [ImageExtendedData])> _filtrations;
-  final ImageExtendedData defaultExtendedData;
-  final Map<ImageData, ImageExtendedData> _extended;
+import "package:flutter_hooks/flutter_hooks.dart";
 
-  AlbumController({
-    required this.notifier,
-    ClassificationStandard standard = ClassificationStandard.day,
-    bool reverse = true,
-    Iterable<bool Function(ImageData, [ImageExtendedData?])> filtrations =
-        const {},
-    this.defaultExtendedData = const ImageExtendedData(),
-    Map<ImageData, ImageExtendedData> extended = const {},
-  }) : _standard = standard,
-       _reverse = reverse,
-       _filtrations = Set.of(filtrations),
-       _extended = Map.of(extended) {
-    notifier.addListener(_update);
+
+
+class AlbumController extends ChangeNotifier{
+  final AlbumItemProvider provider;
+
+  AlbumController({required this.provider}){
+    provider.addListener(_onItemChange);
   }
 
-  List<ImageData> _sorted = [];
+  Future<void> _onItemChange() async{
+    await _sortByItemsMTime();
+    _notify();
+  }
 
-  final Map<DateTime, List<ImageData>> _processed = {};
+  /// items
+  List<AlbumItem> _items = [];
+  List<AlbumItem> get items{
+    final Iterable<AlbumItem> raw = reverse ? _items.reversed : List.from(_items);
 
-  void _update() {
-    final List<ImageData> source = notifier.images;
+    return raw.toList();
+  }
 
-    _extended.removeWhere(
-      (ImageData data, ImageExtendedData value) => !source.contains(data),
-    );
-
-    // _sorted = _filtration != null ? source.where((ImageData data) => _filtration!.call(data, extendedOf(data))).toList() : List.of(source);
-    // _sorted = source.where((ImageData data) => _filtration?.call(data, extendedOf(data)) ?? false).toList();
-    _sorted = List.of(source);
-    for (final filtration in _filtrations) {
-      _sorted.removeWhere((ImageData data) => !filtration.call(data));
+  /// 正序或倒序
+  bool _reverse = true;
+  bool get reverse => _reverse;
+  void setReverse(bool reverse){
+    if(reverse == _reverse){
+      return;
     }
+    _reverse = reverse;
+    _notify();
+  }
+  void toggleReverse(){
+    setReverse(!_reverse);
+  }
 
-    _sorted.sort(
-      (a, b) => _reverse ? b.time.compareTo(a.time) : a.time.compareTo(b.time),
-    );
-
-    _processed.clear();
-
-    for (final image in _sorted) {
-      final DateTime key = _truncateToStandard(image.time);
-
-      (_processed[key] ??= []).add(image);
+  /// 排序
+  final Map<AlbumItem, DateTime> _itemsMTimeCache = {};
+  Future<void> _sortByItemsMTime() async{
+    final SplayTreeMap<DateTime, AlbumItem> sortedItems = SplayTreeMap();
+    for(final AlbumItem item in provider.items){
+      DateTime? mTime;
+      if(item.immutable){
+        mTime = _itemsMTimeCache[item];
+      }
+      mTime ??= await item.stat().then((s) => s.modified);
+      sortedItems[mTime!] = item;
     }
+    _items = sortedItems.values.toList();
+  }
 
+  /// item 选中状态
+  final Set<AlbumItem> _selectedItem = {};
+  Set<AlbumItem> get selectedItem => Set.unmodifiable(_selectedItem);
+  bool isSelect(AlbumItem item){
+    return _selectedItem.contains(item);
+  }
+  void select(AlbumItem item){
+    if(_selectedItem.add(item)){
+      _notify();
+    }
+  }
+  void unselect(AlbumItem item){
+    if(_selectedItem.remove(item)){
+      _notify();
+    }
+  }
+  void toggleSelect(AlbumItem item){
+    if(isSelect(item)){
+      unselect(item);
+    }else{
+      select(item);
+    }
+  }
+
+  /// tag
+
+
+  void _notify(){
+    final Set<AlbumItem> items = _items.toSet();
+    _itemsMTimeCache.removeWhere((item, _) => !items.contains(item));
+    _selectedItem.removeWhere((item) => !items.contains(item));
     notifyListeners();
   }
 
-  DateTime _truncateToStandard(DateTime time) {
-    switch (_standard) {
-      case ClassificationStandard.year:
-        return DateTime(time.year);
-      case ClassificationStandard.month:
-        return DateTime(time.year, time.month);
-      case ClassificationStandard.day:
-        return DateTime(time.year, time.month, time.day);
-      case ClassificationStandard.hour:
-        return DateTime(time.year, time.month, time.day, time.hour);
-      case ClassificationStandard.minute:
-        return DateTime(
-          time.year,
-          time.month,
-          time.day,
-          time.hour,
-          time.minute,
-        );
-      case ClassificationStandard.second:
-        return DateTime(
-          time.year,
-          time.month,
-          time.day,
-          time.hour,
-          time.minute,
-          time.second,
-        );
-    }
-  }
-
-  List<ImageData> get images => notifier.images;
-
-  List<ImageData> get sorted => List.of(_sorted);
-
-  Map<DateTime, List<ImageData>> get processed {
-    return _processed.map(
-      (DateTime time, List<ImageData> images) =>
-          MapEntry(time, List.of(images)),
-    );
-  }
-
-  ClassificationStandard get standard => _standard;
-  set standard(ClassificationStandard arg) {
-    if (arg == _standard) return;
-
-    _standard = arg;
-    _update();
-  }
-
-  bool get reverse => _reverse;
-  set reverse(bool arg) {
-    if (arg == _reverse) return;
-
-    _reverse = arg;
-    _update();
-  }
-
-  bool addFiltration(bool Function(ImageData, [ImageExtendedData]) filtration) {
-    return _filtrations.add(filtration);
-  }
-
-  bool removeFiltration(
-    bool Function(ImageData, [ImageExtendedData]) filtration,
-  ) {
-    return _filtrations.remove(filtration);
-  }
-
-  void filtrate() {
-    _update();
-  }
-
-  final DetailNotifier<ImageData> onExtendedChanged =
-      DetailNotifier<ImageData>();
-
-  ImageExtendedData extendedOf(ImageData data) {
-    return _extended[data] ?? defaultExtendedData;
-  }
-
-  void setExtended(ImageData data, [ImageExtendedData? value]) {
-    if (extendedOf(data) == (value ?? defaultExtendedData)) return;
-
-    _extended[data] = value ?? defaultExtendedData;
-    onExtendedChanged.notify(data);
-  }
-
   @override
-  void dispose() {
-    notifier.removeListener(_update);
-    onExtendedChanged.dispose();
+  void dispose(){
+    provider.removeListener(_onItemChange);
     super.dispose();
   }
+}
+
+
+AlbumController useAlbumController(AlbumItemProvider provider){
+  final AlbumController controller = useMemoized(
+    () => AlbumController(provider: provider),
+    [provider],
+  );
+
+  useEffect(() => controller.dispose, [controller]);
+
+  return controller;
 }
