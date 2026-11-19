@@ -9,6 +9,17 @@ import "package:flutter_hooks/flutter_hooks.dart";
 
 
 
+AlbumController useAlbumController(AlbumItemProvider provider){
+  final AlbumController controller = useMemoized(
+    () => AlbumController(provider: provider),
+    [provider],
+  );
+
+  useEffect(() => controller.dispose, [controller]);
+
+  return controller;
+}
+
 class AlbumController extends ChangeNotifier{
   final AlbumItemProvider provider;
 
@@ -16,8 +27,18 @@ class AlbumController extends ChangeNotifier{
     provider.addListener(_onItemChange);
   }
 
+  bool _isInit = false;
+  double _initProgress = 0;
+  bool get isInit => _isInit;
+  double get initProgress => _initProgress;
   Future<void> _onItemChange() async{
-    await _sortByItemsMTime();
+    await _sortByItemsMTime((current, total){
+      if(!_isInit){
+        _initProgress = current / total;
+        notifyListeners();
+      }
+    });
+    _isInit = true;
     _notify();
   }
 
@@ -45,8 +66,9 @@ class AlbumController extends ChangeNotifier{
 
   /// 排序
   final Map<AlbumItem, DateTime> _itemsMTimeCache = {};
-  Future<void> _sortByItemsMTime() async{
+  Future<void> _sortByItemsMTime([void Function(int current, int total)? progress]) async{
     final SplayTreeMap<DateTime, AlbumItem> sortedItems = SplayTreeMap();
+    final int total = provider.length;
     for(final AlbumItem item in provider.items){
       DateTime? mTime;
       if(item.immutable){
@@ -54,6 +76,10 @@ class AlbumController extends ChangeNotifier{
       }
       mTime ??= await item.stat().then((s) => s.modified);
       sortedItems[mTime!] = item;
+      if(item.immutable){
+        _itemsMTimeCache[item] = mTime;
+      }
+      progress?.call(sortedItems.length, total);
     }
     _items = sortedItems.values.toList();
   }
@@ -97,16 +123,4 @@ class AlbumController extends ChangeNotifier{
     provider.removeListener(_onItemChange);
     super.dispose();
   }
-}
-
-
-AlbumController useAlbumController(AlbumItemProvider provider){
-  final AlbumController controller = useMemoized(
-    () => AlbumController(provider: provider),
-    [provider],
-  );
-
-  useEffect(() => controller.dispose, [controller]);
-
-  return controller;
 }
