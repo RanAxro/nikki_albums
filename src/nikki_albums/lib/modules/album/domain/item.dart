@@ -1,5 +1,8 @@
 
+import "thumbnail.dart";
 import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
+
+import "dart:ui" as ui;
 
 import "package:path/path.dart" as p;
 
@@ -34,16 +37,43 @@ class AlbumItem{
     return fsHandler.stat(path);
   }
 
+  Future<ui.Image> getThumbnail({int? targetWidth, int? targetHeight}){
+    if(immutable){
+      return Thumbnail.fromCache(
+        id: this,
+        getBytes: () => fsHandler.readBytes(p.join(path, thumbnailPath ?? coverPath ?? mediaPath)),
+        targetWidth: targetWidth,
+        targetHeight: targetHeight,
+      );
+    }
+    return Thumbnail.from(
+      getBytes: () => fsHandler.readBytes(p.join(path, thumbnailPath ?? coverPath ?? mediaPath)),
+      targetWidth: targetWidth,
+      targetHeight: targetHeight,
+    );
+  }
+
+  bool _pathEquals(String? path1, String? path2){
+    if(path1 != null && path2 != null){
+      return p.equals(path1, path2);
+    }
+    return path1 == path2;
+  }
+
+  bool isSame(AlbumItem other) =>
+    identical(this, other) ||
+    fsHandler == other.fsHandler && _pathEquals(path, other.path) && _pathEquals(mediaPath, other.mediaPath);
+
   @override
   bool operator ==(Object other) =>
     identical(this, other) ||
     other is AlbumItem && runtimeType == other.runtimeType &&
     fsHandler == other.fsHandler &&
     immutable == other.immutable &&
-    p.equals(path, other.path) &&
-    p.equals(mediaPath, other.mediaPath) &&
-    p.equals(coverPath ?? "", other.coverPath ?? "") &&
-    p.equals(thumbnailPath ?? "", other.thumbnailPath ?? "");
+    _pathEquals(path, other.path) &&
+    _pathEquals(mediaPath, other.mediaPath) &&
+    _pathEquals(coverPath ?? "", other.coverPath ?? "") &&
+    _pathEquals(thumbnailPath ?? "", other.thumbnailPath ?? "");
 
   @override
   int get hashCode => fsHandler.hashCode ^ immutable.hashCode ^ path.hashCode ^ mediaPath.hashCode ^ coverPath.hashCode ^ thumbnailPath.hashCode;
