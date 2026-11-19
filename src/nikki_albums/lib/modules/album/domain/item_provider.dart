@@ -6,7 +6,34 @@ import "package:flutter/widgets.dart";
 import "dart:async";
 
 import "package:path/path.dart" as p;
+import "package:flutter_hooks/flutter_hooks.dart";
 
+
+
+AlbumItemProvider useAlbumItemProvider({
+  required NGeneralFileSystem fsHandler,
+  FutureOr<String> albumPath = "",
+  bool immutableMedia = true,
+  required FutureOr<String> Function(String path) getMediaPath,
+  FutureOr<String?> Function(String path)? getCoverPath,
+  FutureOr<String?> Function(String path)? getThumbnailPath,
+}){
+  final AlbumItemProvider provider = useMemoized(
+    () => AlbumItemProvider(
+      fsHandler: fsHandler,
+      albumPath: albumPath,
+      immutableMedia: immutableMedia,
+      getMediaPath: getMediaPath,
+      getCoverPath: getCoverPath,
+      getThumbnailPath: getThumbnailPath,
+    ),
+    [fsHandler, albumPath, immutableMedia, getMediaPath, getCoverPath, getThumbnailPath],
+  );
+
+  useEffect(() => provider.dispose, [provider]);
+
+  return provider;
+}
 
 class AlbumItemProvider extends ChangeNotifier{
   final NGeneralFileSystem fsHandler;
@@ -32,6 +59,7 @@ class AlbumItemProvider extends ChangeNotifier{
   StreamSubscription<FileEvent>? _subscription;
   final Map<int, AlbumItem> _items = {};
   List<AlbumItem> get items => List.unmodifiable(_items.values);
+  int get length => _items.length;
 
   bool _isInit = false;
   bool get isInit => _isInit;
