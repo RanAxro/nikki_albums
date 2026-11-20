@@ -3,11 +3,12 @@ import "thumbnail.dart";
 import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
 
 import "dart:ui" as ui;
+import "dart:typed_data";
 
 import "package:path/path.dart" as p;
 
 
-class AlbumItem{
+class MediaItem{
   final NGeneralFileSystem fsHandler;
   final bool immutable;
   final String path;
@@ -20,7 +21,7 @@ class AlbumItem{
   /// [mediaPath] 媒体文件所在的路径, 相对于 [path]
   /// [coverPath] 媒体封面图像文件所在的路径, 相对于 [path]
   /// [thumbnailPath] 媒体封面缩略图图像文件所在的路径, 相对于 [path]
-  AlbumItem({
+  MediaItem({
     required this.fsHandler,
     this.immutable = true,
     required this.path,
@@ -35,6 +36,13 @@ class AlbumItem{
 
   Future<NGFileStat> stat(){
     return fsHandler.stat(path);
+  }
+
+  Future<ui.Image> getMedia() async{
+    final Uint8List bytes = await fsHandler.readBytes(p.join(path, mediaPath));
+    final ui.Codec codec = await ui.instantiateImageCodec(bytes);
+    final ui.FrameInfo frame = await codec.getNextFrame();
+    return frame.image;
   }
 
   Future<ui.Image> getThumbnail({int? targetWidth, int? targetHeight}){
@@ -60,14 +68,14 @@ class AlbumItem{
     return path1 == path2;
   }
 
-  bool isSame(AlbumItem other) =>
+  bool isSame(MediaItem other) =>
     identical(this, other) ||
     fsHandler == other.fsHandler && _pathEquals(path, other.path) && _pathEquals(mediaPath, other.mediaPath);
 
   @override
   bool operator ==(Object other) =>
     identical(this, other) ||
-    other is AlbumItem && runtimeType == other.runtimeType &&
+    other is MediaItem && runtimeType == other.runtimeType &&
     fsHandler == other.fsHandler &&
     immutable == other.immutable &&
     _pathEquals(path, other.path) &&
