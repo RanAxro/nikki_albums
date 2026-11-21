@@ -3,7 +3,7 @@ part of "../library_controller.dart";
 
 
 mixin SelectionMixin<T extends MediaItem> on LibraryController<T>{
-  final Set<T> _selected = <T>{};
+  Set<T> _selected = <T>{};
   Set<T> get selected => Set<T>.unmodifiable(_selected);
 
   int get selectedCount => _selected.length;
@@ -21,7 +21,7 @@ mixin SelectionMixin<T extends MediaItem> on LibraryController<T>{
       notify();
     }
   }
-  void toggleSelect(T item){
+  void invert(T item){
     if(isSelected(item)){
       unselect(item);
     }else{
@@ -37,7 +37,17 @@ mixin SelectionMixin<T extends MediaItem> on LibraryController<T>{
       notify();
     }
   }
-  void clearSelection(){
+  void invertAll(){
+    final Set<T> invert = {};
+    for(final T item in items){
+      if(!_selected.contains(item)){
+        invert.add(item);
+      }
+    }
+    _selected = invert;
+    notify();
+  }
+  void unselectAll(){
     if(_selected.isEmpty){
       return;
     }
