@@ -101,7 +101,9 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
       (res[classTime] ??= <T>[]).add(item);
     }
 
-    res[null] = unclassifiable;
+    if(unclassifiable.isNotEmpty){
+      res[null] = unclassifiable;
+    }
     return res;
   }
 
