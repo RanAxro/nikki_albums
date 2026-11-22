@@ -31,6 +31,8 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
 
   void _sort(List<T> sortable){
     switch(_sortingMethod){
+      case SortingMethod_Random<MediaItem>():
+        return sortable.shuffle();
       case SortingMethod_None<T>():
         return;
       case SortingMethod_CTime<T>():
@@ -46,8 +48,10 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
 
   void _sortReverse(List<T> sortable){
     switch(_sortingMethod){
+      case SortingMethod_Random<MediaItem>():
+        return sortable.shuffle();
       case SortingMethod_None<T>():
-        return;
+        return sortable.reverse();
       case SortingMethod_CTime<T>():
         return sortable.sort((T a, T b) => _stats[b]!.changed.compareTo(_stats[a]!.changed));
       case SortingMethod_MTime<T>():
@@ -140,5 +144,15 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
       }
     }
     notify();
+  }
+}
+
+extension ListReverse<T> on List<T>{
+  void reverse(){
+    for(int i = 0; i < length ~/ 2; i++){
+      final T temp = this[i];
+      this[i] = this[length - 1 - i];
+      this[length - 1 - i] = temp;
+    }
   }
 }

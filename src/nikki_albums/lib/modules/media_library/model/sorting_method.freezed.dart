@@ -56,10 +56,11 @@ extension SortingMethodPatterns<T extends MediaItem> on SortingMethod<T> {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SortingMethod_None<T> value)?  none,TResult Function( SortingMethod_CTime<T> value)?  cTime,TResult Function( SortingMethod_MTime<T> value)?  mTime,TResult Function( SortingMethod_Size<T> value)?  size,TResult Function( SortingMethod_Custom<T> value)?  custom,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SortingMethod_Random<T> value)?  random,TResult Function( SortingMethod_None<T> value)?  none,TResult Function( SortingMethod_CTime<T> value)?  cTime,TResult Function( SortingMethod_MTime<T> value)?  mTime,TResult Function( SortingMethod_Size<T> value)?  size,TResult Function( SortingMethod_Custom<T> value)?  custom,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case SortingMethod_None() when none != null:
+case SortingMethod_Random() when random != null:
+return random(_that);case SortingMethod_None() when none != null:
 return none(_that);case SortingMethod_CTime() when cTime != null:
 return cTime(_that);case SortingMethod_MTime() when mTime != null:
 return mTime(_that);case SortingMethod_Size() when size != null:
@@ -82,10 +83,11 @@ return custom(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SortingMethod_None<T> value)  none,required TResult Function( SortingMethod_CTime<T> value)  cTime,required TResult Function( SortingMethod_MTime<T> value)  mTime,required TResult Function( SortingMethod_Size<T> value)  size,required TResult Function( SortingMethod_Custom<T> value)  custom,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SortingMethod_Random<T> value)  random,required TResult Function( SortingMethod_None<T> value)  none,required TResult Function( SortingMethod_CTime<T> value)  cTime,required TResult Function( SortingMethod_MTime<T> value)  mTime,required TResult Function( SortingMethod_Size<T> value)  size,required TResult Function( SortingMethod_Custom<T> value)  custom,}){
 final _that = this;
 switch (_that) {
-case SortingMethod_None():
+case SortingMethod_Random():
+return random(_that);case SortingMethod_None():
 return none(_that);case SortingMethod_CTime():
 return cTime(_that);case SortingMethod_MTime():
 return mTime(_that);case SortingMethod_Size():
@@ -104,10 +106,11 @@ return custom(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SortingMethod_None<T> value)?  none,TResult? Function( SortingMethod_CTime<T> value)?  cTime,TResult? Function( SortingMethod_MTime<T> value)?  mTime,TResult? Function( SortingMethod_Size<T> value)?  size,TResult? Function( SortingMethod_Custom<T> value)?  custom,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SortingMethod_Random<T> value)?  random,TResult? Function( SortingMethod_None<T> value)?  none,TResult? Function( SortingMethod_CTime<T> value)?  cTime,TResult? Function( SortingMethod_MTime<T> value)?  mTime,TResult? Function( SortingMethod_Size<T> value)?  size,TResult? Function( SortingMethod_Custom<T> value)?  custom,}){
 final _that = this;
 switch (_that) {
-case SortingMethod_None() when none != null:
+case SortingMethod_Random() when random != null:
+return random(_that);case SortingMethod_None() when none != null:
 return none(_that);case SortingMethod_CTime() when cTime != null:
 return cTime(_that);case SortingMethod_MTime() when mTime != null:
 return mTime(_that);case SortingMethod_Size() when size != null:
@@ -129,9 +132,10 @@ return custom(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  none,TResult Function()?  cTime,TResult Function()?  mTime,TResult Function()?  size,TResult Function( int Function(T a, T b) compare)?  custom,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  random,TResult Function()?  none,TResult Function()?  cTime,TResult Function()?  mTime,TResult Function()?  size,TResult Function( int Function(T a, T b) compare)?  custom,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case SortingMethod_None() when none != null:
+case SortingMethod_Random() when random != null:
+return random();case SortingMethod_None() when none != null:
 return none();case SortingMethod_CTime() when cTime != null:
 return cTime();case SortingMethod_MTime() when mTime != null:
 return mTime();case SortingMethod_Size() when size != null:
@@ -154,9 +158,10 @@ return custom(_that.compare);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  none,required TResult Function()  cTime,required TResult Function()  mTime,required TResult Function()  size,required TResult Function( int Function(T a, T b) compare)  custom,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  random,required TResult Function()  none,required TResult Function()  cTime,required TResult Function()  mTime,required TResult Function()  size,required TResult Function( int Function(T a, T b) compare)  custom,}) {final _that = this;
 switch (_that) {
-case SortingMethod_None():
+case SortingMethod_Random():
+return random();case SortingMethod_None():
 return none();case SortingMethod_CTime():
 return cTime();case SortingMethod_MTime():
 return mTime();case SortingMethod_Size():
@@ -175,9 +180,10 @@ return custom(_that.compare);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  none,TResult? Function()?  cTime,TResult? Function()?  mTime,TResult? Function()?  size,TResult? Function( int Function(T a, T b) compare)?  custom,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  random,TResult? Function()?  none,TResult? Function()?  cTime,TResult? Function()?  mTime,TResult? Function()?  size,TResult? Function( int Function(T a, T b) compare)?  custom,}) {final _that = this;
 switch (_that) {
-case SortingMethod_None() when none != null:
+case SortingMethod_Random() when random != null:
+return random();case SortingMethod_None() when none != null:
 return none();case SortingMethod_CTime() when cTime != null:
 return cTime();case SortingMethod_MTime() when mTime != null:
 return mTime();case SortingMethod_Size() when size != null:
@@ -189,6 +195,38 @@ return custom(_that.compare);case _:
 }
 
 }
+
+/// @nodoc
+
+
+class SortingMethod_Random<T extends MediaItem> implements SortingMethod<T> {
+  const SortingMethod_Random();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SortingMethod_Random<T>);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+    return 'SortingMethod<$T>.random()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
