@@ -1,13 +1,15 @@
 
 import "item.dart";
 import "item_provider.dart";
+import "../model/sorting_method.dart";
+import "../model/classification_standard.dart";
 import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file_system.dart";
 
 import "package:flutter/widgets.dart";
 import "dart:collection";
 
 part "library_controller_mixin/initialization_mixin.dart";
-part "library_controller_mixin/sort_mixin.dart";
+part "library_controller_mixin/sort_and_classification_mixin.dart";
 part "library_controller_mixin/selection_mixin.dart";
 part "library_controller_mixin/tag_mixin.dart";
 

@@ -80,8 +80,8 @@ class MediaItem{
     immutable == other.immutable &&
     _pathEquals(path, other.path) &&
     _pathEquals(mediaPath, other.mediaPath) &&
-    _pathEquals(coverPath ?? "", other.coverPath ?? "") &&
-    _pathEquals(thumbnailPath ?? "", other.thumbnailPath ?? "");
+    _pathEquals(coverPath, other.coverPath) &&
+    _pathEquals(thumbnailPath, other.thumbnailPath);
 
   @override
   int get hashCode => fsHandler.hashCode ^ immutable.hashCode ^ path.hashCode ^ mediaPath.hashCode ^ coverPath.hashCode ^ thumbnailPath.hashCode;

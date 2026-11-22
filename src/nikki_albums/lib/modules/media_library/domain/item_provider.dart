@@ -45,10 +45,10 @@ NDirMediaItemProvider useNDirMediaItemProvider({
       getCoverPath: getCoverPath,
       getThumbnailPath: getThumbnailPath,
     ),
-    [fsHandler, libraryPath, immutableMedia, getMediaPath, getCoverPath, getThumbnailPath],
+    <Object?>[fsHandler, libraryPath, immutableMedia, getMediaPath, getCoverPath, getThumbnailPath],
   );
 
-  useEffect(() => provider.dispose, [provider]);
+  useEffect(() => provider.dispose, <Object?>[provider]);
 
   return provider;
 }
@@ -93,7 +93,7 @@ class NDirMediaItemProvider extends MediaItemProvider<MediaItem>{
   }
 
   Future<void> _init() async{
-    final List<String> files = await fsHandler.list(await libraryPath).then((v) => v.files);
+    final List<String> files = await fsHandler.list(await libraryPath).then((NGDirList v) => v.files);
     for(final String file in files){
       final MediaItem item = await _generateItem(file);
       _items[p.hash(item.path)] = item;

@@ -6,7 +6,7 @@ import "package:flutter_hooks/flutter_hooks.dart";
 
 AlbumController<T> useAlbumController<T extends MediaItem>(MediaItemProvider<T> provider){
   final AlbumController<T> controller = useMemoized(
-        () => AlbumController<T>(provider: provider),
+    () => AlbumController<T>(provider: provider),
     <Object?>[provider],
   );
 
@@ -15,6 +15,6 @@ AlbumController<T> useAlbumController<T extends MediaItem>(MediaItemProvider<T> 
   return controller;
 }
 
-class AlbumController<T extends MediaItem> extends LibraryController<T> with InitializationMixin<T>, SortMixin<T>, SelectionMixin<T>{
+class AlbumController<T extends MediaItem> extends LibraryController<T> with InitializationMixin<T>, SortAndClassificationMixin<T>, SelectionMixin<T>{
   AlbumController({required super.provider});
 }
