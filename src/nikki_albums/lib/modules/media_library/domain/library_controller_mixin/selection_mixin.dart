@@ -28,17 +28,37 @@ mixin SelectionMixin<T extends MediaItem> on LibraryController<T>{
       select(item);
     }
   }
-  void selectAll(){
-    bool changed = false;
-    for(final T item in items){
-      changed |= _selected.add(item);
+  void selectMulti(Iterable<T> items){
+    final int oldLength = _selected.length;
+    _selected.addAll(items);
+    if(oldLength != _selected.length){
+      notify();
     }
-    if(changed){
+  }
+  void invertMulti(Iterable<T> items){
+    for(final T item in items){
+      if(!_selected.add(item)){
+        _selected.remove(item);
+      }
+    }
+    notify();
+  }
+  void unselectMulti(Iterable<T> items){
+    final int oldLength = _selected.length;
+    _selected.removeAll(items);
+    if(oldLength != _selected.length){
+      notify();
+    }
+  }
+  void selectAll(){
+    final int oldLength = _selected.length;
+    _selected.addAll(items);
+    if(oldLength != _selected.length){
       notify();
     }
   }
   void invertAll(){
-    final Set<T> invert = {};
+    final Set<T> invert = <T>{};
     for(final T item in items){
       if(!_selected.contains(item)){
         invert.add(item);
