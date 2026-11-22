@@ -37,8 +37,6 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
         return sortable.sort((T a, T b) => _stats[a]!.changed.compareTo(_stats[b]!.changed));
       case SortingMethod_MTime<T>():
         return sortable.sort((T a, T b) => _stats[a]!.modified.compareTo(_stats[b]!.modified));
-      case SortingMethod_ATime<T>():
-        return sortable.sort((T a, T b) => _stats[a]!.accessed.compareTo(_stats[b]!.accessed));
       case SortingMethod_Size<T>():
         return sortable.sort((T a, T b) => _stats[a]!.size.compareTo(_stats[b]!.size));
       case SortingMethod_Custom<T>(:final int Function(T a, T b) compare):
@@ -54,8 +52,6 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
         return sortable.sort((T a, T b) => _stats[b]!.changed.compareTo(_stats[a]!.changed));
       case SortingMethod_MTime<T>():
         return sortable.sort((T a, T b) => _stats[b]!.modified.compareTo(_stats[a]!.modified));
-      case SortingMethod_ATime<T>():
-        return sortable.sort((T a, T b) => _stats[b]!.accessed.compareTo(_stats[a]!.accessed));
       case SortingMethod_Size<T>():
         return sortable.sort((T a, T b) => _stats[b]!.size.compareTo(_stats[a]!.size));
       case SortingMethod_Custom<T>(:final int Function(T a, T b) compare):
@@ -71,8 +67,15 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
     _classificationStandard = standard;
     notify();
   }
+  bool canClassify(){
+    return switch(sortingMethod){
+      SortingMethod_CTime<T>() => true,
+      SortingMethod_MTime<T>() => true,
+      _ => false,
+    };
+  }
   Map<DateTime?, List<T>> getClassifiedItems(){
-    final Map<DateTime?, List<T>> res = <DateTime, List<T>>{};
+    final Map<DateTime?, List<T>> res = <DateTime?, List<T>>{};
 
     final List<T> unclassifiable = <T>[];
     for(final T item in items){
@@ -82,9 +85,8 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
         continue;
       }
       final DateTime itemTime = switch(sortingMethod){
-        SortingMethod_CTime<MediaItem>() => stat.changed,
-        SortingMethod_MTime<MediaItem>() => stat.modified,
-        SortingMethod_ATime<MediaItem>() => stat.accessed,
+        SortingMethod_CTime<T>() => stat.changed,
+        SortingMethod_MTime<T>() => stat.modified,
         _ => throw Exception("当前排序方法不支持分类 $_sortingMethod"),
       };
       final DateTime classTime = switch(classificationStandard){
@@ -128,7 +130,7 @@ mixin SortAndClassificationMixin<T extends MediaItem> on LibraryController<T>{
     _stats.removeWhere((T item, _) => !item.immutable || !newItems.contains(item));
     final int max = newItems.length - 1;
     for(final (int index, T item) in newItems.indexed){
-      if(_stats.containsKey(items)){
+      if(_stats.containsKey(item)){
         continue;
       }
       _stats[item] = await item.stat();
