@@ -2,5 +2,23 @@
   "nav": {
     "plugin": "Plugins",
     "setting": "Settings"
+  },
+  "media_library": {
+    "sorting_and_classification_form": {
+      "sorting_method": "Sorting Method",
+      "sorting_method_random": "Shuffle",
+      "sorting_method_none": "None",
+      "sorting_method_creation": "Creation Time",
+      "sorting_method_changed": "Changed Time",
+      "sorting_method_modified": "Modified Time",
+      "sorting_method_size": "Size",
+      "classify_left": "Classify by",
+      "classification_standard_year": "Year",
+      "classification_standard_month": "Month",
+      "classification_standard_day": "Day",
+      "reshuffle": "Re-shuffle",
+      "ascending_order": "Asc",
+      "descending_order": "Desc"
+    }
   }
 }

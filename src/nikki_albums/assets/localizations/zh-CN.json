@@ -2,5 +2,24 @@
   "nav": {
     "plugin": "插件",
     "setting": "设置"
+  },
+  "media_library": {
+    "sorting_and_classification_form": {
+      "sorting_method": "排序方式",
+      "sorting_method_random": "随机打乱",
+      "sorting_method_none": "不排序",
+      "sorting_method_creation": "创建时间",
+      "sorting_method_changed": "状态改变时间",
+      "sorting_method_modified": "修改时间",
+      "sorting_method_size": "文件大小",
+      "classify_left": "按",
+      "classify_right": "分类",
+      "classification_standard_year": "年份",
+      "classification_standard_month": "月份",
+      "classification_standard_day": "天",
+      "reshuffle": "重新打乱",
+      "ascending_order": "正序",
+      "descending_order": "倒序"
+    }
   }
 }

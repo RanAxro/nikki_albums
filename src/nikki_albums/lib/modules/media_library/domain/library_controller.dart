@@ -29,6 +29,10 @@ class LibraryController<T extends MediaItem> extends ChangeNotifier{
     return List<T>.from(getItems(provider.items));
   }
 
+  void refresh(){
+    notify();
+  }
+
   @protected
   @visibleForTesting
   @mustCallSuper
