@@ -124,4 +124,16 @@ class NNativeFileSystem extends NGeneralFileSystem{
       return FileEvent(type, p.relative(event.path, from: root));
     });
   }
+
+  @override
+  Future<FileSystemEntity> native(String path) async{
+    final String real = _getRealPath(path);
+    final FileSystemEntityType type = await FileSystemEntity.type(real);
+    return switch(type){
+      FileSystemEntityType.file => File(real),
+      FileSystemEntityType.directory => Directory(real),
+      FileSystemEntityType.link => Link(real),
+      _ => throw Exception("文件不存在"),
+    };
+  }
 }

@@ -159,4 +159,10 @@ class NAdbFileSystem extends NGeneralFileSystem{
       return FileEvent(type, p.relative(event.path, from: root));
     });
   }
+
+  @override
+  Future<FileSystemEntity> native(String path){
+    // TODO: implement native
+    throw UnimplementedError();
+  }
 }

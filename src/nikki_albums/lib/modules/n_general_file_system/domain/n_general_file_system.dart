@@ -1,6 +1,7 @@
 export "n_native_file_system.dart";
 
 import "dart:convert";
+import "dart:io";
 import "dart:typed_data";
 
 
@@ -79,4 +80,6 @@ abstract class NGeneralFileSystem{
   Future<Uint8List> readBytes(String path);
 
   Stream<FileEvent> watch(String path);
+
+  Future<FileSystemEntity> native(String path);
 }

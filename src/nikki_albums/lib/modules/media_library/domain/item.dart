@@ -4,6 +4,7 @@ import "package:nikki_albums/modules/n_general_file_system/domain/n_general_file
 
 import "dart:ui" as ui;
 import "dart:typed_data";
+import "dart:io";
 
 import "package:path/path.dart" as p;
 
@@ -38,8 +39,15 @@ class MediaItem{
     return fsHandler.stat(path);
   }
 
-  Future<ui.Image> getMedia() async{
-    final Uint8List bytes = await fsHandler.readBytes(p.join(path, mediaPath));
+  Future<Uint8List> getMediaBytes(){
+    return fsHandler.readBytes(p.join(path, mediaPath));
+  }
+
+  Future<ui.Image?> getCover() async{
+    if(coverPath == null){
+      return null;
+    }
+    final Uint8List bytes = await fsHandler.readBytes(p.join(path, coverPath));
     final ui.Codec codec = await ui.instantiateImageCodec(bytes);
     final ui.FrameInfo frame = await codec.getNextFrame();
     return frame.image;
@@ -50,15 +58,21 @@ class MediaItem{
       return Thumbnail.fromCache(
         id: this,
         getBytes: () => fsHandler.readBytes(p.join(path, thumbnailPath ?? coverPath ?? mediaPath)),
+        getPath: () => fsHandler.native(p.join(path, thumbnailPath ?? coverPath ?? mediaPath)).then((FileSystemEntity entity) => entity.path),
         targetWidth: targetWidth,
         targetHeight: targetHeight,
       );
     }
     return Thumbnail.from(
       getBytes: () => fsHandler.readBytes(p.join(path, thumbnailPath ?? coverPath ?? mediaPath)),
+      getPath: () => fsHandler.native(p.join(path, thumbnailPath ?? coverPath ?? mediaPath)).then((FileSystemEntity entity) => entity.path),
       targetWidth: targetWidth,
       targetHeight: targetHeight,
     );
+  }
+
+  Future<FileSystemEntity> native(){
+    return fsHandler.native(p.join(path, mediaPath));
   }
 
   bool _pathEquals(String? path1, String? path2){

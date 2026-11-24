@@ -8,7 +8,13 @@
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
 analyzer:
+  language:
+#    strict-casts: true
+#    strict-inference: true
+#    strict-raw-types: true
   exclude:
+    - "**/*.g.dart"
+    - "lib/gen/**"
     - build/**
     - android/**
     - ios/**
@@ -29,6 +35,33 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
+    - always_put_control_body_on_new_line  # if/for/while 的 body 应放在新的一行（即使只有一行）
+    - always_specify_types  # 要求处处指定类型
+    - avoid_bool_literals_in_conditional_expressions  # 条件表达式中避免直接使用布尔字面量（? true : false）
+    - avoid_dynamic_calls  # 避免在 dynamic 上调用方法（失去静态类型安全）
+    - avoid_multiple_declarations_per_line  # 每行只声明一个变量
+    - avoid_returning_this  # 避免返回 this（链式调用应使用级联）
+    - curly_braces_in_flow_control_structures  # 流程控制结构（if/for/while）应使用花括号
+    - file_names  # 文件名应使用 lower_snake_case
+    - join_return_with_assignment  # 赋值与返回应合并（return x = ...;）
+    - no_wildcard_variable_uses	 # 通配符变量 _ 不应被读取使用
+    - prefer_collection_literals  # 优先使用集合字面量（[]/{}）而非构造函数
+    - prefer_conditional_assignment	 # 条件赋值应使用 ??=
+    - prefer_contains  # 判断包含关系时优先用 contains 而非 indexOf
+    - prefer_double_quotes  # 优先使用双引号
+    - prefer_is_empty  # 判断空集合优先使用 isEmpty
+    - prefer_is_not_empty  # 判断非空优先使用 isNotEmpty
+    - prefer_is_not_operator  # 优先使用 is! 而非 !(x is T)
+    - prefer_spread_collections	 # 合并集合时优先使用展开运算符 ...
+    - prefer_void_to_null  # 不需要返回值时使用 void 而非 Null
+    - require_trailing_commas  # 多行参数/集合末尾应添加尾逗号
+    - slash_for_doc_comments  # 文档注释使用 /// 而非 /** */
+    - unnecessary_const	 # 重复的 const 关键字应省略
+    - unnecessary_to_list_in_spreads  # 展开运算符内不必调用 .toList()
+    - use_enums	 # 能使用 enum 时避免使用类+静态常量
+    - use_string_buffers  # 循环中拼接字符串应使用 StringBuffer
+    - use_super_parameters  # 优先使用 super. 初始化形参
+    - use_truncating_division  # 整除优先使用 ~/ 而非 .toInt() 或 floor()
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 
