@@ -3288,10 +3288,48 @@ impl SseDecode for std::collections::HashMap<String, String> {
     }
 }
 
+impl SseDecode
+    for std::collections::HashMap<
+        String,
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        )>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
 impl SseDecode for std::collections::HashMap<String, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<(String, bool)>>::sse_decode(deserializer);
+        return inner.into_iter().collect();
+    }
+}
+
+impl SseDecode
+    for std::collections::HashMap<
+        i32,
+        std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<(
+            i32,
+            std::collections::HashMap<
+                String,
+                crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+            >,
+        )>>::sse_decode(deserializer);
         return inner.into_iter().collect();
     }
 }
@@ -3594,6 +3632,96 @@ impl SseDecode for crate::config::hot_update::AppVersionHotUpdateInfo {
     }
 }
 
+impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::AttachmentData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_boneName = <String>::sse_decode(deserializer);
+        let mut var_refBoneName = <Option<String>>::sse_decode(deserializer);
+        let mut var_enableClothMatch = <bool>::sse_decode(deserializer);
+        let mut var_hidden = <bool>::sse_decode(deserializer);
+        let mut var_partiallyModified = <bool>::sse_decode(deserializer);
+        let mut var_offset =
+            <crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_params::structs::nikki_photo_params::AttachmentData {
+            bone_name: var_boneName,
+            ref_bone_name: var_refBoneName,
+            enable_cloth_match: var_enableClothMatch,
+            hidden: var_hidden,
+            partially_modified: var_partiallyModified,
+            offset: var_offset,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_translation =
+            <crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation>::sse_decode(
+                deserializer,
+            );
+        let mut var_rotation =
+            <crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation>::sse_decode(
+                deserializer,
+            );
+        let mut var_scale =
+            <crate::nuan5_params::structs::nikki_photo_params::AttachmentScale>::sse_decode(
+                deserializer,
+            );
+        return crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset {
+            translation: var_translation,
+            rotation: var_rotation,
+            scale: var_scale,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_x = <f64>::sse_decode(deserializer);
+        let mut var_y = <f64>::sse_decode(deserializer);
+        let mut var_z = <f64>::sse_decode(deserializer);
+        let mut var_w = <f64>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation {
+            x: var_x,
+            y: var_y,
+            z: var_z,
+            w: var_w,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::AttachmentScale {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_x = <f64>::sse_decode(deserializer);
+        let mut var_y = <f64>::sse_decode(deserializer);
+        let mut var_z = <f64>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::nikki_photo_params::AttachmentScale {
+            x: var_x,
+            y: var_y,
+            z: var_z,
+        };
+    }
+}
+
+impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_x = <f64>::sse_decode(deserializer);
+        let mut var_y = <f64>::sse_decode(deserializer);
+        let mut var_z = <f64>::sse_decode(deserializer);
+        return crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation {
+            x: var_x,
+            y: var_y,
+            z: var_z,
+        };
+    }
+}
+
 impl SseDecode for bool {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3825,11 +3953,19 @@ impl SseDecode for crate::nuan5_params::structs::nikki_photo_params::ClothParams
             );
         let mut var_patternMode = <Option<i64>>::sse_decode(deserializer);
         let mut var_effectHidden = <Option<bool>>::sse_decode(deserializer);
+        let mut var_attachmentData = <std::collections::HashMap<
+            i32,
+            std::collections::HashMap<
+                String,
+                crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+            >,
+        >>::sse_decode(deserializer);
         return crate::nuan5_params::structs::nikki_photo_params::ClothParams {
             cloth: var_cloth,
             diy: var_diy,
             pattern_mode: var_patternMode,
             effect_hidden: var_effectHidden,
+            attachment_data: var_attachmentData,
         };
     }
 }
@@ -4489,6 +4625,32 @@ impl SseDecode for Vec<u8> {
     }
 }
 
+impl SseDecode
+    for Vec<(
+        i32,
+        std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >,
+    )>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(
+                i32,
+                std::collections::HashMap<
+                    String,
+                    crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+                >,
+            )>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<(i32, crate::nuan5_database::model::Nuan5Cloth)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4752,6 +4914,26 @@ impl SseDecode for Vec<(i64, bool)> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<(i64, bool)>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode
+    for Vec<(
+        String,
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    )>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<(
+                String,
+                crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+            )>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -6291,6 +6473,26 @@ impl SseDecode for (f64, f64, f64, f64) {
     }
 }
 
+impl SseDecode
+    for (
+        i32,
+        std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >,
+    )
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <i32>::sse_decode(deserializer);
+        let mut var_field1 = <std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
 impl SseDecode for (i32, crate::nuan5_database::model::Nuan5Cloth) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -6479,6 +6681,23 @@ impl SseDecode for (i64, bool) {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <i64>::sse_decode(deserializer);
         let mut var_field1 = <bool>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode
+    for (
+        String,
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    )
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <String>::sse_decode(deserializer);
+        let mut var_field1 =
+            <crate::nuan5_params::structs::nikki_photo_params::AttachmentData>::sse_decode(
+                deserializer,
+            );
         return (var_field0, var_field1);
     }
 }
@@ -7672,6 +7891,144 @@ impl flutter_rust_bridge::IntoIntoDart<crate::config::hot_update::AppVersionHotU
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentData
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.bone_name.into_into_dart().into_dart(),
+            self.ref_bone_name.into_into_dart().into_dart(),
+            self.enable_cloth_match.into_into_dart().into_dart(),
+            self.hidden.into_into_dart().into_dart(),
+            self.partially_modified.into_into_dart().into_dart(),
+            self.offset.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentData
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    > for crate::nuan5_params::structs::nikki_photo_params::AttachmentData
+{
+    fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::AttachmentData {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.translation.into_into_dart().into_dart(),
+            self.rotation.into_into_dart().into_dart(),
+            self.scale.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset,
+    > for crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset
+{
+    fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.x.into_into_dart().into_dart(),
+            self.y.into_into_dart().into_dart(),
+            self.z.into_into_dart().into_dart(),
+            self.w.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation,
+    > for crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentScale
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.x.into_into_dart().into_dart(),
+            self.y.into_into_dart().into_dart(),
+            self.z.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentScale
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentScale,
+    > for crate::nuan5_params::structs::nikki_photo_params::AttachmentScale
+{
+    fn into_into_dart(self) -> crate::nuan5_params::structs::nikki_photo_params::AttachmentScale {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.x.into_into_dart().into_dart(),
+            self.y.into_into_dart().into_dart(),
+            self.z.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation,
+    > for crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation
+{
+    fn into_into_dart(
+        self,
+    ) -> crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::nuan5_params::structs::camera_params::CameraParams {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -7954,6 +8311,7 @@ impl flutter_rust_bridge::IntoDart
             self.diy.into_into_dart().into_dart(),
             self.pattern_mode.into_into_dart().into_dart(),
             self.effect_hidden.into_into_dart().into_dart(),
+            self.attachment_data.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -10380,10 +10738,46 @@ impl SseEncode for std::collections::HashMap<String, String> {
     }
 }
 
+impl SseEncode
+    for std::collections::HashMap<
+        String,
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        )>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
 impl SseEncode for std::collections::HashMap<String, bool> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<(String, bool)>>::sse_encode(self.into_iter().collect(), serializer);
+    }
+}
+
+impl SseEncode
+    for std::collections::HashMap<
+        i32,
+        std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<(
+            i32,
+            std::collections::HashMap<
+                String,
+                crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+            >,
+        )>>::sse_encode(self.into_iter().collect(), serializer);
     }
 }
 
@@ -10682,6 +11076,66 @@ impl SseEncode for crate::config::hot_update::AppVersionHotUpdateInfo {
     }
 }
 
+impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::AttachmentData {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.bone_name, serializer);
+        <Option<String>>::sse_encode(self.ref_bone_name, serializer);
+        <bool>::sse_encode(self.enable_cloth_match, serializer);
+        <bool>::sse_encode(self.hidden, serializer);
+        <bool>::sse_encode(self.partially_modified, serializer);
+        <crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset>::sse_encode(
+            self.offset,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::AttachmentOffset {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation>::sse_encode(
+            self.translation,
+            serializer,
+        );
+        <crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation>::sse_encode(
+            self.rotation,
+            serializer,
+        );
+        <crate::nuan5_params::structs::nikki_photo_params::AttachmentScale>::sse_encode(
+            self.scale, serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::AttachmentRotation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.x, serializer);
+        <f64>::sse_encode(self.y, serializer);
+        <f64>::sse_encode(self.z, serializer);
+        <f64>::sse_encode(self.w, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::AttachmentScale {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.x, serializer);
+        <f64>::sse_encode(self.y, serializer);
+        <f64>::sse_encode(self.z, serializer);
+    }
+}
+
+impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::AttachmentTranslation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.x, serializer);
+        <f64>::sse_encode(self.y, serializer);
+        <f64>::sse_encode(self.z, serializer);
+    }
+}
+
 impl SseEncode for bool {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -10871,6 +11325,13 @@ impl SseEncode for crate::nuan5_params::structs::nikki_photo_params::ClothParams
         );
         <Option<i64>>::sse_encode(self.pattern_mode, serializer);
         <Option<bool>>::sse_encode(self.effect_hidden, serializer);
+        <std::collections::HashMap<
+            i32,
+            std::collections::HashMap<
+                String,
+                crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+            >,
+        >>::sse_encode(self.attachment_data, serializer);
     }
 }
 
@@ -11419,6 +11880,30 @@ impl SseEncode for Vec<u8> {
     }
 }
 
+impl SseEncode
+    for Vec<(
+        i32,
+        std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >,
+    )>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(
+                i32,
+                std::collections::HashMap<
+                    String,
+                    crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+                >,
+            )>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<(i32, crate::nuan5_database::model::Nuan5Cloth)> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -11619,6 +12104,24 @@ impl SseEncode for Vec<(i64, bool)> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <(i64, bool)>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode
+    for Vec<(
+        String,
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    )>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <(
+                String,
+                crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+            )>::sse_encode(item, serializer);
         }
     }
 }
@@ -12812,6 +13315,25 @@ impl SseEncode for (f64, f64, f64, f64) {
     }
 }
 
+impl SseEncode
+    for (
+        i32,
+        std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >,
+    )
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.0, serializer);
+        <std::collections::HashMap<
+            String,
+            crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+        >>::sse_encode(self.1, serializer);
+    }
+}
+
 impl SseEncode for (i32, crate::nuan5_database::model::Nuan5Cloth) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -12968,6 +13490,21 @@ impl SseEncode for (i64, bool) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i64>::sse_encode(self.0, serializer);
         <bool>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode
+    for (
+        String,
+        crate::nuan5_params::structs::nikki_photo_params::AttachmentData,
+    )
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.0, serializer);
+        <crate::nuan5_params::structs::nikki_photo_params::AttachmentData>::sse_encode(
+            self.1, serializer,
+        );
     }
 }
 

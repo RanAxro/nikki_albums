@@ -11,19 +11,155 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'nikki_photo_params.freezed.dart';
 
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `LocationType`, `NikkiPhotoMainParams`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`
+
+class AttachmentData {
+  final String boneName;
+  final String? refBoneName;
+  final bool enableClothMatch;
+  final bool hidden;
+  final bool partiallyModified;
+  final AttachmentOffset offset;
+
+  const AttachmentData({
+    required this.boneName,
+    this.refBoneName,
+    required this.enableClothMatch,
+    required this.hidden,
+    required this.partiallyModified,
+    required this.offset,
+  });
+
+  @override
+  int get hashCode =>
+      boneName.hashCode ^
+      refBoneName.hashCode ^
+      enableClothMatch.hashCode ^
+      hidden.hashCode ^
+      partiallyModified.hashCode ^
+      offset.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AttachmentData &&
+          runtimeType == other.runtimeType &&
+          boneName == other.boneName &&
+          refBoneName == other.refBoneName &&
+          enableClothMatch == other.enableClothMatch &&
+          hidden == other.hidden &&
+          partiallyModified == other.partiallyModified &&
+          offset == other.offset;
+}
+
+class AttachmentOffset {
+  final AttachmentTranslation translation;
+  final AttachmentRotation rotation;
+  final AttachmentScale scale;
+
+  const AttachmentOffset({
+    required this.translation,
+    required this.rotation,
+    required this.scale,
+  });
+
+  @override
+  int get hashCode => translation.hashCode ^ rotation.hashCode ^ scale.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AttachmentOffset &&
+          runtimeType == other.runtimeType &&
+          translation == other.translation &&
+          rotation == other.rotation &&
+          scale == other.scale;
+}
+
+class AttachmentRotation {
+  final double x;
+  final double y;
+  final double z;
+  final double w;
+
+  const AttachmentRotation({
+    required this.x,
+    required this.y,
+    required this.z,
+    required this.w,
+  });
+
+  @override
+  int get hashCode => x.hashCode ^ y.hashCode ^ z.hashCode ^ w.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AttachmentRotation &&
+          runtimeType == other.runtimeType &&
+          x == other.x &&
+          y == other.y &&
+          z == other.z &&
+          w == other.w;
+}
+
+class AttachmentScale {
+  final double x;
+  final double y;
+  final double z;
+
+  const AttachmentScale({required this.x, required this.y, required this.z});
+
+  @override
+  int get hashCode => x.hashCode ^ y.hashCode ^ z.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AttachmentScale &&
+          runtimeType == other.runtimeType &&
+          x == other.x &&
+          y == other.y &&
+          z == other.z;
+}
+
+class AttachmentTranslation {
+  final double x;
+  final double y;
+  final double z;
+
+  const AttachmentTranslation({
+    required this.x,
+    required this.y,
+    required this.z,
+  });
+
+  @override
+  int get hashCode => x.hashCode ^ y.hashCode ^ z.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AttachmentTranslation &&
+          runtimeType == other.runtimeType &&
+          x == other.x &&
+          y == other.y &&
+          z == other.z;
+}
 
 class ClothParams {
   final Cloth cloth;
   final DiyData? diy;
   final PlatformInt64? patternMode;
   final bool? effectHidden;
+  final Map<int, Map<String, AttachmentData>> attachmentData;
 
   const ClothParams({
     required this.cloth,
     this.diy,
     this.patternMode,
     this.effectHidden,
+    required this.attachmentData,
   });
 
   @override
@@ -31,7 +167,8 @@ class ClothParams {
       cloth.hashCode ^
       diy.hashCode ^
       patternMode.hashCode ^
-      effectHidden.hashCode;
+      effectHidden.hashCode ^
+      attachmentData.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -41,7 +178,8 @@ class ClothParams {
           cloth == other.cloth &&
           diy == other.diy &&
           patternMode == other.patternMode &&
-          effectHidden == other.effectHidden;
+          effectHidden == other.effectHidden &&
+          attachmentData == other.attachmentData;
 }
 
 class DiyData {

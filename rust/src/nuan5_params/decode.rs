@@ -73,7 +73,7 @@ pub fn decode_media_param(param_type: &MediaParamType, data: &decrypt::CustomDat
 
       let decoded = match param_type{
         CameraParams => from_slice(&bytes).ok().as_ref().map(convert_camera_params).map(MediaParam::CameraParams),
-        NikkiPhoto => from_slice(&bytes).ok().as_ref().map(convert_nikki_photo_params).map(MediaParam::NikkiPhoto),
+        NikkiPhoto => from_slice(&bytes).map_err(|e| println!("{}", e)).ok().as_ref().map(convert_nikki_photo_params).map(MediaParam::NikkiPhoto),
         ClockInPhoto => from_slice(&bytes).ok().as_ref().map(convert_clock_in_photo_params).map(MediaParam::ClockInPhoto),
         Collage => from_slice(&bytes).ok().as_ref().map(convert_collage_params).map(MediaParam::Collage),
         DIY => from_slice(&bytes).ok().as_ref().map(convert_diy_params).map(MediaParam::DIY),

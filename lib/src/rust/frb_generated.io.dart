@@ -99,7 +99,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Map<String, String> dco_decode_Map_String_String_None(dynamic raw);
 
   @protected
+  Map<String, AttachmentData> dco_decode_Map_String_attachment_data_None(
+    dynamic raw,
+  );
+
+  @protected
   Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw);
+
+  @protected
+  Map<int, Map<String, AttachmentData>>
+  dco_decode_Map_i_32_Map_String_attachment_data_None_None(dynamic raw);
 
   @protected
   Map<int, Nuan5Cloth> dco_decode_Map_i_32_nuan_5_cloth_None(dynamic raw);
@@ -221,6 +230,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AppVersionHotUpdateInfo dco_decode_app_version_hot_update_info(dynamic raw);
+
+  @protected
+  AttachmentData dco_decode_attachment_data(dynamic raw);
+
+  @protected
+  AttachmentOffset dco_decode_attachment_offset(dynamic raw);
+
+  @protected
+  AttachmentRotation dco_decode_attachment_rotation(dynamic raw);
+
+  @protected
+  AttachmentScale dco_decode_attachment_scale(dynamic raw);
+
+  @protected
+  AttachmentTranslation dco_decode_attachment_translation(dynamic raw);
 
   @protected
   bool dco_decode_bool(dynamic raw);
@@ -598,6 +622,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
+  List<(int, Map<String, AttachmentData>)>
+  dco_decode_list_record_i_32_map_string_attachment_data_none(dynamic raw);
+
+  @protected
   List<(int, Nuan5Cloth)> dco_decode_list_record_i_32_nuan_5_cloth(dynamic raw);
 
   @protected
@@ -679,6 +707,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw);
+
+  @protected
+  List<(String, AttachmentData)> dco_decode_list_record_string_attachment_data(
+    dynamic raw,
+  );
 
   @protected
   List<(String, bool)> dco_decode_list_record_string_bool(dynamic raw);
@@ -1000,6 +1033,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Map<String, AttachmentData>)
+  dco_decode_record_i_32_map_string_attachment_data_none(dynamic raw);
+
+  @protected
   (int, Nuan5Cloth) dco_decode_record_i_32_nuan_5_cloth(dynamic raw);
 
   @protected
@@ -1068,6 +1105,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (PlatformInt64, bool) dco_decode_record_i_64_bool(dynamic raw);
+
+  @protected
+  (String, AttachmentData) dco_decode_record_string_attachment_data(
+    dynamic raw,
+  );
 
   @protected
   (String, bool) dco_decode_record_string_bool(dynamic raw);
@@ -1241,7 +1283,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  Map<String, AttachmentData> sse_decode_Map_String_attachment_data_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Map<String, bool> sse_decode_Map_String_bool_None(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Map<int, Map<String, AttachmentData>>
+  sse_decode_Map_i_32_Map_String_attachment_data_None_None(
     SseDeserializer deserializer,
   );
 
@@ -1387,6 +1440,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AppVersionHotUpdateInfo sse_decode_app_version_hot_update_info(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AttachmentData sse_decode_attachment_data(SseDeserializer deserializer);
+
+  @protected
+  AttachmentOffset sse_decode_attachment_offset(SseDeserializer deserializer);
+
+  @protected
+  AttachmentRotation sse_decode_attachment_rotation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  AttachmentScale sse_decode_attachment_scale(SseDeserializer deserializer);
+
+  @protected
+  AttachmentTranslation sse_decode_attachment_translation(
     SseDeserializer deserializer,
   );
 
@@ -1870,6 +1942,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
+  List<(int, Map<String, AttachmentData>)>
+  sse_decode_list_record_i_32_map_string_attachment_data_none(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<(int, Nuan5Cloth)> sse_decode_list_record_i_32_nuan_5_cloth(
     SseDeserializer deserializer,
   );
@@ -1967,6 +2045,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<(PlatformInt64, bool)> sse_decode_list_record_i_64_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<(String, AttachmentData)> sse_decode_list_record_string_attachment_data(
     SseDeserializer deserializer,
   );
 
@@ -2388,6 +2471,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (int, Map<String, AttachmentData>)
+  sse_decode_record_i_32_map_string_attachment_data_none(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (int, Nuan5Cloth) sse_decode_record_i_32_nuan_5_cloth(
     SseDeserializer deserializer,
   );
@@ -2480,6 +2569,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (PlatformInt64, bool) sse_decode_record_i_64_bool(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (String, AttachmentData) sse_decode_record_string_attachment_data(
     SseDeserializer deserializer,
   );
 
@@ -2695,8 +2789,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_Map_String_attachment_data_None(
+    Map<String, AttachmentData> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_Map_String_bool_None(
     Map<String, bool> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Map_i_32_Map_String_attachment_data_None_None(
+    Map<int, Map<String, AttachmentData>> self,
     SseSerializer serializer,
   );
 
@@ -2865,6 +2971,36 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_app_version_hot_update_info(
     AppVersionHotUpdateInfo self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_attachment_data(
+    AttachmentData self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_attachment_offset(
+    AttachmentOffset self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_attachment_rotation(
+    AttachmentRotation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_attachment_scale(
+    AttachmentScale self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_attachment_translation(
+    AttachmentTranslation self,
     SseSerializer serializer,
   );
 
@@ -3475,6 +3611,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_record_i_32_map_string_attachment_data_none(
+    List<(int, Map<String, AttachmentData>)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_cloth(
     List<(int, Nuan5Cloth)> self,
     SseSerializer serializer,
@@ -3585,6 +3727,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_record_i_64_bool(
     List<(PlatformInt64, bool)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_record_string_attachment_data(
+    List<(String, AttachmentData)> self,
     SseSerializer serializer,
   );
 
@@ -4120,6 +4268,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_i_32_map_string_attachment_data_none(
+    (int, Map<String, AttachmentData>) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_record_i_32_nuan_5_cloth(
     (int, Nuan5Cloth) self,
     SseSerializer serializer,
@@ -4230,6 +4384,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_i_64_bool(
     (PlatformInt64, bool) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_string_attachment_data(
+    (String, AttachmentData) self,
     SseSerializer serializer,
   );
 

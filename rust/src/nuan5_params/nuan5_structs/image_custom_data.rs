@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
 use rust_lib_nikki_albums_macro::with_transform_fields;
 use crate::serde_nuan5_json::ext_type::*;
@@ -99,6 +100,9 @@ pub struct Content{
 
   #[serde(rename = "nsHiddenData")]
   pub ns_hidden_data: Option<IdMap<i64>>,
+
+  #[serde(rename = "attachmentData")]
+  pub attachment_data : Option<OptionMap<IdMap<HashMap<i32, HashMap<String, NikkiAttachmentData>>>>>,
 }
 
 #[derive(Clone)]
@@ -364,6 +368,14 @@ pub struct PhotoInfo{
   #[serde(rename = "nikkiDIY")]
   pub nikki_diy: AdaptiveArray<NikkiDIY>,
 
+  // 3.0 Update
+  #[serde(rename = "patternData")]
+  pub pattern_data: Option<IdMap<i64>>,
+
+  // 3.0 Update
+  #[serde(rename = "nikkiAttachmentData")]
+  pub nikki_attachment_data : Option<OptionMap<IdMap<HashMap<i32, HashMap<String, NikkiAttachmentData>>>>>,
+
   #[serde(rename = "nikkiHidden")]
   pub nikki_hidden: bool,
 
@@ -530,6 +542,72 @@ pub struct PatternCreationExtCoreData{
 }
 
 
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct NikkiAttachmentData{
+  #[serde(rename = "BoneName")]
+  pub bone_name: String,
 
+  #[serde(rename = "RefBoneName")]
+  pub ref_bone_name: Option<String>,
 
+  #[serde(rename = "bEnableClothMatch")]
+  pub enable_cloth_match: bool,
 
+  #[serde(rename = "bHidden")]
+  pub hidden: bool,
+
+  #[serde(rename = "bPartiallyModified")]
+  pub partially_modified: bool,
+
+  #[serde(rename = "Offset")]
+  pub offset: AttachmentOffset,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct AttachmentOffset{
+  #[serde(rename = "Translation")]
+  pub translation: AttachmentTranslation,
+
+  #[serde(rename = "Rotation")]
+  pub rotation: AttachmentRotation,
+
+  #[serde(rename = "Scale3D")]
+  pub scale: AttachmentScale,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct AttachmentTranslation{
+  #[serde(rename = "X")]
+  pub x: f64,
+  #[serde(rename = "Y")]
+  pub y: f64,
+  #[serde(rename = "Z")]
+  pub z: f64,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct AttachmentRotation{
+  #[serde(rename = "X")]
+  pub x: f64,
+  #[serde(rename = "Y")]
+  pub y: f64,
+  #[serde(rename = "Z")]
+  pub z: f64,
+  #[serde(rename = "W")]
+  pub w: f64,
+}
+
+#[derive(Clone)]
+#[derive(Serialize, Deserialize)]
+pub struct AttachmentScale{
+  #[serde(rename = "X")]
+  pub x: f64,
+  #[serde(rename = "Y")]
+  pub y: f64,
+  #[serde(rename = "Z")]
+  pub z: f64,
+}

@@ -197,6 +197,7 @@ pub struct ClothParams{
   pub diy: Option<DiyData>,
   pub pattern_mode: Option<i64>,
   pub effect_hidden: Option<bool>,
+  pub attachment_data : HashMap<i32, HashMap<String, AttachmentData>>,
 }
 
 #[derive(Clone)]
@@ -268,7 +269,44 @@ pub struct ObjectParams{
 }
 
 
+#[derive(Clone)]
+pub struct AttachmentData{
+  pub bone_name: String,
+  pub ref_bone_name: Option<String>,
+  pub enable_cloth_match: bool,
+  pub hidden: bool,
+  pub partially_modified: bool,
+  pub offset: AttachmentOffset,
+}
 
+#[derive(Clone)]
+pub struct AttachmentOffset{
+  pub translation: AttachmentTranslation,
+  pub rotation: AttachmentRotation,
+  pub scale: AttachmentScale,
+}
+
+#[derive(Clone)]
+pub struct AttachmentTranslation{
+  pub x: f64,
+  pub y: f64,
+  pub z: f64,
+}
+
+#[derive(Clone)]
+pub struct AttachmentRotation{
+  pub x: f64,
+  pub y: f64,
+  pub z: f64,
+  pub w: f64,
+}
+
+#[derive(Clone)]
+pub struct AttachmentScale{
+  pub x: f64,
+  pub y: f64,
+  pub z: f64,
+}
 
 
 

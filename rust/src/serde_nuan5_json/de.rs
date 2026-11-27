@@ -1082,7 +1082,15 @@ impl<'a> Deserializer<'a>{
         frame @ (b'[' | b'{') => {
           self.scratch.extend(enclosing.take());
           self.discard();
-          Some(frame)
+
+          if frame == b'['
+            && self.parse_whitespace() == Some(b':')
+          {
+            self.ignore_id_map()?;
+            None
+          }else{
+            Some(frame)
+          }
         }
         _ => return Err(self.peek_error(ErrorCode::ExpectedSomeValue)),
       };
@@ -1217,6 +1225,58 @@ impl<'a> Deserializer<'a>{
     }
 
     Ok(())
+  }
+
+  fn ignore_id_map(&mut self) -> Result<(), Error>{
+    let outer_scratch = std::mem::take(&mut self.scratch);
+    let result = self.ignore_id_map_inner();
+    self.scratch = outer_scratch;
+    result
+  }
+
+  fn ignore_id_map_inner(&mut self) -> Result<(), Error>{
+    // At this point `self.index` points to the leading colon:
+    // [:key:value,key:value]
+    self.discard();
+
+    match self.parse_whitespace(){
+      Some(b']') => {
+        self.discard();
+        return Ok(());
+      }
+      Some(_) => {}
+      None => return Err(self.peek_error(ErrorCode::EofWhileParsingIdMap)),
+    }
+
+    loop{
+      match self.parse_whitespace(){
+        Some(b'-') => {
+          self.discard();
+          self.ignore_integer()?;
+        }
+        Some(b'0'..=b'9') => self.ignore_integer()?,
+        Some(_) => return Err(self.peek_error(ErrorCode::ExpectedNumericKey)),
+        None => return Err(self.peek_error(ErrorCode::EofWhileParsingIdMap)),
+      }
+
+      self.parse_id_map_colon()?;
+      self.ignore_value()?;
+
+      match self.parse_whitespace(){
+        Some(b']') => {
+          self.discard();
+          return Ok(());
+        }
+        Some(b',') => {
+          self.discard();
+          if self.parse_whitespace() == Some(b']') {
+            return Err(self.peek_error(ErrorCode::TrailingComma));
+          }
+        }
+        Some(_) => return Err(self.peek_error(ErrorCode::ExpectedObjectCommaOrEnd)),
+        None => return Err(self.peek_error(ErrorCode::EofWhileParsingIdMap)),
+      }
+    }
   }
 
   fn ignore_str(&mut self) -> Result<(), Error>{
@@ -2183,4 +2243,45 @@ where
   T: de::Deserialize<'a>,
 {
   from_slice(s.as_ref())
+}
+
+#[cfg(test)]
+mod tests {
+  use super::from_slice;
+  use serde::Deserialize;
+
+  #[derive(Debug, Deserialize, PartialEq)]
+  struct KnownField {
+    value: i64,
+  }
+
+  #[test]
+  fn ignores_unknown_id_map_field() {
+    let value = from_slice::<KnownField>(
+      br#"{"value":1,"patternData":[:2020100537:0,2020940537:1]}"#,
+    )
+    .unwrap();
+
+    assert_eq!(value, KnownField { value: 1 });
+  }
+
+  #[test]
+  fn ignores_unknown_nested_id_map() {
+    let value = from_slice::<KnownField>(
+      br#"{"value":1,"extra":{"patternData":[:2020100537:0,2020940537:1]}}"#,
+    )
+    .unwrap();
+
+    assert_eq!(value, KnownField { value: 1 });
+  }
+
+  #[test]
+  fn ignores_unknown_id_map_inside_array() {
+    let value = from_slice::<KnownField>(
+      br#"{"value":1,"extra":[[ :2020100537:0 ],{"patternData":[:2020940537:1]}]}"#,
+    )
+    .unwrap();
+
+    assert_eq!(value, KnownField { value: 1 });
+  }
 }

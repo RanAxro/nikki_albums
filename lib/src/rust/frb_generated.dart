@@ -3122,10 +3122,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<String, AttachmentData> dco_decode_Map_String_attachment_data_None(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_string_attachment_data(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
   Map<String, bool> dco_decode_Map_String_bool_None(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(
       dco_decode_list_record_string_bool(raw).map((e) => MapEntry(e.$1, e.$2)),
+    );
+  }
+
+  @protected
+  Map<int, Map<String, AttachmentData>>
+  dco_decode_Map_i_32_Map_String_attachment_data_None_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_i_32_map_string_attachment_data_none(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
     );
   }
 
@@ -3420,6 +3443,75 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return AppVersionHotUpdateInfo(
       min: dco_decode_i_32(arr[0]),
       max: dco_decode_i_32(arr[1]),
+    );
+  }
+
+  @protected
+  AttachmentData dco_decode_attachment_data(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return AttachmentData(
+      boneName: dco_decode_String(arr[0]),
+      refBoneName: dco_decode_opt_String(arr[1]),
+      enableClothMatch: dco_decode_bool(arr[2]),
+      hidden: dco_decode_bool(arr[3]),
+      partiallyModified: dco_decode_bool(arr[4]),
+      offset: dco_decode_attachment_offset(arr[5]),
+    );
+  }
+
+  @protected
+  AttachmentOffset dco_decode_attachment_offset(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return AttachmentOffset(
+      translation: dco_decode_attachment_translation(arr[0]),
+      rotation: dco_decode_attachment_rotation(arr[1]),
+      scale: dco_decode_attachment_scale(arr[2]),
+    );
+  }
+
+  @protected
+  AttachmentRotation dco_decode_attachment_rotation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return AttachmentRotation(
+      x: dco_decode_f_64(arr[0]),
+      y: dco_decode_f_64(arr[1]),
+      z: dco_decode_f_64(arr[2]),
+      w: dco_decode_f_64(arr[3]),
+    );
+  }
+
+  @protected
+  AttachmentScale dco_decode_attachment_scale(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return AttachmentScale(
+      x: dco_decode_f_64(arr[0]),
+      y: dco_decode_f_64(arr[1]),
+      z: dco_decode_f_64(arr[2]),
+    );
+  }
+
+  @protected
+  AttachmentTranslation dco_decode_attachment_translation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return AttachmentTranslation(
+      x: dco_decode_f_64(arr[0]),
+      y: dco_decode_f_64(arr[1]),
+      z: dco_decode_f_64(arr[2]),
     );
   }
 
@@ -3961,13 +4053,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ClothParams dco_decode_cloth_params(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return ClothParams(
       cloth: dco_decode_cloth(arr[0]),
       diy: dco_decode_opt_box_autoadd_diy_data(arr[1]),
       patternMode: dco_decode_opt_box_autoadd_i_64(arr[2]),
       effectHidden: dco_decode_opt_box_autoadd_bool(arr[3]),
+      attachmentData: dco_decode_Map_i_32_Map_String_attachment_data_None_None(
+        arr[4],
+      ),
     );
   }
 
@@ -4400,6 +4495,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Map<String, AttachmentData>)>
+  dco_decode_list_record_i_32_map_string_attachment_data_none(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_i_32_map_string_attachment_data_none)
+        .toList();
+  }
+
+  @protected
   List<(int, Nuan5Cloth)> dco_decode_list_record_i_32_nuan_5_cloth(
     dynamic raw,
   ) {
@@ -4579,6 +4683,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   List<(PlatformInt64, bool)> dco_decode_list_record_i_64_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_record_i_64_bool).toList();
+  }
+
+  @protected
+  List<(String, AttachmentData)> dco_decode_list_record_string_attachment_data(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_record_string_attachment_data)
+        .toList();
   }
 
   @protected
@@ -5571,6 +5685,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, Map<String, AttachmentData>)
+  dco_decode_record_i_32_map_string_attachment_data_none(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_i_32(arr[0]),
+      dco_decode_Map_String_attachment_data_None(arr[1]),
+    );
+  }
+
+  @protected
   (int, Nuan5Cloth) dco_decode_record_i_32_nuan_5_cloth(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -5787,6 +5915,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('Expected 2 elements, got ${arr.length}');
     }
     return (dco_decode_i_64(arr[0]), dco_decode_bool(arr[1]));
+  }
+
+  @protected
+  (String, AttachmentData) dco_decode_record_string_attachment_data(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_String(arr[0]), dco_decode_attachment_data(arr[1]));
   }
 
   @protected
@@ -6381,11 +6521,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Map<String, AttachmentData> sse_decode_Map_String_attachment_data_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_string_attachment_data(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
   Map<String, bool> sse_decode_Map_String_bool_None(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_record_string_bool(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  Map<int, Map<String, AttachmentData>>
+  sse_decode_Map_i_32_Map_String_attachment_data_None_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_i_32_map_string_attachment_data_none(
+      deserializer,
+    );
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
   }
 
@@ -6669,6 +6830,70 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_min = sse_decode_i_32(deserializer);
     var var_max = sse_decode_i_32(deserializer);
     return AppVersionHotUpdateInfo(min: var_min, max: var_max);
+  }
+
+  @protected
+  AttachmentData sse_decode_attachment_data(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_boneName = sse_decode_String(deserializer);
+    var var_refBoneName = sse_decode_opt_String(deserializer);
+    var var_enableClothMatch = sse_decode_bool(deserializer);
+    var var_hidden = sse_decode_bool(deserializer);
+    var var_partiallyModified = sse_decode_bool(deserializer);
+    var var_offset = sse_decode_attachment_offset(deserializer);
+    return AttachmentData(
+      boneName: var_boneName,
+      refBoneName: var_refBoneName,
+      enableClothMatch: var_enableClothMatch,
+      hidden: var_hidden,
+      partiallyModified: var_partiallyModified,
+      offset: var_offset,
+    );
+  }
+
+  @protected
+  AttachmentOffset sse_decode_attachment_offset(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_translation = sse_decode_attachment_translation(deserializer);
+    var var_rotation = sse_decode_attachment_rotation(deserializer);
+    var var_scale = sse_decode_attachment_scale(deserializer);
+    return AttachmentOffset(
+      translation: var_translation,
+      rotation: var_rotation,
+      scale: var_scale,
+    );
+  }
+
+  @protected
+  AttachmentRotation sse_decode_attachment_rotation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_x = sse_decode_f_64(deserializer);
+    var var_y = sse_decode_f_64(deserializer);
+    var var_z = sse_decode_f_64(deserializer);
+    var var_w = sse_decode_f_64(deserializer);
+    return AttachmentRotation(x: var_x, y: var_y, z: var_z, w: var_w);
+  }
+
+  @protected
+  AttachmentScale sse_decode_attachment_scale(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_x = sse_decode_f_64(deserializer);
+    var var_y = sse_decode_f_64(deserializer);
+    var var_z = sse_decode_f_64(deserializer);
+    return AttachmentScale(x: var_x, y: var_y, z: var_z);
+  }
+
+  @protected
+  AttachmentTranslation sse_decode_attachment_translation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_x = sse_decode_f_64(deserializer);
+    var var_y = sse_decode_f_64(deserializer);
+    var var_z = sse_decode_f_64(deserializer);
+    return AttachmentTranslation(x: var_x, y: var_y, z: var_z);
   }
 
   @protected
@@ -7330,11 +7555,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_diy = sse_decode_opt_box_autoadd_diy_data(deserializer);
     var var_patternMode = sse_decode_opt_box_autoadd_i_64(deserializer);
     var var_effectHidden = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_attachmentData =
+        sse_decode_Map_i_32_Map_String_attachment_data_None_None(deserializer);
     return ClothParams(
       cloth: var_cloth,
       diy: var_diy,
       patternMode: var_patternMode,
       effectHidden: var_effectHidden,
+      attachmentData: var_attachmentData,
     );
   }
 
@@ -7875,6 +8103,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<(int, Map<String, AttachmentData>)>
+  sse_decode_list_record_i_32_map_string_attachment_data_none(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(int, Map<String, AttachmentData>)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(
+        sse_decode_record_i_32_map_string_attachment_data_none(deserializer),
+      );
+    }
+    return ans_;
+  }
+
+  @protected
   List<(int, Nuan5Cloth)> sse_decode_list_record_i_32_nuan_5_cloth(
     SseDeserializer deserializer,
   ) {
@@ -8146,6 +8391,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <(PlatformInt64, bool)>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_record_i_64_bool(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<(String, AttachmentData)> sse_decode_list_record_string_attachment_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(String, AttachmentData)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_string_attachment_data(deserializer));
     }
     return ans_;
   }
@@ -9529,6 +9788,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, Map<String, AttachmentData>)
+  sse_decode_record_i_32_map_string_attachment_data_none(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_i_32(deserializer);
+    var var_field1 = sse_decode_Map_String_attachment_data_None(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
   (int, Nuan5Cloth) sse_decode_record_i_32_nuan_5_cloth(
     SseDeserializer deserializer,
   ) {
@@ -9718,6 +9988,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_i_64(deserializer);
     var var_field1 = sse_decode_bool(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (String, AttachmentData) sse_decode_record_string_attachment_data(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_String(deserializer);
+    var var_field1 = sse_decode_attachment_data(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -10392,12 +10672,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_Map_String_attachment_data_None(
+    Map<String, AttachmentData> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_string_attachment_data(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_Map_String_bool_None(
     Map<String, bool> self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_record_string_bool(
+      self.entries.map((e) => (e.key, e.value)).toList(),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_i_32_Map_String_attachment_data_None_None(
+    Map<int, Map<String, AttachmentData>> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_i_32_map_string_attachment_data_none(
       self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
@@ -10748,6 +11052,65 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.min, serializer);
     sse_encode_i_32(self.max, serializer);
+  }
+
+  @protected
+  void sse_encode_attachment_data(
+    AttachmentData self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.boneName, serializer);
+    sse_encode_opt_String(self.refBoneName, serializer);
+    sse_encode_bool(self.enableClothMatch, serializer);
+    sse_encode_bool(self.hidden, serializer);
+    sse_encode_bool(self.partiallyModified, serializer);
+    sse_encode_attachment_offset(self.offset, serializer);
+  }
+
+  @protected
+  void sse_encode_attachment_offset(
+    AttachmentOffset self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_attachment_translation(self.translation, serializer);
+    sse_encode_attachment_rotation(self.rotation, serializer);
+    sse_encode_attachment_scale(self.scale, serializer);
+  }
+
+  @protected
+  void sse_encode_attachment_rotation(
+    AttachmentRotation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.x, serializer);
+    sse_encode_f_64(self.y, serializer);
+    sse_encode_f_64(self.z, serializer);
+    sse_encode_f_64(self.w, serializer);
+  }
+
+  @protected
+  void sse_encode_attachment_scale(
+    AttachmentScale self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.x, serializer);
+    sse_encode_f_64(self.y, serializer);
+    sse_encode_f_64(self.z, serializer);
+  }
+
+  @protected
+  void sse_encode_attachment_translation(
+    AttachmentTranslation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.x, serializer);
+    sse_encode_f_64(self.y, serializer);
+    sse_encode_f_64(self.z, serializer);
   }
 
   @protected
@@ -11422,6 +11785,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_opt_box_autoadd_diy_data(self.diy, serializer);
     sse_encode_opt_box_autoadd_i_64(self.patternMode, serializer);
     sse_encode_opt_box_autoadd_bool(self.effectHidden, serializer);
+    sse_encode_Map_i_32_Map_String_attachment_data_None_None(
+      self.attachmentData,
+      serializer,
+    );
   }
 
   @protected
@@ -11896,6 +12263,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_record_i_32_map_string_attachment_data_none(
+    List<(int, Map<String, AttachmentData>)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_i_32_map_string_attachment_data_none(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_record_i_32_nuan_5_cloth(
     List<(int, Nuan5Cloth)> self,
     SseSerializer serializer,
@@ -12123,6 +12502,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_record_i_64_bool(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_record_string_attachment_data(
+    List<(String, AttachmentData)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_string_attachment_data(item, serializer);
     }
   }
 
@@ -13360,6 +13751,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_record_i_32_map_string_attachment_data_none(
+    (int, Map<String, AttachmentData>) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.$1, serializer);
+    sse_encode_Map_String_attachment_data_None(self.$2, serializer);
+  }
+
+  @protected
   void sse_encode_record_i_32_nuan_5_cloth(
     (int, Nuan5Cloth) self,
     SseSerializer serializer,
@@ -13547,6 +13948,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.$1, serializer);
     sse_encode_bool(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_string_attachment_data(
+    (String, AttachmentData) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.$1, serializer);
+    sse_encode_attachment_data(self.$2, serializer);
   }
 
   @protected
