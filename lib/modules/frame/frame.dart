@@ -2,7 +2,6 @@ import "package:nikki_albums/modules/hot_update/domain/check_app_hot_updates.dar
 import "package:nikki_albums/modules/initial_startup/presentation/initial_startup_setting.dart";
 
 import "package:nikki_albums/modules/app_base/app_registry.dart";
-import "package:nikki_albums/modules/setting/version_information/presentation/update_dialog.dart";
 import "package:nikki_albums/utils/system/windows.dart";
 import "package:nikki_albums/modules/setting/version_information/domain/check_app_updates.dart";
 import "ui_android.dart";
@@ -27,6 +26,7 @@ import "package:desktop_drop/desktop_drop.dart";
 import "package:file_picker/file_picker.dart";
 import "package:nikki_albums/utils/native_file_picker.dart";
 import "package:easy_localization/easy_localization.dart";
+import 'package:easy_localization/src/localization.dart';
 
 class Frame extends StatefulWidget {
   const Frame(key) : super(key: key);
@@ -48,12 +48,23 @@ class _FrameState extends State<Frame> {
     setState(() {});
   }
 
+  Future<void> reloadTranslations(BuildContext context) async{
+    final Locale locale = context.locale;
+    final controller = EasyLocalization.of(context)!.delegate.localizationController!;
+
+    await controller.setLocale(locale);
+
+    Localization.load(
+      context.mounted ? context.locale : locale,
+      translations: controller.translations,
+      fallbackTranslations: controller.fallbackTranslations,
+    );
+  }
+
   Future<void> checkHotUpdate(BuildContext context) async {
     try {
       final bool needNotice = await checkAppHotUpdates();
       if (!needNotice) return;
-
-      await Future.delayed(const Duration(seconds: 1));
 
       if (context.mounted) {
         AppToast.showMessage(
@@ -61,27 +72,17 @@ class _FrameState extends State<Frame> {
           message: context.tr("hot_update_successful"),
         );
 
-        final List lang = AppState.lang.value.split("-");
-        await EasyLocalization.of(
-          context,
-        )?.delegate.localizationController?.setLocale(Locale(lang[0], lang[1]));
-        // await context.setLocale(Locale(lang[0], lang[1]));
-
-        await Future.delayed(const Duration(seconds: 1));
-
-        if(!isUpdate){
-          setState((){
-            _appRebuildKey++;
-          });
-        }
+        await reloadTranslations(context);
       }
     } catch (e) {
       if (context.mounted) {
-        AppToast.showMessage(
+        showAppDialog(
           context: context,
-          duration: const Duration(hours: 1),
-          message: "${context.tr("hot_update_failed")}\n$e",
-          state: false,
+          builder: (BuildContext context){
+            return AppConfirmDialog(
+              message: "${context.tr("hot_update_failed")}\n$e",
+            );
+          },
         );
       }
     }
