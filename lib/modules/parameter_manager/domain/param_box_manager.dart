@@ -2,7 +2,6 @@
 import "../model/param_item.dart";
 import "../model/param_box.dart";
 import "../model/param_type.dart";
-import "package:nikki_albums/modules/album/album.dart";
 import "package:nikki_albums/utils/system/system.dart";
 
 import "package:flutter/foundation.dart";
