@@ -66,7 +66,9 @@ abstract final class ParamBoxStorageHelper{
     );
 
     final File manifest = _getManifestFile(dst);
-    await manifest.create(recursive: true);
+    if(!(await manifest.exists())){
+      await manifest.create(recursive: true);
+    }
     await manifest.writeAsBytes(serParamBox(mergedBox));
   }
   static Future<ParamBox?> _checkCanMergeParamBoxStorage(Directory test, Directory another, Directory dst) async{
@@ -85,9 +87,17 @@ abstract final class ParamBoxStorageHelper{
     }
   }
   static Future<bool> _safeCopyItemImage(Directory src, Directory dst, String? uuid) async{
+    if(p.equals(src.path, dst.path)){
+      return true;
+    }
     if(uuid != null){
       try{
-        await File(getImagePath(src, uuid)).copy(getImagePath(dst, uuid));
+        final String target = getImagePath(dst, uuid);
+        final Directory targetParentDir = File(target).parent;
+        if(!await targetParentDir.exists()){
+          await targetParentDir.create(recursive: true);
+        }
+        await File(getImagePath(src, uuid)).copy(target);
         return true;
       }catch(e){
         print(e);
@@ -155,6 +165,10 @@ abstract final class ParamBoxStorageHelper{
 }
 
 Future<void> _copyDirectory(Directory source, Directory destination) async{
+  if(p.equals(source.path, destination.path)){
+    return;
+  }
+
   if(!await destination.exists()){
     await destination.create(recursive: true);
   }
