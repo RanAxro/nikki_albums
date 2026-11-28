@@ -34,11 +34,19 @@ class ParamBoxManager extends ChangeNotifier{
 
   ParamBoxManager(this.directory) : manifestFile = File(p.join(directory.path, "manifest"));
 
-  late final ParamBox _box;
+  late ParamBox _box;
 
   bool isInit = false;
 
   Future<void> init() async{
+    if(isInit){
+      return;
+    }
+    await _init();
+    isInit = true;
+  }
+
+  Future<void> _init() async{
     if(await manifestFile.exists()){
       final Uint8List bytes = await manifestFile.readAsBytes();
       final dynamic data = msgpack.deserialize(bytes);
@@ -50,7 +58,6 @@ class ParamBoxManager extends ChangeNotifier{
     }else{
       _box = ParamBox(set: [], tag: [], item: []);
     }
-    isInit = true;
   }
 
   Future<void> save() async{
@@ -266,5 +273,11 @@ class ParamBoxManager extends ChangeNotifier{
 
     notifyListeners();
     return false;
+  }
+
+  Future<void> reload() async{
+    await _init();
+    isInit = true;
+    notifyListeners();
   }
 }
