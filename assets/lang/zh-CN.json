@@ -93,7 +93,18 @@
       "default_data_dir": "默认位置",
       "custom_data_dir": "自定义位置",
       "copy_data_failed": "文件复制失败",
-      "change_data_successfully": "数据移动成功"
+      "change_data_successfully": "数据移动成功",
+      "export": "导出/备份数据",
+      "export_directory_picker": "选择数据保存位置",
+      "same_export_directory": "导出位置不能与储存位置相同",
+      "exporting": "导出中",
+      "export_successful": "导出成功",
+      "export_failed": "导出失败",
+      "import": "导入数据",
+      "import_directory_picker": "请选择需要导入的数据",
+      "importing": "导入中",
+      "import_successful": "导入成功",
+      "import_failed": "导入失败"
     }
   },
   "----------error_log----------": "----------error_log----------",

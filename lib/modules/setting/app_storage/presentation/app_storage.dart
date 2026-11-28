@@ -1,4 +1,5 @@
 
+import "package:file_picker/file_picker.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_box_storage_helper.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/parameter_manager.dart";
 import "package:uuid/v4.dart";
@@ -216,6 +217,124 @@ class AppStorage extends StatelessWidget{
                         child: AppIcon("folder"),
                       );
                     },
+                  ),
+                ],
+              );
+            },
+          ),
+
+          GlobalParamBoxManagerBuilder(
+            builder: (BuildContext context, ParamBoxManager globalManager){
+              return Row(
+                spacing: listSpacing,
+                children: [
+                  AppButton.smallText(
+                    isTransparent: false,
+                    onClick: () async{
+                      String? saved = await FilePicker.platform.getDirectoryPath(
+                        dialogTitle: tr("app_storage.parameter_manager.export_directory_picker"),
+                        lockParentWindow: true,
+                      );
+                      if(saved == null){
+                        return;
+                      }
+
+                      if(p.basename(saved) != "ParamBox"){
+                        saved = p.join(saved, "ParamBox");
+                      }
+                      if(p.equals(globalManager.directory.path, saved)){
+                        if(context.mounted){
+                          AppToast.showMessage(
+                            context: context,
+                            message: context.tr("app_storage.parameter_manager.same_export_directory"),
+                            state: false,
+                          );
+                        }
+                        return;
+                      }
+
+                      if(context.mounted){
+                        AppToast.showMessage(
+                          context: context,
+                          message: context.tr("app_storage.parameter_manager.exporting"),
+                          state: true,
+                        );
+                      }
+                      try{
+                        await copyDirectory(globalManager.directory.path, saved);
+                        if(context.mounted){
+                          AppToast.showMessage(
+                            context: context,
+                            message: context.tr("app_storage.parameter_manager.export_successful"),
+                            state: true,
+                          );
+                        }
+                      }catch(e){
+                        if(context.mounted){
+                          AppToast.showMessage(
+                            context: context,
+                            message: "${context.tr("app_storage.parameter_manager.export_failed")}\n$e",
+                            state: false,
+                          );
+                        }
+                      }
+                    },
+                    child: AppText.tr("app_storage.parameter_manager.export"),
+                  ),
+                  AppButton.smallText(
+                    isTransparent: false,
+                    onClick: () async{
+                      String? imported = await FilePicker.platform.getDirectoryPath(
+                        dialogTitle: tr("app_storage.parameter_manager.import_directory_picker"),
+                        lockParentWindow: true,
+                      );
+                      if(imported == null){
+                        return;
+                      }
+
+                      if(p.basename(imported) != "ParamBox"){
+                        imported = p.join(imported, "ParamBox");
+                      }
+                      if(p.equals(globalManager.directory.path, imported)){
+                        if(context.mounted){
+                          AppToast.showMessage(
+                            context: context,
+                            message: context.tr("app_storage.parameter_manager.same_export_directory"),
+                            state: false,
+                          );
+                        }
+                        return;
+                      }
+
+                      if(context.mounted){
+                        AppToast.showMessage(
+                          context: context,
+                          message: context.tr("app_storage.parameter_manager.importing"),
+                          state: true,
+                        );
+                      }
+
+                      try{
+                        await ParamBoxStorageHelper.mergeParamBoxStorage(Directory(imported), globalManager.directory, globalManager.directory);
+                        globalManager.reload();
+                        if(context.mounted){
+                          AppToast.showMessage(
+                            context: context,
+                            message: context.tr("app_storage.parameter_manager.import_successful"),
+                            state: true,
+                          );
+                        }
+                      }catch(e){
+                        if(context.mounted){
+                          AppToast.showMessage(
+                            context: context,
+                            message: "${context.tr("app_storage.parameter_manager.import_failed")}\n$e",
+                            state: false,
+                          );
+                        }
+                      }
+                    },
+                    child: AppText.tr("app_storage.parameter_manager.import"),
                   ),
                 ],
               );

@@ -93,7 +93,18 @@
       "default_data_dir": "Default location",
       "custom_data_dir": "Custom location",
       "copy_data_failed": "File copy failed",
-      "change_data_successfully": "Data transfer successfully!"
+      "change_data_successfully": "Data transfer successfully!",
+      "export": "Export/Back up data",
+      "export_directory_picker": "Select data save location",
+      "same_export_directory": "Export location cannot be the same as the storage location",
+      "exporting": "Exporting",
+      "export_successful": "Export successful",
+      "export_failed": "Export failed",
+      "import": "Import data",
+      "import_directory_picker": "Please select the data to import",
+      "importing": "Importing",
+      "import_successful": "Import successful",
+      "import_failed": "Import failed"
     }
   },
   "----------error_log----------": "----------error_log----------",
