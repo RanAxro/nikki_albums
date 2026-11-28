@@ -329,6 +329,8 @@ const AlbumType defaultAlbumTypeWithoutUid = AlbumType.ScreenShot;
 
 /// AlbumType 相册类型
 enum AlbumType {
+  BeadCraft,
+  BoothGroup,
   Collage_CollagePhoto,
   Collage_HighQuality,
   Collage_LowQuality,
@@ -349,6 +351,7 @@ enum AlbumType {
   PlantDyeing,
   ScreenShot,
   Video,
+  WhimNewspaperPhotos,
   XSdkQrCode;
 
   static AlbumType from(dynamic value) {
@@ -571,6 +574,20 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     },
     supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
+  // 趣拼海报原图
+  AlbumType.BeadCraft: AlbumsInfoItem(
+    type: "BeadCraft",
+    visible: true,
+    name: "ai_BeadCraft",
+    description: "ai_BeadCraft",
+    isRequireUid: true,
+    locateInGame: r"\X6Game\Saved\GamePlayPhotos\$uid$\BeadCraft",
+    locateInBackup: null,
+    locateInRecycleBin:
+    r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\BeadCraft\$uid$",
+    chainDeletion: {},
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
+  ),
   // 使用过的头像
   AlbumType.CustomAvatar: AlbumsInfoItem(
     type: "CustomAvatar",
@@ -599,6 +616,32 @@ const Map<AlbumType, AlbumsInfoItem> albumsInfoMap = {
     locateInBackup: null,
     locateInRecycleBin:
         r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\CustomCard\$uid$",
+    chainDeletion: {},
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
+  ),
+  AlbumType.BoothGroup: AlbumsInfoItem(
+    type: "BoothGroup",
+    visible: true,
+    name: "ai_BoothGroup",
+    description: "ai_BoothGroupDescription",
+    isRequireUid: true,
+    locateInGame: r"\X6Game\Saved\BoothGroup\$uid$",
+    locateInBackup: null,
+    locateInRecycleBin:
+    r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\BoothGroup\$uid$",
+    chainDeletion: {},
+    supportedPlatforms: inWindows | inAndroid | inMacOS,
+  ),
+  AlbumType.WhimNewspaperPhotos: AlbumsInfoItem(
+    type: "WhimNewspaperPhotos",
+    visible: true,
+    name: "ai_WhimNewspaperPhotos",
+    description: "ai_WhimNewspaperPhotosDescription",
+    isRequireUid: true,
+    locateInGame: r"\X6Game\Saved\GamePlayPhotos\$uid$\WhimNewspaperPhotos",
+    locateInBackup: null,
+    locateInRecycleBin:
+    r"\X6Game\NikkiAlbumsRecycleBin\$msSinceEpoch$\WhimNewspaperPhotos\$uid$",
     chainDeletion: {},
     supportedPlatforms: inWindows | inAndroid | inMacOS,
   ),
