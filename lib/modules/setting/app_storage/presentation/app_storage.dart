@@ -1,5 +1,7 @@
 
+import "package:nikki_albums/modules/parameter_manager/domain/param_box_storage_helper.dart";
 import "package:nikki_albums/modules/parameter_manager/presentation/parameter_manager.dart";
+import "package:uuid/v4.dart";
 
 import "../domain/fix_app_assets.dart";
 import "package:nikki_albums/modules/parameter_manager/domain/param_box_manager.dart";
@@ -28,7 +30,9 @@ class AppStorage extends StatelessWidget{
     if(p.equals(oldPath, newPath)){
       return;
     }
+    final Directory oldDir = Directory(oldPath);
     final Directory newDir = Directory(newPath);
+    final Directory newDirTemp = Directory("$newPath${UuidV4().generate()}");
 
     final ValueNotifier<double?> progress = ValueNotifier(null);
     if(context.mounted){
@@ -40,12 +44,12 @@ class AppStorage extends StatelessWidget{
     }
 
     try{
-      await copyDirectory(oldPath, newPath);
+      await ParamBoxStorageHelper.mergeParamBoxStorage(oldDir, newDir, newDirTemp);
       AppState.customParamBoxPath.value = newPath;
     }catch(e){
       try{
-        if(await newDir.exists()){
-          await newDir.delete(recursive: true);
+        if(await newDirTemp.exists()){
+          await newDirTemp.delete(recursive: true);
         }
       }catch(e){
         debugPrint(e.toString());
@@ -59,7 +63,8 @@ class AppStorage extends StatelessWidget{
     }
 
     try{
-      await Directory(oldPath).delete(recursive: true);
+      await newDirTemp.rename(newDir.path);
+      await oldDir.delete(recursive: true);
     }catch(e){
       debugPrint(e.toString());
     }
